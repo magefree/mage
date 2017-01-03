@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -42,9 +41,10 @@ import mage.filter.common.FilterArtifactPermanent;
 public class CreepingCorrosion extends CardImpl {
 
     public CreepingCorrosion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
 
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent()));
+        // Destroy all artifacts.
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent("artifacts")));
     }
 
     public CreepingCorrosion(final CreepingCorrosion card) {

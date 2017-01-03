@@ -42,14 +42,11 @@ import mage.target.TargetPlayer;
  */
 public class ScrapyardSalvo extends CardImpl {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
-
     public ScrapyardSalvo(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(new FilterArtifactCard())));
     }
 
     public ScrapyardSalvo(final ScrapyardSalvo card) {

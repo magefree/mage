@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -39,33 +38,32 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
  *
  * @author Loki
  */
 public class DarksteelJuggernaut extends CardImpl {
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts you control");
 
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
-    public DarksteelJuggernaut (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+    public DarksteelJuggernaut(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.subtype.add("Juggernaut");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
+        // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
+
+        // Darksteel Juggernaut’s power and toughness are each equal to the number of artifacts you control.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent("artifacts you control")), Duration.EndOfGame)));
+
+        // Darksteel Juggernaut attacks each turn if able.
         this.addAbility(new AttacksEachTurnStaticAbility());
     }
 
-    public DarksteelJuggernaut (final DarksteelJuggernaut card) {
+    public DarksteelJuggernaut(final DarksteelJuggernaut card) {
         super(card);
     }
 

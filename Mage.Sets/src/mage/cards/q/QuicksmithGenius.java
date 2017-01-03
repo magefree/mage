@@ -36,11 +36,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
  *
@@ -48,14 +45,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class QuicksmithGenius extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterArtifactPermanent("an artifact");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     public QuicksmithGenius(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Artificer");
         this.power = new MageInt(3);
@@ -63,7 +54,7 @@ public class QuicksmithGenius extends CardImpl {
 
         // Whenever an artifact enters the battlefield under your control, you may discard a card. If you do, draw a card.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), filter, true));
+                Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), new FilterControlledArtifactPermanent("an artifact"), true, null, true));
     }
 
     public QuicksmithGenius(final QuicksmithGenius card) {
