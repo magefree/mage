@@ -191,7 +191,7 @@ public class CascadeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Enlisted Wurm", 1);
         assertLife(playerA, 15);
         assertHandCount(playerA, 5);
-        assertPermanentCount(playerA, "Demon", 1);
+        assertPermanentCount(playerA, "Demon", 0);
 
     }
 }
