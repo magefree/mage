@@ -51,8 +51,6 @@ public class AetherRevolt extends ExpansionSet {
 
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
-    //TODO: Check Paradox Engine's card number
-
     private AetherRevolt() {
         super("Aether Revolt", "AER", ExpansionSet.buildDate(2017, 1, 20), SetType.EXPANSION);
         this.blockName = "Kaladesh";
@@ -79,6 +77,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Gonti's Aether Heart", 152, Rarity.MYTHIC, mage.cards.g.GontisAetherHeart.class));
         cards.add(new SetCardInfo("Heart of Kiran", 153, Rarity.MYTHIC, mage.cards.h.HeartOfKiran.class));
         cards.add(new SetCardInfo("Oath of Ajani", 131, Rarity.RARE, mage.cards.o.OathOfAjani.class));
+        cards.add(new SetCardInfo("Pacification Array", 168, Rarity.UNCOMMON, mage.cards.p.PacificationArray.class));
         cards.add(new SetCardInfo("Paradox Engine", 169, Rarity.MYTHIC, mage.cards.p.ParadoxEngine.class));
         cards.add(new SetCardInfo("Peacekeeper Colossus", 170, Rarity.RARE, mage.cards.p.PeacekeeperColossus.class));
         cards.add(new SetCardInfo("Pia's Revolution", 91, Rarity.RARE, mage.cards.p.PiasRevolution.class));
