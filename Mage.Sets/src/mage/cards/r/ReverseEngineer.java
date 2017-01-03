@@ -28,6 +28,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ImproviseAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,6 +47,7 @@ public class ReverseEngineer extends CardImpl {
         this.addAbility(new ImproviseAbility());
 
         // Draw three cards.
+        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
     public ReverseEngineer(final ReverseEngineer card) {
