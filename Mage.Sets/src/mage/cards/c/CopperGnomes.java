@@ -33,17 +33,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -52,13 +47,13 @@ import mage.target.common.TargetCardInHand;
 public class CopperGnomes extends CardImpl {
 
     public CopperGnomes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.subtype.add("Gnome");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // {4}, Sacrifice Copper Gnomes: You may put an artifact card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutArtifactOnBattlefieldEffect(), new ManaCostsImpl("{4}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(new FilterArtifactCard()), new ManaCostsImpl("{4}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -70,41 +65,5 @@ public class CopperGnomes extends CardImpl {
     @Override
     public CopperGnomes copy() {
         return new CopperGnomes(this);
-    }
-}
-
-class PutArtifactOnBattlefieldEffect extends OneShotEffect {
-
-    private static final String choiceText = "Put an artifact card from your hand onto the battlefield?";
-
-    public PutArtifactOnBattlefieldEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "You may put an artifact card from your hand onto the battlefield";
-    }
-
-    public PutArtifactOnBattlefieldEffect(final PutArtifactOnBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PutArtifactOnBattlefieldEffect copy() {
-        return new PutArtifactOnBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || !controller.chooseUse(Outcome.PutCardInPlay, choiceText, source, game)) {
-            return false;
-        }
-
-        TargetCardInHand target = new TargetCardInHand(new FilterArtifactCard());
-        if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            }
-        }
-        return false;
     }
 }
