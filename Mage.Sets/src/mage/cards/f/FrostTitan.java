@@ -25,14 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -52,17 +53,20 @@ import mage.target.TargetStackObject;
 public class FrostTitan extends CardImpl {
 
     public FrostTitan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
-        
+
         // Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.        
-        this.addAbility(new FrostTitanAbility1());
+        this.addAbility(new FrostTitanAbility());
 
         // Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
-        this.addAbility(new FrostTitanAbility2());
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new TapTargetEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("It"));
+        ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
     }
 
     public FrostTitan(final FrostTitan card) {
@@ -76,19 +80,19 @@ public class FrostTitan extends CardImpl {
 
 }
 
-class FrostTitanAbility1 extends TriggeredAbilityImpl {
+class FrostTitanAbility extends TriggeredAbilityImpl {
 
-    public FrostTitanAbility1() {
+    public FrostTitanAbility() {
         super(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(2)), false);
     }
 
-    public FrostTitanAbility1(final FrostTitanAbility1 ability) {
+    public FrostTitanAbility(final FrostTitanAbility ability) {
         super(ability);
     }
 
     @Override
-    public FrostTitanAbility1 copy() {
-        return new FrostTitanAbility1(this);
+    public FrostTitanAbility copy() {
+        return new FrostTitanAbility(this);
     }
 
     @Override
@@ -111,43 +115,6 @@ class FrostTitanAbility1 extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.";
-    }
-
-}
-
-class FrostTitanAbility2 extends TriggeredAbilityImpl {
-
-    public FrostTitanAbility2() {
-        super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
-        this.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
-        this.addTarget(new TargetPermanent());
-    }
-
-    public FrostTitanAbility2(final FrostTitanAbility2 ability) {
-        super(ability);
-    }
-
-    @Override
-    public FrostTitanAbility2 copy() {
-        return new FrostTitanAbility2(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.";
     }
 
 }

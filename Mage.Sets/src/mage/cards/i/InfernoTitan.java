@@ -29,7 +29,8 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageMultiEffect;
@@ -39,9 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -51,14 +49,19 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
 public class InfernoTitan extends CardImpl {
 
     public InfernoTitan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
+        // {R}: Inferno Titan gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-        this.addAbility(new InfernoTitanAbility());
+
+        // Whenever Inferno Titan enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageMultiEffect(3));
+        ability.addTarget(new TargetCreatureOrPlayerAmount(3));
+        this.addAbility(ability);
     }
 
     public InfernoTitan(final InfernoTitan card) {
@@ -68,42 +71,6 @@ public class InfernoTitan extends CardImpl {
     @Override
     public InfernoTitan copy() {
         return new InfernoTitan(this);
-    }
-
-}
-
-class InfernoTitanAbility extends TriggeredAbilityImpl {
-
-    public InfernoTitanAbility() {
-        super(Zone.BATTLEFIELD, new DamageMultiEffect(3), false);
-        this.addTarget(new TargetCreatureOrPlayerAmount(3));
-    }
-
-    public InfernoTitanAbility(final InfernoTitanAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public InfernoTitanAbility copy() {
-        return new InfernoTitanAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.";
     }
 
 }

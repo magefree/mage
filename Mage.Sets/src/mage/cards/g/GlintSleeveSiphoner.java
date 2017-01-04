@@ -29,8 +29,8 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -42,9 +42,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -64,7 +61,7 @@ public class GlintSleeveSiphoner extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Whenever Glint-Sleeve Siphoner enters the battlefield or attacks, you get {E}.
-        this.addAbility(new GlintSleeveSiphonerAbility());
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GetEnergyCountersControllerEffect(1)));
 
         // At the beginning of your upkeep, you may pay {E}{E}. If you do, draw a card and you lose 1 life.
         DoIfCostPaid doIfCostPaidEffect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new PayEnergyCost(2));
@@ -80,42 +77,5 @@ public class GlintSleeveSiphoner extends CardImpl {
     @Override
     public GlintSleeveSiphoner copy() {
         return new GlintSleeveSiphoner(this);
-    }
-}
-
-class GlintSleeveSiphonerAbility extends TriggeredAbilityImpl {
-
-    public GlintSleeveSiphonerAbility() {
-        super(Zone.BATTLEFIELD, new GetEnergyCountersControllerEffect(1), false);
-    }
-
-    public GlintSleeveSiphonerAbility(final GlintSleeveSiphonerAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GlintSleeveSiphonerAbility copy() {
-        return new GlintSleeveSiphonerAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, target creature you control gains double strike and lifelink until end of turn";
     }
 }

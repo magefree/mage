@@ -29,16 +29,12 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -48,14 +44,17 @@ import mage.game.permanent.token.ZombieToken;
 public class GraveTitan extends CardImpl {
 
     public GraveTitan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
+        // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
-        this.addAbility(new GraveTitanAbility());
+
+        // Whenever Grave Titan enters the battlefield or attacks, create two 2/2 black Zombie creature tokens.
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2)));
     }
 
     public GraveTitan(final GraveTitan card) {
@@ -65,41 +64,6 @@ public class GraveTitan extends CardImpl {
     @Override
     public GraveTitan copy() {
         return new GraveTitan(this);
-    }
-
-}
-
-class GraveTitanAbility extends TriggeredAbilityImpl {
-
-    public GraveTitanAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken(), 2), false);
-    }
-
-    public GraveTitanAbility(final GraveTitanAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GraveTitanAbility copy() {
-        return new GraveTitanAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, create two 2/2 black Zombie creature tokens.";
     }
 
 }

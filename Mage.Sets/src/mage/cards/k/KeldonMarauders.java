@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOrLeavesSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.VanishingSacrificeAbility;
@@ -64,7 +64,7 @@ public class KeldonMarauders extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
 
         // When Keldon Marauders enters the battlefield or leaves the battlefield, it deals 1 damage to target player.
-        ability = new EntersOrLeavesTheBattlefieldSourceTriggeredAbility(new DamageTargetEffect(1), false);
+        ability = new EntersBattlefieldOrLeavesSourceTriggeredAbility(new DamageTargetEffect(1), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

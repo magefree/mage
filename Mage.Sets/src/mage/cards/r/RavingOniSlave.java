@@ -30,7 +30,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOrLeavesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -55,7 +55,7 @@ public class RavingOniSlave extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Raving Oni-Slave enters the battlefield or leaves the battlefield, you lose 3 life if you don't control a Demon.
-        this.addAbility(new EntersOrLeavesTheBattlefieldSourceTriggeredAbility(new RavingOniSlaveEffect(), false));
+        this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new RavingOniSlaveEffect(), false));
     }
 
     public RavingOniSlave(final RavingOniSlave card) {

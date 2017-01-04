@@ -253,6 +253,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Strength in Numbers", 224, Rarity.COMMON, mage.cards.s.StrengthInNumbers.class));
         cards.add(new SetCardInfo("Stronghold Overseer", 133, Rarity.RARE, mage.cards.s.StrongholdOverseer.class));
         cards.add(new SetCardInfo("Stuffy Doll", 264, Rarity.RARE, mage.cards.s.StuffyDoll.class));
+        cards.add(new SetCardInfo("Subterranean Shambler", 178, Rarity.COMMON, mage.cards.s.SubterraneanShambler.class));
         cards.add(new SetCardInfo("Sudden Death", 134, Rarity.UNCOMMON, mage.cards.s.SuddenDeath.class));
         cards.add(new SetCardInfo("Sudden Shock", 179, Rarity.UNCOMMON, mage.cards.s.SuddenShock.class));
         cards.add(new SetCardInfo("Sudden Spoiling", 135, Rarity.RARE, mage.cards.s.SuddenSpoiling.class));

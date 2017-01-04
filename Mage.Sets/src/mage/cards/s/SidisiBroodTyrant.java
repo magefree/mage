@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.Card;
@@ -40,7 +41,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.token.ZombieToken;
 
@@ -51,7 +51,7 @@ import mage.game.permanent.token.ZombieToken;
 public class SidisiBroodTyrant extends CardImpl {
 
     public SidisiBroodTyrant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Naga");
         this.subtype.add("Shaman");
@@ -60,7 +60,8 @@ public class SidisiBroodTyrant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Sidisi, Brood Tyrant enters the battlefield or attacks, put the top three cards of your library into your graveyard.
-        this.addAbility(new SidisiBroodTyrantAbility());
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(3)));
+
         // Whenever one or more creature cards are put into your graveyard from your library, create a 2/2 black Zombie creature token.
         this.addAbility(new SidisiBroodTyrantTriggeredAbility());
     }
@@ -72,40 +73,6 @@ public class SidisiBroodTyrant extends CardImpl {
     @Override
     public SidisiBroodTyrant copy() {
         return new SidisiBroodTyrant(this);
-    }
-}
-
-class SidisiBroodTyrantAbility extends TriggeredAbilityImpl {
-
-    public SidisiBroodTyrantAbility() {
-        super(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveControllerEffect(3), false);
-    }
-
-    public SidisiBroodTyrantAbility(final SidisiBroodTyrantAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SidisiBroodTyrantAbility copy() {
-        return new SidisiBroodTyrantAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, put the top three cards of your library into your graveyard.";
     }
 }
 
@@ -129,19 +96,19 @@ class SidisiBroodTyrantTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
         if (zEvent != null && Zone.LIBRARY == zEvent.getFromZone() && Zone.GRAVEYARD == zEvent.getToZone() && zEvent.getCards() != null) {
             for (Card card : zEvent.getCards()) {
-                if (card != null) {         
-                    
+                if (card != null) {
+
                     UUID cardOwnerId = card.getOwnerId();
                     List<CardType> cardType = card.getCardType();
-                    
+
                     if (cardOwnerId != null
-                            && card.getOwnerId().equals(getControllerId()) 
+                            && card.getOwnerId().equals(getControllerId())
                             && cardType != null
                             && card.getCardType().contains(CardType.CREATURE)) {
                         return true;
                     }
                 }
-                
+
             }
         }
         return false;

@@ -25,56 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.cards.s;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldOrLeavesSourceTriggeredAbility;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.keyword.EchoAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
  * @author Styxo
  */
-public class EntersTheBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class SubterraneanShambler extends CardImpl {
 
-    public EntersTheBattlefieldOrAttacksSourceTriggeredAbility(Effect effect) {
-        this(effect, false);
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
+
+    static {
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public EntersTheBattlefieldOrAttacksSourceTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+    public SubterraneanShambler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
+
+        this.subtype.add("Elemental");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // Echo {3}{R}
+        this.addAbility(new EchoAbility("{3}{R}"));
+
+        // When Subterranean Shambler enters the battlefield or leaves the battlefield, it deals 1 damage to each creature without flying.
+        this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new DamageAllEffect(1, filter), false));
+
     }
 
-    public EntersTheBattlefieldOrAttacksSourceTriggeredAbility(final EntersTheBattlefieldOrAttacksSourceTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EntersTheBattlefieldOrAttacksSourceTriggeredAbility copy() {
-        return new EntersTheBattlefieldOrAttacksSourceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+    public SubterraneanShambler(final SubterraneanShambler card) {
+        super(card);
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, " + super.getRule();
+    public SubterraneanShambler copy() {
+        return new SubterraneanShambler(this);
     }
-
 }

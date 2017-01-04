@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOrLeavesSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -67,7 +67,7 @@ public class AvenRiftwatcher extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
 
         // When Aven Riftwatcher enters the battlefield or leaves the battlefield, you gain 2 life.
-        this.addAbility(new EntersOrLeavesTheBattlefieldSourceTriggeredAbility(new GainLifeEffect(2), false));
+        this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new GainLifeEffect(2), false));
     }
 
     public AvenRiftwatcher(final AvenRiftwatcher card) {

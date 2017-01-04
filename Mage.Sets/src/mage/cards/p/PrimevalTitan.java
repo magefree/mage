@@ -29,18 +29,14 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -50,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
 public class PrimevalTitan extends CardImpl {
 
     public PrimevalTitan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);
@@ -60,7 +56,7 @@ public class PrimevalTitan extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Primeval Titan enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new PrimevalTitanAbility());
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterLandCard("land cards")), true, Outcome.PutLandInPlay)));
     }
 
     public PrimevalTitan(final PrimevalTitan card) {
@@ -70,43 +66,6 @@ public class PrimevalTitan extends CardImpl {
     @Override
     public PrimevalTitan copy() {
         return new PrimevalTitan(this);
-    }
-
-}
-
-class PrimevalTitanAbility extends TriggeredAbilityImpl {
-
-    public PrimevalTitanAbility() {
-        super(Zone.BATTLEFIELD, null, true);
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterLandCard());
-        this.addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
-    }
-
-    public PrimevalTitanAbility(final PrimevalTitanAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PrimevalTitanAbility copy() {
-        return new PrimevalTitanAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.";
     }
 
 }

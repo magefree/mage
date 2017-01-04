@@ -29,7 +29,9 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -38,11 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -61,7 +59,15 @@ public class BruseTarlBoorishHerder extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Bruse Tarl, Boorish Herder enters the battlefield or attacks, target creature you control gains double strike and lifelink until end of turn.
-        this.addAbility(new BruseTarlAbility());
+        Effect effect = new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("target creature you control gains double strike");
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(effect);
+        effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and lifelink until end of turn");
+        ability.addEffect(effect);
+        ability.addTarget(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("target creature you control")));
+
+        this.addAbility(ability);
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
@@ -74,46 +80,5 @@ public class BruseTarlBoorishHerder extends CardImpl {
     @Override
     public BruseTarlBoorishHerder copy() {
         return new BruseTarlBoorishHerder(this);
-    }
-}
-
-class BruseTarlAbility extends TriggeredAbilityImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("target creature you control");
-
-    public BruseTarlAbility() {
-        super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), false);
-        addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
-        this.addTarget(new TargetControlledCreaturePermanent(filter));
-    }
-
-    public BruseTarlAbility(final BruseTarlAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BruseTarlAbility copy() {
-        return new BruseTarlAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, target creature you control gains double strike and lifelink until end of turn";
     }
 }

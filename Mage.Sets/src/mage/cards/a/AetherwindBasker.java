@@ -29,7 +29,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersTheBattlefieldOrAttacksSourceTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -60,7 +60,7 @@ public class AetherwindBasker extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Aetherwind Basker enters the battlefield or attacks, you get {E} for each creature you control.
-        this.addAbility(new EntersTheBattlefieldOrAttacksSourceTriggeredAbility(new GetEnergyCountersControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("creature you control"), null))));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GetEnergyCountersControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("creature you control"), null))));
 
         // Pay {E}: Aetherwind Basker gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new PayEnergyCost(1)));
