@@ -25,28 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.cost.CastWithoutPayingManaCostEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.filter.Filter;
-import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
 import mage.game.permanent.token.ServoToken;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public class SramsExpertise extends CardImpl {
@@ -56,10 +47,10 @@ public class SramsExpertise extends CardImpl {
 
 
         // Create three 1/1 colorless Servo artifact creature tokens.
-        getSpellAbility().addEffect(new CreateTokenEffect(new ServoToken(), 3));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ServoToken(), 3));
 
         // You may cast a card with converted mana cost 3 or less from your hand without paying its mana cost.
-        getSpellAbility().addEffect(new SramsExpertiseCastEffect());
+        this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(3));
     }
 
     public SramsExpertise(final SramsExpertise card) {
@@ -69,56 +60,5 @@ public class SramsExpertise extends CardImpl {
     @Override
     public SramsExpertise copy() {
         return new SramsExpertise(this);
-    }
-}
-
-class SramsExpertiseCastEffect extends OneShotEffect {
-
-    private static final FilterNonlandCard filter = new FilterNonlandCard("card with converted mana cost 3 or less from your hand");
-
-    static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
-    }
-
-    public SramsExpertiseCastEffect() {
-        super(Outcome.PlayForFree);
-        this.staticText = "you may cast a card with converted mana cost 3 or less from your hand without paying its mana cost";
-    }
-
-    public SramsExpertiseCastEffect(final SramsExpertiseCastEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SramsExpertiseCastEffect copy() {
-        return new SramsExpertiseCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInHand(filter);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
-              controller.chooseUse(outcome, "Cast a card with converted mana cost 3 or less from your hand without paying its mana cost?", source, game)) {
-                Card cardToCast = null;
-                boolean cancel = false;
-                while (controller.canRespond() && !cancel) {
-                    if (controller.chooseTarget(outcome, target, source, game)) {
-                        cardToCast = game.getCard(target.getFirstTarget());
-                        if (cardToCast != null && cardToCast.getSpellAbility().canChooseTarget(game)) {
-                            cancel = true;
-                        }
-                    } else {
-                        cancel = true;
-                    }
-                }
-                if (cardToCast != null) {
-                    controller.cast(cardToCast.getSpellAbility(), game, true);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
