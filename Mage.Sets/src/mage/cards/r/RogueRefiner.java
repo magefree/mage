@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
@@ -53,7 +54,9 @@ public class RogueRefiner extends CardImpl {
 
         // When Rogue Refiner enters the battlefield, draw a card and you get {E}{E}.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
-        ability.addEffect(new GetEnergyCountersControllerEffect(2));
+        Effect effect = new GetEnergyCountersControllerEffect(2);
+        effect.setText("and you get {E}{E}");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
