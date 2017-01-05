@@ -87,11 +87,13 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Fatal Push", 57, Rarity.UNCOMMON, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Foundry Assembler", 151, Rarity.COMMON, mage.cards.f.FoundryAssembler.class));
         cards.add(new SetCardInfo("Freejam Regent", 81, Rarity.RARE, mage.cards.f.FreejamRegent.class));
+        cards.add(new SetCardInfo("Gifted Aetherborn", 61, Rarity.UNCOMMON, mage.cards.g.GiftedAetherborn.class));
         cards.add(new SetCardInfo("Glint-Sleeve Siphoner", 62, Rarity.RARE, mage.cards.g.GlintSleeveSiphoner.class));
         cards.add(new SetCardInfo("Gonti's Aether Heart", 152, Rarity.MYTHIC, mage.cards.g.GontisAetherHeart.class));
         cards.add(new SetCardInfo("Greenbelt Rampager", 107, Rarity.RARE, mage.cards.g.GreenbeltRampager.class));
         cards.add(new SetCardInfo("Greenwheel Liberator", 108, Rarity.RARE, mage.cards.g.GreenwheelLiberator.class));
         cards.add(new SetCardInfo("Heart of Kiran", 153, Rarity.MYTHIC, mage.cards.h.HeartOfKiran.class));
+        cards.add(new SetCardInfo("Hidden Herbalists", 118, Rarity.UNCOMMON, mage.cards.h.HiddenHerbalists.class));
         cards.add(new SetCardInfo("Hidden Stocks", 129, Rarity.UNCOMMON, mage.cards.h.HiddenStocks.class));
         cards.add(new SetCardInfo("Hungry Flames", 84, Rarity.UNCOMMON, mage.cards.h.HungryFlames.class));
         cards.add(new SetCardInfo("Implement of Combustion", 155, Rarity.COMMON, mage.cards.i.ImplementOfCombustion.class));
@@ -115,6 +117,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Release the Gremlins", 96, Rarity.RARE, mage.cards.r.ReleaseTheGremlins.class));
         cards.add(new SetCardInfo("Renegade Map", 173, Rarity.COMMON, mage.cards.r.RenegadeMap.class));
         cards.add(new SetCardInfo("Renegade Rallier", 133, Rarity.UNCOMMON, mage.cards.r.RenegadeRallier.class));
+        cards.add(new SetCardInfo("Renegade Wheelsmith", 134, Rarity.UNCOMMON, mage.cards.r.RenegadeWheelsmith.class));
         cards.add(new SetCardInfo("Reverse Engineer", 42, Rarity.UNCOMMON, mage.cards.r.ReverseEngineer.class));
         cards.add(new SetCardInfo("Rishkar's Expertise", 123, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 122, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
@@ -125,6 +128,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Siege Modification", 99, Rarity.UNCOMMON, mage.cards.s.SiegeModification.class));
         cards.add(new SetCardInfo("Silkweaver Elite", 125, Rarity.COMMON, mage.cards.s.SilkweaverElite.class));
         cards.add(new SetCardInfo("Solemn Recruit", 22, Rarity.RARE, mage.cards.s.SolemnRecruit.class));
+        cards.add(new SetCardInfo("Spire Patrol", 136, Rarity.UNCOMMON, mage.cards.s.SpirePatrol.class));
         cards.add(new SetCardInfo("Spire of Industry", 184, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
         cards.add(new SetCardInfo("Sram's Expertise", 24, Rarity.RARE, mage.cards.s.SramsExpertise.class));
         cards.add(new SetCardInfo("Sram, Senior Edificer", 23, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
