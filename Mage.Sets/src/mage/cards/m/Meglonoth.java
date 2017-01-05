@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksCreatureTriggeredAbility;
+import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
 public class Meglonoth extends CardImpl {
 
     public Meglonoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(6);
@@ -61,7 +61,7 @@ public class Meglonoth extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Meglonoth blocks a creature, Meglonoth deals damage to that creature's controller equal to Meglonoth's power.
-        this.addAbility(new BlocksCreatureTriggeredAbility(new MeglonothEffect(), false, true));
+        this.addAbility(new BlocksTriggeredAbility(new MeglonothEffect(), false, true));
 
     }
 

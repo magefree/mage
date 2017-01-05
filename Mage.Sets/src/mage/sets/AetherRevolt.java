@@ -89,7 +89,6 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Freejam Regent", 81, Rarity.RARE, mage.cards.f.FreejamRegent.class));
         cards.add(new SetCardInfo("Glint-Sleeve Siphoner", 62, Rarity.RARE, mage.cards.g.GlintSleeveSiphoner.class));
         cards.add(new SetCardInfo("Gonti's Aether Heart", 152, Rarity.MYTHIC, mage.cards.g.GontisAetherHeart.class));
-        cards.add(new SetCardInfo("Greenbelt Druid", 106, Rarity.COMMON, mage.cards.g.GreenbeltDruid.class));
         cards.add(new SetCardInfo("Greenbelt Rampager", 107, Rarity.RARE, mage.cards.g.GreenbeltRampager.class));
         cards.add(new SetCardInfo("Greenwheel Liberator", 108, Rarity.RARE, mage.cards.g.GreenwheelLiberator.class));
         cards.add(new SetCardInfo("Heart of Kiran", 153, Rarity.MYTHIC, mage.cards.h.HeartOfKiran.class));

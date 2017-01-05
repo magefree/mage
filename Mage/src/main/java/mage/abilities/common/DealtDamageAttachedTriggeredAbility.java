@@ -25,72 +25,65 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
+public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-public class BlocksCreatureAttachedTriggeredAbility extends TriggeredAbilityImpl{
-    private boolean setFixedTargetPointer;
-    private String attachedDescription;
-    private boolean setFixedTargetPointerToBlocked;
+    protected SetTargetPointer setTargetPointer;
 
-    public BlocksCreatureAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
-        this(effect, attachedDescription, optional, false);
+    public DealtDamageAttachedTriggeredAbility(Effect effect, boolean optional) {
+        this(Zone.BATTLEFIELD, effect, optional, SetTargetPointer.NONE);
     }
 
-    public BlocksCreatureAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.setFixedTargetPointer = setFixedTargetPointer;
-        this.attachedDescription = attachedDescription;
-    }
-    
-    public BlocksCreatureAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer, boolean setFixedTargetPointerToBlocked) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.setFixedTargetPointer = setFixedTargetPointer;
-        this.attachedDescription = attachedDescription;
-        this.setFixedTargetPointerToBlocked = setFixedTargetPointerToBlocked;
+    public DealtDamageAttachedTriggeredAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
+        super(zone, effect, optional);
+        this.setTargetPointer = setTargetPointer;
     }
 
-    public BlocksCreatureAttachedTriggeredAbility(final BlocksCreatureAttachedTriggeredAbility ability) {
+    public DealtDamageAttachedTriggeredAbility(final DealtDamageAttachedTriggeredAbility ability) {
         super(ability);
-        this.setFixedTargetPointer = ability.setFixedTargetPointer;
-        this.attachedDescription = ability.attachedDescription;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
-    public BlocksCreatureAttachedTriggeredAbility copy() {
-        return new BlocksCreatureAttachedTriggeredAbility(this);
+    public DealtDamageAttachedTriggeredAbility copy() {
+        return new DealtDamageAttachedTriggeredAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+        return event.getType() == EventType.DAMAGED_CREATURE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent p = game.getPermanent(event.getSourceId());
-        if (p != null && p.getAttachments().contains(this.getSourceId())) {
-            if (setFixedTargetPointer) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                }
-            }
-            if (setFixedTargetPointerToBlocked) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+        Permanent enchantment = game.getPermanent(sourceId);
+        UUID targetId = event.getTargetId();
+        if(enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
+            for(Effect effect : this.getEffects()) {
+                effect.setValue("damage", event.getAmount());
+                switch(setTargetPointer) {
+                    case PERMANENT:
+                        effect.setTargetPointer(new FixedTarget(targetId));
+                        break;
+                    case PLAYER:
+                        effect.setTargetPointer(new FixedTarget(game.getPermanentOrLKIBattlefield(targetId).getControllerId()));
+                        break;
                 }
             }
             return true;
@@ -100,6 +93,6 @@ public class BlocksCreatureAttachedTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public String getRule() {
-        return "Whenever " + attachedDescription + " creature blocks a creature, " + super.getRule();
+        return "Whenever enchanted creature is dealt damage, " + super.getRule();
     }
 }

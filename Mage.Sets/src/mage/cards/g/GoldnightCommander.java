@@ -27,23 +27,31 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.common.EntersAnotherCreatureYourControlTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
-
-import java.util.UUID;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  * @author Loki
  */
 public class GoldnightCommander extends CardImpl {
 
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
     public GoldnightCommander(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.subtype.add("Soldier");
@@ -52,7 +60,7 @@ public class GoldnightCommander extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
-        this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn)));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn), filter, false, null, true));
     }
 
     public GoldnightCommander(final GoldnightCommander card) {

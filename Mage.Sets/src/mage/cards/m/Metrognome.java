@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiscardedByOpponentTrigger;
+import mage.abilities.common.DiscardedByOpponentTriggerAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -51,7 +51,7 @@ public class Metrognome extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // When a spell or ability an opponent controls causes you to discard Metrognome, create four 1/1 colorless Gnome artifact creature tokens.
-        this.addAbility(new DiscardedByOpponentTrigger(new CreateTokenEffect(new GnomeToken(), 4)));
+        this.addAbility(new DiscardedByOpponentTriggerAbility(new CreateTokenEffect(new GnomeToken(), 4)));
 
         // {4}, {tap}: Create a 1/1 colorless Gnome artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GnomeToken()), new ManaCostsImpl("{4}"));

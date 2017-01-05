@@ -32,7 +32,7 @@ package mage.cards.i;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -74,7 +74,7 @@ public class InitiateOfBlood extends CardImpl {
         this.addAbility(ability);
 
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new FlipSourceEffect(new GokaTheUnjust())));
+        this.addAbility(new DealtDamageAndDiedTriggeredAbility(new FlipSourceEffect(new GokaTheUnjust())));
 
     }
 

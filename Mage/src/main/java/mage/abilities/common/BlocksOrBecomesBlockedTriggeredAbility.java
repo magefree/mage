@@ -30,9 +30,12 @@ package mage.abilities.common;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -40,33 +43,75 @@ import mage.game.events.GameEvent.EventType;
  */
 public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
+    protected FilterPermanent filter;
+    protected String rule;
+    protected boolean setTargetPointer;
+
     public BlocksOrBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, new FilterCreaturePermanent(), optional, null, false);
+    }
+
+    public BlocksOrBecomesBlockedTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
+        this(effect, filter, optional, null, true);
+    }
+
+    public BlocksOrBecomesBlockedTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, String rule) {
+        this(effect, filter, optional, rule, true);
+    }
+
+    public BlocksOrBecomesBlockedTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, String rule, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.filter = filter;
+        this.rule = rule;
+        this.setTargetPointer = setTargetPointer;
     }
 
     public BlocksOrBecomesBlockedTriggeredAbility(final BlocksOrBecomesBlockedTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
+        this.rule = ability.rule;
+        this.setTargetPointer = ability.setTargetPointer;
+
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED || event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
+        if (event.getSourceId().equals(this.getSourceId())) {
+            Permanent blocked = game.getPermanent(event.getTargetId());
+            if (blocked != null && filter.match(blocked, game)) {
+                if (setTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    }
+                }
+                return true;
+            }
         }
-        if (event.getType() == EventType.CREATURE_BLOCKED && event.getTargetId().equals(this.getSourceId())) {
-            return true;
+        if (event.getTargetId().equals(this.getSourceId())) {
+            Permanent blocker = game.getPermanent(event.getSourceId());
+            if (blocker != null && filter.match(blocker, game)) {
+                if (setTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                    }
+                }
+                return true;
+            }
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever {this} blocks or becomes blocked, " + super.getRule();
+        if (rule != null) {
+            return rule;
+        }
+        return "Whenever {this} blocks or becomes blocked" + (setTargetPointer ? " by a " + filter.getMessage() : "") + ", " + super.getRule();
     }
 
     @Override

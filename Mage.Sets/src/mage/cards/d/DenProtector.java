@@ -33,16 +33,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowerEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -52,14 +49,14 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class DenProtector extends CardImpl {
 
     public DenProtector(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // Creatures with power less than Den Protector's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DenProtectorRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
 
         // Megamorph {1}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{G}"), true));
@@ -78,32 +75,5 @@ public class DenProtector extends CardImpl {
     @Override
     public DenProtector copy() {
         return new DenProtector(this);
-    }
-}
-
-class DenProtectorRestrictionEffect extends RestrictionEffect {
-
-    public DenProtectorRestrictionEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Creatures with power less than {this}'s power can't block it";
-    }
-
-    public DenProtectorRestrictionEffect(final DenProtectorRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return (blocker.getPower().getValue() >= attacker.getPower().getValue());
-    }
-
-    @Override
-    public DenProtectorRestrictionEffect copy() {
-        return new DenProtectorRestrictionEffect(this);
     }
 }

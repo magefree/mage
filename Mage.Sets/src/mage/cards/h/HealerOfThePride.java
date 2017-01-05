@@ -30,10 +30,13 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.common.EntersAnotherCreatureYourControlTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -41,8 +44,14 @@ import mage.cards.CardSetInfo;
  */
 public class HealerOfThePride extends CardImpl {
 
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
     public HealerOfThePride(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add("Cat");
         this.subtype.add("Cleric");
 
@@ -50,7 +59,8 @@ public class HealerOfThePride extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield under your control, you gain 2 life.
-        this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new GainLifeEffect(2)));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), filter, false, null, true));
+
     }
 
     public HealerOfThePride(final HealerOfThePride card) {

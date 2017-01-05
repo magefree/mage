@@ -29,7 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -45,7 +45,7 @@ import mage.constants.CardType;
 public class TangleAsp extends CardImpl {
 
     public TangleAsp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Snake");
 
         this.color.setGreen(true);
@@ -53,10 +53,9 @@ public class TangleAsp extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
         effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(effect, false));
     }
 
     public TangleAsp(final TangleAsp card) {

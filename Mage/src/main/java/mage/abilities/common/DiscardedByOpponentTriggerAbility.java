@@ -25,46 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.i;
+package mage.abilities.common;
 
-import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
-import mage.abilities.keyword.ImproviseAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.stack.StackObject;
 
 /**
  *
  * @author Styxo
  */
-public class InspirationalMonuments extends CardImpl {
+public class DiscardedByOpponentTriggerAbility extends TriggeredAbilityImpl {
 
-    private static final FilterSpell filter = new FilterSpell("non-artifact spells you cast");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+    public DiscardedByOpponentTriggerAbility(Effect effect) {
+        this(effect, false);
     }
 
-    public InspirationalMonuments(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-
-        // Non-artifact spells you cast have improvise.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new ImproviseAbility(), filter)));
-
+    public DiscardedByOpponentTriggerAbility(Effect effect, boolean optional) {
+        super(Zone.GRAVEYARD, effect, optional);
     }
 
-    public InspirationalMonuments(final InspirationalMonuments card) {
-        super(card);
+    public DiscardedByOpponentTriggerAbility(final DiscardedByOpponentTriggerAbility ability) {
+        super(ability);
     }
 
     @Override
-    public InspirationalMonuments copy() {
-        return new InspirationalMonuments(this);
+    public DiscardedByOpponentTriggerAbility copy() {
+        return new DiscardedByOpponentTriggerAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DISCARDED_CARD;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (getSourceId().equals(event.getTargetId())) {
+            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+            if (stackObject != null) {
+                return game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When a spell or ability an opponent controls causes you to discard {this}, " + super.getRule();
     }
 }

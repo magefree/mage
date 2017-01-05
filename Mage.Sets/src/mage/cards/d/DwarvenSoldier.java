@@ -29,7 +29,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,17 +43,15 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class DwarvenSoldier extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Orc", "Orc creature");
-
     public DwarvenSoldier(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Dwarf");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // Whenever Dwarven Soldier blocks or becomes blocked by one or more Orcs, Dwarven Soldier gets +0/+2 until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), filter, false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), new FilterCreaturePermanent("Orc", "Orc creature"), false));
     }
 
     public DwarvenSoldier(final DwarvenSoldier card) {

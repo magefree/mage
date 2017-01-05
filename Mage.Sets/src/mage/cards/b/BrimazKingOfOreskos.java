@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BlocksCreatureTriggeredAbility;
+import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.VigilanceAbility;
@@ -53,7 +53,7 @@ import mage.game.permanent.token.CatSoldierCreatureToken;
 public class BrimazKingOfOreskos extends CardImpl {
 
     public BrimazKingOfOreskos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
@@ -68,7 +68,7 @@ public class BrimazKingOfOreskos extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new CatSoldierCreatureToken(), 1, false, true), false));
 
         // Whenever Brimaz blocks a creature, create a 1/1 white Cat Soldier creature token with vigilance blocking that creature.
-        this.addAbility(new BlocksCreatureTriggeredAbility(new BrimazKingOfOreskosEffect(), false, true));
+        this.addAbility(new BlocksTriggeredAbility(new BrimazKingOfOreskosEffect(), false, true));
     }
 
     public BrimazKingOfOreskos(final BrimazKingOfOreskos card) {

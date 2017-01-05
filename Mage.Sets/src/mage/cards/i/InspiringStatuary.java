@@ -25,40 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.i;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
+import mage.abilities.keyword.ImproviseAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
  * @author Styxo
  */
-public class GreenbeltDruid extends CardImpl {
+public class InspiringStatuary extends CardImpl {
 
-    public GreenbeltDruid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
+    private static final FilterSpell filter = new FilterSpell("non-artifact spells you cast");
 
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+    }
 
-        // {T}: Add G to your mana pool.
-        this.addAbility(new GreenManaAbility());
+    public InspiringStatuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+
+        // Non-artifact spells you cast have improvise.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new ImproviseAbility(), filter)));
 
     }
 
-    public GreenbeltDruid(final GreenbeltDruid card) {
+    public InspiringStatuary(final InspiringStatuary card) {
         super(card);
     }
 
     @Override
-    public GreenbeltDruid copy() {
-        return new GreenbeltDruid(this);
+    public InspiringStatuary copy() {
+        return new InspiringStatuary(this);
     }
 }

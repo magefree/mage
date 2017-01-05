@@ -30,7 +30,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,7 +42,7 @@ import mage.cards.CardSetInfo;
 public class AshmouthHound extends CardImpl {
 
     public AshmouthHound(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Hound");
 
@@ -50,7 +50,7 @@ public class AshmouthHound extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Ashmouth Hound blocks or becomes blocked by a creature, Ashmouth Hound deals 1 damage to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
     }
 
     public AshmouthHound(final AshmouthHound card) {

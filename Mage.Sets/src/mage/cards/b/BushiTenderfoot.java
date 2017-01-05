@@ -32,7 +32,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.keyword.BushidoAbility;
@@ -68,7 +68,7 @@ public class BushiTenderfoot extends CardImpl {
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
         Effect effect = new FlipSourceEffect(new KenzoTheHardhearted());
         effect.setText("flip {this}");
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(effect));
+        this.addAbility(new DealtDamageAndDiedTriggeredAbility(effect));
     }
 
     public BushiTenderfoot(final BushiTenderfoot card) {

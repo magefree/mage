@@ -29,7 +29,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -54,7 +54,7 @@ public class RockBasilisk extends CardImpl {
     }
 
     public RockBasilisk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
         this.subtype.add("Basilisk");
 
         this.power = new MageInt(4);
@@ -64,7 +64,7 @@ public class RockBasilisk extends CardImpl {
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
         effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, filter, false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(effect, filter, false));
     }
 
     public RockBasilisk(final RockBasilisk card) {

@@ -29,7 +29,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
+import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -66,7 +66,7 @@ public class DruidsCall extends CardImpl {
         // Whenever enchanted creature is dealt damage, its controller creates that many 1/1 green Squirrel creature tokens.
         Effect effect = new CreateTokenTargetEffect(new SquirrelToken(), new NumericSetToEffectValues("that much", "damage"));
         effect.setText("its controller creates that many 1/1 green Squirrel creature tokens");
-        this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
     }
 
     public DruidsCall(final DruidsCall card) {

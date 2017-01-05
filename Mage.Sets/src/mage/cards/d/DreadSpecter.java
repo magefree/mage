@@ -30,7 +30,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author djbrez
  */
 public class DreadSpecter extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
     static {
@@ -55,16 +55,15 @@ public class DreadSpecter extends CardImpl {
     }
 
     public DreadSpecter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Specter");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Whenever Dread Specter blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
         effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, filter, false)); 
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(effect, filter, false));
     }
 
     public DreadSpecter(final DreadSpecter card) {

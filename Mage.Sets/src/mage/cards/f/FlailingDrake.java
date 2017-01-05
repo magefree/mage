@@ -30,7 +30,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -46,7 +46,7 @@ import mage.constants.Duration;
 public class FlailingDrake extends CardImpl {
 
     public FlailingDrake(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add("Drake");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -56,7 +56,7 @@ public class FlailingDrake extends CardImpl {
         // Whenever Flailing Drake blocks or becomes blocked by a creature, that creature gets +1/+1 until end of turn.
         Effect effect = new BoostTargetEffect(+1, +1, Duration.EndOfTurn);
         effect.setText("that creature gets +1/+1 until end of turn");
-        Ability ability = new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false);
+        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(effect, false);
         this.addAbility(ability);
     }
 

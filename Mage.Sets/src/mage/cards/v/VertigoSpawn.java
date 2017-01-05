@@ -30,7 +30,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksCreatureTriggeredAbility;
+import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -45,7 +45,7 @@ import mage.constants.CardType;
 public class VertigoSpawn extends CardImpl {
 
     public VertigoSpawn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Illusion");
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
@@ -54,7 +54,7 @@ public class VertigoSpawn extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever Vertigo Spawn blocks a creature, tap that creature. That creature doesn't untap during its controller's next untap step.
-        Ability ability = new BlocksCreatureTriggeredAbility(new TapTargetEffect("that creature"), false, true);
+        Ability ability = new BlocksTriggeredAbility(new TapTargetEffect("that creature"), false, true);
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("that creature"));
         this.addAbility(ability);
     }

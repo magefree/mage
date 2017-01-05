@@ -50,18 +50,12 @@ public class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffe
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return permanent.getId().equals(source.getSourceId());
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getPower().getValue() < attacker.getPower().getValue()) {
-            return false;
-        }
-        return true;
+        return (blocker.getPower().getValue() >= attacker.getPower().getValue());
     }
 
     @Override

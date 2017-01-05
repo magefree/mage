@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -50,7 +50,7 @@ import mage.constants.TargetController;
 public class KessigForgemaster extends CardImpl {
 
     public KessigForgemaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.subtype.add("Werewolf");
@@ -61,7 +61,7 @@ public class KessigForgemaster extends CardImpl {
         this.secondSideCardClazz = FlameheartWerewolf.class;
 
         // Whenever Kessig Forgemaster blocks or becomes blocked by a creature, Kessig Forgemaster deals 1 damage to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Kessig Forgemaster.
         this.addAbility(new TransformAbility());

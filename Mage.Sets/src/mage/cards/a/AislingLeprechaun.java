@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
@@ -46,7 +46,7 @@ import mage.constants.Duration;
 public class AislingLeprechaun extends CardImpl {
 
     public AislingLeprechaun(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add("Faerie");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -54,7 +54,7 @@ public class AislingLeprechaun extends CardImpl {
         // Whenever Aisling Leprechaun blocks or becomes blocked by a creature, that creature becomes green.
         Effect effect = new BecomesColorTargetEffect(ObjectColor.GREEN, Duration.EndOfGame);
         effect.setText("that creature becomes green");
-        Ability ability = new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false);
+        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(effect, false);
         this.addAbility(ability);
     }
 

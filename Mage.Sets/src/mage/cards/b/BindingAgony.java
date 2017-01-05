@@ -29,7 +29,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
+import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -63,7 +63,7 @@ public class BindingAgony extends CardImpl {
         // Whenever enchanted creature is dealt damage, Binding Agony deals that much damage to that creature's controller.
         Effect effect = new DamageTargetEffect(new NumericSetToEffectValues("that much", "damage"));
         effect.setText("{this} deals that much damage to that creature's controller");
-        this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
     }
 
     public BindingAgony(final BindingAgony card) {

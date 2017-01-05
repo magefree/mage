@@ -29,7 +29,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
+import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyAttachedEffect;
@@ -62,7 +62,7 @@ public class FrozenSolid extends CardImpl {
         // Enchanted creature doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
         // When enchanted creature is dealt damage, destroy it.
-        this.addAbility(new DamageDealtToAttachedTriggeredAbility(new DestroyAttachedEffect("it"), false));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(new DestroyAttachedEffect("it"), false));
     }
 
     public FrozenSolid(final FrozenSolid card) {

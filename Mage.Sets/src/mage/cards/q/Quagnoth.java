@@ -29,7 +29,7 @@ package mage.cards.q;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiscardedByOpponentTrigger;
+import mage.abilities.common.DiscardedByOpponentTriggerAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.SplitSecondAbility;
@@ -56,7 +56,7 @@ public class Quagnoth extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
 
         // When a spell or ability an opponent controls causes you to discard Quagnoth, return it to your hand.
-        this.addAbility(new DiscardedByOpponentTrigger(new ReturnToHandSourceEffect()));
+        this.addAbility(new DiscardedByOpponentTriggerAbility(new ReturnToHandSourceEffect()));
     }
 
     public Quagnoth(final Quagnoth card) {

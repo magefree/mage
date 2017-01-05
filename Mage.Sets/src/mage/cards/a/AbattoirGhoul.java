@@ -35,7 +35,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import java.util.UUID;
-import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.permanent.Permanent;
@@ -57,7 +57,7 @@ public class AbattoirGhoul extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Whenever a creature dealt damage by Abattoir Ghoul this turn dies, you gain life equal to that creature's toughness.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AbattoirGhoulEffect(), false));
+        this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AbattoirGhoulEffect(), false));
     }
 
     public AbattoirGhoul(final AbattoirGhoul card) {

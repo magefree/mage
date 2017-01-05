@@ -36,7 +36,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -63,7 +63,7 @@ public class DreadSlaver extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever a creature dealt damage by Dread Slaver this turn dies, return it to the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new DreadSlaverEffect(), false));
+        this.addAbility(new DealtDamageAndDiedTriggeredAbility(new DreadSlaverEffect(), false));
     }
 
     public DreadSlaver(final DreadSlaver card) {

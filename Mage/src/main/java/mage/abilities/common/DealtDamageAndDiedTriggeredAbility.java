@@ -10,23 +10,23 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
-public class DiesAndDealtDamageThisTurnTriggeredAbility extends TriggeredAbilityImpl {
+public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
 
-    public DiesAndDealtDamageThisTurnTriggeredAbility(Effect effect) {
+    public DealtDamageAndDiedTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
-    public DiesAndDealtDamageThisTurnTriggeredAbility(Effect effect, boolean optional) {
+    public DealtDamageAndDiedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, optional);
     }
 
-    public DiesAndDealtDamageThisTurnTriggeredAbility(final DiesAndDealtDamageThisTurnTriggeredAbility ability) {
+    public DealtDamageAndDiedTriggeredAbility(final DealtDamageAndDiedTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public DiesAndDealtDamageThisTurnTriggeredAbility copy() {
-        return new DiesAndDealtDamageThisTurnTriggeredAbility(this);
+    public DealtDamageAndDiedTriggeredAbility copy() {
+        return new DealtDamageAndDiedTriggeredAbility(this);
     }
 
     @Override
