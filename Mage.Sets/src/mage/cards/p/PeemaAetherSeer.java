@@ -33,19 +33,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayEnergyCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -63,7 +59,9 @@ public class PeemaAetherSeer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Peema Aether-Seer enters the battlefield, you get an amount of {E} equal to the greatest power among creatures you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PeemaAetherSeerEffect()));
+        Effect effect = new GetEnergyCountersControllerEffect(new GreatestPowerAmongControlledCreaturesValue());
+        effect.setText("you get an amount of {E} equal to the greatest power among creatures you control");
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
 
         // Pay {E}{E}{E}: Target creature blocks this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlocksIfAbleTargetEffect(Duration.EndOfTurn), new PayEnergyCost(3));
@@ -79,38 +77,4 @@ public class PeemaAetherSeer extends CardImpl {
     public PeemaAetherSeer copy() {
         return new PeemaAetherSeer(this);
     }
-}
-
-class PeemaAetherSeerEffect extends OneShotEffect {
-
-    PeemaAetherSeerEffect() {
-        super(Outcome.DrawCard);
-        staticText = "you get an amount of {E} equal to the greatest power among creatures you control";
-    }
-
-    PeemaAetherSeerEffect(final PeemaAetherSeerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int amount = 0;
-            for (Permanent p : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), game)) {
-                if (p.getPower().getValue() > amount) {
-                    amount = p.getPower().getValue();
-                }
-            }
-            new GetEnergyCountersControllerEffect(amount).apply(game, source);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public PeemaAetherSeerEffect copy() {
-        return new PeemaAetherSeerEffect(this);
-    }
-
 }

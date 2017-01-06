@@ -132,7 +132,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Implement of Examination", 156, Rarity.COMMON, mage.cards.i.ImplementOfExamination.class));
         cards.add(new SetCardInfo("Implement of Ferocity", 157, Rarity.COMMON, mage.cards.i.ImplementOfFerocity.class));
         cards.add(new SetCardInfo("Implement of Improvement", 158, Rarity.COMMON, mage.cards.i.ImplementOfImprovement.class));
-        cards.add(new SetCardInfo("Implement of Maliace", 159, Rarity.COMMON, mage.cards.i.ImplementOfMaliace.class));
+        cards.add(new SetCardInfo("Implement of Malice", 159, Rarity.COMMON, mage.cards.i.ImplementOfMalice.class));
         cards.add(new SetCardInfo("Inspiring Roar", 186, Rarity.COMMON, mage.cards.i.InspiringRoar.class));
         cards.add(new SetCardInfo("Inspiring Statuary", 160, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
         cards.add(new SetCardInfo("Ironclad Revolutionary", 65, Rarity.UNCOMMON, mage.cards.i.IroncladRevolutionary.class));
@@ -148,8 +148,9 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Maverick Thopterist", 130, Rarity.UNCOMMON, mage.cards.m.MaverickThopterist.class));
         cards.add(new SetCardInfo("Metallic Rebuke", 39, Rarity.COMMON, mage.cards.m.MetallicRebuke.class));
         cards.add(new SetCardInfo("Midnight Entourage", 66, Rarity.RARE, mage.cards.m.MidnightEntourage.class));
+        cards.add(new SetCardInfo("Monstrous Onslaught", 116, Rarity.UNCOMMON, mage.cards.m.MonstrousOnslaught.class));
         cards.add(new SetCardInfo("Narnam Renegade", 117, Rarity.UNCOMMON, mage.cards.n.NarnamRenegade.class));
-        cards.add(new SetCardInfo("Natural Obsolesence", 118, Rarity.COMMON, mage.cards.n.NaturalObsolesence.class));
+        cards.add(new SetCardInfo("Natural Obsolescence", 118, Rarity.COMMON, mage.cards.n.NaturalObsolescence.class));
         cards.add(new SetCardInfo("Negate", 40, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Night Market Aeronaut", 67, Rarity.COMMON, mage.cards.n.NightMarketAeronaut.class));
         cards.add(new SetCardInfo("Oath of Ajani", 131, Rarity.RARE, mage.cards.o.OathOfAjani.class));
@@ -182,6 +183,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 122, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rogue Refiner", 135, Rarity.UNCOMMON, mage.cards.r.RogueRefiner.class));
         cards.add(new SetCardInfo("Scrap Trawler", 175, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
+        cards.add(new SetCardInfo("Scrounging Bandar", 124, Rarity.COMMON, mage.cards.s.ScroungingBandar.class));
         cards.add(new SetCardInfo("Secret Salvage", 71, Rarity.RARE, mage.cards.s.SecretSalvage.class));
         cards.add(new SetCardInfo("Shipwreck Moray", 45, Rarity.COMMON, mage.cards.s.ShipwreckMoray.class));
         cards.add(new SetCardInfo("Shock", 98, Rarity.COMMON, mage.cards.s.Shock.class));

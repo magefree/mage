@@ -30,20 +30,11 @@ package mage.cards.f;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.players.Player;
 
 /**
  *
@@ -52,11 +43,10 @@ import mage.players.Player;
 public class FungalSprouting extends CardImpl {
 
     public FungalSprouting(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.
-        this.getSpellAbility().addEffect(new FungalSproutingEffect());
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new GreatestPowerAmongControlledCreaturesValue()));
     }
 
     public FungalSprouting(final FungalSprouting card) {
@@ -66,45 +56,5 @@ public class FungalSprouting extends CardImpl {
     @Override
     public FungalSprouting copy() {
         return new FungalSprouting(this);
-    }
-}
-
-class FungalSproutingEffect extends OneShotEffect {
-    
-    private static final FilterPermanent filter = new FilterPermanent();
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
-    public FungalSproutingEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control";
-    }
-
-    public FungalSproutingEffect(final FungalSproutingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FungalSproutingEffect copy() {
-        return new FungalSproutingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int amount = 0;
-            for (Permanent p : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), game)) {
-                if (p.getPower().getValue() > amount)
-                    amount = p.getPower().getValue();
-            }
-            SaprolingToken token = new SaprolingToken();
-            token.putOntoBattlefield(amount, game, source.getSourceId(), source.getControllerId());
-            return true;
-        }
-        return false;
     }
 }
