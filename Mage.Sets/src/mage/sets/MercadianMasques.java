@@ -184,6 +184,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Lumbering Satyr", 257, Rarity.UNCOMMON, mage.cards.l.LumberingSatyr.class));
         cards.add(new SetCardInfo("Lunge", 203, Rarity.COMMON, mage.cards.l.Lunge.class));
         cards.add(new SetCardInfo("Lure", 258, Rarity.UNCOMMON, mage.cards.l.Lure.class));
+        cards.add(new SetCardInfo("Maggot Therapy", 145, Rarity.COMMON, mage.cards.m.MaggotTherapy.class));
         cards.add(new SetCardInfo("Magistrate's Scepter", 304, Rarity.RARE, mage.cards.m.MagistratesScepter.class));
         cards.add(new SetCardInfo("Magistrate's Veto", 204, Rarity.UNCOMMON, mage.cards.m.MagistratesVeto.class));
         cards.add(new SetCardInfo("Mercadian Bazaar", 321, Rarity.UNCOMMON, mage.cards.m.MercadianBazaar.class));
@@ -264,6 +265,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Snuff Out", 162, Rarity.COMMON, mage.cards.s.SnuffOut.class));
         cards.add(new SetCardInfo("Soothing Balm", 48, Rarity.COMMON, mage.cards.s.SoothingBalm.class));
         cards.add(new SetCardInfo("Soothsaying", 104, Rarity.UNCOMMON, mage.cards.s.Soothsaying.class));
+        cards.add(new SetCardInfo("Soul Channeling", 163, Rarity.COMMON, mage.cards.s.SoulChanneling.class));
         cards.add(new SetCardInfo("Specter's Wail", 164, Rarity.COMMON, mage.cards.s.SpectersWail.class));
         cards.add(new SetCardInfo("Spidersilk Armor", 273, Rarity.COMMON, mage.cards.s.SpidersilkArmor.class));
         cards.add(new SetCardInfo("Spontaneous Generation", 274, Rarity.RARE, mage.cards.s.SpontaneousGeneration.class));

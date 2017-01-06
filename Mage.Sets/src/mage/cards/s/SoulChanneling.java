@@ -25,51 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EquipAbility;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.abilities.costs.common.UnattachCost;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.effects.common.RegenerateAttachedEffect;
+import mage.constants.*;
 
 /**
  *
- * @author LevelX2
+ * @author Galatolol
  */
-public class BlindingPowder extends CardImpl {
+public class SoulChanneling extends CardImpl {
 
-    public BlindingPowder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.subtype.add("Equipment");
+    public SoulChanneling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
+        
+        this.subtype.add("Aura");
 
-        // Equipped creature has "Unattach Blinding Powder: Prevent all combat damage that would be dealt to this creature this turn."
-        Effect effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
-        effect.setText("Prevent all combat damage that would be dealt to this creature this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new UnattachCost(this.getName(), this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
-        // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(2)));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Regenerate));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // Pay 2 life: Regenerate enchanted creature.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new PayLifeCost(2)));
     }
 
-    public BlindingPowder(final BlindingPowder card) {
+    public SoulChanneling(final SoulChanneling card) {
         super(card);
     }
 
     @Override
-    public BlindingPowder copy() {
-        return new BlindingPowder(this);
+    public SoulChanneling copy() {
+        return new SoulChanneling(this);
     }
 }
