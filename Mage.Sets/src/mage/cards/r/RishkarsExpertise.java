@@ -25,22 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.r;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CastWithoutPayingManaCostEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 
 /**
  * @author fireshoes
@@ -50,9 +45,10 @@ public class RishkarsExpertise extends CardImpl {
     public RishkarsExpertise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
-
         // Draw cards equal to the greatest power among creatures you control.
-        this.getSpellAbility().addEffect(new RishkarsExpertiseDrawEffect());
+        Effect effect = new DrawCardSourceControllerEffect(new GreatestPowerAmongControlledCreaturesValue());
+        effect.setText("Draw cards equal to the greatest power among creatures you control");
+        this.getSpellAbility().addEffect(effect);
 
         // You may cast a card with converted mana cost 5 or less from your hand without paying its mana cost.
         this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(5));
@@ -66,38 +62,4 @@ public class RishkarsExpertise extends CardImpl {
     public RishkarsExpertise copy() {
         return new RishkarsExpertise(this);
     }
-}
-
-class RishkarsExpertiseDrawEffect extends OneShotEffect {
-
-    RishkarsExpertiseDrawEffect() {
-        super(Outcome.DrawCard);
-        staticText = "Draw cards equal to the greatest power among creatures you control";
-    }
-
-    RishkarsExpertiseDrawEffect(final RishkarsExpertiseDrawEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int amount = 0;
-            for (Permanent p : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), game)) {
-                if (p.getPower().getValue() > amount) {
-                    amount = p.getPower().getValue();
-                }
-            }
-            player.drawCards(amount, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public RishkarsExpertiseDrawEffect copy() {
-        return new RishkarsExpertiseDrawEffect(this);
-    }
-
 }

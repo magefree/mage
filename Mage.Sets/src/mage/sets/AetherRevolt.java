@@ -140,6 +140,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Maverick Thopterist", 130, Rarity.UNCOMMON, mage.cards.m.MaverickThopterist.class));
         cards.add(new SetCardInfo("Metallic Rebuke", 39, Rarity.COMMON, mage.cards.m.MetallicRebuke.class));
         cards.add(new SetCardInfo("Midnight Entourage", 66, Rarity.RARE, mage.cards.m.MidnightEntourage.class));
+        cards.add(new SetCardInfo("Monstrous Onslaught", 116, Rarity.UNCOMMON, mage.cards.m.MonstrousOnslaught.class));
         cards.add(new SetCardInfo("Narnam Renegade", 117, Rarity.UNCOMMON, mage.cards.n.NarnamRenegade.class));
         cards.add(new SetCardInfo("Natural Obsolescence", 118, Rarity.COMMON, mage.cards.n.NaturalObsolescence.class));
         cards.add(new SetCardInfo("Negate", 40, Rarity.COMMON, mage.cards.n.Negate.class));
@@ -171,6 +172,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 122, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rogue Refiner", 135, Rarity.UNCOMMON, mage.cards.r.RogueRefiner.class));
         cards.add(new SetCardInfo("Scrap Trawler", 175, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
+        cards.add(new SetCardInfo("Scrounging Bandar", 124, Rarity.COMMON, mage.cards.s.ScroungingBandar.class));
         cards.add(new SetCardInfo("Shipwreck Moray", 45, Rarity.COMMON, mage.cards.s.ShipwreckMoray.class));
         cards.add(new SetCardInfo("Shock", 98, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Siege Modification", 99, Rarity.UNCOMMON, mage.cards.s.SiegeModification.class));
