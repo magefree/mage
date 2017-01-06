@@ -80,12 +80,15 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani's Aid", 188, Rarity.RARE, mage.cards.a.AjanisAid.class));
         cards.add(new SetCardInfo("Ajani's Comrade", 187, Rarity.UNCOMMON, mage.cards.a.AjanisComrade.class));
         cards.add(new SetCardInfo("Ajani, Valiant Protector", 185, Rarity.MYTHIC, mage.cards.a.AjaniValiantProtector.class));
+        cards.add(new SetCardInfo("Alley Strangler", 52, Rarity.COMMON, mage.cards.a.AlleyStrangler.class));
         cards.add(new SetCardInfo("Baral's Expertise", 29, Rarity.RARE, mage.cards.b.BaralsExpertise.class));
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 28, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class));
+        cards.add(new SetCardInfo("Bastion Enforcer", 8, Rarity.COMMON, mage.cards.b.BastionEnforcer.class));
         cards.add(new SetCardInfo("Battle at the Bridge", 53, Rarity.RARE, mage.cards.b.BattleAtTheBridge.class));
         cards.add(new SetCardInfo("Call for Unity", 9, Rarity.RARE, mage.cards.c.CallForUnity.class));
         cards.add(new SetCardInfo("Consulate Crackdown", 11, Rarity.RARE, mage.cards.c.ConsulateCrackdown.class));
         cards.add(new SetCardInfo("Consulate Dreadnought", 146, Rarity.UNCOMMON, mage.cards.c.ConsulateDreadnought.class));
+        cards.add(new SetCardInfo("Conviction", 12, Rarity.COMMON, mage.cards.c.Conviction.class));
         cards.add(new SetCardInfo("Countless Gears Renegade", 13, Rarity.COMMON, mage.cards.c.CountlessGearsRenegade.class));
         cards.add(new SetCardInfo("Dark Intimations", 128, Rarity.RARE, mage.cards.d.DarkIntimations.class));
         cards.add(new SetCardInfo("Decommission", 16, Rarity.COMMON, mage.cards.d.Decommission.class));
@@ -95,6 +98,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Fatal Push", 57, Rarity.UNCOMMON, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Foundry Assembler", 151, Rarity.COMMON, mage.cards.f.FoundryAssembler.class));
         cards.add(new SetCardInfo("Freejam Regent", 81, Rarity.RARE, mage.cards.f.FreejamRegent.class));
+        cards.add(new SetCardInfo("Ghirapur Osprey", 20, Rarity.COMMON, mage.cards.g.GhirapurOsprey.class));
         cards.add(new SetCardInfo("Gifted Aetherborn", 61, Rarity.UNCOMMON, mage.cards.g.GiftedAetherborn.class));
         cards.add(new SetCardInfo("Glint-Sleeve Siphoner", 62, Rarity.RARE, mage.cards.g.GlintSleeveSiphoner.class));
         cards.add(new SetCardInfo("Gonti's Aether Heart", 152, Rarity.MYTHIC, mage.cards.g.GontisAetherHeart.class));
@@ -115,11 +119,13 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Statuary", 160, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
         cards.add(new SetCardInfo("Kari Zev's Expertise", 88, Rarity.RARE, mage.cards.k.KariZevsExpertise.class));
         cards.add(new SetCardInfo("Kari Zev, Skyship Raider", 87, Rarity.RARE, mage.cards.k.KariZevSkyshipRaider.class));
+        cards.add(new SetCardInfo("Lathnu Sailback", 89, Rarity.COMMON, mage.cards.l.LathnuSailback.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 162, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
         cards.add(new SetCardInfo("Lightning Runner", 90, Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
         cards.add(new SetCardInfo("Maverick Thopterist", 130, Rarity.UNCOMMON, mage.cards.m.MaverickThopterist.class));
         cards.add(new SetCardInfo("Metallic Rebuke", 39, Rarity.COMMON, mage.cards.m.MetallicRebuke.class));
         cards.add(new SetCardInfo("Midnight Entourage", 66, Rarity.RARE, mage.cards.m.MidnightEntourage.class));
+        cards.add(new SetCardInfo("Negate", 40, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Night Market Aeronaut", 67, Rarity.COMMON, mage.cards.n.NightMarketAeronaut.class));
         cards.add(new SetCardInfo("Oath of Ajani", 131, Rarity.RARE, mage.cards.o.OathOfAjani.class));
         cards.add(new SetCardInfo("Ornithopter", 167, Rarity.UNCOMMON, mage.cards.o.Ornithopter.class));
@@ -130,6 +136,9 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Pendulum of Patterns", 192, Rarity.COMMON, mage.cards.p.PendulumOfPatterns.class));
         cards.add(new SetCardInfo("Pia's Revolution", 91, Rarity.RARE, mage.cards.p.PiasRevolution.class));
         cards.add(new SetCardInfo("Planar Bridge", 171, Rarity.MYTHIC, mage.cards.p.PlanarBridge.class));
+        cards.add(new SetCardInfo("Precise Strike", 92, Rarity.COMMON, mage.cards.p.PreciseStrike.class));
+        cards.add(new SetCardInfo("Prey Upon", 120, Rarity.COMMON, mage.cards.p.PreyUpon.class));
+        cards.add(new SetCardInfo("Prizefighter Construct", 172, Rarity.COMMON, mage.cards.p.PrizefighterConstruct.class));
         cards.add(new SetCardInfo("Quicksmith Rebel", 93, Rarity.RARE, mage.cards.q.QuicksmithRebel.class));
         cards.add(new SetCardInfo("Quicksmith Spy", 41, Rarity.RARE, mage.cards.q.QuicksmithSpy.class));
         cards.add(new SetCardInfo("Ravenous Intruder", 94, Rarity.UNCOMMON, mage.cards.r.RavenousIntruder.class));
