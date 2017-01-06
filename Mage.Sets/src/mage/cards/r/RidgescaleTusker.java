@@ -25,46 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ReachAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class SomberwaldSpider extends CardImpl {
+public class RidgescaleTusker extends CardImpl {
 
-    public SomberwaldSpider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Spider");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(ReachAbility.getInstance());
-        // Morbid - Somberwald Spider enters the battlefield with two +1/+1 counters on it if a creature died this turn.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), MorbidCondition.getInstance(), ""),
-                "with two +1/+1 counters on it if a creature died this turn"));
+    static {
+        filter.add(new AnotherPredicate());
     }
 
-    public SomberwaldSpider(final SomberwaldSpider card) {
+    public RidgescaleTusker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+
+        this.subtype.add("Beast");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // When Ridgescale Tusker enters the battlefield, put a +1/+1 counter on each other creature you control.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(1), filter)));
+    }
+
+    public RidgescaleTusker(final RidgescaleTusker card) {
         super(card);
     }
 
     @Override
-    public SomberwaldSpider copy() {
-        return new SomberwaldSpider(this);
+    public RidgescaleTusker copy() {
+        return new RidgescaleTusker(this);
     }
 }

@@ -25,46 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.a;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ReachAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.common.PayEnergyCost;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.counters.CounterType;
+import mage.constants.CardType;
+import mage.constants.Duration;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class SomberwaldSpider extends CardImpl {
+public class AetherstreamLeopard extends CardImpl {
 
-    public SomberwaldSpider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Spider");
+    public AetherstreamLeopard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
+        this.subtype.add("Cat");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        this.addAbility(ReachAbility.getInstance());
-        // Morbid - Somberwald Spider enters the battlefield with two +1/+1 counters on it if a creature died this turn.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), MorbidCondition.getInstance(), ""),
-                "with two +1/+1 counters on it if a creature died this turn"));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+
+        // When Aetherstream Leopard enters the battlefield, you get {E}.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(1)));
+
+        // Whenever Aetherstream Leopard attacks, you may pay {E}. If you do, it gets +2/+0 until end of turn.
+        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new PayEnergyCost(1)), false,
+                "Whenever {this} attacks you may pay {E}. If you do, it gets +2/+0 until end of turn."));
     }
 
-    public SomberwaldSpider(final SomberwaldSpider card) {
+    public AetherstreamLeopard(final AetherstreamLeopard card) {
         super(card);
     }
 
     @Override
-    public SomberwaldSpider copy() {
-        return new SomberwaldSpider(this);
+    public AetherstreamLeopard copy() {
+        return new AetherstreamLeopard(this);
     }
 }

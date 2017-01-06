@@ -25,46 +25,35 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.n;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ReachAbility;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.counters.CounterType;
+import mage.constants.CardType;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class SomberwaldSpider extends CardImpl {
+public class NaturalObsolesence extends CardImpl {
 
-    public SomberwaldSpider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Spider");
+    public NaturalObsolesence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(ReachAbility.getInstance());
-        // Morbid - Somberwald Spider enters the battlefield with two +1/+1 counters on it if a creature died this turn.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), MorbidCondition.getInstance(), ""),
-                "with two +1/+1 counters on it if a creature died this turn"));
+        // Put target artifact on the bottom of its owner's library.
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
     }
 
-    public SomberwaldSpider(final SomberwaldSpider card) {
+    public NaturalObsolesence(final NaturalObsolesence card) {
         super(card);
     }
 
     @Override
-    public SomberwaldSpider copy() {
-        return new SomberwaldSpider(this);
+    public NaturalObsolesence copy() {
+        return new NaturalObsolesence(this);
     }
 }

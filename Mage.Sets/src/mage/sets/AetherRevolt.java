@@ -74,6 +74,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Swooper", 26, Rarity.COMMON, mage.cards.a.AetherSwooper.class));
         cards.add(new SetCardInfo("Aethergeode Miner", 4, Rarity.RARE, mage.cards.a.AethergeodeMiner.class));
         cards.add(new SetCardInfo("Aethersphere Harvester", 142, Rarity.RARE, mage.cards.a.AethersphereHarvester.class));
+        cards.add(new SetCardInfo("Aetherstream Leopard", 103, Rarity.COMMON, mage.cards.a.AetherstreamLeopard.class));
         cards.add(new SetCardInfo("Aethertide Whale", 27, Rarity.RARE, mage.cards.a.AethertideWhale.class));
         cards.add(new SetCardInfo("Aetherwind Basker", 104, Rarity.MYTHIC, mage.cards.a.AetherwindBasker.class));
         cards.add(new SetCardInfo("Aid from the Cowl", 105, Rarity.RARE, mage.cards.a.AidFromTheCowl.class));
@@ -119,6 +120,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Heroic Intervention", 109, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Hidden Herbalists", 118, Rarity.UNCOMMON, mage.cards.h.HiddenHerbalists.class));
         cards.add(new SetCardInfo("Hidden Stocks", 129, Rarity.UNCOMMON, mage.cards.h.HiddenStocks.class));
+        cards.add(new SetCardInfo("Highspire Infusion", 111, Rarity.COMMON, mage.cards.h.HighspireInfusion.class));
         cards.add(new SetCardInfo("Hungry Flames", 84, Rarity.UNCOMMON, mage.cards.h.HungryFlames.class));
         cards.add(new SetCardInfo("Implement of Combustion", 155, Rarity.COMMON, mage.cards.i.ImplementOfCombustion.class));
         cards.add(new SetCardInfo("Implement of Examination", 156, Rarity.COMMON, mage.cards.i.ImplementOfExamination.class));
@@ -130,11 +132,17 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Kari Zev's Expertise", 88, Rarity.RARE, mage.cards.k.KariZevsExpertise.class));
         cards.add(new SetCardInfo("Kari Zev, Skyship Raider", 87, Rarity.RARE, mage.cards.k.KariZevSkyshipRaider.class));
         cards.add(new SetCardInfo("Lathnu Sailback", 89, Rarity.COMMON, mage.cards.l.LathnuSailback.class));
+        cards.add(new SetCardInfo("Lifecraft Awakening", 112, Rarity.UNCOMMON, mage.cards.l.LifecraftAwakening.class));
+        cards.add(new SetCardInfo("Lifecraft Cavalry", 113, Rarity.COMMON, mage.cards.l.LifecraftCavalry.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 162, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
+        cards.add(new SetCardInfo("Lifecrafter's Gift", 114, Rarity.UNCOMMON, mage.cards.l.LifecraftersGift.class));
         cards.add(new SetCardInfo("Lightning Runner", 90, Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
+        cards.add(new SetCardInfo("Maulfist Revolutionary", 115, Rarity.UNCOMMON, mage.cards.m.MaulfistRevolutionary.class));
         cards.add(new SetCardInfo("Maverick Thopterist", 130, Rarity.UNCOMMON, mage.cards.m.MaverickThopterist.class));
         cards.add(new SetCardInfo("Metallic Rebuke", 39, Rarity.COMMON, mage.cards.m.MetallicRebuke.class));
         cards.add(new SetCardInfo("Midnight Entourage", 66, Rarity.RARE, mage.cards.m.MidnightEntourage.class));
+        cards.add(new SetCardInfo("Narnam Renegade", 117, Rarity.UNCOMMON, mage.cards.n.NarnamRenegade.class));
+        cards.add(new SetCardInfo("Natural Obsolesence", 118, Rarity.COMMON, mage.cards.n.NaturalObsolesence.class));
         cards.add(new SetCardInfo("Negate", 40, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Night Market Aeronaut", 67, Rarity.COMMON, mage.cards.n.NightMarketAeronaut.class));
         cards.add(new SetCardInfo("Oath of Ajani", 131, Rarity.RARE, mage.cards.o.OathOfAjani.class));
@@ -143,6 +151,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Pacification Array", 168, Rarity.UNCOMMON, mage.cards.p.PacificationArray.class));
         cards.add(new SetCardInfo("Paradox Engine", 169, Rarity.MYTHIC, mage.cards.p.ParadoxEngine.class));
         cards.add(new SetCardInfo("Peacewalker Colossus", 170, Rarity.RARE, mage.cards.p.PeacewalkerColossus.class));
+        cards.add(new SetCardInfo("Peema Aether-Seer", 119, Rarity.UNCOMMON, mage.cards.p.PeemaAetherSeer.class));
         cards.add(new SetCardInfo("Pendulum of Patterns", 192, Rarity.COMMON, mage.cards.p.PendulumOfPatterns.class));
         cards.add(new SetCardInfo("Pia's Revolution", 91, Rarity.RARE, mage.cards.p.PiasRevolution.class));
         cards.add(new SetCardInfo("Planar Bridge", 171, Rarity.MYTHIC, mage.cards.p.PlanarBridge.class));
@@ -158,6 +167,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Renegade Wheelsmith", 134, Rarity.UNCOMMON, mage.cards.r.RenegadeWheelsmith.class));
         cards.add(new SetCardInfo("Restoration Specialist", 21, Rarity.UNCOMMON, mage.cards.r.RestorationSpecialist.class));
         cards.add(new SetCardInfo("Reverse Engineer", 42, Rarity.UNCOMMON, mage.cards.r.ReverseEngineer.class));
+        cards.add(new SetCardInfo("Ridgescale Tusker", 121, Rarity.UNCOMMON, mage.cards.r.RidgescaleTusker.class));
         cards.add(new SetCardInfo("Rishkar's Expertise", 123, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 122, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rogue Refiner", 135, Rarity.UNCOMMON, mage.cards.r.RogueRefiner.class));
@@ -182,10 +192,13 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Expanse", 189, Rarity.COMMON, mage.cards.t.TranquilExpanse.class));
         cards.add(new SetCardInfo("Treasure Keeper", 177, Rarity.UNCOMMON, mage.cards.t.TreasureKeeper.class));
         cards.add(new SetCardInfo("Trophy Mage", 48, Rarity.UNCOMMON, mage.cards.t.TrophyMage.class));
+        cards.add(new SetCardInfo("Unbridled Growth", 126, Rarity.COMMON, mage.cards.u.UnbridledGrowth.class));
         cards.add(new SetCardInfo("Universal Solvent", 178, Rarity.COMMON, mage.cards.u.UniversalSolvent.class));
         cards.add(new SetCardInfo("Untethered Express", 179, Rarity.UNCOMMON, mage.cards.u.UntetheredExpress.class));
         cards.add(new SetCardInfo("Vengeful Rebel", 73, Rarity.UNCOMMON, mage.cards.v.VengefulRebel.class));
+        cards.add(new SetCardInfo("Weldfast Engineer", 139, Rarity.UNCOMMON, mage.cards.w.WeldfastEngineer.class));
         cards.add(new SetCardInfo("Whir of Invention", 49, Rarity.RARE, mage.cards.w.WhirOfInvention.class));
+        cards.add(new SetCardInfo("Winding Constrictor", 140, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
         cards.add(new SetCardInfo("Yahenni's Expertise", 75, Rarity.RARE, mage.cards.y.YahennisExpertise.class));
         cards.add(new SetCardInfo("Yahenni, Undying Partisan", 74, Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class));
     }

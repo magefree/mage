@@ -25,46 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.h;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ReachAbility;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.counters.CounterType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class SomberwaldSpider extends CardImpl {
+public class HighspireInfusion extends CardImpl {
 
-    public SomberwaldSpider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Spider");
+    public HighspireInfusion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(ReachAbility.getInstance());
-        // Morbid - Somberwald Spider enters the battlefield with two +1/+1 counters on it if a creature died this turn.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), MorbidCondition.getInstance(), ""),
-                "with two +1/+1 counters on it if a creature died this turn"));
+        // Target creature gets +3/+3 until end of turn. You get {E}{E}.
+        getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+        getSpellAbility().addTarget(new TargetCreaturePermanent());
+        getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
     }
 
-    public SomberwaldSpider(final SomberwaldSpider card) {
+    public HighspireInfusion(final HighspireInfusion card) {
         super(card);
     }
 
     @Override
-    public SomberwaldSpider copy() {
-        return new SomberwaldSpider(this);
+    public HighspireInfusion copy() {
+        return new HighspireInfusion(this);
     }
 }
