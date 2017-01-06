@@ -34,6 +34,7 @@ import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +54,7 @@ import mage.util.CardUtil;
  */
 public class StasisSnare extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -66,7 +67,7 @@ public class StasisSnare extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Stasis Snare enters the battlefield, exile target creature an opponent controls until Stasis Snare leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new StasisSnareExileEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()));
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);

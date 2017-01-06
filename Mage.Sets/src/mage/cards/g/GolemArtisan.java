@@ -50,7 +50,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author nantuko
@@ -58,7 +58,7 @@ import mage.target.common.TargetArtifactPermanent;
 public class GolemArtisan extends CardImpl {
 
     public GolemArtisan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.subtype.add("Golem");
 
         this.power = new MageInt(3);
@@ -66,12 +66,12 @@ public class GolemArtisan extends CardImpl {
 
         // {2}: Target artifact creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(2));
-        ability.addTarget(new TargetArtifactPermanent(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT));
         this.addAbility(ability);
 
         // {2}: Target artifact creature gains your choice of flying, trample, or haste until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GolemArtisanEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetArtifactPermanent(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT));
         this.addAbility(ability);
 
     }

@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ExileAttachedEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -43,9 +43,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ChokingRestraints extends CardImpl {
 
     public ChokingRestraints(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -69,10 +66,10 @@ public class ChokingRestraints extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
 
         // {3}{W}{W}, Sacrifice Choking Restraints: Exile enchanted creature.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChokingRestraintsEffect(), new ManaCostsImpl<>("{3}{W}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileAttachedEffect(), new ManaCostsImpl<>("{3}{W}{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-        
+
     }
 
     public ChokingRestraints(final ChokingRestraints card) {
@@ -82,35 +79,5 @@ public class ChokingRestraints extends CardImpl {
     @Override
     public ChokingRestraints copy() {
         return new ChokingRestraints(this);
-    }
-}
-
-class ChokingRestraintsEffect extends OneShotEffect {
-
-    ChokingRestraintsEffect() {
-        super(Outcome.Exile);
-        staticText = "Exile enchanted creature";
-    }
-
-    ChokingRestraintsEffect(final ChokingRestraintsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChokingRestraintsEffect copy() {
-        return new ChokingRestraintsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                controller.moveCardsToExile(creature, source, game, true, null, "");
-            }
-        }
-        return false;
     }
 }
