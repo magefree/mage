@@ -33,8 +33,6 @@ import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -46,6 +44,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.abilities.costs.common.UnattachCost;
 
 /**
  *
@@ -59,7 +58,7 @@ public class RazorBoomerang extends CardImpl {
 
         // Equipped creature has "{tap}, Unattach Razor Boomerang: Razor Boomerang deals 1 damage to target creature or player. Return Razor Boomerang to its owner's hand."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RazorBoomerangEffect(this.getId()), new TapSourceCost());
-        gainAbility.addCost(new UnattachCost(this.getId()));
+        gainAbility.addCost(new UnattachCost(this.getName(), this.getId()));
         gainAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.EQUIPMENT)));
 
@@ -74,51 +73,6 @@ public class RazorBoomerang extends CardImpl {
     @Override
     public RazorBoomerang copy() {
         return new RazorBoomerang(this);
-    }
-}
-
-class UnattachCost extends CostImpl {
-
-    private UUID attachmentid;
-
-    public UnattachCost(UUID attachmentid) {
-        this.text = "Unattach Razor Boomerang";
-        this.attachmentid = attachmentid;
-    }
-
-    public UnattachCost(UnattachCost cost) {
-        super(cost);
-        this.attachmentid = cost.attachmentid;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            Permanent attachment = game.getPermanent(attachmentid);
-            if (attachment != null) {
-                permanent.removeAttachment(attachmentid, game);
-                this.paid = true;
-            }
-        }
-        return paid;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            Permanent attachment = game.getPermanent(attachmentid);
-            if (attachment != null && permanent.getAttachments().contains(attachmentid)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public UnattachCost copy() {
-        return new UnattachCost(this);
     }
 }
 
