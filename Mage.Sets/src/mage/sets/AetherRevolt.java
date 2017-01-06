@@ -118,7 +118,6 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Herald of Anguish", 64, Rarity.MYTHIC, mage.cards.h.HeraldOfAnguish.class));
         cards.add(new SetCardInfo("Heroic Intervention", 109, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Hidden Herbalists", 118, Rarity.UNCOMMON, mage.cards.h.HiddenHerbalists.class));
-        cards.add(new SetCardInfo("Hidden Stocks", 129, Rarity.UNCOMMON, mage.cards.h.HiddenStocks.class));
         cards.add(new SetCardInfo("Hidden Stockpile", 129, Rarity.UNCOMMON, mage.cards.h.HiddenStockpile.class));
         cards.add(new SetCardInfo("Highspire Infusion", 111, Rarity.COMMON, mage.cards.h.HighspireInfusion.class));
         cards.add(new SetCardInfo("Hungry Flames", 84, Rarity.UNCOMMON, mage.cards.h.HungryFlames.class));
