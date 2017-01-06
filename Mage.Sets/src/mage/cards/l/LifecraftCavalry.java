@@ -29,6 +29,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -38,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.watchers.common.RevoltWatcher;
 
 /**
  *
@@ -57,9 +59,14 @@ public class LifecraftCavalry extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // <i>Revolt</i> &mdash; Lifecraft Cavalry enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), RevoltCondition.getInstance(), ""),
-                "with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn"));
+        this.addAbility(
+                new EntersBattlefieldAbility(
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
+                        false,
+                        RevoltCondition.getInstance(),
+                        "<i>Revolt</i> &mdash; {this} enters the battlefield with two +1/+1 counter on it if a permanent you controlled left the battlefield this turn", null),
+                new RevoltWatcher()
+        );
     }
 
     public LifecraftCavalry(final LifecraftCavalry card) {

@@ -45,9 +45,9 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class ImplementOfMaliace extends CardImpl {
+public class ImplementOfMalice extends CardImpl {
 
-    public ImplementOfMaliace(UUID ownerId, CardSetInfo setInfo) {
+    public ImplementOfMalice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {B}, Sacrifice Implement of Malice: Target player discards a card. Activate this ability only any time you could cast a sorcery.
@@ -60,12 +60,12 @@ public class ImplementOfMaliace extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ImplementOfMaliace(final ImplementOfMaliace card) {
+    public ImplementOfMalice(final ImplementOfMalice card) {
         super(card);
     }
 
     @Override
-    public ImplementOfMaliace copy() {
-        return new ImplementOfMaliace(this);
+    public ImplementOfMalice copy() {
+        return new ImplementOfMalice(this);
     }
 }

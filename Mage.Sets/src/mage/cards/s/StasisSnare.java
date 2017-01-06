@@ -82,31 +82,3 @@ public class StasisSnare extends CardImpl {
         return new StasisSnare(this);
     }
 }
-
-class StasisSnareExileEffect extends OneShotEffect {
-
-    public StasisSnareExileEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "exile target creature an opponent controls until {this} leaves the battlefield";
-    }
-
-    public StasisSnareExileEffect(final StasisSnareExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StasisSnareExileEffect copy() {
-        return new StasisSnareExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        // If Stasis Snare leaves the battlefield before its triggered ability resolves,
-        // the target won't be exiled.
-        if (permanent != null) {
-            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName()).apply(game, source);
-        }
-        return false;
-    }
-}

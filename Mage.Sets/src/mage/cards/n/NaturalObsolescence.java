@@ -38,9 +38,9 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author fireshoes
  */
-public class NaturalObsolesence extends CardImpl {
+public class NaturalObsolescence extends CardImpl {
 
-    public NaturalObsolesence(UUID ownerId, CardSetInfo setInfo) {
+    public NaturalObsolescence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Put target artifact on the bottom of its owner's library.
@@ -48,12 +48,12 @@ public class NaturalObsolesence extends CardImpl {
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
     }
 
-    public NaturalObsolesence(final NaturalObsolesence card) {
+    public NaturalObsolescence(final NaturalObsolescence card) {
         super(card);
     }
 
     @Override
-    public NaturalObsolesence copy() {
-        return new NaturalObsolesence(this);
+    public NaturalObsolescence copy() {
+        return new NaturalObsolescence(this);
     }
 }

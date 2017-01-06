@@ -31,13 +31,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.watchers.common.RevoltWatcher;
 
 /**
  *
@@ -57,9 +57,14 @@ public class NarnamRenegade extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // <i>Revolt</i> &mdash; Narnam Renegade enters the battlefield with a +1/+1 counter on it if a permanent you controlled left this battlefield this turn.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), RevoltCondition.getInstance(), ""),
-                "with a +1/+1 counter on it if a permanent you controlled left the battlefield this turn"));
+        this.addAbility(
+                new EntersBattlefieldAbility(
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                        false,
+                        RevoltCondition.getInstance(),
+                        "<i>Revolt</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it if a permanent you controlled left the battlefield this turn", null),
+                new RevoltWatcher()
+        );
     }
 
     public NarnamRenegade(final NarnamRenegade card) {

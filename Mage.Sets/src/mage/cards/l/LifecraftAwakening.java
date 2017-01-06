@@ -40,7 +40,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -53,13 +56,19 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class LifecraftAwakening extends CardImpl {
 
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you control");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
+
     public LifecraftAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}");
 
         // Put X +1/+1 counters on target artifact you control. If it isn't a creature or Vehicle, it becomes a 0/0 Construct artifact creature.
         ManacostVariableValue manaX = new ManacostVariableValue();
         getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), manaX));
-        getSpellAbility().addTarget(new TargetArtifactPermanent());
+        getSpellAbility().addTarget(new TargetArtifactPermanent(filter));
         getSpellAbility().addEffect(new LifecraftAwakeningEffect());
     }
 
@@ -91,13 +100,13 @@ class LifecraftAwakeningEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getPermanent(source.getTargets().get(1).getFirstTarget());
-            if (!permanent.getCardType().contains(CardType.CREATURE) && !permanent.getSubtype(game).contains("Vehicle")) {
-                    ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new LifecraftAwakeningToken(), false, true, Duration.Custom);
-                    continuousEffect.setTargetPointer(new FixedTarget(permanent, game));
-                    game.addEffect(continuousEffect, source);
-                    return true;
-            }
+        Permanent permanent = (Permanent) game.getPermanent(source.getTargets().getFirstTarget());
+        if (!permanent.getCardType().contains(CardType.CREATURE) && !permanent.getSubtype(game).contains("Vehicle")) {
+            ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new LifecraftAwakeningToken(), false, true, Duration.Custom);
+            continuousEffect.setTargetPointer(new FixedTarget(permanent, game));
+            game.addEffect(continuousEffect, source);
+            return true;
+        }
         return false;
     }
 }

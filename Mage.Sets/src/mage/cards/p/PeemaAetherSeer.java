@@ -102,7 +102,9 @@ class PeemaAetherSeerEffect extends OneShotEffect {
                     amount = p.getPower().getValue();
                 }
             }
-            new GetEnergyCountersControllerEffect(amount).apply(game, source);
+            if (amount > 0) {
+                new GetEnergyCountersControllerEffect(amount).apply(game, source);
+            }
             return true;
         }
         return false;
