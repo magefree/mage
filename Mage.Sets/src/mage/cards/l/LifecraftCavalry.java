@@ -25,46 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.l;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.MorbidCondition;
+import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ReachAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.counters.CounterType;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class SomberwaldSpider extends CardImpl {
+public class LifecraftCavalry extends CardImpl {
 
-    public SomberwaldSpider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add("Spider");
+    public LifecraftCavalry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
 
-        this.power = new MageInt(2);
+        this.subtype.add("Elf");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(ReachAbility.getInstance());
-        // Morbid - Somberwald Spider enters the battlefield with two +1/+1 counters on it if a creature died this turn.
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+
+        // <i>Revolt</i> &mdash; Lifecraft Cavalry enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.
         this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), MorbidCondition.getInstance(), ""),
-                "with two +1/+1 counters on it if a creature died this turn"));
+                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), RevoltCondition.getInstance(), ""),
+                "with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn"));
     }
 
-    public SomberwaldSpider(final SomberwaldSpider card) {
+    public LifecraftCavalry(final LifecraftCavalry card) {
         super(card);
     }
 
     @Override
-    public SomberwaldSpider copy() {
-        return new SomberwaldSpider(this);
+    public LifecraftCavalry copy() {
+        return new LifecraftCavalry(this);
     }
 }
