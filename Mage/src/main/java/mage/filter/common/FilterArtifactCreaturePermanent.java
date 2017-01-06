@@ -34,7 +34,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class FilterArtifactCreaturePermanent extends FilterArtifactPermanent {
+public class FilterArtifactCreaturePermanent extends FilterCreaturePermanent {
 
     public FilterArtifactCreaturePermanent() {
         this("artifact creature");
@@ -42,7 +42,7 @@ public class FilterArtifactCreaturePermanent extends FilterArtifactPermanent {
 
     public FilterArtifactCreaturePermanent(String name) {
         super(name);
-        this.add(new CardTypePredicate(CardType.CREATURE));
+        this.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public FilterArtifactCreaturePermanent(final FilterArtifactCreaturePermanent filter) {
