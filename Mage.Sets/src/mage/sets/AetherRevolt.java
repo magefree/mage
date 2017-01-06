@@ -119,6 +119,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Runner", 90, Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
         cards.add(new SetCardInfo("Maverick Thopterist", 130, Rarity.UNCOMMON, mage.cards.m.MaverickThopterist.class));
         cards.add(new SetCardInfo("Metallic Rebuke", 39, Rarity.COMMON, mage.cards.m.MetallicRebuke.class));
+        cards.add(new SetCardInfo("Midnight Entourage", 66, Rarity.RARE, mage.cards.m.MidnightEntourage.class));
         cards.add(new SetCardInfo("Night Market Aeronaut", 67, Rarity.COMMON, mage.cards.n.NightMarketAeronaut.class));
         cards.add(new SetCardInfo("Oath of Ajani", 131, Rarity.RARE, mage.cards.o.OathOfAjani.class));
         cards.add(new SetCardInfo("Ornithopter", 167, Rarity.UNCOMMON, mage.cards.o.Ornithopter.class));
@@ -145,6 +146,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Shock", 98, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Siege Modification", 99, Rarity.UNCOMMON, mage.cards.s.SiegeModification.class));
         cards.add(new SetCardInfo("Silkweaver Elite", 125, Rarity.COMMON, mage.cards.s.SilkweaverElite.class));
+        cards.add(new SetCardInfo("Skyship Plunderer", 46, Rarity.UNCOMMON, mage.cards.s.SkyshipPlunderer.class));
         cards.add(new SetCardInfo("Solemn Recruit", 22, Rarity.RARE, mage.cards.s.SolemnRecruit.class));
         cards.add(new SetCardInfo("Spire Patrol", 136, Rarity.UNCOMMON, mage.cards.s.SpirePatrol.class));
         cards.add(new SetCardInfo("Spire of Industry", 184, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
