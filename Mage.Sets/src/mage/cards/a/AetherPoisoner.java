@@ -63,7 +63,7 @@ public class AetherPoisoner extends CardImpl {
 
         // Whenever Aether Poisoner attacks, you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new ServoToken()), new PayEnergyCost(2)), false,
-                "Whenever {this} attacks you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token."));
+                "Whenever {this} attacks, you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token."));
     }
 
     public AetherPoisoner(final AetherPoisoner card) {

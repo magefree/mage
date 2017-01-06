@@ -49,14 +49,15 @@ import mage.game.events.GameEvent;
  * @author MarcoMarin
  */
 public class ArgothianPixies extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Artifact Creatures");
-    
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures");
+
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public ArgothianPixies(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Faerie");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
@@ -78,22 +79,22 @@ public class ArgothianPixies extends CardImpl {
 }
 
 class PreventDamageToSourceByCardTypeEffect2 extends PreventAllDamageToSourceEffect {
-    
+
     private CardType cardType;
-      
-    public PreventDamageToSourceByCardTypeEffect2(){
+
+    public PreventDamageToSourceByCardTypeEffect2() {
         this(null);
     }
 
-    public PreventDamageToSourceByCardTypeEffect2(CardType cardT){
+    public PreventDamageToSourceByCardTypeEffect2(CardType cardT) {
         super(Duration.WhileOnBattlefield);
         cardType = cardT;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (game.getObject(event.getSourceId()).getCardType().contains(cardType)){
+            if (game.getObject(event.getSourceId()).getCardType().contains(cardType)) {
                 if (event.getTargetId().equals(source.getSourceId())) {
                     return true;
                 }

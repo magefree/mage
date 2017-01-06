@@ -36,6 +36,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
@@ -69,8 +70,9 @@ public class VengefulRebel extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), false),
                 new RevoltCondition(),
                 "When {this} enters the battlefield, if a permanent you controlled left the battlefield this turn, "
-                        + "target creature an opponent controls gets -3/-3 until end of turn");
+                + "target creature an opponent controls gets -3/-3 until end of turn");
         ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.setAbilityWord(AbilityWord.REVOLT);
         this.addAbility(ability);
     }
 
