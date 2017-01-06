@@ -51,7 +51,8 @@ public class CascadeAbility extends TriggeredAbilityImpl {
 
     private boolean withReminder;
 
-    private final static String reminderText = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)</i>";
+    private final static String reminderText = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less."
+            + " You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)</i>";
 
     public CascadeAbility() {
         this(true);
