@@ -116,6 +116,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Dispersal Technician", 32, Rarity.COMMON, mage.cards.d.DispersalTechnician.class));
         cards.add(new SetCardInfo("Druid of the Cowl", 106, Rarity.COMMON, mage.cards.d.DruidOfTheCowl.class));
         cards.add(new SetCardInfo("Efficient Construction", 33, Rarity.UNCOMMON, mage.cards.e.EfficientConstruction.class));
+        cards.add(new SetCardInfo("Enraged Giant", 80, Rarity.UNCOMMON, mage.cards.e.EnragedGiant.class));
         cards.add(new SetCardInfo("Exquisite Archangel", 18, Rarity.MYTHIC, mage.cards.e.ExquisiteArchangel.class));
         cards.add(new SetCardInfo("Fatal Push", 57, Rarity.UNCOMMON, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Felidar Guardian", 19, Rarity.UNCOMMON, mage.cards.f.FelidarGuardian.class));
@@ -125,6 +126,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Foundry Hornet", 59, Rarity.UNCOMMON, mage.cards.f.FoundryHornet.class));
         cards.add(new SetCardInfo("Fourth Bridge Prowler", 60, Rarity.COMMON, mage.cards.f.FourthBridgeProwler.class));
         cards.add(new SetCardInfo("Freejam Regent", 81, Rarity.RARE, mage.cards.f.FreejamRegent.class));
+        cards.add(new SetCardInfo("Frontline Rebel", 82, Rarity.COMMON, mage.cards.f.FrontlineRebel.class));
         cards.add(new SetCardInfo("Ghirapur Osprey", 20, Rarity.COMMON, mage.cards.g.GhirapurOsprey.class));
         cards.add(new SetCardInfo("Gifted Aetherborn", 61, Rarity.UNCOMMON, mage.cards.g.GiftedAetherborn.class));
         cards.add(new SetCardInfo("Glint-Sleeve Siphoner", 62, Rarity.RARE, mage.cards.g.GlintSleeveSiphoner.class));
@@ -138,7 +140,10 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Herbalists", 110, Rarity.UNCOMMON, mage.cards.h.HiddenHerbalists.class));
         cards.add(new SetCardInfo("Hidden Stockpile", 129, Rarity.UNCOMMON, mage.cards.h.HiddenStockpile.class));
         cards.add(new SetCardInfo("Highspire Infusion", 111, Rarity.COMMON, mage.cards.h.HighspireInfusion.class));
+        cards.add(new SetCardInfo("Hinterland Drake", 34, Rarity.COMMON, mage.cards.h.HinterlandDrake.class));
         cards.add(new SetCardInfo("Hungry Flames", 84, Rarity.UNCOMMON, mage.cards.h.HungryFlames.class));
+        cards.add(new SetCardInfo("Ice Over", 35, Rarity.COMMON, mage.cards.i.IceOver.class));
+        cards.add(new SetCardInfo("Illusionist's Stratagem", 36, Rarity.UNCOMMON, mage.cards.i.IllusionistsStratagem.class));
         cards.add(new SetCardInfo("Implement of Combustion", 155, Rarity.COMMON, mage.cards.i.ImplementOfCombustion.class));
         cards.add(new SetCardInfo("Implement of Examination", 156, Rarity.COMMON, mage.cards.i.ImplementOfExamination.class));
         cards.add(new SetCardInfo("Implement of Ferocity", 157, Rarity.COMMON, mage.cards.i.ImplementOfFerocity.class));
@@ -146,11 +151,13 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Implement of Malice", 159, Rarity.COMMON, mage.cards.i.ImplementOfMalice.class));
         cards.add(new SetCardInfo("Inspiring Roar", 186, Rarity.COMMON, mage.cards.i.InspiringRoar.class));
         cards.add(new SetCardInfo("Inspiring Statuary", 160, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
+        cards.add(new SetCardInfo("Invigorated Rampage", 86, Rarity.UNCOMMON, mage.cards.i.InvigoratedRampage.class));
         cards.add(new SetCardInfo("Ironclad Revolutionary", 65, Rarity.UNCOMMON, mage.cards.i.IroncladRevolutionary.class));
         cards.add(new SetCardInfo("Irontread Crusher", 161, Rarity.COMMON, mage.cards.i.IrontreadCrusher.class));
         cards.add(new SetCardInfo("Kari Zev's Expertise", 88, Rarity.RARE, mage.cards.k.KariZevsExpertise.class));
         cards.add(new SetCardInfo("Kari Zev, Skyship Raider", 87, Rarity.RARE, mage.cards.k.KariZevSkyshipRaider.class));
         cards.add(new SetCardInfo("Lathnu Sailback", 89, Rarity.COMMON, mage.cards.l.LathnuSailback.class));
+        cards.add(new SetCardInfo("Leave in the Dust", 37, Rarity.COMMON, mage.cards.l.LeaveInTheDust.class));
         cards.add(new SetCardInfo("Lifecraft Awakening", 112, Rarity.UNCOMMON, mage.cards.l.LifecraftAwakening.class));
         cards.add(new SetCardInfo("Lifecraft Cavalry", 113, Rarity.COMMON, mage.cards.l.LifecraftCavalry.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 162, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
