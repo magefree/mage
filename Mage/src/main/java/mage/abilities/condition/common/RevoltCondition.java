@@ -46,7 +46,7 @@ public class RevoltCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         RevoltWatcher watcher = (RevoltWatcher) game.getState().getWatchers().get("Revolt");
-        return watcher.revoltActive(source.getControllerId());
+        return watcher != null && watcher.revoltActive(source.getControllerId());
     }
 
     @Override
