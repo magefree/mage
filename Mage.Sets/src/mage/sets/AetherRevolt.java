@@ -85,14 +85,17 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Alley Evasion", 6, Rarity.COMMON, mage.cards.a.AlleyEvasion.class));
         cards.add(new SetCardInfo("Alley Strangler", 52, Rarity.COMMON, mage.cards.a.AlleyStrangler.class));
         cards.add(new SetCardInfo("Audacious Infiltrator", 7, Rarity.COMMON, mage.cards.a.AudaciousInfiltrator.class));
+        cards.add(new SetCardInfo("Augmenting Automaton", 143, Rarity.COMMON, mage.cards.a.AugmentingAutomaton.class));
         cards.add(new SetCardInfo("Baral's Expertise", 29, Rarity.RARE, mage.cards.b.BaralsExpertise.class));
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 28, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class));
+        cards.add(new SetCardInfo("Barricade Breaker", 144, Rarity.UNCOMMON, mage.cards.b.BarricadeBreaker.class));
         cards.add(new SetCardInfo("Bastion Enforcer", 8, Rarity.COMMON, mage.cards.b.BastionEnforcer.class));
         cards.add(new SetCardInfo("Battle at the Bridge", 53, Rarity.RARE, mage.cards.b.BattleAtTheBridge.class));
         cards.add(new SetCardInfo("Call for Unity", 9, Rarity.RARE, mage.cards.c.CallForUnity.class));
         cards.add(new SetCardInfo("Caught in the Brights", 10, Rarity.COMMON, mage.cards.c.CaughtInTheBrights.class));
         cards.add(new SetCardInfo("Consulate Crackdown", 11, Rarity.RARE, mage.cards.c.ConsulateCrackdown.class));
         cards.add(new SetCardInfo("Consulate Dreadnought", 146, Rarity.UNCOMMON, mage.cards.c.ConsulateDreadnought.class));
+        cards.add(new SetCardInfo("Consulate Turret", 147, Rarity.COMMON, mage.cards.c.ConsulateTurret.class));
         cards.add(new SetCardInfo("Conviction", 12, Rarity.COMMON, mage.cards.c.Conviction.class));
         cards.add(new SetCardInfo("Countless Gears Renegade", 13, Rarity.COMMON, mage.cards.c.CountlessGearsRenegade.class));
         cards.add(new SetCardInfo("Cruel Finality", 54, Rarity.COMMON, mage.cards.c.CruelFinality.class));
@@ -110,6 +113,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Fatal Push", 57, Rarity.UNCOMMON, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Felidar Guardian", 19, Rarity.UNCOMMON, mage.cards.f.FelidarGuardian.class));
         cards.add(new SetCardInfo("Fen Hauler", 58, Rarity.COMMON, mage.cards.f.FenHauler.class));
+        cards.add(new SetCardInfo("Filigree Crawler", 150, Rarity.COMMON, mage.cards.f.FiligreeCrawler.class));
         cards.add(new SetCardInfo("Foundry Assembler", 151, Rarity.COMMON, mage.cards.f.FoundryAssembler.class));
         cards.add(new SetCardInfo("Foundry Hornet", 59, Rarity.UNCOMMON, mage.cards.f.FoundryHornet.class));
         cards.add(new SetCardInfo("Fourth Bridge Prowler", 60, Rarity.COMMON, mage.cards.f.FourthBridgeProwler.class));
@@ -136,6 +140,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Roar", 186, Rarity.COMMON, mage.cards.i.InspiringRoar.class));
         cards.add(new SetCardInfo("Inspiring Statuary", 160, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
         cards.add(new SetCardInfo("Ironclad Revolutionary", 65, Rarity.UNCOMMON, mage.cards.i.IroncladRevolutionary.class));
+        cards.add(new SetCardInfo("Irontread Crusher", 161, Rarity.COMMON, mage.cards.i.IrontreadCrusher.class));
         cards.add(new SetCardInfo("Kari Zev's Expertise", 88, Rarity.RARE, mage.cards.k.KariZevsExpertise.class));
         cards.add(new SetCardInfo("Kari Zev, Skyship Raider", 87, Rarity.RARE, mage.cards.k.KariZevSkyshipRaider.class));
         cards.add(new SetCardInfo("Lathnu Sailback", 89, Rarity.COMMON, mage.cards.l.LathnuSailback.class));
@@ -146,8 +151,10 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Runner", 90, Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
         cards.add(new SetCardInfo("Maulfist Revolutionary", 115, Rarity.UNCOMMON, mage.cards.m.MaulfistRevolutionary.class));
         cards.add(new SetCardInfo("Maverick Thopterist", 130, Rarity.UNCOMMON, mage.cards.m.MaverickThopterist.class));
+        cards.add(new SetCardInfo("Metallic Mimic", 164, Rarity.RARE, mage.cards.m.MetallicMimic.class));
         cards.add(new SetCardInfo("Metallic Rebuke", 39, Rarity.COMMON, mage.cards.m.MetallicRebuke.class));
         cards.add(new SetCardInfo("Midnight Entourage", 66, Rarity.RARE, mage.cards.m.MidnightEntourage.class));
+        cards.add(new SetCardInfo("Mobile Garrison", 165, Rarity.COMMON, mage.cards.m.MobileGarrison.class));
         cards.add(new SetCardInfo("Monstrous Onslaught", 116, Rarity.UNCOMMON, mage.cards.m.MonstrousOnslaught.class));
         cards.add(new SetCardInfo("Narnam Renegade", 117, Rarity.UNCOMMON, mage.cards.n.NarnamRenegade.class));
         cards.add(new SetCardInfo("Natural Obsolescence", 118, Rarity.COMMON, mage.cards.n.NaturalObsolescence.class));
