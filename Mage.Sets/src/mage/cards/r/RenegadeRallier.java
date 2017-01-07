@@ -36,7 +36,6 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.filter.Filter;
 import mage.filter.common.FilterPermanentCard;
@@ -68,8 +67,7 @@ public class RenegadeRallier extends CardImpl {
         // return target permanent card with converted mana cost 2 or less from your graveyard to your battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ConditionalOneShotEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(), RevoltCondition.getInstance()),
-                false);
-        ability.setAbilityWord(AbilityWord.REVOLT);
+                false, "<i>Revolt</i> &mdash; ");
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addWatcher(new RevoltWatcher());
         this.addAbility(ability);

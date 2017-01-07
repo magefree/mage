@@ -37,7 +37,6 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.watchers.common.RevoltWatcher;
 
@@ -60,8 +59,7 @@ public class AirdropAeronauts extends CardImpl {
 
         // <i>Revolt</i> &mdash; When Airdrop Aeronauts enters the battlefield, if a permanent you controlled left the battlefield this turn, you gain 5 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new GainLifeEffect(5), RevoltCondition.getInstance()), false);
-        ability.setAbilityWord(AbilityWord.REVOLT);
+                new ConditionalOneShotEffect(new GainLifeEffect(5), RevoltCondition.getInstance()), false, "<i>Revolt</i> &mdash; ");
         this.addAbility(ability, new RevoltWatcher());
     }
 
