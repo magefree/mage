@@ -90,9 +90,11 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 28, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class));
         cards.add(new SetCardInfo("Barricade Breaker", 144, Rarity.UNCOMMON, mage.cards.b.BarricadeBreaker.class));
         cards.add(new SetCardInfo("Bastion Enforcer", 8, Rarity.COMMON, mage.cards.b.BastionEnforcer.class));
+        cards.add(new SetCardInfo("Bastion Inventor", 30, Rarity.COMMON, mage.cards.b.BastionInventor.class));
         cards.add(new SetCardInfo("Battle at the Bridge", 53, Rarity.RARE, mage.cards.b.BattleAtTheBridge.class));
         cards.add(new SetCardInfo("Call for Unity", 9, Rarity.RARE, mage.cards.c.CallForUnity.class));
         cards.add(new SetCardInfo("Caught in the Brights", 10, Rarity.COMMON, mage.cards.c.CaughtInTheBrights.class));
+        cards.add(new SetCardInfo("Chandra's Revolution", 77, Rarity.COMMON, mage.cards.c.ChandrasRevolution.class));
         cards.add(new SetCardInfo("Consulate Crackdown", 11, Rarity.RARE, mage.cards.c.ConsulateCrackdown.class));
         cards.add(new SetCardInfo("Consulate Dreadnought", 146, Rarity.UNCOMMON, mage.cards.c.ConsulateDreadnought.class));
         cards.add(new SetCardInfo("Consulate Turret", 147, Rarity.COMMON, mage.cards.c.ConsulateTurret.class));
