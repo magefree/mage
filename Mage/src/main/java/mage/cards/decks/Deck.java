@@ -56,6 +56,29 @@ public class Deck implements Serializable {
     public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors) throws GameException {
         return Deck.load(deckCardLists, ignoreErrors, true);
     }
+    
+    public static Deck append(Deck deckToAppend, Deck currentDeck) throws GameException {
+        List<String> deckCardNames = new ArrayList<>();
+        
+        for (Card card : deckToAppend.getCards()) {
+            if (card != null) {
+                currentDeck.cards.add(card);
+                deckCardNames.add(card.getName());
+            }
+        }
+        List<String> sbCardNames = new ArrayList<>();
+        for (Card card : deckToAppend.getSideboard()) {
+            if (card != null) {
+                currentDeck.sideboard.add(card);
+                deckCardNames.add(card.getName());
+            }
+        }        
+        Collections.sort(deckCardNames);
+        Collections.sort(sbCardNames);
+        String deckString = deckCardNames.toString() + sbCardNames.toString();
+        currentDeck.setDeckHashCode(DeckUtil.fixedHash(deckString));
+        return currentDeck;
+    }
 
     public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors, boolean mockCards) throws GameException {
         Deck deck = new Deck();

@@ -71,6 +71,7 @@ import mage.remote.Session;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -693,7 +694,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnImport.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Object[] options = {"File", "Clipboard"};
+                Object[] options = {"File", "Clipboard", "Append from Clipboard"};
 
                 int n = JOptionPane.showOptionDialog(MageFrame.getDesktop(),
                         "Where would you like to import from?",
@@ -713,6 +714,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         break;
                     case 1:
                         btnImportFromClipboardActionPerformed(evt);
+                    case 2:
+                        btnImportFromClipboardActionWAppendPerformed(evt);
                 }
             }
         });
@@ -864,6 +867,33 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
     }
+
+    /**
+     * @param evt ActionEvent
+     */
+    private void btnImportFromClipboardActionWAppendPerformed(ActionEvent evt) {
+        final DeckImportFromClipboardDialog dialog = new DeckImportFromClipboardDialog();
+        dialog.pack();
+        dialog.setVisible(true);
+
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                Deck deckToAppend = null;
+                try {
+                    deckToAppend = Deck.load(DeckImporterUtil.importDeck(dialog.getTmpPath()), true, true);
+                    if (deckToAppend != null) {
+                        deck = Deck.append(deckToAppend, deck);
+                        refreshDeck();
+                    }
+                } catch (GameException e1) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+        });
+    }
+
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         //fcSelectDeck.setCurrentDirectory(new File());
