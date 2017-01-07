@@ -116,6 +116,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Dispersal Technician", 32, Rarity.COMMON, mage.cards.d.DispersalTechnician.class));
         cards.add(new SetCardInfo("Druid of the Cowl", 106, Rarity.COMMON, mage.cards.d.DruidOfTheCowl.class));
         cards.add(new SetCardInfo("Efficient Construction", 33, Rarity.UNCOMMON, mage.cards.e.EfficientConstruction.class));
+        cards.add(new SetCardInfo("Embraal Gear-Smasher", 79, Rarity.COMMON, mage.cards.e.EmbraalGearSmasher.class));
         cards.add(new SetCardInfo("Enraged Giant", 80, Rarity.UNCOMMON, mage.cards.e.EnragedGiant.class));
         cards.add(new SetCardInfo("Exquisite Archangel", 18, Rarity.MYTHIC, mage.cards.e.ExquisiteArchangel.class));
         cards.add(new SetCardInfo("Fatal Push", 57, Rarity.UNCOMMON, mage.cards.f.FatalPush.class));
@@ -169,6 +170,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Maulfist Revolutionary", 115, Rarity.UNCOMMON, mage.cards.m.MaulfistRevolutionary.class));
         cards.add(new SetCardInfo("Maverick Thopterist", 130, Rarity.UNCOMMON, mage.cards.m.MaverickThopterist.class));
         cards.add(new SetCardInfo("Mechanized Production", 38, Rarity.MYTHIC, mage.cards.m.MechanizedProduction.class));
+        cards.add(new SetCardInfo("Merchant's Dockhand", 163, Rarity.RARE, mage.cards.m.MerchantsDockhand.class));
         cards.add(new SetCardInfo("Metallic Mimic", 164, Rarity.RARE, mage.cards.m.MetallicMimic.class));
         cards.add(new SetCardInfo("Metallic Rebuke", 39, Rarity.COMMON, mage.cards.m.MetallicRebuke.class));
         cards.add(new SetCardInfo("Midnight Entourage", 66, Rarity.RARE, mage.cards.m.MidnightEntourage.class));
@@ -233,6 +235,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Take into Custody", 47, Rarity.COMMON, mage.cards.t.TakeIntoCustody.class));
         cards.add(new SetCardInfo("Tezzeret the Schemer", 137, Rarity.MYTHIC, mage.cards.t.TezzeretTheSchemer.class));
         cards.add(new SetCardInfo("Tezzeret's Betrayal", 191, Rarity.RARE, mage.cards.t.TezzeretsBetrayal.class));
+        cards.add(new SetCardInfo("Tezzeret's Simulacrum", 193, Rarity.UNCOMMON, mage.cards.t.TezzeretsSimulacrum.class));
         cards.add(new SetCardInfo("Tezzeret's Touch", 138, Rarity.UNCOMMON, mage.cards.t.TezzeretsTouch.class));
         cards.add(new SetCardInfo("Tezzeret, Master of Metal", 190, Rarity.MYTHIC, mage.cards.t.TezzeretMasterOfMetal.class));
         cards.add(new SetCardInfo("Thopter Arrest", 25, Rarity.UNCOMMON, mage.cards.t.ThopterArrest.class));

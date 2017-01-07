@@ -75,6 +75,7 @@ public class HopeOfGhirapur extends CardImpl {
 
         // Sacrifice Hope of Ghirapur: Until your next turn, target player who was dealt combat damage by Hope of Ghirapur this turn can't cast noncreature spells.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HopeOfGhirapurCantCastEffect(), new SacrificeSourceCost());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability, new HopeOfGhirapurCombatDamageWatcher());
 
     }
@@ -162,7 +163,7 @@ class HopeOfGhirapurPlayerLostLifePredicate implements Predicate<Player> {
 
     @Override
     public boolean apply(Player input, Game game) {
-        HopeOfGhirapurCombatDamageWatcher watcher = (HopeOfGhirapurCombatDamageWatcher) game.getState().getWatchers().get(HopeOfGhirapurCombatDamageWatcher.class.getName(), sourceId);
+        HopeOfGhirapurCombatDamageWatcher watcher = (HopeOfGhirapurCombatDamageWatcher) game.getState().getWatchers().get(HopeOfGhirapurCombatDamageWatcher.class.getName());
         if (watcher != null) {
             return watcher.playerGotCombatDamage(sourceId, input.getId());
         }

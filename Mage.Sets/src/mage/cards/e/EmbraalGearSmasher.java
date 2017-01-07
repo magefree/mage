@@ -25,52 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.watchers.common.RevoltWatcher;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Styxo
+ * @author LevelX2
  */
-public class AirdropAeronauts extends CardImpl {
+public class EmbraalGearSmasher extends CardImpl {
 
-    public AirdropAeronauts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+    public EmbraalGearSmasher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.subtype.add("Dwarf");
-        this.subtype.add("Scout");
-        this.power = new MageInt(4);
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        // {T}, Sacrifice an artifact: Embraal Gear-Smasher deals 2 damage to each opponent.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(2, TargetController.OPPONENT), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        this.addAbility(ability);
 
-        // <i>Revolt</i> &mdash; When Airdrop Aeronauts enters the battlefield, if a permanent you controlled left the battlefield this turn, you gain 5 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new GainLifeEffect(5), RevoltCondition.getInstance()), false);
-        ability.setAbilityWord(AbilityWord.REVOLT);
-        this.addAbility(ability, new RevoltWatcher());
     }
 
-    public AirdropAeronauts(final AirdropAeronauts card) {
+    public EmbraalGearSmasher(final EmbraalGearSmasher card) {
         super(card);
     }
 
     @Override
-    public AirdropAeronauts copy() {
-        return new AirdropAeronauts(this);
+    public EmbraalGearSmasher copy() {
+        return new EmbraalGearSmasher(this);
     }
 }
