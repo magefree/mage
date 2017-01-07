@@ -134,6 +134,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Gonti's Machinations", 63, Rarity.UNCOMMON, mage.cards.g.GontisMachinations.class));
         cards.add(new SetCardInfo("Greenbelt Rampager", 107, Rarity.RARE, mage.cards.g.GreenbeltRampager.class));
         cards.add(new SetCardInfo("Greenwheel Liberator", 108, Rarity.RARE, mage.cards.g.GreenwheelLiberator.class));
+        cards.add(new SetCardInfo("Gremlin Infestation", 83, Rarity.UNCOMMON, mage.cards.g.GremlinInfestation.class));
         cards.add(new SetCardInfo("Heart of Kiran", 153, Rarity.MYTHIC, mage.cards.h.HeartOfKiran.class));
         cards.add(new SetCardInfo("Herald of Anguish", 64, Rarity.MYTHIC, mage.cards.h.HeraldOfAnguish.class));
         cards.add(new SetCardInfo("Heroic Intervention", 109, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
@@ -141,6 +142,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Stockpile", 129, Rarity.UNCOMMON, mage.cards.h.HiddenStockpile.class));
         cards.add(new SetCardInfo("Highspire Infusion", 111, Rarity.COMMON, mage.cards.h.HighspireInfusion.class));
         cards.add(new SetCardInfo("Hinterland Drake", 34, Rarity.COMMON, mage.cards.h.HinterlandDrake.class));
+        cards.add(new SetCardInfo("Hope of Ghirapur", 154, Rarity.RARE, mage.cards.h.HopeOfGhirapur.class));
         cards.add(new SetCardInfo("Hungry Flames", 84, Rarity.UNCOMMON, mage.cards.h.HungryFlames.class));
         cards.add(new SetCardInfo("Ice Over", 35, Rarity.COMMON, mage.cards.i.IceOver.class));
         cards.add(new SetCardInfo("Illusionist's Stratagem", 36, Rarity.UNCOMMON, mage.cards.i.IllusionistsStratagem.class));
@@ -149,6 +151,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Implement of Ferocity", 157, Rarity.COMMON, mage.cards.i.ImplementOfFerocity.class));
         cards.add(new SetCardInfo("Implement of Improvement", 158, Rarity.COMMON, mage.cards.i.ImplementOfImprovement.class));
         cards.add(new SetCardInfo("Implement of Malice", 159, Rarity.COMMON, mage.cards.i.ImplementOfMalice.class));
+        cards.add(new SetCardInfo("Indomitable Creativity", 85, Rarity.MYTHIC, mage.cards.i.IndomitableCreativity.class));
         cards.add(new SetCardInfo("Inspiring Roar", 186, Rarity.COMMON, mage.cards.i.InspiringRoar.class));
         cards.add(new SetCardInfo("Inspiring Statuary", 160, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
         cards.add(new SetCardInfo("Invigorated Rampage", 86, Rarity.UNCOMMON, mage.cards.i.InvigoratedRampage.class));
@@ -165,6 +168,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Runner", 90, Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
         cards.add(new SetCardInfo("Maulfist Revolutionary", 115, Rarity.UNCOMMON, mage.cards.m.MaulfistRevolutionary.class));
         cards.add(new SetCardInfo("Maverick Thopterist", 130, Rarity.UNCOMMON, mage.cards.m.MaverickThopterist.class));
+        cards.add(new SetCardInfo("Mechanized Production", 38, Rarity.MYTHIC, mage.cards.m.MechanizedProduction.class));
         cards.add(new SetCardInfo("Metallic Mimic", 164, Rarity.RARE, mage.cards.m.MetallicMimic.class));
         cards.add(new SetCardInfo("Metallic Rebuke", 39, Rarity.COMMON, mage.cards.m.MetallicRebuke.class));
         cards.add(new SetCardInfo("Midnight Entourage", 66, Rarity.RARE, mage.cards.m.MidnightEntourage.class));
