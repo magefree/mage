@@ -101,7 +101,9 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Consulate Turret", 147, Rarity.COMMON, mage.cards.c.ConsulateTurret.class));
         cards.add(new SetCardInfo("Conviction", 12, Rarity.COMMON, mage.cards.c.Conviction.class));
         cards.add(new SetCardInfo("Countless Gears Renegade", 13, Rarity.COMMON, mage.cards.c.CountlessGearsRenegade.class));
+        cards.add(new SetCardInfo("Crackdown Construct", 148, Rarity.UNCOMMON, mage.cards.c.CrackdownConstruct.class));
         cards.add(new SetCardInfo("Cruel Finality", 54, Rarity.COMMON, mage.cards.c.CruelFinality.class));
+        cards.add(new SetCardInfo("Daredevil Dragster", 149, Rarity.UNCOMMON, mage.cards.d.DaredevilDragster.class));
         cards.add(new SetCardInfo("Daring Demolition", 55, Rarity.COMMON, mage.cards.d.DaringDemolition.class));
         cards.add(new SetCardInfo("Dark Intimations", 128, Rarity.RARE, mage.cards.d.DarkIntimations.class));
         cards.add(new SetCardInfo("Dawnfeather Eagle", 14, Rarity.COMMON, mage.cards.d.DawnfeatherEagle.class));
@@ -109,6 +111,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Decommission", 16, Rarity.COMMON, mage.cards.d.Decommission.class));
         cards.add(new SetCardInfo("Defiant Salvager", 56, Rarity.COMMON, mage.cards.d.DefiantSalvager.class));
         cards.add(new SetCardInfo("Deft Dismissal", 17, Rarity.UNCOMMON, mage.cards.d.DeftDismissal.class));
+        cards.add(new SetCardInfo("Destructive Tampering", 78, Rarity.COMMON, mage.cards.d.DestructiveTampering.class));
         cards.add(new SetCardInfo("Disallow", 31, Rarity.RARE, mage.cards.d.Disallow.class));
         cards.add(new SetCardInfo("Druid of the Cowl", 106, Rarity.COMMON, mage.cards.d.DruidOfTheCowl.class));
         cards.add(new SetCardInfo("Efficient Construction", 33, Rarity.UNCOMMON, mage.cards.e.EfficientConstruction.class));
