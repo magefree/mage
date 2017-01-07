@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOrLeavesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.VanishingSacrificeAbility;
@@ -70,7 +70,7 @@ public class DeadwoodTreefolk extends CardImpl {
         this.addAbility(new VanishingUpkeepAbility(3));
         this.addAbility(new VanishingSacrificeAbility());
         // When Deadwood Treefolk enters the battlefield or leaves the battlefield, return another target creature card from your graveyard to your hand.
-        ability = new EntersOrLeavesTheBattlefieldSourceTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false);
+        ability = new EntersBattlefieldOrLeavesSourceTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false);
         Target target = new TargetCardInYourGraveyard(filter);
         ability.addTarget(target);
         this.addAbility(ability);

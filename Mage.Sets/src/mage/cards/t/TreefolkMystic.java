@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,14 +49,14 @@ import mage.game.permanent.Permanent;
 public class TreefolkMystic extends CardImpl {
 
     public TreefolkMystic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add("Treefolk");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
         // Whenever Treefolk Mystic blocks or becomes blocked by a creature, destroy all Auras attached to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new TreefolkMysticEffect(), false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new TreefolkMysticEffect(), false));
     }
 
     public TreefolkMystic(final TreefolkMystic card) {
@@ -70,8 +70,6 @@ public class TreefolkMystic extends CardImpl {
 }
 
 class TreefolkMysticEffect extends OneShotEffect {
-
-
 
     public TreefolkMysticEffect() {
         super(Outcome.DestroyPermanent);
@@ -89,15 +87,12 @@ class TreefolkMysticEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if(permanent != null)
-        {
+        if (permanent != null) {
             LinkedList<UUID> attachments = new LinkedList();
             attachments.addAll(permanent.getAttachments());
-            for(UUID uuid : attachments)
-            {
+            for (UUID uuid : attachments) {
                 Permanent aura = game.getPermanent(uuid);
-                if(aura != null && aura.getSubtype(game).contains("Aura"))
-                {
+                if (aura != null && aura.getSubtype(game).contains("Aura")) {
                     aura.destroy(source.getSourceId(), game, false);
                 }
             }

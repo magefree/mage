@@ -192,7 +192,7 @@ public class UserData implements Serializable {
     }
 
     public String getHistory() {
-        if (UserGroup.COMPUTER.equals(this.groupId)) {
+        if (UserGroup.COMPUTER.equals(this.groupId)) { // Why we are checking UserGroup and integer equality??
             return "";
         }
         // todo: add preference to hide rating?

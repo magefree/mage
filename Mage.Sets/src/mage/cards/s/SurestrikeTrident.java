@@ -31,8 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -48,9 +46,8 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+import mage.abilities.costs.common.UnattachCost;
 
 /**
  *
@@ -69,7 +66,7 @@ public class SurestrikeTrident extends CardImpl {
         effect.setText("This creature deals damage equal to its power to target player");
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         gainedAbility.addTarget(new TargetPlayer());
-        gainedAbility.addCost(new SurestrikeTridentUnattachCost(getName(), getId()));
+        gainedAbility.addCost(new UnattachCost(this.getName(), this.getId()));
         effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
         effect.setText("and \"{T}, Unattach {this}: This creature deals damage equal to its power to target player.\"");
         ability.addEffect(effect);
@@ -87,58 +84,4 @@ public class SurestrikeTrident extends CardImpl {
     public SurestrikeTrident copy() {
         return new SurestrikeTrident(this);
     }
-}
-
-class SurestrikeTridentUnattachCost extends CostImpl {
-
-    protected UUID sourceEquipmentId;
-
-    public SurestrikeTridentUnattachCost(String name, UUID sourceId) {
-        this.text = "Unattach " + name;
-        this.sourceEquipmentId = sourceId;
-    }
-
-    public SurestrikeTridentUnattachCost(final SurestrikeTridentUnattachCost cost) {
-        super(cost);
-        this.sourceEquipmentId = cost.sourceEquipmentId;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            for (UUID attachmentId : permanent.getAttachments()) {
-                Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getId().equals(sourceEquipmentId)) {
-                    paid = permanent.removeAttachment(attachmentId, game);
-                    if (paid) {
-                        break;
-                    }
-                }
-            }
-
-        }
-        return paid;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            for (UUID attachmentId : permanent.getAttachments()) {
-                Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getId().equals(sourceEquipmentId)) {
-                    return true;
-                }
-            }
-
-        }
-        return false;
-    }
-
-    @Override
-    public SurestrikeTridentUnattachCost copy() {
-        return new SurestrikeTridentUnattachCost(this);
-    }
-
 }

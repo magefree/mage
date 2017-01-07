@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
@@ -53,7 +53,7 @@ public class SoulCollector extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever a creature dealt damage by Soul Collector this turn dies, return that card to the battlefield under your control.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect(false)));
+        this.addAbility(new DealtDamageAndDiedTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect(false)));
         // Morph {B}{B}{B}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{B}{B}{B}")));
     }

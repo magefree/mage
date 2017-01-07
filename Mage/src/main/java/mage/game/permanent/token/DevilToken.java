@@ -28,6 +28,8 @@
 package mage.game.permanent.token;
 
 import java.util.Arrays;
+import java.util.Collections;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -44,7 +46,7 @@ public class DevilToken extends Token {
 
     public DevilToken() {
         super("Devil", "1/1 red Devil creature with \"When this creature dies, it deals 1 damage to target creature or player.\"");
-        availableImageSetCodes.addAll(Arrays.asList("SOI"));
+        availableImageSetCodes.addAll(Collections.singletonList("SOI"));
         cardType.add(CardType.CREATURE);
         subtype.add("Devil");
         color.setRed(true);

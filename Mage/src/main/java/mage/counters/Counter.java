@@ -158,10 +158,7 @@ public class Counter implements Serializable {
 
         Counter counter = (Counter) o;
 
-        if (count != counter.count) {
-            return false;
-        }
-        return !(name != null ? !name.equals(counter.name) : counter.name != null);
+        return count == counter.count && !(name != null ? !name.equals(counter.name) : counter.name != null);
 
     }
 

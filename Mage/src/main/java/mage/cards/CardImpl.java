@@ -462,9 +462,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
                 break;
             case COMMAND:
-                lkiObject = (Commander) game.getObject(objectId);
+                lkiObject = game.getObject(objectId);
                 if (lkiObject != null) {
-                    removed = game.getState().getCommand().remove((Commander) game.getObject(objectId));
+                    removed = game.getState().getCommand().remove(game.getObject(objectId));
                 }
                 break;
             case OUTSIDE:

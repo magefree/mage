@@ -7,7 +7,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author BetaSteward
+ * @author LevelX
  */
 public class EpharaGodOfThePolisTest extends CardTestPlayerBase {
 

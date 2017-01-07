@@ -30,22 +30,16 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.MyTurnBeforeAttackersDeclaredCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -53,17 +47,26 @@ import mage.target.common.TargetCardInHand;
  */
 public class NorwoodPriestess extends CardImpl {
 
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a green creature card");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+    }
+
     public NorwoodPriestess(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // {tap}: You may put a green creature card from your hand onto the battlefield. Activate this ability only during your turn, before attackers are declared.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
-                new NorwoodPriestessEffect(), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
-        this.addAbility(ability);
+        this.addAbility(new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD,
+                new PutPermanentOnBattlefieldEffect(filter),
+                new TapSourceCost(),
+                MyTurnBeforeAttackersDeclaredCondition.getInstance()
+        ));
     }
 
     public NorwoodPriestess(final NorwoodPriestess card) {
@@ -73,47 +76,5 @@ public class NorwoodPriestess extends CardImpl {
     @Override
     public NorwoodPriestess copy() {
         return new NorwoodPriestess(this);
-    }
-}
-
-class NorwoodPriestessEffect extends OneShotEffect {
-
-    private static final String choiceText = "Put a green creature card from your hand onto the battlefield?";
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a green creature card");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
-
-    public NorwoodPriestessEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "You may put a green creature card from your hand onto the battlefield";
-    }
-
-    public NorwoodPriestessEffect(final NorwoodPriestessEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NorwoodPriestessEffect copy() {
-        return new NorwoodPriestessEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || !controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
-            return false;
-        }
-
-        TargetCardInHand target = new TargetCardInHand(filter);
-        if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            }
-        }
-        return false;
     }
 }

@@ -29,7 +29,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
@@ -48,7 +48,7 @@ import mage.counters.CounterType;
 public class WitherscaleWurm extends CardImpl {
 
     public WitherscaleWurm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(9);
@@ -57,7 +57,7 @@ public class WitherscaleWurm extends CardImpl {
         // Whenever Witherscale Wurm blocks or becomes blocked by a creature, that creature gains wither until end of turn.
         Effect effect = new GainAbilityTargetEffect(WitherAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("that creature gains wither until end of turn");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(effect, false));
 
         // Whenever Witherscale Wurm deals damage to an opponent, remove all -1/-1 counters from it.
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.M1M1), false));

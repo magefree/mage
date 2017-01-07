@@ -32,6 +32,7 @@ Forestcycling|cost|
 Forestwalk|new|
 Haste|instance|
 Hexproof|instance|
+Improvise|new|
 Indestructible|instance|
 Infect|instance|
 Intimidate|instance|

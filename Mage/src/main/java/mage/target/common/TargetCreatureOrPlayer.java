@@ -90,10 +90,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
             return filter.match(permanent, game);
         }
         Player player = game.getPlayer(id);
-        if (player != null) {
-            return filter.match(player, game);
-        }
-        return false;
+        return player != null && filter.match(player, game);
     }
 
     @Override
@@ -119,10 +116,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         if (permanent != null) {
             return filter.match(permanent, game);
         }
-        if (player != null) {
-            return filter.match(player, game);
-        }
-        return false;
+        return player != null && filter.match(player, game);
     }
 
     /**

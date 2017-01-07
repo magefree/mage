@@ -36,8 +36,8 @@ import java.util.UUID;
  */
 public class ObjectPlayer<T> {
 
-    protected T object;
-    protected UUID playerId;
+    protected final T object;
+    protected final UUID playerId;
 
     public ObjectPlayer(T object, UUID playerId) {
         this.object = object;

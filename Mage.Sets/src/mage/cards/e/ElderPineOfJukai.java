@@ -29,22 +29,15 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.keyword.SoulshiftAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -53,14 +46,14 @@ import mage.players.Player;
 public class ElderPineOfJukai extends CardImpl {
 
     public ElderPineOfJukai(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // Whenever you cast a Spirit or Arcane spell, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ElderPineOfJukaiEffect(), new FilterSpiritOrArcaneCard(), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, new FilterLandCard(), Zone.LIBRARY), new FilterSpiritOrArcaneCard(), false));
 
         // Soulshift 2
         this.addAbility(new SoulshiftAbility(2));
@@ -73,42 +66,5 @@ public class ElderPineOfJukai extends CardImpl {
     @Override
     public ElderPineOfJukai copy() {
         return new ElderPineOfJukai(this);
-    }
-}
-
-class ElderPineOfJukaiEffect extends OneShotEffect {
-
-    public ElderPineOfJukaiEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order";
-    }
-
-    public ElderPineOfJukaiEffect(final ElderPineOfJukaiEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ElderPineOfJukaiEffect copy() {
-        return new ElderPineOfJukaiEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 3));
-        controller.revealCards(sourceObject.getName(), cards, game);
-        for (Card card : cards.getCards(game)) {
-            if (card.getCardType().contains(CardType.LAND)) {
-                controller.moveCards(card, Zone.HAND, source, game);
-                cards.remove(card);
-            }
-        }
-        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
-        return true;
     }
 }

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.o;
 
 import mage.constants.CardType;
@@ -45,21 +44,21 @@ import mage.filter.common.FilterArtifactPermanent;
  * @author Loki, North
  */
 public class OxiddaScrapmelter extends CardImpl {
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact");
 
-    public OxiddaScrapmelter (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+    public OxiddaScrapmelter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
+        // When Oxidda Scrapmelter enters the battlefield, destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterArtifactPermanent()));
         this.addAbility(ability);
     }
 
-    public OxiddaScrapmelter (final OxiddaScrapmelter card) {
+    public OxiddaScrapmelter(final OxiddaScrapmelter card) {
         super(card);
     }
 

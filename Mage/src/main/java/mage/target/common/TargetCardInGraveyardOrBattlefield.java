@@ -89,10 +89,7 @@ public class TargetCardInGraveyardOrBattlefield extends TargetCard {
             return filter.match(permanent, game);
         }
         Card card = game.getCard(id);
-        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
-            return filter.match(card, game);
-        }
-        return false;
+        return card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD && filter.match(card, game);
     }
 
     @Override

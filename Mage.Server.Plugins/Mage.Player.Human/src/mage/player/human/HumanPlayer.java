@@ -85,6 +85,7 @@ import mage.game.draft.Draft;
 import mage.game.events.GameEvent;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.game.tournament.Tournament;
 import mage.players.Player;
 import mage.players.PlayerImpl;
@@ -811,14 +812,14 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
+    public boolean playMana(Ability abilityToCast, ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
-        boolean result = playManaHandling(unpaid, promptText, game);
+        boolean result = playManaHandling(abilityToCast, unpaid, promptText, game);
         payManaMode = false;
         return result;
     }
 
-    protected boolean playManaHandling(ManaCost unpaid, String promptText, Game game) {
+    protected boolean playManaHandling(Ability abilityToCast, ManaCost unpaid, String promptText, Game game) {
         updateGameStatePriority("playMana", game);
         Map<String, Serializable> options = new HashMap<>();
         if (unpaid.getText().contains("P}")) {
@@ -832,7 +833,7 @@ public class HumanPlayer extends PlayerImpl {
         if (response.getBoolean() != null) {
             return false;
         } else if (response.getUUID() != null) {
-            playManaAbilities(unpaid, game);
+            playManaAbilities(abilityToCast, unpaid, game);
         } else if (response.getString() != null && response.getString().equals("special")) {
             if (unpaid instanceof ManaCostsImpl) {
                 specialManaAction(unpaid, game);
@@ -897,10 +898,15 @@ public class HumanPlayer extends PlayerImpl {
         return xValue;
     }
 
-    protected void playManaAbilities(ManaCost unpaid, Game game) {
+    protected void playManaAbilities(Ability abilityToCast, ManaCost unpaid, Game game) {
         updateGameStatePriority("playManaAbilities", game);
         MageObject object = game.getObject(response.getUUID());
         if (object == null) {
+            return;
+        }
+        Spell spell = game.getStack().getSpell(abilityToCast.getSourceId());
+        if (spell != null && spell.isDoneActivatingManaAbilities()) {
+            game.informPlayer(this, "You can't no longer use activated mana abilities to pay for the current spell. Cancel and recast the spell and activate mana abilities first.");
             return;
         }
         Zone zone = game.getState().getZone(object.getId());

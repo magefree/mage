@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -54,10 +54,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class GoblinCaves extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin", "Goblin creatures");
-
     public GoblinCaves(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
         this.subtype.add("Aura");
 
         // Enchant land
@@ -67,7 +65,7 @@ public class GoblinCaves extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         // As long as enchanted land is a basic Mountain, Goblin creatures get +0/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, filter, false),
+                new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false),
                 new AttachedToBasicMountainCondition(),
                 "As long as enchanted land is a basic Mountain, Goblin creatures get +0/+2"
         )));

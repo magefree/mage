@@ -64,9 +64,8 @@ public class Table implements Serializable {
     private TableRecorder recorder;
 
     public interface TableRecorder {
-
         void record(Table table);
-    };
+    }
 
     protected TableEventSource tableEventSource = new TableEventSource();
 

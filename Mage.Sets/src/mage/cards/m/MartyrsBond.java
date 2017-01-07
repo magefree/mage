@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -59,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
 public class MartyrsBond extends CardImpl {
 
     public MartyrsBond(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");
 
         // Whenever Martyr's Bond or another nonland permanent you control is put into a graveyard from the battlefield, each opponent sacrifices a permanent that shares a card type with it.
         this.addAbility(new MartyrsBondTriggeredAbility());
@@ -112,7 +111,7 @@ class MartyrsBondTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} or another nonland permanent you control is put into a graveyard from the battlefield, each opponent sacrifices a permanent that shares a card type with it";
+        return "Whenever {this} or another nonland permanent you control is put into a graveyard from the battlefield, each opponent sacrifices a permanent that shares a card type with it.";
     }
 
 }
@@ -162,7 +161,7 @@ class MartyrsBondEffect extends OneShotEffect {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null && !playerId.equals(controller.getId())) {
-                        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);                        
+                        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
                         if (target.canChoose(playerId, game)) {
                             player.chooseTarget(Outcome.Sacrifice, target, source, game);
                             perms.add(target.getFirstTarget());
@@ -178,7 +177,7 @@ class MartyrsBondEffect extends OneShotEffect {
                         saccedPermaents = true;
                     }
                 }
-                
+
                 return saccedPermaents;
             }
         }

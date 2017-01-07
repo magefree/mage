@@ -53,7 +53,7 @@ public interface Card extends MageObject {
 
     void setOwnerId(UUID ownerId);
 
-    public Abilities<Ability> getAbilities(Game game);
+    Abilities<Ability> getAbilities(Game game);
 
     void setSpellAbility(SpellAbility ability);
 

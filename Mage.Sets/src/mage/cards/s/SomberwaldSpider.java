@@ -54,7 +54,9 @@ public class SomberwaldSpider extends CardImpl {
 
         this.addAbility(ReachAbility.getInstance());
         // Morbid - Somberwald Spider enters the battlefield with two +1/+1 counters on it if a creature died this turn.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), MorbidCondition.getInstance(), ""), "with two +1/+1 counters on it if a creature died this turn"));
+        this.addAbility(new EntersBattlefieldAbility(
+                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), MorbidCondition.getInstance(), ""),
+                "with two +1/+1 counters on it if a creature died this turn"));
     }
 
     public SomberwaldSpider(final SomberwaldSpider card) {

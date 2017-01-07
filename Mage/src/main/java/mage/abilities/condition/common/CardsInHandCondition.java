@@ -91,12 +91,28 @@ public class CardsInHandCondition implements Condition {
                             break;
                     }
                     break;
+                case ACTIVE:
+                    Player player = game.getPlayer(game.getActivePlayerId());
+                    if (player != null) {
+                        switch (this.type) {
+                            case FEWER_THAN:
+                                conditionApplies = player.getHand().size() < this.count;
+                                break;
+                            case MORE_THAN:
+                                conditionApplies = player.getHand().size() > this.count;
+                                break;
+                            case EQUAL_TO:
+                                conditionApplies = player.getHand().size() == this.count;
+                                break;
+                        }
+                    }
+                    break;
                 case ANY:
                     boolean conflict = false;
                     switch (this.type) {
                         case FEWER_THAN:
                             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                                Player player = game.getPlayer(playerId);
+                                player = game.getPlayer(playerId);
                                 if (player != null) {
                                     if (player.getHand().size() >= this.count) {
                                         conflict = true;
@@ -107,7 +123,7 @@ public class CardsInHandCondition implements Condition {
                             break;
                         case MORE_THAN:
                             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                                Player player = game.getPlayer(playerId);
+                                player = game.getPlayer(playerId);
                                 if (player != null) {
                                     if (player.getHand().size() <= this.count) {
                                         conflict = true;
@@ -118,7 +134,7 @@ public class CardsInHandCondition implements Condition {
                             break;
                         case EQUAL_TO:
                             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                                Player player = game.getPlayer(playerId);
+                                player = game.getPlayer(playerId);
                                 if (player != null) {
                                     if (player.getHand().size() != this.count) {
                                         conflict = true;

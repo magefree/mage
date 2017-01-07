@@ -38,8 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -47,14 +46,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class TwoHeadedSliver extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
     public TwoHeadedSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(1);
@@ -63,8 +56,8 @@ public class TwoHeadedSliver extends CardImpl {
         // All Sliver creatures have menace. (They can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
                 new MenaceAbility(),
-                Duration.WhileOnBattlefield, filter,
-                "All Sliver creatures have menace. (They can't be blocked except by two or more creatures.)")));
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
+                "All Sliver creatures have menace. <i>(They can't be blocked except by two or more creatures.)</i>")));
     }
 
     public TwoHeadedSliver(final TwoHeadedSliver card) {

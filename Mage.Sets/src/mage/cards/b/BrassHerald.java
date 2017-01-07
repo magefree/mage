@@ -35,7 +35,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.EnvoyEffect;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -54,7 +54,7 @@ import mage.game.Game;
 public class BrassHerald extends CardImpl {
 
     public BrassHerald(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.subtype.add("Golem");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -99,6 +99,6 @@ class BrassHeraldEntersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterCard filter = new FilterCard("creature cards of the chosen type");
         filter.add(new ChosenSubtypePredicate(source.getSourceId()));
-        return new EnvoyEffect(filter, 4).apply(game, source);
+        return new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY).apply(game, source);
     }
 }

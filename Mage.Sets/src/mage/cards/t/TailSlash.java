@@ -28,18 +28,13 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageWithPowerTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,13 +49,14 @@ public class TailSlash extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
+
     public TailSlash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Target creature you control deals damage equal to its power to target creature you don't control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new TailSlashEffect());
+        this.getSpellAbility().addEffect(new DamageWithPowerTargetEffect());
     }
 
     public TailSlash(final TailSlash card) {
@@ -71,36 +67,4 @@ public class TailSlash extends CardImpl {
     public TailSlash copy() {
         return new TailSlash(this);
     }
-}
-
-class TailSlashEffect extends OneShotEffect {
-
-    public TailSlashEffect() {
-        super(Outcome.Damage);
-        staticText = "Target creature you control deals damage equal to its power to target creature you don't control";
-     }
-
-    public TailSlashEffect(final TailSlashEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getFirstTarget());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-
-        Permanent targetPermanent = (Permanent) game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (sourcePermanent != null && targetPermanent != null) {
-            targetPermanent.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, false, true);
-        }
-        return true;
-    }
-
-    @Override
-    public TailSlashEffect copy() {
-        return new TailSlashEffect(this);
-    }
-
 }

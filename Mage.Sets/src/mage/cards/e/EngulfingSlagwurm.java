@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -48,20 +47,20 @@ import mage.players.Player;
  */
 public class EngulfingSlagwurm extends CardImpl {
 
-    public EngulfingSlagwurm (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
+    public EngulfingSlagwurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
         // Whenever Engulfing Slagwurm blocks or becomes blocked by a creature, destroy that creature. You gain life equal to that creature's toughness.
-        Ability ability = new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new DestroyTargetEffect(), false);
+        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addEffect(new EngulfingSlagwurmEffect());
         this.addAbility(ability);
     }
 
-    public EngulfingSlagwurm (final EngulfingSlagwurm card) {
+    public EngulfingSlagwurm(final EngulfingSlagwurm card) {
         super(card);
     }
 
@@ -73,6 +72,7 @@ public class EngulfingSlagwurm extends CardImpl {
 }
 
 class EngulfingSlagwurmEffect extends OneShotEffect {
+
     EngulfingSlagwurmEffect() {
         super(Outcome.GainLife);
         staticText = "You gain life equal to that creature's toughness";

@@ -29,7 +29,8 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -38,10 +39,6 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -51,14 +48,20 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class BloodhallPriest extends CardImpl {
 
     public BloodhallPriest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
         this.subtype.add("Vampire");
         this.subtype.add("Cleric");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Whenever Bloodhall Priest enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to target creature or player.
-        this.addAbility(new ConditionalTriggeredAbility(new BloodhallPriestAbility(), HellbentCondition.getInstance(), null));
+        TriggeredAbility triggeredAbility = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(2));
+        triggeredAbility.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(new ConditionalTriggeredAbility(
+                triggeredAbility,
+                HellbentCondition.getInstance(),
+                "Whenever {this} enters the battlefield or attacks, if you have no cards in hand, {this} deals 2 damage to target creature or player"
+        ));
 
         // Madness {1}{B}{R}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{B}{R}")));
@@ -71,40 +74,5 @@ public class BloodhallPriest extends CardImpl {
     @Override
     public BloodhallPriest copy() {
         return new BloodhallPriest(this);
-    }
-}
-
-class BloodhallPriestAbility extends TriggeredAbilityImpl {
-
-    public BloodhallPriestAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
-        this.addTarget(new TargetCreatureOrPlayer());
-    }
-
-    public BloodhallPriestAbility(final BloodhallPriestAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BloodhallPriestAbility copy() {
-        return new BloodhallPriestAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, if you have no cards in hand, {this} deals 2 damage to target creature or player.";
     }
 }

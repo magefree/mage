@@ -31,8 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
@@ -45,8 +43,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.abilities.costs.common.UnattachCost;
 
 /**
  *
@@ -61,7 +58,7 @@ public class BlindingPowder extends CardImpl {
         // Equipped creature has "Unattach Blinding Powder: Prevent all combat damage that would be dealt to this creature this turn."
         Effect effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all combat damage that would be dealt to this creature this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new BlindingPowderUnattachCost(getName(), getId()));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new UnattachCost(this.getName(), this.getId()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(2)));
@@ -75,58 +72,4 @@ public class BlindingPowder extends CardImpl {
     public BlindingPowder copy() {
         return new BlindingPowder(this);
     }
-}
-
-class BlindingPowderUnattachCost extends CostImpl {
-
-    protected UUID sourceEquipmentId;
-
-    public BlindingPowderUnattachCost(String name, UUID sourceId) {
-        this.text = "Unattach " + name;
-        this.sourceEquipmentId = sourceId;
-    }
-
-    public BlindingPowderUnattachCost(final BlindingPowderUnattachCost cost) {
-        super(cost);
-        this.sourceEquipmentId = cost.sourceEquipmentId;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            for (UUID attachmentId : permanent.getAttachments()) {
-                Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getId().equals(sourceEquipmentId)) {
-                    paid = permanent.removeAttachment(attachmentId, game);
-                    if (paid) {
-                        break;
-                    }
-                }
-            }
-
-        }
-        return paid;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            for (UUID attachmentId : permanent.getAttachments()) {
-                Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getId().equals(sourceEquipmentId)) {
-                    return true;
-                }
-            }
-
-        }
-        return false;
-    }
-
-    @Override
-    public BlindingPowderUnattachCost copy() {
-        return new BlindingPowderUnattachCost(this);
-    }
-
 }

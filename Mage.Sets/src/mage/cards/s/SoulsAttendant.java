@@ -27,14 +27,16 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.common.AnotherCreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-
-import java.util.UUID;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -42,8 +44,14 @@ import java.util.UUID;
  */
 public class SoulsAttendant extends CardImpl {
 
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
     public SoulsAttendant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 
@@ -51,7 +59,7 @@ public class SoulsAttendant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever another creature enters the battlefield, you may gain 1 life.
-        this.addAbility(new AnotherCreatureEntersBattlefieldTriggeredAbility(new GainLifeEffect(1), true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filter, true));
     }
 
     public SoulsAttendant(final SoulsAttendant card) {
@@ -63,4 +71,3 @@ public class SoulsAttendant extends CardImpl {
         return new SoulsAttendant(this);
     }
 }
-

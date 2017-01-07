@@ -35,7 +35,6 @@ import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;

@@ -42,6 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,19 +52,19 @@ import mage.target.common.TargetCreaturePermanent;
  * @author cbt33
  */
 public class MagmaSliver extends CardImpl {
-    
+
     public MagmaSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // All Slivers have "{tap}: Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield."
-    Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("Sliver", "Sliver creatures")), new StaticValue(0), Duration.EndOfTurn), new TapSourceCost());
-    Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("Sliver", "Sliver creature"));
-    ability.addTarget(target);
-    this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS), new StaticValue(0), Duration.EndOfTurn), new TapSourceCost());
+        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("Sliver", "Sliver creature"));
+        ability.addTarget(target);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
     public MagmaSliver(final MagmaSliver card) {

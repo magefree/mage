@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
+import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -63,7 +63,7 @@ public class SpitefulShadows extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
-        this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, new SpitefulShadowsEffect(),
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new SpitefulShadowsEffect(),
             false, SetTargetPointer.PERMANENT));
     }
 

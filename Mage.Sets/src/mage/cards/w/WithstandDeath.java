@@ -25,17 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,18 +42,15 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WithstandDeath extends CardImpl {
 
-    public WithstandDeath (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
-
+    public WithstandDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Target creature is indestructible this turn.
-        Effect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("Target creature is indestructible this turn");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WithstandDeath (final WithstandDeath card) {
+    public WithstandDeath(final WithstandDeath card) {
         super(card);
     }
 

@@ -29,22 +29,16 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -53,15 +47,26 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SunTitan extends CardImpl {
 
+    private static final FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 3 or less from your graveyard");
+
+    static {
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
+    }
+
     public SunTitan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
+        // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(new SunTitanAbility());
+
+        // Whenever Sun Titan enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addAbility(ability);
     }
 
     public SunTitan(final SunTitan card) {
@@ -71,56 +76,6 @@ public class SunTitan extends CardImpl {
     @Override
     public SunTitan copy() {
         return new SunTitan(this);
-    }
-
-}
-
-class SunTitanAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCard filter = new FilterCard("permanent card with converted mana cost 3 or less from your graveyard");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT),
-                new CardTypePredicate(CardType.LAND),
-                new CardTypePredicate(CardType.PLANESWALKER)));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
-    }
-
-    public SunTitanAbility() {
-        super(Zone.BATTLEFIELD, null, true);
-        Target target = new TargetCardInYourGraveyard(filter);
-        this.addTarget(target);
-        this.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-    }
-
-    public SunTitanAbility(final SunTitanAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SunTitanAbility copy() {
-        return new SunTitanAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.";
     }
 
 }

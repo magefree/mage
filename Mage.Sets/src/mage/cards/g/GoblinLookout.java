@@ -39,8 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -49,22 +49,21 @@ import mage.target.common.TargetControlledPermanent;
  * @author fireshoes
  */
 public class GoblinLookout extends CardImpl {
-    
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Goblin creatures");
+
     private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("a Goblin");
+
     static {
-        filterCreature.add(new SubtypePredicate("Goblin"));
         filterPermanent.add(new SubtypePredicate("Goblin"));
     }
 
     public GoblinLookout(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Goblin");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {tap}, Sacrifice a Goblin: Goblin creatures get +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 0, Duration.EndOfTurn, filterCreature, false), new TapSourceCost());
+        // {T}, Sacrifice a Goblin: Goblin creatures get +2/+0 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterPermanent)));
         this.addAbility(ability);
     }

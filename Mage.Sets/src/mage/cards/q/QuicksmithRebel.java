@@ -41,10 +41,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -53,12 +51,6 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author Styxo
  */
 public class QuicksmithRebel extends CardImpl {
-
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
 
     public QuicksmithRebel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -76,7 +68,7 @@ public class QuicksmithRebel extends CardImpl {
                 new SourceOnBattlefieldControlUnchangedCondition(),
                 "target artifact you control gains \"{T}: This artifact deals 2 damage to target creature or player\" for as long as you control {this}");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterControlledArtifactPermanent()));
         this.addAbility(ability);
     }
 

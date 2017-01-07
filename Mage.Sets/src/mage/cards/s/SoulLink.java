@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageAttachedTriggeredAbility;
-import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
+import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -63,7 +63,7 @@ public class SoulLink extends CardImpl {
         this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD,
             new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
         // Whenever enchanted creature is dealt damage, you gain that much life.
-        this.addAbility(new DamageDealtToAttachedTriggeredAbility(new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
     }
 
     public SoulLink(final SoulLink card) {

@@ -82,6 +82,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Greater Harvester", 44, Rarity.RARE, mage.cards.g.GreaterHarvester.class));
         cards.add(new SetCardInfo("Grimclaw Bats", 45, Rarity.COMMON, mage.cards.g.GrimclawBats.class));
         cards.add(new SetCardInfo("Hallow", 4, Rarity.COMMON, mage.cards.h.Hallow.class));
+        cards.add(new SetCardInfo("Heartseeker", 124, Rarity.RARE, mage.cards.h.Heartseeker.class));
         cards.add(new SetCardInfo("Hoverguard Observer", 22, Rarity.UNCOMMON, mage.cards.h.HoverguardObserver.class));
         cards.add(new SetCardInfo("Hunger of the Nim", 46, Rarity.COMMON, mage.cards.h.HungerOfTheNim.class));
         cards.add(new SetCardInfo("Inflame", 64, Rarity.COMMON, mage.cards.i.Inflame.class));

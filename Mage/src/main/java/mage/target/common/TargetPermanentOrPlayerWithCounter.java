@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  */
 public class TargetPermanentOrPlayerWithCounter extends TargetPermanentOrPlayer {
 
-    protected FilterPermanentOrPlayerWithCounter filter;
+    protected final FilterPermanentOrPlayerWithCounter filter;
 
     public TargetPermanentOrPlayerWithCounter() {
         this(1, 1);

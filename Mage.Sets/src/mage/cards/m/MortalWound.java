@@ -29,7 +29,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
+import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -57,7 +57,7 @@ public class MortalWound extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // When enchanted creature is dealt damage, destroy it.
-        this.addAbility(new DamageDealtToAttachedTriggeredAbility(new DestroyAttachedEffect("it"), false));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(new DestroyAttachedEffect("it"), false));
     }
 
     public MortalWound(final MortalWound card) {

@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
@@ -51,7 +51,7 @@ import mage.players.Player;
 public class ShapeStealer extends CardImpl {
 
     public ShapeStealer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");
         this.subtype.add("Shapeshifter");
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
@@ -62,7 +62,7 @@ public class ShapeStealer extends CardImpl {
         // each one in succession. The first trigger put on the stack will be the last to resolve,
         // so that will set Shape Stealer's final power and toughness.
         // Whenever Shape Stealer blocks or becomes blocked by a creature, change Shape Stealer's base power and toughness to that creature's power and toughness until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new ShapeStealerEffect(), false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new ShapeStealerEffect(), false));
     }
 
     public ShapeStealer(final ShapeStealer card) {

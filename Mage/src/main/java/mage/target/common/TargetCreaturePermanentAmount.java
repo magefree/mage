@@ -49,7 +49,7 @@ import java.util.UUID;
  */
 public class TargetCreaturePermanentAmount extends TargetAmount {
 
-    protected FilterCreaturePermanent filter;
+    protected final FilterCreaturePermanent filter;
 
     public TargetCreaturePermanentAmount(int amount) {
         this(amount, new FilterCreaturePermanent());
@@ -83,10 +83,7 @@ public class TargetCreaturePermanentAmount extends TargetAmount {
     @Override
     public boolean canTarget(UUID id, Game game) {
         Permanent permanent = game.getPermanent(id);
-        if (permanent != null) {
-            return filter.match(permanent, game);
-        }
-        return false;
+        return permanent != null && filter.match(permanent, game);
     }
 
     @Override
@@ -139,7 +136,7 @@ public class TargetCreaturePermanentAmount extends TargetAmount {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
@@ -151,7 +148,7 @@ public class TargetCreaturePermanentAmount extends TargetAmount {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
             if (filter.match(permanent, null, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());

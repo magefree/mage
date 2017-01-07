@@ -35,8 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -44,14 +43,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class GoblinGeneral extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
-    }
-
     public GoblinGeneral(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 
@@ -59,7 +52,7 @@ public class GoblinGeneral extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Goblin General attacks, Goblin creatures you control get +1/+1 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, false), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false), false));
     }
 
     public GoblinGeneral(final GoblinGeneral card) {

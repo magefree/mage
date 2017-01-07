@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -49,7 +49,7 @@ import mage.constants.TargetController;
 public class FlameheartWerewolf extends CardImpl {
 
     public FlameheartWerewolf(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add("Werewolf");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -60,7 +60,7 @@ public class FlameheartWerewolf extends CardImpl {
         this.transformable = true;
 
         // Whenever Flameheart Werewolf blocks or becomes blocked by a creature, Flameheart Werewolf deals 2 damage to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(2, true, "that creature"), false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(2, true, "that creature"), false));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Flameheart Werewolf.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

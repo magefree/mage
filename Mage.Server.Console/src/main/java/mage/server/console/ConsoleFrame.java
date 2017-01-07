@@ -168,7 +168,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         btnSendMessage.setEnabled(false);
         btnSendMessage.setFocusable(false);
         btnSendMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnSendMessage.setLabel("Send Message");
+        btnSendMessage.setText("Send Message");
         btnSendMessage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSendMessage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

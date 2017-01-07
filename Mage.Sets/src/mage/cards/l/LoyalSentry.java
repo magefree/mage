@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksCreatureTriggeredAbility;
+import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,8 +46,8 @@ import mage.game.permanent.Permanent;
  */
 public class LoyalSentry extends CardImpl {
 
-    public LoyalSentry (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+    public LoyalSentry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -56,10 +55,10 @@ public class LoyalSentry extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Loyal Sentry blocks a creature, destroy that creature and Loyal Sentry.
-        this.addAbility(new BlocksCreatureTriggeredAbility(new LoyalSentryEffect(), false, true));
+        this.addAbility(new BlocksTriggeredAbility(new LoyalSentryEffect(), false, true));
     }
 
-    public LoyalSentry (final LoyalSentry card) {
+    public LoyalSentry(final LoyalSentry card) {
         super(card);
     }
 
@@ -70,6 +69,7 @@ public class LoyalSentry extends CardImpl {
 }
 
 class LoyalSentryEffect extends OneShotEffect {
+
     LoyalSentryEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy that creature and {this}";
@@ -81,7 +81,7 @@ class LoyalSentryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(getTargetPointer().getFirst(game, source));        
+        Permanent p = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (p != null) {
             p.destroy(source.getSourceId(), game, false);
         }

@@ -43,7 +43,7 @@ import mage.game.stack.StackObject;
  */
 public class TargetSpell extends TargetObject {
 
-    protected FilterSpell filter;
+    protected final FilterSpell filter;
 
     public TargetSpell() {
         this(1, 1, new FilterSpell());
@@ -82,10 +82,7 @@ public class TargetSpell extends TargetObject {
             return false;
         }
         Spell spell = game.getStack().getSpell(id);
-        if (spell != null) {
-            return filter.match(spell, source.getSourceId(), source.getControllerId(), game);
-        }
-        return false;
+        return spell != null && filter.match(spell, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override

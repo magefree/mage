@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInGraveyard;
 public class GraveRobbers extends CardImpl {
 
     public GraveRobbers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.power = new MageInt(1);
@@ -58,7 +58,7 @@ public class GraveRobbers extends CardImpl {
         // {B}, {tap}: Exile target artifact card from a graveyard. You gain 2 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard(new FilterArtifactCard()));
+        ability.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
         ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);
     }

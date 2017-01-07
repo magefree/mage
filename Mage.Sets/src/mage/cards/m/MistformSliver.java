@@ -46,7 +46,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
 public class MistformSliver extends CardImpl {
 
     public MistformSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Illusion");
         this.subtype.add("Sliver");
 
@@ -68,7 +68,7 @@ public class MistformSliver extends CardImpl {
 
         // All Slivers have "{1}: This permanent becomes the creature type of your choice in addition to its other types until end of turn."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MistformSliverEffect(), new ManaCostsImpl("{1}"));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
     public MistformSliver(final MistformSliver card) {
@@ -81,41 +81,41 @@ public class MistformSliver extends CardImpl {
     }
 }
 
- class MistformSliverEffect extends OneShotEffect {
+class MistformSliverEffect extends OneShotEffect {
 
-        public MistformSliverEffect() {
-            super(Outcome.Benefit);
-            staticText = "This permanent becomes the creature type of your choice in addition to its other types until end of turn";
-        }
-
-        public MistformSliverEffect(final MistformSliverEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player player = game.getPlayer(source.getControllerId());
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (player != null && permanent != null) {
-                Choice typeChoice = new ChoiceImpl(true);
-                typeChoice.setMessage("Choose creature type");
-                typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-                while (!player.choose(Outcome.Detriment, typeChoice, game)) {
-                    if (!player.canRespond()) {
-                        return false;
-                    }
-                }
-                game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-                ContinuousEffect effect = new AddCardSubTypeTargetEffect(typeChoice.getChoice(), Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                game.addEffect(effect, source);
-            }
-            return false;
-        }
-
-        @Override
-        public MistformSliverEffect copy() {
-            return new MistformSliverEffect(this);
-        }
-
+    public MistformSliverEffect() {
+        super(Outcome.Benefit);
+        staticText = "This permanent becomes the creature type of your choice in addition to its other types until end of turn";
     }
+
+    public MistformSliverEffect(final MistformSliverEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && permanent != null) {
+            Choice typeChoice = new ChoiceImpl(true);
+            typeChoice.setMessage("Choose creature type");
+            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
+            while (!player.choose(Outcome.Detriment, typeChoice, game)) {
+                if (!player.canRespond()) {
+                    return false;
+                }
+            }
+            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
+            ContinuousEffect effect = new AddCardSubTypeTargetEffect(typeChoice.getChoice(), Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            game.addEffect(effect, source);
+        }
+        return false;
+    }
+
+    @Override
+    public MistformSliverEffect copy() {
+        return new MistformSliverEffect(this);
+    }
+
+}

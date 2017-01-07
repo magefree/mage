@@ -45,7 +45,7 @@ public abstract class Watcher implements Serializable {
     protected UUID controllerId;
     protected UUID sourceId;
     protected boolean condition;
-    protected WatcherScope scope;
+    protected final WatcherScope scope;
 
     public Watcher(String basicKey, WatcherScope scope) {
         this.basicKey = basicKey;

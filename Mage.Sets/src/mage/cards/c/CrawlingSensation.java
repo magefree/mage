@@ -1,3 +1,4 @@
+
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
@@ -88,7 +89,8 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
         if (zEvent != null && Zone.GRAVEYARD == zEvent.getToZone() && zEvent.getCards() != null) {
-            Integer usedOnTurn = (Integer) game.getState().getValue("usedOnTurn" + getOriginalId());
+            // TODO: Switch to handle this with a game watcher because this does not work correctly if control changes
+            Integer usedOnTurn = (Integer) game.getState().getValue("usedOnTurn" + getControllerId() + getOriginalId());
             if (usedOnTurn == null || usedOnTurn < game.getTurnNum()) {
                 for (Card card : zEvent.getCards()) {
                     if (card != null) {
@@ -99,7 +101,7 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
                                 && card.getOwnerId().equals(getControllerId())
                                 && cardType != null
                                 && card.getCardType().contains(CardType.LAND)) {
-                            game.getState().setValue("usedOnTurn" + getOriginalId(), game.getTurnNum());
+                            game.getState().setValue("usedOnTurn" + getControllerId() + getOriginalId(), game.getTurnNum());
                             return true;
                         }
                     }

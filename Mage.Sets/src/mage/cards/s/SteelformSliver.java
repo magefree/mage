@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -45,16 +45,16 @@ import mage.filter.common.FilterCreaturePermanent;
 public class SteelformSliver extends CardImpl {
 
     public SteelformSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Sliver creatures you control get +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield,
-                new FilterCreaturePermanent("Sliver", "Sliver creatures"), false)));
+                        StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
     }
 
     public SteelformSliver(final SteelformSliver card) {

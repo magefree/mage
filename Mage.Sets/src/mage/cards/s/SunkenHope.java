@@ -28,16 +28,15 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,11 +51,10 @@ import mage.target.common.TargetControlledPermanent;
 public class SunkenHope extends CardImpl {
 
     public SunkenHope(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // At the beginning of each player's upkeep, that player returns a creature he or she controls to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SunkenHopeReturnToHandEffect(), TargetController.ANY, false, true));
     }
 
     public SunkenHope(final SunkenHope card) {
@@ -69,20 +67,20 @@ public class SunkenHope extends CardImpl {
     }
 }
 
-class ReturnToHandEffect extends OneShotEffect {
+class SunkenHopeReturnToHandEffect extends OneShotEffect {
 
-    public ReturnToHandEffect() {
+    public SunkenHopeReturnToHandEffect() {
         super(Outcome.ReturnToHand);
         staticText = "that player returns a creature he or she controls to its owner's hand";
     }
 
-    public ReturnToHandEffect(final ReturnToHandEffect effect) {
+    public SunkenHopeReturnToHandEffect(final SunkenHopeReturnToHandEffect effect) {
         super(effect);
     }
 
     @Override
-    public ReturnToHandEffect copy() {
-        return new ReturnToHandEffect(this);
+    public SunkenHopeReturnToHandEffect copy() {
+        return new SunkenHopeReturnToHandEffect(this);
     }
 
     @Override
@@ -100,7 +98,7 @@ class ReturnToHandEffect extends OneShotEffect {
                 player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             }
 
-            for (UUID targetId: target.getTargets()) {
+            for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
                     result |= permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);

@@ -43,7 +43,7 @@ import mage.watchers.Watcher;
  */
 public class PlayerCastCreatureWatcher extends Watcher {
 
-    Set<UUID> playerIds = new HashSet<>();
+    final Set<UUID> playerIds = new HashSet<>();
 
     public PlayerCastCreatureWatcher() {
         super("PlayerCastCreature", WatcherScope.GAME);

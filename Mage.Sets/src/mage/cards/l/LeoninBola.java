@@ -33,8 +33,6 @@ import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -42,9 +40,8 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.costs.common.UnattachCost;
 
 /**
  *
@@ -58,7 +55,7 @@ public class LeoninBola extends CardImpl {
 
         // Equipped creature has "{tap}, Unattach Leonin Bola: Tap target creature."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
-        gainAbility.addCost(new UnattachCost(this.getId()));
+        gainAbility.addCost(new UnattachCost(this.getName(), this.getId()));
         gainAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.EQUIPMENT)));
         
@@ -73,50 +70,5 @@ public class LeoninBola extends CardImpl {
     @Override
     public LeoninBola copy() {
         return new LeoninBola(this);
-    }
-}
-
-class UnattachCost extends CostImpl {
-    
-    private UUID attachmentid;
-
-    public UnattachCost(UUID attachmentid) {
-        this.text = "Unattach Leonin Bola";
-        this.attachmentid = attachmentid;
-    }
-
-    public UnattachCost(UnattachCost cost) {
-        super(cost);
-        this.attachmentid = cost.attachmentid;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-                Permanent attachment = game.getPermanent(attachmentid);
-                if (attachment != null) {
-                    permanent.removeAttachment(attachmentid, game);
-                    this.paid = true;
-                }
-            }
-        return paid;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-                Permanent attachment = game.getPermanent(attachmentid);
-                if (attachment != null && permanent.getAttachments().contains(attachmentid)) {
-                    return true;
-                }
-        }
-        return false;
-    }
-
-    @Override
-    public UnattachCost copy() {
-        return new UnattachCost(this);
     }
 }

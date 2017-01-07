@@ -37,16 +37,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class BonescytheSliver extends CardImpl {
-    
+
     public BonescytheSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);
@@ -55,7 +55,7 @@ public class BonescytheSliver extends CardImpl {
         // Sliver creatures you control have double strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(),
-                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
     public BonescytheSliver(final BonescytheSliver card) {

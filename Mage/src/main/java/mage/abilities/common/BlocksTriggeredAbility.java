@@ -32,7 +32,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -40,26 +40,35 @@ import mage.game.events.GameEvent.EventType;
  */
 public class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
+    private boolean setTargetPointer;
+
     public BlocksTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
     }
 
-    public BlocksTriggeredAbility(Effect effect, boolean optional, boolean fixedTargetPointer) {
+    public BlocksTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.setTargetPointer = setTargetPointer;
     }
 
     public BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
         super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_BLOCKERS;
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getCombat().getBlockers().contains(this.getSourceId())) {
+        if (event.getSourceId().equals(this.getSourceId())) {
+            if (setTargetPointer) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                }
+            }
             return true;
         }
         return false;
@@ -67,7 +76,7 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} blocks, " + super.getRule();
+        return "Whenever {this} blocks" + (setTargetPointer ? " a creature, " : ", ") + super.getRule();
     }
 
     @Override

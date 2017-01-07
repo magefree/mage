@@ -28,15 +28,17 @@
 package mage.cards.g;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.common.EntersAnotherCreatureYourControlTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -44,8 +46,14 @@ import mage.constants.Duration;
  */
 public class GriffinProtector extends CardImpl {
 
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
     public GriffinProtector(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add("Griffin");
 
         this.power = new MageInt(2);
@@ -53,8 +61,10 @@ public class GriffinProtector extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.
-        this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn)));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false, null, true));
+
     }
 
     public GriffinProtector(final GriffinProtector card) {

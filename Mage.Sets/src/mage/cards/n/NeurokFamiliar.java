@@ -42,7 +42,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -53,13 +52,14 @@ import mage.players.Player;
 public class NeurokFamiliar extends CardImpl {
 
     public NeurokFamiliar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Bird");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Neurok Familiar enters the battlefield, reveal the top card of your library. If it's an artifact card, put it into your hand. Otherwise, put it into your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new NeurokFamiliarEffect()));
     }
@@ -75,8 +75,6 @@ public class NeurokFamiliar extends CardImpl {
 }
 
 class NeurokFamiliarEffect extends OneShotEffect {
-
-    private static final FilterArtifactCard filterPutInHand = new FilterArtifactCard("artifact card to put in hand");
 
     public NeurokFamiliarEffect() {
         super(Outcome.DrawCard);

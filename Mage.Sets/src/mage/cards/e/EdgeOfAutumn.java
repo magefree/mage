@@ -28,7 +28,6 @@
 package mage.cards.e;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -50,19 +49,17 @@ import mage.target.common.TargetControlledPermanent;
 public class EdgeOfAutumn extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
-    private static final FilterBasicLandCard basiclandfilter = new FilterBasicLandCard();
 
     public EdgeOfAutumn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(basiclandfilter), true),
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 5),
                 "If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library."));
 
         // Cycling-Sacrifice a land.
-        Ability cycling = new CyclingAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(cycling);
+        this.addAbility(new CyclingAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public EdgeOfAutumn(final EdgeOfAutumn card) {

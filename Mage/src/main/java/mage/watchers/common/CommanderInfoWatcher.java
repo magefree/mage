@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
 public class CommanderInfoWatcher extends Watcher {
 
     public final Map<UUID, Integer> damageToPlayer = new HashMap<>();
-    public boolean checkCommanderDamage;
+    public final boolean checkCommanderDamage;
 
     public CommanderInfoWatcher(UUID commander, boolean checkCommanderDamage) {
         super("CommanderCombatDamageWatcher", WatcherScope.CARD);

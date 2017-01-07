@@ -207,11 +207,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             abilityControllerId = target.getAbilityController();
         }
         UUID randomOpponentId = getRandomOpponent(abilityControllerId, game);
-        if (target instanceof TargetPlayer) {
+        if (target.getOriginalTarget() instanceof TargetPlayer) {
             return setTargetPlayer(outcome, target, null, sourceId, abilityControllerId, randomOpponentId, game);
         }
-
-        if (target instanceof TargetDiscard) {
+        if (target.getOriginalTarget() instanceof TargetDiscard) {
             findPlayables(game);
             if (unplayable.size() > 0) {
                 for (int i = unplayable.size() - 1; i >= 0; i--) {
@@ -235,7 +234,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return false;
         }
-        if (target instanceof TargetControlledPermanent) {
+        if (target.getOriginalTarget() instanceof TargetControlledPermanent) {
             List<Permanent> targets;
             targets = threats(abilityControllerId, sourceId, ((TargetControlledPermanent) target).getFilter(), game, target.getTargets());
             if (!outcome.isGood()) {
@@ -249,7 +248,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return false;
         }
-        if (target instanceof TargetPermanent) {
+        if (target.getOriginalTarget() instanceof TargetPermanent) {
             List<Permanent> targets;
             if (outcome.isCanTargetAll()) {
                 targets = threats(null, sourceId, ((TargetPermanent) target).getFilter(), game, target.getTargets());
@@ -288,8 +287,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target instanceof TargetCardInHand
-                || (target.getZone().equals(Zone.HAND) && (target instanceof TargetCard))) {
+        if (target.getOriginalTarget() instanceof TargetCardInHand
+                || (target.getZone().equals(Zone.HAND) && (target.getOriginalTarget() instanceof TargetCard))) {
             List<Card> cards = new ArrayList<>();
             for (UUID cardId : target.possibleTargets(sourceId, this.getId(), game)) {
                 Card card = game.getCard(cardId);
@@ -307,7 +306,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-        if (target instanceof TargetCreatureOrPlayer) {
+        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
             List<Permanent> targets;
             TargetCreatureOrPlayer t = ((TargetCreatureOrPlayer) target);
             if (outcome.isGood()) {
@@ -338,7 +337,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
 
-        if (target instanceof TargetPermanentOrPlayer) {
+        if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
             List<Permanent> targets;
             TargetPermanentOrPlayer t = ((TargetPermanentOrPlayer) target);
             List<Permanent> ownedTargets = threats(abilityControllerId, sourceId, ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());
@@ -393,7 +392,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return false;
         }
-        if (target instanceof TargetCardInGraveyard) {
+        if (target.getOriginalTarget() instanceof TargetCardInGraveyard) {
             List<Card> cards = new ArrayList<>();
             for (Player player : game.getPlayers().values()) {
                 for (Card card : player.getGraveyard().getCards(game)) {
@@ -411,7 +410,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target instanceof TargetCardInYourGraveyard) {
+        if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard) {
             List<UUID> alreadyTargetted = target.getTargets();
             List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards(game));
             while (!cards.isEmpty()) {
@@ -423,7 +422,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return false;
         }
-        if (target instanceof TargetSource) {
+        if (target.getOriginalTarget() instanceof TargetSource) {
             Set<UUID> targets;
             TargetSource t = ((TargetSource) target);
             targets = t.possibleTargets(sourceId, abilityControllerId, game);
@@ -459,11 +458,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             abilityControllerId = target.getAbilityController();
         }
         UUID randomOpponentId = getRandomOpponent(abilityControllerId, game);
-        if (target instanceof TargetPlayer) {
+        if (target.getOriginalTarget() instanceof TargetPlayer) {
             return setTargetPlayer(outcome, target, source, source.getSourceId(), abilityControllerId, randomOpponentId, game);
         }
 
-        if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
+        if (target.getOriginalTarget() instanceof TargetDiscard || target.getOriginalTarget() instanceof TargetCardInHand) {
             if (outcome.isGood()) {
                 Cards cards = new CardsImpl(target.possibleTargets(source.getSourceId(), getId(), game));
                 ArrayList<Card> cardsInHand = new ArrayList<>(cards.getCards(game));
@@ -506,7 +505,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return false;
         }
-        if (target instanceof TargetControlledPermanent) {
+        if (target.getOriginalTarget() instanceof TargetControlledPermanent) {
             List<Permanent> targets;
             targets = threats(abilityControllerId, source.getSourceId(), ((TargetControlledPermanent) target).getFilter(), game, target.getTargets());
             if (!outcome.isGood()) {
@@ -523,7 +522,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
 
         }
-        if (target instanceof TargetPermanent) {
+        if (target.getOriginalTarget() instanceof TargetPermanent) {
             List<Permanent> targets;
             boolean outcomeTargets = true;
             if (outcome.isGood()) {
@@ -547,7 +546,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-        if (target instanceof TargetCreatureOrPlayer) {
+        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
             List<Permanent> targets;
             TargetCreatureOrPlayer t = ((TargetCreatureOrPlayer) target);
             if (outcome.isGood()) {
@@ -594,7 +593,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             //if (!target.isRequired())
             return false;
         }
-        if (target instanceof TargetCardInGraveyard) {
+        if (target.getOriginalTarget() instanceof TargetCardInGraveyard) {
             List<Card> cards = new ArrayList<>();
             for (Player player : game.getPlayers().values()) {
                 cards.addAll(player.getGraveyard().getCards(game));
@@ -607,7 +606,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             //if (!target.isRequired())
             return false;
         }
-        if (target instanceof TargetCardInLibrary) {
+        if (target.getOriginalTarget() instanceof TargetCardInLibrary) {
             List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getLibrary().getCards(game));
             Card card = pickTarget(cards, outcome, target, source, game);
             if (card != null) {
@@ -616,7 +615,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return false;
         }
-        if (target instanceof TargetCardInYourGraveyard) {
+        if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard) {
             List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards(game));
             while (!target.isChosen() && !cards.isEmpty()) {
                 Card card = pickTarget(cards, outcome, target, source, game);
@@ -626,7 +625,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-        if (target instanceof TargetSpell) {
+        if (target.getOriginalTarget() instanceof TargetSpell) {
             if (game.getStack().size() > 0) {
                 Iterator<StackObject> it = game.getStack().iterator();
                 while (it.hasNext()) {
@@ -639,7 +638,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return false;
         }
-        if (target instanceof TargetSpellOrPermanent) {
+        if (target.getOriginalTarget() instanceof TargetSpellOrPermanent) {
             // TODO: Also check if a spell should be selected
             List<Permanent> targets;
             boolean outcomeTargets = true;
@@ -675,7 +674,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return false;
         }
-        if (target instanceof TargetCardInOpponentsGraveyard) {
+        if (target.getOriginalTarget() instanceof TargetCardInOpponentsGraveyard) {
             List<Card> cards = new ArrayList<>();
             for (UUID uuid : game.getOpponents(abilityControllerId)) {
                 Player player = game.getPlayer(uuid);
@@ -691,7 +690,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             //if (!target.isRequired())
             return false;
         }
-        if (target instanceof TargetDefender) {
+        if (target.getOriginalTarget() instanceof TargetDefender) {
             // TODO: Improve, now planeswalker is always chosen if it exits
             List<Permanent> targets;
             targets = game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), randomOpponentId, game);
@@ -713,7 +712,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target instanceof TargetCardInASingleGraveyard) {
+        if (target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
             List<Card> cards = new ArrayList<>();
             for (Player player : game.getPlayers().values()) {
                 cards.addAll(player.getGraveyard().getCards(game));
@@ -727,7 +726,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target instanceof TargetCardInExile) {
+        if (target.getOriginalTarget() instanceof TargetCardInExile) {
             List<Card> cards = new ArrayList<>();
             for (UUID uuid : ((TargetCardInExile) target).possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                 Card card = game.getCard(uuid);
@@ -773,7 +772,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
         }
         UUID opponentId = game.getOpponents(playerId).iterator().next();
-        if (target instanceof TargetCreatureOrPlayerAmount) {
+        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayerAmount) {
             if (outcome.equals(Outcome.Damage) && game.getPlayer(opponentId).getLife() <= target.getAmountRemaining()) {
                 target.addTarget(opponentId, target.getAmountRemaining(), source, game);
                 return true;
@@ -2148,7 +2147,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
      *
      */
     private boolean setTargetPlayer(Outcome outcome, Target target, Ability source, UUID sourceId, UUID abilityControllerId, UUID randomOpponentId, Game game) {
-        if (target instanceof TargetOpponent) {
+        if (target.getOriginalTarget() instanceof TargetOpponent) {
             if (source == null) {
                 if (((TargetOpponent) target).canTarget(randomOpponentId, game)) {
                     target.add(randomOpponentId, game);
@@ -2172,7 +2171,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
 
-        if (target instanceof TargetPlayer) {
+        if (target.getOriginalTarget() instanceof TargetPlayer) {
             if (outcome.isGood()) {
                 if (source == null) {
                     if (target.canTarget(abilityControllerId, game)) {

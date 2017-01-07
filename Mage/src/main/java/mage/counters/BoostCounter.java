@@ -34,8 +34,8 @@ package mage.counters;
  */
 public class BoostCounter extends Counter {
 
-    protected int power;
-    protected int toughness;
+    protected final int power;
+    protected final int toughness;
 
     public BoostCounter(int power, int toughness) {
         this(power, toughness, 1);

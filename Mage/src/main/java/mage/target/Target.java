@@ -155,4 +155,6 @@ public interface Target extends Serializable {
     int getTargetTag();
 
     void setTargetTag(int tag);
+
+    Target getOriginalTarget();
 }

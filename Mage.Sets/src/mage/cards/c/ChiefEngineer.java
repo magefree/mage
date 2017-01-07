@@ -29,40 +29,23 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.players.Player;
+import mage.filter.common.FilterArtifactSpell;
 
 /**
  *
  * @author LevelX2
  */
 public class ChiefEngineer extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("Artifact spells you cast");
 
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-    
     public ChiefEngineer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Artificer");
 
@@ -70,9 +53,8 @@ public class ChiefEngineer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Artifact spells you cast have convoke.
-        this.addAbility(new SimpleStaticAbility(
-            Zone.BATTLEFIELD, new ChiefEngineerGainAbilitySpellsEffect(new ConvokeAbility(), filter)));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new ConvokeAbility(), new FilterArtifactSpell("Artifact spells you cast"))));
+
     }
 
     public ChiefEngineer(final ChiefEngineer card) {
@@ -82,50 +64,5 @@ public class ChiefEngineer extends CardImpl {
     @Override
     public ChiefEngineer copy() {
         return new ChiefEngineer(this);
-    }
-}
-
-class ChiefEngineerGainAbilitySpellsEffect extends ContinuousEffectImpl {
-
-    private final Ability ability;
-    private final FilterSpell filter;
-
-    public ChiefEngineerGainAbilitySpellsEffect(Ability ability, FilterSpell filter) {
-        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.ability = ability;
-        this.filter = filter;
-        staticText = filter.getMessage() + " have " + ability.getRule();
-    }
-
-    public ChiefEngineerGainAbilitySpellsEffect(final ChiefEngineerGainAbilitySpellsEffect effect) {
-        super(effect);
-        this.ability = effect.ability;
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public ChiefEngineerGainAbilitySpellsEffect copy() {
-        return new ChiefEngineerGainAbilitySpellsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            for (StackObject stackObject : game.getStack()) {
-                // only spells cast, so no copies of spells
-                if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
-                    Spell spell = (Spell) stackObject;
-                    if (filter.match(spell, game)) {
-                        if (!spell.getAbilities().contains(ability)) {
-                            game.getState().addOtherAbility(spell.getCard(), ability);
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

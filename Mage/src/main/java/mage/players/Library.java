@@ -74,7 +74,7 @@ public class Library implements Serializable {
     public void shuffle() {
         UUID[] shuffled = library.toArray(new UUID[0]);
         for (int n = shuffled.length - 1; n > 0; n--) {
-            int r = RandomUtil.nextInt(n);;
+            int r = RandomUtil.nextInt(n);
             UUID temp = shuffled[n];
             shuffled[n] = shuffled[r];
             shuffled[r] = temp;

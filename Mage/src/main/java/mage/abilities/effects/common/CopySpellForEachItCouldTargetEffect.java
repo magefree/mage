@@ -261,9 +261,6 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
 
     protected final FilterInPlay<T> additionalFilter;
     protected final Target originalTarget;
-    protected static final Integer minNumberOfTargets = null;
-    protected static final Integer maxNumberOfTargets = null;
-    protected static final Zone zone = null;
 
     public TargetWithAdditionalFilter(final TargetWithAdditionalFilter target) {
         this(target.originalTarget, target.additionalFilter, false);
@@ -274,12 +271,16 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
     }
 
     public TargetWithAdditionalFilter(Target originalTarget, FilterInPlay<T> additionalFilter, boolean notTarget) {
-        originalTarget = originalTarget.copy();
-        originalTarget.clearChosen();
-        this.originalTarget = originalTarget;
+        this.originalTarget = originalTarget.copy();
+        this.originalTarget.clearChosen();
         this.targetName = originalTarget.getFilter().getMessage();
         this.notTarget = notTarget;
         this.additionalFilter = additionalFilter;
+    }
+
+    @Override
+    public Target getOriginalTarget() {
+        return originalTarget;
     }
 
     @Override

@@ -61,6 +61,7 @@ public enum AbilityWord {
     RADIANCE("Radiance"),
     RAID("Raid"),
     RALLY("Rally"),
+    REVOLT("Revolt"),
     SPELL_MASTERY("Spell mastery"),
     STRIVE("Strive"),
     SWEEP("Sweep"),

@@ -38,8 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.GoblinTokenWithHaste;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
@@ -49,20 +48,14 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public class GoblinAssault extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
-    }
-
     public GoblinAssault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // At the beginning of your upkeep, create a 1/1 red Goblin creature token with haste.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste()), TargetController.YOU, false));
 
         // Goblin creatures attack each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(filter, Duration.WhileOnBattlefield)), new AttackedThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, Duration.WhileOnBattlefield)), new AttackedThisTurnWatcher());
     }
 
     public GoblinAssault(final GoblinAssault card) {

@@ -115,6 +115,7 @@ public enum CounterType {
     TIME("time"),
     TOWER("tower"),
     TRAP("trap"),
+    UNITY("unity"),
     VELOCITY("velocity"),
     VERSE("verse"),
     VITALITY("vitality"),
@@ -123,7 +124,7 @@ public enum CounterType {
 
     private final String name;
 
-    private CounterType(String name) {
+    CounterType(String name) {
         this.name = name;
     }
 

@@ -29,7 +29,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksCreatureTriggeredAbility;
+import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -46,18 +46,18 @@ import mage.constants.CardType;
 public class WallOfTears extends CardImpl {
 
     public WallOfTears(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Wall");
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
+
         // Whenever Wall of Tears blocks a creature, return that creature to its owner's hand at end of combat.
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return that creature to its owner's hand at end of combat");
-        this.addAbility(new BlocksCreatureTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-            new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
+        this.addAbility(new BlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
     }
 
     public WallOfTears(final WallOfTears card) {

@@ -29,7 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -54,17 +54,16 @@ public class ThicketBasilisk extends CardImpl {
     }
 
     public ThicketBasilisk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.subtype.add("Basilisk");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
         // Whenever Thicket Basilisk blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
         effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, filter, false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(effect, filter, false));
     }
 
     public ThicketBasilisk(final ThicketBasilisk card) {

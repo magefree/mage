@@ -253,6 +253,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Strength in Numbers", 224, Rarity.COMMON, mage.cards.s.StrengthInNumbers.class));
         cards.add(new SetCardInfo("Stronghold Overseer", 133, Rarity.RARE, mage.cards.s.StrongholdOverseer.class));
         cards.add(new SetCardInfo("Stuffy Doll", 264, Rarity.RARE, mage.cards.s.StuffyDoll.class));
+        cards.add(new SetCardInfo("Subterranean Shambler", 178, Rarity.COMMON, mage.cards.s.SubterraneanShambler.class));
         cards.add(new SetCardInfo("Sudden Death", 134, Rarity.UNCOMMON, mage.cards.s.SuddenDeath.class));
         cards.add(new SetCardInfo("Sudden Shock", 179, Rarity.UNCOMMON, mage.cards.s.SuddenShock.class));
         cards.add(new SetCardInfo("Sudden Spoiling", 135, Rarity.RARE, mage.cards.s.SuddenSpoiling.class));
@@ -277,6 +278,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Thrill of the Hunt", 229, Rarity.COMMON, mage.cards.t.ThrillOfTheHunt.class));
         cards.add(new SetCardInfo("Thunder Totem", 265, Rarity.UNCOMMON, mage.cards.t.ThunderTotem.class));
         cards.add(new SetCardInfo("Tivadar of Thorn", 44, Rarity.RARE, mage.cards.t.TivadarOfThorn.class));
+        cards.add(new SetCardInfo("Tolarian Sentinel", 87, Rarity.COMMON, mage.cards.t.TolarianSentinel.class));
         cards.add(new SetCardInfo("Traitor's Clutch", 137, Rarity.COMMON, mage.cards.t.TraitorsClutch.class));
         cards.add(new SetCardInfo("Trespasser il-Vec", 138, Rarity.COMMON, mage.cards.t.TrespasserIlVec.class));
         cards.add(new SetCardInfo("Trickbind", 88, Rarity.RARE, mage.cards.t.Trickbind.class));

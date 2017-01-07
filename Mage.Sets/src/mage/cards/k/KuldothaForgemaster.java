@@ -48,11 +48,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KuldothaForgemaster extends CardImpl {
 
-    private static final FilterArtifactCard filterArtifactCard = new FilterArtifactCard();
-    private static final FilterControlledArtifactPermanent filterArtifactPermanent = new FilterControlledArtifactPermanent("three artifacts you control");
-
     public KuldothaForgemaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.subtype.add("Construct");
 
         this.power = new MageInt(3);
@@ -60,9 +57,9 @@ public class KuldothaForgemaster extends CardImpl {
 
         // {T}, Sacrifice three artifacts: Search your library for an artifact card and put it onto the battlefield. Then shuffle your library.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterArtifactCard)),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterArtifactCard())),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filterArtifactPermanent, false)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledArtifactPermanent("three artifacts you control"), false)));
         this.addAbility(ability);
     }
 

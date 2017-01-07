@@ -53,7 +53,7 @@ public class MorbidWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) {
+        if (condition) {
             return;
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {

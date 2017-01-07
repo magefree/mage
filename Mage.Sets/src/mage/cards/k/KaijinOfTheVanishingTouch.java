@@ -29,7 +29,7 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksCreatureTriggeredAbility;
+import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -46,19 +46,19 @@ import mage.constants.CardType;
 public class KaijinOfTheVanishingTouch extends CardImpl {
 
     public KaijinOfTheVanishingTouch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        // Defender (This creature can't attack.)
+        // Defender
         this.addAbility(DefenderAbility.getInstance());
-        // Whenever Kaijin of the Vanishing Touch blocks a creature, return that creature to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
+
+        // Whenever Kaijin of the Vanishing Touch blocks a creature, return that creature to its owner's hand at end of combat.
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return that creature to its owner's hand at end of combat");
-        this.addAbility(new BlocksCreatureTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-            new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
+        this.addAbility(new BlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
     }
 
     public KaijinOfTheVanishingTouch(final KaijinOfTheVanishingTouch card) {

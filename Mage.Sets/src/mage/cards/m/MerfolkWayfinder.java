@@ -29,20 +29,15 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,16 +45,26 @@ import mage.players.Player;
  */
 public class MerfolkWayfinder extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("all Island cards");
+
+    static {
+        filter.add(new SubtypePredicate("Island"));
+
+    }
+
     public MerfolkWayfinder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Scout");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new MerfolkWayfinderEffect()));
+
+        // When Merfolk Wayfinder enters the battlefield, reveal the top three cards of your library. Put all Island cards revealed this way into your hand and the rest on the bottom of your library in any order
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, filter, Zone.LIBRARY)));
     }
 
     public MerfolkWayfinder(final MerfolkWayfinder card) {
@@ -69,48 +74,5 @@ public class MerfolkWayfinder extends CardImpl {
     @Override
     public MerfolkWayfinder copy() {
         return new MerfolkWayfinder(this);
-    }
-}
-
-class MerfolkWayfinderEffect extends OneShotEffect {
-
-    public MerfolkWayfinderEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "reveal the top three cards of your library. Put all Island cards revealed this way into your hand and the rest on the bottom of your library in any order";
-    }
-
-    public MerfolkWayfinderEffect(final MerfolkWayfinderEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MerfolkWayfinderEffect copy() {
-        return new MerfolkWayfinderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl();
-        Cards cardsToReveal = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), 3);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cardsToReveal.add(card);
-                if (card.hasSubtype("Island", game)) {
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                } else {
-                    cards.add(card);
-                }
-            }
-        }
-        player.revealCards("Merfolk Wayfinder", cardsToReveal, game);
-        player.putCardsOnBottomOfLibrary(cards, game, source, true);
-        return true;
     }
 }

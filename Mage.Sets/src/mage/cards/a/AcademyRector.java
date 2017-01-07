@@ -29,23 +29,14 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.common.FilterEnchantmentCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -55,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
 public class AcademyRector extends CardImpl {
 
     public AcademyRector(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 
@@ -63,8 +54,12 @@ public class AcademyRector extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Academy Rector dies, you may exile it. If you do, search your library for an enchantment card, put that card onto the battlefield, then shuffle your library.
-        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new AcademyRectorEffect(), new ExileSourceFromGraveCost(), "Exile to search enchantment?"), false);
-        this.addAbility(ability);
+        this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterEnchantmentCard())),
+                new ExileSourceFromGraveCost(),
+                "Exile to search enchantment?"),
+                false
+        ));
     }
 
     public AcademyRector(final AcademyRector card) {
@@ -74,47 +69,5 @@ public class AcademyRector extends CardImpl {
     @Override
     public AcademyRector copy() {
         return new AcademyRector(this);
-    }
-}
-
-class AcademyRectorEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCard();
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
-    public AcademyRectorEffect() {
-        super(Outcome.Benefit);
-        staticText = "you may exile it. If you do, search your library for an enchantment card and put it onto the battlefield. Then shuffle your library";
-    }
-
-    public AcademyRectorEffect(final AcademyRectorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            new ExileSourceEffect().apply(game, source);
-            TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            target.setNotTarget(true);
-            controller.searchLibrary(target, game);
-            Card targetCard = game.getCard(target.getFirstTarget());
-            if (targetCard != null) {
-                controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public AcademyRectorEffect copy() {
-        return new AcademyRectorEffect(this);
     }
 }

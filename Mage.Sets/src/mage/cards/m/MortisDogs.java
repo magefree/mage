@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
 public class MortisDogs extends CardImpl {
 
     public MortisDogs(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Hound");
 
         this.power = new MageInt(2);
@@ -57,7 +57,7 @@ public class MortisDogs extends CardImpl {
         // Whenever Mortis Dogs attacks, it gets +2/+0 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
         // When Mortis Dogs dies, target player loses life equal to its power.
-        Ability ability = new DiesTriggeredAbility(new LoseLifeTargetEffect(new SourcePermanentPowerCount()));
+        Ability ability = new DiesTriggeredAbility(new LoseLifeTargetEffect(new SourcePermanentPowerCount(false)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

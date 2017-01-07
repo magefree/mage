@@ -51,23 +51,18 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SalvageTitan extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three artifacts");
-    static{
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-    
     public SalvageTitan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add("Golem");
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 
         // You may sacrifice three artifacts rather than pay Salvage Titan's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledArtifactPermanent(), true))));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledArtifactPermanent("three artifacts"), true))));
 
         // Exile three artifact cards from your graveyard: Return Salvage Titan from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(3, new FilterArtifactCard()))));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(3, new FilterArtifactCard("artifact cards")))));
     }
 
     public SalvageTitan(final SalvageTitan card) {

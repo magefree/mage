@@ -29,20 +29,17 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -51,8 +48,15 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class ArashinForemost extends CardImpl {
 
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target Warrior creature you control");
+
+    static {
+        filter.add(new SubtypePredicate("Warrior"));
+        filter.add(new AnotherPredicate());
+    }
+
     public ArashinForemost(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);
@@ -60,9 +64,11 @@ public class ArashinForemost extends CardImpl {
 
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
-        
+
         // Whenever Arashin Foremost enters the battlefield or attacks, another target Warrior creature you control gains double strike until end of turn.
-        this.addAbility(new ArashinForemostAbility());
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
+        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
     public ArashinForemost(final ArashinForemost card) {
@@ -73,50 +79,4 @@ public class ArashinForemost extends CardImpl {
     public ArashinForemost copy() {
         return new ArashinForemost(this);
     }
-}
-
-class ArashinForemostAbility extends TriggeredAbilityImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Warrior creature you control");
-
-    static {
-        filter.add(new SubtypePredicate("Warrior"));
-        filter.add(new AnotherPredicate());
-    }
-
-    public ArashinForemostAbility() {
-        super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), false);
-        this.addTarget(new TargetControlledCreaturePermanent(filter));
-    }
-
-    public ArashinForemostAbility(final ArashinForemostAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ArashinForemostAbility copy() {
-        return new ArashinForemostAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId()) ) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, another target Warrior creature you control gains double strike until end of turn";
-    }
-
 }

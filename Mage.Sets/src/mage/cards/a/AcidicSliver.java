@@ -41,8 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -51,14 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class AcidicSliver extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
     public AcidicSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);
@@ -70,7 +63,7 @@ public class AcidicSliver extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
-                        Duration.WhileOnBattlefield, filter,
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
                         "All Slivers have \"{2}, Sacrifice this permanent: This permanent deals 2 damage to target creature or player.\"")));
     }
 

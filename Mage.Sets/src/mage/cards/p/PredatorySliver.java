@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class PredatorySliver extends CardImpl {
 
     public PredatorySliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(1);
@@ -53,7 +53,7 @@ public class PredatorySliver extends CardImpl {
 
         // Sliver creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(1,1, Duration.WhileInGraveyard, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
+                new BoostControlledEffect(1, 1, Duration.WhileInGraveyard, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
     public PredatorySliver(final PredatorySliver card) {

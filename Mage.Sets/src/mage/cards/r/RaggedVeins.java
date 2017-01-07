@@ -29,7 +29,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
+import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -68,7 +68,7 @@ public class RaggedVeins extends CardImpl {
         // Whenever enchanted creature is dealt damage, its controller loses that much life.
         Effect effect = new LoseLifeTargetEffect(new NumericSetToEffectValues("that much", "damage"));
         effect.setText("its controller loses that much life");
-        this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
     }
 
     public RaggedVeins(final RaggedVeins card) {

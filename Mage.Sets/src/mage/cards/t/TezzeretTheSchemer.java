@@ -51,20 +51,16 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.command.Emblem;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author JRHerlehy
  */
 public class TezzeretTheSchemer extends CardImpl {
-
-    final static FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("artifacts you control");
 
     public TezzeretTheSchemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
@@ -77,7 +73,7 @@ public class TezzeretTheSchemer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new EtheriumCellToken()), 1));
 
         // -2: Target creature gets +X/-X until end of turn, where X is the number of artifacts you control.
-        DynamicValue count = new PermanentsOnBattlefieldCount(filter);
+        DynamicValue count = new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent("artifacts you control"));
         Effect effect = new BoostTargetEffect(count, new SignInversionDynamicValue(count), Duration.EndOfTurn);
         effect.setText("Target creature gets +X/-X until end of turn, where X is the number of artifacts you control");
         Ability ability = new LoyaltyAbility(effect, -2);
@@ -100,12 +96,6 @@ public class TezzeretTheSchemer extends CardImpl {
 
 class TezzeretTheSchemerEmblem extends Emblem {
 
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     public TezzeretTheSchemerEmblem() {
         this.setName("Emblem Tezzeret");
 
@@ -115,8 +105,7 @@ class TezzeretTheSchemerEmblem extends Emblem {
         effect = new SetPowerToughnessTargetEffect(5, 5, Duration.EndOfGame);
         effect.setText("with base power and toughness 5/5");
         ability.addEffect(effect);
-        ability.addTarget(new TargetArtifactPermanent(filter));
-
+        ability.addTarget(new TargetPermanent(new FilterControlledArtifactPermanent()));
         this.getAbilities().add(ability);
     }
 }

@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class ThorncasterSliver extends CardImpl {
 
     public ThorncasterSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);
@@ -60,8 +60,8 @@ public class ThorncasterSliver extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
-                Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Sliver","Sliver creatures"),
-                "Sliver creatures you control have \"Whenever this creature attacks, it deals 1 damage to target creature or player.\"")));
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
+                        "Sliver creatures you control have \"Whenever this creature attacks, it deals 1 damage to target creature or player.\"")));
     }
 
     public ThorncasterSliver(final ThorncasterSliver card) {

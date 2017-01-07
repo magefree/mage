@@ -105,10 +105,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
             return filter.match(permanent, game);
         }
         Spell spell = game.getStack().getSpell(id);
-        if (spell != null) {
-            return filter.match(spell, game);
-        }
-        return false;
+        return spell != null && filter.match(spell, game);
     }
 
     @Override
@@ -124,11 +121,8 @@ public class TargetSpellOrPermanent extends TargetImpl {
             }
         }
         Spell spell = game.getStack().getSpell(id);
-        if (spell != null
-                && !source.getSourceId().equals(id)) { // 114.4. A spell or ability on the stack is an illegal target for itself.
-            return filter.match(spell, game);
-        }
-        return false;
+        // 114.4. A spell or ability on the stack is an illegal target for itself.
+        return spell != null && !source.getSourceId().equals(id) && filter.match(spell, game);
     }
 
     @Override

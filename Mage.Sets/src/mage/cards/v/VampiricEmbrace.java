@@ -29,7 +29,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -71,7 +71,7 @@ public class VampiricEmbrace extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // Whenever a creature dealt damage by enchanted creature this turn dies, put a +1/+1 counter on that creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false), AttachmentType.AURA)));
     }
 
     public VampiricEmbrace(final VampiricEmbrace card) {

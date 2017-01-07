@@ -44,7 +44,7 @@ import mage.players.Player;
  */
 public class TargetCard extends TargetObject {
 
-    protected FilterCard filter;
+    protected final FilterCard filter;
 
     protected TargetCard(Zone zone) {
         this(1, 1, zone, new FilterCard());
@@ -214,10 +214,7 @@ public class TargetCard extends TargetObject {
 
     public boolean canTarget(UUID id, Cards cards, Game game) {
         Card card = cards.get(id, game);
-        if (card != null) {
-            return filter.match(card, game);
-        }
-        return false;
+        return card != null && filter.match(card, game);
     }
 
     @Override

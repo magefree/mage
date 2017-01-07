@@ -31,20 +31,15 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -52,17 +47,17 @@ import mage.util.CardUtil;
  */
 public class BanishingLight extends CardImpl {
 
-    private final static FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent an opponent controls");
+    private final static FilterNonlandPermanent filter = new FilterNonlandPermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public BanishingLight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // When Banishing Light enters the battlefield, exile target nonland permanent an opponent controls until Banishing Light leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BanishingLightExileEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()));
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
@@ -75,33 +70,5 @@ public class BanishingLight extends CardImpl {
     @Override
     public BanishingLight copy() {
         return new BanishingLight(this);
-    }
-}
-
-class BanishingLightExileEffect extends OneShotEffect {
-
-    public BanishingLightExileEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "exile target nonland permanent an opponent controls until {this} leaves the battlefield. <i>(That permanent returns under its owner's control.)</i>";
-    }
-
-    public BanishingLightExileEffect(final BanishingLightExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BanishingLightExileEffect copy() {
-        return new BanishingLightExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        // If Banishing Light leaves the battlefield before its triggered ability resolves,
-        // the target won't be exiled.
-        if (permanent != null) {
-            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName()).apply(game, source);
-        }
-        return false;
     }
 }

@@ -174,7 +174,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean canLoyaltyBeUsed(Game game);
 
-    public void resetControl();
+    void resetControl();
 
     boolean changeControllerId(UUID controllerId, Game game);
 
