@@ -146,6 +146,7 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Hordeling Outburst", 178, Rarity.UNCOMMON, mage.cards.h.HordelingOutburst.class));
         cards.add(new SetCardInfo("Icy Manipulator", 67, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("Impulse", 17, Rarity.COMMON, mage.cards.i.Impulse.class));
+        cards.add(new SetCardInfo("Incendiary Flow", 202, Rarity.SPECIAL, mage.cards.i.IncendiaryFlow.class));
         cards.add(new SetCardInfo("Isochron Scepter", 102, Rarity.UNCOMMON, mage.cards.i.IsochronScepter.class));
         cards.add(new SetCardInfo("Izzet Charm", 157, Rarity.UNCOMMON, mage.cards.i.IzzetCharm.class));
         cards.add(new SetCardInfo("Jace's Ingenuity", 134, Rarity.UNCOMMON, mage.cards.j.JacesIngenuity.class));

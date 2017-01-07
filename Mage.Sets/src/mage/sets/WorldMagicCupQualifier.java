@@ -50,6 +50,7 @@ public class WorldMagicCupQualifier extends ExpansionSet {
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abrupt Decay", 6, Rarity.RARE, mage.cards.a.AbruptDecay.class));
         cards.add(new SetCardInfo("Geist of Saint Traft", 2, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
+        cards.add(new SetCardInfo("Inkmoth Nexus", 6, Rarity.SPECIAL, mage.cards.i.InkmothNexus.class));
         cards.add(new SetCardInfo("Liliana of the Veil", 4, Rarity.MYTHIC, mage.cards.l.LilianaOfTheVeil.class));
         cards.add(new SetCardInfo("Snapcaster Mage", 5, Rarity.RARE, mage.cards.s.SnapcasterMage.class));
         cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 3, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class));

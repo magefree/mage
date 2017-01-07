@@ -57,7 +57,7 @@ public class FoundryHornet extends CardImpl {
 
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterOpponent.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     private static final String rule = "When {this} enters the battlefield, if you control a creature with a +1/+1 counter on it, creatures your opponents control get -1/-1 until end of turn.";

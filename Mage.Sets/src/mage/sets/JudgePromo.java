@@ -91,6 +91,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Hanna, Ship's Navigator", 84, Rarity.RARE, mage.cards.h.HannaShipsNavigator.class));
         cards.add(new SetCardInfo("Hermit Druid", 19, Rarity.RARE, mage.cards.h.HermitDruid.class));
         cards.add(new SetCardInfo("Imperial Recruiter", 74, Rarity.UNCOMMON, mage.cards.i.ImperialRecruiter.class));
+        cards.add(new SetCardInfo("Imperial Seal", 109, Rarity.SPECIAL, mage.cards.i.ImperialSeal.class));
         cards.add(new SetCardInfo("Intuition", 11, Rarity.RARE, mage.cards.i.Intuition.class));
         cards.add(new SetCardInfo("Island", 90, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Karador, Ghost Chieftain", 80, Rarity.MYTHIC, mage.cards.k.KaradorGhostChieftain.class));
@@ -109,6 +110,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Factory", 23, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Morphling", 53, Rarity.RARE, mage.cards.m.Morphling.class));
         cards.add(new SetCardInfo("Mountain", 92, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mystic Confluence", 109, Rarity.SPECIAL, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Natural Order", 49, Rarity.RARE, mage.cards.n.NaturalOrder.class));
         cards.add(new SetCardInfo("Nekusar, the Mindrazer", 86, Rarity.MYTHIC, mage.cards.n.NekusarTheMindrazer.class));
         cards.add(new SetCardInfo("Noble Hierarch", 66, Rarity.RARE, mage.cards.n.NobleHierarch.class));

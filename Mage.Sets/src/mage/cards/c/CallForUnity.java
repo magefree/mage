@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -61,9 +62,10 @@ public class CallForUnity extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(ability, new RevoltCondition(), ruleText));
 
         // Creatures you control get +1/+1 for each unity counter on Call for Unity.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(new CountersSourceCount(CounterType.UNITY), new CountersSourceCount(CounterType.UNITY), Duration.WhileOnBattlefield,
-                        new FilterCreaturePermanent(), false)));
+        Effect effect = new BoostControlledEffect(new CountersSourceCount(CounterType.UNITY), new CountersSourceCount(CounterType.UNITY), Duration.WhileOnBattlefield,
+                        new FilterCreaturePermanent(), false);
+        effect.setText("Creatures you control get +1/+1 for each unity counter on {this}");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public CallForUnity(final CallForUnity card) {
