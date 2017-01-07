@@ -54,7 +54,6 @@ public class BaralsExpertise extends CardImpl {
     public BaralsExpertise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 
-
         // Return up to three target artifacts and/or creatures to their owners' hands.
         getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         getSpellAbility().addTarget(new TargetPermanent(0, 3, filter, false));
