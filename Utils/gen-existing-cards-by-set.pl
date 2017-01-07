@@ -177,6 +177,8 @@ foreach $name_collectorid (sort @setCards)
             my $className = toCamelCase($cardName);
             my $setId = lc($cardName);
             $setId =~ s/^(.).*/$1/;
+            my $googleSetName = $setName;
+            $googleSetName =~ s/ /+/img;
             my $fn = "..\\Mage.Sets\\src\\mage\\cards\\$setId\\$className.java";
             my $str = "        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity." . getRarity ($cards{$cardName}{$setName}[3], $cardName) . ", mage.cards.$setId.$className.class));\n";
             my $plus_cardName = $cardName;
@@ -188,18 +190,18 @@ foreach $name_collectorid (sort @setCards)
 # Go Looking for the existing implementation..
                 if (-e $fn) {
                     $implementedButNotInSetYet {$str} = 1;
-                    $githubTask {"- [ ] Implemented but have to add to set -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$setName+mtg&source=lnms&tbm=isch)\n"} = 1;
+                    $githubTask {"- [ ] Implemented but have to add to set -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 } else { 
                     $unimplemented {"$str"} = 1;
-                    $githubTask {"- [ ] Not done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$setName+mtg&source=lnms&tbm=isch)\n"} = 1;
+                    $githubTask {"- [ ] Not done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 }
             } else {
                 if (-e $fn) {
                     $implemented {$str} = 1;
-                    $githubTask {"- [x] Done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$setName+mtg&source=lnms&tbm=isch)\n"} = 1;
+                    $githubTask {"- [x] Done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 } else { 
                     $unimplemented {$str} = 1;
-                    $githubTask {"- [ ] Not Done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$setName+mtg&source=lnms&tbm=isch)\n"} = 1;
+                    $githubTask {"- [ ] Not Done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 }
             }
         }
