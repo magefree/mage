@@ -41,15 +41,15 @@ import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect.Gende
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.g.GideonBattleForged;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.g.GideonBattleForged;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.AttackedThisCombatWatcher;
+import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 
 /**
  *
@@ -58,26 +58,26 @@ import mage.watchers.common.AttackedThisCombatWatcher;
 public class KytheonHeroOfAkros extends CardImpl {
 
     public KytheonHeroOfAkros(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        
+
         this.transformable = true;
         this.secondSideCardClazz = GideonBattleForged.class;
 
-        // At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon, 
+        // At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon,
         // then return him to the battlefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalTriggeredAbility(new EndOfCombatTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.MALE), false), 
-                new KytheonHeroOfAkrosCondition(), "At end of combat, if {this} and at least two other creatures attacked this combat, exile {this}, " +
-                        "then return him to the battlefield transformed under his owner's control."), new AttackedThisCombatWatcher());
-        
+        this.addAbility(new ConditionalTriggeredAbility(new EndOfCombatTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.MALE), false),
+                new KytheonHeroOfAkrosCondition(), "At end of combat, if {this} and at least two other creatures attacked this combat, exile {this}, "
+                + "then return him to the battlefield transformed under his owner's control."), new AttackedOrBlockedThisCombatWatcher());
+
         // {2}{W}: Kytheon gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{W}")));
-        
+
     }
 
     public KytheonHeroOfAkros(final KytheonHeroOfAkros card) {
@@ -91,16 +91,16 @@ public class KytheonHeroOfAkros extends CardImpl {
 }
 
 class KytheonHeroOfAkrosCondition implements Condition {
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (sourceObject != null) {
-            AttackedThisCombatWatcher watcher = (AttackedThisCombatWatcher) game.getState().getWatchers().get("AttackedThisCombat");
+            AttackedOrBlockedThisCombatWatcher watcher = (AttackedOrBlockedThisCombatWatcher) game.getState().getWatchers().get(AttackedOrBlockedThisCombatWatcher.class.getName());
             if (watcher != null) {
                 boolean sourceFound = false;
                 int number = 0;
-                for (MageObjectReference mor: watcher.getAttackedThisTurnCreatures()) {
+                for (MageObjectReference mor : watcher.getAttackedThisTurnCreatures()) {
                     if (mor.refersTo(sourceObject, game)) {
                         sourceFound = true;
                     } else {
