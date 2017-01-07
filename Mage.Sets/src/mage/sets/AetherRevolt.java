@@ -113,6 +113,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Deft Dismissal", 17, Rarity.UNCOMMON, mage.cards.d.DeftDismissal.class));
         cards.add(new SetCardInfo("Destructive Tampering", 78, Rarity.COMMON, mage.cards.d.DestructiveTampering.class));
         cards.add(new SetCardInfo("Disallow", 31, Rarity.RARE, mage.cards.d.Disallow.class));
+        cards.add(new SetCardInfo("Dispersal Technician", 32, Rarity.COMMON, mage.cards.d.DispersalTechnician.class));
         cards.add(new SetCardInfo("Druid of the Cowl", 106, Rarity.COMMON, mage.cards.d.DruidOfTheCowl.class));
         cards.add(new SetCardInfo("Efficient Construction", 33, Rarity.UNCOMMON, mage.cards.e.EfficientConstruction.class));
         cards.add(new SetCardInfo("Exquisite Archangel", 18, Rarity.MYTHIC, mage.cards.e.ExquisiteArchangel.class));
