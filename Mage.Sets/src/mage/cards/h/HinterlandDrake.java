@@ -30,6 +30,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -55,7 +56,9 @@ public class HinterlandDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Hinterland Drake can't block artifact creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT)));
+        Effect effect = new CantBlockCreaturesSourceEffect(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT);
+        effect.setText("{this}  can't block artifact creatures");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public HinterlandDrake(final HinterlandDrake card) {
