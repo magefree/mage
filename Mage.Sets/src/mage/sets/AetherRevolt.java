@@ -95,6 +95,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Call for Unity", 9, Rarity.RARE, mage.cards.c.CallForUnity.class));
         cards.add(new SetCardInfo("Caught in the Brights", 10, Rarity.COMMON, mage.cards.c.CaughtInTheBrights.class));
         cards.add(new SetCardInfo("Chandra's Revolution", 77, Rarity.COMMON, mage.cards.c.ChandrasRevolution.class));
+        cards.add(new SetCardInfo("Cogwork Assembler", 145, Rarity.UNCOMMON, mage.cards.c.CogworkAssembler.class));
         cards.add(new SetCardInfo("Consulate Crackdown", 11, Rarity.RARE, mage.cards.c.ConsulateCrackdown.class));
         cards.add(new SetCardInfo("Consulate Dreadnought", 146, Rarity.UNCOMMON, mage.cards.c.ConsulateDreadnought.class));
         cards.add(new SetCardInfo("Consulate Turret", 147, Rarity.COMMON, mage.cards.c.ConsulateTurret.class));
