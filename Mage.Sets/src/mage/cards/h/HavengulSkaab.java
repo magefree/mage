@@ -30,7 +30,6 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -80,8 +79,7 @@ class HavengulSkaabAbility extends TriggeredAbilityImpl {
     }
 
     public HavengulSkaabAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
-        this.addEffect(new ReturnToHandTargetEffect());
+        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
     }
 
     public HavengulSkaabAbility(final HavengulSkaabAbility ability) {

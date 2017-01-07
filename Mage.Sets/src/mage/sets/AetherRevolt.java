@@ -163,6 +163,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Natural Obsolescence", 118, Rarity.COMMON, mage.cards.n.NaturalObsolescence.class));
         cards.add(new SetCardInfo("Negate", 40, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Night Market Aeronaut", 67, Rarity.COMMON, mage.cards.n.NightMarketAeronaut.class));
+        cards.add(new SetCardInfo("Night Market Guard", 166, Rarity.COMMON, mage.cards.n.NightMarketGuard.class));
         cards.add(new SetCardInfo("Oath of Ajani", 131, Rarity.RARE, mage.cards.o.OathOfAjani.class));
         cards.add(new SetCardInfo("Ornithopter", 167, Rarity.UNCOMMON, mage.cards.o.Ornithopter.class));
         cards.add(new SetCardInfo("Outland Boar", 132, Rarity.UNCOMMON, mage.cards.o.OutlandBoar.class));
@@ -180,11 +181,13 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Quicksmith Rebel", 93, Rarity.RARE, mage.cards.q.QuicksmithRebel.class));
         cards.add(new SetCardInfo("Quicksmith Spy", 41, Rarity.RARE, mage.cards.q.QuicksmithSpy.class));
         cards.add(new SetCardInfo("Ravenous Intruder", 94, Rarity.UNCOMMON, mage.cards.r.RavenousIntruder.class));
+        cards.add(new SetCardInfo("Reckless Racer", 95, Rarity.UNCOMMON, mage.cards.r.RecklessRacer.class));
         cards.add(new SetCardInfo("Release the Gremlins", 96, Rarity.RARE, mage.cards.r.ReleaseTheGremlins.class));
         cards.add(new SetCardInfo("Renegade Map", 173, Rarity.COMMON, mage.cards.r.RenegadeMap.class));
         cards.add(new SetCardInfo("Renegade Rallier", 133, Rarity.UNCOMMON, mage.cards.r.RenegadeRallier.class));
         cards.add(new SetCardInfo("Renegade Wheelsmith", 134, Rarity.UNCOMMON, mage.cards.r.RenegadeWheelsmith.class));
         cards.add(new SetCardInfo("Renegade's Getaway", 69, Rarity.COMMON, mage.cards.r.RenegadesGetaway.class));
+        cards.add(new SetCardInfo("Reservoir Walker", 174, Rarity.COMMON, mage.cards.r.ReservoirWalker.class));
         cards.add(new SetCardInfo("Resourceful Return", 70, Rarity.COMMON, mage.cards.r.ResourcefulReturn.class));
         cards.add(new SetCardInfo("Restoration Specialist", 21, Rarity.UNCOMMON, mage.cards.r.RestorationSpecialist.class));
         cards.add(new SetCardInfo("Reverse Engineer", 42, Rarity.UNCOMMON, mage.cards.r.ReverseEngineer.class));
@@ -192,9 +195,13 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Rishkar's Expertise", 123, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 122, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rogue Refiner", 135, Rarity.UNCOMMON, mage.cards.r.RogueRefiner.class));
+        cards.add(new SetCardInfo("Salvage Scuttler", 43, Rarity.UNCOMMON, mage.cards.s.SalvageScuttler.class));
         cards.add(new SetCardInfo("Scrap Trawler", 175, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
+        cards.add(new SetCardInfo("Scrapper Champion", 97, Rarity.UNCOMMON, mage.cards.s.ScrapperChampion.class));
         cards.add(new SetCardInfo("Scrounging Bandar", 124, Rarity.COMMON, mage.cards.s.ScroungingBandar.class));
         cards.add(new SetCardInfo("Secret Salvage", 71, Rarity.RARE, mage.cards.s.SecretSalvage.class));
+        cards.add(new SetCardInfo("Servo Schematic", 176, Rarity.UNCOMMON, mage.cards.s.ServoSchematic.class));
+        cards.add(new SetCardInfo("Shielded Aether Thief", 44, Rarity.UNCOMMON, mage.cards.s.ShieldedAetherThief.class));
         cards.add(new SetCardInfo("Shipwreck Moray", 45, Rarity.COMMON, mage.cards.s.ShipwreckMoray.class));
         cards.add(new SetCardInfo("Shock", 98, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Siege Modification", 99, Rarity.UNCOMMON, mage.cards.s.SiegeModification.class));
@@ -208,6 +215,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Sram, Senior Edificer", 23, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
         cards.add(new SetCardInfo("Submerged Boneyard", 194, Rarity.COMMON, mage.cards.s.SubmergedBoneyard.class));
         cards.add(new SetCardInfo("Sweatworks Brawler", 100, Rarity.COMMON, mage.cards.s.SweatworksBrawler.class));
+        cards.add(new SetCardInfo("Take into Custody", 47, Rarity.COMMON, mage.cards.t.TakeIntoCustody.class));
         cards.add(new SetCardInfo("Tezzeret the Schemer", 137, Rarity.MYTHIC, mage.cards.t.TezzeretTheSchemer.class));
         cards.add(new SetCardInfo("Tezzeret's Betrayal", 191, Rarity.RARE, mage.cards.t.TezzeretsBetrayal.class));
         cards.add(new SetCardInfo("Tezzeret's Touch", 138, Rarity.UNCOMMON, mage.cards.t.TezzeretsTouch.class));
@@ -220,9 +228,15 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Universal Solvent", 178, Rarity.COMMON, mage.cards.u.UniversalSolvent.class));
         cards.add(new SetCardInfo("Untethered Express", 179, Rarity.UNCOMMON, mage.cards.u.UntetheredExpress.class));
         cards.add(new SetCardInfo("Vengeful Rebel", 73, Rarity.UNCOMMON, mage.cards.v.VengefulRebel.class));
+        cards.add(new SetCardInfo("Verdant Automaton", 180, Rarity.COMMON, mage.cards.v.VerdantAutomaton.class));
+        cards.add(new SetCardInfo("Walking Ballista", 181, Rarity.RARE, mage.cards.w.WalkingBallista.class));
+        cards.add(new SetCardInfo("Watchful Automaton", 182, Rarity.COMMON, mage.cards.w.WatchfulAutomaton.class));
+        cards.add(new SetCardInfo("Welder Automaton", 183, Rarity.COMMON, mage.cards.w.WelderAutomaton.class));
         cards.add(new SetCardInfo("Weldfast Engineer", 139, Rarity.UNCOMMON, mage.cards.w.WeldfastEngineer.class));
         cards.add(new SetCardInfo("Whir of Invention", 49, Rarity.RARE, mage.cards.w.WhirOfInvention.class));
+        cards.add(new SetCardInfo("Wind-King Raiders", 50, Rarity.UNCOMMON, mage.cards.w.WindKingRaiders.class));
         cards.add(new SetCardInfo("Winding Constrictor", 140, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
+        cards.add(new SetCardInfo("Wrangle", 101, Rarity.COMMON, mage.cards.w.Wrangle.class));
         cards.add(new SetCardInfo("Yahenni's Expertise", 75, Rarity.RARE, mage.cards.y.YahennisExpertise.class));
         cards.add(new SetCardInfo("Yahenni, Undying Partisan", 74, Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class));
     }
