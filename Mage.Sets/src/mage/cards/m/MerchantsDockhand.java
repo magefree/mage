@@ -145,7 +145,7 @@ class TapXTargetCost extends VariableCostImpl {
     }
 
     public TapXTargetCost() {
-        super("controlled untapped artifacts you like to tap");
+        super("controlled untapped artifacts you would like to tap");
         this.text = "Tap X untapped artifacts you control";
     }
 
