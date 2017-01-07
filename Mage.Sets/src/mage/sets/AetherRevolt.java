@@ -252,7 +252,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Welder Automaton", 183, Rarity.COMMON, mage.cards.w.WelderAutomaton.class));
         cards.add(new SetCardInfo("Weldfast Engineer", 139, Rarity.UNCOMMON, mage.cards.w.WeldfastEngineer.class));
         cards.add(new SetCardInfo("Whir of Invention", 49, Rarity.RARE, mage.cards.w.WhirOfInvention.class));
-        cards.add(new SetCardInfo("Wind-King Raiders", 50, Rarity.UNCOMMON, mage.cards.w.WindKingRaiders.class));
+        cards.add(new SetCardInfo("Wind-Kin Raiders", 50, Rarity.UNCOMMON, mage.cards.w.WindKinRaiders.class));
         cards.add(new SetCardInfo("Winding Constrictor", 140, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
         cards.add(new SetCardInfo("Wrangle", 101, Rarity.COMMON, mage.cards.w.Wrangle.class));
         cards.add(new SetCardInfo("Yahenni's Expertise", 75, Rarity.RARE, mage.cards.y.YahennisExpertise.class));

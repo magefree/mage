@@ -39,9 +39,9 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class WindKingRaiders extends CardImpl {
+public class WindKinRaiders extends CardImpl {
 
-    public WindKingRaiders(UUID ownerId, CardSetInfo setInfo) {
+    public WindKinRaiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
         this.subtype.add("Human");
@@ -56,12 +56,12 @@ public class WindKingRaiders extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WindKingRaiders(final WindKingRaiders card) {
+    public WindKinRaiders(final WindKinRaiders card) {
         super(card);
     }
 
     @Override
-    public WindKingRaiders copy() {
-        return new WindKingRaiders(this);
+    public WindKinRaiders copy() {
+        return new WindKinRaiders(this);
     }
 }
