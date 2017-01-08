@@ -65,7 +65,7 @@ import mage.target.targetpointer.FixedTarget;
 public class NimDeathmantle extends CardImpl {
 
     public NimDeathmantle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add("Equipment");
 
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
@@ -115,7 +115,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         Permanent permanent = zEvent.getTarget();
         if (permanent != null
-                && permanent.getControllerId().equals(this.controllerId)
+                && permanent.getOwnerId().equals(this.controllerId)
                 && zEvent.getToZone() == Zone.GRAVEYARD
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
                 && !(permanent instanceof PermanentToken)
