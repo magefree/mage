@@ -51,7 +51,7 @@ public class WestvaleCultLeader extends CardImpl {
     final private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
     public WestvaleCultLeader(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(0);
@@ -62,7 +62,7 @@ public class WestvaleCultLeader extends CardImpl {
         this.nightCard = true;
 
         // Westvale Cult Leader's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
 
         // At the beginning of your end step, create a 1/1 white and black Human Cleric creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new HumanClericToken()), TargetController.YOU, false));
