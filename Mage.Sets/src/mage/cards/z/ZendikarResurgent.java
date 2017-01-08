@@ -36,9 +36,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -46,14 +45,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class ZendikarResurgent extends CardImpl {
 
-    private static final FilterSpell FILTER = new FilterSpell("a creature spell");
-
-    static {
-        FILTER.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public ZendikarResurgent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}{G}");
 
         // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced. (<i>The types of mana are white, blue, black, red, green, and colorless.)</i>
         AddManaOfAnyTypeProducedEffect effect = new AddManaOfAnyTypeProducedEffect();
@@ -64,7 +57,8 @@ public class ZendikarResurgent extends CardImpl {
                 SetTargetPointer.PERMANENT));
 
         // Whenever you cast a creature spell, draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), FILTER, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 
     public ZendikarResurgent(final ZendikarResurgent card) {

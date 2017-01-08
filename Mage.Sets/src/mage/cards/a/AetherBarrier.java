@@ -38,8 +38,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -49,22 +48,12 @@ import mage.players.Player;
  */
 public class AetherBarrier extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a creature spell");
-    static {
-            filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public AetherBarrier(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Whenever a player casts a creature spell, that player sacrifices a permanent unless he or she pays {1}.
-        this.addAbility(new SpellCastAllTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new AetherBarrierEffect(),
-                filter,
-                false,
-                SetTargetPointer.PLAYER
-        ));
+        this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new AetherBarrierEffect(),
+                StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.PLAYER));
     }
 
     public AetherBarrier(final AetherBarrier card) {

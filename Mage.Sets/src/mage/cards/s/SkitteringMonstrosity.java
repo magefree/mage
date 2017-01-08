@@ -34,8 +34,7 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -43,20 +42,14 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class SkitteringMonstrosity extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public SkitteringMonstrosity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add("Horror");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
         // When you cast a creature spell, sacrifice Skittering Monstrosity.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 
     public SkitteringMonstrosity(final SkitteringMonstrosity card) {

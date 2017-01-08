@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureSpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -54,13 +54,15 @@ import mage.target.common.TargetCardInLibrary;
 public class KarametraGodOfHarvests extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Forest or Plains card");
+
     static {
         filter.add(Predicates.or(
                 new SubtypePredicate("Forest"),
                 new SubtypePredicate("Plains")));
     }
+
     public KarametraGodOfHarvests(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("God");
 
@@ -75,7 +77,7 @@ public class KarametraGodOfHarvests extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Whenever you cast a creature spell, you may search your library for a Forest or Plains card, put it onto the battlefield tapped, then shuffle your library.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), new FilterCreatureSpell("a creature spell"), true));
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), StaticFilters.FILTER_SPELL_A_CREATURE, true));
     }
 
     public KarametraGodOfHarvests(final KarametraGodOfHarvests card) {

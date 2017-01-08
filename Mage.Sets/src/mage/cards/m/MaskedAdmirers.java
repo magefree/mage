@@ -40,8 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -49,13 +48,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class MaskedAdmirers extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a creature spell");
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public MaskedAdmirers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 
@@ -68,7 +62,7 @@ public class MaskedAdmirers extends CardImpl {
         OneShotEffect effect = new ReturnToHandSourceEffect();
         effect.setText("return {this} from your graveyard to your hand");
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                Zone.GRAVEYARD, new DoIfCostPaid(effect, new ManaCostsImpl("{G}{G}")), filter, false, false));
+                Zone.GRAVEYARD, new DoIfCostPaid(effect, new ManaCostsImpl("{G}{G}")), StaticFilters.FILTER_SPELL_A_CREATURE, false, false));
     }
 
     public MaskedAdmirers(final MaskedAdmirers card) {

@@ -34,8 +34,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,17 +43,11 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Onslaught extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public Onslaught(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
 
         // Whenever you cast a creature spell, tap target creature.
-        Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
