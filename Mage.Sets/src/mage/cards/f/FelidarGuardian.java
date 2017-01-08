@@ -37,6 +37,8 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -58,7 +60,9 @@ public class FelidarGuardian extends CardImpl {
         effect.setApplyEffectsAfter();
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true));
-        ability.addTarget(new TargetControlledPermanent());
+        FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
+        filter.add(new AnotherPredicate());
+        ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
 
     }
