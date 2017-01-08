@@ -35,32 +35,25 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author hanasu
  */
 public class SkitteringSkirge extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("a creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
 
     public SkitteringSkirge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");
         this.subtype.add("Imp");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When you cast a creature spell, sacrifice Skittering Skirge.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 
     public SkitteringSkirge(final SkitteringSkirge card) {

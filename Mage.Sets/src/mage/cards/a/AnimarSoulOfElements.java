@@ -47,8 +47,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -59,13 +58,8 @@ import mage.util.CardUtil;
  */
 public class AnimarSoulOfElements extends CardImpl {
 
-    private static final FilterSpell filterSpell = new FilterSpell("a creature spell");
-    static {
-        filterSpell.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public AnimarSoulOfElements(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elemental");
 
@@ -76,7 +70,7 @@ public class AnimarSoulOfElements extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE, ObjectColor.BLACK));
 
         // Whenever you cast a creature spell, put a +1/+1 counter on Animar, Soul of Elements.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filterSpell, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_SPELL_A_CREATURE, false));
 
         // Creature spells you cast cost {1} less to cast for each +1/+1 counter on Animar.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnimarCostReductionEffect()));

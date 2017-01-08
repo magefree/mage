@@ -43,9 +43,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.command.Emblem;
 import mage.target.common.TargetCardInLibrary;
@@ -95,16 +94,10 @@ public class GarrukCallerOfBeasts extends CardImpl {
  */
 class GarrukCallerOfBeastsEmblem extends Emblem {
 
-    private static final FilterSpell filter = new FilterSpell("a creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public GarrukCallerOfBeastsEmblem() {
         this.setName("Emblem Garruk");
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterCreatureCard("creature card")), false, true, Outcome.PutCreatureInPlay);
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, filter, true, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, StaticFilters.FILTER_SPELL_A_CREATURE, true, false);
         this.getAbilities().add(ability);
     }
 }

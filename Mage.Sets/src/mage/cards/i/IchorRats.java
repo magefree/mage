@@ -25,12 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.i;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -49,8 +47,8 @@ import mage.players.Player;
  */
 public class IchorRats extends CardImpl {
 
-    public IchorRats (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+    public IchorRats(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add("Rat");
 
         this.power = new MageInt(2);
@@ -59,7 +57,7 @@ public class IchorRats extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new IchorRatsEffect(), false));
     }
 
-    public IchorRats (final IchorRats card) {
+    public IchorRats(final IchorRats card) {
         super(card);
     }
 
@@ -71,6 +69,7 @@ public class IchorRats extends CardImpl {
 }
 
 class IchorRatsEffect extends OneShotEffect {
+
     public IchorRatsEffect() {
         super(Outcome.Damage);
         staticText = "each player gets a poison counter";
@@ -82,7 +81,7 @@ class IchorRatsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.addCounters(CounterType.POISON.createInstance(), game);

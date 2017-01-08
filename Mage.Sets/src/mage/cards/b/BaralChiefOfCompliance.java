@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,7 +36,6 @@ import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -46,10 +43,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.target.Target;
-import mage.target.TargetSpell;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -58,10 +53,11 @@ import mage.watchers.Watcher;
 public class BaralChiefOfCompliance extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Instant and sorcery spells");
+
     static {
         filter.add(Predicates.or(
-            new CardTypePredicate(CardType.INSTANT),
-            new CardTypePredicate(CardType.SORCERY)
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)
         ));
     }
 
@@ -78,7 +74,7 @@ public class BaralChiefOfCompliance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever a spell or ability you control counters a spell, you may draw a card. If you do, discard a card.
-        this.addAbility(new BaralChiefOfComplianceTriggeredAbility(), new CastedSpellsWithSpellTarget());
+        this.addAbility(new BaralChiefOfComplianceTriggeredAbility());
     }
 
     public BaralChiefOfCompliance(final BaralChiefOfCompliance card) {
@@ -113,69 +109,19 @@ class BaralChiefOfComplianceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        CastedSpellsWithSpellTarget watcher = (CastedSpellsWithSpellTarget) game.getState().getWatchers().get("CastedSpellsWithSpellTarget");
-        UUID controllerIdCounter = watcher.getControllerSpell(event.getSourceId(), event.getTargetId());
-        return controllerIdCounter != null && controllerIdCounter.equals(controllerId);
+        StackObject stackObjectThatCountered = (StackObject) game.getStack().getStackObject(event.getSourceId());
+        if (stackObjectThatCountered == null) {
+            stackObjectThatCountered = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
+        }
+        if (stackObjectThatCountered != null && stackObjectThatCountered.getControllerId().equals(getControllerId())) {
+            StackObject counteredStackObject = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
+            return counteredStackObject != null && (counteredStackObject instanceof Spell);
+        }
+        return false;
     }
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever a spell or ability you control counters a spell, ").append(super.getRule()).toString();
+        return "Whenever a spell or ability you control counters a spell, " + super.getRule();
     }
-}
-
-class CastedSpellsWithSpellTarget extends Watcher {
-
-    private final Map<String, UUID> casted = new HashMap<>();
-
-    public CastedSpellsWithSpellTarget() {
-        super("CastedSpellsWithSpellTarget", WatcherScope.GAME);
-    }
-
-    public CastedSpellsWithSpellTarget(final CastedSpellsWithSpellTarget watcher) {
-        super(watcher);
-        for (Map.Entry<String, UUID> entry: watcher.casted.entrySet()) {
-            casted.put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-            if (stackObject == null) {
-                stackObject = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
-            }
-            if (stackObject != null && stackObject.getStackAbility() != null) {
-                for (Target target: stackObject.getStackAbility().getTargets()) {
-                    if (target instanceof TargetSpell && target.getFirstTarget() != null) {
-                        casted.put(getKey(target.getFirstTarget(), stackObject.getSourceId()), stackObject.getControllerId());
-                    }
-                }
-            }
-        }
-    }
-
-    private String getKey(UUID targetId, UUID sourceId) {
-        return new StringBuilder(targetId.toString()).append("_").append(sourceId.toString()).toString();
-    }
-
-    public UUID getControllerSpell(UUID sourceId, UUID counteredSpell) {
-        if (sourceId != null && counteredSpell != null){
-            return casted.get(getKey(counteredSpell, sourceId));
-        }
-        return null;
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        casted.clear();
-    }
-
-    @Override
-    public CastedSpellsWithSpellTarget copy() {
-        return new CastedSpellsWithSpellTarget(this);
-    }
-
 }

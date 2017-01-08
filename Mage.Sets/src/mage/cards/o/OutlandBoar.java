@@ -55,8 +55,8 @@ public class OutlandBoar extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
         this.subtype.add("Boar");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
         // Outland Boar can't be blocked by creatures with power 2 or less.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));

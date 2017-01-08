@@ -43,6 +43,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.common.RevoltWatcher;
 
 /**
  *
@@ -68,12 +69,12 @@ public class VengefulRebel extends CardImpl {
         // target creature an opponent controls gets -3/-3 until end of turn.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), false),
-                new RevoltCondition(),
+                RevoltCondition.getInstance(),
                 "When {this} enters the battlefield, if a permanent you controlled left the battlefield this turn, "
                 + "target creature an opponent controls gets -3/-3 until end of turn");
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.setAbilityWord(AbilityWord.REVOLT);
-        this.addAbility(ability);
+        this.addAbility(ability, new RevoltWatcher());
     }
 
     public VengefulRebel(final VengefulRebel card) {

@@ -34,6 +34,7 @@ import mage.constants.CardType;
 import mage.target.TargetStackObject;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  * @author JRHerlehy
@@ -45,7 +46,9 @@ public class Disallow extends CardImpl {
 
 
         // Counter target spell, activated ability, or triggered ability.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        Effect effect = new CounterTargetEffect();
+        effect.setText("Counter target spell, activated ability, or triggered ability");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetStackObject());
     }
 

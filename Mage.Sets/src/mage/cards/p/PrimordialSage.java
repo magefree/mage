@@ -28,14 +28,13 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -43,21 +42,15 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class PrimordialSage extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public PrimordialSage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
         // Whenever you cast a creature spell, you may draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A_CREATURE, true));
     }
 
     public PrimordialSage(final PrimordialSage card) {

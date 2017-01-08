@@ -33,6 +33,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.server.util.SystemUtil;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -105,14 +109,16 @@ public class ChatManager {
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType) {
         this.broadcast(chatId, userName, message, color, withTime, messageType, null);
     }
-    
+
     private boolean containsSwearing(String message) {
         if (message != null && message.toLowerCase().matches("^.*(anal|asshole|balls|bastard|bitch|blowjob|cock|crap|cunt|cum|damn|dick|dildo|douche|fag|fuck|idiot|moron|penis|piss|prick|pussy|rape|rapist|sex|screw|shit|slut|vagina).*$")) {
             return true;
         }
         return false;
     }
-
+    
+    Pattern cardNamePattern = Pattern.compile("\\[(.*?)\\]");
+    
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
@@ -127,20 +133,51 @@ public class ChatManager {
             }
 
             if (!messageType.equals(MessageType.GAME)) {
-
+                User user = UserManager.getInstance().getUserByName(userName);
                 if (message != null && userName != null && !userName.equals("")) {
+
                     if (message.equals(userMessages.get(userName))) {
                         // prevent identical messages
+                        String informUser = "Your message appears to be identical to your last message";
+                        chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
                         return;
                     }
+
+                    String messageToCheck = message;
+                    Matcher matchPattern = cardNamePattern.matcher(message);
+                    while (matchPattern.find()) {
+                        String cardName = matchPattern.group(1);
+                        CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);
+                        if (cardInfo != null) {
+                            String colour = "silver";
+                            if (cardInfo.getCard().getColor(null).isMulticolored()) {
+                                colour = "yellow";
+                            } else if (cardInfo.getCard().getColor(null).isWhite()) {
+                                colour = "white";
+                            } else if (cardInfo.getCard().getColor(null).isBlue()) {
+                                colour = "blue";
+                            } else if (cardInfo.getCard().getColor(null).isBlack()) {
+                                colour = "black";
+                            } else if (cardInfo.getCard().getColor(null).isRed()) {
+                                colour = "red";
+                            } else if (cardInfo.getCard().getColor(null).isGreen()) {
+                                colour = "green";
+                            }
+                            messageToCheck = messageToCheck.replaceFirst("\\[" + cardName + "\\]", "card");
+                            String displayCardName = "<font bgcolor=orange color=" + colour + ">" + cardName + "</font>";
+                            message = message.replaceFirst("\\[" + cardName + "\\]", displayCardName);
+                        }
+                    }
+
                     userMessages.put(userName, message);
-                    if (containsSwearing(message)) {
+                    if (containsSwearing(messageToCheck)) {
+                        String informUser = "Your message appears to contain profanity";
+                        chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
                         return;
                     }
                 }
 
                 if (messageType.equals(MessageType.TALK)) {
-                    User user = UserManager.getInstance().getUserByName(userName);
                     if (user != null) {
                         if (user.getChatLockedUntil() != null) {
                             if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) > 0) {
@@ -163,7 +200,8 @@ public class ChatManager {
             + "<br/>\\history or \\h [username] - shows the history of a player"
             + "<br/>\\me - shows the history of the current player"
             + "<br/>\\list or \\l - Show a list of commands"
-            + "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name";
+            + "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name"
+            + "<br/>[Card Name] - Show a highlighted card name";
 
     private boolean performUserCommand(User user, String message, UUID chatId, boolean doError) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);

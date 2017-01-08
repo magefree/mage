@@ -30,8 +30,9 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.common.EndOfCombatTriggeredAbility;
+import mage.abilities.condition.common.AttackedOrBlockedThisCombatSourceCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
@@ -42,6 +43,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 
 /**
  *
@@ -57,7 +59,11 @@ public class DaredevilDragster extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At end of combat, if Daredevil Dragster attacked or blocked this combat, put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new DaredevilDragsterEffect(), false));
+        this.addAbility(new ConditionalTriggeredAbility(
+                new EndOfCombatTriggeredAbility(new DaredevilDragsterEffect(), false),
+                new AttackedOrBlockedThisCombatSourceCondition(),
+                "At end of combat, if {this} attacked or blocked this combat, put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards."),
+                new AttackedOrBlockedThisCombatWatcher());
 
         // Crew 2
         this.addAbility(new CrewAbility(2));
@@ -77,7 +83,7 @@ class DaredevilDragsterEffect extends OneShotEffect {
 
     public DaredevilDragsterEffect() {
         super(Outcome.Damage);
-        this.staticText = "At end of combat, if {this} attacked or blocked this combat, put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards";
+        this.staticText = "put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards";
     }
 
     public DaredevilDragsterEffect(final DaredevilDragsterEffect effect) {
@@ -91,38 +97,11 @@ class DaredevilDragsterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new DaredevilDragsterEffect2());                
-            game.addDelayedTriggeredAbility(ability, source);
-        }
-        return false;
-    }
-}
-
-class DaredevilDragsterEffect2 extends OneShotEffect {
-
-    public DaredevilDragsterEffect2() {
-        super(Outcome.Damage);
-        this.staticText = "put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards";
-    }
-
-    public DaredevilDragsterEffect2(final DaredevilDragsterEffect2 effect) {
-        super(effect);
-    }
-
-    @Override
-    public DaredevilDragsterEffect2 copy() {
-        return new DaredevilDragsterEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null) {
             permanent.addCounters(CounterType.VELOCITY.createInstance(), source, game);
-            if (permanent != null && permanent.getCounters(game).getCount(CounterType.VELOCITY) >= 2) {
+            if (permanent.getCounters(game).getCount(CounterType.VELOCITY) >= 2) {
                 permanent.sacrifice(source.getSourceId(), game);
                 controller.drawCards(2, game);
             }

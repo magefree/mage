@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,19 +53,17 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class PrimevalBounty extends CardImpl {
 
-    private static final FilterSpell filterCreature = new FilterSpell("a creature spell");
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
+
     static {
-        filterCreature.add(new CardTypePredicate(CardType.CREATURE));
         filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
     public PrimevalBounty(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
 
         // Whenever you cast a creature spell, create a 3/3 green Beast creature token.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new BeastToken()), filterCreature, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new BeastToken()), StaticFilters.FILTER_SPELL_A_CREATURE, false));
 
         // Whenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(3));
@@ -72,7 +71,7 @@ public class PrimevalBounty extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
-        // Whenever a land enters the battlefield under your control, you gain 3 life. 
+        // Whenever a land enters the battlefield under your control, you gain 3 life.
         effect = new GainLifeEffect(3);
         ability = new EntersBattlefieldControlledTriggeredAbility(effect, new FilterLandPermanent("a land"));
         this.addAbility(ability);

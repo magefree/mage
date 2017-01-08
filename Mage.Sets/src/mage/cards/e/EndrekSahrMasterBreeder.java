@@ -41,9 +41,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.Filter;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.ThrullToken;
 import mage.game.stack.Spell;
@@ -55,14 +54,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class EndrekSahrMasterBreeder extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public EndrekSahrMasterBreeder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
@@ -71,7 +64,7 @@ public class EndrekSahrMasterBreeder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast a creature spell, create X 1/1 black Thrull creature tokens, where X is that spell's converted mana cost.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new EndrekSahrMasterBreederEffect(), filter, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new EndrekSahrMasterBreederEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false, true));
         // When you control seven or more Thrulls, sacrifice Endrek Sahr, Master Breeder.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
                 new FilterCreaturePermanent("Thrull", "seven or more Thrulls"), Filter.ComparisonType.GreaterThan, 6,

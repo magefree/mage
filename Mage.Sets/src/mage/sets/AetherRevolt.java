@@ -116,6 +116,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Dispersal Technician", 32, Rarity.COMMON, mage.cards.d.DispersalTechnician.class));
         cards.add(new SetCardInfo("Druid of the Cowl", 106, Rarity.COMMON, mage.cards.d.DruidOfTheCowl.class));
         cards.add(new SetCardInfo("Efficient Construction", 33, Rarity.UNCOMMON, mage.cards.e.EfficientConstruction.class));
+        cards.add(new SetCardInfo("Embraal Gear-Smasher", 79, Rarity.COMMON, mage.cards.e.EmbraalGearSmasher.class));
         cards.add(new SetCardInfo("Enraged Giant", 80, Rarity.UNCOMMON, mage.cards.e.EnragedGiant.class));
         cards.add(new SetCardInfo("Exquisite Archangel", 18, Rarity.MYTHIC, mage.cards.e.ExquisiteArchangel.class));
         cards.add(new SetCardInfo("Fatal Push", 57, Rarity.UNCOMMON, mage.cards.f.FatalPush.class));
@@ -134,6 +135,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Gonti's Machinations", 63, Rarity.UNCOMMON, mage.cards.g.GontisMachinations.class));
         cards.add(new SetCardInfo("Greenbelt Rampager", 107, Rarity.RARE, mage.cards.g.GreenbeltRampager.class));
         cards.add(new SetCardInfo("Greenwheel Liberator", 108, Rarity.RARE, mage.cards.g.GreenwheelLiberator.class));
+        cards.add(new SetCardInfo("Gremlin Infestation", 83, Rarity.UNCOMMON, mage.cards.g.GremlinInfestation.class));
         cards.add(new SetCardInfo("Heart of Kiran", 153, Rarity.MYTHIC, mage.cards.h.HeartOfKiran.class));
         cards.add(new SetCardInfo("Herald of Anguish", 64, Rarity.MYTHIC, mage.cards.h.HeraldOfAnguish.class));
         cards.add(new SetCardInfo("Heroic Intervention", 109, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
@@ -141,6 +143,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Stockpile", 129, Rarity.UNCOMMON, mage.cards.h.HiddenStockpile.class));
         cards.add(new SetCardInfo("Highspire Infusion", 111, Rarity.COMMON, mage.cards.h.HighspireInfusion.class));
         cards.add(new SetCardInfo("Hinterland Drake", 34, Rarity.COMMON, mage.cards.h.HinterlandDrake.class));
+        cards.add(new SetCardInfo("Hope of Ghirapur", 154, Rarity.RARE, mage.cards.h.HopeOfGhirapur.class));
         cards.add(new SetCardInfo("Hungry Flames", 84, Rarity.UNCOMMON, mage.cards.h.HungryFlames.class));
         cards.add(new SetCardInfo("Ice Over", 35, Rarity.COMMON, mage.cards.i.IceOver.class));
         cards.add(new SetCardInfo("Illusionist's Stratagem", 36, Rarity.UNCOMMON, mage.cards.i.IllusionistsStratagem.class));
@@ -149,6 +152,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Implement of Ferocity", 157, Rarity.COMMON, mage.cards.i.ImplementOfFerocity.class));
         cards.add(new SetCardInfo("Implement of Improvement", 158, Rarity.COMMON, mage.cards.i.ImplementOfImprovement.class));
         cards.add(new SetCardInfo("Implement of Malice", 159, Rarity.COMMON, mage.cards.i.ImplementOfMalice.class));
+        cards.add(new SetCardInfo("Indomitable Creativity", 85, Rarity.MYTHIC, mage.cards.i.IndomitableCreativity.class));
         cards.add(new SetCardInfo("Inspiring Roar", 186, Rarity.COMMON, mage.cards.i.InspiringRoar.class));
         cards.add(new SetCardInfo("Inspiring Statuary", 160, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
         cards.add(new SetCardInfo("Invigorated Rampage", 86, Rarity.UNCOMMON, mage.cards.i.InvigoratedRampage.class));
@@ -165,6 +169,8 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Runner", 90, Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
         cards.add(new SetCardInfo("Maulfist Revolutionary", 115, Rarity.UNCOMMON, mage.cards.m.MaulfistRevolutionary.class));
         cards.add(new SetCardInfo("Maverick Thopterist", 130, Rarity.UNCOMMON, mage.cards.m.MaverickThopterist.class));
+        cards.add(new SetCardInfo("Mechanized Production", 38, Rarity.MYTHIC, mage.cards.m.MechanizedProduction.class));
+        cards.add(new SetCardInfo("Merchant's Dockhand", 163, Rarity.RARE, mage.cards.m.MerchantsDockhand.class));
         cards.add(new SetCardInfo("Metallic Mimic", 164, Rarity.RARE, mage.cards.m.MetallicMimic.class));
         cards.add(new SetCardInfo("Metallic Rebuke", 39, Rarity.COMMON, mage.cards.m.MetallicRebuke.class));
         cards.add(new SetCardInfo("Midnight Entourage", 66, Rarity.RARE, mage.cards.m.MidnightEntourage.class));
@@ -229,6 +235,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Take into Custody", 47, Rarity.COMMON, mage.cards.t.TakeIntoCustody.class));
         cards.add(new SetCardInfo("Tezzeret the Schemer", 137, Rarity.MYTHIC, mage.cards.t.TezzeretTheSchemer.class));
         cards.add(new SetCardInfo("Tezzeret's Betrayal", 191, Rarity.RARE, mage.cards.t.TezzeretsBetrayal.class));
+        cards.add(new SetCardInfo("Tezzeret's Simulacrum", 193, Rarity.UNCOMMON, mage.cards.t.TezzeretsSimulacrum.class));
         cards.add(new SetCardInfo("Tezzeret's Touch", 138, Rarity.UNCOMMON, mage.cards.t.TezzeretsTouch.class));
         cards.add(new SetCardInfo("Tezzeret, Master of Metal", 190, Rarity.MYTHIC, mage.cards.t.TezzeretMasterOfMetal.class));
         cards.add(new SetCardInfo("Thopter Arrest", 25, Rarity.UNCOMMON, mage.cards.t.ThopterArrest.class));
@@ -245,7 +252,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Welder Automaton", 183, Rarity.COMMON, mage.cards.w.WelderAutomaton.class));
         cards.add(new SetCardInfo("Weldfast Engineer", 139, Rarity.UNCOMMON, mage.cards.w.WeldfastEngineer.class));
         cards.add(new SetCardInfo("Whir of Invention", 49, Rarity.RARE, mage.cards.w.WhirOfInvention.class));
-        cards.add(new SetCardInfo("Wind-King Raiders", 50, Rarity.UNCOMMON, mage.cards.w.WindKingRaiders.class));
+        cards.add(new SetCardInfo("Wind-Kin Raiders", 50, Rarity.UNCOMMON, mage.cards.w.WindKinRaiders.class));
         cards.add(new SetCardInfo("Winding Constrictor", 140, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
         cards.add(new SetCardInfo("Wrangle", 101, Rarity.COMMON, mage.cards.w.Wrangle.class));
         cards.add(new SetCardInfo("Yahenni's Expertise", 75, Rarity.RARE, mage.cards.y.YahennisExpertise.class));

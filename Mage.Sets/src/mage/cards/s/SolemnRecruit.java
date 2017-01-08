@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.watchers.common.RevoltWatcher;
 
 /**
  *
@@ -46,8 +47,8 @@ import mage.counters.CounterType;
  */
 public class SolemnRecruit extends CardImpl {
 
-    private static final String ruleText = "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, " +
-        "put a +1/+1 counter on {this}.";
+    private static final String ruleText = "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, "
+            + "put a +1/+1 counter on {this}.";
 
     public SolemnRecruit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
@@ -62,7 +63,7 @@ public class SolemnRecruit extends CardImpl {
 
         // <i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a +1/+1 counter on Solemn Recruit.
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new RevoltCondition(), ruleText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, RevoltCondition.getInstance(), ruleText), new RevoltWatcher());
     }
 
     public SolemnRecruit(final SolemnRecruit card) {

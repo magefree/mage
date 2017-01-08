@@ -11,6 +11,7 @@ import mage.filter.common.FilterArtifactCreaturePermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterCreatureSpell;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -31,6 +32,8 @@ public class StaticFilters {
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_GOBLINS = new FilterCreaturePermanent("Goblin", "Goblin creatures");
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_SLIVERS = new FilterCreaturePermanent("Sliver", "Sliver creatures");
+
+    public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");
 
     static {
         FILTER_PERMANENT_ARTIFACT_OR_CREATURE.add(Predicates.or(

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RishkarPeemaRenegade extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a counter on it");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with a counter on it");
 
     static {
         filter.add(new CounterAnyPredicate());

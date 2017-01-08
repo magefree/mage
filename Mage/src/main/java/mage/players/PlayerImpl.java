@@ -1856,7 +1856,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             int finalAmount = amount;
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
-                eventCounter.remove(amount - 1);
+                eventCounter.remove(eventCounter.getCount() - 1);
                 GameEvent event = GameEvent.getEvent(EventType.ADD_COUNTER, playerId, null, playerId, counter.getName(), 1);
                 if (!game.replaceEvent(event)) {
                     getCounters().addCounter(eventCounter);

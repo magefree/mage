@@ -37,8 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.Token;
 
 /**
@@ -47,20 +46,13 @@ import mage.game.permanent.token.Token;
  */
 public class HalcyonGlaze extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public HalcyonGlaze(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
 
         // Whenever you cast a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying in addition to its other types until end of turn.
         Effect effect = new BecomesCreatureSourceEffect(new HalcyonGlazeToken(), "enchantment", Duration.EndOfTurn);
         effect.setText("Whenever you cast a creature spell, {this} becomes a 4/4 Illusion creature with flying in addition to its other types until end of turn");
-        this.addAbility(new SpellCastControllerTriggeredAbility(effect, filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 
     public HalcyonGlaze(final HalcyonGlaze card) {
@@ -74,6 +66,7 @@ public class HalcyonGlaze extends CardImpl {
 }
 
 class HalcyonGlazeToken extends Token {
+
     HalcyonGlazeToken() {
         super("", "4/4 Illusion creature with flying");
         cardType.add(CardType.CREATURE);
