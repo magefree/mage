@@ -7,14 +7,13 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import org.apache.log4j.Logger;
-
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -56,6 +55,14 @@ public enum ExpansionRepository {
     public void add(ExpansionInfo expansion) {
         try {
             expansionDao.create(expansion);
+        } catch (SQLException ex) {
+            logger.error(ex);
+        }
+    }
+
+    public void update(ExpansionInfo expansion) {
+        try {
+            expansionDao.update(expansion);
         } catch (SQLException ex) {
             logger.error(ex);
         }

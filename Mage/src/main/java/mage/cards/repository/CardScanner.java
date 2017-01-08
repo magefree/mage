@@ -25,12 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mage.cards.*;
 import org.apache.log4j.Logger;
 
@@ -53,7 +51,18 @@ public class CardScanner {
         List<CardInfo> cardsToAdd = new ArrayList<>();
 
         for (ExpansionSet set : Sets.getInstance().values()) {
-            ExpansionRepository.instance.add(new ExpansionInfo(set));
+            ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(set.getCode());
+            if (expansionInfo == null) {
+                ExpansionRepository.instance.add(new ExpansionInfo(set));
+            } else if (!expansionInfo.name.equals(set.getName())
+                    || !expansionInfo.code.equals(set.getCode())
+                    || (expansionInfo.blockName == null ? set.getBlockName() != null : !expansionInfo.blockName.equals(set.getBlockName()))
+                    || !expansionInfo.releaseDate.equals(set.getReleaseDate())
+                    || !expansionInfo.type.equals(set.getSetType())
+                    || expansionInfo.boosters != set.hasBoosters()
+                    || expansionInfo.basicLands != set.hasBasicLands()) {
+                ExpansionRepository.instance.update(expansionInfo);
+            }
         }
         ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());
 
@@ -62,7 +71,7 @@ public class CardScanner {
                 if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber()) == null) {
                     Card card = CardImpl.createCard(setInfo.getCardClass(),
                             new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(),
-                                            setInfo.getRarity(), setInfo.getGraphicInfo()));
+                                    setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card != null) {
                         cardsToAdd.add(new CardInfo(card));
                         if (card instanceof SplitCard) {
