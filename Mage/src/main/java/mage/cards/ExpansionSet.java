@@ -46,7 +46,7 @@ import mage.util.RandomUtil;
  */
 public abstract class ExpansionSet implements Serializable {
 
-    public class SetCardInfo implements Serializable {
+    public static class SetCardInfo implements Serializable {
 
         private final String name;
         private final String cardNumber;

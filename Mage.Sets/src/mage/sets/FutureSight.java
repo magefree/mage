@@ -146,6 +146,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Minions' Murmurs", 71, Rarity.UNCOMMON, mage.cards.m.MinionsMurmurs.class));
         cards.add(new SetCardInfo("Mistmeadow Skulk", 27, Rarity.UNCOMMON, mage.cards.m.MistmeadowSkulk.class));
         cards.add(new SetCardInfo("Molten Disaster", 102, Rarity.RARE, mage.cards.m.MoltenDisaster.class));
+        cards.add(new SetCardInfo("Muraganda Petroglyphs", 146, Rarity.RARE, mage.cards.m.MuragandaPetroglyphs.class));
         cards.add(new SetCardInfo("Mystic Speculation", 41, Rarity.UNCOMMON, mage.cards.m.MysticSpeculation.class));
         cards.add(new SetCardInfo("Nacatl War-Pride", 147, Rarity.UNCOMMON, mage.cards.n.NacatlWarPride.class));
         cards.add(new SetCardInfo("Narcomoeba", 54, Rarity.UNCOMMON, mage.cards.n.Narcomoeba.class));
