@@ -127,20 +127,23 @@ public class ChatManager {
             }
 
             if (!messageType.equals(MessageType.GAME)) {
-
+                User user = UserManager.getInstance().getUserByName(userName);
                 if (message != null && userName != null && !userName.equals("")) {
                     if (message.equals(userMessages.get(userName))) {
                         // prevent identical messages
+                        String informUser = "Your message appears to be identical to your last message";
+                        chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
                         return;
                     }
                     userMessages.put(userName, message);
                     if (containsSwearing(message)) {
+                        String informUser = "Your message appears to contain profanity";
+                        chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
                         return;
                     }
                 }
 
                 if (messageType.equals(MessageType.TALK)) {
-                    User user = UserManager.getInstance().getUserByName(userName);
                     if (user != null) {
                         if (user.getChatLockedUntil() != null) {
                             if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) > 0) {
