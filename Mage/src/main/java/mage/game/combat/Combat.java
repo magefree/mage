@@ -938,11 +938,11 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     Set<UUID> blockedSet = mustBeBlockedByAtLeastOne.get(blockedAttackerId);
                                     Set<UUID> toBlockSet = mustBeBlockedByAtLeastOne.get(toBeBlockedCreatureId);
                                     if (toBlockSet == null) {
-                                        // This should never happen.â€¨
+                                        // This should never happen.
                                         return null;
                                     } else if (toBlockSet.containsAll(blockedSet)) {
-                                        // the creature already blocks alone a creature that has to be blocked by at least oneâ€¨
-                                        // and has more possible blockers, so this is okâ€¨
+                                        // the creature already blocks alone a creature that has to be blocked by at least one
+                                        // and has more possible blockers, so this is ok
                                         return null;
                                     }
 
@@ -983,7 +983,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     for (Ability ability : entry.getValue()) {
                         if (!effect.canBlockCheckAfter(ability, game)) {
                             if (controller.isHuman()) {
-                                game.informPlayer(controller, blockingCreature.getLogName() + " can't block this way.");
+                                game.informPlayer(controller, new StringBuilder(blockingCreature.getLogName()).append(" can't block this way.").toString());
                                 return false;
                             } else {
                                 // remove blocking creatures for AI
@@ -1003,7 +1003,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     for (Ability ability : entry.getValue()) {
                         if (!effect.canBeBlockedCheckAfter(attackingCreature, ability, game)) {
                             if (controller.isHuman()) {
-                                game.informPlayer(controller, attackingCreature.getLogName() + " can't be blocked this way.");
+                                game.informPlayer(controller, new StringBuilder(attackingCreature.getLogName()).append(" can't be blocked this way.").toString());
                                 return false;
                             } else {
                                 // remove blocking creatures for AI
@@ -1030,7 +1030,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             switch (game.getAttackOption()) {
                 case LEFT:
                     players = game.getState().getPlayerList(attackingPlayerId);
-                    while (attackingPlayer.isInGame()) {
+                    while (true && attackingPlayer.isInGame()) {
                         Player opponent = players.getNext(game);
                         if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
                             addDefender(opponent.getId(), game);
@@ -1040,7 +1040,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     break;
                 case RIGHT:
                     players = game.getState().getPlayerList(attackingPlayerId);
-                    while (attackingPlayer.isInGame()) {
+                    while (true && attackingPlayer.isInGame()) {
                         Player opponent = players.getPrevious(game);
                         if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
                             addDefender(opponent.getId(), game);

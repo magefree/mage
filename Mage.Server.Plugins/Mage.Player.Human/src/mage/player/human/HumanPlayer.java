@@ -52,6 +52,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.RequirementEffect;
+import mage.abilities.keyword.BandingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -1023,6 +1024,39 @@ public class HumanPlayer extends PlayerImpl {
                         removeAttackerIfPossible(game, attacker);
                     }
                 }
+            }
+        }
+        //declare possibleBanders thing to store attackerId by defenderId by boolean hasBanding
+        for(UUID attackerId : game.getCombat().getAttackers()) {
+            Permanent attacker = game.getPermanent(attackerId);
+            for(UUID defenderId : game.getCombat().getDefenders()) {
+                Player defender = game.getPlayer(defenderId);
+                if(attacker != null && defender != null && game.getCombat().getDefenderId(attackerId).equals(defenderId)) {
+                    if(attacker.getAbilities().contains(BandingAbility.getInstance())) {
+                        //store attacker in thing with banding true
+                    } else {
+                        //store attacker in thing with banding false
+                    }
+                }
+            }
+        }
+        for(/*each defender in possibleBanders with attacker(s) that have banding*/) {
+            while(!abort) {
+                //options are possibleBanders for this defender and a button to create the band group as a method in combat.java.
+                //to be used in combat damage and determine who gets relevent damage assignment
+                game.fireSelectEvent(playerId, "Select attackers for a band", options);
+                waitForResponse(game);
+                
+                //If a creature without banding is selected to be in a band and a creature without banding is already selected
+                //inform the player only one creature without banding can be in a band.
+                
+                //if player presses button to create a band if there is a least one creature with banding in the selected creatures
+                //then execute code to create the band else inform the player that there must be at least one creature with banding
+                
+                //if a creature already in a band is selected when player is selecting to create another band
+                //inform player that it is already in a band.
+                
+                //player should be able to undo all bands created so far to start over or just undo the active selection to redo the active selection
             }
         }
     }

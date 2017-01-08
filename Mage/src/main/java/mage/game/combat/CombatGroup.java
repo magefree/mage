@@ -257,16 +257,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             if (canDamage(blocker, first)) {
                 if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
                     attacker.markDamage(blockerDamage, blocker.getId(), game, true, true);
-                } else {
-                    for(UUID attackerId : attackerOrder) {
-                        if(blockerDamage > 0){
-                            attacker = game.getPermanent(attackerId);
-                            attacker.markDamage(blockerDamage, blocker.getId(), game, true, true);
-                            blockerDamage = blockerDamage - attacker.getToughness().getValue();
-                        } else {
-                            break;
-                        }
-                    }
                 }
             }
         }   
@@ -470,7 +460,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         Player player = game.getPlayer(playerId);
         List<UUID> blockerList = new ArrayList<>(blockers);
         blockerOrder.clear();
-        while (player.canRespond()) {
+        while (true && player.canRespond()) {
             if (blockerList.size() == 1) {
                 blockerOrder.add(blockerList.get(0));
                 break;
