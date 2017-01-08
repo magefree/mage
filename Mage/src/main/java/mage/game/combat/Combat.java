@@ -983,7 +983,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     for (Ability ability : entry.getValue()) {
                         if (!effect.canBlockCheckAfter(ability, game)) {
                             if (controller.isHuman()) {
-                                game.informPlayer(controller, new StringBuilder(blockingCreature.getLogName()).append(" can't block this way.").toString());
+                                game.informPlayer(controller, blockingCreature.getLogName() + " can't block this way.");
                                 return false;
                             } else {
                                 // remove blocking creatures for AI
@@ -1003,7 +1003,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     for (Ability ability : entry.getValue()) {
                         if (!effect.canBeBlockedCheckAfter(attackingCreature, ability, game)) {
                             if (controller.isHuman()) {
-                                game.informPlayer(controller, new StringBuilder(attackingCreature.getLogName()).append(" can't be blocked this way.").toString());
+                                game.informPlayer(controller, attackingCreature.getLogName() + " can't be blocked this way.");
                                 return false;
                             } else {
                                 // remove blocking creatures for AI
@@ -1030,7 +1030,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             switch (game.getAttackOption()) {
                 case LEFT:
                     players = game.getState().getPlayerList(attackingPlayerId);
-                    while (true && attackingPlayer.isInGame()) {
+                    while (attackingPlayer.isInGame()) {
                         Player opponent = players.getNext(game);
                         if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
                             addDefender(opponent.getId(), game);
@@ -1040,7 +1040,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     break;
                 case RIGHT:
                     players = game.getState().getPlayerList(attackingPlayerId);
-                    while (true && attackingPlayer.isInGame()) {
+                    while (attackingPlayer.isInGame()) {
                         Player opponent = players.getPrevious(game);
                         if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
                             addDefender(opponent.getId(), game);
