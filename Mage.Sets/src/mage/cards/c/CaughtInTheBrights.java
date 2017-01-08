@@ -41,10 +41,11 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -57,6 +58,7 @@ public class CaughtInTheBrights extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vehicle you control");
 
     static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Vehicle"));
     }
 
