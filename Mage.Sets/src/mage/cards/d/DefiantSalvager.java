@@ -38,7 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -48,10 +49,10 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class DefiantSalvager extends CardImpl {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an artifact or creature");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
     }
 
     public DefiantSalvager(UUID ownerId, CardSetInfo setInfo) {
