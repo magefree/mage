@@ -62,7 +62,9 @@ public class Modern extends Constructed {
         banned.add("Dig Through Time");
         banned.add("Dread Return");
         banned.add("Eye of Ugin");
+        banned.add("Gitaxian Probe");
         banned.add("Glimpse of Nature");
+        banned.add("Golgari Grave-Troll");
         banned.add("Great Furnace");
         banned.add("Green Sun's Zenith");
         banned.add("Hypergenesis");
