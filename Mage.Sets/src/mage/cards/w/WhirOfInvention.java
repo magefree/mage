@@ -52,8 +52,7 @@ import mage.target.common.TargetCardInLibrary;
 public class WhirOfInvention extends CardImpl {
 
     public WhirOfInvention(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{U}{U}");
 
         // Improvise <i>(Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)
         addAbility(new ImproviseAbility());
