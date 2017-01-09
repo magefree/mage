@@ -110,7 +110,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Factory", 23, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Morphling", 53, Rarity.RARE, mage.cards.m.Morphling.class));
         cards.add(new SetCardInfo("Mountain", 92, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mystic Confluence", 109, Rarity.SPECIAL, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mystic Confluence", 109, Rarity.SPECIAL, mage.cards.m.MysticConfluence.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Natural Order", 49, Rarity.RARE, mage.cards.n.NaturalOrder.class));
         cards.add(new SetCardInfo("Nekusar, the Mindrazer", 86, Rarity.MYTHIC, mage.cards.n.NekusarTheMindrazer.class));
         cards.add(new SetCardInfo("Noble Hierarch", 66, Rarity.RARE, mage.cards.n.NobleHierarch.class));
