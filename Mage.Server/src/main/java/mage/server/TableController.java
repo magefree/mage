@@ -90,7 +90,7 @@ public class TableController {
     private Tournament tournament;
 
     private ScheduledFuture<?> futureTimeout;
-    protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
+    protected static final ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
     public TableController(UUID roomId, UUID userId, MatchOptions options) {
         this.userId = userId;
@@ -128,20 +128,17 @@ public class TableController {
 
     private void init() {
         match.addTableEventListener(
-                new Listener<TableEvent>() {
-            @Override
-            public void event(TableEvent event) {
-                try {
-                    switch (event.getEventType()) {
-                        case SIDEBOARD:
-                            sideboard(event.getPlayerId(), event.getDeck());
-                            break;
+                (Listener<TableEvent>) event -> {
+                    try {
+                        switch (event.getEventType()) {
+                            case SIDEBOARD:
+                                sideboard(event.getPlayerId(), event.getDeck());
+                                break;
+                        }
+                    } catch (MageException ex) {
+                        logger.fatal("Table event listener error", ex);
                     }
-                } catch (MageException ex) {
-                    logger.fatal("Table event listener error", ex);
                 }
-            }
-        }
         );
     }
 
@@ -814,12 +811,7 @@ public class TableController {
         cancelTimeout();
         if (seconds > 0) {
             futureTimeout = timeoutExecutor.schedule(
-                    new Runnable() {
-                @Override
-                public void run() {
-                    autoSideboard();
-                }
-            },
+                    () -> autoSideboard(),
                     seconds, TimeUnit.SECONDS
             );
         }

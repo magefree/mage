@@ -64,7 +64,7 @@ import org.apache.log4j.Logger;
  */
 public class TableManager {
 
-    protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected static final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
     // protected static ScheduledExecutorService expireExecutor = ThreadExecutor.getInstance().getExpireExecutor();
     
@@ -87,14 +87,11 @@ public class TableManager {
     }
 
     private TableManager() {
-        expireExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    checkTableHealthState();
-                } catch(Exception ex) {
-                    logger.fatal("Check table health state job error:", ex);
-                }
+        expireExecutor.scheduleAtFixedRate(() -> {
+            try {
+                checkTableHealthState();
+            } catch(Exception ex) {
+                logger.fatal("Check table health state job error:", ex);
             }
         }, EXPIRE_CHECK_PERIOD, EXPIRE_CHECK_PERIOD, TimeUnit.MINUTES);
     }

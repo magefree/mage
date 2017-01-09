@@ -49,14 +49,14 @@ import java.util.concurrent.TimeUnit;
 public class TournamentSession {
     protected final static Logger logger = Logger.getLogger(TournamentSession.class);
 
-    protected UUID userId;
-    protected UUID playerId;
-    protected UUID tableId;
-    protected Tournament tournament;
+    protected final UUID userId;
+    protected final UUID playerId;
+    protected final UUID tableId;
+    protected final Tournament tournament;
     protected boolean killed = false;
 
     private ScheduledFuture<?> futureTimeout;
-    protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
+    protected static final ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
     public TournamentSession(Tournament tournament, UUID userId, UUID tableId, UUID playerId) {
         this.userId = userId;
@@ -129,16 +129,13 @@ public class TournamentSession {
         cancelTimeout();
         if (seconds > 0) {
             futureTimeout = timeoutExecutor.schedule(
-                new Runnable() {
-                    @Override
-                    public void run() {
+                    () -> {
                         try {
                             TournamentManager.getInstance().timeout(tournament.getId(), userId);
                         } catch (Exception e) {
                             logger.fatal("TournamentSession error - userId " + userId + " tId " + tournament.getId(), e);
                         }
-                    }
-                },
+                    },
                 seconds, TimeUnit.SECONDS
             );
         }

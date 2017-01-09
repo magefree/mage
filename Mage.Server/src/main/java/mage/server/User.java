@@ -70,7 +70,7 @@ public class User {
 
     public enum UserState {
 
-        Created, Connected, Disconnected, Reconnected, Expired;
+        Created, Connected, Disconnected, Reconnected, Expired
     }
 
     private final UUID userId;

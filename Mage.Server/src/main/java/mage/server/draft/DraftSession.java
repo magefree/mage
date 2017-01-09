@@ -52,14 +52,14 @@ public class DraftSession {
 
     protected final static Logger logger = Logger.getLogger(DraftSession.class);
 
-    protected UUID userId;
-    protected UUID playerId;
-    protected Draft draft;
+    protected final UUID userId;
+    protected final UUID playerId;
+    protected final Draft draft;
     protected boolean killed = false;
     protected UUID markedCard;
 
     private ScheduledFuture<?> futureTimeout;
-    protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
+    protected static final ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
     public DraftSession(Draft draft, UUID userId, UUID playerId) {
         this.userId = userId;
@@ -125,12 +125,7 @@ public class DraftSession {
         cancelTimeout();
         if (seconds > 0) {
             futureTimeout = timeoutExecutor.schedule(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        DraftManager.getInstance().timeout(draft.getId(), userId);
-                    }
-                },
+                    () -> DraftManager.getInstance().timeout(draft.getId(), userId),
                 seconds, TimeUnit.SECONDS
             );
         }

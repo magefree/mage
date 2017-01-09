@@ -74,9 +74,7 @@ public class DraftController {
 
     private void init() {
         draft.addTableEventListener(
-            new Listener<TableEvent> () {
-                @Override
-                public void event(TableEvent event) {
+                (Listener<TableEvent>) event -> {
                     try {
                         switch (event.getEventType()) {
                             case UPDATE:
@@ -91,12 +89,9 @@ public class DraftController {
                         logger.fatal("Table event listener error", ex);
                     }
                 }
-            }
         );
         draft.addPlayerQueryEventListener(
-            new Listener<PlayerQueryEvent> () {
-                @Override
-                public void event(PlayerQueryEvent event) {
+                (Listener<PlayerQueryEvent>) event -> {
                     try {
                         switch (event.getQueryType()) {
                             case PICK_CARD:
@@ -108,7 +103,6 @@ public class DraftController {
                         logger.fatal("Table event listener error", ex);
                     }
                 }
-            }
         );
         for (DraftPlayer player: draft.getPlayers()) {
             if (!player.getPlayer().isHuman()) {
@@ -156,12 +150,7 @@ public class DraftController {
         if (!draft.isStarted() && allJoined()) {
             draft.setStarted();
             ThreadExecutor.getInstance().getCallExecutor().execute(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        startDraft();
-                    }
-            });
+                    () -> startDraft());
         }
     }
 

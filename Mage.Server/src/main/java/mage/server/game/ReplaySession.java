@@ -43,7 +43,7 @@ import mage.view.GameView;
 public class ReplaySession implements GameCallback {
 
     private final GameReplay replay;
-    protected UUID userId;
+    protected final UUID userId;
 
     ReplaySession(UUID gameId, UUID userId) {
         this.replay = new GameReplay(gameId);
