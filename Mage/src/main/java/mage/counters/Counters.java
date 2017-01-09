@@ -35,15 +35,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Counters extends HashMap<String, Counter> implements Serializable {
 
-    public Counters() {}
+    public Counters() {
+    }
 
     public Counters(final Counters counters) {
-        for (Map.Entry<String, Counter> entry: counters.entrySet()) {
+        for (Map.Entry<String, Counter> entry : counters.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
     }
@@ -53,16 +53,12 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
     }
 
     public void addCounter(String name) {
-        if (!this.containsKey(name)) {
-            this.put(name, new Counter(name));
-        }
+        putIfAbsent(name, new Counter(name));
         this.get(name).increase();
-        }        
+    }
 
     public void addCounter(String name, int amount) {
-        if (!this.containsKey(name)) {
-            this.put(name, new Counter(name));
-        }
+        putIfAbsent(name, new Counter(name));
         this.get(name).add(amount);
     }
 
@@ -100,13 +96,14 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
         return false;
     }
 
-    public void removeAllCounters(CounterType counterType){
+    public void removeAllCounters(CounterType counterType) {
         removeAllCounters(counterType.getName());
     }
 
-    public void removeAllCounters(String name){
-        if (this.containsKey(name)){
+    public void removeAllCounters(String name) {
+        if (this.containsKey(name)) {
             this.remove(name);
+
         }
     }
 
@@ -130,9 +127,9 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
 
     public List<BoostCounter> getBoostCounters() {
         List<BoostCounter> boosters = new ArrayList<>();
-        for (Counter counter: this.values()) {
+        for (Counter counter : this.values()) {
             if (counter instanceof BoostCounter) {
-                boosters.add((BoostCounter)counter);
+                boosters.add((BoostCounter) counter);
             }
         }
         return boosters;

@@ -64,9 +64,7 @@ public class LookedAt extends HashMap<String, Cards> implements Serializable, Co
     }
 
     public Cards createLookedAt(String name) {
-        if (!this.containsKey(name)) {
-            this.put(name, new CardsImpl());
-        }
+        putIfAbsent(name, new CardsImpl());
         return this.get(name);
     }
 
