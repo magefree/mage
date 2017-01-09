@@ -28,9 +28,7 @@
 package mage.client.deck.generator;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -193,12 +191,9 @@ public class DeckGeneratorDialog {
         // Advanced checkbox (enable/disable advanced configuration)
         cAdvanced = new JCheckBox("Advanced");
         cAdvanced.setToolTipText("Enable advanced configuration options");
-        cAdvanced.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent itemEvent) {
-                boolean enable = cAdvanced.isSelected();
-                enableAdvancedPanel(enable);
-            }
+        cAdvanced.addItemListener(itemEvent -> {
+            boolean enable = cAdvanced.isSelected();
+            enableAdvancedPanel(enable);
         });
 
         // Advanced Checkbox
@@ -216,23 +211,17 @@ public class DeckGeneratorDialog {
         mainPanel.add(advancedPanel, c);
 
         btnGenerate = new JButton("Ok");
-        btnGenerate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btnGenerate.setEnabled(false);
-                colorsChooser.setEnabled(false);
-                selectedColors = (String) colorsChooser.getSelectedItem();
-                dlg.setVisible(false);
-                MageFrame.getPreferences().put("genDeckColor", selectedColors);
-            }
+        btnGenerate.addActionListener(e -> {
+            btnGenerate.setEnabled(false);
+            colorsChooser.setEnabled(false);
+            selectedColors = (String) colorsChooser.getSelectedItem();
+            dlg.setVisible(false);
+            MageFrame.getPreferences().put("genDeckColor", selectedColors);
         });
         btnCancel = new JButton("Cancel");
-        btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dlg.setVisible(false);
-                selectedColors = null;
-            }
+        btnCancel.addActionListener(e -> {
+            dlg.setVisible(false);
+            selectedColors = null;
         });
         JButton[] options = {btnGenerate, btnCancel};
         JOptionPane optionPane = new JOptionPane(mainPanel, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, options, options[1]);
@@ -308,12 +297,9 @@ public class DeckGeneratorDialog {
         c.gridy = 2;
         btnReset = new JButton("Reset");
         btnReset.setToolTipText("Reset advanced dialog to default values");
-        btnReset.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                cbCMC.setSelectedItem(DeckGeneratorCMC.Default);
-                adjustingSliderPanel.resetValues();
-            }
+        btnReset.addActionListener(actionEvent -> {
+            cbCMC.setSelectedItem(DeckGeneratorCMC.Default);
+            adjustingSliderPanel.resetValues();
         });
         advancedPanel.add(btnReset, c);
 

@@ -279,7 +279,7 @@ public class DialogManager extends JComponent implements MouseListener,
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (bDragged == true) {
+        if (bDragged) {
             dx = e.getX() - mx;
             dy = e.getY() - my;
 

@@ -32,9 +32,9 @@ public class StackDialog extends IDialogPanel {
     private HoverButton jButtonResponse = null;
 
     private JLayeredPane jLayeredPane;
-    private FeedbackPanel feedbackPanel;
+    private final FeedbackPanel feedbackPanel;
     
-    private UUID gameId;
+    private final UUID gameId;
 
     private class CustomLabel extends JLabel {
 
@@ -51,7 +51,7 @@ public class StackDialog extends IDialogPanel {
         }
 
         private static final long serialVersionUID = 1L;
-    };
+    }
 
     /**
      * This is the default constructor

@@ -41,10 +41,10 @@ public abstract class SortSetting {
     boolean ascending;
     boolean pilesToggle;
     
-    String prefSortBy;
-    String prefSortIndex;
-    String prefSortAscending;
-    String prefPilesToggle;
+    final String prefSortBy;
+    final String prefSortIndex;
+    final String prefSortAscending;
+    final String prefPilesToggle;
 
     public SortSetting(String prefSortBy, String prefSortIndex, String prefSortAscending, String prefPilesToggle) {
         this.prefSortBy = prefSortBy;

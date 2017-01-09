@@ -68,8 +68,8 @@ public final class ListenableCollections {
     private static class ListenableList<E> extends AbstractList<E> implements RandomAccess, Serializable {
         private static final long serialVersionUID = 8622608480525537692L;
 
-        private List<E>           delegate;
-        private ListListener<E>   listener;
+        private final List<E>           delegate;
+        private final ListListener<E>   listener;
 
         public ListenableList(List<E> delegate, ListListener<E> listener) {
             this.delegate = delegate;
@@ -110,8 +110,8 @@ public final class ListenableCollections {
     private static class ListenableSequentialList<E> extends AbstractSequentialList<E> implements Serializable {
         private static final long serialVersionUID = 3630474556578001885L;
 
-        private List<E>           delegate;
-        private ListListener<E>   listener;
+        private final List<E>           delegate;
+        private final ListListener<E>   listener;
 
         public ListenableSequentialList(List<E> delegate, ListListener<E> listener) {
             this.delegate = delegate;
@@ -185,23 +185,23 @@ public final class ListenableCollections {
         }
     }
 
-    public static interface SetListener<E> extends Serializable {
+    public interface SetListener<E> extends Serializable {
         /**
          * Notified after a value was added to the set.
          */
-        public void add(E newValue);
+        void add(E newValue);
 
         /**
          * Notified after a value was removed from the set.
          */
-        public void remove(E oldValue);
+        void remove(E oldValue);
     }
 
     private static class ListenableSet<E> extends AbstractSet<E> implements Serializable {
         private static final long serialVersionUID = 7728087988927063221L;
 
-        private Set<E>            delegate;
-        private SetListener<E>    listener;
+        private final Set<E>            delegate;
+        private final SetListener<E>    listener;
 
         public ListenableSet(Set<E> set, SetListener<E> listener) {
             delegate = set;
@@ -220,7 +220,7 @@ public final class ListenableCollections {
                 listener.add(o);
             }
             return b;
-        };
+        }
 
         @SuppressWarnings("unchecked")
         @Override
@@ -268,29 +268,29 @@ public final class ListenableCollections {
         }
     }
 
-    public static interface MapListener<K, V> extends Serializable {
+    public interface MapListener<K, V> extends Serializable {
         /**
          * Notified after a value was put into the map.
          */
-        public void put(K key, V newValue);
+        void put(K key, V newValue);
 
         /**
          * Notified after a value in the map was changed.
          */
-        public void set(K key, V oldValue, V newValue);
+        void set(K key, V oldValue, V newValue);
 
         /**
          * Notified after a value was removed from the map.
          */
-        public void remove(K key, V oldValue);
+        void remove(K key, V oldValue);
     }
 
     private static class ListenableMap<K, V> extends AbstractMap<K, V> implements Serializable {
         private static final long serialVersionUID = 4032087477448965103L;
 
-        private Map<K, V>         delegate;
-        private MapListener<K, V> listener;
-        private Set<Entry<K, V>>  entrySet;
+        private final Map<K, V>         delegate;
+        private final MapListener<K, V> listener;
+        private final Set<Entry<K, V>>  entrySet;
 
         public ListenableMap(Map<K, V> map, MapListener<K, V> listener) {
             this.listener = listener;

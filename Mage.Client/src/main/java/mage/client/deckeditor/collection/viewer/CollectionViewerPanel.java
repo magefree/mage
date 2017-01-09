@@ -31,8 +31,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -58,8 +56,8 @@ public final class CollectionViewerPanel extends JPanel {
 
     private static final Logger logger = Logger.getLogger(CollectionViewerPanel.class);
 
-    protected static String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
-    protected static String FORMAT_CONFIG_KEY = "collectionViewerFormat";
+    protected static final String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
+    protected static final String FORMAT_CONFIG_KEY = "collectionViewerFormat";
 
     public CollectionViewerPanel() {
         initComponents();
@@ -107,26 +105,20 @@ public final class CollectionViewerPanel extends JPanel {
         small3x3.setForeground(Color.white);
         boolean selected3x3 = MageFrame.getPreferences().get(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3).equals(MageBook.LAYOUT_3x3);
         small3x3.setSelected(selected3x3);
-        small3x3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                big4x4.setSelected(false);
-                mageBook.updateSize(MageBook.LAYOUT_3x3);
-                MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3);
-            }
+        small3x3.addActionListener(e -> {
+            big4x4.setSelected(false);
+            mageBook.updateSize(MageBook.LAYOUT_3x3);
+            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3);
         });
         jPanel1.add(small3x3);
 
         big4x4 = new JRadioButton("4x4");
         big4x4.setForeground(Color.white);
         big4x4.setSelected(!selected3x3);
-        big4x4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                small3x3.setSelected(false);
-                mageBook.updateSize(MageBook.LAYOUT_4x4);
-                MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_4x4);
-            }
+        big4x4.addActionListener(e -> {
+            small3x3.setSelected(false);
+            mageBook.updateSize(MageBook.LAYOUT_4x4);
+            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_4x4);
         });
         jPanel1.add(big4x4);
 
@@ -143,31 +135,18 @@ public final class CollectionViewerPanel extends JPanel {
         jPanel1.add(buttonPanel);
 
         JButton prev = new JButton("Prev");
-        prev.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mageBook.prev();
-            }
-        });
+        prev.addActionListener(e -> mageBook.prev());
         buttonPanel.add(prev);
 
         JButton next = new JButton("Next");
-        next.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mageBook.next();
-            }
-        });
+        next.addActionListener(e -> mageBook.next());
         buttonPanel.add(next);
 
-        formats.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (mageBook != null) {
-                    String format = (String)formats.getSelectedItem();
-                    MageFrame.getPreferences().put(CollectionViewerPanel.FORMAT_CONFIG_KEY, format);
-                    mageBook.updateDispayedSets(format);
-                }
+        formats.addActionListener(e -> {
+            if (mageBook != null) {
+                String format = (String)formats.getSelectedItem();
+                MageFrame.getPreferences().put(CollectionViewerPanel.FORMAT_CONFIG_KEY, format);
+                mageBook.updateDispayedSets(format);
             }
         });
 
@@ -197,12 +176,7 @@ public final class CollectionViewerPanel extends JPanel {
         );
 
         btnExit.setText("Exit");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
-            }
-        });
+        btnExit.addActionListener(evt -> btnExitActionPerformed(evt));
 
     }
 

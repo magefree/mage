@@ -40,7 +40,7 @@ public class CountryComboBox extends JComboBox {
 
     private final DefaultComboBoxModel model;
 
-    public static String[][] countryList = {
+    public static final String[][] countryList = {
         {"Afghanistan", "af"},
         {"Åland Islands", "ax"},
         {"Albania", "al"},

@@ -57,22 +57,19 @@ public class MageTextArea extends JEditorPane {
 
         buffer.append("</b></center></body></html>");
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                String promptText = buffer.toString();
-                MageTextArea.super.setText(promptText);
-                // in case the text don't fit in the panel a tooltip with the text is added
-                if (panelWidth > 0 && MageTextArea.this.getPreferredSize().getWidth() > panelWidth) {
-                    String tooltip = "<html><center><body style='font-family:Dialog;font-size:"
-                            + GUISizeHelper.gameDialogAreaFontSizeBig
-                            + ";color: #FFFFFF'><p width='500'>" + basicText + "</p></body></html>";
-                    MageTextArea.super.setToolTipText(tooltip);
-                } else {
-                    MageTextArea.super.setToolTipText(null);
-                }
-                setCaretPosition(0);
+        SwingUtilities.invokeLater(() -> {
+            String promptText = buffer.toString();
+            MageTextArea.super.setText(promptText);
+            // in case the text don't fit in the panel a tooltip with the text is added
+            if (panelWidth > 0 && MageTextArea.this.getPreferredSize().getWidth() > panelWidth) {
+                String tooltip = "<html><center><body style='font-family:Dialog;font-size:"
+                        + GUISizeHelper.gameDialogAreaFontSizeBig
+                        + ";color: #FFFFFF'><p width='500'>" + basicText + "</p></body></html>";
+                MageTextArea.super.setToolTipText(tooltip);
+            } else {
+                MageTextArea.super.setToolTipText(null);
             }
+            setCaretPosition(0);
         });
     }
 }

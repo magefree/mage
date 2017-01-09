@@ -55,9 +55,9 @@ import mage.view.CardsView;
  */
 public class DeckArea extends javax.swing.JPanel {
 
-    private CardEventSource maindeckVirtualEvent = new CardEventSource();
-    private CardEventSource sideboardVirtualEvent = new CardEventSource();
-    private Set<UUID> hiddenCards = new HashSet<>();
+    private final CardEventSource maindeckVirtualEvent = new CardEventSource();
+    private final CardEventSource sideboardVirtualEvent = new CardEventSource();
+    private final Set<UUID> hiddenCards = new HashSet<>();
     private Deck lastDeck = new Deck();
     private BigCard lastBigCard = null;
     private int dividerLocationNormal = 0;

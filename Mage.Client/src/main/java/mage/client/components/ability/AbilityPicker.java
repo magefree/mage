@@ -49,7 +49,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     private static final String IMAGE_RIGHT_PATH = "/game/right.png";
     private static final String IMAGE_RIGHT_HOVERED_PATH = "/game/right_hovered.png";
 
-    private static Color SELECTED_COLOR = new Color(64, 147, 208);
+    private static final Color SELECTED_COLOR = new Color(64, 147, 208);
     private static Color BORDER_COLOR = new Color(0, 0, 0, 50);
 
     private boolean selected = false;

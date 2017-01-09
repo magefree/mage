@@ -29,7 +29,6 @@ package mage.cards.t;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;

@@ -7,15 +7,12 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -455,12 +452,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     }
 
     public enum Sort {
-        NONE("No Sort", new Comparator<CardView>() {
-            @Override
-            public int compare(CardView o1, CardView o2) {
-                // Always equal, sort into the first row
-                return 0;
-            }
+        NONE("No Sort", (o1, o2) -> {
+            // Always equal, sort into the first row
+            return 0;
         }),
         CARD_TYPE("Card Type", new CardViewCardTypeComparator()),
         CMC("Converted Mana Cost", new CardViewCostComparator()),
@@ -508,44 +502,44 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     }
 
     // Counters we use
-    private CardTypeCounter creatureCounter = new CardTypeCounter() {
+    private final CardTypeCounter creatureCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
             return card.getCardTypes().contains(CardType.CREATURE);
         }
     };
-    private CardTypeCounter landCounter = new CardTypeCounter() {
+    private final CardTypeCounter landCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
             return card.getCardTypes().contains(CardType.LAND);
         }
     };
 
-    private CardTypeCounter artifactCounter = new CardTypeCounter() {
+    private final CardTypeCounter artifactCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
             return card.getCardTypes().contains(CardType.ARTIFACT);
         }
     };
-    private CardTypeCounter enchantmentCounter = new CardTypeCounter() {
+    private final CardTypeCounter enchantmentCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
             return card.getCardTypes().contains(CardType.ENCHANTMENT);
         }
     };
-    private CardTypeCounter instantCounter = new CardTypeCounter() {
+    private final CardTypeCounter instantCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
             return card.getCardTypes().contains(CardType.INSTANT);
         }
     };
-    private CardTypeCounter sorceryCounter = new CardTypeCounter() {
+    private final CardTypeCounter sorceryCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
             return card.getCardTypes().contains(CardType.SORCERY);
         }
     };
-    private CardTypeCounter planeswalkerCounter = new CardTypeCounter() {
+    private final CardTypeCounter planeswalkerCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
             return card.getCardTypes().contains(CardType.PLANESWALKER);
@@ -581,11 +575,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         void invertCardSelection(Collection<CardView> cards);
 
         void showAll();
-    };
+    }
 
     // Constants
-    public static int COUNT_LABEL_HEIGHT = 20;
-    public static int GRID_PADDING = 10;
+    public static final int COUNT_LABEL_HEIGHT = 20;
+    public static final int GRID_PADDING = 10;
 
     private final static ImageIcon INSERT_ROW_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_row.png"));
     private final static ImageIcon INSERT_COL_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_col.png"));
@@ -601,41 +595,41 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     BigCard lastBigCard = null;
 
     // Top bar with dropdowns for sort / filter / etc
-    JButton sortButton;
-    JButton filterButton;
-    JButton visibilityButton;
-    JButton selectByButton;
-    JButton analyseButton;
+    final JButton sortButton;
+    final JButton filterButton;
+    final JButton visibilityButton;
+    final JButton selectByButton;
+    final JButton analyseButton;
 
     // Popup for toolbar
-    JPopupMenu filterPopup;
+    final JPopupMenu filterPopup;
     JPopupMenu selectByTypePopup;
 
-    JPopupMenu sortPopup;
-    JPopupMenu selectByPopup;
-    JCheckBox separateCreaturesCb;
-    JTextField searchByTextField;
+    final JPopupMenu sortPopup;
+    final JPopupMenu selectByPopup;
+    final JCheckBox separateCreaturesCb;
+    final JTextField searchByTextField;
     JToggleButton multiplesButton;
 
-    JSlider cardSizeSlider;
-    JLabel cardSizeSliderLabel;
+    final JSlider cardSizeSlider;
+    final JLabel cardSizeSliderLabel;
 
-    Map<Sort, AbstractButton> sortButtons = new HashMap<>();
-    HashMap<CardType, AbstractButton> selectByTypeButtons = new HashMap<>();
+    final Map<Sort, AbstractButton> sortButtons = new HashMap<>();
+    final HashMap<CardType, AbstractButton> selectByTypeButtons = new HashMap<>();
 
-    JLabel deckNameAndCountLabel;
-    JLabel landCountLabel;
-    JLabel creatureCountLabel;
+    final JLabel deckNameAndCountLabel;
+    final JLabel landCountLabel;
+    final JLabel creatureCountLabel;
 
     // Main two controls holding the scrollable card grid
-    JScrollPane cardScroll;
+    final JScrollPane cardScroll;
     JLayeredPane cardContent;
 
     // Drag onto insert arrow
-    JLabel insertArrow;
+    final JLabel insertArrow;
 
     // Card area selection panel
-    SelectionBox selectionPanel;
+    final SelectionBox selectionPanel;
     Set<CardView> selectionDragStartCards;
     int selectionDragStartX;
     int selectionDragStartY;
@@ -672,7 +666,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             return name;
         }
 
-        private String name;
+        private final String name;
     }
 
     public static class Settings {
@@ -1013,11 +1007,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // Analyse Mana (aka #blue pips, #islands, #white pips, #plains etc.)
         analyseButton.setToolTipText("Counts coloured/colourless mana costs. Counts land types.");
 
-        analyseButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                analyseDeck();
-            }
-        });
+        analyseButton.addActionListener(evt -> analyseDeck());
 
         // Filter popup
         filterPopup = new JPopupMenu();
@@ -1229,7 +1219,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         trimGrid();
 
         // First sort all cards by name
-        Collections.sort(allCards, new CardViewNameComparator());
+        allCards.sort(new CardViewNameComparator());
 
         // Now re-insert all of the cards using the current sort
         for (CardView card : allCards) {

@@ -30,8 +30,6 @@ package mage.client.dialog;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.UUID;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
@@ -69,12 +67,7 @@ public class PickPileDialog extends MageDialog {
         panel.add(pile1, BorderLayout.CENTER);
 
         JButton btnChoosePile1 = new JButton("Pile 1");
-        btnChoosePile1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btnPile1ActionPerformed(e);
-            }
-        });
+        btnChoosePile1.addActionListener(e -> btnPile1ActionPerformed(e));
         panel.add(btnChoosePile1, BorderLayout.NORTH);
 
         JPanel panel_1 = new JPanel();
@@ -85,12 +78,7 @@ public class PickPileDialog extends MageDialog {
         panel_1.add(pile2, BorderLayout.CENTER);
 
         JButton btnChoosePile2 = new JButton("Pile 2");
-        btnChoosePile2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btnPile2ActionPerformed(e);
-            }
-        });
+        btnChoosePile2.addActionListener(e -> btnPile2ActionPerformed(e));
         panel_1.add(btnChoosePile2, BorderLayout.NORTH);
     }
 

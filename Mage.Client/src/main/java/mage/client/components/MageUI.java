@@ -96,12 +96,7 @@ public class MageUI {
         while (!j.isEnabled()) {
             Thread.sleep(10);
         }
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                j.doClick();
-            }
-        });
+        Thread t = new Thread(() -> j.doClick());
         t.start();
     }
 }

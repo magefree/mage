@@ -6,12 +6,8 @@
 package mage.client.components;
 
 import java.awt.BorderLayout;
-import javax.swing.DefaultDesktopManager;
-import javax.swing.DesktopManager;
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+
 import mage.client.dialog.CardInfoWindowDialog;
 
 /**
@@ -41,24 +37,21 @@ public class MageDesktopManager extends DefaultDesktopManager {
     }
 
     public static void main(String args[]) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JFrame frame = new JFrame();
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-                JDesktopPane desktopPane = new JDesktopPane();
-                DesktopManager dm = new MageDesktopManager();
-                desktopPane.setDesktopManager(dm);
-                JInternalFrame internalFrame = new JInternalFrame("Test Internal Frame", true, false, true, true);
-                internalFrame.setSize(200, 150);
-                internalFrame.setVisible(true);
-                desktopPane.add(internalFrame);
+            JDesktopPane desktopPane = new JDesktopPane();
+            DesktopManager dm = new MageDesktopManager();
+            desktopPane.setDesktopManager(dm);
+            JInternalFrame internalFrame = new JInternalFrame("Test Internal Frame", true, false, true, true);
+            internalFrame.setSize(200, 150);
+            internalFrame.setVisible(true);
+            desktopPane.add(internalFrame);
 
-                frame.add(desktopPane, BorderLayout.CENTER);
-                frame.setSize(800, 600);
-                frame.setVisible(true);
-            }
+            frame.add(desktopPane, BorderLayout.CENTER);
+            frame.setSize(800, 600);
+            frame.setVisible(true);
         });
     }
 }

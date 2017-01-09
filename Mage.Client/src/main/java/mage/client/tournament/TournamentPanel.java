@@ -84,7 +84,7 @@ public class TournamentPanel extends javax.swing.JPanel {
     private boolean firstInitDone = false;
 
     private final TournamentPlayersTableModel playersModel;
-    private TournamentMatchesTableModel matchesModel;
+    private final TournamentMatchesTableModel matchesModel;
     private UpdateTournamentTask updateTask;
     private final DateFormat df;
 
@@ -358,11 +358,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         txtName.setMaximumSize(new java.awt.Dimension(50, 22));
         txtName.setOpaque(false);
         txtName.setRequestFocusEnabled(false);
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
+        txtName.addActionListener(evt -> txtNameActionPerformed(evt));
 
         txtType.setEditable(false);
         txtType.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -394,19 +390,11 @@ public class TournamentPanel extends javax.swing.JPanel {
 
         btnQuitTournament.setText("Quit Tournament");
         btnQuitTournament.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQuitTournament.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitTournamentActionPerformed(evt);
-            }
-        });
+        btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
 
         btnCloseWindow.setText("Close Window");
         btnCloseWindow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCloseWindow.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseWindowActionPerformed(evt);
-            }
-        });
+        btnCloseWindow.addActionListener(evt -> btnCloseWindowActionPerformed(evt));
 
         lblName.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         lblName.setText("Name:");

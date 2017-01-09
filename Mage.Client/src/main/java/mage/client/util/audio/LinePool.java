@@ -39,8 +39,8 @@ public class LinePool {
      * from the timer thread to prevent deadlocks in PulseAudio internals.
      */
 
-    private Mixer mixer;
-    private int alwaysActive;
+    private final Mixer mixer;
+    private final int alwaysActive;
 
     public LinePool() {
         this(new AudioFormat(22050, 16, 1, true, false), 4, 1);

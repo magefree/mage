@@ -30,7 +30,6 @@ package mage.tournament.cubes;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.decks.importer.DeckImporterUtil;
 import mage.game.draft.DraftCube.CardIdentity;
 import mage.game.draft.DraftCube;
 

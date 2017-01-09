@@ -15,7 +15,6 @@ import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import mage.abilities.Ability;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -96,7 +95,7 @@ public abstract class CardRenderer {
     }, 4);
 
     // Paint for a card back
-    public static Paint BG_TEXTURE_CARDBACK = new Color(153, 102, 51);
+    public static final Paint BG_TEXTURE_CARDBACK = new Color(153, 102, 51);
 
     // The size of the card
     protected int cardWidth;
@@ -107,18 +106,18 @@ public abstract class CardRenderer {
     protected boolean isSelected;
 
     // Radius of the corners of the cards
-    protected static float CORNER_RADIUS_FRAC = 0.1f; //x cardWidth
-    protected static int CORNER_RADIUS_MIN = 3;
+    protected static final float CORNER_RADIUS_FRAC = 0.1f; //x cardWidth
+    protected static final int CORNER_RADIUS_MIN = 3;
     protected int cornerRadius;
 
     // The inset of the actual card from the black / white border around it
-    protected static float BORDER_WIDTH_FRAC = 0.03f; //x cardWidth
-    protected static float BORDER_WIDTH_MIN = 2;
+    protected static final float BORDER_WIDTH_FRAC = 0.03f; //x cardWidth
+    protected static final float BORDER_WIDTH_MIN = 2;
     protected int borderWidth;
 
     // The parsed text of the card
-    protected ArrayList<TextboxRule> textboxRules = new ArrayList<>();
-    protected ArrayList<TextboxRule> textboxKeywords = new ArrayList<>();
+    protected final ArrayList<TextboxRule> textboxRules = new ArrayList<>();
+    protected final ArrayList<TextboxRule> textboxKeywords = new ArrayList<>();
 
     // The Construtor
     // The constructor should prepare all of the things that it can
@@ -271,14 +270,19 @@ public abstract class CardRenderer {
                 // Don't render loyalty, we do that in the bottom corner
                 if (!v.getName().equals("loyalty")) {
                     Polygon p;
-                    if (v.getName().equals("+1/+1")) {
-                        p = PLUS_COUNTER_POLY;
-                    } else if (v.getName().equals("-1/-1")) {
-                        p = MINUS_COUNTER_POLY;
-                    } else if (v.getName().equals("time")) {
-                        p = TIME_COUNTER_POLY;
-                    } else {
-                        p = OTHER_COUNTER_POLY;
+                    switch (v.getName()) {
+                        case "+1/+1":
+                            p = PLUS_COUNTER_POLY;
+                            break;
+                        case "-1/-1":
+                            p = MINUS_COUNTER_POLY;
+                            break;
+                        case "time":
+                            p = TIME_COUNTER_POLY;
+                            break;
+                        default:
+                            p = OTHER_COUNTER_POLY;
+                            break;
                     }
                     double scale = (0.1 * 0.25 * cardWidth);
                     Graphics2D g2 = (Graphics2D) g.create();

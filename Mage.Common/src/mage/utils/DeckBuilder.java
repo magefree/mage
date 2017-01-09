@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Random;
+
 import mage.Mana;
 import mage.cards.Card;
 import mage.cards.decks.Deck;

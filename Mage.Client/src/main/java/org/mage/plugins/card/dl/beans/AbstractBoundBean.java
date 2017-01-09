@@ -17,7 +17,7 @@ import java.beans.PropertyChangeListener;
  * @author Clemens Koza
  */
 public abstract class AbstractBoundBean implements BoundBean {
-    protected PropertyChangeSupport s = new PropertyChangeSupport(this);
+    protected final PropertyChangeSupport s = new PropertyChangeSupport(this);
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         s.addPropertyChangeListener(listener);

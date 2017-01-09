@@ -16,7 +16,7 @@ public class MusicPlayer {
     private static final Logger log = Logger.getLogger(AudioManager.class);
     String filepath;
     String filename;
-    List filelist = new List();
+    final List filelist = new List();
     static MusicPlayer player = null;
 
     //open file and add list
@@ -138,11 +138,11 @@ public class MusicPlayer {
                 breaked = false;
             }
         }
-    };
+    }
 
     class PlayThread extends Thread {
 
-        byte tempBuffer[] = new byte[320];
+        final byte[] tempBuffer = new byte[320];
 
         public void run() {
             try {
@@ -165,5 +165,5 @@ public class MusicPlayer {
                 log.error("Thread error: " + e);
             }
         }
-    };
+    }
 }

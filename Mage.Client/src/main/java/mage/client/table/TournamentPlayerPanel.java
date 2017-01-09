@@ -38,9 +38,7 @@ import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import mage.cards.decks.DeckCardLists;
-import mage.client.MageFrame;
 import mage.client.SessionHandler;
-import mage.remote.Session;
 
 /**
  *
@@ -101,11 +99,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
         jLabel1.setText("Type:");
 
         cbPlayerType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbPlayerType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPlayerTypeActionPerformed(evt);
-            }
-        });
+        cbPlayerType.addActionListener(evt -> cbPlayerTypeActionPerformed(evt));
 
         lblPlayerNum.setFont(new java.awt.Font("Tahoma", 1, 11));
         lblPlayerNum.setText("Player Num:");

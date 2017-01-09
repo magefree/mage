@@ -105,7 +105,7 @@ public class DraftPanel extends javax.swing.JPanel {
     // all cards picked
     protected SimpleCardsView pickedCards;
     // all cards picked
-    protected SimpleCardsView pickedCardsShown = new SimpleCardsView();
+    protected final SimpleCardsView pickedCardsShown = new SimpleCardsView();
     // id of card with popup menu
     protected UUID cardIdPopupMenu;
 
@@ -145,17 +145,14 @@ public class DraftPanel extends javax.swing.JPanel {
         draftLeftPane.setOpaque(false);
 
         countdown = new Timer(1000,
-                new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (--timeout > 0) {
-                    setTimeout(timeout);
-                } else {
-                    setTimeout(0);
-                    countdown.stop();
+                e -> {
+                    if (--timeout > 0) {
+                        setTimeout(timeout);
+                    } else {
+                        setTimeout(0);
+                        countdown.stop();
+                    }
                 }
-            }
-        }
         );
     }
 
@@ -306,18 +303,15 @@ public class DraftPanel extends javax.swing.JPanel {
         loadCardsToPickedCardsArea(draftPickView.getPicks());
 
         this.draftPicks.clearCardEventListeners();
-        this.draftPicks.addCardEventListener(new Listener<Event>() {
-            @Override
-            public void event(Event event) {
-                if (event.getEventName().equals("show-popup-menu")) {
-                    if (event.getSource() != null) {
-                        // Popup Menu Card
-                        cardIdPopupMenu = ((SimpleCardView) event.getSource()).getId();
-                        popupMenuCardPanel.show(event.getComponent(), event.getxPos(), event.getyPos());
-                    } else {
-                        // Popup Menu area
-                        popupMenuPickedArea.show(event.getComponent(), event.getxPos(), event.getyPos());
-                    }
+        this.draftPicks.addCardEventListener((Listener<Event>) event -> {
+            if (event.getEventName().equals("show-popup-menu")) {
+                if (event.getSource() != null) {
+                    // Popup Menu Card
+                    cardIdPopupMenu = ((SimpleCardView) event.getSource()).getId();
+                    popupMenuCardPanel.show(event.getComponent(), event.getxPos(), event.getyPos());
+                } else {
+                    // Popup Menu area
+                    popupMenuPickedArea.show(event.getComponent(), event.getxPos(), event.getyPos());
                 }
             }
         }
@@ -327,25 +321,22 @@ public class DraftPanel extends javax.swing.JPanel {
         draftBooster.loadBooster(CardsViewUtil.convertSimple(draftPickView.getBooster()), bigCard);
         this.draftBooster.clearCardEventListeners();
         this.draftBooster.addCardEventListener(
-                new Listener<Event>() {
-            @Override
-            public void event(Event event) {
-                if (event.getEventName().equals("pick-a-card")) {
-                    SimpleCardView source = (SimpleCardView) event.getSource();
-                    DraftPickView view = SessionHandler.sendCardPick(draftId, source.getId(), cardsHidden);
-                    if (view != null) {
-                        loadCardsToPickedCardsArea(view.getPicks());
-                        draftBooster.loadBooster(EMPTY_VIEW, bigCard);
-                        Plugins.getInstance().getActionCallback().hideOpenComponents();
-                        setMessage("Waiting for other players");
+                (Listener<Event>) event -> {
+                    if (event.getEventName().equals("pick-a-card")) {
+                        SimpleCardView source = (SimpleCardView) event.getSource();
+                        DraftPickView view = SessionHandler.sendCardPick(draftId, source.getId(), cardsHidden);
+                        if (view != null) {
+                            loadCardsToPickedCardsArea(view.getPicks());
+                            draftBooster.loadBooster(EMPTY_VIEW, bigCard);
+                            Plugins.getInstance().getActionCallback().hideOpenComponents();
+                            setMessage("Waiting for other players");
+                        }
+                    }
+                    if (event.getEventName().equals("mark-a-card")) {
+                        SimpleCardView source = (SimpleCardView) event.getSource();
+                        SessionHandler.sendCardMark(draftId, source.getId());
                     }
                 }
-                if (event.getEventName().equals("mark-a-card")) {
-                    SimpleCardView source = (SimpleCardView) event.getSource();
-                    SessionHandler.sendCardMark(draftId, source.getId());
-                }
-            }
-        }
         );
         setMessage("Pick a card");
         if (!MageFrame.getInstance().isActive()) {
@@ -422,12 +413,7 @@ public class DraftPanel extends javax.swing.JPanel {
         popupMenuPickedArea.add(menuItem);
 
         // Confirm (F9)
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showAgainAllHiddenCards();
-            }
-        });
+        menuItem.addActionListener(e -> showAgainAllHiddenCards());
 
         // popupMenuPickedArea.addSeparator();
     }
@@ -440,12 +426,7 @@ public class DraftPanel extends javax.swing.JPanel {
         popupMenuCardPanel.add(menuItem);
 
         // Hide Card
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                hideThisCard(cardIdPopupMenu);
-            }
-        });
+        menuItem.addActionListener(e -> hideThisCard(cardIdPopupMenu));
 
         // popupMenuCardPanel.addSeparator();
     }
@@ -608,11 +589,7 @@ public class DraftPanel extends javax.swing.JPanel {
         draftLeftPane.setVerifyInputWhenFocusTarget(false);
 
         btnQuitTournament.setText("Quit Tournament");
-        btnQuitTournament.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitTournamentActionPerformed(evt);
-            }
-        });
+        btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
 
         lblPack1.setText("Pack 1:");
 

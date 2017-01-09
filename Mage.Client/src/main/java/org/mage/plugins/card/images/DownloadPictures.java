@@ -3,8 +3,6 @@ package org.mage.plugins.card.images;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -69,11 +67,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private static final Logger logger = Logger.getLogger(DownloadPictures.class);
 
-    private JProgressBar bar;
+    private final JProgressBar bar;
     private final JOptionPane dlg;
     private boolean cancel;
     private final JButton closeButton;
-    private JButton startDownloadButton;
+    private final JButton startDownloadButton;
     private int cardIndex;
     private List<CardDownloadData> cards;
     private List<CardDownloadData> type2cards;
@@ -111,12 +109,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         String title = "Downloading";
 
         final JDialog dialog = this.dlg.createDialog(frame, title);
-        closeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dialog.setVisible(false);
-            }
-        });
+        closeButton.addActionListener(e -> dialog.setVisible(false));
         return dialog;
     }
 
@@ -159,51 +152,45 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         jComboBox1.setModel(jComboBox1Model);
         jComboBox1.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jComboBox1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JComboBox cb = (JComboBox) e.getSource();
-                switch (cb.getSelectedIndex()) {
-                    case 0:
-                        cardImageSource = MagicCardsImageSource.getInstance();
-                        break;
-                    case 1:
-                        cardImageSource = WizardCardsImageSource.getInstance();
-                        break;
-                    case 2:
-                        cardImageSource = MythicspoilerComSource.getInstance();
-                        break;
-                    case 3:
-                        cardImageSource = TokensMtgImageSource.getInstance();
-                        break;
-                    case 4:
-                        cardImageSource = MtgOnlTokensImageSource.getInstance();
-                        break;
-                    case 5:
-                        cardImageSource = AltMtgOnlTokensImageSource.getInstance();
-                        break;
-                    case 6:
-                        cardImageSource = GrabbagImageSource.getInstance();
-                        break;
-                    case 7:
-                        cardImageSource = MagidexImageSource.getInstance();
-                        break;
-                }
-                updateCardsToDownload();
+        jComboBox1.addActionListener(e -> {
+            JComboBox cb = (JComboBox) e.getSource();
+            switch (cb.getSelectedIndex()) {
+                case 0:
+                    cardImageSource = MagicCardsImageSource.getInstance();
+                    break;
+                case 1:
+                    cardImageSource = WizardCardsImageSource.getInstance();
+                    break;
+                case 2:
+                    cardImageSource = MythicspoilerComSource.getInstance();
+                    break;
+                case 3:
+                    cardImageSource = TokensMtgImageSource.getInstance();
+                    break;
+                case 4:
+                    cardImageSource = MtgOnlTokensImageSource.getInstance();
+                    break;
+                case 5:
+                    cardImageSource = AltMtgOnlTokensImageSource.getInstance();
+                    break;
+                case 6:
+                    cardImageSource = GrabbagImageSource.getInstance();
+                    break;
+                case 7:
+                    cardImageSource = MagidexImageSource.getInstance();
+                    break;
             }
+            updateCardsToDownload();
         });
         p0.add(jComboBox1);
         p0.add(Box.createVerticalStrut(5));
 
         // Start
         startDownloadButton = new JButton("Start download");
-        startDownloadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Thread(DownloadPictures.this).start();
-                startDownloadButton.setEnabled(false);
-                checkBox.setEnabled(false);
-            }
+        startDownloadButton.addActionListener(e -> {
+            new Thread(DownloadPictures.this).start();
+            startDownloadButton.setEnabled(false);
+            checkBox.setEnabled(false);
         });
         p0.add(Box.createVerticalStrut(5));
 
@@ -223,12 +210,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         p0.add(checkBox);
         p0.add(Box.createVerticalStrut(5));
 
-        checkBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateCardsToDownload();
-            }
-        });
+        checkBox.addActionListener(e -> updateCardsToDownload());
 
         // JOptionPane
         Object[] options = {startDownloadButton, closeButton = new JButton("Cancel")};
@@ -669,7 +651,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                 if (responseCode == 200 || useTempFile) {
                     if (!useTempFile) {
-                        try (BufferedInputStream in = new BufferedInputStream(((HttpURLConnection) httpConn).getInputStream())) {
+                        try (BufferedInputStream in = new BufferedInputStream(httpConn.getInputStream())) {
                             //try (BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream())) {
                             out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
                             byte[] buf = new byte[1024];

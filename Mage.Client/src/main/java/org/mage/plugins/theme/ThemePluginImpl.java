@@ -22,8 +22,8 @@ public class ThemePluginImpl implements ThemePlugin {
 
     private static final Logger log = Logger.getLogger(ThemePluginImpl.class);
     private static BufferedImage background;
-    private List flist = new List();
-    private String BackgroundDir = "backgrounds" + File.separator;
+    private final List flist = new List();
+    private final String BackgroundDir = "backgrounds" + File.separator;
 
     @Init
     public void init() {

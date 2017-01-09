@@ -25,7 +25,7 @@ public class TextboxRule {
     // attributed string.
     public interface AttributeRegion {
 
-        public void applyToAttributedString(AttributedString str, Font normal, Font italic);
+        void applyToAttributedString(AttributedString str, Font normal, Font italic);
     }
 
     // A region of italics, or bold text in a
@@ -67,10 +67,10 @@ public class TextboxRule {
         }
     }
 
-    public String text;
-    public TextboxRuleType type;
+    public final String text;
+    public final TextboxRuleType type;
 
-    private List<AttributeRegion> regions;
+    private final List<AttributeRegion> regions;
 
     protected TextboxRule(String text, List<AttributeRegion> regions, TextboxRuleType type) {
         this.text = text;

@@ -39,7 +39,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -64,7 +63,7 @@ import org.mage.card.arcane.CardPanel;
  */
 public class CardGrid extends javax.swing.JLayeredPane implements MouseListener, ICardGrid {
 
-    protected CardEventSource cardEventSource = new CardEventSource();
+    protected final CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected UUID gameId;
     private final Map<UUID, MageCard> cards = new HashMap<>();
@@ -154,22 +153,22 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
             List<MageCard> sortedCards = new ArrayList<>(cards.values());
             switch (sortSetting.getSortBy()) {
                 case NAME:
-                    Collections.sort(sortedCards, new CardNameComparator());
+                    sortedCards.sort(new CardNameComparator());
                     break;
                 case CARD_TYPE:
-                    Collections.sort(sortedCards, new CardTypeComparator());
+                    sortedCards.sort(new CardTypeComparator());
                     break;
                 case RARITY:
-                    Collections.sort(sortedCards, new CardRarityComparator());
+                    sortedCards.sort(new CardRarityComparator());
                     break;
                 case COLOR:
-                    Collections.sort(sortedCards, new CardColorComparator());
+                    sortedCards.sort(new CardColorComparator());
                     break;
                 case COLOR_IDENTITY:
-                    Collections.sort(sortedCards, new CardColorDetailedIdentity());
+                    sortedCards.sort(new CardColorDetailedIdentity());
                     break;
                 case CASTING_COST:
-                    Collections.sort(sortedCards, new CardCostComparator());
+                    sortedCards.sort(new CardCostComparator());
                     break;
 
             }
@@ -409,7 +408,7 @@ class CardCostComparator implements Comparator<MageCard> {
 
     @Override
     public int compare(MageCard o1, MageCard o2) {
-        int val = Integer.valueOf(o1.getOriginal().getConvertedManaCost()).compareTo(Integer.valueOf(o2.getOriginal().getConvertedManaCost()));
+        int val = Integer.valueOf(o1.getOriginal().getConvertedManaCost()).compareTo(o2.getOriginal().getConvertedManaCost());
         if (val == 0) {
             return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
         } else {

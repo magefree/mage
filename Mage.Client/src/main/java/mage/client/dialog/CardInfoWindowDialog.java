@@ -65,13 +65,13 @@ public class CardInfoWindowDialog extends MageDialog {
 
     private static final Logger LOGGER = Logger.getLogger(CardInfoWindowDialog.class);
 
-    public static enum ShowType {
+    public enum ShowType {
         REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, OTHER
-    };
+    }
 
-    private ShowType showType;
+    private final ShowType showType;
     private boolean positioned;
-    private String name;
+    private final String name;
 
     public CardInfoWindowDialog(ShowType showType, String name) {
         this.name = name;
@@ -185,22 +185,19 @@ public class CardInfoWindowDialog extends MageDialog {
     }
 
     private void showAndPositionWindow() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                int width = CardInfoWindowDialog.this.getWidth();
-                int height = CardInfoWindowDialog.this.getHeight();
-                if (width > 0 && height > 0) {
-                    Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
-                    if (!positioned) {
-                        int xPos = centered.x / 2;
-                        int yPos = centered.y / 2;
-                        CardInfoWindowDialog.this.setLocation(xPos, yPos);
-                        show();
-                        positioned = true;
-                    }
-                    GuiDisplayUtil.keepComponentInsideFrame(centered.x, centered.y, CardInfoWindowDialog.this);
+        SwingUtilities.invokeLater(() -> {
+            int width = CardInfoWindowDialog.this.getWidth();
+            int height = CardInfoWindowDialog.this.getHeight();
+            if (width > 0 && height > 0) {
+                Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+                if (!positioned) {
+                    int xPos = centered.x / 2;
+                    int yPos = centered.y / 2;
+                    CardInfoWindowDialog.this.setLocation(xPos, yPos);
+                    show();
+                    positioned = true;
                 }
+                GuiDisplayUtil.keepComponentInsideFrame(centered.x, centered.y, CardInfoWindowDialog.this);
             }
         });
     }

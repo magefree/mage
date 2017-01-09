@@ -177,7 +177,6 @@ public class MythicspoilerComSource implements CardImageSource {
                 cardName = cardLink.substring(6, cardLink.length() - 4);
             } else if (aliasesStart.contains(cardLink)) {
                 cardName = cardLink.substring(0, cardLink.length() - 4);
-                ;
             }
             if (cardName != null && !cardName.isEmpty()) {
                 if (cardNameAliases.containsKey(cardSet + "-" + cardName)) {
@@ -209,11 +208,7 @@ public class MythicspoilerComSource implements CardImageSource {
         if (card.isFlippedSide()) { //doesn't support rotated images
             return null;
         }
-        Map<String, String> setLinks = sets.get(cardSet);
-        if (setLinks == null) {
-            setLinks = getSetLinks(cardSet);
-            sets.put(cardSet, setLinks);
-        }
+        Map<String, String> setLinks = sets.computeIfAbsent(cardSet, k -> getSetLinks(cardSet));
         String searchName = card.getDownloadName().toLowerCase()
                 .replaceAll(" ", "")
                 .replaceAll("-", "")

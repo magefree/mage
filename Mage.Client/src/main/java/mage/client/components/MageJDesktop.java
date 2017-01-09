@@ -24,7 +24,7 @@ public class MageJDesktop extends JDesktopPane {
             UIDefaults map = new UIDefaults();
             Painter painter = new Painter() {
 
-                Color color = null;
+                final Color color = null;
 
                 @Override
                 public void paint(Graphics2D g, Object c, int w, int h) {

@@ -44,8 +44,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.BeastToken;
 import mage.players.Player;
-import mage.target.TargetPlayer;
-import mage.target.common.TargetOpponent;
 
 /**
  *

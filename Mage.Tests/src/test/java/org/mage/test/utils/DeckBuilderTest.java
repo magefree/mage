@@ -5,8 +5,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.basiclands.Island;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;

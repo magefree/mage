@@ -65,7 +65,6 @@ import mage.game.draft.DraftOptions;
 import mage.game.draft.DraftOptions.TimingOption;
 import mage.game.tournament.LimitedOptions;
 import mage.game.tournament.TournamentOptions;
-import mage.remote.Session;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
@@ -215,11 +214,7 @@ public class NewTournamentDialog extends MageDialog {
         lblTournamentType.setText("Tournament Type:");
 
         cbTournamentType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbTournamentType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTournamentTypeActionPerformed(evt);
-            }
-        });
+        cbTournamentType.addActionListener(evt -> cbTournamentTypeActionPerformed(evt));
 
         lbDeckType.setText("Deck Type:");
         lbDeckType.setFocusable(false);
@@ -227,11 +222,7 @@ public class NewTournamentDialog extends MageDialog {
         lblGameType.setText("Game Type:");
         lblGameType.setFocusable(false);
 
-        cbGameType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGameTypeActionPerformed(evt);
-            }
-        });
+        cbGameType.addActionListener(evt -> cbGameTypeActionPerformed(evt));
 
         lblFreeMulligans.setText("Free Mulligans:");
 
@@ -240,30 +231,18 @@ public class NewTournamentDialog extends MageDialog {
         lblNumWins.setText("Wins:");
 
         spnNumWins.setToolTipText("To win a match a player has to win this number of games.");
-        spnNumWins.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spnNumWinsnumPlayersChanged(evt);
-            }
-        });
+        spnNumWins.addChangeListener(evt -> spnNumWinsnumPlayersChanged(evt));
 
         lblDraftCube.setText("Draft Cube:");
 
         cbDraftCube.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbDraftCube.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDraftCubeActionPerformed(evt);
-            }
-        });
+        cbDraftCube.addActionListener(evt -> cbDraftCubeActionPerformed(evt));
 
         lblNumRounds.setText("Number of Swiss Rounds:");
         lblNumRounds.setToolTipText("<html>The number of rounds the swiss tournament has in total.<br>\nThe tournaments ends after that number of rounds or<br> \nif there are less than two players left in the tournament.");
 
         spnNumRounds.setToolTipText("<html>The number of rounds the swiss tournament has in total.<br>\nThe tournaments ends after that number of rounds or<br> \nif there are less than two players left in the tournament.");
-        spnNumRounds.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spnNumRoundsnumPlayersChanged(evt);
-            }
-        });
+        spnNumRounds.addChangeListener(evt -> spnNumRoundsnumPlayersChanged(evt));
 
         lblPacks.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPacks.setText("Packs");
@@ -273,28 +252,16 @@ public class NewTournamentDialog extends MageDialog {
 
         lblNbrPlayers.setText("Players:");
 
-        spnNumPlayers.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spnNumPlayersStateChanged(evt);
-            }
-        });
+        spnNumPlayers.addChangeListener(evt -> spnNumPlayersStateChanged(evt));
 
         lblNbrSeats.setText("Seats:");
 
-        spnNumSeats.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spnNumSeatsStateChanged(evt);
-            }
-        });
+        spnNumSeats.addChangeListener(evt -> spnNumSeatsStateChanged(evt));
 
         jLabel6.setText("Timing:");
 
         cbDraftTiming.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbDraftTiming.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDraftTimingActionPerformed(evt);
-            }
-        });
+        cbDraftTiming.addActionListener(evt -> cbDraftTimingActionPerformed(evt));
 
         javax.swing.GroupLayout pnlDraftOptionsLayout = new javax.swing.GroupLayout(pnlDraftOptions);
         pnlDraftOptions.setLayout(pnlDraftOptionsLayout);
@@ -348,18 +315,10 @@ public class NewTournamentDialog extends MageDialog {
         );
 
         btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
+        btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         pnlRandomPacks.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlRandomPacks.setToolTipText("");
@@ -887,13 +846,7 @@ public class NewTournamentDialog extends MageDialog {
             btnSelectRandomPacks.setAlignmentX(Component.LEFT_ALIGNMENT);
             btnSelectRandomPacks.setText("Select packs to be included in the pool");
             btnSelectRandomPacks.setToolTipText(RandomPacksSelectorDialog.randomDraftDescription);
-            btnSelectRandomPacks.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    showRandomPackSelectorDialog();
-
-                }
-            });
+            btnSelectRandomPacks.addActionListener(evt -> showRandomPackSelectorDialog());
             pnlRandomPacks.add(btnSelectRandomPacks);
         }
         this.pack();
@@ -925,12 +878,7 @@ public class NewTournamentDialog extends MageDialog {
             pack.setModel(new DefaultComboBoxModel(ExpansionRepository.instance.getWithBoostersSortedByReleaseDate()));
             pnlPacks.add(pack);
             packs.add(pack);
-            pack.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    packActionPerformed(evt);
-                }
-            });
+            pack.addActionListener(evt -> packActionPerformed(evt));
         }
         this.pack();
         this.revalidate();
@@ -980,12 +928,9 @@ public class NewTournamentDialog extends MageDialog {
         this.pnlOtherPlayers.removeAll();
         for (TournamentPlayerPanel panel: players) {
             this.pnlOtherPlayers.add(panel);
-            panel.getPlayerType().addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    if (!automaticChange) {
-                        playerActionPerformed(evt);
-                    }
+            panel.getPlayerType().addActionListener(evt -> {
+                if (!automaticChange) {
+                    playerActionPerformed(evt);
                 }
             });
         }

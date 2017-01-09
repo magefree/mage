@@ -77,11 +77,7 @@ public class AboutDialog extends MageDialog {
         setTitle("About XMage");
 
         btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
+        btnOk.addActionListener(this::btnOkActionPerformed);
 
         jLabel1.setText("XMage client");
 

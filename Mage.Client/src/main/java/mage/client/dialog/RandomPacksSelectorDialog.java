@@ -135,19 +135,11 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
 
         btnNone.setText("Select none");
         btnNone.setActionCommand("none");
-        btnNone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNoneActionPerformed(evt);
-            }
-        });
+        btnNone.addActionListener(evt -> btnNoneActionPerformed(evt));
         pnlSelect.add(btnNone);
 
         btnAll.setText("Select all");
-        btnAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAllActionPerformed(evt);
-            }
-        });
+        btnAll.addActionListener(evt -> btnAllActionPerformed(evt));
         pnlSelect.add(btnAll);
 
         pnlApply.setLayout(new javax.swing.BoxLayout(pnlApply, javax.swing.BoxLayout.LINE_AXIS));
@@ -158,11 +150,7 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         } else if (isRichManDraft) {
             btnApply.setToolTipText("At least 1 pack must be selected");
         }
-        btnApply.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApplyActionPerformed(evt);
-            }
-        });
+        btnApply.addActionListener(evt -> btnApplyActionPerformed(evt));
         pnlApply.add(btnApply);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

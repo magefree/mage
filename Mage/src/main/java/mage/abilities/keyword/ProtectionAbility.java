@@ -30,7 +30,6 @@ package mage.abilities.keyword;
 import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.cards.Card;
 import mage.constants.CardType;

@@ -30,7 +30,6 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.DynamicManaAbility;

@@ -320,8 +320,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
     public static final String OPEN_PHASES_TAB = "Open-Phases-Tab";
 
-    public static String PHASE_ON = "on";
-    public static String PHASE_OFF = "off";
+    public static final String PHASE_ON = "on";
+    public static final String PHASE_OFF = "off";
 
     private static final Map<Integer, JPanel> PANELS = new HashMap<>();
 
@@ -590,11 +590,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         showCardName.setToolTipText("Write the card's name on the card to make the card name more recognizable.");
         showCardName.setActionCommand("");
         showCardName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        showCardName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showCardNameActionPerformed(evt);
-            }
-        });
+        showCardName.addActionListener(evt -> showCardNameActionPerformed(evt));
 
         tooltipDelayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tooltipDelayLabel.setText("Delay in milliseconds for showing the card tooltip text");
@@ -636,71 +632,43 @@ public class PreferencesDialog extends javax.swing.JDialog {
         nonLandPermanentsInOnePile.setSelected(true);
         nonLandPermanentsInOnePile.setText("Put non-land permanents in same row as creatures");
         nonLandPermanentsInOnePile.setToolTipText("<html>If activated, all non land permanents are shown in one row.<br>\nFirst creatures than other permanents. If not activated, creatures are<br>\nshown in a separate row.");
-        nonLandPermanentsInOnePile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nonLandPermanentsInOnePileActionPerformed(evt);
-            }
-        });
+        nonLandPermanentsInOnePile.addActionListener(evt -> nonLandPermanentsInOnePileActionPerformed(evt));
 
         showPlayerNamesPermanently.setSelected(true);
         showPlayerNamesPermanently.setText("Show player names on avatar permanently");
         showPlayerNamesPermanently.setToolTipText("Instead showing the names only if you hover over the avatar with the mouse, the name is shown all the time.");
         showPlayerNamesPermanently.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        showPlayerNamesPermanently.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showPlayerNamesPermanentlyActionPerformed(evt);
-            }
-        });
+        showPlayerNamesPermanently.addActionListener(evt -> showPlayerNamesPermanentlyActionPerformed(evt));
 
         showAbilityPickerForced.setSelected(true);
         showAbilityPickerForced.setText("Show ability picker for abilities or spells without costs");
         showAbilityPickerForced.setToolTipText("This prevents you from accidently activating abilities without other costs than tapping or casting spells with 0 mana costs.");
         showAbilityPickerForced.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        showAbilityPickerForced.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showAbilityPickerForcedActionPerformed(evt);
-            }
-        });
+        showAbilityPickerForced.addActionListener(evt -> showAbilityPickerForcedActionPerformed(evt));
 
         cbAllowRequestToShowHandCards.setSelected(true);
         cbAllowRequestToShowHandCards.setText("Allow requests from players and spectators to show your hand cards");
         cbAllowRequestToShowHandCards.setToolTipText("<html>This is the default setting used for your matches. If activated other players or spectators<br>\nof your match can send a request so you can allow them to see your hand cards.");
         cbAllowRequestToShowHandCards.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cbAllowRequestToShowHandCards.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAllowRequestToShowHandCardsActionPerformed(evt);
-            }
-        });
+        cbAllowRequestToShowHandCards.addActionListener(evt -> cbAllowRequestToShowHandCardsActionPerformed(evt));
 
         cbShowStormCounter.setSelected(true);
         cbShowStormCounter.setText("Show the number of spell casts during the current turn");
         cbShowStormCounter.setToolTipText("<html>Adds a little box left to the short keys line with the number<br>\nof spells already cast during the current turn (storm counter).");
         cbShowStormCounter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cbShowStormCounter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbShowStormCounterActionPerformed(evt);
-            }
-        });
+        cbShowStormCounter.addActionListener(evt -> cbShowStormCounterActionPerformed(evt));
 
         cbConfirmEmptyManaPool.setSelected(true);
         cbConfirmEmptyManaPool.setText("Confirm if you want to pass a phase/step but there is still mana in your mana pool");
         cbConfirmEmptyManaPool.setToolTipText("<html>If activated you get a confirm message if you pass priority while stack is empty<br>\n and you still have mana in your mana pool.");
         cbConfirmEmptyManaPool.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cbConfirmEmptyManaPool.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbConfirmEmptyManaPoolActionPerformed(evt);
-            }
-        });
+        cbConfirmEmptyManaPool.addActionListener(evt -> cbConfirmEmptyManaPoolActionPerformed(evt));
 
         cbAskMoveToGraveOrder.setSelected(true);
         cbAskMoveToGraveOrder.setText("Ask player for setting order cards go to graveyard");
         cbAskMoveToGraveOrder.setToolTipText("<html>If activated and multiple cards go to the graveyard at the same time<br>\nthe player is asked to set the order of the cards.");
         cbAskMoveToGraveOrder.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cbAskMoveToGraveOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAskMoveToGraveOrderActionPerformed(evt);
-            }
-        });
+        cbAskMoveToGraveOrder.addActionListener(evt -> cbAskMoveToGraveOrderActionPerformed(evt));
 
         org.jdesktop.layout.GroupLayout main_gameLayout = new org.jdesktop.layout.GroupLayout(main_game);
         main_game.setLayout(main_gameLayout);
@@ -744,20 +712,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbGameLogAutoSave.setSelected(true);
         cbGameLogAutoSave.setText("Auto save game logs     (to \"../Mage.Client/gamelogs/\" directory)");
         cbGameLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
-        cbGameLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGameLogAutoSaveActionPerformed(evt);
-            }
-        });
+        cbGameLogAutoSave.addActionListener(evt -> cbGameLogAutoSaveActionPerformed(evt));
 
         cbDraftLogAutoSave.setSelected(true);
         cbDraftLogAutoSave.setText("Auto save draft logs     (to \"../Mage.Client/gamelogs/\" directory)");
         cbDraftLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
-        cbDraftLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDraftLogAutoSaveActionPerformed(evt);
-            }
-        });
+        cbDraftLogAutoSave.addActionListener(evt -> cbDraftLogAutoSaveActionPerformed(evt));
 
         org.jdesktop.layout.GroupLayout main_gamelogLayout = new org.jdesktop.layout.GroupLayout(main_gamelog);
         main_gamelog.setLayout(main_gamelogLayout);
@@ -1258,75 +1218,47 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbStopAttack.setText("Stop on declare attackers step if you skip steps (F4/F5/F7) and attackers are available");
         cbStopAttack.setToolTipText("If you use F4, F5 or F7 to skip steps, you stop on declare attackers step if attackers are available. If this option is not activated, you also skip the declare attackers step with this actions. F9 does always skip the declare attackers step.");
         cbStopAttack.setActionCommand("");
-        cbStopAttack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbStopAttackActionPerformed(evt);
-            }
-        });
+        cbStopAttack.addActionListener(evt -> cbStopAttackActionPerformed(evt));
         phases_stopSettings.add(cbStopAttack);
 
         cbStopBlock.setText("Stop on your declare blockers step also if no blockers available");
         cbStopBlock.setToolTipText("Also if you have no blockers to declare, the game stops at the declare blockers step.");
         cbStopBlock.setActionCommand("");
-        cbStopBlock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbStopBlockActionPerformed(evt);
-            }
-        });
+        cbStopBlock.addActionListener(evt -> cbStopBlockActionPerformed(evt));
         phases_stopSettings.add(cbStopBlock);
 
         cbStopOnAllMain.setText("Skip with F7 to next main phase (if not activated skip always to your next main phase)");
         cbStopOnAllMain.setToolTipText("If activated F7 skips to next main phases (regardless of the active players).");
         cbStopOnAllMain.setActionCommand("");
-        cbStopOnAllMain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbStopOnAllMainActionPerformed(evt);
-            }
-        });
+        cbStopOnAllMain.addActionListener(evt -> cbStopOnAllMainActionPerformed(evt));
         phases_stopSettings.add(cbStopOnAllMain);
 
         cbStopOnAllEnd.setText("Skip with F5 to next end step (if not activated only to end steps of opponents)");
         cbStopOnAllEnd.setToolTipText("If activated - F5 skips to the next end step (regardless of the current player)");
         cbStopOnAllEnd.setActionCommand("");
         cbStopOnAllEnd.setPreferredSize(new java.awt.Dimension(300, 25));
-        cbStopOnAllEnd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbStopOnAllEndActionPerformed(evt);
-            }
-        });
+        cbStopOnAllEnd.addActionListener(evt -> cbStopOnAllEndActionPerformed(evt));
         phases_stopSettings.add(cbStopOnAllEnd);
 
         cbPassPriorityCast.setText("Pass priority automatically after you have put a spell on the stack");
         cbPassPriorityCast.setToolTipText("If activated the system passes priority automatically for you if you have put a spell on the stack.");
         cbPassPriorityCast.setActionCommand("");
         cbPassPriorityCast.setPreferredSize(new java.awt.Dimension(300, 25));
-        cbPassPriorityCast.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPassPriorityCastActionPerformed(evt);
-            }
-        });
+        cbPassPriorityCast.addActionListener(evt -> cbPassPriorityCastActionPerformed(evt));
         phases_stopSettings.add(cbPassPriorityCast);
 
         cbPassPriorityActivation.setText("Pass priority automatically after you have put an activated ability on the stack");
         cbPassPriorityActivation.setToolTipText("If activated the system passes priority for you automatically after you have put an activated ability on the stack.");
         cbPassPriorityActivation.setActionCommand("");
         cbPassPriorityActivation.setPreferredSize(new java.awt.Dimension(300, 25));
-        cbPassPriorityActivation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPassPriorityActivationActionPerformed(evt);
-            }
-        });
+        cbPassPriorityActivation.addActionListener(evt -> cbPassPriorityActivationActionPerformed(evt));
         phases_stopSettings.add(cbPassPriorityActivation);
 
         cbAutoOrderTrigger.setText("Set order for your triggers automatically if all have the same text");
         cbAutoOrderTrigger.setToolTipText("<HTML>If activated the order to put on the stack your triggers that trigger at the same time<br/>\nis set automatically if all have the same text.");
         cbAutoOrderTrigger.setActionCommand("");
         cbAutoOrderTrigger.setPreferredSize(new java.awt.Dimension(300, 25));
-        cbAutoOrderTrigger.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAutoOrderTriggerActionPerformed(evt);
-            }
-        });
+        cbAutoOrderTrigger.addActionListener(evt -> cbAutoOrderTriggerActionPerformed(evt));
         phases_stopSettings.add(cbAutoOrderTrigger);
 
         org.jdesktop.layout.GroupLayout tabPhasesLayout = new org.jdesktop.layout.GroupLayout(tabPhases);
@@ -1448,34 +1380,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
         panelCardImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images:"));
 
         cbUseDefaultImageFolder.setText("Use default location to save images");
-        cbUseDefaultImageFolder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUseDefaultImageFolderActionPerformed(evt);
-            }
-        });
+        cbUseDefaultImageFolder.addActionListener(evt -> cbUseDefaultImageFolderActionPerformed(evt));
 
         txtImageFolderPath.setToolTipText("The selected image will be used as background picture. You have to restart MAGE to view a changed background image.");
 
         btnBrowseImageLocation.setText("Browse...");
-        btnBrowseImageLocation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBrowseImageLocationActionPerformed(evt);
-            }
-        });
+        btnBrowseImageLocation.addActionListener(evt -> btnBrowseImageLocationActionPerformed(evt));
 
         cbCheckForNewImages.setText("Check for new images on startup");
-        cbCheckForNewImages.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCheckForNewImagesActionPerformed(evt);
-            }
-        });
+        cbCheckForNewImages.addActionListener(evt -> cbCheckForNewImagesActionPerformed(evt));
 
         cbSaveToZipFiles.setText("Store images in zip files");
-        cbSaveToZipFiles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSaveToZipFilesActionPerformed(evt);
-            }
-        });
+        cbSaveToZipFiles.addActionListener(evt -> cbSaveToZipFilesActionPerformed(evt));
 
         cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -1546,51 +1462,23 @@ public class PreferencesDialog extends javax.swing.JDialog {
         panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images setting:"));
 
         cbUseDefaultBackground.setText("Use default image");
-        cbUseDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUseDefaultBackgroundActionPerformed(evt);
-            }
-        });
+        cbUseDefaultBackground.addActionListener(evt -> cbUseDefaultBackgroundActionPerformed(evt));
 
-        txtBackgroundImagePath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBackgroundImagePathActionPerformed(evt);
-            }
-        });
+        txtBackgroundImagePath.addActionListener(evt -> txtBackgroundImagePathActionPerformed(evt));
 
         btnBrowseBackgroundImage.setText("Browse...");
-        btnBrowseBackgroundImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBrowseBackgroundImageActionPerformed(evt);
-            }
-        });
+        btnBrowseBackgroundImage.addActionListener(evt -> btnBrowseBackgroundImageActionPerformed(evt));
 
-        txtBattlefieldImagePath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBattlefieldImagePathActionPerformed(evt);
-            }
-        });
+        txtBattlefieldImagePath.addActionListener(evt -> txtBattlefieldImagePathActionPerformed(evt));
 
         btnBrowseBattlefieldImage.setText("Browse...");
-        btnBrowseBattlefieldImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBrowseBattlefieldImageActionPerformed(evt);
-            }
-        });
+        btnBrowseBattlefieldImage.addActionListener(evt -> btnBrowseBattlefieldImageActionPerformed(evt));
 
         cbUseDefaultBattleImage.setText("Use default battlefield image");
-        cbUseDefaultBattleImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUseDefaultBattleImageActionPerformed(evt);
-            }
-        });
+        cbUseDefaultBattleImage.addActionListener(evt -> cbUseDefaultBattleImageActionPerformed(evt));
 
         cbUseRandomBattleImage.setText("Select random battlefield image");
-        cbUseRandomBattleImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUseRandomBattleImageActionPerformed(evt);
-            }
-        });
+        cbUseRandomBattleImage.addActionListener(evt -> cbUseRandomBattleImageActionPerformed(evt));
 
         jLabel14.setText("Background:");
 
@@ -1650,25 +1538,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card rendering:"));
 
         cbCardRenderImageFallback.setText("Fall back to plain image based rendering");
-        cbCardRenderImageFallback.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCardRenderImageFallbackActionPerformed(evt);
-            }
-        });
+        cbCardRenderImageFallback.addActionListener(evt -> cbCardRenderImageFallbackActionPerformed(evt));
 
         cbCardRenderShowReminderText.setText("Show reminder text in rendered card textboxes");
-        cbCardRenderShowReminderText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCardRenderShowReminderTextActionPerformed(evt);
-            }
-        });
+        cbCardRenderShowReminderText.addActionListener(evt -> cbCardRenderShowReminderTextActionPerformed(evt));
 
         cbCardRenderHideSetSymbol.setText("Hide set symbols on cards (more space on the type line for card types)");
-        cbCardRenderHideSetSymbol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCardRenderHideSetSymbolActionPerformed(evt);
-            }
-        });
+        cbCardRenderHideSetSymbol.addActionListener(evt -> cbCardRenderHideSetSymbolActionPerformed(evt));
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1723,38 +1599,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         cbEnableGameSounds.setText("Enable game sounds");
         cbEnableGameSounds.setToolTipText("Sounds that will be played for certain actions (e.g. play land, attack, etc.) during the game.");
-        cbEnableGameSounds.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEnableGameSoundsActionPerformed(evt);
-            }
-        });
+        cbEnableGameSounds.addActionListener(evt -> cbEnableGameSoundsActionPerformed(evt));
         sounds_clips.add(cbEnableGameSounds);
 
         cbEnableDraftSounds.setText("Enable draft sounds");
         cbEnableDraftSounds.setToolTipText("Sounds that will be played during drafting for card picking or warining if time runs out.");
-        cbEnableDraftSounds.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEnableDraftSoundsActionPerformed(evt);
-            }
-        });
+        cbEnableDraftSounds.addActionListener(evt -> cbEnableDraftSoundsActionPerformed(evt));
         sounds_clips.add(cbEnableDraftSounds);
 
         cbEnableSkipButtonsSounds.setText("Enable skip button sounds");
         cbEnableSkipButtonsSounds.setToolTipText("Sounds that will be played if a priority skip action (F4/F5/F7/F9) or cancel skip action (F3) is used.");
-        cbEnableSkipButtonsSounds.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEnableSkipButtonsSoundsActionPerformed(evt);
-            }
-        });
+        cbEnableSkipButtonsSounds.addActionListener(evt -> cbEnableSkipButtonsSoundsActionPerformed(evt));
         sounds_clips.add(cbEnableSkipButtonsSounds);
 
         cbEnableOtherSounds.setText("Enable other sounds");
         cbEnableOtherSounds.setToolTipText("Sounds that will be played for actions outside of games (e.g. whisper, player joins your game, player submits a deck ...).");
-        cbEnableOtherSounds.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEnableOtherSoundsActionPerformed(evt);
-            }
-        });
+        cbEnableOtherSounds.addActionListener(evt -> cbEnableOtherSoundsActionPerformed(evt));
         sounds_clips.add(cbEnableOtherSounds);
 
         sounds_backgroundMusic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Music"));
@@ -1762,27 +1622,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbEnableBattlefieldBGM.setText("Play music during match");
         cbEnableBattlefieldBGM.setToolTipText("During your matches music will be played from the seleced folder.");
         cbEnableBattlefieldBGM.setActionCommand("Play automatically during matches");
-        cbEnableBattlefieldBGM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEnableBattlefieldBGMActionPerformed(evt);
-            }
-        });
+        cbEnableBattlefieldBGM.addActionListener(evt -> cbEnableBattlefieldBGMActionPerformed(evt));
 
         jLabel16.setText("Playing from folder:");
         jLabel16.setToolTipText("");
 
-        txtBattlefieldIBGMPath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBattlefieldIBGMPathActionPerformed(evt);
-            }
-        });
+        txtBattlefieldIBGMPath.addActionListener(evt -> txtBattlefieldIBGMPathActionPerformed(evt));
 
         btnBattlefieldBGMBrowse.setText("Browse...");
-        btnBattlefieldBGMBrowse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBattlefieldBGMBrowseActionPerformed(evt);
-            }
-        });
+        btnBattlefieldBGMBrowse.addActionListener(evt -> btnBattlefieldBGMBrowseActionPerformed(evt));
 
         org.jdesktop.layout.GroupLayout sounds_backgroundMusicLayout = new org.jdesktop.layout.GroupLayout(sounds_backgroundMusic);
         sounds_backgroundMusic.setLayout(sounds_backgroundMusicLayout);
@@ -2337,11 +2185,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         lblProxyType.setText("Proxy:");
 
-        cbProxyType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbProxyTypeActionPerformed(evt);
-            }
-        });
+        cbProxyType.addActionListener(evt -> cbProxyTypeActionPerformed(evt));
 
         pnlProxySettings.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -2359,18 +2203,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         lblProxyPassword.setText("Password:");
 
-        txtPasswordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordFieldActionPerformed(evt);
-            }
-        });
+        txtPasswordField.addActionListener(evt -> txtPasswordFieldActionPerformed(evt));
 
         rememberPswd.setText("Remember Password");
-        rememberPswd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rememberPswdActionPerformed(evt);
-            }
-        });
+        rememberPswd.addActionListener(evt -> rememberPswdActionPerformed(evt));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         jLabel11.setText("Note: password won't be encrypted!");
@@ -2517,11 +2353,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         controlsDescriptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         bttnResetControls.setText("Reset to default");
-        bttnResetControls.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnResetControlsActionPerformed(evt);
-            }
-        });
+        bttnResetControls.addActionListener(evt -> bttnResetControlsActionPerformed(evt));
 
         org.jdesktop.layout.GroupLayout tabControlsLayout = new org.jdesktop.layout.GroupLayout(tabControls);
         tabControls.setLayout(tabControlsLayout);
@@ -2613,22 +2445,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
         saveButton.setMinimumSize(new java.awt.Dimension(100, 30));
         saveButton.setPreferredSize(new java.awt.Dimension(100, 30));
         saveButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
+        saveButton.addActionListener(evt -> saveButtonActionPerformed(evt));
 
         exitButton.setText("Exit");
         exitButton.setMaximumSize(new java.awt.Dimension(100, 30));
         exitButton.setMinimumSize(new java.awt.Dimension(100, 30));
         exitButton.setPreferredSize(new java.awt.Dimension(100, 30));
         exitButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitButtonActionPerformed(evt);
-            }
-        });
+        exitButton.addActionListener(evt -> exitButtonActionPerformed(evt));
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -3097,7 +2921,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cbCardRenderHideSetSymbolActionPerformed
 
     private void bttnResetControlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnResetControlsActionPerformed
-        getKeybindButtons().stream().forEach((bttn) -> {
+        getKeybindButtons().forEach((bttn) -> {
             String id = bttn.getKey();
             int keyCode = getDefaultControlKey(id);
             bttn.setKeyCode(keyCode);
@@ -3166,43 +2990,40 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         }
         final int openedTab = param;
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                if (!dialog.isVisible()) {
-                    Preferences prefs = MageFrame.getPreferences();
+        java.awt.EventQueue.invokeLater(() -> {
+            if (!dialog.isVisible()) {
+                Preferences prefs = MageFrame.getPreferences();
 
-                    // Main & Phases
-                    loadPhases(prefs);
+                // Main & Phases
+                loadPhases(prefs);
 
-                    // Gui Size
-                    loadGuiSize(prefs);
+                // Gui Size
+                loadGuiSize(prefs);
 
-                    // Images
-                    loadImagesSettings(prefs);
+                // Images
+                loadImagesSettings(prefs);
 
-                    // Sounds
-                    loadSoundSettings(prefs);
+                // Sounds
+                loadSoundSettings(prefs);
 
-                    // Connection
-                    loadProxySettings(prefs);
+                // Connection
+                loadProxySettings(prefs);
 
-                    // Controls
-                    loadControlSettings(prefs);
+                // Controls
+                loadControlSettings(prefs);
 
-                    // Selected avatar
-                    loadSelectedAvatar(prefs);
+                // Selected avatar
+                loadSelectedAvatar(prefs);
 
-                    dialog.reset();
-                    // open specified tab before displaying
-                    openTab(openedTab);
+                dialog.reset();
+                // open specified tab before displaying
+                openTab(openedTab);
 
-                    dialog.setLocation(300, 200);
+                dialog.setLocation(300, 200);
 
-                    dialog.setVisible(true);
-                } else {
-                    dialog.requestFocus();
-                }
+                dialog.setVisible(true);
+            } else {
+                dialog.requestFocus();
             }
         });
     }

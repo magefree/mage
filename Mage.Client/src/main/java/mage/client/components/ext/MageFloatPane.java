@@ -21,11 +21,9 @@ public class MageFloatPane extends JEditorPane {
     }
 
     public void setCard(final String text) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                setText(text);
-                setCaretPosition(0);
-            }
+        SwingUtilities.invokeLater(() -> {
+            setText(text);
+            setCaretPosition(0);
         });
     }
 }

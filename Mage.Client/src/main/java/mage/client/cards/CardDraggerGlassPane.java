@@ -3,7 +3,6 @@ package mage.client.cards;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
 import mage.view.CardView;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +10,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by StravantUser on 2016-09-22.
  */
 public class CardDraggerGlassPane implements MouseListener, MouseMotionListener {
-    private DragCardSource source;
+    private final DragCardSource source;
     private Component dragComponent;
     private JRootPane currentRoot;
     private JComponent glassPane;

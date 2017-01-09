@@ -24,9 +24,9 @@ import org.mage.plugins.card.dl.beans.collections.ListenableCollections.MapListe
 public class PropertyChangeMapListener<K, V> implements MapListener<K, V> {
     private static final long     serialVersionUID = 625853864429729560L;
 
-    private PropertyChangeSupport s;
-    private Map<K, V>             map;
-    private String                propertyName;
+    private final PropertyChangeSupport s;
+    private final Map<K, V>             map;
+    private final String                propertyName;
 
     public PropertyChangeMapListener(PropertyChangeSupport s, Map<K, V> map, String propertyName) {
         this.s = s;
@@ -49,8 +49,8 @@ public class PropertyChangeMapListener<K, V> implements MapListener<K, V> {
     public static abstract class MapEvent<K, V> extends PropertyChangeEvent {
         private static final long serialVersionUID = -651568020675693544L;
 
-        private Map<K, V>         map;
-        private K                 key;
+        private final Map<K, V>         map;
+        private final K                 key;
 
         public MapEvent(Object source, String propertyName, Map<K, V> map, K key) {
             super(source, propertyName, null, null);
@@ -77,7 +77,7 @@ public class PropertyChangeMapListener<K, V> implements MapListener<K, V> {
     public static class MapPutEvent<K, V> extends MapEvent<K, V> {
         private static final long serialVersionUID = 6006291474676939650L;
 
-        private V                 newElement;
+        private final V                 newElement;
 
         public MapPutEvent(Object source, String propertyName, Map<K, V> map, K key, V newElement) {
             super(source, propertyName, map, key);
@@ -92,7 +92,8 @@ public class PropertyChangeMapListener<K, V> implements MapListener<K, V> {
     public static class MapSetEvent<K, V> extends MapEvent<K, V> {
         private static final long serialVersionUID = -2419438379909500079L;
 
-        private V                 oldElement, newElement;
+        private final V                 oldElement;
+        private final V newElement;
 
         public MapSetEvent(Object source, String propertyName, Map<K, V> map, K key, V oldElement, V newElement) {
             super(source, propertyName, map, key);
@@ -112,7 +113,7 @@ public class PropertyChangeMapListener<K, V> implements MapListener<K, V> {
     public static class MapRemoveEvent<K, V> extends MapEvent<K, V> {
         private static final long serialVersionUID = -2644879706878221895L;
 
-        private V                 oldElement;
+        private final V                 oldElement;
 
         public MapRemoveEvent(Object source, String propertyName, Map<K, V> map, K key, V oldElement) {
             super(source, propertyName, map, key);

@@ -42,7 +42,6 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;

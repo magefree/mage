@@ -27,7 +27,6 @@
  */
 package org.mage.test.cards.control;
 
-import org.mage.test.cards.prevention.*;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;

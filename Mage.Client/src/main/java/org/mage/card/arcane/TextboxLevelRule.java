@@ -15,10 +15,10 @@ import java.util.List;
 public class TextboxLevelRule extends TextboxRule {
 
     // The levels that this rule applies to
-    public int levelFrom;
-    public int levelTo;
+    public final int levelFrom;
+    public final int levelTo;
 
-    public static int AND_HIGHER = 100;
+    public static final int AND_HIGHER = 100;
 
     public TextboxLevelRule(String text, List<AttributeRegion> regions, int levelFrom, int levelTo) {
         super(text, regions, TextboxRuleType.LEVEL);
