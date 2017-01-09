@@ -45,7 +45,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
     //TODO: might have to make E extend Copyable
 
-    protected List<E> list = new ArrayList<>();
+    protected final List<E> list = new ArrayList<>();
 
     protected final ReentrantLock lock = new ReentrantLock();
 
@@ -357,8 +357,8 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
     private class CircularIterator<E> implements Iterator<E> {
 
         int cursor;
-        int lastIndex;
-        int curModCount;
+        final int lastIndex;
+        final int curModCount;
         boolean hasMoved = false;
 
         private CircularIterator() {
@@ -399,9 +399,9 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
     private class CircularListIterator<E> implements ListIterator<E> {
 
         int cursor;
-        int lastIndex;
-        int firstIndex;
-        int curModCount;
+        final int lastIndex;
+        final int firstIndex;
+        final int curModCount;
         boolean hasMoved = false;
 
         private CircularListIterator() {
