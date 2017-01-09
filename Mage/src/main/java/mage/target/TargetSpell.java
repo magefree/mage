@@ -132,6 +132,6 @@ public class TargetSpell extends TargetObject {
     private boolean canBeChosen(StackObject stackObject, UUID sourceID, UUID sourceControllerId, Game game) {
         return stackObject instanceof Spell
                 && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
-                && filter.match((Spell) stackObject, sourceID, sourceControllerId, game);
+                && filter.match(stackObject, sourceID, sourceControllerId, game);
     }
 }

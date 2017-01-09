@@ -57,16 +57,6 @@ public class TargetOpponent extends TargetPlayer {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return super.canChoose(sourceId, sourceControllerId, game);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        return super.canTarget(id, source, game);
-    }
-
-    @Override
     public TargetOpponent copy() {
         return new TargetOpponent(this);
     }
