@@ -37,6 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.RevoltWatcher;
 
@@ -65,6 +66,7 @@ public class FatalPush extends CardImpl {
         return new FatalPush(this);
     }
 }
+
 class FatalPushEffect extends OneShotEffect {
 
     FatalPushEffect() {
@@ -83,11 +85,14 @@ class FatalPushEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
-            int cmc = targetCreature.getConvertedManaCost();
-            if (cmc <= 2 || (RevoltCondition.getInstance().apply(game, source) && cmc <= 4)) {
-                targetCreature.destroy(source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+            if (targetCreature != null) {
+                int cmc = targetCreature.getConvertedManaCost();
+                if (cmc <= 2 || (RevoltCondition.getInstance().apply(game, source) && cmc <= 4)) {
+                    targetCreature.destroy(source.getSourceId(), game, false);
+                }
             }
             return true;
         }
