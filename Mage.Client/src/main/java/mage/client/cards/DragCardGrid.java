@@ -40,9 +40,11 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import mage.cards.Card;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -52,6 +54,9 @@ import javax.swing.SwingUtilities;
 import mage.cards.MageCard;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
@@ -66,6 +71,7 @@ import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.constants.CardType;
+import mage.util.RandomUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
@@ -577,7 +583,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         void hideCards(Collection<CardView> card);
 
         void duplicateCards(Collection<CardView> cards);
-        
+
         void invertCardSelection(Collection<CardView> cards);
 
         void showAll();
@@ -606,6 +612,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     JButton visibilityButton;
     JButton selectByButton;
     JButton analyseButton;
+    JButton blingButton;
 
     // Popup for toolbar
     JPopupMenu filterPopup;
@@ -756,9 +763,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // Toolbar
         sortButton = new JButton("Sort");
         filterButton = new JButton("Filter");
-        visibilityButton = new JButton("Visibility");
+        visibilityButton = new JButton("V"); // "Visibility" button
         selectByButton = new JButton("Select By");
-        analyseButton = new JButton("Mana");
+        analyseButton = new JButton("M"); // "Mana" button
+        blingButton = new JButton("B"); // "Bling" button
 
         // Name and count label
         deckNameAndCountLabel = new JLabel();
@@ -779,9 +787,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         toolbarInner.add(creatureCountLabel);
         toolbarInner.add(sortButton);
         toolbarInner.add(filterButton);
-        toolbarInner.add(visibilityButton);
         toolbarInner.add(selectByButton);
+        toolbarInner.add(visibilityButton);
         toolbarInner.add(analyseButton);
+        toolbarInner.add(blingButton);
         toolbar.add(toolbarInner, BorderLayout.WEST);
         JPanel sliderPanel = new JPanel(new GridBagLayout());
         sliderPanel.setOpaque(false);
@@ -929,6 +938,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             JMenuItem showAll = new JMenuItem("Show all");
             showAll.addActionListener(e -> showAll());
             visPopup.add(showAll);
+            visibilityButton.setToolTipText("Visibility of cards.  Right click to get the same options this provides");
             visibilityButton.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -956,15 +966,15 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             ButtonGroup selectByTypeModeGroup = new ButtonGroup();
             for (final CardType cardType : CardType.values()) {
 
-                if (cardType == cardType.CONSPIRACY) { 
+                if (cardType == cardType.CONSPIRACY) {
                     multiplesButton = new JToggleButton("Multiples");
                     selectByTypeButtons.put(cardType, multiplesButton);
                     selectByTypeMode.add(multiplesButton);
                     selectByTypeModeGroup.add(multiplesButton);
                     multiplesButton.addActionListener(e -> {
-                            multiplesButton.setSelected(!multiplesButton.isSelected());
-                            reselectBy();
-                            });
+                        multiplesButton.setSelected(!multiplesButton.isSelected());
+                        reselectBy();
+                    });
                     continue;
                 }
 
@@ -1011,11 +1021,20 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
 
         // Analyse Mana (aka #blue pips, #islands, #white pips, #plains etc.)
-        analyseButton.setToolTipText("Counts coloured/colourless mana costs. Counts land types.");
+        analyseButton.setToolTipText("Mana Analyser! Counts coloured/colourless mana costs. Counts land types.");
 
         analyseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 analyseDeck();
+            }
+        });
+
+        // Bling button - aka Add in a premium 'JR', 'MBP', 'CS' etc card 
+        blingButton.setToolTipText("Bling your deck! Select the original and added cards by selecting 'Multiples' in the selection options");
+
+        blingButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                blingDeck();
             }
         });
 
@@ -1108,7 +1127,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             l.duplicateCards(toDuplicate);
         }
     }
-    
+
     private void invertSelection() {
         Collection<CardView> toInvert = allCards;
         for (DragCardGridListener l : listeners) {
@@ -1478,6 +1497,84 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         MageFrame.getInstance().showMessage(finalInfo);
     }
 
+    public void blingDeck() {
+        if (!(this.mode == Constants.DeckEditorMode.FREE_BUILDING)) {
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(null, "Are you sure you want to bling your deck?  This process will add cards!", "WARNING",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        HashMap<String, Integer> pimpedSets = new HashMap<>();
+        HashMap<CardView, Integer> pimpedCards = new HashMap<>();
+        pimpedSets.put("CP", 1);
+        pimpedSets.put("JR", 1);
+        pimpedSets.put("MPS", 1);
+        pimpedSets.put("CLASH", 1);
+        pimpedSets.put("ARENA", 1);
+        pimpedSets.put("UGIN", 1);
+        pimpedSets.put("WMCQ", 1);
+        pimpedSets.put("APAC", 1);
+        pimpedSets.put("EURO", 1);
+        pimpedSets.put("FNMP", 1);
+        pimpedSets.put("MGDC", 1);
+        pimpedSets.put("MPRP", 1);
+        pimpedSets.put("EXP", 1);
+        pimpedSets.put("GPX", 1);
+        pimpedSets.put("GRC", 1);
+        pimpedSets.put("MBP", 1);
+        pimpedSets.put("MLP", 1);
+        pimpedSets.put("PLS", 1);
+        pimpedSets.put("PTC", 1);
+        pimpedSets.put("SUS", 1);
+
+        String[] sets = pimpedSets.keySet().toArray(new String[pimpedSets.keySet().size()]);
+        Boolean didModify = false;
+
+        for (ArrayList<ArrayList<CardView>> gridRow : cardGrid) {
+            for (ArrayList<CardView> stack : gridRow) {
+                for (CardView card : stack) {
+                    if (card.getSuperTypes().contains("Basic")) {
+                        continue;
+                    }
+
+                    if (!pimpedSets.containsKey(card.getExpansionSetCode())) {
+                        final CardCriteria cardCriteria = new CardCriteria();
+                        cardCriteria.setCodes(sets);
+                        cardCriteria.name(card.getName());
+
+                        List<CardInfo> cardPool = CardRepository.instance.findCards(cardCriteria);
+
+                        if (cardPool.size() > 0) {
+                            Card acard = cardPool.get(RandomUtil.nextInt(cardPool.size())).getMockCard();
+
+                            if (acard.getName().equals(card.getName())) {
+                                CardView pimpedCard = new CardView(acard);
+                                addCardView(pimpedCard, false);
+                                eventSource.addSpecificCard(pimpedCard, "add-specific-card");
+                                pimpedCards.put(pimpedCard, 1);
+                                didModify = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (didModify) {
+                for (CardView c : pimpedCards.keySet()) {
+                    sortIntoGrid(c);
+                }
+
+                layoutGrid();
+                cardScroll.revalidate();
+                repaint();
+                JOptionPane.showMessageDialog(null, "Added " + pimpedCards.size() + " cards.  You can select them and the originals by choosing 'Multiples'");
+            }
+        }
+    }
+
     // Update the contents of the card grid
     public void setCards(CardsView cardsView, DeckCardLayout layout, BigCard bigCard) {
         if (bigCard != null) {
@@ -1640,10 +1737,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             AbstractButton button = selectByTypeButtons.get(cardType);
             String text = cardType.toString();
             int numCards = getCount(cardType);
-            if (cardType == cardType.CONSPIRACY) { 
+            if (cardType == cardType.CONSPIRACY) {
                 continue;
             }
-            
+
             if (numCards > 0) {
                 button.setForeground(Color.BLACK);
                 text = text + " - " + numCards;
@@ -1659,7 +1756,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         JMenuItem hide = new JMenuItem("Hide");
         hide.addActionListener(e2 -> hideSelection());
         menu.add(hide);
-        
+
         JMenuItem invertSelection = new JMenuItem("Invert Selection");
         invertSelection.addActionListener(e2 -> invertSelection());
         menu.add(invertSelection);
