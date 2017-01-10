@@ -67,5 +67,8 @@ public class Standard extends Constructed {
                 }
             }
         }
+        banned.add("Emrakul, the Promised End");
+        banned.add("Reflector Mage");
+        banned.add("Smuggler's Copter");
     }
 }

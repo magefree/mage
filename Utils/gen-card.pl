@@ -227,11 +227,31 @@ foreach my $ability (@abilities) {
                         $ability =~ m/({.*})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, new ManaCostsImpl("' . fixCost($1) . '")));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
+                    } elsif ($keywords{$kw} eq 'type') {
+                        $ability =~ m/\s([a-zA-Z\s]*)/g;
+                        if ($1 =~ m/(^.*\s.*)/g) {
+                            $vars{'abilities'} .= "\n        TargetPermanent auraTarget = new TargetPermanent(filter);";
+                        } else {
+                            $vars{'abilities'} .= "\n        TargetPermanent auraTarget = new Target". toCamelCase($1) . "Permanent();";
+                            $vars{'abilitiesImports'} .= "\nimport mage.target.common.Target". toCamelCase($1) . "Permanent;";
+                        }
+                        $vars{'abilities'} .= "\n        this.getSpellAbility().addTarget(auraTarget);";
+                        $vars{'abilities'} .= "\n        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));";
+                        $vars{'abilities'} .= "\n        Ability ability = new EnchantAbility(auraTarget.getTargetName());";
+                        $vars{'abilities'} .= "\n        this.addAbility(ability);";
+                        $vars{'abilitiesImports'} .= "\nimport mage.abilities.Ability;";
+                        $vars{'abilitiesImports'} .= "\nimport mage.abilities.effects.common.AttachEffect;";
+                        $vars{'abilitiesImports'} .= "\nimport mage.constants.Outcome;";
+                        $vars{'abilitiesImports'} .= "\nimport mage.target.TargetPermanent;";
+                    } elsif ($keywords{$kw} eq 'manaString') {
+                        $ability =~ m/({.*})/g;
+                        $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability("' . fixCost($1) . '"));';
                     }
                     $vars{'abilitiesImports'} .= "\nimport mage.abilities.keyword." . $kw . "Ability;";
                 } else {
                     $vars{'abilities'} .= "\n        // $kwUnchanged";
                 }
+                $vars{'abilities'} .= "\n";
             }
         }
     }
