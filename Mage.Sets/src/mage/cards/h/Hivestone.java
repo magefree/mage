@@ -43,9 +43,8 @@ class CreaturesAreSliversEffect extends ContinuousEffectImpl {
 
 
     public CreaturesAreSliversEffect() {
-
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
-        staticText = "All permanents are artifacts in addition to their other types";
+        staticText = "Creatures you control are Slivers in addition to their other creature types.";
     }
 
     @Override
