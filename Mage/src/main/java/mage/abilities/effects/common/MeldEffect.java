@@ -98,7 +98,7 @@ public class MeldEffect extends OneShotEffect {
                 // Create the meld card and move it to the battlefield.
                 Card sourceCard = game.getExile().getCard(sourceId, game);
                 Card meldWithCard = game.getExile().getCard(meldWithId, game);
-                if (!sourceCard.isCopy() && !meldWithCard.isCopy()) {
+                if (sourceCard != null && !sourceCard.isCopy() && meldWithCard != null && !meldWithCard.isCopy()) {
                     meldCard.setOwnerId(controller.getId());
                     meldCard.setTopHalfCard(meldWithCard, game);
                     meldCard.setBottomHalfCard(sourceCard, game);
