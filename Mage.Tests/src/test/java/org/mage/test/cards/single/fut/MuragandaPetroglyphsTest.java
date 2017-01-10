@@ -171,15 +171,19 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
     /**
      * Cipher grants an ability to creatures, meaning the affected creatures would no longer get the +2/+2 bonus.
      */
-//     TODO See how to set the cipher ability in tests
-//    public void cipherTest() {
-//        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
-//        addCard(Zone.BATTLEFIELD, playerA, "Muraganda Petroglyphs", 1);
-//        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
-//
-//        addCard(Zone.HAND, playerA, "Shadow Slice"); // {4}{B}
-//        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shadow Slice");
-//
-//
-//    }
+    @Test
+    public void cipherTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Muraganda Petroglyphs", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
+
+        addCard(Zone.HAND, playerA, "Shadow Slice"); // {4}{B}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shadow Slice");
+        setChoice(playerA, "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, "Grizzly Bears", 2, 2);
+    }
 }
