@@ -47,7 +47,7 @@ public class DaringDemolition extends CardImpl {
     private final static FilterPermanent filter = new FilterPermanent("creature or Vehicle");
 
     static {
-        Predicates.or(new CardTypePredicate(CardType.CREATURE), new SubtypePredicate("Vehicle"));
+        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new SubtypePredicate("Vehicle")));
     }
 
     public DaringDemolition(UUID ownerId, CardSetInfo setInfo) {
