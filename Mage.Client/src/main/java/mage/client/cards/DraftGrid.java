@@ -40,7 +40,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
@@ -62,7 +61,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 
     private static final Logger logger = Logger.getLogger(DraftGrid.class);
 
-    protected CardEventSource cardEventSource = new CardEventSource();
+    protected final CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected MageCard markedCard;
     protected boolean emptyGrid;
@@ -126,7 +125,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
             Dimension dimension = new Dimension(cardDimension.frameWidth, cardDimension.frameHeight);
 
             List<CardView> sortedCards = new ArrayList<>(booster.values());
-            Collections.sort(sortedCards, new CardViewRarityComparator());
+            sortedCards.sort(new CardViewRarityComparator());
             for (CardView card: sortedCards) {
                 MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, null, true, true);
                 cardImg.addMouseListener(this);

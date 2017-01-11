@@ -30,7 +30,6 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -46,8 +45,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 

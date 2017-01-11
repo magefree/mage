@@ -42,7 +42,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.PermanentCard;

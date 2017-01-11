@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -72,7 +71,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
     private final List<MagePermanent> links = new ArrayList<>();
 
-    public JPanel buttonPanel;
+    public final JPanel buttonPanel;
     private JButton dayNightButton;
     private JButton showCopySourceButton;
 
@@ -89,11 +88,11 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     private ActionCallback callback;
 
     protected boolean tooltipShowing;
-    protected TextPopup tooltipText;
+    protected final TextPopup tooltipText;
     protected UUID gameId;
     private TransferData data = new TransferData();
 
-    private boolean isPermanent;
+    private final boolean isPermanent;
     private boolean hasSickness;
     private String zone;
 
@@ -139,17 +138,14 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             dayNightButton.setToolTipText("This permanent is a double faced card. To see the back face card, push this button or turn mouse wheel down while hovering with the mouse pointer over the permanent.");
             BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
             dayNightButton.setIcon(new ImageIcon(day));
-            dayNightButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // if card is being rotated, ignore action performed
-                    // if card is tapped, no visual transforming is possible (implementation limitation)
-                    // if card is permanent, it will be rotated by Mage, so manual rotate should be possible
-                    if (animationInProgress || isTapped() || isPermanent) {
-                        return;
-                    }
-                    Animation.transformCard(CardPanel.this, CardPanel.this, true);
+            dayNightButton.addActionListener(e -> {
+                // if card is being rotated, ignore action performed
+                // if card is tapped, no visual transforming is possible (implementation limitation)
+                // if card is permanent, it will be rotated by Mage, so manual rotate should be possible
+                if (animationInProgress || isTapped() || isPermanent) {
+                    return;
                 }
+                Animation.transformCard(CardPanel.this, CardPanel.this, true);
             });
 
             // Add it
@@ -164,12 +160,9 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             showCopySourceButton.setToolTipText("This permanent is copying a target. To see original card, push this button or turn mouse wheel down while hovering with the mouse pointer over the permanent.");
             showCopySourceButton.setVisible(((PermanentView) this.gameCard).isCopy());
             showCopySourceButton.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getCopyInformIconImage()));
-            showCopySourceButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    ActionCallback callback = Plugins.getInstance().getActionCallback();
-                    ((MageActionCallback) callback).enlargeCard(EnlargeMode.COPY);
-                }
+            showCopySourceButton.addActionListener(e -> {
+                ActionCallback callback1 = Plugins.getInstance().getActionCallback();
+                ((MageActionCallback) callback1).enlargeCard(EnlargeMode.COPY);
             });
 
             // Add it

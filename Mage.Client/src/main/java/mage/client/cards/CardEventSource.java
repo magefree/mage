@@ -33,7 +33,6 @@ import mage.client.util.Event;
 import mage.client.util.EventDispatcher;
 import mage.client.util.EventSource;
 import mage.client.util.Listener;
-import mage.view.CardView;
 import mage.view.SimpleCardView;
 
 /**

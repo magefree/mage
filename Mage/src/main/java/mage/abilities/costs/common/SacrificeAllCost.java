@@ -38,7 +38,6 @@ import mage.constants.AbilityType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

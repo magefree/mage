@@ -41,11 +41,7 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
         final Iterable<T> it = Iterables.concat(new ArrayList<Iterable<T>>(l));
 
         //transform to singleton iterators
-        return new Iterable<T>() {
-            public Iterator<T> iterator() {
-                return new SingletonIterator<T>(it.iterator());
-            }
-        };
+        return () -> new SingletonIterator<T>(it.iterator());
     }
 
     /**
@@ -71,7 +67,7 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
     private class ListenerIterator<T> extends AbstractIterator<T> {
 
         private final Class<? extends T> listenerClass;
-        private Object[] listeners = listenerList;
+        private final Object[] listeners = listenerList;
         private int index = listeners.length;
 
         private ListenerIterator(Class<? extends T> listenerClass) {
@@ -96,12 +92,7 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
     private class ClassToIterableFunction<T> implements Function<Class<? extends T>, Iterable<T>> {
 
         public Iterable<T> apply(final Class<? extends T> from) {
-            return new Iterable<T>() {
-
-                public Iterator<T> iterator() {
-                    return new ListenerIterator<T>(from);
-                }
-            };
+            return () -> new ListenerIterator<T>(from);
         }
     }
 
@@ -111,8 +102,8 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
      */
     private static class SingletonIterator<T> extends AbstractIterator<T> {
 
-        private Iterator<T> it;
-        private HashSet<T> previous = new HashSet<T>();
+        private final Iterator<T> it;
+        private final HashSet<T> previous = new HashSet<T>();
 
         public SingletonIterator(Iterator<T> it) {
             this.it = it;

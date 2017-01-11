@@ -153,18 +153,10 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         lblPlayerDeck.setText("Deck:");
 
         btnPlayerDeck.setText("...");
-        btnPlayerDeck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlayerDeckActionPerformed(evt);
-            }
-        });
+        btnPlayerDeck.addActionListener(evt -> btnPlayerDeckActionPerformed(evt));
 
         btnGenerate.setText("Generate");
-        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerateActionPerformed(evt);
-            }
-        });
+        btnGenerate.addActionListener(evt -> btnGenerateActionPerformed(evt));
 
         lblLevel.setText("Skill:");
 

@@ -33,7 +33,7 @@ public enum AuthorizedUserRepository {
 
     private Dao<AuthorizedUser, Object> dao;
 
-    private AuthorizedUserRepository() {
+    AuthorizedUserRepository() {
         File file = new File("db");
         if (!file.exists()) {
             file.mkdirs();

@@ -52,7 +52,7 @@ import org.apache.log4j.Logger;
  */
 public class UserManager {
 
-    protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected static final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private static final Logger LOGGER = Logger.getLogger(UserManager.class);
 
@@ -68,12 +68,7 @@ public class UserManager {
     }
 
     private UserManager() {
-        expireExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                checkExpired();
-            }
-        }, 60, 60, TimeUnit.SECONDS);
+        expireExecutor.scheduleAtFixedRate(() -> checkExpired(), 60, 60, TimeUnit.SECONDS);
     }
 
     public User createUser(String userName, String host, AuthorizedUser authorizedUser) {
@@ -137,21 +132,18 @@ public class UserManager {
             final User user = users.get(userId);
             if (user != null) {
                 USER_EXECUTOR.execute(
-                        new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + "]");
-                            user.remove(reason);
-                            LOGGER.debug("USER REMOVE END - " + user.getName());
-                        } catch (Exception ex) {
-                            handleException(ex);
-                        } finally {
-                            users.remove(userId);
-                            usersByName.remove(user.getName());
+                        () -> {
+                            try {
+                                LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + "]");
+                                user.remove(reason);
+                                LOGGER.debug("USER REMOVE END - " + user.getName());
+                            } catch (Exception ex) {
+                                handleException(ex);
+                            } finally {
+                                users.remove(userId);
+                                usersByName.remove(user.getName());
+                            }
                         }
-                    }
-                }
                 );
             } else {
                 LOGGER.warn("Trying to remove userId: " + userId + " - but it does not exist.");
@@ -212,14 +204,11 @@ public class UserManager {
     }
 
     public void updateUserHistory() {
-        USER_EXECUTOR.execute(new Runnable() {
-            @Override
-            public void run() {
-                for (String updatedUser : UserStatsRepository.instance.updateUserStats()) {
-                    User user = getUserByName(updatedUser);
-                    if (user != null) {
-                        user.resetUserStats();
-                    }
+        USER_EXECUTOR.execute(() -> {
+            for (String updatedUser : UserStatsRepository.instance.updateUserStats()) {
+                User user = getUserByName(updatedUser);
+                if (user != null) {
+                    user.resetUserStats();
                 }
             }
         });

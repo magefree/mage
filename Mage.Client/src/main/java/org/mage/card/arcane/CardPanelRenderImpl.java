@@ -260,13 +260,9 @@ public class CardPanelRenderImpl extends CardPanel {
                     = new ImageKey(gameCard, artImage,
                             getCardWidth(), getCardHeight(),
                             isChoosable(), isSelected());
-            cardImage = IMAGE_CACHE.get(key);
+            cardImage = IMAGE_CACHE.computeIfAbsent(key, k -> renderCard());
 
             // No cached copy exists? Render one and cache it
-            if (cardImage == null) {
-                cardImage = renderCard();
-                IMAGE_CACHE.put(key, cardImage);
-            }
         }
 
         // And draw the image we now have
@@ -324,39 +320,33 @@ public class CardPanelRenderImpl extends CardPanel {
         // Submit a task to draw with the card art when it arrives
         if (artImage == null) {
             final int stamp = ++updateArtImageStamp;
-            Util.threadPool.submit(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        final BufferedImage srcImage;
-                        if (gameCard.isFaceDown()) {
-                            // Nothing to do
-                            srcImage = null;
-                        } else if (getCardWidth() > THUMBNAIL_SIZE_FULL.width) {
-                            srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
-                        } else {
-                            srcImage = ImageCache.getThumbnail(gameCard);
-                        }
-
-                        UI.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (stamp == updateArtImageStamp) {
-                                    artImage = srcImage;
-                                    cardRenderer.setArtImage(srcImage);
-                                    if (srcImage != null) {
-                                        // Invalidate and repaint
-                                        cardImage = null;
-                                        repaint();
-                                    }
-                                }
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } catch (Error err) {
-                        err.printStackTrace();
+            Util.threadPool.submit(() -> {
+                try {
+                    final BufferedImage srcImage;
+                    if (gameCard.isFaceDown()) {
+                        // Nothing to do
+                        srcImage = null;
+                    } else if (getCardWidth() > THUMBNAIL_SIZE_FULL.width) {
+                        srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
+                    } else {
+                        srcImage = ImageCache.getThumbnail(gameCard);
                     }
+
+                    UI.invokeLater(() -> {
+                        if (stamp == updateArtImageStamp) {
+                            artImage = srcImage;
+                            cardRenderer.setArtImage(srcImage);
+                            if (srcImage != null) {
+                                // Invalidate and repaint
+                                cardImage = null;
+                                repaint();
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } catch (Error err) {
+                    err.printStackTrace();
                 }
             });
         }

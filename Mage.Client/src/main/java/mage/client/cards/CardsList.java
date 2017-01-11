@@ -83,7 +83,7 @@ import org.mage.card.arcane.CardPanel;
  */
 public class CardsList extends javax.swing.JPanel implements MouseListener, ICardGrid {
 
-    protected CardEventSource cardEventSource = new CardEventSource();
+    protected final CardEventSource cardEventSource = new CardEventSource();
     private Dimension cardDimension;
     private int rowHeight;
     private CardsView cards;
@@ -346,8 +346,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                     break;
             }
             if (comparator != null) {
-                Collections.sort(sortedCards, new CardViewNameComparator());
-                Collections.sort(sortedCards, comparator);
+                sortedCards.sort(new CardViewNameComparator());
+                sortedCards.sort(comparator);
             }
             CardView lastCard = null;
             for (CardView card : sortedCards) {
@@ -536,11 +536,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         chkPiles.setText("Piles");
         chkPiles.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         chkPiles.setMargin(new java.awt.Insets(3, 2, 2, 2));
-        chkPiles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkPilesActionPerformed(evt);
-            }
-        });
+        chkPiles.addActionListener(evt -> chkPilesActionPerformed(evt));
 
         cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SortBy" }));
         cbSortBy.setToolTipText("Sort the cards if card view is active.");
@@ -549,11 +545,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         cbSortBy.setName("SortBy"); // NOI18N
         cbSortBy.setOpaque(false);
         cbSortBy.setPreferredSize(new java.awt.Dimension(120, 20));
-        cbSortBy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSortByActionPerformed(evt);
-            }
-        });
+        cbSortBy.addActionListener(evt -> cbSortByActionPerformed(evt));
 
         bgView.add(jToggleListView);
         jToggleListView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/list_panel.png"))); // NOI18N
@@ -564,11 +556,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         jToggleListView.setMaximumSize(new java.awt.Dimension(37, 25));
         jToggleListView.setMinimumSize(new java.awt.Dimension(37, 25));
         jToggleListView.setPreferredSize(new java.awt.Dimension(44, 22));
-        jToggleListView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleListViewActionPerformed(evt);
-            }
-        });
+        jToggleListView.addActionListener(evt -> jToggleListViewActionPerformed(evt));
 
         bgView.add(jToggleCardView);
         jToggleCardView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png"))); // NOI18N
@@ -576,11 +564,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         jToggleCardView.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jToggleCardView.setMargin(new java.awt.Insets(2, 6, 2, 6));
         jToggleCardView.setPreferredSize(new java.awt.Dimension(40, 22));
-        jToggleCardView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleCardViewActionPerformed(evt);
-            }
-        });
+        jToggleCardView.addActionListener(evt -> jToggleCardViewActionPerformed(evt));
 
         javax.swing.GroupLayout panelControlLayout = new javax.swing.GroupLayout(panelControl);
         panelControl.setLayout(panelControlLayout);

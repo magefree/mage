@@ -68,12 +68,12 @@ public class CardPluginImpl implements CardPlugin {
     private static final float STACK_SPACING_Y = 0.10f;
     private static final float ATTACHMENT_SPACING_Y = 0.13f;
 
-    private int landStackMax = 5;
+    private final int landStackMax = 5;
     // private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
     private int cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();
     private int cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();
 
-    private boolean stackVertical = false;
+    private final boolean stackVertical = false;
 
     private int playAreaWidth, playAreaHeight;
     private int cardWidth, cardHeight;
@@ -422,7 +422,7 @@ public class CardPluginImpl implements CardPlugin {
         return height - cardSpacingY + GUTTER_Y * 2;
     }
 
-    private static enum RowType {
+    private enum RowType {
         land, creature, other, attached;
 
         public boolean isType(MagePermanent card) {
@@ -581,7 +581,7 @@ public class CardPluginImpl implements CardPlugin {
     @Override
     public void onAddCard(MagePermanent card, int count) {
         if (card != null) {
-            Animation.showCard((CardPanel) card, count > 0 ? count : 1);
+            Animation.showCard(card, count > 0 ? count : 1);
             try {
                 while ((card).getAlpha() + 0.05f < 1) {
                     Thread.sleep(30);

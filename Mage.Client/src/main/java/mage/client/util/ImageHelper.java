@@ -49,8 +49,8 @@ import org.mage.card.arcane.UI;
  */
 public class ImageHelper {
 
-    protected static HashMap<String, BufferedImage> images = new HashMap<>();
-    protected static HashMap<String, BufferedImage> backgrounds = new HashMap<>();
+    protected static final HashMap<String, BufferedImage> images = new HashMap<>();
+    protected static final HashMap<String, BufferedImage> backgrounds = new HashMap<>();
 
     public static BufferedImage loadImage(String ref, int width, int height) {
         BufferedImage image = loadImage(ref);

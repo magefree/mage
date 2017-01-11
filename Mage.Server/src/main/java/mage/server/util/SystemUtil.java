@@ -56,8 +56,7 @@ public class SystemUtil {
 
             logger.info("Parsing init.txt... ");
 
-            Scanner scanner = new Scanner(f);
-            try {
+            try (Scanner scanner = new Scanner(f)) {
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine().trim();
                     if (line.trim().isEmpty() || line.startsWith("#")) {
@@ -114,8 +113,6 @@ public class SystemUtil {
                         swapWithAnyCard(game, player, card, gameZone);
                     }
                 }
-            } finally {
-                scanner.close();
             }
         } catch (Exception e) {
             logger.fatal("", e);

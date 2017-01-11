@@ -34,17 +34,14 @@
 
 package mage.client.table;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import mage.cards.decks.importer.DeckImporterUtil;
-import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
-import mage.remote.Session;
 
 /**
  *
@@ -52,7 +49,7 @@ import mage.remote.Session;
  */
 public class TablePlayerPanel extends javax.swing.JPanel {
 
-    protected PlayerTypeEventSource playerTypeEventSource = new PlayerTypeEventSource();
+    protected final PlayerTypeEventSource playerTypeEventSource = new PlayerTypeEventSource();
 
 
     /** Creates new form TablePlayerPanel */
@@ -78,7 +75,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         } 
     }
 
-    public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public boolean joinTable(UUID roomId, UUID tableId) throws IOException, ClassNotFoundException {
         if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
             return SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (String)this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()),"");
          }
@@ -114,11 +111,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
         lbPlayerType.setText("Type:");
 
-        cbPlayerType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPlayerTypeActionPerformed(evt);
-            }
-        });
+        cbPlayerType.addActionListener(evt -> cbPlayerTypeActionPerformed(evt));
 
         lblPlayerNum.setFont(new java.awt.Font("Tahoma", 1, 11));
         lblPlayerNum.setText("Player #");

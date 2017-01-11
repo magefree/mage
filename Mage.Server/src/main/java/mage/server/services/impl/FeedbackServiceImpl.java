@@ -12,7 +12,7 @@ import java.util.Calendar;
 public enum FeedbackServiceImpl implements FeedbackService {
     instance;
 
-    private static Logger log = Logger.getLogger(FeedbackServiceImpl.class);
+    private static final Logger log = Logger.getLogger(FeedbackServiceImpl.class);
 
     @Override
     public void feedback(String username, String title, String type, String message, String email, String host) {

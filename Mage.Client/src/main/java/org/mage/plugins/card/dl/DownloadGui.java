@@ -9,8 +9,6 @@ package org.mage.plugins.card.dl;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -55,12 +53,7 @@ public class DownloadGui extends JPanel {
         p.setBorder(BorderFactory.createTitledBorder("Progress:"));
         p.add(progress);
         JButton b = new JButton("X");
-        b.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getDownloader().dispose();
-            }
-        });
+        b.addActionListener(e -> getDownloader().dispose());
         p.add(b, BorderLayout.EAST);
         add(p, BorderLayout.NORTH);
 
@@ -160,14 +153,11 @@ public class DownloadGui extends JPanel {
             setBorder(BorderFactory.createTitledBorder(job.getName()));
             add(bar = new JProgressBar(job.getProgress()));
             JButton b = new JButton("X");
-            b.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    switch(getJob().getState()) {
-                        case NEW:
-                        case WORKING:
-                            getJob().setState(State.ABORTED);
-                    }
+            b.addActionListener(e -> {
+                switch(getJob().getState()) {
+                    case NEW:
+                    case WORKING:
+                        getJob().setState(State.ABORTED);
                 }
             });
             add(b, BorderLayout.EAST);

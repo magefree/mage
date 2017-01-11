@@ -181,7 +181,7 @@ public class NaturalOrderComparator implements Comparator
 
         System.out.println("Scrambled: " + scrambled);
 
-        Collections.sort(scrambled, new NaturalOrderComparator());
+        scrambled.sort(new NaturalOrderComparator());
 
         System.out.println("Sorted: " + scrambled);
     }

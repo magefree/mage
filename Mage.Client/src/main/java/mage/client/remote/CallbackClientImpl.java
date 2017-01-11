@@ -79,302 +79,299 @@ public class CallbackClientImpl implements CallbackClient {
     public synchronized void processCallback(final ClientCallback callback) {
         SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
         callback.setData(CompressUtil.decompress(callback.getData()));
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    logger.debug(callback.getMessageId() + " -- " + callback.getMethod());
-                    switch (callback.getMethod()) {
-                        case "startGame": {
-                            TableClientMessage message = (TableClientMessage) callback.getData();
-                            GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
-                            gameStarted(message.getGameId(), message.getPlayerId());
-                            break;
+        SwingUtilities.invokeLater(() -> {
+            try {
+                logger.debug(callback.getMessageId() + " -- " + callback.getMethod());
+                switch (callback.getMethod()) {
+                    case "startGame": {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
+                        gameStarted(message.getGameId(), message.getPlayerId());
+                        break;
+                    }
+                    case "startTournament": {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        tournamentStarted(message.getGameId(), message.getPlayerId());
+                        break;
+                    }
+                    case "startDraft": {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        draftStarted(message.getGameId(), message.getPlayerId());
+                        break;
+                    }
+                    case "replayGame":
+                        replayGame(callback.getObjectId());
+                        break;
+                    case "showTournament":
+                        showTournament(callback.getObjectId());
+                        break;
+                    case "watchGame":
+                        watchGame(callback.getObjectId());
+                        break;
+                    case "chatMessage": {
+                        ChatMessage message = (ChatMessage) callback.getData();
+                        ChatPanelBasic panel = MageFrame.getChat(callback.getObjectId());
+                        if (panel != null) {
+                            // play the sound related to the message
+                            if (message.getSoundToPlay() != null) {
+                                switch (message.getSoundToPlay()) {
+                                    case PlayerLeft:
+                                        AudioManager.playPlayerLeft();
+                                        break;
+                                    case PlayerQuitTournament:
+                                        AudioManager.playPlayerQuitTournament();
+                                        break;
+                                    case PlayerSubmittedDeck:
+                                        AudioManager.playPlayerSubmittedDeck();
+                                        break;
+                                    case PlayerWhispered:
+                                        AudioManager.playPlayerWhispered();
+                                        break;
+                                }
+                            }
+                            // send start message to chat if not done yet
+                            if (!panel.isStartMessageDone()) {
+                                createChatStartMessage(panel);
+                            }
+                            // send the message to subchat if exists and it's not a game message
+                            if (!message.getMessageType().equals(MessageType.GAME) && panel.getConnectedChat() != null) {
+                                panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), ChatMessage.MessageColor.BLACK);
+                            } else {
+                                panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), message.getColor());
+                            }
+
                         }
-                        case "startTournament": {
-                            TableClientMessage message = (TableClientMessage) callback.getData();
-                            tournamentStarted(message.getGameId(), message.getPlayerId());
-                            break;
-                        }
-                        case "startDraft": {
-                            TableClientMessage message = (TableClientMessage) callback.getData();
-                            draftStarted(message.getGameId(), message.getPlayerId());
-                            break;
-                        }
-                        case "replayGame":
-                            replayGame(callback.getObjectId());
-                            break;
-                        case "showTournament":
-                            showTournament(callback.getObjectId());
-                            break;
-                        case "watchGame":
-                            watchGame(callback.getObjectId());
-                            break;
-                        case "chatMessage": {
+                        break;
+                    }
+                    case "serverMessage":
+                        if (callback.getData() != null) {
                             ChatMessage message = (ChatMessage) callback.getData();
-                            ChatPanelBasic panel = MageFrame.getChat(callback.getObjectId());
-                            if (panel != null) {
-                                // play the sound related to the message
-                                if (message.getSoundToPlay() != null) {
-                                    switch (message.getSoundToPlay()) {
-                                        case PlayerLeft:
-                                            AudioManager.playPlayerLeft();
-                                            break;
-                                        case PlayerQuitTournament:
-                                            AudioManager.playPlayerQuitTournament();
-                                            break;
-                                        case PlayerSubmittedDeck:
-                                            AudioManager.playPlayerSubmittedDeck();
-                                            break;
-                                        case PlayerWhispered:
-                                            AudioManager.playPlayerWhispered();
-                                            break;
-                                    }
-                                }
-                                // send start message to chat if not done yet
-                                if (!panel.isStartMessageDone()) {
-                                    createChatStartMessage(panel);
-                                }
-                                // send the message to subchat if exists and it's not a game message
-                                if (!message.getMessageType().equals(MessageType.GAME) && panel.getConnectedChat() != null) {
-                                    panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), ChatMessage.MessageColor.BLACK);
-                                } else {
-                                    panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), message.getColor());
-                                }
+                            if (message.getColor().equals(ChatMessage.MessageColor.RED)) {
+                                JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.WARNING_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+                        break;
+                    case "joinedTable": {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
+                        break;
+                    }
+                    case "replayInit": {
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.init((GameView) callback.getData());
+                        }
+                        break;
+                    }
+                    case "replayDone": {
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.endMessage((String) callback.getData(), callback.getMessageId());
+                        }
+                        break;
+                    }
+                    case "replayUpdate": {
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.updateGame((GameView) callback.getData());
+                        }
+                        break;
+                    }
+                    case "gameInit": {
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.init((GameView) callback.getData());
+                        }
+                        break;
+                    }
+                    case "gameOver": {
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.endMessage((String) callback.getData(), callback.getMessageId());
+                        }
+                        break;
+                    }
+                    case "gameError":
+                        frame.showErrorDialog("Game Error", (String) callback.getData());
+                        break;
+                    case "gameAsk": {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.ask(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());
+                        }
+                        break;
+                    }
+                    case "gameTarget": // e.g. Pick triggered ability
+                    {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(),
+                                    message.getTargets(), message.isFlag(), message.getOptions(), callback.getMessageId());
+                        }
+                        break;
+                    }
+                    case "gameSelect": {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.select(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());
+                        }
+                        break;
+                    }
+                    case "gameChooseAbility": {
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.pickAbility((AbilityPickerView) callback.getData());
+                        }
+                        break;
+                    }
+                    case "gameChoosePile": {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());
+                        }
+                        break;
+                    }
+                    case "gameChooseChoice": {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
 
-                            }
-                            break;
+                        if (panel != null) {
+                            panel.getChoice(message.getChoice(), callback.getObjectId());
                         }
-                        case "serverMessage":
-                            if (callback.getData() != null) {
-                                ChatMessage message = (ChatMessage) callback.getData();
-                                if (message.getColor().equals(ChatMessage.MessageColor.RED)) {
-                                    JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.WARNING_MESSAGE);
-                                } else {
-                                    JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    }
+                    case "gamePlayMana": {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.playMana(message.getMessage(), message.getGameView(), message.getOptions(), callback.getMessageId());
+                        }
+                        break;
+                    }
+                    case "gamePlayXMana": {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.playXMana(message.getMessage(), message.getGameView(), callback.getMessageId());
+                        }
+                        break;
+                    }
+                    case "gameSelectAmount": {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.getAmount(message.getMin(), message.getMax(), message.getMessage());
+                        }
+                        break;
+                    }
+                    case "gameUpdate": {
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.updateGame((GameView) callback.getData());
+                        }
+                        break;
+                    }
+                    case "endGameInfo":
+                        MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
+                        break;
+                    case "showUserMessage":
+                        List<String> messageData = (List<String>) callback.getData();
+                        if (messageData.size() == 2) {
+                            JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
+                        }
+                        break;
+                    case "gameInform":
+                        if (callback.getMessageId() > gameInformMessageId) {
+                            {
+                                GameClientMessage message = (GameClientMessage) callback.getData();
+                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                                if (panel != null) {
+                                    panel.inform(message.getMessage(), message.getGameView(), callback.getMessageId());
                                 }
                             }
-                            break;
-                        case "joinedTable": {
-                            TableClientMessage message = (TableClientMessage) callback.getData();
-                            joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
-                            break;
-                        }
-                        case "replayInit": {
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.init((GameView) callback.getData());
-                            }
-                            break;
-                        }
-                        case "replayDone": {
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.endMessage((String) callback.getData(), callback.getMessageId());
-                            }
-                            break;
-                        }
-                        case "replayUpdate": {
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.updateGame((GameView) callback.getData());
-                            }
-                            break;
-                        }
-                        case "gameInit": {
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.init((GameView) callback.getData());
-                            }
-                            break;
-                        }
-                        case "gameOver": {
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.endMessage((String) callback.getData(), callback.getMessageId());
-                            }
-                            break;
-                        }
-                        case "gameError":
-                            frame.showErrorDialog("Game Error", (String) callback.getData());
-                            break;
-                        case "gameAsk": {
-                            GameClientMessage message = (GameClientMessage) callback.getData();
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.ask(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());
-                            }
-                            break;
-                        }
-                        case "gameTarget": // e.g. Pick triggered ability
-                        {
-                            GameClientMessage message = (GameClientMessage) callback.getData();
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(),
-                                        message.getTargets(), message.isFlag(), message.getOptions(), callback.getMessageId());
-                            }
-                            break;
-                        }
-                        case "gameSelect": {
-                            GameClientMessage message = (GameClientMessage) callback.getData();
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.select(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());
-                            }
-                            break;
-                        }
-                        case "gameChooseAbility": {
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.pickAbility((AbilityPickerView) callback.getData());
-                            }
-                            break;
-                        }
-                        case "gameChoosePile": {
-                            GameClientMessage message = (GameClientMessage) callback.getData();
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());
-                            }
-                            break;
-                        }
-                        case "gameChooseChoice": {
-                            GameClientMessage message = (GameClientMessage) callback.getData();
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-
-                            if (panel != null) {
-                                panel.getChoice(message.getChoice(), callback.getObjectId());
-                            }
-                            break;
-                        }
-                        case "gamePlayMana": {
-                            GameClientMessage message = (GameClientMessage) callback.getData();
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.playMana(message.getMessage(), message.getGameView(), message.getOptions(), callback.getMessageId());
-                            }
-                            break;
-                        }
-                        case "gamePlayXMana": {
-                            GameClientMessage message = (GameClientMessage) callback.getData();
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.playXMana(message.getMessage(), message.getGameView(), callback.getMessageId());
-                            }
-                            break;
-                        }
-                        case "gameSelectAmount": {
-                            GameClientMessage message = (GameClientMessage) callback.getData();
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.getAmount(message.getMin(), message.getMax(), message.getMessage());
-                            }
-                            break;
-                        }
-                        case "gameUpdate": {
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                panel.updateGame((GameView) callback.getData());
-                            }
-                            break;
-                        }
-                        case "endGameInfo":
-                            MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
-                            break;
-                        case "showUserMessage":
-                            List<String> messageData = (List<String>) callback.getData();
-                            if (messageData.size() == 2) {
-                                JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
-                            }
-                            break;
-                        case "gameInform":
-                            if (callback.getMessageId() > gameInformMessageId) {
-                                {
-                                    GameClientMessage message = (GameClientMessage) callback.getData();
-                                    GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                    if (panel != null) {
-                                        panel.inform(message.getMessage(), message.getGameView(), callback.getMessageId());
-                                    }
-                                }
 // no longer needed because phase skip handling on server side now
-                            } else {
-                                logger.warn(new StringBuilder("message out of sequence - ignoring").append("MessageId = ").append(callback.getMessageId()).append(" method = ").append(callback.getMethod()));
-                                //logger.warn("message out of sequence - ignoring");
-                            }
-                            gameInformMessageId = messageId;
-                            break;
-                        case "gameInformPersonal": {
-                            GameClientMessage message = (GameClientMessage) callback.getData();
-                            GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                            if (panel != null) {
-                                JOptionPane.showMessageDialog(panel, message.getMessage(), "Game message",
-                                        JOptionPane.INFORMATION_MESSAGE);
-                            }
-                            break;
+                        } else {
+                            logger.warn(new StringBuilder("message out of sequence - ignoring").append("MessageId = ").append(callback.getMessageId()).append(" method = ").append(callback.getMethod()));
+                            //logger.warn("message out of sequence - ignoring");
                         }
-                        case "sideboard": {
-                            TableClientMessage message = (TableClientMessage) callback.getData();
-                            DeckView deckView = message.getDeck();
-                            Deck deck = DeckUtil.construct(deckView);
-                            if (message.getFlag()) {
-                                construct(deck, message.getTableId(), message.getTime());
-                            } else {
-                                sideboard(deck, message.getTableId(), message.getTime());
-                            }
-                            break;
+                        gameInformMessageId = messageId;
+                        break;
+                    case "gameInformPersonal": {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            JOptionPane.showMessageDialog(panel, message.getMessage(), "Game message",
+                                    JOptionPane.INFORMATION_MESSAGE);
                         }
-                        case "construct": {
-                            TableClientMessage message = (TableClientMessage) callback.getData();
-                            DeckView deckView = message.getDeck();
-                            Deck deck = DeckUtil.construct(deckView);
+                        break;
+                    }
+                    case "sideboard": {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        DeckView deckView = message.getDeck();
+                        Deck deck = DeckUtil.construct(deckView);
+                        if (message.getFlag()) {
                             construct(deck, message.getTableId(), message.getTime());
-                            break;
+                        } else {
+                            sideboard(deck, message.getTableId(), message.getTime());
                         }
-                        case "draftOver":
-                            MageFrame.removeDraft(callback.getObjectId());
-                            break;
-                        case "draftPick": {
-                            DraftClientMessage message = (DraftClientMessage) callback.getData();
-                            DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
-                            if (panel != null) {
-                                panel.loadBooster(message.getDraftPickView());
-                            }
-                            break;
+                        break;
+                    }
+                    case "construct": {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        DeckView deckView = message.getDeck();
+                        Deck deck = DeckUtil.construct(deckView);
+                        construct(deck, message.getTableId(), message.getTime());
+                        break;
+                    }
+                    case "draftOver":
+                        MageFrame.removeDraft(callback.getObjectId());
+                        break;
+                    case "draftPick": {
+                        DraftClientMessage message = (DraftClientMessage) callback.getData();
+                        DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
+                        if (panel != null) {
+                            panel.loadBooster(message.getDraftPickView());
                         }
-                        case "draftUpdate": {
-                            DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
-                            if (panel != null) {
-                                panel.updateDraft((DraftView) callback.getData());
-                            }
-                            break;
+                        break;
+                    }
+                    case "draftUpdate": {
+                        DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
+                        if (panel != null) {
+                            panel.updateDraft((DraftView) callback.getData());
                         }
-                        case "draftInform": //                            if (callback.getMessageId() > messageId) {
-                        {
-                            DraftClientMessage message = (DraftClientMessage) callback.getData();
-                        }
+                        break;
+                    }
+                    case "draftInform": //                            if (callback.getMessageId() > messageId) {
+                    {
+                        DraftClientMessage message = (DraftClientMessage) callback.getData();
+                    }
 //                            } else {
 //                                logger.warn("message out of sequence - ignoring");
 //                            }
-                        break;
-                        case "draftInit": {
-                            DraftClientMessage message = (DraftClientMessage) callback.getData();
-                            DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
-                            if (panel != null) {
-                                panel.loadBooster(message.getDraftPickView());
-                            }
-                            break;
+                    break;
+                    case "draftInit": {
+                        DraftClientMessage message = (DraftClientMessage) callback.getData();
+                        DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
+                        if (panel != null) {
+                            panel.loadBooster(message.getDraftPickView());
                         }
-                        case "tournamentInit":
-                            break;
-                        case "userRequestDialog":
-                            frame.showUserRequestDialog((UserRequestMessage) callback.getData());
-                            break;
+                        break;
                     }
-                    messageId = callback.getMessageId();
-                } catch (Exception ex) {
-                    handleException(ex);
+                    case "tournamentInit":
+                        break;
+                    case "userRequestDialog":
+                        frame.showUserRequestDialog((UserRequestMessage) callback.getData());
+                        break;
                 }
+                messageId = callback.getMessageId();
+            } catch (Exception ex) {
+                handleException(ex);
             }
         });
     }
@@ -391,28 +388,28 @@ public class CallbackClientImpl implements CallbackClient {
                         .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
                         .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
                         .append("<br/><b>")
-                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_CONFIRM, 113)))
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_CONFIRM, 113)))
                         .append("</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
                         .append("<br/><b>")
-                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_NEXT_TURN, 115)))
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_NEXT_TURN, 115)))
                         .append("</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
                         .append("<br/><b>")
-                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_END_STEP, 116)))
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_END_STEP, 116)))
                         .append("</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
                         .append("<br/><b>")
-                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_SKIP_STEP, 117)))
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_SKIP_STEP, 117)))
                         .append("</b> - Skip current turn but stop on declare attackers/blockers")
                         .append("<br/><b>")
-                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_MAIN_STEP, 118)))
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_MAIN_STEP, 118)))
                         .append("</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
                         .append("<br/><b>")
-                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_YOUR_TURN, 120)))
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_YOUR_TURN, 120)))
                         .append("</b> - Skip everything until your next turn")
                         .append("<br/><b>")
-                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_PRIOR_END, 122)))
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_PRIOR_END, 122)))
                         .append("</b> - Skip everything until the end step just prior to your turn")
                         .append("<br/><b>")
-                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP, 114)))
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP, 114)))
                         .append("</b> - Undo F4/F5/F7/F9/F11")
                         .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);

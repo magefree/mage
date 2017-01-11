@@ -30,17 +30,12 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetSpell;
 
 /**

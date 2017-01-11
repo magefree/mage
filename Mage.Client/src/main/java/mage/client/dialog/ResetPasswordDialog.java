@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 public class ResetPasswordDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ResetPasswordDialog.class);
-    private ConnectDialog connectDialog;
+    private final ConnectDialog connectDialog;
     private Connection connection;
     private GetAuthTokenTask getAuthTokenTask;
     private ResetPasswordTask resetPasswordTask;
@@ -88,11 +88,7 @@ public class ResetPasswordDialog extends MageDialog {
         lblPasswordConfirmation.setText("New password:");
 
         btnSubmitNewPassword.setText("Submit a new password");
-        btnSubmitNewPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitNewPasswordActionPerformed(evt);
-            }
-        });
+        btnSubmitNewPassword.addActionListener(evt -> btnSubmitNewPasswordActionPerformed(evt));
 
         lblPasswordConfirmationReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         lblPasswordConfirmationReasoning.setLabelFor(txtPasswordConfirmation);
@@ -157,11 +153,7 @@ public class ResetPasswordDialog extends MageDialog {
         lblEmail.setText("Email:");
 
         btnGetAuthToken.setText("Email an auth token");
-        btnGetAuthToken.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGetAuthTokenActionPerformed(evt);
-            }
-        });
+        btnGetAuthToken.addActionListener(evt -> btnGetAuthTokenActionPerformed(evt));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,11 +188,7 @@ public class ResetPasswordDialog extends MageDialog {
         );
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         lblServer.setLabelFor(txtServer);
         lblServer.setText("Server:");

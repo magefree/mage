@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 public class RegisterUserDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ConnectDialog.class);
-    private ConnectDialog connectDialog;
+    private final ConnectDialog connectDialog;
     private Connection connection;
     private ConnectTask task;
 
@@ -78,25 +78,13 @@ public class RegisterUserDialog extends MageDialog {
         lblPassword.setLabelFor(txtPassword);
         lblPassword.setText("Password:");
 
-        txtUserName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserNameActionPerformed(evt);
-            }
-        });
+        txtUserName.addActionListener(evt -> txtUserNameActionPerformed(evt));
 
         btnRegister.setText("Register");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
+        btnRegister.addActionListener(evt -> btnRegisterActionPerformed(evt));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         lblStatus.setToolTipText("");
 

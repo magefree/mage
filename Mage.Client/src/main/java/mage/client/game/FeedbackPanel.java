@@ -52,7 +52,6 @@ import static mage.constants.Constants.Option.ORIGINAL_ID;
 import static mage.constants.Constants.Option.SECOND_MESSAGE;
 import static mage.constants.Constants.Option.SPECIAL_BUTTON;
 import mage.constants.PlayerAction;
-import mage.remote.Session;
 import org.apache.log4j.Logger;
 
 /**
@@ -184,17 +183,14 @@ public class FeedbackPanel extends javax.swing.JPanel {
      * Close game window by pressing OK button after 8 seconds
      */
     private void endWithTimeout() {
-        Runnable task = new Runnable() {
-            @Override
-            public void run() {
-                LOGGER.info("Ending game...");
-                Component c = MageFrame.getGame(gameId);
-                while (c != null && !(c instanceof GamePane)) {
-                    c = c.getParent();
-                }
-                if (c != null && ((GamePane) c).isVisible()) { // check if GamePanel still visible
-                    FeedbackPanel.this.btnRight.doClick();
-                }
+        Runnable task = () -> {
+            LOGGER.info("Ending game...");
+            Component c = MageFrame.getGame(gameId);
+            while (c != null && !(c instanceof GamePane)) {
+                c = c.getParent();
+            }
+            if (c != null && c.isVisible()) { // check if GamePanel still visible
+                FeedbackPanel.this.btnRight.doClick();
             }
         };
         WORKER.schedule(task, 8, TimeUnit.SECONDS);
@@ -255,36 +251,16 @@ public class FeedbackPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 0, 0, 80));
 
         btnRight.setText("Cancel");
-        btnRight.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRightActionPerformed(evt);
-            }
-        });
+        btnRight.addActionListener(evt -> btnRightActionPerformed(evt));
 
         btnLeft.setText("OK");
-        btnLeft.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLeftActionPerformed(evt);
-            }
-        });
+        btnLeft.addActionListener(evt -> btnLeftActionPerformed(evt));
 
         btnSpecial.setText("Special");
-        btnSpecial.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSpecialActionPerformed(evt);
-            }
-        });
+        btnSpecial.addActionListener(evt -> btnSpecialActionPerformed(evt));
 
         btnUndo.setText("Undo");
-        btnUndo.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUndoActionPerformed(evt);
-            }
-        });
+        btnUndo.addActionListener(evt -> btnUndoActionPerformed(evt));
 
     }
 

@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public class DelayedViewerThread extends Thread {
-    private static DelayedViewerThread fInstance = new DelayedViewerThread();
+    private static final DelayedViewerThread fInstance = new DelayedViewerThread();
 
     public static DelayedViewerThread getInstance() {
         return fInstance;

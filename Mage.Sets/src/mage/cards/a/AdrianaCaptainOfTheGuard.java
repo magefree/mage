@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.MeleeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

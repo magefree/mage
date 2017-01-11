@@ -28,11 +28,9 @@
 package org.mage.plugins.card.dl.sources;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
-import org.mage.plugins.card.images.DownloadPictures;
 
 /**
  *

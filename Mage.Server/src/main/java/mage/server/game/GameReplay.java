@@ -87,15 +87,11 @@ public class GameReplay {
         try{
             InputStream file = new FileInputStream("saved/" + gameId.toString() + ".game");
             InputStream buffer = new BufferedInputStream(file);
-            ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
-            try {
-                Game loadGame = (Game)input.readObject();
-                GameStates states = (GameStates)input.readObject();
+            try (ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer))) {
+                Game loadGame = (Game) input.readObject();
+                GameStates states = (GameStates) input.readObject();
                 loadGame.loadGameStates(states);
                 return loadGame;
-            }
-            finally {
-                input.close();
             }
         }
         catch(ClassNotFoundException ex) {

@@ -88,7 +88,7 @@ public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
 
     private class AbilityPickerAction extends AbstractAction {
 
-        private UUID id;
+        private final UUID id;
 
         public AbilityPickerAction(UUID id, String choice) {
             this.id = id;

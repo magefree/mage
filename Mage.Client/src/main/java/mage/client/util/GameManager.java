@@ -8,7 +8,7 @@ import java.util.UUID;
  * @author nantuko
  */
 public class GameManager {
-    private static GameManager fInstance = new GameManager();
+    private static final GameManager fInstance = new GameManager();
 
     public static GameManager getInstance() {
         return fInstance;

@@ -36,7 +36,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -76,7 +75,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     private static final Logger log = Logger.getLogger(TableModel.class);
 
-    protected CardEventSource cardEventSource = new CardEventSource();
+    protected final CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected UUID gameId;
     private final Map<UUID, CardView> cards = new LinkedHashMap<>();
@@ -437,7 +436,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         recentAscending = ascending;
 
         MageCardComparator sorter = new MageCardComparator(column, ascending);
-        Collections.sort(view, sorter);
+        view.sort(sorter);
 
         fireTableDataChanged();
 

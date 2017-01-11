@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.UUID;
 import javax.swing.*;
 
@@ -145,11 +144,7 @@ public class NewTableDialog extends MageDialog {
 
         lblGameType.setText("Game Type:");
 
-        cbGameType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGameTypeActionPerformed(evt);
-            }
-        });
+        cbGameType.addActionListener(evt -> cbGameTypeActionPerformed(evt));
 
         chkRollbackTurnsAllowed.setText("Allow rollbacks");
         chkRollbackTurnsAllowed.setToolTipText("<HTML>Allow to rollback to the start of previous turns<br>\nif all players agree.\n");
@@ -163,11 +158,7 @@ public class NewTableDialog extends MageDialog {
         lblNumPlayers.setLabelFor(spnNumPlayers);
         lblNumPlayers.setText("Players");
 
-        spnNumPlayers.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                numPlayersChanged(evt);
-            }
-        });
+        spnNumPlayers.addChangeListener(evt -> numPlayersChanged(evt));
 
         lblRange.setLabelFor(cbRange);
         lblRange.setText("Range of Influence");
@@ -188,11 +179,7 @@ public class NewTableDialog extends MageDialog {
         lblNumWins.setText("Wins");
         lblNumWins.setToolTipText("How many games has a player to win to win the match.");
 
-        spnNumWins.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spnNumWinsnumPlayersChanged(evt);
-            }
-        });
+        spnNumWins.addChangeListener(evt -> spnNumWinsnumPlayersChanged(evt));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Player 1 (You)");
@@ -203,18 +190,10 @@ public class NewTableDialog extends MageDialog {
         pnlOtherPlayers.setLayout(new java.awt.GridLayout(0, 1));
 
         btnOK.setText("OK");
-        btnOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOKActionPerformed(evt);
-            }
-        });
+        btnOK.addActionListener(evt -> btnOKActionPerformed(evt));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         lblQuitRatio.setText("Allowed quit %");
         lblEdhPowerLevel.setText("EDH power level");
@@ -534,12 +513,7 @@ public class NewTableDialog extends MageDialog {
                 playerPanel.init(players.size() + 2, playerType);
                 players.add(playerPanel);
                 playerPanel.addPlayerTypeEventListener(
-                        new Listener<Event>() {
-                            @Override
-                            public void event(Event event) {
-                                drawPlayers();
-                            }
-                        }
+                        (Listener<Event>) event -> drawPlayers()
                 );
             }
 
@@ -697,12 +671,11 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL, options.getSkillLevel().toString());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO, Integer.toString(options.getQuitRatio()));
         StringBuilder playerTypesString = new StringBuilder();
-        ListIterator iterator = players.listIterator();
-        while (iterator.hasNext()) {
+        for (Object player : players) {
             if (playerTypesString.length() > 0) {
                 playerTypesString.append(",");
             }
-            TablePlayerPanel tpp = (TablePlayerPanel) iterator.next();
+            TablePlayerPanel tpp = (TablePlayerPanel) player;
             playerTypesString.append(tpp.getPlayerType());
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, playerTypesString.toString());

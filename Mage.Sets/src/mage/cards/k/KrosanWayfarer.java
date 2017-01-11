@@ -29,7 +29,6 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;

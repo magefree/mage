@@ -50,7 +50,7 @@ import org.apache.log4j.Logger;
 public class ChatManager {
 
     private static final Logger logger = Logger.getLogger(ChatManager.class);
-    private static HashMap<String, String> userMessages = new HashMap<>();
+    private static final HashMap<String, String> userMessages = new HashMap<>();
 
     private static final ChatManager INSTANCE = new ChatManager();
 
@@ -117,7 +117,7 @@ public class ChatManager {
         return false;
     }
     
-    Pattern cardNamePattern = Pattern.compile("\\[(.*?)\\]");
+    final Pattern cardNamePattern = Pattern.compile("\\[(.*?)\\]");
     
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);

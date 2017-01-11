@@ -73,16 +73,13 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
     public GamesRoomImpl() {
-        UPDATE_EXECUTOR.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    update();
-                } catch (Exception ex) {
-                    LOGGER.fatal("Games room update exception! " + ex.toString(), ex);
-                }
-
+        UPDATE_EXECUTOR.scheduleAtFixedRate(() -> {
+            try {
+                update();
+            } catch (Exception ex) {
+                LOGGER.fatal("Games room update exception! " + ex.toString(), ex);
             }
+
         }, 2, 2, TimeUnit.SECONDS);
     }
 
@@ -95,7 +92,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         ArrayList<TableView> tableList = new ArrayList<>();
         ArrayList<MatchView> matchList = new ArrayList<>();
         List<Table> allTables = new ArrayList<>(tables.values());
-        Collections.sort(allTables, new TableListSorter());
+        allTables.sort(new TableListSorter());
         for (Table table : allTables) {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));
@@ -136,7 +133,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             }
         }
 
-        Collections.sort(users, new UserNameSorter());
+        users.sort(new UserNameSorter());
         List<RoomUsersView> roomUserInfo = new ArrayList<>();
         roomUserInfo.add(new RoomUsersView(users,
                 GameManager.getInstance().getNumberActiveGames(),

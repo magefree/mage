@@ -31,7 +31,6 @@ import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import static java.awt.Component.LEFT_ALIGNMENT;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -53,7 +52,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -263,20 +261,12 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         };
 
-        resizeTimer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        resizeTimer.stop();
-                        setGUISize();
-                        feedbackPanel.changeGUISize();
+        resizeTimer = new Timer(1000, evt -> SwingUtilities.invokeLater(() -> {
+            resizeTimer.stop();
+            setGUISize();
+            feedbackPanel.changeGUISize();
 
-                    }
-                });
-            }
-        });
+        }));
 
         pnlHelperHandButtonsStackArea.addComponentListener(componentAdapterPlayField);
         initComponents = false;
@@ -1124,12 +1114,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void removeClosedCardInfoWindows(Map<String, CardInfoWindowDialog> windowMap) {
         // Remove closed window objects from the maps
-        for (Iterator<Map.Entry<String, CardInfoWindowDialog>> iterator = windowMap.entrySet().iterator(); iterator.hasNext();) {
-            Map.Entry<String, CardInfoWindowDialog> entry = iterator.next();
-            if (entry.getValue().isClosed()) {
-                iterator.remove();
-            }
-        }
+        windowMap.entrySet().removeIf(entry -> entry.getValue().isClosed());
     }
 
     public void ask(String question, GameView gameView, int messageId, Map<String, Serializable> options) {
@@ -1700,20 +1685,10 @@ public final class GamePanel extends javax.swing.JPanel {
         final BasicSplitPaneUI myUi = (BasicSplitPaneUI) jSplitPane0.getUI();
         final BasicSplitPaneDivider divider = myUi.getDivider();
         final JButton upArrowButton = (JButton) divider.getComponent(0);
-        upArrowButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, "up");
-            }
-        });
+        upArrowButton.addActionListener(actionEvent -> PreferencesDialog.saveValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, "up"));
 
         final JButton downArrowButton = (JButton) divider.getComponent(1);
-        downArrowButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, "down");
-            }
-        });
+        downArrowButton.addActionListener(actionEvent -> PreferencesDialog.saveValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, "down"));
 
         KeyStroke ksAltEReleased = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK, true);
         this.getInputMap(c).put(ksAltEReleased, "ENLARGE_RELEASE");
@@ -1772,44 +1747,19 @@ public final class GamePanel extends javax.swing.JPanel {
         stackObjects.setBackgroundColor(new Color(0, 0, 0, 40));
 
         btnStopReplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop.png")));
-        btnStopReplay.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStopReplayActionPerformed(evt);
-            }
-        });
+        btnStopReplay.addActionListener(evt -> btnStopReplayActionPerformed(evt));
 
         btnNextPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_right.png")));
-        btnNextPlay.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextPlayActionPerformed(evt);
-            }
-        });
+        btnNextPlay.addActionListener(evt -> btnNextPlayActionPerformed(evt));
 
         btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_right.png")));
-        btnPlay.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlayActionPerformed(evt);
-            }
-        });
+        btnPlay.addActionListener(evt -> btnPlayActionPerformed(evt));
 
         btnSkipForward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_double_stop_right.png")));
-        btnSkipForward.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSkipForwardActionPerformed(evt);
-            }
-        });
+        btnSkipForward.addActionListener(evt -> btnSkipForwardActionPerformed(evt));
 
         btnPreviousPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_left.png")));
-        btnPreviousPlay.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPreviousPlayActionPerformed(evt);
-            }
-        });
+        btnPreviousPlay.addActionListener(evt -> btnPreviousPlayActionPerformed(evt));
 
         initPopupMenuTriggerOrder();
 
@@ -2251,21 +2201,18 @@ public final class GamePanel extends javax.swing.JPanel {
 
     // Event listener for the ShowCardsDialog
     private Listener<Event> getShowCardsEventListener(final ShowCardsDialog dialog) {
-        return new Listener<Event>() {
-            @Override
-            public void event(Event event) {
-                if (event.getEventName().equals("show-popup-menu")) {
-                    if (event.getComponent() != null && event.getComponent() instanceof CardPanel) {
-                        JPopupMenu menu = ((CardPanel) event.getComponent()).getPopupMenu();
-                        if (menu != null) {
-                            cardViewPopupMenu = ((CardView) event.getSource());
-                            menu.show(event.getComponent(), event.getxPos(), event.getyPos());
-                        }
+        return (Listener<Event>) event -> {
+            if (event.getEventName().equals("show-popup-menu")) {
+                if (event.getComponent() != null && event.getComponent() instanceof CardPanel) {
+                    JPopupMenu menu = ((CardPanel) event.getComponent()).getPopupMenu();
+                    if (menu != null) {
+                        cardViewPopupMenu = ((CardView) event.getSource());
+                        menu.show(event.getComponent(), event.getxPos(), event.getyPos());
                     }
                 }
-                if (event.getEventName().equals("action-consumed")) {
-                    dialog.removeDialog();
-                }
+            }
+            if (event.getEventName().equals("action-consumed")) {
+                dialog.removeDialog();
             }
         };
     }
@@ -2312,12 +2259,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void initPopupMenuTriggerOrder() {
 
-        ActionListener actionListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleTriggerOrderPopupMenuEvent(e);
-            }
-        };
+        ActionListener actionListener = e -> handleTriggerOrderPopupMenuEvent(e);
 
         popupMenuTriggerOrder = new JPopupMenu();
 
@@ -2366,7 +2308,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     // Use Cmd on OSX since Ctrl+click is already used to simulate right click
-    private static int holdPriorityMask = System.getProperty("os.name").contains("Mac OS X") ? InputEvent.META_DOWN_MASK : InputEvent.CTRL_DOWN_MASK;
+    private static final int holdPriorityMask = System.getProperty("os.name").contains("Mac OS X") ? InputEvent.META_DOWN_MASK : InputEvent.CTRL_DOWN_MASK;
 
     public void handleEvent(AWTEvent event) {
         if (event instanceof InputEvent) {

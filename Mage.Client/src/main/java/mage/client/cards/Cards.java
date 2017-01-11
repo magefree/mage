@@ -37,8 +37,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -210,7 +208,7 @@ public class Cards extends javax.swing.JPanel {
                 tmp.setIsAbility(true);
                 tmp.overrideTargets(card.getTargets());
                 tmp.overrideId(card.getId());
-                tmp.setAbilityType(((StackAbilityView) card).getAbilityType());
+                tmp.setAbilityType(card.getAbilityType());
                 card = tmp;
             } else {
                 card.setAbilityType(null);
@@ -258,7 +256,7 @@ public class Cards extends javax.swing.JPanel {
         this.cardDimension = dimension;
         for (Component component : cardArea.getComponents()) {
             if (component instanceof CardPanel) {
-                ((CardPanel) component).setBounds(0, 0, dimension.width, dimension.height);
+                component.setBounds(0, 0, dimension.width, dimension.height);
             }
         }
         layoutCards();
@@ -358,12 +356,7 @@ public class Cards extends javax.swing.JPanel {
             }
         }
         // sort the cards
-        Collections.sort(cardsToLayout, new Comparator<CardPanel>() {
-            @Override
-            public int compare(CardPanel cp1, CardPanel cp2) {
-                return Integer.valueOf(cp1.getLocation().x).compareTo(cp2.getLocation().x);
-            }
-        });
+        cardsToLayout.sort((cp1, cp2) -> Integer.valueOf(cp1.getLocation().x).compareTo(cp2.getLocation().x));
         // relocate the cards
         int dx = 0;
         for (Component component : cardsToLayout) {

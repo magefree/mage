@@ -14,7 +14,7 @@ import javax.swing.plaf.synth.SynthStyleFactory;
  * @author nantuko
  */
 public class MageSynthStyleFactory extends SynthStyleFactory {
-    private SynthStyleFactory wrappedFactory;
+    private final SynthStyleFactory wrappedFactory;
 
     public MageSynthStyleFactory(SynthStyleFactory factory) {
         this.wrappedFactory = factory;

@@ -1,8 +1,6 @@
 package mage.client.util.sets;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -26,9 +24,7 @@ public class ConstructedFormats {
     public static final String FRONTIER = "- Frontier";
     public static final String MODERN = "- Modern";
     public static final String VINTAGE_LEGACY = "- Vintage / Legacy";
-    ;
     public static final String CUSTOM = "- Custom";
-    ;
     public static final Standard STANDARD_CARDS = new Standard();
 
     private static final Map<String, List<String>> underlyingSetCodesPerFormat = new HashMap<>();
@@ -99,9 +95,7 @@ public class ConstructedFormats {
             // Create the Block formats
             if (set.getType().equals(SetType.EXPANSION) && set.getBlockName() != null) {
                 String blockDisplayName = getBlockDisplayName(set.getBlockName());
-                if (underlyingSetCodesPerFormat.get(blockDisplayName) == null) {
-                    underlyingSetCodesPerFormat.put(blockDisplayName, new ArrayList<>());
-                }
+                underlyingSetCodesPerFormat.computeIfAbsent(blockDisplayName, k -> new ArrayList<>());
 
                 underlyingSetCodesPerFormat.get(blockDisplayName).add(set.getCode());
 
@@ -117,9 +111,7 @@ public class ConstructedFormats {
             }
 
             if (set.getType().equals(SetType.SUPPLEMENTAL) && set.getBlockName() != null) {
-                if (expansionInfo.get(set.getBlockName()) == null) {
-                    expansionInfo.put(set.getBlockName(), set);
-                }
+                expansionInfo.putIfAbsent(set.getBlockName(), set);
 
                 if (expansionInfo.get(set.getBlockName()).getReleaseDate().before(set.getReleaseDate())) {
                     expansionInfo.put(set.getBlockName(), set);
@@ -127,89 +119,84 @@ public class ConstructedFormats {
             }
         }
 
-        Collections.sort(formats, new Comparator<String>() {
+        formats.sort((name1, name2) -> {
+            ExpansionInfo expansionInfo1 = expansionInfo.get(name1);
+            ExpansionInfo expansionInfo2 = expansionInfo.get(name2);
 
-            @Override
-            public int compare(String name1, String name2) {
-                ExpansionInfo expansionInfo1 = expansionInfo.get(name1);
-                ExpansionInfo expansionInfo2 = expansionInfo.get(name2);
-
-                if (expansionInfo1.getType().compareTo(expansionInfo2.getType()) == 0) {
-                    SetType setType = expansionInfo1.getType();
-                    switch (setType) {
-                        case EXPANSION:
-                            if (expansionInfo1.getBlockName() == null) {
-                                if (expansionInfo2.getBlockName() == null) {
-                                    return expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate());
-                                }
-
-                                return 1;
-                            }
-
+            if (expansionInfo1.getType().compareTo(expansionInfo2.getType()) == 0) {
+                SetType setType = expansionInfo1.getType();
+                switch (setType) {
+                    case EXPANSION:
+                        if (expansionInfo1.getBlockName() == null) {
                             if (expansionInfo2.getBlockName() == null) {
-                                return -1;
-                            }
-
-                            //Block comparison
-                            if (name1.endsWith("Block") && name2.endsWith("Block")) {
                                 return expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate());
                             }
 
-                            if (name1.endsWith("Block")) {
-                                if (expansionInfo1.getBlockName().equals(expansionInfo2.getBlockName())) {
-                                    return -1;
-                                }
-                            }
+                            return 1;
+                        }
 
-                            if (name2.endsWith("Block")) {
-                                if (expansionInfo1.getBlockName().equals(expansionInfo2.getBlockName())) {
-                                    return 1;
-                                }
-                            }
+                        if (expansionInfo2.getBlockName() == null) {
+                            return -1;
+                        }
 
+                        //Block comparison
+                        if (name1.endsWith("Block") && name2.endsWith("Block")) {
                             return expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate());
-                        case SUPPLEMENTAL:
-                            if (expansionInfo1.getBlockName() == null) {
-                                if (expansionInfo2.getBlockName() == null) {
-                                    return expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate());
-                                }
+                        }
 
-                                return -1;
-                            }
-
-                            if (expansionInfo2.getBlockName() == null) {
-                                return 1;
-                            }
-
+                        if (name1.endsWith("Block")) {
                             if (expansionInfo1.getBlockName().equals(expansionInfo2.getBlockName())) {
-                                //If release date is the same, sort alphabetically.
-                                if (expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate()) == 0) {
-                                    return name1.compareTo(name2);
-                                }
+                                return -1;
+                            }
+                        }
+
+                        if (name2.endsWith("Block")) {
+                            if (expansionInfo1.getBlockName().equals(expansionInfo2.getBlockName())) {
+                                return 1;
+                            }
+                        }
+
+                        return expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate());
+                    case SUPPLEMENTAL:
+                        if (expansionInfo1.getBlockName() == null) {
+                            if (expansionInfo2.getBlockName() == null) {
                                 return expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate());
                             }
 
-                            if (expansionInfo1.getBlockName().startsWith("Duel Decks")) {
-                                if (expansionInfo1.getBlockName().startsWith("Duel Decks: Anthology")) {
-                                    return 1;
-                                }
+                            return -1;
+                        }
+
+                        if (expansionInfo2.getBlockName() == null) {
+                            return 1;
+                        }
+
+                        if (expansionInfo1.getBlockName().equals(expansionInfo2.getBlockName())) {
+                            //If release date is the same, sort alphabetically.
+                            if (expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate()) == 0) {
+                                return name1.compareTo(name2);
+                            }
+                            return expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate());
+                        }
+
+                        if (expansionInfo1.getBlockName().startsWith("Duel Decks")) {
+                            if (expansionInfo1.getBlockName().startsWith("Duel Decks: Anthology")) {
                                 return 1;
                             }
-                            if (expansionInfo2.getBlockName().startsWith("Duel Decks")) {
-                                return -1;
-                            }
+                            return 1;
+                        }
+                        if (expansionInfo2.getBlockName().startsWith("Duel Decks")) {
+                            return -1;
+                        }
 
-                            ExpansionInfo blockInfo1 = expansionInfo.get(expansionInfo1.getBlockName());
-                            ExpansionInfo blockInfo2 = expansionInfo.get(expansionInfo2.getBlockName());
+                        ExpansionInfo blockInfo1 = expansionInfo.get(expansionInfo1.getBlockName());
+                        ExpansionInfo blockInfo2 = expansionInfo.get(expansionInfo2.getBlockName());
 
-                            return blockInfo2.getReleaseDate().compareTo(blockInfo1.getReleaseDate());
-                        default:
-                            return expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate());
-                    }
+                        return blockInfo2.getReleaseDate().compareTo(blockInfo1.getReleaseDate());
+                    default:
+                        return expansionInfo2.getReleaseDate().compareTo(expansionInfo1.getReleaseDate());
                 }
-                return expansionInfo1.getType().compareTo(expansionInfo2.getType());
             }
-
+            return expansionInfo1.getType().compareTo(expansionInfo2.getType());
         });
         if (!formats.isEmpty()) {
             formats.add(0, CUSTOM);
@@ -224,10 +211,7 @@ public class ConstructedFormats {
     }
 
     private static String getBlockDisplayName(String blockName) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("* ").append(blockName).append(" Block");
-
-        return builder.toString();
+        return "* " + blockName + " Block";
     }
     // Attention -Month is 0 Based so Feb = 1 for example.
     private static final Date extendedDate = new GregorianCalendar(2009, 7, 20).getTime();

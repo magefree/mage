@@ -30,7 +30,7 @@ public enum UserStatsRepository {
 
     private Dao<UserStats, Object> dao;
 
-    private UserStatsRepository() {
+    UserStatsRepository() {
         File file = new File("db");
         if (!file.exists()) {
             file.mkdirs();

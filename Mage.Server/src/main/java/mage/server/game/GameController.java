@@ -99,24 +99,24 @@ public class GameController implements GameCallback {
     private static final ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
     private static final Logger logger = Logger.getLogger(GameController.class);
 
-    protected ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected final ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private ScheduledFuture<?> futureTimeout;
-    protected static ScheduledExecutorService timeoutIdleExecutor = ThreadExecutor.getInstance().getTimeoutIdleExecutor();
+    protected static final ScheduledExecutorService timeoutIdleExecutor = ThreadExecutor.getInstance().getTimeoutIdleExecutor();
 
-    private ConcurrentHashMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
 
-    private ConcurrentHashMap<UUID, UUID> userPlayerMap;
-    private UUID gameSessionId;
-    private Game game;
-    private UUID chatId;
-    private UUID tableId;
-    private UUID choosingPlayerId;
+    private final ConcurrentHashMap<UUID, UUID> userPlayerMap;
+    private final UUID gameSessionId;
+    private final Game game;
+    private final UUID chatId;
+    private final UUID tableId;
+    private final UUID choosingPlayerId;
     private Future<?> gameFuture;
     private boolean useTimeout = true;
-    private GameOptions gameOptions;
+    private final GameOptions gameOptions;
 
     private UUID userReqestingRollback;
     private int turnsToRollback;
@@ -155,133 +155,124 @@ public class GameController implements GameCallback {
 
     private void init() {
         game.addTableEventListener(
-                new Listener<TableEvent>() {
-            @Override
-            public void event(TableEvent event) {
-                try {
-                    PriorityTimer timer;
-                    UUID playerId;
-                    switch (event.getEventType()) {
-                        case UPDATE:
-                            updateGame();
-                            break;
-                        case INFO:
-                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, ChatMessage.MessageType.GAME, null);
-                            logger.trace(game.getId() + " " + event.getMessage());
-                            break;
-                        case STATUS:
-                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), ChatMessage.MessageType.GAME, null);
-                            logger.trace(game.getId() + " " + event.getMessage());
-                            break;
-                        case ERROR:
-                            error(event.getMessage(), event.getException());
-                            break;
-                        case END_GAME_INFO:
-                            endGameInfo();
-                            break;
-                        case INIT_TIMER:
-                            final UUID initPlayerId = event.getPlayerId();
-                            if (initPlayerId == null) {
-                                throw new MageException("INIT_TIMER: playerId can't be null");
-                            }
-                            createPlayerTimer(event.getPlayerId(), game.getPriorityTime());
-                            break;
-                        case RESUME_TIMER:
-                            playerId = event.getPlayerId();
-                            if (playerId == null) {
-                                throw new MageException("RESUME_TIMER: playerId can't be null");
-                            }
-                            timer = timers.get(playerId);
-                            if (timer == null) {
-                                Player player = game.getState().getPlayer(playerId);
-                                if (player != null) {
-                                    timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
-                                } else {
-                                    throw new MageException("RESUME_TIMER: player can't be null");
+                (Listener<TableEvent>) event -> {
+                    try {
+                        PriorityTimer timer;
+                        UUID playerId;
+                        switch (event.getEventType()) {
+                            case UPDATE:
+                                updateGame();
+                                break;
+                            case INFO:
+                                ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, MessageType.GAME, null);
+                                logger.trace(game.getId() + " " + event.getMessage());
+                                break;
+                            case STATUS:
+                                ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), MessageType.GAME, null);
+                                logger.trace(game.getId() + " " + event.getMessage());
+                                break;
+                            case ERROR:
+                                error(event.getMessage(), event.getException());
+                                break;
+                            case END_GAME_INFO:
+                                endGameInfo();
+                                break;
+                            case INIT_TIMER:
+                                final UUID initPlayerId = event.getPlayerId();
+                                if (initPlayerId == null) {
+                                    throw new MageException("INIT_TIMER: playerId can't be null");
                                 }
-                            }
-                            timer.resume();
-                            break;
-                        case PAUSE_TIMER:
-                            playerId = event.getPlayerId();
-                            if (playerId == null) {
-                                throw new MageException("PAUSE_TIMER: playerId can't be null");
-                            }
-                            timer = timers.get(playerId);
-                            if (timer == null) {
-                                throw new MageException("PAUSE_TIMER: couldn't find timer for player: " + playerId);
-                            }
-                            timer.pause();
-                            break;
+                                createPlayerTimer(event.getPlayerId(), game.getPriorityTime());
+                                break;
+                            case RESUME_TIMER:
+                                playerId = event.getPlayerId();
+                                if (playerId == null) {
+                                    throw new MageException("RESUME_TIMER: playerId can't be null");
+                                }
+                                timer = timers.get(playerId);
+                                if (timer == null) {
+                                    Player player = game.getState().getPlayer(playerId);
+                                    if (player != null) {
+                                        timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
+                                    } else {
+                                        throw new MageException("RESUME_TIMER: player can't be null");
+                                    }
+                                }
+                                timer.resume();
+                                break;
+                            case PAUSE_TIMER:
+                                playerId = event.getPlayerId();
+                                if (playerId == null) {
+                                    throw new MageException("PAUSE_TIMER: playerId can't be null");
+                                }
+                                timer = timers.get(playerId);
+                                if (timer == null) {
+                                    throw new MageException("PAUSE_TIMER: couldn't find timer for player: " + playerId);
+                                }
+                                timer.pause();
+                                break;
+                        }
+                    } catch (MageException ex) {
+                        logger.fatal("Table event listener error ", ex);
                     }
-                } catch (MageException ex) {
-                    logger.fatal("Table event listener error ", ex);
                 }
-            }
-        }
         );
         game.addPlayerQueryEventListener(
-                new Listener<PlayerQueryEvent>() {
-            @Override
-            public void event(PlayerQueryEvent event) {
-                logger.trace(new StringBuilder(event.getPlayerId().toString()).append("--").append(event.getQueryType()).append("--").append(event.getMessage()).toString());
-                try {
-                    switch (event.getQueryType()) {
-                        case ASK:
-                            ask(event.getPlayerId(), event.getMessage(), event.getOptions());
-                            break;
-                        case PICK_TARGET:
-                            target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getPerms(), event.getTargets(), event.isRequired(), event.getOptions());
-                            break;
-                        case PICK_ABILITY:
-                            target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired(), event.getOptions());
-                            break;
-                        case SELECT:
-                            select(event.getPlayerId(), event.getMessage(), event.getOptions());
-                            break;
-                        case PLAY_MANA:
-                            playMana(event.getPlayerId(), event.getMessage(), event.getOptions());
-                            break;
-                        case PLAY_X_MANA:
-                            playXMana(event.getPlayerId(), event.getMessage());
-                            break;
-                        case CHOOSE_ABILITY:
-                            String objectName = null;
-                            if (event.getChoices() != null && event.getChoices().size() > 0) {
-                                objectName = event.getChoices().iterator().next();
-                            }
-                            chooseAbility(event.getPlayerId(), objectName, event.getAbilities());
-                            break;
-                        case CHOOSE_PILE:
-                            choosePile(event.getPlayerId(), event.getMessage(), event.getPile1(), event.getPile2());
-                            break;
-                        case CHOOSE_MODE:
-                            chooseMode(event.getPlayerId(), event.getModes());
-                            break;
-                        case CHOOSE_CHOICE:
-                            chooseChoice(event.getPlayerId(), event.getChoice());
-                            break;
-                        case AMOUNT:
-                            amount(event.getPlayerId(), event.getMessage(), event.getMin(), event.getMax());
-                            break;
-                        case PERSONAL_MESSAGE:
-                            informPersonal(event.getPlayerId(), event.getMessage());
-                            break;
+                (Listener<PlayerQueryEvent>) event -> {
+                    logger.trace(new StringBuilder(event.getPlayerId().toString()).append("--").append(event.getQueryType()).append("--").append(event.getMessage()).toString());
+                    try {
+                        switch (event.getQueryType()) {
+                            case ASK:
+                                ask(event.getPlayerId(), event.getMessage(), event.getOptions());
+                                break;
+                            case PICK_TARGET:
+                                target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getPerms(), event.getTargets(), event.isRequired(), event.getOptions());
+                                break;
+                            case PICK_ABILITY:
+                                target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired(), event.getOptions());
+                                break;
+                            case SELECT:
+                                select(event.getPlayerId(), event.getMessage(), event.getOptions());
+                                break;
+                            case PLAY_MANA:
+                                playMana(event.getPlayerId(), event.getMessage(), event.getOptions());
+                                break;
+                            case PLAY_X_MANA:
+                                playXMana(event.getPlayerId(), event.getMessage());
+                                break;
+                            case CHOOSE_ABILITY:
+                                String objectName = null;
+                                if (event.getChoices() != null && event.getChoices().size() > 0) {
+                                    objectName = event.getChoices().iterator().next();
+                                }
+                                chooseAbility(event.getPlayerId(), objectName, event.getAbilities());
+                                break;
+                            case CHOOSE_PILE:
+                                choosePile(event.getPlayerId(), event.getMessage(), event.getPile1(), event.getPile2());
+                                break;
+                            case CHOOSE_MODE:
+                                chooseMode(event.getPlayerId(), event.getModes());
+                                break;
+                            case CHOOSE_CHOICE:
+                                chooseChoice(event.getPlayerId(), event.getChoice());
+                                break;
+                            case AMOUNT:
+                                amount(event.getPlayerId(), event.getMessage(), event.getMin(), event.getMax());
+                                break;
+                            case PERSONAL_MESSAGE:
+                                informPersonal(event.getPlayerId(), event.getMessage());
+                                break;
+                        }
+                    } catch (MageException ex) {
+                        logger.fatal("Player event listener error ", ex);
                     }
-                } catch (MageException ex) {
-                    logger.fatal("Player event listener error ", ex);
                 }
-            }
-        }
         );
-        joinWaitingExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    sendInfoAboutPlayersNotJoinedYet();
-                } catch (Exception ex) {
-                    logger.fatal("Send info about player not joined yet:", ex);
-                }
+        joinWaitingExecutor.scheduleAtFixedRate(() -> {
+            try {
+                sendInfoAboutPlayersNotJoinedYet();
+            } catch (Exception ex) {
+                logger.fatal("Send info about player not joined yet:", ex);
             }
         }, 15, 15, TimeUnit.SECONDS);
         checkStart();
@@ -303,12 +294,9 @@ public class GameController implements GameCallback {
         final UUID initPlayerId = playerId;
         long delayMs = 250L; // run each 250 ms
 
-        Action executeOnNoTimeLeft = new Action() {
-            @Override
-            public void execute() throws MageException {
-                game.timerTimeout(initPlayerId);
-                logger.debug("Player has no time left to end the match: " + initPlayerId + ". Conceding.");
-            }
+        Action executeOnNoTimeLeft = () -> {
+            game.timerTimeout(initPlayerId);
+            logger.debug("Player has no time left to end the match: " + initPlayerId + ". Conceding.");
         };
 
         PriorityTimer timer = new PriorityTimer(count, delayMs, executeOnNoTimeLeft);
@@ -402,12 +390,7 @@ public class GameController implements GameCallback {
         if (allJoined()) {
             joinWaitingExecutor.shutdownNow();
             ThreadExecutor.getInstance().getCallExecutor().execute(
-                    new Runnable() {
-                @Override
-                public void run() {
-                    startGame();
-                }
-            });
+                    () -> startGame());
         }
     }
 
@@ -703,49 +686,24 @@ public class GameController implements GameCallback {
     }
 
     public void sendPlayerUUID(UUID userId, final UUID data) {
-        sendMessage(userId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).sendPlayerUUID(data);
-            }
-        });
+        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerUUID(data));
     }
 
     public void sendPlayerString(UUID userId, final String data) {
-        sendMessage(userId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).sendPlayerString(data);
-            }
-        });
+        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerString(data));
     }
 
     public void sendPlayerManaType(UUID userId, final UUID manaTypePlayerId, final ManaType data) {
-        sendMessage(userId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).sendPlayerManaType(data, manaTypePlayerId);
-            }
-        });
+        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerManaType(data, manaTypePlayerId));
     }
 
     public void sendPlayerBoolean(UUID userId, final Boolean data) {
-        sendMessage(userId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).sendPlayerBoolean(data);
-            }
-        });
+        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerBoolean(data));
 
     }
 
     public void sendPlayerInteger(UUID userId, final Integer data) {
-        sendMessage(userId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).sendPlayerInteger(data);
-            }
-        });
+        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerInteger(data));
 
     }
 
@@ -779,120 +737,69 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void ask(UUID playerId, final String question, final Map<String, Serializable> options) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).ask(question, options);
-            }
-        });
+        perform(playerId, playerId1 -> getGameSession(playerId1).ask(question, options));
 
     }
 
     private synchronized void chooseAbility(UUID playerId, final String objectName, final List<? extends Ability> choices) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).chooseAbility(new AbilityPickerView(objectName, choices));
-            }
-        });
+        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(objectName, choices)));
     }
 
     private synchronized void choosePile(UUID playerId, final String message, final List<? extends Card> pile1, final List<? extends Card> pile2) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).choosePile(message, new CardsView(pile1), new CardsView(pile2));
-            }
-        });
+        perform(playerId, playerId1 -> getGameSession(playerId1).choosePile(message, new CardsView(pile1), new CardsView(pile2)));
     }
 
     private synchronized void chooseMode(UUID playerId, final Map<UUID, String> modes) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).chooseAbility(new AbilityPickerView(modes));
-            }
-        });
+        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(modes)));
     }
 
     private synchronized void chooseChoice(UUID playerId, final Choice choice) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).chooseChoice(choice);
-            }
-        });
+        perform(playerId, playerId1 -> getGameSession(playerId1).chooseChoice(choice));
     }
 
     private synchronized void target(UUID playerId, final String question, final Cards cards, final List<Permanent> perms, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                if (cards != null) {
-                    // Zone targetZone = (Zone) options.get("targetZone");
-                    // Are there really situations where a player selects from a list of face down cards?
-                    // So always show face up for selection
-                    // boolean showFaceDown = targetZone != null && targetZone.equals(Zone.PICK);
-                    boolean showFaceDown = true;
-                    getGameSession(playerId).target(question, new CardsView(game, cards.getCards(game), showFaceDown, true), targets, required, options);
-                } else if (perms != null) {
-                    CardsView permsView = new CardsView();
-                    for (Permanent perm : perms) {
-                        permsView.put(perm.getId(), new PermanentView(perm, game.getCard(perm.getId()), playerId, game));
-                    }
-                    getGameSession(playerId).target(question, permsView, targets, required, options);
-                } else {
-                    getGameSession(playerId).target(question, new CardsView(), targets, required, options);
+        perform(playerId, playerId1 -> {
+            if (cards != null) {
+                // Zone targetZone = (Zone) options.get("targetZone");
+                // Are there really situations where a player selects from a list of face down cards?
+                // So always show face up for selection
+                // boolean showFaceDown = targetZone != null && targetZone.equals(Zone.PICK);
+                boolean showFaceDown = true;
+                getGameSession(playerId1).target(question, new CardsView(game, cards.getCards(game), showFaceDown, true), targets, required, options);
+            } else if (perms != null) {
+                CardsView permsView = new CardsView();
+                for (Permanent perm : perms) {
+                    permsView.put(perm.getId(), new PermanentView(perm, game.getCard(perm.getId()), playerId1, game));
                 }
+                getGameSession(playerId1).target(question, permsView, targets, required, options);
+            } else {
+                getGameSession(playerId1).target(question, new CardsView(), targets, required, options);
             }
         });
 
     }
 
     private synchronized void target(UUID playerId, final String question, final Collection<? extends Ability> abilities, final boolean required, final Map<String, Serializable> options) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                CardsView cardsView = new CardsView(abilities, game);
-                getGameSession(playerId).target(question, cardsView, null, required, options);
-            }
+        perform(playerId, playerId1 -> {
+            CardsView cardsView = new CardsView(abilities, game);
+            getGameSession(playerId1).target(question, cardsView, null, required, options);
         });
     }
 
     private synchronized void select(final UUID playerId, final String message, final Map<String, Serializable> options) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).select(message, options);
-            }
-        });
+        perform(playerId, playerId1 -> getGameSession(playerId1).select(message, options));
     }
 
     private synchronized void playMana(UUID playerId, final String message, final Map<String, Serializable> options) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).playMana(message, options);
-            }
-        });
+        perform(playerId, playerId1 -> getGameSession(playerId1).playMana(message, options));
     }
 
     private synchronized void playXMana(UUID playerId, final String message) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).playXMana(message);
-            }
-        });
+        perform(playerId, playerId1 -> getGameSession(playerId1).playXMana(message));
     }
 
     private synchronized void amount(UUID playerId, final String message, final int min, final int max) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).getAmount(message, min, max);
-            }
-        });
+        perform(playerId, playerId1 -> getGameSession(playerId1).getAmount(message, min, max));
     }
 
     private void informOthers(UUID playerId) throws MageException {
@@ -939,12 +846,7 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void informPersonal(UUID playerId, final String message) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).informPersonal(message);
-            }
-        });
+        perform(playerId, playerId1 -> getGameSession(playerId1).informPersonal(message));
     }
 
     private void error(String message, Exception ex) {
@@ -977,12 +879,9 @@ public class GameController implements GameCallback {
         try {
             OutputStream file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
             OutputStream buffer = new BufferedOutputStream(file);
-            ObjectOutput output = new ObjectOutputStream(new GZIPOutputStream(buffer));
-            try {
+            try (ObjectOutput output = new ObjectOutputStream(new GZIPOutputStream(buffer))) {
                 output.writeObject(game);
                 output.writeObject(game.getGameStates());
-            } finally {
-                output.close();
             }
             logger.debug("Saved game:" + game.getId());
             return true;
@@ -1074,12 +973,7 @@ public class GameController implements GameCallback {
         }
         cancelTimeout();
         futureTimeout = timeoutIdleExecutor.schedule(
-                new Runnable() {
-            @Override
-            public void run() {
-                idleTimeout(playerId);
-            }
-        },
+                () -> idleTimeout(playerId),
                 Main.isTestMode() ? 3600 : ConfigSettings.getInstance().getMaxSecondsIdle(),
                 TimeUnit.SECONDS
         );

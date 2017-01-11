@@ -14,15 +14,15 @@ public class CardDownloadData {
     private String set;
     private String tokenSetCode;
     private String tokenDescriptor;
-    private String collectorId;
-    private Integer type;
+    private final String collectorId;
+    private final Integer type;
     private boolean token;
-    private boolean twoFacedCard;
-    private boolean secondSide;
+    private final boolean twoFacedCard;
+    private final boolean secondSide;
     private boolean flipCard;
     private boolean flippedSide;
     private boolean splitCard;
-    private boolean usesVariousArt;
+    private final boolean usesVariousArt;
     private boolean isType2;
 
     public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor) {

@@ -32,14 +32,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import mage.cards.Card;
+
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.CardType;
 import mage.constants.SetType;
-import mage.util.CardUtil;
 
 /**
  *

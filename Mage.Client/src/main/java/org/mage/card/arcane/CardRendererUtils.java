@@ -85,9 +85,9 @@ public class CardRendererUtils {
     
     // Abbreviate a piece of rules text, making substitutions to decrease its
     // length. Also abbreviate reminder text.
-    private static Pattern abbreviationPattern;
-    private static Map<String, String> abbreviations = new HashMap<String, String>();
-    private static Pattern killReminderTextPattern;
+    private static final Pattern abbreviationPattern;
+    private static final Map<String, String> abbreviations = new HashMap<String, String>();
+    private static final Pattern killReminderTextPattern;
     static {
         // Available abbreviations
         abbreviations.put("enters the battlefield", "ETB");

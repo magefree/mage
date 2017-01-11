@@ -68,27 +68,19 @@ public class TransformedImageCache {
         }
     }
 
-    static Map<Key, Map<BufferedImage, BufferedImage>> IMAGE_CACHE;
+    static final Map<Key, Map<BufferedImage, BufferedImage>> IMAGE_CACHE;
 
     static {
         // TODO: can we use a single map?
-        IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap(new Function<Key, Map<BufferedImage, BufferedImage>>() {
-            @Override
-            public Map<BufferedImage, BufferedImage> apply(final Key key) {
-                return new MapMaker().weakKeys().softValues().makeComputingMap(new Function<BufferedImage, BufferedImage>() {
-                    @Override
-                    public BufferedImage apply(BufferedImage image) {
-                        if (key.width != image.getWidth() || key.height != image.getHeight()) {
-                            image = resizeImage(image, key.width, key.height);
-                        }
-                        if (key.angle != 0.0) {
-                            image = rotateImage(image, key.angle);
-                        }
-                        return image;
-                    }
-                });
+        IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap((Function<Key, Map<BufferedImage, BufferedImage>>) key -> new MapMaker().weakKeys().softValues().makeComputingMap(image -> {
+            if (key.width != image.getWidth() || key.height != image.getHeight()) {
+                image = resizeImage(image, key.width, key.height);
             }
-        }));
+            if (key.angle != 0.0) {
+                image = rotateImage(image, key.angle);
+            }
+            return image;
+        })));
     }
 
     private static BufferedImage rotateImage(BufferedImage image, double angle) {

@@ -28,7 +28,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageInt;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -44,7 +44,6 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 
 /**

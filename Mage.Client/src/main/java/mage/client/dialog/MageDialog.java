@@ -97,12 +97,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
                 stopModal();
             } else {
                 try {
-                    SwingUtilities.invokeAndWait(new Runnable() {
-                        @Override
-                        public void run() {
-                            stopModal();
-                        }
-                    });
+                    SwingUtilities.invokeAndWait(() -> stopModal());
                 } catch (InterruptedException ex) {
                     LOGGER.fatal("MageDialog error", ex);
                 } catch (InvocationTargetException ex) {
