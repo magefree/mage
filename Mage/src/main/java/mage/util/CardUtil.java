@@ -69,7 +69,7 @@ public class CardUtil {
 
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
-    static String numberStrings[] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+    static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
         "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
 
     public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{
