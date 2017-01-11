@@ -2748,9 +2748,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
                 LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getUseableActivatedAbilities(permanent, Zone.BATTLEFIELD, game);
                 for (ActivatedAbility ability : useableAbilities.values()) {
-                    if (!playableActivated.containsKey(ability.toString())) {
-                        playableActivated.put(ability.toString(), ability);
-                    }
+                    playableActivated.putIfAbsent(ability.toString(), ability);
                 }
             }
             // activated abilities from stack objects

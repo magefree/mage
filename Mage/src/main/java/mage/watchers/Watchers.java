@@ -50,9 +50,7 @@ public class Watchers extends HashMap<String, Watcher> {
     }
 
     public void add(Watcher watcher) {
-        if (!this.containsKey(watcher.getKey())) {
-            this.put(watcher.getKey(), watcher);
-        }
+        putIfAbsent(watcher.getKey(), watcher);
     }
 
     public void watch(GameEvent event, Game game) {
