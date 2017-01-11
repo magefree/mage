@@ -10,6 +10,7 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 import java.util.List;
 import java.util.UUID;
@@ -49,10 +50,11 @@ class CreaturesAreSliversEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent perm : permanents) {
             List<String> cardSubType = perm.getSubtype(game);
-            if (!cardSubType.contains("Sliver")) {
+            if (!cardSubType.contains("Sliver") && perm.getOwnerId() == player.getId()) {
                 cardSubType.add("Sliver");
             }
         }

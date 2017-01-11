@@ -1,13 +1,14 @@
 package org.mage.test.cards.single.tsp;
 
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * Created by Alexsandr0x.
  */
-
-
 public class HivestoneTest extends CardTestPlayerBase {
 
     /**
@@ -15,8 +16,21 @@ public class HivestoneTest extends CardTestPlayerBase {
      */
     @Test
     public void abilityCheckTest() {
-        // Coloca criatura qualquer em campo, uma no player A e outra no player B, checa se
-        // receberam o subtipo
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Hivestone", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Muscle Sliver", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Runeclaw Bear", 1);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, "Grizzly Bears", 3, 3, Filter.ComparisonScope.Any);
+
+        assertPowerToughness(playerB, "Runeclaw Bear", 2, 2, Filter.ComparisonScope.Any);
+
+
     }
 
     /**
@@ -25,7 +39,22 @@ public class HivestoneTest extends CardTestPlayerBase {
      */
     @Test
     public void rootSliverTest() {
-        // com o root sliver e a hivestone em campo, tenta counterar uma carta que não é sliver vinda
-        // da mão (tem que funcionar, ja que a carta não é sliver na stack)
+        addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Hivestone", 1);
+        // Root Sliver can't be countered. Sliver spells can't be countered by spells or abilities.
+        addCard(Zone.BATTLEFIELD, playerA, "Root Sliver", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Counterspell");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Grizzly Bears", "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, 1);
     }
 }
