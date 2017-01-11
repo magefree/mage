@@ -34,12 +34,11 @@ import mage.game.draft.DraftCube;
  * @author fireshoes
  */
 
-public class LegacyCubeSeptember2016 extends DraftCube {
+public class LegacyCubeJanuary2017 extends DraftCube {
 
-    public LegacyCubeSeptember2016() {
-        super("MTGO Legacy Cube September 2016 (600 cards)");
+    public LegacyCubeJanuary2017() {
+        super("MTGO Legacy Cube January 2017 (600 cards)");
         cubeCards.add(new DraftCube.CardIdentity("Abbot of Keral Keep",""));
-        cubeCards.add(new DraftCube.CardIdentity("Abhorrent Overlord",""));
         cubeCards.add(new DraftCube.CardIdentity("Abrupt Decay",""));
         cubeCards.add(new DraftCube.CardIdentity("Abyssal Persecutor",""));
         cubeCards.add(new DraftCube.CardIdentity("Accorder Paladin",""));
@@ -51,6 +50,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Anafenza, Kin-Tree Spirit",""));
         cubeCards.add(new DraftCube.CardIdentity("Ancestral Vision",""));
         cubeCards.add(new DraftCube.CardIdentity("Ancient Tomb",""));
+        cubeCards.add(new DraftCube.CardIdentity("Angel of Invention",""));
         cubeCards.add(new DraftCube.CardIdentity("Angel of Serenity",""));
         cubeCards.add(new DraftCube.CardIdentity("Anger of the Gods",""));
         cubeCards.add(new DraftCube.CardIdentity("Anguished Unmaking",""));
@@ -90,6 +90,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Bloodghast",""));
         cubeCards.add(new DraftCube.CardIdentity("Bloodstained Mire",""));
         cubeCards.add(new DraftCube.CardIdentity("Bloom Tender",""));
+        cubeCards.add(new DraftCube.CardIdentity("Blossoming Defense",""));
         cubeCards.add(new DraftCube.CardIdentity("Bogardan Hellkite",""));
         cubeCards.add(new DraftCube.CardIdentity("Bone Shredder",""));
         cubeCards.add(new DraftCube.CardIdentity("Bonesplitter",""));
@@ -106,6 +107,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Careful Consideration",""));
         cubeCards.add(new DraftCube.CardIdentity("Careful Study",""));
         cubeCards.add(new DraftCube.CardIdentity("Catacomb Sifter",""));
+        cubeCards.add(new DraftCube.CardIdentity("Cathartic Reunion",""));
         cubeCards.add(new DraftCube.CardIdentity("Celestial Colonnade",""));
         cubeCards.add(new DraftCube.CardIdentity("Chain Lightning",""));
         cubeCards.add(new DraftCube.CardIdentity("Chainer's Edict",""));
@@ -114,8 +116,8 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Chandra, Fire of Kaladesh",""));
         cubeCards.add(new DraftCube.CardIdentity("Chandra, Flamecaller",""));
         cubeCards.add(new DraftCube.CardIdentity("Chandra, Pyromaster",""));
+        cubeCards.add(new DraftCube.CardIdentity("Chandra, Torch of Defiance",""));
         cubeCards.add(new DraftCube.CardIdentity("Chandra's Phoenix",""));
-        cubeCards.add(new DraftCube.CardIdentity("Chaos Warp",""));
         cubeCards.add(new DraftCube.CardIdentity("Char",""));
         cubeCards.add(new DraftCube.CardIdentity("Chord of Calling",""));
         cubeCards.add(new DraftCube.CardIdentity("Chromatic Lantern",""));
@@ -140,7 +142,6 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Cryptic Command",""));
         cubeCards.add(new DraftCube.CardIdentity("Cultivate",""));
         cubeCards.add(new DraftCube.CardIdentity("Cunning Sparkmage",""));
-        cubeCards.add(new DraftCube.CardIdentity("Cursed Scroll",""));
         cubeCards.add(new DraftCube.CardIdentity("Cyclonic Rift",""));
         cubeCards.add(new DraftCube.CardIdentity("Damnation",""));
         cubeCards.add(new DraftCube.CardIdentity("Dark Confidant",""));
@@ -158,8 +159,6 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Desecration Demon",""));
         cubeCards.add(new DraftCube.CardIdentity("Devil's Play",""));
         cubeCards.add(new DraftCube.CardIdentity("Devoted Druid",""));
-        cubeCards.add(new DraftCube.CardIdentity("Dictate of Heliod",""));
-        cubeCards.add(new DraftCube.CardIdentity("Disciple of Bolas",""));
         cubeCards.add(new DraftCube.CardIdentity("Disfigure",""));
         cubeCards.add(new DraftCube.CardIdentity("Dismember",""));
         cubeCards.add(new DraftCube.CardIdentity("Dismiss",""));
@@ -190,7 +189,6 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Eldritch Evolution",""));
         cubeCards.add(new DraftCube.CardIdentity("Electrolyze",""));
         cubeCards.add(new DraftCube.CardIdentity("Elesh Norn, Grand Cenobite",""));
-        cubeCards.add(new DraftCube.CardIdentity("Elixir of Immortality",""));
         cubeCards.add(new DraftCube.CardIdentity("Elspeth Tirel",""));
         cubeCards.add(new DraftCube.CardIdentity("Elspeth, Knight-Errant",""));
         cubeCards.add(new DraftCube.CardIdentity("Elspeth, Sun's Champion",""));
@@ -203,14 +201,11 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Erebos, God of the Dead",""));
         cubeCards.add(new DraftCube.CardIdentity("Eternal Witness",""));
         cubeCards.add(new DraftCube.CardIdentity("Ever After",""));
-        cubeCards.add(new DraftCube.CardIdentity("Evolutionary Leap",""));
-        cubeCards.add(new DraftCube.CardIdentity("Exclude",""));
         cubeCards.add(new DraftCube.CardIdentity("Exhume",""));
         cubeCards.add(new DraftCube.CardIdentity("Explore",""));
         cubeCards.add(new DraftCube.CardIdentity("Exquisite Firecraft",""));
         cubeCards.add(new DraftCube.CardIdentity("Fact or Fiction",""));
         cubeCards.add(new DraftCube.CardIdentity("Faith's Fetters",""));
-        cubeCards.add(new DraftCube.CardIdentity("Falkenrath Aristocrat",""));
         cubeCards.add(new DraftCube.CardIdentity("Falkenrath Gorger",""));
         cubeCards.add(new DraftCube.CardIdentity("Far // Away",""));
         cubeCards.add(new DraftCube.CardIdentity("Farseek",""));
@@ -224,6 +219,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Flame Slash",""));
         cubeCards.add(new DraftCube.CardIdentity("Flametongue Kavu",""));
         cubeCards.add(new DraftCube.CardIdentity("Flamewake Phoenix",""));
+        cubeCards.add(new DraftCube.CardIdentity("Fleetwheel Cruiser",""));
         cubeCards.add(new DraftCube.CardIdentity("Flickerwisp",""));
         cubeCards.add(new DraftCube.CardIdentity("Flooded Strand",""));
         cubeCards.add(new DraftCube.CardIdentity("Forbid",""));
@@ -235,6 +231,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Fyndhorn Elves",""));
         cubeCards.add(new DraftCube.CardIdentity("Gaddock Teeg",""));
         cubeCards.add(new DraftCube.CardIdentity("Gaea's Cradle",""));
+        cubeCards.add(new DraftCube.CardIdentity("Gamble",""));
         cubeCards.add(new DraftCube.CardIdentity("Garruk Relentless",""));
         cubeCards.add(new DraftCube.CardIdentity("Garruk Wildspeaker",""));
         cubeCards.add(new DraftCube.CardIdentity("Garruk, Apex Predator",""));
@@ -262,10 +259,9 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Goblin Guide",""));
         cubeCards.add(new DraftCube.CardIdentity("Goblin Rabblemaster",""));
         cubeCards.add(new DraftCube.CardIdentity("Godless Shrine",""));
+        cubeCards.add(new DraftCube.CardIdentity("Gonti, Lord of Luxury",""));
         cubeCards.add(new DraftCube.CardIdentity("Gore-House Chainwalker",""));
-        cubeCards.add(new DraftCube.CardIdentity("Grafted Wargear",""));
         cubeCards.add(new DraftCube.CardIdentity("Grave Titan",""));
-        cubeCards.add(new DraftCube.CardIdentity("Gravecrawler",""));
         cubeCards.add(new DraftCube.CardIdentity("Gray Merchant of Asphodel",""));
         cubeCards.add(new DraftCube.CardIdentity("Greater Gargadon",""));
         cubeCards.add(new DraftCube.CardIdentity("Green Sun's Zenith",""));
@@ -275,8 +271,6 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Hallowed Fountain",""));
         cubeCards.add(new DraftCube.CardIdentity("Hallowed Spiritkeeper",""));
         cubeCards.add(new DraftCube.CardIdentity("Hangarback Walker",""));
-        cubeCards.add(new DraftCube.CardIdentity("Hanweir Battlements",""));
-        cubeCards.add(new DraftCube.CardIdentity("Hanweir Garrison",""));
         cubeCards.add(new DraftCube.CardIdentity("Harbinger of the Tides",""));
         cubeCards.add(new DraftCube.CardIdentity("Harmonize",""));
         cubeCards.add(new DraftCube.CardIdentity("Hellrider",""));
@@ -291,12 +285,10 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Huntmaster of the Fells",""));
         cubeCards.add(new DraftCube.CardIdentity("Hymn to Tourach",""));
         cubeCards.add(new DraftCube.CardIdentity("Hypnotic Specter",""));
-        cubeCards.add(new DraftCube.CardIdentity("Icefall Regent",""));
         cubeCards.add(new DraftCube.CardIdentity("Imperial Recruiter",""));
         cubeCards.add(new DraftCube.CardIdentity("Impulse",""));
         cubeCards.add(new DraftCube.CardIdentity("Incendiary Flow",""));
         cubeCards.add(new DraftCube.CardIdentity("Incinerate",""));
-        cubeCards.add(new DraftCube.CardIdentity("Indrik Stomphowler",""));
         cubeCards.add(new DraftCube.CardIdentity("Inferno Titan",""));
         cubeCards.add(new DraftCube.CardIdentity("Inquisition of Kozilek",""));
         cubeCards.add(new DraftCube.CardIdentity("Into the Roil",""));
@@ -316,7 +308,6 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Kami of Ancient Law",""));
         cubeCards.add(new DraftCube.CardIdentity("Karmic Guide",""));
         cubeCards.add(new DraftCube.CardIdentity("Karn Liberated",""));
-        cubeCards.add(new DraftCube.CardIdentity("Keiga, the Tide Star",""));
         cubeCards.add(new DraftCube.CardIdentity("Keranos, God of Storms",""));
         cubeCards.add(new DraftCube.CardIdentity("Kiki-Jiki, Mirror Breaker",""));
         cubeCards.add(new DraftCube.CardIdentity("Kiln Fiend",""));
@@ -326,7 +317,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Kitchen Finks",""));
         cubeCards.add(new DraftCube.CardIdentity("Kodama's Reach",""));
         cubeCards.add(new DraftCube.CardIdentity("Kokusho, the Evening Star",""));
-        cubeCards.add(new DraftCube.CardIdentity("Kor Skyfisher",""));
+        cubeCards.add(new DraftCube.CardIdentity("Kolaghan's Command",""));
         cubeCards.add(new DraftCube.CardIdentity("Koth of the Hammer",""));
         cubeCards.add(new DraftCube.CardIdentity("Krenko's Command",""));
         cubeCards.add(new DraftCube.CardIdentity("Kytheon, Hero of Akros",""));
@@ -355,6 +346,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Lumbering Falls",""));
         cubeCards.add(new DraftCube.CardIdentity("Maelstrom Pulse",""));
         cubeCards.add(new DraftCube.CardIdentity("Magma Jet",""));
+        cubeCards.add(new DraftCube.CardIdentity("Magus of the Will",""));
         cubeCards.add(new DraftCube.CardIdentity("Makeshift Mannequin",""));
         cubeCards.add(new DraftCube.CardIdentity("Malicious Affliction",""));
         cubeCards.add(new DraftCube.CardIdentity("Man-o'-War",""));
@@ -387,7 +379,6 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Murderous Cut",""));
         cubeCards.add(new DraftCube.CardIdentity("Mutavault",""));
         cubeCards.add(new DraftCube.CardIdentity("Myr Battlesphere",""));
-        cubeCards.add(new DraftCube.CardIdentity("Mystic Confluence",""));
         cubeCards.add(new DraftCube.CardIdentity("Mystic Snake",""));
         cubeCards.add(new DraftCube.CardIdentity("Nahiri, the Harbinger",""));
         cubeCards.add(new DraftCube.CardIdentity("Nature's Lore",""));
@@ -402,13 +393,13 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Nissa, Voice of Zendikar",""));
         cubeCards.add(new DraftCube.CardIdentity("Nissa, Worldwaker",""));
         cubeCards.add(new DraftCube.CardIdentity("Noble Hierarch",""));
+        cubeCards.add(new DraftCube.CardIdentity("Noxious Gearhulk",""));
         cubeCards.add(new DraftCube.CardIdentity("Nykthos, Shrine to Nyx",""));
         cubeCards.add(new DraftCube.CardIdentity("Oath of Nissa",""));
         cubeCards.add(new DraftCube.CardIdentity("Ob Nixilis Reignited",""));
         cubeCards.add(new DraftCube.CardIdentity("Oblivion Ring",""));
         cubeCards.add(new DraftCube.CardIdentity("Oblivion Stone",""));
         cubeCards.add(new DraftCube.CardIdentity("Obstinate Baloth",""));
-        cubeCards.add(new DraftCube.CardIdentity("Ohran Viper",""));
         cubeCards.add(new DraftCube.CardIdentity("Old Man of the Sea",""));
         cubeCards.add(new DraftCube.CardIdentity("Olivia Voldaren",""));
         cubeCards.add(new DraftCube.CardIdentity("Omnath, Locus of Rage",""));
@@ -422,6 +413,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Overgrown Tomb",""));
         cubeCards.add(new DraftCube.CardIdentity("Pack Rat",""));
         cubeCards.add(new DraftCube.CardIdentity("Pact of Negation",""));
+        cubeCards.add(new DraftCube.CardIdentity("Panharmonicon",""));
         cubeCards.add(new DraftCube.CardIdentity("Parallax Wave",""));
         cubeCards.add(new DraftCube.CardIdentity("Part the Waterveil",""));
         cubeCards.add(new DraftCube.CardIdentity("Path to Exile",""));
@@ -462,6 +454,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Reanimate",""));
         cubeCards.add(new DraftCube.CardIdentity("Reckless Bushwhacker",""));
         cubeCards.add(new DraftCube.CardIdentity("Reclamation Sage",""));
+        cubeCards.add(new DraftCube.CardIdentity("Recruiter of the Guard",""));
         cubeCards.add(new DraftCube.CardIdentity("Recurring Nightmare",""));
         cubeCards.add(new DraftCube.CardIdentity("Reflecting Pool",""));
         cubeCards.add(new DraftCube.CardIdentity("Reflector Mage",""));
@@ -486,6 +479,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Savannah",""));
         cubeCards.add(new DraftCube.CardIdentity("Scalding Tarn",""));
         cubeCards.add(new DraftCube.CardIdentity("Scavenging Ooze",""));
+        cubeCards.add(new DraftCube.CardIdentity("Scrapheap Scrounger",""));
         cubeCards.add(new DraftCube.CardIdentity("Scroll Rack",""));
         cubeCards.add(new DraftCube.CardIdentity("Scrubland",""));
         cubeCards.add(new DraftCube.CardIdentity("Sea Gate Oracle",""));
@@ -496,6 +490,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("See the Unwritten",""));
         cubeCards.add(new DraftCube.CardIdentity("Seeker of the Way",""));
         cubeCards.add(new DraftCube.CardIdentity("Selfless Spirit",""));
+        cubeCards.add(new DraftCube.CardIdentity("Selvala, Heart of the Wilds",""));
         cubeCards.add(new DraftCube.CardIdentity("Sensei's Divining Top",""));
         cubeCards.add(new DraftCube.CardIdentity("Serendib Efreet",""));
         cubeCards.add(new DraftCube.CardIdentity("Serum Visions",""));
@@ -512,6 +507,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Skinrender",""));
         cubeCards.add(new DraftCube.CardIdentity("Slagstorm",""));
         cubeCards.add(new DraftCube.CardIdentity("Slaughter Pact",""));
+        cubeCards.add(new DraftCube.CardIdentity("Smuggler's Copter",""));
         cubeCards.add(new DraftCube.CardIdentity("Snapcaster Mage",""));
         cubeCards.add(new DraftCube.CardIdentity("Soldier of the Pantheon",""));
         cubeCards.add(new DraftCube.CardIdentity("Solemn Simulacrum",""));
@@ -576,6 +572,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Thalia, Heretic Cathar",""));
         cubeCards.add(new DraftCube.CardIdentity("Thassa, God of the Sea",""));
         cubeCards.add(new DraftCube.CardIdentity("Thing in the Ice",""));
+        cubeCards.add(new DraftCube.CardIdentity("Thirst for Knowledge",""));
         cubeCards.add(new DraftCube.CardIdentity("Thoughtseize",""));
         cubeCards.add(new DraftCube.CardIdentity("Thragtusk",""));
         cubeCards.add(new DraftCube.CardIdentity("Threads of Disloyalty",""));
@@ -586,6 +583,7 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Time Warp",""));
         cubeCards.add(new DraftCube.CardIdentity("Tireless Tracker",""));
         cubeCards.add(new DraftCube.CardIdentity("Tooth and Nail",""));
+        cubeCards.add(new DraftCube.CardIdentity("Torrential Gearhulk",""));
         cubeCards.add(new DraftCube.CardIdentity("Toxic Deluge",""));
         cubeCards.add(new DraftCube.CardIdentity("Treachery",""));
         cubeCards.add(new DraftCube.CardIdentity("Tropical Island",""));
@@ -602,9 +600,11 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Utopia Sprawl",""));
         cubeCards.add(new DraftCube.CardIdentity("Vampire Hexmage",""));
         cubeCards.add(new DraftCube.CardIdentity("Vampire Nighthawk",""));
+        cubeCards.add(new DraftCube.CardIdentity("Vapor Snag",""));
         cubeCards.add(new DraftCube.CardIdentity("Vendilion Clique",""));
         cubeCards.add(new DraftCube.CardIdentity("Venser, Shaper Savant",""));
         cubeCards.add(new DraftCube.CardIdentity("Verdant Catacombs",""));
+        cubeCards.add(new DraftCube.CardIdentity("Verdurous Gearhulk",""));
         cubeCards.add(new DraftCube.CardIdentity("Victimize",""));
         cubeCards.add(new DraftCube.CardIdentity("Vindicate",""));
         cubeCards.add(new DraftCube.CardIdentity("Volcanic Island",""));
@@ -633,7 +633,6 @@ public class LegacyCubeSeptember2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Wretched Confluence",""));
         cubeCards.add(new DraftCube.CardIdentity("Wurmcoil Engine",""));
         cubeCards.add(new DraftCube.CardIdentity("Xenagos, the Reveler",""));
-        cubeCards.add(new DraftCube.CardIdentity("Xiahou Dun, the One-Eyed",""));
         cubeCards.add(new DraftCube.CardIdentity("Yavimaya Elder",""));
         cubeCards.add(new DraftCube.CardIdentity("Yosei, the Morning Star",""));
         cubeCards.add(new DraftCube.CardIdentity("Young Pyromancer",""));
