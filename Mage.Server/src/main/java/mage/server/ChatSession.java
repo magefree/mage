@@ -27,12 +27,6 @@
  */
 package mage.server;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.interfaces.callback.ClientCallback;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
@@ -40,8 +34,14 @@ import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ChatSession {
@@ -79,7 +79,7 @@ public class ChatSession {
             }
             if (userId != null && clients.containsKey(userId)) {
                 String userName = clients.get(userId);
-                if (!reason.equals(DisconnectReason.LostConnection)) { // for lost connection the user will be reconnected or session expire so no remove of chat yet
+                if (reason != DisconnectReason.LostConnection) { // for lost connection the user will be reconnected or session expire so no remove of chat yet
                     clients.remove(userId);
                     logger.debug(userName + "(" + reason.toString() + ")" + " removed from chatId " + chatId);
                 }

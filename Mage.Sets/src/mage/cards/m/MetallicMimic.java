@@ -135,7 +135,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
         return enteringCreature != null && sourcePermanent != null 
                 && enteringCreature.getControllerId().equals(source.getControllerId())
                 && enteringCreature.getCardType().contains(CardType.CREATURE)
-                && enteringCreature.getSubtype(game).contains((String) game.getState().getValue(sourcePermanent.getId() + "_type"))
+                && enteringCreature.getSubtype(game).contains(game.getState().getValue(sourcePermanent.getId() + "_type"))
                 && !event.getTargetId().equals(source.getSourceId());
     }
 

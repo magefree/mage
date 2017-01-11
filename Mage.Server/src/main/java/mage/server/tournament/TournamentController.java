@@ -302,7 +302,7 @@ public class TournamentController {
     }
 
     private void initTournament() {
-        if (!TableManager.getInstance().getTable(tableId).getState().equals(TableState.DUELING)) {
+        if (TableManager.getInstance().getTable(tableId).getState()!=TableState.DUELING) {
             TableManager.getInstance().initTournament(tableId);
         }
     }
@@ -385,7 +385,7 @@ public class TournamentController {
                 // quit active matches of that tournament
                 TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
                 status = TourneyQuitStatus.DURING_ROUND;
-            } else if (tournamentPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
+            } else if (tournamentPlayer.getState()==TournamentPlayerState.DRAFTING) {
                 info = "during Draft phase";
                 if (!checkToReplaceDraftPlayerByAi(userId, tournamentPlayer)) {
                     this.abortDraftTournament();
@@ -399,7 +399,7 @@ public class TournamentController {
                     }
                 }
                 status = TourneyQuitStatus.DURING_DRAFTING;
-            } else if (tournamentPlayer.getState().equals(TournamentPlayerState.CONSTRUCTING)) {
+            } else if (tournamentPlayer.getState()==TournamentPlayerState.CONSTRUCTING) {
                 info = "during Construction phase";
                 status = TourneyQuitStatus.DURING_CONSTRUCTION;
             } else {
@@ -523,7 +523,7 @@ public class TournamentController {
                 }
             }
         }
-        if (activePlayers < 2 && !tableState.equals(TableState.WAITING)) {
+        if (activePlayers < 2 && tableState!=TableState.WAITING) {
             logger.debug("Tournament has less than 2 active players - tournamentId: " + tournament.getId() + " state: " + tableState.toString());
             return false;
         }

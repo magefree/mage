@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
 import mage.constants.SkillLevel;
 import mage.constants.TableState;
 import mage.game.Game;
@@ -43,7 +44,6 @@ import mage.game.match.MatchPlayer;
 import mage.game.tournament.TournamentPlayer;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TableView implements Serializable {
@@ -67,19 +67,19 @@ public class TableView implements Serializable {
     private final boolean rated;
     private final boolean passworded;
 
-    public TableView(Table table) {    
+    public TableView(Table table) {
         this.tableId = table.getId();
         this.gameType = table.getGameType();
         this.tableName = table.getName();
         String tableNameInfo = null;
         if (tableName != null && !tableName.isEmpty()) {
-            tableNameInfo = " [" +  table.getName() + "]";
+            tableNameInfo = " [" + table.getName() + "]";
         }
         this.controllerName = table.getControllerName();
         this.tableState = table.getState();
-        if (table.getState().equals(TableState.WAITING) || 
-                table.getState().equals(TableState.READY_TO_START) ||
-                table.getState().equals(TableState.STARTING) ) {
+        if (table.getState() == TableState.WAITING ||
+                table.getState() == TableState.READY_TO_START ||
+                table.getState() == TableState.STARTING) {
             this.createTime = table.getCreateTime();
         } else {
             if (table.isTournament()) {
@@ -89,22 +89,22 @@ public class TableView implements Serializable {
             }
         }
         this.isTournament = table.isTournament();
-        for (Seat seat: table.getSeats()) {
+        for (Seat seat : table.getSeats()) {
             seats.add(new SeatView(seat));
         }
         if (!table.isTournament()) {
-        // MATCH
-            if (table.getState().equals(TableState.WAITING) || table.getState().equals(TableState.READY_TO_START)) {
-                tableStateText = table.getState().toString() + " (" + table.getMatch().getPlayers().size() + "/"+ table.getSeats().length + ")";
+            // MATCH
+            if (table.getState()==TableState.WAITING || table.getState()==TableState.READY_TO_START) {
+                tableStateText = table.getState().toString() + " (" + table.getMatch().getPlayers().size() + "/" + table.getSeats().length + ")";
             } else {
                 tableStateText = table.getState().toString();
             }
-            for (Game game: table.getMatch().getGames()) {
+            for (Game game : table.getMatch().getGames()) {
                 games.add(game.getId());
             }
             StringBuilder sb = new StringBuilder();
             StringBuilder sbScore = new StringBuilder();
-            for(MatchPlayer matchPlayer: table.getMatch().getPlayers()) {
+            for (MatchPlayer matchPlayer : table.getMatch().getPlayers()) {
                 if (matchPlayer.getPlayer() == null) {
                     sb.append(", ").append("[unknown]");
                     sbScore.append("-").append(matchPlayer.getWins());
@@ -112,7 +112,7 @@ public class TableView implements Serializable {
                     sb.append(", ").append(matchPlayer.getName());
                     sbScore.append("-").append(matchPlayer.getWins());
                 } else {
-                    sbScore.insert(0,matchPlayer.getWins()).insert(0," Score: ");
+                    sbScore.insert(0, matchPlayer.getWins()).insert(0, " Score: ");
                 }
             }
             if (table.getMatch().getDraws() > 0) {
@@ -138,12 +138,12 @@ public class TableView implements Serializable {
             this.rated = table.getMatch().getOptions().isRated();
             this.passworded = !table.getMatch().getOptions().getPassword().isEmpty();
         } else {
-        // TOURNAMENT
+            // TOURNAMENT
             if (table.getTournament().getOptions().getNumberRounds() > 0) {
                 this.gameType = new StringBuilder(this.gameType).append(" ").append(table.getTournament().getOptions().getNumberRounds()).append(" Rounds").toString();
             }
             StringBuilder sb1 = new StringBuilder();
-            for (TournamentPlayer tp: table.getTournament().getPlayers()) {
+            for (TournamentPlayer tp : table.getTournament().getPlayers()) {
                 if (!tp.getPlayer().getName().equals(table.getControllerName())) {
                     sb1.append(", ").append(tp.getPlayer().getName());
                 }
@@ -163,7 +163,7 @@ public class TableView implements Serializable {
                         infoText.append(" Fr.Mul: ").append(table.getTournament().getOptions().getMatchOptions().getFreeMulligans());
                     }
                     if (table.getTournament().getTournamentType().isLimited()) {
-                        infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime()/60).append(" Min.");
+                        infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
                     }
                     break;
                 case DUELING:
@@ -172,13 +172,13 @@ public class TableView implements Serializable {
                 case DRAFTING:
                     Draft draft = table.getTournament().getDraft();
                     if (draft != null) {
-                        stateText.append(" ").append(draft.getBoosterNum()).append("/").append(draft.getCardNum() -1);
+                        stateText.append(" ").append(draft.getBoosterNum()).append("/").append(draft.getCardNum() - 1);
                     }
                 default:
             }
             this.additionalInfo = infoText.toString();
             this.tableStateText = stateText.toString();
-            this.deckType =  table.getDeckType() + " " + table.getTournament().getBoosterInfo() + (tableNameInfo != null ? tableNameInfo : "");
+            this.deckType = table.getDeckType() + " " + table.getTournament().getBoosterInfo() + (tableNameInfo != null ? tableNameInfo : "");
             this.skillLevel = table.getTournament().getOptions().getMatchOptions().getSkillLevel();
             this.quitRatio = Integer.toString(table.getTournament().getOptions().getQuitRatio());
             this.limited = table.getTournament().getOptions().getMatchOptions().isLimited();
@@ -226,6 +226,7 @@ public class TableView implements Serializable {
     public boolean isTournament() {
         return this.isTournament;
     }
+
     public String getAdditionalInfo() {
         return this.additionalInfo;
     }
@@ -249,7 +250,7 @@ public class TableView implements Serializable {
     public boolean isRated() {
         return rated;
     }
-    
+
     public boolean isPassworded() {
         return passworded;
     }

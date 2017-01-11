@@ -30,6 +30,7 @@ package mage.abilities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
@@ -76,7 +77,6 @@ import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class AbilityImpl implements Ability {
@@ -197,7 +197,7 @@ public abstract class AbilityImpl implements Ability {
                     boolean effectResult = effect.apply(game, this);
                     result &= effectResult;
                     if (logger.isDebugEnabled()) {
-                        if (!this.getAbilityType().equals(AbilityType.MANA)) {
+                        if (this.getAbilityType() != AbilityType.MANA) {
                             if (!effectResult) {
                                 if (this.getSourceId() != null) {
                                     MageObject mageObject = game.getObject(this.getSourceId());
@@ -267,7 +267,7 @@ public abstract class AbilityImpl implements Ability {
          * If the player wishes to splice any cards onto the spell (see rule 702.45), he
          * or she reveals those cards in his or her hand.
          */
-        if (this.abilityType.equals(AbilityType.SPELL)) {
+        if (this.abilityType == AbilityType.SPELL) {
             game.getContinuousEffects().applySpliceEffects(this, game);
         }
 
@@ -290,8 +290,8 @@ public abstract class AbilityImpl implements Ability {
         // or her intentions to pay any or all of those costs (see rule 601.2e).
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
         if (!activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game)) {
-            if (getAbilityType().equals(AbilityType.SPELL)
-                    && ((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.FACE_DOWN_CREATURE)) {
+            if (getAbilityType() == AbilityType.SPELL
+                    && ((SpellAbility) this).getSpellAbilityType() == SpellAbilityType.FACE_DOWN_CREATURE) {
                 return false;
             }
         }
@@ -302,7 +302,7 @@ public abstract class AbilityImpl implements Ability {
         VariableManaCost variableManaCost = handleManaXCosts(game, noMana, controller);
         String announceString = handleOtherXCosts(game, controller);
         // For effects from cards like Void Winnower x costs have to be set
-        if (this.getAbilityType().equals(AbilityType.SPELL)
+        if (this.getAbilityType() == AbilityType.SPELL
                 && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, getId(), getSourceId(), getControllerId()), this)) {
             return false;
         }
@@ -325,7 +325,7 @@ public abstract class AbilityImpl implements Ability {
             // and/or zones become the target of a spell trigger at this point; they'll wait to be put on
             // the stack until the spell has finished being cast.)
 
-            if (sourceObject != null && !this.getAbilityType().equals(AbilityType.TRIGGERED)) { // triggered abilities check this already in playerImpl.triggerAbility
+            if (sourceObject != null && this.getAbilityType() != AbilityType.TRIGGERED) { // triggered abilities check this already in playerImpl.triggerAbility
                 sourceObject.adjustTargets(this, game);
             }
             // Flashback abilities haven't made the choices the underlying spell might need for targeting.
@@ -408,7 +408,7 @@ public abstract class AbilityImpl implements Ability {
         }
         activated = true;
         // fire if tapped for mana (may only fire now because else costs of ability itself can be payed with mana of abilities that trigger for that event
-        if (this.getAbilityType().equals(AbilityType.MANA)) {
+        if (this.getAbilityType() == AbilityType.MANA) {
             for (Cost cost : costs) {
                 if (cost instanceof TapSourceCost) {
                     Mana mana = null;
@@ -466,10 +466,10 @@ public abstract class AbilityImpl implements Ability {
             }
             // controller specific alternate spell costs
             if (!noMana && !alternativeCostisUsed) {
-                if (this.getAbilityType().equals(AbilityType.SPELL)
+                if (this.getAbilityType() == AbilityType.SPELL
                         // 117.9a Only one alternative cost can be applied to any one spell as it’s being cast.
                         // So an alternate spell ability can't be paid with Omniscience
-                        && !((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
+                        && ((SpellAbility) this).getSpellAbilityType() != SpellAbilityType.BASE_ALTERNATE) {
                     for (AlternativeSourceCosts alternativeSourceCosts : controller.getAlternativeSourceCosts()) {
                         if (alternativeSourceCosts.isAvailable(this, game)) {
                             if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
@@ -489,10 +489,8 @@ public abstract class AbilityImpl implements Ability {
      * Handles the setting of non mana X costs
      *
      * @param controller
-     *
      * @param game
      * @return announce message
-     *
      */
     protected String handleOtherXCosts(Game game, Player controller) {
         String announceString = null;
@@ -873,7 +871,6 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
-     *
      * @param game
      * @param source
      * @return
@@ -883,7 +880,7 @@ public abstract class AbilityImpl implements Ability {
         if (!this.hasSourceObjectAbility(game, source, event)) {
             return false;
         }
-        if (zone.equals(Zone.COMMAND)) {
+        if (zone == Zone.COMMAND) {
             if (this.getSourceId() == null) { // commander effects
                 return true;
             }
@@ -1027,7 +1024,7 @@ public abstract class AbilityImpl implements Ability {
             sb.append("unknown");
         }
         if (object instanceof Spell && ((Spell) object).getSpellAbilities().size() > 1) {
-            if (((Spell) object).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+            if (((Spell) object).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                 Spell spell = (Spell) object;
                 int i = 0;
                 for (SpellAbility spellAbility : spell.getSpellAbilities()) {

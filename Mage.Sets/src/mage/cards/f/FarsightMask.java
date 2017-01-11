@@ -28,6 +28,7 @@
 package mage.cards.f;
 
 import java.util.UUID;
+
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,13 +40,12 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author North
  */
 public class FarsightMask extends CardImpl {
 
     public FarsightMask(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Whenever a source an opponent controls deals damage to you, if Farsight Mask is untapped, you may draw a card.
         this.addAbility(new FarsightMaskTriggeredAbility());
@@ -78,7 +78,7 @@ class FarsightMaskTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER);
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override

@@ -30,13 +30,13 @@ package mage.server;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 import mage.MageException;
 import mage.players.net.UserData;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SessionManager {
@@ -47,6 +47,7 @@ public class SessionManager {
     public static SessionManager getInstance() {
         return INSTANCE;
     }
+
     private final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
     public Session getSession(String sessionId) {
@@ -127,7 +128,7 @@ public class SessionManager {
     public void disconnect(String sessionId, DisconnectReason reason) {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            if (!reason.equals(DisconnectReason.AdminDisconnect)) {
+            if (reason != DisconnectReason.AdminDisconnect) {
                 if (!sessions.containsKey(sessionId)) {
                     // session was removed meanwhile by another thread so we can return
                     return;

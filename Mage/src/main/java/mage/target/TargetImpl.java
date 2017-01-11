@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -49,7 +50,6 @@ import mage.players.Player;
 import mage.util.RandomUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class TargetImpl implements Target {
@@ -184,7 +184,7 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean isRequired(Ability ability) {
-        return ability == null || ability.isActivated() || !(ability.getAbilityType().equals(AbilityType.SPELL) || ability.getAbilityType().equals(AbilityType.ACTIVATED));
+        return ability == null || ability.isActivated() || !(ability.getAbilityType() == AbilityType.SPELL || ability.getAbilityType() == AbilityType.ACTIVATED);
     }
 
     @Override

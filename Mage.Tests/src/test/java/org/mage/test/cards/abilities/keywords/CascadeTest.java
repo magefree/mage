@@ -174,8 +174,8 @@ public class CascadeTest extends CardTestPlayerBase {
         // Choose one - You draw five cards and you lose 5 life;
         //    or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.
         // Entwine {4} (Choose both if you pay the entwine cost.)
-        //addCard(Zone.LIBRARY, playerA, "Promise of Power", 10);
-        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.LIBRARY, playerA, "Promise of Power", 1);
+       // addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);

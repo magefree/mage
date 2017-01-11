@@ -88,7 +88,7 @@ public class PreventDamageToControllerEffect extends PreventionEffectImpl {
             sb.append("combat ");
         }
         sb.append("damage that would be dealt to you");
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         }
         return sb.toString();
