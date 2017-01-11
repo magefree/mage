@@ -1023,11 +1023,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // Bling button - aka Add in a premium 'JR', 'MBP', 'CS' etc card 
         blingButton.setToolTipText("Bling your deck! Select the original and added cards by selecting 'Multiples' in the selection options");
 
-        blingButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                blingDeck();
-            }
-        });
+        blingButton.addActionListener(evt -> blingDeck());
 
         // Filter popup
         filterPopup = new JPopupMenu();
