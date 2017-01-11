@@ -86,6 +86,7 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Decree of Savagery", 115, Rarity.RARE, mage.cards.d.DecreeOfSavagery.class));
         cards.add(new SetCardInfo("Decree of Silence", 32, Rarity.RARE, mage.cards.d.DecreeOfSilence.class));
         cards.add(new SetCardInfo("Dispersal Shield", 33, Rarity.COMMON, mage.cards.d.DispersalShield.class));
+        cards.add(new SetCardInfo("Divergent Growth", 116, Rarity.COMMON, mage.cards.d.DivergentGrowth.class));
         cards.add(new SetCardInfo("Dragon Breath", 86, Rarity.COMMON, mage.cards.d.DragonBreath.class));
         cards.add(new SetCardInfo("Dragon Fangs", 117, Rarity.COMMON, mage.cards.d.DragonFangs.class));
         cards.add(new SetCardInfo("Dragon Mage", 87, Rarity.RARE, mage.cards.d.DragonMage.class));

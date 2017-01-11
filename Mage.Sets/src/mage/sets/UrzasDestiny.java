@@ -71,6 +71,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Capashen Knight", 3, Rarity.COMMON, mage.cards.c.CapashenKnight.class));
         cards.add(new SetCardInfo("Capashen Standard", 4, Rarity.COMMON, mage.cards.c.CapashenStandard.class));
         cards.add(new SetCardInfo("Capashen Templar", 5, Rarity.COMMON, mage.cards.c.CapashenTemplar.class));
+        cards.add(new SetCardInfo("Carnival of Souls", 55, Rarity.RARE, mage.cards.c.CarnivalOfSouls.class));
         cards.add(new SetCardInfo("Colos Yearling", 79, Rarity.COMMON, mage.cards.c.ColosYearling.class));
         cards.add(new SetCardInfo("Compost", 102, Rarity.UNCOMMON, mage.cards.c.Compost.class));
         cards.add(new SetCardInfo("Covetous Dragon", 80, Rarity.RARE, mage.cards.c.CovetousDragon.class));

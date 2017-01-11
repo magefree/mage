@@ -274,6 +274,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Smash", 143, Rarity.COMMON, mage.cards.s.Smash.class));
         cards.add(new SetCardInfo("Snapping Drake", 64, Rarity.COMMON, mage.cards.s.SnappingDrake.class));
         cards.add(new SetCardInfo("Sparkmage Apprentice", 144, Rarity.COMMON, mage.cards.s.SparkmageApprentice.class));
+        cards.add(new SetCardInfo("Spectral Searchlight", 271, Rarity.UNCOMMON, mage.cards.s.SpectralSearchlight.class));
         cards.add(new SetCardInfo("Stasis Cell", 66, Rarity.COMMON, mage.cards.s.StasisCell.class));
         cards.add(new SetCardInfo("Stinkweed Imp", 107, Rarity.COMMON, mage.cards.s.StinkweedImp.class));
         cards.add(new SetCardInfo("Stone-Seeder Hierophant", 184, Rarity.COMMON, mage.cards.s.StoneSeederHierophant.class));

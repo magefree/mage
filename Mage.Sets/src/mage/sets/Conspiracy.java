@@ -194,6 +194,7 @@ public class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Sky Spirit", 192, Rarity.UNCOMMON, mage.cards.s.SkySpirit.class));
         cards.add(new SetCardInfo("Smallpox", 125, Rarity.UNCOMMON, mage.cards.s.Smallpox.class));
         cards.add(new SetCardInfo("Soulcatcher", 82, Rarity.UNCOMMON, mage.cards.s.Soulcatcher.class));
+        cards.add(new SetCardInfo("Spectral Searchlight", 205, Rarity.UNCOMMON, mage.cards.s.SpectralSearchlight.class));
         cards.add(new SetCardInfo("Spiritmonger", 193, Rarity.RARE, mage.cards.s.Spiritmonger.class));
         cards.add(new SetCardInfo("Split Decision", 25, Rarity.UNCOMMON, mage.cards.s.SplitDecision.class));
         cards.add(new SetCardInfo("Spontaneous Combustion", 194, Rarity.UNCOMMON, mage.cards.s.SpontaneousCombustion.class));
