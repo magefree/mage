@@ -29,15 +29,21 @@ package mage.cards.m;
 
 import java.util.UUID;
 
+import mage.MageObject;
+import mage.abilities.Abilities;
+import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.NoAbilityPredicate;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
 
 /**
  *
@@ -65,5 +71,42 @@ public class MuragandaPetroglyphs extends CardImpl {
     @Override
     public MuragandaPetroglyphs copy() {
         return new MuragandaPetroglyphs(this);
+    }
+}
+
+class NoAbilityPredicate implements Predicate<MageObject> {
+
+    @Override
+    public boolean apply(MageObject input, Game game) {
+        boolean isFaceDown = false;
+        Abilities<Ability> abilities;
+        if (input instanceof Card){
+            abilities = ((Card)input).getAbilities(game);
+
+            isFaceDown = ((Card)input).isFaceDown(game);
+        } else {
+            abilities = input.getAbilities();
+        }
+        if (isFaceDown) {
+            for (Ability ability : abilities){
+                if(!ability.getSourceId().equals(input.getId())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        for (Ability ability : abilities){
+            if (ability.getClass() != SpellAbility.class){
+
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "with no abilities";
     }
 }
