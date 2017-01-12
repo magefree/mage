@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RishkarPeemaRenegade extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with a counter on it");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control with a counter on it");
 
     static {
         filter.add(new CounterAnyPredicate());
@@ -77,7 +77,7 @@ public class RishkarPeemaRenegade extends CardImpl {
         // Each creature you control with a counter on it has "T: Add G to your mana pool."
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(
+                new GainAbilityControlledEffect(
                         new GreenManaAbility(),
                         Duration.WhileOnBattlefield,
                         filter)));

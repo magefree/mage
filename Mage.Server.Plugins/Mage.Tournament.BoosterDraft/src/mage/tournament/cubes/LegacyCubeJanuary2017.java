@@ -308,6 +308,7 @@ public class LegacyCubeJanuary2017 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Kami of Ancient Law",""));
         cubeCards.add(new DraftCube.CardIdentity("Karmic Guide",""));
         cubeCards.add(new DraftCube.CardIdentity("Karn Liberated",""));
+        cubeCards.add(new DraftCube.CardIdentity("Keiga, the Tide Star",""));
         cubeCards.add(new DraftCube.CardIdentity("Keranos, God of Storms",""));
         cubeCards.add(new DraftCube.CardIdentity("Kiki-Jiki, Mirror Breaker",""));
         cubeCards.add(new DraftCube.CardIdentity("Kiln Fiend",""));
@@ -583,7 +584,6 @@ public class LegacyCubeJanuary2017 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Time Warp",""));
         cubeCards.add(new DraftCube.CardIdentity("Tireless Tracker",""));
         cubeCards.add(new DraftCube.CardIdentity("Tooth and Nail",""));
-        cubeCards.add(new DraftCube.CardIdentity("Torrential Gearhulk",""));
         cubeCards.add(new DraftCube.CardIdentity("Toxic Deluge",""));
         cubeCards.add(new DraftCube.CardIdentity("Treachery",""));
         cubeCards.add(new DraftCube.CardIdentity("Tropical Island",""));
