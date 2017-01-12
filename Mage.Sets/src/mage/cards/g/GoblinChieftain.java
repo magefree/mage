@@ -64,6 +64,7 @@ public class GoblinChieftain extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
         effect.setText("and have haste");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
