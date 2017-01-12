@@ -28,23 +28,13 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.search.SearchLibraryGraveyardPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,14 +43,21 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LiberatingCombustion extends CardImpl {
 
+    private final static FilterCard filter = new FilterCard("Chandra, Pyrogenius");
+
+    static {
+        filter.add(new NamePredicate("Chandra, Pyrogenius"));
+    }
+
     public LiberatingCombustion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
         // Liberating Combustion deals 6 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(6));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        
         // You may search your library and/or graveyard for a card named Chandra, Pyrogenius, reveal it, and put it into your hand. If you search your library this way, shuffle it.
-        this.getSpellAbility().addEffect(new LiberatingCombustionEffect());
+        this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter));
     }
 
     public LiberatingCombustion(final LiberatingCombustion card) {
@@ -70,53 +67,5 @@ public class LiberatingCombustion extends CardImpl {
     @Override
     public LiberatingCombustion copy() {
         return new LiberatingCombustion(this);
-    }
-}
-
-class LiberatingCombustionEffect extends OneShotEffect {
-
-    public LiberatingCombustionEffect() {
-        super(Outcome.Benefit);
-        staticText = "You may search your library and/or graveyard for a card named Chandra, Pyrogenius, reveal it, and put it into your hand. If you search your library this way, shuffle it";
-    }
-
-    public LiberatingCombustionEffect(final LiberatingCombustionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LiberatingCombustionEffect copy() {
-        return new LiberatingCombustionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null && controller.chooseUse(outcome, "Search your library and/or graveyard for a card named Chandra, Pyrogenius?", source, game)) {
-            //Search your library and graveyard
-            Cards allCards = new CardsImpl();
-            boolean librarySearched = false;
-            if (controller.chooseUse(outcome, "Search also your library?", source, game)) {
-                librarySearched = true;
-                allCards.addAll(controller.getLibrary().getCardList());
-            }
-            allCards.addAll(controller.getGraveyard());
-            FilterCard filter = new FilterCard("a card named Chandra, Pyrogenius");
-            filter.add(new NamePredicate("Chandra, Pyrogenius"));
-            TargetCard target = new TargetCard(0, 1, Zone.ALL, new FilterCard());
-            if (controller.choose(outcome, allCards, target, game)) {
-                Card cardFound = game.getCard(target.getFirstTarget());
-                if (cardFound != null) {
-                    controller.revealCards(sourceObject.getIdName(), new CardsImpl(cardFound), game);
-                    controller.moveCards(cardFound, Zone.HAND, source, game);
-                }
-            }
-            if (librarySearched) {
-                controller.shuffleLibrary(source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }
