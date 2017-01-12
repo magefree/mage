@@ -71,6 +71,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Armored Guardian", 230, Rarity.RARE, mage.cards.a.ArmoredGuardian.class));
         cards.add(new SetCardInfo("Artifact Mutation", 231, Rarity.RARE, mage.cards.a.ArtifactMutation.class));
         cards.add(new SetCardInfo("Assault // Battery", 295, Rarity.UNCOMMON, mage.cards.a.AssaultBattery.class));
+        cards.add(new SetCardInfo("Atalya, Samite Master", 4, Rarity.RARE, mage.cards.a.AtalyaSamiteMaster.class));
         cards.add(new SetCardInfo("Aura Mutation", 232, Rarity.RARE, mage.cards.a.AuraMutation.class));
         cards.add(new SetCardInfo("Aura Shards", 233, Rarity.UNCOMMON, mage.cards.a.AuraShards.class));
         cards.add(new SetCardInfo("Backlash", 234, Rarity.UNCOMMON, mage.cards.b.Backlash.class));
