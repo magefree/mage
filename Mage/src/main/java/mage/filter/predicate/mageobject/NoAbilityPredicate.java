@@ -27,7 +27,7 @@ public class NoAbilityPredicate implements Predicate<MageObject> {
         }
         if (isFaceDown) {
             for (Ability ability : abilities){
-                if(ability.getSourceId() != input.getId()) {
+                if(!ability.getSourceId().equals(input.getId())) {
                     return false;
                 }
             }

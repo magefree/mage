@@ -54,7 +54,7 @@ class CreaturesAreSliversEffect extends ContinuousEffectImpl {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent perm : permanents) {
             List<String> cardSubType = perm.getSubtype(game);
-            if (!cardSubType.contains("Sliver") && perm.getOwnerId() == player.getId()) {
+            if (!cardSubType.contains("Sliver") && perm.getOwnerId().equals(player.getId())) {
                 cardSubType.add("Sliver");
             }
         }
