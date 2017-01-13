@@ -205,6 +205,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Psychic Membrane", 46, Rarity.UNCOMMON, mage.cards.p.PsychicMembrane.class));
         cards.add(new SetCardInfo("Psychogenic Probe", 231, Rarity.RARE, mage.cards.p.PsychogenicProbe.class));
         cards.add(new SetCardInfo("Pyrite Spellbomb", 232, Rarity.COMMON, mage.cards.p.PyriteSpellbomb.class));
+        cards.add(new SetCardInfo("Quicksilver Elemental", 47, Rarity.RARE, mage.cards.q.QuicksilverElemental.class));
         cards.add(new SetCardInfo("Raise the Alarm", 16, Rarity.COMMON, mage.cards.r.RaiseTheAlarm.class));
         cards.add(new SetCardInfo("Razor Barrier", 17, Rarity.COMMON, mage.cards.r.RazorBarrier.class));
         cards.add(new SetCardInfo("Regress", 48, Rarity.COMMON, mage.cards.r.Regress.class));
