@@ -6,24 +6,27 @@ import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * Created by Galatolol
  */
-public class AddManaOfAnyColorToManaPoolTargetControllerEffect extends ManaEffect {
+public class AddManaOfAnyColorToManaPoolTargetPlayerEffect extends ManaEffect {
 
-    public AddManaOfAnyColorToManaPoolTargetControllerEffect(String textManaPoolOwner) {
+    public AddManaOfAnyColorToManaPoolTargetPlayerEffect(String textManaPoolOwner) {
         super();
         this.staticText = (textManaPoolOwner.equals("his or her")?"that player adds ":"add ") + "one mana of any color" + " to " + textManaPoolOwner + " mana pool";
     }
 
-    public AddManaOfAnyColorToManaPoolTargetControllerEffect(final AddManaOfAnyColorToManaPoolTargetControllerEffect effect) {
+    public AddManaOfAnyColorToManaPoolTargetPlayerEffect(final AddManaOfAnyColorToManaPoolTargetPlayerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        UUID playerId = (UUID) game.getState().getValue(source.getSourceId() + "_player");
+        Player player = game.getPlayer(playerId);
         if (player != null) {
             ChoiceColor choice = new ChoiceColor();
             while (!player.choose(outcome, choice, game)) {
@@ -42,8 +45,8 @@ public class AddManaOfAnyColorToManaPoolTargetControllerEffect extends ManaEffec
     }
 
     @Override
-    public AddManaOfAnyColorToManaPoolTargetControllerEffect copy() {
-        return new AddManaOfAnyColorToManaPoolTargetControllerEffect(this);
+    public AddManaOfAnyColorToManaPoolTargetPlayerEffect copy() {
+        return new AddManaOfAnyColorToManaPoolTargetPlayerEffect(this);
     }
 
     @Override
