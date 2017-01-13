@@ -96,12 +96,16 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
             switch (zoneDetail) {
                 case BOTTOM:
                     sb.append("the bottom");
+                    break;
                 case TOP:
                     sb.append("top");
+                    break;
                 case CHOOSE:
                     sb.append("top or bottom");
+                    break;
                 case NONE:
                     sb.append("<not allowed value>");
+                    break;
             }
             sb.append(" of its owner's library instead of into that player's graveyard");
         }
