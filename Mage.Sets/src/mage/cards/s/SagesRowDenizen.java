@@ -28,9 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -38,6 +35,9 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -51,13 +51,15 @@ import mage.target.TargetPlayer;
 public class SagesRowDenizen extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another blue creature");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(new AnotherPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
+
     public SagesRowDenizen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
 

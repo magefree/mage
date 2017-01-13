@@ -46,7 +46,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterPermanent filter;
     protected String rule;
-    protected boolean controlled;
+    protected boolean controlledText;
     protected SetTargetPointer setTargetPointer;
 
     /**
@@ -71,19 +71,19 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         this(zone, effect, filter, optional, rule, false);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule, boolean controlled) {
-        this(zone, effect, filter, optional, SetTargetPointer.NONE, rule, controlled);
+    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule, boolean controlledText) {
+        this(zone, effect, filter, optional, SetTargetPointer.NONE, rule, controlledText);
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule) {
         this(zone, effect, filter, optional, setTargetPointer, rule, false);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule, boolean controlled) {
+    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule, boolean controlledText) {
         super(zone, effect, optional);
         this.filter = filter;
         this.rule = rule;
-        this.controlled = controlled;
+        this.controlledText = controlledText;
         this.setTargetPointer = setTargetPointer;
     }
 
@@ -91,7 +91,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;
-        this.controlled = ability.controlled;
+        this.controlledText = ability.controlledText;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
@@ -130,7 +130,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         }
         StringBuilder sb = new StringBuilder("Whenever ").append(filter.getMessage());
         sb.append(" enters the battlefield");
-        if (controlled) {
+        if (controlledText) {
             sb.append(" under your control, ");
         } else {
             sb.append(", ");

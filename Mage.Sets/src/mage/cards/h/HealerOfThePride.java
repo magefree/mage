@@ -28,14 +28,14 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class HealerOfThePride extends CardImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 
     static {
         filter.add(new AnotherPredicate());
