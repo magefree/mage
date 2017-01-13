@@ -22,6 +22,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
 import javax.swing.SwingUtilities;
+
 import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
@@ -78,6 +79,7 @@ public class MageActionCallback implements ActionCallback {
 
         CLOSED, NORMAL, ROTATED
     }
+
     private Date enlargeredViewOpened;
     private volatile EnlargedWindowState enlargedWindowState = EnlargedWindowState.CLOSED;
     //private volatile boolean enlargedImageWindowOpen = false;
@@ -156,7 +158,7 @@ public class MageActionCallback implements ActionCallback {
                         || !tooltipCard.equals(data.card)
                         || SessionHandler.getSession() == null
                         || !popupTextWindowOpen
-                        || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+                        || enlargedWindowState != EnlargedWindowState.CLOSED) {
                     return;
                 }
 
@@ -176,21 +178,21 @@ public class MageActionCallback implements ActionCallback {
             public void showPopup(final Component popupContainer, final Component infoPane) throws InterruptedException {
                 final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
                 SwingUtilities.invokeLater(() -> {
-                    if (!popupTextWindowOpen
-                            || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
-                        return;
-                    }
-                    if (data.locationOnScreen == null) {
-                        data.locationOnScreen = data.component.getLocationOnScreen();
-                    }
+                            if (!popupTextWindowOpen
+                                    || enlargedWindowState != EnlargedWindowState.CLOSED) {
+                                return;
+                            }
+                            if (data.locationOnScreen == null) {
+                                data.locationOnScreen = data.component.getLocationOnScreen();
+                            }
 
-                    Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
-                    location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, infoPane, parentComponent);
-                    location.translate(-parentPoint.x, -parentPoint.y);
-                    popupContainer.setLocation(location);
-                    popupContainer.setVisible(true);
-                    c.repaint();
-                }
+                            Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
+                            location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, infoPane, parentComponent);
+                            location.translate(-parentPoint.x, -parentPoint.y);
+                            popupContainer.setLocation(location);
+                            popupContainer.setVisible(true);
+                            c.repaint();
+                        }
                 );
             }
         });
@@ -402,7 +404,7 @@ public class MageActionCallback implements ActionCallback {
             } else {
                 popupTextWindowOpen = true;
             }
-            if (!enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+            if (enlargedWindowState != EnlargedWindowState.CLOSED) {
                 cancelTimeout();
                 displayEnlargedCard(mageCard.getOriginal(), transferData);
             }
@@ -417,7 +419,6 @@ public class MageActionCallback implements ActionCallback {
 
     /**
      * Hides the text popup window
-     *
      */
     public void hideTooltipPopup() {
         this.tooltipCard = null;
@@ -461,13 +462,13 @@ public class MageActionCallback implements ActionCallback {
     @Override
     public void mouseWheelMoved(MouseWheelEvent e, TransferData transferData) {
         int notches = e.getWheelRotation();
-        if (!enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+        if (enlargedWindowState != EnlargedWindowState.CLOSED) {
             // same move direction will be ignored, opposite direction closes the enlarged window
             if (new Date().getTime() - enlargeredViewOpened.getTime() > 1000) {
                 // if the opening is back more than 1 seconds close anyway
                 hideEnlargedCard();
                 handleOverNewView(transferData);
-            } else if (enlargeMode.equals(EnlargeMode.NORMAL)) {
+            } else if (enlargeMode == EnlargeMode.NORMAL) {
                 if (notches > 0) {
                     hideEnlargedCard();
                     handleOverNewView(transferData);
@@ -491,10 +492,10 @@ public class MageActionCallback implements ActionCallback {
      * Show the big card image on mouse position while hovering over a card
      *
      * @param showAlternative defines if the original image (if it's a copied
-     * card) or the opposite side of a transformable card will be shown
+     *                        card) or the opposite side of a transformable card will be shown
      */
     public void enlargeCard(EnlargeMode showAlternative) {
-        if (enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+        if (enlargedWindowState == EnlargedWindowState.CLOSED) {
             this.enlargeMode = showAlternative;
             CardView cardView = null;
             if (popupData != null) {
@@ -515,7 +516,7 @@ public class MageActionCallback implements ActionCallback {
     }
 
     public void hideEnlargedCard() {
-        if (!enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+        if (enlargedWindowState != EnlargedWindowState.CLOSED) {
             enlargedWindowState = EnlargedWindowState.CLOSED;
             try {
                 Component cardPreviewContainer = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_CONTAINER);
@@ -535,21 +536,21 @@ public class MageActionCallback implements ActionCallback {
                 return;
             }
             try {
-                if (enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+                if (enlargedWindowState == EnlargedWindowState.CLOSED) {
                     return;
                 }
 
                 MageComponents mageComponentCardPreviewContainer;
                 MageComponents mageComponentCardPreviewPane;
                 if (cardView.isToRotate()) {
-                    if (enlargedWindowState.equals(EnlargedWindowState.NORMAL)) {
+                    if (enlargedWindowState == EnlargedWindowState.NORMAL) {
                         hideEnlargedCard();
                         enlargedWindowState = EnlargedWindowState.ROTATED;
                     }
                     mageComponentCardPreviewContainer = MageComponents.CARD_PREVIEW_CONTAINER_ROTATED;
                     mageComponentCardPreviewPane = MageComponents.CARD_PREVIEW_PANE_ROTATED;
                 } else {
-                    if (enlargedWindowState.equals(EnlargedWindowState.ROTATED)) {
+                    if (enlargedWindowState == EnlargedWindowState.ROTATED) {
                         hideEnlargedCard();
                         enlargedWindowState = EnlargedWindowState.NORMAL;
                     }
@@ -608,7 +609,7 @@ public class MageActionCallback implements ActionCallback {
             // XXX: scaled to fit width
             bigCard.setCard(mageCard.getOriginal().getId(), enlargeMode, image, mageCard.getOriginal().getRules(), mageCard.getOriginal().isToRotate());
             // if it's an ability, show only the ability text as overlay
-            if (mageCard.getOriginal().isAbility() && enlargeMode.equals(EnlargeMode.NORMAL)) {
+            if (mageCard.getOriginal().isAbility() && enlargeMode == EnlargeMode.NORMAL) {
                 bigCard.showTextComponent();
             } else {
                 bigCard.hideTextComponent();

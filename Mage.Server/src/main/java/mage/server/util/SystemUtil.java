@@ -1,16 +1,5 @@
 package mage.server.util;
 
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -18,6 +7,14 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.RandomUtil;
+
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author nantuko
@@ -129,14 +126,17 @@ public class SystemUtil {
         // Put the card in Exile to start. Otherwise the game doesn't know where to remove the card from.
         game.getExile().getPermanentExile().add(card);
         game.setZone(card.getId(), Zone.EXILED);
-        if (zone.equals(Zone.BATTLEFIELD)) {
-            card.putOntoBattlefield(game, Zone.EXILED, null, player.getId());
-        } else if (zone.equals(Zone.LIBRARY)) {
-            card.setZone(Zone.LIBRARY, game);
-            game.getExile().getPermanentExile().remove(card);
-            player.getLibrary().putOnTop(card, game);
-        } else {
-            card.moveToZone(zone, null, game, false);
+        switch (zone) {
+            case BATTLEFIELD:
+                card.putOntoBattlefield(game, Zone.EXILED, null, player.getId());
+                break;
+            case LIBRARY:
+                card.setZone(Zone.LIBRARY, game);
+                game.getExile().getPermanentExile().remove(card);
+                player.getLibrary().putOnTop(card, game);
+                break;
+            default:
+                card.moveToZone(zone, null, game, false);
         }
         logger.info("Added card to player's " + zone.toString() + ": " + card.getName() + ", player = " + player.getName());
     }
@@ -176,8 +176,8 @@ public class SystemUtil {
     /**
      * Get a diff between two dates
      *
-     * @param date1 the oldest date
-     * @param date2 the newest date
+     * @param date1    the oldest date
+     * @param date2    the newest date
      * @param timeUnit the unit in which you want the diff
      * @return the diff value, in the provided unit
      */

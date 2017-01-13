@@ -28,6 +28,7 @@
 package mage.cards.f;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -51,7 +52,6 @@ import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class FrenziedFugue extends CardImpl {
@@ -98,13 +98,13 @@ class FrenziedFugueTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD) || event.getType().equals(EventType.UPKEEP_STEP_PRE);
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD || event.getType() == EventType.UPKEEP_STEP_PRE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean result;
-        if (event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD)) {
+        if (event.getType()==EventType.ENTERS_THE_BATTLEFIELD) {
             result = event.getTargetId().equals(this.getSourceId());
         } else {
             result = event.getPlayerId().equals(this.getControllerId());

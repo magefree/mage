@@ -6,6 +6,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -30,7 +31,6 @@ import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
 /**
- *
  * @author LevelX2
  */
 public class ImproviseAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
@@ -59,7 +59,7 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
     public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && game.getBattlefield().contains(filterUntapped, controller.getId(), 1, game)) {
-            if (source.getAbilityType().equals(AbilityType.SPELL) && unpaid.getMana().getGeneric() > 0) {
+            if (source.getAbilityType() == AbilityType.SPELL && unpaid.getMana().getGeneric() > 0) {
                 SpecialAction specialAction = new ImproviseSpecialAction(unpaid);
                 specialAction.setControllerId(source.getControllerId());
                 specialAction.setSourceId(source.getSourceId());

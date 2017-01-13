@@ -344,7 +344,7 @@ public class TableManager {
             }
                         
             // If table is not finished, the table has to be removed completly because it's not a normal state (if finished it will be removed in GamesRoomImpl.Update())
-            if (!table.getState().equals(TableState.FINISHED)) {
+            if (table.getState()!=TableState.FINISHED) {
                 if (game != null) {
                     GameManager.getInstance().removeGame(game.getId());
                 }
@@ -395,7 +395,7 @@ public class TableManager {
         tableCopy.addAll(tables.values());
         for (Table table : tableCopy) {
             try {
-                if (!table.getState().equals(TableState.FINISHED)) {
+                if (table.getState()!=TableState.FINISHED) {
                     // remove tables and games not valid anymore
                     logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime() == null ? table.getCreateTime() : table.getCreateTime()) +" (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament":""));
                     TableController tableController = getController(table.getId());

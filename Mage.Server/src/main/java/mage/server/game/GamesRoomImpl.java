@@ -37,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
@@ -58,7 +59,6 @@ import mage.view.UsersView;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
@@ -232,11 +232,11 @@ class TableListSorter implements Comparator<Table> {
     @Override
     public int compare(Table one, Table two) {
         if (one.getState() != null && two.getState() != null) {
-            if (!TableState.SIDEBOARDING.equals(one.getState()) && !TableState.DUELING.equals(one.getState())) {
+            if (TableState.SIDEBOARDING != one.getState() && TableState.DUELING != one.getState()) {
                 if (one.getState().compareTo(two.getState()) != 0) {
                     return one.getState().compareTo(two.getState());
                 }
-            } else if (!TableState.SIDEBOARDING.equals(two.getState()) && !TableState.DUELING.equals(two.getState())) {
+            } else if (TableState.SIDEBOARDING != two.getState() && TableState.DUELING != two.getState()) {
                 if (one.getState().compareTo(two.getState()) != 0) {
                     return one.getState().compareTo(two.getState());
                 }

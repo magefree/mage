@@ -28,6 +28,7 @@
 package mage.cards.e;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,13 +44,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author Plopman
  */
 public class EnergyField extends CardImpl {
 
     public EnergyField(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
 
         // Prevent all damage that would be dealt to you by sources you don't control.
@@ -100,8 +100,8 @@ class EnergyFieldEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)) {
-            if (event.getTargetId().equals(source.getControllerId()) && game.getControllerId(event.getSourceId()) != source.getControllerId()){
+        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER) {
+            if (event.getTargetId().equals(source.getControllerId()) && game.getControllerId(event.getSourceId()) != source.getControllerId()) {
                 return super.applies(event, source, game);
             }
         }

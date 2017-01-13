@@ -36,7 +36,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class EntersBattlefieldOrLeavesSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -68,7 +67,7 @@ public class EntersBattlefieldOrLeavesSourceTriggeredAbility extends TriggeredAb
         }
         if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone().equals(Zone.BATTLEFIELD)) {
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 return true;
             }
         }

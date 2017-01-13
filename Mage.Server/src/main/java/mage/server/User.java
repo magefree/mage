@@ -37,6 +37,7 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+
 import mage.cards.decks.Deck;
 import mage.constants.ManaType;
 import mage.constants.TableState;
@@ -61,7 +62,6 @@ import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class User {
@@ -199,7 +199,7 @@ public class User {
 
     public void lostConnection() {
         // Because watched games don't get restored after reconnection call stop watching
-        for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext();) {
+        for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext(); ) {
             UUID gameId = iterator.next();
             GameManager.getInstance().stopWatching(gameId, userId);
             iterator.remove();
@@ -208,7 +208,7 @@ public class User {
     }
 
     public boolean isConnected() {
-        return userState.equals(UserState.Connected) || userState.equals(UserState.Reconnected);
+        return userState == UserState.Connected || userState == UserState.Reconnected;
     }
 
     public String getDisconnectDuration() {
@@ -762,7 +762,7 @@ public class User {
     public int getNumberOfNotStartedTables() {
         int number = 0;
         for (Table table : tables.values()) {
-            if (table.getState().equals(TableState.WAITING) || table.getState().equals(TableState.STARTING)) {
+            if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
                 number++;
             }
         }
@@ -772,7 +772,7 @@ public class User {
     public int getNumberOfNotFinishedTables() {
         int number = 0;
         for (Table table : tables.values()) {
-            if (table.getState().equals(TableState.FINISHED)) {
+            if (table.getState() == TableState.FINISHED) {
                 number++;
             } else {
                 TableController tableController = TableManager.getInstance().getController(table.getId());

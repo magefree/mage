@@ -580,7 +580,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean leaveTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         TableState tableState = TableManager.getInstance().getController(tableId).getTableState();
-        if (!tableState.equals(TableState.WAITING) && !tableState.equals(TableState.READY_TO_START)) {
+        if (tableState!=TableState.WAITING && tableState!=TableState.READY_TO_START) {
             // table was already started, so player can't leave anymore now
             return false;
         }

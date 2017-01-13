@@ -72,7 +72,7 @@ public class AddLandDialog extends MageDialog {
     public void showDialog(Deck deck, DeckEditorMode mode) {
         this.deck = deck;
         SortedSet<String> landSetNames = new TreeSet<>();
-        if (!mode.equals(DeckEditorMode.FREE_BUILDING)) {
+        if (mode!=DeckEditorMode.FREE_BUILDING) {
             // decide from which sets basic lands are taken from
             for (String setCode : deck.getExpansionSetCodes()) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);

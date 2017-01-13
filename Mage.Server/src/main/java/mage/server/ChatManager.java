@@ -35,6 +35,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.server.util.SystemUtil;
@@ -44,7 +45,6 @@ import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ChatManager {
@@ -116,9 +116,9 @@ public class ChatManager {
         }
         return false;
     }
-    
+
     final Pattern cardNamePattern = Pattern.compile("\\[(.*?)\\]");
-    
+
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
@@ -132,7 +132,7 @@ public class ChatManager {
                 }
             }
 
-            if (!messageType.equals(MessageType.GAME)) {
+            if (messageType != MessageType.GAME) {
                 User user = UserManager.getInstance().getUserByName(userName);
                 if (message != null && userName != null && !userName.equals("")) {
 
@@ -177,7 +177,7 @@ public class ChatManager {
                     }
                 }
 
-                if (messageType.equals(MessageType.TALK)) {
+                if (messageType == MessageType.TALK) {
                     if (user != null) {
                         if (user.getChatLockedUntil() != null) {
                             if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) > 0) {
@@ -249,7 +249,6 @@ public class ChatManager {
     }
 
     /**
-     *
      * use mainly for announcing that a user connection was lost or that a user
      * has reconnected
      *
