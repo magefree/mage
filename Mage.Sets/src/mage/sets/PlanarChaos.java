@@ -59,6 +59,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Akroma, Angel of Fury", 94, Rarity.RARE, mage.cards.a.AkromaAngelOfFury.class));
         cards.add(new SetCardInfo("Ana Battlemage", 124, Rarity.UNCOMMON, mage.cards.a.AnaBattlemage.class));
         cards.add(new SetCardInfo("Aquamorph Entity", 33, Rarity.COMMON, mage.cards.a.AquamorphEntity.class));
+        cards.add(new SetCardInfo("Auramancer's Guise", 34, Rarity.UNCOMMON, mage.cards.a.AuramancersGuise.class));
         cards.add(new SetCardInfo("Aven Riftwatcher", 1, Rarity.COMMON, mage.cards.a.AvenRiftwatcher.class));
         cards.add(new SetCardInfo("Battering Sliver", 95, Rarity.COMMON, mage.cards.b.BatteringSliver.class));
         cards.add(new SetCardInfo("Benalish Commander", 2, Rarity.RARE, mage.cards.b.BenalishCommander.class));
