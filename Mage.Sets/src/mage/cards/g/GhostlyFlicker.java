@@ -110,7 +110,14 @@ class GhostlyFlickerEffect extends OneShotEffect {
             }
             controller.moveCardsToExile(toExile, source, game, true, exileId, sourceObject.getIdName());
             game.applyEffects();
-            controller.moveCards(game.getExile().getExileZone(exileId).getCards(game), Zone.BATTLEFIELD, source, game);
+            Set<Card> toBattlefield = new HashSet<>();
+            for (Card card : toExile) {
+                Zone currentZone = game.getState().getZone(card.getId());
+                if (!Zone.BATTLEFIELD.equals(currentZone) && Zone.isPublicZone(currentZone)) {
+                    toBattlefield.add(game.getCard(card.getId()));
+                }
+            }
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
             return true;
         }
         return false;

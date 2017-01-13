@@ -47,4 +47,7 @@ public enum Zone {
         return super.toString();
     }
 
+    public static boolean isPublicZone(Zone zone) {
+        return GRAVEYARD.equals(zone) || BATTLEFIELD.equals(zone) || STACK.equals(zone) || EXILED.equals(zone) || COMMAND.equals(zone);
+    }
 }
