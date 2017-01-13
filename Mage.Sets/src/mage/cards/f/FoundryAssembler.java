@@ -43,8 +43,7 @@ public class FoundryAssembler extends CardImpl {
     public FoundryAssembler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
 
-        this.subtype.add("Assembly");
-        this.subtype.add("Worker");
+        this.subtype.add("Assembly-Worker");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
