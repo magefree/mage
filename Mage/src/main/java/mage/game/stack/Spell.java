@@ -161,6 +161,7 @@ public class Spell extends StackObjImpl implements Card {
                 }
             }
         }
+        setDoneActivatingManaAbilities(false); // can be activated again maybe during the resolution of the spell (e.g. Metallic Rebuke)
         return true;
     }
 
