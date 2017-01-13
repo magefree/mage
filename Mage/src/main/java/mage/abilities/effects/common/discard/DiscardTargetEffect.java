@@ -91,9 +91,8 @@ public class DiscardTargetEffect extends OneShotEffect {
             if (player != null) {
                 player.discard(amount.calculate(game, source, this), randomDiscard, source, game);
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
