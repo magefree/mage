@@ -100,7 +100,6 @@ class GhostlyFlickerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            UUID exileId = UUID.randomUUID();
             Set<Card> toExile = new HashSet<>();
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent target = game.getPermanent(permanentId);
@@ -108,7 +107,7 @@ class GhostlyFlickerEffect extends OneShotEffect {
                     toExile.add(target);
                 }
             }
-            controller.moveCardsToExile(toExile, source, game, true, exileId, sourceObject.getIdName());
+            controller.moveCards(toExile, Zone.EXILED, source, game);
             game.applyEffects();
             Set<Card> toBattlefield = new HashSet<>();
             for (Card card : toExile) {
