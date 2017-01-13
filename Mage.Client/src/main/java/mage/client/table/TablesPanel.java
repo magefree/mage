@@ -82,6 +82,7 @@ import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
 import mage.client.dialog.TableWaitingDialog;
+import static mage.client.table.TablesPanel.PASSWORDED;
 import mage.client.util.ButtonColumn;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.MageTableRowSorter;
@@ -109,6 +110,7 @@ public class TablesPanel extends javax.swing.JPanel {
     private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
     private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 120, 180, 80, 120, 80, 60, 40, 40, 60};
 
+    public static final String PASSWORDED = "***";
     private final TableTableModel tableModel;
     private final MatchesTableModel matchesModel;
     private UUID roomId;
@@ -138,7 +140,7 @@ public class TablesPanel extends javax.swing.JPanel {
         gameChooser = new GameChooser();
 
         initComponents();
-      //  tableModel.setSession(session);
+        //  tableModel.setSession(session);
 
         tableTables.createDefaultColumnsFromModel();
 
@@ -180,9 +182,9 @@ public class TablesPanel extends javax.swing.JPanel {
                 UUID gameId = (UUID) tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 2);
                 String action = (String) tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
                 String deckType = (String) tableModel.getValueAt(modelRow, TableTableModel.COLUMN_DECK_TYPE);
-                String status = (String) tableModel.getValueAt(modelRow, TableTableModel.COLUMN_STATUS);
                 boolean isTournament = (Boolean) tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
                 String owner = (String) tableModel.getValueAt(modelRow, TableTableModel.COLUMN_OWNER);
+                String pwdColumn = (String) tableModel.getValueAt(modelRow, TableTableModel.COLUMN_PASSWORD);
                 switch (action) {
                     case "Join":
                         if (owner.equals(SessionHandler.getUserName()) || owner.startsWith(SessionHandler.getUserName() + ",")) {
@@ -209,10 +211,10 @@ public class TablesPanel extends javax.swing.JPanel {
                         if (isTournament) {
                             LOGGER.info("Joining tournament " + tableId);
                             if (deckType.startsWith("Limited")) {
-                                if (!status.endsWith("PW")) {
-                                    SessionHandler.joinTournamentTable(roomId, tableId, SessionHandler.getUserName(), "Human", 1, null, "");
-                                } else {
+                                if (PASSWORDED.equals(pwdColumn)) {
                                     joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
+                                } else {
+                                    SessionHandler.joinTournamentTable(roomId, tableId, SessionHandler.getUserName(), "Human", 1, null, "");
                                 }
                             } else {
                                 joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
@@ -612,10 +614,10 @@ public class TablesPanel extends javax.swing.JPanel {
         }
 
         List<RowFilter<Object, Object>> ratingFilterList = new ArrayList<>();
-        if (btnRated.isSelected()){
+        if (btnRated.isSelected()) {
             ratingFilterList.add(RowFilter.regexFilter("^Rated", TableTableModel.COLUMN_RATING));
         }
-        if (btnUnrated.isSelected()){
+        if (btnUnrated.isSelected()) {
             ratingFilterList.add(RowFilter.regexFilter("^Unrated", TableTableModel.COLUMN_RATING));
         }
 
@@ -665,7 +667,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 filterList.addAll(ratingFilterList);
             }
 
-             if (passwordFilterList.size() > 1) {
+            if (passwordFilterList.size() > 1) {
                 filterList.add(RowFilter.orFilter(passwordFilterList));
             } else if (passwordFilterList.size() == 1) {
                 filterList.addAll(passwordFilterList);
@@ -1292,7 +1294,6 @@ class TableTableModel extends AbstractTableModel {
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
 
-
     public void loadData(Collection<TableView> tables) throws MageRemoteException {
         this.tables = tables.toArray(new TableView[0]);
         this.fireTableDataChanged();
@@ -1307,7 +1308,6 @@ class TableTableModel extends AbstractTableModel {
     public int getColumnCount() {
         return columnNames.length;
     }
-
 
     @Override
     public Object getValueAt(int arg0, int arg1) {
@@ -1325,7 +1325,7 @@ class TableTableModel extends AbstractTableModel {
             case 5:
                 return tables[arg0].getTableStateText();
             case 6:
-                return tables[arg0].isPassworded() ? "***" : "";
+                return tables[arg0].isPassworded() ? PASSWORDED : "";
             case 7:
                 return timeFormatter.format(tables[arg0].getCreateTime());
             case 8:
@@ -1460,7 +1460,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
 
     private static final Logger logger = Logger.getLogger(UpdatePlayersTask.class);
 
-    UpdatePlayersTask( UUID roomId, PlayersChatPanel chat) {
+    UpdatePlayersTask(UUID roomId, PlayersChatPanel chat) {
 
         this.roomId = roomId;
         this.chat = chat;
@@ -1635,7 +1635,6 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
 }
 
 class GameChooser extends JPopupMenu {
-
 
     public void init() {
 
