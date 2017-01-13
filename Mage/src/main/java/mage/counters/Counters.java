@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.counters;
 
 import java.io.Serializable;
@@ -50,11 +49,6 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
 
     public Counters copy() {
         return new Counters(this);
-    }
-
-    public void addCounter(String name) {
-        putIfAbsent(name, new Counter(name));
-        this.get(name).increase();
     }
 
     public void addCounter(String name, int amount) {

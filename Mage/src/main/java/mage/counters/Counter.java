@@ -74,13 +74,6 @@ public class Counter implements Serializable {
     }
 
     /**
-     * Increases the {@code count} by 1
-     */
-    public void increase() {
-        count++;
-    }
-
-    /**
      * Adds the passed in {@code amount} to the {@code count}
      *
      * @param amount the value to add to the {@code count}
