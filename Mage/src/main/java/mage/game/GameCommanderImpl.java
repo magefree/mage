@@ -27,7 +27,6 @@
  */
 package mage.game;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -38,7 +37,6 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -49,11 +47,8 @@ import mage.watchers.common.CommanderInfoWatcher;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
-    static boolean CHECK_COMMANDER_DAMAGE = true;
-
-    private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
-    // private final Set<CommanderInfoWatcher> commanderCombatWatcher = new HashSet<>();
-
+    // private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
+    protected boolean checkCommanderDamage;
     protected boolean alsoHand;    // replace commander going to hand
     protected boolean alsoLibrary; // replace commander going to library
     protected boolean startingPlayerSkipsDraw = true;
@@ -67,6 +62,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         this.alsoHand = game.alsoHand;
         this.alsoLibrary = game.alsoLibrary;
         this.startingPlayerSkipsDraw = game.startingPlayerSkipsDraw;
+        this.checkCommanderDamage = game.checkCommanderDamage;
     }
 
     @Override
@@ -85,7 +81,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                         ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
                         ability.addEffect(new CommanderCostModification(commander.getId()));
                         getState().setValue(commander.getId() + "_castCount", 0);
-                        CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), CHECK_COMMANDER_DAMAGE);
+                        CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), checkCommanderDamage);
                         getState().getWatchers().add(watcher);
                         watcher.addCardInfoToCommander(this);
                     }
@@ -227,4 +223,13 @@ public abstract class GameCommanderImpl extends GameImpl {
     public void setAlsoLibrary(boolean alsoLibrary) {
         this.alsoLibrary = alsoLibrary;
     }
+
+    public boolean isCheckCommanderDamage() {
+        return checkCommanderDamage;
+    }
+
+    public void setCheckCommanderDamage(boolean checkCommanderDamage) {
+        this.checkCommanderDamage = checkCommanderDamage;
+    }
+
 }
