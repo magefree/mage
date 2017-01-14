@@ -1009,6 +1009,20 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
+    public void setActivation(final String sessionId, final String userName, boolean active) throws MageException {
+        execute("setActivation", sessionId, () -> {
+            User user = UserManager.getInstance().getUserByName(userName);
+            if (user != null) {
+                user.setActive(active);
+                if (!user.isActive() && user.isConnected()) {
+                    SessionManager.getInstance().disconnectUser(sessionId, user.getSessionId());
+                }
+            }
+
+        });
+    }
+
+    @Override
     public void toggleActivation(final String sessionId, final String userName) throws MageException {
         execute("toggleActivation", sessionId, () -> {
             User user = UserManager.getInstance().getUserByName(userName);

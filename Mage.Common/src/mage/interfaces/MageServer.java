@@ -210,6 +210,8 @@ public interface MageServer {
 
     void lockUser(String sessionId, String userName, long durationMinutes) throws MageException;
 
+    void setActivation(String sessionId, String userName, boolean active) throws MageException;
+    
     void toggleActivation(String sessionId, String userName) throws MageException;
 
     void removeTable(String sessionId, UUID tableId) throws MageException;
