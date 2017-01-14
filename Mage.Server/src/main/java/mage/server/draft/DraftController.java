@@ -121,9 +121,11 @@ public class DraftController {
         UUID playerId = userPlayerMap.get(userId);
         DraftSession draftSession = new DraftSession(draft, userId, playerId);
         draftSessions.put(playerId, draftSession);
-        UserManager.getInstance().getUser(userId).addDraft(playerId, draftSession);
-        logger.debug("User " + UserManager.getInstance().getUser(userId).getName() + " has joined draft " + draft.getId());
-        draft.getPlayer(playerId).setJoined();
+        UserManager.getInstance().getUser(userId).ifPresent(user-> {
+                    user.addDraft(playerId, draftSession);
+                    logger.debug("User " + user.getName() + " has joined draft " + draft.getId());
+                    draft.getPlayer(playerId).setJoined();
+                });
         checkStart();
     }
 

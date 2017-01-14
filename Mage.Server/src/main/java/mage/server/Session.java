@@ -27,11 +27,7 @@
  */
 package mage.server;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
@@ -321,9 +317,13 @@ public class Session {
             } else {
                 logger.error("CAN'T GET LOCK - userId: " + userId + " hold count: " + lock.getHoldCount());
             }
-            User user = UserManager.getInstance().getUser(userId);
-            if (user == null || !user.isConnected()) {
+            Optional<User> _user = UserManager.getInstance().getUser(userId);
+            if (!_user.isPresent()) {
                 return; //user was already disconnected by other thread
+            }
+            User user = _user.get();
+            if(!user.isConnected()){
+                return;
             }
             if (!user.getSessionId().equals(sessionId)) {
                 // user already reconnected with another instance
@@ -371,12 +371,14 @@ public class Session {
             call.setMessageId(messageId++);
             callbackHandler.handleCallbackOneway(new Callback(call));
         } catch (HandleCallbackException ex) {
-            User user = UserManager.getInstance().getUser(userId);
-            logger.warn("SESSION CALLBACK EXCEPTION - " + (user != null ? user.getName() : "") + " userId " + userId);
-            logger.warn(" - method: " + call.getMethod());
-            logger.warn(" - cause: " + getBasicCause(ex).toString());
-            logger.trace("Stack trace:", ex);
-            userLostConnection();
+            ex.printStackTrace();
+            UserManager.getInstance().getUser(userId).ifPresent(user-> {
+                logger.warn("SESSION CALLBACK EXCEPTION - " + (user != null ? user.getName() : "") + " userId " + userId);
+                logger.warn(" - method: " + call.getMethod());
+                logger.warn(" - cause: " + getBasicCause(ex).toString());
+                logger.trace("Stack trace:", ex);
+                userLostConnection();
+            });
         }
     }
 

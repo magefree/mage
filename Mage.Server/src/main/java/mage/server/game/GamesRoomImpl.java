@@ -133,7 +133,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             }
         }
 
-        users.sort(new UserNameSorter());
+        users.sort((one, two) -> one.getUserName().compareToIgnoreCase(two.getUserName()));
         List<RoomUsersView> roomUserInfo = new ArrayList<>();
         roomUserInfo.add(new RoomUsersView(users,
                 GameManager.getInstance().getNumberActiveGames(),

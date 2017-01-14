@@ -27,24 +27,16 @@
  */
 package mage.server;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import mage.server.User.UserState;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
 
+import java.util.*;
+import java.util.concurrent.*;
+
 /**
- *
  * manages users - if a user is disconnected and 10 minutes have passed with no
  * activity the user is removed
  *
@@ -81,11 +73,18 @@ public class UserManager {
         return user;
     }
 
-    public User getUser(UUID userId) {
-        if (userId != null) {
+    public Optional<User> getUser(UUID userId) {
+        if (users.get(userId) == null) {
+            LOGGER.error(String.format("User with id %s could not be found", userId));
+            return Optional.empty();
+        } else {
+            return Optional.of(users.get(userId));
+        }
+      /*  if (userId != null) {
             return users.get(userId);
         }
         return null;
+        */
     }
 
     public User getUserByName(String userName) {

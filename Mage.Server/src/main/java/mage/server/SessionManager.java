@@ -29,6 +29,7 @@ package mage.server;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 import mage.MageException;
@@ -190,7 +191,7 @@ public class SessionManager {
         if (session == null) {
             return null;
         }
-        return UserManager.getInstance().getUser(session.getUserId());
+        return UserManager.getInstance().getUser(session.getUserId()).get();
     }
 
     public void endUserSession(String sessionId, String userSessionId) {
@@ -211,12 +212,13 @@ public class SessionManager {
         return sessions.containsKey(sessionId);
     }
 
-    public User getUser(String sessionId) {
+    public Optional<User> getUser(String sessionId) {
         Session session = sessions.get(sessionId);
         if (session != null) {
             return UserManager.getInstance().getUser(sessions.get(sessionId).getUserId());
         }
-        return null;
+        logger.error(String.format("Session %s could not be found",sessionId));
+        return Optional.empty();
     }
 
     public boolean extendUserSession(String sessionId, String pingInfo) {
