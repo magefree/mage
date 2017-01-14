@@ -96,6 +96,7 @@ public class ConditionalManaEffect extends ManaEffect {
         }
 
         if (mana != null) {
+            checkToFirePossibleEvents(mana, game, source);
             controller.getManaPool().addMana(mana, game, source);
         }
         return true;
@@ -113,9 +114,6 @@ public class ConditionalManaEffect extends ManaEffect {
             mana = effect.getMana();
         } else if (otherwiseEffect != null) {
             mana = otherwiseEffect.getMana();
-        }
-        if (mana != null) {
-            checkToFirePossibleEvents(mana, game, source);
         }
         return mana;
     }
