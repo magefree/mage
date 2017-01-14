@@ -48,7 +48,7 @@ import mage.watchers.common.CommanderInfoWatcher;
 public abstract class GameCommanderImpl extends GameImpl {
 
     // private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
-    protected boolean checkCommanderDamage;
+    protected boolean checkCommanderDamage = true;
     protected boolean alsoHand;    // replace commander going to hand
     protected boolean alsoLibrary; // replace commander going to library
     protected boolean startingPlayerSkipsDraw = true;
