@@ -240,6 +240,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Putrefy", 221, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Rain of Embers", 138, Rarity.COMMON, mage.cards.r.RainOfEmbers.class));
         cards.add(new SetCardInfo("Rally the Righteous", 222, Rarity.COMMON, mage.cards.r.RallyTheRighteous.class));
+        cards.add(new SetCardInfo("Razia's Purification", 224, Rarity.RARE, mage.cards.r.RaziasPurification.class));
         cards.add(new SetCardInfo("Razia, Boros Archangel", 223, Rarity.RARE, mage.cards.r.RaziaBorosArchangel.class));
         cards.add(new SetCardInfo("Recollect", 178, Rarity.UNCOMMON, mage.cards.r.Recollect.class));
         cards.add(new SetCardInfo("Remand", 63, Rarity.UNCOMMON, mage.cards.r.Remand.class));
