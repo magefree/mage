@@ -1488,7 +1488,15 @@ public class SessionImpl implements Session {
     @Override
     public boolean toggleActivation(String userName) {
         try {
-            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to activate/deactivate user: " + userName + " for?", "WARNING",
+            if (JOptionPane.showConfirmDialog(null, "Did you want to set user: " + userName + " to active?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                return setActivation(userName, true);
+            }
+            if (JOptionPane.showConfirmDialog(null, "Did you want to set user: " + userName + " to INactive?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                return setActivation(userName, false);
+            }
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to toggle activation for user: " + userName + "?", "WARNING",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (isConnected()) {
                     server.toggleActivation(sessionId, userName);
