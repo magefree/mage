@@ -100,7 +100,7 @@ public class RegisterUserDialog extends MageDialog {
 
         lblEmailReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         lblEmailReasoning.setLabelFor(txtEmail);
-        lblEmailReasoning.setText("(used for password reset)");
+        lblEmailReasoning.setText("(used for password reset and sending initial password)");
         lblEmailReasoning.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
