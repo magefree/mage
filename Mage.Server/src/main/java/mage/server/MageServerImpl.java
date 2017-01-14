@@ -1011,12 +1011,16 @@ public class MageServerImpl implements MageServer {
     @Override
     public void setActivation(final String sessionId, final String userName, boolean active) throws MageException {
         execute("setActivation", sessionId, () -> {
+            AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
             User user = UserManager.getInstance().getUserByName(userName);
             if (user != null) {
                 user.setActive(active);
                 if (!user.isActive() && user.isConnected()) {
                     SessionManager.getInstance().disconnectUser(sessionId, user.getSessionId());
                 }
+            } else if (authorizedUser != null) {
+                User theUser = new User(userName, "localhost", authorizedUser);
+                theUser.setActive(active);
             }
 
         });
