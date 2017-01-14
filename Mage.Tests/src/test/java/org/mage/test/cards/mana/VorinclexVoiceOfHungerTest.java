@@ -29,6 +29,7 @@ package org.mage.test.cards.mana;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -62,4 +63,59 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Vorinclex glitches with Gemstone Cavern
+     */
+    @Test
+    public void testGemstoneCavern() {
+        // Trample
+        // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+        // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
+        addCard(Zone.BATTLEFIELD, playerB, "Vorinclex, Voice of Hunger", 1); // {6}{G}{G}
+
+        // If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.
+        // {T}: Add {C} to your mana pool. If Gemstone Caverns has a luck counter on it, instead add one mana of any color to your mana pool.
+        addCard(Zone.HAND, playerB, "Gemstone Caverns", 1);
+
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 2);
+
+        activateManaAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Add");
+        setChoice(playerB, "White");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Gemstone Caverns", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+        assertExileCount("Silvercoat Lion", 1);
+        assertTapped("Gemstone Caverns", true);
+
+    }
+
+    @Test
+    public void testCastWithGemstoneCavern() {
+        // Trample
+        // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+        // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
+        addCard(Zone.HAND, playerB, "Vorinclex, Voice of Hunger", 1); // {6}{G}{G}
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 7);
+
+        // If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.
+        // {T}: Add {C} to your mana pool. If Gemstone Caverns has a luck counter on it, instead add one mana of any color to your mana pool.
+        addCard(Zone.HAND, playerB, "Gemstone Caverns", 1);
+
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 2);
+
+        activateManaAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Add");
+        setChoice(playerB, "White");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Vorinclex, Voice of Hunger");
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Gemstone Caverns", 1);
+        assertCounterCount("Gemstone Caverns", CounterType.LUCK, 1);
+        assertPermanentCount(playerB, "Vorinclex, Voice of Hunger", 1);
+        assertTapped("Gemstone Caverns", true);
+
+    }
 }

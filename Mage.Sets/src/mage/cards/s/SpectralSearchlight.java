@@ -28,18 +28,17 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorToManaPoolTargetPlayerEffect;
+import mage.abilities.effects.common.ChoosePlayerEffect;
+import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.abilities.effects.common.ChoosePlayerEffect;
-import mage.abilities.effects.common.ManaEffect;
 
 /**
  *
@@ -49,11 +48,10 @@ public class SpectralSearchlight extends CardImpl {
 
     public SpectralSearchlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        
 
-        // {tap}: Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool.
+        // {T}: Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool.
         ManaEffect effect = new AddManaOfAnyColorToManaPoolTargetPlayerEffect("chosen player");
-        effect.setText("Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool");
+        effect.setText("That player adds one mana of any color he or she chooses to his or her mana pool");
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         // choosing player as first effect, before adding mana effect
         ability.getEffects().add(0, new ChoosePlayerEffect(Outcome.PutManaInPool));
