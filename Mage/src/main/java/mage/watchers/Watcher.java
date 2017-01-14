@@ -57,6 +57,7 @@ public abstract class Watcher implements Serializable {
         this.controllerId = watcher.controllerId;
         this.sourceId = watcher.sourceId;
         this.scope = watcher.scope;
+        this.basicKey = watcher.basicKey;
     }
 
     public UUID getControllerId() {
