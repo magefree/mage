@@ -44,6 +44,7 @@ import mage.players.net.UserGroup;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.SystemUtil;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
@@ -90,6 +91,9 @@ public class Session {
                 sendErrorMessageToClient(returnMessage);
                 return returnMessage;
             }
+
+            RandomString randomString = new RandomString(10);
+            password = randomString.nextString();
             returnMessage = validatePassword(password, userName);
             if (returnMessage != null) {
                 sendErrorMessageToClient(returnMessage);
@@ -103,6 +107,8 @@ public class Session {
             AuthorizedUserRepository.instance.add(userName, password, email);
             String subject = "XMage Registration Completed";
             String text = "You are successfully registered as " + userName + ".";
+            text += "  Your initial, generated password is: " + password;
+
             boolean success;
             if (!ConfigSettings.getInstance().getMailUser().isEmpty()) {
                 success = MailClient.sendMessage(email, subject, text);
@@ -110,9 +116,14 @@ public class Session {
                 success = MailgunClient.sendMessage(email, subject, text);
             }
             if (success) {
-                logger.info("Sent a registration confirmation email to " + email + " for " + userName);
+                String ok = "Sent a registration confirmation / initial password email to " + email + " for " + userName;
+                logger.info(ok);
+                sendInfoMessageToClient(ok);
             } else {
-                logger.error("Failed sending a registration confirmation email to " + email + " for " + userName);
+                String err = "Failed sending a registration confirmation / initial password email to " + email + " for " + userName;
+                logger.error(err);
+                sendErrorMessageToClient(err);
+                return err;
             }
             return null;
         }
@@ -396,6 +407,13 @@ public class Session {
         fireCallback(new ClientCallback("showUserMessage", null, messageData));
     }
 
+    public void sendInfoMessageToClient(String message) {
+        List<String> messageData = new LinkedList<>();
+        messageData.add("Information about connecting to the server");
+        messageData.add(message);
+        fireCallback(new ClientCallback("showUserMessage", null, messageData));
+    }
+
     public static Throwable getBasicCause(Throwable cause) {
         Throwable t = cause;
         while (t.getCause() != null) {
@@ -405,5 +423,37 @@ public class Session {
             }
         }
         return t;
+    }
+}
+
+class RandomString {
+
+    private static final char[] symbols;
+
+    static {
+        StringBuilder tmp = new StringBuilder();
+        for (char ch = '0'; ch <= '9'; ++ch) {
+            tmp.append(ch);
+        }
+        for (char ch = 'a'; ch <= 'z'; ++ch) {
+            tmp.append(ch);
+        }
+        symbols = tmp.toString().toCharArray();
+    }
+
+    private final char[] buf;
+
+    public RandomString(int length) {
+        if (length < 8) {
+            length = 8;
+        }
+        buf = new char[length];
+    }
+
+    public String nextString() {
+        for (int idx = 0; idx < buf.length; ++idx) {
+            buf[idx] = symbols[RandomUtil.nextInt(symbols.length)];
+        }
+        return new String(buf);
     }
 }
