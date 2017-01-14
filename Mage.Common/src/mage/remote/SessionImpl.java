@@ -1466,6 +1466,24 @@ public class SessionImpl implements Session {
         }
         return false;
     }
+    
+    @Override
+    public boolean setActivation(String userName, boolean active) {
+        try {
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to set active to " + active + " for user: " + userName + "?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.setActivation(sessionId, userName, active);
+                    return true;
+                }
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
 
     @Override
     public boolean toggleActivation(String userName) {
