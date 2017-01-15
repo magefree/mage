@@ -25,41 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.abilities.effects.common.enterAttribute;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.other.OwnerIdPredicate;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class MeldCondition implements Condition {
+public class EnterAttributeAddChosenSubtypeEffect extends OneShotEffect {
 
-    private final String meldWithName;
+    public EnterAttributeAddChosenSubtypeEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "{this} is the chosen type in addition to its other types";
+    }
 
-    public MeldCondition(String meldWithName) {
-        this.meldWithName = meldWithName;
+    public EnterAttributeAddChosenSubtypeEffect(final EnterAttributeAddChosenSubtypeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EnterAttributeAddChosenSubtypeEffect copy() {
+        return new EnterAttributeAddChosenSubtypeEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceMageObject = source.getSourceObjectIfItStillExists(game);
-        if (sourceMageObject != null && sourceMageObject instanceof Permanent) {
-            Permanent sourcePermanent = (Permanent) sourceMageObject;
-            if (sourcePermanent.getControllerId().equals(source.getControllerId())
-                    && sourcePermanent.getOwnerId().equals(source.getControllerId())) {
-                FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-                filter.add(new NamePredicate(this.meldWithName));
-                filter.add(new OwnerIdPredicate(source.getControllerId()));
-                return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0;
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        String subtype = (String) game.getState().getValue(source.getSourceId() + "_type");
+        if (permanent != null && subtype != null) {
+            MageObject mageObject = permanent.getBasicMageObject(game);
+            if (!mageObject.getSubtype(null).contains(subtype)) {
+                mageObject.getSubtype(null).add(subtype);
             }
+            if (!permanent.getSubtype(null).contains(subtype)) {
+                permanent.getSubtype(null).add(subtype);
+            }
+            return true;
         }
         return false;
     }

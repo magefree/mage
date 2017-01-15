@@ -28,6 +28,7 @@
 package mage.game.permanent;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
@@ -44,6 +45,7 @@ import mage.game.events.ZoneChangeEvent;
 public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
+    // A copy of the origin card that was cast (this is not the original card, so it's possible to chnage some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
     protected Card card;
     // the number this permanent instance had
     protected int zoneChangeCounter;
@@ -139,6 +141,11 @@ public class PermanentCard extends PermanentImpl {
         }
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
+    }
+
+    @Override
+    public MageObject getBasicMageObject(Game game) {
+        return card;
     }
 
     public Card getCard() {

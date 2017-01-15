@@ -57,6 +57,7 @@ import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
+import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
@@ -1787,7 +1788,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 } else {
                     SpellAbility spellAbility = perm.getSpellAbility();
-                    if (perm.getSpellAbility().getTargets().isEmpty()) {
+                    if (spellAbility.getTargets().isEmpty()) {
                         for (Ability ability : perm.getAbilities(this)) {
                             if ((ability instanceof SpellAbility)
                                     && SpellAbilityType.BASE_ALTERNATE.equals(((SpellAbility) ability).getSpellAbilityType())
@@ -1810,6 +1811,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                                     UUID wasAttachedTo = perm.getAttachedTo();
                                     perm.attachTo(null, this);
+                                    BestowAbility.becomeCreature(perm, this);
                                     fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
                                 } else if (movePermanentToGraveyardWithInfo(perm)) {
                                     somethingHappened = true;
@@ -2675,17 +2677,17 @@ public abstract class GameImpl implements Game, Serializable {
                 card.setZone(Zone.GRAVEYARD, this);
                 player.getGraveyard().add(card);
             }
-            for (PermanentCard card : battlefield) {
-                card.setZone(Zone.BATTLEFIELD, this);
-                card.setOwnerId(ownerId);
-                PermanentCard permanent = new PermanentCard(card.getCard(), ownerId, this);
-                getPermanentsEntering().put(permanent.getId(), permanent);
-                permanent.entersBattlefield(permanent.getId(), this, Zone.OUTSIDE, false);
-                getBattlefield().addPermanent(permanent);
-                getPermanentsEntering().remove(permanent.getId());
-                permanent.removeSummoningSickness();
-                if (card.isTapped()) {
-                    permanent.setTapped(true);
+            for (PermanentCard permanentCard : battlefield) {
+                permanentCard.setZone(Zone.BATTLEFIELD, this);
+                permanentCard.setOwnerId(ownerId);
+                PermanentCard newPermanent = new PermanentCard(permanentCard.getCard(), ownerId, this);
+                getPermanentsEntering().put(newPermanent.getId(), newPermanent);
+                newPermanent.entersBattlefield(newPermanent.getId(), this, Zone.OUTSIDE, false);
+                getBattlefield().addPermanent(newPermanent);
+                getPermanentsEntering().remove(newPermanent.getId());
+                newPermanent.removeSummoningSickness();
+                if (permanentCard.isTapped()) {
+                    newPermanent.setTapped(true);
                 }
             }
             applyEffects();

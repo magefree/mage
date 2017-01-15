@@ -59,6 +59,7 @@ import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.EffectType;
+import mage.constants.EnterEventType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
@@ -872,12 +873,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // remove some attributes here, because first apply effects comes later otherwise abilities (e.g. color related) will unintended trigger
             MorphAbility.setPermanentToFaceDownCreature(this);
         }
-        EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
+
+        EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone, EnterEventType.SELF);
+        if (game.replaceEvent(event)) {
+            return false;
+        }
+        event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
         if (!game.replaceEvent(event)) {
             if (fireEvent) {
                 game.addSimultaneousEvent(event);
                 return true;
             }
+
         }
         return false;
     }

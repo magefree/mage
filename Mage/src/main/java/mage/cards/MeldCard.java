@@ -55,13 +55,13 @@ public abstract class MeldCard extends CardImpl {
         halves = new CardsImpl();
     }
 
-    public MeldCard(MeldCard card) {
+    public MeldCard(final MeldCard card) {
         super(card);
         this.topHalfCard = card.topHalfCard;
         this.bottomHalfCard = card.bottomHalfCard;
         this.topLastZoneChangeCounter = card.topLastZoneChangeCounter;
         this.bottomLastZoneChangeCounter = card.bottomLastZoneChangeCounter;
-        this.halves = new CardsImpl(halves);
+        this.halves = new CardsImpl(card.halves);
         this.isMelded = card.isMelded;
     }
 
@@ -211,4 +211,5 @@ public abstract class MeldCard extends CardImpl {
     public Cards getHalves() {
         return halves;
     }
+
 }

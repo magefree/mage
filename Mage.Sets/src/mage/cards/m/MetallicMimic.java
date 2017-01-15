@@ -32,16 +32,15 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
+import mage.abilities.effects.common.enterAttribute.EnterAttributeAddChosenSubtypeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
+import mage.constants.EnterEventType;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -63,10 +62,10 @@ public class MetallicMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As Metallic Mimic enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
-
+        AsEntersBattlefieldAbility ability = new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature), null, EnterEventType.SELF);
         // Metallic Mimic is the chosen type in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MetallicMimicEffect()));
+        ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
+        this.addAbility(ability);
 
         // Each other creature you control of the chosen type enters the battlefield with an additional +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MetallicMimicReplacementEffect()));
@@ -82,34 +81,6 @@ public class MetallicMimic extends CardImpl {
         return new MetallicMimic(this);
     }
 
-    class MetallicMimicEffect extends ContinuousEffectImpl {
-
-        public MetallicMimicEffect() {
-            super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-            staticText = "{this} is the chosen type in addition to its other types";
-        }
-
-        public MetallicMimicEffect(final MetallicMimicEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
-                if (subtype != null && !permanent.getSubtype(game).contains(subtype)) {
-                    permanent.getSubtype(game).add(subtype);
-                }
-            }
-            return true;
-        }
-
-        @Override
-        public MetallicMimicEffect copy() {
-            return new MetallicMimicEffect(this);
-        }
-    }
 }
 
 class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
@@ -117,6 +88,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
     MetallicMimicReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "Each other creature you control of the chosen type enters the battlefield with an additional +1/+1 counter on it";
+        setCharacterDefining(true);
     }
 
     MetallicMimicReplacementEffect(MetallicMimicReplacementEffect effect) {
@@ -132,11 +104,14 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent enteringCreature = ((EntersTheBattlefieldEvent) event).getTarget();
-        return enteringCreature != null && sourcePermanent != null 
+        if (enteringCreature != null && sourcePermanent != null
                 && enteringCreature.getControllerId().equals(source.getControllerId())
                 && enteringCreature.getCardType().contains(CardType.CREATURE)
-                && enteringCreature.getSubtype(game).contains(game.getState().getValue(sourcePermanent.getId() + "_type"))
-                && !event.getTargetId().equals(source.getSourceId());
+                && !event.getTargetId().equals(source.getSourceId())) {
+            String subtype = (String) game.getState().getValue(sourcePermanent.getId() + "_type");
+            return subtype != null && enteringCreature.getSubtype(game).contains(subtype);
+        }
+        return false;
     }
 
     @Override

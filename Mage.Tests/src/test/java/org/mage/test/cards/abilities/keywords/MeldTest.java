@@ -127,11 +127,11 @@ public class MeldTest extends CardTestPlayerBase {
         // When you cast Bruna, the Fading Light, you may return target Angel or Human creature card from your graveyard to the battlefield.
         // Flying, Vigilance
         // <i>(Melds with Gisela, the Broken Blade.)</i>
-        addCard(Zone.HAND, playerA, "Bruna, the Fading Light"); // {5}{W}{W}
+        addCard(Zone.HAND, playerA, "Bruna, the Fading Light"); // Creature {5}{W}{W}  5/7
         // Flying, First strike, Lifelink
         // At the beginning of your end step, if you both own and control Gisela, the Broken Blade and a
         // creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.
-        addCard(Zone.HAND, playerA, "Gisela, the Broken Blade"); // {2}{W}{W}
+        addCard(Zone.HAND, playerA, "Gisela, the Broken Blade"); // Creature {2}{W}{W} 4/3
         // Brisela, Voice of Nightmares  9/10
         // Flying, First strike, Vigilance, Lifelink
         // Your opponents can't cast spells with converted mana cost 3 or less.
@@ -160,7 +160,7 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Vanish into Memory", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 2);
-        assertHandCount(playerB, 0);
+        assertHandCount(playerB, 1); // discard 10 upkeep turn 6 ==> 0 + draw 1 at draw phase turn 6
 
     }
 
