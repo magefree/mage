@@ -25,22 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.game.permanent.token.ServoToken;
 import mage.watchers.common.RevoltWatcher;
-
-import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -57,9 +56,11 @@ public class CountlessGearsRenegade extends CardImpl {
 
         // <i>Revolt</i> &mdash; When Countless Gears Renegade enters the battlefield, if a permanent you controlled
         // left the battlefield this turn, create a 1/1 colorless Servo artifact creature token.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new CreateTokenEffect(new ServoToken(), 1), RevoltCondition.getInstance()),
-                false, "<i>Revolt</i> &mdash; ");
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new ServoToken(), 1), false), RevoltCondition.getInstance(),
+                "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
+                + " the battlefield this turn, create a 1/1 colorless Servo artifact creature token.");
+        ability.setAbilityWord(AbilityWord.REVOLT);
         ability.addWatcher(new RevoltWatcher());
         this.addAbility(ability);
     }
