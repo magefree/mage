@@ -783,6 +783,13 @@ public class User {
         }
         return number;
     }
+    
+    public String getEmail() {
+        if (authorizedUser != null) {
+            return authorizedUser.email;
+        }
+        return "";
+    }
 
     private void updateAuthorizedUser() {
         if (authorizedUser != null) {
