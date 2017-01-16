@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.util.HashSet;
@@ -53,16 +52,16 @@ import mage.watchers.Watcher;
 public class ArchiveTrap extends CardImpl {
 
     public ArchiveTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
+
         this.subtype.add("Trap");
 
         // If an opponent searched his or her library this turn, you may pay {0} rather than pay Archive Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), OpponentSearchesLibCondition.getInstance()), new ArchiveTrapWatcher());
-        
+
         // Target opponent puts the top thirteen cards of his or her library into his or her graveyard.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));               
+        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
     }
 
     public ArchiveTrap(final ArchiveTrap card) {
@@ -78,7 +77,7 @@ public class ArchiveTrap extends CardImpl {
 class ArchiveTrapWatcher extends Watcher {
 
     Set<UUID> playerIds = new HashSet<>();
-    
+
     public ArchiveTrapWatcher() {
         super("LibrarySearched", WatcherScope.GAME);
     }
@@ -95,7 +94,8 @@ class ArchiveTrapWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.LIBRARY_SEARCHED) {
+        if (event.getType() == EventType.LIBRARY_SEARCHED
+                && event.getTargetId().equals(event.getPlayerId())) { // player searched own library
             playerIds.add(event.getPlayerId());
         }
     }
@@ -106,7 +106,6 @@ class ArchiveTrapWatcher extends Watcher {
         playerIds.clear();
     }
 
-    
     public Set<UUID> getPlayersSearchedLibrary() {
         return playerIds;
     }
@@ -115,7 +114,7 @@ class ArchiveTrapWatcher extends Watcher {
 class OpponentSearchesLibCondition implements Condition {
 
     private static final OpponentSearchesLibCondition fInstance = new OpponentSearchesLibCondition();
-    
+
     public static Condition getInstance() {
         return fInstance;
     }
@@ -138,5 +137,5 @@ class OpponentSearchesLibCondition implements Condition {
     public String toString() {
         return "If an opponent searched his or her library this turn";
     }
-    
+
 }
