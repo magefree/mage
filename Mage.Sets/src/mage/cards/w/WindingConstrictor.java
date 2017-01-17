@@ -56,9 +56,10 @@ public class WindingConstrictor extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // If one or more counters would be placed on an artifact or creature you control, that many of those counters plus one are placed on that permanent instead.
+        // If one or more counters would be placed on an artifact or creature you control, that many plus one of each of those kinds of counters are placed on that permanent instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WindingConstrictorPermanentEffect()));
-        // If you would get one or more counters, you get that many of those counters plus one instead.
+
+        // If you would get one or more counters, you get that many plus one of each of those kinds of counters instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WindingConstrictorPlayerEffect()));
     }
 
@@ -76,7 +77,8 @@ class WindingConstrictorPermanentEffect extends ReplacementEffectImpl {
 
     WindingConstrictorPermanentEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
-        staticText = "If one or more counters would be placed on an artifact or creature you control, that many of those counters plus one are placed on that permanent instead";
+        staticText = "If one or more counters would be placed on an artifact or creature you control, "
+                + "that many plus one of each of those kinds of counters are placed on that permanent instead";
     }
 
     WindingConstrictorPermanentEffect(final WindingConstrictorPermanentEffect effect) {
@@ -120,7 +122,7 @@ class WindingConstrictorPlayerEffect extends ReplacementEffectImpl {
 
     WindingConstrictorPlayerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
-        staticText = "If you would get one or more counters, you get that many of those counters plus one instead";
+        staticText = "If you would get one or more counters, you get that many plus one of each of those kinds of counters instead";
     }
 
     WindingConstrictorPlayerEffect(final WindingConstrictorPlayerEffect effect) {
