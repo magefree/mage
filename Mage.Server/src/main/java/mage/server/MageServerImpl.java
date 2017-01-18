@@ -132,7 +132,7 @@ public class MageServerImpl implements MageServer {
         }
         return true;
     }
-
+    
     @Override
     public boolean resetPassword(String sessionId, String email, String authToken, String password) throws MageException {
         if (!ConfigSettings.getInstance().isAuthenticationActivated()) {
@@ -942,7 +942,8 @@ public class MageServerImpl implements MageServer {
                             user.getGameInfo(),
                             user.getUserState().toString(),
                             user.getChatLockedUntil(),
-                            user.getClientVersion()
+                            user.getClientVersion(),
+                            user.getEmail()
                     ));
                 }
                 return users;

@@ -27,6 +27,10 @@
  */
 package mage.players;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -86,11 +90,6 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
@@ -2423,7 +2422,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     /**
      * @param ability
-     * @param available    if null, it won't be checked if enough mana is available
+     * @param available if null, it won't be checked if enough mana is available
      * @param sourceObject
      * @param game
      * @return
@@ -3229,7 +3228,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // identify cards from one owner
             Cards cards = new CardsImpl();
             UUID ownerId = null;
-            for (Iterator<Card> it = allCards.iterator(); it.hasNext(); ) {
+            for (Iterator<Card> it = allCards.iterator(); it.hasNext();) {
                 Card card = it.next();
                 if (cards.isEmpty()) {
                     ownerId = card.getOwnerId();
@@ -3353,7 +3352,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         card = basicCard;
                     }
                 }
-                game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() : "a card face down") + " "
+                game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() + (card.isCopy() ? " (Copy)" : "") : "a card face down") + " "
                         + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "") + "to the exile zone");
             }
             result = true;

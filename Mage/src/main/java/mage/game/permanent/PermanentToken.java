@@ -28,6 +28,7 @@
 package mage.game.permanent;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.game.Game;
@@ -90,6 +91,11 @@ public class PermanentToken extends PermanentImpl {
         this.supertype = token.getSupertype();
         this.subtype = token.getSubtype(game);
         this.tokenDescriptor = token.getTokenDescriptor();
+    }
+
+    @Override
+    public MageObject getBasicMageObject(Game game) {
+        return token;
     }
 
     public Token getToken() {

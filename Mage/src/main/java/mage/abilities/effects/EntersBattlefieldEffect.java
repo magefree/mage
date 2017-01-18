@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.constants.Duration;
+import mage.constants.EnterEventType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,6 +51,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
     protected String text;
     protected Condition condition;
     protected boolean optional;
+    protected EnterEventType enterEventType;
 
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
@@ -66,19 +68,25 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
     }
 
     public EntersBattlefieldEffect(Effect baseEffect, Condition condition, String text, boolean selfScope, boolean optional) {
+        this(baseEffect, condition, text, selfScope, optional, EnterEventType.OTHER);
+    }
+
+    public EntersBattlefieldEffect(Effect baseEffect, Condition condition, String text, boolean selfScope, boolean optional, EnterEventType enterEventType) {
         super(Duration.WhileOnBattlefield, baseEffect.getOutcome(), selfScope);
         this.baseEffects.add(baseEffect);
+        this.enterEventType = enterEventType;
         this.text = text;
         this.condition = condition;
         this.optional = optional;
     }
 
-    public EntersBattlefieldEffect(EntersBattlefieldEffect effect) {
+    public EntersBattlefieldEffect(final EntersBattlefieldEffect effect) {
         super(effect);
         this.baseEffects = effect.baseEffects.copy();
         this.text = effect.text;
         this.condition = effect.condition;
         this.optional = effect.optional;
+        this.enterEventType = effect.enterEventType;
     }
 
     public void addEffect(Effect effect) {
@@ -87,7 +95,17 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.ENTERS_THE_BATTLEFIELD.equals(event.getType());
+        switch (enterEventType) {
+            case OTHER:
+                return EventType.ENTERS_THE_BATTLEFIELD.equals(event.getType());
+            case SELF:
+                return EventType.ENTERS_THE_BATTLEFIELD_SELF.equals(event.getType());
+            case CONTROL:
+                return EventType.ENTERS_THE_BATTLEFIELD_CONTROL.equals(event.getType());
+            case COPY:
+                return EventType.ENTERS_THE_BATTLEFIELD_COPY.equals(event.getType());
+        }
+        return false;
     }
 
     @Override

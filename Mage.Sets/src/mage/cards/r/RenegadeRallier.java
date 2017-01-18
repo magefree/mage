@@ -32,10 +32,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.filter.Filter;
 import mage.filter.common.FilterPermanentCard;
@@ -65,9 +66,11 @@ public class RenegadeRallier extends CardImpl {
 
         // <i>Revolt</i> &mdash; When Renegade Rallier enters the battlefield, if a permanent you controlled left the battlefield this turn,
         // return target permanent card with converted mana cost 2 or less from your graveyard to your battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(), RevoltCondition.getInstance()),
-                false, "<i>Revolt</i> &mdash; ");
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(
+                new ReturnFromGraveyardToBattlefieldTargetEffect(), false), RevoltCondition.getInstance(),
+                "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
+                + " the battlefield this turn, return target permanent card with converted mana cost 2 or less from your graveyard to your battlefield.");
+        ability.setAbilityWord(AbilityWord.REVOLT);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addWatcher(new RevoltWatcher());
         this.addAbility(ability);

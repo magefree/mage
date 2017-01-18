@@ -46,6 +46,12 @@ import mage.game.permanent.token.ServoToken;
  */
 public class SlyRequisitioner extends CardImpl {
 
+    private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("a nontoken artifact you control");
+
+    static {
+        filter.add(Predicates.not(new TokenPredicate()));
+    }
+
     public SlyRequisitioner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
 
@@ -56,9 +62,8 @@ public class SlyRequisitioner extends CardImpl {
 
         // Improvise
         this.addAbility(new ImproviseAbility());
+
         // Whenever a nontoken artifact you control is put into a graveyard from the battlefield, create a 1/1 colorless Servo artifact creature token.
-        FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("a nontoken artifact you control");
-        filter.add(Predicates.not(new TokenPredicate()));
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new CreateTokenEffect(new ServoToken()), false, filter, false));
     }
 

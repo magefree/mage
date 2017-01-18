@@ -27,16 +27,21 @@
  */
 package mage.cards.v;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -49,6 +54,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -57,7 +63,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class VanishIntoMemory extends CardImpl {
 
     public VanishIntoMemory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
 
         // Exile target creature. You draw cards equal to that creature's power.
         // At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to that creature's toughness.
@@ -79,7 +85,7 @@ class VanishIntoMemoryEffect extends OneShotEffect {
 
     public VanishIntoMemoryEffect() {
         super(Outcome.Detriment);
-        staticText = "Exile target creature. You draw cards equal to that creature's power. At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to that creature's toughness.";
+        staticText = "Exile target creature. You draw cards equal to that creature's power. At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to that creature's toughness";
     }
 
     public VanishIntoMemoryEffect(final VanishIntoMemoryEffect effect) {
@@ -89,20 +95,18 @@ class VanishIntoMemoryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (permanent != null && sourceObject != null) {
-            if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
-                you.drawCards(permanent.getPower().getValue(), game);
+        if (controller != null && permanent != null && sourceObject != null) {
+            if (controller.moveCardsToExile(permanent, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
+                controller.drawCards(permanent.getPower().getValue(), game);
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                 // only if permanent is in exile (tokens would be stop to exist)
                 if (exile != null && !exile.isEmpty()) {
-                    Card card = game.getCard(permanent.getId());
-                    if (card != null) {
-                        //create delayed triggered ability
-                        game.addDelayedTriggeredAbility(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(
-                                new VanishIntoMemoryReturnFromExileEffect(new MageObjectReference(card, game))), source);
-                    }
+                    //create delayed triggered ability
+                    Effect effect = new VanishIntoMemoryReturnFromExileEffect();
+                    effect.setTargetPointer(new FixedTargets(exile, game));
+                    game.addDelayedTriggeredAbility(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect), source);
                 }
                 return true;
             }
@@ -118,17 +122,13 @@ class VanishIntoMemoryEffect extends OneShotEffect {
 
 class VanishIntoMemoryReturnFromExileEffect extends OneShotEffect {
 
-    MageObjectReference objectToReturn;
-
-    public VanishIntoMemoryReturnFromExileEffect(MageObjectReference objectToReturn) {
+    public VanishIntoMemoryReturnFromExileEffect() {
         super(Outcome.PutCardInPlay);
-        this.objectToReturn = objectToReturn;
         staticText = "return that card to the battlefield under its owner's control";
     }
 
     public VanishIntoMemoryReturnFromExileEffect(final VanishIntoMemoryReturnFromExileEffect effect) {
         super(effect);
-        this.objectToReturn = effect.objectToReturn;
     }
 
     @Override
@@ -138,31 +138,30 @@ class VanishIntoMemoryReturnFromExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(objectToReturn.getSourceId());
-        if (card != null && objectToReturn.refersTo(card, game)) {
-            Player owner = game.getPlayer(card.getOwnerId());
-            if (owner != null) {
-                game.addEffect(new VanishIntoMemoryEntersBattlefieldEffect(objectToReturn), source);
-                owner.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
-            }
+        Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Set<Card> cardsToBattlefield = new HashSet<>();
+            cardsToBattlefield.addAll(cards.getCards(game));
+            ContinuousEffect effect = new VanishIntoMemoryEntersBattlefieldEffect();
+            effect.setTargetPointer(new FixedTargets(cards, game));
+            game.addEffect(effect, source);
+            controller.moveCards(cardsToBattlefield, Zone.BATTLEFIELD, source, game, false, false, true, null);
         }
+
         return true;
     }
 }
 
 class VanishIntoMemoryEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    MageObjectReference objectToReturn;
-
-    public VanishIntoMemoryEntersBattlefieldEffect(MageObjectReference objectToReturn) {
-        super(Duration.Custom, Outcome.BoostCreature);
-        this.objectToReturn = objectToReturn;
+    public VanishIntoMemoryEntersBattlefieldEffect() {
+        super(Duration.EndOfTurn, Outcome.Discard);
         staticText = "discard cards equal to that creature's toughness.";
     }
 
     public VanishIntoMemoryEntersBattlefieldEffect(VanishIntoMemoryEntersBattlefieldEffect effect) {
         super(effect);
-        this.objectToReturn = effect.objectToReturn;
     }
 
     @Override
@@ -172,10 +171,7 @@ class VanishIntoMemoryEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
-            return event.getTargetId().equals(objectToReturn.getSourceId());
-        }
-        return false;
+        return getTargetPointer().getTargets(game, source).contains(event.getTargetId());
     }
 
     @Override
@@ -186,7 +182,6 @@ class VanishIntoMemoryEntersBattlefieldEffect extends ReplacementEffectImpl {
             if (you != null) {
                 you.discard(permanent.getToughness().getValue(), false, source, game);
             }
-            discard(); // use only once
         }
         return false;
     }

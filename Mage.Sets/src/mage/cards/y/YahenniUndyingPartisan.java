@@ -40,13 +40,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -55,14 +53,11 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class YahenniUndyingPartisan extends CardImpl {
 
-    private static final FilterCreaturePermanent opponentFilter = new FilterCreaturePermanent("a creature an opponent controls");
-    private static final FilterControlledCreaturePermanent ownFilter = new FilterControlledCreaturePermanent("another creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        opponentFilter.add(new ControllerPredicate(TargetController.OPPONENT));
-        ownFilter.add(new AnotherPredicate());
+        filter.add(new AnotherPredicate());
     }
-
 
     public YahenniUndyingPartisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -77,11 +72,14 @@ public class YahenniUndyingPartisan extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni, Undying Partisan.
-        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, opponentFilter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, new FilterOpponentsCreaturePermanent()));
 
         // Sacrifice another creature: Yahenni gains indestructible until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(ownFilter))));
+        this.addAbility(new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
+                new SacrificeTargetCost(new TargetControlledPermanent(filter)))
+        );
     }
 
     public YahenniUndyingPartisan(final YahenniUndyingPartisan card) {

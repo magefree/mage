@@ -45,10 +45,10 @@ import mage.target.TargetSpell;
 public class RevolutionaryRebuff extends CardImpl {
 
     public RevolutionaryRebuff(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Counter target nonartifact spell unless its controller pays 2.
-        FilterSpell filter = new FilterSpell();
+        FilterSpell filter = new FilterSpell("nonartifact spell");
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));

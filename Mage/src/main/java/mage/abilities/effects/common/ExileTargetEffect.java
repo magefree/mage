@@ -137,8 +137,8 @@ public class ExileTargetEffect extends OneShotEffect {
                             }
                         } else {
                             StackObject stackObject = game.getStack().getStackObject(targetId);
-                            if (stackObject instanceof Spell && ((Spell) stackObject).getCard() != null) {
-                                toExile.add(((Spell) stackObject).getCard());
+                            if (stackObject instanceof Spell) {
+                                toExile.add((Spell) stackObject);
                             }
                         }
                     }

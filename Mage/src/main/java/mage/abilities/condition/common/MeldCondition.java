@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -39,7 +40,6 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-
 public class MeldCondition implements Condition {
 
     private final String meldWithName;
@@ -57,11 +57,8 @@ public class MeldCondition implements Condition {
                     && sourcePermanent.getOwnerId().equals(source.getControllerId())) {
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                 filter.add(new NamePredicate(this.meldWithName));
-                for (Permanent meldWithPermanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    if (meldWithPermanent.getOwnerId().equals(source.getControllerId())) {
-                        return true;
-                    }
-                }
+                filter.add(new OwnerIdPredicate(source.getControllerId()));
+                return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0;
             }
         }
         return false;

@@ -29,8 +29,8 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SpellCounteredControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
@@ -40,11 +40,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -74,7 +69,7 @@ public class BaralChiefOfCompliance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever a spell or ability you control counters a spell, you may draw a card. If you do, discard a card.
-        this.addAbility(new BaralChiefOfComplianceTriggeredAbility());
+        this.addAbility(new SpellCounteredControllerTriggeredAbility(new DrawDiscardControllerEffect(), true));
     }
 
     public BaralChiefOfCompliance(final BaralChiefOfCompliance card) {
@@ -84,44 +79,5 @@ public class BaralChiefOfCompliance extends CardImpl {
     @Override
     public BaralChiefOfCompliance copy() {
         return new BaralChiefOfCompliance(this);
-    }
-}
-
-class BaralChiefOfComplianceTriggeredAbility extends TriggeredAbilityImpl {
-
-    public BaralChiefOfComplianceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), true);
-    }
-
-    public BaralChiefOfComplianceTriggeredAbility(final BaralChiefOfComplianceTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BaralChiefOfComplianceTriggeredAbility copy() {
-        return new BaralChiefOfComplianceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.COUNTERED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject stackObjectThatCountered = (StackObject) game.getStack().getStackObject(event.getSourceId());
-        if (stackObjectThatCountered == null) {
-            stackObjectThatCountered = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
-        }
-        if (stackObjectThatCountered != null && stackObjectThatCountered.getControllerId().equals(getControllerId())) {
-            StackObject counteredStackObject = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
-            return counteredStackObject != null && (counteredStackObject instanceof Spell);
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a spell or ability you control counters a spell, " + super.getRule();
     }
 }

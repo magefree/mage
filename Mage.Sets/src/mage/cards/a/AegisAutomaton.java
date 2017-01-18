@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class AegisAutomaton extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
         filter.add(new AnotherPredicate());

@@ -42,13 +42,11 @@ import mage.game.permanent.token.ThopterColorlessToken;
  */
 public class EfficientConstruction extends CardImpl {
 
-    private static final FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
-
     public EfficientConstruction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken()), new FilterArtifactSpell("an artifact spell"), false));
     }
 
     public EfficientConstruction(final EfficientConstruction card) {

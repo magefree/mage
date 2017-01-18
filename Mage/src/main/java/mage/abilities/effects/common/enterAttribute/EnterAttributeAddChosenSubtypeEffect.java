@@ -25,45 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.o;
+package mage.abilities.effects.common.enterAttribute;
 
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersAllEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterPlaneswalkerCard;
-
-import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- * @author JRHerlehy
+ *
+ * @author LevelX2
  */
-public class OathOfAjani extends CardImpl {
+public class EnterAttributeAddChosenSubtypeEffect extends OneShotEffect {
 
-    public OathOfAjani(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{W}");
-
-        this.supertype.add("Legendary");
-
-        // When Oath of Ajani enters the battlefield, put a +1/+1 counter on each creature you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent())));
-
-        // Planeswalker spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterPlaneswalkerCard("Planeswalker spells"), 1)));
+    public EnterAttributeAddChosenSubtypeEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "{this} is the chosen type in addition to its other types";
     }
 
-    public OathOfAjani(final OathOfAjani card) {
-        super(card);
+    public EnterAttributeAddChosenSubtypeEffect(final EnterAttributeAddChosenSubtypeEffect effect) {
+        super(effect);
     }
 
     @Override
-    public OathOfAjani copy() {
-        return new OathOfAjani(this);
+    public EnterAttributeAddChosenSubtypeEffect copy() {
+        return new EnterAttributeAddChosenSubtypeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        String subtype = (String) game.getState().getValue(source.getSourceId() + "_type");
+        if (permanent != null && subtype != null) {
+            MageObject mageObject = permanent.getBasicMageObject(game);
+            if (!mageObject.getSubtype(null).contains(subtype)) {
+                mageObject.getSubtype(null).add(subtype);
+            }
+            if (!permanent.getSubtype(null).contains(subtype)) {
+                permanent.getSubtype(null).add(subtype);
+            }
+            return true;
+        }
+        return false;
     }
 }

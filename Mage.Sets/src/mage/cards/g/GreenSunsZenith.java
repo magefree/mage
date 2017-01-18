@@ -29,36 +29,34 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.search.SearchLibraryWithLessCMCPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  * @author Loki
  */
 public class GreenSunsZenith extends CardImpl {
 
-    public GreenSunsZenith(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
+    private static final FilterCard filter = new FilterCard("green creature");
 
-        // Search your library for a green creature card with converted mana cost X or less,
-        // put it onto the battlefield, then shuffle your library.
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
+
+    public GreenSunsZenith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");
+
+        // Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryWithLessCMCPutInPlayEffect(filter));
+
         // Shuffle Green Sun's Zenith into its owner's library.
-        this.getSpellAbility().addEffect(new GreenSunsZenithSearchEffect());
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
 
@@ -69,51 +67,6 @@ public class GreenSunsZenith extends CardImpl {
     @Override
     public GreenSunsZenith copy() {
         return new GreenSunsZenith(this);
-    }
-
-}
-
-class GreenSunsZenithSearchEffect extends OneShotEffect {
-
-    GreenSunsZenithSearchEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library";
-    }
-
-    GreenSunsZenithSearchEffect(final GreenSunsZenithSearchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
-        int xValue = source.getManaCostsToPay().getX() + 1;
-        FilterCard filter = new FilterCard("green creature card with converted mana cost " + xValue + " or less");
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xValue));
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (controller.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
-                Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
-        }
-        controller.shuffleLibrary(source, game);
-        return false;
-    }
-
-    @Override
-    public GreenSunsZenithSearchEffect copy() {
-        return new GreenSunsZenithSearchEffect(this);
     }
 
 }

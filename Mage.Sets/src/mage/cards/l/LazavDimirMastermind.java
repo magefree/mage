@@ -28,7 +28,6 @@
 package mage.cards.l;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
@@ -56,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
 public class LazavDimirMastermind extends CardImpl {
 
     public LazavDimirMastermind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Shapeshifter");
 
@@ -85,7 +84,6 @@ public class LazavDimirMastermind extends CardImpl {
 
 class LazavDimirEffect extends ContinuousEffectImpl {
 
-    protected UUID IdOfCopiedCard;
     protected Card cardToCopy;
 
     public LazavDimirEffect() {
@@ -96,7 +94,6 @@ class LazavDimirEffect extends ContinuousEffectImpl {
     public LazavDimirEffect(final LazavDimirEffect effect) {
         super(effect);
         this.cardToCopy = effect.cardToCopy;
-        this.IdOfCopiedCard = effect.IdOfCopiedCard;
     }
 
     @Override
@@ -105,17 +102,23 @@ class LazavDimirEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(((FixedTarget)getTargetPointer()).getTarget());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (card == null || permanent == null) {
-            discard();
-            return false;
-        }
-        if (IdOfCopiedCard == null || !IdOfCopiedCard.equals(card.getId())) {
-            IdOfCopiedCard = card.getId();
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        Card card = game.getCard(((FixedTarget) getTargetPointer()).getTarget());
+        if (card != null) {
             cardToCopy = card.copy();
             cardToCopy.assignNewId();
+        } else {
+            discard();
+        }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            discard();
+            return true;
         }
         permanent.getPower().setValue(cardToCopy.getPower().getValue());
         permanent.getToughness().setValue(cardToCopy.getToughness().getValue());
