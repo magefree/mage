@@ -30,7 +30,6 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.SearchEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -63,9 +62,7 @@ public class TrophyMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Trophy Mage enters the battlefield, you may search your library for an artifact card with converted mana cost 3, reveal it, put it into your hand, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-        SearchEffect effect = new SearchLibraryPutInHandEffect(target, true, true);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true, true), true));
     }
 
     public TrophyMage(final TrophyMage card) {

@@ -47,6 +47,12 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class WeldfastEngineer extends CardImpl {
 
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("artifact creature you control");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
+
     public WeldfastEngineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
@@ -57,8 +63,6 @@ public class WeldfastEngineer extends CardImpl {
 
         // At the beginning of combat on your turn, target artifact creature you control gets +2/+0 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), TargetController.YOU, false);
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("artifact creature you control");
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }

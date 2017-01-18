@@ -28,23 +28,13 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.search.SearchLibraryWithLessCMCPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInLibrary;
+import mage.filter.common.FilterArtifactCard;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -53,19 +43,14 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Reshape extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Reshape(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
 
         // As an additional cost to cast Reshape, sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent("an artifact"), false)));
+        
         // Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
-        this.getSpellAbility().addEffect(new ReshapeSearchEffect());
+        this.getSpellAbility().addEffect(new SearchLibraryWithLessCMCPutInPlayEffect(new FilterArtifactCard()));
     }
 
     public Reshape(final Reshape card) {
@@ -75,48 +60,5 @@ public class Reshape extends CardImpl {
     @Override
     public Reshape copy() {
         return new Reshape(this);
-    }
-}
-
-class ReshapeSearchEffect extends OneShotEffect {
-
-    ReshapeSearchEffect() {
-        super(Outcome.PutCardInPlay);
-        staticText = "Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library";
-    }
-
-    ReshapeSearchEffect(final ReshapeSearchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
-        int xValue = source.getManaCostsToPay().getX() + 1;
-        FilterCard filter = new FilterCard("artifact card with converted mana cost " + xValue + " or less");
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xValue));
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (controller.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
-                Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
-        }
-        controller.shuffleLibrary(source, game);
-        return false;
-    }
-
-    @Override
-    public ReshapeSearchEffect copy() {
-        return new ReshapeSearchEffect(this);
     }
 }

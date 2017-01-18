@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.SwordsToPlowsharesEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,13 +42,10 @@ import java.util.UUID;
 public class SwordsToPlowshares extends CardImpl {
 
     public SwordsToPlowshares(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
-
-        // Exile target creature.
+        // Exile target creature. Its controller gains life equal to its power.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
-        // Its controller gains life equal to its power.
         this.getSpellAbility().addEffect(new SwordsToPlowsharesEffect());
 
     }

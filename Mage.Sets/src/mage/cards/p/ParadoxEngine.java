@@ -28,9 +28,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,10 +47,7 @@ public class ParadoxEngine extends CardImpl {
         this.supertype.add("Legendary");
 
         // Whenever you cast a spell, untap all nonland permanents you control.
-        Effect effect = new UntapAllControllerEffect(new FilterNonlandPermanent());
-        Ability ability = new SpellCastControllerTriggeredAbility(effect, false);
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapAllControllerEffect(new FilterNonlandPermanent()), false));
     }
 
     public ParadoxEngine(final ParadoxEngine card) {

@@ -29,16 +29,13 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -55,7 +52,9 @@ public class SalvageScuttler extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Salvage Scuttler attacks, return an artifact you control to its owner's hand.
-        this.addAbility(new SalvageScuttlerAbility());
+        Ability ability = new AttacksTriggeredAbility(new ReturnToHandTargetEffect(), false);
+        ability.addTarget(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact you control")));
+        this.addAbility(ability);
     }
 
     public SalvageScuttler(final SalvageScuttler card) {
@@ -65,41 +64,5 @@ public class SalvageScuttler extends CardImpl {
     @Override
     public SalvageScuttler copy() {
         return new SalvageScuttler(this);
-    }
-}
-
-class SalvageScuttlerAbility extends TriggeredAbilityImpl {
-
-    public SalvageScuttlerAbility() {
-        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
-    }
-
-    public SalvageScuttlerAbility(final SalvageScuttlerAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent("artifact you control"), false);
-            this.addTarget(target);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} attacks, return an artifact you control to its owner's hand.";
-    }
-
-    @Override
-    public SalvageScuttlerAbility copy() {
-        return new SalvageScuttlerAbility(this);
     }
 }

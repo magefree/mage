@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -38,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GremlinToken;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -75,17 +74,5 @@ public class ReleaseTheGremlins extends CardImpl {
     @Override
     public ReleaseTheGremlins copy() {
         return new ReleaseTheGremlins(this);
-    }
-}
-
-class GremlinToken extends Token {
-
-    public GremlinToken() {
-        super("Gremlin", "2/2 red Gremlin creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Gremlin");
-        color.setRed(true);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }
