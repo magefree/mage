@@ -313,6 +313,10 @@ public class GameController implements GameCallback {
             logger.fatal("- userId: " + userId);
             return;
         }
+		if(!user.isPresent(){
+			logger.fatal("User not found : "+userId);
+			return;
+		}
         Player player = game.getPlayer(playerId);
         if (player == null) {
             logger.fatal("Player not found - playerId: " + playerId);

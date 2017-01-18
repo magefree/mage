@@ -373,7 +373,7 @@ public class Session {
         } catch (HandleCallbackException ex) {
             ex.printStackTrace();
             UserManager.getInstance().getUser(userId).ifPresent(user-> {
-                logger.warn("SESSION CALLBACK EXCEPTION - " + (user != null ? user.getName() : "") + " userId " + userId);
+                logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId);
                 logger.warn(" - method: " + call.getMethod());
                 logger.warn(" - cause: " + getBasicCause(ex).toString());
                 logger.trace("Stack trace:", ex);
