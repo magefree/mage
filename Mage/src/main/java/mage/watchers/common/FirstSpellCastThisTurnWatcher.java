@@ -12,7 +12,8 @@ import mage.watchers.Watcher;
 
 /**
  * @author jeffwadsworth
-**/
+*
+ */
 public class FirstSpellCastThisTurnWatcher extends Watcher {
 
     private final Map<UUID, UUID> playerFirstSpellCast = new HashMap<>();
@@ -24,6 +25,8 @@ public class FirstSpellCastThisTurnWatcher extends Watcher {
 
     public FirstSpellCastThisTurnWatcher(final FirstSpellCastThisTurnWatcher watcher) {
         super(watcher);
+        playerFirstSpellCast.putAll(watcher.playerFirstSpellCast);
+        playerFirstCastSpell.putAll(watcher.playerFirstSpellCast);
     }
 
     @Override
