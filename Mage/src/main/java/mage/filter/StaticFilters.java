@@ -9,6 +9,7 @@ import mage.constants.CardType;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactCreaturePermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterCreatureSpell;
@@ -25,6 +26,7 @@ public class StaticFilters {
     public static final FilterCreaturePermanent FILTER_ARTIFACT_CREATURE_PERMANENT = new FilterArtifactCreaturePermanent();
     public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_OR_CREATURE = new FilterPermanent("artifact or creature");
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("artifact or creature you control");
+    public static final FilterControlledPermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT = new FilterControlledArtifactPermanent();
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT = new FilterArtifactCard();
     public static final FilterNonlandCard FILTER_CARD_NON_LAND = new FilterNonlandCard();
