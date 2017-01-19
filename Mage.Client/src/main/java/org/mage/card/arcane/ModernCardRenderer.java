@@ -311,7 +311,7 @@ public class ModernCardRenderer extends CardRenderer {
         Rectangle2D rect;
         if (useInventionFrame()) {
             rect = new Rectangle2D.Float(0, 0, 1, 1);
-        } else if (cardView.getFrameStyle().isFullArt() || cardView.isToken()) {
+        } else if (cardView.getFrameStyle().isFullArt() || (cardView.isToken())) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
         } else {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .42f);
@@ -320,7 +320,7 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     private float getTypeLineYFrac() {
-        if (cardView.isToken()) {
+        if (cardView.isToken() && cardView.getCardNumber() == null) {
             return TYPE_LINE_Y_FRAC_TOKEN;
         } else if (cardView.getFrameStyle().isFullArt()) {
             return TYPE_LINE_Y_FRAC_FULL_ART;
