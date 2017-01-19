@@ -24,9 +24,9 @@ import org.mage.plugins.card.dl.beans.collections.ListenableCollections.SetListe
 public class PropertyChangeSetListener<E> implements SetListener<E> {
     private static final long     serialVersionUID = 625853864429729560L;
 
-    private PropertyChangeSupport s;
-    private Set<E>                set;
-    private String                propertyName;
+    private final PropertyChangeSupport s;
+    private final Set<E>                set;
+    private final String                propertyName;
 
     public PropertyChangeSetListener(PropertyChangeSupport s, Set<E> set, String propertyName) {
         this.s = s;
@@ -45,7 +45,7 @@ public class PropertyChangeSetListener<E> implements SetListener<E> {
     public static abstract class SetEvent<E> extends PropertyChangeEvent {
         private static final long serialVersionUID = -651568020675693544L;
 
-        private Set<E>            set;
+        private final Set<E>            set;
 
         public SetEvent(Object source, String propertyName, Set<E> set) {
             super(source, propertyName, null, null);
@@ -67,7 +67,7 @@ public class PropertyChangeSetListener<E> implements SetListener<E> {
     public static class SetAddEvent<E> extends SetEvent<E> {
         private static final long serialVersionUID = 9041766866796759871L;
 
-        private E                 newElement;
+        private final E                 newElement;
 
         public SetAddEvent(Object source, String propertyName, Set<E> set, E newElement) {
             super(source, propertyName, set);
@@ -82,7 +82,7 @@ public class PropertyChangeSetListener<E> implements SetListener<E> {
     public static class SetRemoveEvent<E> extends SetEvent<E> {
         private static final long serialVersionUID = -1315342339926392385L;
 
-        private E                 oldElement;
+        private final E                 oldElement;
 
         public SetRemoveEvent(Object source, String propertyName, Set<E> set, E oldElement) {
             super(source, propertyName, set);

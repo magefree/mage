@@ -66,8 +66,8 @@ public class TournamentFactory {
         Tournament tournament;
         Constructor<Tournament> con;
         try {
-            con = tournaments.get(tournamentType).getConstructor(new Class[]{TournamentOptions.class});
-            tournament = con.newInstance(new Object[] {options});
+            con = tournaments.get(tournamentType).getConstructor(TournamentOptions.class);
+            tournament = con.newInstance(options);
             // transfer set information, create short info string for included sets
             tournament.setTournamentType(tournamentTypes.get(tournamentType));
             if (tournament.getTournamentType().isLimited()) {

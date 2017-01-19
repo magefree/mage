@@ -90,21 +90,13 @@ public class PickNumberDialog extends MageDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         lblMessage = new javax.swing.JTextPane();
 
-        spnAmount.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), null, null, Integer.valueOf(1)));
+        spnAmount.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
+        btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 

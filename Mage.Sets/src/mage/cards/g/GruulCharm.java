@@ -29,7 +29,6 @@ package mage.cards.g;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
 import mage.constants.*;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;

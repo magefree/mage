@@ -2,7 +2,6 @@ package mage.client.cards;
 
 import mage.view.CardView;
 
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 

@@ -24,12 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.game.events;
 
-import java.util.ArrayList;
 import java.util.UUID;
+import mage.constants.EnterEventType;
+import static mage.constants.EnterEventType.SELF;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 
@@ -43,17 +43,24 @@ public class EntersTheBattlefieldEvent extends GameEvent {
     private Permanent target;
 
     public EntersTheBattlefieldEvent(Permanent target, UUID sourceId, UUID playerId, Zone fromZone) {
-        super(EventType.ENTERS_THE_BATTLEFIELD, target.getId(), sourceId, playerId);
-        this.fromZone = fromZone;
-        this.target = target;
+        this(target, sourceId, playerId, fromZone, EnterEventType.OTHER);
     }
 
-    public EntersTheBattlefieldEvent(Permanent target, UUID sourceId, UUID playerId, Zone fromZone, ArrayList<UUID> appliedEffects) {
+    public EntersTheBattlefieldEvent(Permanent target, UUID sourceId, UUID playerId, Zone fromZone, EnterEventType enterType) {
         super(EventType.ENTERS_THE_BATTLEFIELD, target.getId(), sourceId, playerId);
-        this.fromZone = fromZone;
-        if (appliedEffects != null) {
-            this.appliedEffects = appliedEffects;
+        switch (enterType) {
+            case SELF:
+                type = EventType.ENTERS_THE_BATTLEFIELD_SELF;
+                break;
+            case CONTROL:
+                type = EventType.ENTERS_THE_BATTLEFIELD_CONTROL;
+                break;
+            case COPY:
+                type = EventType.ENTERS_THE_BATTLEFIELD_COPY;
+                break;
         }
+        this.fromZone = fromZone;
+        this.target = target;
     }
 
     public Zone getFromZone() {

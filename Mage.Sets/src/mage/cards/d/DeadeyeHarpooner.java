@@ -32,10 +32,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -63,11 +64,12 @@ public class DeadeyeHarpooner extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Revolt</i> &mdash; When Deadeye Harpooner enters the battlefield, if a permanent you controlled left the battlefield this turn, destroy target tapped creature an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new DestroyTargetEffect(), RevoltCondition.getInstance()),
-                false,
-                "<i>Revolt</i> &mdash; "
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(
+                new DestroyTargetEffect(), false), RevoltCondition.getInstance(),
+                "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
+                + " the battlefield this turn, destroy target tapped creature an opponent controls."
         );
+        ability.setAbilityWord(AbilityWord.REVOLT);
         ability.addTarget(new TargetOpponentsCreaturePermanent(filter));
         ability.addWatcher(new RevoltWatcher());
         this.addAbility(ability);

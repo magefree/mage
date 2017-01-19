@@ -40,7 +40,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;

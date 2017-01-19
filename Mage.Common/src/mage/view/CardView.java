@@ -244,7 +244,7 @@ public class CardView extends SimpleCardView {
             Zone cardZone = game.getState().getZone(card.getId());
             if (card.isFaceDown(game)) {
                 showFaceUp = false;
-                if (!Zone.BATTLEFIELD.equals(cardZone)) {
+                if (Zone.BATTLEFIELD != cardZone) {
                     if (showFaceDownCard) {
                         showFaceUp = true;
                     }
@@ -379,8 +379,9 @@ public class CardView extends SimpleCardView {
             this.isToken = false;
         }
 
-        if (card.getSecondCardFace() != null) {
-            this.secondCardFace = new CardView(card.getSecondCardFace());
+        Card secondSideCard = card.getSecondCardFace();
+        if (secondSideCard != null) {
+            this.secondCardFace = new CardView(secondSideCard);
             this.alternateName = secondCardFace.getName();
             this.originalName = card.getName();
         }
@@ -458,7 +459,7 @@ public class CardView extends SimpleCardView {
             this.rarity = Rarity.NA;
             this.rules = new ArrayList<>();
             this.rules.add(stackAbility.getRule());
-            if (stackAbility.getZone().equals(Zone.COMMAND)) {
+            if (stackAbility.getZone() == Zone.COMMAND) {
                 this.expansionSetCode = stackAbility.getExpansionSetCode();
             }
         }

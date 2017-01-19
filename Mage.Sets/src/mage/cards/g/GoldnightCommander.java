@@ -28,15 +28,15 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class GoldnightCommander extends CardImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 
     static {
         filter.add(new AnotherPredicate());

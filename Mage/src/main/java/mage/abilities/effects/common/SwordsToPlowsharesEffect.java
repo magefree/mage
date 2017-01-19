@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -42,7 +41,7 @@ public class SwordsToPlowsharesEffect extends OneShotEffect {
 
     public SwordsToPlowsharesEffect() {
         super(Outcome.GainLife);
-        staticText = "Its controller gains life equal to its power";
+        staticText = "Exile target creature. Its controller gains life equal to its power";
     }
 
     public SwordsToPlowsharesEffect(final SwordsToPlowsharesEffect effect) {
@@ -60,7 +59,9 @@ public class SwordsToPlowsharesEffect extends OneShotEffect {
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.gainLife(permanent.getPower().getValue(), game);
+                int creaturePower = permanent.getPower().getValue();
+                permanent.moveToExile(null, null, source.getSourceId(), game);
+                player.gainLife(creaturePower, game);
             }
             return true;
         }

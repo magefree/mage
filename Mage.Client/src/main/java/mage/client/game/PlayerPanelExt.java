@@ -38,8 +38,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -58,7 +56,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import mage.MageException;
+
 import mage.cards.decks.importer.DckDeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -68,7 +66,6 @@ import mage.client.components.MageRoundPane;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.CardsViewUtil;
-import mage.client.util.Command;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
@@ -141,22 +138,16 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (priorityTime > 0) {
             long delay = 1000L;
 
-            timer = new PriorityTimer(priorityTime, delay, new mage.interfaces.Action() {
-                @Override
-                public void execute() throws MageException {
-                    // do nothing
-                }
+            timer = new PriorityTimer(priorityTime, delay, () -> {
+                // do nothing
             });
             final PriorityTimer pt = timer;
-            timer.setTaskOnTick(new mage.interfaces.Action() {
-                @Override
-                public void execute() throws MageException {
-                    int priorityTimeValue = pt.getCount();
-                    String text = getPriorityTimeLeftString(priorityTimeValue);
-                    PlayerPanelExt.this.avatar.setTopText(text);
-                    PlayerPanelExt.this.timerLabel.setText(text);
-                    PlayerPanelExt.this.avatar.repaint();
-                }
+            timer.setTaskOnTick(() -> {
+                int priorityTimeValue = pt.getCount();
+                String text = getPriorityTimeLeftString(priorityTimeValue);
+                PlayerPanelExt.this.avatar.setTopText(text);
+                PlayerPanelExt.this.timerLabel.setText(text);
+                PlayerPanelExt.this.avatar.repaint();
             });
             timer.init(gameId);
         }
@@ -414,12 +405,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             avatar.setTextAlwaysVisible(true);
         }
         avatar.setTextOffsetButtonY(10);
-        avatar.setObserver(new Command() {
-            @Override
-            public void execute() {
-                SessionHandler.sendPlayerUUID(gameId, playerId);
-            }
-        });
+        avatar.setObserver(() -> SessionHandler.sendPlayerUUID(gameId, playerId));
 
         // timer area /small layout)
         timerLabel.setToolTipText("Time left");
@@ -462,12 +448,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         library = new HoverButton(null, resizedLibrary, resizedLibrary, resizedLibrary, r);
         library.setToolTipText("Library");
         library.setOpaque(false);
-        library.setObserver(new Command() {
-            @Override
-            public void execute() {
-                btnLibraryActionPerformed(null);
-            }
-        });
+        library.setObserver(() -> btnLibraryActionPerformed(null));
 
         // Grave count and open graveyard button
         r = new Rectangle(21, 21);
@@ -478,12 +459,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         grave = new HoverButton(null, resizedGrave, resizedGrave, resizedGrave, r);
         grave.setToolTipText("Graveyard");
         grave.setOpaque(false);
-        grave.setObserver(new Command() {
-            @Override
-            public void execute() {
-                btnGraveActionPerformed(null);
-            }
-        });
+        grave.setObserver(() -> btnGraveActionPerformed(null));
 
         exileLabel = new JLabel();
         exileLabel.setToolTipText("Exile");
@@ -493,12 +469,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         exileZone = new HoverButton(null, resized, resized, resized, r);
         exileZone.setToolTipText("Exile");
         exileZone.setOpaque(false);
-        exileZone.setObserver(new Command() {
-            @Override
-            public void execute() {
-                btnExileZoneActionPerformed(null);
-            }
-        });
+        exileZone.setObserver(() -> btnExileZoneActionPerformed(null));
         exileZone.setBounds(25, 0, 21, 21);
 
         // Cheat button
@@ -508,12 +479,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         cheat = new JButton();
         cheat.setIcon(new ImageIcon(resized));
         cheat.setToolTipText("Cheat button");
-        cheat.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btnCheatActionPerformed(e);
-            }
-        });
+        cheat.addActionListener(e -> btnCheatActionPerformed(e));
 
         zonesPanel = new JPanel();
         zonesPanel.setPreferredSize(new Dimension(100, 60));
@@ -527,12 +493,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         commandZone = new HoverButton(null, resized, resized, resized, r);
         commandZone.setToolTipText("Command Zone (Commander and Emblems)");
         commandZone.setOpaque(false);
-        commandZone.setObserver(new Command() {
-            @Override
-            public void execute() {
-                btnCommandZoneActionPerformed(null);
-            }
-        });
+        commandZone.setObserver(() -> btnCommandZoneActionPerformed(null));
         commandZone.setBounds(5, 0, 21, 21);
         zonesPanel.add(commandZone);
 
@@ -569,12 +530,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         btnPlayer.setText("Player");
         btnPlayer.setVisible(false);
         btnPlayer.setToolTipText("Player");
-        btnPlayer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SessionHandler.sendPlayerUUID(gameId, playerId);
-            }
-        });
+        btnPlayer.addActionListener(e -> SessionHandler.sendPlayerUUID(gameId, playerId));
 
         // Add mana symbols
         JLabel manaCountLabelW = new JLabel();
@@ -587,12 +543,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         btnWhiteMana.setToolTipText("White mana");
         btnWhiteMana.setOpaque(false);
-        btnWhiteMana.setObserver(new Command() {
-            @Override
-            public void execute() {
-                btnManaActionPerformed(ManaType.WHITE);
-            }
-        });
+        btnWhiteMana.setObserver(() -> btnManaActionPerformed(ManaType.WHITE));
 
         JLabel manaCountLabelU = new JLabel();
         manaCountLabelU.setToolTipText("Blue mana");
@@ -603,12 +554,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         HoverButton btnBlueMana = new HoverButton(null, imageManaU, imageManaU, imageManaU, r);
         btnBlueMana.setToolTipText("Blue mana");
         btnBlueMana.setOpaque(false);
-        btnBlueMana.setObserver(new Command() {
-            @Override
-            public void execute() {
-                btnManaActionPerformed(ManaType.BLUE);
-            }
-        });
+        btnBlueMana.setObserver(() -> btnManaActionPerformed(ManaType.BLUE));
 
         JLabel manaCountLabelB = new JLabel();
         manaCountLabelB.setToolTipText("Black mana");
@@ -619,12 +565,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         HoverButton btnBlackMana = new HoverButton(null, imageManaB, imageManaB, imageManaB, r);
         btnBlackMana.setToolTipText("Black mana");
         btnBlackMana.setOpaque(false);
-        btnBlackMana.setObserver(new Command() {
-            @Override
-            public void execute() {
-                btnManaActionPerformed(ManaType.BLACK);
-            }
-        });
+        btnBlackMana.setObserver(() -> btnManaActionPerformed(ManaType.BLACK));
 
         JLabel manaCountLabelR = new JLabel();
         manaCountLabelR.setToolTipText("Red mana");
@@ -635,12 +576,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         HoverButton btnRedMana = new HoverButton(null, imageManaR, imageManaR, imageManaR, r);
         btnRedMana.setToolTipText("Red mana");
         btnRedMana.setOpaque(false);
-        btnRedMana.setObserver(new Command() {
-            @Override
-            public void execute() {
-                btnManaActionPerformed(ManaType.RED);
-            }
-        });
+        btnRedMana.setObserver(() -> btnManaActionPerformed(ManaType.RED));
 
         JLabel manaCountLabelG = new JLabel();
         manaCountLabelG.setToolTipText("Green mana");
@@ -651,12 +587,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         HoverButton btnGreenMana = new HoverButton(null, imageManaG, imageManaG, imageManaG, r);
         btnGreenMana.setToolTipText("Green mana");
         btnGreenMana.setOpaque(false);
-        btnGreenMana.setObserver(new Command() {
-            @Override
-            public void execute() {
-                btnManaActionPerformed(ManaType.GREEN);
-            }
-        });
+        btnGreenMana.setObserver(() -> btnManaActionPerformed(ManaType.GREEN));
 
         JLabel manaCountLabelX = new JLabel();
         manaCountLabelX.setToolTipText("Colorless mana");
@@ -667,12 +598,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         HoverButton btnColorlessMana = new HoverButton(null, imageManaX, imageManaX, imageManaX, r);
         btnColorlessMana.setToolTipText("Colorless mana");
         btnColorlessMana.setOpaque(false);
-        btnColorlessMana.setObserver(new Command() {
-            @Override
-            public void execute() {
-                btnManaActionPerformed(ManaType.COLORLESS);
-            }
-        });
+        btnColorlessMana.setObserver(() -> btnManaActionPerformed(ManaType.COLORLESS));
 
         GroupLayout gl_panelBackground = new GroupLayout(panelBackground);
         gl_panelBackground.setHorizontalGroup(

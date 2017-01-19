@@ -62,6 +62,7 @@ public class AsylumVisitor extends CardImpl {
                 "At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.");
         Effect effect = new LoseLifeSourceControllerEffect(1);
         effect.setText("and you lose 1 life");
+        ability.addEffect(effect);
         this.addAbility(ability);
 
         // Madness {1}{B}

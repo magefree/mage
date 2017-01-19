@@ -92,7 +92,7 @@ public class Main {
     private static final File pluginFolder = new File("plugins");
     private static final File extensionFolder = new File("extensions");
 
-    public static PluginClassLoader classLoader = new PluginClassLoader();
+    public static final PluginClassLoader classLoader = new PluginClassLoader();
     public static TransporterServer server;
     protected static boolean testMode;
     protected static boolean fastDbMode;
@@ -437,12 +437,7 @@ public class Main {
             directory.mkdirs();
         }
         File[] files = directory.listFiles(
-                new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".game");
-            }
-        }
+                (dir, name) -> name.endsWith(".game")
         );
         for (File file : files) {
             file.delete();

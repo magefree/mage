@@ -46,19 +46,16 @@ import java.util.UUID;
  */
 public class OathOfAjani extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent creatureFilter = new FilterControlledCreaturePermanent();
-    private static final FilterPlaneswalkerCard planeswalkerFilter = new FilterPlaneswalkerCard("Planeswalker spells");
-
     public OathOfAjani(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{W}");
 
         this.supertype.add("Legendary");
 
         // When Oath of Ajani enters the battlefield, put a +1/+1 counter on each creature you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), creatureFilter)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent())));
 
         // Planeswalker spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(planeswalkerFilter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterPlaneswalkerCard("Planeswalker spells"), 1)));
     }
 
     public OathOfAjani(final OathOfAjani card) {

@@ -34,7 +34,6 @@
 package mage.client.dialog;
 
 import java.awt.Cursor;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -78,15 +77,10 @@ public class ConnectDialog extends MageDialog {
     private static final Logger logger = Logger.getLogger(ConnectDialog.class);
     private Connection connection;
     private ConnectTask task;
-    private RegisterUserDialog registerUserDialog;
-    private ResetPasswordDialog resetPasswordDialog;
+    private final RegisterUserDialog registerUserDialog;
+    private final ResetPasswordDialog resetPasswordDialog;
 
-    private final ActionListener connectAction = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent evt) {
-            btnConnectActionPerformed(evt);
-        }
-    };
+    private final ActionListener connectAction = evt -> btnConnectActionPerformed(evt);
 
     /**
      * Creates new form ConnectDialog
@@ -179,11 +173,7 @@ public class ConnectDialog extends MageDialog {
         btnFind.setText("Find...");
         btnFind.setToolTipText("Shows the list of public servers");
         btnFind.setName("findServerBtn"); // NOI18N
-        btnFind.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                findPublicServerActionPerformed(evt);
-            }
-        });
+        btnFind.addActionListener(evt -> findPublicServerActionPerformed(evt));
 
         lblPort.setLabelFor(txtPort);
         lblPort.setText("Port:");
@@ -207,56 +197,28 @@ public class ConnectDialog extends MageDialog {
 
         chkAutoConnect.setText("Automatically connect to this server next time");
         chkAutoConnect.setToolTipText("<HTML>If active this connect dialog will not be shown if you choose to connect.<br>\nInstead XMage tries to connect to the last server you were connected to.");
-        chkAutoConnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkAutoConnectActionPerformed(evt);
-            }
-        });
+        chkAutoConnect.addActionListener(evt -> chkAutoConnectActionPerformed(evt));
 
         chkForceUpdateDB.setText("Force update of card database");
         chkForceUpdateDB.setToolTipText("<HTML>If active the comparison of the server cards database to the client database will be enforced.<br>If not, the comparison will only done if the database version of the client is lower than the version of the server.");
-        chkForceUpdateDB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkForceUpdateDBActionPerformed(evt);
-            }
-        });
+        chkForceUpdateDB.addActionListener(evt -> chkForceUpdateDBActionPerformed(evt));
 
         jProxySettingsButton.setText("Proxy Settings...");
-        jProxySettingsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jProxySettingsButtonActionPerformed(evt);
-            }
-        });
+        jProxySettingsButton.addActionListener(evt -> jProxySettingsButtonActionPerformed(evt));
 
         btnConnect.setText("Connect");
-        btnConnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConnectActionPerformed(evt);
-            }
-        });
+        btnConnect.addActionListener(evt -> btnConnectActionPerformed(evt));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         btnRegister.setText("Register new user");
         btnRegister.setToolTipText("<html>XMage now supports user authentication.<br>Register your account before you log in.<html>");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
+        btnRegister.addActionListener(evt -> btnRegisterActionPerformed(evt));
 
         btnForgotPassword.setText("Forgot password");
         btnForgotPassword.setToolTipText("<html>You can reset your password if you have registered<br>your account with an email address.</html>");
-        btnForgotPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnForgotPasswordActionPerformed(evt);
-            }
-        });
+        btnForgotPassword.addActionListener(evt -> btnForgotPasswordActionPerformed(evt));
 
         btnFind1.setText("X");
         btnFind1.setToolTipText("Connect to xmage.de");
@@ -268,11 +230,7 @@ public class ConnectDialog extends MageDialog {
         btnFind1.setMinimumSize(new java.awt.Dimension(42, 23));
         btnFind1.setName("connectXmageDeBtn"); // NOI18N
         btnFind1.setPreferredSize(new java.awt.Dimension(23, 23));
-        btnFind1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connectXmageDe(evt);
-            }
-        });
+        btnFind1.addActionListener(evt -> connectXmageDe(evt));
 
         btnFind2.setText("L");
         btnFind2.setToolTipText("Connect to localhost");
@@ -282,11 +240,7 @@ public class ConnectDialog extends MageDialog {
         btnFind2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnFind2.setName("connectLocalhostBtn"); // NOI18N
         btnFind2.setPreferredSize(new java.awt.Dimension(23, 23));
-        btnFind2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connectLocalhost(evt);
-            }
-        });
+        btnFind2.addActionListener(evt -> connectLocalhost(evt));
 
         btnFind3.setText("W");
         btnFind3.setToolTipText("Connect to woogerworks");
@@ -296,11 +250,7 @@ public class ConnectDialog extends MageDialog {
         btnFind3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnFind3.setName("connectWoogerworksBtn"); // NOI18N
         btnFind3.setPreferredSize(new java.awt.Dimension(23, 23));
-        btnFind3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connectWoogerworks(evt);
-            }
-        });
+        btnFind3.addActionListener(evt -> connectWoogerworks(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

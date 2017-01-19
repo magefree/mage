@@ -36,11 +36,10 @@ package mage.client.unusedFiles;
 
 import java.awt.Color;
 import java.util.UUID;
-import mage.client.MageFrame;
+
 import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.dialog.ShowCardsDialog;
-import mage.remote.Session;
 import mage.view.PlayerView;
 
 /**
@@ -108,11 +107,7 @@ public class PlayerPanel extends javax.swing.JPanel {
 
         btnPlayerName.setText("Player Name"); // NOI18N
         btnPlayerName.setName("btnPlayerName"); // NOI18N
-        btnPlayerName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlayerNameActionPerformed(evt);
-            }
-        });
+        btnPlayerName.addActionListener(evt -> btnPlayerNameActionPerformed(evt));
 
         lblLife.setLabelFor(txtLife);
         lblLife.setText("Life:"); // NOI18N
@@ -140,11 +135,7 @@ public class PlayerPanel extends javax.swing.JPanel {
         lblGrave.setName("lblGrave"); // NOI18N
 
         btnGrave.setName("btnGrave"); // NOI18N
-        btnGrave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGraveActionPerformed(evt);
-            }
-        });
+        btnGrave.addActionListener(evt -> btnGraveActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -593,6 +593,54 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             //if (!target.isRequired())
             return false;
         }
+        if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
+            List<Permanent> targets;
+            TargetPermanentOrPlayer t = ((TargetPermanentOrPlayer) target);
+            if (outcome.isGood()) {
+                targets = threats(abilityControllerId, source.getSourceId(), ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());
+            } else {
+                targets = threats(randomOpponentId, source.getSourceId(), ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());
+            }
+
+            if (targets.isEmpty()) {
+                if (outcome.isGood()) {
+                    if (target.canTarget(getId(), abilityControllerId, source, game)) {
+                        target.addTarget(abilityControllerId, source, game);
+                        return true;
+                    }
+                } else if (target.canTarget(getId(), randomOpponentId, source, game)) {
+                    target.addTarget(randomOpponentId, source, game);
+                    return true;
+                }
+            }
+
+            if (targets.isEmpty() && target.isRequired(source)) {
+                targets = game.getBattlefield().getActivePermanents(((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), playerId, game);
+            }
+            for (Permanent permanent : targets) {
+                List<UUID> alreadyTargetted = target.getTargets();
+                if (t.canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                        target.addTarget(permanent.getId(), source, game);
+                        return true;
+                    }
+                }
+            }
+
+            if (outcome.isGood()) {
+                if (target.canTarget(getId(), abilityControllerId, source, game)) {
+                    target.addTarget(abilityControllerId, source, game);
+                    return true;
+                }
+            } else if (target.canTarget(getId(), randomOpponentId, source, game)) {
+                target.addTarget(randomOpponentId, source, game);
+                return true;
+            }
+
+            //if (!target.isRequired())
+            return false;
+        }
+
         if (target.getOriginalTarget() instanceof TargetCardInGraveyard) {
             List<Card> cards = new ArrayList<>();
             for (Player player : game.getPlayers().values()) {

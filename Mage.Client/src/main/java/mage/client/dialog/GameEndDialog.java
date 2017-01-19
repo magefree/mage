@@ -61,7 +61,7 @@ import mage.view.PlayerView;
  */
 public class GameEndDialog extends MageDialog {
 
-    private final DateFormat df = DateFormat.getDateTimeInstance();;
+    private final DateFormat df = DateFormat.getDateTimeInstance();
 
 
     /** Creates new form GameEndDialog
@@ -290,11 +290,7 @@ public class GameEndDialog extends MageDialog {
         tabPane.addTab("Statistics", tabStatistics);
 
         btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
+        btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

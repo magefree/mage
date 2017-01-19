@@ -394,7 +394,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     class ColumnHeaderToolTips extends MouseMotionAdapter {
 
         int curCol;
-        Map<Integer, String> tips = new HashMap<>();
+        final Map<Integer, String> tips = new HashMap<>();
 
         public void setToolTip(Integer mCol, String tooltip) {
             if (tooltip == null) {

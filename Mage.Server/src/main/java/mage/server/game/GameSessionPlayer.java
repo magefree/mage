@@ -282,34 +282,31 @@ public class GameSessionPlayer extends GameSessionWatcher {
             final Player player = game.getPlayer(playerId);
             if (player != null && player.isInGame()) {
                 callExecutor.execute(
-                        new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            if (game.getStartTime() == null) {
-                                // gameController is still waiting to start the game
-                                player.leave();
-                            } else {
-                                // game was already started
-                                player.quit(game);
-                            }
-
-                        } catch (Exception ex) {
-                            if (ex != null) {
-                                // It seems this can happen if two threads try to end the game at the exact same time (one wins and one ends here)
-                                logger.fatal("Game session game quit exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
-                                logger.debug("- gameId:" + game.getId() + "  playerId: " + playerId);
-                                if (ex.getCause() != null) {
-                                    logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()), ex);
+                        () -> {
+                            try {
+                                if (game.getStartTime() == null) {
+                                    // gameController is still waiting to start the game
+                                    player.leave();
                                 } else {
-                                    logger.debug("- ex: " + ex.toString(), ex);
+                                    // game was already started
+                                    player.quit(game);
                                 }
-                            } else {
-                                logger.fatal("Game session game quit exception - null  gameId:" + game.getId() + "  playerId: " + playerId);
+
+                            } catch (Exception ex) {
+                                if (ex != null) {
+                                    // It seems this can happen if two threads try to end the game at the exact same time (one wins and one ends here)
+                                    logger.fatal("Game session game quit exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
+                                    logger.debug("- gameId:" + game.getId() + "  playerId: " + playerId);
+                                    if (ex.getCause() != null) {
+                                        logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()), ex);
+                                    } else {
+                                        logger.debug("- ex: " + ex.toString(), ex);
+                                    }
+                                } else {
+                                    logger.fatal("Game session game quit exception - null  gameId:" + game.getId() + "  playerId: " + playerId);
+                                }
                             }
                         }
-                    }
-                }
                 );
 
             }

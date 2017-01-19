@@ -23,18 +23,8 @@ public class DeckImportFromClipboardDialog extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
-        buttonOK.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-        buttonCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
+        buttonOK.addActionListener(e -> onOK());
+        buttonCancel.addActionListener(e -> onCancel());
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -45,12 +35,7 @@ public class DeckImportFromClipboardDialog extends JDialog {
         });
 
         // Close on "ESC"
-        contentPane.registerKeyboardAction(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void onOK() {
@@ -94,21 +79,15 @@ public class DeckImportFromClipboardDialog extends JDialog {
                             javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
                             java.awt.Color.BLACK), contentPane.getBorder()));
 
-            contentPane.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-                @Override
-                public void propertyChange(java.beans.PropertyChangeEvent e) {
-                    if ("border".equals(e.getPropertyName())) {
-                        throw new RuntimeException();
-                    }
+            contentPane.addPropertyChangeListener(e -> {
+                if ("border".equals(e.getPropertyName())) {
+                    throw new RuntimeException();
                 }
             });
 
-            contentPane.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-                @Override
-                public void propertyChange(java.beans.PropertyChangeEvent e) {
-                    if ("border".equals(e.getPropertyName())) {
-                        throw new RuntimeException();
-                    }
+            contentPane.addPropertyChangeListener(e -> {
+                if ("border".equals(e.getPropertyName())) {
+                    throw new RuntimeException();
                 }
             });
 

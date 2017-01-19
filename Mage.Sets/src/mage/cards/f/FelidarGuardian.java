@@ -47,6 +47,12 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class FelidarGuardian extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
     public FelidarGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
@@ -60,8 +66,6 @@ public class FelidarGuardian extends CardImpl {
         effect.setApplyEffectsAfter();
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true));
-        FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
-        filter.add(new AnotherPredicate());
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
 

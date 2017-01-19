@@ -285,7 +285,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 if (card == null) {
                     throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
                 }
-                PermanentCard p = new PermanentCard(card, player.getId(), currentGame);
+                PermanentCard p = new PermanentCard(card.copy(), player.getId(), currentGame);
                 p.setTapped(tapped);
                 getBattlefieldCards(player).add(p);
             }
@@ -466,7 +466,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 + ", cardName=" + cardName, count > 0);
 
         if (scope.equals(Filter.ComparisonScope.Any)) {
-            Assert.assertTrue("There is no such creature under player's control with specified power&toughness, player=" + player.getName()
+            Assert.assertTrue("There is no such creature under player's control with specified p/t of " + power + "/" + toughness + ", player=" + player.getName()
                     + ", cardName=" + cardName + " (found similar: " + found + ", one of them: power=" + foundPower + " toughness=" + foundToughness + ")", fit > 0);
         }
     }

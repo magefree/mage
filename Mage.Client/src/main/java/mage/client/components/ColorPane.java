@@ -13,9 +13,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
-import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkEvent.EventType;
-import javax.swing.event.HyperlinkListener;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
@@ -35,8 +33,8 @@ import mage.view.CardView;
  */
 public class ColorPane extends JEditorPane {
 
-    HTMLEditorKit kit = new HTMLEditorKit();
-    HTMLDocument doc = new HTMLDocument();
+    final HTMLEditorKit kit = new HTMLEditorKit();
+    final HTMLDocument doc = new HTMLDocument();
     private int tooltipDelay;
     private int tooltipCounter;
     private boolean hyperlinkEnabled = false;
@@ -47,39 +45,28 @@ public class ColorPane extends JEditorPane {
     }
 
     private void addHyperlinkHandlers() {
-        addHyperlinkListener(new HyperlinkListener() {
-
-            @Override
-            public void hyperlinkUpdate(final HyperlinkEvent e) {
-                ThreadUtils.threadPool2.submit(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        tooltipDelay = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300);
-                        if (tooltipDelay == 0) {
-                            return;
-                        }
-                        String name = e.getDescription().substring(1);
-                        CardInfo card = CardRepository.instance.findCard(name);
-                        try {
-                            final Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
-                            if (e.getEventType() == EventType.EXITED) {
-                                setPopupVisibility(container, false);
-                            }
-                            if (e.getEventType() == EventType.ENTERED && card != null) {
-                                CardInfoPane cardInfoPane = (CardInfoPane) MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
-                                cardInfoPane.setCard(new CardView(card.getMockCard()), container);
-                                setPopupVisibility(container, true);
-                            }
-                        } catch (InterruptedException e1) {
-                            e1.printStackTrace();
-                        }
-
-                    }
-                });
+        addHyperlinkListener(e -> ThreadUtils.threadPool2.submit(() -> {
+            tooltipDelay = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300);
+            if (tooltipDelay == 0) {
+                return;
+            }
+            String name = e.getDescription().substring(1);
+            CardInfo card = CardRepository.instance.findCard(name);
+            try {
+                final Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
+                if (e.getEventType() == EventType.EXITED) {
+                    setPopupVisibility(container, false);
+                }
+                if (e.getEventType() == EventType.ENTERED && card != null) {
+                    CardInfoPane cardInfoPane = (CardInfoPane) MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
+                    cardInfoPane.setCard(new CardView(card.getMockCard()), container);
+                    setPopupVisibility(container, true);
+                }
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
             }
 
-        });
+        }));
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -96,22 +83,19 @@ public class ColorPane extends JEditorPane {
 
     private void setPopupVisibility(final Component container, final boolean show) throws InterruptedException {
         final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                tooltipCounter += show ? 1 : -1;
-                if (tooltipCounter < 0) {
-                    tooltipCounter = 0;
-                }
-                if (tooltipCounter > 0) {
-                    Point location = new Point(getLocationOnScreen().x - container.getWidth(), MouseInfo.getPointerInfo().getLocation().y);
-                    Component parentComponent = MageFrame.getInstance();
-                    location = GuiDisplayUtil.keepComponentInsideParent(location, parentComponent.getLocationOnScreen(), container, parentComponent);
-                    container.setLocation(location);
-                }
-                container.setVisible(tooltipCounter > 0);
-                c.repaint();
+        SwingUtilities.invokeLater(() -> {
+            tooltipCounter += show ? 1 : -1;
+            if (tooltipCounter < 0) {
+                tooltipCounter = 0;
             }
+            if (tooltipCounter > 0) {
+                Point location = new Point(getLocationOnScreen().x - container.getWidth(), MouseInfo.getPointerInfo().getLocation().y);
+                Component parentComponent = MageFrame.getInstance();
+                location = GuiDisplayUtil.keepComponentInsideParent(location, parentComponent.getLocationOnScreen(), container, parentComponent);
+                container.setLocation(location);
+            }
+            container.setVisible(tooltipCounter > 0);
+            c.repaint();
         });
     }
 

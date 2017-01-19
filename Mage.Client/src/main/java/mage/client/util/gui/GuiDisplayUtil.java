@@ -156,8 +156,8 @@ public class GuiDisplayUtil {
         if (card.getMageObjectType().canHaveCounters()) {
             ArrayList<CounterView> counters = new ArrayList<>();
             if (card instanceof PermanentView) {
-                if (((PermanentView) card).getCounters() != null) {
-                    counters = new ArrayList<>(((PermanentView) card).getCounters());
+                if (card.getCounters() != null) {
+                    counters = new ArrayList<>(card.getCounters());
                 }
             } else if (card.getCounters() != null) {
                 counters = new ArrayList<>(card.getCounters());

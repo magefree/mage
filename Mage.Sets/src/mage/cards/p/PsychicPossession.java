@@ -46,7 +46,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *

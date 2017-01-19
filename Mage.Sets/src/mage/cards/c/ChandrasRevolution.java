@@ -36,10 +36,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -53,13 +51,9 @@ public class ChandrasRevolution extends CardImpl {
     public ChandrasRevolution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
-        // Chandra's Revolution deals 4 damage to target creature. 
-        Target target = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(target);
-
-        // Tap target land. That land doesn't untap during its controller's next untap step.
-        Target target2 = new TargetLandPermanent(new FilterLandPermanent());
-        this.getSpellAbility().addTarget(target2);
+        // Chandra's Revolution deals 4 damage to target creature. Tap target land. That land doesn't untap during its controller's next untap step.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetLandPermanent());
         this.getSpellAbility().addEffect(new ChandrasRevolutionEffect());
     }
 

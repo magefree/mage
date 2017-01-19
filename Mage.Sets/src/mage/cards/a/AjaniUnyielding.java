@@ -29,7 +29,6 @@ package mage.cards.a;
 
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.SwordsToPlowsharesEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -38,7 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.Predicates;
@@ -49,6 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author JRHerlehy
@@ -56,12 +55,10 @@ import mage.constants.Zone;
 public class AjaniUnyielding extends CardImpl {
 
     private static final FilterPermanentCard nonlandPermanentFilter = new FilterPermanentCard("nonland permanent cards");
-    private static final FilterCreaturePermanent creatureFilter = new FilterCreaturePermanent("creature you control");
     private static final FilterPlaneswalkerPermanent planeswalkerFilter = new FilterPlaneswalkerPermanent("other planeswalker you control");
 
     static {
         nonlandPermanentFilter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        creatureFilter.add(new ControllerPredicate(TargetController.YOU));
         planeswalkerFilter.add(new ControllerPredicate(TargetController.YOU));
         planeswalkerFilter.add(new AnotherPredicate());
     }
@@ -77,12 +74,11 @@ public class AjaniUnyielding extends CardImpl {
 
         // -2: Exile target creature. Its controller gains life equal to its power.
         LoyaltyAbility ajaniAbility2 = new LoyaltyAbility(new SwordsToPlowsharesEffect(), -2);
-        ajaniAbility2.addEffect(new ExileTargetEffect());
         ajaniAbility2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ajaniAbility2);
 
         // -9: Put five +1/+1 counters on each creature you control and five loyalty counters on each other planeswalker you control.
-        LoyaltyAbility ajaniAbility3 = new LoyaltyAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(5), creatureFilter), -9);
+        LoyaltyAbility ajaniAbility3 = new LoyaltyAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(5), new FilterControlledCreaturePermanent()), -9);
         ajaniAbility3.addEffect(new AddCountersAllEffect(CounterType.LOYALTY.createInstance(5), planeswalkerFilter));
         this.addAbility(ajaniAbility3);
     }

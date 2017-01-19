@@ -50,13 +50,15 @@ public class RenegadeMap extends CardImpl {
     public RenegadeMap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-
         // Renegade Map enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {T}, Sacrifice Renegade Map: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(target, true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true),
+                new TapSourceCost()
+        );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

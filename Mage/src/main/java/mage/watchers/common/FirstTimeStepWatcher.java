@@ -64,9 +64,4 @@ public class FirstTimeStepWatcher extends Watcher {
             condition = true;
         }
     }
-
-    @Override
-    public void reset() {
-        super.reset();
-    }
 }

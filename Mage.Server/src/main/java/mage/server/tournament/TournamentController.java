@@ -88,68 +88,62 @@ public class TournamentController {
 
     private void init() {
         tournament.addTableEventListener(
-                new Listener<TableEvent>() {
-            @Override
-            public void event(TableEvent event) {
-                switch (event.getEventType()) {
-                    case CHECK_STATE_PLAYERS:
-                        checkPlayersState();
-                        break;
-                    case INFO:
-                        ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, MessageType.STATUS, null);
-                        logger.debug(tournament.getId() + " " + event.getMessage());
-                        break;
-                    case START_DRAFT:
-                        startDraft(event.getDraft());
-                        break;
-                    case CONSTRUCT:
-                        if (!isAbort()) {
-                            construct();
-                        } else {
-                            endTournament();
-                        }
-                        break;
-                    case START_MATCH:
-                        if (!isAbort()) {
-                            initTournament(); // set state
-                            startMatch(event.getPair(), event.getMatchOptions());
-                        }
-                        break;
-                    case START_MULTIPLAYER_MATCH:
-                        if (!isAbort()) {
-                            initTournament(); // set state
-                            MatchOptions matchOptions = event.getMatchOptions();
-                            if (matchOptions != null && event.getMultiplayerRound() != null) {
-                                for (TournamentPlayer player : event.getMultiplayerRound().getAllPlayers()) {
-                                    matchOptions.getPlayerTypes().add(player.getPlayerType());
-                                }
-                            }
-
-                            startMultiplayerMatch(event.getMultiplayerRound(), event.getMatchOptions());
-                        }
-                        break;
-                    case END:
-                        endTournament();
-                        break;
-                }
-            }
-        }
-        );
-        tournament.addPlayerQueryEventListener(
-                new Listener<PlayerQueryEvent>() {
-            @Override
-            public void event(PlayerQueryEvent event) {
-                try {
-                    switch (event.getQueryType()) {
+                (Listener<TableEvent>) event -> {
+                    switch (event.getEventType()) {
+                        case CHECK_STATE_PLAYERS:
+                            checkPlayersState();
+                            break;
+                        case INFO:
+                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, MessageType.STATUS, null);
+                            logger.debug(tournament.getId() + " " + event.getMessage());
+                            break;
+                        case START_DRAFT:
+                            startDraft(event.getDraft());
+                            break;
                         case CONSTRUCT:
-                            construct(event.getPlayerId(), event.getMax());
+                            if (!isAbort()) {
+                                construct();
+                            } else {
+                                endTournament();
+                            }
+                            break;
+                        case START_MATCH:
+                            if (!isAbort()) {
+                                initTournament(); // set state
+                                startMatch(event.getPair(), event.getMatchOptions());
+                            }
+                            break;
+                        case START_MULTIPLAYER_MATCH:
+                            if (!isAbort()) {
+                                initTournament(); // set state
+                                MatchOptions matchOptions = event.getMatchOptions();
+                                if (matchOptions != null && event.getMultiplayerRound() != null) {
+                                    for (TournamentPlayer player : event.getMultiplayerRound().getAllPlayers()) {
+                                        matchOptions.getPlayerTypes().add(player.getPlayerType());
+                                    }
+                                }
+
+                                startMultiplayerMatch(event.getMultiplayerRound(), event.getMatchOptions());
+                            }
+                            break;
+                        case END:
+                            endTournament();
                             break;
                     }
-                } catch (MageException ex) {
-                    logger.fatal("Player event listener error", ex);
                 }
-            }
-        }
+        );
+        tournament.addPlayerQueryEventListener(
+                (Listener<PlayerQueryEvent>) event -> {
+                    try {
+                        switch (event.getQueryType()) {
+                            case CONSTRUCT:
+                                construct(event.getPlayerId(), event.getMax());
+                                break;
+                        }
+                    } catch (MageException ex) {
+                        logger.fatal("Player event listener error", ex);
+                    }
+                }
         );
         for (TournamentPlayer player : tournament.getPlayers()) {
             if (!player.getPlayer().isHuman()) {
@@ -208,12 +202,7 @@ public class TournamentController {
     private void checkStart() {
         if (!started && allJoined()) {
             ThreadExecutor.getInstance().getCallExecutor().execute(
-                    new Runnable() {
-                @Override
-                public void run() {
-                    startTournament();
-                }
-            });
+                    () -> startTournament());
         }
     }
 
@@ -313,7 +302,7 @@ public class TournamentController {
     }
 
     private void initTournament() {
-        if (!TableManager.getInstance().getTable(tableId).getState().equals(TableState.DUELING)) {
+        if (TableManager.getInstance().getTable(tableId).getState()!=TableState.DUELING) {
             TableManager.getInstance().initTournament(tableId);
         }
     }
@@ -396,7 +385,7 @@ public class TournamentController {
                 // quit active matches of that tournament
                 TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
                 status = TourneyQuitStatus.DURING_ROUND;
-            } else if (tournamentPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
+            } else if (tournamentPlayer.getState()==TournamentPlayerState.DRAFTING) {
                 info = "during Draft phase";
                 if (!checkToReplaceDraftPlayerByAi(userId, tournamentPlayer)) {
                     this.abortDraftTournament();
@@ -410,7 +399,7 @@ public class TournamentController {
                     }
                 }
                 status = TourneyQuitStatus.DURING_DRAFTING;
-            } else if (tournamentPlayer.getState().equals(TournamentPlayerState.CONSTRUCTING)) {
+            } else if (tournamentPlayer.getState()==TournamentPlayerState.CONSTRUCTING) {
                 info = "during Construction phase";
                 status = TourneyQuitStatus.DURING_CONSTRUCTION;
             } else {
@@ -534,7 +523,7 @@ public class TournamentController {
                 }
             }
         }
-        if (activePlayers < 2 && !tableState.equals(TableState.WAITING)) {
+        if (activePlayers < 2 && tableState!=TableState.WAITING) {
             logger.debug("Tournament has less than 2 active players - tournamentId: " + tournament.getId() + " state: " + tableState.toString());
             return false;
         }

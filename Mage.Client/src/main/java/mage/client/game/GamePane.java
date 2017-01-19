@@ -50,12 +50,9 @@ public class GamePane extends MagePane {
     public GamePane() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                gamePanel.setJLayeredPane(getLayeredPane());
-                gamePanel.installComponents();
-            }
+        SwingUtilities.invokeLater(() -> {
+            gamePanel.setJLayeredPane(getLayeredPane());
+            gamePanel.installComponents();
         });
 
     }

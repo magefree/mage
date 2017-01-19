@@ -35,10 +35,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
+import mage.abilities.effects.common.enterAttribute.EnterAttributeAddChosenSubtypeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.EnterEventType;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
@@ -61,15 +63,18 @@ public class AdaptiveAutomaton extends CardImpl {
     }
 
     public AdaptiveAutomaton(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add("Construct");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // As Adaptive Automaton enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
         // Adaptive Automaton is the chosen type in addition to its other types.
+        AsEntersBattlefieldAbility ability = new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature), null, EnterEventType.SELF);
+        ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
+        this.addAbility(ability);
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AdaptiveAutomatonAddSubtypeEffect()));
         // Other creatures you control of the chosen type get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));

@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -56,7 +57,7 @@ public class FlailingDrake extends CardImpl {
         // Whenever Flailing Drake blocks or becomes blocked by a creature, that creature gets +1/+1 until end of turn.
         Effect effect = new BoostTargetEffect(+1, +1, Duration.EndOfTurn);
         effect.setText("that creature gets +1/+1 until end of turn");
-        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(effect, false);
+        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(effect, new FilterCreaturePermanent("a creature"), false, null, true);
         this.addAbility(ability);
     }
 

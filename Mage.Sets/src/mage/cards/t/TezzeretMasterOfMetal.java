@@ -118,7 +118,7 @@ class TezzeretMasterOfMetalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game);
         for (Permanent permanent : permanents) {
-            ContinuousEffect effect = new TibaltTheFiendBloodedControlEffect(source.getControllerId());
+            ContinuousEffect effect = new TezzeretMasterOfMetalControlEffect(source.getControllerId());
             effect.setTargetPointer(new FixedTarget(permanent.getId()));
             game.addEffect(effect, source);
         }

@@ -46,14 +46,15 @@ public class EldritchMoon extends ExpansionSet {
     private EldritchMoon() {
         super("Eldritch Moon", "EMN", ExpansionSet.buildDate(2016, 7, 22), SetType.EXPANSION);
         this.blockName = "Shadows over Innistrad";
+        this.parentSet = ShadowsOverInnistrad.getInstance();
         this.hasBoosters = true;
+        this.hasBasicLands = false;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = 1;
-        this.parentSet = ShadowsOverInnistrad.getInstance();
         cards.add(new SetCardInfo("Abandon Reason", 115, Rarity.UNCOMMON, mage.cards.a.AbandonReason.class));
         cards.add(new SetCardInfo("Abolisher of Bloodlines", 111, Rarity.RARE, mage.cards.a.AbolisherOfBloodlines.class));
         cards.add(new SetCardInfo("Abundant Maw", 1, Rarity.UNCOMMON, mage.cards.a.AbundantMaw.class));

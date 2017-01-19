@@ -21,8 +21,8 @@ import org.mage.plugins.card.dl.beans.collections.ListenableCollections.ListList
 public class PropertyChangeListListener<E> implements ListListener<E> {
     private static final long     serialVersionUID = 625853864429729560L;
 
-    private PropertyChangeSupport s;
-    private String                propertyName;
+    private final PropertyChangeSupport s;
+    private final String                propertyName;
 
     public PropertyChangeListListener(PropertyChangeSupport s, String propertyName) {
         this.s = s;

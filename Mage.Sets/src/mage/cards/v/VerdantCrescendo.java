@@ -28,23 +28,14 @@
 package mage.cards.v;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.search.SearchLibraryGraveyardPutInHandEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -53,14 +44,20 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class VerdantCrescendo extends CardImpl {
 
+    private final static FilterCard filter = new FilterCard("Nissa, Nature's Artisan");
+
+    static {
+        filter.add(new NamePredicate("Nissa, Nature's Artisan"));
+    }
+
     public VerdantCrescendo(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Search your library for a basic land card and put it onto the battlefield tapped.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, false));
 
         // Search your library and graveyard for a card named Nissa, Nature's Artisan, reveal it, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new VerdantCrescendoEffect());
+        this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter, true));
     }
 
     public VerdantCrescendo(final VerdantCrescendo card) {
@@ -70,47 +67,5 @@ public class VerdantCrescendo extends CardImpl {
     @Override
     public VerdantCrescendo copy() {
         return new VerdantCrescendo(this);
-    }
-}
-
-class VerdantCrescendoEffect extends OneShotEffect {
-
-    public VerdantCrescendoEffect() {
-        super(Outcome.Benefit);
-        staticText = "Search your library and graveyard for a card named Nissa, Nature's Artisan, reveal it, and put it into your hand. Then shuffle your library";
-    }
-
-    public VerdantCrescendoEffect(final VerdantCrescendoEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public VerdantCrescendoEffect copy() {
-        return new VerdantCrescendoEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            //Search your library and graveyard
-            Cards allCards = new CardsImpl();
-            allCards.addAll(controller.getLibrary().getCardList());
-            allCards.addAll(controller.getGraveyard());
-            FilterCard filter = new FilterCard("a card named Nissa, Nature's Artisan");
-            filter.add(new NamePredicate("Nissa, Nature's Artisan"));
-            TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
-            if (controller.choose(outcome, allCards, target, game)) {
-                Cards cardFound = new CardsImpl(target.getTargets());
-                if (!cardFound.isEmpty()) {
-                    controller.revealCards(sourceObject.getIdName(), cardFound, game);
-                    controller.moveCards(cardFound, Zone.HAND, source, game);
-                }
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
-        }
-        return false;
     }
 }

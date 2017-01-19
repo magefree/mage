@@ -179,12 +179,7 @@ public class CardPanelComponentImpl extends CardPanel {
     }
 
     static {
-        IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap(new Function<Key, BufferedImage>() {
-            @Override
-            public BufferedImage apply(Key key) {
-                return createImage(key);
-            }
-        }));
+        IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap((Function<Key, BufferedImage>) key -> createImage(key)));
     }
 
     public CardPanelComponentImpl(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension) {
@@ -472,7 +467,7 @@ public class CardPanelComponentImpl extends CardPanel {
         ptText.setVisible(showText);
 
         if (showText) {
-            int fontSize = (int) cardHeight / 11;
+            int fontSize = cardHeight / 11;
             titleText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
 
             int titleX = Math.round(cardWidth * (20f / 480));
@@ -533,33 +528,27 @@ public class CardPanelComponentImpl extends CardPanel {
         //final CardView gameCard = this.gameCard;
         final int stamp = ++updateArtImageStamp;
 
-        Util.threadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final BufferedImage srcImage;
-                    if (gameCard.isFaceDown()) {
-                        srcImage = getFaceDownImage();
-                    } else if (getCardWidth() > THUMBNAIL_SIZE_FULL.width) {
-                        srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
-                    } else {
-                        srcImage = ImageCache.getThumbnail(gameCard);
-                    }
-                    UI.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (stamp == updateArtImageStamp) {
-                                hasImage = srcImage != null;
-                                setText(gameCard);
-                                setImage(srcImage);
-                            }
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } catch (Error err) {
-                    err.printStackTrace();
+        Util.threadPool.submit(() -> {
+            try {
+                final BufferedImage srcImage;
+                if (gameCard.isFaceDown()) {
+                    srcImage = getFaceDownImage();
+                } else if (getCardWidth() > THUMBNAIL_SIZE_FULL.width) {
+                    srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
+                } else {
+                    srcImage = ImageCache.getThumbnail(gameCard);
                 }
+                UI.invokeLater(() -> {
+                    if (stamp == updateArtImageStamp) {
+                        hasImage = srcImage != null;
+                        setText(gameCard);
+                        setImage(srcImage);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            } catch (Error err) {
+                err.printStackTrace();
             }
         });
     }

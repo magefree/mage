@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.Random;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;

@@ -51,7 +51,7 @@ public class Wrangle extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or less");
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.LessThan, 4));
+        filter.add(new PowerPredicate(ComparisonType.LessThan, 5));
     }
 
     public Wrangle(UUID ownerId, CardSetInfo setInfo) {

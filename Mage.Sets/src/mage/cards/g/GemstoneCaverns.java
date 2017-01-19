@@ -66,7 +66,7 @@ public class GemstoneCaverns extends CardImpl {
         // If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.
         this.addAbility(new GemstoneCavernsAbility());
 
-        // {tap}: Add {C} to your mana pool. If Gemstone Caverns has a luck counter on it, instead add one mana of any color to your mana pool.
+        // {T}: Add {C} to your mana pool. If Gemstone Caverns has a luck counter on it, instead add one mana of any color to your mana pool.
         Ability ability = new ConditionalManaAbility(Zone.BATTLEFIELD,
                 new ConditionalManaEffect(
                         new AddManaOfAnyColorEffect(),

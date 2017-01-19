@@ -230,9 +230,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         Map<String, Card> cards = new HashMap<>();
         for (UUID cardId : this) {
             Card card = game.getCard(cardId);
-            if (!cards.containsKey(card.getName())) {
-                cards.put(card.getName(), card);
-            }
+            cards.putIfAbsent(card.getName(), card);
         }
         return cards.values();
     }

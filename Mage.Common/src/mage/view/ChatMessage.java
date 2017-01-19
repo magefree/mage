@@ -82,11 +82,11 @@ public class ChatMessage implements Serializable {
     }
 
     public boolean isUserMessage() {
-        return color != null && (color.equals(MessageColor.BLUE) || color.equals(MessageColor.YELLOW));
+        return color != null && (color==MessageColor.BLUE || color==MessageColor.YELLOW);
     }
 
     public boolean isStatusMessage() {
-        return color != null && color.equals(MessageColor.ORANGE);
+        return color != null && color== MessageColor.ORANGE;
     }
 
     public String getUsername() {

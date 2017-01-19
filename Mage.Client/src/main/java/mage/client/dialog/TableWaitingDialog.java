@@ -206,34 +206,18 @@ public class TableWaitingDialog extends MageDialog {
 
         btnMoveUp.setText("Move Up");
         btnMoveUp.setEnabled(false);
-        btnMoveUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveUpActionPerformed(evt);
-            }
-        });
+        btnMoveUp.addActionListener(evt -> btnMoveUpActionPerformed(evt));
 
         btnMoveDown.setText("Move Down");
         btnMoveDown.setEnabled(false);
-        btnMoveDown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveDownActionPerformed(evt);
-            }
-        });
+        btnMoveDown.addActionListener(evt -> btnMoveDownActionPerformed(evt));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         btnStart.setText("Start");
         btnStart.setEnabled(false);
-        btnStart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStartActionPerformed(evt);
-            }
-        });
+        btnStart.addActionListener(evt -> btnStartActionPerformed(evt));
 
         jSplitPane1.setDividerLocation(300);
         jSplitPane1.setDividerSize(3);

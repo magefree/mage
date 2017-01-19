@@ -53,7 +53,7 @@ import mage.players.Player;
 public class RingsOfBrighthearth extends CardImpl {
 
     public RingsOfBrighthearth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.
         this.addAbility(new RingsOfBrighthearthTriggeredAbility());
@@ -133,10 +133,10 @@ class RingsOfBrighthearthEffect extends OneShotEffect {
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     StackAbility ability = (StackAbility) getValue("stackAbility");
                     Player controller = game.getPlayer(source.getControllerId());
-                    Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-                    if (ability != null && controller != null) {
+                    Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+                    if (ability != null && controller != null && sourcePermanent != null) {
                         ability.createCopyOnStack(game, source, source.getControllerId(), true);
-                        game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(": ").append(controller.getLogName()).append(" copied activated ability").toString());
+                        game.informPlayers(sourcePermanent.getIdName() + ": " + controller.getLogName() + " copied activated ability");
                         return true;
                     }
                     return false;

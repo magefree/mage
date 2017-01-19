@@ -107,7 +107,7 @@ public abstract class Phase implements Serializable {
                 if (game.isPaused() || game.gameOver(null)) {
                     return false;
                 }
-                if (game.getTurn().isEndTurnRequested() && !step.getType().equals(PhaseStep.CLEANUP)) {
+                if (game.getTurn().isEndTurnRequested() && step.getType()!=PhaseStep.CLEANUP) {
                     continue;
                 }
                 currentStep = step;

@@ -25,22 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.watchers.common.RevoltWatcher;
-
-import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -59,11 +58,14 @@ public class SilkweaverElite extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // <i>Revolt</i> &mdash; When Silkweaver Elite enters the battlefield, if a permanent you controlled left the battlefield this turn, draw a card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), RevoltCondition.getInstance()),
-                false, "<i>Revolt</i> &mdash; ");
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), false), RevoltCondition.getInstance(),
+                "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
+                + " the battlefield this turn, draw a card.");
+        ability.setAbilityWord(AbilityWord.REVOLT);
         ability.addWatcher(new RevoltWatcher());
         this.addAbility(ability);
+
     }
 
     public SilkweaverElite(final SilkweaverElite card) {

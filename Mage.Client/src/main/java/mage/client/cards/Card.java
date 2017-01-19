@@ -86,7 +86,6 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
-import mage.remote.Session;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -101,10 +100,10 @@ import org.apache.log4j.Logger;
 @SuppressWarnings("serial")
 public class Card extends MagePermanent implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
-    protected static DefaultActionCallback callback = DefaultActionCallback.getInstance();
+    protected static final DefaultActionCallback callback = DefaultActionCallback.getInstance();
 
     protected Point p;
-    protected CardDimensions dimension;
+    protected final CardDimensions dimension;
 
     protected final UUID gameId;
     protected final BigCard bigCard;
@@ -112,10 +111,10 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     protected Popup tooltipPopup;
     protected boolean tooltipShowing;
 
-    protected TextPopup tooltipText = new TextPopup();
+    protected final TextPopup tooltipText = new TextPopup();
     protected BufferedImage background;
-    protected BufferedImage image = new BufferedImage(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT, BufferedImage.TYPE_INT_RGB);
-    protected BufferedImage small;
+    protected final BufferedImage image = new BufferedImage(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT, BufferedImage.TYPE_INT_RGB);
+    protected final BufferedImage small;
     protected String backgroundName;
 
     // if this is set, it's opened if the user right clicks on the card panel

@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -80,7 +81,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
                     ++amount;
                 }
                 amountOfCardsThisTurn.put(playerId, amount);
-                if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
+                if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                     cardsPutToGraveyardFromBattlefield.add(new MageObjectReference(event.getTargetId(), game));
                 }
             }

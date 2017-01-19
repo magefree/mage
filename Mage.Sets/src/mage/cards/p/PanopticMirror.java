@@ -36,7 +36,6 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;

@@ -52,7 +52,7 @@ import org.mage.card.arcane.CardPanel;
 
 public class CardArea extends JPanel implements MouseListener {
 
-    protected CardEventSource cardEventSource = new CardEventSource();
+    protected final CardEventSource cardEventSource = new CardEventSource();
 
     private boolean reloaded = false;
     private final javax.swing.JLayeredPane cardArea;
@@ -89,7 +89,7 @@ public class CardArea extends JPanel implements MouseListener {
         setGUISize();
         for (Component component : cardArea.getComponents()) {
             if (component instanceof CardPanel) {
-                ((CardPanel) component).setBounds(0, 0, cardDimension.width, cardDimension.height);
+                component.setBounds(0, 0, cardDimension.width, cardDimension.height);
             }
         }
     }

@@ -228,7 +228,7 @@ public class ManaSymbols {
         manaCost = UI.getDisplayManaCost(manaCost);
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
-            String symbol = tok.nextToken().substring(0);
+            String symbol = tok.nextToken();
             // Check and load symbol in the width
             Image image = sizedSymbols.get(symbol);
             if (image == null) {

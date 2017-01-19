@@ -63,18 +63,15 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                 return;
             }
 
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    if (!card.equals(currentCard)) {
-                        return;
-                    }
-                    TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
-                    StringBuilder buffer = GuiDisplayUtil.getRulefromCardView(card, textLines);
-                    resizeTooltipIfNeeded(container, textLines.basicTextLength, textLines.lines.size());
-                    setText(buffer.toString());
-                    setCaretPosition(0);
+            SwingUtilities.invokeLater(() -> {
+                if (!card.equals(currentCard)) {
+                    return;
                 }
+                TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
+                StringBuilder buffer = GuiDisplayUtil.getRulefromCardView(card, textLines);
+                resizeTooltipIfNeeded(container, textLines.basicTextLength, textLines.lines.size());
+                setText(buffer.toString());
+                setCaretPosition(0);
             });
 
         } catch (Exception e) {

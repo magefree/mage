@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.Random;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;

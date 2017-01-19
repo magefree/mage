@@ -52,8 +52,11 @@ public class PlanarBridge extends CardImpl {
         this.supertype.add("Legendary");
 
         // {8}, {T}: Search your library for a permanent card, put it onto the battlefield, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(new FilterPermanentCard());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target), new GenericManaCost(8));
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterPermanentCard())),
+                new GenericManaCost(8)
+        );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

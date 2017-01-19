@@ -33,7 +33,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

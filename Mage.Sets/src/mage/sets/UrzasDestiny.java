@@ -57,6 +57,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Academy Rector", 1, Rarity.RARE, mage.cards.a.AcademyRector.class));
         cards.add(new SetCardInfo("Aether Sting", 76, Rarity.UNCOMMON, mage.cards.a.AetherSting.class));
         cards.add(new SetCardInfo("Ancient Silverback", 101, Rarity.RARE, mage.cards.a.AncientSilverback.class));
+        cards.add(new SetCardInfo("Apprentice Necromancer", 51, Rarity.RARE, mage.cards.a.ApprenticeNecromancer.class));
         cards.add(new SetCardInfo("Attrition", 52, Rarity.RARE, mage.cards.a.Attrition.class));
         cards.add(new SetCardInfo("Aura Thief", 26, Rarity.RARE, mage.cards.a.AuraThief.class));
         cards.add(new SetCardInfo("Blizzard Elemental", 27, Rarity.RARE, mage.cards.b.BlizzardElemental.class));
@@ -71,6 +72,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Capashen Knight", 3, Rarity.COMMON, mage.cards.c.CapashenKnight.class));
         cards.add(new SetCardInfo("Capashen Standard", 4, Rarity.COMMON, mage.cards.c.CapashenStandard.class));
         cards.add(new SetCardInfo("Capashen Templar", 5, Rarity.COMMON, mage.cards.c.CapashenTemplar.class));
+        cards.add(new SetCardInfo("Carnival of Souls", 55, Rarity.RARE, mage.cards.c.CarnivalOfSouls.class));
         cards.add(new SetCardInfo("Colos Yearling", 79, Rarity.COMMON, mage.cards.c.ColosYearling.class));
         cards.add(new SetCardInfo("Compost", 102, Rarity.UNCOMMON, mage.cards.c.Compost.class));
         cards.add(new SetCardInfo("Covetous Dragon", 80, Rarity.RARE, mage.cards.c.CovetousDragon.class));

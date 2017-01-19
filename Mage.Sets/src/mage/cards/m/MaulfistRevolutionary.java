@@ -39,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
+import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -95,14 +97,31 @@ class MaulfistRevolutionaryEffect extends OneShotEffect {
         if (controller != null) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null) {
-                for (Counter counter : player.getCounters().values()) {
-                    counter.increase();
+                Counters counters = player.getCounters().copy();
+                for (Counter counter : counters.values()) {
+                    CounterType counterType = CounterType.findByName(counter.getName());
+                    Counter counterToAdd;
+                    if (counterType != null) {
+                        counterToAdd = counterType.createInstance();
+                    } else {
+                        counterToAdd = new Counter(counter.getName());
+                    }
+                    player.addCounters(counterToAdd, game);
                 }
+                return true;
             }
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                for (Counter counter : permanent.getCounters(game).values()) {
-                    counter.increase();
+                Counters counters = permanent.getCounters(game).copy();
+                for (Counter counter : counters.values()) {
+                    CounterType counterType = CounterType.findByName(counter.getName());
+                    Counter counterToAdd;
+                    if (counterType != null) {
+                        counterToAdd = counterType.createInstance();
+                    } else {
+                        counterToAdd = new Counter(counter.getName());
+                    }
+                    permanent.addCounters(counterToAdd, source, game);
                 }
             }
             return true;

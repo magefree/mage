@@ -27,7 +27,6 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;

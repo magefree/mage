@@ -83,12 +83,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private boolean limited = false;
     private final SortSetting sortSetting;
 
-    private final ActionListener searchAction = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent evt) {
-            jButtonSearchActionPerformed(evt);
-        }
-    };
+    private final ActionListener searchAction = evt -> jButtonSearchActionPerformed(evt);
 
     /**
      * Creates new form CardSelector
@@ -494,11 +489,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbRed.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbRed.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_red.png"))); // NOI18N
         tbRed.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbRed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbRedActionPerformed(evt);
-            }
-        });
+        tbRed.addActionListener(evt -> tbRedActionPerformed(evt));
         tbColor.add(tbRed);
 
         tbGreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_green_off.png"))); // NOI18N
@@ -510,11 +501,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbGreen.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_green.png"))); // NOI18N
         tbGreen.setVerifyInputWhenFocusTarget(false);
         tbGreen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbGreen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbGreenActionPerformed(evt);
-            }
-        });
+        tbGreen.addActionListener(evt -> tbGreenActionPerformed(evt));
         tbColor.add(tbGreen);
 
         tbBlue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_blueOff.png"))); // NOI18N
@@ -525,11 +512,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbBlue.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbBlue.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_blue.png"))); // NOI18N
         tbBlue.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbBlue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbBlueActionPerformed(evt);
-            }
-        });
+        tbBlue.addActionListener(evt -> tbBlueActionPerformed(evt));
         tbColor.add(tbBlue);
 
         tbBlack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_black_off.png"))); // NOI18N
@@ -540,11 +523,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbBlack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbBlack.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_black.png"))); // NOI18N
         tbBlack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbBlack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbBlackActionPerformed(evt);
-            }
-        });
+        tbBlack.addActionListener(evt -> tbBlackActionPerformed(evt));
         tbColor.add(tbBlack);
 
         tbWhite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_white_off.png"))); // NOI18N
@@ -555,11 +534,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbWhite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbWhite.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_white.png"))); // NOI18N
         tbWhite.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbWhite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbWhiteActionPerformed(evt);
-            }
-        });
+        tbWhite.addActionListener(evt -> tbWhiteActionPerformed(evt));
         tbColor.add(tbWhite);
 
         tbColorless.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/colorless_off.png"))); // NOI18N
@@ -570,11 +545,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbColorless.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbColorless.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/colorless.png"))); // NOI18N
         tbColorless.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbColorless.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbColorlessActionPerformed(evt);
-            }
-        });
+        tbColorless.addActionListener(evt -> tbColorlessActionPerformed(evt));
         tbColor.add(tbColorless);
         tbColor.add(jSeparator1);
 
@@ -583,11 +554,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         cbExpansionSet.setMinimumSize(new java.awt.Dimension(250, 25));
         cbExpansionSet.setName("cbExpansionSet"); // NOI18N
         cbExpansionSet.setPreferredSize(new java.awt.Dimension(250, 25));
-        cbExpansionSet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbExpansionSetActionPerformed(evt);
-            }
-        });
+        cbExpansionSet.addActionListener(evt -> cbExpansionSetActionPerformed(evt));
         tbColor.add(cbExpansionSet);
         tbColor.add(jSeparator2);
 
@@ -596,22 +563,14 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         btnBooster.setFocusable(false);
         btnBooster.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBooster.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnBooster.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBoosterActionPerformed(evt);
-            }
-        });
+        btnBooster.addActionListener(evt -> btnBoosterActionPerformed(evt));
         tbColor.add(btnBooster);
 
         btnClear.setText("Clear");
         btnClear.setFocusable(false);
         btnClear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnClear.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
+        btnClear.addActionListener(evt -> btnClearActionPerformed(evt));
         tbColor.add(btnClear);
 
         tbTypes.setFloatable(false);
@@ -627,11 +586,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbLand.setFocusable(false);
         tbLand.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbLand.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbLand.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbLandActionPerformed(evt);
-            }
-        });
+        tbLand.addActionListener(evt -> tbLandActionPerformed(evt));
         tbTypes.add(tbLand);
 
         tbCreatures.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_creatures.png"))); // NOI18N
@@ -642,11 +597,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbCreatures.setFocusable(false);
         tbCreatures.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbCreatures.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbCreatures.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbCreaturesActionPerformed(evt);
-            }
-        });
+        tbCreatures.addActionListener(evt -> tbCreaturesActionPerformed(evt));
         tbTypes.add(tbCreatures);
 
         tbArifiacts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_artifact.png"))); // NOI18N
@@ -657,11 +608,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbArifiacts.setFocusable(false);
         tbArifiacts.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbArifiacts.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbArifiacts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbArifiactsActionPerformed(evt);
-            }
-        });
+        tbArifiacts.addActionListener(evt -> tbArifiactsActionPerformed(evt));
         tbTypes.add(tbArifiacts);
 
         tbSorceries.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_sorcery.png"))); // NOI18N
@@ -672,11 +619,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbSorceries.setFocusable(false);
         tbSorceries.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbSorceries.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbSorceries.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbSorceriesActionPerformed(evt);
-            }
-        });
+        tbSorceries.addActionListener(evt -> tbSorceriesActionPerformed(evt));
         tbTypes.add(tbSorceries);
 
         tbInstants.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_instant.png"))); // NOI18N
@@ -687,11 +630,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbInstants.setFocusable(false);
         tbInstants.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbInstants.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbInstants.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbInstantsActionPerformed(evt);
-            }
-        });
+        tbInstants.addActionListener(evt -> tbInstantsActionPerformed(evt));
         tbTypes.add(tbInstants);
 
         tbEnchantments.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_enchantment.png"))); // NOI18N
@@ -702,11 +641,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbEnchantments.setFocusable(false);
         tbEnchantments.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbEnchantments.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbEnchantments.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbEnchantmentsActionPerformed(evt);
-            }
-        });
+        tbEnchantments.addActionListener(evt -> tbEnchantmentsActionPerformed(evt));
         tbTypes.add(tbEnchantments);
 
         tbPlaneswalkers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_planeswalker.png"))); // NOI18N
@@ -717,11 +652,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbPlaneswalkers.setFocusable(false);
         tbPlaneswalkers.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbPlaneswalkers.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbPlaneswalkers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbPlaneswalkersActionPerformed(evt);
-            }
-        });
+        tbPlaneswalkers.addActionListener(evt -> tbPlaneswalkersActionPerformed(evt));
         tbTypes.add(tbPlaneswalkers);
         tbTypes.add(jSeparator6);
 
@@ -730,11 +661,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         chkPiles.setFocusable(false);
         chkPiles.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         chkPiles.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        chkPiles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkPilesActionPerformed(evt);
-            }
-        });
+        chkPiles.addActionListener(evt -> chkPilesActionPerformed(evt));
         tbTypes.add(chkPiles);
         tbTypes.add(jSeparator3);
 
@@ -742,11 +669,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         cbSortBy.setMaximumSize(new java.awt.Dimension(120, 20));
         cbSortBy.setMinimumSize(new java.awt.Dimension(120, 20));
         cbSortBy.setPreferredSize(new java.awt.Dimension(120, 20));
-        cbSortBy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSortByActionPerformed(evt);
-            }
-        });
+        cbSortBy.addActionListener(evt -> cbSortByActionPerformed(evt));
         tbTypes.add(cbSortBy);
         tbTypes.add(jSeparator4);
 
@@ -761,11 +684,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jToggleListView.setMaximumSize(new java.awt.Dimension(37, 22));
         jToggleListView.setMinimumSize(new java.awt.Dimension(37, 22));
         jToggleListView.setPreferredSize(new java.awt.Dimension(37, 22));
-        jToggleListView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleListViewActionPerformed(evt);
-            }
-        });
+        jToggleListView.addActionListener(evt -> jToggleListViewActionPerformed(evt));
         tbTypes.add(jToggleListView);
 
         bgView.add(jToggleCardView);
@@ -780,11 +699,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jToggleCardView.setName(""); // NOI18N
         jToggleCardView.setPreferredSize(new java.awt.Dimension(37, 22));
         jToggleCardView.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToggleCardView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleCardViewActionPerformed(evt);
-            }
-        });
+        jToggleCardView.addActionListener(evt -> jToggleCardViewActionPerformed(evt));
         tbTypes.add(jToggleCardView);
 
         cardSelectorScrollPane.setToolTipText("<HTML>Double click to add the card to the main deck.<br/>\nALT + Double click to add the card to the sideboard.");
@@ -798,11 +713,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jButtonAddToMain.setMaximumSize(new java.awt.Dimension(42, 23));
         jButtonAddToMain.setMinimumSize(new java.awt.Dimension(42, 23));
         jButtonAddToMain.setPreferredSize(new java.awt.Dimension(40, 28));
-        jButtonAddToMain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddToMainActionPerformed(evt);
-            }
-        });
+        jButtonAddToMain.addActionListener(evt -> jButtonAddToMainActionPerformed(evt));
 
         jButtonAddToSideboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/sideboard_in.png"))); // NOI18N
         jButtonAddToSideboard.setToolTipText("<html>Add selected cards to sideboard.<br/>\nAlternative: <strong>ALT key + Double click</strong> the card in card selector to move a card to the sideboard.");
@@ -810,11 +721,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jButtonAddToSideboard.setMaximumSize(new java.awt.Dimension(100, 30));
         jButtonAddToSideboard.setMinimumSize(new java.awt.Dimension(10, 30));
         jButtonAddToSideboard.setPreferredSize(new java.awt.Dimension(40, 28));
-        jButtonAddToSideboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddToSideboardActionPerformed(evt);
-            }
-        });
+        jButtonAddToSideboard.addActionListener(evt -> jButtonAddToSideboardActionPerformed(evt));
 
         jLabelSearch.setText("Search:");
         jLabelSearch.setToolTipText("Searches for card names and in the rule text of the card.");
@@ -823,19 +730,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         jButtonSearch.setText("Search");
         jButtonSearch.setToolTipText("Performs the search.");
-        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSearchActionPerformed(evt);
-            }
-        });
+        jButtonSearch.addActionListener(evt -> jButtonSearchActionPerformed(evt));
 
         jButtonClean.setText("Clear");
         jButtonClean.setToolTipText("Clears the search field.");
-        jButtonClean.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCleanActionPerformed(evt);
-            }
-        });
+        jButtonClean.addActionListener(evt -> jButtonCleanActionPerformed(evt));
 
         cardCountLabel.setText("Card count:");
         cardCountLabel.setToolTipText("Number of cards currently shown.");
@@ -848,11 +747,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jButtonRemoveFromMain.setMaximumSize(new java.awt.Dimension(42, 23));
         jButtonRemoveFromMain.setMinimumSize(new java.awt.Dimension(42, 23));
         jButtonRemoveFromMain.setPreferredSize(new java.awt.Dimension(40, 28));
-        jButtonRemoveFromMain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRemoveFromMainActionPerformed(evt);
-            }
-        });
+        jButtonRemoveFromMain.addActionListener(evt -> jButtonRemoveFromMainActionPerformed(evt));
 
         jButtonRemoveFromSideboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/sideboard_out.png"))); // NOI18N
         jButtonRemoveFromSideboard.setToolTipText("Remove selected cards from sideboard.");
@@ -860,11 +755,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jButtonRemoveFromSideboard.setMaximumSize(new java.awt.Dimension(10, 30));
         jButtonRemoveFromSideboard.setMinimumSize(new java.awt.Dimension(100, 30));
         jButtonRemoveFromSideboard.setPreferredSize(new java.awt.Dimension(40, 28));
-        jButtonRemoveFromSideboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRemoveFromSideboardActionPerformed(evt);
-            }
-        });
+        jButtonRemoveFromSideboard.addActionListener(evt -> jButtonRemoveFromSideboardActionPerformed(evt));
 
         javax.swing.GroupLayout cardSelectorBottomPanelLayout = new javax.swing.GroupLayout(cardSelectorBottomPanel);
         cardSelectorBottomPanel.setLayout(cardSelectorBottomPanelLayout);
@@ -1132,12 +1023,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }
 
     public void refresh() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                currentView.refresh();
-            }
-        });
+        SwingUtilities.invokeLater(() -> currentView.refresh());
     }
 
     private TableModel mainModel;

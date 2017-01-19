@@ -37,7 +37,6 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.CardSetInfo;

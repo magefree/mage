@@ -51,10 +51,10 @@ public class GameSessionWatcher {
 
     protected final static Logger logger = Logger.getLogger(GameSessionWatcher.class);
 
-    protected UUID userId;
-    protected Game game;
+    protected final UUID userId;
+    protected final Game game;
     protected boolean killed = false;
-    protected boolean isPlayer;
+    protected final boolean isPlayer;
 
     public GameSessionWatcher(UUID userId, Game game, boolean isPlayer) {
         this.userId = userId;

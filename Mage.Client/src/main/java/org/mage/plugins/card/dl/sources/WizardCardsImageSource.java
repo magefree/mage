@@ -440,11 +440,7 @@ public class WizardCardsImageSource implements CardImageSource {
         }
         String setNames = setsAliases.get(cardSet);
         if (setNames != null) {
-            Map<String, String> setLinks = sets.get(cardSet);
-            if (setLinks == null) {
-                setLinks = getSetLinks(cardSet);
-                sets.put(cardSet, setLinks);
-            }
+            Map<String, String> setLinks = sets.computeIfAbsent(cardSet, k -> getSetLinks(cardSet));
             String link = setLinks.get(card.getDownloadName().toLowerCase());
             if (link == null) {
                 int length = collectorId.length();

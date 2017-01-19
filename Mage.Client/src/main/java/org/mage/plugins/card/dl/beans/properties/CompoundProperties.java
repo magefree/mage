@@ -23,7 +23,7 @@ import java.util.Set;
  * @author Clemens Koza
  */
 public class CompoundProperties extends AbstractProperties {
-    private List<Properties> delegates;
+    private final List<Properties> delegates;
 
     public CompoundProperties(Properties... delegates) {
         this.delegates = asList(delegates);

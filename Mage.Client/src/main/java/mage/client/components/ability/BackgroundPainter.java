@@ -14,9 +14,9 @@ import java.awt.geom.RoundRectangle2D;
  */
 public class BackgroundPainter extends AbstractPainter {
 
-    private Color bgColor = Color.black;
+    private final Color bgColor = Color.black;
 
-    float bgalpha = 0.6f;
+    final float bgalpha = 0.6f;
 
     public BackgroundPainter() {
         super();

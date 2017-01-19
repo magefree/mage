@@ -42,10 +42,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetArtifactPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -63,7 +62,7 @@ public class CogworkAssembler extends CardImpl {
 
         // {7}: Create a token that's a copy of target artifact. That token gains haste. Exile it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CogworkAssemblerCreateTokenEffect(), new GenericManaCost(7));
-        ability.addTarget(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
+        ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
 

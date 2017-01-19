@@ -204,8 +204,7 @@ public class ZonesHandler {
             // If we can't find the card we can't remove it.
             return false;
         }
-        // If needed take attributes from the spell (e.g. color of spell was changed)
-        card = takeAttributesFromSpell(card, event, game);
+
         boolean success = false;
         if (info.faceDown) {
             card.setFaceDown(true, game);
@@ -213,6 +212,8 @@ public class ZonesHandler {
         if (!game.replaceEvent(event)) {
             Zone fromZone = event.getFromZone();
             if (event.getToZone() == Zone.BATTLEFIELD) {
+                // If needed take attributes from the spell (e.g. color of spell was changed)
+                card = takeAttributesFromSpell(card, event, game);
                 // controlling player can be replaced so use event player now
                 Permanent permanent;
                 if (card instanceof MeldCard) {
@@ -232,7 +233,6 @@ public class ZonesHandler {
                 if (info.faceDown) {
                     card.setFaceDown(false, game);
                 }
-
                 // make sure the controller of all continuous effects of this card are switched to the current controller
                 game.setScopeRelevant(true);
                 game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
@@ -282,16 +282,12 @@ public class ZonesHandler {
     }
 
     private static Card takeAttributesFromSpell(Card card, ZoneChangeEvent event, Game game) {
+        card = card.copy();
         if (Zone.STACK.equals(event.getFromZone())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && !spell.isFaceDown(game)) {
-                boolean doCopy = false;
                 if (!card.getColor(game).equals(spell.getColor(game))) {
-                    doCopy = true;
-                }
-                if (doCopy) {
                     // the card that is referenced to in the permanent is copied and the spell attributes are set to this copied card
-                    card = card.copy();
                     card.getColor(game).setColor(spell.getColor(game));
                 }
             }

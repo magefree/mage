@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -93,12 +94,14 @@ public class MeldEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanent(sourceId);
             Permanent meldWithPermanent = game.getPermanent(meldWithId);
             if (sourcePermanent != null && meldWithPermanent != null) {
-                sourcePermanent.moveToExile(null, "", sourceId, game);
-                meldWithPermanent.moveToExile(null, "", sourceId, game);
+                Set<Card> toExile = new HashSet<>();
+                toExile.add(sourcePermanent);
+                toExile.add(meldWithPermanent);
+                controller.moveCards(toExile, Zone.EXILED, source, game);
                 // Create the meld card and move it to the battlefield.
                 Card sourceCard = game.getExile().getCard(sourceId, game);
                 Card meldWithCard = game.getExile().getCard(meldWithId, game);
-                if (!sourceCard.isCopy() && !meldWithCard.isCopy()) {
+                if (sourceCard != null && !sourceCard.isCopy() && meldWithCard != null && !meldWithCard.isCopy()) {
                     meldCard.setOwnerId(controller.getId());
                     meldCard.setTopHalfCard(meldWithCard, game);
                     meldCard.setBottomHalfCard(sourceCard, game);
@@ -106,7 +109,7 @@ public class MeldEffect extends OneShotEffect {
                     game.addMeldCard(meldCard.getId(), meldCard);
                     game.getState().addCard(meldCard);
                     meldCard.setZone(Zone.EXILED, game);
-                    meldCard.moveToZone(Zone.BATTLEFIELD, sourceId, game, false);
+                    controller.moveCards(meldCard, Zone.BATTLEFIELD, source, game);
                 }
                 return true;
             }

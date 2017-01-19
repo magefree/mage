@@ -161,6 +161,7 @@ public class Spell extends StackObjImpl implements Card {
                 }
             }
         }
+        setDoneActivatingManaAbilities(false); // can be activated again maybe during the resolution of the spell (e.g. Metallic Rebuke)
         return true;
     }
 
@@ -256,8 +257,8 @@ public class Spell extends StackObjImpl implements Card {
                         Permanent permanent = game.getPermanent(card.getId());
                         if (permanent != null && permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                            ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
-                            ((PermanentCard) permanent).getCard().getSubtype(game).remove("Aura");
+                            card.getCardType().add(CardType.CREATURE);
+                            card.getSubtype(game).remove("Aura");
                         }
                     }
                     return ability.resolve(game);
@@ -270,7 +271,15 @@ public class Spell extends StackObjImpl implements Card {
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (this.getSpellAbility() instanceof BestowAbility) {
                 updateOptionalCosts(0);
-                return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+                if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null && permanent instanceof PermanentCard) {
+                        ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
+                        ((PermanentCard) permanent).getCard().getSubtype(game).remove("Aura");
+                        return true;
+                    }
+                }
+                return false;
             } else {
                 //20091005 - 608.2b
                 if (!game.isSimulation()) {

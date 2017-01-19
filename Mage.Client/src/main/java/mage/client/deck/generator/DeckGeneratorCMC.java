@@ -69,7 +69,8 @@ public enum DeckGeneratorCMC {
         add(new CMC(7, 100, 0.15f));
     }});
 
-    private ArrayList<CMC> poolCMCs60, poolCMCs40;
+    private final ArrayList<CMC> poolCMCs60;
+    private final ArrayList<CMC> poolCMCs40;
 
     DeckGeneratorCMC(ArrayList<CMC> CMCs60, ArrayList<CMC> CMCs40) {
         this.poolCMCs60 = CMCs60;

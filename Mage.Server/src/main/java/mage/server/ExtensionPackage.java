@@ -40,9 +40,9 @@ import java.util.Map;
  * @author Lymia
  */
 public abstract class ExtensionPackage {
-    protected List<ExpansionSet> expansions = new ArrayList<>();
-    protected Map<String, Class> deckTypes = new HashMap<>();
-    protected Map<String, Class> draftCubes = new HashMap<>();
+    protected final List<ExpansionSet> expansions = new ArrayList<>();
+    protected final Map<String, Class> deckTypes = new HashMap<>();
+    protected final Map<String, Class> draftCubes = new HashMap<>();
 
     /**
      * @return A list of expansions included in this custom set package.

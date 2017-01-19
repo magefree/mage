@@ -52,11 +52,9 @@ import mage.cards.Sets;
 import static mage.client.constants.Constants.DAMAGE_MAX_LEFT;
 import static mage.client.constants.Constants.POWBOX_TEXT_MAX_TOP;
 import mage.client.util.Config;
-import mage.client.util.ImageHelper;
 import mage.constants.CardType;
 import mage.view.CounterView;
 import mage.view.PermanentView;
-import org.mage.plugins.card.images.ImageCache;
 import mage.client.util.TransformedImageCache;
 
 /**
@@ -67,9 +65,9 @@ public class Permanent extends Card {
 
     protected PermanentView permanent;
 
-    protected List<MagePermanent> links = new ArrayList<>();
+    protected final List<MagePermanent> links = new ArrayList<>();
     protected boolean linked;
-    protected BufferedImage tappedImage;
+    protected final BufferedImage tappedImage;
     protected BufferedImage flippedImage;
 
     /** Creates new form Permanent

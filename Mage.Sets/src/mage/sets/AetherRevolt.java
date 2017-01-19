@@ -53,6 +53,7 @@ public class AetherRevolt extends ExpansionSet {
     private AetherRevolt() {
         super("Aether Revolt", "AER", ExpansionSet.buildDate(2017, 1, 20), SetType.EXPANSION);
         this.blockName = "Kaladesh";
+        this.parentSet = Kaladesh.getInstance();
         this.hasBoosters = true;
         this.hasBasicLands = false;
         this.numBoosterLands = 1;
@@ -62,7 +63,6 @@ public class AetherRevolt extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 184;
         this.ratioBoosterSpecialLand = 144;
-        this.parentSet = Kaladesh.getInstance();
         cards.add(new SetCardInfo("Aegis Automaton", 141, Rarity.COMMON, mage.cards.a.AegisAutomaton.class));
         cards.add(new SetCardInfo("Aerial Modification", 1, Rarity.UNCOMMON, mage.cards.a.AerialModification.class));
         cards.add(new SetCardInfo("Aeronaut Admiral", 2, Rarity.UNCOMMON, mage.cards.a.AeronautAdmiral.class));

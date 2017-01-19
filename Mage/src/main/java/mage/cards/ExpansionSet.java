@@ -406,7 +406,7 @@ public abstract class ExpansionSet implements Serializable {
                 Iterator<CardInfo> iterator = savedCardsInfos.iterator();
                 while (iterator.hasNext()) {
                     CardInfo next = iterator.next();
-                    if (Integer.valueOf(next.getCardNumber()) > maxCardNumberInBooster) {
+                    if (Integer.valueOf(next.getCardNumber()) > maxCardNumberInBooster && !rarity.equals(Rarity.LAND)) {
                         iterator.remove();
                     }
                 }

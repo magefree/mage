@@ -66,11 +66,7 @@ public class CastFromGraveyardWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone().equals(Zone.GRAVEYARD)) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell != null) {
-                HashSet<Integer> zcc = spellsCastFromGraveyard.get(spell.getSourceId());
-                if (zcc == null) {
-                    zcc = new HashSet<>();
-                    spellsCastFromGraveyard.put(spell.getSourceId(), zcc);
-                }
+                HashSet<Integer> zcc = spellsCastFromGraveyard.computeIfAbsent(spell.getSourceId(), k -> new HashSet<>());
                 zcc.add(spell.getZoneChangeCounter(game));
             }
 

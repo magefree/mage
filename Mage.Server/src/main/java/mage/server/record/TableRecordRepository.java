@@ -24,7 +24,7 @@ public enum TableRecordRepository {
 
     private Dao<TableRecord, Object> dao;
 
-    private TableRecordRepository() {
+    TableRecordRepository() {
         File file = new File("db");
         if (!file.exists()) {
             file.mkdirs();

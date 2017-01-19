@@ -28,7 +28,6 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -42,7 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GremlinToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -70,7 +69,7 @@ public class GremlinInfestation extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageAttachedControllerEffect(2), TargetController.YOU, false));
 
         // When enchanted artifact is put into a graveyard, create a 2/2 red Gremlin creature token.
-        this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new GremlinInfestationToken()), "enchanted artifact", false, false));
+        this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new GremlinToken()), "enchanted artifact", false, false));
     }
 
     public GremlinInfestation(final GremlinInfestation card) {
@@ -80,19 +79,5 @@ public class GremlinInfestation extends CardImpl {
     @Override
     public GremlinInfestation copy() {
         return new GremlinInfestation(this);
-    }
-}
-
-class GremlinInfestationToken extends Token {
-
-    GremlinInfestationToken() {
-        super("Gremlin", "2/2 red Gremlin creature token");
-        this.setOriginalExpansionSetCode("AER");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Gremlin");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-
     }
 }

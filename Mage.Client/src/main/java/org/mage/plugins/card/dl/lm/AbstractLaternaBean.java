@@ -22,6 +22,6 @@ import org.mage.plugins.card.dl.beans.properties.bound.BoundProperties;
  */
 public class AbstractLaternaBean extends AbstractBoundBean {
     protected static final Logger log = Logger.getLogger(AbstractLaternaBean.class);
-    protected Properties        properties = new BoundProperties(s);
+    protected final Properties        properties = new BoundProperties(s);
     protected EventListenerList listeners  = new EventListenerList();
 }

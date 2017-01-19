@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class TextboxLoyaltyRule extends TextboxRule {
 
-    public int loyaltyChange;
+    public final int loyaltyChange;
 
-    public static int MINUS_X = 100;
+    public static final int MINUS_X = 100;
 
     public String getChangeString() {
         if (loyaltyChange == MINUS_X) {

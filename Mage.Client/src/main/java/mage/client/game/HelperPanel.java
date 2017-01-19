@@ -48,7 +48,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
-import mage.client.MageFrame;
+
 import mage.client.SessionHandler;
 import mage.client.components.MageTextArea;
 import mage.client.game.FeedbackPanel.FeedbackMode;
@@ -59,7 +59,6 @@ import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_YES;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_TEXT_NO;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_TEXT_YES;
-import mage.remote.Session;
 
 /**
  * Panel with buttons that copy the state of feedback panel.
@@ -200,52 +199,30 @@ public class HelperPanel extends JPanel {
         };
 
         btnLeft.addMouseListener(checkPopupAdapter);
-        btnLeft.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (linkLeft != null) {
-                    clickButton(linkLeft);
-                }
+        btnLeft.addActionListener(evt -> {
+            if (linkLeft != null) {
+                clickButton(linkLeft);
             }
         });
 
         btnRight.addMouseListener(checkPopupAdapter);
-        btnRight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (linkRight != null) {
-                    clickButton(linkRight);
-                }
+        btnRight.addActionListener(evt -> {
+            if (linkRight != null) {
+                clickButton(linkRight);
             }
         });
 
-        btnSpecial.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (linkSpecial != null) {
-                    clickButton(linkSpecial);
-                }
+        btnSpecial.addActionListener(evt -> {
+            if (linkSpecial != null) {
+                clickButton(linkSpecial);
             }
         });
 
-        btnUndo.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (linkUndo != null) {
-                    {
-                        Thread worker = new Thread() {
-                            @Override
-                            public void run() {
-                                SwingUtilities.invokeLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        linkUndo.doClick();
-                                    }
-                                });
-                            }
-                        };
-                        worker.start();
-                    }
+        btnUndo.addActionListener(evt -> {
+            if (linkUndo != null) {
+                {
+                    Thread worker = new Thread(() -> SwingUtilities.invokeLater(() -> linkUndo.doClick()));
+                    worker.start();
                 }
             }
         });
@@ -279,19 +256,11 @@ public class HelperPanel extends JPanel {
     }
 
     private void clickButton(final JButton button) {
-        Thread worker = new Thread() {
-            @Override
-            public void run() {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        setState("", false, "", false, null);
-                        setSpecial("", false);
-                        button.doClick();
-                    }
-                });
-            }
-        };
+        Thread worker = new Thread(() -> SwingUtilities.invokeLater(() -> {
+            setState("", false, "", false, null);
+            setSpecial("", false);
+            button.doClick();
+        }));
         worker.start();
     }
 
@@ -363,12 +332,7 @@ public class HelperPanel extends JPanel {
 
     private void initPopupMenuTriggerOrder() {
 
-        ActionListener actionListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleAutoAnswerPopupMenuEvent(e);
-            }
-        };
+        ActionListener actionListener = e -> handleAutoAnswerPopupMenuEvent(e);
 
         popupMenuAskYes = new JPopupMenu();
         popupMenuAskNo = new JPopupMenu();

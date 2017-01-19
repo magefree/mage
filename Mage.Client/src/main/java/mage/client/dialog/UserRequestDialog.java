@@ -35,7 +35,6 @@ package mage.client.dialog;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JComponent;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import mage.client.MageFrame;
 import mage.client.util.GUISizeHelper;
@@ -76,7 +75,7 @@ public class UserRequestDialog extends MageDialog {
         btn3.setMinimumSize(new Dimension(50 + 4 * font.getSize(), 2 * font.getSize() + 10));
         btn3.setMaximumSize(new Dimension(50 + 4 * font.getSize(), 2 * font.getSize() + 10));
         btn3.setPreferredSize(new Dimension(50 + 4 * font.getSize(), 2 * font.getSize() + 10));
-        JComponent c = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
+        JComponent c = ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         c.setMinimumSize(new Dimension(c.getMinimumSize().width, font.getSize() + 10));
         c.setMaximumSize(new Dimension(c.getMaximumSize().width, font.getSize() + 10));
         c.setPreferredSize(new Dimension(c.getPreferredSize().width, font.getSize() + 10));
@@ -138,31 +137,19 @@ public class UserRequestDialog extends MageDialog {
         btn3.setMaximumSize(new java.awt.Dimension(150, 50));
         btn3.setMinimumSize(new java.awt.Dimension(75, 25));
         btn3.setPreferredSize(new java.awt.Dimension(150, 50));
-        btn3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn3ActionPerformed(evt);
-            }
-        });
+        btn3.addActionListener(evt -> btn3ActionPerformed(evt));
 
         btn2.setText("btn2");
         btn2.setMaximumSize(new java.awt.Dimension(150, 50));
         btn2.setMinimumSize(new java.awt.Dimension(75, 25));
         btn2.setPreferredSize(new java.awt.Dimension(150, 50));
-        btn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn2ActionPerformed(evt);
-            }
-        });
+        btn2.addActionListener(evt -> btn2ActionPerformed(evt));
 
         btn1.setText("btn1");
         btn1.setMaximumSize(new java.awt.Dimension(150, 50));
         btn1.setMinimumSize(new java.awt.Dimension(75, 25));
         btn1.setPreferredSize(new java.awt.Dimension(150, 50));
-        btn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn1ActionPerformed(evt);
-            }
-        });
+        btn1.addActionListener(evt -> btn1ActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -39,10 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.watchers.common.RevoltWatcher;
 
 /**
@@ -50,12 +47,6 @@ import mage.watchers.common.RevoltWatcher;
  * @author fireshoes
  */
 public class VengefulRebel extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
 
     public VengefulRebel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -71,8 +62,9 @@ public class VengefulRebel extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), false),
                 RevoltCondition.getInstance(),
                 "When {this} enters the battlefield, if a permanent you controlled left the battlefield this turn, "
-                + "target creature an opponent controls gets -3/-3 until end of turn");
-        ability.addTarget(new TargetCreaturePermanent(filter));
+                + "target creature an opponent controls gets -3/-3 until end of turn"
+        );
+        ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.setAbilityWord(AbilityWord.REVOLT);
         this.addAbility(ability, new RevoltWatcher());
     }

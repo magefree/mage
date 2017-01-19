@@ -29,7 +29,6 @@ package mage.client.dialog;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -73,7 +72,7 @@ public class AddLandDialog extends MageDialog {
     public void showDialog(Deck deck, DeckEditorMode mode) {
         this.deck = deck;
         SortedSet<String> landSetNames = new TreeSet<>();
-        if (!mode.equals(DeckEditorMode.FREE_BUILDING)) {
+        if (mode!=DeckEditorMode.FREE_BUILDING) {
             // decide from which sets basic lands are taken from
             for (String setCode : deck.getExpansionSetCodes()) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
@@ -183,44 +182,32 @@ public class AddLandDialog extends MageDialog {
 
         lblForest.setText("Forest");
 
-        spnForest.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spnForest.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         lblIsland.setText("Island");
 
-        spnIsland.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spnIsland.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         lblMountain.setText("Mountain");
 
-        spnMountain.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spnMountain.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         lblPains.setText("Plains");
 
-        spnPlains.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spnPlains.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         lblSwamp.setText("Swamp");
 
-        spnSwamp.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spnSwamp.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         btnAdd.setText("Add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
+        btnAdd.addActionListener(evt -> btnAddActionPerformed(evt));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         btnAutoAdd.setText("Suggest");
-        btnAutoAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAutoAddActionPerformed(evt);
-            }
-        });
+        btnAutoAdd.addActionListener(evt -> btnAutoAddActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

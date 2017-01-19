@@ -54,18 +54,18 @@ import mage.util.CardUtil;
 public class AvatarOfFury extends CardImpl {
 
     public AvatarOfFury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
         // If an opponent controls seven or more lands, Avatar of Fury costs {6} less to cast.
-         this.addAbility(new AvatarOfFuryAdjustingCostsAbility());
+        this.addAbility(new AvatarOfFuryAdjustingCostsAbility());
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {R}: Avatar of Fury gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
     public AvatarOfFury(final AvatarOfFury card) {
@@ -100,11 +100,13 @@ class AvatarOfFuryAdjustingCostsAbility extends SimpleStaticAbility implements A
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        FilterPermanent filter = new FilterLandPermanent();
-        for (UUID playerId: game.getOpponents(ability.getControllerId())) {
-            if (game.getBattlefield().countAll(filter, playerId, game) > 6) {
-                CardUtil.adjustCost((SpellAbility)ability, 6);
-                break;
+        if (ability instanceof SpellAbility) { // Prevent adjustment of activated ability
+            FilterPermanent filter = new FilterLandPermanent();
+            for (UUID playerId : game.getOpponents(ability.getControllerId())) {
+                if (game.getBattlefield().countAll(filter, playerId, game) > 6) {
+                    CardUtil.adjustCost((SpellAbility) ability, 6);
+                    break;
+                }
             }
         }
     }
