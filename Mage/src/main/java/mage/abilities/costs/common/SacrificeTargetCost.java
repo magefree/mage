@@ -53,7 +53,7 @@ public class SacrificeTargetCost extends CostImpl {
         target.setNotTarget(true); // sacrifice is never targeted
         this.text = "sacrifice "
                 + ((target.getNumberOfTargets() != 1 || (target.getTargetName().startsWith("an") || target.getTargetName().startsWith("a ")))
-                ? "" : "a ") + target.getTargetName();
+                ? "" : (target.getTargetName().startsWith("artifact") ? "an " : "a ")) + target.getTargetName();
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
