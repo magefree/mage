@@ -39,6 +39,8 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -47,6 +49,7 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
+import mage.constants.SetType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
@@ -156,14 +159,26 @@ class MomirEffect extends OneShotEffect {
         // should this be random across card names, or card printings?
         CardCriteria criteria = new CardCriteria().types(CardType.CREATURE).convertedManaCost(value);
         List<CardInfo> options = CardRepository.instance.findCards(criteria);
-        if (options != null && !options.isEmpty()) {
-            Card card = options.get(RandomUtil.nextInt(options.size())).getCard();
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);
-        } else {
+        if (options == null || options.isEmpty()) {
             game.informPlayers("No random creature card with converted mana cost of " + value + " was found.");
+            return false;
         }
+        EmptyToken token = new EmptyToken(); // search for a non custom set creature
+        while (token.getName().isEmpty() && !options.isEmpty()) {
+            int index = RandomUtil.nextInt(options.size());
+            ExpansionSet expansionSet = Sets.findSet(options.get(index).getSetCode());
+            if (expansionSet == null || expansionSet.getSetType().equals(SetType.CUSTOM_SET)) {
+                options.remove(index);
+            } else {
+                Card card = options.get(index).getCard();
+                if (card != null) {
+                    CardUtil.copyTo(token).from(card);
+                } else {
+                    options.remove(index);
+                }
+            }
+        }
+        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);
         return true;
     }
 }
