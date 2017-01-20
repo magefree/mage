@@ -115,6 +115,9 @@ class FairgroundsTrumpeterWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER_ADDED && event.getData().equals(CounterType.P1P1.getName())) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (permanent == null) {
+                permanent = game.getPermanentEntering(event.getTargetId());
+            }
             if (permanent != null) {
                 players.add(permanent.getControllerId());
             }
