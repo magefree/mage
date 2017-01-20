@@ -28,18 +28,16 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterCreatureSpell;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 
 /**
  *
@@ -70,8 +68,6 @@ public class SteelGolem extends CardImpl {
 
 class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private static final FilterCreatureSpell filter = new FilterCreatureSpell();
-
     public SteelGolemEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You can't cast creature spells";
@@ -94,10 +90,8 @@ class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getControllerId())) {
-            Spell spell = game.getStack().getSpell(event.getSourceId());
-            if (spell != null && filter.match(spell, game)) {
-                return true;
-            }
+            Card card = game.getCard(event.getSourceId());
+            return card != null && card.getCardType().contains(CardType.CREATURE);
         }
         return false;
     }
