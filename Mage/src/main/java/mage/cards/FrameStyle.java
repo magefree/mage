@@ -27,6 +27,10 @@ public enum FrameStyle {
      */
     ZEN_FULL_ART_BASIC(BorderType.MOD, true),
     /**
+     * Magic Player Rewards full art cards
+     */
+    MPRP_FULL_ART_BASIC(BorderType.MOD, true),
+    /**
      * Unhinged full art lands
      */
     UNH_FULL_ART_BASIC(BorderType.SPC, true),

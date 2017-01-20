@@ -17,6 +17,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -38,6 +39,23 @@ public class ManaSymbols {
     private static boolean mediumSymbolsFound = false;
 
     private static final Map<String, Map<String, Image>> setImages = new HashMap<>();
+
+    private static final HashSet<String> onlyMythics = new HashSet<>();
+    private static final HashSet<String> withoutSymbols = new HashSet<>();
+
+    static {
+        onlyMythics.add("DRB");
+        onlyMythics.add("V09");
+        onlyMythics.add("V12");
+        onlyMythics.add("V13");
+        onlyMythics.add("V14");
+        onlyMythics.add("V15");
+        onlyMythics.add("V16");
+        onlyMythics.add("EXP");
+        onlyMythics.add("MPS");
+
+        withoutSymbols.add("MPRP");
+    }
     private static final Map<String, Dimension> setImagesExist = new HashMap<>();
     private static final Pattern REPLACE_SYMBOLS_PATTERN = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
     private static String cachedPath;
@@ -57,7 +75,15 @@ public class ManaSymbols {
             return;
         }
         for (String set : setCodes) {
-            String[] codes = new String[]{"C", "U", "R", "M"};
+            if (withoutSymbols.contains(set)) {
+                continue;
+            }
+            String[] codes;
+            if (onlyMythics.contains(set)) {
+                codes = new String[]{"M"};
+            } else {
+                codes = new String[]{"C", "U", "R", "M"};
+            }
 
             Map<String, Image> rarityImages = new HashMap<>();
             setImages.put(set, rarityImages);
@@ -72,7 +98,7 @@ public class ManaSymbols {
                         if (h > 0) {
                             Rectangle r = new Rectangle(21, (int) (h * 21.0f / width));
                             BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                            rarityImages.put(set, resized);
+                            rarityImages.put(rarityCode, resized);
                         }
                     } else {
                         rarityImages.put(rarityCode, image);

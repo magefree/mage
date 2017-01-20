@@ -58,12 +58,15 @@ public class GathererSets implements Iterable<DownloadJob> {
         "KTK", "FRF", "DTK",
         "BFZ", "OGW",
         "SOI", "EMN",
-        "KLD", "MPS", "AER",
+        "KLD", "AER",
         "AKH", "HOU"
     };
 
     private static final String[] onlyMythics = {
         "DRB", "V09", "V12", "V12", "V13", "V14", "V15", "V16", "EXP"
+    };
+    private static final String[] onlyMythicsAsSpecial = {
+        "MPS"
     };
 
     private static final HashMap<String, String> symbolsReplacements = new HashMap<>();
@@ -93,6 +96,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         symbolsReplacements.put("LEA", "1E");
         symbolsReplacements.put("LEB", "2E");
         symbolsReplacements.put("LEG", "LE");
+        symbolsReplacements.put("MPS", "MPS_KLD");
         symbolsReplacements.put("MIR", "MI");
         symbolsReplacements.put("MMQ", "MM");
         symbolsReplacements.put("NEM", "NE");
@@ -129,35 +133,41 @@ public class GathererSets implements Iterable<DownloadJob> {
         for (String symbol : symbols) {
             ExpansionSet exp = Sets.findSet(symbol);
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
-                jobs.add(generateDownloadJob(symbol, "C"));
-                jobs.add(generateDownloadJob(symbol, "U"));
-                jobs.add(generateDownloadJob(symbol, "R"));
+                jobs.add(generateDownloadJob(symbol, "C", "C"));
+                jobs.add(generateDownloadJob(symbol, "U", "U"));
+                jobs.add(generateDownloadJob(symbol, "R", "R"));
             }
         }
         for (String symbol : withMythics) {
             ExpansionSet exp = Sets.findSet(symbol);
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
-                jobs.add(generateDownloadJob(symbol, "C"));
-                jobs.add(generateDownloadJob(symbol, "U"));
-                jobs.add(generateDownloadJob(symbol, "R"));
-                jobs.add(generateDownloadJob(symbol, "M"));
+                jobs.add(generateDownloadJob(symbol, "C", "C"));
+                jobs.add(generateDownloadJob(symbol, "U", "U"));
+                jobs.add(generateDownloadJob(symbol, "R", "R"));
+                jobs.add(generateDownloadJob(symbol, "M", "M"));
             }
         }
         for (String symbol : onlyMythics) {
             ExpansionSet exp = Sets.findSet(symbol);
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
-                jobs.add(generateDownloadJob(symbol, "M"));
+                jobs.add(generateDownloadJob(symbol, "M", "M"));
+            }
+        }
+        for (String symbol : onlyMythicsAsSpecial) {
+            ExpansionSet exp = Sets.findSet(symbol);
+            if (exp != null && exp.getReleaseDate().before(compareDate)) {
+                jobs.add(generateDownloadJob(symbol, "M", "S"));
             }
         }
         return jobs.iterator();
     }
 
-    private DownloadJob generateDownloadJob(String set, String rarity) {
+    private DownloadJob generateDownloadJob(String set, String rarity, String urlRarity) {
         File dst = new File(outDir, set + "-" + rarity + ".jpg");
         if (symbolsReplacements.containsKey(set)) {
             set = symbolsReplacements.get(set);
         }
-        String url = "http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + rarity;
+        String url = "http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + urlRarity;
         return new DownloadJob(set + "-" + rarity, fromURL(url), toFile(dst));
     }
 
