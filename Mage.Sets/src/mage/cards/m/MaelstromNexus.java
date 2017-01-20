@@ -46,7 +46,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.watchers.common.FirstSpellCastThisTurnWatcher;
 
-
 /**
  *
  * @author jeffwadsworth
@@ -54,7 +53,7 @@ import mage.watchers.common.FirstSpellCastThisTurnWatcher;
 public class MaelstromNexus extends CardImpl {
 
     public MaelstromNexus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
 
         // The first spell you cast each turn has cascade.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaelstromNexusGainCascadeFirstSpellEffect()), new FirstSpellCastThisTurnWatcher());
@@ -72,7 +71,7 @@ public class MaelstromNexus extends CardImpl {
 
 class MaelstromNexusGainCascadeFirstSpellEffect extends ContinuousEffectImpl {
 
-    private Ability cascadeAbility = new CascadeAbility();
+    private final Ability cascadeAbility = new CascadeAbility();
 
     public MaelstromNexusGainCascadeFirstSpellEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

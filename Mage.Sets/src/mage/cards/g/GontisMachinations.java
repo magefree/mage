@@ -124,6 +124,7 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
 
     public GontisMachinationsFirstLostLifeThisTurnWatcher(final GontisMachinationsFirstLostLifeThisTurnWatcher watcher) {
         super(watcher);
+        this.playersLostLife.putAll(watcher.playersLostLife);
     }
 
     @Override

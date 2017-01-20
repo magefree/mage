@@ -14,7 +14,6 @@ import java.awt.Paint;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -171,11 +170,12 @@ public abstract class CardRenderer {
     }
 
     /**
-     * How far does a card have to be spaced down from
-     * a rendered card to show it's entire name line?
-     * This function is a bit of a hack, as different card faces need
-     * slightly different spacing, but we need it in a static context
-     * so that spacing is consistent in GY / deck views etc.
+     * How far does a card have to be spaced down from a rendered card to show
+     * it's entire name line? This function is a bit of a hack, as different
+     * card faces need slightly different spacing, but we need it in a static
+     * context so that spacing is consistent in GY / deck views etc.
+     *
+     * @param cardWidth
      * @return
      */
     public static int getCardTopHeight(int cardWidth) {
@@ -186,7 +186,7 @@ public abstract class CardRenderer {
                 BOX_HEIGHT_MIN,
                 BOX_HEIGHT_FRAC * cardWidth * 1.4f);
         int borderWidth = getBorderWidth(cardWidth);
-        return 2*borderWidth + boxHeight;
+        return 2 * borderWidth + boxHeight;
     }
 
     // The Draw Method

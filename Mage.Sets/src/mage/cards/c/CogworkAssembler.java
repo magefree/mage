@@ -55,7 +55,7 @@ public class CogworkAssembler extends CardImpl {
 
     public CogworkAssembler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-
+        
         this.subtype.add("Assembly-Worker");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

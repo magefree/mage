@@ -29,18 +29,13 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.DealsDamageToACreatureAllTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.targetpointer.FixedTarget;
+import mage.constants.SetTargetPointer;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -56,7 +51,10 @@ public class ToxinSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a Sliver deals combat damage to a creature, destroy that creature. It can't be regenerated.
-        this.addAbility(new DealsDamageToACreatureTriggeredAbility(new DestroyTargetEffect(true), true, false, true));
+        this.addAbility(new DealsDamageToACreatureAllTriggeredAbility(
+                new DestroyTargetEffect(true), false, 
+                new FilterCreaturePermanent("Sliver","a Sliver"), 
+                SetTargetPointer.PERMANENT, true));
 
     }
 
@@ -68,49 +66,4 @@ public class ToxinSliver extends CardImpl {
     public ToxinSliver copy() {
         return new ToxinSliver(this);
     }
-}
-
-class DealsDamageTriggeredAbility extends TriggeredAbilityImpl {
-
-    private boolean setTargetPointer;
-
-    public DealsDamageTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.setTargetPointer = setTargetPointer;
-    }
-
-    public DealsDamageTriggeredAbility(final DealsDamageTriggeredAbility ability) {
-        super(ability);
-        this.setTargetPointer = ability.setTargetPointer;
-    }
-
-    @Override
-    public DealsDamageTriggeredAbility copy() {
-        return new DealsDamageTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_CREATURE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-            if (game.getPermanent(event.getSourceId()).hasSubtype("Sliver", game)) {
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(game.getControllerId(event.getTargetId())));
-                        effect.setValue("damage", event.getAmount());
-                    }
-                }
-                return true;
-            }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Sliver deals damage to a creature" + super.getRule();
-    }
-
 }
