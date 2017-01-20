@@ -27,22 +27,19 @@
  */
 package mage.server;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.server.exceptions.UserNotFoundException;
 import mage.server.util.SystemUtil;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -256,26 +253,24 @@ public class ChatManager {
      * @param message
      * @param color
      */
-    public void broadcast(UUID userId, String message, MessageColor color) {
-        User user = UserManager.getInstance().getUser(userId);
-        if (user != null) {
-            for (ChatSession chat : chatSessions.values()) {
-                if (chat.hasUser(userId)) {
-                    chat.broadcast(user.getName(), message, color, true, MessageType.TALK, null);
-                }
-            }
-        }
+    public void broadcast(UUID userId, String message, MessageColor color) throws UserNotFoundException {
+        UserManager.getInstance().getUser(userId).ifPresent(user-> {
+
+            chatSessions.values()
+                    .stream()
+                    .filter(chat -> chat.hasUser(userId))
+                    .forEach(session -> session.broadcast(user.getName(), message, color, true, MessageType.TALK, null));
+
+        });
     }
 
     public void sendReconnectMessage(UUID userId) {
-        User user = UserManager.getInstance().getUser(userId);
-        if (user != null) {
-            for (ChatSession chat : chatSessions.values()) {
-                if (chat.hasUser(userId)) {
-                    chat.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS, null);
-                }
-            }
-        }
+        UserManager.getInstance().getUser(userId).ifPresent(user ->
+                chatSessions.values()
+                        .stream()
+                        .filter(chat -> chat.hasUser(userId))
+                        .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS, null)));
+
     }
 
     public void removeUser(UUID userId, DisconnectReason reason) {
@@ -291,4 +286,7 @@ public class ChatManager {
         chatSessionList.addAll(chatSessions.values());
         return chatSessionList;
     }
+
+
 }
+

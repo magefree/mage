@@ -50,7 +50,7 @@ public class ReplayManager {
     public void replayGame(UUID gameId, UUID userId) {
         ReplaySession replaySession = new ReplaySession(gameId, userId);
         replaySessions.put(gameId.toString() + userId.toString(), replaySession);
-        UserManager.getInstance().getUser(userId).ccReplayGame(gameId);        
+        UserManager.getInstance().getUser(userId).ifPresent(user->user.ccReplayGame(gameId));
     }
 
     public void startReplay(UUID gameId, UUID userId) {

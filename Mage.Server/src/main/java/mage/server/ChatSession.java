@@ -28,6 +28,7 @@
 package mage.server;
 
 import mage.interfaces.callback.ClientCallback;
+import mage.server.exceptions.UserNotFoundException;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -38,6 +39,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -61,13 +63,14 @@ public class ChatSession {
     }
 
     public void join(UUID userId) {
-        User user = UserManager.getInstance().getUser(userId);
-        if (user != null && !clients.containsKey(userId)) {
-            String userName = user.getName();
-            clients.put(userId, userName);
-            broadcast(null, userName + " has joined (" + user.getClientVersion() + ")", MessageColor.BLUE, true, MessageType.STATUS, null);
-            logger.trace(userName + " joined chat " + chatId);
-        }
+       UserManager.getInstance().getUser(userId).ifPresent(user-> {
+           if (!clients.containsKey(userId)) {
+               String userName = user.getName();
+               clients.put(userId, userName);
+               broadcast(null, userName + " has joined (" + user.getClientVersion() + ")", MessageColor.BLUE, true, MessageType.STATUS, null);
+               logger.trace(userName + " joined chat " + chatId);
+           }
+       });
     }
 
     public void kill(UUID userId, DisconnectReason reason) {
@@ -141,9 +144,9 @@ public class ChatSession {
             HashSet<UUID> clientsToRemove = null;
             ClientCallback clientCallback = new ClientCallback("chatMessage", chatId, new ChatMessage(userName, message, (withTime ? timeFormatter.format(new Date()) : ""), color, messageType, soundToPlay));
             for (UUID userId : clients.keySet()) {
-                User user = UserManager.getInstance().getUser(userId);
-                if (user != null) {
-                    user.fireCallback(clientCallback);
+                Optional<User> user = UserManager.getInstance().getUser(userId);
+                if (user.isPresent()) {
+                    user.get().fireCallback(clientCallback);
                 } else {
                     if (clientsToRemove == null) {
                         clientsToRemove = new HashSet<>();

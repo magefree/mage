@@ -37,13 +37,13 @@ import mage.server.util.ThreadExecutor;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentSession {
@@ -67,9 +67,9 @@ public class TournamentSession {
 
     public boolean init() {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), getTournamentView()));
+            Optional<User> user = UserManager.getInstance().getUser(userId);
+            if (user.isPresent()) {
+                user.get().fireCallback(new ClientCallback("tournamentInit", tournament.getId(), getTournamentView()));
                 return true;
             }
         }
@@ -78,30 +78,27 @@ public class TournamentSession {
 
     public void update() {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), getTournamentView()));
-            }
+            UserManager.getInstance().getUser(userId).ifPresent(user ->
+                    user.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), getTournamentView())));
+
         }
     }
 
     public void gameOver(final String message) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("tournamentOver", tournament.getId(), message));
-            }
+            UserManager.getInstance().getUser(userId).ifPresent(user ->
+                    user.fireCallback(new ClientCallback("tournamentOver", tournament.getId(), message)));
+
         }
     }
 
     public void construct(int timeout) {
         if (!killed) {
             setupTimeout(timeout);
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
+            UserManager.getInstance().getUser(userId).ifPresent(user -> {
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
                 user.ccConstruct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
-            }
+            });
         }
     }
 
@@ -136,7 +133,7 @@ public class TournamentSession {
                             logger.fatal("TournamentSession error - userId " + userId + " tId " + tournament.getId(), e);
                         }
                     },
-                seconds, TimeUnit.SECONDS
+                    seconds, TimeUnit.SECONDS
             );
         }
     }
@@ -165,18 +162,18 @@ public class TournamentSession {
         cleanUp();
         removeTournamentForUser();
     }
-    
+
     private void cleanUp() {
         if (futureTimeout != null && !futureTimeout.isDone()) {
             futureTimeout.cancel(true);
         }
     }
-    
+
     private void removeTournamentForUser() {
-        User user = UserManager.getInstance().getUser(userId);
-        if (user != null) {
-            user.removeTournament(playerId);
-        }        
+        UserManager.getInstance().getUser(userId).ifPresent(user ->
+                user.removeTournament(playerId));
+
+
     }
-    
+
 }
