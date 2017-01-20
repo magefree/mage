@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -88,7 +89,8 @@ public class HopeOfGhirapur extends CardImpl {
                 if (sourceObject != null) {
                     ability.getTargets().clear();
                     FilterPlayer playerFilter = new FilterPlayer("player who was dealt combat damage by " + sourceObject.getIdName() + " this turn");
-                    playerFilter.add(new HopeOfGhirapurPlayerLostLifePredicate(ability.getSourceId()));
+                    MageObjectReference sourceReference = new MageObjectReference(ability.getSourceId(), ability.getSourceObjectZoneChangeCounter(), game);
+                    playerFilter.add(new HopeOfGhirapurPlayerLostLifePredicate(sourceReference));
                     ability.addTarget(new TargetPlayer(1, 1, false, playerFilter));
                 }
             }
@@ -155,17 +157,17 @@ class HopeOfGhirapurCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
 class HopeOfGhirapurPlayerLostLifePredicate implements Predicate<Player> {
 
-    private final UUID sourceId;
+    private final MageObjectReference sourceReference;
 
-    public HopeOfGhirapurPlayerLostLifePredicate(UUID sourceId) {
-        this.sourceId = sourceId;
+    public HopeOfGhirapurPlayerLostLifePredicate(MageObjectReference sourceReference) {
+        this.sourceReference = sourceReference;
     }
 
     @Override
     public boolean apply(Player input, Game game) {
         HopeOfGhirapurCombatDamageWatcher watcher = (HopeOfGhirapurCombatDamageWatcher) game.getState().getWatchers().get(HopeOfGhirapurCombatDamageWatcher.class.getName());
         if (watcher != null) {
-            return watcher.playerGotCombatDamage(sourceId, input.getId());
+            return watcher.playerGotCombatDamage(sourceReference, input.getId());
         }
         return false;
     }
@@ -173,7 +175,7 @@ class HopeOfGhirapurPlayerLostLifePredicate implements Predicate<Player> {
 
 class HopeOfGhirapurCombatDamageWatcher extends Watcher {
 
-    private final HashMap<UUID, Set<UUID>> combatDamagedPlayers = new HashMap<>();
+    private final HashMap<MageObjectReference, Set<UUID>> combatDamagedPlayers = new HashMap<>();
 
     public HopeOfGhirapurCombatDamageWatcher() {
         super(HopeOfGhirapurCombatDamageWatcher.class.getName(), WatcherScope.GAME);
@@ -181,10 +183,10 @@ class HopeOfGhirapurCombatDamageWatcher extends Watcher {
 
     public HopeOfGhirapurCombatDamageWatcher(final HopeOfGhirapurCombatDamageWatcher watcher) {
         super(watcher);
-        for (UUID objectId : watcher.combatDamagedPlayers.keySet()) {
+        for (MageObjectReference sourceReference : watcher.combatDamagedPlayers.keySet()) {
             Set<UUID> players = new HashSet<>();
-            players.addAll(watcher.combatDamagedPlayers.get(objectId));
-            this.combatDamagedPlayers.put(objectId, players);
+            players.addAll(watcher.combatDamagedPlayers.get(sourceReference));
+            this.combatDamagedPlayers.put(sourceReference, players);
         }
     }
 
@@ -196,28 +198,29 @@ class HopeOfGhirapurCombatDamageWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_PLAYER && ((DamagedPlayerEvent) event).isCombatDamage()) {
+            MageObjectReference sourceReference = new MageObjectReference(event.getSourceId(), game);
             Set<UUID> players;
-            if (combatDamagedPlayers.containsKey(event.getSourceId())) {
-                players = combatDamagedPlayers.get(event.getSourceId());
+            if (combatDamagedPlayers.containsKey(sourceReference)) {
+                players = combatDamagedPlayers.get(sourceReference);
             } else {
                 players = new HashSet<>();
-                combatDamagedPlayers.put(event.getSourceId(), players);
+                combatDamagedPlayers.put(sourceReference, players);
             }
             players.add(event.getTargetId());
         }
     }
 
     /**
-     * Checks if the current object with sourceId has damaged the player during
-     * the current turn. The zoneChangeCounter will be taken into account.
+     * Checks if the current object has damaged the player during
+     * the current turn.
      *
-     * @param sourceId
-     * @param game
+     * @param objectReference
+     * @param playerId
      * @return
      */
-    public boolean playerGotCombatDamage(UUID sourceId, UUID playerId) {
-        if (combatDamagedPlayers.containsKey(sourceId)) {
-            return combatDamagedPlayers.get(sourceId).contains(playerId);
+    public boolean playerGotCombatDamage(MageObjectReference objectReference, UUID playerId) {
+        if (combatDamagedPlayers.containsKey(objectReference)) {
+            return combatDamagedPlayers.get(objectReference).contains(playerId);
         }
         return false;
     }
