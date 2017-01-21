@@ -25,44 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.u;
 
-import java.util.UUID;
+package mage.abilities.effects.common.continuous;
 
-import mage.constants.*;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- *
- * @author Plopman
+ * @author Galatolol
  */
-public class UrborgTombOfYawgmoth extends CardImpl {
 
-    public UrborgTombOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+public class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
 
-        // Each land is a Swamp in addition to its other land types.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),
-                "Each land is a Swamp in addition to its other land types"));
-        ability.addEffect(new AddCardSubtypeAllEffect(new FilterLandPermanent(), "Swamp", DependencyType.BecomeSwamp));
-        this.addAbility(ability);
+    private static FilterPermanent filter = new FilterLandPermanent();
+    private static String addedSubtype;
 
+    public AddCardSubtypeAllEffect(FilterPermanent _filter, String _addedSubtype, DependencyType _dependency) {
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+        filter = _filter;
+        staticText = "";
+        addedSubtype = _addedSubtype;
+        addDependencyType(_dependency);
     }
 
-    public UrborgTombOfYawgmoth(final UrborgTombOfYawgmoth card) {
-        super(card);
+    public AddCardSubtypeAllEffect(final AddCardSubtypeAllEffect effect) {
+        super(effect);
     }
 
     @Override
-    public UrborgTombOfYawgmoth copy() {
-        return new UrborgTombOfYawgmoth(this);
+    public boolean apply(Game game, Ability source) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            if (perm != null && !perm.getSubtype(game).contains(addedSubtype)) {
+                perm.getSubtype(game).add(addedSubtype);
+            }
+        }
+        return true;
     }
+
+    @Override
+    public AddCardSubtypeAllEffect copy() {
+        return new AddCardSubtypeAllEffect(this);
+    }
+
 }

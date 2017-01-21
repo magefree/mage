@@ -25,44 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.u;
+package mage.cards.b;
 
 import java.util.UUID;
 
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterLandPermanent;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
+import mage.constants.CardType;
+import mage.constants.DependencyType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author Plopman
+ * @author Galatolol
  */
-public class UrborgTombOfYawgmoth extends CardImpl {
+public class BlanketOfNight extends CardImpl {
 
-    public UrborgTombOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+    public BlanketOfNight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
+        
 
         // Each land is a Swamp in addition to its other land types.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),
                 "Each land is a Swamp in addition to its other land types"));
         ability.addEffect(new AddCardSubtypeAllEffect(new FilterLandPermanent(), "Swamp", DependencyType.BecomeSwamp));
         this.addAbility(ability);
-
     }
 
-    public UrborgTombOfYawgmoth(final UrborgTombOfYawgmoth card) {
+    public BlanketOfNight(final BlanketOfNight card) {
         super(card);
     }
 
     @Override
-    public UrborgTombOfYawgmoth copy() {
-        return new UrborgTombOfYawgmoth(this);
+    public BlanketOfNight copy() {
+        return new BlanketOfNight(this);
     }
 }
