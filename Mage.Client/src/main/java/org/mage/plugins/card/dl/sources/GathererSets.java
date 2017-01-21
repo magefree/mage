@@ -127,7 +127,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     public Iterator<DownloadJob> iterator() {
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
-        c.add(Calendar.DATE, -14);
+        c.add(Calendar.DATE, +14); // Try to load the symbols eralies 14 days before release date
         Date compareDate = c.getTime();
         ArrayList<DownloadJob> jobs = new ArrayList<>();
         for (String symbol : symbols) {
