@@ -27,6 +27,14 @@
  */
 package mage.server;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -60,15 +68,6 @@ import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
 
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -96,10 +95,9 @@ public class TableController {
         if (userId != null) {
             Optional<User> user = UserManager.getInstance().getUser(userId);
             // TODO: Handle if user == null
-            if(user.isPresent()) {
+            if (user.isPresent()) {
                 controllerName = user.get().getName();
-            }
-            else{
+            } else {
                 controllerName = "undefined";
             }
         } else {
@@ -578,10 +576,10 @@ public class TableController {
             GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId, gameOptions);
             String creator = null;
             StringBuilder opponent = new StringBuilder();
-            for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) { // no AI players
+            for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) { // do only for no AI players
                 if (match.getPlayer(entry.getValue()) != null && !match.getPlayer(entry.getValue()).hasQuit()) {
                     Optional<User> _user = UserManager.getInstance().getUser(entry.getKey());
-                    if (!_user.isPresent()) {
+                    if (_user.isPresent()) {
                         User user = _user.get();
                         user.ccGameStarted(match.getGame().getId(), entry.getValue());
 
@@ -978,8 +976,8 @@ public class TableController {
     void cleanUp() {
         if (!table.isTournamentSubTable()) {
             for (Map.Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
-                UserManager.getInstance().getUser(entry.getKey()).ifPresent(user ->
-                        user.removeTable(entry.getValue()));
+                UserManager.getInstance().getUser(entry.getKey()).ifPresent(user
+                        -> user.removeTable(entry.getValue()));
             }
 
         }
