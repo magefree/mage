@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.watchers.common;
 
 import java.util.HashSet;
@@ -49,11 +48,12 @@ public class RevoltWatcher extends Watcher {
     private final Set<UUID> revoltActivePlayerIds = new HashSet<>(0);
 
     public RevoltWatcher() {
-        super("Revolt", WatcherScope.GAME);
+        super(RevoltWatcher.class.getName(), WatcherScope.GAME);
     }
 
     public RevoltWatcher(final RevoltWatcher watcher) {
         super(watcher);
+        this.revoltActivePlayerIds.addAll(watcher.revoltActivePlayerIds);
     }
 
     @Override
@@ -77,8 +77,6 @@ public class RevoltWatcher extends Watcher {
     public void reset() {
         revoltActivePlayerIds.clear();
     }
-
-
 
     @Override
     public RevoltWatcher copy() {
