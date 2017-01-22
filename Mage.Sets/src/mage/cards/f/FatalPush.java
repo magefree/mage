@@ -71,7 +71,7 @@ class FatalPushEffect extends OneShotEffect {
 
     FatalPushEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target creature if it has converted mana cost 2 or less.<br><i>Revolt</i> &mdash; Destroy that creature if it has converted mana cost 4 or less instead if a permanent you controlled left the battlefield this turn.";
+        this.staticText = "Destroy target creature if it has converted mana cost 2 or less.<br><i>Revolt</i> &mdash; Destroy that creature if it has converted mana cost 4 or less instead if a permanent you controlled left the battlefield this turn";
     }
 
     FatalPushEffect(final FatalPushEffect effect) {
