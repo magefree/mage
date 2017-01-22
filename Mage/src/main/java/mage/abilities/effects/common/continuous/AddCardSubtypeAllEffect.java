@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
 
 public class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
 
-    private static FilterPermanent filter = new FilterLandPermanent();
+    private static FilterPermanent filter;
     private static String addedSubtype;
 
     public AddCardSubtypeAllEffect(FilterPermanent _filter, String _addedSubtype, DependencyType _dependency) {
