@@ -3293,6 +3293,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
+        if (card == null) {
+            return false;
+        }
         boolean result = false;
         //    Zone fromZone = game.getState().getZone(card.getId());
         if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null ? fromZone == Zone.BATTLEFIELD : false)) {
@@ -3317,6 +3320,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName) {
+        if (card == null) {
+            return false;
+        }
         boolean result = false;
         if (card.moveToZone(Zone.LIBRARY, sourceId, game, toTop)) {
             if (!game.isSimulation()) {
@@ -3346,6 +3352,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName) {
+        if (card == null) {
+            return false;
+        }
         boolean result = false;
         if (card.moveToExile(exileId, exileName, sourceId, game)) {
             if (!game.isSimulation()) {
