@@ -825,8 +825,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!cardsToLibrary.isEmpty()) {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             if (!anyOrder) {
-                for (UUID objectId : cards) {
-                    moveObjectToLibrary(objectId, source == null ? null : source.getSourceId(), game, false, false);
+                while (!cards.isEmpty()) {
+                    UUID cardId = cards.getRandom(game).getId();
+                    cards.remove(cardId);
+                    moveObjectToLibrary(cardId, source == null ? null : source.getSourceId(), game, false, false);
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
@@ -864,8 +866,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
-                for (UUID cardId : cards) {
-                    moveObjectToLibrary(cardId, sourceId, game, true, false);
+                while (!cards.isEmpty()) {
+                    UUID cardId = cards.getRandom(game).getId();
+                    cards.remove(cardId);
+                    moveObjectToLibrary(cardId, source == null ? null : source.getSourceId(), game, true, false);
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
