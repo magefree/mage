@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,11 +39,9 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.permanent.token.OozeToken;
+import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -54,17 +54,19 @@ public class CorruptedZendikon extends CardImpl {
         this.subtype.add("Aura");
 
         // Enchant land
-        // Enchanted land is a 3/3 black Ooze creature. It's still a land.
-        // When enchanted land dies, return that card to its owner's hand.
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new OozeToken(3, 3), "Enchanted land is a 3/3 black Ooze creature. It's still a land.", Duration.WhileOnBattlefield));
+        // Enchanted land is a 3/3 black Ooze creature. It's still a land.
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new BecomesCreatureAttachedEffect(new CorruptedZendikonOozeToken(),
+                        "Enchanted land is a 3/3 black Ooze creature. It's still a land.", Duration.WhileOnBattlefield));
         this.addAbility(ability2);
 
+        // When enchanted land dies, return that card to its owner's hand.
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false);
         this.addAbility(ability3);
     }
@@ -77,4 +79,17 @@ public class CorruptedZendikon extends CardImpl {
     public CorruptedZendikon copy() {
         return new CorruptedZendikon(this);
     }
+}
+
+class CorruptedZendikonOozeToken extends Token {
+
+    public CorruptedZendikonOozeToken() {
+        super("Ooze", "3/3 black Ooze creature");
+        cardType.add(CardType.CREATURE);
+        color.setBlack(true);
+        subtype.add("Ooze");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+    }
+
 }
