@@ -115,6 +115,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Folk of An-Havva", 58, Rarity.COMMON, FolkOfAnHavva.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Folk of An-Havva", 59, Rarity.COMMON, FolkOfAnHavva.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forget", 32, Rarity.RARE, mage.cards.f.Forget.class));
+        cards.add(new SetCardInfo("Ghost Hounds", 12, Rarity.UNCOMMON, mage.cards.g.GhostHounds.class));
         cards.add(new SetCardInfo("Grandmother Sengir", 13, Rarity.RARE, mage.cards.g.GrandmotherSengir.class));
         cards.add(new SetCardInfo("Headstone", 15, Rarity.COMMON, mage.cards.h.Headstone.class));
         cards.add(new SetCardInfo("Hungry Mist", 60, Rarity.COMMON, mage.cards.h.HungryMist.class, new CardGraphicInfo(null, true)));

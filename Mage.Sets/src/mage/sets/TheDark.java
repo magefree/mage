@@ -104,6 +104,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Marsh Viper", 44, Rarity.COMMON, mage.cards.m.MarshViper.class));
         cards.add(new SetCardInfo("Maze of Ith", 114, Rarity.UNCOMMON, mage.cards.m.MazeOfIth.class));
         cards.add(new SetCardInfo("Merfolk Assassin", 31, Rarity.UNCOMMON, mage.cards.m.MerfolkAssassin.class));
+        cards.add(new SetCardInfo("Morale", 87, Rarity.COMMON, mage.cards.m.Morale.class));
         cards.add(new SetCardInfo("Murk Dwellers", 11, Rarity.COMMON, mage.cards.m.MurkDwellers.class));
         cards.add(new SetCardInfo("Niall Silvain", 45, Rarity.RARE, mage.cards.n.NiallSilvain.class));
         cards.add(new SetCardInfo("Orc General", 72, Rarity.UNCOMMON, mage.cards.o.OrcGeneral.class));
