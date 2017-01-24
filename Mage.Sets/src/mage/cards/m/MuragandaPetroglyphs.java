@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -51,14 +50,17 @@ import mage.game.Game;
  */
 public class MuragandaPetroglyphs extends CardImpl {
 
-    private static final FilterCreaturePermanent filterNoAbilities = new FilterCreaturePermanent(
-            "Creatures with no ability");
+    private static final FilterCreaturePermanent filterNoAbilities
+            = new FilterCreaturePermanent("Creatures with no ability");
+
+    static {
+        filterNoAbilities.add(new NoAbilityPredicate());
+    }
 
     public MuragandaPetroglyphs(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.expansionSetCode = "FUT";
 
-        filterNoAbilities.add(new NoAbilityPredicate());
         // Creatures with no abilities get +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(
                 2, 2, Duration.WhileOnBattlefield, filterNoAbilities, false)));
@@ -80,24 +82,23 @@ class NoAbilityPredicate implements Predicate<MageObject> {
     public boolean apply(MageObject input, Game game) {
         boolean isFaceDown = false;
         Abilities<Ability> abilities;
-        if (input instanceof Card){
-            abilities = ((Card)input).getAbilities(game);
-
-            isFaceDown = ((Card)input).isFaceDown(game);
+        if (input instanceof Card) {
+            abilities = ((Card) input).getAbilities(game);
+            isFaceDown = ((Card) input).isFaceDown(game);
         } else {
             abilities = input.getAbilities();
         }
         if (isFaceDown) {
-            for (Ability ability : abilities){
-                if(!ability.getSourceId().equals(input.getId())) {
+            for (Ability ability : abilities) {
+                if (!ability.getSourceId().equals(input.getId())) {
                     return false;
                 }
             }
             return true;
         }
 
-        for (Ability ability : abilities){
-            if (ability.getClass() != SpellAbility.class){
+        for (Ability ability : abilities) {
+            if (ability.getClass() != SpellAbility.class) {
 
                 return false;
             }
