@@ -63,7 +63,7 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
         filter.add(new GreatestPowerPredicate());
     }
 
-    private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power";
+    private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.";
 
     public SelvalaHeartOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

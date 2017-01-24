@@ -43,17 +43,32 @@ import mage.game.Game;
  */
 public class SimpleManaAbility extends ActivatedManaAbilityImpl {
 
+    private boolean predictable;
+            
     public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost) {
+        this(zone, effect, cost, true);
+    }
+    /**
+     * 
+     * @param zone
+     * @param effect
+     * @param cost
+     * @param predictable set to false if definig the mana type or amount needs to reveal information and can't be predicted
+     */
+    public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost, boolean predictable) {
         super(zone, effect, cost);
+        this.predictable = predictable;
     }
 
     public SimpleManaAbility(Zone zone, Mana mana, Cost cost) {
         super(zone, new BasicManaEffect(mana), cost);
         this.netMana.add(mana.copy());
+        this.predictable = true;
     }
 
     public SimpleManaAbility(final SimpleManaAbility ability) {
         super(ability);
+        this.predictable = ability.predictable;
     }
 
     @Override
@@ -63,7 +78,7 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        if (netMana.isEmpty()) {
+        if (netMana.isEmpty() && predictable) {
             for (Effect effect: getEffects()) {
                 if (effect instanceof ManaEffect) {
                     Mana effectMana =((ManaEffect)effect).getMana(game, this);
