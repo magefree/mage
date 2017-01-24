@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -41,8 +42,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author vereena42
@@ -51,7 +50,6 @@ public class PowerstoneMinefield extends CardImpl {
 
     public PowerstoneMinefield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{W}");
-        
 
         // Whenever a creature attacks or blocks, Powerstone Minefield deals 2 damage to it.
         this.addAbility(new PowerstoneMinefieldTriggeredAbility());
@@ -86,11 +84,10 @@ class PowerstoneMinefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        UUID sourceId = event.getSourceId();
-        Permanent permanent = game.getPermanent(sourceId);
+        Permanent permanent = game.getPermanent(event.getSourceId());
         if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(sourceId));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
             }
             return true;
         }
@@ -99,7 +96,7 @@ class PowerstoneMinefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature attacks or blocks, Powerstone Minefield deals 2 damage to it.";
+        return "Whenever a creature attacks or blocks, {this} deals 2 damage to it.";
     }
 
     @Override
