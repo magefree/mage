@@ -432,6 +432,13 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public String getLogName() {
+        if (faceDown) {
+            if (getCardType().contains(CardType.CREATURE)) {
+                return "face down creature spell";
+            } else {
+                return "face down spell";
+            }
+        }
         return GameLog.getColoredObjectIdName(card);
     }
 
@@ -451,7 +458,7 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public List<CardType> getCardType() {
-        if (this.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.FACE_DOWN_CREATURE)) {
+        if (faceDown) {
             List<CardType> cardTypes = new ArrayList<>();
             cardTypes.add(CardType.CREATURE);
             return cardTypes;

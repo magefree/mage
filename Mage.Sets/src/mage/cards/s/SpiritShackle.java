@@ -25,44 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.u;
+package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.constants.*;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
+import mage.counters.BoostCounter;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterLandPermanent;
-import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
+import mage.constants.CardType;
 
 /**
  *
- * @author Plopman
+ * @author Galatolol
  */
-public class UrborgTombOfYawgmoth extends CardImpl {
+public class SpiritShackle extends CardImpl {
 
-    public UrborgTombOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+    public SpiritShackle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");
+        
+        this.subtype.add("Aura");
 
-        // Each land is a Swamp in addition to its other land types.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),
-                "Each land is a Swamp in addition to its other land types"));
-        ability.addEffect(new AddCardSubtypeAllEffect(new FilterLandPermanent(), "Swamp", DependencyType.BecomeSwamp));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new AddCountersAttachedEffect(new BoostCounter(0, -2), "it"), "enchanted creature"));
 
     }
 
-    public UrborgTombOfYawgmoth(final UrborgTombOfYawgmoth card) {
+    public SpiritShackle(final SpiritShackle card) {
         super(card);
     }
 
     @Override
-    public UrborgTombOfYawgmoth copy() {
-        return new UrborgTombOfYawgmoth(this);
+    public SpiritShackle copy() {
+        return new SpiritShackle(this);
     }
 }

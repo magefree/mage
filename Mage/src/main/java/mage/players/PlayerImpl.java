@@ -2768,7 +2768,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                             case STATIC:
                                 if (card.getCardType().contains(CardType.LAND) && ability instanceof AlternativeSourceCosts) {
                                     if (canLandPlayAlternateSourceCostsAbility(card, available, ability, game)) { // e.g. Land with Morph
-                                        playable.add(card.getId());
+                                        if (game.canPlaySorcery(getId())) {
+                                            playable.add(card.getId());
+                                        }
                                         break Abilities;
                                     }
                                 }

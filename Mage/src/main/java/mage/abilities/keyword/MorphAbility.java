@@ -194,7 +194,8 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     @Override
     public boolean isAvailable(Ability source, Game game) {
-        return true;
+        return game.isMainPhase() && game.getActivePlayerId().equals(source.getControllerId())
+                && (game.getStack().isEmpty() || (game.getStack().size() == 1 && game.getStack().getFirst().getSourceId().equals(source.getSourceId())));
     }
 
     @Override
@@ -282,10 +283,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     @Override
     public String getCastMessageSuffix(Game game) {
-        StringBuilder sb = new StringBuilder();
-        int position = 0;
-        sb.append(alternateCosts.getCastSuffixMessage(position));
-        return sb.toString();
+        return alternateCosts.getCastSuffixMessage(0);
     }
 
     @Override

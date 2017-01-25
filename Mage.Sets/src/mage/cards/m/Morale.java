@@ -25,44 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.u;
+package mage.cards.m;
 
 import java.util.UUID;
 
-import mage.constants.*;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterLandPermanent;
-import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author Plopman
+ * @author Galatolol
  */
-public class UrborgTombOfYawgmoth extends CardImpl {
+public class Morale extends CardImpl {
 
-    public UrborgTombOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+    public Morale(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
+        
 
-        // Each land is a Swamp in addition to its other land types.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),
-                "Each land is a Swamp in addition to its other land types"));
-        ability.addEffect(new AddCardSubtypeAllEffect(new FilterLandPermanent(), "Swamp", DependencyType.BecomeSwamp));
-        this.addAbility(ability);
+        // Attacking creatures get +1/+1 until end of turn.
+        this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false));
 
     }
 
-    public UrborgTombOfYawgmoth(final UrborgTombOfYawgmoth card) {
+    public Morale(final Morale card) {
         super(card);
     }
 
     @Override
-    public UrborgTombOfYawgmoth copy() {
-        return new UrborgTombOfYawgmoth(this);
+    public Morale copy() {
+        return new Morale(this);
     }
 }

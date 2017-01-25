@@ -130,6 +130,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Haunting Hymn", 112, Rarity.UNCOMMON, mage.cards.h.HauntingHymn.class));
         cards.add(new SetCardInfo("Havenwood Wurm", 199, Rarity.COMMON, mage.cards.h.HavenwoodWurm.class));
         cards.add(new SetCardInfo("Herd Gnarr", 200, Rarity.COMMON, mage.cards.h.HerdGnarr.class));
+        cards.add(new SetCardInfo("Hivestone", 256, Rarity.RARE, mage.cards.h.Hivestone.class));
         cards.add(new SetCardInfo("Hypergenesis", 201, Rarity.RARE, mage.cards.h.Hypergenesis.class));
         cards.add(new SetCardInfo("Ib Halfheart, Goblin Tactician", 163, Rarity.RARE, mage.cards.i.IbHalfheartGoblinTactician.class));
         cards.add(new SetCardInfo("Icatian Crier", 23, Rarity.COMMON, mage.cards.i.IcatianCrier.class));

@@ -25,44 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.u;
+package mage.cards.g;
 
 import java.util.UUID;
-
-import mage.constants.*;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.mana.BlackManaAbility;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterLandPermanent;
-import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author Plopman
+ * @author Galatolol
  */
-public class UrborgTombOfYawgmoth extends CardImpl {
+public class GhostHounds extends CardImpl {
 
-    public UrborgTombOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creature");
 
-        // Each land is a Swamp in addition to its other land types.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),
-                "Each land is a Swamp in addition to its other land types"));
-        ability.addEffect(new AddCardSubtypeAllEffect(new FilterLandPermanent(), "Swamp", DependencyType.BecomeSwamp));
-        this.addAbility(ability);
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+    }
+
+    public GhostHounds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        
+        this.subtype.add("Hound");
+        this.subtype.add("Spirit");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
+
+        // Whenever Ghost Hounds blocks or becomes blocked by a white creature, Ghost Hounds gains first strike until end of turn.
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), filter, false));
 
     }
 
-    public UrborgTombOfYawgmoth(final UrborgTombOfYawgmoth card) {
+    public GhostHounds(final GhostHounds card) {
         super(card);
     }
-
     @Override
-    public UrborgTombOfYawgmoth copy() {
-        return new UrborgTombOfYawgmoth(this);
+    public GhostHounds copy() {
+        return new GhostHounds(this);
     }
 }
