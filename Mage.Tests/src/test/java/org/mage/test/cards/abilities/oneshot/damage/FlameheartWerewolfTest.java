@@ -43,7 +43,7 @@ public class FlameheartWerewolfTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Kalitas, Traitor of Ghet", 0);
         assertGraveyardCount(playerB, "Kalitas, Traitor of Ghet", 1);
     }
-    
+
     @Test
     public void testBlockedByTwo22s() {
         addCard(Zone.BATTLEFIELD, playerA, "Flameheart Werewolf");
@@ -70,5 +70,33 @@ public class FlameheartWerewolfTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Falkenrath Reaver", 1);
         assertPermanentCount(playerB, "Wind Drake", 0);
         assertGraveyardCount(playerB, "Wind Drake", 1);
+    }
+
+    @Test
+    public void testKessigForgemaster() {
+        addCard(Zone.BATTLEFIELD, playerA, "Kessig Forgemaster");
+        // Both 1/1 creatures should die before the combat starts
+        addCard(Zone.BATTLEFIELD, playerB, "Wily Bandar");
+        addCard(Zone.BATTLEFIELD, playerB, "Stern Constable");
+
+        attack(3, playerA, "Kessig Forgemaster");
+        block(3, playerB, "Wily Bandar", "Flameheart Werewolf");
+        block(3, playerB, "Stern Constable", "Flameheart Werewolf");
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        // Kessig Forgemaster was blocked, no trample
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        // both 1/1s should die before they had a chance to deal damage
+        // to Kessig Forgemaster
+        assertPermanentCount(playerA, "Kessig Forgemaster", 1);
+        assertGraveyardCount(playerA, "Kessig Forgemaster", 0);
+        assertPermanentCount(playerB, "Wily Bandar", 0);
+        assertGraveyardCount(playerB, "Wily Bandar", 1);
+        assertPermanentCount(playerB, "Stern Constable", 0);
+        assertGraveyardCount(playerB, "Stern Constable", 1);
     }
 }
