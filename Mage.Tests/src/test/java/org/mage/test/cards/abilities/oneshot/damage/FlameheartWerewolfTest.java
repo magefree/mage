@@ -80,8 +80,8 @@ public class FlameheartWerewolfTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Stern Constable");
 
         attack(3, playerA, "Kessig Forgemaster");
-        block(3, playerB, "Wily Bandar", "Flameheart Werewolf");
-        block(3, playerB, "Stern Constable", "Flameheart Werewolf");
+        block(3, playerB, "Wily Bandar", "Kessig Forgemaster");
+        block(3, playerB, "Stern Constable", "Kessig Forgemaster");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
