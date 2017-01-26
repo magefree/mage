@@ -164,15 +164,6 @@ public class SystemUtil {
         return input.replaceAll("[^a-zA-Z0-9]", "");
     }
 
-    public static void main(String... args) {
-        System.out.println(sanitize("123"));
-        System.out.println(sanitize("AaAaD_123"));
-        System.out.println(sanitize("--sas-"));
-        System.out.println(sanitize("anPlsdf123_") + "|");
-        System.out.println(sanitize("anPlsdf123 ") + "|");
-        System.out.println(sanitize("anPlsdf123\r\n") + "|");
-    }
-
     /**
      * Get a diff between two dates
      *
