@@ -32,11 +32,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
@@ -111,9 +107,8 @@ public class ClassScanner {
         List<Class> cards = new ArrayList<>();
         if (!file.exists()) return cards;
 
-        JarInputStream jarFile = null;
-        try {
-            jarFile = new JarInputStream(new FileInputStream(file));
+
+        try(JarInputStream jarFile = new JarInputStream(new FileInputStream(file))) {
             while (true) {
                 JarEntry jarEntry = jarFile.getNextJarEntry();
                 if (jarEntry == null) {
@@ -127,11 +122,6 @@ public class ClassScanner {
                 }
             }
         } catch (IOException ex) {
-        } finally {
-            try {
-                if(jarFile != null) jarFile.close();
-            } catch (IOException ex) {
-            }
         }
         return cards;
     }
