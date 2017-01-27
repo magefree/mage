@@ -215,7 +215,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         UUID opponentId = game.getCombat().getDefenders().iterator().next();
         for (UUID attackerId: combat.getAttackers()) {
             this.declareAttacker(attackerId, opponentId, game, false);
-            sb.append(game.getPermanent(attackerId).getName()).append(",");
+            sb.append(game.getPermanent(attackerId).getName()).append(',');
         }
         logger.info(sb.toString());
         MCTSNode.logHitMiss();
@@ -233,9 +233,9 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                 sb.append(game.getPermanent(groups.get(i).getAttackers().get(0)).getName()).append(" with: ");
                 for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
                     this.declareBlocker(this.getId(), blockerId, groups.get(i).getAttackers().get(0), game);
-                    sb.append(game.getPermanent(blockerId).getName()).append(",");
+                    sb.append(game.getPermanent(blockerId).getName()).append(',');
                 }
-                sb.append("|");
+                sb.append('|');
             }
         }
         logger.info(sb.toString());
@@ -448,7 +448,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         StringBuilder sb = new StringBuilder();
         sb.append(game.getTurn().getValue(game.getTurnNum()));
         for (Player player: game.getPlayers().values()) {
-            sb.append("[player ").append(player.getName()).append(":").append(player.getLife()).append("]");
+            sb.append("[player ").append(player.getName()).append(':').append(player.getLife()).append(']');
         }
         logger.info(sb.toString());        
     }

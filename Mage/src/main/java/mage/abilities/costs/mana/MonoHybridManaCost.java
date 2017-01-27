@@ -77,7 +77,7 @@ public class MonoHybridManaCost extends ManaCostImpl {
 
     @Override
     public String getText() {
-        return "{2/" + mana.toString() + "}";
+        return "{2/" + mana.toString() + '}';
     }
 
     @Override

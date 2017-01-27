@@ -56,17 +56,17 @@ public class CardHelper {
         StringBuilder type = new StringBuilder();
         for (String superType : c.getSuperTypes()) {
             type.append(superType);
-            type.append(" ");
+            type.append(' ');
         }
         for (CardType cardType : c.getCardTypes()) {
             type.append(cardType.toString());
-            type.append(" ");
+            type.append(' ');
         }
         if (c.getSubTypes().size() > 0) {
             type.append("- ");
             for (String subType : c.getSubTypes()) {
                 type.append(subType);
-                type.append(" ");
+                type.append(' ');
             }
         }
         return type.toString();

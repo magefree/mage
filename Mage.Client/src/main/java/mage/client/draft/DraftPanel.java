@@ -188,7 +188,7 @@ public class DraftPanel extends javax.swing.JPanel {
             // If we are logging the draft create a file that will contain
             // the log.
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            logFilename = "Draft_" + sdf.format(new Date()) + "_" + draftId + ".txt";
+            logFilename = "Draft_" + sdf.format(new Date()) + '_' + draftId + ".txt";
             try {
                 Files.write(pathToDraftLog(), "".getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             } catch (IOException ex) {
@@ -366,12 +366,12 @@ public class DraftPanel extends javax.swing.JPanel {
         int second = s - (minute * 60);
         String text;
         if (minute < 10) {
-            text = "0" + Integer.toString(minute) + ":";
+            text = '0' + Integer.toString(minute) + ':';
         } else {
-            text = Integer.toString(minute) + ":";
+            text = Integer.toString(minute) + ':';
         }
         if (second < 10) {
-            text = text + "0" + Integer.toString(second);
+            text = text + '0' + Integer.toString(second);
         } else {
             text = text + Integer.toString(second);
         }

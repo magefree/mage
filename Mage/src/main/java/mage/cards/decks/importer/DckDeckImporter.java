@@ -93,7 +93,7 @@ public class DckDeckImporter extends DeckImporter {
                     }
                 }
             } else {
-                sbMessage.append("Could not find card '").append("' at line ").append(lineCount).append(": ").append(line).append("\n");
+                sbMessage.append("Could not find card '").append("' at line ").append(lineCount).append(": ").append(line).append('\n');
             }
         } else if (line.startsWith("NAME:")) {
             deckList.setName(line.substring(5, line.length()));

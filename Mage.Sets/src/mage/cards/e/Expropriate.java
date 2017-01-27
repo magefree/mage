@@ -156,7 +156,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                if (player.chooseUse(Outcome.Vote, "Choose " + choiceOne + "?", source, game)) {
+                if (player.chooseUse(Outcome.Vote, "Choose " + choiceOne + '?', source, game)) {
                     voteOneCount++;
                     game.informPlayers(player.getName() + " has voted for " + choiceOne);
                 } else {

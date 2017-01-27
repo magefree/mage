@@ -83,7 +83,7 @@ public class MageDrawAction extends MageAction {
                 drawnCards.add(card);
                 card.moveToZone(Zone.HAND, null, game, false);
                 if (player.isTopCardRevealed()) {
-                    game.fireInformEvent(player.getLogName() + " draws a revealed card  (" + card.getLogName() + ")");
+                    game.fireInformEvent(player.getLogName() + " draws a revealed card  (" + card.getLogName() + ')');
                 }
 
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), player.getId()));

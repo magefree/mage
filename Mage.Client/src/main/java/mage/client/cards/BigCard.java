@@ -141,7 +141,7 @@ public class BigCard extends JComponent {
 
         try {
             for (String line : strings) {
-                doc.insertString(doc.getLength(), line + "\n", doc.getStyle("regular"));
+                doc.insertString(doc.getLength(), line + '\n', doc.getStyle("regular"));
             }
         } catch (BadLocationException ble) {
         }

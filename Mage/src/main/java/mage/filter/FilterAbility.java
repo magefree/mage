@@ -80,7 +80,7 @@ public class FilterAbility extends FilterImpl<Ability> {
 
         @Override
         public String toString() {
-            return "Zone(" + zone.toString() + ")";
+            return "Zone(" + zone.toString() + ')';
         }
     }
 

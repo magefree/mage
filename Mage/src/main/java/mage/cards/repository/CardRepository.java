@@ -400,7 +400,7 @@ public enum CardRepository {
         try {
             String sqlName = name.toLowerCase().replaceAll("\'", "\'\'");
             GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
-                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower(name) = '" + sqlName + "'",
+                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower(name) = '" + sqlName + '\'',
                     cardDao.getRawRowMapper());
             List<CardInfo> result = new ArrayList<>();
             for (CardInfo cardinfo : rawResults) {

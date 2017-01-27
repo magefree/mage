@@ -180,7 +180,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         if (durationPhaseStep != null) {
             sb.append(" until your next ").append(durationPhaseStep.toString().toLowerCase(Locale.ENGLISH));
         } else if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         return sb.toString();
     }

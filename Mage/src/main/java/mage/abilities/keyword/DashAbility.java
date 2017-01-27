@@ -179,7 +179,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
             ++numberCosts;
         }
         if (numberCosts == 1) {
-            sb.append(" ").append(remarkText);
+            sb.append(' ').append(remarkText);
         }
 
         return sb.toString();

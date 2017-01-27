@@ -66,7 +66,7 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
         super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
-        staticText = "{this}'s power and toughness is " + power + "/" + toughness + " " + duration.toString();
+        staticText = "{this}'s power and toughness is " + power + '/' + toughness + ' ' + duration.toString();
     }
 
     public SetPowerToughnessSourceEffect(final SetPowerToughnessSourceEffect effect) {

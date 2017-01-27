@@ -43,7 +43,7 @@ public class MagePreferences {
     }
 
     private static String prefixedKey(String prefix, String key) {
-        return prefix + "/" + key;
+        return prefix + '/' + key;
     }
 
     public static String getUserName(String serverAddress) {

@@ -163,7 +163,7 @@ public class TargetCreaturePermanentAmount extends TargetAmount {
         for (UUID targetId : getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                sb.append(permanent.getLogName()).append("(").append(getTargetAmount(targetId)).append(") ");
+                sb.append(permanent.getLogName()).append('(').append(getTargetAmount(targetId)).append(") ");
             }
         }
         return sb.toString();

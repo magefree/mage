@@ -174,20 +174,20 @@ public class MagicCardsImageSource implements CardImageSource {
 
         String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
 
-        StringBuilder url = new StringBuilder("http://magiccards.info/scans/").append(preferedLanguage).append("/");
-        url.append(set.toLowerCase()).append("/").append(collectorId);
+        StringBuilder url = new StringBuilder("http://magiccards.info/scans/").append(preferedLanguage).append('/');
+        url.append(set.toLowerCase()).append('/').append(collectorId);
 
         if (card.isTwoFacedCard()) {
             url.append(card.isSecondSide() ? "b" : "a");
         }
         if (card.isSplitCard()) {
-            url.append("a");
+            url.append('a');
         }
         if (card.isFlipCard()) {
             if (card.isFlippedSide()) { // download rotated by 180 degree image
-                url.append("b");
+                url.append('b');
             } else {
-                url.append("a");
+                url.append('a');
             }
         }
         url.append(".jpg");
@@ -200,16 +200,16 @@ public class MagicCardsImageSource implements CardImageSource {
         String name = card.getName();
         // add type to name if it's not 0
         if (card.getType() > 0) {
-            name = name + " " + card.getType();
+            name = name + ' ' + card.getType();
         }
         name = name.replaceAll(" ", "-").replace(",", "").toLowerCase();
         String set = "not-supported-set";
         if (setNameTokenReplacement.containsKey(card.getSet())) {
             set = setNameTokenReplacement.get(card.getSet());
         } else {
-            set += "-" + card.getSet();
+            set += '-' + card.getSet();
         }
-        return "http://magiccards.info/extras/token/" + set + "/" + name + ".jpg";
+        return "http://magiccards.info/extras/token/" + set + '/' + name + ".jpg";
     }
 
     @Override

@@ -162,19 +162,19 @@ public class TokensMtgImageSource implements CardImageSource {
         TokenData tokenData;
         if (type == 0) {
             if (matchedTokens.size() > 1) {
-                logger.info("Multiple images were found for token " + name + ", set " + set + ".");
+                logger.info("Multiple images were found for token " + name + ", set " + set + '.');
             }
             tokenData = matchedTokens.get(0);
         } else {
             if (type > matchedTokens.size()) {
-                logger.warn("Not enough images for token with type " + type + ", name " + name + ", set " + set + ".");
+                logger.warn("Not enough images for token with type " + type + ", name " + name + ", set " + set + '.');
                 return null;
             }
             tokenData = matchedTokens.get(card.getType() - 1);
         }
 
-        String url = "http://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + "_"
-                + tokenData.getNumber().trim() + "-" + tokenData.getName().trim() + ".jpg";
+        String url = "http://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + '_'
+                + tokenData.getNumber().trim() + '-' + tokenData.getName().trim() + ".jpg";
         url = url.replace(' ', '-');
         return url;
     }

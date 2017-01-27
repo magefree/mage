@@ -45,7 +45,7 @@ public class GetEmblemEffect extends OneShotEffect {
     public GetEmblemEffect(Emblem emblem) {
         super(Outcome.Benefit);
         this.emblem = emblem;
-        this.staticText = "You get an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
+        this.staticText = "You get an emblem with \"" + emblem.getAbilities().getRules(null) + '"';
     }
 
     public GetEmblemEffect(final GetEmblemEffect effect) {

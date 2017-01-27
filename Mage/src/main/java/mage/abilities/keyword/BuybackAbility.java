@@ -138,7 +138,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         StringBuilder sb = new StringBuilder();
         if (buybackCost != null) {
             sb.append(buybackCost.getText(false));
-            sb.append(" ").append(buybackCost.getReminderText());
+            sb.append(' ').append(buybackCost.getReminderText());
         }
         return sb.toString();
     }

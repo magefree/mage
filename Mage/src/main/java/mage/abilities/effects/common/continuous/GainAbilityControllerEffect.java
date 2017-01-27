@@ -63,7 +63,7 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl {
         this.ability = ability;
         staticText = "You have " + ability.getRule();
         if (!duration.toString().isEmpty()) {
-            staticText += " " + duration.toString();
+            staticText += ' ' + duration.toString();
         }
     }
 

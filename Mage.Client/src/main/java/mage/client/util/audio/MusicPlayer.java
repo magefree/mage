@@ -112,7 +112,7 @@ public class MusicPlayer {
                 volume = (FloatControl) sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
                 sourceDataLine.start();
             } catch (Exception e) {
-                log.error("Couldn't load file: " + file + " " + e);
+                log.error("Couldn't load file: " + file + ' ' + e);
             }
 
         }

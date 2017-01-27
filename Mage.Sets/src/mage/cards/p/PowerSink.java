@@ -98,7 +98,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
                 int amount = source.getManaCostsToPay().getX();
                 if (amount > 0) {
                     GenericManaCost cost = new GenericManaCost(amount);
-                    StringBuilder sb = new StringBuilder("Pay ").append(cost.getText()).append("?");
+                    StringBuilder sb = new StringBuilder("Pay ").append(cost.getText()).append('?');
                     if (player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                         if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                             game.informPlayers(new StringBuilder(sourceObject.getName()).append(": additional cost was paid").toString());

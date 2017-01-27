@@ -168,7 +168,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
 
     private static JLabel createChangingPercentageLabel(final JSlider slider)  {
 
-        final JLabel label = new JLabel("      " + String.valueOf(slider.getValue()) + "%");
+        final JLabel label = new JLabel("      " + String.valueOf(slider.getValue()) + '%');
 
         slider.addChangeListener(e -> {
             String value = String.valueOf(slider.getValue());
@@ -178,7 +178,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
                 labelBuilder.append("  ");
             }
             labelBuilder.append(value);
-            labelBuilder.append("%");
+            labelBuilder.append('%');
             label.setText(labelBuilder.toString());
         });
         return label;

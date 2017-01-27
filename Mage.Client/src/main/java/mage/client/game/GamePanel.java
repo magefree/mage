@@ -406,7 +406,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+        String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, Integer.toString(this.jSplitPane0.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
@@ -417,7 +417,7 @@ public final class GamePanel extends javax.swing.JPanel {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
             String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+            String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
             // use divider positions only if screen size is the same as it was the time the settings were saved
             if (size != null && size.equals(sb)) {
 
@@ -764,7 +764,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         if (game.getSpellsCastCurrentTurn() > 0 && PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, "true").equals("true")) {
             this.txtSpellsCast.setVisible(true);
-            this.txtSpellsCast.setText(" " + Integer.toString(game.getSpellsCastCurrentTurn()) + " ");
+            this.txtSpellsCast.setText(' ' + Integer.toString(game.getSpellsCastCurrentTurn()) + ' ');
         } else {
             this.txtSpellsCast.setVisible(false);
         }
@@ -1279,7 +1279,7 @@ public final class GamePanel extends javax.swing.JPanel {
         pickChoice.showDialog(choice, objectId, choiceWindowState);
         if (choice.isKeyChoice()) {
             if (pickChoice.isAutoSelect()) {
-                SessionHandler.sendPlayerString(gameId, "#" + choice.getChoiceKey());
+                SessionHandler.sendPlayerString(gameId, '#' + choice.getChoiceKey());
             } else {
                 SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
             }

@@ -80,7 +80,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
                 || amount instanceof PermanentsOnBattlefieldCount || amount.toString().equals("1");
         sb.append("draw ").append(oneCard ? "a" : CardUtil.numberToText(amount.toString())).append(" card");
         if (!oneCard) {
-            sb.append("s");
+            sb.append('s');
         }
         String message = amount.getMessage();
         if (message.length() > 0) {

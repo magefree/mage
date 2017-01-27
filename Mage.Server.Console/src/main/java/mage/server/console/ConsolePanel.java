@@ -575,14 +575,14 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
             for (UserView u2 : usersToCheck) {
                 if (u1.getUserName().equals(u2.getUserName())) {
                     found = true;
-                    String s = u1.getUserName() + "," + u1.getHost();
+                    String s = u1.getUserName() + ',' + u1.getHost();
                     if (peopleIps.get(s) == null) {
-                        logger.warn("Found new user: " + u1.getUserName() + "," + u1.getHost());
+                        logger.warn("Found new user: " + u1.getUserName() + ',' + u1.getHost());
                         peopleIps.put(s, "1");
                     }
-                    s = u2.getUserName() + "," + u2.getHost();
+                    s = u2.getUserName() + ',' + u2.getHost();
                     if (peopleIps.get(s) == null) {
-                        logger.warn("Found new user: " + u1.getUserName() + "," + u1.getHost());
+                        logger.warn("Found new user: " + u1.getUserName() + ',' + u1.getHost());
                         peopleIps.put(s, "1");
                     }                    
                     break;

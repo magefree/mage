@@ -143,6 +143,6 @@ class SimicManipulatorGainControlTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        return "Gain control of target " + mode.getTargets().get(0).getTargetName() + " " + duration.toString();
+        return "Gain control of target " + mode.getTargets().get(0).getTargetName() + ' ' + duration.toString();
     }
 }

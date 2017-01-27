@@ -360,7 +360,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         int h = priorityTimeLeft / 3600;
         int m = (priorityTimeLeft % 3600) / 60;
         int s = priorityTimeLeft % 60;
-        return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+        return (h < 10 ? "0" : "") + h + ':' + (m < 10 ? "0" : "") + m + ':' + (s < 10 ? "0" : "") + s;
     }
 
     protected void update(ManaPoolView pool) {

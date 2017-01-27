@@ -102,7 +102,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
                     affectedTargets++;
                     if (!game.isSimulation()) {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                                + numberAdded + " " + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
+                                + numberAdded + ' ' + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
                     }
                 } else if (player != null) {
                     Counter newCounter = counter.copy();
@@ -111,14 +111,14 @@ public class AddCountersTargetEffect extends OneShotEffect {
                     affectedTargets++;
                     if (!game.isSimulation()) {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                                + counter.getCount() + " " + counter.getName().toLowerCase() + " counter on " + player.getLogName());
+                                + counter.getCount() + ' ' + counter.getName().toLowerCase() + " counter on " + player.getLogName());
                     }
                 } else if (card != null) {
                     card.addCounters(counter, source, game);
                     if (!game.isSimulation()) {
-                        game.informPlayers(new StringBuilder("Added ").append(counter.getCount()).append(" ").append(counter.getName())
+                        game.informPlayers(new StringBuilder("Added ").append(counter.getCount()).append(' ').append(counter.getName())
                                 .append(" counter to ").append(card.getName())
-                                .append(" (").append(card.getCounters(game).getCount(counter.getName())).append(")").toString());
+                                .append(" (").append(card.getCounters(game).getCount(counter.getName())).append(')').toString());
                     }
                     return true;
                 }
@@ -136,13 +136,13 @@ public class AddCountersTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("put ");
         if (counter.getCount() > 1) {
-            sb.append(CardUtil.numberToText(counter.getCount())).append(" ");
+            sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
         } else {
             sb.append("a ");
         }
         sb.append(counter.getName().toLowerCase()).append(" counter");
         if (counter.getCount() > 1) {
-            sb.append("s");
+            sb.append('s');
         }
         sb.append(" on ");
 

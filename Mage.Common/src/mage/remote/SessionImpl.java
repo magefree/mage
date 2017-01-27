@@ -158,7 +158,7 @@ public class SessionImpl implements Session {
                 StringBuilder sb = new StringBuilder();
                 sb.append("Unable to connect to server.\n");
                 for (StackTraceElement element : t.getStackTrace()) {
-                    sb.append(element.toString()).append("\n");
+                    sb.append(element.toString()).append('\n');
                 }
                 client.showMessage(sb.toString());
             }
@@ -171,11 +171,11 @@ public class SessionImpl implements Session {
         return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
             @Override
             public boolean run() throws Throwable {
-                logger.info("Trying to register as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                logger.info("Trying to register as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
                 boolean registerResult = server.registerUser(sessionId, connection.getUsername(),
                         connection.getPassword(), connection.getEmail());
                 if (registerResult) {
-                    logger.info("Registered as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                    logger.info("Registered as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
                 }
                 return registerResult;
             }
@@ -187,10 +187,10 @@ public class SessionImpl implements Session {
         return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
             @Override
             public boolean run() throws Throwable {
-                logger.info("Trying to ask for an auth token to " + getEmail() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                logger.info("Trying to ask for an auth token to " + getEmail() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
                 boolean result = server.emailAuthToken(sessionId, connection.getEmail());
                 if (result) {
-                    logger.info("An auth token is emailed to " + getEmail() + " from MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                    logger.info("An auth token is emailed to " + getEmail() + " from MAGE server at " + connection.getHost() + ':' + connection.getPort());
                 }
                 return result;
             }
@@ -202,10 +202,10 @@ public class SessionImpl implements Session {
         return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
             @Override
             public boolean run() throws Throwable {
-                logger.info("Trying reset the password in XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                logger.info("Trying reset the password in XMAGE server at " + connection.getHost() + ':' + connection.getPort());
                 boolean result = server.resetPassword(sessionId, connection.getEmail(), connection.getAuthToken(), connection.getPassword());
                 if (result) {
-                    logger.info("Password is successfully reset in MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                    logger.info("Password is successfully reset in MAGE server at " + connection.getHost() + ':' + connection.getPort());
                 }
                 return result;
             }
@@ -218,7 +218,7 @@ public class SessionImpl implements Session {
                 && handleRemotingTaskExceptions(new RemotingTask() {
                     @Override
                     public boolean run() throws Throwable {
-                        logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                        logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
                         boolean registerResult;
                         if (connection.getAdminPassword() == null) {
                             // for backward compatibility. don't remove twice call - first one does nothing but for version checking
@@ -234,8 +234,8 @@ public class SessionImpl implements Session {
                             if (!connection.getUsername().equals("Admin")) {
                                 updateDatabase(connection.isForceDBComparison(), serverState);
                             }
-                            logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
-                            client.connected(getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
+                            logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
+                            client.connected(getUserName() + '@' + connection.getHost() + ':' + connection.getPort() + ' ');
                             return true;
                         }
                         disconnect(false);
@@ -260,7 +260,7 @@ public class SessionImpl implements Session {
         boolean result = handleRemotingTaskExceptions(new RemotingTask() {
             @Override
             public boolean run() throws Throwable {
-                logger.info("Trying to connect to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                logger.info("Trying to connect to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
 
                 System.setProperty("http.nonProxyHosts", "code.google.com");
                 System.setProperty("socksNonProxyHosts", "code.google.com");
@@ -391,14 +391,14 @@ public class SessionImpl implements Session {
 
                 Set callbackConnectors = callbackClient.getCallbackConnectors(callbackHandler);
                 if (callbackConnectors.size() != 1) {
-                    logger.warn("There should be one callback Connector (number existing = " + callbackConnectors.size() + ")");
+                    logger.warn("There should be one callback Connector (number existing = " + callbackConnectors.size() + ')');
                 }
 
                 callbackClient.invoke(null);
 
                 sessionId = callbackClient.getSessionId();
                 sessionState = SessionState.CONNECTED;
-                logger.info("Connected to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                logger.info("Connected to MAGE server at " + connection.getHost() + ':' + connection.getPort());
                 return true;
             }
         });
@@ -451,7 +451,7 @@ public class SessionImpl implements Session {
                 break;
             }
             if (t.getCause() != null && logger.isDebugEnabled()) {
-                message = "\n" + t.getCause().getMessage() + message;
+                message = '\n' + t.getCause().getMessage() + message;
                 logger.debug(t.getCause().getMessage());
             }
 
@@ -1434,7 +1434,7 @@ public class SessionImpl implements Session {
     @Override
     public boolean endUserSession(String userSessionId) {
         try {
-            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute userSessionId " + userSessionId + "?", "WARNING",
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute userSessionId " + userSessionId + '?', "WARNING",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (isConnected()) {
                     server.endUserSession(sessionId, userSessionId);
@@ -1470,7 +1470,7 @@ public class SessionImpl implements Session {
     @Override
     public boolean setActivation(String userName, boolean active) {
         try {
-            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to set active to " + active + " for user: " + userName + "?", "WARNING",
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to set active to " + active + " for user: " + userName + '?', "WARNING",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (isConnected()) {
                     server.setActivation(sessionId, userName, active);
@@ -1496,7 +1496,7 @@ public class SessionImpl implements Session {
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 return setActivation(userName, false);
             }
-            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to toggle activation for user: " + userName + "?", "WARNING",
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to toggle activation for user: " + userName + '?', "WARNING",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (isConnected()) {
                     server.toggleActivation(sessionId, userName);
@@ -1542,8 +1542,8 @@ public class SessionImpl implements Session {
     }
 
     private void handleInvalidDeckException(InvalidDeckException iex) {
-        logger.warn(iex.getMessage() + "\n" + iex.getInvalid());
-        client.showError(iex.getMessage() + "\n" + iex.getInvalid());
+        logger.warn(iex.getMessage() + '\n' + iex.getInvalid());
+        client.showError(iex.getMessage() + '\n' + iex.getInvalid());
     }
 
     private void handleGameException(GameException ex) {
@@ -1588,7 +1588,7 @@ public class SessionImpl implements Session {
             if (isConnected()) {
                 long startTime = System.nanoTime();
                 if (!server.ping(sessionId, pingInfo)) {
-                    logger.error("Ping failed: " + this.getUserName() + " Session: " + sessionId + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                    logger.error("Ping failed: " + this.getUserName() + " Session: " + sessionId + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
                     throw new MageException("Ping failed");
                 }
                 pingTime.add(System.nanoTime() - startTime);
@@ -1602,7 +1602,7 @@ public class SessionImpl implements Session {
                     sum += time;
                 }
                 milliSeconds = TimeUnit.MILLISECONDS.convert(sum / pingTime.size(), TimeUnit.NANOSECONDS);
-                pingInfo = lastPing + " (Av: " + (milliSeconds > 0 ? milliSeconds + "ms" : "<1ms") + ")";
+                pingInfo = lastPing + " (Av: " + (milliSeconds > 0 ? milliSeconds + "ms" : "<1ms") + ')';
             }
             return true;
         } catch (MageException ex) {

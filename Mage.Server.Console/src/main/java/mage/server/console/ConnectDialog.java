@@ -423,7 +423,7 @@ public class ConnectDialog extends JDialog {
             connection.setProxyPassword(new String(this.txtPasswordField.getPassword()));
         }
 
-        logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
+        logger.debug("connecting: " + connection.getProxyType() + ' ' + connection.getProxyHost() + ' ' + connection.getProxyPort());
         task = new ConnectTask();
         task.execute();
 

@@ -94,7 +94,7 @@ public class AddCountersControllerEffect extends OneShotEffect {
     private void setText() {
         if (counter.getCount() > 1) {
             StringBuilder sb = new StringBuilder();
-            sb.append("its controller gets ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters");
+            sb.append("its controller gets ").append(Integer.toString(counter.getCount())).append(' ').append(counter.getName()).append(" counters");
             staticText = sb.toString();
         } else {
             staticText = "its controller gets a " + counter.getName() + " counter";

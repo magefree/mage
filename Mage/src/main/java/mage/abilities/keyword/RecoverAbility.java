@@ -132,7 +132,7 @@ class RecoverEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("Recover");
         if (cost instanceof ManaCost) {
-            sb.append(" ").append(cost.getText()).append(" ");
+            sb.append(' ').append(cost.getText()).append(' ');
         } else {
             sb.append("&mdash;").append(cost.getText()).append(". ");
         }

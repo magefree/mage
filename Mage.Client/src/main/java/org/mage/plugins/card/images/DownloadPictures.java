@@ -325,12 +325,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         int tokenImages = 0;
         for (CardDownloadData card : cardsToDownload) {
-            logger.debug((card.isToken() ? "Token" : "Card") + " image to download: " + card.getName() + " (" + card.getSet() + ")");
+            logger.debug((card.isToken() ? "Token" : "Card") + " image to download: " + card.getName() + " (" + card.getSet() + ')');
             if (card.isToken()) {
                 tokenImages++;
             }
         }
-        logger.info("Check download images (total card images: " + numberCardImages + ", total token images: " + numberAllTokenImages + ")");
+        logger.info("Check download images (total card images: " + numberCardImages + ", total token images: " + numberAllTokenImages + ')');
         logger.info("   => Missing card images: " + (cardsToDownload.size() - tokenImages));
         logger.info("   => Missing token images: " + tokenImages);
         return new ArrayList<>(cardsToDownload);
@@ -445,7 +445,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                     CardDownloadData card = cardsToDownload.get(i);
 
-                    logger.debug("Downloading card: " + card.getName() + " (" + card.getSet() + ")");
+                    logger.debug("Downloading card: " + card.getName() + " (" + card.getSet() + ')');
 
                     String url;
                     if (ignoreUrls.contains(card.getSet()) || card.isToken()) {
@@ -470,7 +470,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             } catch (Exception ex) {
                             }
                         } else if (cardImageSource.getTotalImages() == -1) {
-                            logger.info("Card not available on " + cardImageSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ")");
+                            logger.info("Card not available on " + cardImageSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ')');
                             synchronized (sync) {
                                 update(cardIndex + 1, cardsToDownload.size());
                             }
@@ -540,7 +540,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             try {
                 filePath.append(Constants.IO.imageBaseDir);
                 if (!useSpecifiedPaths && card != null) {
-                    filePath.append(card.hashCode()).append(".").append(card.getName().replace(":", "").replace("//", "-")).append(".jpg");
+                    filePath.append(card.hashCode()).append('.').append(card.getName().replace(":", "").replace("//", "-")).append(".jpg");
                     temporaryFile = new File(filePath.toString());
                 }
                 String imagePath;
@@ -650,7 +650,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     if (card != null && !useSpecifiedPaths) {
                         logger.warn("Image download for " + card.getName()
                                 + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
-                                + "(" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
+                                + '(' + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
                     }
                     if (logger.isDebugEnabled()) { // Shows the returned html from the request to the web server
                         logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
@@ -658,7 +658,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 }
 
             } catch (AccessDeniedException e) {
-                logger.error("The file " + (outputFile != null ? outputFile.toString() : "to add the image of " + card.getName() + "(" + card.getSet() + ")") + " can't be accessed. Try rebooting your system to remove the file lock.");
+                logger.error("The file " + (outputFile != null ? outputFile.toString() : "to add the image of " + card.getName() + '(' + card.getSet() + ')') + " can't be accessed. Try rebooting your system to remove the file lock.");
             } catch (Exception e) {
                 logger.error(e, e);
             } finally {

@@ -124,7 +124,7 @@ class CascadeEffect extends OneShotEffect {
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
         if (card != null) {
-            if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + "?", source, game)) {
+            if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + '?', source, game)) {
                 if (controller.cast(card.getSpellAbility(), game, true)) {
                     exile.remove(card.getId());
                 }

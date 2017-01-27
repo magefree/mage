@@ -87,7 +87,7 @@ public class DestroyMultiTargetEffect extends OneShotEffect {
         while (iterator.hasNext()) {
             Target target = iterator.next();
             if (target.getNumberOfTargets() > 1) {
-                sb.append(target.getNumberOfTargets()).append(" ");
+                sb.append(target.getNumberOfTargets()).append(' ');
             }
             sb.append("target ").append(target.getTargetName());
             if (iterator.hasNext()) {

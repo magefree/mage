@@ -93,7 +93,7 @@ public class Connection {
 
     @Override
     public String toString() {
-        return host + ":" + Integer.toString(port) + "/" + serialization + parameter;
+        return host + ':' + Integer.toString(port) + '/' + serialization + parameter;
     }
 
     public String getURI() {
@@ -101,13 +101,13 @@ public class Connection {
             try {
                 InetAddress inet = getLocalAddress();
                 if (inet != null) {
-                    return transport + "://" + inet.getHostAddress() + ":" + port + "/" + serialization + parameter;
+                    return transport + "://" + inet.getHostAddress() + ':' + port + '/' + serialization + parameter;
                 }
             } catch (SocketException ex) {
                 // just use localhost if can't find local ip
             }
         }
-        return transport + "://" + host + ":" + port + "/" + serialization + parameter;
+        return transport + "://" + host + ':' + port + '/' + serialization + parameter;
     }
 
     public ProxyType getProxyType() {

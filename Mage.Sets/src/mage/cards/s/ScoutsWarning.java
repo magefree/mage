@@ -152,12 +152,12 @@ class ScoutsWarningWatcher extends Watcher {
     }
 
     public void addScoutsWarningSpell(UUID sourceId, int zoneChangeCounter) {
-        String spellKey = new StringBuilder(sourceId.toString()).append("_").append(zoneChangeCounter).toString();
+        String spellKey = new StringBuilder(sourceId.toString()).append('_').append(zoneChangeCounter).toString();
         activeScoutsWarningSpells.add(spellKey);
     }
 
     public boolean isScoutsWarningSpellActive(UUID sourceId, int zoneChangeCounter) {
-        String spellKey = new StringBuilder(sourceId.toString()).append("_").append(zoneChangeCounter).toString();
+        String spellKey = new StringBuilder(sourceId.toString()).append('_').append(zoneChangeCounter).toString();
         return activeScoutsWarningSpells.contains(spellKey);
     }
 

@@ -132,7 +132,7 @@ class HopeOfGhirapurCantCastEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast noncreature spells this turn (you were dealt damage by " + mageObject.getLogName() + ")";
+            return "You can't cast noncreature spells this turn (you were dealt damage by " + mageObject.getLogName() + ')';
         }
         return null;
     }

@@ -189,7 +189,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public String toString() {
         StringBuilder sb = threadLocalBuilder.get();
-        sb.append(this.name).append("-").append(this.expansionSetCode);
+        sb.append(this.name).append('-').append(this.expansionSetCode);
         if (copy) {
             sb.append(" [Copy]");
         }

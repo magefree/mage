@@ -174,7 +174,7 @@ public class TournamentPanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+        String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
@@ -184,7 +184,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
             String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+            String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
             // use divider positions only if screen size is the same as it was the time the settings were saved
             if (size != null && size.equals(sb)) {
                 String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_1, null);
@@ -244,7 +244,7 @@ public class TournamentPanel extends javax.swing.JPanel {
                 c = c.getParent();
             }
             if (c != null) {
-                ((TournamentPane) c).setTitle("Tournament [" + tournament.getTournamentName() + "]");
+                ((TournamentPane) c).setTitle("Tournament [" + tournament.getTournamentName() + ']');
             }
             txtName.setText(tournament.getTournamentName());
             txtType.setText(tournament.getTournamentType());
@@ -260,7 +260,7 @@ public class TournamentPanel extends javax.swing.JPanel {
                 if (tournament.getStepStartTime() != null) {
                     timeLeft = Format.getDuration(tournament.getConstructionTime() - (tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime()) / 1000);
                 }
-                txtTournamentState.setText(new StringBuilder(tournament.getTournamentState()).append(" (").append(timeLeft).append(")").toString());
+                txtTournamentState.setText(new StringBuilder(tournament.getTournamentState()).append(" (").append(timeLeft).append(')').toString());
                 break;
             case "Dueling":
             case "Drafting":

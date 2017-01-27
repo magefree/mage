@@ -50,7 +50,7 @@ public class ExileXFromYourGraveCost extends VariableCostImpl {
     public ExileXFromYourGraveCost(FilterCard filter, boolean additionalCostText) {
         super(filter.getMessage() + " to exile");
         this.filter = filter;
-        this.text = (additionalCostText ? "As an additional cost to cast {source}, exile " : "Exile ") + xText + " " + filter.getMessage();
+        this.text = (additionalCostText ? "As an additional cost to cast {source}, exile " : "Exile ") + xText + ' ' + filter.getMessage();
     }
 
     public ExileXFromYourGraveCost(final ExileXFromYourGraveCost cost) {

@@ -673,7 +673,7 @@ public class NewTableDialog extends MageDialog {
         StringBuilder playerTypesString = new StringBuilder();
         for (Object player : players) {
             if (playerTypesString.length() > 0) {
-                playerTypesString.append(",");
+                playerTypesString.append(',');
             }
             TablePlayerPanel tpp = (TablePlayerPanel) player;
             playerTypesString.append(tpp.getPlayerType());

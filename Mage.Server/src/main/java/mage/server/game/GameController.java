@@ -332,7 +332,7 @@ public class GameController implements GameCallback {
             joinType = "rejoined";
         }
         user.get().addGame(playerId, gameSession);
-        logger.debug("Player " + player.getName() + " " + playerId + " has " + joinType + " gameId: " + game.getId());
+        logger.debug("Player " + player.getName() + ' ' + playerId + " has " + joinType + " gameId: " + game.getId());
         ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, MessageType.GAME, null);
         checkStart();
     }
@@ -613,7 +613,7 @@ public class GameController implements GameCallback {
             } else {
                 // user can already see the cards
                 UserManager.getInstance().getUser(userIdRequester).ifPresent(requester -> {
-                    requester.showUserMessage("Request to show hand cards", "You can see already the hand cards of player " + grantingPlayer.getName() + "!");
+                    requester.showUserMessage("Request to show hand cards", "You can see already the hand cards of player " + grantingPlayer.getName() + '!');
                 });
 
             }
@@ -848,9 +848,9 @@ public class GameController implements GameCallback {
         StringBuilder sb = new StringBuilder();
         sb.append(message).append(ex.toString());
         sb.append("\nServer version: ").append(Main.getVersion().toString());
-        sb.append("\n");
+        sb.append('\n');
         for (StackTraceElement e : ex.getStackTrace()) {
-            sb.append(e.toString()).append("\n");
+            sb.append(e.toString()).append('\n');
         }
         for (final Entry<UUID, GameSessionPlayer> entry : gameSessions.entrySet()) {
             entry.getValue().gameError(sb.toString());
@@ -1004,9 +1004,9 @@ public class GameController implements GameCallback {
             if (player != null) {
                 sb.append(player.getName()).append("(Left=").append(player.hasLeft() ? "Y" : "N").append(") ");
             } else {
-                sb.append("player missing: ").append(playerId).append(" ");
+                sb.append("player missing: ").append(playerId).append(' ');
             }
         }
-        return sb.append("]").toString();
+        return sb.append(']').toString();
     }
 }

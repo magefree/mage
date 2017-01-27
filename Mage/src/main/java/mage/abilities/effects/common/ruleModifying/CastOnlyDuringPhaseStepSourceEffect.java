@@ -72,7 +72,7 @@ public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifying
             sb.append("the ").append(phaseStep.getStepText());
         }
         if (condition != null) {
-            sb.append(" ").append(condition.toString());
+            sb.append(' ').append(condition.toString());
         }
         return sb.toString();
     }

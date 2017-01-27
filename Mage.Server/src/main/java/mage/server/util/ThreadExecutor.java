@@ -119,7 +119,7 @@ class XMageThreadFactory implements ThreadFactory {
     @Override
     public Thread newThread(Runnable r) {
         Thread thread = new Thread(r);
-        thread.setName(prefix + " " + thread.getThreadGroup().getName() + "-" + thread.getId());
+        thread.setName(prefix + ' ' + thread.getThreadGroup().getName() + '-' + thread.getId());
         return thread;
     }
 

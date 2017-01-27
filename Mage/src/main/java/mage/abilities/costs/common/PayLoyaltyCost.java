@@ -47,7 +47,7 @@ public class PayLoyaltyCost extends CostImpl {
         this.amount = amount;
         this.text = Integer.toString(amount);
         if (amount >= 0) {
-            this.text = "+" + this.text;
+            this.text = '+' + this.text;
         }
     }
 

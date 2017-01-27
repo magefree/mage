@@ -131,7 +131,7 @@ public class MCTSPlayer extends ComputerPlayer {
             binary.setLength(0);
             binary.append(Integer.toBinaryString(i));
             while (binary.length() < attackersList.size()) {
-                binary.insert(0, "0");
+                binary.insert(0, '0');
             }
             List<UUID> engagement = new ArrayList<UUID>();
             for (int j = 0; j < attackersList.size(); j++) {

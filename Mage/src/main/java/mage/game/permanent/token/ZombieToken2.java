@@ -41,7 +41,7 @@ public class ZombieToken2 extends Token {
     }
 
     public ZombieToken2(int zPower, int zToughness) {
-        super("Zombie", String.valueOf(zPower) + "/" + String.valueOf(zToughness) + " black Zombie creature token");
+        super("Zombie", String.valueOf(zPower) + '/' + String.valueOf(zToughness) + " black Zombie creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Zombie");

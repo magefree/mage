@@ -100,7 +100,7 @@ class HeartmenderEffect extends OneShotEffect {
             if (creature != null
                     && creature.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
                 creature.removeCounters(counter.getName(), counter.getCount(), game);
-                game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
+                game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(' ').append(counter.getName())
                         .append(" counter from ").append(creature.getName()).toString());
                 applied = true;
             }

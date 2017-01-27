@@ -106,7 +106,7 @@ public abstract class MageTestPlayerBase {
 
     private static Class<?> loadPlugin(Plugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
             logger.info("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
@@ -119,7 +119,7 @@ public abstract class MageTestPlayerBase {
 
     private static MatchType loadGameType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
             logger.info("Loading game type: " + plugin.getClassName());
             return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
@@ -132,7 +132,7 @@ public abstract class MageTestPlayerBase {
 
     private static TournamentType loadTournamentType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
             logger.info("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {

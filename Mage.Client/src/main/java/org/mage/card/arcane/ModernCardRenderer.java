@@ -638,7 +638,7 @@ public class ModernCardRenderer extends CardRenderer {
             }
             g.setColor(textColor);
             g.setFont(ptTextFont);
-            String ptText = cardView.getPower() + "/" + cardView.getToughness();
+            String ptText = cardView.getPower() + '/' + cardView.getToughness();
             int ptTextWidth = g.getFontMetrics().stringWidth(ptText);
             g.drawString(ptText,
                     x + (partWidth - ptTextWidth) / 2, curY - ptTextOffset - 1);

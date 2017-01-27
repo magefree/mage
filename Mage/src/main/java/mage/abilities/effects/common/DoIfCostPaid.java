@@ -59,7 +59,7 @@ public class DoIfCostPaid extends OneShotEffect {
                 if (effectText.length() > 0 && effectText.charAt(effectText.length() - 1) == '.') {
                     effectText = effectText.substring(0, effectText.length() - 1);
                 }
-                message = getCostText() + " and " + effectText + "?";
+                message = getCostText() + " and " + effectText + '?';
                 message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
             } else {
                 message = chooseUseText;

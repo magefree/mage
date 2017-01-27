@@ -132,9 +132,9 @@ public abstract class TargetImpl implements Target {
             StringBuilder sb = new StringBuilder();
             sb.append("Select ").append(targetName);
             if (getMaxNumberOfTargets() > 0 && getMaxNumberOfTargets() != Integer.MAX_VALUE) {
-                sb.append(" (").append(targets.size()).append("/").append(getMaxNumberOfTargets()).append(")");
+                sb.append(" (").append(targets.size()).append('/').append(getMaxNumberOfTargets()).append(')');
             } else {
-                sb.append(" (").append(targets.size()).append(")");
+                sb.append(" (").append(targets.size()).append(')');
             }
             sb.append(suffix);
             return sb.toString();

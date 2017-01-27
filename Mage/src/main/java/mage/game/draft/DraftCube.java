@@ -119,11 +119,11 @@ public abstract class DraftCube {
                         booster.add(cardInfo.getCard());
                         done = true;
                     } else {
-                        logger.warn(new StringBuilder(this.getName()).append(" - Card not found: ").append(cardId.getName()).append(":").append(cardId.extension));
+                        logger.warn(new StringBuilder(this.getName()).append(" - Card not found: ").append(cardId.getName()).append(':').append(cardId.extension));
                         notValid++;
                     }
                 } else {
-                    logger.error(new StringBuilder(this.getName()).append(" - Empty card name: ").append(cardId.getName()).append(":").append(cardId.extension));
+                    logger.error(new StringBuilder(this.getName()).append(" - Empty card name: ").append(cardId.getName()).append(':').append(cardId.extension));
                     notValid++;
                 }
 

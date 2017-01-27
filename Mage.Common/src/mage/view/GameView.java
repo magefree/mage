@@ -138,7 +138,7 @@ public class GameView implements Serializable {
                         if (designation != null) {
                             stack.put(stackObject.getId(), new CardView(designation, (StackAbility) stackObject));
                         } else {
-                            LOGGER.fatal("Designation object not found: " + object.getName() + " " + object.toString() + " " + object.getClass().toString());
+                            LOGGER.fatal("Designation object not found: " + object.getName() + ' ' + object.toString() + ' ' + object.getClass().toString());
                         }
 
                     } else if (object instanceof StackAbility) {
@@ -147,7 +147,7 @@ public class GameView implements Serializable {
                         stack.put(stackObject.getId(), new CardView(((StackAbility) stackObject)));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else {
-                        LOGGER.fatal("Object can't be cast to StackAbility: " + object.getName() + " " + object.toString() + " " + object.getClass().toString());
+                        LOGGER.fatal("Object can't be cast to StackAbility: " + object.getName() + ' ' + object.toString() + ' ' + object.getClass().toString());
                     }
                 } else {
                     // can happen if a player times out while ability is on the stack

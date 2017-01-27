@@ -124,14 +124,16 @@ class FlowstoneSculptureEffect extends OneShotEffect {
            }
            else {
                Ability gainedAbility;
-               if(chosen.equals("Flying")) {
-                   gainedAbility = FlyingAbility.getInstance();
-               }
-               else if(chosen.equals("First strike")) {
-                   gainedAbility = FirstStrikeAbility.getInstance();
-               }
-               else {
-                   gainedAbility = TrampleAbility.getInstance();
+               switch (chosen) {
+                   case "Flying":
+                       gainedAbility = FlyingAbility.getInstance();
+                       break;
+                   case "First strike":
+                       gainedAbility = FirstStrikeAbility.getInstance();
+                       break;
+                   default:
+                       gainedAbility = TrampleAbility.getInstance();
+                       break;
                }
                game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), source);
                return true;

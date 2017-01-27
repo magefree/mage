@@ -115,10 +115,10 @@ public class TargetActivatedAbility extends TargetObject {
         for (UUID targetId : getTargets()) {
             StackAbility object = (StackAbility) game.getObject(targetId);
             if (object != null) {
-                sb.append(object.getRule()).append(" ");
+                sb.append(object.getRule()).append(' ');
             }
         }
-        sb.append(")");
+        sb.append(')');
         return sb.toString();
     }
 }

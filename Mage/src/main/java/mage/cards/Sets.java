@@ -193,7 +193,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         List<List<List<DeckCardInfo>>> cardGrid = layout.getCards();
         int height = cardGrid.size();
         int width = (height > 0) ? cardGrid.get(0).size() : 0;
-        out.print("(" + height + "," + width + ")");
+        out.print("(" + height + ',' + width + ')');
         out.print(layout.getSettings());
         out.print("|");
         for (List<List<DeckCardInfo>> row : cardGrid) {

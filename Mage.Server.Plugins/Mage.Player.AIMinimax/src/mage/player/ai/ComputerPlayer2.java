@@ -297,7 +297,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
             task.get(maxThink, TimeUnit.SECONDS);
             long endTime = System.nanoTime();
             long duration = endTime - startTime;
-            logger.info("Calculated " + SimulationNode.nodeCount + " nodes in " + duration/1000000000.0 + "s");
+            logger.info("Calculated " + SimulationNode.nodeCount + " nodes in " + duration/1000000000.0 + 's');
             nodeCount += SimulationNode.nodeCount;
             thinkTime += duration;
         } catch (TimeoutException e) {
@@ -311,7 +311,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
             }
             long endTime = System.nanoTime();
             long duration = endTime - startTime;
-            logger.info("Timeout - Calculated " + SimulationNode.nodeCount + " nodes in " + duration/1000000000.0 + "s");
+            logger.info("Timeout - Calculated " + SimulationNode.nodeCount + " nodes in " + duration/1000000000.0 + 's');
             nodeCount += SimulationNode.nodeCount;
             thinkTime += duration;
         } catch (ExecutionException e) {

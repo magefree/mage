@@ -153,12 +153,12 @@ class QuickenWatcher extends Watcher {
     }
 
     public void addQuickenSpell(UUID playerId, UUID sourceId, int zoneChangeCounter) {
-        String spellKey = playerId.toString() + sourceId.toString() + "_" + zoneChangeCounter;
+        String spellKey = playerId.toString() + sourceId.toString() + '_' + zoneChangeCounter;
         activeQuickenSpells.add(spellKey);
     }
 
     public boolean isQuickenSpellActive(UUID playerId, UUID sourceId, int zoneChangeCounter) {
-        String spellKey = playerId.toString() + sourceId.toString() + "_" + zoneChangeCounter;
+        String spellKey = playerId.toString() + sourceId.toString() + '_' + zoneChangeCounter;
         return activeQuickenSpells.contains(spellKey);
     }
 

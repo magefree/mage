@@ -95,7 +95,7 @@ public class AddCountersAttachedEffect extends OneShotEffect {
         // put a +1/+1 counter on it
         sb.append("put ");
         if (counter.getCount() > 1) {
-            sb.append(CardUtil.numberToText(counter.getCount())).append(" ");
+            sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
         } else {
             sb.append("a ");
         }

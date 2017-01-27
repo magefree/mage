@@ -97,7 +97,8 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
             if (duration.equals(Duration.EndOfTurn)) {
                 sb.append(" this turn");
             } else {
-                sb.append(" ");
+                sb.append(' ');
+                sb.append(' ');
                 sb.append(duration.toString());
             }
         }

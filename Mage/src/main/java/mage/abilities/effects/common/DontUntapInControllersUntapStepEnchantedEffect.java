@@ -43,7 +43,7 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {
-                return enchanted.getLogName() + " doesn't untap during its controller's untap step (" + enchantment.getLogName() + ")";
+                return enchanted.getLogName() + " doesn't untap during its controller's untap step (" + enchantment.getLogName() + ')';
             }
         }
         return null;

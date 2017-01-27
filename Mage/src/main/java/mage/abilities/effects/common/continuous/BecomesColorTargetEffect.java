@@ -143,7 +143,7 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
         } else {
             sb.append(setColor.getDescription());
         }
-        sb.append(" ").append(duration.toString());
+        sb.append(' ').append(duration.toString());
         return sb.toString();
     }
 }

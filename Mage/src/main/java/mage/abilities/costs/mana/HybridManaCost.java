@@ -76,7 +76,7 @@ public class HybridManaCost extends ManaCostImpl {
 
     @Override
     public String getText() {
-        return "{" + mana1.toString() + "/" + mana2.toString() + "}";
+        return '{' + mana1.toString() + '/' + mana2.toString() + '}';
     }
 
     @Override

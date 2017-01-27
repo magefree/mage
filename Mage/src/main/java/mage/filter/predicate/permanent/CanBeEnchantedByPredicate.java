@@ -50,6 +50,6 @@ public class CanBeEnchantedByPredicate implements Predicate<Permanent> {
 
     @Override
     public String toString() {
-        return "CanBeEnchanted(" + auraEnchantment.toString() + ")";
+        return "CanBeEnchanted(" + auraEnchantment.toString() + ')';
     }
 }

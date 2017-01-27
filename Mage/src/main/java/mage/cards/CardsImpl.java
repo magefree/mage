@@ -206,7 +206,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         }
         Collections.sort(cards);
         for (String name : cards) {
-            sb.append(name).append(":");
+            sb.append(name).append(':');
         }
         return sb.toString();
     }

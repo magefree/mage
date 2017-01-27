@@ -62,13 +62,13 @@ public class Format {
         seconds = seconds % 3600;
         long m = seconds / 60;
         long s = seconds % 60;
-        sb.append(h).append(":");
+        sb.append(h).append(':');
         if (m<10) {
-            sb.append("0");
+            sb.append('0');
         }
-        sb.append(m).append(":");
+        sb.append(m).append(':');
         if (s<10) {
-            sb.append("0");
+            sb.append('0');
         }
         sb.append(s);
         return sb.toString();

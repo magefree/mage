@@ -161,7 +161,7 @@ public class ChatManager {
                                 colour = "green";
                             }
                             messageToCheck = messageToCheck.replaceFirst("\\[" + cardName + "\\]", "card");
-                            String displayCardName = "<font bgcolor=orange color=" + colour + ">" + cardName + "</font>";
+                            String displayCardName = "<font bgcolor=orange color=" + colour + '>' + cardName + "</font>";
                             message = message.replaceFirst("\\[" + cardName + "\\]", displayCardName);
                         }
                     }
@@ -220,7 +220,7 @@ public class ChatManager {
         }
         if (command.startsWith("W ") || command.startsWith("WHISPER ")) {
             String rest = message.substring(command.startsWith("W ") ? 3 : 9);
-            int first = rest.indexOf(" ");
+            int first = rest.indexOf(' ');
             if (first > 1) {
                 String userToName = rest.substring(0, first);
                 rest = rest.substring(first + 1).trim();

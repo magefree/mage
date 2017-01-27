@@ -96,7 +96,7 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
 
         sb.append(" creature is a");
         for (String subtype : this.setSubtypes) {
-            sb.append(" ").append(subtype);
+            sb.append(' ').append(subtype);
         }
         staticText = sb.toString();
     }
