@@ -199,7 +199,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
         if (log.isDebugEnabled()) {
-            log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
+            log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
@@ -450,7 +450,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         if (log.isDebugEnabled()) {
-            log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
+            log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
@@ -817,7 +817,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         if (log.isDebugEnabled()) {
-            log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
+            log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
         UUID opponentId = game.getOpponents(playerId).iterator().next();
         if (target.getOriginalTarget() instanceof TargetCreatureOrPlayerAmount) {
@@ -1999,7 +1999,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         for (int i = 1; i < powerElements; i++) {
             String binary = Integer.toBinaryString(i);
             while (binary.length() < attackersList.size()) {
-                binary = "0" + binary;
+                binary = '0' + binary;
             }
             List<Permanent> trialAttackers = new ArrayList<>();
             for (int j = 0; j < attackersList.size(); j++) {
@@ -2119,7 +2119,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         StringBuilder sb = new StringBuilder();
         sb.append(message).append(": ");
         for (MageObject object : list) {
-            sb.append(object.getName()).append(",");
+            sb.append(object.getName()).append(',');
         }
         log.info(sb.toString());
     }
@@ -2128,7 +2128,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         StringBuilder sb = new StringBuilder();
         sb.append(message).append(": ");
         for (Ability ability : list) {
-            sb.append(ability.getRule()).append(",");
+            sb.append(ability.getRule()).append(',');
         }
         log.debug(sb.toString());
     }

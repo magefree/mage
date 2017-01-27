@@ -166,7 +166,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         if (duration.equals(Duration.WhileOnBattlefield) || duration.equals(Duration.EndOfGame)) {
             sb.append("have ");
             if (gainedAbility.startsWith("Whenever ") || gainedAbility.startsWith("{T}")) {
-                gainedAbility = "\"" + gainedAbility + "\"";
+                gainedAbility = '"' + gainedAbility + '"';
             }
         }
         else {
@@ -174,7 +174,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         }
         sb.append(gainedAbility);
         if (!duration.toString().isEmpty() && !duration.equals(Duration.EndOfGame)) {
-                sb.append(" ").append(duration.toString());
+                sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();
     }

@@ -167,7 +167,7 @@ public class DownloadJob extends AbstractLaternaBean {
 
             @Override
             public String toString() {
-                return proxy != null ? proxy.type().toString() + " " : "" + url;
+                return proxy != null ? proxy.type().toString() + ' ' : "" + url;
             }
 
         };
@@ -196,7 +196,7 @@ public class DownloadJob extends AbstractLaternaBean {
 
             @Override
             public String toString() {
-                return proxy != null ? proxy.type().toString() + " " : "" + url;
+                return proxy != null ? proxy.type().toString() + ' ' : "" + url;
             }
         };
     }

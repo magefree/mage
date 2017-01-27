@@ -106,7 +106,7 @@ class ChainLightningEffect extends OneShotEffect {
                         Spell spell = game.getStack().getSpell(source.getSourceId());
                         if (spell != null) {
                             spell.createCopyOnStack(game, source, affectedPlayer.getId(), true);
-                            game.informPlayers(affectedPlayer.getLogName() + " copies " + spell.getName() + ".");
+                            game.informPlayers(affectedPlayer.getLogName() + " copies " + spell.getName() + '.');
                         }
                     }
                 }

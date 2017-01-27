@@ -990,7 +990,7 @@ public class HumanPlayer extends PlayerImpl {
                             } else {
                                 Permanent creature = game.getPermanent(creatureId);
                                 if (creature != null) {
-                                    sb.append(creature.getIdName()).append(" ");
+                                    sb.append(creature.getIdName()).append(' ');
                                 }
                             }
 
@@ -1066,7 +1066,7 @@ public class HumanPlayer extends PlayerImpl {
                 StringBuilder sb = new StringBuilder(target.getTargetName());
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null) {
-                    sb.append(" (").append(attacker.getName()).append(")");
+                    sb.append(" (").append(attacker.getName()).append(')');
                     target.setTargetName(sb.toString());
                 }
             }
@@ -1493,7 +1493,7 @@ public class HumanPlayer extends PlayerImpl {
                 this.quit(game);
                 return;
             }
-            logger.debug("Setting game priority to " + getId() + " [" + methodName + "]");
+            logger.debug("Setting game priority to " + getId() + " [" + methodName + ']');
             game.getState().setPriorityPlayerId(getId());
         }
     }

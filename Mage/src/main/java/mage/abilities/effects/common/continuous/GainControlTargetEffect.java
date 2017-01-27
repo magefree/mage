@@ -150,7 +150,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         }
         sb.append(mode.getTargets().get(0).getTargetName());
         if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         return sb.toString();
     }

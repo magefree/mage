@@ -73,7 +73,7 @@ public class GenericManaCost extends ManaCostImpl {
 
     @Override
     public String getText() {
-        return "{" + Integer.toString(mana) + "}";
+        return '{' + Integer.toString(mana) + '}';
     }
 
     @Override

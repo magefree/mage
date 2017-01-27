@@ -708,7 +708,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         @Override
         public String toString() {
-            return "(" + sort.toString() + "," + Boolean.toString(separateCreatures) + "," + Integer.toString(cardSize) + ")";
+            return '(' + sort.toString() + ',' + Boolean.toString(separateCreatures) + ',' + Integer.toString(cardSize) + ')';
         }
     }
 
@@ -1327,7 +1327,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         if (!s) {
                             String t = "";
                             for (CardType type : card.getCardTypes()) {
-                                t += " " + type.toString();
+                                t += ' ' + type.toString();
                             }
                             s |= t.toLowerCase().contains(searchStr);
                         }
@@ -1385,14 +1385,14 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     // Type line
                     String t = "";
                     for (CardType type : card.getCardTypes()) {
-                        t += " " + type.toString();
+                        t += ' ' + type.toString();
                     }
                     // Sub & Super Types
                     for (String str : card.getSuperTypes()) {
-                        t += " " + str.toLowerCase();
+                        t += ' ' + str.toLowerCase();
                     }
                     for (String str : card.getSubTypes()) {
-                        t += " " + str.toLowerCase();
+                        t += ' ' + str.toLowerCase();
                     }
 
                     for (String qty : qtys.keySet()) {

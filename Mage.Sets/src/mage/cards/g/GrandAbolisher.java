@@ -98,7 +98,7 @@ class GrandAbolisherEffect extends ContinuousRuleModifyingEffectImpl {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (activePlayer != null && mageObject != null) {
             return "You can't cast spells or activate abilities of artifacts, creatures, or enchantments during the turns of " + activePlayer.getLogName() +
-                    " (" + mageObject.getLogName() + ")";
+                    " (" + mageObject.getLogName() + ')';
         }
         return null;
     }

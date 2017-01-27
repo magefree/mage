@@ -59,7 +59,7 @@ public class ExileFromGraveCost extends CostImpl {
                     + (target.getNumberOfTargets() == 1 && target.getMaxNumberOfTargets() == Integer.MAX_VALUE ? "one or more"
                             : ((target.getNumberOfTargets() < target.getMaxNumberOfTargets() ? "up to " : ""))
                             + CardUtil.numberToText(target.getMaxNumberOfTargets()))
-                    + " " + target.getTargetName();
+                    + ' ' + target.getTargetName();
         } else {
             this.text = "Exile " + target.getTargetName();
         }

@@ -105,7 +105,7 @@ class ReverseTheSandsEffect extends OneShotEffect {
                     } else {
                         selectedChoice = choices.iterator().next();
                     }
-                    int index = selectedChoice.indexOf(" ");
+                    int index = selectedChoice.indexOf(' ');
                     if (index > 0) {
                         String lifeString = selectedChoice.substring(0, index);
                         int life = Integer.parseInt(lifeString);

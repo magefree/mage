@@ -92,7 +92,7 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
                 !condition.toString().startsWith("before")) {
                 sb.append("if ");
             }
-            sb.append(condition.toString()).append(".");
+            sb.append(condition.toString()).append('.');
         } else {
             sb.append(" [Condition toSting() == null] ");
         }

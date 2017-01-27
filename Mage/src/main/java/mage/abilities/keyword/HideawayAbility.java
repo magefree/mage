@@ -125,7 +125,7 @@ class HideawayExileEffect extends OneShotEffect {
                 if (card != null) {
                     cards.remove(card);
                     controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source),
-                            "Hideaway (" + hideawaySource.getIdName() + ")", source.getSourceId(), game, Zone.LIBRARY, false);
+                            "Hideaway (" + hideawaySource.getIdName() + ')', source.getSourceId(), game, Zone.LIBRARY, false);
                     card.setFaceDown(true, game);
                 }
             }

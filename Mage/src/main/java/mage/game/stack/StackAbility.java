@@ -87,7 +87,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
         this.controllerId = controllerId;
-        this.name = "stack ability (" + ability.getRule() + ")";
+        this.name = "stack ability (" + ability.getRule() + ')';
     }
 
     public StackAbility(final StackAbility stackAbility) {
@@ -142,7 +142,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public String getIdName() {
-        return getName() + " [" + getId().toString().substring(0, 3) + "]";
+        return getName() + " [" + getId().toString().substring(0, 3) + ']';
     }
 
     @Override

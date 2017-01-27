@@ -121,7 +121,7 @@ class FaerieArtisansEffect extends OneShotEffect {
                 StringBuilder sb = new StringBuilder();
                 for (Permanent permanent : effect.getAddedPermanent()) {
                     if (sb.length() > 0) {
-                        sb.append(";");
+                        sb.append(';');
                     }
                     sb.append(permanent.getId());
                 }

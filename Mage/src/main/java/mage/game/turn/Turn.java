@@ -328,17 +328,17 @@ public class Turn implements Serializable {
 
     public String getValue(int turnNum) {
         StringBuilder sb = threadLocalBuilder.get();
-        sb.append("[").append(turnNum)
-                .append(":").append(currentPhase.getType())
-                .append(":").append(currentPhase.getStep().getType())
-                .append("]");
+        sb.append('[').append(turnNum)
+                .append(':').append(currentPhase.getType())
+                .append(':').append(currentPhase.getStep().getType())
+                .append(']');
 
         return sb.toString();
     }
 
     private void logStartOfTurn(Game game, Player player) {
         StringBuilder sb = new StringBuilder(game.getState().isExtraTurn() ? "Extra turn" : "Turn ");
-        sb.append(game.getState().getTurnNum()).append(" ");
+        sb.append(game.getState().getTurnNum()).append(' ');
         sb.append(player.getLogName());
         sb.append(" (");
         int delimiter = game.getPlayers().size() - 1;
@@ -346,14 +346,14 @@ public class Turn implements Serializable {
             sb.append(gamePlayer.getLife());
             int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
             if (poison > 0) {
-                sb.append("[P:").append(poison).append("]");
+                sb.append("[P:").append(poison).append(']');
             }
             if (delimiter > 0) {
                 sb.append(" - ");
                 delimiter--;
             }
         }
-        sb.append(")");
+        sb.append(')');
         game.fireStatusEvent(sb.toString(), true);
     }
 }

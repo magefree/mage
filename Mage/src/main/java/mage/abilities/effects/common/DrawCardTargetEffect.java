@@ -130,10 +130,10 @@ public class DrawCardTargetEffect extends OneShotEffect {
         sb.append(CardUtil.numberToText(amount.toString(), "a")).append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
-                sb.append("s");
+                sb.append('s');
             }
         } catch (Exception e) {
-            sb.append("s");
+            sb.append('s');
         }
         String message = amount.getMessage();
         if (message.length() > 0) {

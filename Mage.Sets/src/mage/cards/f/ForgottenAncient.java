@@ -124,7 +124,7 @@ public class ForgottenAncient extends CardImpl {
                     continue;
                 }
 
-                int amountToMove = controller.getAmount(0, numCounters, "How many counters do you want to move? " + "(" + numCounters + ")" + " counters remaining.", game);
+                int amountToMove = controller.getAmount(0, numCounters, "How many counters do you want to move? " + '(' + numCounters + ')' + " counters remaining.", game);
                 if(amountToMove > 0)
                 {
                     boolean previouslyChosen = false;

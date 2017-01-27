@@ -92,7 +92,7 @@ public class GainLifeTargetEffect extends OneShotEffect {
         }
         sb.append(" gains ");
         if (message.isEmpty() || !message.equals("1")) {
-            sb.append(life.toString()).append(" ");
+            sb.append(life.toString()).append(' ');
         }
         sb.append("life");
         if (message.length() > 0) {

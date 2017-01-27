@@ -60,7 +60,7 @@ public class SkipUntapOptionalSourceEffect extends RestrictionEffect {
     @Override
     public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
         Player player = game.getPlayer(permanent.getControllerId());
-        return player != null && player.chooseUse(Outcome.Benefit, "Untap " + permanent.getLogName() + "?", source, game);
+        return player != null && player.chooseUse(Outcome.Benefit, "Untap " + permanent.getLogName() + '?', source, game);
     }
 
     @Override

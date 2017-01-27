@@ -51,7 +51,7 @@ public class TapTargetCost extends CostImpl {
         this.text
                 = new StringBuilder("Tap ")
                 .append((target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") || target.getTargetName().startsWith("another"))
-                        ? "" : CardUtil.numberToText(target.getMaxNumberOfTargets()) + " ")
+                        ? "" : CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' ')
                 .append(target.getTargetName()).toString();
     }
 

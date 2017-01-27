@@ -96,7 +96,7 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
         if (controller != null) {
             int numberOfClericsControlled = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("Cleric", "Clerics")).calculate(game, source, this);
             int toPrevent = Math.min(numberOfClericsControlled, event.getAmount());
-            if (toPrevent > 0 && controller.chooseUse(Outcome.PreventDamage, "Prevent " + toPrevent + " damage to " + targetPlayer.getName() + "?", source, game)) {
+            if (toPrevent > 0 && controller.chooseUse(Outcome.PreventDamage, "Prevent " + toPrevent + " damage to " + targetPlayer.getName() + '?', source, game)) {
                 GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, targetPlayer.getId(), source.getSourceId(), source.getControllerId(), toPrevent, false);
                 if (!game.replaceEvent(preventEvent)) {
                     if (event.getAmount() >= toPrevent) {

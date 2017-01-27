@@ -53,7 +53,7 @@ public class ActivationInfo {
         Integer activations = (Integer) game.getState().getValue(key);
         ActivationInfo activationInfo;
         if (activations != null) {
-            Integer turnNum = (Integer) game.getState().getValue(key + "T");
+            Integer turnNum = (Integer) game.getState().getValue(key + 'T');
             activationInfo = new ActivationInfo(game, turnNum, activations);
         } else {
             activationInfo = new ActivationInfo(game, game.getTurnNum(), 0);
@@ -79,7 +79,7 @@ public class ActivationInfo {
             activationCounter++;
         }
         game.getState().setValue(key, activationCounter);
-        game.getState().setValue(key + "T", turnNum);
+        game.getState().setValue(key + 'T', turnNum);
     }
 
     public int getActivationCounter() {

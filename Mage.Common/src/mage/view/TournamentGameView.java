@@ -70,14 +70,14 @@ public class TournamentGameView implements Serializable {
         
         if (game.hasEnded()) {
             if (game.getEndTime() != null) {
-                duelingTime = " (" + DateFormat.getDuration((game.getEndTime().getTime() - game.getStartTime().getTime())/1000) + ")";
+                duelingTime = " (" + DateFormat.getDuration((game.getEndTime().getTime() - game.getStartTime().getTime())/1000) + ')';
             }
             this.state = "Finished" + duelingTime;
             this.result = game.getWinner();
         } 
         else {
             if (game.getStartTime() != null) {
-                duelingTime = " (" + DateFormat.getDuration((new Date().getTime() - game.getStartTime().getTime())/1000) + ")";
+                duelingTime = " (" + DateFormat.getDuration((new Date().getTime() - game.getStartTime().getTime())/1000) + ')';
             }
             this.state = "Dueling" + duelingTime;            
             this.result = "";

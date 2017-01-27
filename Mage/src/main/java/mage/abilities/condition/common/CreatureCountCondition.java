@@ -67,14 +67,14 @@ public class CreatureCountCondition implements Condition {
             case ANY:
                 sb.append("if ");
                 sb.append(creatureCount);
-                sb.append(" ");
+                sb.append(' ');
                 sb.append(filter.getMessage());
                 sb.append(" are on the battlefield");
                 return sb.toString();
         }
         sb.append(" control exactly ");
         sb.append(creatureCount);
-        sb.append(" ");
+        sb.append(' ');
         sb.append(filter.getMessage());
 
         return sb.toString();

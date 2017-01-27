@@ -170,7 +170,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                             }
                         }
                         // add the specific value for x
-                        newAbility.getManaCostsToPay().add(new ManaCostsImpl(new StringBuilder("{").append(xAmount).append("}").toString()));
+                        newAbility.getManaCostsToPay().add(new ManaCostsImpl(new StringBuilder("{").append(xAmount).append('}').toString()));
                         newAbility.getManaCostsToPay().setX(xAmount);
                         if (varCost != null) {
                             varCost.setPaid();
@@ -338,7 +338,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             binary.setLength(0);
             binary.append(Integer.toBinaryString(i));
             while (binary.length() < attackersList.size()) {
-                binary.insert(0, "0");
+                binary.insert(0, '0');
             }
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {

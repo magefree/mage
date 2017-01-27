@@ -732,7 +732,7 @@ public class CardView extends SimpleCardView {
 
     @Override
     public String toString() {
-        return getName() + " [" + getId() + "]";
+        return getName() + " [" + getId() + ']';
     }
 
     public boolean isFaceDown() {

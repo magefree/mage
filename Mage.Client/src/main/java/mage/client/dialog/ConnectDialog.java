@@ -398,7 +398,7 @@ public class ConnectDialog extends MageDialog {
             // pref settings
             MageFrame.getInstance().setUserPrefsToConnection(connection);
 
-            logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
+            logger.debug("connecting: " + connection.getProxyType() + ' ' + connection.getProxyHost() + ' ' + connection.getProxyPort());
             task = new ConnectTask();
             task.execute();
         } finally {

@@ -73,7 +73,7 @@ public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl {
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         sb.append("Switch target ").append(mode.getTargets().get(0).getTargetName()).append("'s power and toughness")
-            .append(" ").append(duration.toString());
+            .append(' ').append(duration.toString());
         return sb.toString();
     }
 

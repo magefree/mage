@@ -380,15 +380,15 @@ public abstract class CardRenderer {
         } else {
             StringBuilder sbType = new StringBuilder();
             for (String superType : cardView.getSuperTypes()) {
-                sbType.append(superType).append(" ");
+                sbType.append(superType).append(' ');
             }
             for (CardType cardType : cardView.getCardTypes()) {
-                sbType.append(cardType.toString()).append(" ");
+                sbType.append(cardType.toString()).append(' ');
             }
             if (cardView.getSubTypes().size() > 0) {
                 sbType.append("- ");
                 for (String subType : cardView.getSubTypes()) {
-                    sbType.append(subType).append(" ");
+                    sbType.append(subType).append(' ');
                 }
             }
             return sbType.toString();

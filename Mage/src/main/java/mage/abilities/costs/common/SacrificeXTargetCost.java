@@ -48,7 +48,7 @@ public class SacrificeXTargetCost extends VariableCostImpl {
 
     public SacrificeXTargetCost(FilterControlledPermanent filter, boolean additionalCostText) {
         super(filter.getMessage() + " to sacrifice");
-        this.text = (additionalCostText ? "As an additional cost to cast {source}, sacrifice " : "Sacrifice ") + xText + " " + filter.getMessage();
+        this.text = (additionalCostText ? "As an additional cost to cast {source}, sacrifice " : "Sacrifice ") + xText + ' ' + filter.getMessage();
         this.filter = filter;
     }
 

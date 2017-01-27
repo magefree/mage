@@ -241,7 +241,7 @@ public class CardPanelComponentImpl extends CardPanel {
         // PT Text
         ptText = new GlowText();
         if (CardUtil.isCreature(gameCard)) {
-            ptText.setText(gameCard.getPower() + "/" + gameCard.getToughness());
+            ptText.setText(gameCard.getPower() + '/' + gameCard.getToughness());
         } else if (CardUtil.isPlaneswalker(gameCard)) {
             ptText.setText(gameCard.getLoyalty());
         }
@@ -580,9 +580,9 @@ public class CardPanelComponentImpl extends CardPanel {
 
         // Update card text
         if (CardUtil.isCreature(card) && CardUtil.isPlaneswalker(card)) {
-            ptText.setText(card.getPower() + "/" + card.getToughness() + " (" + card.getLoyalty() + ")");
+            ptText.setText(card.getPower() + '/' + card.getToughness() + " (" + card.getLoyalty() + ')');
         } else if (CardUtil.isCreature(card)) {
-            ptText.setText(card.getPower() + "/" + card.getToughness());
+            ptText.setText(card.getPower() + '/' + card.getToughness());
         } else if (CardUtil.isPlaneswalker(card)) {
             ptText.setText(card.getLoyalty());
         } else {

@@ -348,7 +348,7 @@ public abstract class AbilityImpl implements Ability {
         for (Cost cost : optionalCosts) {
             if (cost instanceof ManaCost) {
                 cost.clearPaid();
-                if (controller.chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", this, game)) {
+                if (controller.chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + '?', this, game)) {
                     manaCostsToPay.add((ManaCost) cost);
                 }
             }
@@ -507,11 +507,11 @@ public abstract class AbilityImpl implements Ability {
                 // set the xcosts to paid
                 variableCost.setAmount(xValue);
                 ((Cost) variableCost).setPaid();
-                String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ")";
+                String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')';
                 if (announceString == null) {
                     announceString = message;
                 } else {
-                    announceString = announceString + " " + message;
+                    announceString = announceString + ' ' + message;
                 }
             }
         }
@@ -546,7 +546,7 @@ public abstract class AbilityImpl implements Ability {
                     int amountMana = xValue * variableManaCost.getMultiplier();
                     StringBuilder manaString = threadLocalBuilder.get();
                     if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {
-                        manaString.append("{").append(amountMana).append("}");
+                        manaString.append('{').append(amountMana).append('}');
                     } else {
                         String manaSymbol = null;
                         if (variableManaCost.getFilter().isBlack()) {
@@ -564,7 +564,7 @@ public abstract class AbilityImpl implements Ability {
                             throw new UnsupportedOperationException("ManaFilter is not supported: " + this.toString());
                         }
                         for (int i = 0; i < amountMana; i++) {
-                            manaString.append("{").append(manaSymbol).append("}");
+                            manaString.append('{').append(manaSymbol).append('}');
                         }
                     }
                     manaCostsToPay.add(new ManaCostsImpl(manaString.toString()));
@@ -745,7 +745,7 @@ public abstract class AbilityImpl implements Ability {
             }
             if (costs.size() > 0) {
                 if (sbRule.length() > 0) {
-                    sbRule.append(",");
+                    sbRule.append(',');
                 }
                 sbRule.append(costs.getText());
             }
@@ -1069,7 +1069,7 @@ public abstract class AbilityImpl implements Ability {
                 for (Mode mode : spellModes.values()) {
                     item++;
                     if (mode.getId().equals(selectedMode.getId())) {
-                        sb.append(" (mode ").append(item).append(")");
+                        sb.append(" (mode ").append(item).append(')');
                         sb.append(getTargetDescriptionForLog(selectedMode.getTargets(), game));
                         break;
                     }

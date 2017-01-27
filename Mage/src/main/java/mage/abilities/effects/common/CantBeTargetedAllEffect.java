@@ -118,7 +118,7 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
             sb.append("spells");
         }
         if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();
     }

@@ -70,7 +70,7 @@ public class MoveCountersTargetsEffect extends OneShotEffect {
             removeTargetCreature.removeCounters(counterType.createInstance(amount), game);
             addTargetCreature.addCounters(counterType.createInstance(amount), source, game);
             if (!game.isSimulation()) {
-                game.informPlayers("Moved " + amount + " " + counterType.getName() + " counter" + (amount > 1 ? "s" : "") + " from " + removeTargetCreature.getLogName() + " to " + addTargetCreature.getLogName());
+                game.informPlayers("Moved " + amount + ' ' + counterType.getName() + " counter" + (amount > 1 ? "s" : "") + " from " + removeTargetCreature.getLogName() + " to " + addTargetCreature.getLogName());
             }
             return true;
         }
@@ -87,15 +87,15 @@ public class MoveCountersTargetsEffect extends OneShotEffect {
         if (amount > 1) {
             sb.append(amount);
         } else {
-            sb.append("a");
+            sb.append('a');
         }
-        sb.append(" ");
+        sb.append(' ');
         sb.append(counterType.getName());
         sb.append(" counter");
         if (amount > 1) {
             sb.append("s ");
         } else {
-            sb.append(" ");
+            sb.append(' ');
         }
         sb.append("from one target creature to another target creature");
 

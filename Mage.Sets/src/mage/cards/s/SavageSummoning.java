@@ -182,7 +182,7 @@ class SavageSummoningWatcher extends Watcher {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
                     spellsCastWithSavageSummoning.put(spell.getId(), new HashSet<>(savageSummoningSpells));
-                    String cardKey = new StringBuilder(spell.getCard().getId().toString()).append("_").append(spell.getCard().getZoneChangeCounter(game)).toString();
+                    String cardKey = new StringBuilder(spell.getCard().getId().toString()).append('_').append(spell.getCard().getZoneChangeCounter(game)).toString();
                     cardsCastWithSavageSummoning.put(cardKey, new HashSet<>(savageSummoningSpells));
                     savageSummoningSpells.clear();
                 }
@@ -191,7 +191,7 @@ class SavageSummoningWatcher extends Watcher {
     }
 
     public void setSavageSummoningSpellActive(Card card, Game game) {
-        String cardKey = new StringBuilder(card.getId().toString()).append("_").append(card.getZoneChangeCounter(game)).toString();
+        String cardKey = new StringBuilder(card.getId().toString()).append('_').append(card.getZoneChangeCounter(game)).toString();
         savageSummoningSpells.add(cardKey);
     }
 
@@ -200,15 +200,15 @@ class SavageSummoningWatcher extends Watcher {
     }
 
     public boolean isSpellCastWithThisSavageSummoning(UUID spellId, UUID cardId, int zoneChangeCounter) {
-        String cardKey = new StringBuilder(cardId.toString()).append("_").append(zoneChangeCounter).toString();
+        String cardKey = new StringBuilder(cardId.toString()).append('_').append(zoneChangeCounter).toString();
         HashSet<String> savageSpells = (HashSet<String>) spellsCastWithSavageSummoning.get(spellId);
         return savageSpells != null && savageSpells.contains(cardKey);
     }
 
     public boolean isCardCastWithThisSavageSummoning(Card card, UUID cardId, int zoneChangeCounter, Game game) {
-        String creatureCardKey = card.getId().toString() + "_" + (card.getZoneChangeCounter(game));
+        String creatureCardKey = card.getId().toString() + '_' + (card.getZoneChangeCounter(game));
         // add one because card is now gone to battlefield as creature
-        String cardKey = cardId.toString() + "_" + zoneChangeCounter;
+        String cardKey = cardId.toString() + '_' + zoneChangeCounter;
         HashSet<String> savageSpells = (HashSet<String>) cardsCastWithSavageSummoning.get(creatureCardKey);
         return savageSpells != null && savageSpells.contains(cardKey);
     }

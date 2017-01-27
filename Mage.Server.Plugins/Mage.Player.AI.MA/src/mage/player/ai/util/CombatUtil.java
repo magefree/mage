@@ -161,7 +161,7 @@ public class CombatUtil {
         UUID attackerId = game.getCombat().getAttackerId();
         UUID defenderId = game.getCombat().getDefenders().iterator().next();
         if (attackerId == null || defenderId == null) {
-            log.warn("Couldn't find attacker or defender: " + attackerId + " " + defenderId);
+            log.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
             return new CombatInfo();
         }
 
@@ -298,7 +298,7 @@ public class CombatUtil {
         UUID attackerId = game.getCombat().getAttackerId();
         UUID defenderId = game.getCombat().getDefenders().iterator().next();
         if (attackerId == null || defenderId == null) {
-            log.warn("Couldn't find attacker or defender: " + attackerId + " " + defenderId);
+            log.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
             return new CombatInfo();
         }
 

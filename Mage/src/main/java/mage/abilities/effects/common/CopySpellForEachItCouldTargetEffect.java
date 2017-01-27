@@ -466,11 +466,11 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
         for (UUID targetId : getTargets()) {
             MageObject object = game.getObject(targetId);
             if (object != null) {
-                sb.append(object.getLogName()).append(" ");
+                sb.append(object.getLogName()).append(' ');
             } else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
-                    sb.append(player.getLogName()).append(" ");
+                    sb.append(player.getLogName()).append(' ');
                 }
             }
         }

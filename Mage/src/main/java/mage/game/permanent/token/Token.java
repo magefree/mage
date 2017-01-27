@@ -130,7 +130,7 @@ public class Token extends MageObjectImpl {
         String subtype = this.subtype.toString().replaceAll("[^a-zA-Z0-9]", "");
         String cardType = this.cardType.toString().replaceAll("[^a-zA-Z0-9]", "");
         String originalset = this.getOriginalExpansionSetCode();
-        String descriptor = name + "." + color + "." + subtype + "." + cardType + "." + this.power + "." + this.toughness;
+        String descriptor = name + '.' + color + '.' + subtype + '.' + cardType + '.' + this.power + '.' + this.toughness;
         descriptor = descriptor.toUpperCase();
         return descriptor;
     }

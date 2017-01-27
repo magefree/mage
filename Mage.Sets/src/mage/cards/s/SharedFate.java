@@ -109,7 +109,7 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
                                 game,
                                 false,
                                 CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + playerToDraw.getId().toString(), game),
-                                "Shared Fate (" + playerToDraw.getName() + ")");
+                                "Shared Fate (" + playerToDraw.getName() + ')');
                         card.setFaceDown(true, game);
                     }
                 }
@@ -159,7 +159,7 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
             if (exileId != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
                 if (exileZone != null && exileZone.contains(objectId)) {
-                    if (player.chooseUse(outcome, "Play " + game.getCard(objectId).getIdName() + "?", source, game)) {
+                    if (player.chooseUse(outcome, "Play " + game.getCard(objectId).getIdName() + '?', source, game)) {
                         return true;
                     }
                 }

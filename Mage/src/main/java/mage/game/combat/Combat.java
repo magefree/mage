@@ -399,7 +399,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         if (!effect.canAttackCheckAfter(numberAttackers, ability, game)) {
                             MageObject sourceObject = ability.getSourceObject(game);
                             if (attackingPlayer.isHuman()) {
-                                game.informPlayer(attackingPlayer, attackingCreature.getIdName() + " can't attack this way (" + (sourceObject == null ? "null" : sourceObject.getIdName()) + ")");
+                                game.informPlayer(attackingPlayer, attackingCreature.getIdName() + " can't attack this way (" + (sourceObject == null ? "null" : sourceObject.getIdName()) + ')');
                                 return false;
                             } else {
                                 // remove attacking creatures for AI that are not allowed to attack
@@ -504,7 +504,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     if (attackingCreature != null) {
                         sb.append("Attacker: ");
                         sb.append(attackingCreature.getLogName()).append(" (");
-                        sb.append(attackingCreature.getPower().getValue()).append("/").append(attackingCreature.getToughness().getValue()).append(") ");
+                        sb.append(attackingCreature.getPower().getValue()).append('/').append(attackingCreature.getToughness().getValue()).append(") ");
                     } else {
                         // creature left battlefield
                         attackingCreature = (Permanent) game.getLastKnownInformation(attackingCreatureId, Zone.BATTLEFIELD);
@@ -520,7 +520,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             Permanent blockingCreature = game.getPermanent(blockingCreatureId);
                             if (blockingCreature != null) {
                                 sb.append(blockingCreature.getLogName()).append(" (");
-                                sb.append(blockingCreature.getPower().getValue()).append("/").append(blockingCreature.getToughness().getValue()).append(") ");
+                                sb.append(blockingCreature.getPower().getValue()).append('/').append(blockingCreature.getToughness().getValue()).append(") ");
                             }
                         }
 
@@ -782,7 +782,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                             possibleBlockerId, toBeBlockedCreatureId, mustBeBlockedByAtLeastOne, game);
                                     if (blockRequiredMessage != null) { // message means not required
                                         removeBlocker(possibleBlockerId, game);
-                                        game.informPlayer(controller, blockRequiredMessage + " Existing block removed. It's a requirement to block " + toBeBlockedCreature.getIdName() + ".");
+                                        game.informPlayer(controller, blockRequiredMessage + " Existing block removed. It's a requirement to block " + toBeBlockedCreature.getIdName() + '.');
                                         return false;
                                     }
                                 }
@@ -894,7 +894,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
             }
             if (!blockIsValid) {
-                sb.append(" ").append(creatureForcedToBlock.getIdName());
+                sb.append(' ').append(creatureForcedToBlock.getIdName());
             }
         }
         if (sb.length() > 0) {

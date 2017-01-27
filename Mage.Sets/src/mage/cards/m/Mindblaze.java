@@ -113,8 +113,8 @@ class MindblazeEffect extends OneShotEffect {
                 }
             }
 
-            game.informPlayers("Mindblaze, named card: [" + cardChoice.getChoice() + "]");
-            game.informPlayers("Mindblaze, chosen number: [" + numberChoice.getChoice() + "]");
+            game.informPlayers("Mindblaze, named card: [" + cardChoice.getChoice() + ']');
+            game.informPlayers("Mindblaze, chosen number: [" + numberChoice.getChoice() + ']');
 
             Cards cards = new CardsImpl();
             cards.addAll(player.getLibrary().getCards(game));

@@ -94,7 +94,7 @@ public class CantBeTargetedSourceEffect extends ContinuousRuleModifyingEffectImp
         StringBuilder sb = new StringBuilder();
         sb.append("{this} can't be the target of ");
         sb.append(filterSource.getMessage());
-        sb.append(" ").append(duration.toString());
+        sb.append(' ').append(duration.toString());
         staticText = sb.toString();
     }
 

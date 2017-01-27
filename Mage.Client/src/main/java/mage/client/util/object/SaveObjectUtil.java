@@ -53,7 +53,7 @@ public class SaveObjectUtil {
                     }
                 }
                 String time = now(DATE_PATTERN);
-                File f = new File("income" + File.separator + name + "_" + time + ".save");
+                File f = new File("income" + File.separator + name + '_' + time + ".save");
                 if (!f.exists()) {
                     f.createNewFile();
                 }

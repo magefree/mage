@@ -134,7 +134,7 @@ public class CardInfoWindowDialog extends MageDialog {
 
     public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
         boolean changed = cards.loadCards(exile, bigCard, gameId, true);
-        String titel = name + " (" + exile.size() + ")";
+        String titel = name + " (" + exile.size() + ')';
         setTitle(titel);
         this.setTitelBarToolTip(titel);
         if (exile.size() > 0) {

@@ -88,7 +88,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
         }
         sb.append(" loses ");
         if (message.isEmpty() || !message.equals("1")) {
-            sb.append(amount).append(" ");
+            sb.append(amount).append(' ');
         }
         sb.append("life");
         if (message.length() > 0) {

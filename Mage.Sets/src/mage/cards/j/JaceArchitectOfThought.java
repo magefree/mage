@@ -264,7 +264,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
     private void postPileToLog(String pileName, Set<Card> cards, Game game) {
         StringBuilder message = new StringBuilder(pileName).append(": ");
         for (Card card : cards) {
-            message.append(card.getName()).append(" ");
+            message.append(card.getName()).append(' ');
         }
         if (cards.isEmpty()) {
             message.append(" (empty)");

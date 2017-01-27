@@ -126,7 +126,7 @@ public class FlashbackAbility extends SpellAbility {
         if (costs.size() > 0) {
             sbRule.append(" - ");
         } else {
-            sbRule.append(" ");
+            sbRule.append(' ');
         }
         if (manaCosts.size() > 0) {
             sbRule.append(manaCosts.getText());
@@ -136,10 +136,10 @@ public class FlashbackAbility extends SpellAbility {
                 sbRule.append(", ");
             }
             sbRule.append(costs.getText());
-            sbRule.append(".");
+            sbRule.append('.');
         }
         if (abilityName != null) {
-            sbRule.append(" ");
+            sbRule.append(' ');
             sbRule.append(abilityName);
         }
         sbRule.append(" <i>(You may cast this card from your graveyard for its flashback cost. Then exile it.)</i>");

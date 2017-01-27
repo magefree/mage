@@ -69,7 +69,7 @@ public class ClassScanner {
                     URL resource = resources.nextElement();
                     String filePath = resource.getFile();
                     if (filePath.startsWith("file:")) {
-                        filePath = filePath.substring("file:".length(), filePath.lastIndexOf("!"));
+                        filePath = filePath.substring("file:".length(), filePath.lastIndexOf('!'));
                         jars.add(filePath);
                     } else {
                         dirs.put(filePath, packageName);

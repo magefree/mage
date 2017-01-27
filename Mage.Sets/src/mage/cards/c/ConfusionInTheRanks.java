@@ -106,7 +106,7 @@ public class ConfusionInTheRanks extends CardImpl {
                         if (!message.isEmpty()) {
                             message += "or ";
                         }
-                        message += cardTypeEntering.toString().toLowerCase() + " ";
+                        message += cardTypeEntering.toString().toLowerCase() + ' ';
                     }
                     filterTarget.add(Predicates.or(cardTypesPredicates));
                     message += "you do not control";

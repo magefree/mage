@@ -195,7 +195,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         StringBuilder binary = new StringBuilder();
         binary.append(Integer.toBinaryString(value));
         while (binary.length() < attackersList.size()) {
-            binary.insert(0, "0");  //pad with zeros
+            binary.insert(0, '0');  //pad with zeros
         }
         for (int i = 0; i < attackersList.size(); i++) {
             if (binary.charAt(i) == '1') {

@@ -85,7 +85,7 @@ public class DontUntapInOpponentsNextUntapStepAllEffect extends ContinuousRuleMo
         MageObject mageObject = game.getObject(source.getSourceId());
         Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
         if (permanentToUntap != null && mageObject != null) {
-            return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ")";
+            return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ')';
         }
         return null;
     }

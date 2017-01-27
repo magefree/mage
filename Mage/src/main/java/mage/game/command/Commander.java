@@ -96,7 +96,7 @@ public class Commander implements CommandObject {
 
     @Override
     public String getIdName() {
-        return sourceObject.getName() + " [" + sourceObject.getId().toString().substring(0, 3) + "]";
+        return sourceObject.getName() + " [" + sourceObject.getId().toString().substring(0, 3) + ']';
     }
 
     @Override

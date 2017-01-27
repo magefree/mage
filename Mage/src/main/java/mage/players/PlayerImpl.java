@@ -944,7 +944,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             result = cast(card.getSpellAbility(), game, noMana);
         }
         if (!result) {
-            game.informPlayer(this, "You can't play " + card.getIdName() + ".");
+            game.informPlayer(this, "You can't play " + card.getIdName() + '.');
         }
         return result;
     }
@@ -1504,7 +1504,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 if (effectSource != null) {
                                     sb.append(" from ").append(effectSource.getLogName());
                                 }
-                                sb.append(")");
+                                sb.append(')');
                                 filter.setMessage(sb.toString());
                                 Target target = new TargetPermanent(1, 1, filter, true);
                                 if (!this.chooseTarget(Outcome.Untap, target, ability, game)) {
@@ -3217,7 +3217,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.isSimulation()) {
                 game.informPlayers(getLogName() + " puts "
                         + (withName ? card.getLogName() : (card.isFaceDown(game) ? "a face down card" : "a card"))
-                        + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " "
+                        + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' '
                         + (card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand")
                 );
             }
@@ -3306,8 +3306,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     card = game.getCard(card.getId());
                 }
                 StringBuilder sb = new StringBuilder(this.getLogName())
-                        .append(" puts ").append(card.getLogName()).append(" ").append(card.isCopy() ? "(Copy) " : "")
-                        .append(fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "");
+                        .append(" puts ").append(card.getLogName()).append(' ').append(card.isCopy() ? "(Copy) " : "")
+                        .append(fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' ' : "");
                 if (card.getOwnerId().equals(getId())) {
                     sb.append("into his or her graveyard");
                 } else {
@@ -3332,9 +3332,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     card = game.getCard(card.getId());
                 }
                 StringBuilder sb = new StringBuilder(this.getLogName())
-                        .append(" puts ").append(withName ? card.getLogName() : "a card").append(" ");
+                        .append(" puts ").append(withName ? card.getLogName() : "a card").append(' ');
                 if (fromZone != null) {
-                    sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ");
+                    sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(' ');
                 }
                 sb.append("to the ").append(toTop ? "top" : "bottom");
                 if (card.getOwnerId().equals(getId())) {
@@ -3367,8 +3367,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                         card = basicCard;
                     }
                 }
-                game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() + (card.isCopy() ? " (Copy)" : "") : "a card face down") + " "
-                        + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "") + "to the exile zone");
+                game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
+                        + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' ' : "") + "to the exile zone");
             }
             result = true;
         }

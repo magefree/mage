@@ -85,15 +85,15 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
                     game.informPlayers(target.getName() + ": " + controller.getLogName() + " has chosen " + choiceColor.getChoice());
                 }
                 if (choiceColor.getColor().isBlack()) {
-                    sb.append("B");
+                    sb.append('B');
                 } else if (choiceColor.getColor().isBlue()) {
-                    sb.append("U");
+                    sb.append('U');
                 } else if (choiceColor.getColor().isRed()) {
-                    sb.append("R");
+                    sb.append('R');
                 } else if (choiceColor.getColor().isGreen()) {
-                    sb.append("G");
+                    sb.append('G');
                 } else if (choiceColor.getColor().isWhite()) {
-                    sb.append("W");
+                    sb.append('W');
                 }
             }
             String colors = new String(sb);
@@ -123,7 +123,7 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
             sb.append(mode.getTargets().get(0).getFilter().getMessage());
             sb.append(" becomes the color or colors of your choice");
             if (duration.toString().length() > 0) {
-                sb.append(" ").append(duration.toString());
+                sb.append(' ').append(duration.toString());
             }
         }
         return sb.toString();

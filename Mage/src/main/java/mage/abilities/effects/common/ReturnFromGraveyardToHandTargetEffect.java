@@ -78,7 +78,7 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect {
             if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
                 sb.append("up to ");
             }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
         }
         if (!mode.getTargets().get(0).getTargetName().startsWith("another")) {
             sb.append("target ");

@@ -210,13 +210,13 @@ public class LevelerCardBuilder {
             StringBuilder sb = new StringBuilder();
             sb.append("<b>Level ").append(level1);
             if (level2 == -1) {
-                sb.append("+");
+                sb.append('+');
             } else {
-                sb.append("-").append(level2);
+                sb.append('-').append(level2);
             }
-            sb.append(":</b> ").append(power).append("/").append(toughness).append(" ");
+            sb.append(":</b> ").append(power).append('/').append(toughness).append(' ');
             for (String rule : abilities.getRules("{this}")) {
-                sb.append(rule).append(" ");
+                sb.append(rule).append(' ');
             }
             return sb.toString();
         }

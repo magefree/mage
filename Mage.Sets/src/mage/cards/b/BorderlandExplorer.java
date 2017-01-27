@@ -154,7 +154,7 @@ class BorderlandExplorerEffect extends OneShotEffect {
                         for (UUID cardId : cardsPlayer) {
                             Cards cards = new CardsImpl(game.getCard(cardId));
                             Card card = game.getCard(cardId);
-                            player.revealCards(card.getIdName() + " (" + player.getName() + ")", cards, game);
+                            player.revealCards(card.getIdName() + " (" + player.getName() + ')', cards, game);
                             player.moveCardToHandWithInfo(card, source.getSourceId(), game);
                             player.shuffleLibrary(source, game);
                         }

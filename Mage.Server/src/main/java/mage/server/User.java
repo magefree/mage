@@ -234,7 +234,7 @@ public class User {
 
         int minutes = (int) secondsLeft / 60;
         int seconds = (int) secondsLeft % 60;
-        return new StringBuilder(sign).append(Integer.toString(minutes)).append(":").append(seconds > 9 ? seconds : "0" + Integer.toString(seconds)).toString();
+        return new StringBuilder(sign).append(Integer.toString(minutes)).append(':').append(seconds > 9 ? seconds : '0' + Integer.toString(seconds)).toString();
     }
 
     public long getSecondsDisconnected() {
@@ -509,7 +509,7 @@ public class User {
                                     }
 
                                     if (!isConnected()) {
-                                        tournamentPlayer.setDisconnectInfo(" (discon. " + getDisconnectDuration() + ")");
+                                        tournamentPlayer.setDisconnectInfo(" (discon. " + getDisconnectDuration() + ')');
                                     } else {
                                         tournamentPlayer.setDisconnectInfo("");
                                     }
@@ -547,25 +547,25 @@ public class User {
             tablesToDelete.clear();
         }
         if (waiting > 0) {
-            sb.append("Wait: ").append(waiting).append(" ");
+            sb.append("Wait: ").append(waiting).append(' ');
         }
         if (match > 0) {
-            sb.append("Match: ").append(match).append(" ");
+            sb.append("Match: ").append(match).append(' ');
         }
         if (sideboard > 0) {
-            sb.append("Sideb: ").append(sideboard).append(" ");
+            sb.append("Sideb: ").append(sideboard).append(' ');
         }
         if (draft > 0) {
-            sb.append("Draft: ").append(draft).append(" ");
+            sb.append("Draft: ").append(draft).append(' ');
         }
         if (construct > 0) {
-            sb.append("Const: ").append(construct).append(" ");
+            sb.append("Const: ").append(construct).append(' ');
         }
         if (tournament > 0) {
-            sb.append("Tourn: ").append(tournament).append(" ");
+            sb.append("Tourn: ").append(tournament).append(' ');
         }
         if (watchedGames.size() > 0) {
-            sb.append("Watch: ").append(watchedGames.size()).append(" ");
+            sb.append("Watch: ").append(watchedGames.size()).append(' ');
         }
         return sb.toString();
     }
@@ -586,7 +586,7 @@ public class User {
         if (isConnected()) {
             return pingInfo;
         } else {
-            return " (discon. " + getDisconnectDuration() + ")";
+            return " (discon. " + getDisconnectDuration() + ')';
         }
     }
 
@@ -668,7 +668,7 @@ public class User {
         if (quit.size() > 0) {
             builder.append(" (");
             joinStrings(builder, quit, " ");
-            builder.append(")");
+            builder.append(')');
         }
         return builder.toString();
     }
@@ -700,7 +700,7 @@ public class User {
         if (quit.size() > 0) {
             builder.append(" (");
             joinStrings(builder, quit, " ");
-            builder.append(")");
+            builder.append(')');
         }
         return builder.toString();
     }

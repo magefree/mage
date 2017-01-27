@@ -184,7 +184,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
             sb.append(" becomes a ");
         }
         sb.append(token.getDescription());
-        sb.append(" ").append(duration.toString());
+        sb.append(' ').append(duration.toString());
         if (addStillALandText) {
             if (target.getMaxNumberOfTargets() > 1) {
                 sb.append(". They're still lands");

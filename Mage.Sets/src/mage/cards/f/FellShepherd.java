@@ -162,7 +162,7 @@ class FellShepherdEffect extends OneShotEffect {
                     Card card = game.getCard(creatureId);
                     if (card != null) {
                         card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                        sb.append(" ").append(card.getName());
+                        sb.append(' ').append(card.getName());
                     }
                 }
             }

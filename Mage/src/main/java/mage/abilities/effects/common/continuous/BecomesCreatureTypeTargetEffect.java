@@ -101,7 +101,7 @@ public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
         StringBuilder sb = new StringBuilder();
         sb.append("Target creature becomes that type");
         if (!duration.toString().isEmpty() && !duration.equals(Duration.EndOfGame)) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         return sb.toString();
     }

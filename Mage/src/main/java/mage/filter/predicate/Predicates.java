@@ -150,7 +150,7 @@ public final class Predicates {
 
         @Override
         public String toString() {
-            return "Not(" + predicate.toString() + ")";
+            return "Not(" + predicate.toString() + ')';
         }
         private static final long serialVersionUID = 0;
     }
@@ -178,7 +178,7 @@ public final class Predicates {
 
         @Override
         public String toString() {
-            return "And(" + commaJoin(components) + ")";
+            return "And(" + commaJoin(components) + ')';
         }
         private static final long serialVersionUID = 0;
     }
@@ -206,7 +206,7 @@ public final class Predicates {
 
         @Override
         public String toString() {
-            return "Or(" + commaJoin(components) + ")";
+            return "Or(" + commaJoin(components) + ')';
         }
         private static final long serialVersionUID = 0;
     }

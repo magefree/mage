@@ -119,7 +119,7 @@ class ShapeshifterEffect extends OneShotEffect {
                     return false;
                 }
             }
-            game.informPlayers("Shapeshifter, chosen number: [" + numberChoice.getChoice() + "]");
+            game.informPlayers("Shapeshifter, chosen number: [" + numberChoice.getChoice() + ']');
             game.getState().setValue(source.getSourceId().toString() + "_Shapeshifter", numberChoice.getChoice());
                 if (mageObject instanceof Permanent) {
                     ((Permanent) mageObject).addInfo("lastChosenNumber", CardUtil.addToolTipMarkTags("Last chosen number: " + numberChoice.getChoice()), game);

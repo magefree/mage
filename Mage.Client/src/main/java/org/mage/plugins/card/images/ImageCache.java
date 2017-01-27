@@ -255,11 +255,11 @@ public class ImageCache {
      * Returns the map key for a card, without any suffixes for the image size.
      */
     private static String getKey(CardView card, String name, String suffix) {
-        return name + "#" + card.getExpansionSetCode() + "#" + card.getType() + "#" + card.getCardNumber() + "#"
+        return name + '#' + card.getExpansionSetCode() + '#' + card.getType() + '#' + card.getCardNumber() + '#'
                 + (card.getTokenSetCode() == null ? "" : card.getTokenSetCode())
                 + suffix
                 + (card.getUsesVariousArt() ? "#usesVariousArt" : "")
-                + (card.getTokenDescriptor() != null ? "#" + card.getTokenDescriptor() : "#");
+                + (card.getTokenDescriptor() != null ? '#' + card.getTokenDescriptor() : "#");
     }
 
 //    /**
