@@ -108,7 +108,7 @@ public class DrawCardTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().size() > 0) {
+        if (!mode.getTargets().isEmpty()) {
             Target target;
             if (targetPointer instanceof SecondTargetPointer && mode.getTargets().size() > 1) {
                 target = mode.getTargets().get(1);
@@ -136,7 +136,7 @@ public class DrawCardTargetEffect extends OneShotEffect {
             sb.append('s');
         }
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(" for each ");
         }
         sb.append(message);

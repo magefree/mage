@@ -118,11 +118,11 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().size() > 0) {
+        if (!mode.getTargets().isEmpty()) {
             sb.append("target ");
             sb.append(mode.getTargets().get(0).getFilter().getMessage());
             sb.append(" becomes the color or colors of your choice");
-            if (duration.toString().length() > 0) {
+            if (!duration.toString().isEmpty()) {
                 sb.append(' ').append(duration.toString());
             }
         }

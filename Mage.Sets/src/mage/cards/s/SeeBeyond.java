@@ -79,7 +79,7 @@ class SeeBeyondEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         controller.drawCards(2, game);
-        if (controller.getHand().size() > 0) {
+        if (!controller.getHand().isEmpty()) {
             TargetCard target = new TargetCard(Zone.HAND, new FilterCard("card to shuffle into your library"));
             controller.choose(Outcome.Detriment, controller.getHand(), target, game);
             Card card = controller.getHand().get(target.getFirstTarget(), game);

@@ -124,7 +124,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                     ability = options.get(RandomUtil.nextInt(options.size()));
                 }
             }
-            if (ability.getManaCosts().getVariableCosts().size() > 0) {
+            if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                 int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
                 if (amount > 0) {
                     ability = ability.copy();
@@ -221,7 +221,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             int check = RandomUtil.nextInt(numGroups + 1);
             if (check < numGroups) {
                 CombatGroup group = game.getCombat().getGroups().get(check);
-                if (group.getAttackers().size() > 0) {
+                if (!group.getAttackers().isEmpty()) {
                     this.declareBlocker(this.getId(), blocker.getId(), group.getAttackers().get(0), game);
                 }
             }

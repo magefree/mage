@@ -132,7 +132,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         if (duration != Duration.WhileOnBattlefield)
             sb.append(' ').append(duration.toString());
         String message = power.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(" for each ");
         }
         sb.append(message);

@@ -179,7 +179,7 @@ public class CardPluginImpl implements CardPlugin {
                         break;
                     }
                     List<CounterView> counters = firstPanel.getOriginalPermanent().getCounters();
-                    if (counters != null && counters.size() > 0) {
+                    if (counters != null && !counters.isEmpty()) {
                         // don't put to first panel if it has counters
                         insertIndex = i;
                         break;
@@ -191,7 +191,7 @@ public class CardPluginImpl implements CardPlugin {
                         continue;
                     }
                     counters = permanent.getOriginalPermanent().getCounters();
-                    if (counters != null && counters.size() > 0) {
+                    if (counters != null && !counters.isEmpty()) {
                         // if a land has counter, put it to the right
                         insertIndex = i + 1;
                         continue;

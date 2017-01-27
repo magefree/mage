@@ -48,7 +48,7 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
 
     public static enum HandSizeModification {
         SET, INCREASE, REDUCE
-    };
+    }
 
     protected DynamicValue handSize;
     protected HandSizeModification handSizeModification;

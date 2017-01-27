@@ -136,7 +136,7 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
         if (types.getWhite() > 0) {
             choice.getChoices().add("White");
         }
-        if (choice.getChoices().size() > 0) {
+        if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
 
             if (player != null) {

@@ -45,7 +45,8 @@ import mage.game.Game;
  */
 public class PermanentsOnTheBattlefieldCondition implements Condition {
 
-    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
+    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO }
+
     private FilterPermanent filter;
     private Condition condition;
     private CountType type;

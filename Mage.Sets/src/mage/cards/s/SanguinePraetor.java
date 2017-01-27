@@ -92,7 +92,7 @@ class SanguinePraetorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int cmc = 0;
         for (Cost cost : source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost) cost).getPermanents().size() > 0) {
+            if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
                 cmc = ((SacrificeTargetCost) cost).getPermanents().get(0).getConvertedManaCost();
                 break;
             }

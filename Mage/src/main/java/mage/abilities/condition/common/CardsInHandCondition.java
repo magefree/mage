@@ -46,7 +46,7 @@ public class CardsInHandCondition implements Condition {
 
     public static enum CountType {
         MORE_THAN, FEWER_THAN, EQUAL_TO
-    };
+    }
 
     private Condition condition;
     private CountType type;

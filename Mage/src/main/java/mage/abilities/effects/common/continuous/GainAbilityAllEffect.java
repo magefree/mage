@@ -197,7 +197,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         if (quotes) {
             sb.append('"');
         }
-        if (duration.toString().length() > 0) {
+        if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }
         return sb.toString();

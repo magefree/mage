@@ -99,7 +99,7 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
     @Override
     public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getGraveyard().size() > 0) {
+        if (controller != null && !controller.getGraveyard().isEmpty()) {
             if (unpaid.getMana().getGeneric() > 0 && source.getAbilityType().equals(AbilityType.SPELL)) {
                 SpecialAction specialAction = new DelveSpecialAction();
                 specialAction.setControllerId(source.getControllerId());
@@ -159,7 +159,7 @@ class DelveEffect extends OneShotEffect {
             ExileFromGraveCost exileFromGraveCost = (ExileFromGraveCost) source.getCosts().get(0);
 
             List<Card> exiledCards = exileFromGraveCost.getExiledCards();
-            if (exiledCards.size() > 0) {
+            if (!exiledCards.isEmpty()) {
                 Cards toDelve = new CardsImpl();
                 for (Card card : exiledCards) {
                     toDelve.add(card);

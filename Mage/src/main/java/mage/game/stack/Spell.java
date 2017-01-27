@@ -315,7 +315,7 @@ public class Spell extends StackObjImpl implements Card {
             boolean legalTargetedMode = false;
             for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                 Mode mode = spellAbility.getModes().get(modeId);
-                if (mode.getTargets().size() > 0) {
+                if (!mode.getTargets().isEmpty()) {
                     targetedMode = true;
                     if (mode.getTargets().stillLegal(spellAbility, game)) {
                         legalTargetedMode = true;

@@ -82,7 +82,7 @@ class TransmuteEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, sourceObject.getConvertedManaCost()));
             TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
             if (controller.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl(target.getTargets());
                     controller.revealCards(sourceObject.getIdName(), revealed, game);
                     controller.moveCards(revealed, Zone.HAND, source, game);

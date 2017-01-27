@@ -78,7 +78,7 @@ public class LoseLifeSourceControllerEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("you lose ").append(amount.toString()).append(" life");
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(" for each ");
         }
         sb.append(message);

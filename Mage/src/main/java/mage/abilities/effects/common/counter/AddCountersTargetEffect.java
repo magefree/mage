@@ -146,7 +146,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
         }
         sb.append(" on ");
 
-        if (mode.getTargets().size() > 0) {
+        if (!mode.getTargets().isEmpty()) {
             Target target = mode.getTargets().get(0);
             if (target.getNumberOfTargets() == 0) {
                 sb.append("up to ");
@@ -164,7 +164,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
             sb.append("that creature");
         }
 
-        if (amount.getMessage().length() > 0) {
+        if (!amount.getMessage().isEmpty()) {
             sb.append(" for each ").append(amount.getMessage());
         }
         return sb.toString();

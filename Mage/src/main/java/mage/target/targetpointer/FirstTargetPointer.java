@@ -30,7 +30,7 @@ public class FirstTargetPointer implements TargetPointer {
 
     @Override
     public void init(Game game, Ability source) {
-        if (source.getTargets().size() > 0) {
+        if (!source.getTargets().isEmpty()) {
             for (UUID target : source.getTargets().get(0).getTargets()) {
                 Card card = game.getCard(target);
                 if (card != null) {
@@ -43,7 +43,7 @@ public class FirstTargetPointer implements TargetPointer {
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
         ArrayList<UUID> target = new ArrayList<>();
-        if (source.getTargets().size() > 0) {
+        if (!source.getTargets().isEmpty()) {
             for (UUID targetId : source.getTargets().get(0).getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null && zoneChangeCounter.containsKey(targetId)

@@ -95,7 +95,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
      */
     @Override
     public boolean definesMana() {
-        return netMana.size() > 0;
+        return !netMana.isEmpty();
     }
 
     /**

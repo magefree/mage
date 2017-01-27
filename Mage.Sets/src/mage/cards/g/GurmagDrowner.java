@@ -100,7 +100,7 @@ class GurmagDrownerEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             Cards cards = new CardsImpl();
             cards.addAll(controller.getLibrary().getTopCards(game, 4));
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 controller.lookAtCards(sourceObject.getName(), cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
                 if (controller.choose(Outcome.Benefit, cards, target, game)) {

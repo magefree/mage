@@ -100,13 +100,13 @@ class GatherThePackEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(0, max, Zone.LIBRARY, new FilterCreatureCard("creature card" + (max > 1 ? "s" : "") + " to put into your hand"));
                 if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
                     Cards cardsToHand = new CardsImpl(target.getTargets());
-                    if (cardsToHand.size() > 0) {
+                    if (!cardsToHand.isEmpty()) {
                         cards.removeAll(cardsToHand);
                         controller.moveCards(cardsToHand, Zone.HAND, source, game);
                     }
                 }
             }
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
         }

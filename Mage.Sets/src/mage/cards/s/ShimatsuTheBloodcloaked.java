@@ -113,7 +113,7 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
                 return false;
             }
             controller.chooseTarget(Outcome.Detriment, target, source, game);
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 int sacrificedCreatures = target.getTargets().size();
                 game.informPlayers(controller.getLogName() + " sacrifices " + sacrificedCreatures + " creatures for " + creature.getLogName());
                 for (UUID targetId : target.getTargets()) {

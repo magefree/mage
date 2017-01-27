@@ -93,7 +93,7 @@ public class RemoveCounterCost extends CostImpl {
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        if (permanent.getCounters(game).size() > 0 && (counterTypeToRemove == null || permanent.getCounters(game).containsKey(counterTypeToRemove))) {
+                        if (!permanent.getCounters(game).isEmpty() && (counterTypeToRemove == null || permanent.getCounters(game).containsKey(counterTypeToRemove))) {
                             String counterName = null;
 
                             if (counterTypeToRemove != null) {

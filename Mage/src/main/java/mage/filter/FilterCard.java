@@ -115,7 +115,7 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public boolean hasPredicates() {
-        return predicates.size() > 0;
+        return !predicates.isEmpty();
     }
 
     @Override

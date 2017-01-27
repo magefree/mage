@@ -152,12 +152,12 @@ public class DamageTargetEffect extends OneShotEffect {
             sb.append(amount);
         }
         sb.append(" damage to ");
-        if (targetDescription.length() > 0) {
+        if (!targetDescription.isEmpty()) {
             sb.append(targetDescription);
         } else {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         }
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             if (message.equals("1")) {
                 sb.append(" equal to the number of ");
             } else {

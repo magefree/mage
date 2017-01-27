@@ -134,7 +134,7 @@ public class CreateTokenEffect extends OneShotEffect {
             sb.append(" attacking");
         }
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             if (amount.toString().equals("X")) {
                 sb.append(", where X is ");
             } else {

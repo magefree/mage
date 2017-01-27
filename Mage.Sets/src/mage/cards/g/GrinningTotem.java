@@ -189,7 +189,7 @@ class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
-        return exileZone != null && exileZone.getCards(game).size() > 0;
+        return exileZone != null && !exileZone.getCards(game).isEmpty();
     }
 
     @Override

@@ -123,16 +123,16 @@ public class FlashbackAbility extends SpellAbility {
     @Override
     public String getRule() {
         StringBuilder sbRule = new StringBuilder("Flashback");
-        if (costs.size() > 0) {
+        if (!costs.isEmpty()) {
             sbRule.append(" - ");
         } else {
             sbRule.append(' ');
         }
-        if (manaCosts.size() > 0) {
+        if (!manaCosts.isEmpty()) {
             sbRule.append(manaCosts.getText());
         }
-        if (costs.size() > 0) {
-            if (manaCosts.size() > 0) {
+        if (!costs.isEmpty()) {
+            if (!manaCosts.isEmpty()) {
                 sbRule.append(", ");
             }
             sbRule.append(costs.getText());

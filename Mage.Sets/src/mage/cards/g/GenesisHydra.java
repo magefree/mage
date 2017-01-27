@@ -116,7 +116,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
             }
         }
 
-        if (cards.size() > 0) {
+        if (!cards.isEmpty()) {
             controller.revealCards("Genesis Hydra", cards, game);
         }
 

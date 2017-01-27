@@ -688,7 +688,7 @@ public class ContinuousEffects implements Serializable {
         }
         // check if player wants to use splice
 
-        if (spliceAbilities.size() > 0) {
+        if (!spliceAbilities.isEmpty()) {
             Player controller = game.getPlayer(abilityToModify.getControllerId());
             if (controller.chooseUse(Outcome.Benefit, "Splice a card?", abilityToModify, game)) {
                 Cards cardsToReveal = new CardsImpl();
@@ -899,7 +899,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
         //Reload layerEffect if copy effects were applied
-        if (layer.size() > 0) {
+        if (!layer.isEmpty()) {
             activeLayerEffects = getLayeredEffects(game);
         }
 

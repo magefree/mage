@@ -106,7 +106,7 @@ public class SlumberingTora extends CardImpl {
                         if (sublayer == SubLayer.SetPT_7b) {
                             int convManaCosts = 0;
                             for (Cost cost: source.getCosts()) {
-                                if (cost instanceof DiscardTargetCost && ((DiscardTargetCost)cost).getCards().size() > 0) {
+                                if (cost instanceof DiscardTargetCost && !((DiscardTargetCost) cost).getCards().isEmpty()) {
                                     convManaCosts = ((DiscardTargetCost)cost).getCards().get(0).getConvertedManaCost();
                                     break;
                                 }

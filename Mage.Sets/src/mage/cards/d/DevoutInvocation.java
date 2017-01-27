@@ -98,7 +98,7 @@ class DevoutInvocationEffect extends OneShotEffect {
                     Map<String, Serializable> options = new HashMap<>();
                     options.put("UI.right.btn.text", "Tapping complete");
                     controller.choose(outcome, target, source.getControllerId(), game, options);
-                    if (target.getTargets().size() > 0) {
+                    if (!target.getTargets().isEmpty()) {
                         UUID creature = target.getFirstTarget();
                         if (creature != null) {
                             game.getPermanent(creature).tap(game);

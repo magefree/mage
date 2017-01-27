@@ -133,7 +133,7 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                     }
                     abilityView = new AbilityView(ability, sourceObject.getName(), sourceCardView);
                 }
-                if (ability.getTargets().size() > 0) {
+                if (!ability.getTargets().isEmpty()) {
                     abilityView.setTargets(ability.getTargets());
                 } else {
                     List<UUID> abilityTargets = new ArrayList<>();

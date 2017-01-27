@@ -146,7 +146,7 @@ class StarCompassManaEffect extends ManaEffect {
             choice.getChoices().add("White");
             choice.getChoices().add("Colorless");
         }
-        if (choice.getChoices().size() > 0) {
+        if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());

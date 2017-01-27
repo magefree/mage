@@ -100,7 +100,7 @@ class FleshwritherEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, sourceObject.getConvertedManaCost()));
             TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
             if (controller.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     Cards chosen = new CardsImpl(target.getTargets());
                     controller.moveCards(chosen, Zone.BATTLEFIELD, source, game);
                 }

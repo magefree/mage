@@ -81,7 +81,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
 
-        if (mode.getTargets().size() > 0) {
+        if (!mode.getTargets().isEmpty()) {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("that player");
@@ -91,7 +91,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
             sb.append(amount).append(' ');
         }
         sb.append("life");
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             if (amount.toString().equals("X")) {
                 sb.append(", where X is ");
             } else {

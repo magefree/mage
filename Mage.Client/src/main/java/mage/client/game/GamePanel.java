@@ -723,7 +723,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (!handCards.containsKey(chosenHandKey)) {
                     chosenHandKey = YOUR_HAND;
                 }
-            } else if (chosenHandKey.isEmpty() && handCards.size() > 0) {
+            } else if (chosenHandKey.isEmpty() && !handCards.isEmpty()) {
                 chosenHandKey = handCards.keySet().iterator().next();
             }
             if (chosenHandKey != null && handCards.containsKey(chosenHandKey)) {
@@ -854,7 +854,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         showRevealed(game);
         showLookedAt(game);
-        if (game.getCombat().size() > 0) {
+        if (!game.getCombat().isEmpty()) {
             CombatManager.getInstance().showCombat(game.getCombat(), gameId);
         } else {
             CombatManager.getInstance().hideCombat(gameId);
@@ -1164,7 +1164,7 @@ public final class GamePanel extends javax.swing.JPanel {
         updateGame(gameView);
         Map<String, Serializable> options0 = options == null ? new HashMap<>() : options;
         ShowCardsDialog dialog = null;
-        if (cardView != null && cardView.size() > 0) {
+        if (cardView != null && !cardView.isEmpty()) {
             dialog = showCards(message, cardView, required, options0, popupMenuType);
             options0.put("dialog", dialog);
         }
@@ -2130,7 +2130,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 choices,
                 this.chosenHandKey);
 
-        if (newChosenHandKey != null && newChosenHandKey.length() > 0) {
+        if (newChosenHandKey != null && !newChosenHandKey.isEmpty()) {
             this.chosenHandKey = newChosenHandKey;
             CardsView cards = handCards.get(chosenHandKey);
             handContainer.loadCards(cards, bigCard, gameId);

@@ -181,7 +181,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         gImage.setColor(Color.BLACK);
         gImage.drawImage(background, 0, 0, this);
 
-        if (card.getManaCost().size() > 0) {
+        if (!card.getManaCost().isEmpty()) {
             ImageHelper.drawCosts(card.getManaCost(), gImage, FRAME_MAX_WIDTH - SYMBOL_MAX_XOFFSET, SYMBOL_MAX_YOFFSET, this);
         }
 
@@ -197,7 +197,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             gImage.drawString(card.getLoyalty(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
         }
 
-        if (card.getCardTypes().size() > 0) {
+        if (!card.getCardTypes().isEmpty()) {
             gImage.drawString(cardType, CONTENT_MAX_XOFFSET, TYPE_MAX_YOFFSET);
         }
 
@@ -211,7 +211,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             gSmall.drawString(card.getLoyalty(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
         }
 
-        if (card.getCardTypes().size() > 0) {
+        if (!card.getCardTypes().isEmpty()) {
             gSmall.drawString(cardType, Config.dimensions.contentXOffset, Config.dimensions.typeYOffset);
         }
         drawText();
@@ -232,7 +232,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             }
         } else {
             sb.append(card.getName());
-            if (card.getManaCost().size() > 0) {
+            if (!card.getManaCost().isEmpty()) {
                 sb.append('\n').append(card.getManaCost());
             }
             sb.append('\n').append(cardType);
@@ -247,7 +247,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             for (String rule : getRules()) {
                 sb.append('\n').append(rule);
             }
-            if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0) {
+            if (card.getExpansionSetCode() != null && !card.getExpansionSetCode().isEmpty()) {
                 sb.append('\n').append(card.getCardNumber()).append(" - ");
                 sb.append(Sets.getInstance().get(card.getExpansionSetCode()).getName()).append(" - ");
                 sb.append(card.getRarity().toString());
@@ -308,7 +308,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             sbType.append(cardType.toString()).append(' ');
         }
 
-        if (card.getSubTypes().size() > 0) {
+        if (!card.getSubTypes().isEmpty()) {
             sbType.append("- ");
             for (String subType : card.getSubTypes()) {
                 sbType.append(subType).append(' ');

@@ -507,7 +507,7 @@ public class NewTableDialog extends MageDialog {
             while (players.size() != numPlayers) {
                 TablePlayerPanel playerPanel = new TablePlayerPanel();
                 String playerType = "Human";
-                if (prefPlayerTypes.size() >= players.size() && players.size() > 0) {
+                if (prefPlayerTypes.size() >= players.size() && !players.isEmpty()) {
                     playerType = prefPlayerTypes.get(players.size() - 1);
                 }
                 playerPanel.init(players.size() + 2, playerType);

@@ -133,7 +133,7 @@ class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
             Permanent sourcePermanent = game.getPermanent(getSourceId());
             if (targetPermanent != null && sourcePermanent != null) {
-                if (sourcePermanent.getImprinted().size() > 0) {
+                if (!sourcePermanent.getImprinted().isEmpty()) {
                     Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
                     if (imprintedCard != null && targetPermanent.getName().equals(imprintedCard.getName())) {
                         for (Effect effect : this.getEffects()) {

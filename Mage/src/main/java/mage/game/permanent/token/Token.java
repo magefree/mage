@@ -284,7 +284,7 @@ public class Token extends MageObjectImpl {
     }
 
     public void setExpansionSetCodeForImage(String code) {
-        if (availableImageSetCodes.size() > 0) {
+        if (!availableImageSetCodes.isEmpty()) {
             if (availableImageSetCodes.contains(code)) {
                 setOriginalExpansionSetCode(code);
             } else // we should not set random set if appropriate set is already used

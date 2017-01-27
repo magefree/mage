@@ -26,7 +26,7 @@ public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
     public static enum Gender {
 
         MALE, FEMAL
-    };
+    }
 
     protected Effect additionalEffect;
 

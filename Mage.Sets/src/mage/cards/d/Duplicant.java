@@ -143,7 +143,7 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if(permanent.getImprinted().size() > 0){
+            if(!permanent.getImprinted().isEmpty()){
                 Card card = game.getCard(permanent.getImprinted().get(0));
                 if(card != null && card.getCardType().contains(CardType.CREATURE))
                 {

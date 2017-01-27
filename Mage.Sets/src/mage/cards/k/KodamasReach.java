@@ -97,7 +97,7 @@ class KodamasReachEffect extends OneShotEffect {
         }
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
         if (controller.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 Cards revealed = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {
                     Card card = controller.getLibrary().getCard(cardId, game);

@@ -826,7 +826,7 @@ public class NewTournamentDialog extends MageDialog {
             txtRandomPacks.setEnabled(false);
             txtRandomPacks.setLineWrap(true);
             String randomPrefs = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, "");
-            if (randomPrefs.length() > 0) {
+            if (!randomPrefs.isEmpty()) {
                 txtRandomPacks.setText(randomPrefs);
                 ArrayList<String> theList = new ArrayList<>();
                 theList.addAll(Arrays.asList(randomPrefs.split(";")));
@@ -1026,7 +1026,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void loadBoosterPacks(String packString) {
-        if (packString.length()>0) {
+        if (!packString.isEmpty()) {
             String[] packsArray = packString.substring(1, packString.length() - 1).split(",");
             int packNumber = 0;
             for (String pack : packsArray ){

@@ -202,7 +202,7 @@ public abstract class TournamentImpl implements Tournament {
             round.addPairing(new TournamentPairing(player1, player2));
         }
 
-        if (roundPlayers.size() > 0) {
+        if (!roundPlayers.isEmpty()) {
             // player free round - add to bye players of this round
             TournamentPlayer player1 = roundPlayers.get(0);
             round.getPlayerByes().add(player1);

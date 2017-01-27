@@ -314,7 +314,7 @@ public abstract class TargetImpl implements Target {
             chosen = targets.size() >= getNumberOfTargets();
             if (isRandom()) {
                 Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), playerId, game);
-                if (possibleTargets.size() > 0) {
+                if (!possibleTargets.isEmpty()) {
                     int i = 0;
                     int rnd = RandomUtil.nextInt(possibleTargets.size());
                     Iterator it = possibleTargets.iterator();
@@ -370,7 +370,7 @@ public abstract class TargetImpl implements Target {
             }
         }
 
-        return targets.size() > 0;
+        return !targets.isEmpty();
     }
 
     /**
@@ -483,7 +483,7 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public UUID getFirstTarget() {
-        if (targets.size() > 0) {
+        if (!targets.isEmpty()) {
             return targets.keySet().iterator().next();
         }
         return null;

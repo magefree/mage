@@ -36,7 +36,7 @@ public class UpdateMemUsageTask extends SwingWorker<Void, Float> {
 
     @Override
     protected void process(List<Float> chunks) {
-        if (chunks != null && chunks.size() > 0) {
+        if (chunks != null && !chunks.isEmpty()) {
             Float memUsage = chunks.get(chunks.size() - 1);
             if (memUsage != null) {
                 jLabelToDisplayInfo.setText(Math.round(memUsage) + "% Mem free");

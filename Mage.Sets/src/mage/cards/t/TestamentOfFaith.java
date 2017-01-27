@@ -109,7 +109,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (token.getCardType().size() > 0) {
+                        if (!token.getCardType().isEmpty()) {
                             for (CardType t : token.getCardType()) {
                                 if (!permanent.getCardType().contains(t)) {
                                     permanent.getCardType().add(t);
@@ -119,7 +119,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
                         if ("".equals(type) || type == null) {
                             permanent.getSubtype(game).clear();
                         }
-                        if (token.getSubtype(game).size() > 0) {
+                        if (!token.getSubtype(game).isEmpty()) {
                             permanent.getSubtype(game).addAll(token.getSubtype(game));
                         }
                     }
@@ -133,7 +133,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
                     break;
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        if (token.getAbilities().size() > 0) {
+                        if (!token.getAbilities().isEmpty()) {
                             for (Ability ability: token.getAbilities()) {
                                 permanent.addAbility(ability, source.getSourceId(), game, false);
                             }

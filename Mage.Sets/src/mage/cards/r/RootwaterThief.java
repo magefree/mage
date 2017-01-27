@@ -102,7 +102,7 @@ class RootwaterThiefEffect extends OneShotEffect {
         {
             TargetCardInLibrary target = new TargetCardInLibrary();
             if (controller.searchLibrary(target, game, damagedPlayer.getId())) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     Card card = damagedPlayer.getLibrary().remove(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);

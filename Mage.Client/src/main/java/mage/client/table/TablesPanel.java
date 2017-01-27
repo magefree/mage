@@ -259,7 +259,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 switch (action) {
                     case "Replay":
                         List<UUID> gameList = matchesModel.getListofGames(modelRow);
-                        if (gameList != null && gameList.size() > 0) {
+                        if (gameList != null && !gameList.isEmpty()) {
                             if (gameList.size() == 1) {
                                 SessionHandler.replayGame(gameList.get(0));
                             } else {

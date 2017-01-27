@@ -114,7 +114,7 @@ class WildPairEffect extends OneShotEffect {
                 filter.add(new TotalPowerAndToughnessPredicate(Filter.ComparisonType.Equal, totalPT));
                 TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
                 if (controller.searchLibrary(target, game)) {
-                    if (target.getTargets().size() > 0) {
+                    if (!target.getTargets().isEmpty()) {
                         controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                     }
                 }

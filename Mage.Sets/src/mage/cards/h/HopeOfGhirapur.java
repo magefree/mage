@@ -84,7 +84,7 @@ public class HopeOfGhirapur extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SimpleActivatedAbility) {
-            if (ability.getEffects().size() > 0 && (ability.getEffects().get(0) instanceof HopeOfGhirapurCantCastEffect)) {
+            if (!ability.getEffects().isEmpty() && (ability.getEffects().get(0) instanceof HopeOfGhirapurCantCastEffect)) {
                 MageObject sourceObject = ability.getSourceObject(game);
                 if (sourceObject != null) {
                     ability.getTargets().clear();

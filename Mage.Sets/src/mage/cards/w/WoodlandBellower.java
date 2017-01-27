@@ -100,7 +100,7 @@ class WoodlandBellowerEffect extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (controller.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }

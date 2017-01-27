@@ -987,7 +987,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public enum StackClause {
 
         WHILE_ON_STACK,
-        WHILE_NOT_ON_STACK;
+        WHILE_NOT_ON_STACK
     }
 
     /**

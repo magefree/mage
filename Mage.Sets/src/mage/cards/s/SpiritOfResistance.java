@@ -79,7 +79,7 @@ class SpiritOfResistanceCondition implements Condition {
 
     public static SpiritOfResistanceCondition getInstance() {
         return fInstance;
-    };
+    }
 
     private SpiritOfResistanceCondition() {}
 

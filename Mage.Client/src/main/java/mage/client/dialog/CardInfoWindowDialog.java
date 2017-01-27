@@ -137,7 +137,7 @@ public class CardInfoWindowDialog extends MageDialog {
         String titel = name + " (" + exile.size() + ')';
         setTitle(titel);
         this.setTitelBarToolTip(titel);
-        if (exile.size() > 0) {
+        if (!exile.isEmpty()) {
             show();
             if (changed) {
                 try {

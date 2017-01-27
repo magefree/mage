@@ -113,7 +113,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         if (losePreviousTypes) {
                             permanent.getCardType().clear();
                         }
-                        if (token.getCardType().size() > 0) {
+                        if (!token.getCardType().isEmpty()) {
                             for (CardType t : token.getCardType()) {
                                 if (!permanent.getCardType().contains(t)) {
                                     permanent.getCardType().add(t);
@@ -123,7 +123,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         if ("".equals(type) || type == null && permanent.getCardType().contains(CardType.LAND)) {
                             permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
                         }
-                        if (token.getSubtype(game).size() > 0) {
+                        if (!token.getSubtype(game).isEmpty()) {
                             permanent.getSubtype(game).addAll(token.getSubtype(game));
                         }
                     }
@@ -137,7 +137,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                     break;
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        if (token.getAbilities().size() > 0) {
+                        if (!token.getAbilities().isEmpty()) {
                             for (Ability ability : token.getAbilities()) {
                                 permanent.addAbility(ability, source.getSourceId(), game);
                             }
@@ -172,7 +172,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     }
 
     private void setText() {
-        if (type != null && type.length() > 0) {
+        if (type != null && !type.isEmpty()) {
             staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.type;
         } else {
             staticText = duration.toString() + " {this} becomes a " + token.getDescription();

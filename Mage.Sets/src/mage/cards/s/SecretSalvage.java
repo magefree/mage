@@ -101,7 +101,7 @@ class SecretSalvageEffect extends OneShotEffect {
                 nameFilter.add(new NamePredicate(targetCard.getName()));
                 TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, nameFilter);
                 if (controller.searchLibrary(target, game)) {
-                    if (target.getTargets().size() > 0) {
+                    if (!target.getTargets().isEmpty()) {
                         Cards cards = new CardsImpl();
                         for (UUID cardId : target.getTargets()) {
                             Card card = controller.getLibrary().remove(cardId, game);

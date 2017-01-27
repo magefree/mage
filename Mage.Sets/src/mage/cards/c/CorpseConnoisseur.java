@@ -97,7 +97,7 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCards(card, Zone.GRAVEYARD, source, game);

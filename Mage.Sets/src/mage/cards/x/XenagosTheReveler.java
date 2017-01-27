@@ -186,7 +186,7 @@ class XenagosExileEffect extends OneShotEffect {
             filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
                     new CardTypePredicate(CardType.LAND)));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.EXILED, filter);
-            if (exiledCards.size() > 0
+            if (!exiledCards.isEmpty()
                     && target1.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, game)) {
                 controller.moveCards(new CardsImpl(target1.getTargets()), Zone.BATTLEFIELD, source, game);

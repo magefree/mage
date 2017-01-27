@@ -330,7 +330,7 @@ public class GuiDisplayUtil {
                 }
             }
         }
-        if (textLines.lines.size() > 0) {
+        if (!textLines.lines.isEmpty()) {
             for (String textLine : textLines.lines) {
                 if (textLine != null && !textLine.replace(".", "").trim().isEmpty()) {
                     rule.append("<p style='margin: 2px'>").append(textLine).append("</p>");
@@ -339,7 +339,7 @@ public class GuiDisplayUtil {
         }
 
         String legal = rule.toString();
-        if (legal.length() > 0) {
+        if (!legal.isEmpty()) {
             legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this" : card.getName());
             legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this" : card.getName());
             buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.TOOLTIP));
@@ -366,7 +366,7 @@ public class GuiDisplayUtil {
         for (CardType cardType : card.getCardTypes()) {
             types += cardType.toString() + ' ';
         }
-        if (card.getSubTypes().size() > 0) {
+        if (!card.getSubTypes().isEmpty()) {
             types += "- ";
         }
         for (String subType : card.getSubTypes()) {

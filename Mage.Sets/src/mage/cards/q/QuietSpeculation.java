@@ -97,7 +97,7 @@ class SearchLibraryPutInGraveEffect extends SearchEffect {
         Player controller = game.getPlayer(source.getControllerId());
         UUID targetPlayerID = source.getFirstTarget();
         if (controller != null && targetPlayerID != null && controller.searchLibrary(target, game, targetPlayerID)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl(target.getTargets());
                 controller.revealCards("Quiet Speculation", cards, game);
                 controller.moveCards(cards, Zone.GRAVEYARD, source, game);

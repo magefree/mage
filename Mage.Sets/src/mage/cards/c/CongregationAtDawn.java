@@ -95,7 +95,7 @@ class CongregationAtDawnEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCreatureCard("creature cards"));
             if (controller.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl();
                     for (UUID cardId : (List<UUID>) target.getTargets()) {
                         Card card = controller.getLibrary().remove(cardId, game);

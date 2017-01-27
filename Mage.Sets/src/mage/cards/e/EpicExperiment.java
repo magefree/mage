@@ -101,7 +101,7 @@ class EpicExperimentEffect extends OneShotEffect {
                 return true;
             }
             cardsToCast.addAll(epicExperimentExileZone.getCards(filter, source.getSourceId(), source.getControllerId(), game));
-            while (cardsToCast.size() > 0) {
+            while (!cardsToCast.isEmpty()) {
                 if (!controller.chooseUse(Outcome.PlayForFree, "Cast (another) a card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                     break;
                 }

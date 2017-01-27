@@ -81,7 +81,7 @@ public class DamageAllEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("{source} deals ").append(amount.toString()).append(" damage to each ").append(filter.getMessage());
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             if (amount.toString().equals("X")) {
                 sb.append(", where X is ");
             } else {

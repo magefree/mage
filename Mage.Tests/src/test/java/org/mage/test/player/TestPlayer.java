@@ -175,7 +175,7 @@ public class TestPlayer implements Player {
 
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId, game);
-        if (permanents.size() > 0) {
+        if (!permanents.isEmpty()) {
             return permanents.get(0);
         }
         return null;
@@ -200,7 +200,7 @@ public class TestPlayer implements Player {
             return true;
         } else if (groups[2].startsWith("spellOnTopOfStack=")) {
             String spellOnTopOFStack = groups[2].substring(18);
-            if (game.getStack().size() > 0) {
+            if (!game.getStack().isEmpty()) {
                 StackObject stackObject = game.getStack().getFirst();
                 if (stackObject != null && stackObject.getStackAbility().toString().contains(spellOnTopOFStack)) {
                     return true;

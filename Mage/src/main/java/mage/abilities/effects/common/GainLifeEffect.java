@@ -92,7 +92,7 @@ public class GainLifeEffect extends OneShotEffect {
             sb.append(life).append(' ');
         }
         sb.append("life");
-        if (message.length() > 0 && !message.startsWith("that")) {
+        if (!message.isEmpty() && !message.startsWith("that")) {
             sb.append(message.equals("1") ? " equal to the number of " : " for each ");
             sb.append(message);
         }

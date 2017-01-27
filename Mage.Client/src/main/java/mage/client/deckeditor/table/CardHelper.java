@@ -62,7 +62,7 @@ public class CardHelper {
             type.append(cardType.toString());
             type.append(' ');
         }
-        if (c.getSubTypes().size() > 0) {
+        if (!c.getSubTypes().isEmpty()) {
             type.append("- ");
             for (String subType : c.getSubTypes()) {
                 type.append(subType);
