@@ -680,7 +680,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         if (this.getHand().size() == 1 || this.getHand().size() == amount) {
             discardedCards.addAll(this.getHand());
-            while (this.getHand().size() > 0) {
+            while (!this.getHand().isEmpty()) {
                 discard(this.getHand().get(this.getHand().iterator().next(), game), source, game);
             }
             return discardedCards;
@@ -1495,7 +1495,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
                         }
                         // while targets left and there is still allowed to untap
-                        while (canRespond() && leftForUntap.size() > 0 && numberToUntap > 0) {
+                        while (canRespond() && !leftForUntap.isEmpty() && numberToUntap > 0) {
                             // player has to select the permanent he wants to untap for this restriction
                             Ability ability = handledEntry.getKey().getValue().iterator().next();
                             if (ability != null) {
@@ -2817,14 +2817,14 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         if (ability.isModal()) {
             addModeOptions(options, ability, game);
-        } else if (ability.getTargets().getUnchosen().size() > 0) {
+        } else if (!ability.getTargets().getUnchosen().isEmpty()) {
             // TODO: Handle other variable costs than mana costs
-            if (ability.getManaCosts().getVariableCosts().size() > 0) {
+            if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                 addVariableXOptions(options, ability, 0, game);
             } else {
                 addTargetOptions(options, ability, 0, game);
             }
-        } else if (ability.getCosts().getTargets().getUnchosen().size() > 0) {
+        } else if (!ability.getCosts().getTargets().getUnchosen().isEmpty()) {
             addCostTargetOptions(options, ability, 0, game);
         }
 
@@ -2838,13 +2838,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             newOption.getModes().getSelectedModes().clear();
             newOption.getModes().getSelectedModes().add(mode.getId());
             newOption.getModes().setActiveMode(mode);
-            if (newOption.getTargets().getUnchosen().size() > 0) {
-                if (newOption.getManaCosts().getVariableCosts().size() > 0) {
+            if (!newOption.getTargets().getUnchosen().isEmpty()) {
+                if (!newOption.getManaCosts().getVariableCosts().isEmpty()) {
                     addVariableXOptions(options, newOption, 0, game);
                 } else {
                     addTargetOptions(options, newOption, 0, game);
                 }
-            } else if (newOption.getCosts().getTargets().getUnchosen().size() > 0) {
+            } else if (!newOption.getCosts().getTargets().getUnchosen().isEmpty()) {
                 addCostTargetOptions(options, newOption, 0, game);
             } else {
                 options.add(newOption);
@@ -2871,7 +2871,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (targetNum < option.getTargets().size() - 2) {
                 addTargetOptions(options, newOption, targetNum + 1, game);
-            } else if (option.getCosts().getTargets().size() > 0) {
+            } else if (!option.getCosts().getTargets().isEmpty()) {
                 addCostTargetOptions(options, newOption, 0, game);
             } else {
                 options.add(newOption);
@@ -3115,7 +3115,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case GRAVEYARD:
                 fromZone = game.getState().getZone(cards.iterator().next().getId());
                 successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
-                return successfulMovedCards.size() > 0;
+                return !successfulMovedCards.isEmpty();
             case BATTLEFIELD: // new logic that does not yet add the permanents to battlefield while replacement effects are handled
                 List<ZoneChangeInfo> infoList = new ArrayList<>();
                 for (Card card : cards) {
@@ -3175,7 +3175,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             default:
                 throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
         }
-        return successfulMovedCards.size() > 0;
+        return !successfulMovedCards.isEmpty();
     }
 
     @Override

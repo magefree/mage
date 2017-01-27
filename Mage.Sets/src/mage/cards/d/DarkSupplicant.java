@@ -116,7 +116,7 @@ class DarkSupplicantEffect extends OneShotEffect {
         // Library check
         if (player.chooseUse(Outcome.Benefit, "Do you want to search your library for Scion of Darkness?", source, game)) {
             if (player.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) target.getTargets()) {
                         Card card = player.getLibrary().getCard(cardId, game);
                         if (card != null) {

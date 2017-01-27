@@ -76,7 +76,7 @@ public class TapTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (staticText.length() > 0) {
+        if (!staticText.isEmpty()) {
             return "tap " + staticText;
         }
 

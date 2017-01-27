@@ -90,7 +90,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
         }
         target.clearChosen();
         if (controller.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {
                     Card card = game.getCard(cardId);

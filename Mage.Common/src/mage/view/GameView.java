@@ -191,7 +191,7 @@ public class GameView implements Serializable {
             if (priorityPlayer != null && createdForPlayer != null && createdForPlayerId != null && createdForPlayer.isGameUnderControl()
                     && (createdForPlayerId.equals(priorityPlayer.getId()) // player controls the turn
                     || createdForPlayer.getPlayersUnderYourControl().contains(priorityPlayer.getId()))) { // player controls active players turn
-                this.special = state.getSpecialActions().getControlledBy(priorityPlayer.getId(), priorityPlayer.isInPayManaMode()).size() > 0;
+                this.special = !state.getSpecialActions().getControlledBy(priorityPlayer.getId(), priorityPlayer.isInPayManaMode()).isEmpty();
             }
         } else {
             this.special = false;

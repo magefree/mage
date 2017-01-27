@@ -143,7 +143,7 @@ public class MatchView implements Serializable {
         }
         this.players = sb1.toString();
         StringBuilder sb2 = new StringBuilder();
-        if (table.getTournament().getRounds().size() > 0) {
+        if (!table.getTournament().getRounds().isEmpty()) {
             for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {
                 sb2.append(tPlayer.getPlayer().getName()).append(": ").append(tPlayer.getResults()).append(' ');
             }

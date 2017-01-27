@@ -106,7 +106,7 @@ public class Permanent extends Card {
         if (permanent.getOriginal() != null) {
         sb.append("\n----- Originally -------\n");
         sb.append(permanent.getOriginal().getName());
-        if (permanent.getOriginal().getManaCost().size() > 0) {
+        if (!permanent.getOriginal().getManaCost().isEmpty()) {
             sb.append('\n').append(permanent.getOriginal().getManaCost());
         }
         sb.append('\n').append(getType(permanent.getOriginal()));
@@ -122,7 +122,7 @@ public class Permanent extends Card {
         for (String rule: getRules()) {
             sb.append('\n').append(rule);
         }
-        if (permanent.getOriginal().getExpansionSetCode().length() > 0) {
+        if (!permanent.getOriginal().getExpansionSetCode().isEmpty()) {
             sb.append('\n').append(permanent.getCardNumber()).append(" - ");
             sb.append('\n').append(Sets.getInstance().get(permanent.getOriginal().getExpansionSetCode()).getName()).append(" - ");
             sb.append(permanent.getOriginal().getRarity().toString());

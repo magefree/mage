@@ -80,7 +80,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             sb.append(" attacking");
         }
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(" for each ");
         }
         sb.append(message);

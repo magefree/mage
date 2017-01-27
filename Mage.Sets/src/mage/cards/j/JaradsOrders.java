@@ -92,7 +92,7 @@ class JaradsOrdersEffect extends OneShotEffect {
         if (controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterCreatureCard("creature cards"));
             if (controller.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl();
                     for (UUID cardId: (List<UUID>)target.getTargets()) {
                         Card card = controller.getLibrary().getCard(cardId, game);

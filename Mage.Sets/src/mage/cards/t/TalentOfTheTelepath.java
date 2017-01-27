@@ -111,7 +111,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
                 }
             }
             // cast an instant or sorcery for free
-            if (cardsToCast.size() > 0) {
+            if (!cardsToCast.isEmpty()) {
                 int numberOfSpells = 1;
                 if (SpellMasteryCondition.getInstance().apply(game, source)) {
                     numberOfSpells++;
@@ -122,7 +122,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
                     TargetCard target = new TargetCard(Zone.LIBRARY, filter); // zone should be ignored here
                     target.setNotTarget(true);
                     while (numberOfSpells > 0
-                            && cardsToCast.size() > 0
+                            && !cardsToCast.isEmpty()
                             && controller.chooseUse(outcome, "Cast an instant or sorcery card from among them for free?", source, game)
                             && controller.choose(outcome, cardsToCast, target, game)) {
                         Card card = cardsToCast.get(target.getFirstTarget(), game);

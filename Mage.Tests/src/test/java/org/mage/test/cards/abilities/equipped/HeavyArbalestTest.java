@@ -33,7 +33,7 @@ public class HeavyArbalestTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
 
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
-        Assert.assertTrue(eliteVanguard.getAttachments().size() > 0);
+        Assert.assertTrue(!eliteVanguard.getAttachments().isEmpty());
         Assert.assertTrue(eliteVanguard.isTapped());
     }
 

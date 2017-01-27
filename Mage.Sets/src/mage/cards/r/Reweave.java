@@ -125,7 +125,7 @@ class ReweaveEffect extends OneShotEffect {
                             permanentController.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
 
-                        if (cards.size() > 0) {
+                        if (!cards.isEmpty()) {
                             permanentController.revealCards(sourceObject.getIdName(), cards, game);
                             if (cardFound && card != null) {
                                 cards.remove(card);

@@ -1898,7 +1898,7 @@ public abstract class GameImpl implements Game, Serializable {
             //20091005 - 704.5q If a creature is attached to an object or player, it becomes unattached and remains on the battlefield.
             // Similarly, if a permanent thats neither an Aura, an Equipment, nor a Fortification is attached to an object or player,
             // it becomes unattached and remains on the battlefield.
-            if (perm.getAttachments().size() > 0) {
+            if (!perm.getAttachments().isEmpty()) {
                 for (UUID attachmentId : perm.getAttachments()) {
                     Permanent attachment = getPermanent(attachmentId);
                     if (attachment != null

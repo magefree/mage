@@ -237,7 +237,7 @@ public class GameController implements GameCallback {
                                 break;
                             case CHOOSE_ABILITY:
                                 String objectName = null;
-                                if (event.getChoices() != null && event.getChoices().size() > 0) {
+                                if (event.getChoices() != null && !event.getChoices().isEmpty()) {
                                     objectName = event.getChoices().iterator().next();
                                 }
                                 chooseAbility(event.getPlayerId(), objectName, event.getAbilities());
@@ -816,7 +816,7 @@ public class GameController implements GameCallback {
     private void informOthers(List<UUID> players) throws MageException {
         // first player is always original controller
         Player controller = null;
-        if (players != null && players.size() > 0) {
+        if (players != null && !players.isEmpty()) {
             controller = game.getPlayer(players.get(0));
         }
         if (controller == null || game.getStep() == null || game.getStep().getType() == null) {

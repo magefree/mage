@@ -198,7 +198,7 @@ class MimicVatCreateTokenEffect extends OneShotEffect {
             return false;
         }
 
-        if (permanent.getImprinted().size() > 0) {
+        if (!permanent.getImprinted().isEmpty()) {
             Card card = game.getCard(permanent.getImprinted().get(0));
             if (card != null) {
                 PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);

@@ -688,7 +688,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             sbType.append(cardType.toString()).append(' ');
         }
 
-        if (card.getSubTypes().size() > 0) {
+        if (!card.getSubTypes().isEmpty()) {
             sbType.append("- ");
             for (String subType : card.getSubTypes()) {
                 sbType.append(subType).append(' ');
@@ -706,7 +706,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             }
         } else {
             sb.append(card.getName());
-            if (card.getManaCost().size() > 0) {
+            if (!card.getManaCost().isEmpty()) {
                 sb.append('\n').append(card.getManaCost());
             }
             sb.append('\n').append(cardType);
@@ -724,7 +724,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             for (String rule : card.getRules()) {
                 sb.append('\n').append(rule);
             }
-            if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0) {
+            if (card.getExpansionSetCode() != null && !card.getExpansionSetCode().isEmpty()) {
                 sb.append('\n').append(card.getCardNumber()).append(" - ");
                 sb.append(card.getExpansionSetCode()).append(" - ");
                 sb.append(card.getRarity().toString());

@@ -56,7 +56,7 @@ public class DoIfCostPaid extends OneShotEffect {
             String message;
             if (chooseUseText == null) {
                 String effectText = executingEffects.getText(source.getModes().getMode());
-                if (effectText.length() > 0 && effectText.charAt(effectText.length() - 1) == '.') {
+                if (!effectText.isEmpty() && effectText.charAt(effectText.length() - 1) == '.') {
                     effectText = effectText.substring(0, effectText.length() - 1);
                 }
                 message = getCostText() + " and " + effectText + '?';

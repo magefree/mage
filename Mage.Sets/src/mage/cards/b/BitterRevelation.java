@@ -97,7 +97,7 @@ class BitterRevelationEffect extends OneShotEffect {
                     cards.add(card);
                 }
             }
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 Cards cardsToHand = new CardsImpl();
                 player.lookAtCards("Bitter Revelation", cards, game);
                 TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.LIBRARY, new FilterCard("two cards to put in your hand"));

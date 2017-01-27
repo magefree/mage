@@ -93,7 +93,7 @@ class AnimistsAwakeningEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         int xValue = source.getManaCostsToPay().getX();
         cards.addAll(controller.getLibrary().getTopCards(game, xValue));
-        if (cards.size() > 0) {
+        if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
             Set<Card> toBattlefield = new LinkedHashSet<>();
             for (Card card : cards.getCards(new FilterLandCard(), source.getSourceId(), source.getControllerId(), game)) {

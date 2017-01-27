@@ -105,7 +105,7 @@ class AnimalBoneyardEffect extends OneShotEffect {
             int toughness = 0;
 
             for (Cost cost : source.getCosts()) {
-                if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost) cost).getPermanents().size() > 0) {
+                if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
                     toughness = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
                     break;
                 }

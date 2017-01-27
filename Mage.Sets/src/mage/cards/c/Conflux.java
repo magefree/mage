@@ -109,7 +109,7 @@ class ConfluxEffect extends OneShotEffect {
 
         if (you != null && you.getLibrary().size() > 0) {
             if (you.searchLibrary(targetWhite, game)) {
-                if (targetWhite.getTargets().size() > 0) {
+                if (!targetWhite.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetWhite.getTargets()) {
                         Card card = you.getLibrary().remove(cardId, game);
                         if (card != null) {
@@ -121,7 +121,7 @@ class ConfluxEffect extends OneShotEffect {
         }
         if (you != null && you.getLibrary().size() > 0) {
             if (you.searchLibrary(targetBlue, game)) {
-                if (targetBlue.getTargets().size() > 0) {
+                if (!targetBlue.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetBlue.getTargets()) {
                         Card card = you.getLibrary().remove(cardId, game);
                         if (card != null) {
@@ -133,7 +133,7 @@ class ConfluxEffect extends OneShotEffect {
         }
         if (you != null && you.getLibrary().size() > 0) {
             if (you.searchLibrary(targetBlack, game)) {
-                if (targetBlack.getTargets().size() > 0) {
+                if (!targetBlack.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetBlack.getTargets()) {
                         Card card = you.getLibrary().remove(cardId, game);
                         if (card != null) {
@@ -145,7 +145,7 @@ class ConfluxEffect extends OneShotEffect {
         }
         if (you != null && you.getLibrary().size() > 0) {
             if (you.searchLibrary(targetRed, game)) {
-                if (targetRed.getTargets().size() > 0) {
+                if (!targetRed.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetRed.getTargets()) {
                         Card card = you.getLibrary().remove(cardId, game);
                         if (card != null) {
@@ -157,7 +157,7 @@ class ConfluxEffect extends OneShotEffect {
         }
         if (you != null && you.getLibrary().size() > 0) {
             if (you.searchLibrary(targetGreen, game)) {
-                if (targetGreen.getTargets().size() > 0) {
+                if (!targetGreen.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetGreen.getTargets()) {
                         Card card = you.getLibrary().remove(cardId, game);
                         if (card != null) {

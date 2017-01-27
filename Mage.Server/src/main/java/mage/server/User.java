@@ -554,7 +554,7 @@ public class User {
         if (tournament > 0) {
             sb.append("Tourn: ").append(tournament).append(' ');
         }
-        if (watchedGames.size() > 0) {
+        if (!watchedGames.isEmpty()) {
             sb.append("Watch: ").append(watchedGames.size()).append(' ');
         }
         return sb.toString();
@@ -655,7 +655,7 @@ public class User {
         if (proto.getMatchesQuit() > 0) {
             quit.add("Q:" + Integer.toString(proto.getMatchesQuit()));
         }
-        if (quit.size() > 0) {
+        if (!quit.isEmpty()) {
             builder.append(" (");
             joinStrings(builder, quit, " ");
             builder.append(')');
@@ -687,7 +687,7 @@ public class User {
         if (proto.getTourneysQuitDuringRound() > 0) {
             quit.add("R:" + Integer.toString(proto.getTourneysQuitDuringRound()));
         }
-        if (quit.size() > 0) {
+        if (!quit.isEmpty()) {
             builder.append(" (");
             joinStrings(builder, quit, " ");
             builder.append(')');

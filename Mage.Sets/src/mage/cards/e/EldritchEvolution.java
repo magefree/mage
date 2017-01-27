@@ -96,7 +96,7 @@ class EldritchEvolutionEffect extends OneShotEffect {
         for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost) {
                 SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
-                if (sacrificeCost.getPermanents().size() > 0) {
+                if (!sacrificeCost.getPermanents().isEmpty()) {
                     sacrificedPermanent = sacrificeCost.getPermanents().get(0);
                 }
                 break;

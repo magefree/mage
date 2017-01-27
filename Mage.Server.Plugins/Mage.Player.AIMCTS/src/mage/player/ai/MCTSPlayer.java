@@ -52,7 +52,7 @@ public class MCTSPlayer extends ComputerPlayer {
     private NextAction nextAction;
 
     public enum NextAction {
-        PRIORITY, SELECT_ATTACKERS, SELECT_BLOCKERS;
+        PRIORITY, SELECT_ATTACKERS, SELECT_BLOCKERS
     }
 
     public MCTSPlayer(UUID id) {
@@ -83,7 +83,7 @@ public class MCTSPlayer extends ComputerPlayer {
         for (Ability ability: playables) {
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
             if (options.isEmpty()) {
-                if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                     simulateVariableCosts(ability, all, game);
                 }
                 else {
@@ -92,7 +92,7 @@ public class MCTSPlayer extends ComputerPlayer {
             }
             else {
                 for (Ability option: options) {
-                    if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                    if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                         simulateVariableCosts(option, all, game);
                     }
                     else {

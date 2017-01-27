@@ -72,7 +72,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
-                while (player.getSideboard().size() > 0) {
+                while (!player.getSideboard().isEmpty()) {
                     Card commander = this.getCard(player.getSideboard().iterator().next());
                     if (commander != null) {
                         player.addCommanderId(commander.getId());

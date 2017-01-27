@@ -128,7 +128,7 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Card card = game.getCard(event.getSourceId());
         if (sourcePermanent != null && card != null) {
-            if (sourcePermanent.getImprinted().size() > 0) {
+            if (!sourcePermanent.getImprinted().isEmpty()) {
                 Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
                 if (imprintedCard != null) {
                     return card.getName().equals(imprintedCard.getName());

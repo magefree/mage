@@ -118,7 +118,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player.getHand().size() > 0) {
+        if (!player.getHand().isEmpty()) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && player.choose(Outcome.Benefit, player.getHand(), target, game)) {

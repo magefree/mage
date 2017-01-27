@@ -121,7 +121,7 @@ class DralnusPetEffect extends OneShotEffect {
                     && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
                 int cmc = 0;
                 for (Cost cost : spellAbility.getCosts()) {
-                    if (cost instanceof DiscardCardCost && ((DiscardCardCost) cost).getCards().size() > 0) {
+                    if (cost instanceof DiscardCardCost && !((DiscardCardCost) cost).getCards().isEmpty()) {
                         cmc = ((DiscardCardCost) cost).getCards().get(0).getConvertedManaCost();
                     }
                     if (cmc > 0) {

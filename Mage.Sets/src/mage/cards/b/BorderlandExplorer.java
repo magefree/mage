@@ -136,7 +136,7 @@ class BorderlandExplorerEffect extends OneShotEffect {
                     if (cardsPlayer != null) {
                         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, new FilterBasicLandCard());
                         if (player.searchLibrary(target, game)) {
-                            if (target.getTargets().size() > 0) {
+                            if (!target.getTargets().isEmpty()) {
                                 Cards cards = new CardsImpl(target.getTargets());
                                 cards.addAll(target.getTargets());
                                 cardsToReveal.put(playerId, cards);

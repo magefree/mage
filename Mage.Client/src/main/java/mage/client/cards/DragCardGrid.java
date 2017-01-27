@@ -1077,7 +1077,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     for (Sort s : sortMenuItems.keySet()) {
                         sortMenuItems.get(s).setSelected(cardSort == s);
                     }
-                    hideSelected.setEnabled(dragCardList().size() > 0);
+                    hideSelected.setEnabled(!dragCardList().isEmpty());
                     separateButton.setSelected(separateCreatures);
                     menu.show(e.getComponent(), e.getX(), e.getY());
                 }
@@ -1534,7 +1534,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
                         List<CardInfo> cardPool = CardRepository.instance.findCards(cardCriteria);
 
-                        if (cardPool.size() > 0) {
+                        if (!cardPool.isEmpty()) {
                             Card acard = cardPool.get(RandomUtil.nextInt(cardPool.size())).getMockCard();
 
                             if (acard.getName().equals(card.getName())) {
@@ -1656,7 +1656,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         if (trackedCards.containsKey(info.getSetCode()) && trackedCards.get(info.getSetCode()).containsKey(info.getCardNum())) {
                             ArrayList<CardView> candidates
                                     = trackedCards.get(info.getSetCode()).get(info.getCardNum());
-                            if (candidates.size() > 0) {
+                            if (!candidates.isEmpty()) {
                                 gridStack.add(candidates.remove(0));
                                 thisMaxStackSize = Math.max(thisMaxStackSize, gridStack.size());
                             }

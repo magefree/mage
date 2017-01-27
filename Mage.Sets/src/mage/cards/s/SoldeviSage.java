@@ -108,7 +108,7 @@ class SoldeviSageEffect extends OneShotEffect {
                 }
             }
 
-            if (drawnCards.size() > 0) {
+            if (!drawnCards.isEmpty()) {
                 TargetCard cardToDiscard = new TargetCard(Zone.HAND, new FilterCard("card to discard"));
                 cardToDiscard.setNotTarget(true);
                 if (player.choose(Outcome.Discard, drawnCards, cardToDiscard, game)) {

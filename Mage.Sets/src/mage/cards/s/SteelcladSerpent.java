@@ -102,7 +102,7 @@ class SteelcladSerpentEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            if (game.getBattlefield().getActivePermanents(filter, source.getControllerId(), permanent.getId(), game).size() > 0) {
+            if (!game.getBattlefield().getActivePermanents(filter, source.getControllerId(), permanent.getId(), game).isEmpty()) {
                 return false;
             }
             return true;

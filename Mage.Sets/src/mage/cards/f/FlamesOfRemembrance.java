@@ -115,7 +115,7 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
                     cards.add(card);
                 }
             }
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 List<UUID> cardsId = new ArrayList<>();
                 for (Card card : cards) {
                     card.moveToExile(source.getSourceId(), "Flames of Remembrance", source.getSourceId(), game);

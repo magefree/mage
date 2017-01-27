@@ -385,7 +385,7 @@ public abstract class CardRenderer {
             for (CardType cardType : cardView.getCardTypes()) {
                 sbType.append(cardType.toString()).append(' ');
             }
-            if (cardView.getSubTypes().size() > 0) {
+            if (!cardView.getSubTypes().isEmpty()) {
                 sbType.append("- ");
                 for (String subType : cardView.getSubTypes()) {
                     sbType.append(subType).append(' ');

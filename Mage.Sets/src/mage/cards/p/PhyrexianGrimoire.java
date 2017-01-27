@@ -96,7 +96,7 @@ class PhyrexianGrimoireEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (controller != null && opponent != null) {
-            if(controller.getGraveyard().size() > 0)
+            if(!controller.getGraveyard().isEmpty())
             {
                 Cards cards = new CardsImpl();
                 

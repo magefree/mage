@@ -101,7 +101,7 @@ public class AddCountersAttachedEffect extends OneShotEffect {
         }
         sb.append(counter.getName().toLowerCase()).append(" counter on ");
         sb.append(textEnchanted);
-        if (amount.getMessage().length() > 0) {
+        if (!amount.getMessage().isEmpty()) {
             sb.append(" for each ").append(amount.getMessage());
         }
         staticText = sb.toString();

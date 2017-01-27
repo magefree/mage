@@ -127,7 +127,7 @@ class BlessedReincarnationEffect extends OneShotEffect {
                         card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                     }
 
-                    if (cards.size() > 0) {
+                    if (!cards.isEmpty()) {
                         player.revealCards("BlessedReincarnation", cards, game);
                         Set<Card> cardsToShuffle = cards.getCards(game);
                         cardsToShuffle.remove(card);

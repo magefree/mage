@@ -73,7 +73,7 @@ public class PhaseOutTargetEffect extends OneShotEffect {
         }
 
         StringBuilder sb = new StringBuilder();
-        if (targetDescription != null && targetDescription.length() > 0) {
+        if (targetDescription != null && !targetDescription.isEmpty()) {
             sb.append(targetDescription);
         } else {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());

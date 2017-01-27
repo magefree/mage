@@ -93,7 +93,7 @@ class CursedScrollEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
         if (sourceObject != null && controller != null && cardName != null && !cardName.isEmpty()) {
-            if (controller.getHand().size() > 0) {
+            if (!controller.getHand().isEmpty()) {
                 Cards revealed = new CardsImpl();
                 Card card = controller.getHand().getRandom(game);
                 revealed.add(card);

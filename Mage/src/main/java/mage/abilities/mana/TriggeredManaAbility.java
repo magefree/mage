@@ -97,6 +97,6 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
      */
     @Override
     public boolean definesMana() {
-        return netMana.size() > 0;
+        return !netMana.isEmpty();
     }
 }

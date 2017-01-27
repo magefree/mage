@@ -108,7 +108,7 @@ public abstract class DraftCube {
                     if (!cardId.getExtension().isEmpty()) {
                         CardCriteria criteria = new CardCriteria().name(cardId.getName()).setCodes(cardId.extension);
                         List<CardInfo> cardList = CardRepository.instance.findCards(criteria);
-                        if (cardList != null && cardList.size() > 0) {
+                        if (cardList != null && !cardList.isEmpty()) {
                             cardInfo = cardList.get(0);
                         }
                     } else {

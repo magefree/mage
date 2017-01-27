@@ -103,7 +103,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         if (logger.isTraceEnabled()) {
             for (Ability a : allActions) {
                 logger.info("ability==" + a);
-                if (a.getTargets().size() > 0) {
+                if (!a.getTargets().isEmpty()) {
                     MageObject mageObject = game.getObject(a.getFirstTarget());
                     if (mageObject != null) {
                         logger.info("   target=" + mageObject.getName());
@@ -177,7 +177,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                         }
                         card.adjustTargets(newAbility, game);
                         // add the different possible target option for the specific X value
-                        if (newAbility.getTargets().getUnchosen().size() > 0) {
+                        if (!newAbility.getTargets().getUnchosen().isEmpty()) {
                             addTargetOptions(options, newAbility, targetNum, game);
                         }
                     }
@@ -240,7 +240,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         }
         List<Ability> filtered = new ArrayList<>();
         for (Ability option : options) {
-            if (option.getTargets().size() > 0 && option.getTargets().get(0).getMaxNumberOfTargets() == 1) {
+            if (!option.getTargets().isEmpty() && option.getTargets().get(0).getMaxNumberOfTargets() == 1) {
                 Card card = game.getCard(ability.getSourceId());
                 for (String s : suggested) {
                     String[] groups = s.split(";");

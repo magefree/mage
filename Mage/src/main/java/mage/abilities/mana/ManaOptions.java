@@ -46,8 +46,6 @@ public class ManaOptions extends ArrayList<Mana> {
     public ManaOptions() {
     }
 
-    ;
-
     public ManaOptions(final ManaOptions options) {
         for (Mana mana : options) {
             this.add(mana.copy());

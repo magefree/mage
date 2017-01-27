@@ -94,7 +94,7 @@ class SignalTheClansEffect extends SearchEffect {
         }
         //Search your library for three creature cards
         if (player.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);

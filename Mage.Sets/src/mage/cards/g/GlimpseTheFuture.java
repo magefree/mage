@@ -97,7 +97,7 @@ class GlimpseTheFutureEffect extends OneShotEffect {
                 }
             }
 
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 controller.lookAtCards("Glimpse the Future", cards, game);
 
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));

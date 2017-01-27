@@ -77,7 +77,7 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().size() > 0) {
+        if (!mode.getTargets().isEmpty()) {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("It ");

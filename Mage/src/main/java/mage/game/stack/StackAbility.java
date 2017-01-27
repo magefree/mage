@@ -589,7 +589,7 @@ public class StackAbility extends StackObjImpl implements Ability {
         newAbility.newId();
         StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
         game.getStack().push(newStackAbility);
-        if (chooseNewTargets && newAbility.getTargets().size() > 0) {
+        if (chooseNewTargets && !newAbility.getTargets().isEmpty()) {
             Player controller = game.getPlayer(newControllerId);
             Outcome outcome = newAbility.getEffects().isEmpty() ? Outcome.Detriment : newAbility.getEffects().get(0).getOutcome();
             if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {

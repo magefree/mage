@@ -82,7 +82,7 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
                 target.clearChosen();
                 if (controller.searchLibrary(target, game)) {
-                    if (target.getTargets().size() > 0) {
+                    if (!target.getTargets().isEmpty()) {
                         cardFound = game.getCard(target.getFirstTarget());
                     }
                 }
@@ -93,7 +93,7 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(0, 1, Zone.GRAVEYARD, filter);
                 target.clearChosen();
                 if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
-                    if (target.getTargets().size() > 0) {
+                    if (!target.getTargets().isEmpty()) {
                         cardFound = game.getCard(target.getFirstTarget());
                     }
                 }

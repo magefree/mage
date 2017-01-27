@@ -87,7 +87,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             UserManager.getInstance().getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(getGameView(), message, options))));
         }
-        ;
     }
 
     public void chooseAbility(final AbilityPickerView abilities) {
@@ -233,7 +232,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
     }
 
     private void processControlledPlayers(Player player, GameView gameView) {
-        if (player.getPlayersUnderYourControl().size() > 0) {
+        if (!player.getPlayersUnderYourControl().isEmpty()) {
             Map<String, SimpleCardsView> handCards = new HashMap<>();
             for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {
                 Player opponent = game.getPlayer(controlledPlayerId);

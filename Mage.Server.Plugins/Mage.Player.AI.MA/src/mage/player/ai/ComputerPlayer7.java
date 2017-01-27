@@ -164,7 +164,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
             addActionsTimed();
             logger.trace("After add actions timed: root.children.size = " + root.children.size());
-            if (root.children.size() > 0) {
+            if (!root.children.isEmpty()) {
                 root = root.children.get(0);
                 // int bestScore = root.getScore();
                 // if (bestScore > currentScore || allowBadMoves) {
@@ -204,7 +204,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             logger.debug("Sim Calculate post combat actions ----------------------------------------------------------------------------------------");
 
             addActionsTimed();
-            if (root != null && root.children.size() > 0) {
+            if (root != null && !root.children.isEmpty()) {
                 root = root.children.get(0);
                 int bestScore = root.getScore();
                 if (bestScore > currentScore || allowBadMoves) {
@@ -244,7 +244,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 } while ((logNode.getParent() != null));
                 logger.trace(sb);
             }
-        } else if (node.getChildren().size() > 0) {
+        } else if (!node.getChildren().isEmpty()) {
             if (logger.isDebugEnabled()) {
                 StringBuilder sb = new StringBuilder("Add Action [").append(depth)
                         .append("] -- something added children ")
@@ -299,7 +299,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                         val = GameStateEvaluator2.evaluate(playerId, game);
                      */
                 }
-            } else if (node.getChildren().size() > 0) {
+            } else if (!node.getChildren().isEmpty()) {
                 if (logger.isDebugEnabled()) {
                     StringBuilder sb = new StringBuilder("Add Action [").append(depth)
                             .append("] -- trigger ")
@@ -411,7 +411,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                     beta = val;
                     bestNode = newNode;
                     bestNode.setScore(val);
-                    if (newNode.getChildren().size() > 0) {
+                    if (!newNode.getChildren().isEmpty()) {
                         bestNode.setCombat(newNode.getChildren().get(0).getCombat());
                     }
                 }
@@ -419,7 +419,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 alpha = val;
                 bestNode = newNode;
                 bestNode.setScore(val);
-                if (newNode.getChildren().size() > 0) {
+                if (!newNode.getChildren().isEmpty()) {
                     bestNode.setCombat(newNode.getChildren().get(0).getCombat());
                 }
             }
@@ -460,7 +460,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 }
                 Game sim = game.copy();
                 for (CombatGroup group : engagement.getGroups()) {
-                    if (group.getAttackers().size() > 0) {
+                    if (!group.getAttackers().isEmpty()) {
                         UUID attackerId = group.getAttackers().get(0);
                         for (UUID blockerId : group.getBlockers()) {
                             sim.getPlayer(defenderId).declareBlocker(defenderId, blockerId, attackerId, sim);

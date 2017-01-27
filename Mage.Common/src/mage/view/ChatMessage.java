@@ -45,15 +45,15 @@ public class ChatMessage implements Serializable {
     private MessageType messageType;
 
     public enum MessageColor {
-        BLACK, RED, GREEN, BLUE, ORANGE, YELLOW;
+        BLACK, RED, GREEN, BLUE, ORANGE, YELLOW
     }
 
     public enum MessageType {
-        USER_INFO, STATUS, GAME, TALK, WHISPER;
+        USER_INFO, STATUS, GAME, TALK, WHISPER
     }
 
     public enum SoundToPlay {
-        PlayerLeft, PlayerQuitTournament, PlayerSubmittedDeck, PlayerWhispered;
+        PlayerLeft, PlayerQuitTournament, PlayerSubmittedDeck, PlayerWhispered
     }
 
     public ChatMessage(String username, String message, String time, MessageColor color) {

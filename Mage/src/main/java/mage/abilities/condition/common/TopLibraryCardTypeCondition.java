@@ -41,7 +41,7 @@ public class TopLibraryCardTypeCondition implements Condition {
 
     public static enum CheckType {
         CREATURE, LAND, SORCERY, INSTANT
-    };
+    }
 
     private TopLibraryCardTypeCondition.CheckType type;
 

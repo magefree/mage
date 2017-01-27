@@ -83,7 +83,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
             sb.append('s');
         }
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(" for each ");
         }
         sb.append(message);

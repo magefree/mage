@@ -77,7 +77,7 @@ public class PrototypePortal extends CardImpl {
     public void adjustCosts(Ability ability, Game game) {
         Permanent card = game.getPermanent(ability.getSourceId());
         if (card != null) {
-            if (card.getImprinted().size() > 0) {
+            if (!card.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(card.getImprinted().get(0));
                 if (imprinted != null) {
                     ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getConvertedManaCost()));
@@ -115,7 +115,7 @@ class PrototypePortalEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            if (controller.getHand().size() > 0) {
+            if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_ARTIFACT);
                 controller.choose(Outcome.Benefit, controller.getHand(), target, game);
                 Card card = controller.getHand().get(target.getFirstTarget(), game);
@@ -162,7 +162,7 @@ class PrototypePortalCreateTokenEffect extends OneShotEffect {
             return false;
         }
 
-        if (permanent.getImprinted().size() > 0) {
+        if (!permanent.getImprinted().isEmpty()) {
             Card card = game.getCard(permanent.getImprinted().get(0));
             if (card != null) {
                 EmptyToken token = new EmptyToken();

@@ -65,7 +65,7 @@ class ManaSeveranceEffect extends SearchEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     for (UUID cardId : target.getTargets()) {
                         Card card = controller.getLibrary().getCard(cardId, game);
                         if (card != null) {

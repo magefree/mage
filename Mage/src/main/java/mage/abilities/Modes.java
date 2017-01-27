@@ -205,7 +205,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 if (isEachModeOnlyOnce()) {
                     setAlreadySelectedModes(selectedModes, source, game);
                 }
-                return selectedModes.size() > 0;
+                return !selectedModes.isEmpty();
             }
 
             // 700.2d

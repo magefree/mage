@@ -130,7 +130,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
                 return false;
             }
             controller.chooseTarget(Outcome.Detriment, target, source, game);
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 int power = 0;
                 int toughness = 0;
                 for (UUID targetId : target.getTargets()) {

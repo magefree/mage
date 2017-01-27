@@ -139,7 +139,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
                     }
                     targetName = "a creature blocked by creature ";
                 }
-                if (possibleTargets.size() > 0) {
+                if (!possibleTargets.isEmpty()) {
                     this.getTargets().clear();
                     if (possibleTargets.size() == 1) {
                         this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next()));

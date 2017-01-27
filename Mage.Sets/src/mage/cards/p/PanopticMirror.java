@@ -151,7 +151,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
         if (PanopticMirror == null) {
             PanopticMirror = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
-        if (PanopticMirror != null && PanopticMirror.getImprinted() != null && PanopticMirror.getImprinted().size() > 0 && controller != null) {
+        if (PanopticMirror != null && PanopticMirror.getImprinted() != null && !PanopticMirror.getImprinted().isEmpty() && controller != null) {
             CardsImpl cards = new CardsImpl();
             for(UUID uuid : PanopticMirror.getImprinted()){
                 Card card = game.getCard(uuid);

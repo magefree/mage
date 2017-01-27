@@ -153,7 +153,7 @@ class GripOfChaosEffect extends OneShotEffect {
                 for (Target target : mode.getTargets()) {
                     UUID oldTargetId = target.getFirstTarget();
                     Set<UUID> possibleTargets = target.possibleTargets(stackObject.getSourceId(), stackObject.getControllerId(), game);
-                    if (possibleTargets.size() > 0) {
+                    if (!possibleTargets.isEmpty()) {
                         int i = 0;
                         int rnd = RandomUtil.nextInt(possibleTargets.size());
                         Iterator<UUID> it = possibleTargets.iterator();

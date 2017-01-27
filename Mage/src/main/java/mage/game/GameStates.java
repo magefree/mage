@@ -60,7 +60,7 @@ public class GameStates implements Serializable {
     }
 
     public GameState rollback(int index) {
-        if (states.size() > 0 && index < states.size()) {
+        if (!states.isEmpty() && index < states.size()) {
             while (states.size() > index + 1) {
                 states.remove(states.size() - 1);
             }
@@ -72,8 +72,8 @@ public class GameStates implements Serializable {
     }
 
     public int remove(int index) {
-        if (states.size() > 0 && index < states.size()) {
-            while (states.size() > index && states.size() > 0) {
+        if (!states.isEmpty() && index < states.size()) {
+            while (states.size() > index && !states.isEmpty()) {
                 states.remove(states.size() - 1);
             }
         }

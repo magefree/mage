@@ -101,7 +101,7 @@ class InfernalTutorEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            if (controller.getHand().size() > 0) {
+            if (!controller.getHand().isEmpty()) {
                 Card cardToReveal = null;
                 if (controller.getHand().size() > 1) {
                     Target target = new TargetCardInHand(new FilterCard());

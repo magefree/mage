@@ -88,7 +88,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
             return false;
         }
         if (player.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 player.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                         Zone.BATTLEFIELD, source, game, tapped, false, false, null);
             }

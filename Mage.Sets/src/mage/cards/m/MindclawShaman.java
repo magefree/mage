@@ -107,7 +107,7 @@ class MindclawShamanEffect extends OneShotEffect {
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
         MageObject sourceObject = source.getSourceObject(game);
         if (targetOpponent != null && sourceObject != null) {        
-            if (targetOpponent.getHand().size() > 0) {
+            if (!targetOpponent.getHand().isEmpty()) {
                 targetOpponent.revealCards(sourceObject.getName(), targetOpponent.getHand(), game);
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {

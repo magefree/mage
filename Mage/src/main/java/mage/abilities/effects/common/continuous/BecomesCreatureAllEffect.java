@@ -76,7 +76,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getCardType().size() > 0) {
+                            if (!token.getCardType().isEmpty()) {
                                 for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
                                         permanent.getCardType().add(t);
@@ -86,7 +86,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                             if (type == null) {
                                 permanent.getSubtype(game).clear();
                             }
-                            if (token.getSubtype(game).size() > 0) {
+                            if (!token.getSubtype(game).isEmpty()) {
                                 permanent.getSubtype(game).addAll(token.getSubtype(game));
                             }
                         }
@@ -100,7 +100,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                         break;
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getAbilities().size() > 0) {
+                            if (!token.getAbilities().isEmpty()) {
                                 for (Ability ability : token.getAbilities()) {
                                     permanent.addAbility(ability, source.getSourceId(), game);
                                 }
@@ -146,7 +146,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
             sb.append(" become ");
         }
         sb.append(token.getDescription());
-        if (type != null && type.length() > 0) {
+        if (type != null && !type.isEmpty()) {
             sb.append(". They are still ").append(type);
         }
         return sb.toString();

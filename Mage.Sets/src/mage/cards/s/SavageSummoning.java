@@ -151,7 +151,6 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
 class SavageSummoningWatcher extends Watcher {
 
     private Set<String> savageSummoningSpells = new HashSet<>();
-    ;
     private Map<UUID, Set<String>> spellsCastWithSavageSummoning = new LinkedHashMap<>();
     private Map<String, Set<String>> cardsCastWithSavageSummoning = new LinkedHashMap<>();
 

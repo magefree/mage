@@ -137,7 +137,7 @@ class SpellbinderImprintEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null) {
-            if (controller.getHand().size() > 0) {
+            if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
                 if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {

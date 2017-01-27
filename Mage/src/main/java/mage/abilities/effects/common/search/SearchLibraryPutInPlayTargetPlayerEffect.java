@@ -71,7 +71,7 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             if (player.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     player.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                             Zone.BATTLEFIELD, source, game, tapped, false, ownerIsController, null);
                 }

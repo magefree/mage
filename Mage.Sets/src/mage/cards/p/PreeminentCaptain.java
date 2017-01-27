@@ -98,7 +98,7 @@ class PreeminentCaptainEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         TargetCardInHand target = new TargetCardInHand(filter);
         if (target.canChoose(player.getId(), game) && target.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 UUID cardId = target.getFirstTarget();
                 Card card = player.getHand().get(cardId, game);
                 if (card != null) {
