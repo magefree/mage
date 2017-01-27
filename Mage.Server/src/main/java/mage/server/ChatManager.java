@@ -195,6 +195,7 @@ public class ChatManager {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
         if (doError) {
             message += new StringBuilder("<br/>Invalid User Command '" + message + "'.").append(COMMANDS_LIST).toString();
+            message += "<br/>Type <font color=green>\\w " + user.getName() + " profanity 0 (or 1 or 2)</font> to use/not use the profanity filter";
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
@@ -230,6 +231,7 @@ public class ChatManager {
         }
         if (command.equals("L") || command.equals("LIST")) {
             message += COMMANDS_LIST;
+            message += "<br/>Type <font color=green>\\w " + user.getName() + " profanity 0 (or 1 or 2)</font> to use/not use the profanity filter";
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
