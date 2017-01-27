@@ -110,7 +110,7 @@ if (!exists $cards{$cardName}) {
 # Check if card is already implemented
 my $fileName = "../Mage.Sets/src/mage/cards/".substr($cardName, 0, 1)."/".toCamelCase($cardName).".java";
 if(-e $fileName) {
-  die "$cardName is already implemented.\n";
+  die "$cardName is already implemented.\n$fileName\n";
 }
                                                                           
 # Generate lines to corresponding sets
