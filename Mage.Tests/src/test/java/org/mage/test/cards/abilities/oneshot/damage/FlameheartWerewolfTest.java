@@ -98,14 +98,25 @@ public class FlameheartWerewolfTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Falkenrath Reaver", 1);
         assertPermanentCount(playerB, "Wind Drake", 0);
         assertGraveyardCount(playerB, "Wind Drake", 1);
+		
+		System.out.println("22s end");
     }
 
     @Test
     public void testKessigForgemaster() {
+		System.out.println("Forgemaster start");
         addCard(Zone.BATTLEFIELD, playerA, "Kessig Forgemaster");
         // Both 1/1 creatures should die before the combat starts
         addCard(Zone.BATTLEFIELD, playerB, "Wily Bandar");
         addCard(Zone.BATTLEFIELD, playerB, "Stern Constable");
+
+		// to prevent Kessig from transforming:
+		addCard(Zone.BATTLEFIELD, playerA, "Island");
+		addCard(Zone.BATTLEFIELD, playerB, "Island");
+		addCard(Zone.HAND, playerA, "Explosive Apparatus");
+		addCard(Zone.HAND, playerB, "Explosive Apparatus");
+		castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Explosive Apparatus");
+		castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Explosive Apparatus");
 
         attack(3, playerA, "Kessig Forgemaster");
         block(3, playerB, "Wily Bandar", "Kessig Forgemaster");
