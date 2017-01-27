@@ -107,13 +107,6 @@ public class ChatManager {
         this.broadcast(chatId, userName, message, color, withTime, messageType, null);
     }
 
-    private boolean containsSwearing(String message) {
-        if (message != null && message.toLowerCase().matches("^.*(anal|asshole|balls|bastard|bitch|blowjob|cock|crap|cunt|cum|damn|dick|dildo|douche|fag|fuck|idiot|moron|penis|piss|prick|pussy|rape|rapist|sex|screw|shit|slut|vagina).*$")) {
-            return true;
-        }
-        return false;
-    }
-
     final Pattern cardNamePattern = Pattern.compile("\\[(.*?)\\]");
 
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
@@ -167,11 +160,6 @@ public class ChatManager {
                     }
 
                     userMessages.put(userName, message);
-                    if (containsSwearing(messageToCheck)) {
-                        String informUser = "Your message appears to contain profanity";
-                        chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
-                        return;
-                    }
                 }
 
                 if (messageType == MessageType.TALK) {
