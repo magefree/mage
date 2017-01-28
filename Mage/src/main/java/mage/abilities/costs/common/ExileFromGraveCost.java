@@ -95,11 +95,11 @@ public class ExileFromGraveCost extends CostImpl {
                     }
                     exiledCards.add(card);
                 }
+                Cards cardsToExile = new CardsImpl();
+                cardsToExile.addAll(exiledCards);
+                controller.moveCards(cardsToExile, Zone.EXILED, ability, game);
+                paid = true;
             }
-            Cards cardsToExile = new CardsImpl();
-            cardsToExile.addAll(exiledCards);
-            controller.moveCards(cardsToExile, Zone.EXILED, ability, game);
-            paid = true;
 
         }
         return paid;

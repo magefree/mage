@@ -51,12 +51,13 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class ScrapheapScrounger extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("another creature card");
+
     static {
         filter.add(new AnotherCardPredicate());
     }
 
     public ScrapheapScrounger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.subtype.add("Construct");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
