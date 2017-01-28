@@ -27,10 +27,8 @@
  */
 package org.mage.test.cards.triggers;
 
-import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -61,7 +59,7 @@ public class PossibilityStormTest extends CardTestPlayerBase {
         // the top of his or her library until he or she exiles a card that shares a card type with it. That
         // player may cast that card without paying its mana cost. Then he or she puts all cards exiled with
         // Possibility Storm on the bottom of his or her library in a random order.
-        addCard(Zone.BATTLEFIELD, playerA, "Possibility Storm", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Possibility Storm", 1);
 
         // {T}: Add {C} to your mana pool.
         // Morph {2}
@@ -78,14 +76,7 @@ public class PossibilityStormTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
 
-        boolean zoeticCavernInLibrary = false;
-        for (Card card : playerA.getLibrary().getCards(currentGame)) {
-            if (card.getName().equals("Zoetic Cavern")) {
-                zoeticCavernInLibrary = true;
-            }
-        }
-        Assert.assertEquals("Zoetic Cavern has to be in the library", true, zoeticCavernInLibrary);
-
+        assertLibraryCount(playerA, "Zoetic Cavern", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
 
     }

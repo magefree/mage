@@ -32,14 +32,12 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
 
 /**
  *
@@ -54,7 +52,7 @@ public class UrborgTombOfYawgmoth extends CardImpl {
         // Each land is a Swamp in addition to its other land types.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),
                 "Each land is a Swamp in addition to its other land types"));
-        ability.addEffect(new AddCardSubtypeAllEffect());
+        ability.addEffect(new AddCardSubtypeAllEffect(new FilterLandPermanent(), "Swamp", DependencyType.BecomeSwamp));
         this.addAbility(ability);
 
     }
@@ -67,36 +65,4 @@ public class UrborgTombOfYawgmoth extends CardImpl {
     public UrborgTombOfYawgmoth copy() {
         return new UrborgTombOfYawgmoth(this);
     }
-}
-
-class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
-    private static final String addedSubtype = "Swamp";
-
-    public AddCardSubtypeAllEffect() {
-        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        staticText = "";
-        addDependencyType(DependencyType.BecomeSwamp);
-    }
-
-    public AddCardSubtypeAllEffect(final AddCardSubtypeAllEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (perm != null && !perm.getSubtype(game).contains(addedSubtype)) {
-                perm.getSubtype(game).add(addedSubtype);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public AddCardSubtypeAllEffect copy() {
-        return new AddCardSubtypeAllEffect(this);
-    }
-
 }

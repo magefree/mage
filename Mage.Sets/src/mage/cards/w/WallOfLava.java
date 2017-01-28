@@ -25,75 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.cards.Card;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
- * @author jeffwadsworth
+ * @author anonymous
  */
-public class SteelGolem extends CardImpl {
+public class WallOfLava extends CardImpl {
 
-    public SteelGolem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Golem");
+    public WallOfLava(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        
+        this.subtype.add("Wall");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
 
-        // You can't cast creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelGolemEffect()));
+        // {R}: Wall of Lava gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public SteelGolem(final SteelGolem card) {
+    public WallOfLava(final WallOfLava card) {
         super(card);
     }
 
     @Override
-    public SteelGolem copy() {
-        return new SteelGolem(this);
+    public WallOfLava copy() {
+        return new WallOfLava(this);
     }
-}
-
-class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public SteelGolemEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You can't cast creature spells";
-    }
-
-    public SteelGolemEffect(final SteelGolemEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SteelGolemEffect copy() {
-        return new SteelGolemEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            Card card = game.getCard(event.getSourceId());
-            return card != null && card.getCardType().contains(CardType.CREATURE);
-        }
-        return false;
-    }
-
 }

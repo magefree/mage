@@ -87,8 +87,8 @@ class LightningRunnerEffect extends OneShotEffect {
 
     LightningRunnerEffect() {
         super(Outcome.Benefit);
-        staticText = "you get {E}{E}, then you may pay {E}{E}{E}{E}{E}{E}{E}{E}. If you do, " +
-            "untap all creatures you control and after this phase, there is an additional combat phase";
+        staticText = "you get {E}{E}, then you may pay {E}{E}{E}{E}{E}{E}{E}{E}. If you do, "
+                + "untap all creatures you control and after this phase, there is an additional combat phase";
     }
 
     LightningRunnerEffect(final LightningRunnerEffect effect) {
@@ -100,11 +100,15 @@ class LightningRunnerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             new GetEnergyCountersControllerEffect(2).apply(game, source);
-            if (controller.getCounters().getCount(CounterType.ENERGY) > 5) {
-                Cost cost = new PayEnergyCost(6);
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
-                    new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "untap all creatures you control").apply(game, source);
-                    new AdditionalCombatPhaseEffect("and after this phase, there is an additional combat phase").apply(game, source);
+            if (controller.getCounters().getCount(CounterType.ENERGY) > 7) {
+                Cost cost = new PayEnergyCost(8);
+                if (controller.chooseUse(outcome,
+                        "Pay {E}{E}{E}{E}{E}{E}{E}{E} to use this? ",
+                        "Untap all creatures you control and after this phase, there is an additional combat phase.",
+                        "Yes", "No", source, game)
+                        && cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+                    new UntapAllControllerEffect(new FilterControlledCreaturePermanent()).apply(game, source);
+                    new AdditionalCombatPhaseEffect().apply(game, source);
                 }
             }
             return true;

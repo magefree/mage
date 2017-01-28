@@ -299,7 +299,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
                 if (damage > 0 && hasTrample(attacker)) {
                     defenderDamage(attacker, damage, game);
-                } else {
+                } else if (!blockerOrder.isEmpty()) {
                     // Assign the damge left to first blocker
                     assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) + damage);
                 }

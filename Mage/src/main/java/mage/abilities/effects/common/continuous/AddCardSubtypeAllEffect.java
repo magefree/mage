@@ -25,75 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
 
-import java.util.UUID;
-import mage.MageInt;
+package mage.abilities.effects.common.continuous;
+
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
- *
- * @author jeffwadsworth
+ * @author Galatolol
  */
-public class SteelGolem extends CardImpl {
 
-    public SteelGolem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Golem");
+public class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+    private static FilterPermanent filter;
+    private static String addedSubtype;
 
-        // You can't cast creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelGolemEffect()));
+    public AddCardSubtypeAllEffect(FilterPermanent _filter, String _addedSubtype, DependencyType _dependency) {
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+        filter = _filter;
+        staticText = "";
+        addedSubtype = _addedSubtype;
+        addDependencyType(_dependency);
     }
 
-    public SteelGolem(final SteelGolem card) {
-        super(card);
-    }
-
-    @Override
-    public SteelGolem copy() {
-        return new SteelGolem(this);
-    }
-}
-
-class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public SteelGolemEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You can't cast creature spells";
-    }
-
-    public SteelGolemEffect(final SteelGolemEffect effect) {
+    public AddCardSubtypeAllEffect(final AddCardSubtypeAllEffect effect) {
         super(effect);
     }
 
     @Override
-    public SteelGolemEffect copy() {
-        return new SteelGolemEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            Card card = game.getCard(event.getSourceId());
-            return card != null && card.getCardType().contains(CardType.CREATURE);
+    public boolean apply(Game game, Ability source) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            if (perm != null && !perm.getSubtype(game).contains(addedSubtype)) {
+                perm.getSubtype(game).add(addedSubtype);
+            }
         }
-        return false;
+        return true;
+    }
+
+    @Override
+    public AddCardSubtypeAllEffect copy() {
+        return new AddCardSubtypeAllEffect(this);
     }
 
 }

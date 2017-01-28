@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
 public class PossibilityStorm extends CardImpl {
 
     public PossibilityStorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
         // Whenever a player casts a spell from his or her hand, that player exiles it, then exiles cards from
         // the top of his or her library until he or she exiles a card that shares a card type with it. That
@@ -133,14 +133,14 @@ class PossibilityStormEffect extends OneShotEffect {
         if (sourceObject != null && spell != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
             if (spellController != null
-                    && spellController.moveCardToExileWithInfo(spell, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.STACK, true)) {
+                    && spellController.moveCardsToExile(spell, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
                 if (spellController.getLibrary().size() > 0) {
                     Library library = spellController.getLibrary();
                     Card card;
                     do {
-                        card = library.removeFromTop(game);
+                        card = library.getFromTop(game);
                         if (card != null) {
-                            spellController.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                            spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
                         }
                     } while (library.size() > 0 && card != null && !sharesType(card, spell.getCardType()));
 
@@ -154,10 +154,7 @@ class PossibilityStormEffect extends OneShotEffect {
 
                     ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                     if (exile != null) {
-                        while (exile.size() > 0) {
-                            card = exile.getRandom(game);
-                            spellController.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.EXILED, false, false);
-                        }
+                        spellController.putCardsOnBottomOfLibrary(exile, game, source, false);
                     }
 
                 }

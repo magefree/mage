@@ -825,8 +825,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!cardsToLibrary.isEmpty()) {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             if (!anyOrder) {
-                for (UUID objectId : cards) {
-                    moveObjectToLibrary(objectId, source == null ? null : source.getSourceId(), game, false, false);
+                while (!cards.isEmpty()) {
+                    UUID cardId = cards.getRandom(game).getId();
+                    cards.remove(cardId);
+                    moveObjectToLibrary(cardId, source == null ? null : source.getSourceId(), game, false, false);
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
@@ -864,8 +866,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
-                for (UUID cardId : cards) {
-                    moveObjectToLibrary(cardId, sourceId, game, true, false);
+                while (!cards.isEmpty()) {
+                    UUID cardId = cards.getRandom(game).getId();
+                    cards.remove(cardId);
+                    moveObjectToLibrary(cardId, source == null ? null : source.getSourceId(), game, true, false);
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
@@ -2764,7 +2768,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                             case STATIC:
                                 if (card.getCardType().contains(CardType.LAND) && ability instanceof AlternativeSourceCosts) {
                                     if (canLandPlayAlternateSourceCostsAbility(card, available, ability, game)) { // e.g. Land with Morph
-                                        playable.add(card.getId());
+                                        if (game.canPlaySorcery(getId())) {
+                                            playable.add(card.getId());
+                                        }
                                         break Abilities;
                                     }
                                 }
@@ -3289,6 +3295,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
+        if (card == null) {
+            return false;
+        }
         boolean result = false;
         //    Zone fromZone = game.getState().getZone(card.getId());
         if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null ? fromZone == Zone.BATTLEFIELD : false)) {
@@ -3313,6 +3322,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName) {
+        if (card == null) {
+            return false;
+        }
         boolean result = false;
         if (card.moveToZone(Zone.LIBRARY, sourceId, game, toTop)) {
             if (!game.isSimulation()) {
@@ -3342,6 +3354,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName) {
+        if (card == null) {
+            return false;
+        }
         boolean result = false;
         if (card.moveToExile(exileId, exileName, sourceId, game)) {
             if (!game.isSimulation()) {

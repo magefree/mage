@@ -105,4 +105,36 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Mutavault", 1);
 
     }
+    
+    /**
+     * Steel Golem, once Donate'd to another player does not disable their ability to play creature cards.
+     */
+    @Test
+    public void testDonateSteelGolem() {
+         // You can't cast creature spells.
+        addCard(Zone.HAND, playerA, "Steel Golem", 1); // Creature 3/4 {3}
+        // Target player gains control of target permanent you control.
+        addCard(Zone.HAND, playerA, "Donate", 1); // Sorcery {2}{U}         
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Steel Golem");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Donate", playerB);
+        addTarget(playerA, "Steel Golem");
+        
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+        
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Donate", 1);
+        assertPermanentCount(playerA, "Steel Golem", 0);
+        assertPermanentCount(playerB, "Steel Golem", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 0);
+        assertHandCount(playerB, "Silvercoat Lion", 1);
+
+    }
+
 }

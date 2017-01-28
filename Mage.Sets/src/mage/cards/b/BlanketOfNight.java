@@ -25,75 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.b;
 
 import java.util.UUID;
-import mage.MageInt;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.cards.Card;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
+import mage.constants.CardType;
+import mage.constants.DependencyType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author Galatolol
  */
-public class SteelGolem extends CardImpl {
+public class BlanketOfNight extends CardImpl {
 
-    public SteelGolem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Golem");
+    public BlanketOfNight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
+        
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-
-        // You can't cast creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelGolemEffect()));
+        // Each land is a Swamp in addition to its other land types.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),
+                "Each land is a Swamp in addition to its other land types"));
+        ability.addEffect(new AddCardSubtypeAllEffect(new FilterLandPermanent(), "Swamp", DependencyType.BecomeSwamp));
+        this.addAbility(ability);
     }
 
-    public SteelGolem(final SteelGolem card) {
+    public BlanketOfNight(final BlanketOfNight card) {
         super(card);
     }
 
     @Override
-    public SteelGolem copy() {
-        return new SteelGolem(this);
+    public BlanketOfNight copy() {
+        return new BlanketOfNight(this);
     }
-}
-
-class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public SteelGolemEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You can't cast creature spells";
-    }
-
-    public SteelGolemEffect(final SteelGolemEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SteelGolemEffect copy() {
-        return new SteelGolemEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            Card card = game.getCard(event.getSourceId());
-            return card != null && card.getCardType().contains(CardType.CREATURE);
-        }
-        return false;
-    }
-
 }

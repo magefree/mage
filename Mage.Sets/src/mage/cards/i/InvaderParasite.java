@@ -54,15 +54,18 @@ import mage.target.targetpointer.FixedTarget;
 public class InvaderParasite extends CardImpl {
 
     public InvaderParasite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.subtype.add("Insect");
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
+        // Imprint - When Invader Parasite enters the battlefield, exile target land.
         Ability ability = new EntersBattlefieldTriggeredAbility(new InvaderParasiteImprintEffect(), false);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
+
+        // Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, Invader Parasite deals 2 damage to that player.
         this.addAbility(new InvaderParasiteTriggeredAbility());
     }
 
@@ -77,6 +80,7 @@ public class InvaderParasite extends CardImpl {
 }
 
 class InvaderParasiteImprintEffect extends OneShotEffect {
+
     InvaderParasiteImprintEffect() {
         super(Outcome.Exile);
         staticText = "exile target land";
@@ -104,6 +108,7 @@ class InvaderParasiteImprintEffect extends OneShotEffect {
 }
 
 class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
+
     InvaderParasiteTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
@@ -125,12 +130,12 @@ class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            Permanent p = game.getPermanent(event.getTargetId());
+            Permanent targetPermanent = game.getPermanent(event.getTargetId());
             Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (p != null && sourcePermanent != null) {
+            if (targetPermanent != null && sourcePermanent != null) {
                 if (sourcePermanent.getImprinted().size() > 0) {
                     Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
-                    if (p.getName().equals(imprintedCard.getName())) {
+                    if (imprintedCard != null && targetPermanent.getName().equals(imprintedCard.getName())) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }

@@ -53,7 +53,7 @@ import mage.game.events.GameEvent.EventType;
 public class EternalScourge extends CardImpl {
 
     public EternalScourge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Horror");
         this.power = new MageInt(3);
@@ -101,13 +101,14 @@ class EternalScourgePlayEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && card.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(source.getSourceId()) == Zone.EXILED) {
+            if (card != null && card.getOwnerId().equals(affectedControllerId) && game.getState().getZone(source.getSourceId()) == Zone.EXILED) {
                 return true;
             }
         }
         return false;
     }
 }
+
 class EternalScourgeAbility extends TriggeredAbilityImpl {
 
     public EternalScourgeAbility() {

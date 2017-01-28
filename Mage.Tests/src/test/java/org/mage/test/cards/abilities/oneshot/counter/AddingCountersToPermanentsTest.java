@@ -67,4 +67,28 @@ public class AddingCountersToPermanentsTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Fairgrounds Trumpeter does not get a counter at the end of turn when
+     * Woodland Wanderer enters the battlefield
+     */
+    @Test
+    public void testFairgroundsTrumpeter() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+        // At the beginning of each end step, if a +1/+1 counter was placed on a permanent under your control this turn, put a +1/+1 counter on Fairgrounds Trumpeter.
+        addCard(Zone.HAND, playerA, "Fairgrounds Trumpeter", 1); // Creature 2/2  {2}{G}
+        // Vigilance, trample
+        // <i>Converge</i> &mdash; Woodland Wanderer enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
+        addCard(Zone.HAND, playerA, "Woodland Wanderer", 1); // Creature 2/2 {3}{G}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Woodland Wanderer");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fairgrounds Trumpeter");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerA, "Woodland Wanderer", 3, 3);
+        assertPowerToughness(playerA, "Fairgrounds Trumpeter", 3, 3);
+
+    }
+
 }

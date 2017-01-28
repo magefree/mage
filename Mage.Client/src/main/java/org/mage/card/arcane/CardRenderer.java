@@ -21,7 +21,6 @@ import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
-import org.apache.log4j.Logger;
 
 /**
  * @author stravant@gmail.com
@@ -55,8 +54,6 @@ import org.apache.log4j.Logger;
  *
  */
 public abstract class CardRenderer {
-
-    private static final Logger LOGGER = Logger.getLogger(CardPanel.class);
 
     ///////////////////////////////////////////////////////////////////////////
     // Common layout metrics between all cards

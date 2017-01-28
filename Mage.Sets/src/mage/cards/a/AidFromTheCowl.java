@@ -110,6 +110,8 @@ class AidFromTheCowlEffect extends OneShotEffect {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " on the bottom of your library?", source, game)) {
                     controller.putCardsOnBottomOfLibrary(cards, game, source, false);
+                } else {
+                    game.informPlayers(controller.getLogName() + " puts the revealed card back to the top of the library.");
                 }
             }
         }

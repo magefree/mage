@@ -25,77 +25,89 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.m;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author anonymous
  */
-public class SeeBeyond extends CardImpl {
+public class MuragandaPetroglyphs extends CardImpl {
 
-    public SeeBeyond(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
+    private static final FilterCreaturePermanent filterNoAbilities
+            = new FilterCreaturePermanent("Creatures with no ability");
 
-        this.getSpellAbility().addEffect(new SeeBeyondEffect());
+    static {
+        filterNoAbilities.add(new NoAbilityPredicate());
     }
 
-    public SeeBeyond(final SeeBeyond card) {
+    public MuragandaPetroglyphs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
+        this.expansionSetCode = "FUT";
+
+        // Creatures with no abilities get +2/+2.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(
+                2, 2, Duration.WhileOnBattlefield, filterNoAbilities, false)));
+    }
+
+    public MuragandaPetroglyphs(final MuragandaPetroglyphs card) {
         super(card);
     }
 
     @Override
-    public SeeBeyond copy() {
-        return new SeeBeyond(this);
+    public MuragandaPetroglyphs copy() {
+        return new MuragandaPetroglyphs(this);
     }
-
 }
 
-class SeeBeyondEffect extends OneShotEffect {
-
-    public SeeBeyondEffect() {
-        super(Outcome.DrawCard);
-        staticText = "Draw two cards, then shuffle a card from your hand into your library";
-    }
-
-    public SeeBeyondEffect(SeeBeyondEffect effect) {
-        super(effect);
-    }
+class NoAbilityPredicate implements Predicate<MageObject> {
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        controller.drawCards(2, game);
-        if (controller.getHand().size() > 0) {
-            TargetCard target = new TargetCard(Zone.HAND, new FilterCard("card to shuffle into your library"));
-            controller.choose(Outcome.Detriment, controller.getHand(), target, game);
-            Card card = controller.getHand().get(target.getFirstTarget(), game);
-            if (card != null) {
-                controller.moveCards(card, Zone.LIBRARY, source, game);
-                controller.shuffleLibrary(source, game);
+    public boolean apply(MageObject input, Game game) {
+        boolean isFaceDown = false;
+        Abilities<Ability> abilities;
+        if (input instanceof Card) {
+            abilities = ((Card) input).getAbilities(game);
+            isFaceDown = ((Card) input).isFaceDown(game);
+        } else {
+            abilities = input.getAbilities();
+        }
+        if (isFaceDown) {
+            for (Ability ability : abilities) {
+                if (!ability.getSourceId().equals(input.getId())) {
+                    return false;
+                }
             }
             return true;
+        }
 
+        for (Ability ability : abilities) {
+            if (ability.getClass() != SpellAbility.class) {
+
+                return false;
+            }
         }
         return true;
     }
 
     @Override
-    public SeeBeyondEffect copy() {
-        return new SeeBeyondEffect(this);
+    public String toString() {
+        return "with no abilities";
     }
-
 }

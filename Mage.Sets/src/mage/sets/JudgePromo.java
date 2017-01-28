@@ -24,14 +24,13 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -50,14 +49,14 @@ public class JudgePromo extends ExpansionSet {
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Argothian Enchantress", 12, Rarity.RARE, mage.cards.a.ArgothianEnchantress.class));
         cards.add(new SetCardInfo("Armageddon", 14, Rarity.RARE, mage.cards.a.Armageddon.class));
-        cards.add(new SetCardInfo("Azusa, Lost but Seeking", 102, Rarity.RARE, mage.cards.a.AzusaLostButSeeking.class));
+        cards.add(new SetCardInfo("Azusa, Lost but Seeking", 102, Rarity.RARE, mage.cards.a.AzusaLostButSeeking.class));// 2016 003/008
         cards.add(new SetCardInfo("Balance", 15, Rarity.RARE, mage.cards.b.Balance.class));
         cards.add(new SetCardInfo("Ball Lightning", 7, Rarity.RARE, mage.cards.b.BallLightning.class));
         cards.add(new SetCardInfo("Bitterblossom", 59, Rarity.RARE, mage.cards.b.Bitterblossom.class));
         cards.add(new SetCardInfo("Bloodstained Mire", 43, Rarity.RARE, mage.cards.b.BloodstainedMire.class));
         cards.add(new SetCardInfo("Bribery", 73, Rarity.RARE, mage.cards.b.Bribery.class));
         cards.add(new SetCardInfo("Burning Wish", 42, Rarity.RARE, mage.cards.b.BurningWish.class));
-        cards.add(new SetCardInfo("Command Beacon", 105, Rarity.RARE, mage.cards.c.CommandBeacon.class));
+        cards.add(new SetCardInfo("Command Beacon", 105, Rarity.RARE, mage.cards.c.CommandBeacon.class));// 2016 004/008
         cards.add(new SetCardInfo("Command Tower", 71, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Counterspell", 5, Rarity.COMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 75, Rarity.RARE, mage.cards.c.CrucibleOfWorlds.class));
@@ -66,7 +65,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Confidant", 61, Rarity.RARE, mage.cards.d.DarkConfidant.class));
         cards.add(new SetCardInfo("Dark Ritual", 38, Rarity.COMMON, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Decree of Justice", 32, Rarity.RARE, mage.cards.d.DecreeOfJustice.class));
-        cards.add(new SetCardInfo("Defense of the Heart", 106, Rarity.RARE, mage.cards.d.DefenseOfTheHeart.class));
+        cards.add(new SetCardInfo("Defense of the Heart", 106, Rarity.RARE, mage.cards.d.DefenseOfTheHeart.class)); // 2016 007/008
         cards.add(new SetCardInfo("Demonic Tutor", 35, Rarity.UNCOMMON, mage.cards.d.DemonicTutor.class));
         cards.add(new SetCardInfo("Deranged Hermit", 18, Rarity.RARE, mage.cards.d.DerangedHermit.class));
         cards.add(new SetCardInfo("Doubling Season", 62, Rarity.RARE, mage.cards.d.DoublingSeason.class));
@@ -91,7 +90,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Hanna, Ship's Navigator", 84, Rarity.RARE, mage.cards.h.HannaShipsNavigator.class));
         cards.add(new SetCardInfo("Hermit Druid", 19, Rarity.RARE, mage.cards.h.HermitDruid.class));
         cards.add(new SetCardInfo("Imperial Recruiter", 74, Rarity.UNCOMMON, mage.cards.i.ImperialRecruiter.class));
-        cards.add(new SetCardInfo("Imperial Seal", 109, Rarity.SPECIAL, mage.cards.i.ImperialSeal.class));
+        cards.add(new SetCardInfo("Imperial Seal", 109, Rarity.SPECIAL, mage.cards.i.ImperialSeal.class));// 2016 006/008
         cards.add(new SetCardInfo("Intuition", 11, Rarity.RARE, mage.cards.i.Intuition.class));
         cards.add(new SetCardInfo("Island", 90, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Karador, Ghost Chieftain", 80, Rarity.MYTHIC, mage.cards.k.KaradorGhostChieftain.class));
@@ -102,7 +101,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Living Death", 13, Rarity.RARE, mage.cards.l.LivingDeath.class));
         cards.add(new SetCardInfo("Living Wish", 37, Rarity.RARE, mage.cards.l.LivingWish.class));
         cards.add(new SetCardInfo("Mana Crypt", 60, Rarity.RARE, mage.cards.m.ManaCrypt.class));
-        cards.add(new SetCardInfo("Mana Drain", 103, Rarity.UNCOMMON, mage.cards.m.ManaDrain.class));
+        cards.add(new SetCardInfo("Mana Drain", 103, Rarity.UNCOMMON, mage.cards.m.ManaDrain.class));// 2016 002/008
         cards.add(new SetCardInfo("Maze of Ith", 39, Rarity.UNCOMMON, mage.cards.m.MazeOfIth.class));
         cards.add(new SetCardInfo("Meddling Mage", 26, Rarity.RARE, mage.cards.m.MeddlingMage.class));
         cards.add(new SetCardInfo("Memory Lapse", 4, Rarity.COMMON, mage.cards.m.MemoryLapse.class));
@@ -110,7 +109,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Factory", 23, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Morphling", 53, Rarity.RARE, mage.cards.m.Morphling.class));
         cards.add(new SetCardInfo("Mountain", 92, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mystic Confluence", 109, Rarity.SPECIAL, mage.cards.m.MysticConfluence.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Mystic Confluence", 108, Rarity.SPECIAL, mage.cards.m.MysticConfluence.class, new CardGraphicInfo(null, true))); // 2016 005/008
         cards.add(new SetCardInfo("Natural Order", 49, Rarity.RARE, mage.cards.n.NaturalOrder.class));
         cards.add(new SetCardInfo("Nekusar, the Mindrazer", 86, Rarity.MYTHIC, mage.cards.n.NekusarTheMindrazer.class));
         cards.add(new SetCardInfo("Noble Hierarch", 66, Rarity.RARE, mage.cards.n.NobleHierarch.class));
@@ -155,7 +154,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Wooded Foothills", 47, Rarity.RARE, mage.cards.w.WoodedFoothills.class));
         cards.add(new SetCardInfo("Xiahou Dun, the One-Eyed", 64, Rarity.RARE, mage.cards.x.XiahouDunTheOneEyed.class));
         cards.add(new SetCardInfo("Yawgmoth's Will", 30, Rarity.RARE, mage.cards.y.YawgmothsWill.class));
-        cards.add(new SetCardInfo("Zur the Enchanter", 107, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class));
+        cards.add(new SetCardInfo("Zur the Enchanter", 107, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class)); // 2016 008/008
     }
 
 }

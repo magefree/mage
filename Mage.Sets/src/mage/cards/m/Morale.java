@@ -25,75 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.cards.Card;
+
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author jeffwadsworth
+ * @author Galatolol
  */
-public class SteelGolem extends CardImpl {
+public class Morale extends CardImpl {
 
-    public SteelGolem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Golem");
+    public Morale(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
+        
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Attacking creatures get +1/+1 until end of turn.
+        this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false));
 
-        // You can't cast creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelGolemEffect()));
     }
 
-    public SteelGolem(final SteelGolem card) {
+    public Morale(final Morale card) {
         super(card);
     }
 
     @Override
-    public SteelGolem copy() {
-        return new SteelGolem(this);
+    public Morale copy() {
+        return new Morale(this);
     }
-}
-
-class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public SteelGolemEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You can't cast creature spells";
-    }
-
-    public SteelGolemEffect(final SteelGolemEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SteelGolemEffect copy() {
-        return new SteelGolemEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            Card card = game.getCard(event.getSourceId());
-            return card != null && card.getCardType().contains(CardType.CREATURE);
-        }
-        return false;
-    }
-
 }

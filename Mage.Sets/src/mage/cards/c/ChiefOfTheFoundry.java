@@ -46,8 +46,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  * @author fireshoes
  */
 public class ChiefOfTheFoundry extends CardImpl {
-    
-    private static final FilterCreaturePermanent filterBoosted = new FilterCreaturePermanent("artifact creatures");
+
+    private static final FilterCreaturePermanent filterBoosted = new FilterCreaturePermanent("Other artifact creatures you control");
 
     static {
         filterBoosted.add(new CardTypePredicate(CardType.ARTIFACT));
@@ -55,7 +55,7 @@ public class ChiefOfTheFoundry extends CardImpl {
     }
 
     public ChiefOfTheFoundry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add("Construct");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

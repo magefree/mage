@@ -506,6 +506,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param cards - list of cards that have to be moved
      * @param game - game
      * @param anyOrder - true if player can determine the order of the cards
+     * else random order
      * @param source - source ability
      * @return
      */

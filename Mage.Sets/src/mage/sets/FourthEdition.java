@@ -254,6 +254,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Twist", 31, Rarity.RARE, mage.cards.m.MindTwist.class));
         cards.add(new SetCardInfo("Mishra's Factory", 181, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Mons's Goblin Raiders", 231, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));
+        cards.add(new SetCardInfo("Morale", 288, Rarity.COMMON, mage.cards.m.Morale.class));
         cards.add(new SetCardInfo("Mountain", 182, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 183, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 184, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
@@ -325,6 +326,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Net", 364, Rarity.UNCOMMON, mage.cards.s.SoulNet.class));
         cards.add(new SetCardInfo("Spell Blast", 103, Rarity.COMMON, mage.cards.s.SpellBlast.class));
         cards.add(new SetCardInfo("Spirit Link", 301, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
+        cards.add(new SetCardInfo("Spirit Shackle", 47, Rarity.UNCOMMON, mage.cards.s.SpiritShackle.class));
         cards.add(new SetCardInfo("Stasis", 104, Rarity.RARE, mage.cards.s.Stasis.class));
         cards.add(new SetCardInfo("Steal Artifact", 105, Rarity.UNCOMMON, mage.cards.s.StealArtifact.class));
         cards.add(new SetCardInfo("Stone Giant", 241, Rarity.UNCOMMON, mage.cards.s.StoneGiant.class));

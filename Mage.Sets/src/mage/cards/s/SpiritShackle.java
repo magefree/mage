@@ -28,72 +28,49 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
+
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
+import mage.counters.BoostCounter;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.cards.Card;
+import mage.abilities.effects.common.AttachEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.CardType;
 
 /**
  *
- * @author jeffwadsworth
+ * @author Galatolol
  */
-public class SteelGolem extends CardImpl {
+public class SpiritShackle extends CardImpl {
 
-    public SteelGolem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.subtype.add("Golem");
+    public SpiritShackle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");
+        
+        this.subtype.add("Aura");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
-        // You can't cast creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelGolemEffect()));
+        // Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new AddCountersAttachedEffect(new BoostCounter(0, -2), "it"), "enchanted creature"));
+
     }
 
-    public SteelGolem(final SteelGolem card) {
+    public SpiritShackle(final SpiritShackle card) {
         super(card);
     }
 
     @Override
-    public SteelGolem copy() {
-        return new SteelGolem(this);
+    public SpiritShackle copy() {
+        return new SpiritShackle(this);
     }
-}
-
-class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public SteelGolemEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You can't cast creature spells";
-    }
-
-    public SteelGolemEffect(final SteelGolemEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SteelGolemEffect copy() {
-        return new SteelGolemEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            Card card = game.getCard(event.getSourceId());
-            return card != null && card.getCardType().contains(CardType.CREATURE);
-        }
-        return false;
-    }
-
 }

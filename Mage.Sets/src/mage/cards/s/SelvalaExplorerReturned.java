@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.ParleyCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -60,13 +61,13 @@ public class SelvalaExplorerReturned extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Parley - {T}: Each player reveals the top card of his or her library. For each nonland card revealed this way, add {G} to your mana pool and you gain 1 life. Then each player draws a card.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new SelvalaExplorerReturnedEffect(), new TapSourceCost());
-
-        ability.setAbilityWord(AbilityWord.PARLEY);
+        ActivatedManaAbilityImpl manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new SelvalaExplorerReturnedEffect(), new TapSourceCost(), false);
+        manaAbility.setUndoPossible(false);
+        manaAbility.setAbilityWord(AbilityWord.PARLEY);
         Effect effect = new DrawCardAllEffect(1);
         effect.setText("Then each player draws a card");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        manaAbility.addEffect(effect);
+        this.addAbility(manaAbility);
     }
 
     public SelvalaExplorerReturned(final SelvalaExplorerReturned card) {

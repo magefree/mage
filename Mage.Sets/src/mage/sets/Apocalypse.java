@@ -110,6 +110,7 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Gargantua", 48, Rarity.UNCOMMON, mage.cards.p.PhyrexianGargantua.class));
         cards.add(new SetCardInfo("Phyrexian Rager", 49, Rarity.COMMON, mage.cards.p.PhyrexianRager.class));
         cards.add(new SetCardInfo("Planar Despair", 50, Rarity.RARE, mage.cards.p.PlanarDespair.class));
+        cards.add(new SetCardInfo("Powerstone Minefield", 115, Rarity.RARE, mage.cards.p.PowerstoneMinefield.class));
         cards.add(new SetCardInfo("Prophetic Bolt", 116, Rarity.RARE, mage.cards.p.PropheticBolt.class));
         cards.add(new SetCardInfo("Putrid Warrior", 117, Rarity.COMMON, mage.cards.p.PutridWarrior.class));
         cards.add(new SetCardInfo("Quagmire Druid", 51, Rarity.COMMON, mage.cards.q.QuagmireDruid.class));

@@ -29,19 +29,20 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -51,7 +52,6 @@ public class Donate extends CardImpl {
 
     public Donate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
-
 
         // Target player gains control of target permanent you control.
         this.getSpellAbility().addEffect(new DonateEffect());
@@ -69,10 +69,10 @@ public class Donate extends CardImpl {
     }
 }
 
-class DonateEffect extends ContinuousEffectImpl {
+class DonateEffect extends OneShotEffect {
 
     public DonateEffect() {
-        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.Benefit);
+        super(Outcome.Detriment);
         this.staticText = "Target player gains control of target permanent you control";
     }
     
@@ -86,14 +86,13 @@ class DonateEffect extends ContinuousEffectImpl {
     }
     
     @Override
-    public boolean apply(Game game, Ability source) {
-        UUID controllerId = source.getTargets().get(0).getFirstTarget();
-        Player controller = game.getPlayer(controllerId);
+    public boolean apply(Game game, Ability source) {        
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (controller != null && permanent != null) {
-            permanent.changeControllerId(controllerId, game);
-        } else {
-            this.discard();
+        if (targetPlayer != null && permanent != null) {
+            ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, targetPlayer.getId());
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            game.addEffect(effect, source);
         }
         return true;
     }

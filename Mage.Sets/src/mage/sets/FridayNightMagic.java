@@ -52,6 +52,7 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Abzan Beastmaster", 180, Rarity.UNCOMMON, mage.cards.a.AbzanBeastmaster.class));
         cards.add(new SetCardInfo("Accumulated Knowledge", 51, Rarity.COMMON, mage.cards.a.AccumulatedKnowledge.class));
         cards.add(new SetCardInfo("Acidic Slime", 145, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
+        cards.add(new SetCardInfo("Aether Hub", 205, Rarity.SPECIAL, mage.cards.a.AetherHub.class));
         cards.add(new SetCardInfo("Albino Troll", 20, Rarity.UNCOMMON, mage.cards.a.AlbinoTroll.class));
         cards.add(new SetCardInfo("Anathemancer", 122, Rarity.UNCOMMON, mage.cards.a.Anathemancer.class));
         cards.add(new SetCardInfo("Ancient Grudge", 144, Rarity.COMMON, mage.cards.a.AncientGrudge.class));
@@ -206,6 +207,7 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Searing Spear", 152, Rarity.COMMON, mage.cards.s.SearingSpear.class));
         cards.add(new SetCardInfo("Serrated Arrows", 101, Rarity.UNCOMMON, mage.cards.s.SerratedArrows.class));
         cards.add(new SetCardInfo("Serum Visions", 183, Rarity.COMMON, mage.cards.s.SerumVisions.class));
+        cards.add(new SetCardInfo("Servo Exhibition", 203, Rarity.SPECIAL, mage.cards.s.ServoExhibition.class));
         cards.add(new SetCardInfo("Shock", 6, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Shrapnel Blast", 103, Rarity.UNCOMMON, mage.cards.s.ShrapnelBlast.class));
         cards.add(new SetCardInfo("Silver Knight", 46, Rarity.UNCOMMON, mage.cards.s.SilverKnight.class));
@@ -236,6 +238,7 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Tormod's Crypt", 93, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
         cards.add(new SetCardInfo("Treetop Village", 50, Rarity.UNCOMMON, mage.cards.t.TreetopVillage.class));
         cards.add(new SetCardInfo("Ultimate Price", 185, Rarity.UNCOMMON, mage.cards.u.UltimatePrice.class));
+        cards.add(new SetCardInfo("Unlicensed Disintegration", 204, Rarity.SPECIAL, mage.cards.u.UnlicensedDisintegration.class));
         cards.add(new SetCardInfo("Volcanic Geyser", 4, Rarity.UNCOMMON, mage.cards.v.VolcanicGeyser.class));
         cards.add(new SetCardInfo("Wall of Blossoms", 23, Rarity.UNCOMMON, mage.cards.w.WallOfBlossoms.class));
         cards.add(new SetCardInfo("Wall of Omens", 130, Rarity.UNCOMMON, mage.cards.w.WallOfOmens.class));
