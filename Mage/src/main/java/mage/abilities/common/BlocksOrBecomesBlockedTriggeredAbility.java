@@ -48,7 +48,7 @@ public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl
     protected boolean setTargetPointer;
 
     public BlocksOrBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, new FilterCreaturePermanent(), optional, null, false);
+        this(effect, new FilterCreaturePermanent(), optional, null, true);
     }
 
     public BlocksOrBecomesBlockedTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
