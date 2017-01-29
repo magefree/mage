@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package org.mage.test.cards.abilities.oneshot.damage;
 
 import mage.constants.PhaseStep;
@@ -48,11 +47,9 @@ public class FlameheartWerewolfTest extends CardTestPlayerBase {
 
         // Flameheart Werewolf is a 3/2 with:
         // Whenever Flameheart Werewolf blocks or becomes blocked by a creature, Flameheart Werewolf deals 2 damage to that creature.
-
         // Kalitas, Traitor of Ghet is a 3/4 with:
         // Lifelink
         // If a nontoken creature an opponent controls would die, instead exile that card and put a 2/2 black Zombie creature token onto the battlefield
-
         addCard(Zone.BATTLEFIELD, playerA, "Flameheart Werewolf");
         addCard(Zone.BATTLEFIELD, playerB, "Kalitas, Traitor of Ghet");
 
@@ -92,8 +89,8 @@ public class FlameheartWerewolfTest extends CardTestPlayerBase {
 
         // both 2/2s should die before they had a chance to deal damage
         // to Flameheart Werewolf
+        assertGraveyardCount(playerA, "Kessig Forgemaster", 0);
         assertPermanentCount(playerA, "Flameheart Werewolf", 1);
-        assertGraveyardCount(playerA, "Flameheart Werewolf", 0);
         assertPermanentCount(playerB, "Falkenrath Reaver", 0);
         assertGraveyardCount(playerB, "Falkenrath Reaver", 1);
         assertPermanentCount(playerB, "Wind Drake", 0);
