@@ -70,7 +70,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source,
             Game game) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             if (permanent != null) {
                 switch (layer) {
                     case TypeChangingEffects_4:
@@ -86,10 +86,8 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
                         }
                         break;
                 }
-            } else {
-                if (duration.equals(Duration.Custom)) {
-                    discard();
-                }
+            } else if (duration.equals(Duration.Custom)) {
+                discard();
             }
         }
         return true;

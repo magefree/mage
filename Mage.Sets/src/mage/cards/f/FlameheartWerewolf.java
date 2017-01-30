@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -60,7 +61,8 @@ public class FlameheartWerewolf extends CardImpl {
         this.transformable = true;
 
         // Whenever Flameheart Werewolf blocks or becomes blocked by a creature, Flameheart Werewolf deals 2 damage to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(2, true, "that creature"), false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(2, true, "that creature"),
+                StaticFilters.FILTER_PERMANENT_CREATURE, false, null, true));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Flameheart Werewolf.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

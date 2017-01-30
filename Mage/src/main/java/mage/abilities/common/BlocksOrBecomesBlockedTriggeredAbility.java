@@ -27,11 +27,11 @@
  */
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -48,7 +48,7 @@ public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl
     protected boolean setTargetPointer;
 
     public BlocksOrBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, new FilterCreaturePermanent(), optional, null, true);
+        this(effect, StaticFilters.FILTER_PERMANENT_CREATURE, optional, null, false);
     }
 
     public BlocksOrBecomesBlockedTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
