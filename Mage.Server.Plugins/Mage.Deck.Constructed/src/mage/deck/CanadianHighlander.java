@@ -86,7 +86,7 @@ public class CanadianHighlander extends Constructed {
             }
         }
 
-        int allowedPoints = 10 * (int) Math.ceil(deck.getCards().size()/100.0);
+        int allowedPoints = 10 * (int) Math.floor(deck.getCards().size()/100.0);
         int totalPoints = 0;
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             String cn = entry.getKey();
