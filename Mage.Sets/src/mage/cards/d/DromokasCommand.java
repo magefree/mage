@@ -64,9 +64,9 @@ public class DromokasCommand extends CardImpl {
     }
 
     public DromokasCommand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{W}");
 
-        // Choose two - Prevent all damage target instant or sorcery spell would deal this turn; Target player sacrifices an enchantment; Put a +1/+1 counter on target creature; or Target creature you control fights target creature you don't control.
+        // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
 

@@ -44,6 +44,7 @@ import mage.game.stack.StackObject;
 public class TargetSpell extends TargetObject {
 
     protected final FilterSpell filter;
+    private final Set<UUID> sourceIds = new HashSet<>();
 
     public TargetSpell() {
         this(1, 1, new FilterSpell());
@@ -68,6 +69,7 @@ public class TargetSpell extends TargetObject {
     public TargetSpell(final TargetSpell target) {
         super(target);
         this.filter = target.filter.copy();
+        this.sourceIds.addAll(target.sourceIds);
     }
 
     @Override
@@ -134,4 +136,18 @@ public class TargetSpell extends TargetObject {
                 && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
                 && filter.match(stackObject, sourceID, sourceControllerId, game);
     }
+
+    @Override
+    public void addTarget(UUID id, Ability source, Game game, boolean skipEvent) {
+        Spell spell = game.getStack().getSpell(id);
+        if (spell != null) { // remember the original sourceID
+            sourceIds.add(spell.getSourceId());
+        }
+        super.addTarget(id, source, game, skipEvent);
+    }
+
+    public Set<UUID> getSourceIds() {
+        return sourceIds;
+    }
+
 }
