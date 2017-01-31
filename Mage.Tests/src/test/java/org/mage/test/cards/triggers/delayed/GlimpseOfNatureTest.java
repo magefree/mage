@@ -42,7 +42,7 @@ public class GlimpseOfNatureTest extends CardTestPlayerBase {
      * Glimpse of Nature triggers do not draw a card.
      */
     @Test
-    public void testCreatureWasDestroyed() {
+    public void testCardsAreDrawnFromCreatureCasting() {
         // Whenever you cast a creature spell this turn, draw a card.
         addCard(Zone.HAND, playerA, "Glimpse of Nature", 1);// Sorcery {G}
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 2);
