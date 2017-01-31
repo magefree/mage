@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
 
-    private FilterCard filter;
+    private final FilterCard filter;
 
     public SearchLibraryWithLessCMCPutInPlayEffect() {
         this(new FilterCard());
@@ -66,8 +66,9 @@ public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
-            TargetCardInLibrary target = new TargetCardInLibrary(filter);
+            FilterCard advancedFilter = filter.copy(); // never change static objects so copy the object here before
+            advancedFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
+            TargetCardInLibrary target = new TargetCardInLibrary(advancedFilter);
             if (controller.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
