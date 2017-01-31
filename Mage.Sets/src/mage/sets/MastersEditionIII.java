@@ -185,6 +185,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Ragnar", 167, Rarity.UNCOMMON, mage.cards.r.Ragnar.class));
         cards.add(new SetCardInfo("Ramirez DePietro", 168, Rarity.COMMON, mage.cards.r.RamirezDePietro.class));
         cards.add(new SetCardInfo("Ramses Overdark", 169, Rarity.UNCOMMON, mage.cards.r.RamsesOverdark.class));
+        cards.add(new SetCardInfo("Rasputin Dreamweaver", 170, Rarity.RARE, mage.cards.r.RasputinDreamweaver.class));
         cards.add(new SetCardInfo("Recall", 46, Rarity.UNCOMMON, mage.cards.r.Recall.class));
         cards.add(new SetCardInfo("Reincarnation", 130, Rarity.UNCOMMON, mage.cards.r.Reincarnation.class));
         cards.add(new SetCardInfo("Remove Soul", 47, Rarity.COMMON, mage.cards.r.RemoveSoul.class));

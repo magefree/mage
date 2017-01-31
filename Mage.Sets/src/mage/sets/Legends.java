@@ -184,6 +184,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Ragnar", 290, Rarity.RARE, mage.cards.r.Ragnar.class));
         cards.add(new SetCardInfo("Ramirez DePietro", 291, Rarity.UNCOMMON, mage.cards.r.RamirezDePietro.class));
         cards.add(new SetCardInfo("Ramses Overdark", 292, Rarity.RARE, mage.cards.r.RamsesOverdark.class));
+        cards.add(new SetCardInfo("Rasputin Dreamweaver", 293, Rarity.RARE, mage.cards.r.RasputinDreamweaver.class));
         cards.add(new SetCardInfo("Recall", 70, Rarity.RARE, mage.cards.r.Recall.class));
         cards.add(new SetCardInfo("Reincarnation", 115, Rarity.UNCOMMON, mage.cards.r.Reincarnation.class));
         cards.add(new SetCardInfo("Relic Barrier", 237, Rarity.UNCOMMON, mage.cards.r.RelicBarrier.class));

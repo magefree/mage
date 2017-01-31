@@ -62,6 +62,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Contagion", 4, Rarity.UNCOMMON, mage.cards.c.Contagion.class));
         cards.add(new SetCardInfo("Deadly Insect", 64, Rarity.COMMON, mage.cards.d.DeadlyInsect.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Deadly Insect", 65, Rarity.COMMON, mage.cards.d.DeadlyInsect.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Death Spark", 103, Rarity.UNCOMMON, mage.cards.d.DeathSpark.class));
         cards.add(new SetCardInfo("Diminishing Returns", 39, Rarity.RARE, mage.cards.d.DiminishingReturns.class));
         cards.add(new SetCardInfo("Dystopia", 6, Rarity.RARE, mage.cards.d.Dystopia.class));
         cards.add(new SetCardInfo("Elvish Bard", 66, Rarity.UNCOMMON, mage.cards.e.ElvishBard.class));

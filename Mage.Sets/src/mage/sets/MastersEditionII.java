@@ -94,6 +94,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Counterspell", 44, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Dance of the Dead", 83, Rarity.UNCOMMON, mage.cards.d.DanceOfTheDead.class));
         cards.add(new SetCardInfo("Dark Banishing", 84, Rarity.COMMON, mage.cards.d.DarkBanishing.class));
+        cards.add(new SetCardInfo("Death Spark", 123, Rarity.COMMON, mage.cards.d.DeathSpark.class));
         cards.add(new SetCardInfo("Deep Spawn", 45, Rarity.RARE, mage.cards.d.DeepSpawn.class));
         cards.add(new SetCardInfo("Demonic Consultation", 85, Rarity.UNCOMMON, mage.cards.d.DemonicConsultation.class));
         cards.add(new SetCardInfo("Despotic Scepter", 206, Rarity.RARE, mage.cards.d.DespoticScepter.class));
