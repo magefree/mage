@@ -112,6 +112,7 @@ class ReyhanLastOfTheAbzanTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent.getControllerId().equals(this.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE)) {
                 int countersOn = permanent.getCounters(game).getCount(CounterType.P1P1);
                 if (countersOn > 0) {
+                    this.getEffects().clear();
                     this.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(countersOn)));
                 }
                 return true;

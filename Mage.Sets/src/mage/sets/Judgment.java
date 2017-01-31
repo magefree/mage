@@ -63,6 +63,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Aven Fogbringer", 34, Rarity.COMMON, mage.cards.a.AvenFogbringer.class));
         cards.add(new SetCardInfo("Balthor the Defiled", 61, Rarity.RARE, mage.cards.b.BalthorTheDefiled.class));
         cards.add(new SetCardInfo("Battle Screech", 3, Rarity.UNCOMMON, mage.cards.b.BattleScreech.class));
+        cards.add(new SetCardInfo("Battlefield Scrounger", 106, Rarity.COMMON, mage.cards.b.BattlefieldScrounger.class));
         cards.add(new SetCardInfo("Battlewise Aven", 4, Rarity.COMMON, mage.cards.b.BattlewiseAven.class));
         cards.add(new SetCardInfo("Benevolent Bodyguard", 5, Rarity.COMMON, mage.cards.b.BenevolentBodyguard.class));
         cards.add(new SetCardInfo("Book Burning", 80, Rarity.COMMON, mage.cards.b.BookBurning.class));

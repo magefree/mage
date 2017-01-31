@@ -53,6 +53,7 @@ public enum CounterType {
     DEVOTION("devotion"),
     DIVINITY("divinity"),
     DOOM("doom"),
+    DREAM("dream"),
     ELIXIR("elixir"),
     ENERGY("energy"),
     EON("eon"),

@@ -25,17 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
+import mage.target.Target;
+import mage.target.TargetSpell;
 
 /**
  * @author nantuko
@@ -71,8 +72,15 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
             MageObject mageObject = game.getObject(event.getSourceId());
-            if (mageObject instanceof Spell){
-                return this.getTargetPointer().getTargets(game, source).contains(mageObject.getId());
+            if (mageObject != null
+                    && (mageObject.getCardType().contains(CardType.INSTANT) || mageObject.getCardType().contains(CardType.SORCERY))) {
+                for (Target target : source.getTargets()) {
+                    if (target instanceof TargetSpell) {
+                        if (((TargetSpell) target).getSourceIds().contains(event.getSourceId())) {
+                            return true;
+                        }
+                    }
+                }
             }
             return this.getTargetPointer().getTargets(game, source).contains(event.getSourceId());
         }
