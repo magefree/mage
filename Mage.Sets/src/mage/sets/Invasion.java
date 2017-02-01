@@ -206,6 +206,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Opt", 64, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Ordered Migration", 258, Rarity.UNCOMMON, mage.cards.o.OrderedMigration.class));
         cards.add(new SetCardInfo("Orim's Touch", 23, Rarity.COMMON, mage.cards.o.OrimsTouch.class));
+        cards.add(new SetCardInfo("Overabundance", 259, Rarity.RARE, mage.cards.o.Overabundance.class));
         cards.add(new SetCardInfo("Overload", 157, Rarity.COMMON, mage.cards.o.Overload.class));
         cards.add(new SetCardInfo("Pain // Suffering", 294, Rarity.UNCOMMON, mage.cards.p.PainSuffering.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 65, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
