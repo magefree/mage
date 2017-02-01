@@ -28,13 +28,20 @@
 package mage.cards.o;
 
 import java.util.UUID;
+
+import mage.abilities.common.TapForManaAllTriggeredAbility;
+import mage.abilities.common.TapForManaAllTriggeredManaAbility;
+import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author anonymous
+ * @author elliott-king
  */
 public class Overabundance extends CardImpl {
 
@@ -43,6 +50,17 @@ public class Overabundance extends CardImpl {
         
 
         // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced, and Overabundance deals 1 damage to him or her.
+        this.addAbility(new TapForManaAllTriggeredManaAbility(
+                new AddManaOfAnyTypeProducedEffect(),
+                new FilterLandPermanent( "a player taps a land"),
+                SetTargetPointer.PERMANENT
+        ));
+
+        this.addAbility(new TapForManaAllTriggeredAbility(
+                new DamageTargetEffect(1, true, "that player"),
+                new FilterLandPermanent("a player taps a land"),
+                SetTargetPointer.PLAYER
+        ));
     }
 
     public Overabundance(final Overabundance card) {
