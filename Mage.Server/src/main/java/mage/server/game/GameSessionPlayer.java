@@ -27,6 +27,10 @@
  */
 package mage.server.game;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.constants.ManaType;
@@ -40,11 +44,6 @@ import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.*;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ExecutorService;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -92,39 +91,39 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void chooseAbility(final AbilityPickerView abilities) {
         if (!killed) {
-            UserManager.getInstance().getUser(userId).ifPresent(user ->
-                    user.fireCallback(new ClientCallback("gameChooseAbility", game.getId(), abilities)));
+            UserManager.getInstance().getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback("gameChooseAbility", game.getId(), abilities)));
         }
 
     }
 
     public void choosePile(final String message, final CardsView pile1, final CardsView pile2) {
         if (!killed) {
-            UserManager.getInstance().getUser(userId).ifPresent(user ->
-                    user.fireCallback(new ClientCallback("gameChoosePile", game.getId(), new GameClientMessage(message, pile1, pile2))));
+            UserManager.getInstance().getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback("gameChoosePile", game.getId(), new GameClientMessage(message, pile1, pile2))));
         }
 
     }
 
     public void chooseChoice(final Choice choice) {
         if (!killed) {
-            UserManager.getInstance().getUser(userId).ifPresent(user ->
-                    user.fireCallback(new ClientCallback("gameChooseChoice", game.getId(), new GameClientMessage(choice))));
+            UserManager.getInstance().getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback("gameChooseChoice", game.getId(), new GameClientMessage(choice))));
         }
 
     }
 
     public void playMana(final String message, final Map<String, Serializable> options) {
         if (!killed) {
-            UserManager.getInstance().getUser(userId).ifPresent(user ->
-                    user.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(getGameView(), message, options))));
+            UserManager.getInstance().getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(getGameView(), message, options))));
         }
     }
 
     public void playXMana(final String message) {
         if (!killed) {
-            UserManager.getInstance().getUser(userId).ifPresent(user ->
-                    user.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(getGameView(), message))));
+            UserManager.getInstance().getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(getGameView(), message))));
 
         }
     }
@@ -149,7 +148,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             Optional<User> requestingUser = UserManager.getInstance().getUser(requestingUserId);
             Optional<User> requestedUser = UserManager.getInstance().getUser(userId);
-            if (!requestedUser.isPresent() && !requestingUser.isPresent()) {
+            if (requestedUser.isPresent() && requestingUser.isPresent()) {
                 String message;
                 switch (numberTurns) {
                     case 0:
@@ -180,7 +179,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
                 UserRequestMessage userRequestMessage = new UserRequestMessage(
                         "User request",
                         "Allow user <b>" + watcher.get().getName() + "</b> for this match to see your hand cards?<br>"
-                                + "(You can revoke this every time using related popup menu item of your battlefield.)");
+                        + "(You can revoke this every time using related popup menu item of your battlefield.)");
                 userRequestMessage.setRelatedUser(watcherId, watcher.get().getName());
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_SEE_HAND_CARDS);
