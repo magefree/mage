@@ -74,7 +74,7 @@ public class TezzeretTheSchemer extends CardImpl {
 
         // -2: Target creature gets +X/-X until end of turn, where X is the number of artifacts you control.
         DynamicValue count = new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent("artifacts you control"));
-        Effect effect = new BoostTargetEffect(count, new SignInversionDynamicValue(count), Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(count, new SignInversionDynamicValue(count), Duration.EndOfTurn, true);
         effect.setText("Target creature gets +X/-X until end of turn, where X is the number of artifacts you control");
         Ability ability = new LoyaltyAbility(effect, -2);
         ability.addTarget(new TargetCreaturePermanent());
