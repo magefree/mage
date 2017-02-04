@@ -399,7 +399,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
         } else {
             Player defender = game.getPlayer(defenderId);
-            defender.damage(amount, attacker.getId(), game, true, true);
+            if (defender.isInGame()) {
+                defender.damage(amount, attacker.getId(), game, true, true);
+            }
         }
     }
 
