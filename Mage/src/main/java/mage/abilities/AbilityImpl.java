@@ -30,7 +30,6 @@ package mage.abilities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
@@ -39,6 +38,7 @@ import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -283,6 +283,9 @@ public abstract class AbilityImpl implements Ability {
             } else {
                 this.getManaCostsToPay().clear();
             }
+        }
+        if (modes.getAdditionalCost() != null) {
+            ((OptionalAdditionalModeSourceCosts) modes.getAdditionalCost()).addOptionalAdditionalModeCosts(this, game);
         }
         // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
