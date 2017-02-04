@@ -88,6 +88,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("False Prophet", 6, Rarity.RARE, mage.cards.f.FalseProphet.class));
         cards.add(new SetCardInfo("Field Surgeon", 8, Rarity.COMMON, mage.cards.f.FieldSurgeon.class));
         cards.add(new SetCardInfo("Flame Jet", 81, Rarity.COMMON, mage.cards.f.FlameJet.class));
+        cards.add(new SetCardInfo("Fledgling Osprey", 33, Rarity.COMMON, mage.cards.f.FledglingOsprey.class));
         cards.add(new SetCardInfo("Flicker", 9, Rarity.RARE, mage.cards.f.Flicker.class));
         cards.add(new SetCardInfo("Fodder Cannon", 131, Rarity.UNCOMMON, mage.cards.f.FodderCannon.class));
         cards.add(new SetCardInfo("Gamekeeper", 106, Rarity.UNCOMMON, mage.cards.g.Gamekeeper.class));
