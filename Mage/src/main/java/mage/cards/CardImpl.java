@@ -275,7 +275,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public Abilities<Ability> getAbilities(Game game) {
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(objectId);
-        if (otherAbilities == null) {
+        if (otherAbilities == null || otherAbilities.isEmpty()) {
             return abilities;
         }
         Abilities<Ability> all = new AbilitiesImpl<>();

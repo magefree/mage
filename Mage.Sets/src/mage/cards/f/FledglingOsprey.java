@@ -25,37 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.keyword.CascadeAbility;
-import mage.abilities.keyword.ExaltedAbility;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.EnchantedSourceCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author Galatolol
  */
-public class ArdentPlea extends CardImpl {
+public class FledglingOsprey extends CardImpl {
 
-    public ArdentPlea(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
+    public FledglingOsprey(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
+        
+        this.subtype.add("Bird");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-        this.addAbility(new ExaltedAbility());
-
-        // Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-        this.addAbility(new CascadeAbility());
+        // Fledgling Osprey has flying as long as it's enchanted.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
+                new EnchantedSourceCondition(),
+                "{this} has flying as long as it's enchanted")));
     }
 
-    public ArdentPlea(final ArdentPlea card) {
+    public FledglingOsprey(final FledglingOsprey card) {
         super(card);
     }
 
     @Override
-    public ArdentPlea copy() {
-        return new ArdentPlea(this);
+    public FledglingOsprey copy() {
+        return new FledglingOsprey(this);
     }
 }

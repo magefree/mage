@@ -25,37 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.o;
 
 import java.util.UUID;
-import mage.abilities.keyword.CascadeAbility;
-import mage.abilities.keyword.ExaltedAbility;
+
+import mage.abilities.common.TapForManaAllTriggeredAbility;
+import mage.abilities.common.TapForManaAllTriggeredManaAbility;
+import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author Loki
+ * @author elliott-king
  */
-public class ArdentPlea extends CardImpl {
+public class Overabundance extends CardImpl {
 
-    public ArdentPlea(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
+    public Overabundance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{G}");
+        
 
-        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-        this.addAbility(new ExaltedAbility());
+        // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced, and Overabundance deals 1 damage to him or her.
+        this.addAbility(new TapForManaAllTriggeredManaAbility(
+                new AddManaOfAnyTypeProducedEffect(),
+                new FilterLandPermanent( "a player taps a land"),
+                SetTargetPointer.PERMANENT
+        ));
 
-        // Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-        this.addAbility(new CascadeAbility());
+        this.addAbility(new TapForManaAllTriggeredAbility(
+                new DamageTargetEffect(1, true, "that player"),
+                new FilterLandPermanent("a player taps a land"),
+                SetTargetPointer.PLAYER
+        ));
     }
 
-    public ArdentPlea(final ArdentPlea card) {
+    public Overabundance(final Overabundance card) {
         super(card);
     }
 
     @Override
-    public ArdentPlea copy() {
-        return new ArdentPlea(this);
+    public Overabundance copy() {
+        return new Overabundance(this);
     }
 }

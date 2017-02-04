@@ -25,55 +25,76 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.e;
+package mage.cards.n;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.UntapTargetEffect;
+
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
- * @author Loki
+ *
+ * @author Galatolol
  */
-public class Earthcraft extends CardImpl {
+public class NobleStand extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("untapped creature you control");
-    private static final FilterControlledPermanent filterLand = new FilterControlledPermanent("basic land");
+    public NobleStand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
-    static {
-        filterCreature.add(Predicates.not(new TappedPredicate()));
-        filterLand.add(new CardTypePredicate(CardType.LAND));
-        filterLand.add(new SupertypePredicate("Basic"));
+        // Whenever a creature you control blocks, you gain 2 life.
+        this.addAbility(new NobleStandAbility());
     }
 
-    public Earthcraft(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-
-        // Tap an untapped creature you control: Untap target basic land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filterCreature, true)));
-        ability.addTarget(new TargetPermanent(filterLand));
-        this.addAbility(ability);
-    }
-
-    public Earthcraft(final Earthcraft card) {
+    public NobleStand(final NobleStand card) {
         super(card);
     }
 
     @Override
-    public Earthcraft copy() {
-        return new Earthcraft(this);
+    public NobleStand copy() {
+        return new NobleStand(this);
+    }
+}
+
+class NobleStandAbility extends TriggeredAbilityImpl {
+
+    public NobleStandAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(2));
+    }
+
+    public NobleStandAbility(final mage.cards.n.NobleStandAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+        filter.add(Predicates.not(new TokenPredicate()));
+        Permanent permanent = (Permanent) game.getPermanent(event.getSourceId());
+        return permanent != null && filter.match(permanent, sourceId, controllerId, game);
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a creature you control blocks, you gain 2 life.";
+    }
+
+    @Override
+    public mage.cards.n.NobleStandAbility copy() {
+        return new mage.cards.n.NobleStandAbility(this);
     }
 }

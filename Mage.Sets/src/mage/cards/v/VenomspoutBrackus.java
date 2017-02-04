@@ -25,37 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.v;
 
 import java.util.UUID;
-import mage.abilities.keyword.CascadeAbility;
-import mage.abilities.keyword.ExaltedAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
+import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author Galatolol
  */
-public class ArdentPlea extends CardImpl {
+public class VenomspoutBrackus extends CardImpl {
 
-    public ArdentPlea(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
+    private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature(
+            "attacking or blocking creature with flying");
 
-        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-        this.addAbility(new ExaltedAbility());
-
-        // Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-        this.addAbility(new CascadeAbility());
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public ArdentPlea(final ArdentPlea card) {
+    public VenomspoutBrackus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}");
+        
+        this.subtype.add("Beast");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // {1}{G}, {tap}: Venomspout Brackus deals 5 damage to target attacking or blocking creature with flying.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{G}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+        // Morph {3}{G}{G}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}{G}")));
+
+    }
+
+    public VenomspoutBrackus(final VenomspoutBrackus card) {
         super(card);
     }
 
     @Override
-    public ArdentPlea copy() {
-        return new ArdentPlea(this);
+    public VenomspoutBrackus copy() {
+        return new VenomspoutBrackus(this);
     }
 }

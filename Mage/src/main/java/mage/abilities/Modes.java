@@ -56,6 +56,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private boolean eachModeMoreThanOnce; // each mode can be selected multiple times during one choice
     private boolean eachModeOnlyOnce; // state if each mode can be chosen only once as long as the source object exists
     private final LinkedHashMap<UUID, Mode> duplicateModes = new LinkedHashMap<>();
+    private OptionalAdditionalModeSourceCosts optionalAdditionalModeSourceCosts = null; // only set if costs have to be paid
 
     public Modes() {
         this.currentMode = new Mode();
@@ -87,6 +88,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.modeChooser = modes.modeChooser;
         this.eachModeOnlyOnce = modes.eachModeOnlyOnce;
         this.eachModeMoreThanOnce = modes.eachModeMoreThanOnce;
+        this.optionalAdditionalModeSourceCosts = modes.optionalAdditionalModeSourceCosts;
     }
 
     public Modes copy() {
@@ -186,7 +188,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             if (card != null) {
                 for (Ability modeModifyingAbility : card.getAbilities()) {
                     if (modeModifyingAbility instanceof OptionalAdditionalModeSourceCosts) {
-                        ((OptionalAdditionalModeSourceCosts) modeModifyingAbility).addOptionalAdditionalModeCosts(source, game);
+                        ((OptionalAdditionalModeSourceCosts) modeModifyingAbility).changeModes(source, game);
                     }
                 }
             }
@@ -383,6 +385,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public void setEachModeMoreThanOnce(boolean eachModeMoreThanOnce) {
         this.eachModeMoreThanOnce = eachModeMoreThanOnce;
+    }
+
+    public OptionalAdditionalModeSourceCosts getAdditionalCost() {
+        return optionalAdditionalModeSourceCosts;
+    }
+
+    public void setAdditionalCost(OptionalAdditionalModeSourceCosts optionalAdditionalModeSourceCosts) {
+        this.optionalAdditionalModeSourceCosts = optionalAdditionalModeSourceCosts;
     }
 
 }

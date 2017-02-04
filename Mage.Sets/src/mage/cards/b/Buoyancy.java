@@ -25,37 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.keyword.CascadeAbility;
-import mage.abilities.keyword.ExaltedAbility;
+
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.FlashAbility;
+import mage.constants.AttachmentType;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.Ability;
+import mage.abilities.effects.common.AttachEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
 /**
  *
- * @author Loki
+ * @author Galatolol
  */
-public class ArdentPlea extends CardImpl {
+public class Buoyancy extends CardImpl {
 
-    public ArdentPlea(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
+    public Buoyancy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        
+        this.subtype.add("Aura");
 
-        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-        this.addAbility(new ExaltedAbility());
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
 
-        // Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-        this.addAbility(new CascadeAbility());
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Enchanted creature has flying.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public ArdentPlea(final ArdentPlea card) {
+    public Buoyancy(final Buoyancy card) {
         super(card);
     }
 
     @Override
-    public ArdentPlea copy() {
-        return new ArdentPlea(this);
+    public Buoyancy copy() {
+        return new Buoyancy(this);
     }
 }

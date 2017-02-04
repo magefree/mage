@@ -25,37 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.keyword.CascadeAbility;
-import mage.abilities.keyword.ExaltedAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author Loki
+ * @author anonymous
  */
-public class ArdentPlea extends CardImpl {
+public class StrongholdMachinist extends CardImpl {
 
-    public ArdentPlea(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
+    private static final FilterSpell filter = new FilterSpell("noncreature spell");
 
-        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-        this.addAbility(new ExaltedAbility());
-
-        // Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-        this.addAbility(new CascadeAbility());
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public ArdentPlea(final ArdentPlea card) {
+    public StrongholdMachinist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        
+        this.subtype.add("Human");
+        this.subtype.add("Spellshaper");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {U}{U}, {tap}, Discard a card: Counter target noncreature spell.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}{U}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardCardCost());
+        ability.addTarget(new TargetSpell(filter));
+        this.addAbility(ability);
+    }
+
+    public StrongholdMachinist(final StrongholdMachinist card) {
         super(card);
     }
 
     @Override
-    public ArdentPlea copy() {
-        return new ArdentPlea(this);
+    public StrongholdMachinist copy() {
+        return new StrongholdMachinist(this);
     }
 }

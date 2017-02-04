@@ -30,7 +30,6 @@ package mage.abilities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
@@ -39,6 +38,7 @@ import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -50,8 +50,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.DynamicManaEffect;
+import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
@@ -284,6 +284,9 @@ public abstract class AbilityImpl implements Ability {
                 this.getManaCostsToPay().clear();
             }
         }
+        if (modes.getAdditionalCost() != null) {
+            ((OptionalAdditionalModeSourceCosts) modes.getAdditionalCost()).addOptionalAdditionalModeCosts(this, game);
+        }
         // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
@@ -415,8 +418,8 @@ public abstract class AbilityImpl implements Ability {
                     Effect effect = getEffects().get(0);
                     if (effect instanceof DynamicManaEffect) {
                         mana = ((DynamicManaEffect) effect).getMana(game, this);
-                    } else if (effect instanceof BasicManaEffect) {
-                        mana = ((BasicManaEffect) effect).getMana(game, this);
+                    } else if (effect instanceof ManaEffect) {
+                        mana = ((ManaEffect) effect).getMana(game, this);
                     }
                     if (mana != null && mana.getAny() == 0) { // if mana == null or Any > 0 the event has to be fired in the mana effect to know which mana was produced
                         ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId, mana);

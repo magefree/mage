@@ -25,37 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.keyword.CascadeAbility;
-import mage.abilities.keyword.ExaltedAbility;
+
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author Loki
+ * @author Galatolol
  */
-public class ArdentPlea extends CardImpl {
+public class FuriousAssault extends CardImpl {
 
-    public ArdentPlea(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
+    public FuriousAssault(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-        this.addAbility(new ExaltedAbility());
-
-        // Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-        this.addAbility(new CascadeAbility());
+        // Whenever you cast a creature spell, Furious Assault deals 1 damage to target player.
+        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(1), StaticFilters.FILTER_SPELL_A_CREATURE, false);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
-    public ArdentPlea(final ArdentPlea card) {
+    public FuriousAssault(final FuriousAssault card) {
         super(card);
     }
 
     @Override
-    public ArdentPlea copy() {
-        return new ArdentPlea(this);
+    public FuriousAssault copy() {
+        return new FuriousAssault(this);
     }
 }
