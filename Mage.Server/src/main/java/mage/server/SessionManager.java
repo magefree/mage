@@ -88,7 +88,7 @@ public class SessionManager {
         return true;
     }
 
-    public boolean connectUser(String sessionId, String userName, String password) throws MageException {
+    public boolean connectUser(String sessionId, String userName, String password, String userIdStr) throws MageException {
         Session session = sessions.get(sessionId);
         if (session != null) {
             String returnMessage = session.connectUser(userName, password);
@@ -117,10 +117,10 @@ public class SessionManager {
         return false;
     }
 
-    public boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion) throws MageException {
+    public boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            session.setUserData(userName, userData, clientVersion);
+            session.setUserData(userName, userData, clientVersion, userIdStr);
             return true;
         }
         return false;
@@ -217,7 +217,7 @@ public class SessionManager {
         if (session != null) {
             return UserManager.getInstance().getUser(sessions.get(sessionId).getUserId());
         }
-        logger.error(String.format("Session %s could not be found",sessionId));
+        logger.error(String.format("Session %s could not be found", sessionId));
         return Optional.empty();
     }
 

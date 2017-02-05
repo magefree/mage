@@ -25,46 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.t;
+package mage.game;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.game.match.MatchImpl;
+import mage.game.match.MatchOptions;
 
 /**
  *
- * @author nantuko
+ * @author spjspj
  */
-public class TrueConviction extends CardImpl {
+public class CanadianHighlanderDuelMatch extends MatchImpl {
 
-    public TrueConviction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}{W}");
-
-        // Creatures you control have double strike and lifelink.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent()));
-        Effect effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent());
-        effect.setText(" and lifelink");
-        ability.addEffect(effect);
-        this.addAbility(ability);
-    }
-
-    public TrueConviction(final TrueConviction card) {
-        super(card);
+    public CanadianHighlanderDuelMatch(MatchOptions options) {
+        super(options);
     }
 
     @Override
-    public TrueConviction copy() {
-        return new TrueConviction(this);
+    public void startGame() throws GameException {
+        int startLife = 20;
+        CanadianHighlanderDuel game = new CanadianHighlanderDuel(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
+        game.setStartMessage(this.createGameStartMessage());
+        initGame(game);
+        games.add(game);
     }
 
 }

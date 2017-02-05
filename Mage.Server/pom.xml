@@ -144,6 +144,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>mage-game-canadianhighlanderduel</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mage-game-momirduel</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
