@@ -66,7 +66,7 @@ public class CanadianHighlander extends Constructed {
             invalid.put("Deck", "Must contain 100 or more singleton cards: has " + (deck.getCards().size()) + " cards");
             valid = false;
         }
-        
+
         if (deck.getSideboard().size() > 0) {
             invalid.put("Deck", "Sideboard can't contain any cards: has " + (deck.getSideboard().size()) + " cards");
             valid = false;
@@ -86,11 +86,11 @@ public class CanadianHighlander extends Constructed {
             }
         }
 
-        int allowedPoints = 10 * (int) Math.floor(deck.getCards().size()/100.0);
+        int allowedPoints = 10 * (int) Math.floor(deck.getCards().size() / 100.0);
         int totalPoints = 0;
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             String cn = entry.getKey();
-            if(cn.equals("Balance")
+            if (cn.equals("Balance")
                     || cn.equals("Dig Through Time")
                     || cn.equals("Fastbond")
                     || cn.equals("Gifts Ungiven")
@@ -108,8 +108,9 @@ public class CanadianHighlander extends Constructed {
                     || cn.equals("Treasure Cruise")
                     || cn.equals("True-Name Nemesis")) {
                 totalPoints += 1;
+                invalid.put(entry.getKey(), " 1 point " + cn);
             }
-            if(cn.equals("Doomsday")
+            if (cn.equals("Doomsday")
                     || cn.equals("Enlightened Tutor")
                     || cn.equals("Imperial Seal")
                     || cn.equals("Mana Crypt")
@@ -119,8 +120,9 @@ public class CanadianHighlander extends Constructed {
                     || cn.equals("Survival of the Fittest")
                     || cn.equals("Umezawa's Jitte")) {
                 totalPoints += 2;
+                invalid.put(entry.getKey(), " 2 points " + cn);
             }
-            if(cn.equals("Birthing Pod")
+            if (cn.equals("Birthing Pod")
                     || cn.equals("Mox Emerald")
                     || cn.equals("Mox Jet")
                     || cn.equals("Mox Pearl")
@@ -129,27 +131,32 @@ public class CanadianHighlander extends Constructed {
                     || cn.equals("Protean Hulk")
                     || cn.equals("Vampiric Tutor")) {
                 totalPoints += 3;
+                invalid.put(entry.getKey(), " 3 points " + cn);
             }
-            if(cn.equals("Demonic Tutor")
+            if (cn.equals("Demonic Tutor")
                     || cn.equals("Hermit Druid")
                     || cn.equals("Sol Ring")) {
                 totalPoints += 4;
+                invalid.put(entry.getKey(), " 4 points " + cn);
             }
-            if(cn.equals("Ancestral Recall")
+            if (cn.equals("Ancestral Recall")
                     || cn.equals("Natural Order")
                     || cn.equals("Time Walk")
                     || cn.equals("Tinker")) {
                 totalPoints += 5;
+                invalid.put(entry.getKey(), " 5 points " + cn);
             }
-            if(cn.equals("Flash")) {
+            if (cn.equals("Flash")) {
                 totalPoints += 6;
+                invalid.put(entry.getKey(), " 6 points " + cn);
             }
-            if(cn.equals("Black Lotus")
+            if (cn.equals("Black Lotus")
                     || cn.equals("Time Vault")) {
                 totalPoints += 7;
+                invalid.put(entry.getKey(), " 7 points " + cn);
             }
         }
-        if(totalPoints > allowedPoints) {
+        if (totalPoints > allowedPoints) {
             invalid.put("Total points too high", "Your calculated point total was " + totalPoints);
             valid = false;
         }
