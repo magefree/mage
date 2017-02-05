@@ -55,6 +55,7 @@ public class Connection {
     private String proxyPassword;
     private int clientCardDatabaseVersion;
     private boolean forceDBComparison;
+    private String userIdStr;
 
     private UserData userData;
 
@@ -165,6 +166,14 @@ public class Connection {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getUserIdStr() {
+        return userIdStr;
+    }
+
+    public void setUserIdStr(String userIdStr) {
+        this.userIdStr = userIdStr;
     }
 
     public String getPassword() {
