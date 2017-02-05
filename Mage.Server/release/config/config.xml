@@ -69,6 +69,7 @@
         <gameType name="Commander Two Player Duel" jar="mage-game-commanderduel-${project.version}.jar" className="mage.game.CommanderDuelMatch" typeName="mage.game.CommanderDuelType"/>
         <gameType name="Commander Free For All" jar="mage-game-commanderfreeforall-${project.version}.jar" className="mage.game.CommanderFreeForAllMatch" typeName="mage.game.CommanderFreeForAllType"/>
         <gameType name="Tiny Leaders Two Player Duel" jar="mage-game-tinyleadersduel-${project.version}.jar" className="mage.game.TinyLeadersDuelMatch" typeName="mage.game.TinyLeadersDuelType"/>
+        <gameType name="Canadian Highlander Two Player Duel" jar="mage-game-canadianhighlanderduel-${project.version}.jar" className="mage.game.CanadianHighlanderDuelMatch" typeName="mage.game.CanadianHighlanderDuelType"/>
         <gameType name="Momir Basic Two Player Duel" jar="mage-game-momirduel-${project.version}.jar" className="mage.game.MomirDuelMatch" typeName="mage.game.MomirDuelType"/>
     </gameTypes>
     <tournamentTypes>
@@ -134,6 +135,7 @@
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.DuelCommander"/>
         <deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.TinyLeaders"/>
+        <deckType name="Variant Magic - Canadian Highlander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.CanadianHighlander"/>
         <deckType name="Variant Magic - Momir Basic" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Momir"/>
         <deckType name="Block Constructed - Battle for Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.BattleForZendikarBlock"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.InnistradBlock"/>
