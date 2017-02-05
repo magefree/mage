@@ -222,9 +222,9 @@ public class SessionImpl implements Session {
                         boolean registerResult;
                         if (connection.getAdminPassword() == null) {
                             // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                            registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
+                            registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
                             if (registerResult) {
-                                server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString());
+                                server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
                             }
                         } else {
                             registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
@@ -1466,7 +1466,7 @@ public class SessionImpl implements Session {
         }
         return false;
     }
-    
+
     @Override
     public boolean setActivation(String userName, boolean active) {
         try {
@@ -1571,7 +1571,7 @@ public class SessionImpl implements Session {
     public boolean updatePreferencesForServer(UserData userData) {
         try {
             if (isConnected()) {
-                server.setUserData(connection.getUsername(), sessionId, userData, null);
+                server.setUserData(connection.getUsername(), sessionId, userData, null, null);
             }
             return true;
         } catch (MageException ex) {

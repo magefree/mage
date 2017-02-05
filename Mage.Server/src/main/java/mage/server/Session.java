@@ -264,12 +264,13 @@ public class Session {
         this.userId = user.getId();
     }
 
-    public boolean setUserData(String userName, UserData userData, String clientVersion) {
+    public boolean setUserData(String userName, UserData userData, String clientVersion, String userIdStr) {
         User user = UserManager.getInstance().getUserByName(userName);
         if (user != null) {
             if (clientVersion != null) {
                 user.setClientVersion(clientVersion);
             }
+            user.setUserIdStr(userIdStr);
             if (user.getUserData() == null || user.getUserData().getGroupId() == UserGroup.DEFAULT.getGroupId()) {
                 user.setUserData(userData);
             } else {

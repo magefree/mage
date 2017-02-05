@@ -62,7 +62,7 @@ public interface MageServer {
 
     boolean resetPassword(String sessionId, String email, String authToken, String password) throws MageException;
 
-    boolean connectUser(String userName, String password, String sessionId, MageVersion version) throws MageException;
+    boolean connectUser(String userName, String password, String sessionId, MageVersion version, String userIdStr) throws MageException;
 
     boolean connectAdmin(String password, String sessionId, MageVersion version) throws MageException;
 
@@ -72,7 +72,7 @@ public interface MageServer {
     List<CardInfo> getMissingCardsData(List<String> classNames);
 
     // user methods
-    boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion) throws MageException;
+    boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException;
 
     void sendFeedbackMessage(String sessionId, String username, String title, String type, String message, String email) throws MageException;
 

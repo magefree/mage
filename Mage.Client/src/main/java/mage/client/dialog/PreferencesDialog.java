@@ -3520,6 +3520,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (selectedAvatarId == 0) {
             getSelectedAvatar();
         }
+        String userStrId = System.getProperty("user.name");
         return new UserData(UserGroup.PLAYER,
                 PreferencesDialog.selectedAvatarId,
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true"),
@@ -3533,7 +3534,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_CAST, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_ACTIVATION, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_AUTO_ORDER_TRIGGER, "true").equals("true"),
-                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY, "false").equals("true")
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
+                userStrId
         );
     }
 
