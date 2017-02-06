@@ -37,7 +37,6 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-
 import mage.cards.decks.Deck;
 import mage.constants.ManaType;
 import mage.constants.TableState;
@@ -247,8 +246,10 @@ public class User {
 
     public void fireCallback(final ClientCallback call) {
         if (isConnected()) {
-            SessionManager.getInstance().getSession(sessionId).fireCallback(call);
-
+            Session session = SessionManager.getInstance().getSession(sessionId);
+            if (session != null) {
+                session.fireCallback(call);
+            }
         }
     }
 
