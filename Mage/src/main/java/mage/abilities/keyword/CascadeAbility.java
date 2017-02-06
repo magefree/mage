@@ -127,7 +127,6 @@ class CascadeEffect extends OneShotEffect {
         if (card != null) {
             if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + "?", source, game)) {
                 controller.cast(card.getSpellAbility(), game, true);
-            }
         }
         // Move the remaining cards to the buttom of the library in a random order
         Cards cardsFromExile = new CardsImpl();
