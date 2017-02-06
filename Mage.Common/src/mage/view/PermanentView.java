@@ -72,7 +72,7 @@ public class PermanentView extends CardView {
         this.morphed = permanent.isMorphed();
         this.manifested = permanent.isManifested();
         this.damage = permanent.getDamage();
-        if (permanent.getAttachments().size() > 0) {
+        if (!permanent.getAttachments().isEmpty()) {
             attachments = new ArrayList<>();
             attachments.addAll(permanent.getAttachments());
         }

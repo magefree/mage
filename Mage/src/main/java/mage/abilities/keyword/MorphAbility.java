@@ -127,9 +127,9 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         this.setWorksFaceDown(true);
         StringBuilder sb = new StringBuilder();
         if (megamorph) {
-            sb.append(ABILITY_KEYWORD_MEGA).append(" ");
+            sb.append(ABILITY_KEYWORD_MEGA).append(' ');
         } else {
-            sb.append(ABILITY_KEYWORD).append(" ");
+            sb.append(ABILITY_KEYWORD).append(' ');
         }
         name = ABILITY_KEYWORD;
         for (Cost cost : morphCosts) {
@@ -138,7 +138,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                 break;
             }
         }
-        sb.append(morphCosts.getText()).append(" ");
+        sb.append(morphCosts.getText()).append(' ');
         if (megamorph) {
             sb.append(REMINDER_TEXT_MEGA);
         } else {

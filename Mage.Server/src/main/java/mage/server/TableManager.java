@@ -368,12 +368,12 @@ public class TableManager {
             logger.debug(user.getId()
                     + " | " + formatter.format(user.getConnectionTime())
                     + " | " + sessionState
-                    + " | " + user.getName() + " (" + user.getUserState().toString() + " - " + user.getPingInfo() + ")");
+                    + " | " + user.getName() + " (" + user.getUserState().toString() + " - " + user.getPingInfo() + ')');
         }
         ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");
         for (ChatSession chatSession : chatSessions) {
-            logger.debug(chatSession.getChatId() + " " + formatter.format(chatSession.getCreateTime()) + " " + chatSession.getInfo() + " " + chatSession.getClients().values().toString());
+            logger.debug(chatSession.getChatId() + " " + formatter.format(chatSession.getCreateTime()) + ' ' + chatSession.getInfo() + ' ' + chatSession.getClients().values().toString());
         }
         logger.debug("------- Games: " + GameManager.getInstance().getNumberActiveGames() + " --------------------------------------------");
         logger.debug(" Active Game Worker: " + ThreadExecutor.getInstance().getActiveThreads(ThreadExecutor.getInstance().getGameExecutor()));

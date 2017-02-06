@@ -133,20 +133,20 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         }
         String p = power.toString();
         if (!p.startsWith("-")) {
-            sb.append("+");
+            sb.append('+');
         }
-        sb.append(p).append("/");
+        sb.append(p).append('/');
         String t = toughness.toString();
         if (!t.startsWith("-")) {
             if (t.equals("0") && p.startsWith("-")) {
-                sb.append("-");
+                sb.append('-');
             } else {
-                sb.append("+");
+                sb.append('+');
             }
         }
         sb.append(t);
         if (duration != Duration.WhileOnBattlefield) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         String message = null;
         String fixedPart = null;

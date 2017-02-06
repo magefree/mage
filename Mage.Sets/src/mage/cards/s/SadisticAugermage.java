@@ -92,7 +92,7 @@ class WidespreadPanicEffect extends OneShotEffect {
             for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (player.getHand().size() > 0) {
+                    if (!player.getHand().isEmpty()) {
                         TargetCardInHand target = new TargetCardInHand();
                         target.setTargetName("a card from your hand to put on top of your library");
                         player.choose(Outcome.Detriment, target, source.getSourceId(), game);

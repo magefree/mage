@@ -80,9 +80,9 @@ public class PreventDamageToControllerEffect extends PreventionEffectImpl {
         if (amountToPrevent == Integer.MAX_VALUE) {
             sb.append("all ");
         } else if (amountToPreventDynamic != null) {
-            sb.append("the next ").append(amountToPreventDynamic.toString()).append(" ");
+            sb.append("the next ").append(amountToPreventDynamic.toString()).append(' ');
         } else {
-            sb.append("the next ").append(amountToPrevent).append(" ");
+            sb.append("the next ").append(amountToPrevent).append(' ');
         }
         if (onlyCombat) {
             sb.append("combat ");

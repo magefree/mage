@@ -23,7 +23,7 @@ public class MailgunClient {
         String domain = ConfigSettings.getInstance().getMailgunDomain();
         WebResource webResource = client.resource("https://api.mailgun.net/v3/" + domain + "/messages");
         MultivaluedMapImpl formData = new MultivaluedMapImpl();
-        formData.add("from", "XMage <postmaster@" + domain + ">");
+        formData.add("from", "XMage <postmaster@" + domain + '>');
         formData.add("to", email);
         formData.add("subject", subject);
         formData.add("text", text);

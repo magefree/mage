@@ -86,7 +86,7 @@ public class CanAttackAsThoughItDidntHaveDefenderAllEffect extends AsThoughEffec
             } else {
                 sb.append(duration.toString());
             }
-            sb.append(" ");
+            sb.append(' ');
         }
         sb.append("as though they didn't have defender");
         return  sb.toString();

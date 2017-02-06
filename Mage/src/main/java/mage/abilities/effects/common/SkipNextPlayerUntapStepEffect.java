@@ -61,7 +61,7 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = null;
         if (targetPointer != null) {
-            if (targetPointer.getTargets(game, source).size() > 0) {
+            if (!targetPointer.getTargets(game, source).isEmpty()) {
                 player = game.getPlayer(targetPointer.getFirst(game, source));
             } else {
                 player = game.getPlayer(source.getControllerId());
@@ -82,7 +82,7 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (staticText.length() > 0) {
+        if (!staticText.isEmpty()) {
             sb.append(staticText).append(" player skips his or her next untap step");
         } else {
             sb.append("You skip your next untap step");

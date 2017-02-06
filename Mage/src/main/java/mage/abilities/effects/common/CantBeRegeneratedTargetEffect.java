@@ -81,11 +81,11 @@ public class CantBeRegeneratedTargetEffect extends ContinuousRuleModifyingEffect
         }
         sb.append(" can't be regenerated");
         if (!duration.toString().isEmpty()) {
-            sb.append(" ");
+            sb.append(' ');
             if (duration.equals(Duration.EndOfTurn)) {
                 sb.append(" this turn");
             } else {
-                sb.append(" ").append(duration.toString());
+                sb.append(' ').append(duration.toString());
             }
         }
         return sb.toString();

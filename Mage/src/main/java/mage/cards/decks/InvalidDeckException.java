@@ -52,9 +52,9 @@ public class InvalidDeckException extends GameException {
     @Override
     public String getMessage() {
         StringBuilder sb = new StringBuilder();
-        sb.append(super.getMessage()).append("\n");
+        sb.append(super.getMessage()).append('\n');
         for (Entry<String, String> entry: invalid.entrySet()) {
-            sb.append(entry.getKey()).append(" ").append(entry.getValue()).append("\n");
+            sb.append(entry.getKey()).append(' ').append(entry.getValue()).append('\n');
         }
         return sb.toString();
     }

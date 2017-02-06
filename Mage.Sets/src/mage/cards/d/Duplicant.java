@@ -108,7 +108,7 @@ class ExileTargetEffect extends OneShotEffect {
         if (permanent != null) {
             if(sourcePermananent != null){
                 sourcePermananent.imprint(permanent.getId(), game);
-                sourcePermananent.addInfo("imprint", new StringBuilder("[Imprinted card - ").append(permanent.getName()).append("]").toString(), game);
+                sourcePermananent.addInfo("imprint", new StringBuilder("[Imprinted card - ").append(permanent.getName()).append(']').toString(), game);
             }
             return permanent.moveToExile(null, null, source.getSourceId(), game);
         } 
@@ -143,7 +143,7 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if(permanent.getImprinted().size() > 0){
+            if(!permanent.getImprinted().isEmpty()){
                 Card card = game.getCard(permanent.getImprinted().get(0));
                 if(card != null && card.getCardType().contains(CardType.CREATURE))
                 {

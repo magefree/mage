@@ -86,10 +86,10 @@ public class MageCardComparator implements Comparator<CardView> {
                 aCom = (float) -1;
                 bCom = (float) -1;
                 if (CardHelper.isCreature(a)) {
-                    aCom = new Float(a.getPower() + "." + (a.getToughness().startsWith("-") ? "0" : a.getToughness()));
+                    aCom = new Float(a.getPower() + '.' + (a.getToughness().startsWith("-") ? "0" : a.getToughness()));
                 }
                 if (CardHelper.isCreature(b)) {
-                    bCom = new Float(b.getPower() + "." + (b.getToughness().startsWith("-") ? "0" : b.getToughness()));
+                    bCom = new Float(b.getPower() + '.' + (b.getToughness().startsWith("-") ? "0" : b.getToughness()));
                 }
                 break;
             // Rarity

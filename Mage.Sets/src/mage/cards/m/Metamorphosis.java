@@ -84,7 +84,7 @@ class MetamorphosisEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int amount = 0;
         for (Cost cost: source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
+            if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
                 amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getConvertedManaCost()+1;
                 break;
             }

@@ -124,10 +124,10 @@ class GetKickerXValue implements DynamicValue {
     @Override
     public String toString() {
         return "X";
-    };
+    }
 
     @Override
     public String getMessage() {
         return "X";
-    };
+    }
 }

@@ -166,7 +166,7 @@ class CurseOfEchoesEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (mode.getTargets().size() > 0) {
+        if (!mode.getTargets().isEmpty()) {
             return "Copy target " + mode.getTargets().get(0).getTargetName() + ". You may choose new targets for the copy";
         }
         return "No target";

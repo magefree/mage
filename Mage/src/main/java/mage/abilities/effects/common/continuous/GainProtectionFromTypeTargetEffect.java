@@ -47,7 +47,7 @@ public class GainProtectionFromTypeTargetEffect extends GainAbilityTargetEffect 
         super(new ProtectionAbility(new FilterCard()), duration);
         ((ProtectionAbility)ability).setFilter(protectionFrom);
         typeName = protectionFrom.getMessage();
-        staticText = "Target creature gains protection from " + typeName + " " + duration.toString();
+        staticText = "Target creature gains protection from " + typeName + ' ' + duration.toString();
     }
 
     public GainProtectionFromTypeTargetEffect(final GainProtectionFromTypeTargetEffect effect) {

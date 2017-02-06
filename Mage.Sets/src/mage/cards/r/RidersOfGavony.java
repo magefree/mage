@@ -114,7 +114,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
                 if (subtype != null) {
-                    protectionFilter = new FilterPermanent(subtype + "s");
+                    protectionFilter = new FilterPermanent(subtype + 's');
                     protectionFilter.add(new SubtypePredicate(subtype));
                 }
             }

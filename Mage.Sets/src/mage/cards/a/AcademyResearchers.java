@@ -105,7 +105,7 @@ class AcademyResearchersEffect extends OneShotEffect {
                     game.getState().setValue("attachTo:" + auraInHand.getId(), academyResearchers);
                     auraInHand.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), controller.getId());
                     if (academyResearchers.addAttachment(auraInHand.getId(), game)) {
-                        game.informPlayers(controller.getLogName() + " put " + auraInHand.getLogName() + " on the battlefield attached to " + academyResearchers.getLogName() + ".");
+                        game.informPlayers(controller.getLogName() + " put " + auraInHand.getLogName() + " on the battlefield attached to " + academyResearchers.getLogName() + '.');
                         return true;
                     }
                 }

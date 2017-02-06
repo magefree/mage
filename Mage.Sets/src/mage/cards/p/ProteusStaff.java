@@ -117,7 +117,7 @@ class ProteusStaffEffect extends OneShotEffect {
                 controller.revealCards("Proteus Staff", cards, game);
 
                 // and the rest on the bottom of his or her library in any order.
-                while (cards.size() > 0 && controller.canRespond()) {
+                while (!cards.isEmpty() && controller.canRespond()) {
                     if (cards.size() == 1) {
                         Card card = cards.get(cards.iterator().next(), game);
                         if (card != null) {

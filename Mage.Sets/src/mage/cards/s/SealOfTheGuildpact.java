@@ -132,7 +132,7 @@ class SealOfTheGuildpactChooseColorEffect extends OneShotEffect {
             }
             String color2 = choice2.getChoice();
             if (!game.isSimulation()) {
-                game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + color1 + " and " + color2 + ".");
+                game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + color1 + " and " + color2 + '.');
             }
             game.getState().setValue(mageObject.getId() + "_color1", choice1.getColor());
             game.getState().setValue(mageObject.getId() + "_color2", choice2.getColor());

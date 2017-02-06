@@ -108,7 +108,7 @@ class FromTheAshesEffect extends OneShotEffect {
                 if (player != null) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), new FilterBasicLandCard());
                     if (player.searchLibrary(target, game)) {
-                        if (target.getTargets().size() > 0) {
+                        if (!target.getTargets().isEmpty()) {
                             for (UUID cardId: target.getTargets()) {
                                 Card card = player.getLibrary().getCard(cardId, game);
                                 if (card != null) {

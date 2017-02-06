@@ -143,7 +143,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         StringBuilder sb = new StringBuilder();
         if (additionalCost != null) {
             sb.append(additionalCost.getText(false));
-            sb.append(" ").append(additionalCost.getReminderText());
+            sb.append(' ').append(additionalCost.getReminderText());
         }
         return sb.toString();
     }

@@ -111,7 +111,7 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
                 // Put the rest in correct zone
                 switch (zoneToPutRest) {
                     case LIBRARY: {
-                        if (cards.size() > 0) {
+                        if (!cards.isEmpty()) {
                             if (shuffleRestInto) {
                                 library.addAll(cards.getCards(game), game);
                             } else {
@@ -121,7 +121,7 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
                         break;
                     }
                     default:
-                        if (cards.size() > 0) {
+                        if (!cards.isEmpty()) {
                             controller.moveCards(cards, zoneToPutRest, source, game);
                         }
                 }

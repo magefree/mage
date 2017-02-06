@@ -136,7 +136,7 @@ class BorderlandExplorerEffect extends OneShotEffect {
                     if (cardsPlayer != null) {
                         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, new FilterBasicLandCard());
                         if (player.searchLibrary(target, game)) {
-                            if (target.getTargets().size() > 0) {
+                            if (!target.getTargets().isEmpty()) {
                                 Cards cards = new CardsImpl(target.getTargets());
                                 cards.addAll(target.getTargets());
                                 cardsToReveal.put(playerId, cards);
@@ -154,7 +154,7 @@ class BorderlandExplorerEffect extends OneShotEffect {
                         for (UUID cardId : cardsPlayer) {
                             Cards cards = new CardsImpl(game.getCard(cardId));
                             Card card = game.getCard(cardId);
-                            player.revealCards(card.getIdName() + " (" + player.getName() + ")", cards, game);
+                            player.revealCards(card.getIdName() + " (" + player.getName() + ')', cards, game);
                             player.moveCardToHandWithInfo(card, source.getSourceId(), game);
                             player.shuffleLibrary(source, game);
                         }

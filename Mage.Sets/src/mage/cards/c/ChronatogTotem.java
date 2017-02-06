@@ -127,7 +127,7 @@ class ChronatogTotemAbility extends LimitedTimesPerTurnActivatedAbility {
     public String getRule() {
         StringBuilder sb = new StringBuilder(super.getRule());
         sb.deleteCharAt(sb.length() - 1); // remove last '.'
-        sb.append(" and only if ").append(condition.toString()).append(".");
+        sb.append(" and only if ").append(condition.toString()).append('.');
         return sb.toString();
     }
 }

@@ -117,7 +117,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
         if (controller != null && sourceObject != null) {
             if (controller.searchLibrary(target, game)) {
                 UUID exileZone = CardUtil.getCardExileZoneId(game, source);
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     controller.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileZone, sourceObject.getIdName());
                 }
             }
@@ -153,7 +153,7 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, source.getManaCostsToPay().getX()));
             TargetCardInExile target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source));
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            if (cards.size() > 0 && controller.choose(Outcome.PlayForFree, cards, target, game)) {
+            if (!cards.isEmpty() && controller.choose(Outcome.PlayForFree, cards, target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     controller.cast(card.getSpellAbility(), game, true);

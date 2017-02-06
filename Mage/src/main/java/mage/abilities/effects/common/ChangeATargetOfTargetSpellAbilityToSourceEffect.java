@@ -83,7 +83,7 @@ public class ChangeATargetOfTargetSpellAbilityToSourceEffect extends OneShotEffe
                             if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
                                 validTargets = true;
                                 if (name != null
-                                        && controller.chooseUse(Outcome.Neutral, "Change target from " + name + " to " + sourceObject.getLogName() + "?", source, game)) {
+                                        && controller.chooseUse(Outcome.Neutral, "Change target from " + name + " to " + sourceObject.getLogName() + '?', source, game)) {
                                     oldTargetName = getTargetName(targetId, game);
                                     target.remove(targetId);
                                     // The source is still the spell on the stack
@@ -97,7 +97,7 @@ public class ChangeATargetOfTargetSpellAbilityToSourceEffect extends OneShotEffe
                         }
                     }
                     if (oldTargetName == null) {
-                        game.informPlayer(controller, "You have to select at least one target to change to " + sourceObject.getIdName() + "!");
+                        game.informPlayer(controller, "You have to select at least one target to change to " + sourceObject.getIdName() + '!');
                     }
                 } while (validTargets && oldTargetName == null);
             }

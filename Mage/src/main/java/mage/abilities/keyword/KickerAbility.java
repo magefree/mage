@@ -291,7 +291,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             ++numberKicker;
         }
         if (numberKicker == 1) {
-            sb.append(" ").append(remarkText);
+            sb.append(' ').append(remarkText);
         }
 
         return sb.toString();

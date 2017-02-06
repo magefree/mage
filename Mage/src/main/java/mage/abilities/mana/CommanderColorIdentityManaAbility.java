@@ -148,7 +148,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
                     }
                 }
             }
-            if (choice.getChoices().size() > 0) {
+            if (!choice.getChoices().isEmpty()) {
                 if (choice.getChoices().size() == 1) {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {

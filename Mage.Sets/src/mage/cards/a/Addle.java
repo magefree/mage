@@ -92,7 +92,7 @@ class AddleEffect extends OneShotEffect {
             controller.choose(outcome, choice, game);
             ObjectColor color = choice.getColor();
             if(color != null) {
-                game.informPlayers(controller.getLogName() + " chooses " + color + ".");
+                game.informPlayers(controller.getLogName() + " chooses " + color + '.');
                 FilterCard filter = new FilterCard();
                 filter.add(new ColorPredicate(color));
                 Effect effect = new DiscardCardYouChooseTargetEffect(filter);

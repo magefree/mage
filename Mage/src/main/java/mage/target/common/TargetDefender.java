@@ -170,11 +170,11 @@ public class TargetDefender extends TargetImpl {
         for (UUID targetId: getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                sb.append(permanent.getName()).append(" ");
+                sb.append(permanent.getName()).append(' ');
             }
             else {
                 Player player = game.getPlayer(targetId);
-                sb.append(player.getLogName()).append(" ");
+                sb.append(player.getLogName()).append(' ');
             }
         }
         return sb.toString();

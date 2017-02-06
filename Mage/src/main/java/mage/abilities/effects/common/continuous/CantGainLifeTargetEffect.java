@@ -51,7 +51,7 @@ public class CantGainLifeTargetEffect extends ContinuousEffectImpl {
             if (duration.equals(Duration.EndOfTurn)) {
                 sb.append("this turn, ");
             } else {
-                sb.append(" ").append(duration.toString());
+                sb.append(' ').append(duration.toString());
             }
         }
         sb.append("that player gains no life instead");

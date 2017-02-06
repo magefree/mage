@@ -144,8 +144,8 @@ public class DustOfMoments extends CardImpl {
                     }
                     if (!game.isSimulation()) {
                         game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
-                                .append(controller.getLogName()).append(getActionStr()).append("s")
-                                .append(counter.getCount()).append(" ").append(counterName.toLowerCase())
+                                .append(controller.getLogName()).append(getActionStr()).append('s')
+                                .append(counter.getCount()).append(' ').append(counterName.toLowerCase())
                                 .append(" counter on ").append(card.getName()).toString());
                     }
                 }
@@ -170,7 +170,7 @@ public class DustOfMoments extends CardImpl {
                     if (!game.isSimulation()) {
                         game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
                                 .append(controller.getLogName()).append(getActionStr()).append("s ")
-                                .append(counter.getCount()).append(" ").append(counterName.toLowerCase())
+                                .append(counter.getCount()).append(' ').append(counterName.toLowerCase())
                                 .append(" counter on ").append(card.getName()).toString());
                     }
                 }
@@ -185,7 +185,7 @@ public class DustOfMoments extends CardImpl {
             StringBuilder sb = new StringBuilder();
             sb.append(getActionStr());
             if (counter.getCount() > 1) {
-                sb.append(Integer.toString(counter.getCount())).append(" ").append(counter.getName().toLowerCase()).append(" counters on each ");
+                sb.append(Integer.toString(counter.getCount())).append(' ').append(counter.getName().toLowerCase()).append(" counters on each ");
             } else {
                 sb.append("a ").append(counter.getName().toLowerCase()).append(" counter on each ");
             }

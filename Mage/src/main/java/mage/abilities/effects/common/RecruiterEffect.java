@@ -73,7 +73,7 @@ public class RecruiterEffect extends OneShotEffect {
             controller.revealCards(staticText, cards, game);
             controller.shuffleLibrary(source, game);
 
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 controller.putCardsOnTopOfLibrary(cards, game, source, true);
             }
             return true;

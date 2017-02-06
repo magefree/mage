@@ -258,7 +258,7 @@ public class PlayerView implements Serializable {
     }
 
     public boolean hasAttachments() {
-        return attachments != null && attachments.size() > 0;
+        return attachments != null && !attachments.isEmpty();
     }
 
     public int getStatesSavedSize() {

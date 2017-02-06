@@ -406,7 +406,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+        String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, Integer.toString(this.jSplitPane0.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
@@ -417,7 +417,7 @@ public final class GamePanel extends javax.swing.JPanel {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
             String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+            String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
             // use divider positions only if screen size is the same as it was the time the settings were saved
             if (size != null && size.equals(sb)) {
 
@@ -723,7 +723,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (!handCards.containsKey(chosenHandKey)) {
                     chosenHandKey = YOUR_HAND;
                 }
-            } else if (chosenHandKey.isEmpty() && handCards.size() > 0) {
+            } else if (chosenHandKey.isEmpty() && !handCards.isEmpty()) {
                 chosenHandKey = handCards.keySet().iterator().next();
             }
             if (chosenHandKey != null && handCards.containsKey(chosenHandKey)) {
@@ -764,7 +764,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         if (game.getSpellsCastCurrentTurn() > 0 && PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, "true").equals("true")) {
             this.txtSpellsCast.setVisible(true);
-            this.txtSpellsCast.setText(" " + Integer.toString(game.getSpellsCastCurrentTurn()) + " ");
+            this.txtSpellsCast.setText(' ' + Integer.toString(game.getSpellsCastCurrentTurn()) + ' ');
         } else {
             this.txtSpellsCast.setVisible(false);
         }
@@ -854,7 +854,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         showRevealed(game);
         showLookedAt(game);
-        if (game.getCombat().size() > 0) {
+        if (!game.getCombat().isEmpty()) {
             CombatManager.getInstance().showCombat(game.getCombat(), gameId);
         } else {
             CombatManager.getInstance().hideCombat(gameId);
@@ -1164,7 +1164,7 @@ public final class GamePanel extends javax.swing.JPanel {
         updateGame(gameView);
         Map<String, Serializable> options0 = options == null ? new HashMap<>() : options;
         ShowCardsDialog dialog = null;
-        if (cardView != null && cardView.size() > 0) {
+        if (cardView != null && !cardView.isEmpty()) {
             dialog = showCards(message, cardView, required, options0, popupMenuType);
             options0.put("dialog", dialog);
         }
@@ -1279,7 +1279,7 @@ public final class GamePanel extends javax.swing.JPanel {
         pickChoice.showDialog(choice, objectId, choiceWindowState);
         if (choice.isKeyChoice()) {
             if (pickChoice.isAutoSelect()) {
-                SessionHandler.sendPlayerString(gameId, "#" + choice.getChoiceKey());
+                SessionHandler.sendPlayerString(gameId, '#' + choice.getChoiceKey());
             } else {
                 SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
             }
@@ -2130,7 +2130,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 choices,
                 this.chosenHandKey);
 
-        if (newChosenHandKey != null && newChosenHandKey.length() > 0) {
+        if (newChosenHandKey != null && !newChosenHandKey.isEmpty()) {
             this.chosenHandKey = newChosenHandKey;
             CardsView cards = handCards.get(chosenHandKey);
             handContainer.loadCards(cards, bigCard, gameId);

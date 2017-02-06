@@ -113,7 +113,7 @@ class FatespinnerChooseEffect extends OneShotEffect {
                 }
             }
             String chosenPhase = choice.getChoice();
-            game.informPlayers(player.getLogName() + " has chosen to skip " + chosenPhase.toLowerCase() + ".");
+            game.informPlayers(player.getLogName() + " has chosen to skip " + chosenPhase.toLowerCase() + '.');
             game.addEffect(new FatespinnerSkipEffect(chosenPhase), source);
             return true;
         }

@@ -90,7 +90,7 @@ class StompingSlabsEffect extends OneShotEffect {
         if (controller != null) {
             Cards cards = new CardsImpl();
             cards.addAll(controller.getLibrary().getTopCards(game, 7));
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 controller.revealCards("Stomping Slabs", cards, game);
                 boolean stompingSlabsFound = false;
                 for (UUID cardId : cards) {

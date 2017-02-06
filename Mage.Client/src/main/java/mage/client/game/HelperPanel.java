@@ -377,11 +377,11 @@ public class HelperPanel extends JPanel {
     public void handleAutoAnswerPopupMenuEvent(ActionEvent e) {
         switch (e.getActionCommand()) {
             case CMD_AUTO_ANSWER_ID_YES:
-                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_YES, gameId, originalId.toString() + "#" + message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_YES, gameId, originalId.toString() + '#' + message);
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_ID_NO:
-                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_NO, gameId, originalId.toString() + "#" + message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_NO, gameId, originalId.toString() + '#' + message);
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_NAME_YES:

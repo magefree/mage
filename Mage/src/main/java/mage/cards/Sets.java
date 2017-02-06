@@ -146,10 +146,10 @@ public class Sets extends HashMap<String, ExpansionSet> {
         Map<String, DeckCardInfo> deckCards = new HashMap<>();
         Map<String, DeckCardInfo> sideboard = new HashMap<>();
         try (PrintWriter out = new PrintWriter(file)) {
-            if (deck.getName() != null && deck.getName().length() > 0) {
+            if (deck.getName() != null && !deck.getName().isEmpty()) {
                 out.println("NAME:" + deck.getName());
             }
-            if (deck.getAuthor() != null && deck.getAuthor().length() > 0) {
+            if (deck.getAuthor() != null && !deck.getAuthor().isEmpty()) {
                 out.println("AUTHOR:" + deck.getAuthor());
             }
             for (DeckCardInfo deckCardInfo : deck.getCards()) {
@@ -193,7 +193,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         List<List<List<DeckCardInfo>>> cardGrid = layout.getCards();
         int height = cardGrid.size();
         int width = (height > 0) ? cardGrid.get(0).size() : 0;
-        out.print("(" + height + "," + width + ")");
+        out.print("(" + height + ',' + width + ')');
         out.print(layout.getSettings());
         out.print("|");
         for (List<List<DeckCardInfo>> row : cardGrid) {

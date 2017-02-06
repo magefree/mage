@@ -28,7 +28,7 @@ public class LoseAbilityAllEffect extends ContinuousEffectImpl {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.filter = filter;
         this.ability = ability;
-        staticText = filter.getMessage() + " lose " + ability.toString() + (duration.toString().isEmpty() ? "" : " " + duration.toString());
+        staticText = filter.getMessage() + " lose " + ability.toString() + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 
     public LoseAbilityAllEffect(final LoseAbilityAllEffect effect) {

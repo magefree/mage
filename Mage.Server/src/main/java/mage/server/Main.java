@@ -130,7 +130,7 @@ public class Main {
                         logger.info(" - Loading extension from " + f);
                         extensions.add(ExtensionPackageLoader.loadExtension(f));
                     } catch (IOException e) {
-                        logger.error("Could not load extension in " + f + "!", e);
+                        logger.error("Could not load extension in " + f + '!', e);
                     }
                 }
             }
@@ -141,7 +141,7 @@ public class Main {
             logger.info("Registering custom sets...");
             for (ExtensionPackage pkg : extensions) {
                 for (ExpansionSet set : pkg.getSets()) {
-                    logger.info("- Loading " + set.getName() + " (" + set.getCode() + ")");
+                    logger.info("- Loading " + set.getName() + " (" + set.getCode() + ')');
                     Sets.getInstance().addSet(set);
                 }
                 PluginClassloaderRegistery.registerPluginClassloader(pkg.getClassLoader());
@@ -268,7 +268,7 @@ public class Main {
                 StringBuilder sessionInfo = new StringBuilder();
                 Optional<User> user = UserManager.getInstance().getUser(session.getUserId());
                 if (user.isPresent()) {
-                    sessionInfo.append(user.get().getName()).append(" [").append(user.get().getGameInfo()).append("]");
+                    sessionInfo.append(user.get().getName()).append(" [").append(user.get().getGameInfo()).append(']');
                 } else {
                     sessionInfo.append("[user missing] ");
                 }

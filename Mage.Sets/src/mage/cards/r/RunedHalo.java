@@ -96,7 +96,7 @@ class RunedHaloSetProtectionEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
         if (controller != null && cardName != null && !cardName.isEmpty()) {            
-            FilterObject filter = new FilterObject("the name [" + cardName + "]");
+            FilterObject filter = new FilterObject("the name [" + cardName + ']');
             filter.add(new NamePredicate(cardName));            
             ContinuousEffect effect = new GainAbilityControllerEffect(new ProtectionAbility(filter), Duration.Custom);
             game.addEffect(effect, source);

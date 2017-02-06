@@ -183,7 +183,7 @@ public class CardInfo {
         if (spellAbility != null) {
             SpellAbilityType spellAbilityType = spellAbility.getSpellAbilityType();
             if (spellAbilityType == SpellAbilityType.SPLIT_LEFT || spellAbilityType == SpellAbilityType.SPLIT_RIGHT) {
-                this.className = this.setCode + "." + this.name;
+                this.className = this.setCode + '.' + this.name;
                 this.splitCardHalf = true;
             }
         }

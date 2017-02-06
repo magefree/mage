@@ -64,7 +64,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
     public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
-        staticText = "{this} gains " + ability.getRule() + " " + duration.toString();
+        staticText = "{this} gains " + ability.getRule() + ' ' + duration.toString();
         this.onCard = onCard;
     }
 

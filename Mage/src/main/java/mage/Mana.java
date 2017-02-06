@@ -443,7 +443,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public String toString() {
         StringBuilder sbMana = new StringBuilder();
         if (generic > 0) {
-            sbMana.append("{").append(Integer.toString(generic)).append("}");
+            sbMana.append('{').append(Integer.toString(generic)).append('}');
         }
         for (int i = 0; i < colorless; i++) {
             sbMana.append("{C}");

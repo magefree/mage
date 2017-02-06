@@ -139,7 +139,7 @@ class MoonringMirrorEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             Cards cardsToHand = null;
-            if (game.getExile().getExileZone(exileZoneId) != null && game.getExile().getExileZone(exileZoneId).size() > 0) {
+            if (game.getExile().getExileZone(exileZoneId) != null && !game.getExile().getExileZone(exileZoneId).isEmpty()) {
                 cardsToHand = new CardsImpl(game.getExile().getExileZone(exileZoneId));
             }
             for (Card card : controller.getHand().getCards(game)) {

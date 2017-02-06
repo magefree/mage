@@ -90,7 +90,7 @@ class SemblanceAnvilEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player.getHand().size() > 0) {
+        if (!player.getHand().isEmpty()) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
             player.choose(Outcome.Benefit, player.getHand(), target, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
@@ -141,7 +141,7 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     List<UUID> imprinted = permanent.getImprinted();
-                    if (imprinted.size() > 0) {
+                    if (!imprinted.isEmpty()) {
                         Card imprintedCard = game.getCard(imprinted.get(0));
                         if (imprintedCard != null && CardUtil.shareTypes(imprintedCard, sourceCard)) {
                             return true;

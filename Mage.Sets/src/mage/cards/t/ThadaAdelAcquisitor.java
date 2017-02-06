@@ -103,7 +103,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
         }
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterArtifactCard());
         if (controller.searchLibrary(target, game, damagedPlayer.getId())) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 Card card = damagedPlayer.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);

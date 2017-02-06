@@ -118,7 +118,7 @@ class AurraSingBaneOfJediEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.chooseUse(outcome, "Deal 2 damage to " + game.getPermanent(getTargetPointer().getFirst(game, source)).getName() + "?", source, game)) {
+            if (controller.chooseUse(outcome, "Deal 2 damage to " + game.getPermanent(getTargetPointer().getFirst(game, source)).getName() + '?', source, game)) {
                 new DamageTargetEffect(2).apply(game, source);
             } else {
                 new DamageControllerEffect(1).apply(game, source);

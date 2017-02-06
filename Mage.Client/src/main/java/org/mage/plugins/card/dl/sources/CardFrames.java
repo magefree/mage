@@ -78,8 +78,8 @@ public class CardFrames implements Iterable<DownloadJob> {
 
     private DownloadJob generateDownloadJob(String dirName, String name) {
         File dst = new File(outDir, name + ".png");
-        String url = BASE_DOWNLOAD_URL + dirName + "/" + name + ".png";
-        return new DownloadJob("frames-" + dirName + "-" + name, fromURL(url), toFile(dst));
+        String url = BASE_DOWNLOAD_URL + dirName + '/' + name + ".png";
+        return new DownloadJob("frames-" + dirName + '-' + name, fromURL(url), toFile(dst));
     }    
     
     private void useDefaultDir() {

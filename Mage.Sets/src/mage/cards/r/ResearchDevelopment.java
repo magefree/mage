@@ -127,7 +127,7 @@ class ResearchEffect extends OneShotEffect {
                         textToAsk = new StringBuilder(choiceText);
                         textToAsk.append(" (");
                         textToAsk.append(count);
-                        textToAsk.append(")");
+                        textToAsk.append(')');
                     }
                 }
 
@@ -170,7 +170,7 @@ class DevelopmentEffect extends OneShotEffect {
                 for (UUID opponentUuid : opponents) {
                     Player opponent = game.getPlayer(opponentUuid);
                     if (opponent != null && opponent.chooseUse(Outcome.Detriment,
-                            "Allow " + player.getLogName() + " to draw a card instead? (" + Integer.toString(i+1) + ")", source, game)) {
+                            "Allow " + player.getLogName() + " to draw a card instead? (" + Integer.toString(i+1) + ')', source, game)) {
                         game.informPlayers(opponent.getLogName() + " had chosen to let " + player.getLogName() + " draw a card.");
                         player.drawCards(1, game);
                         putToken = false;

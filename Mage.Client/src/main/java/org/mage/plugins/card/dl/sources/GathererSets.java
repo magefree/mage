@@ -163,12 +163,12 @@ public class GathererSets implements Iterable<DownloadJob> {
     }
 
     private DownloadJob generateDownloadJob(String set, String rarity, String urlRarity) {
-        File dst = new File(outDir, set + "-" + rarity + ".jpg");
+        File dst = new File(outDir, set + '-' + rarity + ".jpg");
         if (symbolsReplacements.containsKey(set)) {
             set = symbolsReplacements.get(set);
         }
         String url = "http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + urlRarity;
-        return new DownloadJob(set + "-" + rarity, fromURL(url), toFile(dst));
+        return new DownloadJob(set + '-' + rarity, fromURL(url), toFile(dst));
     }
 
     private void changeOutDir(String path) {

@@ -62,7 +62,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
             if (toRemove > 0) {
                 permanent.removeCounters(counter.getName(), toRemove, game);
                 if (!game.isSimulation()) {
-                    game.informPlayers("Removed " + toRemove + " " + counter.getName() + " counter from " + permanent.getLogName());
+                    game.informPlayers("Removed " + toRemove + ' ' + counter.getName() + " counter from " + permanent.getLogName());
                 }
             }
             return true;
@@ -73,7 +73,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
             if (toRemove > 0) {
                 card.removeCounters(counter.getName(), toRemove, game);
                 if (!game.isSimulation()) {
-                    game.informPlayers("Removed " + toRemove + " " + counter.getName()
+                    game.informPlayers("Removed " + toRemove + ' ' + counter.getName()
                             + " counter from " + card.getLogName()
                             + " (" + card.getCounters(game).getCount(counter.getName()) + " left)");
                 }
@@ -91,7 +91,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
     private void setText() {
         if (counter.getCount() > 1) {
             StringBuilder sb = new StringBuilder();
-            sb.append("remove ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters from {this}");
+            sb.append("remove ").append(Integer.toString(counter.getCount())).append(' ').append(counter.getName()).append(" counters from {this}");
             staticText = sb.toString();
         } else {
             staticText = "remove a " + counter.getName() + " counter from {this}";

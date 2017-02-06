@@ -826,7 +826,7 @@ public class NewTournamentDialog extends MageDialog {
             txtRandomPacks.setEnabled(false);
             txtRandomPacks.setLineWrap(true);
             String randomPrefs = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, "");
-            if (randomPrefs.length() > 0) {
+            if (!randomPrefs.isEmpty()) {
                 txtRandomPacks.setText(randomPrefs);
                 ArrayList<String> theList = new ArrayList<>();
                 theList.addAll(Arrays.asList(randomPrefs.split(";")));
@@ -836,7 +836,7 @@ public class NewTournamentDialog extends MageDialog {
                 StringBuilder packList = new StringBuilder();
                 for (ExpansionInfo exp : allExpansions) {
                     packList.append(exp.getCode());
-                    packList.append(";");
+                    packList.append(';');
                 }
                 txtRandomPacks.setText(packList.toString());
             }
@@ -860,7 +860,7 @@ public class NewTournamentDialog extends MageDialog {
         StringBuilder packList = new StringBuilder();
         for (String str : randomPackSelector.getSelectedPacks()) {
             packList.append(str);
-            packList.append(";");
+            packList.append(';');
         }
         this.txtRandomPacks.setText(packList.toString());
         this.pack();
@@ -1026,7 +1026,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void loadBoosterPacks(String packString) {
-        if (packString.length()>0) {
+        if (!packString.isEmpty()) {
             String[] packsArray = packString.substring(1, packString.length() - 1).split(",");
             int packNumber = 0;
             for (String pack : packsArray ){
@@ -1088,7 +1088,7 @@ public class NewTournamentDialog extends MageDialog {
                 StringBuilder packlist = new StringBuilder();
                 for (String pack : this.randomPackSelector.getSelectedPacks()){
                     packlist.append(pack);
-                    packlist.append(";");
+                    packlist.append(';');
                 }
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, packlist.toString());
             }

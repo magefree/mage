@@ -158,11 +158,11 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
         for (UUID targetId : this.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                sb.append(permanent.getLogName()).append(" ");
+                sb.append(permanent.getLogName()).append(' ');
             } else {
                 Card card = game.getExile().getCard(targetId, game);
                 if (card != null) {
-                    sb.append(card.getLogName()).append(" ");
+                    sb.append(card.getLogName()).append(' ');
                 }
             }
         }

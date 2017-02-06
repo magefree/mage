@@ -123,23 +123,23 @@ public class FlashbackAbility extends SpellAbility {
     @Override
     public String getRule() {
         StringBuilder sbRule = new StringBuilder("Flashback");
-        if (costs.size() > 0) {
+        if (!costs.isEmpty()) {
             sbRule.append(" - ");
         } else {
-            sbRule.append(" ");
+            sbRule.append(' ');
         }
-        if (manaCosts.size() > 0) {
+        if (!manaCosts.isEmpty()) {
             sbRule.append(manaCosts.getText());
         }
-        if (costs.size() > 0) {
-            if (manaCosts.size() > 0) {
+        if (!costs.isEmpty()) {
+            if (!manaCosts.isEmpty()) {
                 sbRule.append(", ");
             }
             sbRule.append(costs.getText());
-            sbRule.append(".");
+            sbRule.append('.');
         }
         if (abilityName != null) {
-            sbRule.append(" ");
+            sbRule.append(' ');
             sbRule.append(abilityName);
         }
         sbRule.append(" <i>(You may cast this card from your graveyard for its flashback cost. Then exile it.)</i>");

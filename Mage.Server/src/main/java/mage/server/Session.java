@@ -102,7 +102,7 @@ public class Session {
             }
             AuthorizedUserRepository.instance.add(userName, password, email);
             String subject = "XMage Registration Completed";
-            String text = "You are successfully registered as " + userName + ".";
+            String text = "You are successfully registered as " + userName + '.';
             text += "  Your initial, generated password is: " + password;
 
             boolean success;

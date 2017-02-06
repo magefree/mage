@@ -137,11 +137,11 @@ class FactOrFictionEffect extends OneShotEffect {
             }
             game.informPlayers(sb.toString());
 
-            sb = new StringBuilder("Pile 2, going to ").append(pile2Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (":");
+            sb = new StringBuilder("Pile 2, going to ").append(pile2Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (':');
             i = 0;
             for (Card card: pile2) {
                 i++;
-                sb.append(" ").append(card.getName());
+                sb.append(' ').append(card.getName());
                 if (i < pile2.size()) {
                     sb.append(", ");
                 }

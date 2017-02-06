@@ -124,7 +124,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                     ability = options.get(RandomUtil.nextInt(options.size()));
                 }
             }
-            if (ability.getManaCosts().getVariableCosts().size() > 0) {
+            if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                 int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
                 if (amount > 0) {
                     ability = ability.copy();
@@ -195,7 +195,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         StringBuilder binary = new StringBuilder();
         binary.append(Integer.toBinaryString(value));
         while (binary.length() < attackersList.size()) {
-            binary.insert(0, "0");  //pad with zeros
+            binary.insert(0, '0');  //pad with zeros
         }
         for (int i = 0; i < attackersList.size(); i++) {
             if (binary.charAt(i) == '1') {
@@ -221,7 +221,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             int check = RandomUtil.nextInt(numGroups + 1);
             if (check < numGroups) {
                 CombatGroup group = game.getCombat().getGroups().get(check);
-                if (group.getAttackers().size() > 0) {
+                if (!group.getAttackers().isEmpty()) {
                     this.declareBlocker(this.getId(), blocker.getId(), group.getAttackers().get(0), game);
                 }
             }

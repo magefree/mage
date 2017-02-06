@@ -81,7 +81,7 @@ class SphereOfSafetyPayManaToAttackAllEffect extends CantAttackYouUnlessPayManaA
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
         int enchantments = game.getBattlefield().countAll(new FilterEnchantmentPermanent(), source.getControllerId(), game);
         if (enchantments > 0) {
-            return new ManaCostsImpl<>("{" + enchantments + "}");
+            return new ManaCostsImpl<>("{" + enchantments + '}');
         }
         return null;
     }

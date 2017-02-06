@@ -143,7 +143,7 @@ class AnimationModuleEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                if (permanent.getCounters(game).size() > 0) {
+                if (!permanent.getCounters(game).isEmpty()) {
                     if (permanent.getCounters(game).size() == 1) {
                         for (Counter counter : permanent.getCounters(game).values()) {
                             Counter newCounter = new Counter(counter.getName());
@@ -172,7 +172,7 @@ class AnimationModuleEffect extends OneShotEffect {
             else {
                 Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                 if (player != null) {
-                    if (player.getCounters().size() > 0) {
+                    if (!player.getCounters().isEmpty()) {
                         if (player.getCounters().size() == 1) {
                             for (Counter counter : player.getCounters().values()) {
                                 Counter newCounter = new Counter(counter.getName());

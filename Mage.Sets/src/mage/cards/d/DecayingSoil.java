@@ -172,7 +172,7 @@ class DecayingSoilEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (player.chooseUse(Outcome.Benefit, " - Pay " + cost.getText() + "?", source, game)) {
+            if (player.chooseUse(Outcome.Benefit, " - Pay " + cost.getText() + '?', source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     UUID target = this.getTargetPointer().getFirst(game, source);

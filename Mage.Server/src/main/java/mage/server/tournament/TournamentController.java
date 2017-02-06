@@ -424,7 +424,7 @@ public class TournamentController {
             TableController tableController = TableManager.getInstance().getController(tableId);
             if (tableController != null) {
                 if (user.isPresent()) {
-                    replacePlayerName = "Draftbot (" + user.get().getName() + ")";
+                    replacePlayerName = "Draftbot (" + user.get().getName() + ')';
                 }
                 tableController.replaceDraftPlayer(leavingPlayer.getPlayer(), replacePlayerName, "Computer - draftbot", 5);
                 if (user.isPresent()) {

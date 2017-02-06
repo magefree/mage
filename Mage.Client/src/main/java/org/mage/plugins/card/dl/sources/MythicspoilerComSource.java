@@ -115,7 +115,7 @@ public class MythicspoilerComSource implements CardImageSource {
             Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
             for (String setName : setNames.split("\\^")) {
                 String URLSetName = URLEncoder.encode(setName, "UTF-8");
-                String baseUrl = "http://mythicspoiler.com/" + URLSetName + "/";
+                String baseUrl = "http://mythicspoiler.com/" + URLSetName + '/';
 
                 Map<String, String> pageLinks = getSetLinksFromPage(cardSet, aliasesStart, prefs, proxyType, baseUrl, baseUrl);
                 setLinks.putAll(pageLinks);
@@ -166,7 +166,7 @@ public class MythicspoilerComSource implements CardImageSource {
         Elements cardsImages = doc.select("img[src^=cards/]"); // starts with cards/
         if (!aliasesStart.isEmpty()) {
             for (String text : aliasesStart) {
-                cardsImages.addAll(doc.select("img[src^=" + text + "]"));
+                cardsImages.addAll(doc.select("img[src^=" + text + ']'));
             }
         }
 
@@ -179,8 +179,8 @@ public class MythicspoilerComSource implements CardImageSource {
                 cardName = cardLink.substring(0, cardLink.length() - 4);
             }
             if (cardName != null && !cardName.isEmpty()) {
-                if (cardNameAliases.containsKey(cardSet + "-" + cardName)) {
-                    cardName = cardNameAliases.get(cardSet + "-" + cardName);
+                if (cardNameAliases.containsKey(cardSet + '-' + cardName)) {
+                    cardName = cardNameAliases.get(cardSet + '-' + cardName);
                 } else if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3") || cardName.endsWith("4") || cardName.endsWith("5")) {
                     if (!cardName.startsWith("forest")
                             && !cardName.startsWith("swamp")

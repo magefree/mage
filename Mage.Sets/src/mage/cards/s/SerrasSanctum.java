@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 
 public class SerrasSanctum extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("enchantment you control");;
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("enchantment you control");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

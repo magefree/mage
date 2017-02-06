@@ -97,7 +97,7 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
                 sb.append("up to ");
             }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" to the battlefield");
         if (tapped) {

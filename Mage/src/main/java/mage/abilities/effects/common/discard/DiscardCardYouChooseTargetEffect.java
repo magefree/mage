@@ -151,7 +151,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                     revealedCards.addAll(player.getHand());
                 }
 
-                player.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ")" : "Discard", revealedCards, game);
+                player.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ')' : "Discard", revealedCards, game);
 
                 boolean result = true;
                 int filteredCardsCount = revealedCards.count(filter, source.getSourceId(), source.getControllerId(), game);
@@ -208,7 +208,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         sb.append(". You choose ");
         boolean discardMultipleCards = !numberCardsToDiscard.toString().equals("1");
         if (discardMultipleCards) {
-            sb.append(numberCardsToDiscard).append(" ");
+            sb.append(numberCardsToDiscard).append(' ');
         } else {
             if (!filter.getMessage().startsWith("a ") && !filter.getMessage().startsWith("an ")) {
                 sb.append("a ");

@@ -137,7 +137,7 @@ class HeartOfKiranAlternateCrewCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return game.getBattlefield().getAllActivePermanents(filter, game).size() > 0;
+        return !game.getBattlefield().getAllActivePermanents(filter, game).isEmpty();
     }
 
     @Override

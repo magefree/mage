@@ -91,7 +91,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                                 permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
                                 permanent.getSubtype(game).addAll(token.getSubtype(game));
                             } else {
-                                if (token.getSubtype(game).size() > 0) {
+                                if (!token.getSubtype(game).isEmpty()) {
                                     for (String subtype : token.getSubtype(game)) {
                                         if (!permanent.getSubtype(game).contains(subtype)) {
                                             permanent.getSubtype(game).add(subtype);
@@ -100,7 +100,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
 
                                 }
                             }
-                            if (token.getCardType().size() > 0) {
+                            if (!token.getCardType().isEmpty()) {
                                 for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
                                         permanent.getCardType().add(t);
@@ -128,7 +128,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                             permanent.removeAllAbilities(source.getSourceId(), game);
                         }
                         if (sublayer == SubLayer.NA) {
-                            if (token.getAbilities().size() > 0) {
+                            if (!token.getAbilities().isEmpty()) {
                                 for (Ability ability : token.getAbilities()) {
                                     permanent.addAbility(ability, source.getSourceId(), game);
                                 }
@@ -184,7 +184,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
             sb.append(" becomes a ");
         }
         sb.append(token.getDescription());
-        sb.append(" ").append(duration.toString());
+        sb.append(' ').append(duration.toString());
         if (addStillALandText) {
             if (target.getMaxNumberOfTargets() > 1) {
                 sb.append(". They're still lands");

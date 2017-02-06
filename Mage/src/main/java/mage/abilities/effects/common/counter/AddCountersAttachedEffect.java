@@ -95,13 +95,13 @@ public class AddCountersAttachedEffect extends OneShotEffect {
         // put a +1/+1 counter on it
         sb.append("put ");
         if (counter.getCount() > 1) {
-            sb.append(CardUtil.numberToText(counter.getCount())).append(" ");
+            sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
         } else {
             sb.append("a ");
         }
         sb.append(counter.getName().toLowerCase()).append(" counter on ");
         sb.append(textEnchanted);
-        if (amount.getMessage().length() > 0) {
+        if (!amount.getMessage().isEmpty()) {
             sb.append(" for each ").append(amount.getMessage());
         }
         staticText = sb.toString();

@@ -79,7 +79,7 @@ public class DeepfireElemental extends CardImpl {
         if (ability.getOriginalId().equals(originalId)) {
             ability.getTargets().clear();
             FilterPermanent newFilter = filter.copy();
-            newFilter.setMessage(new StringBuilder("artifact or creature with converted mana cost {").append(ability.getManaCostsToPay().getX()).append("}").toString());
+            newFilter.setMessage(new StringBuilder("artifact or creature with converted mana cost {").append(ability.getManaCostsToPay().getX()).append('}').toString());
             newFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, ability.getManaCostsToPay().getX()));
             Target target = new TargetPermanent(newFilter);
             ability.addTarget(target);

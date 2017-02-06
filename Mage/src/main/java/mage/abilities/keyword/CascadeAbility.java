@@ -44,16 +44,14 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CascadeAbility extends TriggeredAbilityImpl {
     //20091005 - 702.82
 
-    private boolean withReminder;
-
     private final static String reminderText = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less."
             + " You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)</i>";
+    private boolean withReminder;
 
     public CascadeAbility() {
         this(true);
@@ -121,20 +119,20 @@ class CascadeEffect extends OneShotEffect {
                 break;
             }
             controller.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
-        } while (controller.isInGame() && (card.getCardType().contains(CardType.LAND) || !cardThatCostsLess(sourceCost, card, game)));
+        }
+        while (controller.isInGame() && (card.getCardType().contains(CardType.LAND) || !cardThatCostsLess(sourceCost, card, game)));
 
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
         if (card != null) {
             if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + "?", source, game)) {
                 controller.cast(card.getSpellAbility(), game, true);
-            }
         }
         // Move the remaining cards to the buttom of the library in a random order
         Cards cardsFromExile = new CardsImpl();
         Cards cardsToLibrary = new CardsImpl();
         cardsFromExile.addAll(exile);
-        while (cardsFromExile.size() > 0) {
+        while (!cardsFromExile.isEmpty()) {
             card = cardsFromExile.getRandom(game);
             cardsFromExile.remove(card.getId());
             cardsToLibrary.add(card);

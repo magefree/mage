@@ -122,7 +122,7 @@ class JaceMindseekerEffect extends OneShotEffect {
             }
 
             // cast an instant or sorcery for free
-            if (cardsToCast.size() > 0) {
+            if (!cardsToCast.isEmpty()) {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
                     TargetCard target = new TargetCard(Zone.GRAVEYARD, filter); // zone should be ignored here

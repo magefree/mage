@@ -202,7 +202,7 @@ public abstract class TournamentImpl implements Tournament {
             round.addPairing(new TournamentPairing(player1, player2));
         }
 
-        if (roundPlayers.size() > 0) {
+        if (!roundPlayers.isEmpty()) {
             // player free round - add to bye players of this round
             TournamentPlayer player1 = roundPlayers.get(0);
             round.getPlayerByes().add(player1);
@@ -329,7 +329,7 @@ public abstract class TournamentImpl implements Tournament {
                 }
             }
             for (TournamentPlayer tp : round.getPlayerByes()) {
-                tp.setResults(new StringBuilder(tp.getResults()).append("R").append(round.getRoundNumber()).append(" ").append("Bye ").toString());
+                tp.setResults(new StringBuilder(tp.getResults()).append('R').append(round.getRoundNumber()).append(' ').append("Bye ").toString());
                 tp.setPoints(tp.getPoints() + 3);
             }
         }
@@ -337,7 +337,7 @@ public abstract class TournamentImpl implements Tournament {
 
     private static String addRoundResult(int round, TournamentPairing pair, TournamentPlayer tournamentPlayer, TournamentPlayer opponentPlayer) {
         StringBuilder playerResult = new StringBuilder(tournamentPlayer.getResults());
-        playerResult.append("R").append(round).append(" ");
+        playerResult.append('R').append(round).append(' ');
         playerResult.append(getMatchResultString(tournamentPlayer, opponentPlayer, pair.getMatch()));
         return playerResult.toString();
     }
@@ -352,9 +352,9 @@ public abstract class TournamentImpl implements Tournament {
             matchResult.append(mp1.getPlayer().hasIdleTimeout() ? "I" : (mp1.getPlayer().hasTimerTimeout() ? "T" : "Q"));
         }
         if (match.getDraws() > 0) {
-            matchResult.append("-").append(match.getDraws());
+            matchResult.append('-').append(match.getDraws());
         }
-        matchResult.append("-").append(mp2.getWins());
+        matchResult.append('-').append(mp2.getWins());
         if (mp2.hasQuit()) {
             matchResult.append(mp2.getPlayer().hasIdleTimeout() ? "I" : (mp2.getPlayer().hasTimerTimeout() ? "T" : "Q"));
         }

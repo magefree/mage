@@ -67,7 +67,7 @@ public class TournamentView implements Serializable {
             typeText.append(" / ").append(tournament.getOptions().getMatchOptions().getDeckType());
         }
         if (tournament.getNumberRounds() > 0) {
-            typeText.append(" ").append(tournament.getNumberRounds()).append(" rounds");
+            typeText.append(' ').append(tournament.getNumberRounds()).append(" rounds");
         } 
         tournamentType = typeText.toString();
         startTime = tournament.getStartTime();
@@ -79,7 +79,7 @@ public class TournamentView implements Serializable {
         tournamentState = tournament.getTournamentState();
 
         if (tournament.getTournamentState().equals("Drafting") && tournament.getDraft() != null) {
-            runningInfo = "booster/card: " + tournament.getDraft().getBoosterNum() +"/" + (tournament.getDraft().getCardNum() -1);
+            runningInfo = "booster/card: " + tournament.getDraft().getBoosterNum() + '/' + (tournament.getDraft().getCardNum() -1);
         } else {
             runningInfo = "";
         }

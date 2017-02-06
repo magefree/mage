@@ -143,7 +143,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
                             for (UUID permanentId : target.getTargets()) {
                                 Permanent permanent = game.getPermanent(permanentId);
                                 if (permanent != null) {
-                                    message.append(permanent.getName()).append(" ");
+                                    message.append(permanent.getName()).append(' ');
                                 }
                             }
                         }
@@ -156,7 +156,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
                     for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(currentPlayer.getId())) {
                         if (!playerPiles.get(1).contains(permanent.getId()) && !playerPiles.get(2).contains(permanent.getId())) {
                             playerPiles.get(3).add(permanent.getId());
-                            message.append(permanent.getName()).append(" ");
+                            message.append(permanent.getName()).append(' ');
                         }
                     }
                     if (playerPiles.get(3).isEmpty()) {

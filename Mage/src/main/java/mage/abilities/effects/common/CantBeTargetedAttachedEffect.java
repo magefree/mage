@@ -117,7 +117,7 @@ public class CantBeTargetedAttachedEffect extends ContinuousRuleModifyingEffectI
         sb.append(" can't be the target of ");
         sb.append(filterSource.getMessage());
         if (!duration.toString().isEmpty()) {
-            sb.append(" ");
+            sb.append(' ');
             if (duration.equals(Duration.EndOfTurn)) {
                 sb.append("this turn");
             } else {

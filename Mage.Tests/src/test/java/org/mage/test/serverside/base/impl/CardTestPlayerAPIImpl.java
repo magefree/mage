@@ -446,9 +446,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             if (permanent.getName().equals(cardName) && permanent.getControllerId().equals(player.getId())) {
                 count++;
                 if (scope.equals(Filter.ComparisonScope.All)) {
-                    Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ")",
+                    Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ')',
                             power, permanent.getPower().getValue());
-                    Assert.assertEquals("Toughness is not the same (" + toughness + " vs. " + permanent.getToughness().getValue() + ")",
+                    Assert.assertEquals("Toughness is not the same (" + toughness + " vs. " + permanent.getToughness().getValue() + ')',
                             toughness, permanent.getToughness().getValue());
                 } else if (scope.equals(Filter.ComparisonScope.Any)) {
                     if (power == permanent.getPower().getValue() && toughness == permanent.getToughness().getValue()) {
@@ -466,8 +466,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 + ", cardName=" + cardName, count > 0);
 
         if (scope.equals(Filter.ComparisonScope.Any)) {
-            Assert.assertTrue("There is no such creature under player's control with specified p/t of " + power + "/" + toughness + ", player=" + player.getName()
-                    + ", cardName=" + cardName + " (found similar: " + found + ", one of them: power=" + foundPower + " toughness=" + foundToughness + ")", fit > 0);
+            Assert.assertTrue("There is no such creature under player's control with specified p/t of " + power + '/' + toughness + ", player=" + player.getName()
+                    + ", cardName=" + cardName + " (found similar: " + found + ", one of them: power=" + foundPower + " toughness=" + foundToughness + ')', fit > 0);
         }
     }
 
@@ -584,7 +584,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 }
             }
         }
-        Assert.assertEquals("(Battlefield) Permanents counts for " + player.getName() + " are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Battlefield) Permanents counts for " + player.getName() + " are not equal (" + cardName + ')', count, actualCount);
     }
 
     @Override
@@ -595,7 +595,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 actualCount++;
             }
         }
-        Assert.assertEquals("(Command Zone) Card counts are not equal (" + commandZoneObjectName + ")", count, actualCount);
+        Assert.assertEquals("(Command Zone) Card counts are not equal (" + commandZoneObjectName + ')', count, actualCount);
     }
 
     /**
@@ -636,7 +636,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertNotNull("There is no such permanent " + (player == null ? "" : "for player " + player.getName()) + " on the battlefield, cardName=" + cardName, found);
-        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters(currentGame).getCount(type));
+        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ':' + type + ')', count, found.getCounters(currentGame).getCount(type));
     }
 
     /**
@@ -659,7 +659,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         }
         Assert.assertNotNull("There is no such card in the exile, cardName=" + cardName, found);
-        Assert.assertEquals("(Exile) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters(currentGame).getCount(type));
+        Assert.assertEquals("(Exile) Counter counts are not equal (" + cardName + ':' + type + ')', count, found.getCounters(currentGame).getCount(type));
     }
 
     /**
@@ -670,7 +670,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count Expected count.
      */
     public void assertCounterCount(Player player, CounterType type, int count) throws AssertionError {
-        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + player.getName() + ":" + type + ")", count, player.getCounters().getCount(type));
+        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + player.getName() + ':' + type + ')', count, player.getCounters().getCount(type));
     }
 
     /**
@@ -691,7 +691,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
-        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ":" + type + ")", (found.getCardType().contains(type) == flag));
+        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', (found.getCardType().contains(type) == flag));
 
     }
 
@@ -713,9 +713,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
-        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ":" + type + ")", found.getCardType().contains(type));
+        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
         if (subType != null) {
-            Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ":" + subType + ")", found.getSubtype(currentGame).contains(subType));
+            Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ':' + subType + ')', found.getSubtype(currentGame).contains(subType));
         }
     }
 
@@ -740,7 +740,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
-        Assert.assertEquals("(Battlefield) Tapped state is not equal (" + cardName + ")", tapped, found.isTapped());
+        Assert.assertEquals("(Battlefield) Tapped state is not equal (" + cardName + ')', tapped, found.isTapped());
     }
 
     /**
@@ -781,7 +781,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
-        Assert.assertEquals("(Battlefield) Attacking state is not equal (" + cardName + ")", attacking, found.isAttacking());
+        Assert.assertEquals("(Battlefield) Attacking state is not equal (" + cardName + ')', attacking, found.isAttacking());
     }
 
     /**
@@ -836,7 +836,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
 
-        Assert.assertEquals("(Exile) Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Exile) Card counts are not equal (" + cardName + ')', count, actualCount);
     }
 
     /**
@@ -873,7 +873,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
 
-        Assert.assertEquals("(Graveyard " + player.getName() + ") Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Graveyard " + player.getName() + ") Card counts are not equal (" + cardName + ')', count, actualCount);
     }
 
     /**
@@ -904,7 +904,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
 
-        Assert.assertEquals("(Library " + player.getName() + ") Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Library " + player.getName() + ") Card counts are not equal (" + cardName + ')', count, actualCount);
     }
 
     /**
@@ -938,7 +938,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertNotNull("Couldn't find a card with specified name: " + cardName, permanent0);
-        Assert.assertEquals("More than one permanent was found: " + cardName + "(" + count + ")", 1, count);
+        Assert.assertEquals("More than one permanent was found: " + cardName + '(' + count + ')', 1, count);
         return permanent0;
     }
 
@@ -987,7 +987,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public enum StackClause {
 
         WHILE_ON_STACK,
-        WHILE_NOT_ON_STACK;
+        WHILE_NOT_ON_STACK
     }
 
     /**
@@ -1021,11 +1021,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, StackClause clause) {
         if (StackClause.WHILE_ON_STACK.equals(clause)) {
             player.addAction(turnNum, step, "activate:Cast " + cardName
-                    + "$" + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
+                    + '$' + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
                     + "$spellOnStack=" + spellOnStack);
         } else {
             player.addAction(turnNum, step, "activate:Cast " + cardName
-                    + "$" + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
+                    + '$' + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
                     + "$!spellOnStack=" + spellOnStack);
         }
     }
@@ -1077,13 +1077,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             sb.append("$target=").append(targetName);
         }
         if (spellOnStack != null && !spellOnStack.isEmpty()) {
-            sb.append("$").append(StackClause.WHILE_ON_STACK.equals(clause) ? "" : "!").append("spellOnStack=").append(spellOnStack);
+            sb.append('$').append(StackClause.WHILE_ON_STACK.equals(clause) ? "" : "!").append("spellOnStack=").append(spellOnStack);
         }
         player.addAction(turnNum, step, sb.toString());
     }
 
     public void addCounters(int turnNum, PhaseStep step, TestPlayer player, String cardName, CounterType type, int count) {
-        player.addAction(turnNum, step, "addCounters:" + cardName + "$" + type.getName() + "$" + count);
+        player.addAction(turnNum, step, "addCounters:" + cardName + '$' + type.getName() + '$' + count);
     }
 
     public void attack(int turnNum, TestPlayer player, String attacker) {
@@ -1099,7 +1099,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void block(int turnNum, TestPlayer player, String blocker, String attacker) {
-        player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:" + blocker + "$" + attacker);
+        player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:" + blocker + '$' + attacker);
     }
 
     /**

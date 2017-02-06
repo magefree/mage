@@ -79,6 +79,6 @@ public class GetEmblemTargetPlayerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " gets an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
+        return "Target " + mode.getTargets().get(0).getTargetName() + " gets an emblem with \"" + emblem.getAbilities().getRules(null) + '"';
     }
 }

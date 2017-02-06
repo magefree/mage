@@ -71,7 +71,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
         this.amount = amount;
         StringBuilder sb = new StringBuilder();
         for (CardType theCardtype : card.getCardType()) {
-            sb.append(theCardtype.toString().toLowerCase(Locale.ENGLISH)).append(" ");
+            sb.append(theCardtype.toString().toLowerCase(Locale.ENGLISH)).append(' ');
         }
         this.cardtype = sb.toString().trim();
         addSubAbility(new GraftStaticAbility(amount));
@@ -113,7 +113,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Graft");
-        sb.append(" ").append(amount).append(" <i>(This ").append(cardtype).append(" enters the battlefield with ")
+        sb.append(' ').append(amount).append(" <i>(This ").append(cardtype).append(" enters the battlefield with ")
                 .append(amount == 1 ? "a" : CardUtil.numberToText(amount))
                 .append(" +1/+1 counter on it. Whenever a creature enters the battlefield, you may move a +1/+1 counter from this ")
                 .append(cardtype).append(" onto it.)</i>");

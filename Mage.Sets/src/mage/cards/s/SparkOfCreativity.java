@@ -98,7 +98,7 @@ class SparkOfCreativityEffect extends OneShotEffect {
                 Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (targetCreature != null) {
                     int cmc = card.getManaCost().convertedManaCost();
-                    if (controller.chooseUse(outcome, "Let " + sourceObject.getLogName() + " deal " + cmc + " damage to " + targetCreature.getLogName() + "?", source, game)) {
+                    if (controller.chooseUse(outcome, "Let " + sourceObject.getLogName() + " deal " + cmc + " damage to " + targetCreature.getLogName() + '?', source, game)) {
                         targetCreature.damage(cmc, source.getSourceId(), game, false, true);
                         return true;
                     }

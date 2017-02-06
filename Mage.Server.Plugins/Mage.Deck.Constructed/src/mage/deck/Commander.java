@@ -142,16 +142,16 @@ public class Commander extends Constructed {
         } else {
             for (Card commander : deck.getSideboard()) {
                 if (bannedCommander.contains(commander.getName())) {
-                    invalid.put("Commander", "Commander banned (" + commander.getName() + ")");
+                    invalid.put("Commander", "Commander banned (" + commander.getName() + ')');
                     valid = false;
                 }
                 if ((!commander.getCardType().contains(CardType.CREATURE) || !commander.getSupertype().contains("Legendary"))
                         && (!commander.getCardType().contains(CardType.PLANESWALKER) || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
-                    invalid.put("Commander", "Commander invalid (" + commander.getName() + ")");
+                    invalid.put("Commander", "Commander invalid (" + commander.getName() + ')');
                     valid = false;
                 }
                 if (deck.getSideboard().size() == 2 && !commander.getAbilities().contains(PartnerAbility.getInstance())) {
-                    invalid.put("Commander", "Commander without Partner (" + commander.getName() + ")");
+                    invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
                     valid = false;
                 }
                 FilterMana commanderColor = CardUtil.getColorIdentity(commander);
@@ -174,7 +174,7 @@ public class Commander extends Constructed {
         }
         for (Card card : deck.getCards()) {
             if (!cardHasValidColor(colorIdentity, card)) {
-                invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ")");
+                invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
                 valid = false;
             }
         }

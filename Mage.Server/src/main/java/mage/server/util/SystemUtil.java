@@ -56,7 +56,7 @@ public class SystemUtil {
             try (Scanner scanner = new Scanner(f)) {
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine().trim();
-                    if (line.trim().isEmpty() || line.startsWith("#")) {
+                    if (line.isEmpty() || line.startsWith("#")) {
                         continue;
                     }
 
@@ -69,11 +69,12 @@ public class SystemUtil {
                     String zone = m.group(1);
                     String nickname = m.group(2);
 
-                    Player player = findPlayer(game, nickname);
-                    if (player == null) {
+                    Optional<Player> playerOptional = findPlayer(game, nickname);
+                    if (!playerOptional.isPresent()) {
                         logger.warn("Was skipped: " + line);
                         continue;
                     }
+                    Player player = playerOptional.get();
 
                     Zone gameZone;
                     if ("hand".equalsIgnoreCase(zone)) {
@@ -148,13 +149,13 @@ public class SystemUtil {
      * @param name
      * @return
      */
-    private static Player findPlayer(Game game, String name) {
+    private static Optional<Player> findPlayer(Game game, String name) {
         for (Player player : game.getPlayers().values()) {
             if (player.getName().equals(name)) {
-                return player;
+                return Optional.of(player);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     public static String sanitize(String input) {
@@ -162,15 +163,6 @@ public class SystemUtil {
         //Matcher matcher = pattern.matcher(input);
         //return matcher.replaceAll("");
         return input.replaceAll("[^a-zA-Z0-9]", "");
-    }
-
-    public static void main(String... args) {
-        System.out.println(sanitize("123"));
-        System.out.println(sanitize("AaAaD_123"));
-        System.out.println(sanitize("--sas-"));
-        System.out.println(sanitize("anPlsdf123_") + "|");
-        System.out.println(sanitize("anPlsdf123 ") + "|");
-        System.out.println(sanitize("anPlsdf123\r\n") + "|");
     }
 
     /**

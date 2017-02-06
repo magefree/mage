@@ -113,7 +113,7 @@ class ManifoldInsightsEffect extends OneShotEffect {
                 }
             }
             controller.moveCards(chosenCards, Zone.HAND, source, game);
-            while (topLib.size() > 0 && controller.isInGame()) {
+            while (!topLib.isEmpty() && controller.isInGame()) {
                 Card card = topLib.getRandom(game);
                 if (card != null) {
                     topLib.remove(card);

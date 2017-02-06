@@ -48,7 +48,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
     public enum LoseType {
 
         NONE, ALL, ALL_BUT_COLOR, ABILITIES, ABILITIES_SUBTYPE_AND_PT
-    };
+    }
 
     protected Token token;
     protected String type;
@@ -86,7 +86,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getSupertype().size() > 0) {
+                            if (!token.getSupertype().isEmpty()) {
                                 for (String t : token.getSupertype()) {
                                     if (!permanent.getSupertype().contains(t)) {
                                         permanent.getSupertype().add(t);
@@ -100,7 +100,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                     permanent.getCardType().clear();
                                     break;
                             }
-                            if (token.getCardType().size() > 0) {
+                            if (!token.getCardType().isEmpty()) {
                                 for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
                                         permanent.getCardType().add(t);
@@ -115,7 +115,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                     permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
                                     break;
                             }
-                            if (token.getSubtype(game).size() > 0) {
+                            if (!token.getSubtype(game).isEmpty()) {
                                 for (String t : token.getSubtype(game)) {
                                     if (!permanent.getSubtype(game).contains(t)) {
                                         permanent.getSubtype(game).add(t);
@@ -148,7 +148,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                     permanent.removeAllAbilities(source.getSourceId(), game);
                                     break;
                             }
-                            if (token.getAbilities().size() > 0) {
+                            if (!token.getAbilities().isEmpty()) {
                                 for (Ability ability : token.getAbilities()) {
                                     permanent.addAbility(ability, source.getSourceId(), game);
                                 }

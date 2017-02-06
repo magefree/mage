@@ -78,22 +78,22 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         Card cardFound = null;
         if (controller != null && sourceObject != null) {
-            if (forceToSearchBoth || controller.chooseUse(outcome, "Search your library for a card named " + filter.getMessage() + "?", source, game)) {
+            if (forceToSearchBoth || controller.chooseUse(outcome, "Search your library for a card named " + filter.getMessage() + '?', source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
                 target.clearChosen();
                 if (controller.searchLibrary(target, game)) {
-                    if (target.getTargets().size() > 0) {
+                    if (!target.getTargets().isEmpty()) {
                         cardFound = game.getCard(target.getFirstTarget());
                     }
                 }
                 controller.shuffleLibrary(source, game);
             }
 
-            if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a card named " + filter.getMessage() + "?", source, game)) {
+            if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a card named " + filter.getMessage() + '?', source, game)) {
                 TargetCard target = new TargetCard(0, 1, Zone.GRAVEYARD, filter);
                 target.clearChosen();
                 if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
-                    if (target.getTargets().size() > 0) {
+                    if (!target.getTargets().isEmpty()) {
                         cardFound = game.getCard(target.getFirstTarget());
                     }
                 }

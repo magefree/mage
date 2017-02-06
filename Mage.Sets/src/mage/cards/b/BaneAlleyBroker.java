@@ -176,7 +176,7 @@ class TargetCardInBaneAlleyBrokerExile extends TargetCardInExile {
         if (sourceCard != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
             ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null && exile.size() > 0) {
+            if (exile != null && !exile.isEmpty()) {
                 possibleTargets.addAll(exile);
             }
         }
@@ -189,7 +189,7 @@ class TargetCardInBaneAlleyBrokerExile extends TargetCardInExile {
         if (sourceCard != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
             ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null && exile.size() > 0) {
+            if (exile != null && !exile.isEmpty()) {
                 return true;
             }
         }

@@ -77,7 +77,7 @@ public class BoosterGenerationTest extends MageTestBase {
                 sb.append(", ");
             }
         }
-        sb.append("] (").append(cards.size()).append(")");
+        sb.append("] (").append(cards.size()).append(')');
         return sb.toString();
     }
 

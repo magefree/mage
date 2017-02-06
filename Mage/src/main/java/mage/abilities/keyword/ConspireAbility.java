@@ -195,7 +195,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         StringBuilder sb = new StringBuilder();
         if (conspireCost != null) {
             sb.append(conspireCost.getText(false));
-            sb.append(" ").append(conspireCost.getReminderText());
+            sb.append(' ').append(conspireCost.getReminderText());
         }
         return sb.toString();
     }

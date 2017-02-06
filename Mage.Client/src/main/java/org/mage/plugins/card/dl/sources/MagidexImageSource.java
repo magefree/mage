@@ -74,7 +74,7 @@ public class MagidexImageSource implements CardImageSource {
         }
 
         // This will properly escape the url
-        URI uri = new URI("http", "magidex.com", "/extstatic/card/" + cardSet + "/" + cardDownloadName + ".jpg", null, null);
+        URI uri = new URI("http", "magidex.com", "/extstatic/card/" + cardSet + '/' + cardDownloadName + ".jpg", null, null);
         return  uri.toASCIIString();
     }
 

@@ -101,7 +101,7 @@ class KnowledgePoolEffect1 extends OneShotEffect {
             if (player != null) {
                 player.moveCardsToExile(player.getLibrary().getTopCards(game, 3), source, game, true,
                         CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()),
-                        sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ")");
+                        sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ')');
             }
         }
         return true;
