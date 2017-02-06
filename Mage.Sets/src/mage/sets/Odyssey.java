@@ -238,6 +238,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Nantuko Mentor", 255, Rarity.RARE, mage.cards.n.NantukoMentor.class));
         cards.add(new SetCardInfo("Need for Speed", 209, Rarity.RARE, mage.cards.n.NeedForSpeed.class));
         cards.add(new SetCardInfo("Nefarious Lich", 153, Rarity.RARE, mage.cards.n.NefariousLich.class));
+        cards.add(new SetCardInfo("New Frontiers", 257, Rarity.RARE, mage.cards.n.NewFrontiers.class));
         cards.add(new SetCardInfo("Nimble Mongoose", 258, Rarity.UNCOMMON, mage.cards.n.NimbleMongoose.class));
         cards.add(new SetCardInfo("Nomad Decoy", 37, Rarity.UNCOMMON, mage.cards.n.NomadDecoy.class));
         cards.add(new SetCardInfo("Nomad Stadium", 322, Rarity.UNCOMMON, mage.cards.n.NomadStadium.class));
