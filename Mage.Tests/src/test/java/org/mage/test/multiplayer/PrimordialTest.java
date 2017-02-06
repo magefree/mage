@@ -68,6 +68,39 @@ public class PrimordialTest extends CardTestMultiPlayerBase {
     }
 
     /**
+     * Sepulchral Primordial's "enter the battlefield" effect works correctly on
+     * cast, but does not trigger if he is returned to the battlefield by other
+     * means (e.g. summoned from the graveyard). I've encountered this in
+     * 4-player commander games with other humans.
+     */
+    @Test
+    public void SepulchralPrimordialFromGraveyardTest() {
+        // Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.
+        addCard(Zone.HAND, playerA, "Miraculous Recovery", 1); // Instant {4}{W}
+        // When Sepulchral Primordial enters the battlefield, for each opponent, you may put up to one
+        // target creature card from that player's graveyard onto the battlefield under your control.
+        addCard(Zone.GRAVEYARD, playerA, "Sepulchral Primordial");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+
+        // Player order: A -> D -> C -> B
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
+        addCard(Zone.GRAVEYARD, playerC, "Walking Corpse");
+        addCard(Zone.GRAVEYARD, playerD, "Pillarfield Ox");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Miraculous Recovery", "Sepulchral Primordial");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Sepulchral Primordial", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerA, "Walking Corpse", 0);
+        assertPermanentCount(playerA, "Pillarfield Ox", 1);
+        assertGraveyardCount(playerC, "Walking Corpse", 1);
+        assertGraveyardCount(playerD, "Pillarfield Ox", 0);
+    }
+
+    /**
      * Diluvian Primordial ETB trigger never happened in a 3 player FFA
      * commander game. He just resolved, no ETB trigger occurred.
      */

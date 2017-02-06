@@ -37,11 +37,12 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.f.FlameheartWerewolf;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.f.FlameheartWerewolf;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -61,7 +62,8 @@ public class KessigForgemaster extends CardImpl {
         this.secondSideCardClazz = FlameheartWerewolf.class;
 
         // Whenever Kessig Forgemaster blocks or becomes blocked by a creature, Kessig Forgemaster deals 1 damage to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(1, true, "that creature"),
+                StaticFilters.FILTER_PERMANENT_CREATURE, false, null, true));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Kessig Forgemaster.
         this.addAbility(new TransformAbility());

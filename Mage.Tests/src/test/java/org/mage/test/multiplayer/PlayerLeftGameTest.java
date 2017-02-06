@@ -47,6 +47,7 @@ public class PlayerLeftGameTest extends CardTestMultiPlayerBase {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
+        // Start Life = 2
         Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, 0, 2);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, playerA, "PlayerA");
@@ -195,6 +196,37 @@ public class PlayerLeftGameTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerA, "Jace, Unraveler of Secrets", 0); // Removed from game because player C left the game
         assertEmblemCount(playerA, 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+    }
+
+    /**
+     * Situation: I attacked an opponent with some creatures with True
+     * Conviction in play. There were multiple "deals combat damage to a
+     * player"-triggers (Edric, Spymaster of Trest, Daxos of Meletis et al),
+     * then the opponent lost the game during the first strike combat
+     * damage-step . In the second combat damage step the triggers went on the
+     * stack again, although there was no player being dealt damage (multiplayer
+     * game, so the game wasn't over yet). I don't think these abilities should
+     * trigger again here.
+     */
+    @Test
+    public void TestPlayerDiesDuringFirstStrikeDamageStep() {
+        // Creatures you control have double strike and lifelink.
+        addCard(Zone.BATTLEFIELD, playerD, "True Conviction");
+        // Whenever a creature deals combat damage to one of your opponents, its controller may draw a card.
+        addCard(Zone.BATTLEFIELD, playerD, "Edric, Spymaster of Trest");
+        addCard(Zone.BATTLEFIELD, playerD, "Dross Crocodile", 8); // Creature 5/1
+
+        attack(2, playerD, "Dross Crocodile", playerC);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerC, -3);
+        assertLife(playerD, 7);
+
+        assertHandCount(playerD, 2); // 1 (normal draw) + 1 from True Convition
+        assertPermanentCount(playerC, 0);
+
     }
 
 }

@@ -23,6 +23,7 @@ public class UserData implements Serializable {
     protected boolean passPriorityActivation;
     protected boolean autoOrderTrigger;
     protected boolean useFirstManaAbility = false;
+    private String userIdStr;
 
     protected String matchHistory;
     protected int matchQuitRatio;
@@ -36,7 +37,7 @@ public class UserData implements Serializable {
     public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced,
             boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
             String flagName, boolean askMoveToGraveOrder, boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted,
-            boolean passPriorityCast, boolean passPriorityActivation, boolean autoOrderTrigger, boolean useFirstManaAbility) {
+            boolean passPriorityCast, boolean passPriorityActivation, boolean autoOrderTrigger, boolean useFirstManaAbility, String userIdStr) {
         this.groupId = userGroup.getGroupId();
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
@@ -55,6 +56,7 @@ public class UserData implements Serializable {
         this.matchQuitRatio = 0;
         this.tourneyHistory = "";
         this.tourneyQuitRatio = 0;
+        this.userIdStr = userIdStr;
     }
 
     public void update(UserData userData) {
@@ -72,11 +74,12 @@ public class UserData implements Serializable {
         this.passPriorityActivation = userData.passPriorityActivation;
         this.autoOrderTrigger = userData.autoOrderTrigger;
         this.useFirstManaAbility = userData.useFirstManaAbility;
+        this.userIdStr = userData.userIdStr;
         // todo: why we don't copy user stats here?
     }
 
     public static UserData getDefaultUserDataView() {
-        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, getDefaultFlagName(), false, true, true, false, false, false, false);
+        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, getDefaultFlagName(), false, true, true, false, false, false, false, "");
     }
 
     public void setGroupId(int groupId) {

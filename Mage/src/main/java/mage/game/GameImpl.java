@@ -52,6 +52,7 @@ import mage.abilities.OpeningHandAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.AttachableToRestrictedAbility;
+import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -1923,6 +1924,19 @@ public abstract class GameImpl implements Game, Serializable {
                 perm.getCounters(this).removeCounter(CounterType.M1M1, min);
             }
 
+            // 20170120 - 704.5s
+            // If a permanent with an ability that says it can't have more than N counters of a certain kind on it
+            // has more than N counters of that kind on it, all but N of those counters are removed from it.
+            for (Ability ability : perm.getAbilities(this)) {
+                if (ability instanceof CantHaveMoreThanAmountCountersSourceAbility) {
+                    CantHaveMoreThanAmountCountersSourceAbility counterAbility = (CantHaveMoreThanAmountCountersSourceAbility) ability;
+                    int count = perm.getCounters(this).getCount(counterAbility.getCounterType());
+                    if (count > counterAbility.getAmount()) {
+                        perm.removeCounters(counterAbility.getCounterType().getName(), count - counterAbility.getAmount(), this);
+                        somethingHappened = true;
+                    }
+                }
+            }
         }
         //201300713 - 704.5j
         // If a player controls two or more planeswalkers that share a planeswalker type, that player

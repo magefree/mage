@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SilvergillDouser extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Merfolk and/or Faeries you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk and/or Faeries you control");
 
     static {
         filter.add(Predicates.or(new SubtypePredicate("Merfolk"), new SubtypePredicate("Faerie")));
@@ -66,7 +66,7 @@ public class SilvergillDouser extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target creature gets -X/-0 until end of turn, where X is the number of Merfolk and/or Faeries you control.
-        DynamicValue number = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent(filter), -1);
+        DynamicValue number = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(filter), -1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(number, new StaticValue(0), Duration.EndOfTurn, true), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

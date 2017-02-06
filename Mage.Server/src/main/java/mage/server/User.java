@@ -96,6 +96,7 @@ public class User {
     private Date lockedUntil;
     private final AuthorizedUser authorizedUser;
     private String clientVersion;
+    private String userIdStr;
 
     public User(String userName, String host, AuthorizedUser authorizedUser) {
         this.userId = UUID.randomUUID();
@@ -127,6 +128,7 @@ public class User {
         this.tablesToDelete = new ArrayList<>();
         this.sessionId = "";
         this.clientVersion = "";
+        this.userIdStr = "";
     }
 
     public String getName() {
@@ -178,6 +180,14 @@ public class User {
         this.clientVersion = clientVersion;
     }
 
+    public void setUserIdStr(String userIdStr) {
+        this.userIdStr = userIdStr;
+    }
+
+    public String getUserIdStr() {
+        return this.userIdStr;
+    }
+
     public String getClientVersion() {
         return clientVersion;
     }
@@ -199,7 +209,7 @@ public class User {
 
     public void lostConnection() {
         // Because watched games don't get restored after reconnection call stop watching
-        for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext(); ) {
+        for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext();) {
             UUID gameId = iterator.next();
             GameManager.getInstance().stopWatching(gameId, userId);
             iterator.remove();
@@ -781,7 +791,7 @@ public class User {
         }
         return number;
     }
-    
+
     public String getEmail() {
         if (authorizedUser != null) {
             return authorizedUser.email;

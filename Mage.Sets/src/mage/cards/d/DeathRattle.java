@@ -45,22 +45,22 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DeathRattle extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nongreen creature");
+
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
     }
 
     public DeathRattle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}");
 
         // Delve
         this.addAbility(new DelveAbility());
 
         // Destroy target nongreen creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+
     }
 
     public DeathRattle(final DeathRattle card) {

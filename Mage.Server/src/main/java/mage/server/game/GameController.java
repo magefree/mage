@@ -44,7 +44,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPOutputStream;
-
 import mage.MageException;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -313,10 +312,10 @@ public class GameController implements GameCallback {
             logger.fatal("- userId: " + userId);
             return;
         }
-		if (!user.isPresent()) {
-			logger.fatal("User not found : "+userId);
-			return;
-		}
+        if (!user.isPresent()) {
+            logger.fatal("User not found : " + userId);
+            return;
+        }
         Player player = game.getPlayer(playerId);
         if (player == null) {
             logger.fatal("Player not found - playerId: " + playerId);
@@ -350,8 +349,9 @@ public class GameController implements GameCallback {
     private void sendInfoAboutPlayersNotJoinedYet() {
         for (Player player : game.getPlayers().values()) {
             if (!player.hasLeft() && player.isHuman()) {
-                User user = getUserByPlayerId(player.getId()).get();
-                if (user != null) {
+                Optional<User> requestedUser = getUserByPlayerId(player.getId());
+                if (requestedUser.isPresent()) {
+                    User user = requestedUser.get();
                     if (!user.isConnected()) {
                         if (gameSessions.get(player.getId()) == null) {
                             // join the game because player has not joined are was removed because of disconnect

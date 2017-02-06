@@ -33,6 +33,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -120,15 +121,13 @@ class CascadeEffect extends OneShotEffect {
                 break;
             }
             controller.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
-        } while (controller.isInGame() && card.getCardType().contains(CardType.LAND) || card.getConvertedManaCost() >= sourceCost);
+        } while (controller.isInGame() && (card.getCardType().contains(CardType.LAND) || !cardThatCostsLess(sourceCost, card, game)));
+
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
         if (card != null) {
-            if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + '?', source, game)) {
-                if (controller.cast(card.getSpellAbility(), game, true)) {
-                    exile.remove(card.getId());
-                }
-            }
+            if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + "?", source, game)) {
+                controller.cast(card.getSpellAbility(), game, true);
         }
         // Move the remaining cards to the buttom of the library in a random order
         Cards cardsFromExile = new CardsImpl();
@@ -148,4 +147,12 @@ class CascadeEffect extends OneShotEffect {
         return new CascadeEffect(this);
     }
 
+    private boolean cardThatCostsLess(int value, Card card, Game game) {
+        if (card instanceof SplitCard) {
+            return ((SplitCard) card).getLeftHalfCard().getConvertedManaCost() < value
+                    || ((SplitCard) card).getRightHalfCard().getConvertedManaCost() < value;
+        } else {
+            return card.getConvertedManaCost() < value;
+        }
+    }
 }

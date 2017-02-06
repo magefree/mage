@@ -107,13 +107,6 @@ public class ChatManager {
         this.broadcast(chatId, userName, message, color, withTime, messageType, null);
     }
 
-    private boolean containsSwearing(String message) {
-        if (message != null && message.toLowerCase().matches("^.*(anal|asshole|balls|bastard|bitch|blowjob|cock|crap|cunt|cum|damn|dick|dildo|douche|fag|fuck|idiot|moron|penis|piss|prick|pussy|rape|rapist|sex|screw|shit|slut|vagina).*$")) {
-            return true;
-        }
-        return false;
-    }
-
     final Pattern cardNamePattern = Pattern.compile("\\[(.*?)\\]");
 
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
@@ -167,11 +160,6 @@ public class ChatManager {
                     }
 
                     userMessages.put(userName, message);
-                    if (containsSwearing(messageToCheck)) {
-                        String informUser = "Your message appears to contain profanity";
-                        chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
-                        return;
-                    }
                 }
 
                 if (messageType == MessageType.TALK) {
@@ -204,6 +192,7 @@ public class ChatManager {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
         if (doError) {
             message += new StringBuilder("<br/>Invalid User Command '" + message + "'.").append(COMMANDS_LIST).toString();
+            message += "<br/>Type <font color=green>\\w " + user.getName() + " profanity 0 (or 1 or 2)</font> to use/not use the profanity filter";
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
@@ -239,6 +228,7 @@ public class ChatManager {
         }
         if (command.equals("L") || command.equals("LIST")) {
             message += COMMANDS_LIST;
+            message += "<br/>Type <font color=green>\\w " + user.getName() + " profanity 0 (or 1 or 2)</font> to use/not use the profanity filter";
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }

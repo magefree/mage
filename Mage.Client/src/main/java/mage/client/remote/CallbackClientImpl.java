@@ -421,7 +421,8 @@ public class CallbackClientImpl implements CallbackClient {
             case TABLES:
                 usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" menu to the top right .")
                         .append("<br/>Download icons and symbols by using the \"Symbols\" menu to the top right.")
-                        .append("<br/>\\list - Show a list of available chat commands.").toString(),
+                        .append("<br/>\\list - Show a list of available chat commands.")
+                        .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
 

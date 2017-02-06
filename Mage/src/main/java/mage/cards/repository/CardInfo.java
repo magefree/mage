@@ -30,11 +30,16 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.cards.Card;
+import mage.cards.CardGraphicInfo;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.FrameStyle;
@@ -44,11 +49,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  *
@@ -205,7 +205,7 @@ public class CardInfo {
     }
 
     public Card getCard() {
-        return CardImpl.createCard(className, new CardSetInfo(name, setCode, cardNumber, rarity));
+        return CardImpl.createCard(className, new CardSetInfo(name, setCode, cardNumber, rarity, new CardGraphicInfo(FrameStyle.valueOf(frameStyle), variousArt)));
     }
 
     public Card getMockCard() {
@@ -216,7 +216,9 @@ public class CardInfo {
         }
     }
 
-    public boolean usesVariousArt() { return variousArt; }
+    public boolean usesVariousArt() {
+        return variousArt;
+    }
 
     public ObjectColor getColor() {
         ObjectColor color = new ObjectColor();

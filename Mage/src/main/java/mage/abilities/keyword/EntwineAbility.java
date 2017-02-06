@@ -105,25 +105,34 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
     }
 
     @Override
-    public void addOptionalAdditionalModeCosts(Ability ability, Game game) {
+    public void changeModes(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             Player player = game.getPlayer(controllerId);
             if (player != null) {
                 this.resetCosts();
                 if (additionalCost != null) {
-                    if (player.chooseUse(Outcome.Benefit, "Pay " + additionalCost.getText(false) + " ?", ability, game)) {
+                    if (additionalCost.canPay(ability, ability.getSourceId(), ability.getControllerId(), game)
+                            && player.chooseUse(Outcome.Benefit, "Pay " + additionalCost.getText(false) + " ?", ability, game)) {
+
                         additionalCost.activate();
-                        for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext();) {
-                            Cost cost = (Cost) it.next();
-                            if (cost instanceof ManaCostsImpl) {
-                                ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
-                            } else {
-                                ability.getCosts().add(cost.copy());
-                            }
-                        }
+                        ability.getModes().setAdditionalCost(this);
                         ability.getModes().setMinModes(2);
                         ability.getModes().setMaxModes(2);
                     }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void addOptionalAdditionalModeCosts(Ability ability, Game game) {
+        if (additionalCost.isActivated()) {
+            for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext();) {
+                Cost cost = (Cost) it.next();
+                if (cost instanceof ManaCostsImpl) {
+                    ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                } else {
+                    ability.getCosts().add(cost.copy());
                 }
             }
         }

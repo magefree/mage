@@ -132,7 +132,7 @@ public class MageServerImpl implements MageServer {
         }
         return true;
     }
-    
+
     @Override
     public boolean resetPassword(String sessionId, String email, String authToken, String password) throws MageException {
         if (!ConfigSettings.getInstance().isAuthenticationActivated()) {
@@ -158,13 +158,13 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean connectUser(String userName, String password, String sessionId, MageVersion version) throws MageException {
+    public boolean connectUser(String userName, String password, String sessionId, MageVersion version, String userIdStr) throws MageException {
         try {
             if (version.compareTo(Main.getVersion()) != 0) {
                 logger.info("MageVersionException: userName=" + userName + ", version=" + version);
                 throw new MageVersionException(version, Main.getVersion());
             }
-            return SessionManager.getInstance().connectUser(sessionId, userName, password);
+            return SessionManager.getInstance().connectUser(sessionId, userName, password, userIdStr);
         } catch (MageException ex) {
             if (ex instanceof MageVersionException) {
                 throw (MageVersionException) ex;
@@ -175,11 +175,11 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean setUserData(final String userName, final String sessionId, final UserData userData, final String clientVersion) throws MageException {
+    public boolean setUserData(final String userName, final String sessionId, final UserData userData, final String clientVersion, final String userIdStr) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
-                return SessionManager.getInstance().setUserData(userName, sessionId, userData, clientVersion);
+                return SessionManager.getInstance().setUserData(userName, sessionId, userData, clientVersion, userIdStr);
             }
         });
     }
@@ -943,7 +943,8 @@ public class MageServerImpl implements MageServer {
                             user.getUserState().toString(),
                             user.getChatLockedUntil(),
                             user.getClientVersion(),
-                            user.getEmail()
+                            user.getEmail(),
+                            user.getUserIdStr()
                     ));
                 }
                 return users;

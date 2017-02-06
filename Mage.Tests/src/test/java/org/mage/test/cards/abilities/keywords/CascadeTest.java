@@ -171,27 +171,70 @@ public class CascadeTest extends CardTestPlayerBase {
     public void testHaveToPayAdditionalCosts() {
 
         playerA.getLibrary().clear();
-        // Choose one - You draw five cards and you lose 5 life;
-        //    or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.
+        // Choose one -
+        // - You draw five cards and you lose 5 life;
+        // - put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.
         // Entwine {4} (Choose both if you pay the entwine cost.)
         addCard(Zone.LIBRARY, playerA, "Promise of Power", 1);
-       // addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.LIBRARY, playerA, "Mountain", 5);
+        // addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        // Cascade
+        // Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less.
+        // You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
         addCard(Zone.HAND, playerA, "Enlisted Wurm"); // Creature {4}{G}{W}  5/5
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enlisted Wurm");
+        setChoice(playerA, "Yes"); // Use cascade on Promise of Power
+        setChoice(playerA, "No"); // Pay no Entwine
+        setModeChoice(playerA, "1");
 
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Enlisted Wurm", 1);
         assertLife(playerA, 15);
         assertHandCount(playerA, 5);
         assertPermanentCount(playerA, "Demon", 0);
+        assertPermanentCount(playerA, "Enlisted Wurm", 1);
 
     }
+
+    /**
+     * Cascade dont work with split cards.
+     *
+     * For example: Ardent Plea + Breaking/Entering
+     */
+    @Test
+    public void testWithSplitSpell() {
+
+        playerA.getLibrary().clear();
+        // Breaking - Target player puts the top eight cards of his or her library into his or her graveyard.
+        // Entering - Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.
+        // Fuse (You may cast one or both halves of this card from your hand.)
+        addCard(Zone.LIBRARY, playerA, "Breaking // Entering", 1); // Sorcery {U}{B} // {4}{U}{B}
+        // addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
+        // Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
+        addCard(Zone.HAND, playerA, "Ardent Plea"); // Enchantment {1}{W}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardent Plea");
+        setChoice(playerA, "Yes");
+        addTarget(playerA, playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Ardent Plea", 1);
+        assertGraveyardCount(playerA, "Breaking // Entering", 1);
+
+        assertGraveyardCount(playerB, 8);
+
+    }
+
 }

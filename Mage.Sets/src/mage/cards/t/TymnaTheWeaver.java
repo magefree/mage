@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -123,7 +124,8 @@ class TymnaTheWeaverEffect extends OneShotEffect {
 
 class TymnaTheWeaverWatcher extends Watcher {
 
-    private final Set<UUID> players = new HashSet<>();
+    // private final Set<UUID> players = new HashSet<>();
+    private final HashMap<UUID, Set<UUID>> players = new HashMap<>();
 
     public TymnaTheWeaverWatcher() {
         super(TymnaTheWeaverWatcher.class.getName(), WatcherScope.GAME);
@@ -131,7 +133,11 @@ class TymnaTheWeaverWatcher extends Watcher {
 
     public TymnaTheWeaverWatcher(final TymnaTheWeaverWatcher watcher) {
         super(watcher);
-        players.addAll(watcher.players);
+        for (UUID playerId : watcher.players.keySet()) {
+            HashSet<UUID> opponents = new HashSet<>();
+            opponents.addAll(watcher.players.get(playerId));
+            players.put(playerId, opponents);
+        }
     }
 
     @Override
@@ -144,7 +150,11 @@ class TymnaTheWeaverWatcher extends Watcher {
         if (event.getType() == EventType.DAMAGED_PLAYER) {
             DamagedPlayerEvent dEvent = (DamagedPlayerEvent) event;
             if (dEvent.isCombatDamage()) {
-                players.add(event.getTargetId());
+                if (players.containsKey(event.getTargetId())) { // opponenets can die before number of opponents are checked
+                    players.get(event.getTargetId()).addAll(game.getOpponents(event.getTargetId()));
+                } else {
+                    players.put(event.getTargetId(), game.getOpponents(event.getTargetId()));
+                }
             }
         }
     }
@@ -157,8 +167,8 @@ class TymnaTheWeaverWatcher extends Watcher {
 
     public int opponentsThatGotCombatDamage(UUID playerId, Game game) {
         int numberOfOpponents = 0;
-        for (UUID opponentId : game.getOpponents(playerId)) {
-            if (players.contains(opponentId)) {
+        for (Set<UUID> opponents : players.values()) {
+            if (opponents.contains(playerId)) {
                 numberOfOpponents++;
             }
         }
