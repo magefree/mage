@@ -74,7 +74,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
             if(toRemove != null && p.getCounters(game).getCount(toRemove.getName()) >= toRemove.getCount()) {
                 p.removeCounters(toRemove.getName(), toRemove.getCount(), game);
                 if(!game.isSimulation())
-                    game.informPlayers("Removed " + toRemove.getCount() + " " + toRemove.getName()
+                    game.informPlayers("Removed " + toRemove.getCount() + ' ' + toRemove.getName()
                         + " counter from " + p.getName());
                 return true;
             }
@@ -83,7 +83,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
         if (c != null && counter != null && c.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
             c.removeCounters(counter.getName(), counter.getCount(), game);
             if (!game.isSimulation())
-                game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
+                game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(' ').append(counter.getName())
                     .append(" counter from ").append(c.getName())
                     .append(" (").append(c.getCounters(game).getCount(counter.getName())).append(" left)").toString());
             return true;
@@ -93,7 +93,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
 
     private Counter selectCounterType(Game game, Ability source, Permanent permanent) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null && permanent.getCounters(game).size() > 0) {
+        if(controller != null && !permanent.getCounters(game).isEmpty()) {
             String counterName = null;
             if(permanent.getCounters(game).size() > 1) {
                 Choice choice = new ChoiceImpl(true);
@@ -135,7 +135,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
             text += "a counter";
         }
         else {
-           text += CardUtil.numberToText(counter.getCount(), "a") + " " + counter.getName();
+           text += CardUtil.numberToText(counter.getCount(), "a") + ' ' + counter.getName();
            text += counter.getCount() > 1 ? " counters" : " counter";
         }
         text += " from target " + mode.getTargets().get(0).getTargetName();

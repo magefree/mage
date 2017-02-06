@@ -107,14 +107,14 @@ class ChromeMoxEffect extends OneShotEffect {
             target.setNotTarget(true);
             Card cardToImprint = null;
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (controller.getHand().size() > 0 && controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            if (!controller.getHand().isEmpty() && controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
                 cardToImprint = controller.getHand().get(target.getFirstTarget(), game);
             }
             if (sourcePermanent != null) {
                 if (cardToImprint != null) {
                     controller.moveCardsToExile(cardToImprint, source, game, true, source.getSourceId(), sourceObject.getIdName() + " (Imprint)");
                     sourcePermanent.imprint(cardToImprint.getId(), game);
-                    sourcePermanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + GameLog.getColoredObjectIdNameForTooltip(cardToImprint) + "]"), game);
+                    sourcePermanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + GameLog.getColoredObjectIdNameForTooltip(cardToImprint) + ']'), game);
                 } else {
                     sourcePermanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - None]"), game);
                 }
@@ -154,7 +154,7 @@ class ChromeMoxManaEffect extends ManaEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (permanent != null && player != null) {
             List<UUID> imprinted = permanent.getImprinted();
-            if (imprinted.size() > 0) {
+            if (!imprinted.isEmpty()) {
                 Card imprintedCard = game.getCard(imprinted.get(0));
                 if (imprintedCard != null) {
                     Choice choice = new ChoiceColor(true);
@@ -177,7 +177,7 @@ class ChromeMoxManaEffect extends ManaEffect {
                         choice.getChoices().add("White");
                     }
 
-                    if (choice.getChoices().size() > 0) {
+                    if (!choice.getChoices().isEmpty()) {
                         Mana mana = new Mana();
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());

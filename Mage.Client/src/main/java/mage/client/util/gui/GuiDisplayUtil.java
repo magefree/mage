@@ -222,7 +222,7 @@ public class GuiDisplayUtil {
         buffer.append("<tr><td valign='top'><b>");
         buffer.append(card.getDisplayName());
         if (card.isGameObject()) {
-            buffer.append(" [").append(card.getId().toString().substring(0, 3)).append("]");
+            buffer.append(" [").append(card.getId().toString().substring(0, 3)).append(']');
         }
         buffer.append("</b></td><td align='right' valign='top' style='width:");
         buffer.append(symbolCount * GUISizeHelper.cardTooltipFontSize);
@@ -232,7 +232,7 @@ public class GuiDisplayUtil {
         }
         buffer.append("</td></tr></table>");
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td style='margin-left: 1px'>");
-        String imageSize = " width=" + GUISizeHelper.cardTooltipFontSize + " height=" + GUISizeHelper.cardTooltipFontSize + ">";
+        String imageSize = " width=" + GUISizeHelper.cardTooltipFontSize + " height=" + GUISizeHelper.cardTooltipFontSize + '>';
         if (card.getColor().isWhite()) {
             buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W' ").append(imageSize);
         }
@@ -281,7 +281,7 @@ public class GuiDisplayUtil {
 
         String pt = "";
         if (CardUtil.isCreature(card)) {
-            pt = card.getPower() + "/" + card.getToughness();
+            pt = card.getPower() + '/' + card.getToughness();
         } else if (CardUtil.isPlaneswalker(card)) {
             pt = card.getLoyalty();
         }
@@ -291,7 +291,7 @@ public class GuiDisplayUtil {
         buffer.append("<td align='right'>");
         if (!card.isControlledByOwner()) {
             if (card instanceof PermanentView) {
-                buffer.append("[").append(((PermanentView) card).getNameOwner()).append("] ");
+                buffer.append('[').append(((PermanentView) card).getNameOwner()).append("] ");
             } else {
                 buffer.append("[only controlled] ");
             }
@@ -330,7 +330,7 @@ public class GuiDisplayUtil {
                 }
             }
         }
-        if (textLines.lines.size() > 0) {
+        if (!textLines.lines.isEmpty()) {
             for (String textLine : textLines.lines) {
                 if (textLine != null && !textLine.replace(".", "").trim().isEmpty()) {
                     rule.append("<p style='margin: 2px'>").append(textLine).append("</p>");
@@ -339,7 +339,7 @@ public class GuiDisplayUtil {
         }
 
         String legal = rule.toString();
-        if (legal.length() > 0) {
+        if (!legal.isEmpty()) {
             legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this" : card.getName());
             legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this" : card.getName());
             buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.TOOLTIP));
@@ -361,16 +361,16 @@ public class GuiDisplayUtil {
     private static String getTypes(CardView card) {
         String types = "";
         for (String superType : card.getSuperTypes()) {
-            types += superType + " ";
+            types += superType + ' ';
         }
         for (CardType cardType : card.getCardTypes()) {
-            types += cardType.toString() + " ";
+            types += cardType.toString() + ' ';
         }
-        if (card.getSubTypes().size() > 0) {
+        if (!card.getSubTypes().isEmpty()) {
             types += "- ";
         }
         for (String subType : card.getSubTypes()) {
-            types += subType + " ";
+            types += subType + ' ';
         }
         return types.trim();
     }

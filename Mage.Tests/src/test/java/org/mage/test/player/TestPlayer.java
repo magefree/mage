@@ -175,7 +175,7 @@ public class TestPlayer implements Player {
 
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId, game);
-        if (permanents.size() > 0) {
+        if (!permanents.isEmpty()) {
             return permanents.get(0);
         }
         return null;
@@ -200,7 +200,7 @@ public class TestPlayer implements Player {
             return true;
         } else if (groups[2].startsWith("spellOnTopOfStack=")) {
             String spellOnTopOFStack = groups[2].substring(18);
-            if (game.getStack().size() > 0) {
+            if (!game.getStack().isEmpty()) {
                 StackObject stackObject = game.getStack().getFirst();
                 if (stackObject != null && stackObject.getStackAbility().toString().contains(spellOnTopOFStack)) {
                     return true;
@@ -491,7 +491,7 @@ public class TestPlayer implements Player {
         if (numberOfActions == actions.size()) {
             foundNoAction++;
             if (foundNoAction > maxCallsWithoutAction) {
-                throw new AssertionError("More priority calls to " + getName() + " and doing no action than allowed (" + maxCallsWithoutAction + ")");
+                throw new AssertionError("More priority calls to " + getName() + " and doing no action than allowed (" + maxCallsWithoutAction + ')');
             }
         } else {
             foundNoAction = 0;
@@ -671,7 +671,7 @@ public class TestPlayer implements Player {
                                         break;
                                     }
                                 }
-                            } else if ((permanent.getName() + "-" + permanent.getExpansionSetCode()).equals(targetName)) {
+                            } else if ((permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) {
                                 if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
@@ -816,7 +816,7 @@ public class TestPlayer implements Player {
                             filter = ((FilterCreatureOrPlayer) filter).getCreatureFilter();
                         }
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent) filter, game)) {
-                            if (permanent.getName().equals(targetName) || (permanent.getName() + "-" + permanent.getExpansionSetCode()).equals(targetName)) {
+                            if (permanent.getName().equals(targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) {
                                 if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
@@ -841,7 +841,7 @@ public class TestPlayer implements Player {
                     boolean targetFound = false;
                     for (String targetName : targetList) {
                         for (Card card : computerPlayer.getHand().getCards(((TargetCardInHand) target).getFilter(), game)) {
-                            if (card.getName().equals(targetName) || (card.getName() + "-" + card.getExpansionSetCode()).equals(targetName)) {
+                            if (card.getName().equals(targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) {
                                 if (((TargetCardInHand) target).canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                     target.add(card.getId(), game);
                                     targetFound = true;
@@ -863,7 +863,7 @@ public class TestPlayer implements Player {
                     boolean targetFound = false;
                     for (String targetName : targetList) {
                         for (Card card : computerPlayer.getGraveyard().getCards(((TargetCardInYourGraveyard) target).getFilter(), game)) {
-                            if (card.getName().equals(targetName) || (card.getName() + "-" + card.getExpansionSetCode()).equals(targetName)) {
+                            if (card.getName().equals(targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) {
                                 if (((TargetCardInYourGraveyard) target).canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                     target.add(card.getId(), game);
                                     targetFound = true;
@@ -890,7 +890,7 @@ public class TestPlayer implements Player {
                             if (computerPlayer.hasOpponent(opponentId, game)) {
                                 Player opponent = game.getPlayer(opponentId);
                                 for (Card card : opponent.getGraveyard().getCards(((TargetCardInOpponentsGraveyard) target).getFilter(), game)) {
-                                    if (card.getName().equals(targetName) || (card.getName() + "-" + card.getExpansionSetCode()).equals(targetName)) {
+                                    if (card.getName().equals(targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) {
                                         if (((TargetCardInOpponentsGraveyard) target).canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                             target.add(card.getId(), game);
                                             targetFound = true;

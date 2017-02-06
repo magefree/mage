@@ -64,7 +64,7 @@ public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
                 + (onlyCombat ? "combat ":"")
                 + "damage that would be dealt to " 
                 + filter.getMessage()
-                + (duration.toString().isEmpty() ?"": " "+ duration.toString());
+                + (duration.toString().isEmpty() ?"": ' ' + duration.toString());
     }
 
     public PreventAllDamageToAllEffect(final PreventAllDamageToAllEffect effect) {

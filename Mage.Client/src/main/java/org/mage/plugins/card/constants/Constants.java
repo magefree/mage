@@ -22,5 +22,5 @@ public class Constants {
         String IMAGE_PROPERTIES_FILE = "image.url.properties";
     }
 
-    public static final String CARD_IMAGE_PATH_TEMPLATE = "." + File.separator + "plugins" + File.separator + "images/{set}/{name}.{collector}.full.jpg";
+    public static final String CARD_IMAGE_PATH_TEMPLATE = '.' + File.separator + "plugins" + File.separator + "images/{set}/{name}.{collector}.full.jpg";
 }

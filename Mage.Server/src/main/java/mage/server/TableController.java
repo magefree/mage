@@ -179,7 +179,7 @@ public class TableController {
             if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
                 StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
                 for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
-                    sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                    sb.append(entry.getKey()).append(": ").append(entry.getValue()).append('\n');
                 }
                 sb.append("\n\nSelect a deck that is appropriate for the selected format and try again!");
                 user.showUserMessage("Join Table", sb.toString());
@@ -194,7 +194,7 @@ public class TableController {
         int quitRatio = table.getTournament().getOptions().getQuitRatio();
         if (quitRatio < user.getTourneyQuitRatio()) {
             String message = new StringBuilder("Your quit ratio ").append(user.getTourneyQuitRatio())
-                    .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
+                    .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
             user.showUserMessage("Join Table", message);
             return false;
         }
@@ -278,7 +278,7 @@ public class TableController {
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
             StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
             for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
-                sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                sb.append(entry.getKey()).append(": ").append(entry.getValue()).append('\n');
             }
             sb.append("\n\nSelect a deck that is appropriate for the selected format and try again!");
             user.showUserMessage("Join Table", sb.toString());
@@ -292,7 +292,7 @@ public class TableController {
         int quitRatio = table.getMatch().getOptions().getQuitRatio();
         if (quitRatio < user.getMatchQuitRatio()) {
             String message = new StringBuilder("Your quit ratio ").append(user.getMatchQuitRatio())
-                    .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
+                    .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
             user.showUserMessage("Join Table", message);
             return false;
         }
@@ -317,7 +317,7 @@ public class TableController {
             user.showUserMessage("Join Table", message);
             return false;
         }
-        logger.debug("DECK validated: " + table.getValidator().getName() + " " + player.getName() + " " + deck.getName());
+        logger.debug("DECK validated: " + table.getValidator().getName() + ' ' + player.getName() + ' ' + deck.getName());
         if (!player.canJoinTable(table)) {
             user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
             return false;
@@ -505,7 +505,7 @@ public class TableController {
                     if (table.isTournament()) {
                         logger.debug("Quit tournament sub tables for userId: " + userId);
                         TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
-                        logger.debug("Quit tournament  Id: " + table.getTournament().getId() + "(" + table.getTournament().getTournamentState() + ")");
+                        logger.debug("Quit tournament  Id: " + table.getTournament().getId() + '(' + table.getTournament().getTournamentState() + ')');
                         TournamentManager.getInstance().quit(tournament.getId(), userId);
                     } else {
                         MatchPlayer matchPlayer = match.getPlayer(playerId);
@@ -553,7 +553,7 @@ public class TableController {
                     logger.info("Tourn. match started id:" + match.getId() + " tournId: " + table.getTournament().getId());
                 } else {
                     UserManager.getInstance().getUser(userId).ifPresent(user -> {
-                        logger.info("MATCH started [" + match.getName() + "] " + match.getId() + "(" + user.getName() + ")");
+                        logger.info("MATCH started [" + match.getName() + "] " + match.getId() + '(' + user.getName() + ')');
                         logger.debug("- " + match.getOptions().getGameType() + " - " + match.getOptions().getDeckType());
                     });
                 }
@@ -613,7 +613,7 @@ public class TableController {
 
             // log about game started
             logger.info("GAME started " + (match.getGame() != null ? match.getGame().getId() : "no Game") + " [" + match.getName() + "] " + creator + " - " + opponent.toString());
-            logger.debug("- matchId: " + match.getId() + " [" + match.getName() + "]");
+            logger.debug("- matchId: " + match.getId() + " [" + match.getName() + ']');
             if (match.getGame() != null) {
                 logger.debug("- chatId:  " + GameManager.getInstance().getChatId(match.getGame().getId()));
             }
@@ -926,12 +926,12 @@ public class TableController {
             if (!(table.getState() == TableState.WAITING || table.getState() == TableState.STARTING || table.getState() == TableState.READY_TO_START)) {
                 if (match == null) {
                     logger.debug("- Match table with no match:");
-                    logger.debug("-- matchId:" + match.getId() + " [" + match.getName() + "]");
+                    logger.debug("-- matchId:" + match.getId() + " [" + match.getName() + ']');
                     // return false;
                 } else if (match.isDoneSideboarding() && match.getGame() == null) {
                     // no sideboarding and not active game -> match seems to hang (maybe the Draw bug)
                     logger.debug("- Match with no active game and not in sideboard state:");
-                    logger.debug("-- matchId:" + match.getId() + " [" + match.getName() + "]");
+                    logger.debug("-- matchId:" + match.getId() + " [" + match.getName() + ']');
                     // return false;
                 }
             }

@@ -194,7 +194,7 @@ public class VerifyCardDataTest {
     private void checkPT(Card card, JsonCard ref) {
         if (!eqPT(card.getPower().toString(), ref.power) || !eqPT(card.getToughness().toString(), ref.toughness)) {
             String pt = card.getPower() + "/" + card.getToughness();
-            String expected = ref.power + "/" + ref.toughness;
+            String expected = ref.power + '/' + ref.toughness;
             fail(card, "pt", pt + " != " + expected);
         }
     }

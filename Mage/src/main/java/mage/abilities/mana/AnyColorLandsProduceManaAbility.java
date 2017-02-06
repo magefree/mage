@@ -124,7 +124,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             choice.getChoices().add("Green");
             choice.getChoices().add("White");
         }
-        if (choice.getChoices().size() > 0) {
+        if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());

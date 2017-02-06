@@ -139,7 +139,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
                     }
                     targetName = "a creature blocked by creature ";
                 }
-                if (possibleTargets.size() > 0) {
+                if (!possibleTargets.isEmpty()) {
                     this.getTargets().clear();
                     if (possibleTargets.size() == 1) {
                         this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next()));
@@ -191,7 +191,7 @@ class GodsendExileEffect extends OneShotEffect {
         if (creature != null && controller != null && sourcePermanent != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             controller.moveCardToExileWithInfo(creature, exileId,
-                    sourcePermanent.getIdName() + " (" + sourcePermanent.getZoneChangeCounter(game) + ")", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                    sourcePermanent.getIdName() + " (" + sourcePermanent.getZoneChangeCounter(game) + ')', source.getSourceId(), game, Zone.BATTLEFIELD, true);
 
         }
         return false;
@@ -218,7 +218,7 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast this spell because a card with the same name is exiled by " + mageObject.getLogName() + ".";
+            return "You can't cast this spell because a card with the same name is exiled by " + mageObject.getLogName() + '.';
         }
         return null;
     }

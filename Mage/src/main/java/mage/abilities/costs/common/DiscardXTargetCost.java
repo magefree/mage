@@ -52,7 +52,7 @@ public class DiscardXTargetCost extends VariableCostImpl {
     public DiscardXTargetCost(FilterCard filter, boolean additionalCostText) {
         super(new StringBuilder(filter.getMessage()).append(" to discard").toString());
         this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, discard ":"Discard ")
-                 .append(xText).append(" ").append(filter.getMessage()).toString();
+                 .append(xText).append(' ').append(filter.getMessage()).toString();
         this.filter = filter;
     }
 

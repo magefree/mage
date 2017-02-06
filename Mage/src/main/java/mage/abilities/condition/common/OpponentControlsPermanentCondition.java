@@ -44,8 +44,8 @@ import mage.game.Game;
 
 public class OpponentControlsPermanentCondition implements Condition {
 
-    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
-    
+    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO }
+
     private FilterPermanent filter;
     private CountType type;
     private int count;

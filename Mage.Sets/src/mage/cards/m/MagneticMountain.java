@@ -116,7 +116,7 @@ class MagneticMountainEffect extends DoIfCostPaid {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(new MagneticMountainPredicate());
     
-        if (game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size()>0){
+        if (!game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).isEmpty()){
             this.copy();                
         }
         return true;

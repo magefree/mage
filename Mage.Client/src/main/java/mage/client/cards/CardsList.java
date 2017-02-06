@@ -322,7 +322,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             cardArea.remove(card);
         }
 
-        if (cards != null && cards.size() > 0) {
+        if (cards != null && !cards.isEmpty()) {
             Rectangle rectangle = new Rectangle(cardDimension.width, cardDimension.height);
             List<CardView> sortedCards = new ArrayList<>(cards.values());
             switch (sortSetting.getSortBy()) {

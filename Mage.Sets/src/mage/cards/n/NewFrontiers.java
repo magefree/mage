@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.n;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -37,75 +36,76 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author LevelX2
+ * @author spjspj
  */
-public class SadisticAugermage extends CardImpl {
+public class NewFrontiers extends CardImpl {
 
-    public SadisticAugermage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+    public NewFrontiers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
-
-        // When Sadistic Augermage dies, each player puts a card from his or her hand on top of his or her library.
-        this.getSpellAbility().addEffect(null);
+        // Each player may search his or her library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched his or her library this way shuffles it.
+        this.getSpellAbility().addEffect(new NewFrontiersEffect());
     }
 
-    public SadisticAugermage(final SadisticAugermage card) {
+    public NewFrontiers(final NewFrontiers card) {
         super(card);
     }
 
     @Override
-    public SadisticAugermage copy() {
-        return new SadisticAugermage(this);
+    public NewFrontiers copy() {
+        return new NewFrontiers(this);
     }
 }
 
-class WidespreadPanicEffect extends OneShotEffect {
+class NewFrontiersEffect extends OneShotEffect {
 
-    public WidespreadPanicEffect() {
+    public NewFrontiersEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player puts a card from his or her hand on top of his or her library";
+        this.staticText = "Each player may search his or her library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched his or her library this way shuffles it";
     }
 
-    public WidespreadPanicEffect(final WidespreadPanicEffect effect) {
+    public NewFrontiersEffect(final NewFrontiersEffect effect) {
         super(effect);
     }
 
     @Override
-    public WidespreadPanicEffect copy() {
-        return new WidespreadPanicEffect(this);
+    public NewFrontiersEffect copy() {
+        return new NewFrontiersEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
+            int amount = source.getManaCostsToPay().getX();
+
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (!player.getHand().isEmpty()) {
-                        TargetCardInHand target = new TargetCardInHand();
-                        target.setTargetName("a card from your hand to put on top of your library");
-                        player.choose(Outcome.Detriment, target, source.getSourceId(), game);
-                        Card card = player.getHand().get(target.getFirstTarget(), game);
-                        if (card != null) {
-                            player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterBasicLandCard());
+                    if (player.searchLibrary(target, game)) {
+                        for (UUID cardId : target.getTargets()) {
+                            Card card = player.getLibrary().getCard(cardId, game);
+                            if (card != null) {
+                                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId(), true);
+                            }
                         }
+                        player.shuffleLibrary(source, game);
                     }
-                }                
+
+                }
             }
+            // prevent undo
+            controller.resetStoredBookmark(game);
             return true;
         }
-
         return false;
     }
 }

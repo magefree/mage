@@ -189,11 +189,11 @@ public class TinyLeaders extends Constructed {
                         }
                     }
                 } else {
-                    invalid.put("Commander", "Commander banned (" + commander.getName() + ")");
+                    invalid.put("Commander", "Commander banned (" + commander.getName() + ')');
                     valid = false;
                 }
             } else {
-                invalid.put("Commander", "Commander invalide (" + commander.getName() + ")");
+                invalid.put("Commander", "Commander invalide (" + commander.getName() + ')');
                 valid = false;
             }
         } else {
@@ -221,22 +221,22 @@ public class TinyLeaders extends Constructed {
 
     private boolean isCardFormatValid(Card card, Card commander, FilterMana color) {
         if (!cardHasValideColor(color, card)) {
-            invalid.put(card.getName(), "Invalid color (" + commander.getName() + ")");
+            invalid.put(card.getName(), "Invalid color (" + commander.getName() + ')');
             return false;
         }
 
         //905.5b - Converted mana cost must be 3 or less
         if (card instanceof SplitCard) {
             if (((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() > 3) {
-                invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() + ")");
+                invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() + ')');
                 return false;
             }
             if (((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() > 3) {
-                invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + ")");
+                invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + ')');
                 return false;
             }
         } else if (card.getManaCost().convertedManaCost() > 3) {
-            invalid.put(card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ")");
+            invalid.put(card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ')');
             return false;
         }
         return true;

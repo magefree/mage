@@ -101,7 +101,7 @@ public class WishEffect extends OneShotEffect {
                 List<Card> exile = game.getExile().getAllCards(game);
                 boolean noTargets = cards.isEmpty() && (alsoFromExile ? exile.isEmpty() : true);
                 if (noTargets) {
-                    game.informPlayer(controller, "You have no cards outside the game" + (alsoFromExile ? " or in exile" : "") + ".");
+                    game.informPlayer(controller, "You have no cards outside the game" + (alsoFromExile ? " or in exile" : "") + '.');
                     return true;
                 }
 
@@ -118,7 +118,7 @@ public class WishEffect extends OneShotEffect {
                     }
                 }
                 if (filteredCards.isEmpty()) {
-                    game.informPlayer(controller, "You don't have " + filter.getMessage() + " outside the game" + (alsoFromExile ? " or in exile" : "") + ".");
+                    game.informPlayer(controller, "You don't have " + filter.getMessage() + " outside the game" + (alsoFromExile ? " or in exile" : "") + '.');
                     return true;
                 }
 

@@ -162,7 +162,7 @@ class IntetTheDreamerCastEffect extends AsThoughEffectImpl {
                     if (zone != null && zone.contains(card.getId())/* && CardUtil.cardCanBePlayedNow(card, controller.getId(), game)*/) {
                         if (card.getCardType().contains(CardType.LAND)) {
                             if (game.canPlaySorcery(controller.getId()) && game.getPlayer(controller.getId()).canPlayLand()) {
-                                return controller.chooseUse(outcome, "Play " + card.getIdName() + "?", source, game);
+                                return controller.chooseUse(outcome, "Play " + card.getIdName() + '?', source, game);
                             }
                         } else {
                             controller.setCastSourceIdWithAlternateMana(objectId, null, null);

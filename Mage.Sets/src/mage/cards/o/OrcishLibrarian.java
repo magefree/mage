@@ -107,10 +107,10 @@ class OrcishLibrarianEffect extends OneShotEffect {
                 }
             }
 
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 for (int i = 0; i < 4; i++)
                 {
-                    if (cards.size() > 0)
+                    if (!cards.isEmpty())
                     {
                         Card card = cards.getRandom(game);
                         player.moveCardToExileWithInfo(card, null, null, source.getId(), game, Zone.LIBRARY, true);
@@ -119,7 +119,7 @@ class OrcishLibrarianEffect extends OneShotEffect {
                 }
                 player.lookAtCards("OrcishLibrarian", cards, game);
                 TargetCard target = new TargetCard (Zone.LIBRARY, new FilterCard("card to put on the top of target player's library"));
-                while (player.canRespond() && cards.size() > 0) {
+                while (player.canRespond() && !cards.isEmpty()) {
                     player.choose(Outcome.Neutral, cards, target, game);
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {

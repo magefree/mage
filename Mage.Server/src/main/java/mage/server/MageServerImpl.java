@@ -118,7 +118,7 @@ public class MageServerImpl implements MageServer {
         String authToken = generateAuthToken();
         activeAuthTokens.put(email, authToken);
         String subject = "XMage Password Reset Auth Token";
-        String text = "Use this auth token to reset " + authorizedUser.name + "'s password: " + authToken + "\n"
+        String text = "Use this auth token to reset " + authorizedUser.name + "'s password: " + authToken + '\n'
                 + "It's valid until the next server restart.";
         boolean success;
         if (!ConfigSettings.getInstance().getMailUser().isEmpty()) {
@@ -221,13 +221,13 @@ public class MageServerImpl implements MageServer {
                 // check if the user itself satisfies the quitRatio requirement.
                 int quitRatio = options.getQuitRatio();
                 if (quitRatio < user.getMatchQuitRatio()) {
-                    user.showUserMessage("Create table", "Your quit ratio " + user.getMatchQuitRatio() + "% is higher than the table requirement " + quitRatio + "%");
+                    user.showUserMessage("Create table", "Your quit ratio " + user.getMatchQuitRatio() + "% is higher than the table requirement " + quitRatio + '%');
                     throw new MageException("No message");
                 }
 
                 TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
                 if (logger.isDebugEnabled()) {
-                    logger.debug("TABLE created - tableId: " + table.getTableId() + " " + table.getTableName());
+                    logger.debug("TABLE created - tableId: " + table.getTableId() + ' ' + table.getTableName());
                     logger.debug("- " + user.getName() + " userId: " + user.getId());
                     logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));
                 }
@@ -274,7 +274,7 @@ public class MageServerImpl implements MageServer {
                     int quitRatio = options.getQuitRatio();
                     if (quitRatio < user.getTourneyQuitRatio()) {
                         String message = new StringBuilder("Your quit ratio ").append(user.getTourneyQuitRatio())
-                                .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
+                                .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
                         user.showUserMessage("Create tournament", message);
                         throw new MageException("No message");
                     }
@@ -323,7 +323,7 @@ public class MageServerImpl implements MageServer {
                 if (logger.isTraceEnabled()) {
                     Optional<User> user = UserManager.getInstance().getUser(userId);
                     if (user.isPresent()) {
-                        logger.trace("join tourn. tableId: " + tableId + " " + name);
+                        logger.trace("join tourn. tableId: " + tableId + ' ' + name);
                     }
                 }
                 if (userId == null) {
@@ -963,7 +963,7 @@ public class MageServerImpl implements MageServer {
             User user = UserManager.getInstance().getUserByName(userName);
             if (user != null) {
                 Date muteUntil = new Date(Calendar.getInstance().getTimeInMillis() + (durationMinutes * Timer.ONE_MINUTE));
-                user.showUserMessage("Admin info", "You were muted for chat messages until " + SystemUtil.dateFormat.format(muteUntil) + ".");
+                user.showUserMessage("Admin info", "You were muted for chat messages until " + SystemUtil.dateFormat.format(muteUntil) + '.');
                 user.setChatLockedUntil(muteUntil);
             }
 
@@ -976,7 +976,7 @@ public class MageServerImpl implements MageServer {
             User user = UserManager.getInstance().getUserByName(userName);
             if (user != null) {
                 Date lockUntil = new Date(Calendar.getInstance().getTimeInMillis() + (durationMinutes * Timer.ONE_MINUTE));
-                user.showUserMessage("Admin info", "Your user profile was locked until " + SystemUtil.dateFormat.format(lockUntil) + ".");
+                user.showUserMessage("Admin info", "Your user profile was locked until " + SystemUtil.dateFormat.format(lockUntil) + '.');
                 user.setLockedUntil(lockUntil);
                 if (user.isConnected()) {
                     SessionManager.getInstance().disconnectUser(sessionId, user.getSessionId());

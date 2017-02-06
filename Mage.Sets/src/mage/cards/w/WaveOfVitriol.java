@@ -131,7 +131,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
 
                     TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), new FilterBasicLandCard());
                     if (entry.getKey().searchLibrary(target, game)) {
-                        if (target.getTargets().size() > 0) {
+                        if (!target.getTargets().isEmpty()) {
                             toBattlefield.addAll(target.getTargets());
                             playersToShuffle.add(entry.getKey());
                         }

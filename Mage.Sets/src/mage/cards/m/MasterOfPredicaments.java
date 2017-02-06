@@ -93,7 +93,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.getHand().size() > 0) {
+            if (!controller.getHand().isEmpty()) {
                 Card cardFromHand = null;
                 if (controller.getHand().size() > 1) {
                     TargetCard target = new TargetCardInHand(new FilterCard());

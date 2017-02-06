@@ -65,10 +65,10 @@ public class MultikickerCount implements DynamicValue {
     @Override
     public String toString() {
         return "a";
-    };
-    
+    }
+
     @Override
     public String getMessage() {
         return "time it was kicked";
-    };
+    }
 }

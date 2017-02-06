@@ -225,7 +225,7 @@ public class Cards extends javax.swing.JPanel {
         }
 
         if (!isVisibleIfEmpty) {
-            cardArea.setVisible(cards.size() > 0);
+            cardArea.setVisible(!cards.isEmpty());
         }
 
         sizeCards(getCardDimension());

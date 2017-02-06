@@ -59,8 +59,8 @@ public class TableUtil {
         for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
             TableColumn column = table.getColumnModel().getColumn(table.convertColumnIndexToView(i));
             if (!firstValue) {
-                columnWidthSettings.append(",");
-                columnOrderSettings.append(",");
+                columnWidthSettings.append(',');
+                columnOrderSettings.append(',');
             } else {
                 firstValue = false;
             }

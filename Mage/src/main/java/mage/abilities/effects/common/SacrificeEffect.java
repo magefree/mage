@@ -130,7 +130,7 @@ public class SacrificeEffect extends OneShotEffect{
                 sb.append(" sacrifice ");
             }            
         }
-        sb.append(CardUtil.numberToText(count.toString(), "a")).append(" ");
+        sb.append(CardUtil.numberToText(count.toString(), "a")).append(' ');
         sb.append(filter.getMessage());
         staticText = sb.toString();
     }

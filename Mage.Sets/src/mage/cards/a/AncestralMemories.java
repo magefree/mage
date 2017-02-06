@@ -98,7 +98,7 @@ class AncestralMemoriesEffect extends OneShotEffect {
                 }
             }
 
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 player.lookAtCards("Ancestral Memories", cards, game);
 
                 TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.LIBRARY, new FilterCard("two cards to put in your hand"));

@@ -104,7 +104,7 @@ class DemonicHordesEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent demonicHordes = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && demonicHordes != null) {
-            StringBuilder sb = new StringBuilder(cost.getText()).append("?");
+            StringBuilder sb = new StringBuilder(cost.getText()).append('?');
             if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ")) {
                 sb.insert(0, "Pay ");
             }

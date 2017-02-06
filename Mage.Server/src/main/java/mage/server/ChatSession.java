@@ -67,7 +67,7 @@ public class ChatSession {
            if (!clients.containsKey(userId)) {
                String userName = user.getName();
                clients.put(userId, userName);
-               broadcast(null, userName + " has joined (" + user.getClientVersion() + ")", MessageColor.BLUE, true, MessageType.STATUS, null);
+               broadcast(null, userName + " has joined (" + user.getClientVersion() + ')', MessageColor.BLUE, true, MessageType.STATUS, null);
                logger.trace(userName + " joined chat " + chatId);
            }
        });
@@ -84,7 +84,7 @@ public class ChatSession {
                 String userName = clients.get(userId);
                 if (reason != DisconnectReason.LostConnection) { // for lost connection the user will be reconnected or session expire so no remove of chat yet
                     clients.remove(userId);
-                    logger.debug(userName + "(" + reason.toString() + ")" + " removed from chatId " + chatId);
+                    logger.debug(userName + '(' + reason.toString() + ')' + " removed from chatId " + chatId);
                 }
                 String message;
                 switch (reason) {
@@ -107,7 +107,7 @@ public class ChatSession {
                         message = null;
                         break;
                     default:
-                        message = " left (" + reason.toString() + ")";
+                        message = " left (" + reason.toString() + ')';
                 }
                 if (message != null) {
                     broadcast(null, userName + message, MessageColor.BLUE, true, MessageType.STATUS, null);

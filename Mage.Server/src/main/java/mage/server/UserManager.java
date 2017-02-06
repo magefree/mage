@@ -133,7 +133,7 @@ public class UserManager {
                 USER_EXECUTOR.execute(
                         () -> {
                             try {
-                                LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + "]");
+                                LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
                                 user.remove(reason);
                                 LOGGER.debug("USER REMOVE END - " + user.getName());
                             } catch (Exception ex) {

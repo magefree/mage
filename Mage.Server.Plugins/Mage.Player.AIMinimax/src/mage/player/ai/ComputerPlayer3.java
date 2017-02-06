@@ -139,7 +139,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             else
                 addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
             logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
-            if (root.children.size() > 0) {
+            if (!root.children.isEmpty()) {
                 root = root.children.get(0);
                 actions = new LinkedList<Ability>(root.abilities);
                 combat = root.combat;
@@ -163,7 +163,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             else
                 addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
             logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
-            if (root.children.size() > 0) {
+            if (!root.children.isEmpty()) {
                 root = root.children.get(0);
                 actions = new LinkedList<Ability>(root.abilities);
                 combat = root.combat;
@@ -189,7 +189,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             logger.debug(indent(node.depth) + "simulating -- reached end state");
             val = GameStateEvaluator.evaluate(playerId, game);
         }
-        else if (node.getChildren().size() > 0) {
+        else if (!node.getChildren().isEmpty()) {
             logger.debug(indent(node.depth) + "simulating -- somthing added children:" + node.getChildren().size());
             val = minimaxAB(node, alpha, beta);
         }
@@ -238,7 +238,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                         val = GameStateEvaluator.evaluate(playerId, game);
                 }
             }
-            else if (node.getChildren().size() > 0) {
+            else if (!node.getChildren().isEmpty()) {
                 logger.debug(indent(node.depth) + "simulating -- trigger added children:" + node.getChildren().size());
                 val = minimaxAB(node, alpha, beta);
             }
@@ -388,7 +388,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 }
                 Game sim = game.copy();
                 for (CombatGroup group: engagement.getGroups()) {
-                    if (group.getAttackers().size() > 0) {
+                    if (!group.getAttackers().isEmpty()) {
                         UUID attackerId = group.getAttackers().get(0);
                         for (UUID blockerId: group.getBlockers()) {
                             sim.getPlayer(defenderId).declareBlocker(defenderId, blockerId, attackerId, sim);

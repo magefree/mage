@@ -90,7 +90,7 @@ public class SimulatedPlayer extends ComputerPlayer {
         for (Ability ability: playables) {
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
             if (options.isEmpty()) {
-                if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                     simulateVariableCosts(ability, game);
                 }
                 else {
@@ -101,7 +101,7 @@ public class SimulatedPlayer extends ComputerPlayer {
             else {
 //                ExecutorService simulationExecutor = Executors.newFixedThreadPool(4);
                 for (Ability option: options) {
-                    if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                    if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                         simulateVariableCosts(option, game);
                     }
                     else {
@@ -172,7 +172,7 @@ public class SimulatedPlayer extends ComputerPlayer {
             binary.setLength(0);
             binary.append(Integer.toBinaryString(i));
             while (binary.length() < attackersList.size()) {
-                binary.insert(0, "0");
+                binary.insert(0, '0');
             }
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {

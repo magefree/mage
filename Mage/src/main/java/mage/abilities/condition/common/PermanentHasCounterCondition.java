@@ -43,7 +43,7 @@ public class PermanentHasCounterCondition implements Condition {
 
     public static enum CountType {
         MORE_THAN, FEWER_THAN, EQUAL_TO
-    };
+    }
 
     private CounterType counterType;
     private int amount;

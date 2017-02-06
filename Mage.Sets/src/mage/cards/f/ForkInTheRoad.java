@@ -96,7 +96,7 @@ class ForkInTheRoadEffect extends OneShotEffect {
         }
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
         if (controller.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 Cards revealed = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {
                     Card card = game.getCard(cardId);
@@ -105,7 +105,7 @@ class ForkInTheRoadEffect extends OneShotEffect {
                     }
                 }
                 controller.revealCards(sourceObject.getIdName(), revealed, game);
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
                     controller.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);

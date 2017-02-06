@@ -147,7 +147,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
                             controllerOfDestroyedCreature.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
 
-                        if (cards.size() > 0) {
+                        if (!cards.isEmpty()) {
                             revealCards.addAll(cards);
                             Set<Card> cardsToShuffle = cards.getCards(game);
                             cardsToShuffle.remove(card);

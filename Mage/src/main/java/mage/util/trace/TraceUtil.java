@@ -66,7 +66,7 @@ public class TraceUtil {
                         }
                     }
                     if (cantBeBlocked(attacker)) {
-                        if (group.getBlockers().size() > 0) {
+                        if (!group.getBlockers().isEmpty()) {
                             Permanent blocker = game.getPermanent(group.getBlockers().get(0));
                             if (blocker != null) {
                                 log.warn("Found creature that can't be blocked by some other creature");

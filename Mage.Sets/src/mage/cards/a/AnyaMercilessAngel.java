@@ -127,7 +127,7 @@ class AnyaMercilessAngelCondition implements Condition {
 
     public static AnyaMercilessAngelCondition getInstance() {
         return fInstance;
-    };
+    }
 
     private AnyaMercilessAngelCondition() {}
 

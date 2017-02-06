@@ -137,7 +137,8 @@ class StabwhiskerLoseLifeEffect extends OneShotEffect {
 
 class CardsInTargetOpponentHandCondition implements Condition {
 
-    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
+    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO }
+
     private Condition condition;
     private CountType type;
     private int count;

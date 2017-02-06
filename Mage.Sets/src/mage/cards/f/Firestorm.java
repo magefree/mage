@@ -95,7 +95,7 @@ class FirestormEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         int amount = (new GetXValue()).calculate(game, source, this);
         if (you != null) {
-            if (source.getTargets().size() > 0) {
+            if (!source.getTargets().isEmpty()) {
                 for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                     Permanent creature = game.getPermanent(targetId);
                     if (creature != null) {

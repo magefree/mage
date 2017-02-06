@@ -93,7 +93,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 continue;
             }
             if (ability instanceof SpellAbility) {
-                if (ability.getAdditionalCostsRuleVisible() && ability.getCosts().size() > 0) {
+                if (ability.getAdditionalCostsRuleVisible() && !ability.getCosts().isEmpty()) {
                     StringBuilder sbRule = threadLocalBuilder.get();
                     for (Cost cost : ability.getCosts()) {
                         if (cost.getText() != null && !cost.getText().isEmpty()) {
@@ -107,7 +107,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 }
                 String rule = ability.getRule();
                 if (rule != null) {
-                    if (rule.length() > 0) {
+                    if (!rule.isEmpty()) {
                         rules.add(Character.toUpperCase(rule.charAt(0)) + rule.substring(1));
                     }
                 } else { // logging so we can still can be made aware of rule problems a card has

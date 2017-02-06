@@ -87,7 +87,7 @@ class MeteorBlastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (source.getTargets().size() > 0) {
+            if (!source.getTargets().isEmpty()) {
                 for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                     Permanent creature = game.getPermanent(targetId);
                     if (creature != null) {

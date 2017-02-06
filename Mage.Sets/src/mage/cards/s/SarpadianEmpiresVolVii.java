@@ -135,20 +135,22 @@ class CreateSelectedTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         String tokenType = game.getState().getValue(source.getSourceId().toString() + "_SarpadianEmpiresVolVii").toString();
         Token token;
-        if(tokenType.equals("White Citizen")) {
-            token = new CitizenToken();
-        }
-        else if(tokenType.equals("Blue Camarid")) {
-            token = new CamaridToken();
-        }
-        else if(tokenType.equals("Black Thrull")) {
-            token = new ThrullToken();
-        }
-        else if(tokenType.equals("Red Goblin")) {
-            token = new GoblinToken();
-        }
-        else {
-            token = new SaprolingToken();
+        switch (tokenType) {
+            case "White Citizen":
+                token = new CitizenToken();
+                break;
+            case "Blue Camarid":
+                token = new CamaridToken();
+                break;
+            case "Black Thrull":
+                token = new ThrullToken();
+                break;
+            case "Red Goblin":
+                token = new GoblinToken();
+                break;
+            default:
+                token = new SaprolingToken();
+                break;
         }
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;

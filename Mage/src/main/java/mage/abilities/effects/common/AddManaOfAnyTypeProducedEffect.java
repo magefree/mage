@@ -80,7 +80,7 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
             if (types.getColorless() > 0) {
                 choice.getChoices().add("Colorless");
             }
-            if (choice.getChoices().size() > 0) {
+            if (!choice.getChoices().isEmpty()) {
                 if (choice.getChoices().size() == 1) {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {

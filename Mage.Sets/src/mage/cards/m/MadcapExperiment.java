@@ -107,7 +107,7 @@ class MadcapExperimentEffect extends OneShotEffect {
                 cards.remove(card);
             }
             // Put the rest on the bottom of your library in a random order
-            while (cards.size() > 0) {
+            while (!cards.isEmpty()) {
                 card = cards.getRandom(game);
                 if (card != null) {
                     cards.remove(card);

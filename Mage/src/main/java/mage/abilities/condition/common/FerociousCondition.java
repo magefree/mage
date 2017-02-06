@@ -49,7 +49,7 @@ public class FerociousCondition  implements Condition {
 
     private static final FerociousCondition fInstance = new FerociousCondition();
 
-    private FerociousCondition() {};
+    private FerociousCondition() {}
 
     public static FerociousCondition getInstance() {
         return fInstance;

@@ -410,11 +410,11 @@ public class WizardCardsImageSource implements CardImageSource {
     private String normalizeName(String name) {
     	//Split card
     	if(name.contains("//")) {
-    		name = name.substring(0, name.indexOf("(") - 1);
+    		name = name.substring(0, name.indexOf('(') - 1);
     	}
     	//Special timeshifted name
     	if(name.startsWith("XX")) {
-    		name = name.substring(name.indexOf("(") + 1, name.length() - 1);
+    		name = name.substring(name.indexOf('(') + 1, name.length() - 1);
     	}
         return name.replace("\u2014", "-").replace("\u2019", "'")
                 .replace("\u00C6", "AE").replace("\u00E6", "ae")
@@ -456,7 +456,7 @@ public class WizardCardsImageSource implements CardImageSource {
                 } else {
                     link = setLinks.get(Integer.toString(number - 21));
                     if (link != null) {
-                        link = link.replace(Integer.toString(number - 20), (Integer.toString(number - 20) + "a"));
+                        link = link.replace(Integer.toString(number - 20), (Integer.toString(number - 20) + 'a'));
                     }
                 }
             }

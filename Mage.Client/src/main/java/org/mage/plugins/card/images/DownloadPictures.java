@@ -1,45 +1,5 @@
 package org.mage.plugins.card.images;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.file.AccessDeniedException;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicBoolean;
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultBoundedRangeModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import mage.cards.repository.CardInfo;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
@@ -51,17 +11,26 @@ import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
 import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
-import org.mage.plugins.card.dl.sources.AltMtgOnlTokensImageSource;
-import org.mage.plugins.card.dl.sources.CardImageSource;
-import org.mage.plugins.card.dl.sources.GrabbagImageSource;
-import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
-import org.mage.plugins.card.dl.sources.MagidexImageSource;
-import org.mage.plugins.card.dl.sources.MtgOnlTokensImageSource;
-import org.mage.plugins.card.dl.sources.MythicspoilerComSource;
-import org.mage.plugins.card.dl.sources.TokensMtgImageSource;
-import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
+import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
+
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.*;
+import java.nio.file.AccessDeniedException;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
@@ -356,12 +325,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         int tokenImages = 0;
         for (CardDownloadData card : cardsToDownload) {
-            logger.debug((card.isToken() ? "Token" : "Card") + " image to download: " + card.getName() + " (" + card.getSet() + ")");
+            logger.debug((card.isToken() ? "Token" : "Card") + " image to download: " + card.getName() + " (" + card.getSet() + ')');
             if (card.isToken()) {
                 tokenImages++;
             }
         }
-        logger.info("Check download images (total card images: " + numberCardImages + ", total token images: " + numberAllTokenImages + ")");
+        logger.info("Check download images (total card images: " + numberCardImages + ", total token images: " + numberAllTokenImages + ')');
         logger.info("   => Missing card images: " + (cardsToDownload.size() - tokenImages));
         logger.info("   => Missing token images: " + tokenImages);
         return new ArrayList<>(cardsToDownload);
@@ -376,11 +345,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             return list;
         }
 
-        BufferedReader reader = null;
-        InputStreamReader input = null;
-        try {
-            input = new InputStreamReader(in);
-            reader = new BufferedReader(input);
+
+        try(InputStreamReader input = new InputStreamReader(in);
+            BufferedReader reader = new BufferedReader(input)) {
             String line;
 
             line = reader.readLine();
@@ -425,22 +392,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         } catch (Exception ex) {
             logger.error(ex);
             throw new RuntimeException("DownloadPictures : readFile() error");
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (Exception e) {
-                    logger.error("Input close failed:", e);
-                }
-            }
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (Exception e) {
-                    logger.error("Reader close failed:", e);
-                }
-            }
-
         }
         return list;
     }
@@ -494,7 +445,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                     CardDownloadData card = cardsToDownload.get(i);
 
-                    logger.debug("Downloading card: " + card.getName() + " (" + card.getSet() + ")");
+                    logger.debug("Downloading card: " + card.getName() + " (" + card.getSet() + ')');
 
                     String url;
                     if (ignoreUrls.contains(card.getSet()) || card.isToken()) {
@@ -519,7 +470,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             } catch (Exception ex) {
                             }
                         } else if (cardImageSource.getTotalImages() == -1) {
-                            logger.info("Card not available on " + cardImageSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ")");
+                            logger.info("Card not available on " + cardImageSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ')');
                             synchronized (sync) {
                                 update(cardIndex + 1, cardsToDownload.size());
                             }
@@ -589,7 +540,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             try {
                 filePath.append(Constants.IO.imageBaseDir);
                 if (!useSpecifiedPaths && card != null) {
-                    filePath.append(card.hashCode()).append(".").append(card.getName().replace(":", "").replace("//", "-")).append(".jpg");
+                    filePath.append(card.hashCode()).append('.').append(card.getName().replace(":", "").replace("//", "-")).append(".jpg");
                     temporaryFile = new File(filePath.toString());
                 }
                 String imagePath;
@@ -699,7 +650,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     if (card != null && !useSpecifiedPaths) {
                         logger.warn("Image download for " + card.getName()
                                 + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
-                                + "(" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
+                                + '(' + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
                     }
                     if (logger.isDebugEnabled()) { // Shows the returned html from the request to the web server
                         logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
@@ -707,7 +658,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 }
 
             } catch (AccessDeniedException e) {
-                logger.error("The file " + (outputFile != null ? outputFile.toString() : "to add the image of " + card.getName() + "(" + card.getSet() + ")") + " can't be accessed. Try rebooting your system to remove the file lock.");
+                logger.error("The file " + (outputFile != null ? outputFile.toString() : "to add the image of " + card.getName() + '(' + card.getSet() + ')') + " can't be accessed. Try rebooting your system to remove the file lock.");
             } catch (Exception e) {
                 logger.error(e, e);
             } finally {

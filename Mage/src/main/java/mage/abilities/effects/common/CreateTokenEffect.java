@@ -118,7 +118,7 @@ public class CreateTokenEffect extends OneShotEffect {
             }
             sb.append(token.getDescription());
         } else {
-            sb.append(CardUtil.numberToText(amount.toString())).append(" ");
+            sb.append(CardUtil.numberToText(amount.toString())).append(' ');
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
@@ -134,7 +134,7 @@ public class CreateTokenEffect extends OneShotEffect {
             sb.append(" attacking");
         }
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             if (amount.toString().equals("X")) {
                 sb.append(", where X is ");
             } else {

@@ -135,7 +135,7 @@ class NahiriTheHarbingerEffect extends SearchEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     Permanent permanent = game.getPermanent(card.getId());

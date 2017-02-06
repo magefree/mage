@@ -123,7 +123,7 @@ public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEf
         sb.append(" or ");
         sb.append(ability2.getRule());
         if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         return sb.toString();
     }

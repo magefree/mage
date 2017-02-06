@@ -802,6 +802,6 @@ public class RelativeLayout implements LayoutManager2, java.io.Serializable {
         return getClass().getName()
                 + "[axis=" + axis
                 + ",gap=" + gap
-                + "]";
+                + ']';
     }
 }

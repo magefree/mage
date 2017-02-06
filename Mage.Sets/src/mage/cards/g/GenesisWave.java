@@ -101,7 +101,7 @@ class GenesisWaveEffect extends OneShotEffect {
             Card card = controller.getLibrary().removeFromTop(game);
             cards.add(card);
         }
-        if (cards.size() > 0) {
+        if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
             FilterCard filter = new FilterCard("cards with converted mana cost " + xValue + " or less to put onto the battlefield");
             filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xValue + 1));

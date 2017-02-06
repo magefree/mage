@@ -68,7 +68,7 @@ public class DamageMultiEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() > 0) {
+        if (!source.getTargets().isEmpty()) {
             Target multiTarget = source.getTargets().get(0);
             for (UUID target : multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);

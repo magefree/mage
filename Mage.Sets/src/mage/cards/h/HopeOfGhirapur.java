@@ -84,7 +84,7 @@ public class HopeOfGhirapur extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SimpleActivatedAbility) {
-            if (ability.getEffects().size() > 0 && (ability.getEffects().get(0) instanceof HopeOfGhirapurCantCastEffect)) {
+            if (!ability.getEffects().isEmpty() && (ability.getEffects().get(0) instanceof HopeOfGhirapurCantCastEffect)) {
                 MageObject sourceObject = ability.getSourceObject(game);
                 if (sourceObject != null) {
                     ability.getTargets().clear();
@@ -132,7 +132,7 @@ class HopeOfGhirapurCantCastEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast noncreature spells this turn (you were dealt damage by " + mageObject.getLogName() + ")";
+            return "You can't cast noncreature spells this turn (you were dealt damage by " + mageObject.getLogName() + ')';
         }
         return null;
     }

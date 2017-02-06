@@ -92,7 +92,7 @@ class StripBareEffect extends OneShotEffect {
                 new SubtypePredicate("Aura")));
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null
-                && targetCreature.getAttachments().size() > 0) {
+                && !targetCreature.getAttachments().isEmpty()) {
             for (Permanent attachment : game.getBattlefield().getAllActivePermanents(filter, game)) {
                 if (attachment != null
                         && targetCreature.getAttachments().contains(attachment.getId())) {

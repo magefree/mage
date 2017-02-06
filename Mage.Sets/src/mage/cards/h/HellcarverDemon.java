@@ -100,7 +100,7 @@ class HellcarverDemonEffect extends OneShotEffect {
             }
         }
 
-        if (player != null && player.getHand().size() > 0) {
+        if (player != null && !player.getHand().isEmpty()) {
             int cardsInHand = player.getHand().size();
             player.discard(cardsInHand, source, game);
         }

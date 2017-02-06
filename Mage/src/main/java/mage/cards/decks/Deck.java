@@ -122,7 +122,7 @@ public class Deck implements Serializable {
             cardInfo = CardRepository.instance.findCard("Silvercoat Lion");
             Logger.getLogger(Deck.class).error("Tried to restart the DB: " + (cardInfo == null ? "not successful" : "successful"));
         }
-        return new GameException("Card not found - " + deckCardInfo.getCardName() + " - " + deckCardInfo.getSetCode() + " for deck - " + deckName + "\n"
+        return new GameException("Card not found - " + deckCardInfo.getCardName() + " - " + deckCardInfo.getSetCode() + " for deck - " + deckName + '\n'
                 + "Possible reason is, that you use cards in your deck, that are only supported in newer versions of the server.\n"
                 + "So it can help to use the same card from another set, that's already supported from this server.");
 

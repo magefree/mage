@@ -125,7 +125,7 @@ class DivergentTransformationsEffect extends OneShotEffect {
                             card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                         }
 
-                        if (cards.size() > 0) {
+                        if (!cards.isEmpty()) {
                             player.revealCards(sourceObject.getIdName(), cards, game);
                             Set<Card> cardsToShuffle = cards.getCards(game);
                             cardsToShuffle.remove(card);

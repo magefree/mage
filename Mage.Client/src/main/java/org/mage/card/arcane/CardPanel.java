@@ -681,17 +681,17 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         StringBuilder sbType = new StringBuilder();
 
         for (String superType : card.getSuperTypes()) {
-            sbType.append(superType).append(" ");
+            sbType.append(superType).append(' ');
         }
 
         for (CardType cardType : card.getCardTypes()) {
-            sbType.append(cardType.toString()).append(" ");
+            sbType.append(cardType.toString()).append(' ');
         }
 
-        if (card.getSubTypes().size() > 0) {
+        if (!card.getSubTypes().isEmpty()) {
             sbType.append("- ");
             for (String subType : card.getSubTypes()) {
-                sbType.append(subType).append(" ");
+                sbType.append(subType).append(' ');
             }
         }
 
@@ -702,30 +702,30 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         StringBuilder sb = new StringBuilder();
         if (card instanceof StackAbilityView || card instanceof AbilityView) {
             for (String rule : card.getRules()) {
-                sb.append("\n").append(rule);
+                sb.append('\n').append(rule);
             }
         } else {
             sb.append(card.getName());
-            if (card.getManaCost().size() > 0) {
-                sb.append("\n").append(card.getManaCost());
+            if (!card.getManaCost().isEmpty()) {
+                sb.append('\n').append(card.getManaCost());
             }
-            sb.append("\n").append(cardType);
+            sb.append('\n').append(cardType);
             if (card.getColor().hasColor()) {
-                sb.append("\n").append(card.getColor().toString());
+                sb.append('\n').append(card.getColor().toString());
             }
             if (card.getCardTypes().contains(CardType.CREATURE)) {
-                sb.append("\n").append(card.getPower()).append("/").append(card.getToughness());
+                sb.append('\n').append(card.getPower()).append('/').append(card.getToughness());
             } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
-                sb.append("\n").append(card.getLoyalty());
+                sb.append('\n').append(card.getLoyalty());
             }
             if (card.getRules() == null) {
                 card.overrideRules(new ArrayList<>());
             }
             for (String rule : card.getRules()) {
-                sb.append("\n").append(rule);
+                sb.append('\n').append(rule);
             }
-            if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0) {
-                sb.append("\n").append(card.getCardNumber()).append(" - ");
+            if (card.getExpansionSetCode() != null && !card.getExpansionSetCode().isEmpty()) {
+                sb.append('\n').append(card.getCardNumber()).append(" - ");
                 sb.append(card.getExpansionSetCode()).append(" - ");
                 sb.append(card.getRarity().toString());
             }

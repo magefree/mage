@@ -93,7 +93,7 @@ public class RemoveCounterCost extends CostImpl {
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        if (permanent.getCounters(game).size() > 0 && (counterTypeToRemove == null || permanent.getCounters(game).containsKey(counterTypeToRemove))) {
+                        if (!permanent.getCounters(game).isEmpty() && (counterTypeToRemove == null || permanent.getCounters(game).containsKey(counterTypeToRemove))) {
                             String counterName = null;
 
                             if (counterTypeToRemove != null) {
@@ -133,7 +133,7 @@ public class RemoveCounterCost extends CostImpl {
                                 countersRemoved += numberOfCountersSelected;
                                 if (!game.isSimulation()) {
                                     game.informPlayers(new StringBuilder(controller.getLogName())
-                                            .append(" removes ").append(numberOfCountersSelected == 1 ? "a" : numberOfCountersSelected).append(" ")
+                                            .append(" removes ").append(numberOfCountersSelected == 1 ? "a" : numberOfCountersSelected).append(' ')
                                             .append(counterName).append(numberOfCountersSelected == 1 ? " counter from " : " counters from ")
                                             .append(permanent.getName()).toString());
                                 }
@@ -158,7 +158,7 @@ public class RemoveCounterCost extends CostImpl {
 
     private String setText() {
         StringBuilder sb = new StringBuilder("Remove ");
-        sb.append(CardUtil.numberToText(countersToRemove, "a")).append(" ");
+        sb.append(CardUtil.numberToText(countersToRemove, "a")).append(' ');
         if (counterTypeToRemove != null) {
             sb.append(counterTypeToRemove.getName());
         }

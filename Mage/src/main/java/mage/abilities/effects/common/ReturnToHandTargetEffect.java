@@ -110,7 +110,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             return sb.toString();
         } else {
             if (target.getNumberOfTargets() > 1) {
-                sb.append(CardUtil.numberToText(target.getNumberOfTargets())).append(" ");
+                sb.append(CardUtil.numberToText(target.getNumberOfTargets())).append(' ');
             }
             if (!target.getTargetName().startsWith("another")) {
                 sb.append("target ");

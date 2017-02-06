@@ -89,7 +89,7 @@ public class TxtDeckImporter extends DeckImporter {
             int num = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
             CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
             if (cardInfo == null) {
-                sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
+                sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
             } else {
                 for (int i = 0; i < num; i++) {
                     if (!sideboard) {
@@ -100,7 +100,7 @@ public class TxtDeckImporter extends DeckImporter {
                 }
             }
         } catch (NumberFormatException nfe) {
-            sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
+            sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append('\n');
         }
     }
 

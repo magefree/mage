@@ -106,7 +106,7 @@ class YavimayaDryadEffect extends SearchEffect {
             return false;
         }
         if (controller.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 targetPlayer.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                         Zone.BATTLEFIELD, source, game, true, false, false, null);
             }

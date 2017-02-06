@@ -97,9 +97,9 @@ public class JSONParser {
                 json = (JSONObject) jsonArray.get(index);
                 jsonArray = null;
             } else if (param.contains("[")) {
-                int find = param.indexOf("[");
+                int find = param.indexOf('[');
                 String newParam = param.substring(0, find);
-                String s = param.substring(find+1, param.indexOf("]"));
+                String s = param.substring(find+1, param.indexOf(']'));
                 if (s.isEmpty()) {
                     jsonArray = (JSONArray) json.get(newParam);
                     json = null;

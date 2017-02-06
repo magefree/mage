@@ -86,7 +86,7 @@ public class ImageHelper {
     }
 
     public static void drawCosts(List<String> costs, Graphics2D g, int xOffset, int yOffset, ImageObserver o) {
-        if (costs.size() > 0) {
+        if (!costs.isEmpty()) {
             int costLeft = xOffset;
             for (int i = costs.size() - 1; i >= 0; i--) {
                 String symbol = costs.get(i);

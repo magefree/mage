@@ -128,7 +128,7 @@ class SquanderedResourcesEffect extends ManaEffect {
             choice.getChoices().add("White");
             choice.getChoices().add("Colorless");
         }
-        if (choice.getChoices().size() > 0) {
+        if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
@@ -194,7 +194,7 @@ class SquanderedResourcesEffect extends ManaEffect {
 
         Mana types = new Mana();
         for (Cost cost : source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost) cost).getPermanents().size() > 0) {
+            if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
                 Permanent land = ((SacrificeTargetCost) cost).getPermanents().get(0);
                 if (land != null) {
                     Abilities<ActivatedManaAbilityImpl> manaAbilities = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);

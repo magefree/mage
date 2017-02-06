@@ -468,7 +468,7 @@ public class ManaUtil {
         // Combine the cost back as a mana string
         StringBuilder sb = new StringBuilder();
         for (String s : finalCost) {
-            sb.append("{" + s + "}");
+            sb.append('{' + s + '}');
         }
         // Return the condensed string
         return sb.toString();

@@ -125,7 +125,7 @@ class WidespreadPanicEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player shuffler = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (shuffler != null) {
-            if (shuffler.getHand().size() > 0) {
+            if (!shuffler.getHand().isEmpty()) {
                 TargetCardInHand target = new TargetCardInHand();
                 target.setNotTarget(true);
                 target.setTargetName("a card from your hand to put on top of your library");

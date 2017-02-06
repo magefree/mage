@@ -67,7 +67,7 @@ public class SwissPairingSimple {
 
         });
         // create pairings
-        while (players.size() > 0) {
+        while (!players.isEmpty()) {
             TournamentPlayer player1 = players.get(0);
             players.remove(0);
             TournamentPlayer playerForPossibleSecondPairing = null;

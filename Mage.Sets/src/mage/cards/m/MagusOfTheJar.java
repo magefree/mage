@@ -99,7 +99,7 @@ class MagusoftheJarEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 Cards hand = player.getHand();
-                while (hand.size() > 0) {
+                while (!hand.isEmpty()) {
                     Card card = hand.get(hand.iterator().next(), game);
                     if (card != null) {
                         card.moveToExile(getId(), "Magus of the Jar", source.getSourceId(), game);

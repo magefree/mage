@@ -45,8 +45,6 @@ public class GaeasCradle extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature you control");
 
-    ;
-
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }

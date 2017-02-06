@@ -71,7 +71,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 
     public GainAbilityTargetEffect(Ability ability, Duration duration, String rule, boolean onCard, Layer layer, SubLayer subLayer) {
         super(duration, layer, subLayer,
-                ability.getEffects().size() > 0 ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
+                !ability.getEffects().isEmpty() ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
         this.ability = ability;
         staticText = rule;
         this.onCard = onCard;
@@ -180,7 +180,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         if (durationPhaseStep != null) {
             sb.append(" until your next ").append(durationPhaseStep.toString().toLowerCase(Locale.ENGLISH));
         } else if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         return sb.toString();
     }

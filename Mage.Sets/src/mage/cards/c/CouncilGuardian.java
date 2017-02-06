@@ -118,7 +118,7 @@ class CouncilsGuardianEffect extends OneShotEffect {
                                 }
                                 chosenColors.put(color, 1);
                             }
-                            game.informPlayers(player.getLogName() + " has chosen " + color.getDescription() + ".");
+                            game.informPlayers(player.getLogName() + " has chosen " + color.getDescription() + '.');
                         }
                     }
                 }

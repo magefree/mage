@@ -122,7 +122,7 @@ class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent hisokasGuard = game.getPermanent(source.getSourceId());
-        if (hisokasGuard != null && hisokasGuard.getConnectedCards("HisokasGuard").size() > 0) {
+        if (hisokasGuard != null && !hisokasGuard.getConnectedCards("HisokasGuard").isEmpty()) {
             Permanent guardedCreature = game.getPermanent(hisokasGuard.getConnectedCards("HisokasGuard").get(0));
             if (guardedCreature != null && hisokasGuard.isTapped()) {
                 guardedCreature.addAbility(ability, game);

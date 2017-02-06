@@ -106,7 +106,7 @@ class AngelOfSerenityTriggeredAbility extends ZoneChangeTriggeredAbility {
             filter.add(new AnotherPredicate());
             TargetCreaturePermanent target1 = new TargetCreaturePermanent(0, 3, filter, false);
             game.getPlayer(getControllerId()).chooseTarget(Outcome.Exile, target1, this, game);
-            if (target1.getTargets().size() > 0) {
+            if (!target1.getTargets().isEmpty()) {
                 getTargets().add(target1);
 
             }
@@ -115,7 +115,7 @@ class AngelOfSerenityTriggeredAbility extends ZoneChangeTriggeredAbility {
                 FilterCard filter2 = new FilterCreatureCard("up to " + leftTargets + " target creature card" + (leftTargets > 1 ? "s" : "") + " from graveyards");
                 TargetCardInGraveyard target2 = new TargetCardInGraveyard(0, leftTargets, filter2);
                 game.getPlayer(getControllerId()).chooseTarget(Outcome.Exile, target2, this, game);
-                if (target2.getTargets().size() > 0) {
+                if (!target2.getTargets().isEmpty()) {
                     getTargets().add(target2);
                 }
             }
@@ -152,7 +152,7 @@ class AngelOfSerenityEnterEffect extends OneShotEffect {
         boolean result = true;
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null && source.getTargets().size() > 0) {
+        if (controller != null && sourceObject != null && !source.getTargets().isEmpty()) {
             UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             for (Target target : source.getTargets()) {
                 if (target instanceof TargetCreaturePermanent) {

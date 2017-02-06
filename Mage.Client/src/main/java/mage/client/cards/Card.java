@@ -181,7 +181,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         gImage.setColor(Color.BLACK);
         gImage.drawImage(background, 0, 0, this);
 
-        if (card.getManaCost().size() > 0) {
+        if (!card.getManaCost().isEmpty()) {
             ImageHelper.drawCosts(card.getManaCost(), gImage, FRAME_MAX_WIDTH - SYMBOL_MAX_XOFFSET, SYMBOL_MAX_YOFFSET, this);
         }
 
@@ -192,12 +192,12 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         gImage.setFont(new Font("Arial", Font.PLAIN, NAME_FONT_MAX_SIZE));
         gImage.drawString(card.getName()+"TEST", CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
         if (card.getCardTypes().contains(CardType.CREATURE)) {
-            gImage.drawString(card.getPower() + "/" + card.getToughness(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
+            gImage.drawString(card.getPower() + '/' + card.getToughness(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
         } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
             gImage.drawString(card.getLoyalty(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
         }
 
-        if (card.getCardTypes().size() > 0) {
+        if (!card.getCardTypes().isEmpty()) {
             gImage.drawString(cardType, CONTENT_MAX_XOFFSET, TYPE_MAX_YOFFSET);
         }
 
@@ -211,7 +211,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             gSmall.drawString(card.getLoyalty(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
         }
 
-        if (card.getCardTypes().size() > 0) {
+        if (!card.getCardTypes().isEmpty()) {
             gSmall.drawString(cardType, Config.dimensions.contentXOffset, Config.dimensions.typeYOffset);
         }
         drawText();
@@ -228,27 +228,27 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         StringBuilder sb = new StringBuilder();
         if (card instanceof StackAbilityView || card instanceof AbilityView) {
             for (String rule : getRules()) {
-                sb.append("\n").append(rule);
+                sb.append('\n').append(rule);
             }
         } else {
             sb.append(card.getName());
-            if (card.getManaCost().size() > 0) {
-                sb.append("\n").append(card.getManaCost());
+            if (!card.getManaCost().isEmpty()) {
+                sb.append('\n').append(card.getManaCost());
             }
-            sb.append("\n").append(cardType);
+            sb.append('\n').append(cardType);
             if (card.getColor().hasColor()) {
-                sb.append("\n").append(card.getColor().toString());
+                sb.append('\n').append(card.getColor().toString());
             }
             if (card.getCardTypes().contains(CardType.CREATURE)) {
-                sb.append("\n").append(card.getPower()).append("/").append(card.getToughness());
+                sb.append('\n').append(card.getPower()).append('/').append(card.getToughness());
             } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
-                sb.append("\n").append(card.getLoyalty());
+                sb.append('\n').append(card.getLoyalty());
             }
             for (String rule : getRules()) {
-                sb.append("\n").append(rule);
+                sb.append('\n').append(rule);
             }
-            if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0) {
-                sb.append("\n").append(card.getCardNumber()).append(" - ");
+            if (card.getExpansionSetCode() != null && !card.getExpansionSetCode().isEmpty()) {
+                sb.append('\n').append(card.getCardNumber()).append(" - ");
                 sb.append(Sets.getInstance().get(card.getExpansionSetCode()).getName()).append(" - ");
                 sb.append(card.getRarity().toString());
             }
@@ -277,7 +277,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
         try {
             for (String rule : getRules()) {
-                doc.insertString(doc.getLength(), rule + "\n", doc.getStyle("small"));
+                doc.insertString(doc.getLength(), rule + '\n', doc.getStyle("small"));
             }
         } catch (BadLocationException e) {
         }
@@ -301,17 +301,17 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         StringBuilder sbType = new StringBuilder();
 
         for (String superType : card.getSuperTypes()) {
-            sbType.append(superType).append(" ");
+            sbType.append(superType).append(' ');
         }
 
         for (CardType cardType : card.getCardTypes()) {
-            sbType.append(cardType.toString()).append(" ");
+            sbType.append(cardType.toString()).append(' ');
         }
 
-        if (card.getSubTypes().size() > 0) {
+        if (!card.getSubTypes().isEmpty()) {
             sbType.append("- ");
             for (String subType : card.getSubTypes()) {
-                sbType.append(subType).append(" ");
+                sbType.append(subType).append(' ');
             }
         }
 

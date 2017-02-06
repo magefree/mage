@@ -69,7 +69,7 @@ public class ColoredManaCost extends ManaCostImpl {
 
     @Override
     public String getText() {
-        return "{" + mana.toString() + "}";
+        return '{' + mana.toString() + '}';
     }
 
     @Override

@@ -93,7 +93,7 @@ class FriendlyFireEffect extends OneShotEffect {
             if (targetCreature != null) {
                 Player controllerOfTargetCreature = game.getPlayer(targetCreature.getControllerId());
                 if (controllerOfTargetCreature != null) {
-                    if (controllerOfTargetCreature.getHand().size() > 0) {
+                    if (!controllerOfTargetCreature.getHand().isEmpty()) {
                         Cards cards = new CardsImpl();
                         Card card = controllerOfTargetCreature.getHand().getRandom(game);
                         cards.add(card);

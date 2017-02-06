@@ -91,8 +91,8 @@ public class Excavator extends CardImpl {
 
 class ExcavatorEffect extends ContinuousEffectImpl implements SourceEffect {
 
-    private Abilities<Ability> abilities = new AbilitiesImpl();;
-    
+    private Abilities<Ability> abilities = new AbilitiesImpl();
+
     public ExcavatorEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         setText("Target creature gains landwalk of each of the land types of the sacrificed land until end of turn");

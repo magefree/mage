@@ -49,7 +49,7 @@ public class PreventAllNonCombatDamageToAllEffect extends PreventionEffectImpl {
     public PreventAllNonCombatDamageToAllEffect(Duration duration, FilterInPlay filter) {
         super(duration, Integer.MAX_VALUE, false);
         this.filter = filter;
-        staticText = "Prevent all non combat damage that would be dealt to " + filter.getMessage() + " " + duration.toString();
+        staticText = "Prevent all non combat damage that would be dealt to " + filter.getMessage() + ' ' + duration.toString();
     }
 
     public PreventAllNonCombatDamageToAllEffect(final PreventAllNonCombatDamageToAllEffect effect) {

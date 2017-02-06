@@ -726,7 +726,7 @@ public class HumanPlayer extends PlayerImpl {
                             }
                             if (actingPlayer != null) {
                                 LinkedHashMap<UUID, ActivatedAbility> useableAbilities = actingPlayer.getUseableActivatedAbilities(object, zone, game);
-                                if (useableAbilities != null && useableAbilities.size() > 0) {
+                                if (useableAbilities != null && !useableAbilities.isEmpty()) {
                                     activateAbility(useableAbilities, object, game);
                                     result = true;
                                 }
@@ -912,7 +912,7 @@ public class HumanPlayer extends PlayerImpl {
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
             LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
-            if (useableAbilities != null && useableAbilities.size() > 0) {
+            if (useableAbilities != null && !useableAbilities.isEmpty()) {
                 useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
                 currentlyUnpaidMana = unpaid;
                 activateAbility(useableAbilities, object, game);
@@ -940,7 +940,7 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
             options.put(Constants.Option.POSSIBLE_ATTACKERS, (Serializable) possibleAttackers);
-            if (possibleAttackers.size() > 0) {
+            if (!possibleAttackers.isEmpty()) {
                 options.put(Constants.Option.SPECIAL_BUTTON, (Serializable) "All attack");
             }
 
@@ -990,7 +990,7 @@ public class HumanPlayer extends PlayerImpl {
                             } else {
                                 Permanent creature = game.getPermanent(creatureId);
                                 if (creature != null) {
-                                    sb.append(creature.getIdName()).append(" ");
+                                    sb.append(creature.getIdName()).append(' ');
                                 }
                             }
 
@@ -1066,7 +1066,7 @@ public class HumanPlayer extends PlayerImpl {
                 StringBuilder sb = new StringBuilder(target.getTargetName());
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null) {
-                    sb.append(" (").append(attacker.getName()).append(")");
+                    sb.append(" (").append(attacker.getName()).append(')');
                     target.setTargetName(sb.toString());
                 }
             }
@@ -1330,7 +1330,7 @@ public class HumanPlayer extends PlayerImpl {
                     LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
                     if (useableAbilities != null && useableAbilities.size() == 1) {
                         return (SpellAbility) useableAbilities.values().iterator().next();
-                    } else if (useableAbilities != null && useableAbilities.size() > 0) {
+                    } else if (useableAbilities != null && !useableAbilities.isEmpty()) {
                         game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
                         waitForResponse(game);
                         if (response.getUUID() != null) {
@@ -1378,7 +1378,7 @@ public class HumanPlayer extends PlayerImpl {
                     modeMap.put(mode.getId(), modeText);
                 }
             }
-            if (modeMap.size() > 0) {
+            if (!modeMap.isEmpty()) {
                 boolean done = false;
                 while (!done) {
                     game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
@@ -1493,7 +1493,7 @@ public class HumanPlayer extends PlayerImpl {
                 this.quit(game);
                 return;
             }
-            logger.debug("Setting game priority to " + getId() + " [" + methodName + "]");
+            logger.debug("Setting game priority to " + getId() + " [" + methodName + ']');
             game.getState().setPriorityPlayerId(getId());
         }
     }

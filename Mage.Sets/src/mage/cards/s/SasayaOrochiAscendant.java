@@ -183,7 +183,7 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
                     choice.getChoices().add("Colorless");
                 }
 
-                if (choice.getChoices().size() > 0) {
+                if (!choice.getChoices().isEmpty()) {
                     Mana newMana = new Mana();
                     for (int i = 0; i < count; i++) {
                         choice.clearChoice();

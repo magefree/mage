@@ -77,7 +77,7 @@ public class CyclingAbility extends ActivatedAbilityImpl {
     public String getRule() {
         StringBuilder rule = new StringBuilder(this.text);
         if(cost instanceof ManaCost){
-            rule.append(" ");  
+            rule.append(' ');
         }
         else{
             rule.append("&mdash;");  

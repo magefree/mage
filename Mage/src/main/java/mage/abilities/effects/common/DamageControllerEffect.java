@@ -103,7 +103,7 @@ public class DamageControllerEffect extends OneShotEffect {
             sb.append(amount);
         }
         sb.append(" damage to you");
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             if (message.equals("1")) {
                 sb.append(" equal to the number of ");
             } else {
