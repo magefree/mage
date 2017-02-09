@@ -17,6 +17,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
@@ -62,7 +63,9 @@ public class ManaUtil {
         for (ActivatedManaAbilityImpl ability : useableAbilities.values()) {
             if (!(ability instanceof BasicManaAbility)) {
                 // return map as-is without any modification
-                return useableAbilities;
+                if (!(ability instanceof AnyColorManaAbility)) {
+                    return useableAbilities;
+                }
             }
         }
 
