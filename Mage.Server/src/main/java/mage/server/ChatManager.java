@@ -272,8 +272,7 @@ public class ChatManager {
     }
 
     public ArrayList<ChatSession> getChatSessions() {
-        ArrayList<ChatSession> chatSessionList = new ArrayList<>();
-        chatSessionList.addAll(chatSessions.values());
+        ArrayList<ChatSession> chatSessionList = new ArrayList<>(chatSessions.values());
         return chatSessionList;
     }
 
