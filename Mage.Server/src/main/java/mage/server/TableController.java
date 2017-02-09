@@ -985,11 +985,11 @@ public class TableController {
     }
 
     public synchronized TableState getTableState() {
-        return getTable().getState();
+        return table.getState();
     }
 
     public synchronized boolean changeTableStateToStarting() {
-        if (getTable().getState() != TableState.READY_TO_START) {
+        if (table.getState() != TableState.READY_TO_START) {
             // tournament is not ready, can't start
             return false;
         }
@@ -997,7 +997,7 @@ public class TableController {
             logger.debug("Not alle Seats are occupied: stop start tableId:" + table.getId());
             return false;
         }
-        getTable().setState(TableState.STARTING);
+        table.setState(TableState.STARTING);
         return true;
     }
 }
