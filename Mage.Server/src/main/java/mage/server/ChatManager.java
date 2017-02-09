@@ -124,7 +124,7 @@ public class ChatManager {
 
             if (messageType != MessageType.GAME) {
                 User user = UserManager.getInstance().getUserByName(userName);
-                if (message != null && userName != null && !userName.equals("")) {
+                if (message != null && userName != null && !userName.isEmpty()) {
 
                     if (message.equals(userMessages.get(userName))) {
                         // prevent identical messages
