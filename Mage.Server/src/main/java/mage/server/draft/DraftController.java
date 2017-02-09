@@ -151,8 +151,7 @@ public class DraftController {
     private synchronized void checkStart() {
         if (!draft.isStarted() && allJoined()) {
             draft.setStarted();
-            ThreadExecutor.getInstance().getCallExecutor().execute(
-                    () -> startDraft());
+            ThreadExecutor.getInstance().getCallExecutor().execute(this::startDraft);
         }
     }
 

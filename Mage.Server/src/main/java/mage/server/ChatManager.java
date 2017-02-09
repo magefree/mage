@@ -245,7 +245,6 @@ public class ChatManager {
      */
     public void broadcast(UUID userId, String message, MessageColor color) throws UserNotFoundException {
         UserManager.getInstance().getUser(userId).ifPresent(user-> {
-
             chatSessions.values()
                     .stream()
                     .filter(chat -> chat.hasUser(userId))

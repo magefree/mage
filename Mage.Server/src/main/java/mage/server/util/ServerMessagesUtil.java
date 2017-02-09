@@ -74,7 +74,7 @@ public class ServerMessagesUtil {
 
     public ServerMessagesUtil() {
         updateExecutor = Executors.newSingleThreadScheduledExecutor();
-        updateExecutor.scheduleAtFixedRate(() -> reloadMessages(), 5, 5 * 60, TimeUnit.SECONDS);
+        updateExecutor.scheduleAtFixedRate(this::reloadMessages, 5, 5 * 60, TimeUnit.SECONDS);
     }
 
     public static ServerMessagesUtil getInstance() {

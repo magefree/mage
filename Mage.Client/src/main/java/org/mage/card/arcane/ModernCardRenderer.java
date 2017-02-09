@@ -707,7 +707,7 @@ public class ModernCardRenderer extends CardRenderer {
         if ((cardView instanceof PermanentView) && ((PermanentView) cardView).getDamage() > 0) {
             int x = cardWidth - partWidth - borderWidth;
             int y = curY - boxHeight;
-            String damage = "" + ((PermanentView) cardView).getDamage();
+            String damage = String.valueOf(((PermanentView) cardView).getDamage());
             g.setFont(ptTextFont);
             int txWidth = g.getFontMetrics().stringWidth(damage);
             g.setColor(Color.red);
@@ -986,7 +986,7 @@ public class ModernCardRenderer extends CardRenderer {
             g.setColor(Color.black);
             g.fillOval(borderWidth + 1, totalContentInset + 1, boxHeight - 2, boxHeight - 2);
             g.setColor(Color.white);
-            if (isNightCard()) {
+            if (isTransformed) {
                 g.fillArc(borderWidth + 3, totalContentInset + 3, boxHeight - 6, boxHeight - 6, 90, 270);
                 g.setColor(Color.black);
                 g.fillArc(borderWidth + 3 + 3, totalContentInset + 3, boxHeight - 6 - 3, boxHeight - 6, 90, 270);
@@ -1012,7 +1012,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     // Determine the color of the name / type line text
     protected Color getBoxTextColor() {
-        if (isNightCard()) {
+        if (isTransformed) {
             return Color.white;
         } else if (cardView.isAbility()) {
             return Color.white;

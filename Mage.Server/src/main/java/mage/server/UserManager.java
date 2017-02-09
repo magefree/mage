@@ -60,7 +60,7 @@ public class UserManager {
     }
 
     private UserManager() {
-        expireExecutor.scheduleAtFixedRate(() -> checkExpired(), 60, 60, TimeUnit.SECONDS);
+        expireExecutor.scheduleAtFixedRate(this::checkExpired, 60, 60, TimeUnit.SECONDS);
     }
 
     public User createUser(String userName, String host, AuthorizedUser authorizedUser) {

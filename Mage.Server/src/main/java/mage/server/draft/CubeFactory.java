@@ -44,7 +44,7 @@ public class CubeFactory {
     private static final CubeFactory INSTANCE = new CubeFactory();
     private static final Logger logger = Logger.getLogger(CubeFactory.class);
 
-    private final Map<String, Class> draftCubes = new LinkedHashMap<String, Class>();
+    private final Map<String, Class> draftCubes = new LinkedHashMap<>();
 
     public static CubeFactory getInstance() {
         return INSTANCE;

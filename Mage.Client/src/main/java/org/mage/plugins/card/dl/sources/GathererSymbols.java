@@ -59,7 +59,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                     if (symIndex < symbols.length) {
                         sym = symbols[symIndex++];
                     } else if (numeric <= maxNumeric) {
-                        sym = "" + (numeric++);
+                        sym = String.valueOf(numeric++);
                     } else {
                         sizeIndex++;
                         if (sizeIndex == sizes.length) {

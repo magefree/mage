@@ -421,7 +421,7 @@ public class Session {
         Throwable t = cause;
         while (t.getCause() != null) {
             t = t.getCause();
-            if (t == cause) {
+            if (Objects.equals(t, cause)) {
                 throw new IllegalArgumentException("Infinite cycle detected in causal chain");
             }
         }

@@ -1718,8 +1718,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     private void updateCounts() {
         deckNameAndCountLabel.setText(role.getName() + " - " + allCards.size());
-        creatureCountLabel.setText("" + creatureCounter.get());
-        landCountLabel.setText("" + landCounter.get());
+        creatureCountLabel.setText(String.valueOf(creatureCounter.get()));
+        landCountLabel.setText(String.valueOf(landCounter.get()));
         for (CardType cardType : selectByTypeButtons.keySet()) {
             AbstractButton button = selectByTypeButtons.get(cardType);
             String text = cardType.toString();
@@ -2058,7 +2058,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 if (stack.isEmpty()) {
                     countLabel.setVisible(false);
                 } else {
-                    countLabel.setText("" + stack.size());
+                    countLabel.setText(String.valueOf(stack.size()));
                     countLabel.setLocation(GRID_PADDING + (cardWidth + GRID_PADDING) * colIndex, currentY - COUNT_LABEL_HEIGHT);
                     countLabel.setSize(cardWidth, COUNT_LABEL_HEIGHT);
                     countLabel.setVisible(true);

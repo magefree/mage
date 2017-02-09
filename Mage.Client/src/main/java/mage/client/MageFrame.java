@@ -1443,7 +1443,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 ((MagePane) component).changeGUISize();
             }
         }
-        for (ChatPanelBasic chatPanel : getChatPanels().values()) {
+        for (ChatPanelBasic chatPanel : CHATS.values()) {
             chatPanel.changeGUISize(GUISizeHelper.chatFont);
         }
         try {
