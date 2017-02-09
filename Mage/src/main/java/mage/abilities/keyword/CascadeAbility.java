@@ -49,7 +49,7 @@ import mage.players.Player;
 public class CascadeAbility extends TriggeredAbilityImpl {
     //20091005 - 702.82
 
-    private final static String reminderText = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less."
+    private final static String REMINDERTEXT = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less."
             + " You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)</i>";
     private boolean withReminder;
 
@@ -82,7 +82,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
     public String getRule() {
         StringBuilder sb = new StringBuilder("Cascade");
         if (withReminder) {
-            sb.append(reminderText);
+            sb.append(REMINDERTEXT);
         }
         return sb.toString();
     }
@@ -119,7 +119,9 @@ class CascadeEffect extends OneShotEffect {
                 break;
             }
             controller.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
-        } while (controller.isInGame() && (card.getCardType().contains(CardType.LAND) || !cardThatCostsLess(sourceCost, card, game)));
+        } while (controller.isInGame()
+                && (card.getCardType().contains(CardType.LAND)
+                || !cardThatCostsLess(sourceCost, card, game)));
 
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
@@ -127,19 +129,17 @@ class CascadeEffect extends OneShotEffect {
             if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + '?', source, game)) {
                 controller.cast(card.getSpellAbility(), game, true);
             }
-            // Move the remaining cards to the buttom of the library in a random order
-            Cards cardsFromExile = new CardsImpl();
-            Cards cardsToLibrary = new CardsImpl();
-            cardsFromExile.addAll(exile);
-            while (!cardsFromExile.isEmpty()) {
-                card = cardsFromExile.getRandom(game);
-                cardsFromExile.remove(card.getId());
-                cardsToLibrary.add(card);
-            }
-            controller.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, false);
-
         }
-        return true;
+        // Move the remaining cards to the buttom of the library in a random order
+        Cards cardsFromExile = new CardsImpl();
+        Cards cardsToLibrary = new CardsImpl();
+        cardsFromExile.addAll(exile);
+        while (!cardsFromExile.isEmpty()) {
+            card = cardsFromExile.getRandom(game);
+            cardsFromExile.remove(card.getId());
+            cardsToLibrary.add(card);
+        }
+        return controller.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, false);
     }
 
     @Override
