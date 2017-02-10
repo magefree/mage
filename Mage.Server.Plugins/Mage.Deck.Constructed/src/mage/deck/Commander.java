@@ -244,6 +244,7 @@ public class Commander extends Constructed {
             boolean gainControl = false;
             boolean hexproof = false;
             boolean infect = false;
+            boolean lifeTotalBecomes = false;
             boolean mayCastForFree = false;
             boolean menace = false;
             boolean miracle = false;
@@ -299,6 +300,7 @@ public class Commander extends Constructed {
                 gainControl |= s.contains("gain control");
                 hexproof |= s.contains("hexproof");
                 infect |= s.contains("infect");
+                lifeTotalBecomes |= s.contains("life total becomes");
                 mayCastForFree |= s.contains("may cast") && s.contains("without paying");
                 menace |= s.contains("menace");
                 miracle |= s.contains("miracle");
@@ -380,6 +382,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (gainControl) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (lifeTotalBecomes) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (mayCastForFree) {
@@ -494,7 +499,6 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 1);
             }
 
-            // Planeswalkers
             if (card.getCardType().contains(CardType.PLANESWALKER)) {
                 if (card.getName().toLowerCase().equals("jace, the mind sculptor")) {
                     thisMaxPower = Math.max(thisMaxPower, 6);
@@ -509,7 +513,6 @@ public class Commander extends Constructed {
                 thisMaxPower = 0;
             }
 
-            // Banned in french or unfair cards
             String cn = card.getName().toLowerCase();
             if (cn.equals("ancient tomb")
                     || cn.equals("anafenza, the foremost")
@@ -558,6 +561,7 @@ public class Commander extends Constructed {
                     || cn.equals("loyal retainers")
                     || cn.equals("maelstrom wanderer")
                     || cn.equals("malfegor")
+                    || cn.equals("master of cruelties")
                     || cn.equals("mana crypt")
                     || cn.equals("mana drain")
                     || cn.equals("mana vault")
@@ -621,6 +625,7 @@ public class Commander extends Constructed {
                     || cn.equals("myr turbine") || cn.equals("narset, enlightened master")
                     || cn.equals("nekusar, the mindrazer") || cn.equals("norin the wary")
                     || cn.equals("opalescence") || cn.equals("ornithopter")
+                    || cn.equals("paradox engine")
                     || cn.equals("peregrine drake") || cn.equals("palinchron")
                     || cn.equals("planar portal") || cn.equals("power artifact")
                     || cn.equals("rings of brighthearth") || cn.equals("rite of replication")
@@ -658,6 +663,7 @@ public class Commander extends Constructed {
                     || cn.equals("hokori, dust drinker")
                     || cn.equals("iona, shield of emeria")
                     || cn.equals("jin-gitaxias, core augur")
+                    || cn.equals("kaalia of the vast")
                     || cn.equals("karador, ghost chieftain")
                     || cn.equals("leovold, emissary of trest")
                     || cn.equals("linvala, keeper of silence")
@@ -686,6 +692,7 @@ public class Commander extends Constructed {
                     || cn.equals("maelstrom wanderer")
                     || cn.equals("mikaeus the unhallowed")
                     || cn.equals("nath of the gilt-leaf")
+                    || cn.equals("prossh, skyraider of kher")
                     || cn.equals("purphoros, god of the forge")
                     || cn.equals("sen triplets")
                     || cn.equals("urabrask the hidden")
