@@ -71,7 +71,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         JDialog dlg = download.getDlg(frame);
         dlg.setVisible(true);
         dlg.dispose();
-        download.setCancel(true);
+        download.cancel = true;
     }
 
     public JDialog getDlg(JFrame frame) {

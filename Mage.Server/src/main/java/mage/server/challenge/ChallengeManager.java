@@ -21,7 +21,7 @@ public class ChallengeManager {
     }
 
     public void prepareChallenge(UUID playerId, Match match) {
-        Map<Zone, String> commands = new HashMap<Zone, String>();
+        Map<Zone, String> commands = new HashMap<>();
         commands.put(Zone.OUTSIDE, "life:3");
         match.getGame().cheat(playerId, commands);
     }

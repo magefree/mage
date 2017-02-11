@@ -388,8 +388,7 @@ public class GameController implements GameCallback {
     private void checkStart() {
         if (allJoined()) {
             joinWaitingExecutor.shutdownNow();
-            ThreadExecutor.getInstance().getCallExecutor().execute(
-                    () -> startGame());
+            ThreadExecutor.getInstance().getCallExecutor().execute(this::startGame);
         }
     }
 

@@ -186,10 +186,10 @@ public class TextboxRuleParser {
                                     if (levelMatch.find()) {
                                         try {
                                             levelFrom = Integer.parseInt(levelMatch.group(1));
-                                            if (!levelMatch.group(2).equals("")) {
+                                            if (!levelMatch.group(2).isEmpty()) {
                                                 levelTo = Integer.parseInt(levelMatch.group(2));
                                             }
-                                            if (!levelMatch.group(3).equals("")) {
+                                            if (!levelMatch.group(3).isEmpty()) {
                                                 levelTo = TextboxLevelRule.AND_HIGHER;
                                             }
                                             isLeveler = true;

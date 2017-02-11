@@ -27,8 +27,8 @@ public class DialogManager extends JComponent implements MouseListener,
             synchronized (dialogManagers) {
                 if (!dialogManagers.containsKey(gameId)) {
                     DialogManager dialogManager = new DialogManager();
-                    dialogManager.setScreenWidth(768);
-                    dialogManager.setScreenHeight(1024);
+                    dialogManager.screen_width = 768;
+                    dialogManager.screen_height = 1024;
                     dialogManager.setBounds(0, 0, 768, 1024);
                     dialogManager.setVisible(false);
                     dialogManagers.put(gameId, dialogManager);
@@ -96,8 +96,8 @@ public class DialogManager extends JComponent implements MouseListener,
     public static void updateParams(int width, int height, boolean isVisible) {
         synchronized (dialogManagers) {
             for (DialogManager dialogManager : dialogManagers.values()) {
-                dialogManager.setScreenWidth(width);
-                dialogManager.setScreenHeight(height);
+                dialogManager.screen_width = width;
+                dialogManager.screen_height = height;
                 dialogManager.setBounds(0, 0, width, height);
             }
         }

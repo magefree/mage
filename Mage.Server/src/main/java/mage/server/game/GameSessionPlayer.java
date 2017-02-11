@@ -130,7 +130,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
     public void getAmount(final String message, final int min, final int max) {
         if (!killed) {
             UserManager.getInstance().getUser(userId).ifPresent(user -> {
-
                 user.fireCallback(new ClientCallback("gameSelectAmount", game.getId(), new GameClientMessage(message, min, max)));
             });
         }
