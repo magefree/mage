@@ -61,7 +61,7 @@ public class TournamentUtil {
             // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
             // select a set with basic lands by random
             List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
-            if (basicLandSets.size() > 0) {
+            if (!basicLandSets.isEmpty()) {
                 landSetCodes.add(basicLandSets.get(RandomUtil.nextInt(basicLandSets.size())).getCode());
             }
         }

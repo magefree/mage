@@ -129,7 +129,7 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
         }
         sb.append(" can't gain life");
         if (!this.duration.toString().isEmpty()) {
-            sb.append(" ");
+            sb.append(' ');
             if (duration.equals(Duration.EndOfTurn)) {
                 sb.append("this turn");
             } else {

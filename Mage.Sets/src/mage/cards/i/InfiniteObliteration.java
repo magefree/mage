@@ -97,7 +97,7 @@ class InfiniteObliterationEffect extends SearchTargetGraveyardHandLibraryForCard
             cardName = cardChoice.getChoice();
             MageObject sourceObject = game.getObject(source.getSourceId());
             if (sourceObject != null) {
-                game.informPlayers(sourceObject.getName() + " named card: [" + cardName + "]");
+                game.informPlayers(sourceObject.getName() + " named card: [" + cardName + ']');
             }
 
             super.applySearchAndExile(game, source, cardName, player.getId());

@@ -87,7 +87,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
         this.controllerId = controllerId;
-        this.name = "stack ability (" + ability.getRule() + ")";
+        this.name = "stack ability (" + ability.getRule() + ')';
     }
 
     public StackAbility(final StackAbility stackAbility) {
@@ -142,7 +142,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public String getIdName() {
-        return getName() + " [" + getId().toString().substring(0, 3) + "]";
+        return getName() + " [" + getId().toString().substring(0, 3) + ']';
     }
 
     @Override
@@ -589,7 +589,7 @@ public class StackAbility extends StackObjImpl implements Ability {
         newAbility.newId();
         StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
         game.getStack().push(newStackAbility);
-        if (chooseNewTargets && newAbility.getTargets().size() > 0) {
+        if (chooseNewTargets && !newAbility.getTargets().isEmpty()) {
             Player controller = game.getPlayer(newControllerId);
             Outcome outcome = newAbility.getEffects().isEmpty() ? Outcome.Detriment : newAbility.getEffects().get(0).getOutcome();
             if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {

@@ -90,7 +90,7 @@ class StrategicPlanningEffect extends OneShotEffect {
         if (controller != null) {
             Cards cards = new CardsImpl();
             cards.addAll(controller.getLibrary().getTopCards(game, 3));
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 controller.lookAtCards("Strategic Planning", cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
                 if (controller.choose(Outcome.Benefit, cards, target, game)) {

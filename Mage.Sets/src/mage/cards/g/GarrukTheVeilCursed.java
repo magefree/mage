@@ -179,7 +179,7 @@ class GarrukTheVeilCursedEffect extends OneShotEffect {
                 }
             }
             // reveal
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 controller.revealCards("Garruk, the Veil-Cursed", cards, game);
             }
             // shuffle

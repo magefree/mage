@@ -92,8 +92,6 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
         }
     }
 
-    ;
-
     public boolean isInactive(Game game) {
         return false;
     }

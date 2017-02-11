@@ -73,7 +73,7 @@ public class DckDeckImporter extends DeckImporter {
             if (cardInfo == null) {
                 // Try alternate based on name
                 String cardName = m.group(5);
-                if (cardName != null && cardName.length() > 0) {
+                if (cardName != null && !cardName.isEmpty()) {
                     cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, false);
                     sbMessage.append("Could not find card '").append(cardName).append("' in set ").append(setCode).append(" of number ").append(cardNum).append(".\n");
                     if (cardInfo != null) {
@@ -93,7 +93,7 @@ public class DckDeckImporter extends DeckImporter {
                     }
                 }
             } else {
-                sbMessage.append("Could not find card '").append("' at line ").append(lineCount).append(": ").append(line).append("\n");
+                sbMessage.append("Could not find card '").append("' at line ").append(lineCount).append(": ").append(line).append('\n');
             }
         } else if (line.startsWith("NAME:")) {
             deckList.setName(line.substring(5, line.length()));

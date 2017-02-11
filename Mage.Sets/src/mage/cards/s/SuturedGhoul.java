@@ -106,7 +106,7 @@ class SuturedGhoulEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        if (controller.getGraveyard().size() > 0) {
+        if (!controller.getGraveyard().isEmpty()) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard"));
             if (controller.chooseTarget(Outcome.Benefit, target, source, game)) {
                 int count = 0;

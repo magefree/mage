@@ -161,13 +161,13 @@ class SteamAuguryEffect extends OneShotEffect {
             }
             game.informPlayers(sb.toString());
 
-            sb = new StringBuilder(sourceObject.getLogName() + ": Pile 2, going to ").append(pile2Zone.equals(Zone.HAND) ? "Hand" : "Graveyard").append(":");
+            sb = new StringBuilder(sourceObject.getLogName() + ": Pile 2, going to ").append(pile2Zone.equals(Zone.HAND) ? "Hand" : "Graveyard").append(':');
             i = 0;
             for (UUID cardUuid : pile2CardsIds) {
                 Card card = game.getCard(cardUuid);
                 if (card != null) {
                     i++;
-                    sb.append(" ").append(GameLog.getColoredObjectName(card));
+                    sb.append(' ').append(GameLog.getColoredObjectName(card));
                     if (i < pile2CardsIds.size()) {
                         sb.append(", ");
                     }

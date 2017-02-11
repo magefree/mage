@@ -101,7 +101,7 @@ public class StackAbilityView extends CardView {
         List<String> names = new ArrayList<>();
         for (UUID modeId : ability.getModes().getSelectedModes()) {
             Mode mode = ability.getModes().get(modeId);
-            if (mode.getTargets().size() > 0) {
+            if (!mode.getTargets().isEmpty()) {
                 setTargets(mode.getTargets());
             } else {
                 List<UUID> targetList = new ArrayList<>();
@@ -111,7 +111,7 @@ public class StackAbilityView extends CardView {
                         targetList.add(((FixedTarget) targetPointer).getTarget());
                     }
                 }
-                if (targetList.size() > 0) {
+                if (!targetList.isEmpty()) {
                     overrideTargets(targetList);
 
                     for (UUID uuid : targetList) {

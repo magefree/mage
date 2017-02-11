@@ -154,7 +154,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
             if (spellController.moveCardsToExile(spell, source, game, true, exileZoneId, eyeOfTheStorm.getIdName())) {
                 eyeOfTheStorm.imprint(card.getId(), game);
 
-                if (eyeOfTheStorm.getImprinted() != null && eyeOfTheStorm.getImprinted().size() > 0) {
+                if (eyeOfTheStorm.getImprinted() != null && !eyeOfTheStorm.getImprinted().isEmpty()) {
                     CardsImpl copiedCards = new CardsImpl();
                     for (UUID uuid : eyeOfTheStorm.getImprinted()) {
                         card = game.getCard(uuid);

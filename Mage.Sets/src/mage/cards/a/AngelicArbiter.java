@@ -109,7 +109,7 @@ class AngelicArbiterWatcher2 extends Watcher {
                 && game.getActivePlayerId().equals(event.getPlayerId())
                 && game.getOpponents(controllerId).contains(event.getPlayerId())
                 && game.getCombat().getAttackerId().equals(event.getPlayerId())
-                && game.getCombat().getAttackers().size() > 0) {
+                && !game.getCombat().getAttackers().isEmpty()) {
             playersThatAttackedThisTurn.add(event.getPlayerId());
         }
     }

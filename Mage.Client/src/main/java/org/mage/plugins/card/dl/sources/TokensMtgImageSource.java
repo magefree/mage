@@ -27,6 +27,9 @@
  */
 package org.mage.plugins.card.dl.sources;
 
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.images.CardDownloadData;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,8 +39,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.images.CardDownloadData;
 
 /**
  *
@@ -161,19 +162,19 @@ public class TokensMtgImageSource implements CardImageSource {
         TokenData tokenData;
         if (type == 0) {
             if (matchedTokens.size() > 1) {
-                logger.info("Multiple images were found for token " + name + ", set " + set + ".");
+                logger.info("Multiple images were found for token " + name + ", set " + set + '.');
             }
             tokenData = matchedTokens.get(0);
         } else {
             if (type > matchedTokens.size()) {
-                logger.warn("Not enough images for token with type " + type + ", name " + name + ", set " + set + ".");
+                logger.warn("Not enough images for token with type " + type + ", name " + name + ", set " + set + '.');
                 return null;
             }
             tokenData = matchedTokens.get(card.getType() - 1);
         }
 
-        String url = "http://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + "_"
-                + tokenData.getNumber().trim() + "-" + tokenData.getName().trim() + ".jpg";
+        String url = "http://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + '_'
+                + tokenData.getNumber().trim() + '-' + tokenData.getName().trim() + ".jpg";
         url = url.replace(' ', '-');
         return url;
     }
@@ -184,30 +185,18 @@ public class TokensMtgImageSource implements CardImageSource {
                 tokensData = new ArrayList<>();
 
                 // get tokens data from resource file
-                InputStream inputStream = null;
-                try {
-                    inputStream = this.getClass().getResourceAsStream("/tokens-mtg-onl-list.csv");
+                try(InputStream inputStream = this.getClass().getResourceAsStream("/tokens-mtg-onl-list.csv")) {
                     List<TokenData> fileTokensData = parseTokensData(inputStream);
                     tokensData.addAll(fileTokensData);
                 } catch (Exception exception) {
                     logger.warn("Failed to get tokens description from resource file tokens-mtg-onl-list.csv", exception);
-                } finally {
-                    if (inputStream != null) {
-                        try {
-                            inputStream.close();
-                        } catch (Exception e) {
-                            logger.error("Input stream close failed:", e);
-                        }
-                    }
                 }
 
                 // description on site may contain new information
                 // try to add it
-                try {
-                    URL url = new URL("http://tokens.mtg.onl/data/SetsWithTokens.csv");
-                    inputStream = url.openStream();
+                URL url = new URL("http://tokens.mtg.onl/data/SetsWithTokens.csv");
+                try(InputStream inputStream = url.openStream()) {
                     List<TokenData> siteTokensData = parseTokensData(inputStream);
-
                     List<TokenData> newTokensData = new ArrayList<>();
                     for (TokenData siteData : siteTokensData) {
                         boolean isNew = true;
@@ -227,14 +216,6 @@ public class TokensMtgImageSource implements CardImageSource {
                     tokensData.addAll(newTokensData);
                 } catch (Exception exception) {
                     logger.warn("Failed to get tokens description from tokens.mtg.onl", exception);
-                } finally {
-                    if (inputStream != null) {
-                        try {
-                            inputStream.close();
-                        } catch (Exception e) {
-                            logger.error("Input stream close failed:", e);
-                        }
-                    }
                 }
             }
         }
@@ -245,12 +226,9 @@ public class TokensMtgImageSource implements CardImageSource {
     private List<TokenData> parseTokensData(InputStream inputStream) throws IOException {
         List<TokenData> newTokensData = new ArrayList<>();
 
-        InputStreamReader inputReader = null;
-        BufferedReader reader = null;
-        try {
+        try(InputStreamReader inputReader = new InputStreamReader(inputStream, "Cp1252");
+            BufferedReader reader = new BufferedReader(inputReader)) {
             // we have to specify encoding to read special comma
-            inputReader = new InputStreamReader(inputStream, "Cp1252");
-            reader = new BufferedReader(inputReader);
 
             reader.readLine(); // skip header
             String line = reader.readLine();
@@ -281,21 +259,6 @@ public class TokensMtgImageSource implements CardImageSource {
                 }
 
                 line = reader.readLine();
-            }
-        } finally {
-            if (inputReader != null) {
-                try {
-                    inputReader.close();
-                } catch (Exception e) {
-                    logger.error("Input reader close failed:", e);
-                }
-            }
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (Exception e) {
-                    logger.error("Buffered reader close failed:", e);
-                }
             }
         }
 

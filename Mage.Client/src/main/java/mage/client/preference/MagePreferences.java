@@ -1,5 +1,6 @@
 package mage.client.preference;
 
+import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 import mage.client.MageFrame;
 
@@ -43,16 +44,31 @@ public class MagePreferences {
     }
 
     private static String prefixedKey(String prefix, String key) {
-        return prefix + "/" + key;
+        return prefix + '/' + key;
     }
 
     public static String getUserName(String serverAddress) {
         String userName = prefs().get(prefixedKey(serverAddress, KEY_USER_NAME), "");
+
         if (!userName.isEmpty()) {
             return userName;
         }
         // For clients older than 1.4.7, userName is stored without a serverAddress prefix.
         return prefs().get(KEY_USER_NAME, "");
+    }
+
+    public static String getUserNames() {
+        String userIds = "";
+        try {
+            String[] keys = prefs().keys();
+            for (String key : keys) {
+                if (key.matches(".*userName$")) {
+                    userIds += "," + prefs().get(key, null);
+                }
+            }
+        } catch (BackingStoreException ex) {
+        }
+        return userIds;
     }
 
     public static void setUserName(String serverAddress, String userName) {

@@ -89,7 +89,7 @@ class PerishTheThoughtEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
         if (targetOpponent != null) {
-            if (targetOpponent.getHand().size() > 0) {
+            if (!targetOpponent.getHand().isEmpty()) {
                 targetOpponent.revealCards("Perish the Thought", targetOpponent.getHand(), game);
                 Player you = game.getPlayer(source.getControllerId());
                 if (you != null) {

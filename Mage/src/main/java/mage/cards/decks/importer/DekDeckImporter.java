@@ -23,7 +23,7 @@ public class DekDeckImporter extends DeckImporter {
             Boolean isSideboard = "true".equals(extractAttribute(line, "Sideboard"));
             CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);
             if (cardInfo == null) {
-                sbMessage.append("Could not find card: '").append(cardName).append("' at line ").append(lineCount).append("\n");
+                sbMessage.append("Could not find card: '").append(cardName).append("' at line ").append(lineCount).append('\n');
             } else {
                 for (int i = 0; i < cardCount; i++) {
                     DeckCardInfo deckCardInfo = new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode());
@@ -35,7 +35,7 @@ public class DekDeckImporter extends DeckImporter {
                 }
             }
         }catch (NumberFormatException nfe) {
-            sbMessage.append("Invalid number: ").append(extractAttribute(line, "Quantity")).append(" at line ").append(lineCount).append("\n");
+            sbMessage.append("Invalid number: ").append(extractAttribute(line, "Quantity")).append(" at line ").append(lineCount).append('\n');
         }
 
     }
@@ -43,7 +43,7 @@ public class DekDeckImporter extends DeckImporter {
     private String extractAttribute(String line, String name) {
         String searchString = name+"=\"";
         int startDelim = line.indexOf(searchString)+searchString.length();
-        int endDelim = line.substring(startDelim).indexOf("\"");
+        int endDelim = line.substring(startDelim).indexOf('\"');
         return line.substring(startDelim, startDelim+endDelim);
     }
 

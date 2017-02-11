@@ -89,7 +89,7 @@ class SyphonMindEffect extends OneShotEffect {
             for (UUID playerId : you.getInRange()) {
                 if (!playerId.equals(source.getControllerId())) {
                     Player otherPlayer = game.getPlayer(playerId);
-                    if (otherPlayer != null && otherPlayer.getHand().size() > 0) {
+                    if (otherPlayer != null && !otherPlayer.getHand().isEmpty()) {
                         TargetCardInHand target = new TargetCardInHand();
                         if (otherPlayer.choose(Outcome.Discard, target, source.getSourceId(), game)) {
                             Card card = game.getCard(target.getFirstTarget());

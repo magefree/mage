@@ -103,7 +103,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null) {
-            if (controller.getHand().size() > 0) {
+            if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
                 if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
@@ -113,7 +113,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
                             permanent.imprint(card.getId(), game);
-                            permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + card.getLogName() + "]"), game);
+                            permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + card.getLogName() + ']'), game);
                         }
                     }
                 }
@@ -155,7 +155,7 @@ class IsochronScepterCopyEffect extends OneShotEffect {
             if (scepter != null && scepter.getImprinted() != null && !scepter.getImprinted().isEmpty()) {
                 Card imprintedInstant = game.getCard(scepter.getImprinted().get(0));
                 if (imprintedInstant != null && game.getState().getZone(imprintedInstant.getId()).equals(Zone.EXILED)) {
-                    if (controller.chooseUse(outcome, new StringBuilder("Create a copy of ").append(imprintedInstant.getName()).append("?").toString(), source, game)) {
+                    if (controller.chooseUse(outcome, new StringBuilder("Create a copy of ").append(imprintedInstant.getName()).append('?').toString(), source, game)) {
                         Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                         if (copiedCard != null) {
                             game.getExile().add(source.getSourceId(), "", copiedCard);

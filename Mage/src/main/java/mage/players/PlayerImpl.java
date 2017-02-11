@@ -680,7 +680,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         if (this.getHand().size() == 1 || this.getHand().size() == amount) {
             discardedCards.addAll(this.getHand());
-            while (this.getHand().size() > 0) {
+            while (!this.getHand().isEmpty()) {
                 discard(this.getHand().get(this.getHand().iterator().next(), game), source, game);
             }
             return discardedCards;
@@ -944,7 +944,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             result = cast(card.getSpellAbility(), game, noMana);
         }
         if (!result) {
-            game.informPlayer(this, "You can't play " + card.getIdName() + ".");
+            game.informPlayer(this, "You can't play " + card.getIdName() + '.');
         }
         return result;
     }
@@ -1495,7 +1495,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
                         }
                         // while targets left and there is still allowed to untap
-                        while (canRespond() && leftForUntap.size() > 0 && numberToUntap > 0) {
+                        while (canRespond() && !leftForUntap.isEmpty() && numberToUntap > 0) {
                             // player has to select the permanent he wants to untap for this restriction
                             Ability ability = handledEntry.getKey().getValue().iterator().next();
                             if (ability != null) {
@@ -1504,7 +1504,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 if (effectSource != null) {
                                     sb.append(" from ").append(effectSource.getLogName());
                                 }
-                                sb.append(")");
+                                sb.append(')');
                                 filter.setMessage(sb.toString());
                                 Target target = new TargetPermanent(1, 1, filter, true);
                                 if (!this.chooseTarget(Outcome.Untap, target, ability, game)) {
@@ -2817,14 +2817,14 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         if (ability.isModal()) {
             addModeOptions(options, ability, game);
-        } else if (ability.getTargets().getUnchosen().size() > 0) {
+        } else if (!ability.getTargets().getUnchosen().isEmpty()) {
             // TODO: Handle other variable costs than mana costs
-            if (ability.getManaCosts().getVariableCosts().size() > 0) {
+            if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                 addVariableXOptions(options, ability, 0, game);
             } else {
                 addTargetOptions(options, ability, 0, game);
             }
-        } else if (ability.getCosts().getTargets().getUnchosen().size() > 0) {
+        } else if (!ability.getCosts().getTargets().getUnchosen().isEmpty()) {
             addCostTargetOptions(options, ability, 0, game);
         }
 
@@ -2838,13 +2838,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             newOption.getModes().getSelectedModes().clear();
             newOption.getModes().getSelectedModes().add(mode.getId());
             newOption.getModes().setActiveMode(mode);
-            if (newOption.getTargets().getUnchosen().size() > 0) {
-                if (newOption.getManaCosts().getVariableCosts().size() > 0) {
+            if (!newOption.getTargets().getUnchosen().isEmpty()) {
+                if (!newOption.getManaCosts().getVariableCosts().isEmpty()) {
                     addVariableXOptions(options, newOption, 0, game);
                 } else {
                     addTargetOptions(options, newOption, 0, game);
                 }
-            } else if (newOption.getCosts().getTargets().getUnchosen().size() > 0) {
+            } else if (!newOption.getCosts().getTargets().getUnchosen().isEmpty()) {
                 addCostTargetOptions(options, newOption, 0, game);
             } else {
                 options.add(newOption);
@@ -2871,7 +2871,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (targetNum < option.getTargets().size() - 2) {
                 addTargetOptions(options, newOption, targetNum + 1, game);
-            } else if (option.getCosts().getTargets().size() > 0) {
+            } else if (!option.getCosts().getTargets().isEmpty()) {
                 addCostTargetOptions(options, newOption, 0, game);
             } else {
                 options.add(newOption);
@@ -3115,7 +3115,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case GRAVEYARD:
                 fromZone = game.getState().getZone(cards.iterator().next().getId());
                 successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
-                return successfulMovedCards.size() > 0;
+                return !successfulMovedCards.isEmpty();
             case BATTLEFIELD: // new logic that does not yet add the permanents to battlefield while replacement effects are handled
                 List<ZoneChangeInfo> infoList = new ArrayList<>();
                 for (Card card : cards) {
@@ -3175,7 +3175,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             default:
                 throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
         }
-        return successfulMovedCards.size() > 0;
+        return !successfulMovedCards.isEmpty();
     }
 
     @Override
@@ -3217,7 +3217,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.isSimulation()) {
                 game.informPlayers(getLogName() + " puts "
                         + (withName ? card.getLogName() : (card.isFaceDown(game) ? "a face down card" : "a card"))
-                        + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " "
+                        + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' '
                         + (card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand")
                 );
             }
@@ -3306,8 +3306,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     card = game.getCard(card.getId());
                 }
                 StringBuilder sb = new StringBuilder(this.getLogName())
-                        .append(" puts ").append(card.getLogName()).append(" ").append(card.isCopy() ? "(Copy) " : "")
-                        .append(fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "");
+                        .append(" puts ").append(card.getLogName()).append(' ').append(card.isCopy() ? "(Copy) " : "")
+                        .append(fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' ' : "");
                 if (card.getOwnerId().equals(getId())) {
                     sb.append("into his or her graveyard");
                 } else {
@@ -3332,9 +3332,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     card = game.getCard(card.getId());
                 }
                 StringBuilder sb = new StringBuilder(this.getLogName())
-                        .append(" puts ").append(withName ? card.getLogName() : "a card").append(" ");
+                        .append(" puts ").append(withName ? card.getLogName() : "a card").append(' ');
                 if (fromZone != null) {
-                    sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ");
+                    sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(' ');
                 }
                 sb.append("to the ").append(toTop ? "top" : "bottom");
                 if (card.getOwnerId().equals(getId())) {
@@ -3367,8 +3367,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                         card = basicCard;
                     }
                 }
-                game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() + (card.isCopy() ? " (Copy)" : "") : "a card face down") + " "
-                        + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "") + "to the exile zone");
+                game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
+                        + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' ' : "") + "to the exile zone");
             }
             result = true;
         }

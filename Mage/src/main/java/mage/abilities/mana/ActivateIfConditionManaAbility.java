@@ -74,7 +74,7 @@ public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder(super.getRule()).append(" Activate this ability only if ").append(condition.toString()).append(".").toString();
+        return new StringBuilder(super.getRule()).append(" Activate this ability only if ").append(condition.toString()).append('.').toString();
     }
 
     @Override

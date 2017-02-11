@@ -78,7 +78,7 @@ public class MatchView implements Serializable {
         this.gameType = match.getOptions().getGameType();
 
         if (table.getName() != null && !table.getName().isEmpty()) {
-            this.deckType = match.getOptions().getDeckType() + " [" +  table.getName() + "]";
+            this.deckType = match.getOptions().getDeckType() + " [" +  table.getName() + ']';
         }  else {
             this.deckType = match.getOptions().getDeckType();
         }
@@ -102,9 +102,9 @@ public class MatchView implements Serializable {
             int lostGames = match.getNumGames() - (matchPlayer.getWins() + match.getDraws());
             sb1.append(", ");
             sb2.append(matchPlayer.getName()).append(" [");
-            sb2.append(matchPlayer.getWins()).append("-");
+            sb2.append(matchPlayer.getWins()).append('-');
             if (match.getDraws() > 0) {
-                sb2.append(match.getDraws()).append("-");
+                sb2.append(match.getDraws()).append('-');
             }
             sb2.append(lostGames).append("], ");
         }
@@ -127,14 +127,14 @@ public class MatchView implements Serializable {
         this.matchName = table.getName();
         this.gameType = table.getGameType();
         if (table.getTournament().getOptions().getNumberRounds() > 0) {
-            this.gameType = new StringBuilder(this.gameType).append(" ").append(table.getTournament().getOptions().getNumberRounds()).append(" Rounds").toString();
+            this.gameType = new StringBuilder(this.gameType).append(' ').append(table.getTournament().getOptions().getNumberRounds()).append(" Rounds").toString();
         }
         StringBuilder sbDeckType = new StringBuilder(table.getDeckType());
         if (!table.getTournament().getBoosterInfo().isEmpty()) {
-            sbDeckType.append(" ").append(table.getTournament().getBoosterInfo());
+            sbDeckType.append(' ').append(table.getTournament().getBoosterInfo());
         }
         if (table.getName() != null && !table.getName().isEmpty()) {
-            sbDeckType.append(table.getDeckType()).append(" [").append(table.getName()).append("]");
+            sbDeckType.append(table.getDeckType()).append(" [").append(table.getName()).append(']');
         }
         this.deckType = sbDeckType.toString();
         StringBuilder sb1 = new StringBuilder();
@@ -143,9 +143,9 @@ public class MatchView implements Serializable {
         }
         this.players = sb1.toString();
         StringBuilder sb2 = new StringBuilder();
-        if (table.getTournament().getRounds().size() > 0) {
+        if (!table.getTournament().getRounds().isEmpty()) {
             for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {
-                sb2.append(tPlayer.getPlayer().getName()).append(": ").append(tPlayer.getResults()).append(" ");
+                sb2.append(tPlayer.getPlayer().getName()).append(": ").append(tPlayer.getResults()).append(' ');
             }
         } else {
           sb2.append("Canceled");

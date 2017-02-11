@@ -37,7 +37,6 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-
 import mage.cards.decks.Deck;
 import mage.constants.ManaType;
 import mage.constants.TableState;
@@ -234,7 +233,7 @@ public class User {
 
         int minutes = (int) secondsLeft / 60;
         int seconds = (int) secondsLeft % 60;
-        return new StringBuilder(sign).append(Integer.toString(minutes)).append(":").append(seconds > 9 ? seconds : "0" + Integer.toString(seconds)).toString();
+        return new StringBuilder(sign).append(Integer.toString(minutes)).append(':').append(seconds > 9 ? seconds : '0' + Integer.toString(seconds)).toString();
     }
 
     public long getSecondsDisconnected() {
@@ -247,8 +246,10 @@ public class User {
 
     public void fireCallback(final ClientCallback call) {
         if (isConnected()) {
-            SessionManager.getInstance().getSession(sessionId).fireCallback(call);
-
+            Session session = SessionManager.getInstance().getSession(sessionId);
+            if (session != null) {
+                session.fireCallback(call);
+            }
         }
     }
 
@@ -509,7 +510,7 @@ public class User {
                                     }
 
                                     if (!isConnected()) {
-                                        tournamentPlayer.setDisconnectInfo(" (discon. " + getDisconnectDuration() + ")");
+                                        tournamentPlayer.setDisconnectInfo(" (discon. " + getDisconnectDuration() + ')');
                                     } else {
                                         tournamentPlayer.setDisconnectInfo("");
                                     }
@@ -547,25 +548,25 @@ public class User {
             tablesToDelete.clear();
         }
         if (waiting > 0) {
-            sb.append("Wait: ").append(waiting).append(" ");
+            sb.append("Wait: ").append(waiting).append(' ');
         }
         if (match > 0) {
-            sb.append("Match: ").append(match).append(" ");
+            sb.append("Match: ").append(match).append(' ');
         }
         if (sideboard > 0) {
-            sb.append("Sideb: ").append(sideboard).append(" ");
+            sb.append("Sideb: ").append(sideboard).append(' ');
         }
         if (draft > 0) {
-            sb.append("Draft: ").append(draft).append(" ");
+            sb.append("Draft: ").append(draft).append(' ');
         }
         if (construct > 0) {
-            sb.append("Const: ").append(construct).append(" ");
+            sb.append("Const: ").append(construct).append(' ');
         }
         if (tournament > 0) {
-            sb.append("Tourn: ").append(tournament).append(" ");
+            sb.append("Tourn: ").append(tournament).append(' ');
         }
-        if (watchedGames.size() > 0) {
-            sb.append("Watch: ").append(watchedGames.size()).append(" ");
+        if (!watchedGames.isEmpty()) {
+            sb.append("Watch: ").append(watchedGames.size()).append(' ');
         }
         return sb.toString();
     }
@@ -586,7 +587,7 @@ public class User {
         if (isConnected()) {
             return pingInfo;
         } else {
-            return " (discon. " + getDisconnectDuration() + ")";
+            return " (discon. " + getDisconnectDuration() + ')';
         }
     }
 
@@ -665,10 +666,10 @@ public class User {
         if (proto.getMatchesQuit() > 0) {
             quit.add("Q:" + Integer.toString(proto.getMatchesQuit()));
         }
-        if (quit.size() > 0) {
+        if (!quit.isEmpty()) {
             builder.append(" (");
             joinStrings(builder, quit, " ");
-            builder.append(")");
+            builder.append(')');
         }
         return builder.toString();
     }
@@ -697,10 +698,10 @@ public class User {
         if (proto.getTourneysQuitDuringRound() > 0) {
             quit.add("R:" + Integer.toString(proto.getTourneysQuitDuringRound()));
         }
-        if (quit.size() > 0) {
+        if (!quit.isEmpty()) {
             builder.append(" (");
             joinStrings(builder, quit, " ");
-            builder.append(")");
+            builder.append(')');
         }
         return builder.toString();
     }

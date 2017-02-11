@@ -97,7 +97,7 @@ public class DeckArea extends javax.swing.JPanel {
 
         @Override
         public String toString() {
-            return maindeckSettings.toString() + "|" + sideboardSetings.toString() + "|" + dividerLocationNormal + "|" + dividerLocationLimited;
+            return maindeckSettings.toString() + '|' + sideboardSetings.toString() + '|' + dividerLocationNormal + '|' + dividerLocationLimited;
         }
     }
 

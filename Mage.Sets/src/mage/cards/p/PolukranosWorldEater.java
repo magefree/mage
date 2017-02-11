@@ -129,7 +129,7 @@ class PolukranosWorldEaterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() > 0) {
+        if (!source.getTargets().isEmpty()) {
             Target multiTarget = source.getTargets().get(0);
             Set<Permanent> permanents = new HashSet<>();
             for (UUID target: multiTarget.getTargets()) {

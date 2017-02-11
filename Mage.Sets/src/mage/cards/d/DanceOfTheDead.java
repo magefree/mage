@@ -261,7 +261,7 @@ class DanceOfTheDeadChangeAbilityEffect extends ContinuousEffectImpl implements 
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = affectedObjectList.get(0).getPermanent(game);;
+        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
         if (permanent != null) {
             Ability abilityToRemove = null;
             for (Ability ability : permanent.getAbilities()) {

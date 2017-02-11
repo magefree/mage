@@ -116,7 +116,7 @@ public class DiscardTargetEffect extends OneShotEffect {
             sb.append(" at random");
         }
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(" for each ");
         }
         sb.append(message);

@@ -75,7 +75,7 @@ public class ProliferateEffect extends OneShotEffect {
             UUID chosen = (UUID) target.getTargets().get(idx);
             Permanent permanent = game.getPermanent(chosen);
             if (permanent != null) {
-                if (permanent.getCounters(game).size() > 0) {
+                if (!permanent.getCounters(game).isEmpty()) {
                     if (permanent.getCounters(game).size() == 1) {
                         for (Counter counter : permanent.getCounters(game).values()) {
                             Counter newCounter = new Counter(counter.getName());
@@ -88,7 +88,7 @@ public class ProliferateEffect extends OneShotEffect {
                             choices.add(counter.getName());
                         }
                         choice.setChoices(choices);
-                        choice.setMessage("Choose a counter to proliferate (" + permanent.getIdName() + ")");
+                        choice.setMessage("Choose a counter to proliferate (" + permanent.getIdName() + ')');
                         controller.choose(Outcome.Benefit, choice, game);
                         for (Counter counter : permanent.getCounters(game).values()) {
                             if (counter.getName().equals(choice.getChoice())) {
@@ -102,7 +102,7 @@ public class ProliferateEffect extends OneShotEffect {
             } else {
                 Player player = game.getPlayer(chosen);
                 if (player != null) {
-                    if (player.getCounters().size() > 0) {
+                    if (!player.getCounters().isEmpty()) {
                         if (player.getCounters().size() == 1) {
                             for (Counter counter : player.getCounters().values()) {
                                 Counter newCounter = new Counter(counter.getName());
@@ -115,7 +115,7 @@ public class ProliferateEffect extends OneShotEffect {
                                 choices.add(counter.getName());
                             }
                             choice.setChoices(choices);
-                            choice.setMessage("Choose a counter to proliferate (" + player.getLogName() + ")");
+                            choice.setMessage("Choose a counter to proliferate (" + player.getLogName() + ')');
                             controller.choose(Outcome.Benefit, choice, game);
                             for (Counter counter : player.getCounters().values()) {
                                 if (counter.getName().equals(choice.getChoice())) {

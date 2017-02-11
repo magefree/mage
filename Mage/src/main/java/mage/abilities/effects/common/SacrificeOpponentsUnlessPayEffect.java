@@ -189,14 +189,14 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect{
         } else {
             if (amount.toString().equals("1")) {
                 if (!filter.getMessage().startsWith("a ") && !filter.getMessage().startsWith("an ")) {
-                    sb.append("a");
+                    sb.append('a');
                 }
             } else {
                 sb.append(CardUtil.numberToText(amount.toString()));
             }
         }
         
-        sb.append(" ");
+        sb.append(' ');
         sb.append(filter.getMessage());
         
         sb.append(" unless he or she pays ");

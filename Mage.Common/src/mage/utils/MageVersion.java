@@ -77,7 +77,7 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
 
     @Override
     public String toString() {
-        return major + "." + minor + "." + patch + info + minorPatch;
+        return major + "." + minor + '.' + patch + info + minorPatch;
     }
 
     @Override

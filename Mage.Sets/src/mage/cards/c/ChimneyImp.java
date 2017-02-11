@@ -96,7 +96,7 @@ class ChimneyImpEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (targetOpponent != null) {
-            if (targetOpponent.getHand().size() > 0) {
+            if (!targetOpponent.getHand().isEmpty()) {
                 TargetCardInHand target = new TargetCardInHand();
                 target.setNotTarget(true);
                 target.setTargetName("a card from your hand to put on top of your library");

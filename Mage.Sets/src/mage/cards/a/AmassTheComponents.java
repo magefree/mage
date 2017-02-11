@@ -90,7 +90,7 @@ class AmassTheComponentsEffect extends OneShotEffect {
         }
 
         player.drawCards(3, game);
-        if (player.getHand().size() > 0) {
+        if (!player.getHand().isEmpty()) {
             FilterCard filter = new FilterCard("card from your hand to put on the bottom of your library");
             TargetCard target = new TargetCard(Zone.HAND, filter);
 

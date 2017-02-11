@@ -155,7 +155,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                                 }
                             }
                         }
-                        continueCasting = copiedCards.size() > 0
+                        continueCasting = !copiedCards.isEmpty()
                                 && controller.chooseUse(outcome, "Cast one of the copied cards without paying its mana cost?", source, game);
                     }
                 }

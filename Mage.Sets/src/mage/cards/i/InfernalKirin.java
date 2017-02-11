@@ -108,7 +108,7 @@ class InfernalKirinEffect extends OneShotEffect {
                 }
             }
             if (targetPlayer != null) {
-                if (targetPlayer.getHand().size() > 0) {
+                if (!targetPlayer.getHand().isEmpty()) {
                     targetPlayer.revealCards("Infernal Kirin", targetPlayer.getHand(), game);
                     for (UUID uuid: targetPlayer.getHand().copy()) {
                         Card card = game.getCard(uuid);

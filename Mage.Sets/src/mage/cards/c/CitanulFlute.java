@@ -106,7 +106,7 @@ class CitanulFluteSearchEffect extends OneShotEffect {
 		
 	TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 Cards cards = new CardsImpl();
                 if (card != null){

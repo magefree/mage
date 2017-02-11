@@ -88,7 +88,7 @@ public class GetEnergyCountersControllerEffect extends OneShotEffect {
         sb.append(val > 1 ? "s" : "");
         sb.append(")</i>");
         if ((value instanceof StaticValue)) {
-            sb.append(".");
+            sb.append('.');
         } else {
             sb.append(" for each ");
             sb.append(value.getMessage());

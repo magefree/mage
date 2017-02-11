@@ -151,7 +151,7 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
                 payed = true;
             }
         }
-        game.informPlayers(player.getLogName() + " pays {" + xValue + "}");
+        game.informPlayers(player.getLogName() + " pays {" + xValue + '}');
         return xValue;
     }
 

@@ -87,7 +87,7 @@ public class TextboxRule {
         // Do it in reverse order for proper handling of regions where
         // there are multiple attributes stacked (EG: bold + italic)
         AttributedString attributedRule = new AttributedString(text);
-        if (text.length() != 0) {
+        if (!text.isEmpty()) {
             attributedRule.addAttribute(TextAttribute.FONT, normal);
             for (int i = regions.size() - 1; i >= 0; --i) {
                 regions.get(i).applyToAttributedString(attributedRule, normal, italic);

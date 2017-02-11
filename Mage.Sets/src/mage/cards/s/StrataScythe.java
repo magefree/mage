@@ -95,7 +95,7 @@ class StrataScytheImprintEffect extends OneShotEffect {
             return false;
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
         if (player.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 UUID cardId = target.getTargets().get(0);
                 Card card = player.getLibrary().remove(cardId, game);
                 if (card != null) {
@@ -132,7 +132,7 @@ class SameNameAsExiledCountValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int value = 0;
         Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
-        if (permanent != null && permanent.getImprinted().size() > 0) {
+        if (permanent != null && !permanent.getImprinted().isEmpty()) {
             FilterPermanent filterPermanent = new FilterPermanent();
             filterPermanent.add(new NamePredicate(game.getCard(permanent.getImprinted().get(0)).getName()));
             value = game.getBattlefield().count(filterPermanent, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);

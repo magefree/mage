@@ -92,7 +92,7 @@ class StrongholdGambitEffect extends OneShotEffect {
             Map<UUID, UUID> choosenCard = new LinkedHashMap<>();
             for (UUID playerId : game.getState().getPlayerList(controller.getId())) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && player.getHand().size() > 0) {
+                if (player != null && !player.getHand().isEmpty()) {
                     TargetCardInHand target = new TargetCardInHand();
                     if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
                         choosenCard.put(playerId, target.getFirstTarget());
@@ -106,7 +106,7 @@ class StrongholdGambitEffect extends OneShotEffect {
                     Card card = game.getCard(choosenCard.get(playerId));
                     if (card != null) {
                         Cards cardsToReveal = new CardsImpl(card);
-                        player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ")", cardsToReveal, game);
+                        player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', cardsToReveal, game);
                         if (card.getCardType().contains(CardType.CREATURE)
                                 && lowestCMC > card.getConvertedManaCost()) {
                             lowestCMC = card.getConvertedManaCost();

@@ -101,7 +101,7 @@ class MyriadEffect extends OneShotEffect {
                 if (!playerId.equals(defendingPlayerId) && controller.hasOpponent(playerId, game)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null && controller.chooseUse(Outcome.PutCreatureInPlay,
-                            "Put a copy of " + sourceObject.getIdName() + " onto battlefield attacking " + opponent.getName() + "?", source, game)) {
+                            "Put a copy of " + sourceObject.getIdName() + " onto battlefield attacking " + opponent.getName() + '?', source, game)) {
                         PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(controller.getId(), null, false, 1, true, true, playerId);
                         effect.setTargetPointer(new FixedTarget(sourceObject, game));
                         effect.apply(game, source);

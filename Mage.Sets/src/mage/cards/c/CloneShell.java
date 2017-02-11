@@ -120,7 +120,7 @@ class CloneShellEffect extends OneShotEffect {
             target1.clearChosen();
         }
 
-        if (cards.size() > 0) {
+        if (!cards.isEmpty()) {
             TargetCard target2 = new TargetCard(Zone.LIBRARY, filter2);
             while (player.canRespond() && cards.size() > 1) {
                 player.choose(Outcome.Benefit, cards, target2, game);
@@ -163,7 +163,7 @@ class CloneShellDiesEffect extends OneShotEffect {
             Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (permanent != null) {
                 List<UUID> imprinted = permanent.getImprinted();
-                if (imprinted.size() > 0) {
+                if (!imprinted.isEmpty()) {
                     Card imprintedCard = game.getCard(imprinted.get(0));
                     imprintedCard.setFaceDown(false, game);
                     if (imprintedCard.getCardType().contains(CardType.CREATURE)) {

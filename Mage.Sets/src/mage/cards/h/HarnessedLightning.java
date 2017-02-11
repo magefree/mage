@@ -50,9 +50,9 @@ import mage.target.common.TargetCreaturePermanent;
 public class HarnessedLightning extends CardImpl {
 
     public HarnessedLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        // Choose target creature.  You get {E}{E}{E}, then you may pay any amount of {E}. Harnessed Lightning deals that much damage to that creature.
+        // Choose target creature. You get {E}{E}{E}, then you may pay any amount of {E}. Harnessed Lightning deals that much damage to that creature.
         this.getSpellAbility().addEffect(new HarnessedLightningEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -71,7 +71,7 @@ class HarnessedLightningEffect extends OneShotEffect {
 
     public HarnessedLightningEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "Choose target creature.  You get {E}{E}{E}, then you may pay any amount of {E}. Harnessed Lightning deals that much damage to that creature";
+        this.staticText = "Choose target creature. You get {E}{E}{E}, then you may pay any amount of {E}. {this} deals that much damage to that creature";
     }
 
     public HarnessedLightningEffect(final HarnessedLightningEffect effect) {

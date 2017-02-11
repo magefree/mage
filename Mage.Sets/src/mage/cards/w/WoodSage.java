@@ -107,7 +107,7 @@ class WoodSageEffect extends OneShotEffect {
             }
             String cardName = cardChoice.getChoice();
             if (!game.isSimulation()) {
-                game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
+                game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + ']');
             }
 
             FilterCreatureCard filter = new FilterCreatureCard("all of them with that name");

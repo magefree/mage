@@ -584,12 +584,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         int second = s - (minute * 60);
         String text;
         if (minute < 10) {
-            text = "0" + Integer.toString(minute) + ":";
+            text = '0' + Integer.toString(minute) + ':';
         } else {
-            text = Integer.toString(minute) + ":";
+            text = Integer.toString(minute) + ':';
         }
         if (second < 10) {
-            text = text + "0" + Integer.toString(second);
+            text = text + '0' + Integer.toString(second);
         } else {
             text = text + Integer.toString(second);
         }
@@ -599,7 +599,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
         if (timeToSubmit > 0) {
             timeToSubmit--;
-            btnSubmitTimer.setText("Submit (" + timeToSubmit + ")");
+            btnSubmitTimer.setText("Submit (" + timeToSubmit + ')');
             btnSubmitTimer.setToolTipText("Submit your deck in " + timeToSubmit + " seconds!");
         }
     }

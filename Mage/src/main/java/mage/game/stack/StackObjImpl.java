@@ -165,7 +165,7 @@ public abstract class StackObjImpl implements StackObject {
             // change the target?
             Outcome outcome = mode.getEffects().isEmpty() ? Outcome.Detriment : mode.getEffects().get(0).getOutcome();
             if (targetNames != null
-                    && (forceChange || targetController.chooseUse(outcome, "Change this target: " + targetNames + "?", ability, game))) {
+                    && (forceChange || targetController.chooseUse(outcome, "Change this target: " + targetNames + '?', ability, game))) {
                 Set<UUID> possibleTargets = target.possibleTargets(this.getSourceId(), getControllerId(), game);
                 // choose exactly one other target - already targeted objects are not counted
                 if (forceChange && possibleTargets != null && possibleTargets.size() > 1) { // controller of spell must be used (e.g. TargetOpponent)
@@ -182,7 +182,7 @@ public abstract class StackObjImpl implements StackObject {
                         if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
                             Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
                             if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
-                                game.informPlayer(targetController, "Target does not fullfil the target requirements (" + filterNewTarget.getMessage() + ")");
+                                game.informPlayer(targetController, "Target does not fullfil the target requirements (" + filterNewTarget.getMessage() + ')');
                                 newTarget.clearChosen();
                             }
                         }
@@ -235,7 +235,7 @@ public abstract class StackObjImpl implements StackObject {
                             } else if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
                                 Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
                                 if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
-                                    game.informPlayer(targetController, "This target does not fullfil the target requirements (" + filterNewTarget.getMessage() + ")");
+                                    game.informPlayer(targetController, "This target does not fullfil the target requirements (" + filterNewTarget.getMessage() + ')');
                                     again = true;
                                 }
                             } else {

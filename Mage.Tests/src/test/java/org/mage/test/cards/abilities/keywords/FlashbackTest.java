@@ -108,12 +108,12 @@ public class FlashbackTest extends CardTestPlayerBase {
      * Test Granting Flashback to spells with X in mana cost, where X has no
      * influence on targeting requirements
      *
-     * Specific instance: Snapcaser Mage granting Flashback to Blaze
+     * Specific instance: Snapcaster Mage granting Flashback to Blaze
      */
     @Test
     public void testSnapcasterMageWithBlaze() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3); // you still need extra red mana in case the Snapcaster Mage is paid for via UR, X=1 using R, etc
 
         addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
         addCard(Zone.GRAVEYARD, playerA, "Blaze", 1);

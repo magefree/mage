@@ -1,15 +1,5 @@
 package org.mage.test.serverside.base;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -34,6 +24,13 @@ import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 import org.mage.test.player.RandomPlayer;
 import org.mage.test.player.TestPlayer;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Base class for all tests.
@@ -123,7 +120,7 @@ public abstract class MageTestBase {
 
     private static Class<?> loadPlugin(Plugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
             logger.info("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
@@ -136,7 +133,7 @@ public abstract class MageTestBase {
 
     private static MatchType loadGameType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
             logger.info("Loading game type: " + plugin.getClassName());
             return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
@@ -149,7 +146,7 @@ public abstract class MageTestBase {
 
     private static TournamentType loadTournamentType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
             logger.info("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
@@ -181,8 +178,7 @@ public abstract class MageTestBase {
     protected void parseScenario(String filename) throws FileNotFoundException {
         parserState = ParserState.INIT;
         File f = new File(filename);
-        Scanner scanner = new Scanner(f);
-        try {
+        try(Scanner scanner = new Scanner(f)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
                 if (line == null || line.isEmpty() || line.startsWith("#")) {
@@ -198,8 +194,6 @@ public abstract class MageTestBase {
                 }
                 parseLine(line);
             }
-        } finally {
-            scanner.close();
         }
     }
 

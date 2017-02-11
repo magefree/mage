@@ -167,7 +167,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
             ++numberCosts;
         }
         if (numberCosts == 1) {
-            sb.append(" ").append(remarkText);
+            sb.append(' ').append(remarkText);
         }
 
         return sb.toString();

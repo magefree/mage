@@ -62,10 +62,10 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
             sb.append("Equipped creature can't block");
         }
         if (!filter.getMessage().equals("creature")) {
-            sb.append(" ").append(filter.getMessage());
+            sb.append(' ').append(filter.getMessage());
         }
         if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();
     }

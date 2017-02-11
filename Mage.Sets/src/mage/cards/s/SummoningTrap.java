@@ -183,7 +183,7 @@ class SummoningTrapEffect extends OneShotEffect {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             }
         }

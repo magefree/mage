@@ -121,7 +121,7 @@ class AladdinsLampEffect extends ReplacementEffectImpl {
     
         
         // Put the rest on the bottom of your library in a random order
-        while (cards.size() > 0) {
+        while (!cards.isEmpty()) {
             Card card = cards.getRandom(game);
             if (card != null) {
                 cards.remove(card);

@@ -326,7 +326,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             String[] symbols = mana.split("^\\{|\\}\\{|\\}$");
             int modifierForX = 0;
             for (String symbol : symbols) {
-                if (symbol.length() > 0) {
+                if (!symbol.isEmpty()) {
                     if (symbol.length() == 1 || isNumeric(symbol)) {
                         if (Character.isDigit(symbol.charAt(0))) {
                             this.add(new GenericManaCost(Integer.valueOf(symbol)));

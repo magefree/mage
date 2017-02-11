@@ -54,62 +54,64 @@ public class GathererSymbols implements Iterable<DownloadJob> {
 
             @Override
             protected DownloadJob computeNext() {
-                String sym;
-                if (symIndex < symbols.length) {
-                    sym = symbols[symIndex++];
-                } else if (numeric <= maxNumeric) {
-                    sym = "" + (numeric++);
-                } else {
-                    sizeIndex++;
-                    if (sizeIndex == sizes.length) {
-                        return endOfData();
+                while (true) {
+                    String sym;
+                    if (symIndex < symbols.length) {
+                        sym = symbols[symIndex++];
+                    } else if (numeric <= maxNumeric) {
+                        sym = "" + (numeric++);
+                    } else {
+                        sizeIndex++;
+                        if (sizeIndex == sizes.length) {
+                            return endOfData();
+                        }
+
+                        symIndex = 0;
+                        numeric = 0;
+                        dir = new File(outDir, sizes[sizeIndex]);
+                        continue;
+                    }
+                    String symbol = sym.replaceAll("/", "");
+                    File dst = new File(dir, symbol + ".gif");
+
+                    /**
+                     * Handle a bug on Gatherer where a few symbols are missing at the large size.
+                     * Fall back to using the medium symbol for those cases.
+                     */
+                    int modSizeIndex = sizeIndex;
+                    if (sizeIndex == 2) {
+                        switch (sym) {
+                            case "WP":
+                            case "UP":
+                            case "BP":
+                            case "RP":
+                            case "GP":
+                            case "E":
+                            case "C":
+                                modSizeIndex = 1;
+                                break;
+
+                            default:
+                                // Nothing to do, symbol is available in the large size
+                        }
                     }
 
-                    symIndex = 0;
-                    numeric = 0;
-                    dir = new File(outDir, sizes[sizeIndex]);
-                    return computeNext();
-                }
-                String symbol = sym.replaceAll("/", "");
-                File dst = new File(dir, symbol + ".gif");
-
-                /**
-                 * Handle a bug on Gatherer where a few symbols are missing at the large size.
-                 * Fall back to using the medium symbol for those cases.
-                 */
-                int modSizeIndex = sizeIndex;
-                if (sizeIndex == 2) {
-                    switch (sym) {
-                        case "WP":
-                        case "UP":
-                        case "BP":
-                        case "RP":
-                        case "GP":
-                        case "E":
-                        case "C":
-                            modSizeIndex = 1;
+                    switch (symbol) {
+                        case "T":
+                            symbol = "tap";
                             break;
-
-                        default:
-                            // Nothing to do, symbol is available in the large size
+                        case "Q":
+                            symbol = "untap";
+                            break;
+                        case "S":
+                            symbol = "snow";
+                            break;
                     }
+
+                    String url = format(urlFmt, sizes[modSizeIndex], symbol);
+
+                    return new DownloadJob(sym, fromURL(url), toFile(dst));
                 }
-
-                switch (symbol) {
-                    case "T":
-                        symbol = "tap";
-                        break;
-                    case "Q":
-                        symbol = "untap";
-                        break;
-                    case "S":
-                        symbol = "snow";
-                        break;
-                }
-
-                String url = format(urlFmt, sizes[modSizeIndex], symbol);
-
-                return new DownloadJob(sym, fromURL(url), toFile(dst));
             }
         };
     }

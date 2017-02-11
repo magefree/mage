@@ -112,7 +112,7 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (targetPlayer != null && mageObject != null) {
             return "This turn you can't cast spells or activate abilities" +
-                    " (" + mageObject.getLogName() + ")";
+                    " (" + mageObject.getLogName() + ')';
         }
         return null;
     }

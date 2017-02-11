@@ -97,7 +97,7 @@ class MagusOfTheScrollEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
         if (sourceObject != null && you != null && cardName != null && !cardName.isEmpty()) {
-            if (you.getHand().size() > 0) {
+            if (!you.getHand().isEmpty()) {
                 Cards revealed = new CardsImpl();
                 Card card = you.getHand().getRandom(game);
                 revealed.add(card);

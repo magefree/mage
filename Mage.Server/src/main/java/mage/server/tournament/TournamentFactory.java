@@ -92,13 +92,13 @@ public class TournamentFactory {
                     StringBuilder rv = new StringBuilder( "Random Draft using sets: ");
                     for (Map.Entry<String, Integer> entry: setInfo.entrySet()){
                         rv.append(entry.getKey());
-                        rv.append(";");
+                        rv.append(';');
                     }
                     tournament.setBoosterInfo(rv.toString());
                 } else {
                     StringBuilder sb = new StringBuilder();
                     for (Map.Entry<String,Integer> entry:setInfo.entrySet()) {
-                        sb.append(entry.getValue().toString()).append("x").append(entry.getKey()).append(" ");
+                        sb.append(entry.getValue().toString()).append('x').append(entry.getKey()).append(' ');
                     }
                     tournament.setBoosterInfo(sb.toString());
                 }
@@ -110,7 +110,7 @@ public class TournamentFactory {
             logger.fatal("TournamentFactory error ", ex);
             return null;
         }
-        logger.debug("Tournament created: " + tournamentType + " " + tournament.getId()); 
+        logger.debug("Tournament created: " + tournamentType + ' ' + tournament.getId());
 
         return tournament;
     }

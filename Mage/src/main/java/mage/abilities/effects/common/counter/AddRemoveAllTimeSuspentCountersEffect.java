@@ -98,7 +98,7 @@ public class AddRemoveAllTimeSuspentCountersEffect extends OneShotEffect {
                 if (!game.isSimulation()) {
                     game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
                             .append(controller.getLogName()).append(actionStr)
-                            .append(counter.getCount()).append(" ").append(counterName.toLowerCase())
+                            .append(counter.getCount()).append(' ').append(counterName.toLowerCase())
                             .append(" counter on ").append(card.getName()).toString());
                 }
             }
@@ -110,7 +110,7 @@ public class AddRemoveAllTimeSuspentCountersEffect extends OneShotEffect {
         final String actionsStr2 = removeCounter ? "remove " : " put ";
         sb.append(actionsStr2);
         if (counter.getCount() > 1) {
-            sb.append(Integer.toString(counter.getCount())).append(" ").append(counter.getName().toLowerCase()).append(" counters on each ");
+            sb.append(Integer.toString(counter.getCount())).append(' ').append(counter.getName().toLowerCase()).append(" counters on each ");
         } else {
             sb.append("a ").append(counter.getName().toLowerCase()).append(" counter on each ");
         }

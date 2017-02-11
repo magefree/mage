@@ -49,7 +49,7 @@ public class UntapTargetCost extends CostImpl {
 
     public UntapTargetCost(TargetControlledPermanent target) {
         this.target = target;
-        this.text = "Untap " + target.getMaxNumberOfTargets() + " " + target.getTargetName();
+        this.text = "Untap " + target.getMaxNumberOfTargets() + ' ' + target.getTargetName();
     }
 
     public UntapTargetCost(final UntapTargetCost cost) {

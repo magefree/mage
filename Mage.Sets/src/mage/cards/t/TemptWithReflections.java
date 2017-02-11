@@ -116,7 +116,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
                 effect.apply(game, source);
             }
 
-            if (playersSaidYes.size() > 0) {
+            if (!playersSaidYes.isEmpty()) {
                 effect = new PutTokenOntoBattlefieldCopyTargetEffect();
                 effect.setTargetPointer(getTargetPointer());
                 effect.apply(game, source);

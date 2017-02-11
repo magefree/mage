@@ -112,7 +112,7 @@ class TorrentialGearhulkEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
             if (card != null) {
-                if (controller.chooseUse(outcome, "Cast " + card.getLogName() + "?", source, game)) {
+                if (controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
                     if (controller.cast(card.getSpellAbility(), game, true)) {
                         ContinuousEffect effect = new TorrentialGearhulkReplacementEffect(card.getId());
                         effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));

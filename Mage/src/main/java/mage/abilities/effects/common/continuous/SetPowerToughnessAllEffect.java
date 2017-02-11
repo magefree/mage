@@ -131,9 +131,9 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
         } else {
             sb.append(" have base power and toughness ");
         }
-        sb.append(power).append("/").append(toughness);
+        sb.append(power).append('/').append(toughness);
         if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         return sb.toString();
     }

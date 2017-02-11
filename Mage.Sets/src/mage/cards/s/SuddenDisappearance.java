@@ -93,7 +93,7 @@ class SuddenDisappearanceEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             Set<Card> permsSet = new HashSet<>(game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game));
-            if (permsSet.size() > 0) {
+            if (!permsSet.isEmpty()) {
                 controller.moveCardsToExile(permsSet, source, game, true, source.getSourceId(), sourceObject.getIdName());
                 Cards targets = new CardsImpl();
                 for (Card card : permsSet) {

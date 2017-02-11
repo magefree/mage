@@ -94,7 +94,7 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
 
     private Counter selectCounterType(Game game, Ability source, Permanent permanent) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && permanent.getCounters(game).size() > 0) {
+        if (controller != null && !permanent.getCounters(game).isEmpty()) {
             String counterName = null;
             if (permanent.getCounters(game).size() > 1) {
                 Choice choice = new ChoiceImpl(true);
@@ -122,7 +122,7 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
 
     private Counter selectCounterType(Game game, Ability source, Card card) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && card.getCounters(game).size() > 0) {
+        if (controller != null && !card.getCounters(game).isEmpty()) {
             String counterName = null;
             if (card.getCounters(game).size() > 1) {
                 Choice choice = new ChoiceImpl(true);

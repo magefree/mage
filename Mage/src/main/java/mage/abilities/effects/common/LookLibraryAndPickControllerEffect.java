@@ -222,7 +222,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 sb.append("put ").append(filter.getMessage()).append(" into your graveyard");
                 break;
         }
-        return sb.append("?").toString();
+        return sb.append('?').toString();
     }
 
     private String getPickText() {

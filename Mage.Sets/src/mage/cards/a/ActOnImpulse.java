@@ -98,7 +98,7 @@ class ActOnImpulseExileEffect extends OneShotEffect {
                     cards.add(card);
                 }
             }
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 List<UUID> cardsId = new ArrayList<>();
                 for (Card card : cards) {
                     card.moveToExile(source.getSourceId(), "Act on Impulse", source.getSourceId(), game);

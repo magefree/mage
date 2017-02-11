@@ -132,7 +132,7 @@ class WarpWorldEffect extends OneShotEffect {
             if (player != null) {
                 CardsImpl cards = new CardsImpl();
                 cards.addAll(player.getLibrary().getTopCards(game, permanentsCount.get(player.getId())));
-                player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ")", cards, game);
+                player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', cards, game);
                 cardsRevealed.put(player.getId(), cards);
             }
         }

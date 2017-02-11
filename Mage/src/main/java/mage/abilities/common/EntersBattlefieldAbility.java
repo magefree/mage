@@ -88,7 +88,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
 
     @Override
     public void addEffect(Effect effect) {
-        if (getEffects().size() > 0) {
+        if (!getEffects().isEmpty()) {
             Effect entersBattlefieldEffect = this.getEffects().get(0);
             if (entersBattlefieldEffect instanceof EntersBattlefieldEffect) {
                 ((EntersBattlefieldEffect) entersBattlefieldEffect).addEffect(effect);

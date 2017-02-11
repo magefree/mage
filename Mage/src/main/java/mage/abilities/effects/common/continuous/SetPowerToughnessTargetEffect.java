@@ -96,7 +96,7 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" has base power and toughness ");
-        sb.append(power).append("/").append(toughness).append(" ").append(duration.toString());
+        sb.append(power).append('/').append(toughness).append(' ').append(duration.toString());
         return sb.toString();
     }
 

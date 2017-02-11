@@ -69,7 +69,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder("put ");
         sb.append(CardUtil.numberToText(amount.toString(), "a"));
-        sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
+        sb.append(' ').append(token.getDescription()).append(" onto the battlefield");
         if (tapped) {
             sb.append(" tapped");
         }
@@ -80,7 +80,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             sb.append(" attacking");
         }
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(" for each ");
         }
         sb.append(message);

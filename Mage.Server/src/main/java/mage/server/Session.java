@@ -102,7 +102,7 @@ public class Session {
             }
             AuthorizedUserRepository.instance.add(userName, password, email);
             String subject = "XMage Registration Completed";
-            String text = "You are successfully registered as " + userName + ".";
+            String text = "You are successfully registered as " + userName + '.';
             text += "  Your initial, generated password is: " + password;
 
             boolean success;
@@ -113,6 +113,10 @@ public class Session {
             }
             if (success) {
                 String ok = "Sent a registration confirmation / initial password email to " + email + " for " + userName;
+                logger.info(ok);
+                sendInfoMessageToClient(ok);
+            } else if (Main.isTestMode()) {
+                String ok = "Server is in test mode.  Your account is registered with a password of " + password + " for " + userName;
                 logger.info(ok);
                 sendInfoMessageToClient(ok);
             } else {

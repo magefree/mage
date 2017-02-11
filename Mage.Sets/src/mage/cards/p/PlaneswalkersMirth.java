@@ -84,7 +84,7 @@ class PlaneswalkersMirthEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
-        if (opponent != null && player!= null && opponent.getHand().size() > 0) {
+        if (opponent != null && player!= null && !opponent.getHand().isEmpty()) {
             Cards revealed = new CardsImpl();
             Card card = opponent.getHand().getRandom(game);
             if (card != null) {

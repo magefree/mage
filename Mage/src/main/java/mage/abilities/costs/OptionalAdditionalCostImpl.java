@@ -130,8 +130,6 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
         ++activatedCounter;
     }
 
-    ;
-
     /**
      * Reset the activate and count information
      *
@@ -162,8 +160,6 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
         return repeatable;
     }
 
-    ;
-
     /**
      * Returns if the cost was activated
      *
@@ -174,8 +170,6 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
         return activated;
     }
 
-    ;
-
     /**
      * Returns the number of times the cost was activated
      * @return
@@ -184,8 +178,6 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
     public int getActivateCount() {
         return activatedCounter;
     }
-
-    ;
 
 
     @Override

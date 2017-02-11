@@ -33,7 +33,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            StringBuilder sb = new StringBuilder(cost.getText()).append("?");
+            StringBuilder sb = new StringBuilder(cost.getText()).append('?');
             if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ")) {
                 sb.insert(0, "Pay ");
             }
@@ -43,7 +43,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
                     && controller.chooseUse(Outcome.Benefit, message, source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
-                    game.informPlayers(controller.getLogName() + " pays " + cost.toString());
+                    game.informPlayers(controller.getLogName() + " pays " + cost.getText());
                     return true;
                 }
             }

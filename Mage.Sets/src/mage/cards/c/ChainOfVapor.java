@@ -96,7 +96,7 @@ class ChainOfVaporEffect extends OneShotEffect {
         if (permanent != null) {
             controller.moveCards(permanent, Zone.HAND, source, game);
             Player player = game.getPlayer(permanent.getControllerId());
-            TargetControlledPermanent target = new TargetControlledPermanent(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ")"), true);
+            TargetControlledPermanent target = new TargetControlledPermanent(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ')'), true);
             if (player.chooseTarget(Outcome.Sacrifice, target, source, game)) {
                 Permanent land = game.getPermanent(target.getFirstTarget());
                 if (land != null && land.sacrifice(source.getSourceId(), game)) {
@@ -109,7 +109,7 @@ class ChainOfVaporEffect extends OneShotEffect {
                                 if (activateMessage.startsWith(" casts ")) {
                                     activateMessage = activateMessage.substring(6);
                                 }
-                                game.informPlayers(player.getLogName() + " " + activateMessage);
+                                game.informPlayers(player.getLogName() + ' ' + activateMessage);
                             }
                         }
                     }

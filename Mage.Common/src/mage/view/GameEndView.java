@@ -79,11 +79,11 @@ public class GameEndView implements Serializable {
         }
         if (you != null) {
             if (you.hasWon()) {
-                gameInfo = new StringBuilder("You won the game on turn ").append(game.getTurnNum()).append(".").toString();
+                gameInfo = new StringBuilder("You won the game on turn ").append(game.getTurnNum()).append('.').toString();
             } else if (winner > 0) {
-                gameInfo = new StringBuilder("You lost the game on turn ").append(game.getTurnNum()).append(".").toString();
+                gameInfo = new StringBuilder("You lost the game on turn ").append(game.getTurnNum()).append('.').toString();
             } else {
-                gameInfo = new StringBuilder("Game is a draw on Turn ").append(game.getTurnNum()).append(".").toString();
+                gameInfo = new StringBuilder("Game is a draw on Turn ").append(game.getTurnNum()).append('.').toString();
             }
         }
         matchView = new MatchView(table);

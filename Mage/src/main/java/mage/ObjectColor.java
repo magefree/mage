@@ -231,19 +231,19 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     public String toString() {
         StringBuilder sb = new StringBuilder(5);
         if (white) {
-            sb.append("W");
+            sb.append('W');
         }
         if (blue) {
-            sb.append("U");
+            sb.append('U');
         }
         if (black) {
-            sb.append("B");
+            sb.append('B');
         }
         if (red) {
-            sb.append("R");
+            sb.append('R');
         }
         if (green) {
-            sb.append("G");
+            sb.append('G');
         }
         return sb.toString();
     }

@@ -100,7 +100,7 @@ public class RoninWarclub extends CardImpl {
 
                 if (!this.getTargets().isEmpty()) {
                     // remove previous target
-                    if (this.getTargets().get(0).getTargets().size() > 0) {
+                    if (!this.getTargets().get(0).getTargets().isEmpty()) {
                         this.getTargets().clear();
                         this.addTarget(new TargetCreaturePermanent());
                     }

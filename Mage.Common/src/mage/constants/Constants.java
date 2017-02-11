@@ -78,7 +78,7 @@ public final class Constants {
 
     public enum SessionState {
 
-        DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_STARTING;
+        DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_STARTING
     }
 
     public enum Option {

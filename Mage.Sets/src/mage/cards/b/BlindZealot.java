@@ -109,7 +109,7 @@ class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
                 StringBuilder sb = new StringBuilder();
                 sb.append("Do you wish to sacrifice ").append(sourcePermanent.getIdName());
                 sb.append(" to destroy target creature controlled by ");
-                sb.append(game.getPlayer(event.getTargetId()).getLogName()).append("?");
+                sb.append(game.getPlayer(event.getTargetId()).getLogName()).append('?');
                 if (player.chooseUse(Outcome.DestroyPermanent, sb.toString(), this, game)) {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent();
                     filter.add(new ControllerIdPredicate(event.getTargetId()));

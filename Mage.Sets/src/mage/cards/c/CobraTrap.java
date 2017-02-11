@@ -117,7 +117,7 @@ class CobraTrapWatcher extends Watcher {
         if (event.getType() == EventType.DESTROYED_PERMANENT) {
             Permanent perm = (Permanent) game.getPermanentOrLKIBattlefield(event.getTargetId()); // can regenerate or be indestructible
             if (perm != null && !perm.getCardType().contains(CardType.CREATURE)) {
-                if (game.getStack().size() > 0) {
+                if (!game.getStack().isEmpty()) {
                     StackObject spell = game.getStack().getStackObject(event.getSourceId());
                     if (spell != null && game.getOpponents(perm.getControllerId()).contains(spell.getControllerId())) {
                         players.add(perm.getControllerId());

@@ -70,7 +70,7 @@ public class ChancellorAbility extends StaticAbility implements OpeningHandActio
 
     @Override
     public boolean askUseOpeningHandAction(Card card, Player player, Game game) {
-        return player.chooseUse(Outcome.PutCardInPlay, "Do you wish to reveal " + card.getIdName() + "?", this, game);
+        return player.chooseUse(Outcome.PutCardInPlay, "Do you wish to reveal " + card.getIdName() + '?', this, game);
     }
 
     @Override

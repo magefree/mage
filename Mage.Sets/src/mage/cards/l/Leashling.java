@@ -98,7 +98,7 @@ class PutCardFromHandOnTopOfLibrary extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            return controller.getHand().size() > 0;
+            return !controller.getHand().isEmpty();
         }
         return false;
     }

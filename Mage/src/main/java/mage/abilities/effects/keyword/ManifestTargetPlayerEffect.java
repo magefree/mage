@@ -105,7 +105,7 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
     private String setText() {
         StringBuilder sb = new StringBuilder();
         if (prefix != null && !prefix.isEmpty()) {
-            sb.append(prefix).append(" ");
+            sb.append(prefix).append(' ');
         }
         sb.append("manifest the top ");
         if (amount > 1) {

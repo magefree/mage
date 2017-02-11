@@ -104,7 +104,7 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
             if (damageSource != null && preventionSource != null) {
                 StringBuilder message = new StringBuilder(preventedDamage).append(" damage from ");
                 message.append(damageSource.getName()).append(" prevented ");
-                message.append("(").append(preventionSource).append(")");
+                message.append('(').append(preventionSource).append(')');
                 game.informPlayers(message.toString());
             }
             event.setAmount(0);

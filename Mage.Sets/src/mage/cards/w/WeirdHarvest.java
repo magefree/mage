@@ -115,10 +115,10 @@ class WeirdHarvestEffect extends OneShotEffect {
             usingPlayers.add(player);
             TargetCardInLibrary target = new TargetCardInLibrary(0, xValue, new FilterCreatureCard());
             if (player.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     Cards cards = new CardsImpl(target.getTargets());
                     player.moveCards(cards, Zone.HAND, source, game);
-                    player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ")", cards, game);
+                    player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', cards, game);
                 }
             }
         }

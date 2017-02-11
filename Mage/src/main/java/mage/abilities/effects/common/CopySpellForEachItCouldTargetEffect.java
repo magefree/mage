@@ -170,7 +170,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                 if (playerTargetCopyMap.containsKey(player.getId())) {
                     Map<UUID, Spell> targetCopyMap = playerTargetCopyMap.get(player.getId());
                     if (targetCopyMap != null) {
-                        while (targetCopyMap.size() > 0) {
+                        while (!targetCopyMap.isEmpty()) {
                             FilterInPlay<T> setFilter = filter.copy();
                             setFilter.add(new FromSetPredicate(targetCopyMap.keySet()));
                             Target target = new TargetWithAdditionalFilter(sampleTarget, setFilter);
@@ -466,11 +466,11 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
         for (UUID targetId : getTargets()) {
             MageObject object = game.getObject(targetId);
             if (object != null) {
-                sb.append(object.getLogName()).append(" ");
+                sb.append(object.getLogName()).append(' ');
             } else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
-                    sb.append(player.getLogName()).append(" ");
+                    sb.append(player.getLogName()).append(' ');
                 }
             }
         }

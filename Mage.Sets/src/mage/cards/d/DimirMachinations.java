@@ -108,7 +108,7 @@ class DimirMachinationsEffect extends OneShotEffect {
                             cards.remove(card);
                         }
                     }
-                    while (cards.size() > 0) {
+                    while (!cards.isEmpty()) {
                         if (cards.size() == 1) {
                             Card card = cards.get(cards.iterator().next(), game);
                             controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);

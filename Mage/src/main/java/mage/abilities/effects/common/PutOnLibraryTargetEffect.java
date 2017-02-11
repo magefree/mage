@@ -155,7 +155,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
             if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {
                 sb.append("up to ");
             }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
         sb.append(onTop ? "top" : "the bottom").append(" of its owner's library");

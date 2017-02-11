@@ -112,7 +112,7 @@ public class DevourEffect extends ReplacementEffectImpl {
             }
             if (controller.chooseUse(Outcome.Detriment, "Devour creatures?", source, game)) {
                 controller.chooseTarget(Outcome.Detriment, target, source, game);
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     List<ArrayList<String>> cardSubtypes = new ArrayList<>();
                     int devouredCreatures = target.getTargets().size();
                     if (!game.isSimulation()) {

@@ -290,9 +290,9 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
             if (permanent.getName().equals(cardName)) {
                 count++;
                 if (scope.equals(Filter.ComparisonScope.All)) {
-                    Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ")",
+                    Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ')',
                             power, permanent.getPower().getValue());
-                    Assert.assertEquals("Toughness is not the same (" + toughness + " vs. " + permanent.getToughness().getValue() + ")",
+                    Assert.assertEquals("Toughness is not the same (" + toughness + " vs. " + permanent.getToughness().getValue() + ')',
                             toughness, permanent.getToughness().getValue());
                 } else if (scope.equals(Filter.ComparisonScope.Any)) {
                     if (power == permanent.getPower().getValue() && toughness == permanent.getToughness().getValue()) {
@@ -372,7 +372,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
                 }
             }
         }
-        Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ')', count, actualCount);
     }
 
     public Permanent getPermanent(String cardName, UUID controller) {
@@ -387,7 +387,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
             }
         }
         Assert.assertNotNull("Couldn't find a card with specified name: " + cardName, permanent0);
-        Assert.assertEquals("More than one permanent was found: " + cardName + "(" + count + ")", 1, count);
+        Assert.assertEquals("More than one permanent was found: " + cardName + '(' + count + ')', 1, count);
         return permanent0;
     }
 

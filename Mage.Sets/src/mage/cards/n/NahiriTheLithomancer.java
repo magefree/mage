@@ -134,7 +134,7 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
                         //TODO: Make sure the Equipment can legally enchant the token, preferably on targetting.
                         Target target = new TargetControlledPermanent(0, 1, filter, true);
                         if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                                && controller.chooseUse(outcome, "Attach an Equipment you control to the created " + tokenPermanent.getIdName() + "?", source, game)) {
+                                && controller.chooseUse(outcome, "Attach an Equipment you control to the created " + tokenPermanent.getIdName() + '?', source, game)) {
                             if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
                                 Permanent equipmentPermanent = game.getPermanent(target.getFirstTarget());
                                 if (equipmentPermanent != null) {

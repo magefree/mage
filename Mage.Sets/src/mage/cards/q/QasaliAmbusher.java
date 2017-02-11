@@ -107,8 +107,8 @@ class QasaliAmbusherAbility extends ActivatedAbilityImpl {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         if (super.canActivate(playerId, game)) {
-            if (game.getBattlefield().getActivePermanents(filterPlains, this.getControllerId(), this.getSourceId(), game).size() > 0
-                    && game.getBattlefield().getActivePermanents(filterForest, this.getControllerId(), this.getSourceId(), game).size() > 0) {
+            if (!game.getBattlefield().getActivePermanents(filterPlains, this.getControllerId(), this.getSourceId(), game).isEmpty()
+                    && !game.getBattlefield().getActivePermanents(filterForest, this.getControllerId(), this.getSourceId(), game).isEmpty()) {
                 for (CombatGroup group : game.getCombat().getGroups()) {
                     if (getControllerId().equals(group.getDefenderId())) {
                         return true;
