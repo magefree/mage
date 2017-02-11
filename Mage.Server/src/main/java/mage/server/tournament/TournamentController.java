@@ -198,8 +198,7 @@ public class TournamentController {
 
     private void checkStart() {
         if (!started && allJoined()) {
-            ThreadExecutor.getInstance().getCallExecutor().execute(
-                    () -> startTournament());
+            ThreadExecutor.getInstance().getCallExecutor().execute(this::startTournament);
         }
     }
 

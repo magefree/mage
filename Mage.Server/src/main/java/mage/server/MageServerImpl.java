@@ -202,38 +202,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public TableView createTable(final String sessionId, final UUID roomId, final MatchOptions options) throws MageException {
-        return executeWithResult("createTable", sessionId, new ActionWithTableViewResult() {
-            @Override
-            public TableView execute() throws MageException {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                Optional<User> _user = UserManager.getInstance().getUser(userId);
-                if (!_user.isPresent()) {
-                    logger.error("User for session not found. session = " + sessionId);
-                    return null;
-                }
-                User user = _user.get();
-                // check if user can create another table
-                int notStartedTables = user.getNumberOfNotStartedTables();
-                if (notStartedTables > 1) {
-                    user.showUserMessage("Create table", "You have already " + notStartedTables + " not started table" + (notStartedTables == 1 ? "" : "s") + ". You can't create another.");
-                    throw new MageException("No message");
-                }
-                // check if the user itself satisfies the quitRatio requirement.
-                int quitRatio = options.getQuitRatio();
-                if (quitRatio < user.getMatchQuitRatio()) {
-                    user.showUserMessage("Create table", "Your quit ratio " + user.getMatchQuitRatio() + "% is higher than the table requirement " + quitRatio + '%');
-                    throw new MageException("No message");
-                }
-
-                TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
-                if (logger.isDebugEnabled()) {
-                    logger.debug("TABLE created - tableId: " + table.getTableId() + ' ' + table.getTableName());
-                    logger.debug("- " + user.getName() + " userId: " + user.getId());
-                    logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));
-                }
-                return table;
-            }
-        });
+        return executeWithResult("createTable", sessionId, new MyActionWithTableViewResult(sessionId, options, roomId));
     }
 
     @Override
@@ -322,9 +291,7 @@ public class MageServerImpl implements MageServer {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 if (logger.isTraceEnabled()) {
                     Optional<User> user = UserManager.getInstance().getUser(userId);
-                    if (user.isPresent()) {
-                        logger.trace("join tourn. tableId: " + tableId + ' ' + name);
-                    }
+                    user.ifPresent(user1 -> logger.trace("join tourn. tableId: " + tableId + ' ' + name));
                 }
                 if (userId == null) {
                     logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
@@ -688,18 +655,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public DraftPickView sendCardPick(final UUID draftId, final String sessionId, final UUID cardPick, final Set<UUID> hiddenCards) throws MageException {
-        return executeWithResult("sendCardPick", sessionId, new ActionWithNullNegativeResult<DraftPickView>() {
-            @Override
-            public DraftPickView execute() {
-                Session session = SessionManager.getInstance().getSession(sessionId);
-                if (session != null) {
-                    return DraftManager.getInstance().sendCardPick(draftId, session.getUserId(), cardPick, hiddenCards);
-                } else {
-                    logger.error("Session not found sessionId: " + sessionId + "  draftId:" + draftId);
-                }
-                return null;
-            }
-        });
+        return executeWithResult("sendCardPick", sessionId, new DraftPickViewActionWithNullNegativeResult(sessionId, draftId, cardPick, hiddenCards));
     }
 
     @Override
@@ -780,13 +736,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public boolean watchTournamentTable(final String sessionId, final UUID tableId) throws MageException {
-        return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
-            @Override
-            public Boolean execute() throws MageException {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                return TableManager.getInstance().watchTable(userId, tableId);
-            }
-        });
+        return executeWithResult("setUserData", sessionId, new MyActionWithBooleanResult(sessionId, tableId));
     }
 
     @Override
@@ -911,13 +861,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public GameView getGameView(final UUID gameId, final String sessionId, final UUID playerId) throws MageException {
-        return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<GameView>() {
-            @Override
-            public GameView execute() throws MageException {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                return GameManager.getInstance().getGameView(gameId, userId, playerId);
-            }
-        });
+        return executeWithResult("getGameView", sessionId, new GameViewActionWithNullNegativeResult(sessionId, gameId, playerId));
     }
 
     /**
@@ -929,27 +873,7 @@ public class MageServerImpl implements MageServer {
      */
     @Override
     public List<UserView> getUsers(String sessionId) throws MageException {
-        return executeWithResult("getUsers", sessionId, new ActionWithNullNegativeResult<List<UserView>>() {
-            @Override
-            public List<UserView> execute() throws MageException {
-                List<UserView> users = new ArrayList<>();
-                for (User user : UserManager.getInstance().getUsers()) {
-                    users.add(new UserView(
-                            user.getName(),
-                            user.getHost(),
-                            user.getSessionId(),
-                            user.getConnectionTime(),
-                            user.getGameInfo(),
-                            user.getUserState().toString(),
-                            user.getChatLockedUntil(),
-                            user.getClientVersion(),
-                            user.getEmail(),
-                            user.getUserIdStr()
-                    ));
-                }
-                return users;
-            }
-        }, true);
+        return executeWithResult("getUsers", sessionId, new ListActionWithNullNegativeResult(), true);
     }
 
     @Override
@@ -1040,12 +964,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public Object getServerMessagesCompressed(String sessionId) throws MageException {
-        return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<Object>() {
-            @Override
-            public Object execute() throws MageException {
-                return CompressUtil.compress(ServerMessagesUtil.getInstance().getMessages());
-            }
-        });
+        return executeWithResult("getGameView", sessionId, new MyActionWithNullNegativeResult());
     }
 
     @Override
@@ -1141,5 +1060,136 @@ public class MageServerImpl implements MageServer {
     @Override
     public List<CardInfo> getMissingCardsData(List<String> classNames) {
         return CardRepository.instance.getMissingCards(classNames);
+    }
+
+    private static class MyActionWithNullNegativeResult extends ActionWithNullNegativeResult<Object> {
+        @Override
+        public Object execute() throws MageException {
+            return CompressUtil.compress(ServerMessagesUtil.getInstance().getMessages());
+        }
+    }
+
+    private static class ListActionWithNullNegativeResult extends ActionWithNullNegativeResult<List<UserView>> {
+        @Override
+        public List<UserView> execute() throws MageException {
+            List<UserView> users = new ArrayList<>();
+            for (User user : UserManager.getInstance().getUsers()) {
+                users.add(new UserView(
+                        user.getName(),
+                        user.getHost(),
+                        user.getSessionId(),
+                        user.getConnectionTime(),
+                        user.getGameInfo(),
+                        user.getUserState().toString(),
+                        user.getChatLockedUntil(),
+                        user.getClientVersion(),
+                        user.getEmail(),
+                        user.getUserIdStr()
+                ));
+            }
+            return users;
+        }
+    }
+
+    private static class GameViewActionWithNullNegativeResult extends ActionWithNullNegativeResult<GameView> {
+        private final String sessionId;
+        private final UUID gameId;
+        private final UUID playerId;
+
+        public GameViewActionWithNullNegativeResult(String sessionId, UUID gameId, UUID playerId) {
+            this.sessionId = sessionId;
+            this.gameId = gameId;
+            this.playerId = playerId;
+        }
+
+        @Override
+        public GameView execute() throws MageException {
+            UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+            return GameManager.getInstance().getGameView(gameId, userId, playerId);
+        }
+    }
+
+    private static class MyActionWithBooleanResult extends ActionWithBooleanResult {
+        private final String sessionId;
+        private final UUID tableId;
+
+        public MyActionWithBooleanResult(String sessionId, UUID tableId) {
+            this.sessionId = sessionId;
+            this.tableId = tableId;
+        }
+
+        @Override
+        public Boolean execute() throws MageException {
+            UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+            return TableManager.getInstance().watchTable(userId, tableId);
+        }
+    }
+
+    private static class DraftPickViewActionWithNullNegativeResult extends ActionWithNullNegativeResult<DraftPickView> {
+        private final String sessionId;
+        private final UUID draftId;
+        private final UUID cardPick;
+        private final Set<UUID> hiddenCards;
+
+        public DraftPickViewActionWithNullNegativeResult(String sessionId, UUID draftId, UUID cardPick, Set<UUID> hiddenCards) {
+            this.sessionId = sessionId;
+            this.draftId = draftId;
+            this.cardPick = cardPick;
+            this.hiddenCards = hiddenCards;
+        }
+
+        @Override
+        public DraftPickView execute() {
+            Session session = SessionManager.getInstance().getSession(sessionId);
+            if (session != null) {
+                return DraftManager.getInstance().sendCardPick(draftId, session.getUserId(), cardPick, hiddenCards);
+            } else {
+                logger.error("Session not found sessionId: " + sessionId + "  draftId:" + draftId);
+            }
+            return null;
+        }
+    }
+
+    private static class MyActionWithTableViewResult extends ActionWithTableViewResult {
+        private final String sessionId;
+        private final MatchOptions options;
+        private final UUID roomId;
+
+        public MyActionWithTableViewResult(String sessionId, MatchOptions options, UUID roomId) {
+            this.sessionId = sessionId;
+            this.options = options;
+            this.roomId = roomId;
+        }
+
+        @Override
+        public TableView execute() throws MageException {
+            UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+            Optional<User> _user = UserManager.getInstance().getUser(userId);
+            if (!_user.isPresent()) {
+                logger.error("User for session not found. session = " + sessionId);
+                return null;
+            }
+            User user = _user.get();
+            // check if user can create another table
+            int notStartedTables = user.getNumberOfNotStartedTables();
+            if (notStartedTables > 1) {
+                user.showUserMessage("Create table", "You have already " + notStartedTables + " not started table" + (notStartedTables == 1 ? "" : "s") + ". You can't create another.");
+                throw new MageException("No message");
+            }
+            // check if the user itself satisfies the quitRatio requirement.
+            int quitRatio = options.getQuitRatio();
+            if (quitRatio < user.getMatchQuitRatio()) {
+                user.showUserMessage("Create table", "Your quit ratio " + user.getMatchQuitRatio() + "% is higher than the table requirement " + quitRatio + '%');
+                throw new MageException("No message");
+            }
+
+            TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
+            if (logger.isDebugEnabled()) {
+                logger.debug("TABLE created - tableId: " + table.getTableId() + ' ' + table.getTableName());
+                logger.debug("- " + user.getName() + " userId: " + user.getId());
+                logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));
+            }
+            return table;
+        }
     }
 }

@@ -533,7 +533,7 @@ public final class GamePanel extends javax.swing.JPanel {
         if (!SessionHandler.watchGame(gameId)) {
             removeGame();
         }
-        for (PlayAreaPanel panel : getPlayers().values()) {
+        for (PlayAreaPanel panel : players.values()) {
             panel.setPlayingMode(false);
         }
     }
@@ -553,7 +553,7 @@ public final class GamePanel extends javax.swing.JPanel {
         if (!SessionHandler.startReplay(gameId)) {
             removeGame();
         }
-        for (PlayAreaPanel panel : getPlayers().values()) {
+        for (PlayAreaPanel panel : players.values()) {
             panel.setPlayingMode(false);
         }
     }
@@ -815,7 +815,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 logger.warn("   uuid:" + player.getPlayerId());
                 logger.warn("   players:");
                 for (PlayAreaPanel p : players.values()) {
-                    logger.warn("" + p);
+                    logger.warn(String.valueOf(p));
                 }
             }
         }

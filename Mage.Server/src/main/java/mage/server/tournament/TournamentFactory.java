@@ -79,7 +79,7 @@ public class TournamentFactory {
                 }
                 tournament.getOptions().getLimitedOptions().setNumberBoosters(tournament.getTournamentType().getNumBoosters());
                 if (tournament.getTournamentType().isCubeBooster()) {
-                    DraftCube draftCube = null;
+                    DraftCube draftCube;
 
                     if (tournament.getOptions().getLimitedOptions().getCubeFromDeck() != null) {
                         draftCube = CubeFactory.getInstance().createDeckDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName(), tournament.getOptions().getLimitedOptions().getCubeFromDeck());

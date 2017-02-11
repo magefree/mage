@@ -60,7 +60,7 @@ public class UserManager {
     }
 
     private UserManager() {
-        expireExecutor.scheduleAtFixedRate(() -> checkExpired(), 60, 60, TimeUnit.SECONDS);
+        expireExecutor.scheduleAtFixedRate(this::checkExpired, 60, 60, TimeUnit.SECONDS);
     }
 
     public User createUser(String userName, String host, AuthorizedUser authorizedUser) {
@@ -168,8 +168,7 @@ public class UserManager {
     private void checkExpired() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, -3);
-        List<User> usersToCheck = new ArrayList<>();
-        usersToCheck.addAll(users.values());
+        List<User> usersToCheck = new ArrayList<>(users.values());
         for (User user : usersToCheck) {
             if (!user.getUserState().equals(UserState.Expired) && user.isExpired(calendar.getTime())) {
                 removeUser(user.getId(), DisconnectReason.SessionExpired);

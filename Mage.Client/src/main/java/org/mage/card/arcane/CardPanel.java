@@ -574,12 +574,12 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
         int cx = getCardX() - component.x;
         int cy = getCardY() - component.y;
-        int cw = getCardWidth();
-        int ch = getCardHeight();
+        int cw = cardWidth;
+        int ch = cardHeight;
         if (isTapped()) {
             cy = ch - cw + cx;
             ch = cw;
-            cw = getCardHeight();
+            cw = cardHeight;
         }
 
         return x >= cx && x <= cx + cw && y >= cy && y <= cy + ch;

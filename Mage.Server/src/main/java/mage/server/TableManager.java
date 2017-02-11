@@ -388,8 +388,7 @@ public class TableManager {
             debugServerState();
         }
         logger.debug("TABLE HEALTH CHECK");
-        ArrayList<Table> tableCopy = new ArrayList<>();
-        tableCopy.addAll(tables.values());
+        ArrayList<Table> tableCopy = new ArrayList<>(tables.values());
         for (Table table : tableCopy) {
             try {
                 if (table.getState() != TableState.FINISHED) {

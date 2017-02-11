@@ -124,7 +124,7 @@ public class ChatManager {
 
             if (messageType != MessageType.GAME) {
                 User user = UserManager.getInstance().getUserByName(userName);
-                if (message != null && userName != null && !userName.equals("")) {
+                if (message != null && userName != null && !userName.isEmpty()) {
 
                     if (message.equals(userMessages.get(userName))) {
                         // prevent identical messages
@@ -245,7 +245,6 @@ public class ChatManager {
      */
     public void broadcast(UUID userId, String message, MessageColor color) throws UserNotFoundException {
         UserManager.getInstance().getUser(userId).ifPresent(user-> {
-
             chatSessions.values()
                     .stream()
                     .filter(chat -> chat.hasUser(userId))
@@ -272,8 +271,7 @@ public class ChatManager {
     }
 
     public ArrayList<ChatSession> getChatSessions() {
-        ArrayList<ChatSession> chatSessionList = new ArrayList<>();
-        chatSessionList.addAll(chatSessions.values());
+        ArrayList<ChatSession> chatSessionList = new ArrayList<>(chatSessions.values());
         return chatSessionList;
     }
 

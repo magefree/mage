@@ -290,7 +290,7 @@ public abstract class CardRenderer {
                     g2.setColor(Color.black);
                     g2.drawPolygon(p);
                     g2.setFont(new Font("Arial", Font.BOLD, 7));
-                    String cstr = "" + v.getCount();
+                    String cstr = String.valueOf(v.getCount());
                     int strW = g2.getFontMetrics().stringWidth(cstr);
                     g2.drawString(cstr, 5 - strW / 2, 8);
                     g2.dispose();

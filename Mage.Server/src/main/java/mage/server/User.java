@@ -430,35 +430,35 @@ public class User {
     }
 
     public void remove(DisconnectReason reason) {
-        logger.trace("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
+        logger.trace("REMOVE " + userName + " Draft sessions " + draftSessions.size());
         for (DraftSession draftSession : draftSessions.values()) {
             draftSession.setKilled();
         }
         draftSessions.clear();
-        logger.trace("REMOVE " + getName() + " Tournament sessions " + userTournaments.size());
+        logger.trace("REMOVE " + userName + " Tournament sessions " + userTournaments.size());
         for (UUID tournamentId : userTournaments.values()) {
-            TournamentManager.getInstance().quit(tournamentId, getId());
+            TournamentManager.getInstance().quit(tournamentId, userId);
         }
         userTournaments.clear();
-        logger.trace("REMOVE " + getName() + " Tables " + tables.size());
+        logger.trace("REMOVE " + userName + " Tables " + tables.size());
         for (Entry<UUID, Table> entry : tables.entrySet()) {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
         tables.clear();
-        logger.trace("REMOVE " + getName() + " Game sessions: " + gameSessions.size());
+        logger.trace("REMOVE " + userName + " Game sessions: " + gameSessions.size());
         for (GameSessionPlayer gameSessionPlayer : gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSessionPlayer.getGameId());
             GameManager.getInstance().quitMatch(gameSessionPlayer.getGameId(), userId);
             gameSessionPlayer.quitGame();
         }
         gameSessions.clear();
-        logger.trace("REMOVE " + getName() + " watched Games " + watchedGames.size());
+        logger.trace("REMOVE " + userName + " watched Games " + watchedGames.size());
         for (UUID gameId : watchedGames) {
             GameManager.getInstance().stopWatching(gameId, userId);
         }
         watchedGames.clear();
-        logger.trace("REMOVE " + getName() + " Chats ");
+        logger.trace("REMOVE " + userName + " Chats ");
         ChatManager.getInstance().removeUser(userId, reason);
     }
 
@@ -517,11 +517,11 @@ public class User {
                                 }
                             } else {
                                 // can happen if tournamet has just ended
-                                logger.debug(getName() + " tournament player missing - tableId:" + table.getId(), null);
+                                logger.debug(userName + " tournament player missing - tableId:" + table.getId(), null);
                                 tablesToDelete.add(tableEntry.getKey());
                             }
                         } else {
-                            logger.error(getName() + " tournament key missing - tableId: " + table.getId(), null);
+                            logger.error(userName + " tournament key missing - tableId: " + table.getId(), null);
                         }
                     } else {
                         switch (table.getState()) {

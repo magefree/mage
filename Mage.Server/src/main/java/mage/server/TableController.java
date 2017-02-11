@@ -95,11 +95,7 @@ public class TableController {
         if (userId != null) {
             Optional<User> user = UserManager.getInstance().getUser(userId);
             // TODO: Handle if user == null
-            if (user.isPresent()) {
-                controllerName = user.get().getName();
-            } else {
-                controllerName = "undefined";
-            }
+            controllerName = user.map(User::getName).orElse("undefined");
         } else {
             controllerName = "System";
         }
@@ -671,9 +667,7 @@ public class TableController {
             if (entry.getValue().equals(playerId)) {
                 Optional<User> user = UserManager.getInstance().getUser(entry.getKey());
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                if (user.isPresent()) {
-                    user.get().ccSideboard(deck, table.getId(), remaining, options.isLimited());
-                }
+                user.ifPresent(user1 -> user1.ccSideboard(deck, table.getId(), remaining, options.isLimited()));
                 break;
             }
         }
@@ -811,10 +805,7 @@ public class TableController {
     private synchronized void setupTimeout(int seconds) {
         cancelTimeout();
         if (seconds > 0) {
-            futureTimeout = timeoutExecutor.schedule(
-                    () -> autoSideboard(),
-                    seconds, TimeUnit.SECONDS
-            );
+            futureTimeout = timeoutExecutor.schedule(this::autoSideboard, seconds, TimeUnit.SECONDS);
         }
     }
 
@@ -985,11 +976,11 @@ public class TableController {
     }
 
     public synchronized TableState getTableState() {
-        return getTable().getState();
+        return table.getState();
     }
 
     public synchronized boolean changeTableStateToStarting() {
-        if (getTable().getState() != TableState.READY_TO_START) {
+        if (table.getState() != TableState.READY_TO_START) {
             // tournament is not ready, can't start
             return false;
         }
@@ -997,7 +988,7 @@ public class TableController {
             logger.debug("Not alle Seats are occupied: stop start tableId:" + table.getId());
             return false;
         }
-        getTable().setState(TableState.STARTING);
+        table.setState(TableState.STARTING);
         return true;
     }
 }

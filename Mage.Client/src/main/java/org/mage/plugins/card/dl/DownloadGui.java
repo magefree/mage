@@ -53,7 +53,9 @@ public class DownloadGui extends JPanel {
         p.setBorder(BorderFactory.createTitledBorder("Progress:"));
         p.add(progress);
         JButton b = new JButton("X");
-        b.addActionListener(e -> getDownloader().dispose());
+        b.addActionListener(e -> {
+            d.dispose();
+        });
         p.add(b, BorderLayout.EAST);
         add(p, BorderLayout.NORTH);
 
@@ -154,10 +156,10 @@ public class DownloadGui extends JPanel {
             add(bar = new JProgressBar(job.getProgress()));
             JButton b = new JButton("X");
             b.addActionListener(e -> {
-                switch(getJob().getState()) {
+                switch(this.job.getState()) {
                     case NEW:
                     case WORKING:
-                        getJob().setState(State.ABORTED);
+                        this.job.setState(State.ABORTED);
                 }
             });
             add(b, BorderLayout.EAST);

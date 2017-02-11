@@ -141,8 +141,7 @@ public class ChoiceDialog extends IDialogPanel {
             remove(toRemove.get(i));
         }
 
-        java.util.List<CardView> cardList = new ArrayList<CardView>();
-        cardList.addAll(cards.values());
+        java.util.List<CardView> cardList = new ArrayList<CardView>(cards.values());
 
         int width = SettingsManager.getInstance().getCardSize().width;
         int height = SettingsManager.getInstance().getCardSize().height;

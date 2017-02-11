@@ -346,7 +346,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                     if (card.getId().equals(cardView.getId())) {
                                         deck.getCards().remove(card);
                                         deck.getSideboard().add(card);
-                                        cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), getBigCard());
+                                        cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), this.bigCard);
                                         break;
                                     }
                                 }

@@ -124,7 +124,7 @@ public class ThemePluginImpl implements ThemePlugin {
     private BufferedImage loadbuffer_selected() throws IOException {
         BufferedImage res;
         String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BATTLEFIELD_IMAGE, "");
-        if (path != null && !path.equals("")) {
+        if (path != null && !path.isEmpty()) {
             try {
                 res = ImageIO.read(new File(path));
                 return res;
@@ -162,7 +162,7 @@ public class ThemePluginImpl implements ThemePlugin {
                             background = ImageIO.read(is);
                         } else {
                             String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE, "");
-                            if (path != null && !path.equals("")) {
+                            if (path != null && !path.isEmpty()) {
                                 try {
                                     File f = new File(path);
                                     if (f != null) {

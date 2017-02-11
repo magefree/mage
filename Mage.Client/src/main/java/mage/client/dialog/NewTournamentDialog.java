@@ -537,7 +537,7 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getLimitedOptions().setIsRandom(tournamentType.isRandom());
             if (tournamentType.isCubeBooster()) {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
-                if (!(cubeFromDeckFilename.equals(""))) {
+                if (!(cubeFromDeckFilename.isEmpty())) {
                     Deck cubeFromDeck = new Deck();                   
                     try {
                         cubeFromDeck = Deck.load(DeckImporterUtil.importDeck(cubeFromDeckFilename), true, true);
@@ -828,8 +828,7 @@ public class NewTournamentDialog extends MageDialog {
             String randomPrefs = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, "");
             if (!randomPrefs.isEmpty()) {
                 txtRandomPacks.setText(randomPrefs);
-                ArrayList<String> theList = new ArrayList<>();
-                theList.addAll(Arrays.asList(randomPrefs.split(";")));
+                ArrayList<String> theList = new ArrayList<>(Arrays.asList(randomPrefs.split(";")));
                 randomPackSelector.setSelectedPacks(theList);
             } else {
                 ExpansionInfo[] allExpansions = ExpansionRepository.instance.getWithBoostersSortedByReleaseDate();

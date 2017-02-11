@@ -22,7 +22,7 @@ public class TextboxLoyaltyRule extends TextboxRule {
         } else if (loyaltyChange > 0) {
             return "+" + loyaltyChange;
         } else {
-            return "" + loyaltyChange;
+            return String.valueOf(loyaltyChange);
         }
     }
 

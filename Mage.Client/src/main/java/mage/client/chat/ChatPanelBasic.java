@@ -195,7 +195,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         if (level.equals("0")) {
             return false;
         }
-        message = "." + message + ".";
+        message = '.' + message + '.';
 
         message = message.toLowerCase();
         message = message.replaceAll("[a@]([s5][s5]+)", "axyx");
@@ -217,7 +217,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
 
         if (level.equals("2")) {
             message = message.replaceAll("\\.", "");
-            message = "." + message + ".";
+            message = '.' + message + '.';
             matchPattern = profanity2Pattern.matcher(message);
             if (matchPattern.find()) {
                 return true;

@@ -49,7 +49,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ChatSession {
 
     private static final Logger logger = Logger.getLogger(ChatSession.class);
-    private static final DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+    private static final DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT);
 
     private final ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<>();
     private final UUID chatId;

@@ -162,8 +162,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                         if (s1 != s2) {
                             changed = true;
                         } else if (s1 > 0) {
-                            Set<UUID> attachmentIds = new HashSet<>();
-                            attachmentIds.addAll(permanent.getAttachments());
+                            Set<UUID> attachmentIds = new HashSet<>(permanent.getAttachments());
                             for (MagePermanent magePermanent : oldMagePermanent.getLinks()) {
                                 if (!attachmentIds.contains(magePermanent.getOriginalPermanent().getId())) {
                                     // that means that the amount of attachments is the same
