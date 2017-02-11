@@ -20,7 +20,7 @@ public final class CardSetInfo implements Serializable {
         this.expansionSetCode = expansionSetCode;
         this.cardNumber = cardNumber;
         this.rarity = rarity;
-        if (graphicInfo == null && Rarity.LAND.equals(rarity)) {
+        if (graphicInfo == null && Rarity.LAND == rarity) {
             // Workaround to get images of basic land permanents loaded
             this.graphicInfo = new CardGraphicInfo(null, true);
         } else {

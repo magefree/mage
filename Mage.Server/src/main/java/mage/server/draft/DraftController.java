@@ -171,7 +171,7 @@ public class DraftController {
             return false;
         }
         for (DraftPlayer player: draft.getPlayers()) {
-            if (player.getPlayer().isHuman() && draftSessions.get(player.getPlayer().getId()) == null) {
+            if (player.getPlayer().isHuman() && !draftSessions.containsKey(player.getPlayer().getId())) {
                 return false;
             }
         }

@@ -56,7 +56,7 @@ public abstract class StaticAbility extends AbilityImpl {
         if (game.getShortLivingLKI(getSourceId(), zone)) {
             return true; // maybe this can be a problem if effects removed the ability from the object
         }
-        if (game.getPermanentEntering(getSourceId()) != null && zone.equals(Zone.BATTLEFIELD)) {
+        if (game.getPermanentEntering(getSourceId()) != null && zone == Zone.BATTLEFIELD) {
             return true; // abilities of permanents entering battlefield are countes as on battlefield
         }
         return super.isInUseableZone(game, source, event);

@@ -37,10 +37,12 @@ import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
+
 import java.io.File;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.Callable;
+
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
@@ -48,7 +50,6 @@ import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author North
  */
 public enum CardRepository {
@@ -61,7 +62,7 @@ public enum CardRepository {
     private static final long CARD_DB_VERSION = 50;
     // raise this if new cards were added to the server
     private static final long CARD_CONTENT_VERSION = 70;
-    private final TreeSet<String> landTypes = new TreeSet();
+    private final TreeSet<String> landTypes = new TreeSet<>();
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
 
@@ -87,21 +88,18 @@ public enum CardRepository {
 
     public void addCards(final List<CardInfo> cards) {
         try {
-            cardDao.callBatchTasks(new Callable<Object>() {
-                @Override
-                public Object call() throws Exception {
-                    try {
-                        for (CardInfo card : cards) {
-                            cardDao.create(card);
-                            if (classNames != null) {
-                                classNames.add(card.getClassName());
-                            }
+            cardDao.callBatchTasks(() -> {
+                try {
+                    for (CardInfo card : cards) {
+                        cardDao.create(card);
+                        if (classNames != null) {
+                            classNames.add(card.getClassName());
                         }
-                    } catch (SQLException ex) {
-                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB - ", ex);
                     }
-                    return null;
+                } catch (SQLException ex) {
+                    Logger.getLogger(CardRepository.class).error("Error adding cards to DB - ", ex);
                 }
+                return null;
             });
         } catch (Exception ex) {
         }
@@ -157,6 +155,7 @@ public enum CardRepository {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting names from DB : " + ex);
         }
         return names;
     }
@@ -178,6 +177,8 @@ public enum CardRepository {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
+
         }
         return names;
     }
@@ -199,6 +200,8 @@ public enum CardRepository {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting creature names from DB : " + ex);
+
         }
         return names;
     }
@@ -221,6 +224,7 @@ public enum CardRepository {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land and non-creature names from DB : " + ex);
         }
         return names;
     }
@@ -243,6 +247,8 @@ public enum CardRepository {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-artifact non-land names from DB : " + ex);
+
         }
         return names;
     }
@@ -284,6 +290,8 @@ public enum CardRepository {
             subtypes.add("Triskelavite");
 
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting creaturetypes from DB : " + ex);
+
         }
         return subtypes;
     }
@@ -302,6 +310,7 @@ public enum CardRepository {
                 landTypes.remove("Dryad");
 
             } catch (SQLException ex) {
+                Logger.getLogger(CardRepository.class).error("Error getting landtypes from DB : " + ex);
             }
         }
         return landTypes;
@@ -316,6 +325,8 @@ public enum CardRepository {
                 return result.get(0);
             }
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error finding card from DB : " + ex);
+
         }
         return null;
     }
@@ -328,6 +339,7 @@ public enum CardRepository {
                 names.add(card.getClassName());
             }
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting classnames from DB : " + ex);
         }
         return names;
     }
@@ -339,12 +351,14 @@ public enum CardRepository {
 
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting missing cards from DB : " + ex);
+
         }
+
         return Collections.emptyList();
     }
 
     /**
-     *
      * @param name
      * @return random card with the provided name or null if none is found
      */

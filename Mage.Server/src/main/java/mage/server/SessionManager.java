@@ -52,7 +52,7 @@ public class SessionManager {
     private final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
     public Session getSession(String sessionId) {
-        if (sessions == null || sessionId == null) {
+        if (sessionId == null) {
             return null;
         }
         Session session = sessions.get(sessionId);

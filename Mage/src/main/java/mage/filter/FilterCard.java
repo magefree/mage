@@ -32,6 +32,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.filter.predicate.ObjectPlayer;
@@ -41,7 +43,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
@@ -105,13 +106,8 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public Set<Card> filter(Set<Card> cards, Game game) {
-        Set<Card> filtered = new HashSet<>();
-        for (Card card : cards) {
-            if (match(card, game)) {
-                filtered.add(card);
-            }
-        }
-        return filtered;
+        return cards.stream().filter(card -> match(card, game)).collect(Collectors.toSet());
+
     }
 
     public boolean hasPredicates() {

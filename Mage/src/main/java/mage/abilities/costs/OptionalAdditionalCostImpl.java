@@ -52,7 +52,7 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
         this.delimiter = delimiter;
         this.reminderText = "<i>(" + reminderText + ")</i>";
         this.activatedCounter = 0;
-        this.add((Cost) cost);
+        this.add(cost);
     }
 
     public OptionalAdditionalCostImpl(final OptionalAdditionalCostImpl cost) {

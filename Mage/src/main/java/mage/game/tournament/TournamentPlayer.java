@@ -206,19 +206,19 @@ public class TournamentPlayer {
     }
 
     public void setStateAtTournamentEnd() {
-        if (this.getState().equals(TournamentPlayerState.DRAFTING)
-                || this.getState().equals(TournamentPlayerState.CONSTRUCTING)
-                || this.getState().equals(TournamentPlayerState.DUELING)
-                || this.getState().equals(TournamentPlayerState.SIDEBOARDING)
-                || this.getState().equals(TournamentPlayerState.WAITING)) {
+        if (this.getState() == TournamentPlayerState.DRAFTING
+                || this.getState() == TournamentPlayerState.CONSTRUCTING
+                || this.getState() == TournamentPlayerState.DUELING
+                || this.getState() == TournamentPlayerState.SIDEBOARDING
+                || this.getState() == TournamentPlayerState.WAITING) {
             this.setState(TournamentPlayerState.FINISHED);
         }
     }
     
     public boolean isInTournament() {
-        return !this.getState().equals(TournamentPlayerState.CANCELED)
-                && !this.getState().equals(TournamentPlayerState.ELIMINATED)
-                && !this.getState().equals(TournamentPlayerState.FINISHED);
+        return !(this.getState() == TournamentPlayerState.CANCELED)
+                && !(this.getState() == TournamentPlayerState.ELIMINATED)
+                && !(this.getState() == TournamentPlayerState.FINISHED);
     }
 
     public TournamentPlayer getReplacedTournamentPlayer() {

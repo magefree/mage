@@ -28,6 +28,7 @@ public class PropertiesUtil {
             }
         } else {
             logger.warn("No xmage.properties were found on classpath");
+
         }
     }
 

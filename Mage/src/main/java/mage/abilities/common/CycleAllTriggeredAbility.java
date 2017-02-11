@@ -62,7 +62,7 @@ public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
         }
         StackObject item = game.getState().getStack().getFirst();
         if (item instanceof StackAbility
-                && ((StackAbility) item).getStackAbility() instanceof CyclingAbility) {
+                && item.getStackAbility() instanceof CyclingAbility) {
             return true;
         }
         return false;
