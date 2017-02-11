@@ -115,6 +115,10 @@ public class Session {
                 String ok = "Sent a registration confirmation / initial password email to " + email + " for " + userName;
                 logger.info(ok);
                 sendInfoMessageToClient(ok);
+            } else if (Main.isTestMode()) {
+                String ok = "Server is in test mode.  Your account is registered with a password of " + password + " for " + userName;
+                logger.info(ok);
+                sendInfoMessageToClient(ok);
             } else {
                 String err = "Failed sending a registration confirmation / initial password email to " + email + " for " + userName;
                 logger.error(err);
