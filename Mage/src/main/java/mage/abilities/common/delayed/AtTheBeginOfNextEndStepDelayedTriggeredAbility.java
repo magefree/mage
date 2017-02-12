@@ -73,8 +73,8 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
             case ANY:
                 return true;
             case YOU:
-                boolean yours = event.getPlayerId().equals(this.controllerId);
-                return yours;
+                return event.getPlayerId().equals(this.controllerId);
+
             case OPPONENT:
                 if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
                     return true;

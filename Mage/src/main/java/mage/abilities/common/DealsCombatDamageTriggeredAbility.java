@@ -76,7 +76,7 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
             return true;
 
         }
-        if (event.getType().equals(GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE)) {
+        if (event.getType()== GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE) {
             usedInPhase = false;
         }
         return false;

@@ -38,7 +38,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX
  */
 public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbilityImpl {
@@ -54,15 +53,15 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
     }
 
     public DealsDamageToACreatureAttachedTriggeredAbility(final DealsDamageToACreatureAttachedTriggeredAbility ability) {
-            super(ability);
-            this.setTargetPointer = ability.setTargetPointer;
-            this.combatOnly = ability.combatOnly;
-            this.attachedDescription = ability.attachedDescription;
+        super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
+        this.combatOnly = ability.combatOnly;
+        this.attachedDescription = ability.attachedDescription;
     }
 
     @Override
     public DealsDamageToACreatureAttachedTriggeredAbility copy() {
-            return new DealsDamageToACreatureAttachedTriggeredAbility(this);
+        return new DealsDamageToACreatureAttachedTriggeredAbility(this);
     }
 
     @Override
@@ -74,18 +73,17 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!combatOnly || ((DamagedCreatureEvent) event).isCombatDamage()) {
             Permanent attachment = game.getPermanent(this.getSourceId());
-              if (attachment != null
-                      && attachment.getAttachedTo() != null
-                      && event.getSourceId().equals(attachment.getAttachedTo())
-                ) {
-                        if (setTargetPointer) {
-                            for (Effect effect : this.getEffects()) {
-                                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                                    effect.setValue("damage", event.getAmount());
-                            }
-                        }
-                        return true;
+            if (attachment != null
+                    && attachment.getAttachedTo() != null
+                    && event.getSourceId().equals(attachment.getAttachedTo())) {
+                if (setTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                        effect.setValue("damage", event.getAmount());
+                    }
                 }
+                return true;
+            }
 
         }
         return false;
@@ -93,11 +91,11 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
 
     @Override
     public String getRule() {
-            return new StringBuilder("Whenever ").append(attachedDescription)
-                    .append(" deals ")
-                    .append(combatOnly ? "combat ":"")
-                    .append("damage to a creature, ")
-                    .append(super.getRule()).toString();
+        return new StringBuilder("Whenever ").append(attachedDescription)
+                .append(" deals ")
+                .append(combatOnly ? "combat " : "")
+                .append("damage to a creature, ")
+                .append(super.getRule()).toString();
     }
 
 }

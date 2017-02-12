@@ -188,7 +188,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 case ZONE_CHANGE:
                 case DESTROYED_PERMANENT:
                     if (isLeavesTheBattlefieldTrigger()) {
-                        if (event.getType().equals(EventType.DESTROYED_PERMANENT)) {
+                        if (event.getType() == EventType.DESTROYED_PERMANENT) {
                             source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
                         } else if (((ZoneChangeEvent) event).getTarget() != null) {
                             source = ((ZoneChangeEvent) event).getTarget();

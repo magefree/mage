@@ -53,7 +53,7 @@ public class IsStepCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return phaseStep.equals(game.getStep().getType()) && (!onlyDuringYourSteps || game.getActivePlayerId().equals(source.getControllerId()));
+        return phaseStep == game.getStep().getType() && (!onlyDuringYourSteps || game.getActivePlayerId().equals(source.getControllerId()));
     }
 
     @Override

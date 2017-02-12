@@ -33,6 +33,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ProtectionAbility;
@@ -44,9 +45,8 @@ import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
  * @param <T>
+ * @author BetaSteward_at_googlemail.com
  */
 public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
 
@@ -171,7 +171,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     public Abilities<Ability> getManaAbilities(Zone zone) {
         Abilities<Ability> abilities = new AbilitiesImpl<>();
         for (T ability : this) {
-            if (ability.getAbilityType().equals(AbilityType.MANA) && ability.getZone().match(zone)) {
+            if (ability.getAbilityType() == AbilityType.MANA && ability.getZone().match(zone)) {
                 abilities.add(ability);
             }
         }
@@ -257,7 +257,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean contains(T ability) {
-        for (Iterator<T> iterator = this.iterator(); iterator.hasNext();) { // simple loop can cause java.util.ConcurrentModificationException
+        for (Iterator<T> iterator = this.iterator(); iterator.hasNext(); ) { // simple loop can cause java.util.ConcurrentModificationException
             T test = iterator.next();
             // Checking also by getRule() without other restrictions is a problem when a triggered ability will be copied to a permanent that had the same ability
             // already before the copy. Because then it keeps the triggered ability twice and it triggers twice.
@@ -287,6 +287,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean containsAll(Abilities<T> abilities) {
+
         if (this.size() < abilities.size()) {
             return false;
         }

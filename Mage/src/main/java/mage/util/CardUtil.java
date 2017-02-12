@@ -593,7 +593,7 @@ public class CardUtil {
     public static Set<Integer> getCMC(MageObject object) {
         Set<Integer> cmcObject = new HashSet<>();
         if (object instanceof Spell) {
-            cmcObject.add(((Spell) object).getConvertedManaCost());
+            cmcObject.add(object.getConvertedManaCost());
         } else if (object instanceof Card) {
             Card card = (Card) object;
             if (card instanceof SplitCard) {

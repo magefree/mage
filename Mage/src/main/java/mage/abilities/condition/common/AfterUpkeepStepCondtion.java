@@ -11,7 +11,6 @@ import mage.constants.PhaseStep;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class AfterUpkeepStepCondtion implements Condition {
@@ -24,8 +23,8 @@ public class AfterUpkeepStepCondtion implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return !(game.getStep().getType().equals(PhaseStep.UNTAP)
-                || game.getStep().getType().equals(PhaseStep.UPKEEP));
+        return !(game.getStep().getType() == PhaseStep.UNTAP
+                || game.getStep().getType() == PhaseStep.UPKEEP);
     }
 
     @Override

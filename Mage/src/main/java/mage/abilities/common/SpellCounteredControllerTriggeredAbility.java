@@ -44,7 +44,7 @@ public class SpellCounteredControllerTriggeredAbility extends TriggeredAbilityIm
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject stackObjectThatCountered = (StackObject) game.getStack().getStackObject(event.getSourceId());
+        StackObject stackObjectThatCountered = game.getStack().getStackObject(event.getSourceId());
         if (stackObjectThatCountered == null) {
             stackObjectThatCountered = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
         }

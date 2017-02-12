@@ -38,7 +38,6 @@ import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
@@ -60,7 +59,6 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     /**
-     *
      * @param zone
      * @param effect
      * @param filter
@@ -89,8 +87,8 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && filter.match(spell, game)) {
-                if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
-                    for (Effect effect: this.getEffects()) {
+                if (setTargetPointer != SetTargetPointer.NONE) {
+                    for (Effect effect : this.getEffects()) {
                         switch (setTargetPointer) {
                             case SPELL:
                                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -101,7 +99,7 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
                             default:
                                 throw new UnsupportedOperationException("Value of SetTargetPointer not supported!");
                         }
-                        
+
                     }
                 }
                 return true;

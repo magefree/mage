@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  */
 public class CardsInHandCondition implements Condition {
 
-    public static enum CountType {
+    public enum CountType {
         MORE_THAN, FEWER_THAN, EQUAL_TO
     }
 
