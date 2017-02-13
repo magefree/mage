@@ -1,7 +1,5 @@
 package mage.client.util.gui;
 
-import com.google.common.collect.MapMaker;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
@@ -14,31 +12,37 @@ import java.util.List;
  */
 public class ArrowBuilder {
 
-    private static final ArrowBuilder instance;
+    private static ArrowBuilder instance;
 
     static {
         instance = new ArrowBuilder();
     }
-
-    /**
-     * Stores arrow panels per game
-     */
-    private final Map<UUID, JPanel> arrowPanels = new HashMap<>();
-    private final Map<UUID, Map<Type, List<Arrow>>> map = new MapMaker().weakKeys().weakValues().makeMap();
-    /**
-     * The top panel where arrow panels are added to.
-     */
-    private JPanel arrowsManagerPanel;
-    private int currentWidth;
-    private int currentHeight;
 
     public static ArrowBuilder getBuilder() {
         return instance;
     }
 
     /**
+     * The top panel where arrow panels are added to.
+     */
+    private JPanel arrowsManagerPanel;
+
+    /**
+     * Stores arrow panels per game
+     */
+    private final Map<UUID, JPanel> arrowPanels = new HashMap<UUID, JPanel>();
+
+    private final Map<UUID, Map<Type, List<Arrow>>> map = new HashMap<UUID, Map<Type, java.util.List<Arrow>>>();
+
+    private int currentWidth;
+    private int currentHeight;
+
+    public enum Type {
+        PAIRED, SOURCE, TARGET, COMBAT, ENCHANT_PLAYERS;
+    }
+
+    /**
      * Get the panel where all arrows are being drawn.
-     *
      * @return
      */
     public JPanel getArrowsManagerPanel() {
@@ -70,6 +74,17 @@ public class ArrowBuilder {
     }
 
     /**
+     * Not synchronized method for arrows panel.
+     * Doesn't create JPanel in case the panel doesn't exist.
+     * Works faster.
+     *
+     * @return
+     */
+    /*public JPanel getPanelRef() {
+        return arrowsManagerPanel;
+    }*/
+
+    /**
      * Adds new arrow.
      *
      * @param startX
@@ -85,24 +100,25 @@ public class ArrowBuilder {
         arrow.setColor(color);
         arrow.setArrowLocation(startX, startY, endX, endY);
         arrow.setBounds(0, 0, Math.max(startX, endX) + 40, Math.max(startY, endY) + 30); // 30 is offset for arrow heads (being cut otherwise)
-        p.add(arrow);
-        Map<Type, List<Arrow>> innerMap = map.computeIfAbsent(gameId, k -> new HashMap<>());
-        List<Arrow> arrows = innerMap.computeIfAbsent(type, k -> new ArrayList<>());
-        arrows.add(arrow);
+
+        synchronized (map) {
+            p.add(arrow);
+            Map<Type, java.util.List<Arrow>> innerMap = map.get(gameId);
+            if (innerMap == null) {
+                innerMap = new HashMap<Type, List<Arrow>>();
+                map.put(gameId, innerMap);
+            }
+            java.util.List<Arrow> arrows = innerMap.get(type);
+            if (arrows == null) {
+                arrows = new ArrayList<Arrow>();
+                innerMap.put(type, arrows);
+            }
+            arrows.add(arrow);
+        }
+
         p.revalidate();
         p.repaint();
     }
-
-    /**
-     * Not synchronized method for arrows panel.
-     * Doesn't create JPanel in case the panel doesn't exist.
-     * Works faster.
-     *
-     * @return
-     */
-    /*public JPanel getPanelRef() {
-        return arrowsManagerPanel;
-    }*/
 
     /**
      * Removes all arrows from the screen.
@@ -111,13 +127,15 @@ public class ArrowBuilder {
         if (map.containsKey(gameId)) {
             Map<Type, List<Arrow>> innerMap = map.get(gameId);
             JPanel p = getArrowsPanel(gameId);
-            if (p != null && p.getComponentCount() > 0) {
-                p.removeAll();
-                p.revalidate();
-                p.repaint();
+            synchronized (map) {
+                if (p != null && p.getComponentCount() > 0) {
+                    p.removeAll();
+                    p.revalidate();
+                    p.repaint();
+                }
+                innerMap.clear();
+                map.remove(gameId);
             }
-            innerMap.clear();
-            map.remove(gameId);
         }
     }
 
@@ -125,12 +143,14 @@ public class ArrowBuilder {
         if (map.containsKey(gameId)) {
             Map<Type, List<Arrow>> innerMap = map.get(gameId);
             java.util.List<Arrow> arrows = innerMap.get(type);
-            if (arrows != null && !arrows.isEmpty()) {
+            if (arrows != null && arrows.size() > 0) {
                 JPanel p = getArrowsPanel(gameId);
-                for (Arrow arrow : arrows) {
-                    p.remove(arrow);
+                synchronized (map) {
+                    for (Arrow arrow : arrows) {
+                        p.remove(arrow);
+                    }
+                    innerMap.put(type, new ArrayList<Arrow>());
                 }
-                innerMap.put(type, new ArrayList<>());
                 p.revalidate();
                 p.repaint();
             }
@@ -159,10 +179,6 @@ public class ArrowBuilder {
         if (arrowPanels.containsKey(gameId)) {
             arrowPanels.get(gameId).setVisible(true);
         }
-    }
-
-    public enum Type {
-        PAIRED, SOURCE, TARGET, COMBAT, ENCHANT_PLAYERS
     }
 
 }
