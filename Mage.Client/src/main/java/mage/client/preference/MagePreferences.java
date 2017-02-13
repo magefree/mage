@@ -58,17 +58,17 @@ public class MagePreferences {
     }
 
     public static String getUserNames() {
-        String userIds = "";
+        StringBuilder userIds = new StringBuilder();
         try {
             String[] keys = prefs().keys();
             for (String key : keys) {
                 if (key.matches(".*userName$")) {
-                    userIds += "," + prefs().get(key, null);
+                    userIds.append(',').append(prefs().get(key, null));
                 }
             }
         } catch (BackingStoreException ex) {
         }
-        return userIds;
+        return userIds.toString();
     }
 
     public static void setUserName(String serverAddress, String userName) {
