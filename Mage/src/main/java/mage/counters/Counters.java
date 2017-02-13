@@ -57,8 +57,12 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
     }
 
     public void addCounter(Counter counter) {
-        putIfAbsent(counter.name, counter);
-        get(counter.name).add(counter.getCount());
+        if (!containsKey(counter.name)) {
+            put(counter.name, counter);
+        } else {
+
+            get(counter.name).add(counter.getCount());
+        }
 
     }
 
