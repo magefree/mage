@@ -69,7 +69,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
                     tableId,
                     this.txtPlayerName.getText(),
                     (String)this.cbPlayerType.getSelectedItem(),
-                    Integer.valueOf((String)this.cbLevel.getSelectedItem()),
+                    (Integer)spnLevel.getValue(),
                     deckCardLists,
                     "");
          }
@@ -93,23 +93,27 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
         txtPlayerName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cbLevel = new javax.swing.JComboBox();
+        spnLevel = new javax.swing.JSpinner();
 
         jLabel1.setLabelFor(cbPlayerType);
         jLabel1.setText("Type:");
 
         cbPlayerType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbPlayerType.addActionListener(evt -> cbPlayerTypeActionPerformed(evt));
+        cbPlayerType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPlayerTypeActionPerformed(evt);
+            }
+        });
 
-        lblPlayerNum.setFont(new java.awt.Font("Tahoma", 1, 11));
+        lblPlayerNum.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPlayerNum.setText("Player Num:");
 
         jLabel2.setText("Name:");
 
         jLabel3.setText("Skill:");
 
-        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        cbLevel.setSelectedIndex(9);
+        spnLevel.setModel(new javax.swing.SpinnerNumberModel(6, 1, 10, 1));
+        spnLevel.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout pnlPlayerNameLayout = new javax.swing.GroupLayout(pnlPlayerName);
         pnlPlayerName.setLayout(pnlPlayerNameLayout);
@@ -118,19 +122,19 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
             .addGroup(pnlPlayerNameLayout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spnLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
         );
         pnlPlayerNameLayout.setVerticalGroup(
             pnlPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(txtPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel3)
-                .addComponent(jLabel2))
+                .addComponent(jLabel2)
+                .addComponent(spnLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -172,13 +176,13 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox cbLevel;
     private javax.swing.JComboBox cbPlayerType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblPlayerNum;
     private javax.swing.JPanel pnlPlayerName;
+    private javax.swing.JSpinner spnLevel;
     private javax.swing.JTextField txtPlayerName;
     // End of variables declaration//GEN-END:variables
 
