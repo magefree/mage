@@ -60,6 +60,7 @@ public class GoblinKing extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new GainAbilityAllEffect(new MountainwalkAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
         effect.setText("and have mountainwalk");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
