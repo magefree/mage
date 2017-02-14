@@ -281,6 +281,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Threaten", 241, Rarity.UNCOMMON, mage.cards.t.Threaten.class));
         cards.add(new SetCardInfo("Thunder of Hooves", 242, Rarity.UNCOMMON, mage.cards.t.ThunderOfHooves.class));
         cards.add(new SetCardInfo("Towering Baloth", 292, Rarity.UNCOMMON, mage.cards.t.ToweringBaloth.class));
+        cards.add(new SetCardInfo("Trade Secrets", 118, Rarity.RARE, mage.cards.t.TradeSecrets.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 326, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Treespring Lorian", 293, Rarity.COMMON, mage.cards.t.TreespringLorian.class));
         cards.add(new SetCardInfo("Tribal Unity", 294, Rarity.UNCOMMON, mage.cards.t.TribalUnity.class));
@@ -303,6 +304,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Whipcorder", 60, Rarity.UNCOMMON, mage.cards.w.Whipcorder.class));
         cards.add(new SetCardInfo("Windswept Heath", 328, Rarity.RARE, mage.cards.w.WindsweptHeath.class, new CardGraphicInfo(new ObjectColor("GW"), null, false)));
 	    cards.add(new SetCardInfo("Bloodline Shaman", 249, Rarity.UNCOMMON, mage.cards.b.BloodlineShaman.class));
+        cards.add(new SetCardInfo("Trade Secrets", 118, Rarity.RARE, mage.cards.t.TradeSecrets.class));
         cards.add(new SetCardInfo("Venomspout Brackus", 295, Rarity.UNCOMMON, mage.cards.v.VenomspoutBrackus.class));
         cards.add(new SetCardInfo("Wirewood Elf", 301, Rarity.COMMON, mage.cards.w.WirewoodElf.class));
         cards.add(new SetCardInfo("Wirewood Herald", 302, Rarity.COMMON, mage.cards.w.WirewoodHerald.class));
@@ -311,6 +313,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Wirewood Savage", 304, Rarity.COMMON, mage.cards.w.WirewoodSavage.class));
         cards.add(new SetCardInfo("Wooded Foothills", 330, Rarity.RARE, mage.cards.w.WoodedFoothills.class, new CardGraphicInfo(new ObjectColor("RG"), null, false)));
 	    cards.add(new SetCardInfo("Bloodline Shaman", 249, Rarity.UNCOMMON, mage.cards.b.BloodlineShaman.class));
+        cards.add(new SetCardInfo("Trade Secrets", 118, Rarity.RARE, mage.cards.t.TradeSecrets.class));
         cards.add(new SetCardInfo("Venomspout Brackus", 295, Rarity.UNCOMMON, mage.cards.v.VenomspoutBrackus.class));
         cards.add(new SetCardInfo("Words of War", 244, Rarity.RARE, mage.cards.w.WordsOfWar.class));
         cards.add(new SetCardInfo("Words of Wind", 122, Rarity.RARE, mage.cards.w.WordsOfWind.class));

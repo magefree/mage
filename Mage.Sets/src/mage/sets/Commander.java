@@ -327,6 +327,7 @@ public class Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Terminate", 231, Rarity.COMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 291, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Mimeoplasm", 210, Rarity.MYTHIC, mage.cards.t.TheMimeoplasm.class));
+        cards.add(new SetCardInfo("Trade Secrets", 64, Rarity.RARE, mage.cards.t.TradeSecrets.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 292, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Trench Gorger", 65, Rarity.RARE, mage.cards.t.TrenchGorger.class));
         cards.add(new SetCardInfo("Tribute to the Wild", 175, Rarity.UNCOMMON, mage.cards.t.TributeToTheWild.class));
