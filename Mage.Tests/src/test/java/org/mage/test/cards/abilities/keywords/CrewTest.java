@@ -81,4 +81,27 @@ public class CrewTest extends CardTestPlayerBase {
         assertType("Smuggler's Copter", CardType.CREATURE, "Vehicle");
     }
 
+    @Test
+    public void testThatBouncingACrewedVehicleWillUncrewIt() {
+        addCard(Zone.BATTLEFIELD, playerA, "Smuggler's Copter", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Speedway Fanatic", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        addCard(Zone.HAND, playerA, "Evacuation", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 1");
+        setChoice(playerA, "Speedway Fanatic");
+
+        // Return all creatures to there owners hands
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Evacuation");
+
+        // (Re)Cast Smugglers Copter
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Smuggler's Copter");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // Only crewed vehicles have card type creature
+        assertNotType("Smuggler's Copter", CardType.CREATURE);
+    }
+
 }
