@@ -55,6 +55,7 @@ public class Planechase2012 extends ExpansionSet {
         cards.add(new SetCardInfo("Augury Owl", 14, Rarity.COMMON, mage.cards.a.AuguryOwl.class));
         cards.add(new SetCardInfo("Aura Gnarlid", 55, Rarity.COMMON, mage.cards.a.AuraGnarlid.class));
         cards.add(new SetCardInfo("Auramancer", 2, Rarity.COMMON, mage.cards.a.Auramancer.class));
+        cards.add(new SetCardInfo("Auratouched Mage", 3, Rarity.UNCOMMON, mage.cards.a.AuratouchedMage.class));
         cards.add(new SetCardInfo("Awakening Zone", 56, Rarity.RARE, mage.cards.a.AwakeningZone.class));
         cards.add(new SetCardInfo("Baleful Strix", 82, Rarity.UNCOMMON, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Beast Within", 57, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));

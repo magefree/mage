@@ -55,6 +55,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Agrus Kos, Wojek Veteran", 190, Rarity.RARE, mage.cards.a.AgrusKosWojekVeteran.class));
+        cards.add(new SetCardInfo("Auratouched Mage", 1, Rarity.UNCOMMON, mage.cards.a.AuratouchedMage.class));
         cards.add(new SetCardInfo("Autochthon Wurm", 191, Rarity.RARE, mage.cards.a.AutochthonWurm.class));
         cards.add(new SetCardInfo("Barbarian Riftcutter", 114, Rarity.COMMON, mage.cards.b.BarbarianRiftcutter.class));
         cards.add(new SetCardInfo("Bathe in Light", 2, Rarity.UNCOMMON, mage.cards.b.BatheInLight.class));
