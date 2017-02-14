@@ -279,6 +279,7 @@ public class Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Twister", 222, Rarity.UNCOMMON, mage.cards.s.SavageTwister.class));
         cards.add(new SetCardInfo("Scattering Stroke", 60, Rarity.UNCOMMON, mage.cards.s.ScatteringStroke.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 170, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
+        cards.add(new SetCardInfo("Scythe Specter", 97, Rarity.RARE, mage.cards.s.ScytheSpecter.class));
         cards.add(new SetCardInfo("Secluded Steppe", 286, Rarity.COMMON, mage.cards.s.SecludedSteppe.class));
         cards.add(new SetCardInfo("Selesnya Evangel", 223, Rarity.COMMON, mage.cards.s.SelesnyaEvangel.class));
         cards.add(new SetCardInfo("Selesnya Guildmage", 224, Rarity.UNCOMMON, mage.cards.s.SelesnyaGuildmage.class));
