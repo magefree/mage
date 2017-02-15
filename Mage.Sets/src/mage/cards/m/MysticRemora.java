@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -104,7 +105,7 @@ class MysticRemoraTriggeredAbility extends TriggeredAbilityImpl {
                 if (spell != null && !spell.getCardType().contains(CardType.CREATURE)) {
                     Player controller = game.getPlayer(game.getControllerId(this.controllerId));
                     Player player = game.getPlayer(spell.getControllerId());
-                    if (controller != player) {
+                    if (!Objects.equals(controller, player)) {
                         this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                 return true;

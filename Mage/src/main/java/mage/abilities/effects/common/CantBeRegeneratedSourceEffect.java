@@ -36,6 +36,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
+import java.util.Objects;
+
 /**
  *
  * @author jeffwadsworth
@@ -67,7 +69,7 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getSourceId() == event.getTargetId();
+        return Objects.equals(source.getSourceId(), event.getTargetId());
     }
 
     @Override

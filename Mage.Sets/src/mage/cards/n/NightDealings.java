@@ -27,6 +27,7 @@
  */
 package mage.cards.n;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -103,7 +104,7 @@ public class NightDealings extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             // to another player
-            if (this.getControllerId() != event.getTargetId()) {
+            if (!Objects.equals(this.getControllerId(), event.getTargetId())) {
                 // a source you control
                 UUID sourceControllerId = game.getControllerId(event.getSourceId());
                 if (sourceControllerId != null && sourceControllerId.equals(this.getControllerId())) {

@@ -10,6 +10,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.util.Objects;
+
 /**
  * Custom unit tests for {link Mana}.
  *
@@ -525,7 +527,7 @@ public class ManaTest {
 
         // then
         assertEquals(mana, copy); // are equal
-        assertFalse(mana == copy); // are not the same object
+        assertFalse(Objects.equals(mana, copy)); // are not the same object
     }
 
     @Test
@@ -603,7 +605,7 @@ public class ManaTest {
 
         // then
         assertEquals(mana, newMana);
-        assertFalse(mana == newMana);
+        assertFalse(Objects.equals(mana, newMana));
     }
 
     @Test

@@ -29,6 +29,7 @@ package mage.game.draft;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import mage.cards.Card;
 import mage.cards.repository.CardCriteria;
@@ -146,7 +147,7 @@ public abstract class DraftCube {
         }
 
         for (int i = leftCubeCards.size() - 1; i >= 0; i--) {
-            if (leftCubeCards.get(i) == cardId) {
+            if (Objects.equals(leftCubeCards.get(i), cardId)) {
                 leftCubeCards.remove(i);
                 return;
             }

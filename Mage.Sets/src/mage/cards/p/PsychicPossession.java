@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -106,7 +107,7 @@ class PsychicPossessionTriggeredAbility extends TriggeredAbilityImpl {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Player opponent = game.getPlayer(enchantment.getAttachedTo());
             Player player = game.getPlayer(event.getPlayerId());
-            if (opponent != null && player != null && player == opponent) {
+            if (opponent != null && player != null && Objects.equals(player, opponent)) {
                 return true;
             }
         }

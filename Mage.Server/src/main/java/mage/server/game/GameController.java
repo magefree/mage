@@ -978,8 +978,8 @@ public class GameController implements GameCallback {
         }
     }
 
+    @FunctionalInterface
     interface Command {
-
         void execute(UUID player);
     }
 

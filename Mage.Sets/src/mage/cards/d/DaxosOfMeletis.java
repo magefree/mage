@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -207,7 +208,7 @@ class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         return source.getControllerId().equals(affectedControllerId)
-                && objectId == ((FixedTarget) getTargetPointer()).getTarget()
+                && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
                 && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
                 && (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId))
                 && game.getState().getZone(objectId).equals(Zone.STACK);

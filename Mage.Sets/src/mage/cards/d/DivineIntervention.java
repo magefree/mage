@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -111,9 +112,9 @@ public class DivineIntervention extends CardImpl {
                 for (StackObject stackObject : game.getStack()) {
 
                     if (stackObject.getControllerId() != null && !firstOnStack) {
-                        if (you != stackObject.getControllerId()) {
+                        if (!Objects.equals(you, stackObject.getControllerId())) {
                             onlyYouOnStack = false;
-                        } else if (you == stackObject.getControllerId()) {
+                        } else if (Objects.equals(you, stackObject.getControllerId())) {
                             onlyOpponentOnStack = false;
                         }
 

@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -139,14 +140,14 @@ class GuardianBeastConditionalEffect extends ContinuousRuleModifyingEffectImpl {
             return false;
         }
 
-        if (targetPermanent.getControllerId() != guardianBeast.getControllerId()) {
+        if (!Objects.equals(targetPermanent.getControllerId(), guardianBeast.getControllerId())) {
             return false;
         }
 
         StackObject spell = game.getStack().getStackObject(event.getSourceId());
         if (event.getType() == EventType.LOSE_CONTROL || event.getType() == EventType.ATTACH || event.getType() == EventType.TARGET && spell != null && spell.getCardType().contains(CardType.ENCHANTMENT) && spell.getSubtype(game).contains("Aura")) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                if (perm != null && perm.getId() == targetPermanent.getId() && !perm.getCardType().contains(CardType.CREATURE)) {
+                if (perm != null && Objects.equals(perm.getId(), targetPermanent.getId()) && !perm.getCardType().contains(CardType.CREATURE)) {
                     return true;
                 }
             }

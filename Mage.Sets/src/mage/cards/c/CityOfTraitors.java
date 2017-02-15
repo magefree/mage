@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
@@ -88,7 +89,7 @@ class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl {
         Permanent land = game.getPermanent(event.getTargetId());
         return land.getCardType().contains(CardType.LAND)
                 && land.getControllerId().equals(this.controllerId)
-                && event.getTargetId() != this.getSourceId();
+                && !Objects.equals(event.getTargetId(), this.getSourceId());
     }
 
     @Override

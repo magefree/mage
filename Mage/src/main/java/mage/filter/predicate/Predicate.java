@@ -36,6 +36,7 @@ import mage.game.Game;
  * @author North
  * @param <T>
  */
+@FunctionalInterface
 public interface Predicate <T> extends Serializable {
     /**
      * Returns the result of applying this predicate to {@code input}. This method is <i>generally

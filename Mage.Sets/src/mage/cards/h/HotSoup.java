@@ -27,6 +27,7 @@
  */
 package mage.cards.h;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -101,7 +102,7 @@ class HotSoupTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(this.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
-            if (event.getTargetId() == equipment.getAttachedTo()) {
+            if (Objects.equals(event.getTargetId(), equipment.getAttachedTo())) {
                 for(Effect effect : this.getEffects())
                 {
                     effect.setTargetPointer(new FixedTarget(equipment.getAttachedTo()));

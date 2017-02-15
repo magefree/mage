@@ -28,13 +28,8 @@
 
 package mage.game.draft;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.game.draft.DraftOptions.TimingOption;
@@ -197,7 +192,7 @@ public abstract class DraftImpl implements Draft {
             while (true) {
                 List<Card> nextBooster = next.booster;
                 next.setBooster(currentBooster);
-                if (nextId == startId) {
+                if (Objects.equals(nextId, startId)) {
                     break;
                 }
                 currentBooster = nextBooster;
@@ -218,7 +213,7 @@ public abstract class DraftImpl implements Draft {
             while (true) {
                 List<Card> prevBooster = prev.booster;
                 prev.setBooster(currentBooster);
-                if (prevId == startId) {
+                if (Objects.equals(prevId, startId)) {
                     break;
                 }
                 currentBooster = prevBooster;

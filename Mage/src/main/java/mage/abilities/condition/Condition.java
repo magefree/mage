@@ -10,6 +10,7 @@ import mage.game.Game;
  *
  * @author nantuko, noxx
  */
+@FunctionalInterface
 public interface Condition extends Serializable {
 
     public enum ComparisonType {

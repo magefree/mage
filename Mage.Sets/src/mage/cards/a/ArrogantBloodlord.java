@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -97,12 +98,12 @@ class ArrogantBloodlordTriggeredAbility extends TriggeredAbilityImpl {
         Permanent blocker = game.getPermanent(event.getSourceId());
         Permanent blocked = game.getPermanent(event.getTargetId());
         Permanent arrogantBloodlord = game.getPermanent(sourceId);
-        if (blocker != null && blocker != arrogantBloodlord
+        if (blocker != null && !Objects.equals(blocker, arrogantBloodlord)
                 && blocker.getPower().getValue() < 2
-                && blocked == arrogantBloodlord) {
+                && Objects.equals(blocked, arrogantBloodlord)) {
             return true;
         }
-        if (blocker != null && blocker == arrogantBloodlord
+        if (blocker != null && Objects.equals(blocker, arrogantBloodlord)
                 && game.getPermanent(event.getTargetId()).getPower().getValue() < 2) {
             return true;
         }

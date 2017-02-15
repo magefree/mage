@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -98,7 +99,7 @@ class RocketLauncherWatcher extends Watcher {
             changedControllerOR1stTurn = false;
         }
         if (event.getType() == GameEvent.EventType.LOST_CONTROL &&
-                event.getSourceId()==cardId) {            
+                Objects.equals(event.getSourceId(), cardId)) {
             changedControllerOR1stTurn = true;
         }
     }

@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -86,7 +87,7 @@ class MagneticMineTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getFromZone() == Zone.BATTLEFIELD
                 && zEvent.getToZone() == Zone.GRAVEYARD
                 && zEvent.getTarget().getCardType().contains(CardType.ARTIFACT)
-                && zEvent.getTarget().getId() != this.getSourceId()) {
+                && !Objects.equals(zEvent.getTarget().getId(), this.getSourceId())) {
             this.getTargets().get(0).add(zEvent.getTarget().getControllerId(), game);
             return true;
         }

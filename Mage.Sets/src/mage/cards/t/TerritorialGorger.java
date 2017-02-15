@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -92,7 +93,7 @@ class TerritorialGorgerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(CounterType.ENERGY.getName())) {
-            return event.getTargetId() == this.getControllerId();
+            return Objects.equals(event.getTargetId(), this.getControllerId());
         }
         return false;
     }

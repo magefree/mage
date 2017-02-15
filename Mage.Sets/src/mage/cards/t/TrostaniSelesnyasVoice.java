@@ -28,6 +28,7 @@
 
 package mage.cards.t;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -102,7 +103,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent.getCardType().contains(CardType.CREATURE)
                 && permanent.getControllerId().equals(this.controllerId)
-                && event.getTargetId() != this.getSourceId()) {
+                && !Objects.equals(event.getTargetId(), this.getSourceId())) {
             Effect effect = this.getEffects().get(0);
             // life is determined during resolution so it has to be retrieved there (e.g. Giant Growth before resolution)
             effect.setValue("lifeSource", event.getTargetId());

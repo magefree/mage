@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Objects;
+
 /**
  * Custom unit tests for {@link Counter}
  */
@@ -58,7 +60,7 @@ public class CounterTest {
 
         // then
         assertEquals(copy, counter);
-        assertFalse(copy == counter);
+        assertFalse(Objects.equals(copy, counter));
     }
 
     @Test

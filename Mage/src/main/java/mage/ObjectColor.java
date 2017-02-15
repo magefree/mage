@@ -30,6 +30,8 @@ package mage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import mage.constants.ColoredManaSymbol;
 import mage.util.Copyable;
 
@@ -89,11 +91,11 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
      */
     public ObjectColor union(ObjectColor other) {
         ObjectColor newColor = new ObjectColor();
-        newColor.white = white | other.white;
-        newColor.blue = blue | other.blue;
-        newColor.black = black | other.black;
-        newColor.red = red | other.red;
-        newColor.green = green | other.green;
+        newColor.white = white || other.white;
+        newColor.blue = blue || other.blue;
+        newColor.black = black || other.black;
+        newColor.red = red || other.red;
+        newColor.green = green || other.green;
         return newColor;
     }
 
@@ -168,20 +170,20 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     }
 
     public boolean hasColor() {
-        return white | blue | black | red | green;
+        return white || blue || black || red || green;
     }
 
     public boolean isMulticolored() {
         if (isColorless()) {
             return false;
         }
-        if (white && (blue | black | red | green)) {
+        if (white && (blue || black || red || green)) {
             return true;
         }
-        if (blue && (black | red | green)) {
+        if (blue && (black || red || green)) {
             return true;
         }
-        if (black && (red | green)) {
+        if (black && (red || green)) {
             return true;
         }
         return red && green;
@@ -307,22 +309,22 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     }
 
     public boolean contains(ObjectColor color) {
-        if (this == color) {
+        if (Objects.equals(this, color)) {
             return true;
         }
-        if (color.white & this.white) {
+        if (color.white && this.white) {
             return true;
         }
-        if (color.blue & this.blue) {
+        if (color.blue && this.blue) {
             return true;
         }
-        if (color.black & this.black) {
+        if (color.black && this.black) {
             return true;
         }
-        if (color.red & this.red) {
+        if (color.red && this.red) {
             return true;
         }
-        if (color.green & this.green) {
+        if (color.green && this.green) {
             return true;
         }
         return false;

@@ -27,6 +27,7 @@
  */
 package mage.cards.h;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -90,7 +91,7 @@ class HydraOmnivoreEffect extends OneShotEffect {
         MageObject object = game.getObject(source.getSourceId());
         if (object != null && amount > 0 && damagedOpponent != null) {
             for (UUID playerId :game.getOpponents(source.getControllerId())) {
-                if (playerId != damagedOpponent) {
+                if (!Objects.equals(playerId, damagedOpponent)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
                         int dealtDamage = opponent.damage(amount, source.getSourceId(), game, false, true);

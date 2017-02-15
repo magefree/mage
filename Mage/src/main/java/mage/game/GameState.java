@@ -28,18 +28,8 @@
 package mage.game;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -360,7 +350,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         for (Player player : players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
-            if (playerId == player.getId()) {
+            if (Objects.equals(playerId, player.getId())) {
                 sb.append(player.getHand().getValue(game));
             } else {
                 sb.append(player.getHand().size());

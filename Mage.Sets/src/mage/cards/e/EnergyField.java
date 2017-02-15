@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -101,7 +102,7 @@ class EnergyFieldEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER) {
-            if (event.getTargetId().equals(source.getControllerId()) && game.getControllerId(event.getSourceId()) != source.getControllerId()) {
+            if (event.getTargetId().equals(source.getControllerId()) && !Objects.equals(game.getControllerId(event.getSourceId()), source.getControllerId())) {
                 return super.applies(event, source, game);
             }
         }

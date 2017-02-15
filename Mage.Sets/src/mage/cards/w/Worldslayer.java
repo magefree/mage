@@ -28,6 +28,7 @@
 package mage.cards.w;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -125,7 +126,7 @@ class WorldslayerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
         for (Permanent permanent : permanents) {
-            if (permanent.getId() != source.getSourceId()) {
+            if (!Objects.equals(permanent.getId(), source.getSourceId())) {
                 permanent.destroy(source.getSourceId(), game, false);
             }
         }

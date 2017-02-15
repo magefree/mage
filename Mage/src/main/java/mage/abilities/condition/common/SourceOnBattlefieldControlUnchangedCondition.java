@@ -27,6 +27,7 @@
  */
 package mage.abilities.condition.common;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -50,7 +51,7 @@ public class SourceOnBattlefieldControlUnchangedCondition implements Condition {
             controllerId = source.getControllerId();
         }
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        return (permanent != null && controllerId == source.getControllerId());
+        return (permanent != null && Objects.equals(controllerId, source.getControllerId()));
     }
 
 }

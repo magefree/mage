@@ -26,6 +26,7 @@ import org.mage.test.player.TestPlayer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -121,7 +122,7 @@ public abstract class MageTestPlayerBase {
         try {
             classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
             logger.info("Loading game type: " + plugin.getClassName());
-            return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
+            return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder");
         } catch (Exception ex) {
@@ -134,7 +135,7 @@ public abstract class MageTestPlayerBase {
         try {
             classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
             logger.info("Loading tournament type: " + plugin.getClassName());
-            return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
+            return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getJar() + " - check plugin folder");
         } catch (Exception ex) {

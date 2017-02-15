@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -104,7 +105,7 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent();
                 filter.add(new ControllerIdPredicate(playerId));
-                if (playerId != controller.getId()) {
+                if (!Objects.equals(playerId, controller.getId())) {
                     if (max < game.getBattlefield().countAll(filter, playerId, game)) {
                         max = game.getBattlefield().countAll(filter, playerId, game);
                     }

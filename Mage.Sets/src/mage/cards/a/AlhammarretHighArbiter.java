@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -108,7 +109,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
         if (controller != null) {
             Cards revealedCards = new CardsImpl();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (playerId != controller.getId()) {
+                if (!Objects.equals(playerId, controller.getId())) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
                         Cards cards = new CardsImpl(opponent.getHand());

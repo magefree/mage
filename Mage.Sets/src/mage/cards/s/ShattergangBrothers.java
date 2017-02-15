@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -117,7 +118,7 @@ class ShattergangBrothersEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (playerId != source.getControllerId()) {
+                if (!Objects.equals(playerId, source.getControllerId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         TargetControlledPermanent target = new TargetControlledPermanent(filter);

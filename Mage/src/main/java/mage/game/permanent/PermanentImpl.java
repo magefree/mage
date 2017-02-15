@@ -27,14 +27,8 @@
  */
 package mage.game.permanent;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -667,7 +661,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void attachTo(UUID permanentId, Game game) {
-        if (this.attachedTo != null && this.attachedTo != permanentId) {
+        if (this.attachedTo != null && !Objects.equals(this.attachedTo, permanentId)) {
             Permanent attachment = game.getPermanent(this.attachedTo);
             if (attachment != null) {
                 attachment.removeAttachment(this.objectId, game);

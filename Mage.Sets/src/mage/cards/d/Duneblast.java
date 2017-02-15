@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -93,7 +94,7 @@ class DuneblastEffect extends OneShotEffect {
                 creatureToKeep = game.getPermanent(target.getFirstTarget());
             }
             for(Permanent creature: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-                if (creature != creatureToKeep) {
+                if (!Objects.equals(creature, creatureToKeep)) {
                     creature.destroy(source.getSourceId(), game, false);
                 }
             }

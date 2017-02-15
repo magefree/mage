@@ -19,6 +19,8 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
+import java.util.Objects;
+
 /**
  *
  * @author jeffwadsworth
@@ -112,7 +114,7 @@ class EpicReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source.getControllerId() == event.getPlayerId()) {
+        if (Objects.equals(source.getControllerId(), event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null) {
                 return true;
