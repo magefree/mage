@@ -55,9 +55,8 @@ public class DeckValidatorFactory {
     public DeckValidator createDeckValidator(String deckType) {
 
         DeckValidator validator;
-        Constructor<?> con;
         try {
-            con = deckTypes.get(deckType).getConstructor();
+            Constructor<?> con = deckTypes.get(deckType).getConstructor();
             validator = (DeckValidator)con.newInstance();
         } catch (Exception ex) {
             logger.fatal("DeckValidatorFactory error", ex);

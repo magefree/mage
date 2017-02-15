@@ -37,8 +37,7 @@ public class MailClient {
             message.setSubject(subject);
             message.setText(text);
 
-            Transport trnsport;
-            trnsport = session.getTransport("smtps");
+            Transport trnsport = session.getTransport("smtps");
             trnsport.connect(null, properties.getProperty("mail.password"));
             message.saveChanges();
             trnsport.sendMessage(message, message.getAllRecipients());

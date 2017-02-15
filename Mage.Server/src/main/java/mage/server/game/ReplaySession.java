@@ -33,7 +33,6 @@ import java.util.UUID;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.interfaces.callback.ClientCallback;
-import mage.server.User;
 import mage.server.UserManager;
 import mage.view.GameView;
 

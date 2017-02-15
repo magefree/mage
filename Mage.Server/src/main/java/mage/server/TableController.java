@@ -911,9 +911,6 @@ public class TableController {
     public boolean isMatchTableStillValid() {
         // check only normal match table with state != Finished
         if (!table.isTournament()) {
-            int humanPlayers = 0;
-            int aiPlayers = 0;
-            int validHumanPlayers = 0;
             if (!(table.getState() == TableState.WAITING || table.getState() == TableState.STARTING || table.getState() == TableState.READY_TO_START)) {
                 if (match == null) {
                     logger.debug("- Match table with no match:");
@@ -927,6 +924,9 @@ public class TableController {
                 }
             }
             // check for active players
+            int validHumanPlayers = 0;
+            int aiPlayers = 0;
+            int humanPlayers = 0;
             for (Map.Entry<UUID, UUID> userPlayerEntry : userPlayerMap.entrySet()) {
                 MatchPlayer matchPlayer = match.getPlayer(userPlayerEntry.getValue());
                 if (matchPlayer == null) {

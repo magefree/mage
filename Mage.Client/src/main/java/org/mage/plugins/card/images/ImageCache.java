@@ -39,7 +39,7 @@ import org.mage.plugins.card.utils.CardImageUtils;
  * look</li>
  * </ul>
  */
-public class ImageCache {
+public final class ImageCache {
 
     private static final Logger LOGGER = Logger.getLogger(ImageCache.class);
 
@@ -157,6 +157,9 @@ public class ImageCache {
         });
     }
 
+    private ImageCache() {
+    }
+
     public static BufferedImage getMorphImage() {
         CardDownloadData info = new CardDownloadData("Morph", "KTK", "0", false, 0, "KTK", "");
         info.setToken(true);
@@ -222,8 +225,7 @@ public class ImageCache {
      */
     private static BufferedImage getImage(String key) {
         try {
-            BufferedImage image = IMAGE_CACHE.get(key);
-            return image;
+            return IMAGE_CACHE.get(key);
         } catch (NullPointerException ex) {
             // unfortunately NullOutputException, thrown when apply() returns
             // null, is not public
@@ -244,11 +246,7 @@ public class ImageCache {
      * the cache.
      */
     private static BufferedImage tryGetImage(String key) {
-        if (IMAGE_CACHE.containsKey(key)) {
-            return IMAGE_CACHE.get(key);
-        } else {
-            return null;
-        }
+        return IMAGE_CACHE.containsKey(key) ? IMAGE_CACHE.get(key) : null;
     }
 
     /**
@@ -279,11 +277,11 @@ public class ImageCache {
         if (file == null) {
             return null;
         }
-        BufferedImage image = null;
         if (!file.exists()) {
             LOGGER.debug("File does not exist: " + file.toString());
             return null;
         }
+        BufferedImage image = null;
         try {
             try (TFileInputStream inputStream = new TFileInputStream(file)) {
                 image = ImageIO.read(inputStream);
@@ -395,8 +393,7 @@ public class ImageCache {
 
     public static TFile getTFile(String path) {
         try {
-            TFile file = new TFile(path);
-            return file;
+            return new TFile(path);
         } catch (NullPointerException ex) {
             LOGGER.warn("Imagefile does not exist: " + path);
         }

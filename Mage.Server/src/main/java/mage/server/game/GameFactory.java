@@ -62,9 +62,8 @@ public class GameFactory {
     public Match createMatch(String gameType, MatchOptions options) {
 
         Match match;
-        Constructor<Match> con;
         try {
-            con = games.get(gameType).getConstructor(MatchOptions.class);
+            Constructor<Match> con = games.get(gameType).getConstructor(MatchOptions.class);
             match = con.newInstance(options);
         } catch (Exception ex) {
             logger.fatal("Error creating match - " + gameType, ex);

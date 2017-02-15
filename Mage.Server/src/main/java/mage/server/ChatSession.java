@@ -28,7 +28,6 @@
 package mage.server;
 
 import mage.interfaces.callback.ClientCallback;
-import mage.server.exceptions.UserNotFoundException;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -36,7 +35,6 @@ import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;

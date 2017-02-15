@@ -271,8 +271,7 @@ public class ChatManager {
     }
 
     public ArrayList<ChatSession> getChatSessions() {
-        ArrayList<ChatSession> chatSessionList = new ArrayList<>(chatSessions.values());
-        return chatSessionList;
+        return new ArrayList<>(chatSessions.values());
     }
 
 

@@ -418,10 +418,10 @@ public class TournamentController {
         }
         // replace player that quits with draft bot
         if (humans > 1) {
-            String replacePlayerName = "Draftbot";
             Optional<User> user = UserManager.getInstance().getUser(userId);
             TableController tableController = TableManager.getInstance().getController(tableId);
             if (tableController != null) {
+                String replacePlayerName = "Draftbot";
                 if (user.isPresent()) {
                     replacePlayerName = "Draftbot (" + user.get().getName() + ')';
                 }

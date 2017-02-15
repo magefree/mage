@@ -173,8 +173,9 @@ public class SessionManager {
      */
     public void disconnectUser(String sessionId, String userSessionId) {
         if (isAdmin(sessionId)) {
-            User userAdmin, user;
+            User userAdmin;
             if ((userAdmin = getUserFromSession(sessionId)) != null) {
+                User user;
                 if ((user = getUserFromSession(userSessionId)) != null) {
                     user.showUserMessage("Admin operation", "Your session was disconnected by Admin.");
                     userAdmin.showUserMessage("Admin action", "User" + user.getName() + " was disconnected.");

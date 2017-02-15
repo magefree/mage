@@ -621,9 +621,8 @@ public class GameController implements GameCallback {
     }
 
     public void cheat(UUID userId, UUID playerId, DeckCardLists deckList) {
-        Deck deck;
         try {
-            deck = Deck.load(deckList, false, false);
+            Deck deck = Deck.load(deckList, false, false);
             game.loadCards(deck.getCards(), playerId);
             for (Card card : deck.getCards()) {
                 card.putOntoBattlefield(game, Zone.OUTSIDE, null, playerId);

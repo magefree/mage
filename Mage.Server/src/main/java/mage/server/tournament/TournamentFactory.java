@@ -64,9 +64,8 @@ public class TournamentFactory {
     public Tournament createTournament(String tournamentType, TournamentOptions options) {
 
         Tournament tournament;
-        Constructor<Tournament> con;
         try {
-            con = tournaments.get(tournamentType).getConstructor(TournamentOptions.class);
+            Constructor<Tournament> con = tournaments.get(tournamentType).getConstructor(TournamentOptions.class);
             tournament = con.newInstance(options);
             // transfer set information, create short info string for included sets
             tournament.setTournamentType(tournamentTypes.get(tournamentType));

@@ -45,7 +45,6 @@ public class SystemUtil {
     public static void addCardsForTesting(Game game) {
         try {
             File f = new File(INIT_FILE_PATH);
-            Pattern pattern = Pattern.compile("([a-zA-Z]+):([\\w]+):([a-zA-Z ,\\/\\-.!'\\d:]+?):(\\d+)");
             if (!f.exists()) {
                 logger.warn("Couldn't find init file: " + INIT_FILE_PATH);
                 return;
@@ -54,6 +53,7 @@ public class SystemUtil {
             logger.info("Parsing init.txt... ");
 
             try (Scanner scanner = new Scanner(f)) {
+                Pattern pattern = Pattern.compile("([a-zA-Z]+):([\\w]+):([a-zA-Z ,\\/\\-.!'\\d:]+?):(\\d+)");
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine().trim();
                     if (line.isEmpty() || line.startsWith("#")) {
