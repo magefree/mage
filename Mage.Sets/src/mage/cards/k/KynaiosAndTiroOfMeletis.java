@@ -28,6 +28,7 @@
 package mage.cards.k;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -127,7 +128,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
                             }
                         }
                     }
-                    if (!playedLand && currentPlayer != controller) {
+                    if (!playedLand && !Objects.equals(currentPlayer, controller)) {
                         noLandPlayers.put(currentPlayer.getId(), playedLand);
                     }
                 }

@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -122,7 +123,7 @@ class CrownOfDoomEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player newController = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller != null && newController != null && controller.getId() != newController.getId()) {
+        if (controller != null && newController != null && !Objects.equals(controller.getId(), newController.getId())) {
             // Duration.Custom = effect ends if Artifact leaves the current zone (battlefield)
             ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
             effect.setTargetPointer(new FixedTarget(source.getSourceId()));

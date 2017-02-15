@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -97,7 +98,7 @@ class FabricationModuleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(CounterType.ENERGY.getName())) {
-            return event.getTargetId() == this.getControllerId();
+            return Objects.equals(event.getTargetId(), this.getControllerId());
         }
         return false;
     }

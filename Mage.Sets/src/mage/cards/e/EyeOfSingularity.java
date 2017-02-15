@@ -28,6 +28,7 @@
 package mage.cards.e;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -191,7 +192,7 @@ class EyeOfSingularityTriggeredEffect extends OneShotEffect {
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             String cardName = permanent.getName();
-            if (cardName.equals(cn) && permanent.getId() != etbPermanent.getId()) {
+            if (cardName.equals(cn) && !Objects.equals(permanent.getId(), etbPermanent.getId())) {
                 toDestroy.put(permanent.getId(), 1);
             }
         }

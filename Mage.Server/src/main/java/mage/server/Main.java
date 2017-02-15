@@ -62,6 +62,7 @@ import org.w3c.dom.Element;
 import javax.management.MBeanServer;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.util.*;
@@ -401,7 +402,7 @@ public class Main {
         try {
             classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading game type: " + plugin.getClassName());
-            return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
+            return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder", ex);
         } catch (Exception ex) {
@@ -414,7 +415,7 @@ public class Main {
         try {
             classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading tournament type: " + plugin.getClassName());
-            return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
+            return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getName() + " / " + plugin.getJar() + " - check plugin folder", ex);
         } catch (Exception ex) {

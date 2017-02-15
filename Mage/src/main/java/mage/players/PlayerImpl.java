@@ -1291,7 +1291,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this.getId(), game)) {
                 for (Ability ability : object.getAbilities()) {
                     if (canUse || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
-                        if (ability.getManaCosts().isEmpty() && ability.getCosts().isEmpty() && ability instanceof SpellAbility && !(ability.getSourceId() == getCastSourceIdWithAlternateMana())) {
+                        if (ability.getManaCosts().isEmpty() && ability.getCosts().isEmpty() && ability instanceof SpellAbility && !(Objects.equals(ability.getSourceId(), getCastSourceIdWithAlternateMana()))) {
                             continue; // You can't play spells that have no costs, unless you can play them without paying their mana costs
                         }
                         ability.setControllerId(this.getId());
@@ -1679,7 +1679,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean isLifeTotalCanChange() {
-        return canGainLife | canLoseLife;
+        return canGainLife || canLoseLife;
     }
 
     @Override
@@ -3247,7 +3247,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // move cards to graveyard in order the owner decides
             if (!cards.isEmpty()) {
                 Player choosingPlayer = this;
-                if (ownerId != this.getId()) {
+                if (!Objects.equals(ownerId, this.getId())) {
                     choosingPlayer = game.getPlayer(ownerId);
                 }
                 if (choosingPlayer == null) {

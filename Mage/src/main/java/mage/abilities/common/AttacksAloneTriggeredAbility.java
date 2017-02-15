@@ -27,6 +27,7 @@
  */
 package mage.abilities.common;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -65,7 +66,7 @@ public class AttacksAloneTriggeredAbility extends TriggeredAbilityImpl {
         if(game.getActivePlayerId().equals(this.controllerId) ) {
             UUID creatureId = this.getSourceId();
             if(creatureId != null) {
-                if(game.getCombat().attacksAlone() && creatureId == game.getCombat().getAttackers().get(0)) {
+                if(game.getCombat().attacksAlone() && Objects.equals(creatureId, game.getCombat().getAttackers().get(0))) {
                     UUID defender = game.getCombat().getDefenderId(creatureId);
                     if(defender != null) {
                         for(Effect effect: getEffects()) {

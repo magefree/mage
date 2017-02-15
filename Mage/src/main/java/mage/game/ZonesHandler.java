@@ -184,9 +184,9 @@ public class ZonesHandler {
                 ZoneChangeInfo subInfo = itr.next();
                 if (!maybeRemoveFromSourceZone(subInfo, game)) {
                     itr.remove();
-                } else if (subInfo.event.getTargetId() == meld.getTopHalfCard().getId()) {
+                } else if (Objects.equals(subInfo.event.getTargetId(), meld.getTopHalfCard().getId())) {
                     meld.setTopLastZoneChangeCounter(meld.getTopHalfCard().getZoneChangeCounter(game));
-                } else if (subInfo.event.getTargetId() == meld.getBottomHalfCard().getId()) {
+                } else if (Objects.equals(subInfo.event.getTargetId(), meld.getBottomHalfCard().getId())) {
                     meld.setBottomLastZoneChangeCounter(meld.getBottomHalfCard().getZoneChangeCounter(game));
                 }
             }

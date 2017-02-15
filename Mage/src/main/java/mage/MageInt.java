@@ -28,6 +28,8 @@
 package mage;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import mage.util.Copyable;
 
 public class MageInt implements Serializable, Copyable<MageInt> {
@@ -75,7 +77,7 @@ public class MageInt implements Serializable, Copyable<MageInt> {
 
     @Override
     public MageInt copy() {
-        if (this == EmptyMageInt) {
+        if (Objects.equals(this, EmptyMageInt)) {
             return this;
         }
         return new MageInt(baseValue, baseValueModified, boostedValue, cardValue);

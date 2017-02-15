@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -95,7 +96,7 @@ public class ScarredPuma extends CardImpl {
             if (permanent.getId().equals(source.getSourceId())) {
                 for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     //excludes itself (http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=23067)
-                    if (creature.getId() != source.getSourceId()) {
+                    if (!Objects.equals(creature.getId(), source.getSourceId())) {
                         ObjectColor color = creature.getColor(game);
                         if (color.isBlack() || color.isGreen()) {
                             return false;

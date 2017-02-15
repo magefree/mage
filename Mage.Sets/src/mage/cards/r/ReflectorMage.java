@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -151,7 +152,7 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
             if (spell != null && spell.isFaceDown(game)) {
                 return false; // Face Down cast spell (Morph creature) has no name
             }
-            return card.getName().equals(creatureName) && ownerId == card.getOwnerId();
+            return card.getName().equals(creatureName) && Objects.equals(ownerId, card.getOwnerId());
         }
         return false;
     }

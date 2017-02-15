@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -87,7 +88,7 @@ class MindsAglowEffect extends OneShotEffect {
             int xSum = 0;
             xSum += playerPaysXGenericMana(controller, source, game);
             for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (playerId != controller.getId()) {
+                if (!Objects.equals(playerId, controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         xSum += playerPaysXGenericMana(player, source, game);

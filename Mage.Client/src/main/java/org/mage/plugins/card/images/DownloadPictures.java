@@ -296,10 +296,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
                 } else if (card.getCardNumber().isEmpty() || "0".equals(card.getCardNumber())) {
                     System.err.println("There was a critical error!");
-                    logger.error("Card has no collector ID and won't be sent to client: " + card);
+                    logger.error("Card has no collector ID and won't be sent to client: " + card.getName());
                 } else if (card.getSetCode().isEmpty()) {
                     System.err.println("There was a critical error!");
-                    logger.error("Card has no set name and won't be sent to client:" + card);
+                    logger.error("Card has no set name and won't be sent to client:" + card.getName());
                 }
             });
             numberWithoutTokens = allCards.size();

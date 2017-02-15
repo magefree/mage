@@ -1,6 +1,7 @@
 package mage.watchers.common;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import mage.constants.WatcherScope;
@@ -32,7 +33,7 @@ public class CastFromHandWatcher extends Watcher {
          * reset if the game comes to a new step
          */
 
-        if (step != null && game.getTurn().getStep() != step) {
+        if (step != null && !Objects.equals(game.getTurn().getStep(), step)) {
             spellsCastFromHand.clear();
             step = null;
         }

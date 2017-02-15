@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -93,7 +94,7 @@ class SpreadingPlagueEffect extends OneShotEffect {
             ObjectColor color = creature.getColor(game);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(FILTER, source.getControllerId(), game)) {
                 if (permanent.getColor(game).shares(color)
-                        && permanent != creature) {
+                        && !Objects.equals(permanent, creature)) {
                     permanent.destroy(source.getSourceId(), game, true);
                 }
             }

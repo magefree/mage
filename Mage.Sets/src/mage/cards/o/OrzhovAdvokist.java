@@ -28,6 +28,7 @@
 package mage.cards.o;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -121,7 +122,7 @@ class OrzhovAdvokistEffect extends OneShotEffect {
                 }
             }
             for (UUID playerId : players) {
-                if (playerId != source.getControllerId()) {
+                if (!Objects.equals(playerId, source.getControllerId())) {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent();
                     filter.add(new ControllerIdPredicate(playerId));
                     game.addEffect(new CantAttackYouAllEffect(Duration.UntilYourNextTurn, filter, true), source);

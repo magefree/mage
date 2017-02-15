@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import mage.constants.CardType;
@@ -79,7 +80,7 @@ public class SkullRend extends CardImpl {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
-                    if (playerId != source.getControllerId()) {
+                    if (!Objects.equals(playerId, source.getControllerId())) {
                         Player opponent = game.getPlayer(playerId);
                         if (opponent != null) {
                             // damage

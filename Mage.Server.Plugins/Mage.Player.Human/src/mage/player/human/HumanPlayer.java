@@ -752,7 +752,8 @@ public class HumanPlayer extends PlayerImpl {
                 return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
             }
         } catch (NullPointerException ex) {
-            logger.error("null pointer exception  UserData = " + userData == null ? "null" : "not null");
+            String isNull = userData == null ? "null" : "not null";
+            logger.error("null pointer exception  UserData = " + isNull);
         }
         return true;
     }

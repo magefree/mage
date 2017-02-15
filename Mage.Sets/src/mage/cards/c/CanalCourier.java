@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -108,7 +109,7 @@ class CanalCourierTriggeredAbility extends TriggeredAbilityImpl {
             Player attackedPlayer = game.getPlayer(sourceDefenderId);
             if (attackedPlayer != null) {
                 for (UUID attacker : game.getCombat().getAttackers()) {
-                    if (attacker != permanent.getId()) {
+                    if (!Objects.equals(attacker, permanent.getId())) {
                         UUID defenderId = game.getCombat().getDefenderId(attacker);
                         Player attackedPlayer2 = game.getPlayer(defenderId);
                         if (attackedPlayer2 != null && attackedPlayer.getId().equals(attackedPlayer2.getId())) {

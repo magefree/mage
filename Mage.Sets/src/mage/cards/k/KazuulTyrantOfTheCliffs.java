@@ -27,6 +27,7 @@
  */
 package mage.cards.k;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -101,7 +102,7 @@ class KazuulTyrantOfTheCliffsTriggeredAbility extends TriggeredAbilityImpl {
         Permanent attacker = game.getPermanent(event.getSourceId());
         Player defender = game.getPlayer(event.getTargetId());
         Player you = game.getPlayer(controllerId);
-        if (attacker.getControllerId() != you.getId() && defender == you) {
+        if (!Objects.equals(attacker.getControllerId(), you.getId()) && Objects.equals(defender, you)) {
             this.getEffects().get(0).setTargetPointer(new FixedTarget(attacker.getControllerId()));
             return true;
         }

@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -94,7 +95,7 @@ class EquipoiseEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
-            if (targetPlayer != controller) {
+            if (!Objects.equals(targetPlayer, controller)) {
                 phaseOutCardType(controller, targetPlayer, CardType.LAND, source, game);
                 phaseOutCardType(controller, targetPlayer, CardType.ARTIFACT, source, game);
                 phaseOutCardType(controller, targetPlayer, CardType.CREATURE, source, game);

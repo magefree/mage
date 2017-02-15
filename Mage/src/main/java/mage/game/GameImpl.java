@@ -29,20 +29,9 @@ package mage.game;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Stack;
-import java.util.UUID;
+
 import mage.MageException;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -2010,7 +1999,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
             for (Permanent permanent : worldEnchantment) {
-                if (newestPermanent != permanent) {
+                if (!Objects.equals(newestPermanent, permanent)) {
                     movePermanentToGraveyardWithInfo(permanent);
                     somethingHappened = true;
                 }

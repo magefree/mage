@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -145,7 +146,7 @@ class ManaWebeffect extends OneShotEffect {
 
             boolean tappedLands = false;
             for (Permanent opponentPermanent : game.getBattlefield().getActivePermanents(filter, permanent.getControllerId(), game)) {
-                if (opponentPermanent.getControllerId() == permanent.getControllerId()) {
+                if (Objects.equals(opponentPermanent.getControllerId(), permanent.getControllerId())) {
                     Mana opponentLandMana = new Mana();
 
                     for (ActivatedManaAbilityImpl ability : opponentPermanent.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {

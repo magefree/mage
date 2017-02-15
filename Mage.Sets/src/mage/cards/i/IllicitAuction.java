@@ -27,6 +27,7 @@
  */
 package mage.cards.i;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -95,7 +96,7 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
             game.informPlayers(winner.getLogName()+ " has bet 0 lifes");
             
             Player currentPlayer = playerList.getNextInRange(controller, game);
-            while (currentPlayer != winner) {
+            while (!Objects.equals(currentPlayer, winner)) {
                 String text = winner.getLogName() + " has bet " + highBid + " life" + (highBid > 1 ? "s" : "") + ". Top the bid?";
                 if (currentPlayer.chooseUse(Outcome.Detriment, text, source, game)) {
                     int newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", game);

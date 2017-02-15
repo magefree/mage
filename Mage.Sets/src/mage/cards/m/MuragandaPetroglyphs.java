@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
@@ -98,7 +99,7 @@ class NoAbilityPredicate implements Predicate<MageObject> {
         }
 
         for (Ability ability : abilities) {
-            if (ability.getClass() != SpellAbility.class) {
+            if (!Objects.equals(ability.getClass(), SpellAbility.class)) {
 
                 return false;
             }

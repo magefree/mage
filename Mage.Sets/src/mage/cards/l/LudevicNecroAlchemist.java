@@ -27,6 +27,7 @@
  */
 package mage.cards.l;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -93,10 +94,10 @@ class LudevicNecroAlchemistCondition implements Condition {
         }
 
         while (watcher != null && currentPlayer != null) {
-            if (currentPlayer != null && currentPlayer.getId() != sourcePlayerId && watcher.getLiveLost(currentPlayer.getId()) > 0) {
+            if (currentPlayer != null && !Objects.equals(currentPlayer.getId(), sourcePlayerId) && watcher.getLiveLost(currentPlayer.getId()) > 0) {
                 return true;
             }
-            if (currentPlayer == firstPlayer) {
+            if (Objects.equals(currentPlayer, firstPlayer)) {
                 return false;
             }
             currentPlayer = playerList.getNext(game);

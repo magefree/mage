@@ -18,6 +18,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -102,7 +103,7 @@ public class UI {
                         Object o = elem.getAttributes().getAttribute(StyleConstants.NameAttribute);
                         if (o instanceof HTML.Tag) {
                             HTML.Tag kind = (HTML.Tag) o;
-                            if (kind == HTML.Tag.IMG) {
+                            if (Objects.equals(kind, HTML.Tag.IMG)) {
                                 return new ImageView(elem) {
                                     @Override
                                     public URL getImageURL() {

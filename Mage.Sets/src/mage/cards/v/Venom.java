@@ -27,6 +27,7 @@
  */
 package mage.cards.v;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -110,13 +111,13 @@ class VenomTriggeredAbility extends TriggeredAbilityImpl {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
             if (enchantedCreature != null) {
-                if (blocker != null && blocker != enchantedCreature
+                if (blocker != null && !Objects.equals(blocker, enchantedCreature)
                         && !blocker.getSubtype(game).contains("Wall")
-                        && blocked == enchantedCreature) {
+                        && Objects.equals(blocked, enchantedCreature)) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId()));
                     return true;
                 }
-                if (blocker != null && blocker == enchantedCreature
+                if (blocker != null && Objects.equals(blocker, enchantedCreature)
                         && !blocked.getSubtype(game).contains("Wall")) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(blocked.getId()));
                     return true;
