@@ -86,11 +86,15 @@ public class Deck implements Serializable {
         deck.cardsLayout = deckCardLists.getCardLayout();
         deck.sideboardLayout = deckCardLists.getSideboardLayout();
         List<String> deckCardNames = new ArrayList<>();
+        int totalCards = 0;
         for (DeckCardInfo deckCardInfo : deckCardLists.getCards()) {
             Card card = createCard(deckCardInfo, mockCards);
             if (card != null) {
-                deck.cards.add(card);
-                deckCardNames.add(card.getName());
+                if (totalCards < 1000) {
+                    deck.cards.add(card);
+                    deckCardNames.add(card.getName());
+                    totalCards++;
+                }
             } else if (!ignoreErrors) {
                 throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
             }
@@ -99,8 +103,11 @@ public class Deck implements Serializable {
         for (DeckCardInfo deckCardInfo : deckCardLists.getSideboard()) {
             Card card = createCard(deckCardInfo, mockCards);
             if (card != null) {
-                deck.sideboard.add(card);
-                sbCardNames.add(card.getName());
+                if (totalCards < 1000) {
+                    deck.sideboard.add(card);
+                    sbCardNames.add(card.getName());
+                    totalCards++;
+                }
             } else if (!ignoreErrors) {
                 throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
             }
