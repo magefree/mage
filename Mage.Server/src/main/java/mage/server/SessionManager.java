@@ -37,6 +37,8 @@ import mage.players.net.UserData;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -51,10 +53,7 @@ public class SessionManager {
 
     private final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
-    public Session getSession(String sessionId) {
-        if (sessionId == null) {
-            return null;
-        }
+    public Session getSession(@Nonnull String sessionId) {
         Session session = sessions.get(sessionId);
         if (session != null && session.getUserId() != null && UserManager.getInstance().getUser(session.getUserId()) == null) {
             logger.error("User for session " + sessionId + " with userId " + session.getUserId() + " is missing. Session removed.");
@@ -209,11 +208,11 @@ public class SessionManager {
         return false;
     }
 
-    public boolean isValidSession(String sessionId) {
+    public boolean isValidSession(@Nonnull String sessionId) {
         return sessions.containsKey(sessionId);
     }
 
-    public Optional<User> getUser(String sessionId) {
+    public Optional<User> getUser(@Nonnull String sessionId) {
         Session session = sessions.get(sessionId);
         if (session != null) {
             return UserManager.getInstance().getUser(sessions.get(sessionId).getUserId());

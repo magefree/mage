@@ -23,6 +23,7 @@ public class TextboxRule {
 
     // An attributed region in the text, which can be applied to an
     // attributed string.
+    @FunctionalInterface
     public interface AttributeRegion {
 
         void applyToAttributedString(AttributedString str, Font normal, Font italic);

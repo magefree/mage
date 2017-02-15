@@ -1,4 +1,5 @@
 /*
+/*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -38,6 +39,7 @@ import mage.game.Game;
  *
  * @author nantuko
  */
+@FunctionalInterface
 public interface AdjustingSourceCosts {
     void adjustCosts(Ability ability, Game game);
 }

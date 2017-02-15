@@ -64,6 +64,7 @@ public class Table implements Serializable {
     private Tournament tournament;
     private TableRecorder recorder;
 
+    @FunctionalInterface
     public interface TableRecorder {
         void record(Table table);
     }

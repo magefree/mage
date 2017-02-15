@@ -5,6 +5,7 @@ package mage.server.services;
  *
  * @author noxx
  */
+@FunctionalInterface
 public interface LogService {
 
     /**

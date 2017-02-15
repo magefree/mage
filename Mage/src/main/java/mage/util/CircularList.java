@@ -27,6 +27,8 @@
  */
 package mage.util;
 
+
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
