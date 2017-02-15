@@ -116,13 +116,13 @@ public class Main {
         }
 
         logger.info("Loading extension packages...");
-        List<ExtensionPackage> extensions = new ArrayList<>();
         if (!extensionFolder.exists()) {
             if (!extensionFolder.mkdirs()) {
                 logger.error("Could not create extensions directory.");
             }
         }
         File[] extensionDirectories = extensionFolder.listFiles();
+        List<ExtensionPackage> extensions = new ArrayList<>();
         if (extensionDirectories != null) {
             for (File f : extensionDirectories) {
                 if (f.isDirectory()) {

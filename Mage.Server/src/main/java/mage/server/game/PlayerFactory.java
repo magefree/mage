@@ -54,13 +54,11 @@ public class PlayerFactory {
     private PlayerFactory() {}
 
     public Player createPlayer(String playerType, String name, RangeOfInfluence range, int skill) {
-        Player player;
-        Constructor<?> con;
         try {
             Class playerTypeClass = playerTypes.get(playerType);
             if (playerTypeClass != null) {
-                con = playerTypeClass.getConstructor(String.class, RangeOfInfluence.class, int.class);
-                player = (Player)con.newInstance(name, range, skill);
+                Constructor<?> con = playerTypeClass.getConstructor(String.class, RangeOfInfluence.class, int.class);
+                Player player = (Player) con.newInstance(name, range, skill);
                 logger.trace("Player created: " + name + " - " + player.getId());
                 return player;
             }

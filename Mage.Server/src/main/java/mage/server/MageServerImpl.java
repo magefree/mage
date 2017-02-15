@@ -227,13 +227,13 @@ public class MageServerImpl implements MageServer {
                     // check AI players max
                     String maxAiOpponents = ConfigSettings.getInstance().getMaxAiOpponents();
                     if (maxAiOpponents != null) {
-                        int max = Integer.parseInt(maxAiOpponents);
                         int aiPlayers = 0;
                         for (String playerType : options.getPlayerTypes()) {
                             if (!playerType.equals("Human")) {
                                 aiPlayers++;
                             }
                         }
+                        int max = Integer.parseInt(maxAiOpponents);
                         if (aiPlayers > max) {
                             user.showUserMessage("Create tournament", "It's only allowed to use a maximum of " + max + " AI players.");
                             throw new MageException("No message");

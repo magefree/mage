@@ -101,11 +101,11 @@ public class Session {
                 return returnMessage;
             }
             AuthorizedUserRepository.instance.add(userName, password, email);
-            String subject = "XMage Registration Completed";
             String text = "You are successfully registered as " + userName + '.';
             text += "  Your initial, generated password is: " + password;
 
             boolean success;
+            String subject = "XMage Registration Completed";
             if (!ConfigSettings.getInstance().getMailUser().isEmpty()) {
                 success = MailClient.sendMessage(email, subject, text);
             } else {

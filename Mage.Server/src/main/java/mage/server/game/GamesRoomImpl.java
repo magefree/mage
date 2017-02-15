@@ -29,7 +29,6 @@ package mage.server.game;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -89,10 +88,10 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     private void update() {
-        ArrayList<TableView> tableList = new ArrayList<>();
-        ArrayList<MatchView> matchList = new ArrayList<>();
         List<Table> allTables = new ArrayList<>(tables.values());
         allTables.sort(new TableListSorter());
+        ArrayList<MatchView> matchList = new ArrayList<>();
+        ArrayList<TableView> tableList = new ArrayList<>();
         for (Table table : allTables) {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));

@@ -55,9 +55,8 @@ public class CubeFactory {
     public DraftCube createDraftCube(String draftCubeName) {
 
         DraftCube draftCube;
-        Constructor<?> con;
         try {
-            con = draftCubes.get(draftCubeName).getConstructor();
+            Constructor<?> con = draftCubes.get(draftCubeName).getConstructor();
             draftCube = (DraftCube)con.newInstance();
         } catch (Exception ex) {
             logger.fatal("CubeFactory error", ex);
@@ -71,9 +70,8 @@ public class CubeFactory {
     public DraftCube createDeckDraftCube(String draftCubeName, Deck cubeFromDeck) {
 
         DraftCube draftCube;
-        Constructor<?> con;
         try {
-            con = draftCubes.get(draftCubeName).getConstructor(Deck.class);
+            Constructor<?> con = draftCubes.get(draftCubeName).getConstructor(Deck.class);
             draftCube = (DraftCube)con.newInstance(cubeFromDeck);
         } catch (Exception ex) {
             logger.fatal("CubeFactory error", ex);
