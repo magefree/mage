@@ -703,20 +703,22 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param subType a subtype to test for
      */
     public void assertType(String cardName, CardType type, String subType) throws AssertionError {
-        Permanent found = null;
-        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getName().equals(cardName)) {
-                found = permanent;
-                break;
-            }
-        }
-
-        Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
-
+        Permanent found = getPermanent(cardName);
         Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
         if (subType != null) {
             Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ':' + subType + ')', found.getSubtype(currentGame).contains(subType));
         }
+    }
+
+    /**
+     * Assert whether a permanent is not a specified type
+     *
+     * @param cardName Name of the permanent that should be checked.
+     * @param type A type to test for
+     */
+    public void assertNotType(String cardName, CardType type) throws AssertionError {
+        Permanent found = getPermanent(cardName);
+        Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
     }
 
     /**
@@ -920,6 +922,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void assertActivePlayer(TestPlayer player) {
         Assert.assertEquals("message", currentGame.getState().getActivePlayerId(), player.getId());
+    }
+
+    public Permanent getPermanent(String cardName) {
+        Permanent found = null;
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
+            if (permanent.getName().equals(cardName)) {
+                found = permanent;
+                break;
+            }
+        }
+
+        Assert.assertNotNull("Couldn't find a card with specified name: " + cardName, found);
+
+        return found;
     }
 
     public Permanent getPermanent(String cardName, Player player) {
