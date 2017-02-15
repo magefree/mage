@@ -75,19 +75,11 @@ public class PlayerLostLifeWatcher extends Watcher {
     }
 
     public int getLiveLost(UUID playerId) {
-        Integer amount = amountOfLifeLostThisTurn.get(playerId);
-        if (amount != null) {
-            return amount;
-        }
-        return 0;
+        return amountOfLifeLostThisTurn.getOrDefault(playerId, 0);
     }
 
     public int getLiveLostLastTurn(UUID playerId) {
-        Integer amount = amountOfLifeLostLastTurn.get(playerId);
-        if (amount != null) {
-            return amount;
-        }
-        return 0;
+        return amountOfLifeLostLastTurn.getOrDefault(playerId, 0);
     }
 
     @Override

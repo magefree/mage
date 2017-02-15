@@ -66,8 +66,8 @@ public class PlayerAttackedWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            int numberAttackers = playerAttacked.containsKey(event.getPlayerId()) ? playerAttacked.get(event.getPlayerId()) : 0;
-            playerAttacked.put(event.getPlayerId(), numberAttackers + 1);
+            playerAttacked.putIfAbsent(event.getPlayerId(), 0);
+            playerAttacked.compute(event.getPlayerId(), (p,amount)->amount + 1);
         }
     }
 
@@ -78,6 +78,6 @@ public class PlayerAttackedWatcher extends Watcher {
     }
 
     public int getNumberOfAttackersCurrentTurn(UUID playerId) {
-        return playerAttacked.containsKey(playerId) ? playerAttacked.get(playerId) : 0;
+        return playerAttacked.getOrDefault(playerId, 0);
     }
 }

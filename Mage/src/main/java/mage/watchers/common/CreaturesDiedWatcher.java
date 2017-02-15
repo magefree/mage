@@ -81,10 +81,7 @@ public class CreaturesDiedWatcher extends Watcher {
     }
 
     public int getAmountOfCreaturesDiesThisTurn(UUID playerId) {
-        if (amountOfCreaturesThatDiedByController.containsKey(playerId)) {
-            return amountOfCreaturesThatDiedByController.get(playerId);
-        }
-        return 0;
+        return amountOfCreaturesThatDiedByController.getOrDefault(playerId, 0);
     }
 
     @Override

@@ -80,10 +80,8 @@ public class ProwlWatcher extends Watcher {
                     if (creature.getAbilities().containsKey(ChangelingAbility.getInstance().getId()) || creature.getSubtype(game).contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
                         allSubtypes.add(creature.getControllerId());
                     } else {
-                        Set<String> subtypes = damagingSubtypes.get(creature.getControllerId());
-                        if (subtypes == null) {
-                            subtypes = new LinkedHashSet<>();
-                        }
+                        Set<String> subtypes = damagingSubtypes.getOrDefault(creature.getControllerId(), new LinkedHashSet<>());
+
                         subtypes.addAll(creature.getSubtype(game));
                         damagingSubtypes.put(creature.getControllerId(), subtypes);
                     }

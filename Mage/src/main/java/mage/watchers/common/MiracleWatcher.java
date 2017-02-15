@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.Card;
@@ -74,14 +75,9 @@ public class MiracleWatcher extends Watcher {
         if (game.getPhase() != null && event.getType() == GameEvent.EventType.DREW_CARD) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
-                if (amount == null) {
-                    amount = 1;
-                } else {
-                    amount++;
-                }
-                amountOfCardsDrawnThisTurn.put(playerId, amount);
-                if (amount == 1) {
+                amountOfCardsDrawnThisTurn.putIfAbsent(playerId, 0);
+                amountOfCardsDrawnThisTurn.compute(playerId, (p, amount) -> amount + 1);
+                if (amountOfCardsDrawnThisTurn.get(playerId) == 1) {
                     checkMiracleAbility(event, game);
                 }
             }
