@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
 import mage.constants.PhaseStep;
 import mage.constants.WatcherScope;
 import mage.game.Game;
@@ -39,11 +40,9 @@ import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author LevelX2
  *
- * Counts cards drawn during draw step
- * 
+ *         Counts cards drawn during draw step
  */
 
 public class CardsDrawnDuringDrawStepWatcher extends Watcher {
@@ -65,26 +64,18 @@ public class CardsDrawnDuringDrawStepWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD
                 && game.getPhase() != null
-                && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
+                && game.getPhase().getStep().getType() == PhaseStep.DRAW) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
-                if (amount == null) {
-                    amount = 1;
-                } else {
-                    amount++;
-                }
-                amountOfCardsDrawnThisTurn.put(playerId, amount);
+                amountOfCardsDrawnThisTurn.putIfAbsent(playerId, 0);
+                amountOfCardsDrawnThisTurn.compute(playerId, (k, amount) -> amount + 1);
+
             }
         }
     }
 
     public int getAmountCardsDrawn(UUID playerId) {
-        Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
-        if (amount != null) {
-            return amount;
-        }
-        return 0;
+        return amountOfCardsDrawnThisTurn.getOrDefault(playerId, 0);
     }
 
     @Override

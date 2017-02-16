@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -38,7 +39,6 @@ import mage.watchers.Watcher;
 
 /**
  * Counts amount of life gained during the current turn by players.
- *
  *
  * @author LevelX2
  */
@@ -65,23 +65,14 @@ public class PlayerGainedLifeWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.GAINED_LIFE) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                Integer amount = amountOfLifeGainedThisTurn.get(playerId);
-                if (amount == null) {
-                    amount = event.getAmount();
-                } else {
-                    amount = amount + event.getAmount();
-                }
-                amountOfLifeGainedThisTurn.put(playerId, amount);
+                amountOfLifeGainedThisTurn.putIfAbsent(playerId, 0);
+                amountOfLifeGainedThisTurn.compute(playerId, (p, amount) -> amount + event.getAmount());
             }
         }
     }
 
     public int getLiveGained(UUID playerId) {
-        Integer amount = amountOfLifeGainedThisTurn.get(playerId);
-        if (amount != null) {
-            return amount;
-        }
-        return 0;
+        return amountOfLifeGainedThisTurn.getOrDefault(playerId, 0);
     }
 
     @Override

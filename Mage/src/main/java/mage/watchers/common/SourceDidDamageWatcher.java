@@ -33,9 +33,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Watcher stores which sources did damage to anything.
@@ -44,7 +42,7 @@ import java.util.UUID;
  */
 public class SourceDidDamageWatcher extends Watcher {
 
-    public final List<UUID> damageSources = new ArrayList<>();
+    public final Set<UUID> damageSources = new HashSet<>();
 
     public SourceDidDamageWatcher() {
         super("SourceDidDamageWatcher", WatcherScope.GAME);
@@ -65,9 +63,8 @@ public class SourceDidDamageWatcher extends Watcher {
         if (event.getType() == EventType.DAMAGED_CREATURE
                 || event.getType() == EventType.DAMAGED_PLANESWALKER
                 || event.getType() == EventType.DAMAGED_PLAYER) {
-            if (!damageSources.contains(event.getSourceId())) {
                 damageSources.add(event.getSourceId());
-            }
+
         }
     }
 

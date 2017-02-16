@@ -31,17 +31,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author jeffwadsworth
  *
- * Amount of damage received by a player this turn
- *
+ *         Amount of damage received by a player this turn
  */
 public class AmountOfDamageAPlayerReceivedThisTurnWatcher extends Watcher {
 
@@ -63,23 +62,14 @@ public class AmountOfDamageAPlayerReceivedThisTurnWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             UUID playerId = event.getTargetId();
             if (playerId != null) {
-                Integer amount = amountOfDamageReceivedThisTurn.get(playerId);
-                if (amount == null) {
-                    amount = event.getAmount();
-                } else {
-                    amount = amount + event.getAmount();
-                }
-                amountOfDamageReceivedThisTurn.put(playerId, amount);
+                amountOfDamageReceivedThisTurn.putIfAbsent(playerId, 0);
+                amountOfDamageReceivedThisTurn.compute(playerId, (k, v) -> v + event.getAmount());
             }
         }
     }
 
     public int getAmountOfDamageReceivedThisTurn(UUID playerId) {
-        Integer amount = amountOfDamageReceivedThisTurn.get(playerId);
-        if (amount != null) {
-            return amount;
-        }
-        return 0;
+        return amountOfDamageReceivedThisTurn.getOrDefault(playerId, 0);
     }
 
     @Override

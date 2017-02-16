@@ -27,20 +27,16 @@
  */
 package mage.watchers.common;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
- *
  * @author nantuko, BetaSteward_at_googlemail.com
  */
 public class CastSpellLastTurnWatcher extends Watcher {
@@ -70,13 +66,9 @@ public class CastSpellLastTurnWatcher extends Watcher {
             spellsCastThisTurnInOrder.add(new MageObjectReference(event.getTargetId(), game));
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                Integer amount = amountOfSpellsCastOnCurrentTurn.get(playerId);
-                if (amount == null) {
-                    amount = 1;
-                } else {
-                    amount = amount + 1;
-                }
-                amountOfSpellsCastOnCurrentTurn.put(playerId, amount);
+                amountOfSpellsCastOnCurrentTurn.putIfAbsent(playerId, 0);
+                amountOfSpellsCastOnCurrentTurn.compute(playerId, (k, a) -> a + 1);
+
             }
         }
     }
@@ -98,20 +90,11 @@ public class CastSpellLastTurnWatcher extends Watcher {
     }
 
     public int getAmountOfSpellsAllPlayersCastOnCurrentTurn() {
-        int totalAmount = 0;
-        for (Integer amount : amountOfSpellsCastOnCurrentTurn.values()) {
-            totalAmount += amount;
-        }
-        return totalAmount;
+        return amountOfSpellsCastOnCurrentTurn.values().stream().reduce(0, Integer::sum);
     }
 
     public int getAmountOfSpellsPlayerCastOnCurrentTurn(UUID playerId) {
-        Integer value = amountOfSpellsCastOnCurrentTurn.get(playerId);
-        if (value != null) {
-            return value;
-        } else {
-            return 0;
-        }
+        return amountOfSpellsCastOnCurrentTurn.getOrDefault(playerId, 0);
     }
 
     public int getSpellOrder(MageObjectReference spell, Game game) {
