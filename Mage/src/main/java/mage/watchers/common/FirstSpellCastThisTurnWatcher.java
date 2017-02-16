@@ -58,6 +58,6 @@ public class FirstSpellCastThisTurnWatcher extends Watcher {
     }
 
     public UUID getIdOfFirstCastSpell(UUID playerId) {
-        return playerFirstSpellCast.getOrDefault(playerId, playerFirstSpellCast.get(playerId));
+        return playerFirstSpellCast.getOrDefault(playerId, playerFirstCastSpell.get(playerId));
     }
 }
