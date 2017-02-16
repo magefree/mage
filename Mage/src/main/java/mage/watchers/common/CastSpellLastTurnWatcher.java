@@ -90,7 +90,7 @@ public class CastSpellLastTurnWatcher extends Watcher {
     }
 
     public int getAmountOfSpellsAllPlayersCastOnCurrentTurn() {
-        return amountOfSpellsCastOnCurrentTurn.values().stream().mapToInt(Integer::intValue).sum();
+        return amountOfSpellsCastOnCurrentTurn.values().stream().reduce(0, Integer::sum);
     }
 
     public int getAmountOfSpellsPlayerCastOnCurrentTurn(UUID playerId) {

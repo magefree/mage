@@ -41,7 +41,7 @@ import mage.watchers.Watcher;
 
 /**
  * @author LevelX2
- *         <p>
+ *
  *         Counts cards drawn during draw step
  */
 

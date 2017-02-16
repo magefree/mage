@@ -61,7 +61,7 @@ public class CardsAmountDrawnThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
             amountOfCardsDrawnThisTurn.putIfAbsent(event.getPlayerId(), 0);
-            amountOfCardsDrawnThisTurn.compute(event.getPlayerId(), (k, amount) -> amount += 1);
+            amountOfCardsDrawnThisTurn.compute(event.getPlayerId(), (k, amount) -> amount + 1);
         }
     }
 
@@ -86,7 +86,7 @@ public class CardsAmountDrawnThisTurnWatcher extends Watcher {
     }
 
     public int getAmountCardsDrawn(UUID playerId) {
-        return amountOfCardsDrawnThisTurn.getOrDefault(playerId,0);
+        return amountOfCardsDrawnThisTurn.getOrDefault(playerId, 0);
     }
 
     @Override

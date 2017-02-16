@@ -75,9 +75,9 @@ public class MiracleWatcher extends Watcher {
         if (game.getPhase() != null && event.getType() == GameEvent.EventType.DREW_CARD) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                amountOfCardsDrawnThisTurn.putIfAbsent(playerId, 0);
-                amountOfCardsDrawnThisTurn.compute(playerId, (p, amount) -> amount + 1);
-                if (amountOfCardsDrawnThisTurn.get(playerId) == 1) {
+                Integer amount = 1 + amountOfCardsDrawnThisTurn.getOrDefault(playerId, 0);
+                amountOfCardsDrawnThisTurn.put(playerId, amount);
+                if (amount == 1) {
                     checkMiracleAbility(event, game);
                 }
             }

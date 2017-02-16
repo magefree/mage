@@ -77,7 +77,7 @@ public class CommanderInfoWatcher extends Watcher {
                 DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
                 if (damageEvent.isCombatDamage()) {
                     UUID playerUUID = event.getTargetId();
-                    Integer damage = damageToPlayer.getOrDefault(playerUUID,0);
+                    Integer damage = damageToPlayer.getOrDefault(playerUUID, 0);
                     damage += damageEvent.getAmount();
                     damageToPlayer.put(playerUUID, damage);
                     Player player = game.getPlayer(playerUUID);

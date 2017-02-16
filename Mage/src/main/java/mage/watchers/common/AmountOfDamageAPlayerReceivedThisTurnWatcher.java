@@ -39,7 +39,7 @@ import mage.watchers.Watcher;
 
 /**
  * @author jeffwadsworth
- *         <p>
+ *
  *         Amount of damage received by a player this turn
  */
 public class AmountOfDamageAPlayerReceivedThisTurnWatcher extends Watcher {
