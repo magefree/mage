@@ -28,6 +28,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -57,7 +58,6 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author fireshoes
  */
 public class ChandraTorchOfDefiance extends CardImpl {
@@ -117,7 +117,7 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
         if (controller != null && sourceObject != null && controller.getLibrary().size() > 0) {
             Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
-            if (card != null) {
+            if (card != null && !card.getManaCost().isEmpty()) {
                 boolean exiledCardWasCast = false;
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                 if (controller.chooseUse(Outcome.Benefit, "Cast the card? (You still pay the costs)", source, game) && !card.getCardType().contains(CardType.LAND)) {
