@@ -132,6 +132,10 @@ public class ChatManager {
                         chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
                         return;
                     }
+                    
+                    if (message.length() > 500) {                        
+                        message = message.replaceFirst("^(.{500}).*", "$1 (rest of message truncated)");
+                    }
 
                     String messageToCheck = message;
                     Matcher matchPattern = cardNamePattern.matcher(message);
