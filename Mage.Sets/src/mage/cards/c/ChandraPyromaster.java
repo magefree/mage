@@ -30,6 +30,7 @@ package mage.cards.c;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -62,13 +63,12 @@ import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class ChandraPyromaster extends CardImpl {
 
     public ChandraPyromaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -211,9 +211,11 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
             Card card = library.removeFromTop(game);
             if (card != null) {
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName() + " <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
-                ContinuousEffect effect = new ChandraPyromasterCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
-                game.addEffect(effect, source);
+                if (!card.getManaCost().isEmpty()) {
+                    ContinuousEffect effect = new ChandraPyromasterCastFromExileEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
+                }
             }
             return true;
         }

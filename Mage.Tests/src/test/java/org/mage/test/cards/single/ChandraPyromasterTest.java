@@ -43,6 +43,29 @@ public class ChandraPyromasterTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
     }
+
+    @Test
+    public void testAbility2AncestralVision() {
+        addCard(Zone.BATTLEFIELD, playerA, "Chandra, Pyromaster");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Ancestral Vision");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+0: Exile the top card of your library. You may play it this turn.");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Chandra, Pyromaster", 1);
+        assertGraveyardCount(playerA, "Ancestral Vision", 0);
+
+        assertExileCount(playerA, "Ancestral Vision", 1);
+    }
     
     @Test
     public void testAbility2CastCardFromExileWithOverlaod() {
