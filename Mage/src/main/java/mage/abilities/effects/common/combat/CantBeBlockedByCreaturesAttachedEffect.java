@@ -36,7 +36,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class CantBeBlockedByCreaturesAttachedEffect extends RestrictionEffect {
@@ -47,13 +46,9 @@ public class CantBeBlockedByCreaturesAttachedEffect extends RestrictionEffect {
         super(duration);
         this.filter = filter;
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == AttachmentType.AURA) {
-            sb.append("Enchanted ");
-        } else {
-            sb.append("Equipped ");
-        }
-        staticText = sb.append("creature can't be blocked ")
-                .append(filter.getMessage().startsWith("except by") ? "":"by ").append(filter.getMessage()).toString();
+        sb.append(attachmentType.verb());
+        staticText = sb.append(" creature can't be blocked ")
+                .append(filter.getMessage().startsWith("except by") ? "" : "by ").append(filter.getMessage()).toString();
     }
 
     public CantBeBlockedByCreaturesAttachedEffect(final CantBeBlockedByCreaturesAttachedEffect effect) {

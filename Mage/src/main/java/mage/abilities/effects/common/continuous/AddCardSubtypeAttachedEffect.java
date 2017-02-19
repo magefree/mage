@@ -72,11 +72,8 @@ public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == AttachmentType.AURA)
-            sb.append("Enchanted");
-        else if (attachmentType == AttachmentType.EQUIPMENT)
-            sb.append("Equipped");
 
+        sb.append(attachmentType.verb());
         sb.append(" creature becomes ").append(addedSubtype).append(" in addition to its other types"); //TODO add attacked card type detection
         staticText = sb.toString();
     }
