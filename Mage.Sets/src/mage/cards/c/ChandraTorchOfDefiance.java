@@ -117,20 +117,22 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
         if (controller != null && sourceObject != null && controller.getLibrary().size() > 0) {
             Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
-            if (card != null && !card.getManaCost().isEmpty()) {
+            if (card != null) {
                 boolean exiledCardWasCast = false;
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                if (controller.chooseUse(Outcome.Benefit, "Cast the card? (You still pay the costs)", source, game) && !card.getCardType().contains(CardType.LAND)) {
+                if (!card.getManaCost().isEmpty())
+                    if (controller.chooseUse(Outcome.Benefit, "Cast the card? (You still pay the costs)", source, game) && !card.getCardType().contains(CardType.LAND)) {
 //                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = controller.getUseableActivatedAbilities(card, Zone.EXILED, game);
 //                    for (ActivatedAbility ability : useableAbilities.values()) {
 //
 //                    }
 //                    controller.activateAbility(useableAbilities, game);
-                    exiledCardWasCast = controller.cast(card.getSpellAbility(), game, false);
-                }
+                        exiledCardWasCast = controller.cast(card.getSpellAbility(), game, false);
+                    }
                 if (!exiledCardWasCast) {
                     new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT).apply(game, source);
                 }
+
             }
             return true;
         }
