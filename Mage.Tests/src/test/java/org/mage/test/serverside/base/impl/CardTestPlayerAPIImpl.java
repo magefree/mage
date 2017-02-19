@@ -861,9 +861,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Assert card count in player's graveyard.
+     * Assert card count in player's exile.
      *
-     * @param owner {@link Player} who's graveyard should be counted.
+     * @param owner {@link Player} who's exile should be counted.
      * @param cardName Name of the cards that should be counted.
      * @param count Expected count.
      */
