@@ -33,6 +33,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -51,7 +53,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ContinuousEffectImpl extends EffectImpl implements ContinuousEffect {
@@ -171,9 +172,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     public void init(Ability source, Game game) {
         targetPointer.init(game, source);
         //20100716 - 611.2c
-        if (AbilityType.ACTIVATED.equals(source.getAbilityType())
-                || AbilityType.SPELL.equals(source.getAbilityType())
-                || AbilityType.TRIGGERED.equals(source.getAbilityType())) {
+        if (AbilityType.ACTIVATED == source.getAbilityType()
+                || AbilityType.SPELL == source.getAbilityType()
+                || AbilityType.TRIGGERED == source.getAbilityType()) {
             if (layer != null) {
                 switch (layer) {
                     case CopyEffects_1:
@@ -197,7 +198,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (duration.equals(Duration.UntilYourNextTurn)) {
+        if (duration == Duration.UntilYourNextTurn) {
             Player player = game.getPlayer(startingControllerId);
             if (player != null) {
                 if (player.isInGame()) {
@@ -271,19 +272,13 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
         if (dependendToType != null) {
-            // the dependent classes needs to be an enclosed class for dependent check of continuous effects
-            Set<UUID> dependentTo = null;
-            for (ContinuousEffect effect : allEffectsInLayer) {
-                if (effect.getDependencyTypes().contains(dependendToType)) {
-                    if (dependentTo == null) {
-                        dependentTo = new HashSet<>();
-                    }
-                    dependentTo.add(effect.getId());
-                }
-            }
-            return dependentTo;
+            return allEffectsInLayer.stream()
+                    .filter(effect -> effect.getDependencyTypes().contains(dependendToType))
+                    .map(Effect::getId)
+                    .collect(Collectors.toSet());
+
         }
-        return null;
+        return new HashSet<>();
     }
 
     @Override

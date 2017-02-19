@@ -27,40 +27,12 @@
  */
 package mage.abilities.effects;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.MageSingleton;
-import mage.abilities.SpellAbility;
-import mage.abilities.StaticAbility;
+import mage.abilities.*;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.AbilityType;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.EffectType;
-import mage.constants.Layer;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -77,8 +49,11 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import org.apache.log4j.Logger;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ContinuousEffects implements Serializable {
@@ -218,7 +193,7 @@ public class ContinuousEffects implements Serializable {
                 case WhileOnStack:
                 case WhileInGraveyard:
                     HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
-                    if (abilities != null) {
+                    if (!abilities.isEmpty()) {
                         for (Ability ability : abilities) {
                             // If e.g. triggerd abilities (non static) created the effect, the ability must not be in usable zone (e.g. Unearth giving Haste effect)
                             if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null)) {
@@ -358,7 +333,6 @@ public class ContinuousEffects implements Serializable {
     }
 
     /**
-     *
      * @param event
      * @param game
      * @return a list of all {@link ReplacementEffect} that apply to the current
@@ -717,7 +691,8 @@ public class ContinuousEffects implements Serializable {
                             spliceAbilities.remove(selectedAbility);
                         }
                     }
-                } while (!spliceAbilities.isEmpty() && controller.chooseUse(Outcome.Benefit, "Splice another card?", abilityToModify, game));
+                }
+                while (!spliceAbilities.isEmpty() && controller.chooseUse(Outcome.Benefit, "Splice another card?", abilityToModify, game));
                 controller.revealCards("Spliced cards", cardsToReveal, game);
             }
         }
@@ -727,10 +702,10 @@ public class ContinuousEffects implements Serializable {
      * Checks if an event won't happen because of an rule modifying effect
      *
      * @param event
-     * @param targetAbility ability the event is attached to. can be null.
+     * @param targetAbility     ability the event is attached to. can be null.
      * @param game
      * @param checkPlayableMode true if the event does not really happen but
-     * it's checked if the event would be replaced
+     *                          it's checked if the event would be replaced
      * @return
      */
     public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean checkPlayableMode) {
@@ -777,7 +752,7 @@ public class ContinuousEffects implements Serializable {
         do {
             HashMap<ReplacementEffect, HashSet<Ability>> rEffects = getApplicableReplacementEffects(event, game);
             // Remove all consumed effects (ability dependant)
-            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext();) {
+            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext(); ) {
                 ReplacementEffect entry = it1.next();
                 if (consumed.containsKey(entry.getId())) {
                     HashSet<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
@@ -865,9 +840,8 @@ public class ContinuousEffects implements Serializable {
                 if (consumed.containsKey(rEffect.getId())) {
                     HashSet<UUID> set = consumed.get(rEffect.getId());
                     if (rAbility != null) {
-                        if (!set.contains(rAbility.getId())) {
-                            set.add(rAbility.getId());
-                        }
+                        set.add(rAbility.getId());
+
                     }
                 } else {
                     HashSet<UUID> set = new HashSet<>();
@@ -936,7 +910,7 @@ public class ContinuousEffects implements Serializable {
             for (ContinuousEffect effect : layer) {
                 if (activeLayerEffects.contains(effect) && !appliedEffects.contains(effect.getId())) { // Effect does still exist and was not applied yet
                     Set<UUID> dependentTo = effect.isDependentTo(layer);
-                    if (dependentTo != null && !appliedEffects.containsAll(dependentTo)) {
+                    if (!appliedEffects.containsAll(dependentTo)) {
                         waitingEffects.put(effect, dependentTo);
                         continue;
                     }
@@ -959,7 +933,7 @@ public class ContinuousEffects implements Serializable {
 
                     if (!waitingEffects.isEmpty()) {
                         // check if waiting effects can be applied now
-                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext();) {
+                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext(); ) {
                             Map.Entry<ContinuousEffect, Set<UUID>> entry = iterator.next();
                             if (appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
                                 appliedAbilities = appliedEffectAbilities.get(entry.getKey());
@@ -1039,7 +1013,7 @@ public class ContinuousEffects implements Serializable {
             for (ContinuousEffect effect : layer) {
                 if (numberOfEffects > 1) { // If an effect is dependent to not applied effects yet of this layer, so wait to apply this effect
                     Set<UUID> dependentTo = effect.isDependentTo(layer);
-                    if (dependentTo != null && !appliedEffects.containsAll(dependentTo)) {
+                    if (!appliedEffects.containsAll(dependentTo)) {
                         waitingEffects.put(effect, dependentTo);
                         continue;
                     }
@@ -1162,17 +1136,16 @@ public class ContinuousEffects implements Serializable {
     private void setControllerForEffect(ContinuousEffectsList<?> effects, UUID sourceId, UUID controllerId) {
         for (Effect effect : effects) {
             HashSet<Ability> abilities = effects.getAbility(effect.getId());
-            if (abilities != null) {
-                for (Ability ability : abilities) {
-                    if (ability.getSourceId() != null) {
-                        if (ability.getSourceId().equals(sourceId)) {
-                            ability.setControllerId(controllerId);
-                        }
-                    } else if (!ability.getZone().equals(Zone.COMMAND)) {
-                        logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
+            for (Ability ability : abilities) {
+                if (ability.getSourceId() != null) {
+                    if (ability.getSourceId().equals(sourceId)) {
+                        ability.setControllerId(controllerId);
                     }
+                } else if (ability.getZone() != Zone.COMMAND) {
+                    logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
                 }
             }
+
         }
     }
 

@@ -47,7 +47,7 @@ public class CantBeBlockedByCreaturesAttachedEffect extends RestrictionEffect {
         super(duration);
         this.filter = filter;
         StringBuilder sb = new StringBuilder();
-        if (attachmentType.equals(AttachmentType.AURA)) {
+        if (attachmentType == AttachmentType.AURA) {
             sb.append("Enchanted ");
         } else {
             sb.append("Equipped ");

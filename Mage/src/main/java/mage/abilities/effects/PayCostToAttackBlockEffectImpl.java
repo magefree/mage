@@ -44,7 +44,7 @@ import mage.players.Player;
  */
 public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectImpl implements PayCostToAttackBlockEffect {
 
-    public static enum RestrictType {
+    public enum RestrictType {
 
         ATTACK("attack"),
         ATTACK_AND_BLOCK("attack or block"),
@@ -111,7 +111,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             case BLOCK:
                 return event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER);
             case ATTACK_AND_BLOCK:
-                return event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER);
+                return event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER;
         }
         return false;
     }

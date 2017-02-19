@@ -16,7 +16,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifyingEffectImpl {
@@ -49,8 +48,8 @@ public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifying
     public boolean applies(GameEvent event, Ability source, Game game) {
         // has to return true, if the spell cannot be cast in the current phase / step
         if (event.getSourceId().equals(source.getSourceId())) {
-            if ((turnPhase != null && !game.getPhase().getType().equals(turnPhase))
-                    || (phaseStep != null && !game.getTurn().getStepType().equals(phaseStep))
+            if ((turnPhase != null && game.getPhase().getType() != turnPhase)
+                    || (phaseStep != null && (game.getTurn().getStepType() != phaseStep))
                     || (condition != null && !condition.apply(game, source))) {
                 return true;
             }

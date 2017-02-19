@@ -49,7 +49,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     public AddCardTypeSourceEffect(CardType addedCardType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedCardType = addedCardType;
-        if (addedCardType.equals(CardType.ENCHANTMENT)) {
+        if (addedCardType == CardType.ENCHANTMENT) {
             dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
         }
     }

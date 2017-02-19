@@ -54,7 +54,7 @@ public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
         super(duration, Outcome.Benefit);
         this.amount = amount;
         this.attachmentType = attachmentType;
-        staticText = (attachmentType.equals(AttachmentType.AURA) ? "Enchanted" : "Equipped") + " creature can't be blocked except by " + amount + " or more creatures";
+        staticText = (attachmentType == AttachmentType.AURA ? "Enchanted" : "Equipped") + " creature can't be blocked except by " + amount + " or more creatures";
     }
 
     public CantBeBlockedByOneAttachedEffect(final CantBeBlockedByOneAttachedEffect effect) {
