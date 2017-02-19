@@ -6,6 +6,7 @@ import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotSame;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -527,7 +528,7 @@ public class ManaTest {
 
         // then
         assertEquals(mana, copy); // are equal
-        assertFalse(Objects.equals(mana, copy)); // are not the same object
+        assertNotSame(mana, copy); // are not the same object
     }
 
     @Test
@@ -605,7 +606,7 @@ public class ManaTest {
 
         // then
         assertEquals(mana, newMana);
-        assertFalse(Objects.equals(mana, newMana));
+        assertNotSame(mana, newMana);
     }
 
     @Test
