@@ -26,10 +26,7 @@ public class BeforeBlockersAreDeclaredCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return !(game.getStep().getType().equals(PhaseStep.DECLARE_BLOCKERS)
-                || game.getStep().getType().equals(PhaseStep.FIRST_COMBAT_DAMAGE)
-                || game.getStep().getType().equals(PhaseStep.COMBAT_DAMAGE)
-                || game.getStep().getType().equals(PhaseStep.END_COMBAT));
+        return game.getStep().getType().isBefore(PhaseStep.DECLARE_BLOCKERS);
     }
 
     @Override

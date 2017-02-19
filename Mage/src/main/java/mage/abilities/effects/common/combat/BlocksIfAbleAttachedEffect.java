@@ -44,7 +44,7 @@ public class BlocksIfAbleAttachedEffect extends RequirementEffect {
 
     public BlocksIfAbleAttachedEffect(Duration duration, AttachmentType attachmentType) {
         super(duration);
-        if (attachmentType.equals(AttachmentType.AURA)) {
+        if (attachmentType == AttachmentType.AURA) {
             this.staticText = "Enchanted creature blocks each turn if able";
         } else {
             this.staticText = "Equipped creature blocks each turn if able";

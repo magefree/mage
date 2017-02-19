@@ -71,8 +71,7 @@ public class ProliferateEffect extends OneShotEffect {
         options.put("UI.right.btn.text", "Done");
         controller.choose(Outcome.Benefit, target, source.getSourceId(), game, options);
 
-        for (int idx = 0; idx < target.getTargets().size(); idx++) {
-            UUID chosen = (UUID) target.getTargets().get(idx);
+        for (UUID chosen : target.getTargets()) {
             Permanent permanent = game.getPermanent(chosen);
             if (permanent != null) {
                 if (!permanent.getCounters(game).isEmpty()) {

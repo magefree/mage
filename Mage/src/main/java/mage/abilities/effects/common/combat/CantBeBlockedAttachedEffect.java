@@ -42,7 +42,7 @@ public class CantBeBlockedAttachedEffect extends RestrictionEffect {
 
     public CantBeBlockedAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);
-        if (attachmentType.equals(AttachmentType.AURA)) {
+        if (attachmentType == AttachmentType.AURA) {
             this.staticText = "Enchanted creature can't be blocked";
         } else {
             this.staticText = "Equipped creature can't be blocked";

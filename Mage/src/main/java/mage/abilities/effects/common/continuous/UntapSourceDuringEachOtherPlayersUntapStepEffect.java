@@ -64,7 +64,7 @@ public class UntapSourceDuringEachOtherPlayersUntapStepEffect extends Continuous
         if (applied == null) {
             applied = Boolean.FALSE;
         }
-        if (!applied && layer.equals(Layer.RulesEffects)) {
+        if (!applied && layer == Layer.RulesEffects) {
             if (!source.getControllerId().equals(game.getActivePlayerId())
                     && game.getStep() != null
                     && game.getStep().getType() == PhaseStep.UNTAP) {
@@ -80,7 +80,7 @@ public class UntapSourceDuringEachOtherPlayersUntapStepEffect extends Continuous
                     }
                 }
             }
-        } else if (applied && layer.equals(Layer.RulesEffects)) {
+        } else if (applied && layer == Layer.RulesEffects) {
             if (game.getStep() != null && game.getStep().getType() == PhaseStep.END_TURN) {
                 game.getState().setValue(source.getSourceId() + "applied", false);
             }

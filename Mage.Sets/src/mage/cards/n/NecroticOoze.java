@@ -31,12 +31,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -119,17 +122,11 @@ public class NecroticOoze extends CardImpl {
         @Override
         public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
             // the dependent classes needs to be an enclosed class for dependent check of continuous effects
-            Set<UUID> dependentTo = null;
-            for (ContinuousEffect effect : allEffectsInLayer) {
-                // http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/285211-yixlid-jailer-vs-necrotic-ooze
-                if (YixlidJailer.class.equals(effect.getClass().getEnclosingClass())) {
-                    if (dependentTo == null) {
-                        dependentTo = new HashSet<>();
-                    }
-                    dependentTo.add(effect.getId());
-                }
-            }
-            return dependentTo;
+            return allEffectsInLayer.stream()
+                    .filter(effect -> YixlidJailer.class.equals(effect.getClass().getEnclosingClass()))
+                    .map(Effect::getId)
+                    .collect(Collectors.toSet());
+
         }
     }
 

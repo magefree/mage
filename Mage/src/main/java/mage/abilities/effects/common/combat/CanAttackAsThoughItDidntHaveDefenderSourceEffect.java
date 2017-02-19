@@ -44,7 +44,7 @@ public class CanAttackAsThoughItDidntHaveDefenderSourceEffect extends AsThoughEf
     public CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration duration) {
         super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
         staticText = "{this} can attack "
-                + (duration.equals(Duration.EndOfTurn) ? "this turn " : "")
+                + (duration == Duration.EndOfTurn ? "this turn " : "")
                 + "as though it didn't have defender";
     }
 

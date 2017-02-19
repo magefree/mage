@@ -39,7 +39,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author ayratn
  */
 public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl {
@@ -59,7 +58,7 @@ public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
+        Permanent target = game.getPermanent(source.getFirstTarget());
         if (target != null) {
             int power = target.getPower().getValue();
             target.getPower().setValue(target.getToughness().getValue());
@@ -73,7 +72,7 @@ public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl {
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         sb.append("Switch target ").append(mode.getTargets().get(0).getTargetName()).append("'s power and toughness")
-            .append(' ').append(duration.toString());
+                .append(' ').append(duration.toString());
         return sb.toString();
     }
 

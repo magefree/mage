@@ -56,7 +56,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
         super(duration);
         this.filter = filter;
         StringBuilder sb = new StringBuilder();
-        if (attachmentType.equals(AttachmentType.AURA)) {
+        if (attachmentType == AttachmentType.AURA) {
             sb.append("Enchanted creature can't block");
         } else {
             sb.append("Equipped creature can't block");

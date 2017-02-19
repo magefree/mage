@@ -97,13 +97,13 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         switch (enterEventType) {
             case OTHER:
-                return EventType.ENTERS_THE_BATTLEFIELD.equals(event.getType());
+                return EventType.ENTERS_THE_BATTLEFIELD == event.getType();
             case SELF:
-                return EventType.ENTERS_THE_BATTLEFIELD_SELF.equals(event.getType());
+                return EventType.ENTERS_THE_BATTLEFIELD_SELF == event.getType();
             case CONTROL:
-                return EventType.ENTERS_THE_BATTLEFIELD_CONTROL.equals(event.getType());
+                return EventType.ENTERS_THE_BATTLEFIELD_CONTROL == event.getType();
             case COPY:
-                return EventType.ENTERS_THE_BATTLEFIELD_COPY.equals(event.getType());
+                return EventType.ENTERS_THE_BATTLEFIELD_COPY == event.getType();
         }
         return false;
     }

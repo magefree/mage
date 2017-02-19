@@ -46,7 +46,7 @@ public class MustBeBlockedByAllTargetEffect extends RequirementEffect {
     public MustBeBlockedByAllTargetEffect(Duration duration) {
         super(duration);
         staticText =  new StringBuilder("All creatures able to block target creature ")
-                .append(this.getDuration().equals(Duration.EndOfTurn) ? "this turn ":"")
+                .append(this.getDuration() == Duration.EndOfTurn ? "this turn ":"")
                 .append("do so").toString();
     }
 
@@ -58,7 +58,7 @@ public class MustBeBlockedByAllTargetEffect extends RequirementEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {        
         Permanent attackingCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (attackingCreature != null && attackingCreature.isAttacking()) {
-            if (!source.getAbilityType().equals(AbilityType.STATIC)) {
+            if (source.getAbilityType() != AbilityType.STATIC) {
                 BlockedAttackerWatcher blockedAttackerWatcher = (BlockedAttackerWatcher) game.getState().getWatchers().get("BlockedAttackerWatcher");
                 if (blockedAttackerWatcher != null && blockedAttackerWatcher.creatureHasBlockedAttacker(attackingCreature, permanent, game)) {
                     // has already blocked this turn, so no need to do again

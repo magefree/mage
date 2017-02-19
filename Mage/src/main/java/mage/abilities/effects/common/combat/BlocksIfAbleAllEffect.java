@@ -51,7 +51,7 @@ public class BlocksIfAbleAllEffect extends RequirementEffect {
         super(duration);
         staticText = new StringBuilder(filter.getMessage())
                 .append(" block ")
-                .append(duration.equals(Duration.EndOfTurn) ? "this":"each")
+                .append(duration == Duration.EndOfTurn ? "this":"each")
                 .append(" turn if able").toString();
         this.filter = filter;
     }

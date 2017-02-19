@@ -72,7 +72,7 @@ public class CantBlockAllEffect extends RestrictionEffect {
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage()).append(" can't block");
-        if (Duration.EndOfTurn.equals(this.duration)) {
+        if (this.duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         }
         return sb.toString();

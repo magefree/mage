@@ -93,7 +93,7 @@ public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
             sb.append("Target ");
         }
         sb.append(target.getTargetName()).append(" can't block {this}");
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         }
 

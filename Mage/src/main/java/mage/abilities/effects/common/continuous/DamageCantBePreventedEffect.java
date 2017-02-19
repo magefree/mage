@@ -29,7 +29,7 @@ public class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectIm
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.PREVENT_DAMAGE);
+        return event.getType() == GameEvent.EventType.PREVENT_DAMAGE;
     }
 
     @Override
