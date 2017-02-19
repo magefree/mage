@@ -88,11 +88,7 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Whenever ");
-        if (attachmentType.equals(AttachmentType.EQUIPMENT)) {
-            sb.append("equipped");
-        } else {
-            sb.append("enchanted");
-        }
+        sb.append(attachmentType.verb().toLowerCase());
         return sb.append(" creature attacks, ").append(super.getRule()).toString();
     }
 }

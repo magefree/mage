@@ -37,7 +37,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -45,11 +44,7 @@ public class CanBlockOnlyFlyingAttachedEffect extends RestrictionEffect {
 
     public CanBlockOnlyFlyingAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);
-        if (attachmentType == AttachmentType.AURA) {
-            this.staticText = "Enchanted creature can block only creatures with flying";
-        } else {
-            this.staticText = "Equipped creature can block only creatures with flying";
-        }        
+        this.staticText = attachmentType.verb() + " creature can block only creatures with flying";
     }
 
     public CanBlockOnlyFlyingAttachedEffect(final CanBlockOnlyFlyingAttachedEffect effect) {

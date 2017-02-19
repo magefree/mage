@@ -44,11 +44,7 @@ public class CantAttackAttachedEffect extends RestrictionEffect {
 
     public CantAttackAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);
-        if (attachmentType == AttachmentType.AURA) {
-            this.staticText = "Enchanted creature can't attack";
-        } else {
-            this.staticText = "Equipped creature can't attack";
-        }
+        this.staticText = attachmentType.verb() + " creature can't attack";
     }
 
     public CantAttackAttachedEffect(final CantAttackAttachedEffect effect) {

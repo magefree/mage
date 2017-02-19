@@ -36,7 +36,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -44,11 +43,7 @@ public class BlocksIfAbleAttachedEffect extends RequirementEffect {
 
     public BlocksIfAbleAttachedEffect(Duration duration, AttachmentType attachmentType) {
         super(duration);
-        if (attachmentType == AttachmentType.AURA) {
-            this.staticText = "Enchanted creature blocks each turn if able";
-        } else {
-            this.staticText = "Equipped creature blocks each turn if able";
-        }
+        this.staticText = attachmentType.verb() + " creature blocks each turn if able";
     }
 
     public BlocksIfAbleAttachedEffect(final BlocksIfAbleAttachedEffect effect) {

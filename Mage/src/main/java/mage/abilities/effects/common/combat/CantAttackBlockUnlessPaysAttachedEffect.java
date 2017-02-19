@@ -46,8 +46,8 @@ public class CantAttackBlockUnlessPaysAttachedEffect extends PayCostToAttackBloc
 
     public CantAttackBlockUnlessPaysAttachedEffect(ManaCosts manaCosts, AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK_AND_BLOCK, manaCosts);
-        staticText = (attachmentType == AttachmentType.AURA ? "Enchanted " : "Equipped ")
-                + "creature can't attack or block unless its controller pays "
+        staticText = attachmentType.verb()
+                + " creature can't attack or block unless its controller pays "
                 + (manaCosts == null ? "" : manaCosts.getText());
     }
 
