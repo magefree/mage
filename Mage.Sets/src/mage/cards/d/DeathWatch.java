@@ -28,7 +28,6 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -80,6 +79,7 @@ public class DeathWatch extends CardImpl {
 
         public DeathWatchEffect() {
             super(Outcome.LoseLife);
+            staticText = "that creature's controller loses life equal to its power and you gain life equal to its toughness.";
         }
 
         public DeathWatchEffect(DeathWatchEffect copy) {
@@ -106,11 +106,6 @@ public class DeathWatch extends CardImpl {
                 }
             }
             return false;
-        }
-
-        @Override
-        public String getText(Mode mode) {
-            return "that creature's controller loses life equal to its power and you gain life equal to its toughness.";
         }
 
     }
