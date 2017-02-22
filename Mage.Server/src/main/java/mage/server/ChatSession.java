@@ -127,10 +127,10 @@ public class ChatSession {
     public boolean broadcastWhisperToUser(User fromUser, User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
             toUser.fireCallback(new ClientCallback("chatMessage", chatId,
-                    new ChatMessage(new StringBuilder("Whisper from ").append(fromUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, SoundToPlay.PlayerWhispered)));
+                    new ChatMessage(fromUser.getName(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER_FROM, SoundToPlay.PlayerWhispered)));
             if (clients.containsKey(fromUser.getId())) {
                 fromUser.fireCallback(new ClientCallback("chatMessage", chatId,
-                        new ChatMessage(new StringBuilder("Whisper to ").append(toUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, null)));
+                        new ChatMessage(toUser.getName(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER_TO, null)));
                 return true;
             }
         }

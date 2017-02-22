@@ -3067,7 +3067,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canJoinTable(Table table) {
-        return true;
+        return !table.userIsBanned(name);
     }
 
     @Override

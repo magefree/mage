@@ -41,6 +41,7 @@ import mage.client.SessionHandler;
 import mage.client.components.MageComponents;
 import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
+import mage.client.util.IgnoreList;
 import mage.client.util.Listener;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
@@ -386,6 +387,8 @@ public class NewTableDialog extends MageDialog {
         options.setPassword(this.txtPassword.getText());
         options.setQuitRatio((Integer) this.spnQuitRatio.getValue());
         options.setEdhPowerLevel((Integer) this.spnEdhPowerLevel.getValue());
+        String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+        options.setBannedUsers(IgnoreList.ignoreList(serverAddress));
         if (!checkMatchOptions(options)) {
             return;
         }
