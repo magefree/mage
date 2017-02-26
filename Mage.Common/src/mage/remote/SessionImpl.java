@@ -244,6 +244,10 @@ public class SessionImpl implements Session {
                 });
     }
 
+    public Optional<String> getServerHostname() {
+        return isConnected() ? Optional.of(connection.getHost()) : Optional.<String>empty();
+    }
+
     @Override
     public boolean stopConnecting() {
         canceled = true;
@@ -959,6 +963,8 @@ public class SessionImpl implements Session {
         }
         return false;
     }
+
+
 
     @Override
     public boolean joinGame(UUID gameId) {

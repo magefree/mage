@@ -271,8 +271,8 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         if (color.equals(MessageColor.YELLOW)) {
             textColor = "Yellow";
         }
-        if (messageType == MessageType.WHISPER) {
-            if (username.equalsIgnoreCase("Whisper from " + SessionHandler.getUserName())) {
+        if (messageType == MessageType.WHISPER_FROM) {
+            if (username.equalsIgnoreCase(SessionHandler.getUserName())) {
                 if (message.toLowerCase().startsWith("profanity 0")) {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "0");
                 } else if (message.toLowerCase().startsWith("profanity 1")) {
@@ -281,6 +281,10 @@ public class ChatPanelBasic extends javax.swing.JPanel {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "2");
                 }
             }
+            username = "Whisper from " + username;
+        }
+        if (messageType == MessageType.WHISPER_TO) {
+            username = "Whisper to " + username;
         }
 
         Matcher matchPattern = cardNamePattern.matcher(message);

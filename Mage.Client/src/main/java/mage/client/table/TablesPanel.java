@@ -51,6 +51,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -85,6 +86,7 @@ import mage.client.dialog.TableWaitingDialog;
 import static mage.client.table.TablesPanel.PASSWORDED;
 import mage.client.util.ButtonColumn;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.IgnoreList;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.TableUtil;
@@ -550,7 +552,7 @@ public class TablesPanel extends javax.swing.JPanel {
         return chatPanelMain.getUserChatPanel();
     }
 
-    private void setTableFilter() {
+    public void setTableFilter() {
         // state
         List<RowFilter<Object, Object>> stateFilterList = new ArrayList<>();
         if (btnStateWaiting.isSelected()) {
@@ -630,6 +632,20 @@ public class TablesPanel extends javax.swing.JPanel {
             passwordFilterList.add(RowFilter.regexFilter("^\\*\\*\\*$", TableTableModel.COLUMN_PASSWORD));
         }
 
+        // Hide games of ignored players
+        List<RowFilter<Object, Object>> ignoreListFilterList = new ArrayList<>();
+        String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+        final Set<String> ignoreListCopy = IgnoreList.ignoreList(serverAddress);
+        if (ignoreListCopy.size() > 0) {
+            ignoreListFilterList.add(new RowFilter<Object, Object>() {
+                @Override
+                public boolean include(Entry<? extends Object, ? extends Object> entry) {
+                    final String owner = entry.getStringValue(TableTableModel.COLUMN_OWNER);
+                    return !ignoreListCopy.contains(owner);
+                }
+            });
+        }
+
         if (stateFilterList.isEmpty() || typeFilterList.isEmpty() || formatFilterList.isEmpty()
                 || skillFilterList.isEmpty() || ratingFilterList.isEmpty()
                 || passwordFilterList.isEmpty()) { // no selection
@@ -671,6 +687,12 @@ public class TablesPanel extends javax.swing.JPanel {
                 filterList.add(RowFilter.orFilter(passwordFilterList));
             } else if (passwordFilterList.size() == 1) {
                 filterList.addAll(passwordFilterList);
+            }
+
+            if (ignoreListFilterList.size() > 1) {
+                filterList.add(RowFilter.orFilter(ignoreListFilterList));
+            } else if (ignoreListFilterList.size() == 1) {
+                filterList.addAll(ignoreListFilterList);
             }
 
             if (filterList.size() == 1) {
@@ -1177,6 +1199,8 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setSkillLevel(SkillLevel.CASUAL);
             options.setRollbackTurnsAllowed(true);
             options.setQuitRatio(100);
+            String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+            options.setBannedUsers(IgnoreList.ignoreList(serverAddress));
             table = SessionHandler.createTable(roomId, options);
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"), "");

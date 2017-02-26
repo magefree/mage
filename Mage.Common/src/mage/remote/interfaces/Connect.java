@@ -29,6 +29,8 @@ package mage.remote.interfaces;
 
 import mage.remote.Connection;
 
+import java.util.Optional;
+
 /**
  * @author noxx
  */
@@ -51,6 +53,8 @@ public interface Connect {
     boolean ping();
 
     boolean isConnected();
+
+    Optional<String> getServerHostname();
 
     boolean disconnectUser(String userSessionId);
 

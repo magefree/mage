@@ -1057,6 +1057,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         this.tablesPane.hideTables();
     }
 
+    public void setTableFilter() {
+        if (this.tablesPane != null) {
+            this.tablesPane.setTableFilter();
+        }
+    }
+
     public void showGames(boolean setActive) {
         MagePane topPanebefore = getTopMost(tablesPane);
         if (!tablesPane.isVisible()) {
