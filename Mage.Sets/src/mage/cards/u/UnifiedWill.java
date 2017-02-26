@@ -30,15 +30,16 @@ package mage.cards.u;
 
 import mage.constants.CardType;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -49,6 +50,7 @@ public class UnifiedWill extends CardImpl {
     public UnifiedWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
+        // Counter target spell if you control more creatures than that spell's controller.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new UnifiedWillEffect());
     }
@@ -64,22 +66,22 @@ public class UnifiedWill extends CardImpl {
 
 }
 
-class UnifiedWillEffect extends CounterTargetEffect {
+class UnifiedWillEffect extends OneShotEffect {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public UnifiedWillEffect() {}
+    public UnifiedWillEffect() {
+        super(Outcome.Detriment);
+        staticText = "Counter target spell if you control more creatures than that spell's controller";
+    }
 
     public UnifiedWillEffect(final UnifiedWillEffect effect) {
         super(effect);
-        staticText = "Counter target spell if you control more creatures than that spell's controller";
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
         if (stackObject != null) {
-            if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > game.getBattlefield().countAll(filter, stackObject.getControllerId(), game)) {
+            if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game) > game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, stackObject.getControllerId(), game)) {
                 return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
             }
             return true;
