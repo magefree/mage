@@ -362,6 +362,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Skull Catapult", 399, Rarity.UNCOMMON, mage.cards.s.SkullCatapult.class));
         cards.add(new SetCardInfo("Smoke", 268, Rarity.RARE, mage.cards.s.Smoke.class));
         cards.add(new SetCardInfo("Sorceress Queen", 56, Rarity.RARE, mage.cards.s.SorceressQueen.class));
+        cards.add(new SetCardInfo("Soul Barrier", 125, Rarity.COMMON, mage.cards.s.SoulBarrier.class));
         cards.add(new SetCardInfo("Soul Net", 400, Rarity.UNCOMMON, mage.cards.s.SoulNet.class));
         cards.add(new SetCardInfo("Spell Blast", 126, Rarity.COMMON, mage.cards.s.SpellBlast.class));
         cards.add(new SetCardInfo("Spirit Link", 340, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
