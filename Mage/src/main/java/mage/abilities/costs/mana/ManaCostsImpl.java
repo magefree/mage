@@ -27,11 +27,6 @@
  */
 package mage.abilities.costs.mana;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -45,13 +40,15 @@ import mage.players.Player;
 import mage.target.Targets;
 import mage.util.ManaUtil;
 
+import java.util.*;
+
 /**
  * @author BetaSteward_at_googlemail.com
  * @param <T>
  */
 public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements ManaCosts<T> {
 
-    protected UUID id;
+    protected final UUID id;
     protected String text = null;
 
     private static Map<String, ManaCosts> costs = new HashMap<>();
@@ -323,7 +320,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             if (mana == null || mana.isEmpty()) {
                 return;
             }
-            String[] symbols = mana.split("^\\{|\\}\\{|\\}$");
+            String[] symbols = mana.split("^\\{|}\\{|}$");
             int modifierForX = 0;
             for (String symbol : symbols) {
                 if (!symbol.isEmpty()) {

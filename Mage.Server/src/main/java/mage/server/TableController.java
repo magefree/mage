@@ -27,14 +27,6 @@
  */
 package mage.server;
 
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -67,6 +59,15 @@ import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
+
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -195,8 +196,9 @@ public class TableController {
             return false;
         }
 
-        Player player = createPlayer(name, seat.getPlayerType(), skill);
-        if (player != null) {
+        Optional<Player> playerOptional = createPlayer(name, seat.getPlayerType(), skill);
+        if (playerOptional.isPresent()) {
+            Player player = playerOptional.get();
             if (!player.canJoinTable(table)) {
                 user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
                 return false;
@@ -227,10 +229,11 @@ public class TableController {
     }
 
     public synchronized boolean replaceDraftPlayer(Player oldPlayer, String name, String playerType, int skill) {
-        Player newPlayer = createPlayer(name, playerType, skill);
-        if (newPlayer == null || table.getState() != TableState.DRAFTING) {
+        Optional<Player> newPlayerOpt = createPlayer(name, playerType, skill);
+        if (!newPlayerOpt.isPresent() || table.getState() != TableState.DRAFTING) {
             return false;
         }
+        Player newPlayer = newPlayerOpt.get();
         TournamentPlayer oldTournamentPlayer = tournament.getPlayer(oldPlayer.getId());
         tournament.removePlayer(oldPlayer.getId());
         tournament.addPlayer(newPlayer, playerType);
@@ -306,13 +309,14 @@ public class TableController {
             }
         }
 
-        Player player = createPlayer(name, seat.getPlayerType(), skill);
-        if (player == null) {
+        Optional<Player> playerOpt = createPlayer(name, seat.getPlayerType(), skill);
+        if (!playerOpt.isPresent()) {
             String message = new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType()).toString();
             logger.warn(new StringBuilder("User: ").append(user.getName()).append(" => ").append(message).toString());
             user.showUserMessage("Join Table", message);
             return false;
         }
+        Player player = playerOpt.get();
         logger.debug("DECK validated: " + table.getValidator().getName() + ' ' + player.getName() + ' ' + deck.getName());
         if (!player.canJoinTable(table)) {
             user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
@@ -443,17 +447,18 @@ public class TableController {
 //        ReplayManager.getInstance().replayGame(table.getId(), userId);
 //        return true;
 //    }
-    private Player createPlayer(String name, String playerType, int skill) {
-        Player player;
+    private Optional<Player> createPlayer(String name, String playerType, int skill) {
+        Optional<Player> playerOpt;
         if (options == null) {
-            player = PlayerFactory.getInstance().createPlayer(playerType, name, RangeOfInfluence.ALL, skill);
+            playerOpt = PlayerFactory.getInstance().createPlayer(playerType, name, RangeOfInfluence.ALL, skill);
         } else {
-            player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange(), skill);
+            playerOpt = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange(), skill);
         }
-        if (player != null) {
+        if (playerOpt.isPresent()) {
+            Player player = playerOpt.get();
             logger.trace("Player " + player.getName() + " created id: " + player.getId());
         }
-        return player;
+        return playerOpt;
     }
 
     public void leaveTableAll() {
