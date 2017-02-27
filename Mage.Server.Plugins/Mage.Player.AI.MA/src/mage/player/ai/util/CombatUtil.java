@@ -21,7 +21,7 @@ import java.util.*;
  *
  * @author noxx
  */
-public class CombatUtil {
+public final class CombatUtil {
 
     private static final List<Permanent> emptyList = new ArrayList<Permanent>();
 

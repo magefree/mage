@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
  * this evaluator is only good for two player games
  *
  */
-public class GameStateEvaluator2 {
+public final class GameStateEvaluator2 {
 
     private static final Logger logger = Logger.getLogger(GameStateEvaluator2.class);
 

@@ -8,7 +8,7 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 // TODO: Move all preference related logic from MageFrame and PreferencesDialog to this class.
-public class MagePreferences {
+public final class MagePreferences {
 
     private static final String KEY_SERVER_ADDRESS = "serverAddress";
     private static final String KEY_SERVER_PORT = "serverPort";

@@ -59,7 +59,7 @@ import mage.util.functions.CopyTokenFunction;
 /**
  * @author nantuko
  */
-public class CardUtil {
+public final class CardUtil {
 
     private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
     private static final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";

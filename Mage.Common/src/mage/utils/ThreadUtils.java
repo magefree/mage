@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @author ayrat
  */
 @SuppressWarnings("unchecked")
-public class ThreadUtils {
+public final class ThreadUtils {
 
     public static final ThreadPoolExecutor threadPool;
     public static final ThreadPoolExecutor threadPool2;

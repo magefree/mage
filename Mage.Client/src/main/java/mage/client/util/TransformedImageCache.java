@@ -20,7 +20,7 @@ import java.util.Map;
  *
  * @author user
  */
-public class TransformedImageCache {
+public final class TransformedImageCache {
 
     private final static class Key {
 

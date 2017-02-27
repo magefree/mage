@@ -46,7 +46,7 @@ import javax.swing.text.html.ImageView;
 /**
  * UI utility functions.
  */
-public class UI {
+public final class UI {
     private static final ConcurrentMap<URI, Image> imageCache = new ConcurrentHashMap<>();
 
     public static JToggleButton getToggleButton () {

@@ -16,7 +16,7 @@ import mage.deck.Standard;
  *
  * @author nantuko
  */
-public class ConstructedFormats {
+public final class ConstructedFormats {
 
     public static final String ALL = "- All Sets";
     public static final String STANDARD = "- Standard";

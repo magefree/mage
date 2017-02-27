@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author noxx
  */
-public class EntityManagerTest {
+public final class EntityManagerTest {
 
     private static DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.FULL);
 

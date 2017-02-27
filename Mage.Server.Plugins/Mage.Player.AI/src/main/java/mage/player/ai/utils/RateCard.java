@@ -21,7 +21,7 @@ import java.util.*;
  *
  * @author nantuko
  */
-public class RateCard {
+public final class RateCard {
 
     private static Map<String, Integer> ratings;
     private static final Map<String, Integer> rated = new HashMap<>();

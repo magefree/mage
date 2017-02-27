@@ -6,7 +6,7 @@ import java.io.*;
  *
  * @author noxx
  */
-public class FileUtil {
+public final class FileUtil {
 
     private FileUtil() {}
 

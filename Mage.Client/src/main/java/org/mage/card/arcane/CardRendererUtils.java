@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  *
  * Various static utilities for use in the card renderer
  */
-public class CardRendererUtils {
+public final class CardRendererUtils {
 
     /**
      * Convert an abstract image, whose underlying implementation may or may not

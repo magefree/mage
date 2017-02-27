@@ -4,7 +4,7 @@ import com.xmage.ws.model.DomainErrors;
 import com.xmage.ws.resource.Resource;
 import net.minidev.json.JSONObject;
 
-public class ResponseBuilder {
+public final class ResponseBuilder {
 
     public static JSONObject build(int code) {
         JSONObject response = new JSONObject();

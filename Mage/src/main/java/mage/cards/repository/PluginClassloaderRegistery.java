@@ -36,7 +36,7 @@ import java.util.List;
  *
  * @author Lymia
  */
-public class PluginClassloaderRegistery {
+public final class PluginClassloaderRegistery {
     static List<ClassLoader> pluginClassloaders = new ArrayList<>();
 
     public static void registerPluginClassloader(ClassLoader cl) {

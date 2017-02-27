@@ -19,7 +19,7 @@ public class XMageStatsJSONBuilder implements JSONBuilder<ServerStats> {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
-    static class StaticHolder {
+    static final class StaticHolder {
         static XMageStatsJSONBuilder instance = new XMageStatsJSONBuilder();
     }
 

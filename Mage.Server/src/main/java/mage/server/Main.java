@@ -70,7 +70,7 @@ import java.util.*;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Main {
+public final class Main {
 
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);

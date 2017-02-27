@@ -20,7 +20,7 @@ import mage.view.*;
 /**
  * Created by IGOUDT on 15-9-2016.
  */
-public class SessionHandler {
+public final class SessionHandler {
 
     private static Session session;
 

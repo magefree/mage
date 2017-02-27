@@ -21,7 +21,7 @@ import mage.util.RandomUtil;
  *
  * @author nantuko
  */
-public class DeckBuilder {
+public final class DeckBuilder {
 
     private static final int DECK_COUNT40[] = {3, 6, 6, 4, 3, 2};
     private static final int DECK_COUNT60[] = {4, 9, 9, 5, 5, 3};

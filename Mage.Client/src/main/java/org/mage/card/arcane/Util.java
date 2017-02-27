@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.SwingUtilities;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class Util {
+public final class Util {
     public static final boolean isMac = System.getProperty("os.name").toLowerCase().contains("mac");
     public static final boolean isWindows = !System.getProperty("os.name").toLowerCase().contains("windows");
 

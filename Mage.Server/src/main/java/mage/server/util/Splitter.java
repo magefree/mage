@@ -9,7 +9,7 @@ import mage.players.Player;
 /**
  * @author nantuko
  */
-public class Splitter {
+public final class Splitter {
 
     public static List<UUID> split(Game game, UUID playerId) {
         List<UUID> players = new ArrayList<>();

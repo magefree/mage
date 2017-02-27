@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author noxx
  */
-public class FileHelper {
+public final class FileHelper {
 
     private FileHelper() {
     }

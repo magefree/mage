@@ -34,7 +34,7 @@ import java.util.Map;
  *
  * @author draxdyn
  */
-public class ImageCaches {
+public final class ImageCaches {
 
     private final static ArrayList<Map> IMAGE_CACHES;
 

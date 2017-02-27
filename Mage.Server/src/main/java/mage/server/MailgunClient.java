@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import mage.server.util.ConfigSettings;
 import org.apache.log4j.Logger;
 
-public class MailgunClient {
+public final class MailgunClient {
 
     private static final Logger logger = Logger.getLogger(Main.class);
 

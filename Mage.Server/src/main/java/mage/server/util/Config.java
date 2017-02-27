@@ -36,7 +36,7 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Config {
+public final class Config {
 
     private static final Logger logger = Logger.getLogger(Config.class);
 

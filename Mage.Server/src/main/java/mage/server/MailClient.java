@@ -10,7 +10,7 @@ import javax.mail.internet.MimeMessage;
 import mage.server.util.ConfigSettings;
 import org.apache.log4j.Logger;
 
-public class MailClient {
+public final class MailClient {
 
     private static final Logger logger = Logger.getLogger(Main.class);
 
