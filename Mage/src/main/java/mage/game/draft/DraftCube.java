@@ -74,7 +74,7 @@ public abstract class DraftCube {
     private static final Logger logger = Logger.getLogger(DraftCube.class);
 
     private final String name;
-    private final int boosterSize = 15;
+    private static final int boosterSize = 15;
 
     protected List<CardIdentity> cubeCards = new ArrayList<>();
     protected List<CardIdentity> leftCubeCards = new ArrayList<>();

@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class CrabappleCohort extends CardImpl {
 
-    private final String rule = "{this} gets +1/+1 as long as you control another green creature";
+    private static final String rule = "{this} gets +1/+1 as long as you control another green creature";
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

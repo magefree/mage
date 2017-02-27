@@ -22,7 +22,7 @@ public class DialogContainer extends JPanel {
     private Color backgroundColor = new Color(0, 255, 255, 60);
     private int alpha = 50;
 
-    private final boolean isGradient = false;
+    private static final boolean isGradient = false;
     private final TexturePaint tp = null;
     private final Image gradient = null;
     private BufferedImage b;

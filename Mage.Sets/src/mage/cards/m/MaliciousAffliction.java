@@ -89,7 +89,7 @@ public class MaliciousAffliction extends CardImpl {
 
 class CopySourceSpellEffect extends OneShotEffect {
 
-    final String rule = "copy {this} and may choose a new target for the copy";
+    static final String rule = "copy {this} and may choose a new target for the copy";
 
     public CopySourceSpellEffect() {
         super(Outcome.Benefit);

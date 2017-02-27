@@ -60,7 +60,7 @@ public class AinokBondKin extends CardImpl {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    final String rule = "Each creature you control with a +1/+1 counter on it has first strike";
+    static final String rule = "Each creature you control with a +1/+1 counter on it has first strike";
 
     public AinokBondKin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

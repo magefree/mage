@@ -78,9 +78,9 @@ public class PrimalClay extends CardImpl {
 
     class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
 
-        private final String choice33 = "a 3/3 artifact creature";
-        private final String choice22 = "a 2/2 artifact creature with flying";
-        private final String choice16 = "a 1/6 artifact creature with defender";
+        private static final String choice33 = "a 3/3 artifact creature";
+        private static final String choice22 = "a 2/2 artifact creature with flying";
+        private static final String choice16 = "a 1/6 artifact creature with defender";
 
         public PrimalPlasmaReplacementEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Benefit);

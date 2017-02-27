@@ -56,7 +56,7 @@ public class SapphireDrake extends CardImpl {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
     
-    final String rule = "Each creature you control with a +1/+1 counter on it has flying";
+    static final String rule = "Each creature you control with a +1/+1 counter on it has flying";
 
     public SapphireDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

@@ -47,7 +47,7 @@ import mage.cards.CardSetInfo;
  */
 public class SpiralingDuelist extends CardImpl {
 
-    private final String effectText = "Metalcraft - Spiraling Duelist has double strike as long as you control three or more artifacts.";
+    private static final String effectText = "Metalcraft - Spiraling Duelist has double strike as long as you control three or more artifacts.";
 
     public SpiralingDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class EldraziAggressor extends CardImpl {
 
-    private final String rule = "{this} has haste as long as you control another colorless creature";
+    private static final String rule = "{this} has haste as long as you control another colorless creature";
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another colorless creature");
 
     static {
