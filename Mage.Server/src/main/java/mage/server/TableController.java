@@ -297,10 +297,35 @@ public class TableController {
         int edhPowerLevel = table.getMatch().getOptions().getEdhPowerLevel();
         if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase().equals("commander")) {
             int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck);
-            if (deckEdhPowerLevel > edhPowerLevel) {
+            if (deckEdhPowerLevel % 100 > edhPowerLevel) {
                 String message = new StringBuilder("Your deck appears to be too powerful for this table.\n\nReduce the number of extra turn cards, infect, counters, fogs, reconsider your commander. ")
                         .append("\nThe table requirement has a maximum power level of ").append(edhPowerLevel).append(" whilst your deck has a calculated power level of ")
-                        .append(deckEdhPowerLevel).toString();
+                        .append(deckEdhPowerLevel % 100).toString();
+                user.showUserMessage("Join Table", message);
+                return false;
+            }
+            if (edhPowerLevel % 10 == 6 && deckEdhPowerLevel >= 10000000) {
+                String message = new StringBuilder("Your deck contains white.  The creator of the table has requested no white cards on the table!").toString();
+                user.showUserMessage("Join Table", message);
+                return false;
+            }
+            if (edhPowerLevel % 10 == 4 && deckEdhPowerLevel % 10000000 >= 1000000) {
+                String message = new StringBuilder("Your deck contains blue.  The creator of the table has requested no blue cards on the table!").toString();
+                user.showUserMessage("Join Table", message);
+                return false;
+            }
+            if (edhPowerLevel % 10 == 3 && deckEdhPowerLevel % 1000000 >= 100000) {
+                String message = new StringBuilder("Your deck contains black.  The creator of the table has requested no black cards on the table!").toString();
+                user.showUserMessage("Join Table", message);
+                return false;
+            }
+            if (edhPowerLevel % 10 == 2 && deckEdhPowerLevel % 100000 >= 10000) {
+                String message = new StringBuilder("Your deck contains red.  The creator of the table has requested no red cards on the table!").toString();
+                user.showUserMessage("Join Table", message);
+                return false;
+            }
+            if (edhPowerLevel % 10 == 1 && deckEdhPowerLevel % 10000 >= 1000) {
+                String message = new StringBuilder("Your deck contains green.  The creator of the table has requested no green cards on the table!").toString();
                 user.showUserMessage("Join Table", message);
                 return false;
             }

@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -213,6 +214,7 @@ public class Commander extends Constructed {
         }
 
         int edhPowerLevel = 0;
+        int commanderColors = 0;
         int numberInfinitePieces = 0;
 
         for (Card card : deck.getCards()) {
@@ -647,9 +649,15 @@ public class Commander extends Constructed {
             edhPowerLevel += thisMaxPower;
         }
 
+        ObjectColor color = null;
         for (Card commander : deck.getSideboard()) {
             int thisMaxPower = 0;
             String cn = commander.getName().toLowerCase();
+            if (color == null) {
+                color = commander.getColor(null);
+            } else {
+                color = color.union(commander.getColor(null));
+            }
 
             // Least fun commanders
             if (cn.equals("animar, soul of element")
@@ -706,6 +714,13 @@ public class Commander extends Constructed {
         edhPowerLevel = (int) Math.round(edhPowerLevel / 4.5);
         if (edhPowerLevel > 100) {
             edhPowerLevel = 100;
+        }
+        if (color != null) {
+            edhPowerLevel += (color.isWhite() ? 10000000 : 0);
+            edhPowerLevel += (color.isBlue()  ?  1000000 : 0);
+            edhPowerLevel += (color.isBlack() ?   100000 : 0);
+            edhPowerLevel += (color.isRed()   ?    10000 : 0);
+            edhPowerLevel += (color.isGreen() ?     1000 : 0);            
         }
         return edhPowerLevel;
     }
