@@ -139,6 +139,7 @@ public class Planechase extends ExpansionSet {
         cards.add(new SetCardInfo("Mage Slayer", 91, Rarity.UNCOMMON, mage.cards.m.MageSlayer.class));
         cards.add(new SetCardInfo("Mask of Memory", 119, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
         cards.add(new SetCardInfo("Master of Etherium", 11, Rarity.RARE, mage.cards.m.MasterOfEtherium.class));
+        cards.add(new SetCardInfo("Menacing Ogre", 59, Rarity.RARE, mage.cards.m.MenacingOgre.class));
         cards.add(new SetCardInfo("Mountain", 156, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 157, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 158, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));

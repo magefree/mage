@@ -34,6 +34,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.PreferencesDialog;
@@ -42,6 +43,7 @@ import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.DeckUtil;
 import mage.client.util.GameManager;
+import mage.client.util.IgnoreList;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
@@ -110,6 +112,15 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     case "chatMessage": {
                         ChatMessage message = (ChatMessage) callback.getData();
+
+                        // Drop messages from ignored users
+                        if (message.getUsername() != null && IgnoreList.IGNORED_MESSAGE_TYPES.contains(message.getMessageType())) {
+                            final String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+                            if (IgnoreList.userIsIgnored(serverAddress, message.getUsername())) {
+                                break;
+                            }
+                        }
+
                         ChatPanelBasic panel = MageFrame.getChat(callback.getObjectId());
                         if (panel != null) {
                             // play the sound related to the message
@@ -422,6 +433,7 @@ public class CallbackClientImpl implements CallbackClient {
                 usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" menu to the top right .")
                         .append("<br/>Download icons and symbols by using the \"Symbols\" menu to the top right.")
                         .append("<br/>\\list - Show a list of available chat commands.")
+                        .append("<br/>").append(IgnoreList.usage())
                         .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;

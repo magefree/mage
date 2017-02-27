@@ -84,11 +84,7 @@ public class AddCardColorAttachedEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == AttachmentType.AURA)
-            sb.append("Enchanted");
-        else if (attachmentType == AttachmentType.EQUIPMENT)
-            sb.append("Equipped");
-
+        sb.append(attachmentType.verb());
         sb.append(" creature is a ").append(addedColor.getDescription()).append(" in addition to its colors");
         staticText = sb.toString();
     }

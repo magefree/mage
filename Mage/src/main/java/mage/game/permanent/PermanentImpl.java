@@ -28,7 +28,6 @@
 package mage.game.permanent;
 
 import java.util.*;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -751,7 +750,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 if (source != null && sourceAbilities != null) {
                     if (sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
                         Player player = game.getPlayer(sourceControllerId);
-                        player.gainLife(damageAmount, game);
+                        player.gainLife(damageDone, game);
                     }
                     if (sourceAbilities.containsKey(DeathtouchAbility.getInstance().getId())) {
                         deathtouched = true;

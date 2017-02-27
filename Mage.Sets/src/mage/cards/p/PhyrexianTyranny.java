@@ -52,8 +52,7 @@ import mage.target.targetpointer.FixedTarget;
 public class PhyrexianTyranny extends CardImpl {
 
     public PhyrexianTyranny(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{B}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
         // Whenever a player draws a card, that player loses 2 life unless he or she pays {2}.
         this.addAbility(new PhyrexianTyrannyTriggeredAbility());
@@ -70,15 +69,15 @@ public class PhyrexianTyranny extends CardImpl {
 }
 
 class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     PhyrexianTyrannyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PhyrexianTyrannyEffect(), false);
     }
-    
+
     PhyrexianTyrannyTriggeredAbility(final PhyrexianTyrannyTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public PhyrexianTyrannyTriggeredAbility copy() {
         return new PhyrexianTyrannyTriggeredAbility(this);
@@ -88,7 +87,7 @@ class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DREW_CARD;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         for (Effect effect : this.getEffects()) {
@@ -98,7 +97,7 @@ class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
         }
         return true;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever a player draws a card, that player loses 2 life unless he or she pays {2}";
@@ -127,7 +126,7 @@ class PhyrexianTyrannyEffect extends OneShotEffect {
         if (player != null) {
             Cost cost = new GenericManaCost(2);
             if (!cost.pay(source, game, player.getId(), player.getId(), false, null)) {
-                player.damage(2, source.getSourceId(), game, false, true);
+                player.loseLife(2, game, false);
             }
             return true;
         }

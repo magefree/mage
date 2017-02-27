@@ -49,7 +49,7 @@ public class ChatMessage implements Serializable {
     }
 
     public enum MessageType {
-        USER_INFO, STATUS, GAME, TALK, WHISPER
+        USER_INFO, STATUS, GAME, TALK, WHISPER_FROM, WHISPER_TO
     }
 
     public enum SoundToPlay {

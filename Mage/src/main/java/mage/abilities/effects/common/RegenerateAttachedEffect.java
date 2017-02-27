@@ -40,7 +40,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author jeff
  */
 public class RegenerateAttachedEffect extends ReplacementEffectImpl {
@@ -102,13 +101,8 @@ public class RegenerateAttachedEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+
     private void setText() {
-        StringBuilder sb = new StringBuilder();
-        if (attachmentType == AttachmentType.AURA) {
-            sb.append("Regenerate enchanted creature");
-        } else if (attachmentType == AttachmentType.EQUIPMENT) {
-            sb.append("Regenerate equipped creature");
-        }
-        staticText = sb.toString();
+        staticText = "Regenerate " + attachmentType.verb().toLowerCase() + " creature";
     }
 }

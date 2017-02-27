@@ -82,7 +82,7 @@ class EssenceFluxEffect extends OneShotEffect {
 
     EssenceFluxEffect() {
         super(Outcome.Benefit);
-        staticText = "return that card to the battlefield under its owner's control";
+        staticText = "return that card to the battlefield under its owner's control.  If it's a Spirit, put a +1/+1 counter on it";
     }
 
     EssenceFluxEffect(final EssenceFluxEffect effect) {

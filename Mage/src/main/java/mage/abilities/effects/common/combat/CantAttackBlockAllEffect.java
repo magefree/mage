@@ -48,7 +48,7 @@ public class CantAttackBlockAllEffect extends RestrictionEffect {
         StringBuilder sb = new StringBuilder(filter.getMessage()).append(" can't attack or block");
         if (!duration.toString().isEmpty()) {
             sb.append(' ');
-            if (duration.equals(Duration.EndOfTurn)) {
+            if (duration == Duration.EndOfTurn) {
                 sb.append(" this turn");
             } else {
                 sb.append(' ').append(duration.toString());

@@ -105,6 +105,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Merieke Ri Berit", 95, Rarity.SPECIAL, mage.cards.m.MeriekeRiBerit.class));
         cards.add(new SetCardInfo("Mindless Automaton", 111, Rarity.SPECIAL, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Mirari", 112, Rarity.SPECIAL, mage.cards.m.Mirari.class));
+        cards.add(new SetCardInfo("Mistform Ultimus", 26, Rarity.SPECIAL, mage.cards.m.MistformUltimus.class));
         cards.add(new SetCardInfo("Moorish Cavalry", 11, Rarity.COMMON, mage.cards.m.MoorishCavalry.class));
         cards.add(new SetCardInfo("Mystic Enforcer", 96, Rarity.SPECIAL, mage.cards.m.MysticEnforcer.class));
         cards.add(new SetCardInfo("Mystic Snake", 97, Rarity.COMMON, mage.cards.m.MysticSnake.class));

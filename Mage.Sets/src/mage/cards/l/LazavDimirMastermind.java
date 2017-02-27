@@ -29,24 +29,27 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
-import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.functions.ApplyToPermanent;
 
 /**
  *
@@ -67,7 +70,7 @@ public class LazavDimirMastermind extends CardImpl {
 
         // Whenever a creature card is put into an opponent's graveyard from anywhere, you may have Lazav, Dimir Mastermind become a copy of that card except its name is still Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it gains hexproof and this ability.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
-                new LazavDimirEffect(), true,
+                new LazavDimirMastermindEffect(), true,
                 new FilterCreatureCard("a creature card"),
                 TargetController.OPPONENT, SetTargetPointer.CARD));
     }
@@ -82,80 +85,73 @@ public class LazavDimirMastermind extends CardImpl {
     }
 }
 
-class LazavDimirEffect extends ContinuousEffectImpl {
+class LazavDimirMastermindEffect extends OneShotEffect {
 
-    protected Card cardToCopy;
-
-    public LazavDimirEffect() {
-        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
-        staticText = "have {this} become a copy of that card except its name is still {this}, it's legendary in addition to its other types, and it gains hexproof and this ability";
+    LazavDimirMastermindEffect() {
+        super(Outcome.Copy);
+        staticText = "you may have {this} become a copy of that card except its name is still {this}, it's legendary in addition to its other types, and it gains hexproof and this ability";
     }
 
-    public LazavDimirEffect(final LazavDimirEffect effect) {
+    LazavDimirMastermindEffect(final LazavDimirMastermindEffect effect) {
         super(effect);
-        this.cardToCopy = effect.cardToCopy;
     }
 
     @Override
-    public LazavDimirEffect copy() {
-        return new LazavDimirEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        Card card = game.getCard(((FixedTarget) getTargetPointer()).getTarget());
-        if (card != null) {
-            cardToCopy = card.copy();
-            cardToCopy.assignNewId();
-        } else {
-            discard();
-        }
+    public LazavDimirMastermindEffect copy() {
+        return new LazavDimirMastermindEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            discard();
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent lazavDimirMastermind = game.getPermanent(source.getSourceId());
+        Permanent newBluePrint = null;
+        if (controller != null
+                && lazavDimirMastermind != null) {
+            Card copyFromCard = game.getCard(((FixedTarget) getTargetPointer()).getTarget());
+            if (copyFromCard != null) {
+                newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
+                newBluePrint.assignNewId();
+                ApplyToPermanent applier = new LazavDimirMastermindApplier();
+                applier.apply(game, newBluePrint);
+                CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, lazavDimirMastermind.getId());
+                copyEffect.newId();
+                copyEffect.setApplier(applier);
+                Ability newAbility = source.copy();
+                copyEffect.init(newAbility, game);
+                game.addEffect(copyEffect, newAbility);
+            }
             return true;
         }
-        permanent.getPower().setValue(cardToCopy.getPower().getValue());
-        permanent.getToughness().setValue(cardToCopy.getToughness().getValue());
-        permanent.getColor(game).setColor(cardToCopy.getColor(game));
-        permanent.getManaCost().clear();
-        permanent.getManaCost().add(cardToCopy.getManaCost());
-        permanent.getCardType().clear();
-        for (CardType type : cardToCopy.getCardType()) {
-            if (!permanent.getCardType().contains(type)) {
-                permanent.getCardType().add(type);
-            }
-        }
-        permanent.getSubtype(game).clear();
-        for (String type : cardToCopy.getSubtype(game)) {
-            if (!permanent.getSubtype(game).contains(type)) {
-                permanent.getSubtype(game).add(type);
-            }
-        }
-        permanent.getSupertype().clear();
-        permanent.getSupertype().add("Legendary");
-        for (String type : cardToCopy.getSupertype()) {
-            if (!permanent.getSupertype().contains(type)) {
-                permanent.getSupertype().add(type);
-            }
-        }
-        permanent.removeAllAbilities(source.getSourceId(), game);
-        permanent.addAbility(HexproofAbility.getInstance(), source.getSourceId(), game);
-        permanent.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
-                new LazavDimirEffect(), true,
-                new FilterCreatureCard("a creature card"),
-                TargetController.OPPONENT, SetTargetPointer.CARD), source.getSourceId(), game);
+        return false;
+    }
+}
 
-        for (Ability ability : cardToCopy.getAbilities()) {
-            if (!permanent.getAbilities().contains(ability)) {
-                permanent.addAbility(ability, source.getSourceId(), game);
-            }
-        }
+class LazavDimirMastermindApplier extends ApplyToPermanent {
+
+    @Override
+    public Boolean apply(Game game, Permanent permanent) {
+        Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                new LazavDimirMastermindEffect(), true,
+                new FilterCreatureCard("a creature card"),
+                TargetController.OPPONENT, SetTargetPointer.CARD);
+        permanent.getAbilities().add(ability);
+        permanent.setName("Lazav, Dimir Mastermind");
+        permanent.getSupertype().add("Legendary");
+        permanent.getAbilities().add(HexproofAbility.getInstance());
+        return true;
+    }
+
+    @Override
+    public Boolean apply(Game game, MageObject mageObject) {
+        Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                new LazavDimirMastermindEffect(), true,
+                new FilterCreatureCard("a creature card"),
+                TargetController.OPPONENT, SetTargetPointer.CARD);
+        mageObject.getAbilities().add(ability);
+        mageObject.setName("Lazav, Dimir Mastermind");
+        mageObject.getSupertype().add("Legendary");
+        mageObject.getAbilities().add(HexproofAbility.getInstance());
         return true;
     }
 }

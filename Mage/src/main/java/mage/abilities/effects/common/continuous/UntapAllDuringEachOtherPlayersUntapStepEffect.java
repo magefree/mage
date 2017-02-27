@@ -69,7 +69,7 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
         if (applied == null) {
             applied = Boolean.FALSE;
         }
-        if (!applied && layer.equals(Layer.RulesEffects)) {
+        if (!applied && layer == Layer.RulesEffects) {
             if (!source.getControllerId().equals(game.getActivePlayerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {

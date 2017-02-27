@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects.common.combat;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.AsThoughEffectType;
@@ -38,18 +37,19 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public class CanAttackAsThoughItDidntHaveDefenderAllEffect extends AsThoughEffectImpl {
 
     private final FilterPermanent filter;
-    
+
     public CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration duration) {
         this(duration, new FilterCreaturePermanent());
     }
-    
+
     public CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration duration, FilterPermanent filter) {
         super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
         this.filter = filter;
@@ -76,12 +76,12 @@ public class CanAttackAsThoughItDidntHaveDefenderAllEffect extends AsThoughEffec
         Permanent permanent = game.getPermanent(objectId);
         return permanent != null && filter.match(permanent, game);
     }
-    
+
     private String getText() {
         StringBuilder sb = new StringBuilder(filter.getMessage());
         sb.append(" can attack ");
-        if (!duration.toString().isEmpty()) {            
-            if(Duration.EndOfTurn.equals(duration)) {
+        if (!duration.toString().isEmpty()) {
+            if (Duration.EndOfTurn == duration) {
                 sb.append("this turn");
             } else {
                 sb.append(duration.toString());
@@ -89,6 +89,6 @@ public class CanAttackAsThoughItDidntHaveDefenderAllEffect extends AsThoughEffec
             sb.append(' ');
         }
         sb.append("as though they didn't have defender");
-        return  sb.toString();
+        return sb.toString();
     }
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import mage.constants.CardType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -75,7 +76,8 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
         if (enteringBattlefieldLastTurn.containsKey(sourcePermanent.getControllerId())) {
             for (Permanent permanent : enteringBattlefieldLastTurn.get(sourcePermanent.getControllerId())) {
                 if (!permanent.getId().equals(sourcePermanent.getId())
-                        || permanent.getZoneChangeCounter(game) != sourcePermanent.getZoneChangeCounter(game)) {
+                        //|| permanent.getZoneChangeCounter(game) == sourcePermanent.getZoneChangeCounter(game) why is this needed?
+                        && permanent.getCardType().contains(CardType.CREATURE)) {
                     return true;
                 }
             }

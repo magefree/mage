@@ -140,4 +140,10 @@ public class TablesPane extends MagePane {
     public void deactivated() {
         tablesPanel.stopTasks();
     }
+
+    public void setTableFilter() {
+        if (tablesPanel != null) {
+            tablesPanel.setTableFilter();
+        }
+    }
 }

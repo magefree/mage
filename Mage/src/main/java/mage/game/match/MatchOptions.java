@@ -30,7 +30,9 @@ package mage.game.match;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -61,6 +63,7 @@ public class MatchOptions implements Serializable {
     protected int edhPowerLevel;
     protected boolean rated;
     protected int numSeatsForMatch;
+    protected Set<String> bannedUsers = new HashSet<>();
 
     /**
      * Time each player has during the game to play using his\her priority.
@@ -224,6 +227,14 @@ public class MatchOptions implements Serializable {
 
     public void setRated(boolean rated) {
         this.rated = rated;
+    }
+
+    public Set<String> getBannedUsers() {
+        return bannedUsers;
+    }
+
+    public void setBannedUsers(Set<String> bannedUsers) {
+        this.bannedUsers = bannedUsers;
     }
 
     public ResultProtos.MatchOptionsProto toProto() {

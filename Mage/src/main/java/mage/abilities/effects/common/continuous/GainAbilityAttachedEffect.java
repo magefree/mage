@@ -124,11 +124,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == AttachmentType.AURA) {
-            sb.append("Enchanted");
-        } else if (attachmentType == AttachmentType.EQUIPMENT) {
-            sb.append("Equipped");
-        }
+        sb.append(attachmentType.verb());
         sb.append(" creature ");
         if (duration == Duration.WhileOnBattlefield) {
             sb.append("has ");

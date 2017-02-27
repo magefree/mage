@@ -1,5 +1,7 @@
 package mage.constants;
 
+import mage.game.turn.Phase;
+
 /**
  *
  * @author North
@@ -31,6 +33,14 @@ public enum PhaseStep {
         this.text = text;
         this.index = index;
         this.stepText = stepText;
+    }
+
+    public boolean isBefore(PhaseStep other){
+        return this.getIndex()<other.getIndex();
+    }
+
+    public boolean isAfter(PhaseStep other){
+        return this.getIndex()>other.getIndex();
     }
 
     public int getIndex() {

@@ -60,7 +60,7 @@ public class CounterTest {
 
         // then
         assertEquals(copy, counter);
-        assertFalse(Objects.equals(copy, counter));
+        assertNotSame(copy, counter);
     }
 
     @Test

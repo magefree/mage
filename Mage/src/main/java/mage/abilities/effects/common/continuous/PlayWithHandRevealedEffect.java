@@ -71,7 +71,7 @@ public class PlayWithHandRevealedEffect extends ContinuousEffectImpl {
                     affectedPlayers = game.getOpponents(source.getControllerId());
                     break;
                 case YOU:
-                    ArrayList tmp = new ArrayList<>();
+                    ArrayList<UUID> tmp = new ArrayList<>();
                     tmp.add(source.getControllerId());
                     affectedPlayers = tmp;
                     break;

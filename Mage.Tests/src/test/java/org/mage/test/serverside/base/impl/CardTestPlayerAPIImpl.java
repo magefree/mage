@@ -861,6 +861,25 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Assert card count in player's exile.
+     *
+     * @param owner {@link Player} who's exile should be counted.
+     * @param cardName Name of the cards that should be counted.
+     * @param count Expected count.
+     */
+    public void assertExileCount(Player owner, String cardName, int count) throws AssertionError {
+        int actualCount = 0;
+        for (ExileZone exile : currentGame.getExile().getExileZones()) {
+            for (Card card : exile.getCards(currentGame)) {
+                if (card.getOwnerId().equals(owner.getId()) && card.getName().equals(cardName)) {
+                    actualCount++;
+                }
+            }
+        }
+        Assert.assertEquals("(Exile " + owner.getName() + ") Card counts are not equal (" + cardName + ')', count, actualCount);
+    }
+
+    /**
      * Assert card count in player's graveyard.
      *
      * @param player {@link Player} who's graveyard should be counted.

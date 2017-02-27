@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  */
 public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
 
-    public static enum HandSizeModification {
+    public enum HandSizeModification {
         SET, INCREASE, REDUCE
     }
 
@@ -90,8 +90,8 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
 
     protected static Outcome defineOutcome(HandSizeModification handSizeModification, TargetController targetController) {
         Outcome newOutcome = Outcome.Benefit;
-        if ((targetController.equals(TargetController.YOU) || targetController.equals(TargetController.ANY))
-                && handSizeModification.equals(HandSizeModification.REDUCE)) {
+        if ((targetController == TargetController.YOU || targetController == TargetController.ANY)
+                && handSizeModification == HandSizeModification.REDUCE) {
             newOutcome = Outcome.Detriment;
         }
         return newOutcome;

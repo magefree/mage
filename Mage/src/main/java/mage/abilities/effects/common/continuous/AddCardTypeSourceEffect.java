@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -49,7 +50,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     public AddCardTypeSourceEffect(CardType addedCardType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedCardType = addedCardType;
-        if (addedCardType.equals(CardType.ENCHANTMENT)) {
+        if (addedCardType == CardType.ENCHANTMENT) {
             dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
         }
     }
@@ -60,15 +61,26 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (Duration.Custom.equals(this.duration) || this.duration.toString().startsWith("End")) {
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()), game));
+            if (affectedObjectList.isEmpty()) {
+                this.discard();
+            }
+        }
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
+        if (permanent != null
+                && (affectedObjectList.isEmpty() || affectedObjectList.contains(new MageObjectReference(permanent, game)))) {
             if (!permanent.getCardType().contains(addedCardType)) {
                 permanent.getCardType().add(addedCardType);
             }
             return true;
-        }
-        else if (this.getDuration().equals(Duration.Custom)) {
+        } else if (this.getDuration().equals(Duration.Custom)) {
             this.discard();
         }
         return false;

@@ -92,12 +92,12 @@ public class CrewTest extends CardTestPlayerBase {
         setChoice(playerA, "Speedway Fanatic");
 
         // Return all creatures to there owners hands
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Evacuation");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Evacuation");
 
         // (Re)Cast Smugglers Copter
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Smuggler's Copter");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Smuggler's Copter");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         // Only crewed vehicles have card type creature

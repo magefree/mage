@@ -20,11 +20,7 @@ public class CantAttackAloneAttachedEffect extends RestrictionEffect {
 
     public CantAttackAloneAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);
-        if (attachmentType.equals(AttachmentType.AURA)) {
-            this.staticText = "Enchanted creature can't attack alone";
-        } else {
-            this.staticText = "Equipped creature can't attack alone";
-        }
+        this.staticText = attachmentType.verb() + " creature can't attack alone";
     }
 
     public CantAttackAloneAttachedEffect(final CantAttackAloneAttachedEffect effect) {

@@ -89,6 +89,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Clinging Darkness", 80, Rarity.COMMON, mage.cards.c.ClingingDarkness.class));
         cards.add(new SetCardInfo("Cloudstone Curio", 257, Rarity.RARE, mage.cards.c.CloudstoneCurio.class));
         cards.add(new SetCardInfo("Clutch of the Undercity", 197, Rarity.UNCOMMON, mage.cards.c.ClutchOfTheUndercity.class));
+        cards.add(new SetCardInfo("Coalhauler Swine", 119, Rarity.COMMON, mage.cards.c.CoalhaulerSwine.class));
         cards.add(new SetCardInfo("Compulsive Research", 40, Rarity.COMMON, mage.cards.c.CompulsiveResearch.class));
         cards.add(new SetCardInfo("Concerted Effort", 8, Rarity.RARE, mage.cards.c.ConcertedEffort.class));
         cards.add(new SetCardInfo("Conclave Equenaut", 9, Rarity.COMMON, mage.cards.c.ConclaveEquenaut.class));

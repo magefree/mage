@@ -62,7 +62,7 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
                 target.getSubtype(game).add(addedSubType);
             }
         } else {
-            if (Duration.Custom.equals(duration)) {
+            if (duration == Duration.Custom) {
                 discard();
             }
         }

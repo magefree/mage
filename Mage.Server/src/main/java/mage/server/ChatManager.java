@@ -132,6 +132,10 @@ public class ChatManager {
                         chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
                         return;
                     }
+                    
+                    if (message.length() > 500) {                        
+                        message = message.replaceFirst("^(.{500}).*", "$1 (rest of message truncated)");
+                    }
 
                     String messageToCheck = message;
                     Matcher matchPattern = cardNamePattern.matcher(message);
@@ -186,7 +190,10 @@ public class ChatManager {
             + "<br/>\\me - shows the history of the current player"
             + "<br/>\\list or \\l - Show a list of commands"
             + "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name"
-            + "<br/>[Card Name] - Show a highlighted card name";
+            + "<br/>[Card Name] - Show a highlighted card name"
+            + "<br/>\\ignore - shows current ignore list on this server."
+            + "<br/>\\ignore [username] - add a username to your ignore list on this server."
+            + "<br/>\\unignore [username] - remove a username from your ignore list on this server.";
 
     private boolean performUserCommand(User user, String message, UUID chatId, boolean doError) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);

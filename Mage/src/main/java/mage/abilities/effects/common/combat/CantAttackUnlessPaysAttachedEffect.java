@@ -46,8 +46,8 @@ public class CantAttackUnlessPaysAttachedEffect extends PayCostToAttackBlockEffe
 
     public CantAttackUnlessPaysAttachedEffect(ManaCosts manaCosts, AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK, manaCosts);
-        staticText = (attachmentType.equals(AttachmentType.AURA) ? "Enchanted " : "Equipped ")
-                + "creature can't attack unless its controller pays "
+        staticText = attachmentType.verb()
+                + " creature can't attack unless its controller pays "
                 + (manaCosts == null ? "" : manaCosts.getText());
     }
 
@@ -59,7 +59,7 @@ public class CantAttackUnlessPaysAttachedEffect extends PayCostToAttackBlockEffe
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
-            if (event.getType().equals(EventType.DECLARE_ATTACKER)) {
+            if (event.getType() == EventType.DECLARE_ATTACKER) {
                 return event.getSourceId().equals(enchantment.getAttachedTo());
             }
         }

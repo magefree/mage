@@ -28,13 +28,15 @@
 
 package mage.server.game;
 
-import java.lang.reflect.Constructor;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
 import mage.constants.RangeOfInfluence;
 import mage.players.Player;
 import org.apache.log4j.Logger;
+
+import java.lang.reflect.Constructor;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  *
@@ -53,14 +55,14 @@ public class PlayerFactory {
 
     private PlayerFactory() {}
 
-    public Player createPlayer(String playerType, String name, RangeOfInfluence range, int skill) {
+    public Optional<Player> createPlayer(String playerType, String name, RangeOfInfluence range, int skill) {
         try {
             Class playerTypeClass = playerTypes.get(playerType);
             if (playerTypeClass != null) {
                 Constructor<?> con = playerTypeClass.getConstructor(String.class, RangeOfInfluence.class, int.class);
                 Player player = (Player) con.newInstance(name, range, skill);
                 logger.trace("Player created: " + name + " - " + player.getId());
-                return player;
+                return Optional.of(player);
             }
             else {
                 logger.fatal("Unknown player type: " + playerType);
@@ -68,7 +70,7 @@ public class PlayerFactory {
         } catch (Exception ex) {
             logger.fatal("PlayerFactory error ", ex);
         }
-        return null;
+        return Optional.empty();
     }
 
     public Set<String> getPlayerTypes() {

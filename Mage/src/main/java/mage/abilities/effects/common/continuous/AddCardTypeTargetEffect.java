@@ -50,9 +50,9 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
     public AddCardTypeTargetEffect(CardType addedCardType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedCardType = addedCardType;
-        if (addedCardType.equals(CardType.ENCHANTMENT)) {
+        if (addedCardType == CardType.ENCHANTMENT) {
             dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
-        } else if (addedCardType.equals(CardType.ARTIFACT)) {
+        } else if (addedCardType == CardType.ARTIFACT) {
             dependencyTypes.add(DependencyType.ArtifactAddingRemoving);
         }
     }
@@ -75,7 +75,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
             }
         }
         if (!result) {
-            if (this.getDuration().equals(Duration.Custom)) {
+            if (this.getDuration() == Duration.Custom) {
                 this.discard();
             }
         }
