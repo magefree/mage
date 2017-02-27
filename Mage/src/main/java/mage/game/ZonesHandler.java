@@ -20,7 +20,7 @@ import mage.target.TargetCard;
 /**
  * Created by samuelsandeen on 9/6/16.
  */
-public class ZonesHandler {
+public final class ZonesHandler {
 
     public static boolean cast(ZoneChangeInfo info, Game game) {
         if (maybeRemoveFromSourceZone(info, game)) {

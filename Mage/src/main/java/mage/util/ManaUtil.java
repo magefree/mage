@@ -28,7 +28,7 @@ import mage.game.Game;
 /**
  * @author noxx
  */
-public class ManaUtil {
+public final class ManaUtil {
 
     private ManaUtil() {
     }

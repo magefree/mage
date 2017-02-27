@@ -3,7 +3,7 @@ package org.mage.plugins.card.constants;
 import java.awt.Rectangle;
 import java.io.File;
 
-public class Constants {
+public final class Constants {
 
     public static final String RESOURCE_PATH_SET = File.separator + "sets" + File.separator;
 

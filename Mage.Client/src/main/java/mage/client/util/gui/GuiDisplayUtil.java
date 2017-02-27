@@ -26,7 +26,7 @@ import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
-public class GuiDisplayUtil {
+public final class GuiDisplayUtil {
 
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
     private static final Insets DEFAULT_INSETS = new Insets(0, 0, 70, 25);

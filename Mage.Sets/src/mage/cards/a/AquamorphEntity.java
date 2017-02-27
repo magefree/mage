@@ -84,8 +84,8 @@ public class AquamorphEntity extends CardImpl {
 
 class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
-    private final String choice51 = "a 5/1 creature";
-    private final String choice15 = "a 1/5 creature";
+    private static final String choice51 = "a 5/1 creature";
+    private static final String choice15 = "a 1/5 creature";
 
     public AquamorphEntityReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

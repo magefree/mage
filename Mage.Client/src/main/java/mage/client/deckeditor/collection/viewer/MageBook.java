@@ -346,7 +346,7 @@ public class MageBook extends JComponent {
     /**
      * Defines the position of the next card on the mage book
      */
-    private static class CardPosition {
+    private static final class CardPosition {
 
         private CardPosition() {
         }

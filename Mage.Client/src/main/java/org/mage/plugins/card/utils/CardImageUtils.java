@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.properties.SettingsManager;
 
-public class CardImageUtils {
+public final class CardImageUtils {
 
     private static final HashMap<CardDownloadData, String> pathCache = new HashMap<>();
     private static final Logger log = Logger.getLogger(CardImageUtils.class);

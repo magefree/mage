@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author North
  */
-public class RepositoryUtil {
+public final class RepositoryUtil {
 
     public static boolean isDatabaseObsolete(ConnectionSource connectionSource, String entityName, long version) throws SQLException {
         TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);

@@ -8,7 +8,7 @@ import mage.remote.traffic.ZippedObjectImpl;
  *
  * @author ayrat
  */
-public class CompressUtil {
+public final class CompressUtil {
 
     /**
      * Defines should data be compressed or not. True by default. Read from

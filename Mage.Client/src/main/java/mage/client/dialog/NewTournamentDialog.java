@@ -86,8 +86,8 @@ public class NewTournamentDialog extends MageDialog {
     private JTextArea txtRandomPacks;
     private final List<TournamentPlayerPanel> players = new ArrayList<>();
     private final List<JComboBox> packs = new ArrayList<>();
-    private final int CONSTRUCTION_TIME_MIN = 6;
-    private final int CONSTRUCTION_TIME_MAX = 30;
+    private static final int CONSTRUCTION_TIME_MIN = 6;
+    private static final int CONSTRUCTION_TIME_MAX = 30;
     private boolean isRandom = false;
     private boolean isRichMan = false;
     private String cubeFromDeckFilename = "";

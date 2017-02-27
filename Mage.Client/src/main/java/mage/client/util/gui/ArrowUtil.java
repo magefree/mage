@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class ArrowUtil {
+public final class ArrowUtil {
 
     private ArrowUtil() {}
 

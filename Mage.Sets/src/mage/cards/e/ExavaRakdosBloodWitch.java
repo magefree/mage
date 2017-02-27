@@ -62,7 +62,7 @@ public class ExavaRakdosBloodWitch extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    final String rule = "Each other creature you control with a +1/+1 counter on it has haste";
+    static final String rule = "Each other creature you control with a +1/+1 counter on it has haste";
     public ExavaRakdosBloodWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
         this.supertype.add("Legendary");

@@ -62,7 +62,7 @@ public class ScourgeOfValkas extends CardImpl {
         filter2.add(new SubtypePredicate("Dragon"));
     }
     
-    private final String rule = "Whenever {this} or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.";
+    private static final String rule = "Whenever {this} or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.";
 
     public ScourgeOfValkas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");

@@ -61,7 +61,7 @@ public class WayOfTheThief extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Gate"));
     }    
-    private final String rule = "Enchanted creature can't be blocked as long as you control a Gate";
+    private static final String rule = "Enchanted creature can't be blocked as long as you control a Gate";
 
     public WayOfTheThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

@@ -36,7 +36,7 @@ import org.apache.log4j.Logger;
  *
  * @author North
  */
-public class CardScanner {
+public final class CardScanner {
 
     public static boolean scanned = false;
 

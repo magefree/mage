@@ -14,7 +14,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author ubeefx, nantuko
  */
-public class ArtificialScoringSystem {
+public final class ArtificialScoringSystem {
 
     public static final int WIN_GAME_SCORE = 100000000;
     public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;

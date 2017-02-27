@@ -37,7 +37,7 @@ import mage.view.CardView;
  * 
  * @author nantuko
  */
-public class CardHelper {
+public final class CardHelper {
     private CardHelper() {
     }
 

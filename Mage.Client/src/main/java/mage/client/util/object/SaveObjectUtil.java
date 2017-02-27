@@ -13,7 +13,7 @@ import java.util.Calendar;
  *
  * @author ayrat
  */
-public class SaveObjectUtil {
+public final class SaveObjectUtil {
 
     /**
      * Defines should data be saved or not.

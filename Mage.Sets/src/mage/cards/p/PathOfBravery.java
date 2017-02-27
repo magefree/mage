@@ -58,7 +58,7 @@ public class PathOfBravery extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
-    final String rule = "As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1";
+    static final String rule = "As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1";
 
     public PathOfBravery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

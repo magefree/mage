@@ -59,7 +59,7 @@ public class AbzanBattlePriest extends CardImpl {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    final String rule = "Each creature you control with a +1/+1 counter on it has lifelink";
+    static final String rule = "Each creature you control with a +1/+1 counter on it has lifelink";
 
     public AbzanBattlePriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

@@ -68,12 +68,12 @@ public class CardPluginImpl implements CardPlugin {
     private static final float STACK_SPACING_Y = 0.10f;
     private static final float ATTACHMENT_SPACING_Y = 0.13f;
 
-    private final int landStackMax = 5;
+    private static final int landStackMax = 5;
     // private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
     private int cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();
     private int cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();
 
-    private final boolean stackVertical = false;
+    private static final boolean stackVertical = false;
 
     private int playAreaWidth, playAreaHeight;
     private int cardWidth, cardHeight;

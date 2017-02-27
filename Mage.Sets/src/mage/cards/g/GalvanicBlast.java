@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class GalvanicBlast extends CardImpl {
 
-    private final String effectText = "{this} deals 2 damage to target creature or player.<br>Metalcraft - {this} deals 4 damage to that creature or player instead if you control three or more artifacts";
+    private static final String effectText = "{this} deals 2 damage to target creature or player.<br>Metalcraft - {this} deals 4 damage to that creature or player instead if you control three or more artifacts";
 
     public GalvanicBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

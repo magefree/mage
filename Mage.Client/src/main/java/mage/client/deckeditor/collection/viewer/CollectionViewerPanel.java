@@ -57,7 +57,7 @@ public final class CollectionViewerPanel extends JPanel {
     private static final Logger logger = Logger.getLogger(CollectionViewerPanel.class);
 
     protected static final String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
-    protected static final String FORMAT_CONFIG_KEY = "collectionViewerFormat";
+    private static final String FORMAT_CONFIG_KEY = "collectionViewerFormat";
 
     public CollectionViewerPanel() {
         initComponents();

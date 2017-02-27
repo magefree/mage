@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author noxx
  */
-public class Statistics {
+public final class Statistics {
 
     public static void main(String[] args) throws Exception {
         List<Log> logs = EntityManager.instance.getAllLogs();

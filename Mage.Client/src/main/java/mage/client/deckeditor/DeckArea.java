@@ -62,7 +62,7 @@ public class DeckArea extends javax.swing.JPanel {
     private BigCard lastBigCard = null;
     private int dividerLocationNormal = 0;
     private int dividerLocationLimited = 0;
-    private final boolean isLimitedBuildingOrientation = false;
+    private static final boolean isLimitedBuildingOrientation = false;
 
     public DeckCardLayout getCardLayout() {
         return deckList.getCardLayout();

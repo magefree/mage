@@ -28,7 +28,7 @@ import javax.mail.internet.MimeMessage;
 import mage.server.util.ConfigSettings;
 import org.apache.log4j.Logger;
 
-public class GmailClient {
+public final class GmailClient {
 
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();

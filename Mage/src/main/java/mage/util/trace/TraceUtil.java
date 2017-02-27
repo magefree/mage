@@ -25,7 +25,7 @@ import mage.constants.CardType;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class TraceUtil {
+public final class TraceUtil {
     
     private static final Logger log = Logger.getLogger(TraceUtil.class);
 

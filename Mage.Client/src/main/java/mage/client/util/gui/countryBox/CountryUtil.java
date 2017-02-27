@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
  *
  * @author LevelX2
  */
-public class CountryUtil {
+public final class CountryUtil {
 
     private static final Logger LOGGER = Logger.getLogger(CountryUtil.class);
     private static final Map<String, ImageIcon> FLAG_ICON_CACHE = new HashMap<>();

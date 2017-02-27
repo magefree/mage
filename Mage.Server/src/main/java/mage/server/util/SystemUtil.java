@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 /**
  * @author nantuko
  */
-public class SystemUtil {
+public final class SystemUtil {
 
     public static final DateFormat dateFormat = new SimpleDateFormat("yy-M-dd HH:mm:ss");
 

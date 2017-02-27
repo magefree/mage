@@ -8,7 +8,7 @@ import mage.view.ChatMessage;
 import java.util.Arrays;
 import java.util.Set;
 
-public class IgnoreList {
+public final class IgnoreList {
 
     private static final String USAGE = "<br/><font color=yellow>\\ignore - shows current ignore list on this server."
             + "<br/>\\ignore [username] - add a username to your ignore list on this server."

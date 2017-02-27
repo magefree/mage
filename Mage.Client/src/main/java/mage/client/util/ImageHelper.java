@@ -47,7 +47,7 @@ import org.mage.card.arcane.UI;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ImageHelper {
+public final class ImageHelper {
 
     protected static final HashMap<String, BufferedImage> images = new HashMap<>();
     protected static final HashMap<String, BufferedImage> backgrounds = new HashMap<>();

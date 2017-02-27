@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
-public class LocalCommands {
+public final class LocalCommands {
 
     private static final DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT);
 

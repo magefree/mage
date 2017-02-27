@@ -49,7 +49,7 @@ import mage.cards.CardSetInfo;
  * @author Loki
  */
 public class EzurisBrigade extends CardImpl {
-    private final String text = "Metalcraft - As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample";
+    private static final String text = "Metalcraft - As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample";
 
     public EzurisBrigade (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

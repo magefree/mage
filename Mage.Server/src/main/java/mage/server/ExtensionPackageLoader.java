@@ -37,7 +37,7 @@ import java.util.Scanner;
 /**
  * @author Lymia
  */
-public class ExtensionPackageLoader {
+public final class ExtensionPackageLoader {
     public static ExtensionPackage loadExtension(File directory) throws IOException {
         if(!directory.exists     ()) throw new RuntimeException("File not found "+directory);
         if(!directory.isDirectory()) throw new RuntimeException(directory+" is not a directory");

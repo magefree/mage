@@ -52,7 +52,7 @@ import mage.util.TournamentUtil;
  * @author nantuko
  * @author Simown
  */
-public class DeckGenerator {
+public final class DeckGenerator {
 
     public static class DeckGeneratorException extends RuntimeException {
 
