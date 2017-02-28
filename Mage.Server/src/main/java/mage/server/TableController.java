@@ -333,9 +333,9 @@ public class TableController {
             }
             if (restrictedColor) {
                 String message = new StringBuilder("Your deck contains ")
-                        .append(restrictedColor)
+                        .append(badColor)
                         .append(".  The creator of the table has requested no ")
-                        .append(restrictedColor)
+                        .append(badColor)
                         .append(" cards to be on the table!").toString();
                 user.showUserMessage("Join Table", message);
                 return false;
