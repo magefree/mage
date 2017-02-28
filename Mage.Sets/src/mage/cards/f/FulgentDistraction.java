@@ -28,19 +28,20 @@
 
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -84,7 +85,7 @@ class FulgentDistractionEffect extends OneShotEffect {
         for ( UUID target : targetPointer.getTargets(game, source) ) {
             Permanent creature = game.getPermanent(target);
 
-            List<UUID> copiedAttachments = new ArrayList<UUID>(creature.getAttachments());
+            List<UUID> copiedAttachments = new ArrayList<>(creature.getAttachments());
             for ( UUID equipmentId : copiedAttachments ) {
                 Permanent equipment = game.getPermanent(equipmentId);
                 boolean isEquipment = false;

@@ -78,7 +78,7 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     public List<Ability> getPlayableOptions(Game game) {
-        List<Ability> all = new ArrayList<Ability>();
+        List<Ability> all = new ArrayList<>();
         List<Ability> playables = getPlayableAbilities(game);
         for (Ability ability: playables) {
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
@@ -122,7 +122,7 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     public List<List<UUID>> getAttacks(Game game) {
-        List<List<UUID>> engagements = new ArrayList<List<UUID>>();
+        List<List<UUID>> engagements = new ArrayList<>();
         List<Permanent> attackersList = super.getAvailableAttackers(game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
@@ -133,7 +133,7 @@ public class MCTSPlayer extends ComputerPlayer {
             while (binary.length() < attackersList.size()) {
                 binary.insert(0, '0');
             }
-            List<UUID> engagement = new ArrayList<UUID>();
+            List<UUID> engagement = new ArrayList<>();
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {
                     engagement.add(attackersList.get(j).getId());
@@ -145,14 +145,14 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     public List<List<List<UUID>>> getBlocks(Game game) {
-        List<List<List<UUID>>> engagements = new ArrayList<List<List<UUID>>>();
+        List<List<List<UUID>>> engagements = new ArrayList<>();
         int numGroups = game.getCombat().getGroups().size();
         if (numGroups == 0) {
             return engagements;
         }
 
         //add a node with no blockers
-        List<List<UUID>> engagement = new ArrayList<List<UUID>>();
+        List<List<UUID>> engagement = new ArrayList<>();
         for (int i = 0; i < numGroups; i++) {
             engagement.add(new ArrayList<UUID>());
         }
@@ -165,9 +165,9 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     private List<List<UUID>> copyEngagement(List<List<UUID>> engagement) {
-        List<List<UUID>> newEngagement = new ArrayList<List<UUID>>();
+        List<List<UUID>> newEngagement = new ArrayList<>();
         for (List<UUID> group: engagement) {
-            newEngagement.add(new ArrayList<UUID>(group));
+            newEngagement.add(new ArrayList<>(group));
         }
         return newEngagement;
     }

@@ -212,7 +212,7 @@ public class ContinuousEffects implements Serializable {
 
         updateTimestamps(layerEffects);
 
-        Collections.sort(layerEffects, sorter);
+        layerEffects.sort(sorter);
         return layerEffects;
     }
 

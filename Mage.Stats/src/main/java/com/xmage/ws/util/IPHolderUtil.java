@@ -8,8 +8,8 @@ package com.xmage.ws.util;
  */
 public final class IPHolderUtil {
 
-    private static final ThreadLocal<String> ipThreadLocal = new ThreadLocal<String>();
-    private static final ThreadLocal<String> userAgentThreadLocal = new ThreadLocal<String>();
+    private static final ThreadLocal<String> ipThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<String> userAgentThreadLocal = new ThreadLocal<>();
 
     private IPHolderUtil() {}
 

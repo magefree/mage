@@ -2,6 +2,7 @@ package mage.db.model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,7 +55,7 @@ public class Log {
     }
 
     public List<String> getArguments() {
-        ArrayList<String> arguments = new ArrayList<String>();
+        ArrayList<String> arguments = new ArrayList<>();
         if (arg0 != null) {
             arguments.add(arg0);
         }

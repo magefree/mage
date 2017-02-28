@@ -27,9 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -43,6 +40,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +94,7 @@ class ThoughtsOfRuinEffect extends OneShotEffect {
         if (controller != null) {
             int amount = controller.getHand().size();
             if (amount > 0) {
-                List<Permanent> permanentsToSacrifice = new ArrayList<Permanent>();
+                List<Permanent> permanentsToSacrifice = new ArrayList<>();
                 // select all lands to sacrifice
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);

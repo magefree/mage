@@ -191,7 +191,7 @@ public final class RateCard {
             }
             return 2 * (converted - colorPenalty + 1);
         }
-        final Map<String, Integer> singleCount = new HashMap<String, Integer>();
+        final Map<String, Integer> singleCount = new HashMap<>();
         int maxSingleCount = 0;
         for (String symbol : card.getManaCost().getSymbols()) {
             int count = 0;
@@ -257,7 +257,7 @@ public final class RateCard {
      * @return
      */
     public static int getDifferentColorManaCount(Card card) {
-        Set<String> symbols = new HashSet<String>();
+        Set<String> symbols = new HashSet<>();
         for (String symbol : card.getManaCost().getSymbols()) {
             if (isColoredMana(symbol)) {
                 symbols.add(symbol);

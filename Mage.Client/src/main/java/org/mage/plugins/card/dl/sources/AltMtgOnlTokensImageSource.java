@@ -27,10 +27,11 @@
  */
 package org.mage.plugins.card.dl.sources;
 
-import java.io.IOException;
-import java.util.HashMap;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 /**
  *
@@ -104,9 +105,9 @@ public class AltMtgOnlTokensImageSource implements CardImageSource {
         if (copyUrlToImage != null) {
             return;
         }
-        copyUrlToImage = new HashMap<String, String>();
-        copyImageToUrl = new HashMap<String, String>();
-        copyUrlToImageDone = new HashMap<String, Integer>();
+        copyUrlToImage = new HashMap<>();
+        copyImageToUrl = new HashMap<>();
+        copyUrlToImageDone = new HashMap<>();
 
         copyUrlToImage.put("SCG_CC_002-Penguin.jpg", "BIRD.WU.BIRD.CREATURE.1.1.full.jpg");
         copyUrlToImage.put("SCG_CC_005-Vampire.jpg", "VAMPIRE.B.VAMPIRE.CREATURE.1.1.full.jpg");

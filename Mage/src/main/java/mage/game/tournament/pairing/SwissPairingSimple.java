@@ -33,8 +33,6 @@ import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -59,13 +57,7 @@ public class SwissPairingSimple {
         List<TournamentPlayer> playerByes = new ArrayList<>();
 
         // sort players by tournament points
-        Collections.sort(players, new Comparator<TournamentPlayer>() {
-            @Override
-            public int compare(TournamentPlayer p1, TournamentPlayer p2) {
-                return p2.getPoints() - p1.getPoints();
-            }
-
-        });
+        players.sort((p1, p2) -> p2.getPoints() - p1.getPoints());
         // create pairings
         while (!players.isEmpty()) {
             TournamentPlayer player1 = players.get(0);

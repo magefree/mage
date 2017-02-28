@@ -27,19 +27,22 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +104,7 @@ class SecondSunriseEffect extends OneShotEffect {
 }
 
 class SecondSunriseWatcher extends Watcher {
-    ArrayList<UUID> cards = new ArrayList<UUID>();
+    ArrayList<UUID> cards = new ArrayList<>();
 
     public SecondSunriseWatcher() {
         super("SecondSunriseWatcher", WatcherScope.GAME);

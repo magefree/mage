@@ -141,7 +141,7 @@ public class Outwit extends CardImpl {
 
         @Override
         public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-            Set<UUID> possibleTargets = new HashSet<UUID>();
+            Set<UUID> possibleTargets = new HashSet<>();
             for (StackObject stackObject : game.getStack()) {
                 if (stackObject instanceof Spell && filter.match((Spell) stackObject, game)) {
                     if (targetsPlayer(stackObject.getId(), game)) {

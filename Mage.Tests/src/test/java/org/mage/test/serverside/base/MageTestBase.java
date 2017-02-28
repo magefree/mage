@@ -27,7 +27,6 @@ import org.mage.test.player.TestPlayer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -163,12 +162,7 @@ public abstract class MageTestBase {
             directory.mkdirs();
         }
         File[] files = directory.listFiles(
-                new FilenameFilter() {
-                    @Override
-                    public boolean accept(File dir, String name) {
-                        return name.endsWith(".game");
-                    }
-                }
+                (dir, name) -> name.endsWith(".game")
         );
         for (File file : files) {
             file.delete();

@@ -27,16 +27,17 @@
  */
 package mage.cards.d;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,7 +46,6 @@ import mage.target.common.TargetCardInLibrary;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
@@ -88,8 +88,8 @@ class DoublingChantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Card> chosenCards = new ArrayList<Card>();
-        List<String> namesFiltered = new ArrayList<String>();
+        List<Card> chosenCards = new ArrayList<>();
+        List<String> namesFiltered = new ArrayList<>();
 
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {

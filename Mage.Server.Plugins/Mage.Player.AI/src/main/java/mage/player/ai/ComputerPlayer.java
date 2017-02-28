@@ -617,9 +617,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         if (target.getOriginalTarget() instanceof TargetSpell) {
             if (!game.getStack().isEmpty()) {
-                Iterator<StackObject> it = game.getStack().iterator();
-                while (it.hasNext()) {
-                    StackObject o = it.next();
+                for (StackObject o : game.getStack()) {
                     if (o instanceof Spell && !source.getId().equals(o.getStackAbility().getId())) {
                         target.addTarget(o.getId(), source, game);
                         return true;
@@ -651,9 +649,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             if (!game.getStack().isEmpty()) {
-                Iterator<StackObject> it = game.getStack().iterator();
-                while (it.hasNext()) {
-                    StackObject stackObject = it.next();
+                for (StackObject stackObject : game.getStack()) {
                     if (stackObject instanceof Spell && source != null && !source.getId().equals(stackObject.getStackAbility().getId())) {
                         if (((TargetSpellOrPermanent) target).getFilter().match(stackObject, game)) {
                             target.addTarget(stackObject.getId(), source, game);

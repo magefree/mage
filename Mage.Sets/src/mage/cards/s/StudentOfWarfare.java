@@ -28,7 +28,6 @@
 
 package mage.cards.s;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -40,6 +39,7 @@ import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
+import mage.constants.CardType;
 
 import java.util.UUID;
 
@@ -58,10 +58,10 @@ public class StudentOfWarfare extends LevelerCard {
         this.toughness = new MageInt(1);
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{W}")));
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(FirstStrikeAbility.getInstance());
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(DoubleStrikeAbility.getInstance());
 
         this.addAbilities(LevelerCardBuilder.construct(

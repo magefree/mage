@@ -28,10 +28,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -46,8 +42,13 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 
 /**
@@ -77,13 +78,13 @@ public class JoragaTreespeaker extends LevelerCard {
         // LEVEL 1-4
         // 1/2
         // {T}: Add {G}{G} to your mana pool.
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()));
 
         // LEVEL 5+
         // 1/4
         // Elves you control have "{T}: Add {G}{G} to your mana pool."
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()),
                 Duration.WhileOnBattlefield, filter)));

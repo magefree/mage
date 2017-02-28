@@ -60,7 +60,7 @@ public class SwissPairingMinimalWeightMatching {
     public SwissPairingMinimalWeightMatching(List<TournamentPlayer> players, List<Round> rounds, boolean isLastRound) {
         playersCount = players.size();
 
-        swissPlayers = new ArrayList<PlayerInfo>();
+        swissPlayers = new ArrayList<>();
         for (TournamentPlayer tournamentPlayer : players) {
             PlayerInfo swissPlayer = new PlayerInfo();
             swissPlayer.tournamentPlayer = tournamentPlayer;
@@ -98,15 +98,12 @@ public class SwissPairingMinimalWeightMatching {
         }
 
         // sort by points and then by sos points
-        Collections.sort(swissPlayers, new Comparator<PlayerInfo>() {
-            @Override
-            public int compare(PlayerInfo p1, PlayerInfo p2) {
-                int result = p2.points - p1.points;
-                if (result != 0) {
-                    return result;
-                }
-                return p2.sosPoints - p1.sosPoints;
+        swissPlayers.sort((p1, p2) -> {
+            int result = p2.points - p1.points;
+            if (result != 0) {
+                return result;
             }
+            return p2.sosPoints - p1.sosPoints;
         });
 
         // order could be changed, update ids and mapping

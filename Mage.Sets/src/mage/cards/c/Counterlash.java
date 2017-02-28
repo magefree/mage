@@ -27,16 +27,13 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -47,6 +44,9 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -97,7 +97,7 @@ class CounterlashEffect extends OneShotEffect {
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
             if (player.chooseUse(Outcome.PutCardInPlay, "Cast a nonland card in your hand that shares a card type with that spell without paying its mana cost?", source, game)) {
                 FilterCard filter = new FilterCard();
-                ArrayList<Predicate<MageObject>> types = new ArrayList<Predicate<MageObject>>();
+                ArrayList<Predicate<MageObject>> types = new ArrayList<>();
                 for (CardType type: stackObject.getCardType()) {
                     if (type != CardType.LAND) {
                         types.add(new CardTypePredicate(type));

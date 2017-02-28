@@ -27,9 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,11 +34,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -49,6 +42,10 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -117,11 +114,7 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
                     if (player.getLibrary().size() > 0) {
                         Card card = player.getLibrary().getFromTop(game);
                         String exileKey = playerId.toString() + CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()).toString();
-                        UUID exileId = exileIds.get(exileKey);
-                        if (exileId == null) {
-                            exileId = UUID.randomUUID();
-                            exileIds.put(exileKey, exileId);
-                        }
+                        UUID exileId = exileIds.computeIfAbsent(exileKey, k -> UUID.randomUUID());
                         player.moveCardsToExile(card, source, game, false, exileId, sourceObject.getIdName() + " (" + player.getName() + ')');
                         card.setFaceDown(true, game);
                     }

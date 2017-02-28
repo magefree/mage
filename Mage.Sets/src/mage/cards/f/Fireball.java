@@ -27,11 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -43,6 +38,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.*;
 
 /**
  *
@@ -158,9 +155,7 @@ class FireballTargetCreatureOrPlayer extends TargetCreatureOrPlayer {
             }
 
             possibleTargets.removeAll(getTargets());
-            Iterator<UUID> it = possibleTargets.iterator();
-            while (it.hasNext()) {
-                UUID targetId = it.next();
+            for (UUID targetId : possibleTargets) {
                 TargetCreatureOrPlayer target = this.copy();
                 target.clearChosen();
                 target.addTarget(targetId, source, game, true);

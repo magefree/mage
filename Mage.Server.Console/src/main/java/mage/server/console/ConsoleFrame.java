@@ -34,16 +34,6 @@
 
 package mage.server.console;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.prefs.Preferences;
-import javax.swing.Box;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
@@ -51,6 +41,14 @@ import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.prefs.Preferences;
 
 /**
  *
@@ -101,12 +99,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             logger.fatal("", ex);
         }
         
-        pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                session.ping();
-            }
-        }, 60, 60, TimeUnit.SECONDS);        
+        pingTaskExecutor.scheduleAtFixedRate(() -> session.ping(), 60, 60, TimeUnit.SECONDS);
     }
 
    public boolean connect(Connection connection) {
@@ -157,11 +150,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         btnConnect.setFocusable(false);
         btnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnConnect.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnConnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConnectActionPerformed(evt);
-            }
-        });
+        btnConnect.addActionListener(evt -> btnConnectActionPerformed(evt));
         jToolBar1.add(btnConnect);
 
         btnSendMessage.setActionCommand("SendMessage");
@@ -170,11 +159,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         btnSendMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSendMessage.setText("Send Message");
         btnSendMessage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnSendMessage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSendMessageActionPerformed(evt);
-            }
-        });
+        btnSendMessage.addActionListener(evt -> btnSendMessageActionPerformed(evt));
         jToolBar1.add(btnSendMessage);
 
         lblStatus.setText("Not Connected");
@@ -224,12 +209,9 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         logger.info("Starting MAGE server console version " + version);
         logger.info("Logging level: " + logger.getEffectiveLevel());
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ConsoleFrame().setVisible(true);
-                logger.info("Started MAGE server console");
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ConsoleFrame().setVisible(true);
+            logger.info("Started MAGE server console");
         });
     }
 
@@ -252,12 +234,9 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             enableButtons();            
         }
         else {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    setStatusText(message);
-                    enableButtons();
-                }
+            SwingUtilities.invokeLater(() -> {
+                setStatusText(message);
+                enableButtons();
             });
         }
     }
@@ -270,13 +249,10 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             disableButtons();
         }
         else {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    consolePanel1.stop();
-                    setStatusText("Not connected");
-                    disableButtons();
-                }
+            SwingUtilities.invokeLater(() -> {
+                consolePanel1.stop();
+                setStatusText("Not connected");
+                disableButtons();
             });
         }
     }
@@ -287,12 +263,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             JOptionPane.showMessageDialog(this, message);
         }
         else {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    JOptionPane.showMessageDialog(getFrame(), message);
-                }
-            });
+            SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(getFrame(), message));
         }
     }
 
@@ -302,12 +273,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
         else {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    JOptionPane.showMessageDialog(getFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            });
+            SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(getFrame(), message, "Error", JOptionPane.ERROR_MESSAGE));
         }
     }
 

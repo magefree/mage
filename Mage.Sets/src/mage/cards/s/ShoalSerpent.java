@@ -27,10 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.Iterator;
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -38,8 +34,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,12 +94,7 @@ class ShoalSerpentEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
-                            Ability entry = i.next();
-                            if (entry.getId().equals(DefenderAbility.getInstance().getId())) {
-                                i.remove();
-                            }
-                        }
+                        permanent.getAbilities().removeIf(entry -> entry.getId().equals(DefenderAbility.getInstance().getId()));
                     }
                     break;
             }

@@ -9,12 +9,10 @@ import com.google.common.base.Function;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
-import static java.util.Arrays.*;
-import java.util.EventListener;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+
+import java.util.*;
+
+import static java.util.Arrays.asList;
 
 /**
  * The class EventListenerList.
@@ -35,13 +33,13 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
      */
     public <T extends EventListener> Iterable<T> getIterable(final Class<? extends T>... listenerClass) {
         //transform class -> iterable
-        List<Iterable<T>> l = Lists.transform(asList(listenerClass), new ClassToIterableFunction<T>());
+        List<Iterable<T>> l = Lists.transform(asList(listenerClass), new ClassToIterableFunction<>());
 
         //compose iterable (use an arraylist to memoize the function's results)
-        final Iterable<T> it = Iterables.concat(new ArrayList<Iterable<T>>(l));
+        final Iterable<T> it = Iterables.concat(new ArrayList<>(l));
 
         //transform to singleton iterators
-        return () -> new SingletonIterator<T>(it.iterator());
+        return () -> new SingletonIterator<>(it.iterator());
     }
 
     /**
@@ -92,7 +90,7 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
     private class ClassToIterableFunction<T> implements Function<Class<? extends T>, Iterable<T>> {
 
         public Iterable<T> apply(final Class<? extends T> from) {
-            return () -> new ListenerIterator<T>(from);
+            return () -> new ListenerIterator<>(from);
         }
     }
 
@@ -103,7 +101,7 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
     private static class SingletonIterator<T> extends AbstractIterator<T> {
 
         private final Iterator<T> it;
-        private final HashSet<T> previous = new HashSet<T>();
+        private final HashSet<T> previous = new HashSet<>();
 
         public SingletonIterator(Iterator<T> it) {
             this.it = it;

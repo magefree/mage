@@ -28,9 +28,6 @@
 
 package mage.player.ai;
 
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.PassAbility;
@@ -38,6 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Cards;
 import mage.choices.Choice;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -163,7 +163,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
             logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
             if (!root.children.isEmpty()) {
                 root = root.children.get(0);
-                actions = new LinkedList<Ability>(root.abilities);
+                actions = new LinkedList<>(root.abilities);
                 combat = root.combat;
                 if (logger.isDebugEnabled())
                     logger.debug("adding actions:" + actions);
@@ -184,7 +184,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
             logger.debug("simlating -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
             if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue(true).hashCode() == test.gameValue) {
                 logger.debug("simulating -- continuing previous action chain");
-                actions = new LinkedList<Ability>(root.abilities);
+                actions = new LinkedList<>(root.abilities);
                 combat = root.combat;
                 return true;
             }
@@ -284,10 +284,9 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     }
 
     protected void addActionsTimed() {
-        FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
+        FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
             @Override
-            public Integer call() throws Exception
-            {
+            public Integer call() throws Exception {
                 return addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
             }
         });

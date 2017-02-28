@@ -27,7 +27,6 @@
  */
 package mage.game.permanent;
 
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -36,25 +35,10 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.MorphAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.WitherAbility;
+import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.EffectType;
-import mage.constants.EnterEventType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -70,6 +54,8 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1216,7 +1202,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean clearImprinted(Game game) {
-        this.connectedCards.put("imprint", new ArrayList<UUID>());
+        this.connectedCards.put("imprint", new ArrayList<>());
         return true;
     }
 

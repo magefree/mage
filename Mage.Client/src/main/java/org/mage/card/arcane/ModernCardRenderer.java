@@ -767,7 +767,7 @@ public class ModernCardRenderer extends CardRenderer {
         // Add the keyword rule if there are any keywords
         if (!textboxKeywords.isEmpty()) {
             String keywordRulesString = getKeywordRulesString();
-            TextboxRule keywordsRule = new TextboxRule(keywordRulesString, new ArrayList<TextboxRule.AttributeRegion>());
+            TextboxRule keywordsRule = new TextboxRule(keywordRulesString, new ArrayList<>());
             allRules.add(0, keywordsRule);
         }
 

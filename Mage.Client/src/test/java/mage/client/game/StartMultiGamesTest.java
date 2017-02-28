@@ -1,11 +1,12 @@
 package mage.client.game;
 
-import javax.swing.SwingUtilities;
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
+
+import javax.swing.*;
 
 /**
  * @author ayratn
@@ -42,18 +43,12 @@ public class StartMultiGamesTest {
 
     private void startGame() throws Exception {
         frame = null;
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            public void uncaughtException(Thread t, Throwable e) {
-                logger.fatal(null, e);
-            }
-        });
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                synchronized (sync) {
-                    frame = new MageFrame();
-                    frame.setVisible(true);
-                    sync.notify();
-                }
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.fatal(null, e));
+        SwingUtilities.invokeLater(() -> {
+            synchronized (sync) {
+                frame = new MageFrame();
+                frame.setVisible(true);
+                sync.notify();
             }
         });
         synchronized (sync) {

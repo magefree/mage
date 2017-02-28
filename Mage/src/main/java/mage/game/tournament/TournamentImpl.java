@@ -27,37 +27,22 @@
  */
 package mage.game.tournament;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.constants.TournamentPlayerState;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftCube;
-import mage.game.events.Listener;
-import mage.game.events.PlayerQueryEvent;
-import mage.game.events.PlayerQueryEventSource;
-import mage.game.events.TableEvent;
+import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.events.TableEventSource;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
-import mage.game.result.ResultProtos.MatchPlayerProto;
-import mage.game.result.ResultProtos.MatchProto;
-import mage.game.result.ResultProtos.MatchQuitStatus;
-import mage.game.result.ResultProtos.TourneyProto;
-import mage.game.result.ResultProtos.TourneyRoundProto;
+import mage.game.result.ResultProtos.*;
 import mage.players.Player;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
@@ -404,12 +389,7 @@ public abstract class TournamentImpl implements Tournament {
 
                 player.setConstructing();
                 new Thread(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                player.getPlayer().construct(TournamentImpl.this, player.getDeck());
-                            }
-                        }
+                        () -> player.getPlayer().construct(TournamentImpl.this, player.getDeck())
                 ).start();
             }
             // add autosubmit trigger

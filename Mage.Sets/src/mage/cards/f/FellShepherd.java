@@ -27,9 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,11 +39,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -56,6 +49,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +95,7 @@ public class FellShepherd extends CardImpl {
 
 class FellShepherdWatcher extends Watcher {
 
-    private Set<UUID> creatureIds = new HashSet<UUID>();
+    private Set<UUID> creatureIds = new HashSet<>();
 
     public FellShepherdWatcher() {
         super("YourCreaturesPutToGraveFromBattlefield", WatcherScope.PLAYER);

@@ -7,11 +7,11 @@
 package org.mage.plugins.card.dl.beans.properties.bound;
 
 
-import java.beans.PropertyChangeEvent;
-import java.util.Map;
-
 import org.mage.plugins.card.dl.beans.PropertyChangeSupport;
 import org.mage.plugins.card.dl.beans.collections.ListenableCollections.MapListener;
+
+import java.beans.PropertyChangeEvent;
+import java.util.Map;
 
 
 /**
@@ -35,15 +35,15 @@ public class PropertyChangeMapListener<K, V> implements MapListener<K, V> {
     }
 
     public void put(K key, V newValue) {
-        s.firePropertyChange(new MapPutEvent<K, V>(s.getSourceBean(), propertyName, map, key, newValue));
+        s.firePropertyChange(new MapPutEvent<>(s.getSourceBean(), propertyName, map, key, newValue));
     }
 
     public void set(K key, V oldValue, V newValue) {
-        s.firePropertyChange(new MapSetEvent<K, V>(s.getSourceBean(), propertyName, map, key, oldValue, newValue));
+        s.firePropertyChange(new MapSetEvent<>(s.getSourceBean(), propertyName, map, key, oldValue, newValue));
     }
 
     public void remove(K key, V oldValue) {
-        s.firePropertyChange(new MapRemoveEvent<K, V>(s.getSourceBean(), propertyName, map, key, oldValue));
+        s.firePropertyChange(new MapRemoveEvent<>(s.getSourceBean(), propertyName, map, key, oldValue));
     }
 
     public static abstract class MapEvent<K, V> extends PropertyChangeEvent {

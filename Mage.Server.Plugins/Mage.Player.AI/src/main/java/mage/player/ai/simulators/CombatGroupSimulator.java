@@ -28,20 +28,21 @@
 
 package mage.player.ai.simulators;
 
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class CombatGroupSimulator implements Serializable {
-    public List<CreatureSimulator> attackers = new ArrayList<CreatureSimulator>();
-    public List<CreatureSimulator> blockers = new ArrayList<CreatureSimulator>();
+    public List<CreatureSimulator> attackers = new ArrayList<>();
+    public List<CreatureSimulator> blockers = new ArrayList<>();
     public UUID defenderId;
     public boolean defenderIsPlaneswalker;
     public int unblockedDamage;

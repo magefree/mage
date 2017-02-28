@@ -27,11 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.AbstractMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -41,15 +36,13 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.*;
 
 /**
  *
@@ -135,7 +128,7 @@ class LeoninArbiterIgnoreEffect extends OneShotEffect {
 
         Map.Entry<Long, Set<UUID>> turnIgnoringPlayersPair = (Map.Entry<Long, Set<UUID>>) game.getState().getValue(key);
         if (turnIgnoringPlayersPair == null || !activationState.equals(turnIgnoringPlayersPair.getKey())) {
-            turnIgnoringPlayersPair = new AbstractMap.SimpleImmutableEntry<Long, Set<UUID>>(activationState, new HashSet<UUID>());
+            turnIgnoringPlayersPair = new AbstractMap.SimpleImmutableEntry<>(activationState, new HashSet<>());
             game.getState().setValue(key, turnIgnoringPlayersPair);
         }
 

@@ -27,21 +27,8 @@
  */
 package mage.game;
 
-import java.io.Serializable;
-import java.util.*;
-
 import mage.MageObject;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.DelayedTriggeredAbilities;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.MageSingleton;
-import mage.abilities.Mode;
-import mage.abilities.SpecialActions;
-import mage.abilities.StaticAbility;
-import mage.abilities.TriggeredAbilities;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -70,6 +57,9 @@ import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *
@@ -1091,11 +1081,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public CardAttribute getCreateCardAttribute(Card card) {
-        CardAttribute cardAtt = cardAttribute.get(card.getId());
-        if (cardAtt == null) {
-            cardAtt = new CardAttribute(card);
-            cardAttribute.put(card.getId(), cardAtt);
-        }
+        CardAttribute cardAtt = cardAttribute.computeIfAbsent(card.getId(), k -> new CardAttribute(card));
         return cardAtt;
     }
 

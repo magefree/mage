@@ -27,12 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -49,6 +43,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
+
+import java.util.*;
 
 /**
  *
@@ -98,11 +94,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
             Map<UUID, List<Permanent>> permanentsOwned = new HashMap<>();
             Collection<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
             for (Permanent permanent : permanents) {
-                List<Permanent> list = permanentsOwned.get(permanent.getOwnerId());
-                if (list == null) {
-                    list = new ArrayList<>();
-                    permanentsOwned.put(permanent.getOwnerId(), list);
-                }
+                List<Permanent> list = permanentsOwned.computeIfAbsent(permanent.getOwnerId(), k -> new ArrayList<>());
                 list.add(permanent);
             }
 
