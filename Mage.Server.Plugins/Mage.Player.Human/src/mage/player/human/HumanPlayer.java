@@ -252,7 +252,7 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
         updateGameStatePriority("chooseEffect", game);
-        if (rEffects.size() == 1) {
+        if (rEffects.size() <= 1) {
             return 0;
         }
         if (!autoSelectReplacementEffects.isEmpty()) {
