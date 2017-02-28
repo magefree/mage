@@ -67,7 +67,7 @@ public class CanadianHighlander extends Constructed {
             valid = false;
         }
 
-        if (deck.getSideboard().size() > 0) {
+        if (!deck.getSideboard().isEmpty()) {
             invalid.put("Deck", "Sideboard can't contain any cards: has " + (deck.getSideboard().size()) + " cards");
             valid = false;
         }

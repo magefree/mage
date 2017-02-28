@@ -636,7 +636,7 @@ public class TablesPanel extends javax.swing.JPanel {
         List<RowFilter<Object, Object>> ignoreListFilterList = new ArrayList<>();
         String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
         final Set<String> ignoreListCopy = IgnoreList.ignoreList(serverAddress);
-        if (ignoreListCopy.size() > 0) {
+        if (!ignoreListCopy.isEmpty()) {
             ignoreListFilterList.add(new RowFilter<Object, Object>() {
                 @Override
                 public boolean include(Entry<? extends Object, ? extends Object> entry) {

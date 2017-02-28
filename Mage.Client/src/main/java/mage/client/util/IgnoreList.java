@@ -36,7 +36,7 @@ public final class IgnoreList {
     }
 
     public static String ignore(String serverAddress, String user) {
-        if (user == null || user.length() == 0) {
+        if (user == null || user.isEmpty()) {
             return ignoreListString(serverAddress);
         }
 
@@ -71,7 +71,7 @@ public final class IgnoreList {
     }
 
     public static String unignore(String serverAddress, String user) {
-        if (user == null || user.length() == 0) {
+        if (user == null || user.isEmpty()) {
             return usage();
         }
         if (MagePreferences.removeIgnoredUser(serverAddress, user)) {

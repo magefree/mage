@@ -143,7 +143,7 @@ public class ArrowBuilder {
         if (map.containsKey(gameId)) {
             Map<Type, List<Arrow>> innerMap = map.get(gameId);
             java.util.List<Arrow> arrows = innerMap.get(type);
-            if (arrows != null && arrows.size() > 0) {
+            if (arrows != null && !arrows.isEmpty()) {
                 JPanel p = getArrowsPanel(gameId);
                 synchronized (map) {
                     for (Arrow arrow : arrows) {
