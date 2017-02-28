@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -41,6 +40,8 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +74,7 @@ public class SithLord extends CardImpl {
         return new SithLord(this);
     }
 
-    class SithLordEffect extends OneShotEffect {
+    static class SithLordEffect extends OneShotEffect {
 
         SithLordEffect() {
             super(Outcome.BoostCreature);

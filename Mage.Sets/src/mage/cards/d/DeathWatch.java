@@ -75,7 +75,7 @@ public class DeathWatch extends CardImpl {
         return new DeathWatch(this);
     }
 
-    class DeathWatchEffect extends OneShotEffect {
+    static class DeathWatchEffect extends OneShotEffect {
 
         public DeathWatchEffect() {
             super(Outcome.LoseLife);

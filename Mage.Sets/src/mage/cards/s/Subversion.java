@@ -27,17 +27,17 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +63,7 @@ public class Subversion extends CardImpl {
     }
     
     
-    class SubversionEffect extends OneShotEffect {
+    static class SubversionEffect extends OneShotEffect {
 
         public SubversionEffect() {
             super(Outcome.Damage);

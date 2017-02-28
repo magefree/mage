@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -35,16 +34,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +67,7 @@ public class RainbowVale extends CardImpl {
         return new RainbowVale(this);
     }
 
-    class RainbowValeEffect extends OneShotEffect {
+    static class RainbowValeEffect extends OneShotEffect {
 
         public RainbowValeEffect() {
             super(Outcome.PutManaInPool);

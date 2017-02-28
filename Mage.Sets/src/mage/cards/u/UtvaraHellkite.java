@@ -27,17 +27,18 @@
  */
 package mage.cards.u;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,7 +73,7 @@ public class UtvaraHellkite extends CardImpl {
     public UtvaraHellkite copy() {
         return new UtvaraHellkite(this);
     }
-    public class UtvaraHellkiteDragonToken extends Token {
+    public static class UtvaraHellkiteDragonToken extends Token {
 
         private UtvaraHellkiteDragonToken() {
             super("Dragon", "6/6 red Dragon creature token with flying");

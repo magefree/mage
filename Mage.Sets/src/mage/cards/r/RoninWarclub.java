@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,6 +45,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -120,7 +121,7 @@ public class RoninWarclub extends CardImpl {
         }
     }
     
-    private class RoninWarclubAttachEffect extends OneShotEffect {
+    private static class RoninWarclubAttachEffect extends OneShotEffect {
 
         public RoninWarclubAttachEffect() {
             super(Outcome.BoostCreature);

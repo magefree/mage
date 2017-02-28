@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -41,6 +40,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class ConvalescentCare extends CardImpl {
         return new ConvalescentCare(this);
     }
     
-    class FiveOrLessLifeCondition implements Condition {
+    static class FiveOrLessLifeCondition implements Condition {
 
         @Override
         public boolean apply(Game game, Ability source) {

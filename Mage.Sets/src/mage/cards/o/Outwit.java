@@ -27,24 +27,24 @@
  */
 package mage.cards.o;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
+import mage.filter.Filter;
+import mage.filter.FilterSpell;
+import mage.game.Game;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
+import mage.players.Player;
+import mage.target.Target;
+import mage.target.TargetObject;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.abilities.Ability;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.stack.StackObject;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.filter.Filter;
-import mage.filter.FilterSpell;
-import mage.players.Player;
-import mage.game.stack.Spell;
-import mage.target.TargetObject;
-import mage.target.Target;
 
 
 
@@ -74,7 +74,7 @@ public class Outwit extends CardImpl {
         return new Outwit(this);
     }
 
-    private class CustomTargetSpell extends TargetObject {
+    private static class CustomTargetSpell extends TargetObject {
 
         protected FilterSpell filter;
 

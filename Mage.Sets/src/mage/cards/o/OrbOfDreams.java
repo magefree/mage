@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -41,6 +40,8 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +65,7 @@ public class OrbOfDreams extends CardImpl {
         return new OrbOfDreams(this);
     }
 
-    private class OrbOfDreamsEffect extends ReplacementEffectImpl {
+    private static class OrbOfDreamsEffect extends ReplacementEffectImpl {
 
         OrbOfDreamsEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Tap, false);

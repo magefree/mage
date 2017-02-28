@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -48,6 +47,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +89,7 @@ public class GenjuOfTheCedars extends CardImpl {
         return new GenjuOfTheCedars(this);
     }
 
-    private class SpiritToken extends Token {
+    private static class SpiritToken extends Token {
 
         SpiritToken() {
             super("", "4/4 green Spirit creature");

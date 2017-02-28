@@ -27,13 +27,11 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -41,6 +39,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +66,7 @@ public class AuraBarbs extends CardImpl {
         return new AuraBarbs(this);
     }
 
-    private class AuraBarbsEffect extends OneShotEffect {
+    private static class AuraBarbsEffect extends OneShotEffect {
 
     public AuraBarbsEffect() {
             super(Outcome.Detriment);

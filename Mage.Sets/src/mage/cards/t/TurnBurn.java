@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -39,6 +38,8 @@ import mage.constants.Duration;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,7 +75,7 @@ public class TurnBurn extends SplitCard {
         return new TurnBurn(this);
     }
 
-    private class WeirdToken extends Token {
+    private static class WeirdToken extends Token {
 
         private WeirdToken() {
             super("Weird", "a red Weird with base power and toughness 0/1");

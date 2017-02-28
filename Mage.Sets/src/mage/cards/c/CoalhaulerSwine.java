@@ -68,7 +68,7 @@ public class CoalhaulerSwine extends CardImpl {
         return new CoalhaulerSwine(this);
     }
 
-    class CoalhaulerSwineEffect extends OneShotEffect {
+    static class CoalhaulerSwineEffect extends OneShotEffect {
 
         public CoalhaulerSwineEffect() {
             super(Outcome.Damage);

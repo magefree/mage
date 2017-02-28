@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,6 +48,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -77,7 +78,7 @@ public class PrimalPlasma extends CardImpl {
         return new PrimalPlasma(this);
     }
 
-    class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
+    static class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
 
         private static final String choice33 = "a 3/3 creature";
         private static final String choice22 = "a 2/2 creature with flying";

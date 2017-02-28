@@ -27,9 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,9 +36,12 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -68,7 +68,7 @@ public class AzoriusKeyrune extends CardImpl {
         return new AzoriusKeyrune(this);
     }
 
-    private class AzoriusKeyruneToken extends Token {
+    private static class AzoriusKeyruneToken extends Token {
         AzoriusKeyruneToken() {
             super("", "2/2 white and blue Bird artifact creature with flying");
             cardType.add(CardType.ARTIFACT);

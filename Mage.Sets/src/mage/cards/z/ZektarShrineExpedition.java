@@ -27,7 +27,6 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -50,6 +49,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -109,7 +110,7 @@ class ZektarShrineExpeditionEffect extends OneShotEffect {
         return true;
     }
 
-    class ElementalToken extends Token {
+    static class ElementalToken extends Token {
 
         public ElementalToken() {
             super("Elemental", "7/1 red Elemental creature token with trample and haste");

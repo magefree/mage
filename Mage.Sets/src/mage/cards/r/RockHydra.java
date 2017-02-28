@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -50,6 +49,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -83,7 +84,7 @@ public class RockHydra extends CardImpl {
         return new RockHydra(this);
     }
     
-    class RockHydraEffect extends PreventionEffectImpl {
+    static class RockHydraEffect extends PreventionEffectImpl {
 
         public RockHydraEffect() {
             super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);

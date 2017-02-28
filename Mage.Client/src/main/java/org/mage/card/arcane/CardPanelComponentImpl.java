@@ -2,24 +2,6 @@ package org.mage.card.arcane;
 
 import com.google.common.base.Function;
 import com.google.common.collect.MapMaker;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.UUID;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import mage.cards.action.ActionCallback;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ImageCaches;
@@ -34,10 +16,19 @@ import mage.view.StackAbilityView;
 import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
-import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.UUID;
+
+import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 
 /**
  * Class for drawing the mage card object by using a form based JComponent approach
@@ -84,7 +75,7 @@ public class CardPanelComponentImpl extends CardPanel {
 
     private final static Map<Key, BufferedImage> IMAGE_CACHE;
 
-    class Key {
+    static class Key {
 
         final int width;
         final int height;
@@ -341,7 +332,7 @@ public class CardPanelComponentImpl extends CardPanel {
 
         g2d.drawImage(
                 IMAGE_CACHE.get(
-                        new Key(getWidth(), getHeight(), getCardWidth(), getCardHeight(), getCardXOffset(), getCardYOffset(), 
+                        new Key(getWidth(), getHeight(), getCardWidth(), getCardHeight(), getCardXOffset(), getCardYOffset(),
                                 hasImage, isSelected(), isChoosable(), gameCard.isPlayable(), gameCard.isCanAttack())), 
                 0, 0, null);
         g2d.dispose();       

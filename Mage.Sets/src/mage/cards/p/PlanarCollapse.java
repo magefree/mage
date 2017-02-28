@@ -27,10 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,9 +35,13 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +70,7 @@ public class PlanarCollapse extends CardImpl {
         return new PlanarCollapse(this);
     }
     
-    class PlanarCollapseCondition implements mage.abilities.condition.Condition {
+    static class PlanarCollapseCondition implements mage.abilities.condition.Condition {
 
         @Override
         public boolean apply(Game game, Ability source) {

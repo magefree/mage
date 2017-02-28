@@ -290,7 +290,7 @@ public class SwissPairingMinimalWeightMatching {
         }
     }
 
-    class PlayerInfo {
+    static class PlayerInfo {
         public int id;
 
         public TournamentPlayer tournamentPlayer;

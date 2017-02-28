@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,6 +40,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +71,7 @@ public class VulshokBattlemaster extends CardImpl {
         return new VulshokBattlemaster(this);
     }
 
-    class VulshokBattlemasterEffect extends OneShotEffect {
+    static class VulshokBattlemasterEffect extends OneShotEffect {
 
         public VulshokBattlemasterEffect() {
             super(Outcome.Benefit);

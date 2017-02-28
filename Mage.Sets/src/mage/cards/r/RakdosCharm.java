@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -44,6 +43,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +80,7 @@ public class RakdosCharm extends CardImpl {
         return new RakdosCharm(this);
     }
 
-    private class RakdosCharmDamageEffect extends OneShotEffect {
+    private static class RakdosCharmDamageEffect extends OneShotEffect {
 
     public RakdosCharmDamageEffect() {
             super(Outcome.Detriment);

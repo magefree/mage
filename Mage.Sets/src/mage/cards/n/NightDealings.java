@@ -27,8 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,11 +34,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -53,6 +47,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -122,7 +119,7 @@ public class NightDealings extends CardImpl {
         }
     }
 
-    private class NightDealingsEffect extends OneShotEffect {
+    private static class NightDealingsEffect extends OneShotEffect {
 
         public NightDealingsEffect() {
             super(Outcome.Damage);
@@ -152,7 +149,7 @@ public class NightDealings extends CardImpl {
         }
     }
 
-    private class NightDealingsSearchEffect extends OneShotEffect {
+    private static class NightDealingsSearchEffect extends OneShotEffect {
 
         public NightDealingsSearchEffect() {
             super(Outcome.DrawCard);

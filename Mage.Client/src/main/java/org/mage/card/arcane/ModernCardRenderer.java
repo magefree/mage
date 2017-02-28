@@ -5,12 +5,17 @@
  */
 package org.mage.card.arcane;
 
+import mage.ObjectColor;
+import mage.cards.FrameStyle;
+import mage.client.dialog.PreferencesDialog;
+import mage.constants.CardType;
+import mage.view.CardView;
+import mage.view.PermanentView;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
 import java.awt.*;
-import java.awt.font.FontRenderContext;
-import java.awt.font.LineBreakMeasurer;
-import java.awt.font.TextAttribute;
-import java.awt.font.TextLayout;
-import java.awt.font.TextMeasurer;
+import java.awt.font.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.RasterFormatException;
@@ -22,14 +27,6 @@ import java.text.CharacterIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.swing.ImageIcon;
-import mage.ObjectColor;
-import mage.cards.FrameStyle;
-import mage.client.dialog.PreferencesDialog;
-import mage.constants.CardType;
-import mage.view.CardView;
-import mage.view.PermanentView;
-import org.apache.log4j.Logger;
 
 
 /*
@@ -721,7 +718,7 @@ public class ModernCardRenderer extends CardRenderer {
     // Draw the card's textbox in a given rect
     protected boolean loyaltyAbilityColorToggle = false;
 
-    private class RuleLayout {
+    private static class RuleLayout {
 
         public List<AttributedString> attributedRules;
         public int remainingHeight;

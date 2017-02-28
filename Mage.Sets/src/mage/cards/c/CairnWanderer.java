@@ -27,38 +27,21 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.ChangelingAbility;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FearAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.LandwalkAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.ReachAbility;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,7 +72,7 @@ public class CairnWanderer extends CardImpl {
         return new CairnWanderer(this);
     }
 
-    class CairnWandererEffect extends ContinuousEffectImpl {
+    static class CairnWandererEffect extends ContinuousEffectImpl {
 
         public CairnWandererEffect() {
             super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

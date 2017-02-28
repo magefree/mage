@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +43,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +102,7 @@ class KalitasDestroyEffect extends OneShotEffect {
         return true;
     }
 
-    class VampireToken extends Token {
+    static class VampireToken extends Token {
         public VampireToken(int tokenPower, int tokenToughness) {
             super("Vampire", new StringBuilder(tokenPower).append('/').append(tokenToughness).append(" black Vampire creature token").toString());
             cardType.add(CardType.CREATURE);

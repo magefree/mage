@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,6 +40,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +70,7 @@ public class SilumgarMonument extends CardImpl {
         return new SilumgarMonument(this);
     }
     
-private class OjutaiMonumentToken extends Token {
+private static class OjutaiMonumentToken extends Token {
         OjutaiMonumentToken() {
             super("", "4/4 blue and black Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);

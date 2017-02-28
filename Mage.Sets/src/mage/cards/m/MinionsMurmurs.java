@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -37,6 +36,8 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public class MinionsMurmurs extends CardImpl {
         return new MinionsMurmurs(this);
     }
 
-    class MinionsMurmursEffect extends OneShotEffect {
+    static class MinionsMurmursEffect extends OneShotEffect {
 
         public MinionsMurmursEffect() {
             super(Outcome.DrawCard);

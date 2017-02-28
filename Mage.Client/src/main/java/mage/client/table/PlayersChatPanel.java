@@ -33,28 +33,8 @@
  */
 package mage.client.table;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.swing.Icon;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanelBasic;
-import static mage.client.chat.ChatPanelBasic.CHAT_ALPHA;
-import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_ORDER;
-import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_WIDTH;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.TableUtil;
@@ -63,6 +43,22 @@ import mage.remote.MageRemoteException;
 import mage.view.RoomUsersView;
 import mage.view.UsersView;
 import net.java.balloontip.utils.ToolTipUtils;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.util.*;
+import java.util.List;
+
+import static mage.client.chat.ChatPanelBasic.CHAT_ALPHA;
+import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_ORDER;
+import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_WIDTH;
 
 /**
  *
@@ -391,7 +387,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTablePlayers;
     // End of variables declaration//GEN-END:variables
 
-    class ColumnHeaderToolTips extends MouseMotionAdapter {
+    static class ColumnHeaderToolTips extends MouseMotionAdapter {
 
         int curCol;
         final Map<Integer, String> tips = new HashMap<>();

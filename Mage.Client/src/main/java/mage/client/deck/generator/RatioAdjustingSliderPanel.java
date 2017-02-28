@@ -30,7 +30,7 @@ package mage.client.deck.generator;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +42,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
     private final List<JLabel> textLabels = new ArrayList<>();
     private AdjustingSliderGroup sg;
 
-    private class JStorageSlider extends JSlider {
+    private static class JStorageSlider extends JSlider {
 
         // Slider stores its initial value to revert to when reset
         private final int defaultValue;
@@ -74,7 +74,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
 
     }
 
-    private class AdjustingSliderGroup
+    private static class AdjustingSliderGroup
     {
         private final ArrayList<JStorageSlider> storageSliders;
         private int sliderIndex = 0;

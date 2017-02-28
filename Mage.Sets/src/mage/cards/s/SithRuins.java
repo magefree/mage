@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -47,6 +45,9 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -74,7 +75,7 @@ public class SithRuins extends CardImpl {
         return new SithRuins(this);
     }
 
-    public class SithRuinsAbility extends ActivatedAbilityImpl {
+    public static class SithRuinsAbility extends ActivatedAbilityImpl {
 
         public SithRuinsAbility(SithRuinsAbility ability) {
             super(ability);

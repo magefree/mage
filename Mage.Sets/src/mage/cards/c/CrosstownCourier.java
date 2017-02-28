@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -42,6 +41,8 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +70,7 @@ public class CrosstownCourier extends CardImpl {
         return new CrosstownCourier(this);
     }
 
-    class CrosstownCourierTriggeredAbility extends TriggeredAbilityImpl {
+    static class CrosstownCourierTriggeredAbility extends TriggeredAbilityImpl {
 
         public CrosstownCourierTriggeredAbility() {
             super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(0), false);

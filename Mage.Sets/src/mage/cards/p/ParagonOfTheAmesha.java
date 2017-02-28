@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,14 +40,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +87,7 @@ public class ParagonOfTheAmesha extends CardImpl {
         return new ParagonOfTheAmesha(this);
     }
 
-    private class ParagonOfTheAmeshaEffect extends ContinuousEffectImpl {
+    private static class ParagonOfTheAmeshaEffect extends ContinuousEffectImpl {
 
         public ParagonOfTheAmeshaEffect() {
             super(Duration.EndOfTurn, Outcome.BecomeCreature);

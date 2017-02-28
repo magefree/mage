@@ -27,24 +27,25 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +76,7 @@ public class Pariah extends CardImpl {
         return new Pariah(this);
     }
 
-    class PariahEffect extends ReplacementEffectImpl {
+    static class PariahEffect extends ReplacementEffectImpl {
         PariahEffect() {
             super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
             staticText = "All damage that would be dealt to you is dealt to enchanted creature instead";

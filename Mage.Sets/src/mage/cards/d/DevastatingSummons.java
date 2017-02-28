@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
@@ -39,6 +38,8 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +96,7 @@ class DevastatingSummonsEffect extends OneShotEffect {
         return new DevastatingSummonsEffect(this);
     }
 
-    class ElementalToken extends Token {
+    static class ElementalToken extends Token {
 
         public ElementalToken() {
             super("Elemental", "X/X red Elemental creature");

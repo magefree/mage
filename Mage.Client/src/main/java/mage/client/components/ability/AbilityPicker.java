@@ -1,10 +1,5 @@
 package mage.client.components.ability;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.List;
-import javax.swing.*;
 import mage.client.SessionHandler;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
@@ -18,6 +13,12 @@ import org.jdesktop.swingx.JXPanel;
 import org.jsoup.Jsoup;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.util.List;
 
 /**
  * Dialog for choosing abilities.
@@ -233,7 +234,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         action.actionPerformed(null);
     }
 
-    public class ImageRenderer2 extends JEditorPane implements ListCellRenderer {
+    public static class ImageRenderer2 extends JEditorPane implements ListCellRenderer {
 
         public final Map<String, String> cache = new HashMap<String, String>();
 

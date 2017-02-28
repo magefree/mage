@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -46,6 +45,8 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 
 
@@ -81,7 +82,7 @@ public class ChimericEgg extends CardImpl {
         return new ChimericEgg(this);
     }
 
-    private class ChimericEggToken extends Token {
+    private static class ChimericEggToken extends Token {
         ChimericEggToken() {
             super("", "6/6 Construct artifact creature with trample");
             cardType.add(CardType.ARTIFACT);

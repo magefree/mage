@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -47,6 +46,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -80,7 +81,7 @@ public class CrazedArmodon extends CardImpl {
         return new CrazedArmodon(this);
     }
 
-    class CrazedArmodonDelayedTriggeredAbility extends DelayedTriggeredAbility {
+    static class CrazedArmodonDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
         public CrazedArmodonDelayedTriggeredAbility() {
             super(new DestroySourceEffect());

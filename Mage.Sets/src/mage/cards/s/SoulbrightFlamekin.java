@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -46,6 +45,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +80,7 @@ public class SoulbrightFlamekin extends CardImpl {
 
 class SoulbrightFlamekinEffect extends OneShotEffect {
 
-    class ActivationInfo {
+    static class ActivationInfo {
         public int zoneChangeCounter;
         public int turn;
         public int activations;

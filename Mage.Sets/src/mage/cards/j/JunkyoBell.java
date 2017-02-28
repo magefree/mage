@@ -27,7 +27,6 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -47,6 +46,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -74,7 +75,7 @@ public class JunkyoBell extends CardImpl {
         return new JunkyoBell(this);
     }
 
-    private class JunkyoBellSacrificeEffect extends OneShotEffect {
+    private static class JunkyoBellSacrificeEffect extends OneShotEffect {
 
         public JunkyoBellSacrificeEffect() {
             super(Outcome.Sacrifice);

@@ -27,18 +27,18 @@
  */
 package mage.cards.s;
 
-import java.util.Objects;
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +64,7 @@ public class SkullRend extends CardImpl {
         return new SkullRend(this);
     }
 
-    private class SkullRendEffect extends OneShotEffect {
+    private static class SkullRendEffect extends OneShotEffect {
 
         public SkullRendEffect() {
             super(Outcome.Damage);

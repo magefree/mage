@@ -37,7 +37,7 @@ public class MultiConnectTest {
     private final Object sync = new Object();
     private MageUI ui;
 
-    private class ClientMock implements MageClient {
+    private static class ClientMock implements MageClient {
 
         private Session session;
         private final String username;

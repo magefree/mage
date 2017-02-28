@@ -27,7 +27,6 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,6 +44,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -77,7 +78,7 @@ public class InnerFlameIgniter extends CardImpl {
 
 class InnerFlameIgniterEffect extends OneShotEffect {
 
-    class ActivationInfo {
+    static class ActivationInfo {
         public int zoneChangeCounter;
         public int turn;
         public int activations;

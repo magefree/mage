@@ -27,12 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -43,16 +37,16 @@ import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.cards.y.YixlidJailer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.cards.y.YixlidJailer;
+
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -80,7 +74,7 @@ public class NecroticOoze extends CardImpl {
         return new NecroticOoze(this);
     }
 
-    class NecroticOozeEffect extends ContinuousEffectImpl {
+    static class NecroticOozeEffect extends ContinuousEffectImpl {
 
         public NecroticOozeEffect() {
             super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
