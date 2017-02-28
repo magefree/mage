@@ -36,7 +36,7 @@ public class StackDialog extends IDialogPanel {
     
     private final UUID gameId;
 
-    private class CustomLabel extends JLabel {
+    private static class CustomLabel extends JLabel {
 
         @Override
         public void paintComponent(Graphics g) {

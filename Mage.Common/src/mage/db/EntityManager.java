@@ -49,7 +49,7 @@ public enum EntityManager {
     }
 
     public List<Log> getAllLogs() {
-        List<Log> logs = new ArrayList<Log>();
+        List<Log> logs = new ArrayList<>();
         try {
             logs = logDao.queryForAll();
         } catch (SQLException ex) {
@@ -64,7 +64,7 @@ public enum EntityManager {
     }
 
     public List<Feedback> getAllFeedbacks() {
-        List<Feedback> feedbacks = new ArrayList<Feedback>();
+        List<Feedback> feedbacks = new ArrayList<>();
         try {
             feedbacks = feedbackDao.queryForAll();
         } catch (SQLException ex) {

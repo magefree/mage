@@ -8,16 +8,7 @@ package org.mage.plugins.card.dl.beans.collections;
 
 
 import java.io.Serializable;
-import java.util.AbstractList;
-import java.util.AbstractMap;
-import java.util.AbstractSequentialList;
-import java.util.AbstractSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.RandomAccess;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -34,18 +25,18 @@ public final class ListenableCollections {
 
     public static <E> List<E> listenableList(List<E> list, ListListener<E> listener) {
         if (list instanceof RandomAccess) {
-            return new ListenableList<E>(list, listener);
+            return new ListenableList<>(list, listener);
         } else {
-            return new ListenableSequentialList<E>(list, listener);
+            return new ListenableSequentialList<>(list, listener);
         }
     }
 
     public static <E> Set<E> listenableSet(Set<E> set, SetListener<E> listener) {
-        return new ListenableSet<E>(set, listener);
+        return new ListenableSet<>(set, listener);
     }
 
     public static <K, V> Map<K, V> listenableMap(Map<K, V> map, MapListener<K, V> listener) {
-        return new ListenableMap<K, V>(map, listener);
+        return new ListenableMap<>(map, listener);
     }
 
     public interface ListListener<E> extends Serializable {

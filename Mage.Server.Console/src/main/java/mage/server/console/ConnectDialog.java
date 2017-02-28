@@ -34,7 +34,12 @@
 
 package mage.server.console;
 
-import java.awt.Cursor;
+import mage.remote.Connection;
+import mage.remote.Connection.ProxyType;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -43,13 +48,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-import mage.remote.Connection;
-import mage.remote.Connection.ProxyType;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -166,40 +164,20 @@ public class ConnectDialog extends JDialog {
         });
 
         btnConnect.setText("Connect");
-        btnConnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConnectActionPerformed(evt);
-            }
-        });
+        btnConnect.addActionListener(evt -> btnConnectActionPerformed(evt));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         chkAutoConnect.setText("Automatically connect to this server next time");
-        chkAutoConnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkAutoConnectActionPerformed(evt);
-            }
-        });
+        chkAutoConnect.addActionListener(evt -> chkAutoConnectActionPerformed(evt));
 
         jButton1.setText("Find...");
         jButton1.setToolTipText("Find public server");
         jButton1.setName("findServerBtn"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                findPublicServerActionPerformed(evt);
-            }
-        });
+        jButton1.addActionListener(evt -> findPublicServerActionPerformed(evt));
 
-        cbProxyType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbProxyTypeActionPerformed(evt);
-            }
-        });
+        cbProxyType.addActionListener(evt -> cbProxyTypeActionPerformed(evt));
 
         lblProxyType.setLabelFor(cbProxyType);
         lblProxyType.setText("Proxy:");
@@ -254,11 +232,7 @@ public class ConnectDialog extends JDialog {
 
         lblProxyPassword.setText("Password:");
 
-        txtPasswordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordFieldActionPerformed(evt);
-            }
-        });
+        txtPasswordField.addActionListener(evt -> txtPasswordFieldActionPerformed(evt));
 
         javax.swing.GroupLayout pnlProxyAuthLayout = new javax.swing.GroupLayout(pnlProxyAuth);
         pnlProxyAuth.setLayout(pnlProxyAuthLayout);

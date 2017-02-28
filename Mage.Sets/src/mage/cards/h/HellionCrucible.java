@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
@@ -81,7 +81,7 @@ public class HellionCrucible extends CardImpl {
         return new HellionCrucible(this);
     }
 
-    class HellionToken extends Token {
+    static class HellionToken extends Token {
         public HellionToken() {
             super("Hellion", "4/4 red Hellion creature token with haste");
             cardType.add(CardType.CREATURE);

@@ -27,9 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -40,6 +37,10 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritWhiteToken;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -85,7 +86,7 @@ class MarchOfSoulsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Permanent> creatures = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(),
             source.getControllerId(), source.getSourceId(), game);
-        HashMap<UUID, Integer> playersWithCreatures = new HashMap<UUID, Integer>();
+        HashMap<UUID, Integer> playersWithCreatures = new HashMap<>();
         for(Permanent p : creatures) {
             UUID controllerId = p.getControllerId();
             if(p.destroy(source.getSourceId(), game, true)) {

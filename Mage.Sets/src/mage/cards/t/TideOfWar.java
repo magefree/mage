@@ -27,9 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -45,6 +42,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -126,7 +127,7 @@ class TideOfWarEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Set<UUID> toSacrifice = new HashSet<UUID>();
+            Set<UUID> toSacrifice = new HashSet<>();
             if (controller.flipCoin(game)) {
                 // each blocking creature is sacrificed by its controller
                 for (CombatGroup combatGroup: game.getCombat().getGroups()) {

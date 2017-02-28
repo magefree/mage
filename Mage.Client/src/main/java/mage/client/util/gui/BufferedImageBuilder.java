@@ -72,7 +72,7 @@ public class BufferedImageBuilder {
         }
     }
 
-    class ImageLoadStatus {
+    static class ImageLoadStatus {
         public boolean widthDone = false;
         public boolean heightDone = false;
     }

@@ -33,7 +33,7 @@ public final class Statistics {
 
     private static List<Integer> displayTop3(Map<String, Integer> nicknames) {
         Collection<Integer> values = nicknames.values();
-        List<Integer> games = new ArrayList<Integer>();
+        List<Integer> games = new ArrayList<>();
         games.addAll(values);
         Collections.sort(games, new Comparator<Integer>() {
             @Override
@@ -43,7 +43,7 @@ public final class Statistics {
         });
 
         // Top-3
-        List<Integer> numbersToFind = new ArrayList<Integer>();
+        List<Integer> numbersToFind = new ArrayList<>();
         for (Integer numberOfGames : games) {
             numbersToFind.add(numberOfGames);
             if (numbersToFind.size() == 3) {
@@ -51,7 +51,7 @@ public final class Statistics {
             }
         }
 
-        Map<Integer, String> players = new LinkedHashMap<Integer, String>();
+        Map<Integer, String> players = new LinkedHashMap<>();
         for (Map.Entry<String, Integer> entry : nicknames.entrySet()) {
             if (check(numbersToFind, entry.getValue())) {
                 players.put(entry.getValue(), entry.getKey());
@@ -70,7 +70,7 @@ public final class Statistics {
 
     private static Map<String, Integer> displayCommonNumbers(List<Log> logs) {
         int count = 0;
-        Map<String, Integer> nicknames = new HashMap<String, Integer>();
+        Map<String, Integer> nicknames = new HashMap<>();
         for (Log log : logs) {
             if (log.getKey().equals("gameStarted")) {
                 if (log.getArguments() != null) {

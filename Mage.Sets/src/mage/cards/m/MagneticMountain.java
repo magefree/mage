@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -50,6 +49,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 
 
@@ -122,7 +123,7 @@ class MagneticMountainEffect extends DoIfCostPaid {
         return true;
         
     }
-    class MagneticMountainPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {        
+    static class MagneticMountainPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
     @Override
     public boolean apply(ObjectPlayer<Permanent> input, Game game) {
         return input.getObject().isTapped();

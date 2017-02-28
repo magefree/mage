@@ -135,12 +135,12 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (!"".equals(duration.toString())) {
+        if (duration.toString() != null && !duration.toString().isEmpty()) {
             sb.append(duration.toString()).append(", ");
         }
         sb.append("all ");
         sb.append(filter.getMessage());
-        if ("".equals(duration.toString())) {
+        if (duration.toString() != null && duration.toString().isEmpty()) {
             sb.append(" are ");
         } else {
             sb.append(" become ");

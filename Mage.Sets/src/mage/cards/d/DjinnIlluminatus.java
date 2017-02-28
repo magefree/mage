@@ -27,9 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,16 +35,15 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -107,11 +103,7 @@ class DjinnIlluminatusGainReplicateEffect extends ContinuousEffectImpl {
             if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
                 Spell spell = (Spell) stackObject;
                 if (filter.match(stackObject, game)) {
-                    ReplicateAbility replicateAbility = replicateAbilities.get(spell.getId());
-                    if (replicateAbility == null) {
-                        replicateAbility = new ReplicateAbility(spell.getCard(), spell.getSpellAbility().getManaCosts().getText());
-                        replicateAbilities.put(spell.getId(), replicateAbility);
-                    }
+                    ReplicateAbility replicateAbility = replicateAbilities.computeIfAbsent(spell.getId(), k -> new ReplicateAbility(spell.getCard(), spell.getSpellAbility().getManaCosts().getText()));
                     game.getState().addOtherAbility(spell.getCard(), replicateAbility, false); // Do not copy because paid and # of activations state is handled in the baility
                 }
             }

@@ -27,9 +27,6 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -41,9 +38,15 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -73,7 +76,7 @@ public class IzzetKeyrune extends CardImpl {
         return new IzzetKeyrune(this);
     }
 
-    private class IzzetKeyruneEffect extends OneShotEffect {
+    private static class IzzetKeyruneEffect extends OneShotEffect {
 
         public IzzetKeyruneEffect() {
             super(Outcome.DrawCard);
@@ -102,7 +105,7 @@ public class IzzetKeyrune extends CardImpl {
         }
     }
 
-    private class IzzetKeyruneToken extends Token {
+    private static class IzzetKeyruneToken extends Token {
         IzzetKeyruneToken() {
             super("", "2/1 blue and red Elemental artifact creature");
             cardType.add(CardType.ARTIFACT);

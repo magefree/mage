@@ -65,7 +65,7 @@ public class HungryFlames extends CardImpl {
         return new HungryFlames(this);
     }
 
-    private class HungryFlamesEffect extends OneShotEffect {
+    private static class HungryFlamesEffect extends OneShotEffect {
         HungryFlamesEffect() {
             super(Outcome.Damage);
             this.staticText = "{this} deals 3 damage to target creature and 2 damage to target player";

@@ -33,24 +33,22 @@
  */
 package mage.server.console;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import static javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN;
-import static javax.swing.JTable.AUTO_RESIZE_OFF;
-import javax.swing.SwingWorker;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableRowSorter;
 import mage.remote.Session;
 import mage.view.TableView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableRowSorter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+
+import static javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN;
+import static javax.swing.JTable.AUTO_RESIZE_OFF;
 
 /**
  *
@@ -161,42 +159,22 @@ public class ConsolePanel extends javax.swing.JPanel {
         jPanel4.setVerifyInputWhenFocusTarget(false);
 
         btnDisconnect.setText("Disconnect");
-        btnDisconnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDisconnectActionPerformed(evt);
-            }
-        });
+        btnDisconnect.addActionListener(evt -> btnDisconnectActionPerformed(evt));
 
         btnEndSession.setText("End session");
-        btnEndSession.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEndSessionActionPerformed(evt);
-            }
-        });
+        btnEndSession.addActionListener(evt -> btnEndSessionActionPerformed(evt));
 
         btnMuteUser.setText("Mute user");
         btnMuteUser.setActionCommand("Mute 1h");
-        btnMuteUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMuteUserActionPerformed(evt);
-            }
-        });
+        btnMuteUser.addActionListener(evt -> btnMuteUserActionPerformed(evt));
 
         btnDeActivate.setText("(de)activate");
         btnDeActivate.setActionCommand("Mute 1h");
-        btnDeActivate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeActivateActionPerformed(evt);
-            }
-        });
+        btnDeActivate.addActionListener(evt -> btnDeActivateActionPerformed(evt));
 
         btnLockUser.setText("Lock user");
         btnLockUser.setActionCommand("Mute 1h");
-        btnLockUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLockUserActionPerformed(evt);
-            }
-        });
+        btnLockUser.addActionListener(evt -> btnLockUserActionPerformed(evt));
 
         lblMinutes.setText("Minutes");
 
@@ -277,11 +255,7 @@ public class ConsolePanel extends javax.swing.JPanel {
         );
 
         btnRemoveTable.setText("Remove Table");
-        btnRemoveTable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveTableActionPerformed(evt);
-            }
-        });
+        btnRemoveTable.addActionListener(evt -> btnRemoveTableActionPerformed(evt));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);

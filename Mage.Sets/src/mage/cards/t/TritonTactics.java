@@ -27,13 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -57,6 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  *
@@ -254,11 +249,7 @@ class BlockedCreaturesWatcher extends Watcher {
         } else {
             attackerMap = new HashMap<>();
         }
-        attackers = attackerMap.get(zoneChangeCounter);
-        if (attackers == null) {
-            attackers = new HashSet<>();
-            attackerMap.put(zoneChangeCounter, attackers);
-        }
+        attackers = attackerMap.computeIfAbsent(zoneChangeCounter, k -> new HashSet<>());
         attackers.add(CardUtil.getCardZoneString(null, attackerId, game));
         game.getState().setValue("blockedAttackers" + getSourceId().toString(), attackerMap);
     }

@@ -1,14 +1,6 @@
 package org.mage.card.arcane;
 
 import com.google.common.collect.MapMaker;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Map;
-import java.util.UUID;
 import mage.cards.action.ActionCallback;
 import mage.constants.CardType;
 import mage.view.CardView;
@@ -18,9 +10,16 @@ import mage.view.StackAbilityView;
 import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
-import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Map;
+import java.util.UUID;
+
+import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 
 public class CardPanelRenderImpl extends CardPanel {
 
@@ -114,7 +113,7 @@ public class CardPanelRenderImpl extends CardPanel {
         return true;
     }
 
-    class ImageKey {
+    static class ImageKey {
 
         final BufferedImage artImage;
         final int width;
@@ -258,8 +257,8 @@ public class CardPanelRenderImpl extends CardPanel {
             // Try to get card image from cache based on our card characteristics
             ImageKey key
                     = new ImageKey(gameCard, artImage,
-                            getCardWidth(), getCardHeight(),
-                            isChoosable(), isSelected());
+                    getCardWidth(), getCardHeight(),
+                    isChoosable(), isSelected());
             cardImage = IMAGE_CACHE.computeIfAbsent(key, k -> renderCard());
 
             // No cached copy exists? Render one and cache it

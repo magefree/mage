@@ -27,19 +27,15 @@
  */
 package mage.cards;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.EnumMap;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.List;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -403,13 +399,7 @@ public abstract class ExpansionSet implements Serializable {
             savedCardsInfos = CardRepository.instance.findCards(criteria);
             // Workaround after card number is numeric
             if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                Iterator<CardInfo> iterator = savedCardsInfos.iterator();
-                while (iterator.hasNext()) {
-                    CardInfo next = iterator.next();
-                    if (Integer.valueOf(next.getCardNumber()) > maxCardNumberInBooster && !rarity.equals(Rarity.LAND)) {
-                        iterator.remove();
-                    }
-                }
+                savedCardsInfos.removeIf(next -> Integer.valueOf(next.getCardNumber()) > maxCardNumberInBooster && !rarity.equals(Rarity.LAND));
             }
 
             savedCards.put(rarity, savedCardsInfos);

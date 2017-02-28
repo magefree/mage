@@ -27,10 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,8 +36,12 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +69,7 @@ public class SecondChance extends CardImpl {
         return new SecondChance(this);
     }
     
-    class FiveOrLessLifeCondition implements Condition {
+    static class FiveOrLessLifeCondition implements Condition {
 
         @Override
         public boolean apply(Game game, Ability source) {

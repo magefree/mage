@@ -265,7 +265,7 @@ public class TokensMtgImageSource implements CardImageSource {
         return newTokensData;
     }
 
-    final class TokenData {
+    static final class TokenData {
 
         final private String name;
         final private String number;

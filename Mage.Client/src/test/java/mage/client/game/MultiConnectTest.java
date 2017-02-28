@@ -37,7 +37,7 @@ public class MultiConnectTest {
     private final Object sync = new Object();
     private MageUI ui;
 
-    private class ClientMock implements MageClient {
+    private static class ClientMock implements MageClient {
 
         private Session session;
         private final String username;
@@ -105,20 +105,12 @@ public class MultiConnectTest {
     }
 
     private void connect(final int index) throws Exception {
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread t, Throwable e) {
-                logger.fatal(null, e);
-            }
-        });
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                String username = "player" + index;
-                ClientMock client = new ClientMock(username);
-                client.connect();
-                latch.countDown();
-            }
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.fatal(null, e));
+        SwingUtilities.invokeLater(() -> {
+            String username = "player" + index;
+            ClientMock client = new ClientMock(username);
+            client.connect();
+            latch.countDown();
         });
     }
 

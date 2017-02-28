@@ -27,9 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,9 +36,12 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -68,7 +68,7 @@ public class GolgariKeyrune extends CardImpl {
         return new GolgariKeyrune(this);
     }
 
-    private class GolgariKeyruneToken extends Token {
+    private static class GolgariKeyruneToken extends Token {
         GolgariKeyruneToken() {
             super("", "2/2 black and green Insect artifact creature with deathtouch");
             cardType.add(CardType.ARTIFACT);

@@ -27,9 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
@@ -47,6 +44,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -94,7 +95,7 @@ class MurderousSpoilsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (target != null) {
-            List<Permanent> attachments = new ArrayList<Permanent>();
+            List<Permanent> attachments = new ArrayList<>();
             for (UUID uuid : target.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
                 if (attached.getSubtype(game).contains("Equipment")) {

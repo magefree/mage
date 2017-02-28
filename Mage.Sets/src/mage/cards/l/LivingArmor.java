@@ -27,7 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -42,6 +41,8 @@ import mage.counters.BoostCounter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ public class LivingArmor extends CardImpl {
         return new LivingArmor(this);
     }
 
-    class LivingArmorEffect extends OneShotEffect {
+    static class LivingArmorEffect extends OneShotEffect {
 
         public LivingArmorEffect() {
             super(Outcome.BoostCreature);

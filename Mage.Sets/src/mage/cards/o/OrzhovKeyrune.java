@@ -27,10 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -40,7 +36,12 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ public class OrzhovKeyrune extends CardImpl {
         return new OrzhovKeyrune(this);
     }
 
-    private class OrzhovKeyruneToken extends Token {
+    private static class OrzhovKeyruneToken extends Token {
         OrzhovKeyruneToken() {
             super("Thrull", "1/4 white and black Thrull artifact creature with lifelink");
             cardType.add(CardType.ARTIFACT);

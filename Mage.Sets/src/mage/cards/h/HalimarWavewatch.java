@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -38,6 +37,7 @@ import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
+import mage.constants.CardType;
 
 import java.util.UUID;
 
@@ -58,11 +58,11 @@ public class HalimarWavewatch extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}")));
 
-        Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
+        Abilities<Ability> levelAbilities = new AbilitiesImpl<>();
         levelAbilities.add(new IslandwalkAbility());
 
         this.addAbilities(LevelerCardBuilder.construct(
-                new LevelerCardBuilder.LevelAbility(1, 4, new AbilitiesImpl<Ability>(), 0, 6),
+                new LevelerCardBuilder.LevelAbility(1, 4, new AbilitiesImpl<>(), 0, 6),
                 new LevelerCardBuilder.LevelAbility(5, -1, levelAbilities, 6, 6)
         ));
         setMaxLevelCounters(5);

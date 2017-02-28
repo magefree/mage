@@ -27,21 +27,22 @@
  */
 package mage.cards.e;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.watchers.common.SourceDidDamageWatcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -119,7 +120,7 @@ class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent {
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get("SourceDidDamageWatcher");
         if (watcher != null) {
             for (UUID targetId : availablePossibleTargets) {

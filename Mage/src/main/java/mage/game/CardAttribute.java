@@ -5,11 +5,12 @@
  */
 package mage.game;
 
+import mage.ObjectColor;
+import mage.cards.Card;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import mage.ObjectColor;
-import mage.cards.Card;
 
 /**
  * This class saves changed attributes of cards (e.g. in graveyard, exile or player hands or libraries).
@@ -23,7 +24,7 @@ public class CardAttribute  implements Serializable {
 
     public CardAttribute(Card card) {
         color = card.getColor(null).copy();
-        subtype = new ArrayList<String>(card.getSubtype(null));
+        subtype = new ArrayList<>(card.getSubtype(null));
     }
 
     public CardAttribute(CardAttribute cardAttribute) {

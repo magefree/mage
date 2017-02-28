@@ -28,8 +28,6 @@
 
 package mage.player.ai.simulators;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.ActivatedAbility;
 import mage.cards.Card;
 import mage.game.Game;
@@ -38,6 +36,9 @@ import mage.player.ai.ComputerPlayer;
 import mage.player.ai.PermanentEvaluator;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -45,8 +46,8 @@ import mage.players.Player;
 public class ActionSimulator {
 
     private ComputerPlayer player;
-    private List<Card> playableInstants = new ArrayList<Card>();
-    private List<ActivatedAbility> playableAbilities = new ArrayList<ActivatedAbility>();
+    private List<Card> playableInstants = new ArrayList<>();
+    private List<ActivatedAbility> playableAbilities = new ArrayList<>();
 
     private Game game;
 

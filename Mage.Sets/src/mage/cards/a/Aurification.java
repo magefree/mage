@@ -39,7 +39,10 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
@@ -95,7 +98,7 @@ public class Aurification extends CardImpl {
         return new Aurification(this);
     }
 
-    public class AddGoldCountersAbility extends TriggeredAbilityImpl {
+    public static class AddGoldCountersAbility extends TriggeredAbilityImpl {
 
         public AddGoldCountersAbility() {
             super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.GOLD.createInstance()));
@@ -136,7 +139,7 @@ public class Aurification extends CardImpl {
 
     }
 
-    public  class RemoveAllGoldCountersEffect extends OneShotEffect {
+    public static class RemoveAllGoldCountersEffect extends OneShotEffect {
         public RemoveAllGoldCountersEffect() {
             super(Outcome.Neutral);
             this.staticText = "remove all gold counters from all creatures";

@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
@@ -48,6 +47,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,7 +82,7 @@ public class PhylacteryLich extends CardImpl {
         return new PhylacteryLich(this);
     }
 
-    class PhylacteryLichAbility extends StateTriggeredAbility {
+    static class PhylacteryLichAbility extends StateTriggeredAbility {
 
         public PhylacteryLichAbility() {
             super(Zone.BATTLEFIELD, new SacrificeSourceEffect());

@@ -103,24 +103,21 @@ public class LoadCallbackClient implements CallbackClient {
     }
 
     private void startControlThread() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    controlCount++;
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    if (controlCount > 5) {
-                        log.warn("Game seems freezed. Sending boolean message to server.");
-                        session.sendPlayerBoolean(gameId, false);
-                        controlCount = 0;
-                    }
+        new Thread(() -> {
+            while (true) {
+                controlCount++;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-
+                if (controlCount > 5) {
+                    log.warn("Game seems freezed. Sending boolean message to server.");
+                    session.sendPlayerBoolean(gameId, false);
+                    controlCount = 0;
+                }
             }
+
         }).start();
     }
 }

@@ -30,9 +30,9 @@ public class ArrowBuilder {
     /**
      * Stores arrow panels per game
      */
-    private final Map<UUID, JPanel> arrowPanels = new HashMap<UUID, JPanel>();
+    private final Map<UUID, JPanel> arrowPanels = new HashMap<>();
 
-    private final Map<UUID, Map<Type, List<Arrow>>> map = new HashMap<UUID, Map<Type, java.util.List<Arrow>>>();
+    private final Map<UUID, Map<Type, List<Arrow>>> map = new HashMap<>();
 
     private int currentWidth;
     private int currentHeight;
@@ -103,16 +103,8 @@ public class ArrowBuilder {
 
         synchronized (map) {
             p.add(arrow);
-            Map<Type, java.util.List<Arrow>> innerMap = map.get(gameId);
-            if (innerMap == null) {
-                innerMap = new HashMap<Type, List<Arrow>>();
-                map.put(gameId, innerMap);
-            }
-            java.util.List<Arrow> arrows = innerMap.get(type);
-            if (arrows == null) {
-                arrows = new ArrayList<Arrow>();
-                innerMap.put(type, arrows);
-            }
+            Map<Type, java.util.List<Arrow>> innerMap = map.computeIfAbsent(gameId, k -> new HashMap<>());
+            java.util.List<Arrow> arrows = innerMap.computeIfAbsent(type, k -> new ArrayList<>());
             arrows.add(arrow);
         }
 
@@ -143,13 +135,13 @@ public class ArrowBuilder {
         if (map.containsKey(gameId)) {
             Map<Type, List<Arrow>> innerMap = map.get(gameId);
             java.util.List<Arrow> arrows = innerMap.get(type);
-            if (arrows != null && arrows.size() > 0) {
+            if (arrows != null && !arrows.isEmpty()) {
                 JPanel p = getArrowsPanel(gameId);
                 synchronized (map) {
                     for (Arrow arrow : arrows) {
                         p.remove(arrow);
                     }
-                    innerMap.put(type, new ArrayList<Arrow>());
+                    innerMap.put(type, new ArrayList<>());
                 }
                 p.revalidate();
                 p.repaint();

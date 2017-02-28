@@ -135,7 +135,7 @@ class CathedralMembraneEffect extends OneShotEffect {
 
 class CathedralMembraneWatcher extends Watcher {
 
-    public List<UUID> blockedCreatures = new ArrayList<UUID>();
+    public List<UUID> blockedCreatures = new ArrayList<>();
 
     public CathedralMembraneWatcher() {
         super("CathedralMembraneWatcher", WatcherScope.CARD);

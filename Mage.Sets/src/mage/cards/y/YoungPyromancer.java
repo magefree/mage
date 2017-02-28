@@ -27,7 +27,6 @@
  */
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,6 +38,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 import mage.util.RandomUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -76,7 +77,7 @@ public class YoungPyromancer extends CardImpl {
         return new YoungPyromancer(this);
     }
 
-    class ElementalToken extends Token {
+    static class ElementalToken extends Token {
 
         public ElementalToken() {
             super("Elemental", "1/1 red Elemental creature");

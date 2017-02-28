@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -40,6 +39,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +64,7 @@ public class NoMercy extends CardImpl {
         return new NoMercy(this);
     }
 
-    public class NoMercyTriggeredAbility extends TriggeredAbilityImpl {
+    public static class NoMercyTriggeredAbility extends TriggeredAbilityImpl {
 
         public NoMercyTriggeredAbility() {
             super(Zone.BATTLEFIELD, new DestroyTargetEffect());

@@ -9,18 +9,18 @@ import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.ext.dlg.DlgParams;
 import mage.client.components.ext.dlg.IDialogPanel;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.audio.AudioManager;
 import mage.client.util.Command;
 import mage.client.util.SettingsManager;
+import mage.client.util.audio.AudioManager;
 import mage.view.CardView;
 import mage.view.CardsView;
+import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.UUID;
-import org.mage.card.arcane.CardPanel;
 
 /**
  * @author mw, noxx
@@ -130,7 +130,7 @@ public class ChoiceDialog extends IDialogPanel {
             return;
         }
 
-        java.util.List<Component> toRemove = new ArrayList<Component>();
+        java.util.List<Component> toRemove = new ArrayList<>();
         for (int i = getComponentCount() - 1; i > 0; i--) {
             Component o = getComponent(i);
             if (o instanceof MageCard) {
@@ -141,7 +141,7 @@ public class ChoiceDialog extends IDialogPanel {
             remove(toRemove.get(i));
         }
 
-        java.util.List<CardView> cardList = new ArrayList<CardView>(cards.values());
+        java.util.List<CardView> cardList = new ArrayList<>(cards.values());
 
         int width = SettingsManager.getInstance().getCardSize().width;
         int height = SettingsManager.getInstance().getCardSize().height;

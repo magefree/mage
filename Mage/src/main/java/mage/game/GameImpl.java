@@ -27,19 +27,9 @@
  */
 package mage.game;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-
 import mage.MageException;
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.OpeningHandAction;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -53,24 +43,10 @@ import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.actions.impl.MageAction;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.MeldCard;
-import mage.cards.SplitCard;
-import mage.cards.SplitCardHalf;
+import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.PlayerAction;
-import mage.constants.RangeOfInfluence;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
@@ -89,14 +65,8 @@ import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.Listener;
-import mage.game.events.PlayerQueryEvent;
-import mage.game.events.PlayerQueryEventSource;
-import mage.game.events.TableEvent;
+import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.events.TableEventSource;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -119,14 +89,13 @@ import mage.util.MessageToClient;
 import mage.util.RandomUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watchers;
-import mage.watchers.common.BlockedAttackerWatcher;
-import mage.watchers.common.BloodthirstWatcher;
-import mage.watchers.common.CastSpellLastTurnWatcher;
-import mage.watchers.common.DamageDoneWatcher;
-import mage.watchers.common.MorbidWatcher;
-import mage.watchers.common.PlayerDamagedBySourceWatcher;
-import mage.watchers.common.PlayerLostLifeWatcher;
+import mage.watchers.common.*;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -2584,11 +2553,7 @@ public abstract class GameImpl implements Game, Serializable {
             // remembers if a object was in a zone during the resolution of an effect
             // e.g. Wrath destroys all and you the question is is the replacement effect to apply because the source was also moved by the same effect
             // because it ahppens all at the same time the replcaement effect has still to be applied
-            Set<UUID> idSet = shortLivingLKI.get(zone);
-            if (idSet == null) {
-                idSet = new HashSet<>();
-                shortLivingLKI.put(zone, idSet);
-            }
+            Set<UUID> idSet = shortLivingLKI.computeIfAbsent(zone, k -> new HashSet<>());
             idSet.add(objectId);
             if (object instanceof Permanent) {
                 Map<Integer, MageObject> lkiExtendedMap = lkiExtended.get(objectId);

@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -41,6 +40,8 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.RandomUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -99,7 +100,7 @@ class MoltenBirthEffect extends OneShotEffect {
         return false;
     }
 
-    class ElementalToken extends Token {
+    static class ElementalToken extends Token {
 
         public ElementalToken() {
             super("Elemental", "1/1 red Elemental creature");

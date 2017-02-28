@@ -34,7 +34,7 @@ public class JSONParser {
 
     private CachePolicy cachePolicy = CachePolicy.CACHE_ONE_LEVEL_ONLY;
 
-    private Map<String, Object> cache = new HashMap<String, Object>();
+    private Map<String, Object> cache = new HashMap<>();
 
     public void parseJSON(String jsonString) throws JSONValidationException {
         parseJSON(jsonString, true);

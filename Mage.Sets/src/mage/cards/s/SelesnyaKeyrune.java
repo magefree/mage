@@ -27,9 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,9 +35,12 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -67,7 +67,7 @@ public class SelesnyaKeyrune extends CardImpl {
         return new SelesnyaKeyrune(this);
     }
 
-    private class SelesnyaKeyruneToken extends Token {
+    private static class SelesnyaKeyruneToken extends Token {
         SelesnyaKeyruneToken() {
             super("", "3/3 green and white Wolf artifact creature");
             cardType.add(CardType.ARTIFACT);

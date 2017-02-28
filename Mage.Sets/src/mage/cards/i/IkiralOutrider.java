@@ -28,17 +28,17 @@
 
 package mage.cards.i;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
+import mage.constants.CardType;
 
 import java.util.UUID;
 
@@ -58,10 +58,10 @@ public class IkiralOutrider extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{4}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(VigilanceAbility.getInstance());
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(VigilanceAbility.getInstance());
 
         this.addAbilities(LevelerCardBuilder.construct(

@@ -27,12 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,6 +37,8 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -51,6 +47,10 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -109,7 +109,7 @@ class CounterfluxEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        List<Spell> spellsToCounter = new LinkedList<Spell>();
+        List<Spell> spellsToCounter = new LinkedList<>();
         for (StackObject stackObject : game.getStack()) {
             if (stackObject instanceof Spell && !stackObject.getControllerId().equals(source.getControllerId())) {
                 spellsToCounter.add((Spell) stackObject);

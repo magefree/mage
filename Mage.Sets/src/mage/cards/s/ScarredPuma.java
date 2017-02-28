@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -42,6 +40,9 @@ import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ public class ScarredPuma extends CardImpl {
         return new ScarredPuma(this);
     }
 
-    class ScarredPumaEffect extends RestrictionEffect {
+    static class ScarredPumaEffect extends RestrictionEffect {
 
         private final FilterAttackingCreature filter = new FilterAttackingCreature();
 

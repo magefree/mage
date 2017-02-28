@@ -27,9 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -38,12 +35,15 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +75,7 @@ public class SlumberingTora extends CardImpl {
         return new SlumberingTora(this);
     }
     
-    private class SlumberingToraEffect extends ContinuousEffectImpl {
+    private static class SlumberingToraEffect extends ContinuousEffectImpl {
 
         public SlumberingToraEffect() {
             super(Duration.EndOfTurn, Outcome.BecomeCreature);

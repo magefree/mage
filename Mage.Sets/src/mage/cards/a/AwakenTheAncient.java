@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,6 +44,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,7 +82,7 @@ public class AwakenTheAncient extends CardImpl {
         return new AwakenTheAncient(this);
     }
 
-    private class GiantToken extends Token {
+    private static class GiantToken extends Token {
 
         GiantToken() {
             super("Giant", "7/7 red Giant creature with haste");

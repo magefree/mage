@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -48,6 +47,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +83,7 @@ public class ProteanHydra extends CardImpl {
         return new ProteanHydra(this);
     }
 
-    class ProteanHydraEffect2 extends PreventionEffectImpl {
+    static class ProteanHydraEffect2 extends PreventionEffectImpl {
 
         public ProteanHydraEffect2() {
             super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
@@ -161,7 +162,7 @@ public class ProteanHydra extends CardImpl {
 
     }
 
-    class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility {
+    static class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
         public ProteanHydraDelayedTriggeredAbility() {
             super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));

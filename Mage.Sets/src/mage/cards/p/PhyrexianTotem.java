@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -48,6 +47,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -76,7 +77,7 @@ public class PhyrexianTotem extends CardImpl {
         return new PhyrexianTotem(this);
     }
     
-    private class PhyrexianTotemToken extends Token {
+    private static class PhyrexianTotemToken extends Token {
         PhyrexianTotemToken() {
             super("Horror", "5/5 black Horror artifact creature with trample");
             cardType.add(CardType.ARTIFACT);

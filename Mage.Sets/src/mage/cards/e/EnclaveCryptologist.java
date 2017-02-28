@@ -28,8 +28,6 @@
 
 package mage.cards.e;
 
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -39,10 +37,12 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
+import mage.constants.CardType;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -63,10 +63,10 @@ public class EnclaveCryptologist extends LevelerCard {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{U}")));
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost());
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>(ability);
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>(ability);
 
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>(ability);
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>(ability);
 
         this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 0, 1),

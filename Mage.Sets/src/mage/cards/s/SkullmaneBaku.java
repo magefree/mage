@@ -28,10 +28,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,13 +42,17 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -88,7 +88,7 @@ public class SkullmaneBaku extends CardImpl {
         return new SkullmaneBaku(this);
     }
     
-    class SkullmaneBakuUnboostEffect extends OneShotEffect {
+    static class SkullmaneBakuUnboostEffect extends OneShotEffect {
 
         public SkullmaneBakuUnboostEffect() {
             super(Outcome.UnboostCreature);

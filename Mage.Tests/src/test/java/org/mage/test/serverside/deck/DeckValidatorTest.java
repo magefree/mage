@@ -27,8 +27,6 @@
  */
 package org.mage.test.serverside.deck;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.repository.CardInfo;
@@ -39,13 +37,16 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author LevelX2
  */
 public class DeckValidatorTest extends CardTestPlayerBase {
 
-    class CardNameAmount {
+    static class CardNameAmount {
 
         String name;
         String setCode;

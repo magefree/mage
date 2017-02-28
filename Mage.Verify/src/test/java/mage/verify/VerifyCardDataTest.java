@@ -210,7 +210,7 @@ public class VerifyCardDataTest {
     private void checkCost(Card card, JsonCard ref) {
         String expected = ref.manaCost;
         String cost = join(card.getManaCost().getSymbols());
-        if ("".equals(cost)) {
+        if (cost != null && cost.isEmpty()) {
             cost = null;
         }
         if (cost != null) {

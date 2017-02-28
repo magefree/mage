@@ -27,9 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -56,6 +53,10 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -138,7 +139,7 @@ class MindreaverNamePredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        Set<String> cardNames = new HashSet<String>();
+        Set<String> cardNames = new HashSet<>();
         UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
         ExileZone exileZone = game.getExile().getExileZone(exileId);
         if (exileZone != null) {

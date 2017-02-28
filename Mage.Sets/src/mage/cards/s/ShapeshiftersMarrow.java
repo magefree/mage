@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -37,13 +36,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +64,7 @@ public class ShapeshiftersMarrow extends CardImpl {
         return new ShapeshiftersMarrow(this);
     }
 
-    class ShapeshiftersMarrowEffect extends OneShotEffect {
+    static class ShapeshiftersMarrowEffect extends OneShotEffect {
 
         public ShapeshiftersMarrowEffect() {
             super(Outcome.BecomeCreature);

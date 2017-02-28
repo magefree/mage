@@ -27,10 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
@@ -38,7 +34,12 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.TargetSpell;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +72,7 @@ public class SpellContortion extends CardImpl {
     
     @Override
     public List<String> getRules() {
-        List<String> rules = new ArrayList<String>();
+        List<String> rules = new ArrayList<>();
         rules.add("Counter target spell unless its controller pays {2}. Draw a card for each time Spell Contortion was kicked.");
         return rules;
     }

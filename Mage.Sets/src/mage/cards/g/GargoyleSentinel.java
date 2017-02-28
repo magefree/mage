@@ -28,14 +28,6 @@
 
 package mage.cards.g;
 
-import java.util.Iterator;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,8 +37,11 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,11 +93,7 @@ class GargoyleSentinelEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
-                            Ability entry = i.next();
-                            if (entry.getId().equals(DefenderAbility.getInstance().getId()))
-                                i.remove();
-                        }
+                        permanent.getAbilities().removeIf(entry -> entry.getId().equals(DefenderAbility.getInstance().getId()));
                         permanent.getAbilities().add(FlyingAbility.getInstance());
                     }
                     break;

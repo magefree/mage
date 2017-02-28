@@ -1,7 +1,9 @@
 package org.mage.test.load;
 
 import mage.cards.Card;
+import mage.cards.Sets;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -13,7 +15,6 @@ import mage.player.ai.ComputerPlayer;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
-import mage.cards.Sets;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
@@ -24,7 +25,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.cards.decks.DeckCardInfo;
 
 /**
  * Intended to test Mage server under different load patterns.
@@ -142,14 +142,11 @@ public class LoadTest {
 
         for (int i = 0; i < EXECUTION_COUNT_PLAY_GAME; i++) {
             final int j = i;
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        testSimpleGame0(deckList, j);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+            Thread t = new Thread(() -> {
+                try {
+                    testSimpleGame0(deckList, j);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             });
             t.start();
@@ -288,7 +285,7 @@ public class LoadTest {
      */
     private Deck generateRandomDeck() {
         String selectedColors = "BR";
-        List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
+        List<ColoredManaSymbol> allowedColors = new ArrayList<>();
         log.info("Building deck with colors: " + selectedColors);
         for (int i = 0; i < selectedColors.length(); i++) {
             char c = selectedColors.charAt(i);

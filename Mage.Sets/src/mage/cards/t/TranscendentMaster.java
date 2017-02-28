@@ -27,15 +27,18 @@
  */
 package mage.cards.t;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
+import mage.constants.CardType;
 
 import java.util.UUID;
 
@@ -60,12 +63,12 @@ public class TranscendentMaster extends LevelerCard {
         // LEVEL 6-11
         // 6/6
         // Lifelink
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>(LifelinkAbility.getInstance());
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>(LifelinkAbility.getInstance());
         // LEVEL 12+
         // 9/9
         // Lifelink
         // Transcendent Master is indestructible.
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>(
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>(
                 LifelinkAbility.getInstance(),
                 IndestructibleAbility.getInstance());
 

@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -45,6 +44,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +76,7 @@ public class BorosFuryShield extends CardImpl {
         return new BorosFuryShield(this);
     }
     
-    class BorosFuryShieldDamageEffect extends OneShotEffect {
+    static class BorosFuryShieldDamageEffect extends OneShotEffect {
         BorosFuryShieldDamageEffect() {
             super(Outcome.Damage);
             staticText = "{this} deals damage to that creature's controller equal to the creature's power";

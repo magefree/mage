@@ -27,12 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -48,6 +42,8 @@ import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.RandomUtil;
+
+import java.util.*;
 
 /**
  *
@@ -121,7 +117,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
                 if (currentPlayer != null && game.getState().getPlayersInRange(controller.getId(), game).contains(currentPlayer.getId())) {
                     Map<Integer, Set<UUID>> playerPiles = new HashMap<>();
                     for (int i = 1; i < 4; i++) {
-                        playerPiles.put(i, new LinkedHashSet<UUID>());
+                        playerPiles.put(i, new LinkedHashSet<>());
                     }
                     playerPermanents.put(currentPlayer.getId(), playerPiles);
                     for (int i = 1; i < 3; i++) {

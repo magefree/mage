@@ -95,7 +95,7 @@ public class SiegeModification extends CardImpl {
         return new SiegeModification(this);
     }
 
-    private class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
+    private static class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
 
         private CardType addedType = CardType.CREATURE;
 

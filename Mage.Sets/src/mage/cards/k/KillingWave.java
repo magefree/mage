@@ -27,13 +27,13 @@
  */
 package mage.cards.k;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -93,8 +93,8 @@ class KillingWaveEffect extends OneShotEffect {
 
         int amount = (new ManacostVariableValue()).calculate(game, source, this);
         if (amount > 0) {
-            LinkedList<Permanent> sacrifices = new LinkedList<Permanent>();
-            HashMap<UUID, Integer> lifePaidAmounts = new HashMap<UUID, Integer>();
+            LinkedList<Permanent> sacrifices = new LinkedList<>();
+            HashMap<UUID, Integer> lifePaidAmounts = new HashMap<>();
 
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {

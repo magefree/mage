@@ -116,7 +116,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
                                 }
                             }
                         }
-                        if ("".equals(type) || type == null) {
+                        if (type != null && type.isEmpty() || type == null) {
                             permanent.getSubtype(game).clear();
                         }
                         if (!token.getSubtype(game).isEmpty()) {

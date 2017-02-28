@@ -41,7 +41,7 @@ import java.util.List;
 public class RoundPairings {
 
     public RoundPairings() {
-        this(new ArrayList<TournamentPairing>(), new ArrayList<TournamentPlayer>());
+        this(new ArrayList<>(), new ArrayList<>());
     }
 
     public RoundPairings(List<TournamentPairing> pairings, List<TournamentPlayer> playerByes) {

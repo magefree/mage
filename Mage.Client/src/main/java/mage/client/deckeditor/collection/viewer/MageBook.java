@@ -27,19 +27,6 @@
  */
 package mage.client.deckeditor.collection.viewer;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
@@ -62,6 +49,16 @@ import mage.view.CardView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.GlowText;
 import org.mage.card.arcane.ManaSymbols;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Mage book with cards and page flipping.
@@ -362,7 +359,7 @@ public class MageBook extends JComponent {
         public static final int GAP_Y = 45;
     }
 
-    abstract class Configuration {
+    abstract static class Configuration {
 
         public int CARDS_PER_PAGE;
         public int CARD_ROWS;

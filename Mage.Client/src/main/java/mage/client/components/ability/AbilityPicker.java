@@ -1,10 +1,5 @@
 package mage.client.components.ability;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.List;
-import javax.swing.*;
 import mage.client.SessionHandler;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
@@ -18,6 +13,12 @@ import org.jdesktop.swingx.JXPanel;
 import org.jsoup.Jsoup;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.util.List;
 
 /**
  * Dialog for choosing abilities.
@@ -91,7 +92,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     }
 
     public void show(AbilityPickerView choices, Point p) {
-        this.choices = new ArrayList<Object>();
+        this.choices = new ArrayList<>();
         this.selected = true; // to stop previous modal
 
         for (Map.Entry<UUID, String> choice : choices.getChoices().entrySet()) {
@@ -233,9 +234,9 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         action.actionPerformed(null);
     }
 
-    public class ImageRenderer2 extends JEditorPane implements ListCellRenderer {
+    public static class ImageRenderer2 extends JEditorPane implements ListCellRenderer {
 
-        public final Map<String, String> cache = new HashMap<String, String>();
+        public final Map<String, String> cache = new HashMap<>();
 
         @Override
         public Component getListCellRendererComponent(
@@ -397,7 +398,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         JFrame jframe = new JFrame("Test");
 
-        List<Object> objectList = new ArrayList<Object>();
+        List<Object> objectList = new ArrayList<>();
         objectList.add("T: add {R} to your mana pool. 111111111111111111111111111");
         objectList.add("T: add {B} to your mana pool. {source} deals 1 damage to you.");
         objectList.add("{T}: add {B} to your mana pool");

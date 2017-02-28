@@ -28,8 +28,6 @@
 
 package mage.cards.b;
 
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -42,6 +40,8 @@ import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -61,12 +61,12 @@ public class BrimstoneMage extends LevelerCard {
         this.toughness = new MageInt(2);
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}{R}")));
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         abilities1.add(ability);
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         abilities2.add(ability);
