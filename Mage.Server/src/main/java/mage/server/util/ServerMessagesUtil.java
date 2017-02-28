@@ -27,6 +27,8 @@
  */
 package mage.server.util;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -39,7 +41,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import org.apache.log4j.Logger;
 
 /**
  * Handles server messages (Messages of the Day). Reloads messages every 5
@@ -193,7 +194,7 @@ public class ServerMessagesUtil {
 //        }
 //    });
     public void setStartDate(long milliseconds) {
-        this.startDate = milliseconds;
+        startDate = milliseconds;
     }
 
     public void incGamesStarted() {

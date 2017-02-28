@@ -27,20 +27,10 @@
  */
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
-import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.*;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -55,12 +45,7 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
-import mage.constants.AbilityType;
-import mage.constants.AbilityWord;
-import mage.constants.EffectType;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
@@ -75,6 +60,10 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -496,7 +485,7 @@ public abstract class AbilityImpl implements Ability {
      * @return announce message
      */
     protected String handleOtherXCosts(Game game, Player controller) {
-        String announceString = null;
+        StringBuilder announceString = new StringBuilder();
         for (VariableCost variableCost : this.costs.getVariableCosts()) {
             if (!(variableCost instanceof VariableManaCost)) {
                 int xValue = variableCost.announceXValue(this, game);
@@ -508,14 +497,10 @@ public abstract class AbilityImpl implements Ability {
                 variableCost.setAmount(xValue);
                 ((Cost) variableCost).setPaid();
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')';
-                if (announceString == null) {
-                    announceString = message;
-                } else {
-                    announceString = announceString + ' ' + message;
-                }
+                announceString.append(message);
             }
         }
-        return announceString;
+        return announceString.toString();
     }
 
     /**
