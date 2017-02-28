@@ -27,9 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -50,6 +47,10 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +83,7 @@ public class OliviaMobilizedForWar extends CardImpl {
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText(", it gains haste until end of turn,");
         doIfCostPaid.addEffect(effect);
-        effect = new BecomesCreatureTypeTargetEffect(Duration.WhileOnBattlefield, new ArrayList<>(Arrays.asList("Vampire")), false);
+        effect = new BecomesCreatureTypeTargetEffect(Duration.WhileOnBattlefield, new ArrayList<>(Collections.singletonList("Vampire")), false);
         effect.setText("and it becomes a Vampire in addition to its other types");
         doIfCostPaid.addEffect(effect);
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, doIfCostPaid, filter, false, SetTargetPointer.PERMANENT, null));

@@ -5,8 +5,6 @@
  */
 package mage.game.stack;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -20,6 +18,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -135,7 +136,7 @@ public abstract class StackObjImpl implements StackObject {
 
             }
             if (!newTargetDescription.toString().equals(oldTargetDescription.toString()) && !game.isSimulation()) {
-                game.informPlayers(this.getLogName() + " is now " + newTargetDescription.toString());
+                game.informPlayers(this.getLogName() + " is now " + newTargetDescription);
             }
             return true;
         }

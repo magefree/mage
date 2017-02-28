@@ -109,7 +109,7 @@ public class CantBeTargetedAttachedEffect extends ContinuousRuleModifyingEffectI
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(attachmentType.verb() + " creature");
+        sb.append(attachmentType.verb()).append(" creature");
         sb.append(" can't be the target of ");
         sb.append(filterSource.getMessage());
         if (!duration.toString().isEmpty()) {
