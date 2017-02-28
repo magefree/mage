@@ -40,7 +40,8 @@ import org.apache.log4j.Logger;
 public abstract class DeckImporter {
 
     private static final Logger logger = Logger.getLogger(DeckImporter.class);
-    protected StringBuilder sbMessage = new StringBuilder();
+
+    protected String errors;
     protected int lineCount;
 
     public DeckCardLists importDeck(String file) {
@@ -51,6 +52,7 @@ public abstract class DeckImporter {
             return deckList;
         }
         lineCount = 0;
+        StringBuilder sbMessage = new StringBuilder();
         sbMessage.setLength(0);
         try {
             try (Scanner scanner = new Scanner(f)) {
@@ -68,11 +70,12 @@ public abstract class DeckImporter {
         } catch (Exception ex) {
             logger.fatal(null, ex);
         }
+        errors = sbMessage.toString();
         return deckList;
     }
 
     public String getErrors(){
-        return sbMessage.toString();
+        return errors;
     }
 
     protected abstract void readLine(String line, DeckCardLists deckList);
