@@ -658,6 +658,23 @@ public class Commander extends Constructed {
             } else {
                 color = color.union(commander.getColor(null));
             }
+            
+            FilterMana commanderColor = CardUtil.getColorIdentity(commander);
+            if (commanderColor.isWhite()) {
+                color.setWhite(true);
+            }
+            if (commanderColor.isBlue()) {
+                color.setBlue(true);
+            }
+            if (commanderColor.isBlack()) {
+                color.setBlack(true);
+            }
+            if (commanderColor.isRed()) {
+                color.setRed(true);
+            }
+            if (commanderColor.isGreen()) {
+                color.setGreen(true);
+            }
 
             // Least fun commanders
             if (cn.equals("animar, soul of element")
