@@ -69,11 +69,21 @@ print "Number of cards found for set " . $setName . ": " . $cardsFound . "\n";
 if ($cardsFound == 0) {
     $setName =~ s/^(...).*/$1/;
     my $poss;
+    my $foundPossibleSet = 0;
+    my $numPossibleSets = 0;
     foreach $poss (sort keys (%all_sets)) {
+        $numPossibleSets++;
         if ($poss =~ m/^$setName/i) {
             print ("Did you possibly mean: $poss ?\n");
+            $foundPossibleSet = 1;
         }
     }
+    if (!$foundPossibleSet) {
+        print ("Couldn't find any matching set for '$setName'. \n");
+    }
+    
+    print "(Note: Looked at $numPossibleSets sets in total).\nPress the enter key to exit.";
+    $setName = <STDIN>;
     exit;
 }
 
@@ -108,6 +118,8 @@ sub getRarity
     }
     print ("ERROR DETECTED! - Incorrect rarity.. --- $val,,,$_[1]\n");
     sleep (10);
+    print "Press the enter key to exit.";
+    $setName = <STDIN>;
     exit;
 }
 
@@ -217,3 +229,5 @@ print (join ("", sort keys (%unimplemented)));
 print "\n\n\nGithub Task:\n";
 print (join ("", sort keys (%githubTask)));
 print ("\nData from reading: ../../mage/Mage.Sets/src/mage/sets/$knownSets{$setName}.java\n");
+print "\n\nYou are done.  Press the enter key to exit.";
+$setName = <STDIN>;
