@@ -241,7 +241,7 @@ public class MageBook extends JComponent {
         cardImg.update(card);
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.frameWidth, cardDimensions.frameHeight);
 
-        boolean implemented = !card.getRarity().equals(Rarity.NA);
+        boolean implemented = card.getRarity() != Rarity.NA;
 
         GlowText label = new GlowText();
         label.setGlow(implemented ? Color.green : NOT_IMPLEMENTED, 12, 0.0f);

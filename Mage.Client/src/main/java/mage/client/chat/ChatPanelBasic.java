@@ -265,10 +265,10 @@ public class ChatPanelBasic extends javax.swing.JPanel {
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
         }
-        if (color.equals(MessageColor.ORANGE)) {
+        if (color == MessageColor.ORANGE) {
             textColor = "Orange";
         }
-        if (color.equals(MessageColor.YELLOW)) {
+        if (color == MessageColor.YELLOW) {
             textColor = "Yellow";
         }
         if (messageType == MessageType.WHISPER_FROM) {
@@ -361,7 +361,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         this.txtConversation.setExtBackgroundColor(new Color(0, 0, 0, alpha)); // Alpha = 255 not transparent
         this.txtConversation.setSelectionColor(Color.LIGHT_GRAY);
         this.jScrollPaneTxt.setOpaque(alpha == 255);
-        this.jScrollPaneTxt.getViewport().setOpaque(!chatType.equals(ChatType.TABLES));
+        this.jScrollPaneTxt.getViewport().setOpaque(chatType != ChatType.TABLES);
     }
 
     public void clear() {

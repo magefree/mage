@@ -72,12 +72,12 @@ public final class ConstructedFormats {
             underlyingSetCodesPerFormat.get(set.getName()).add(set.getCode());
 
             // create the play formats
-            if (set.getType().equals(SetType.CUSTOM_SET)) {
+            if (set.getType() == SetType.CUSTOM_SET) {
                 underlyingSetCodesPerFormat.get(CUSTOM).add(set.getCode());
                 continue;
             }
             underlyingSetCodesPerFormat.get(VINTAGE_LEGACY).add(set.getCode());
-            if (set.getType().equals(SetType.CORE) || set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.SUPPLEMENTAL_STANDARD_LEGAL)) {
+            if (set.getType() == SetType.CORE || set.getType() == SetType.EXPANSION || set.getType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL) {
                 if (STANDARD_CARDS.getSetCodes().contains(set.getCode())) {
                     underlyingSetCodesPerFormat.get(STANDARD).add(set.getCode());
                 }
@@ -93,7 +93,7 @@ public final class ConstructedFormats {
             }
 
             // Create the Block formats
-            if (set.getType().equals(SetType.EXPANSION) && set.getBlockName() != null) {
+            if (set.getType() == SetType.EXPANSION && set.getBlockName() != null) {
                 String blockDisplayName = getBlockDisplayName(set.getBlockName());
                 underlyingSetCodesPerFormat.computeIfAbsent(blockDisplayName, k -> new ArrayList<>());
 
@@ -110,7 +110,7 @@ public final class ConstructedFormats {
 
             }
 
-            if (set.getType().equals(SetType.SUPPLEMENTAL) && set.getBlockName() != null) {
+            if (set.getType() == SetType.SUPPLEMENTAL && set.getBlockName() != null) {
                 expansionInfo.putIfAbsent(set.getBlockName(), set);
 
                 if (expansionInfo.get(set.getBlockName()).getReleaseDate().before(set.getReleaseDate())) {

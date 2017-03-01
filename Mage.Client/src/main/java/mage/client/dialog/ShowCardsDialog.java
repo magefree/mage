@@ -109,7 +109,7 @@ public class ShowCardsDialog extends MageDialog {
                 java.util.List<UUID> choosableCards = (java.util.List<UUID>) options.get("choosable");
                 cardArea.markCards(choosableCards);
             }
-            if (options.containsKey("queryType") && QueryType.PICK_ABILITY.equals(options.get("queryType"))) {
+            if (options.containsKey("queryType") && options.get("queryType") == QueryType.PICK_ABILITY) {
                 cardArea.setPopupMenu(popupMenu);
             }
         }
