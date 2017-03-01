@@ -95,7 +95,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
             if (event == null || !game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
                 if (object != null) {
                     boolean controllerSet = false;
-                    if (!ability.getZone().equals(Zone.COMMAND) && event != null
+                    if (ability.getZone() != Zone.COMMAND && event != null
                             && event.getTargetId() != null // && event.getTargetId().equals(ability.getSourceId())
                             && ability.isLeavesTheBattlefieldTrigger()
                             //                            && ((event.getType().equals(EventType.ZONE_CHANGE)

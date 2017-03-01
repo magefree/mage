@@ -130,7 +130,7 @@ public class HybridManaCost extends ManaCostImpl {
 
     @Override
     public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
-        return mana1.equals(coloredManaSymbol) || mana2.equals(coloredManaSymbol);
+        return mana1 == coloredManaSymbol || mana2 == coloredManaSymbol;
     }
 
     @Override

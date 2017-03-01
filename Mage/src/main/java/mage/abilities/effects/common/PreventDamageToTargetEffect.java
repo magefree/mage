@@ -90,7 +90,7 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
         sb.append(mode.getTargets().get(0).getTargetName());
         if (!duration.toString().isEmpty()) {
             sb.append(' ');
-            if (duration.equals(Duration.EndOfTurn)) {
+            if (duration == Duration.EndOfTurn) {
                 sb.append("this turn");
             } else {
                 sb.append(duration.toString());

@@ -387,7 +387,7 @@ public abstract class ExpansionSet implements Serializable {
         List<CardInfo> savedCardsInfos = savedCards.get(rarity);
         if (savedCardsInfos == null) {
             CardCriteria criteria = new CardCriteria();
-            if (rarity.equals(Rarity.LAND)) {
+            if (rarity == Rarity.LAND) {
                 criteria.setCodes(!hasBasicLands && parentSet != null ? parentSet.code : this.code);
             } else {
                 criteria.setCodes(this.code);

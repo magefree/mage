@@ -2795,8 +2795,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             return true;
         }
         for (Entry<PhaseStep, Step.StepPart> phaseStep : silentPhaseSteps.entrySet()) {
-            if (game.getPhase() != null && game.getPhase().getStep() != null && phaseStep.getKey().equals(game.getPhase().getStep().getType())) {
-                if (phaseStep.getValue() == null || phaseStep.getValue().equals(game.getPhase().getStep().getStepPart())) {
+            if (game.getPhase() != null && game.getPhase().getStep() != null && phaseStep.getKey() == game.getPhase().getStep().getType()) {
+                if (phaseStep.getValue() == null || phaseStep.getValue() == game.getPhase().getStep().getStepPart()) {
                     return true;
                 }
             }

@@ -118,8 +118,8 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
         }
         if (stackObject instanceof Ability) {
             Ability ability = (Ability)stackObject;
-            return ability.getAbilityType().equals(AbilityType.TRIGGERED) 
-               || ability.getAbilityType().equals(AbilityType.ACTIVATED);
+            return ability.getAbilityType() == AbilityType.TRIGGERED
+               || ability.getAbilityType() == AbilityType.ACTIVATED;
         }
         return false;
     }

@@ -109,7 +109,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 }
             }
             if (costs.canPay(this, sourceId, controllerId, game)) {
-                if (getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+                if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
                         return (splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)

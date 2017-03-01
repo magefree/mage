@@ -41,7 +41,7 @@ public enum Zone {
 
     @Override
     public String toString() {
-        if (this.equals(EXILED)) {
+        if (this == EXILED) {
             return "exile zone";
         }
         return super.toString();

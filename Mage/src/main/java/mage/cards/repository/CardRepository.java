@@ -384,7 +384,7 @@ public enum CardRepository {
             for (CardInfo cardinfo : cards) {
                 ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                 if (set != null) {
-                    if ((set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.CORE))
+                    if ((set.getType() == SetType.EXPANSION || set.getType() == SetType.CORE)
                             && (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
                         cardToUse = cardinfo;
                         lastExpansionDate = set.getReleaseDate();

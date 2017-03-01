@@ -145,7 +145,7 @@ public class Turn implements Serializable {
             if (game.isPaused() || game.gameOver(null)) {
                 return false;
             }
-            if (!isEndTurnRequested() || phase.getType().equals(TurnPhase.END)) {
+            if (!isEndTurnRequested() || phase.getType() == TurnPhase.END) {
                 currentPhase = phase;
                 game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayer.getId(), null, activePlayer.getId()));
                 if (!game.getState().getTurnMods().skipPhase(activePlayer.getId(), currentPhase.getType())) {

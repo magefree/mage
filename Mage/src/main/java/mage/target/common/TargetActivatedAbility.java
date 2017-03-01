@@ -75,7 +75,7 @@ public class TargetActivatedAbility extends TargetObject {
     public boolean canChoose(UUID sourceControllerId, Game game) {
         for (StackObject stackObject :  game.getStack()) {
             if (stackObject.getStackAbility() != null 
-                    && stackObject.getStackAbility().getAbilityType().equals(AbilityType.ACTIVATED)
+                    && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
                     && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())) {
                     return true;
                 }
