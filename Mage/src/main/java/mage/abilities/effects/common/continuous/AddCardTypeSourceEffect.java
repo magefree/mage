@@ -80,7 +80,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
                 permanent.getCardType().add(addedCardType);
             }
             return true;
-        } else if (this.getDuration().equals(Duration.Custom)) {
+        } else if (this.getDuration() == Duration.Custom) {
             this.discard();
         }
         return false;

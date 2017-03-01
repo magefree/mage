@@ -89,7 +89,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                         break;
                     case GRAVEYARD:
                         Card card = game.getCard(targetId);
-                        if (card != null && game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
+                        if (card != null && game.getState().getZone(targetId) == Zone.GRAVEYARD) {
                             cards.add(card);
                         }
                         break;

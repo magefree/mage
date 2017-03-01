@@ -263,7 +263,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             if (revealPickedCards) {
                 sb.append(". You may reveal ");
                 sb.append(filter.getMessage()).append(" from among them and put it into your ");
-            } else if (targetPickedCards.equals(Zone.BATTLEFIELD)) {
+            } else if (targetPickedCards == Zone.BATTLEFIELD) {
                 sb.append(". You ");
                 if (optional) {
                     sb.append("may ");

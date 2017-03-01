@@ -1465,12 +1465,12 @@ public abstract class GameImpl implements Game, Serializable {
         newEffect.init(newAbility, this);
 
         // If there are already copy effects with dration = Custom to the same object, remove the existing effects because they no longer have any effect
-        if (Duration.Custom.equals(duration)) {
+        if (duration == Duration.Custom) {
             for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
                 if (effect instanceof CopyEffect) {
                     CopyEffect copyEffect = (CopyEffect) effect;
                     // there is another copy effect that copies to the same permanent
-                    if (copyEffect.getSourceId().equals(copyToPermanentId) && copyEffect.getDuration().equals(Duration.Custom)) {
+                    if (copyEffect.getSourceId().equals(copyToPermanentId) && copyEffect.getDuration() == Duration.Custom) {
                         copyEffect.discard();
                     }
                 }
@@ -1750,7 +1750,7 @@ public abstract class GameImpl implements Game, Serializable {
                     if (spellAbility.getTargets().isEmpty()) {
                         for (Ability ability : perm.getAbilities(this)) {
                             if ((ability instanceof SpellAbility)
-                                    && SpellAbilityType.BASE_ALTERNATE.equals(((SpellAbility) ability).getSpellAbilityType())
+                                    && SpellAbilityType.BASE_ALTERNATE == ((SpellAbility) ability).getSpellAbilityType()
                                     && !ability.getTargets().isEmpty()) {
                                 spellAbility = (SpellAbility) ability;
                                 break;
@@ -2337,6 +2337,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         Iterator it = gameCards.entrySet().iterator();
+
         while (it.hasNext()) {
             Entry<UUID, Card> entry = (Entry<UUID, Card>) it.next();
             Card card = entry.getValue();
@@ -2507,7 +2508,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public MageObject getLastKnownInformation(UUID objectId, Zone zone, int zoneChangeCounter) {
-        if (zone.equals(Zone.BATTLEFIELD)) {
+        if (zone == Zone.BATTLEFIELD) {
             Map<Integer, MageObject> lkiMapExtended = lkiExtended.get(objectId);
 
             if (lkiMapExtended != null) {

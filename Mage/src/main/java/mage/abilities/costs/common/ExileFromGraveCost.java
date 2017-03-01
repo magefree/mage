@@ -90,7 +90,7 @@ public class ExileFromGraveCost extends CostImpl {
             if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
                 for (UUID targetId : targets.get(0).getTargets()) {
                     Card card = game.getCard(targetId);
-                    if (card == null || !game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
+                    if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
                         return false;
                     }
                     exiledCards.add(card);

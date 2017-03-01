@@ -95,7 +95,7 @@ public class PreventAllDamageFromChosenSourceToYouEffect extends PreventionEffec
             sb.append("combat ");
         }
         sb.append("damage that would be dealt to you ");
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             sb.append("this turn ");
         }
         sb.append("by a ").append(targetSource.getFilter().getMessage());

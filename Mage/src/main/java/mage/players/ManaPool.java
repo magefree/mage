@@ -214,7 +214,7 @@ public class ManaPool implements Serializable {
             for (ManaType manaType : ManaType.values()) {
                 if (!doNotEmptyManaTypes.contains(manaType)) {
                     if (item.get(manaType) > 0) {
-                        if (!item.getDuration().equals(Duration.EndOfTurn) || game.getPhase().getType().equals(TurnPhase.END)) {
+                        if (item.getDuration() != Duration.EndOfTurn || game.getPhase().getType() == TurnPhase.END) {
                             if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {
                                 int amount = item.get(manaType);
                                 item.clear(manaType);
@@ -227,7 +227,7 @@ public class ManaPool implements Serializable {
                     }
                     if (conditionalItem != null) {
                         if (conditionalItem.get(manaType) > 0) {
-                            if (!item.getDuration().equals(Duration.EndOfTurn) || game.getPhase().getType().equals(TurnPhase.END)) {
+                            if (item.getDuration() != Duration.EndOfTurn || game.getPhase().getType() == TurnPhase.END) {
                                 if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {
                                     int amount = conditionalItem.get(manaType);
                                     conditionalItem.clear(manaType);

@@ -81,7 +81,7 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
         sb.append(" {this} can't be regenerated");
         if (!duration.toString().isEmpty()) {
             sb.append(' ');
-            if (duration.equals(Duration.EndOfTurn)) {
+            if (duration == Duration.EndOfTurn) {
                 sb.append(" this turn");
             } else {
                 sb.append(' ').append(duration.toString());
