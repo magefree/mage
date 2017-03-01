@@ -296,7 +296,7 @@ public final class GuiDisplayUtil {
                 buffer.append("[only controlled] ");
             }
         }
-        if (!card.getMageObjectType().equals(MageObjectType.NULL)) {
+        if (card.getMageObjectType() != MageObjectType.NULL) {
             buffer.append(card.getMageObjectType().toString());
         }
         buffer.append("</td></tr></table>");

@@ -205,9 +205,9 @@ public class CardPanelComponentImpl extends CardPanel {
         
         // Ability icon
         if (newGameCard.isAbility()) {
-            if (AbilityType.TRIGGERED.equals(newGameCard.getAbilityType())) {
+            if (newGameCard.getAbilityType() == AbilityType.TRIGGERED) {
                 setTypeIcon(ImageManagerImpl.getInstance().getTriggeredAbilityImage(), "Triggered Ability");
-            } else if (AbilityType.ACTIVATED.equals(newGameCard.getAbilityType())) {
+            } else if (newGameCard.getAbilityType() == AbilityType.ACTIVATED) {
                 setTypeIcon(ImageManagerImpl.getInstance().getActivatedAbilityImage(), "Activated Ability");
             }
         }

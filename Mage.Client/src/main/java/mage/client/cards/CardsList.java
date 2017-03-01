@@ -217,7 +217,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     // if you use the deck ediot to build a free deck, numbers can be set directly in deck and sideboard
     public void setDeckEditorMode(DeckEditorMode mode) {
-        if (mode.equals(DeckEditorMode.FREE_BUILDING)) {
+        if (mode == DeckEditorMode.FREE_BUILDING) {
             // activate spinner for card number change
             mainModel.setNumberEditable(true);
             TableColumnModel tcm = mainTable.getColumnModel();
