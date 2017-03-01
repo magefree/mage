@@ -33,6 +33,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
@@ -46,6 +47,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -121,17 +123,11 @@ public class Conversion extends CardImpl {
         @Override
         public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
             // the dependent classes needs to be an enclosed class for dependent check of continuous effects
-            Set<UUID> dependentTo = null;
-            for (ContinuousEffect effect : allEffectsInLayer) {
-                // http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/286046-conversion-magus-of-the-moon
-                if (effect.getDependencyTypes().contains(DependencyType.BecomeMountain)) {
-                    if (dependentTo == null) {
-                        dependentTo = new HashSet<>();
-                    }
-                    dependentTo.add(effect.getId());
-                }
-            }
-            return dependentTo;
+            return allEffectsInLayer.stream()
+                    .filter(effect->effect.getDependencyTypes().contains(DependencyType.BecomeMountain))
+                    .map(Effect::getId)
+                    .collect(Collectors.toSet());
+
         }
 
     }
