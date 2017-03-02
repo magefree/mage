@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -101,7 +102,7 @@ class AeonChroniclerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getData() == CounterType.TIME.getName() && event.getTargetId().equals(this.getSourceId());
+        return Objects.equals(event.getData(), CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

@@ -28,6 +28,7 @@
 package mage.cards.i;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -147,7 +148,7 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.END_COMBAT) {
-            if (game.getTurn().getPhase() != phase) {
+            if (!Objects.equals(game.getTurn().getPhase(), phase)) {
                 return true;
             }
         }
@@ -191,7 +192,7 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.END_COMBAT) {
-            if (game.getTurn().getPhase() != phase) {
+            if (!Objects.equals(game.getTurn().getPhase(), phase)) {
                 return true;
             }
         }
