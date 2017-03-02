@@ -246,6 +246,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Soldevi Machinist", 102, Rarity.UNCOMMON, mage.cards.s.SoldeviMachinist.class));
         cards.add(new SetCardInfo("Soldevi Simulacrum", 314, Rarity.UNCOMMON, mage.cards.s.SoldeviSimulacrum.class));
         cards.add(new SetCardInfo("Songs of the Damned", 48, Rarity.COMMON, mage.cards.s.SongsOfTheDamned.class));
+        cards.add(new SetCardInfo("Soul Barrier", 103, Rarity.UNCOMMON, mage.cards.s.SoulBarrier.class));
         cards.add(new SetCardInfo("Soul Kiss", 50, Rarity.COMMON, mage.cards.s.SoulKiss.class));
         cards.add(new SetCardInfo("Spoils of Evil", 51, Rarity.RARE, mage.cards.s.SpoilsOfEvil.class));
         cards.add(new SetCardInfo("Stampede", 153, Rarity.RARE, mage.cards.s.Stampede.class));

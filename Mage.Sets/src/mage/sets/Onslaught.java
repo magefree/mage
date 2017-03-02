@@ -40,6 +40,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Arcanis the Omnipotent", 66, Rarity.RARE, mage.cards.a.ArcanisTheOmnipotent.class));
         cards.add(new SetCardInfo("Ascending Aven", 68, Rarity.COMMON, mage.cards.a.AscendingAven.class));
         cards.add(new SetCardInfo("Astral Slide", 4, Rarity.UNCOMMON, mage.cards.a.AstralSlide.class));
+        cards.add(new SetCardInfo("Aura Extraction", 5, Rarity.UNCOMMON, mage.cards.a.AuraExtraction.class));
         cards.add(new SetCardInfo("Aurification", 6, Rarity.RARE, mage.cards.a.Aurification.class));
         cards.add(new SetCardInfo("Avarax", 187, Rarity.UNCOMMON, mage.cards.a.Avarax.class));
         cards.add(new SetCardInfo("Aven Brigadier", 7, Rarity.RARE, mage.cards.a.AvenBrigadier.class));
