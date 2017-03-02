@@ -205,7 +205,7 @@ class AnimateDeadAttachEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
-        if (card != null && game.getState().getZone(source.getFirstTarget()).equals(Zone.GRAVEYARD)) {
+        if (card != null && game.getState().getZone(source.getFirstTarget()) == Zone.GRAVEYARD) {
             // Card have no attachedTo attribute yet so write ref only to enchantment now
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null) {

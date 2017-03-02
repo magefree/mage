@@ -141,9 +141,9 @@ class PrismaticStrandsPreventionEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
-                    || event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)
-                    || event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER)) {
+            if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
+                    || event.getType() == GameEvent.EventType.DAMAGE_CREATURE
+                    || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER) {
                 MageObject sourceObject = game.getObject(event.getSourceId());
                 if (sourceObject != null && sourceObject.getColor(game).shares(this.color)) {
                     return true;

@@ -174,7 +174,7 @@ class SoulFoundryEffect extends OneShotEffect {
                     && !soulFoundry.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(soulFoundry.getImprinted().get(0));
                 if (imprinted != null
-                        && game.getState().getZone(imprinted.getId()).equals(Zone.EXILED)) {
+                        && game.getState().getZone(imprinted.getId()) == Zone.EXILED) {
                     PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(imprinted.getId(), imprinted.getZoneChangeCounter(game)));
                     return effect.apply(game, source);

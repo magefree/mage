@@ -111,7 +111,7 @@ class DralnusPetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null && source.getAbilityType().equals(AbilityType.STATIC)) {
+        if (permanent == null && source.getAbilityType() == AbilityType.STATIC) {
             permanent = game.getPermanentEntering(source.getSourceId());
         }
         if (controller != null && permanent != null) {

@@ -141,7 +141,7 @@ class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
                 }
             }
         }
-        if (event.getType().equals(GameEvent.EventType.END_COMBAT_STEP_POST)) {
+        if (event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST) {
             damagedPlayerIds.clear();
         }
         return false;

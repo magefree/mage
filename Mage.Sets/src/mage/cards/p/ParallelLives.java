@@ -83,7 +83,7 @@ class ParallelLivesEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.CREATE_TOKEN);
+        return event.getType() == EventType.CREATE_TOKEN;
     }
 
     @Override

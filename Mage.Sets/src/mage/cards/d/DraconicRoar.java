@@ -75,7 +75,7 @@ public class DraconicRoar extends CardImpl {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
+        if (ability.getAbilityType() == AbilityType.SPELL) {
             Player controller = game.getPlayer(ability.getControllerId());
             if (controller != null) {
                 if (controller.getHand().count(filter, game) > 0) {

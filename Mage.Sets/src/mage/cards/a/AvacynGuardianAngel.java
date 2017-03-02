@@ -154,7 +154,7 @@ class AvacynGuardianAngelPreventToCreaturePreventionEffect extends PreventionEff
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)
+            if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE
                     && event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                 MageObject sourceObject = game.getObject(event.getSourceId());
                 if (sourceObject != null && sourceObject.getColor(game).shares(this.color)) {
@@ -223,7 +223,7 @@ class AvacynGuardianAngelPreventToPlayerPreventionEffect extends PreventionEffec
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
+            if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
                     && event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                 MageObject sourceObject = game.getObject(event.getSourceId());
                 if (sourceObject != null && sourceObject.getColor(game).shares(this.color)) {

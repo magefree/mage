@@ -140,6 +140,6 @@ class NivixAerieOfTheFiremindCanCastEffect extends AsThoughEffectImpl {
         return this.getTargetPointer().getFirst(game, source) != null
                 && this.getTargetPointer().getFirst(game, source).equals(sourceId)
                 && source.getControllerId().equals(affectedControllerId)
-                && game.getState().getZone(sourceId).equals(Zone.EXILED);
+                && game.getState().getZone(sourceId) == Zone.EXILED;
     }
 }

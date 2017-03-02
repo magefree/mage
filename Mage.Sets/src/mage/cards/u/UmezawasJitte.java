@@ -135,7 +135,7 @@ class UmezawasJitteAbility extends TriggeredAbilityImpl {
                 return true;
             }
         }
-        if (event.getType().equals(EventType.COMBAT_DAMAGE_STEP_PRE)) {
+        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_PRE) {
             usedInPhase = false;
         }
         return false;

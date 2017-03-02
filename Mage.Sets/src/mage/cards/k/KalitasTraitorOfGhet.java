@@ -127,7 +127,7 @@ class KalitasTraitorOfGhetEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
+            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
                 if (permanent != null) {
                     controller.moveCards(permanent, Zone.EXILED, source, game);

@@ -94,7 +94,7 @@ class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return GameEvent.EventType.CAST_SPELL.equals(event.getType());
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override

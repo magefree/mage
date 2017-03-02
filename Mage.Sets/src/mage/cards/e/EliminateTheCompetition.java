@@ -66,7 +66,7 @@ public class EliminateTheCompetition extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
+        if (ability.getAbilityType() == AbilityType.SPELL) {
             ability.getTargets().clear();
             int sac = new GetXValue().calculate(game, ability, null);
             ability.addTarget(new TargetCreaturePermanent(sac, sac));

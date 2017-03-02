@@ -90,7 +90,7 @@ class JotunGruntCost extends CostImpl {
             if (targets.choose(Outcome.Removal, controllerId, sourceId, game)) {
                 for (UUID targetId: targets.get(0).getTargets()) {
                     Card card = game.getCard(targetId);
-                    if (card == null || !game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
+                    if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
                         return false;
                     }
                     paid |= controller.moveCardToLibraryWithInfo(card, sourceId, game, Zone.GRAVEYARD, false, true);

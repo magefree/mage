@@ -108,7 +108,7 @@ class NecromanticSelectionEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), source.getSourceId(), game)) {
                 permanent.destroy(source.getSourceId(), game, false);
-                if (game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
+                if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                     cards.add(permanent);
                 }
             }

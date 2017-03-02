@@ -30,6 +30,7 @@ package mage.cards.v;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
@@ -57,7 +58,6 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTargets;
 
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class VanishIntoMemory extends CardImpl {
@@ -166,7 +166,7 @@ class VanishIntoMemoryEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.ENTERS_THE_BATTLEFIELD.equals(event.getType());
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override

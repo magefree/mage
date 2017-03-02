@@ -130,7 +130,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                 
                 // move permanents and hand cards to exile
                 for (UUID objectId : selectedObjects) {
-                    if (game.getState().getZone(objectId).equals(Zone.BATTLEFIELD)) {
+                    if (game.getState().getZone(objectId) == Zone.BATTLEFIELD) {
                         Permanent permanent = game.getPermanent(objectId);
                         if (permanent != null) {
                             Player player = game.getPlayer(permanent.getControllerId());
@@ -138,7 +138,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                                 player.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
                             }
                         }
-                    } else if (game.getState().getZone(objectId).equals(Zone.HAND)) {
+                    } else if (game.getState().getZone(objectId) == Zone.HAND) {
                         Card card = game.getCard(objectId);
                         if (card != null) {
                             Player player = game.getPlayer(card.getOwnerId());

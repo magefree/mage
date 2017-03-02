@@ -119,8 +119,8 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)
-                || (abilityToModify.getAbilityType().equals(AbilityType.MANA) && (abilityToModify instanceof ActivatedAbility))) {
+        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
+                || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
             //Activated abilities of creatures you control
             Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
             if (permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {

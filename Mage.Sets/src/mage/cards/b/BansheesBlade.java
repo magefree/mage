@@ -112,7 +112,7 @@ class BansheesBladeAbility extends TriggeredAbilityImpl {
                 return true;
             }
         }
-        if (event.getType().equals(GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE)) {
+        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_PRE) {
             usedInPhase = false;
         }
         return false;

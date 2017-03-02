@@ -152,7 +152,7 @@ class UginsNexusExileEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Zone.GRAVEYARD && zEvent.getFromZone().equals(Zone.BATTLEFIELD)) {
+            if (zEvent.getToZone() == Zone.GRAVEYARD && zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 return true;
             }
         }

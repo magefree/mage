@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -48,13 +49,12 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 /**
- *
  * @author North
  */
 public class FactOrFiction extends CardImpl {
 
     public FactOrFiction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new FactOrFictionEffect());
@@ -115,9 +115,9 @@ class FactOrFictionEffect extends OneShotEffect {
             }
             List<Card> pile2 = new ArrayList<>();
             pile2.addAll(cards.getCards(game));
-            
-            boolean choice = controller.choosePile(outcome, "Choose a pile to put into your hand.", pile1, pile2, game);            
-            
+
+            boolean choice = controller.choosePile(outcome, "Choose a pile to put into your hand.", pile1, pile2, game);
+
             Zone pile1Zone = Zone.GRAVEYARD;
             Zone pile2Zone = Zone.HAND;
             if (choice) {
@@ -125,21 +125,21 @@ class FactOrFictionEffect extends OneShotEffect {
                 pile2Zone = Zone.GRAVEYARD;
             }
 
-            StringBuilder sb = new StringBuilder("Pile 1, going to ").append(pile1Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (": ");
+            StringBuilder sb = new StringBuilder("Pile 1, going to ").append(pile1Zone.equals(Zone.HAND) ? "Hand" : "Graveyard").append(": ");
             int i = 0;
             for (Card card : pile1) {
                 i++;
-                    sb.append(card.getName());
+                sb.append(card.getName());
                 if (i < pile1.size()) {
-                        sb.append(", ");
+                    sb.append(", ");
                 }
                 card.moveToZone(pile1Zone, source.getSourceId(), game, false);
             }
             game.informPlayers(sb.toString());
 
-            sb = new StringBuilder("Pile 2, going to ").append(pile2Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (':');
+            sb = new StringBuilder("Pile 2, going to ").append(pile2Zone == Zone.HAND ? "Hand" : "Graveyard").append(':');
             i = 0;
-            for (Card card: pile2) {
+            for (Card card : pile2) {
                 i++;
                 sb.append(' ').append(card.getName());
                 if (i < pile2.size()) {

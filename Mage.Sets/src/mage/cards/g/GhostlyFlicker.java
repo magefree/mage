@@ -112,7 +112,7 @@ class GhostlyFlickerEffect extends OneShotEffect {
             Set<Card> toBattlefield = new HashSet<>();
             for (Card card : toExile) {
                 Zone currentZone = game.getState().getZone(card.getId());
-                if (!Zone.BATTLEFIELD.equals(currentZone) && Zone.isPublicZone(currentZone)) {
+                if (!(Zone.BATTLEFIELD == currentZone) && Zone.isPublicZone(currentZone)) {
                     toBattlefield.add(game.getCard(card.getId()));
                 }
             }

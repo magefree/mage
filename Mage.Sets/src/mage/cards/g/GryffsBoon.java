@@ -107,7 +107,7 @@ class GryffsBoonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card aura = game.getCard(source.getSourceId());
         if (aura != null
-                && game.getState().getZone(aura.getId()).equals(Zone.GRAVEYARD)) {
+                && game.getState().getZone(aura.getId()) == Zone.GRAVEYARD) {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (!targetPermanent.cantBeAttachedBy(aura, game)) {
                 game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);

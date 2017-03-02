@@ -99,18 +99,18 @@ class LibraryOfLengEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.DISCARD_CARD)
-                || event.getType().equals(EventType.ZONE_CHANGE);
+        return event.getType() == EventType.DISCARD_CARD
+                || event.getType() == EventType.ZONE_CHANGE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(EventType.DISCARD_CARD)) {
+        if (event.getType() == EventType.DISCARD_CARD) {
             return event.getPlayerId().equals(source.getControllerId());
         }
-        if (event.getType().equals(EventType.ZONE_CHANGE)) {
+        if (event.getType() == EventType.ZONE_CHANGE) {
             if (event.getTargetId().equals(cardId) && game.getState().getZoneChangeCounter(event.getTargetId()) == zoneChangeCounter) {
-                if (((ZoneChangeEvent) event).getFromZone().equals(Zone.HAND) && ((ZoneChangeEvent) event).getToZone().equals(Zone.GRAVEYARD)) {
+                if (((ZoneChangeEvent) event).getFromZone() == Zone.HAND && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
                     return true;
                 }
             }
@@ -120,7 +120,7 @@ class LibraryOfLengEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(EventType.DISCARD_CARD)) {
+        if (event.getType() == EventType.DISCARD_CARD) {
             // only save card info
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
@@ -129,7 +129,7 @@ class LibraryOfLengEffect extends ReplacementEffectImpl {
             }
             return false;
         }
-        if (event.getType().equals(EventType.ZONE_CHANGE)) {
+        if (event.getType() == EventType.ZONE_CHANGE) {
             Player controller = game.getPlayer(source.getControllerId());
             Card card = game.getCard(event.getTargetId());
             if (controller != null && card != null) {

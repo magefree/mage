@@ -113,7 +113,7 @@ class HelmOfObedienceEffect extends OneShotEffect {
                                 if (sourcePermanent != null) {
                                     sourcePermanent.sacrifice(source.getSourceId(), game);
                                 }
-                                if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                                if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                                     card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
                                 }
                                 break;

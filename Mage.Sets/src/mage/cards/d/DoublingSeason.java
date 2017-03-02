@@ -85,7 +85,7 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.CREATE_TOKEN);
+        return event.getType() == GameEvent.EventType.CREATE_TOKEN;
     }
 
     @Override

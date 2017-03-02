@@ -116,12 +116,12 @@ class PyrewildShamanTriggeredAbility extends TriggeredAbilityImpl {
                 }
             }
         }
-        if (event.getType().equals(GameEvent.EventType.END_COMBAT_STEP_POST)){
+        if (event.getType() == EventType.END_COMBAT_STEP_POST){
             damagedPlayerIds.clear();
         }
-        if (event.getType().equals(GameEvent.EventType.ZONE_CHANGE) && event.getTargetId().equals(getSourceId())){
+        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId())){
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone().equals(Zone.GRAVEYARD)) {
+            if (zEvent.getFromZone() == Zone.GRAVEYARD) {
                 damagedPlayerIds.clear();
             }
         }

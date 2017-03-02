@@ -90,7 +90,7 @@ class RitualOfTheReturnedExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+            if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                 controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.GRAVEYARD, true);
                 return new CreateTokenEffect(
                         new RitualOfTheReturnedZombieToken(card.getPower().getValue(), card.getToughness().getValue())).apply(game, source);

@@ -102,7 +102,7 @@ class FluctuatorEffect extends CostModificationEffectImpl {
             }
             if (reduceMax > 0) {
                 int reduce = 0;
-                if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)
+                if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
                         && ((ActivatedAbility) abilityToModify).isCheckPlayableMode()) {
                     reduce = reduceMax;
                 } else {

@@ -75,7 +75,7 @@ class UrzasArmorEffect extends PreventionEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override

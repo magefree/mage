@@ -91,7 +91,7 @@ class HasAbilityWithTapSymbolPredicate implements Predicate<MageObject> {
         }
 
         for (Ability ability : abilities) {
-            if (ability.getAbilityType().equals(AbilityType.ACTIVATED) && !ability.getCosts().isEmpty()) {
+            if (ability.getAbilityType() == AbilityType.ACTIVATED && !ability.getCosts().isEmpty()) {
                 for (Cost cost : ability.getCosts()) {
                     if (cost instanceof TapSourceCost) {
                         return true;

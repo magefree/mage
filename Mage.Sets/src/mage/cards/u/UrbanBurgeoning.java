@@ -118,7 +118,7 @@ class UrbanBurgeoningUntapEffect extends ContinuousEffectImpl {
                     land.untap(game);
                 }
             }
-        } else if (applied && layer.equals(Layer.RulesEffects)) {
+        } else if (applied && layer == Layer.RulesEffects) {
             if (game.getStep().getType() == PhaseStep.END_TURN) {
                 game.getState().setValue(source.getSourceId() + "applied", false);
             }

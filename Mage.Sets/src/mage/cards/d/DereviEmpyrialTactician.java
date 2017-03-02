@@ -139,7 +139,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         Zone currentZone = game.getState().getZone(this.getSourceId());
-        if (currentZone == null || !currentZone.equals(Zone.COMMAND)) {
+        if (currentZone == null || currentZone != Zone.COMMAND) {
             return false;
         }
         return super.canActivate(playerId, game);

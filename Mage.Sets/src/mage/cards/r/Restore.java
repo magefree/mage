@@ -90,7 +90,7 @@ class RestoreEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card land = game.getCard(this.getTargetPointer().getFirst(game, source));
-        if (controller != null && game.getState().getZone(land.getId()).equals(Zone.GRAVEYARD)) {
+        if (controller != null && game.getState().getZone(land.getId()) == Zone.GRAVEYARD) {
             return land.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
         }
         return false;
