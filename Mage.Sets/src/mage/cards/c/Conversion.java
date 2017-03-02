@@ -43,7 +43,6 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -123,7 +122,8 @@ public class Conversion extends CardImpl {
         @Override
         public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
             // the dependent classes needs to be an enclosed class for dependent check of continuous effects
-            return allEffectsInLayer.stream()
+            return allEffectsInLayer
+                    .stream()
                     .filter(effect->effect.getDependencyTypes().contains(DependencyType.BecomeMountain))
                     .map(Effect::getId)
                     .collect(Collectors.toSet());

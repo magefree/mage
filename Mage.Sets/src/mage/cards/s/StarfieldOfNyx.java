@@ -27,12 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,14 +38,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
@@ -63,6 +50,11 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -169,7 +161,11 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
 
     @Override
     public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
-        return allEffectsInLayer.stream().filter(effect->effect.getDependencyTypes().contains(DependencyType.AuraAddingRemoving)).map(Effect::getId).collect(Collectors.toSet());
+        return allEffectsInLayer
+                .stream()
+                .filter(effect->effect.getDependencyTypes().contains(DependencyType.AuraAddingRemoving))
+                .map(Effect::getId)
+                .collect(Collectors.toSet());
 
     }
 }
