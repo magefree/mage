@@ -28,6 +28,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -47,13 +48,12 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 
 /**
- *
  * @author Temba
  */
 public class PhantomTiger extends CardImpl {
 
     public PhantomTiger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Cat");
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
@@ -111,7 +111,7 @@ class PhantomTigerPreventionEffect extends PreventionEffectImpl {
         if (permanent != null) {
             boolean removeCounter = true;
             // check if in the same combat damage step already a counter was removed
-            if (game.getTurn().getPhase().getStep().getType().equals(PhaseStep.COMBAT_DAMAGE)) {
+            if (game.getTurn().getPhase().getStep().getType() == PhaseStep.COMBAT_DAMAGE) {
                 if (game.getTurnNum() == turn
                         && game.getTurn().getStep().equals(combatPhaseStep)) {
                     removeCounter = false;

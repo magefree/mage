@@ -93,8 +93,8 @@ class PowerArtifactCostModificationEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         Permanent artifact = game.getPermanent(abilityToModify.getSourceId());
         if (artifact != null && artifact.getAttachments().contains(source.getSourceId())) {
-            if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)
-                    || (abilityToModify.getAbilityType().equals(AbilityType.MANA) && (abilityToModify instanceof ActivatedAbility))) {
+            if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
+                    || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
                 return true;
             }
         }

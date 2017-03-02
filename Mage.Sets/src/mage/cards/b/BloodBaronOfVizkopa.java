@@ -140,7 +140,7 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return (layer.equals(Layer.AbilityAddingRemovingEffects_6) || layer.equals(layer.PTChangingEffects_7));
+        return (layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7);
 
     }
 

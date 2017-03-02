@@ -101,7 +101,7 @@ class AeonChroniclerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
+        return event.getData() == CounterType.TIME.getName() && event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

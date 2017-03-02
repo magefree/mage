@@ -80,7 +80,7 @@ class LightOfSanctionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)) {
+        if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
                 MageObject damageSource = game.getObject(event.getSourceId());

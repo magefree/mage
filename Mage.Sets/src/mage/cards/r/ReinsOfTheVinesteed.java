@@ -104,7 +104,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card aura = game.getCard(source.getSourceId());
         if (aura != null
-                && game.getState().getZone(aura.getId()).equals(Zone.GRAVEYARD)) {
+                && game.getState().getZone(aura.getId()) == Zone.GRAVEYARD) {
             Player controller = game.getPlayer(source.getControllerId());
             Permanent lastStateAura = (Permanent) game.getLastKnownInformation(aura.getId(), Zone.BATTLEFIELD);
             Permanent lastStateCreature = game.getPermanentOrLKIBattlefield(lastStateAura.getAttachedTo());

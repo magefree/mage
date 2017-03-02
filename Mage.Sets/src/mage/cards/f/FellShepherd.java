@@ -155,7 +155,7 @@ class FellShepherdEffect extends OneShotEffect {
         if (watcher != null) {
             StringBuilder sb = new StringBuilder();
             for (UUID creatureId : watcher.getCreaturesIds()) {
-                if (game.getState().getZone(creatureId).equals(Zone.GRAVEYARD)) {
+                if (game.getState().getZone(creatureId) == Zone.GRAVEYARD) {
                     Card card = game.getCard(creatureId);
                     if (card != null) {
                         card.moveToZone(Zone.HAND, source.getSourceId(), game, false);

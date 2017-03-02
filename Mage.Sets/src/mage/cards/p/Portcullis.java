@@ -123,7 +123,7 @@ class PortcullisExileEffect extends OneShotEffect {
         if (permanent != null && creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());
             Zone currentZone = game.getState().getZone(creature.getId());
-            if (currentZone.equals(Zone.BATTLEFIELD)) {
+            if (currentZone == Zone.BATTLEFIELD) {
                 controller.moveCardsToExile(creature, source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
             }
         }

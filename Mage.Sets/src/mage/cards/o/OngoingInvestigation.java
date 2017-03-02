@@ -116,7 +116,7 @@ class OngoingInvestigationTriggeredAbility extends TriggeredAbilityImpl {
                 damagedPlayers.add(event.getPlayerId());
             }
         }
-        if (event.getType().equals(EventType.COMBAT_DAMAGE_STEP_POST)) {
+        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_POST) {
             if (madeDamage) {
                 Set<UUID> damagedPlayersCopy = new HashSet<>();
                 damagedPlayersCopy.addAll(damagedPlayers);

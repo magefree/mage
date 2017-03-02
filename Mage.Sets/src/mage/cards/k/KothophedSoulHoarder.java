@@ -115,7 +115,7 @@ class KothophedSoulHoarderTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone().equals(Zone.GRAVEYARD) && zEvent.getFromZone().equals(Zone.BATTLEFIELD)) {
+        if (zEvent.getToZone() == Zone.GRAVEYARD && zEvent.getFromZone() == Zone.BATTLEFIELD) {
             Card card = game.getCard(zEvent.getTargetId());
             Player controller = game.getPlayer(getControllerId());
             return card != null && controller != null && controller.hasOpponent(card.getOwnerId(), game);

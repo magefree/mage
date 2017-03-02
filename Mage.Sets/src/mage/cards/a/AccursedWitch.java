@@ -105,7 +105,7 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
+            if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
                 //note: should check for null after game.getCard
                 Card card = game.getCard(source.getSourceId());

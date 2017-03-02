@@ -104,7 +104,7 @@ class AdjustingCostsAbility extends SimpleStaticAbility implements AdjustingSour
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
+        if (ability.getAbilityType() == AbilityType.SPELL) {
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null && player.getLife() < 4) {
                 CardUtil.adjustCost((SpellAbility)ability, 6);

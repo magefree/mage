@@ -127,7 +127,7 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (source.getSourceId().equals(event.getTargetId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if(zEvent.getToZone().equals(Zone.BATTLEFIELD)){
+            if(zEvent.getToZone() == Zone.BATTLEFIELD){
                 return true;
             }
         }

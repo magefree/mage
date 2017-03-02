@@ -150,7 +150,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
             }
             return true;
         } else {
-            if (duration.equals(Duration.Custom)) {
+            if (duration == Duration.Custom) {
                 this.discard();
             }
         }

@@ -114,7 +114,7 @@ class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone().equals(Zone.GRAVEYARD)) {
+        if (zEvent.getFromZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(zEvent.getTargetId());
             Player controller = game.getPlayer(getControllerId());
             return card != null

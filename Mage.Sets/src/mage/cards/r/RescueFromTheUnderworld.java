@@ -241,13 +241,13 @@ class RescueFromTheUnderworldReturnEffect extends OneShotEffect {
             // perhaps because it’s your commander or because of another replacement effect, it will return
             // to the battlefield from the zone it went to.
             if (source.getTargets().get(1) != null) {
-                for (UUID targetId : ((Target) source.getTargets().get(1)).getTargets()) {
+                for (UUID targetId : source.getTargets().get(1).getTargets()) {
                     Card card = game.getCard(targetId);
                     if (card != null && !card.isFaceDown(game)) {
                         Player player = game.getPlayer(card.getOwnerId());
                         if (player != null) {
                             Zone currentZone = game.getState().getZone(card.getId());
-                            if (currentZone.equals(Zone.COMMAND) || currentZone.equals(Zone.GRAVEYARD) || currentZone.equals(Zone.EXILED)) {
+                            if (currentZone == Zone.COMMAND || currentZone == Zone.GRAVEYARD || currentZone == Zone.EXILED) {
                                 return player.moveCards(card, Zone.BATTLEFIELD, source, game);
                             }
                         }

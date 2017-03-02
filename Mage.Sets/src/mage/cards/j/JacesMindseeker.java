@@ -115,7 +115,7 @@ class JaceMindseekerEffect extends OneShotEffect {
                     Zone zone = game.getState().getZone(card.getId());
                     // If the five cards are put into a public zone such as exile instead of a graveyard (perhaps due to the ability of Rest in Peace),
                     // you can cast one of those instant or sorcery cards from that zone.
-                    if (zone.equals(Zone.GRAVEYARD) || zone.equals(Zone.EXILED)) {
+                    if (zone == Zone.GRAVEYARD || zone == Zone.EXILED) {
                         cardsToCast.add(card);
                     }
                 }

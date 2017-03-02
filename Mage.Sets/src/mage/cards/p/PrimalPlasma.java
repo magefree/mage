@@ -95,7 +95,7 @@ public class PrimalPlasma extends CardImpl {
 
         @Override
         public boolean checksEventType(GameEvent event, Game game) {
-            return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD);
+            return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
         }
 
         @Override

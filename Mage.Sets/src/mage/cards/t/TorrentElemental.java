@@ -117,7 +117,7 @@ class ReturnSourceFromExileToBattlefieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!game.getState().getZone(source.getSourceId()).equals(Zone.EXILED)) {
+        if (game.getState().getZone(source.getSourceId()) != Zone.EXILED) {
             return false;
         }
         Card card = game.getCard(source.getSourceId());

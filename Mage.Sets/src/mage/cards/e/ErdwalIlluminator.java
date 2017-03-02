@@ -85,7 +85,7 @@ class ErdwalIlluminatorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.INVESTIGATED);
+        return event.getType() == EventType.INVESTIGATED;
     }
 
     @Override
@@ -124,7 +124,7 @@ class InvestigatedWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (EventType.INVESTIGATED.equals(event.getType())) {
+        if (event.getType() == EventType.INVESTIGATED) {
             if (!timesInvestigated.containsKey(event.getPlayerId())) {
                 timesInvestigated.put(event.getPlayerId(), 1);
             } else {

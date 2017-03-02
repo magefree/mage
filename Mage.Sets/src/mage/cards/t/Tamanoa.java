@@ -88,9 +88,9 @@ class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.DAMAGED_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLANESWALKER);
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER;
     }
 
     @Override
@@ -98,7 +98,7 @@ class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
         MageObject eventSourceObject = game.getObject(event.getSourceId());
         if (eventSourceObject != null && !eventSourceObject.getCardType().contains(CardType.CREATURE)) {
             if (getControllerId().equals(game.getControllerId(event.getSourceId()))) {
-                this.getEffects().stream().forEach((effect) -> {
+                this.getEffects().forEach((effect) -> {
                     effect.setValue("damage", event.getAmount());
                 });
                 return true;

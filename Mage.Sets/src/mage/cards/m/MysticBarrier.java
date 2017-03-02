@@ -97,12 +97,12 @@ class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD) || event.getType().equals(EventType.UPKEEP_STEP_PRE);
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD || event.getType() == EventType.UPKEEP_STEP_PRE;
     }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD)) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             return event.getTargetId().equals(this.getSourceId());
         } else {
             return event.getPlayerId().equals(this.getControllerId());
@@ -196,7 +196,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
                         }
                         if (defender != null) {
                             PlayerList playerList = game.getState().getPlayerList(event.getPlayerId());
-                            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_LEFT)) {
+                            if (allowedDirection == MysticBarrier.ALLOW_ATTACKING_LEFT) {
                                 if (!playerList.getNext().equals(defender.getId())) {
                                     // the defender is not the player to the left
                                     Player attacker = game.getPlayer(event.getPlayerId());
@@ -206,7 +206,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
                                     return true;
                                 }
                             }
-                            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_RIGHT)) {
+                            if (allowedDirection == MysticBarrier.ALLOW_ATTACKING_RIGHT) {
                                 if (!playerList.getPrevious().equals(defender.getId())) {
                                     // the defender is not the player to the right
                                     Player attacker = game.getPlayer(event.getPlayerId());

@@ -179,7 +179,7 @@ class DecayingSoilEffect extends OneShotEffect {
                       if (target != null) {
                         Card card = game.getCard(target);
                         // check if it's still in graveyard
-                        if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                             card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                             return true;
                         }

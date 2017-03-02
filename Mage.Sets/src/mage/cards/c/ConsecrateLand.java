@@ -102,7 +102,7 @@ class ConsecrateLandRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.ATTACH) || event.getType().equals(EventType.STAY_ATTACHED);
+        return event.getType() == EventType.ATTACH || event.getType() == EventType.STAY_ATTACHED;
     }
 
     @Override

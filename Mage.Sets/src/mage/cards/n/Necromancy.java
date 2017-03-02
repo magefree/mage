@@ -235,7 +235,7 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return Layer.AbilityAddingRemovingEffects_6.equals(layer) || Layer.TypeChangingEffects_4.equals(layer);
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
     }
 
 }

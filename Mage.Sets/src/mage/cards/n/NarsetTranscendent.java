@@ -153,7 +153,7 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getFromZone().equals(Zone.HAND)) {
+            if (spell != null && spell.getFromZone() == Zone.HAND) {
                 if (spell.getCard() != null
                         && spell.getCard().getCardType().contains(CardType.INSTANT) || spell.getCard().getCardType().contains(CardType.SORCERY)) {
                     for (Effect effect : getEffects()) {

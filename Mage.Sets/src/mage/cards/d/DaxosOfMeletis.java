@@ -211,7 +211,7 @@ class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
                 && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
                 && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
                 && (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId))
-                && game.getState().getZone(objectId).equals(Zone.STACK);
+                && game.getState().getZone(objectId) == Zone.STACK;
     }
 
     @Override

@@ -173,7 +173,7 @@ class LongRoadHomeEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.ENTERS_THE_BATTLEFIELD.equals(event.getType());
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override

@@ -128,7 +128,7 @@ class OathOfChandraWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone().equals(Zone.BATTLEFIELD)
+            if (zEvent.getToZone() == Zone.BATTLEFIELD
                     && zEvent.getTarget().getCardType().contains(CardType.PLANESWALKER)) {
                 players.add(zEvent.getTarget().getControllerId());
             }

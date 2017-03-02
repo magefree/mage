@@ -99,7 +99,7 @@ class ReturnSourceToBattlefieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
+        if (game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
             return false;
         }
         Card card = game.getCard(source.getSourceId());

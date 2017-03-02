@@ -96,8 +96,8 @@ class SourceOnBattelfieldOrGraveyardCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return (game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)
-                || game.getState().getZone(source.getSourceId()).equals(Zone.BATTLEFIELD));
+        return game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
+                || game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD;
     }
 
     @Override

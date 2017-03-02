@@ -104,7 +104,7 @@ class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
+        if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
             CombatDamageStepStartedWatcher watcher = (CombatDamageStepStartedWatcher) game.getState().getWatchers().get("CombatDamageStepStarted");
             return watcher == null || watcher.conditionMet();
         }

@@ -110,7 +110,7 @@ class FoeRazerRegentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.FIGHTED_PERMANENT);
+        return event.getType() == EventType.FIGHTED_PERMANENT;
     }
 
     @Override

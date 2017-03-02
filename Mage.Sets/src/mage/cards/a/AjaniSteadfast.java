@@ -152,12 +152,12 @@ class AjaniSteadfastPreventEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
+        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
                 && event.getTargetId().equals(source.getControllerId())) {
             return super.applies(event, source, game);
         }
 
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER)) {
+        if (event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
                 return super.applies(event, source, game);

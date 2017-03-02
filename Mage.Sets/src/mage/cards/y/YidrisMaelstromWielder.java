@@ -104,7 +104,7 @@ class YidrisMaelstromWielderGainCascadeEffect extends ContinuousEffectImpl {
                 // only spells cast, so no copies of spells
                 if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
                     Spell spell = (Spell) stackObject;
-                    if (spell.getFromZone().equals(Zone.HAND)) {
+                    if (spell.getFromZone() == Zone.HAND) {
                         game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
                     }
                 }

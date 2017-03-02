@@ -28,6 +28,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,13 +47,12 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author noxx
  */
 public class GiselaBladeOfGoldnight extends CardImpl {
 
     public GiselaBladeOfGoldnight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
 
@@ -82,7 +82,7 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
     public GiselaBladeOfGoldnightDoubleDamageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead."
-            + "If a source would deal damage to you or a permanent you control, prevent half that damage, rounded up";
+                + "If a source would deal damage to you or a permanent you control, prevent half that damage, rounded up";
     }
 
     public GiselaBladeOfGoldnightDoubleDamageEffect(final GiselaBladeOfGoldnightDoubleDamageEffect effect) {
@@ -96,9 +96,9 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.DAMAGE_CREATURE) ||
-                event.getType().equals(EventType.DAMAGE_PLANESWALKER) ||
-                event.getType().equals(EventType.DAMAGE_PLAYER);
+        return event.getType() == EventType.DAMAGE_CREATURE ||
+                event.getType() == EventType.DAMAGE_PLANESWALKER ||
+                event.getType() == EventType.DAMAGE_PLAYER;
     }
 
 
@@ -108,7 +108,7 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
     }
 
     private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
-        int amount = (int)Math.ceil(event.getAmount() / 2.0);
+        int amount = (int) Math.ceil(event.getAmount() / 2.0);
         GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getSourceId(), source.getControllerId(), amount, false);
         if (!game.replaceEvent(preventEvent)) {
             event.setAmount(event.getAmount() - amount);

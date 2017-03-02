@@ -240,7 +240,7 @@ class DarettiScrapSavantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
             effect.setText("return that card to the battlefield at the beginning of the next end step");

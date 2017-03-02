@@ -115,7 +115,7 @@ class RestorationAngelEffect extends OneShotEffect {
                 Card card = game.getCard(permanent.getId());
                 if (card != null
                         && card.getZoneChangeCounter(game) == zcc + 1
-                        && game.getState().getZone(card.getId()).equals(Zone.EXILED)) {
+                        && game.getState().getZone(card.getId()) == Zone.EXILED) {
                     return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }

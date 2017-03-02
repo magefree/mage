@@ -92,7 +92,7 @@ class CabalExecutionerAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return EventType.DAMAGED_PLAYER.equals(event.getType());
+        return event.getType() == EventType.DAMAGED_PLAYER;
     }
 
     

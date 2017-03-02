@@ -146,8 +146,8 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getTurn().getStepType().equals(PhaseStep.END_COMBAT)) {
-            if (!game.getTurn().getPhase().equals(phase)) {
+        if (game.getTurn().getStepType() == PhaseStep.END_COMBAT) {
+            if (game.getTurn().getPhase() != phase) {
                 return true;
             }
         }
@@ -190,8 +190,8 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getTurn().getStepType().equals(PhaseStep.END_COMBAT)) {
-            if (!game.getTurn().getPhase().equals(phase)) {
+        if (game.getTurn().getStepType() == PhaseStep.END_COMBAT) {
+            if (game.getTurn().getPhase() != phase) {
                 return true;
             }
         }
