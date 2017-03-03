@@ -110,7 +110,7 @@ public class EvolveAbility extends TriggeredAbilityImpl {
         if (!event.getTargetId().equals(this.getSourceId())) {
             Permanent triggeringCreature = game.getPermanent(event.getTargetId());
             if (triggeringCreature != null
-                    && triggeringCreature.getCardType().contains(CardType.CREATURE)
+                    && triggeringCreature.isCreature()
                     && triggeringCreature.getControllerId().equals(this.controllerId)) {
                 Permanent sourceCreature = game.getPermanent(sourceId);
                 if (sourceCreature != null && isPowerOrThoughnessGreater(sourceCreature, triggeringCreature)) {

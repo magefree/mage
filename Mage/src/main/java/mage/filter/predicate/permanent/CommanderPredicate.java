@@ -20,7 +20,7 @@ public class CommanderPredicate implements Predicate<Permanent> {
     @Override
     public boolean apply(Permanent input, Game game) {
         Player owner = game.getPlayer(input.getOwnerId());
-        return input.getCardType().contains(CardType.CREATURE)
+        return input.isCreature()
                 && owner != null
                 && owner.getCommandersIds().contains(input.getId());
     }

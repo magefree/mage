@@ -28,7 +28,7 @@ public class EnchantedTargetCondition implements Condition {
                 if (targetPermanent != null) {
                     for (UUID uuid : targetPermanent.getAttachments()) {
                         Permanent attached = game.getBattlefield().getPermanent(uuid);
-                        if (attached != null && attached.getCardType().contains(CardType.ENCHANTMENT)) {
+                        if (attached != null && attached.isEnchantment()) {
                             return true;
                         }
                     }

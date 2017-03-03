@@ -120,7 +120,7 @@ class CascadeEffect extends OneShotEffect {
             }
             controller.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
         } while (controller.isInGame()
-                && (card.getCardType().contains(CardType.LAND)
+                && (card.isLand()
                 || !cardThatCostsLess(sourceCost, card, game)));
 
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw

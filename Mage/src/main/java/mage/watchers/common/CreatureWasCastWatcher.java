@@ -62,7 +62,7 @@ public class CreatureWasCastWatcher extends Watcher {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell != null) {
                 Card card = game.getCard(spell.getSourceId());
-                if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                if (card != null && card.isCreature()) {
                     creaturesCasted.add(card.getId());
                 }
             }
@@ -70,7 +70,7 @@ public class CreatureWasCastWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && card.isCreature()) {
                 creaturesCasted.remove(card.getId());
             }
         }

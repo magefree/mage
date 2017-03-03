@@ -359,7 +359,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canTap() {
-        return !cardType.contains(CardType.CREATURE) || !hasSummoningSickness();
+        return !isCreature() || !hasSummoningSickness();
     }
 
     @Override
@@ -701,7 +701,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage, ArrayList<UUID> appliedEffects) {
         int damageDone = 0;
         if (damageAmount > 0 && canDamage(game.getObject(sourceId), game)) {
-            if (cardType.contains(CardType.PLANESWALKER)) {
+            if (this.isPlaneswalker()) {
                 damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable, combat, markDamage, appliedEffects);
             } else {
                 damageDone = damageCreature(damageAmount, sourceId, game, preventable, combat, markDamage, appliedEffects);
@@ -945,7 +945,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     } else {
                         logName = this.getLogName();
                     }
-                    if (this.getCardType().contains(CardType.CREATURE)) {
+                    if (this.isCreature()) {
                         game.informPlayers(logName + " died");
                     } else {
                         game.informPlayers(logName + " was destroyed");
@@ -1175,7 +1175,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean removeFromCombat(Game game, boolean withInfo) {
         if (this.isAttacking() || this.blocking > 0) {
             return game.getCombat().removeFromCombat(objectId, game, withInfo);
-        } else if (getCardType().contains(CardType.PLANESWALKER)) {
+        } else if (this.isPlaneswalker()) {
             if (game.getCombat().getDefenders().contains(getId())) {
                 game.getCombat().removePlaneswalkerFromCombat(objectId, game, withInfo);
             }

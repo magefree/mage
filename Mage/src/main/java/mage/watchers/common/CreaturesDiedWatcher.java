@@ -59,7 +59,9 @@ public class CreaturesDiedWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.isDiesEvent() && zEvent.getTarget() != null && zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
+            if (zEvent.isDiesEvent()
+                    && zEvent.getTarget() != null
+                    && zEvent.getTarget().isCreature()) {
                 amountOfCreaturesThatDied++;
                 int amount = 0;
                 if (amountOfCreaturesThatDiedByController.containsKey(zEvent.getTarget().getControllerId())) {

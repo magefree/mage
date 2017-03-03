@@ -191,7 +191,7 @@ public class Spell extends StackObjImpl implements Card {
         if (controller == null) {
             return false;
         }
-        if (this.getCardType().contains(CardType.INSTANT) || this.getCardType().contains(CardType.SORCERY)) {
+        if (this.isInstant() || this.isSorcery()) {
             int index = 0;
             result = false;
             boolean legalParts = false;
@@ -239,7 +239,7 @@ public class Spell extends StackObjImpl implements Card {
             }
             counter(null, game);
             return false;
-        } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype(game).contains("Aura")) {
+        } else if (this.isEnchantment() && this.getSubtype(game).contains("Aura")) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
                 boolean bestow = ability instanceof BestowAbility;
@@ -432,7 +432,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public String getLogName() {
         if (faceDown) {
-            if (getCardType().contains(CardType.CREATURE)) {
+            if (this.isCreature()) {
                 return "face down creature spell";
             } else {
                 return "face down spell";

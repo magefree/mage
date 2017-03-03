@@ -115,7 +115,7 @@ public class ProtectionAbility extends StaticAbility {
             // object is still a card and not a spell yet. So return only if the source object can't be a spell
             // otherwise the following FilterObject check will be applied
             if (source instanceof StackObject
-                    || (!source.getCardType().contains(CardType.INSTANT) && !source.getCardType().contains(CardType.SORCERY))) {
+                    || (!source.isInstant() && !source.isSorcery())) {
                 return true;
             }
         }

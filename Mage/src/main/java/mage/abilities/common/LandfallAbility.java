@@ -74,7 +74,7 @@ public class LandfallAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
-                && permanent.getCardType().contains(CardType.LAND)
+                && permanent.isLand()
                 && permanent.getControllerId().equals(this.controllerId)) {
             triggeringLand = permanent;
             if (setTargetPointer == SetTargetPointer.PERMANENT) {

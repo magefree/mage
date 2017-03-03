@@ -180,7 +180,7 @@ public class SuspendAbility extends SpecialAction {
                         .append((suspend == 1 ? "a time counter" : (suspend == Integer.MAX_VALUE ? "X time counters" : suspend + " time counters")))
                         .append(" on it.")
                         .append(" At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.")
-                        .append(card.getCardType().contains(CardType.CREATURE) ? " If you play it this way and it's a creature, it gains haste until you lose control of it." : "")
+                        .append(card.isCreature() ? " If you play it this way and it's a creature, it gains haste until you lose control of it." : "")
                         .append(")</i>");
             }
             if (card.getManaCost().isEmpty()) {
@@ -241,7 +241,7 @@ public class SuspendAbility extends SpecialAction {
             return false;
         }
         MageObject object = game.getObject(sourceId);
-        return (object.getCardType().contains(CardType.INSTANT)
+        return (object.isInstant()
                 || object.hasAbility(FlashAbility.getInstance().getId(), game)
                 || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
                 || game.canPlaySorcery(playerId));
@@ -384,7 +384,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
             }
             // cast the card for free
             if (player.cast(card.getSpellAbility(), game, true)) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     ContinuousEffect effect = new GainHasteEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
                     game.addEffect(effect, source);

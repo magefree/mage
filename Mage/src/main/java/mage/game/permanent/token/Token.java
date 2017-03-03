@@ -195,7 +195,7 @@ public class Token extends MageObjectImpl {
             expansionSetCodeChecked = this.updateExpansionSetCode(setCode);
         }
 
-        GameEvent event = new GameEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount, this.getCardType().contains(CardType.CREATURE));
+        GameEvent event = new GameEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount, this.isCreature());
         if (!game.replaceEvent(event)) {
             amount = event.getAmount();
 

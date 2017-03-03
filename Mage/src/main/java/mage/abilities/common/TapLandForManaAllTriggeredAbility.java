@@ -62,7 +62,7 @@ public class TapLandForManaAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+        if (permanent != null && permanent.isLand()) {
             if (setTargetPointer) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
             }

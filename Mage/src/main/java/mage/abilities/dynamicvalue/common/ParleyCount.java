@@ -68,7 +68,7 @@ public class ParleyCount implements DynamicValue, MageSingleton {
                 if (player != null) {
                     Card card = player.getLibrary().getFromTop(game);
                     if (card != null) {
-                        if (!card.getCardType().contains(CardType.LAND)) {
+                        if (!card.isLand()) {
                             parleyValue++;
                         }
                         player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', new CardsImpl(card), game);

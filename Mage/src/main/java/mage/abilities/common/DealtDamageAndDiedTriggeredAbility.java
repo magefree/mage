@@ -38,7 +38,7 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent)event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
+            if (zEvent.getTarget().isCreature()) {
                 boolean damageDealt = false;
                 for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
                     if (mor.refersTo(getSourceObject(game), game)) {
