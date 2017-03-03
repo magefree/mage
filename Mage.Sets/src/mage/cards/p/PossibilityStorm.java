@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -165,7 +166,7 @@ class PossibilityStormEffect extends OneShotEffect {
         return false;
     }
 
-    private boolean sharesType(Card card, Set<CardType> cardTypes) {
+    private boolean sharesType(Card card, EnumSet<CardType> cardTypes) {
         for (CardType type : card.getCardType()) {
             if (cardTypes.contains(type)) {
                 return true;

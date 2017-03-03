@@ -28,14 +28,14 @@
 
 package mage.view;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.constants.CardType;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class AbilityView extends CardView {
@@ -55,7 +55,7 @@ public class AbilityView extends CardView {
         this.power = "";
         this.toughness = "";
         this.loyalty = "";
-        this.cardTypes = new HashSet<>();
+        this.cardTypes = EnumSet.noneOf(CardType.class);
         this.subTypes = new ArrayList<>();
         this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();
@@ -69,6 +69,6 @@ public class AbilityView extends CardView {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 
 }

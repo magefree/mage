@@ -44,6 +44,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+
 import mage.client.cards.BigCard;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
@@ -58,7 +59,6 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CardInfoWindowDialog extends MageDialog {
@@ -109,7 +109,7 @@ public class CardInfoWindowDialog extends MageDialog {
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getExileImage()));
                 break;
             default:
-            // no icon yet
+                // no icon yet
         }
         this.setTitelBarToolTip(name);
         setGUISize();
@@ -202,17 +202,19 @@ public class CardInfoWindowDialog extends MageDialog {
         });
     }
 
-        private int qtyCardTypes(mage.view.CardsView cardsView){
-        Set<String> cardTypesPresent = new LinkedHashSet<String>() {};
-        for (CardView card : cardsView.values()){
+    private int qtyCardTypes(mage.view.CardsView cardsView) {
+        Set<String> cardTypesPresent = new LinkedHashSet<String>() {
+        };
+        for (CardView card : cardsView.values()) {
             Set<CardType> cardTypes = card.getCardTypes();
-            for (CardType cardType : cardTypes){
+            for (CardType cardType : cardTypes) {
                 cardTypesPresent.add(cardType.toString());
             }
         }
         if (cardTypesPresent.isEmpty()) return 0;
         else return cardTypesPresent.size();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -227,24 +229,24 @@ public class CardInfoWindowDialog extends MageDialog {
         setIconifiable(true);
         setResizable(true);
         setPreferredSize(new Dimension((int) Math.round(GUISizeHelper.otherZonesCardDimension.width * 1.3),
-            (int) Math.round(GUISizeHelper.otherZonesCardDimension.height * 1.2)));
+                (int) Math.round(GUISizeHelper.otherZonesCardDimension.height * 1.2)));
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGap(0, 0, 0))
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGap(0, 0, 0))
-    );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
+        );
 
-    pack();
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

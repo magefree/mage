@@ -70,7 +70,7 @@ public class CardView extends SimpleCardView {
     protected String toughness;
     protected String loyalty;
     protected String startingLoyalty;
-    protected Set<CardType> cardTypes;
+    protected EnumSet<CardType> cardTypes;
     protected List<String> subTypes;
     protected List<String> superTypes;
     protected ObjectColor color;
@@ -518,7 +518,7 @@ public class CardView extends SimpleCardView {
         this.toughness = "";
         this.loyalty = "";
         this.startingLoyalty = "";
-        this.cardTypes = new HashSet<>();
+        this.cardTypes = EnumSet.noneOf(CardType.class);
         this.subTypes = new ArrayList<>();
         this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();
