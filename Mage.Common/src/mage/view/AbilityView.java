@@ -29,6 +29,8 @@
 package mage.view;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+
 import mage.ObjectColor;
 import mage.abilities.Ability;
 
@@ -53,7 +55,7 @@ public class AbilityView extends CardView {
         this.power = "";
         this.toughness = "";
         this.loyalty = "";
-        this.cardTypes = new ArrayList<>();
+        this.cardTypes = new HashSet<>();
         this.subTypes = new ArrayList<>();
         this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();

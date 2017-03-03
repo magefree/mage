@@ -27,9 +27,8 @@
  */
 package mage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -55,7 +54,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
-    protected List<CardType> cardType = new ArrayList<>();
+    protected EnumSet<CardType> cardType = EnumSet.noneOf(CardType.class);
     protected List<String> subtype = new ArrayList<>();
     protected List<String> supertype = new ArrayList<>();
     protected Abilities<Ability> abilities;
@@ -127,7 +126,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public List<CardType> getCardType() {
+    public EnumSet<CardType> getCardType() {
         return cardType;
     }
 

@@ -401,7 +401,7 @@ public class GameController implements GameCallback {
                         return false;
                     }
                 }
-                if (player.isHuman() && gameSessions.get(player.getId()) == null) {
+                if (player.isHuman() && !gameSessions.containsKey(player.getId())) {
                     return false;
                 }
             }
@@ -410,11 +410,11 @@ public class GameController implements GameCallback {
     }
 
     public void watch(UUID userId) {
-        if (userPlayerMap.get(userId) != null) {
+        if (userPlayerMap.containsKey(userId)) {
             // You can't watch a game if you already a player in it
             return;
         }
-        if (watchers.get(userId) != null) {
+        if (watchers.containsKey(userId)) {
             // You can't watch a game if you already watch it
             return;
         }

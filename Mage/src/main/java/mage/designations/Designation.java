@@ -5,9 +5,8 @@
  */
 package mage.designations;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -29,6 +28,7 @@ import mage.util.GameLog;
  */
 public abstract class Designation implements MageObject {
 
+    private static EnumSet emptySet = EnumSet.noneOf(CardType.class);
     private static List emptyList = new ArrayList();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts<ManaCost> emptyCost = new ManaCostsImpl();
@@ -118,8 +118,8 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
-    public List<CardType> getCardType() {
-        return emptyList;
+    public EnumSet<CardType> getCardType() {
+        return emptySet;
     }
 
     @Override

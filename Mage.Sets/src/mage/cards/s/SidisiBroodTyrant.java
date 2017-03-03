@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -99,7 +100,7 @@ class SidisiBroodTyrantTriggeredAbility extends TriggeredAbilityImpl {
                 if (card != null) {
 
                     UUID cardOwnerId = card.getOwnerId();
-                    List<CardType> cardType = card.getCardType();
+                    Set<CardType> cardType = card.getCardType();
 
                     if (cardOwnerId != null
                             && card.getOwnerId().equals(getControllerId())

@@ -30,10 +30,9 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+
+import java.util.*;
+
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -253,8 +252,8 @@ public class CardInfo {
         return Arrays.asList(list.split(SEPARATOR));
     }
 
-    public final List<CardType> getTypes() {
-        ArrayList<CardType> list = new ArrayList<>();
+    public final EnumSet<CardType> getTypes() {
+        EnumSet<CardType> list = EnumSet.noneOf(CardType.class);
         for (String type : this.types.split(SEPARATOR)) {
             try {
                 list.add(CardType.valueOf(type));
@@ -264,7 +263,7 @@ public class CardInfo {
         return list;
     }
 
-    public final void setTypes(List<CardType> types) {
+    public final void setTypes(Set<CardType> types) {
         StringBuilder sb = new StringBuilder();
         for (CardType item : types) {
             sb.append(item.name()).append(SEPARATOR);

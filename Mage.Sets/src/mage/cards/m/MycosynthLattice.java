@@ -28,6 +28,7 @@
 package mage.cards.m;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -90,7 +91,7 @@ class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            List<CardType> cardType = perm.getCardType();
+            Set<CardType> cardType = perm.getCardType();
             if (!cardType.contains(CardType.ARTIFACT)) {
                 cardType.add(CardType.ARTIFACT);
             }

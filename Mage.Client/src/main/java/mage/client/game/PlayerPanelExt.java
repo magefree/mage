@@ -869,7 +869,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         Set<String> cardTypesPresent = new LinkedHashSet<String>() {
         };
         for (CardView card : cardsView.values()) {
-            List<CardType> cardTypes = card.getCardTypes();
+            Set<CardType> cardTypes = card.getCardTypes();
             for (CardType cardType : cardTypes) {
                 cardTypesPresent.add(cardType.toString());
             }

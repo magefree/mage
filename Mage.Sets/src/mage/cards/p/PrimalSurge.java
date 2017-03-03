@@ -28,6 +28,7 @@
 package mage.cards.p;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -95,7 +96,7 @@ class PrimalSurgeEffect extends OneShotEffect {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     card.moveToExile(null, "", source.getSourceId(), game);
-                    List<CardType> cardType = card.getCardType();
+                    Set<CardType> cardType = card.getCardType();
                     if ((cardType.contains(CardType.ARTIFACT) || cardType.contains(CardType.CREATURE)
                             || cardType.contains(CardType.ENCHANTMENT) || cardType.contains(CardType.LAND)
                             || cardType.contains(CardType.PLANESWALKER))

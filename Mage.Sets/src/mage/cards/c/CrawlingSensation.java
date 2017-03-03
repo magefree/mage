@@ -29,6 +29,7 @@
 package mage.cards.c;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -95,7 +96,7 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
                 for (Card card : zEvent.getCards()) {
                     if (card != null) {
                         UUID cardOwnerId = card.getOwnerId();
-                        List<CardType> cardType = card.getCardType();
+                        Set<CardType> cardType = card.getCardType();
 
                         if (cardOwnerId != null
                                 && card.getOwnerId().equals(getControllerId())
