@@ -28,6 +28,7 @@
 package mage.cards.t;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -110,7 +111,7 @@ class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
             for (Card card : zEvent.getCards()) {
                 if (card != null) {                    
                     UUID cardOwnerId = card.getOwnerId();
-                    List<CardType> cardType = card.getCardType();
+                    Set<CardType> cardType = card.getCardType();
                     if (cardOwnerId != null
                             && card.getOwnerId().equals(getControllerId())
                             && cardType != null

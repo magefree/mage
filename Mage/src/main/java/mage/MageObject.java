@@ -1,7 +1,9 @@
 package mage;
 
 import java.io.Serializable;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -24,7 +26,7 @@ public interface MageObject extends MageItem, Serializable {
 
     void setName(String name);
 
-    List<CardType> getCardType();
+    EnumSet<CardType> getCardType();
 
     List<String> getSubtype(Game game);
 

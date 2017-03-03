@@ -27,7 +27,9 @@
  */
 package mage.game.command;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -110,7 +112,7 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public List<CardType> getCardType() {
+    public EnumSet<CardType> getCardType() {
         return sourceObject.getCardType();
     }
 

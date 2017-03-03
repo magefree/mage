@@ -27,9 +27,8 @@
  */
 package mage.game.command;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -51,7 +50,8 @@ import mage.util.GameLog;
  */
 public class Emblem implements CommandObject {
 
-    private static List emptyList = new ArrayList();
+    private static EnumSet<CardType> emptySet = EnumSet.noneOf(CardType.class);
+    private static List emptyList  = new ArrayList();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts emptyCost = new ManaCostsImpl();
 
@@ -148,8 +148,8 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public List<CardType> getCardType() {
-        return emptyList;
+    public EnumSet<CardType> getCardType() {
+        return emptySet;
     }
 
     @Override

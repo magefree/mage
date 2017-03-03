@@ -170,7 +170,7 @@ public class UserManager {
         calendar.add(Calendar.MINUTE, -3);
         List<User> usersToCheck = new ArrayList<>(users.values());
         for (User user : usersToCheck) {
-            if (!user.getUserState().equals(UserState.Expired) && user.isExpired(calendar.getTime())) {
+            if (user.getUserState() != UserState.Expired && user.isExpired(calendar.getTime())) {
                 removeUser(user.getId(), DisconnectReason.SessionExpired);
             }
         }

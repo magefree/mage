@@ -27,9 +27,8 @@
  */
 package mage.game.stack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -457,14 +456,14 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public List<CardType> getCardType() {
+    public EnumSet<CardType> getCardType() {
         if (faceDown) {
-            List<CardType> cardTypes = new ArrayList<>();
+            EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
             cardTypes.add(CardType.CREATURE);
             return cardTypes;
         }
         if (this.getSpellAbility() instanceof BestowAbility) {
-            List<CardType> cardTypes = new ArrayList<>();
+            EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
             cardTypes.addAll(card.getCardType());
             cardTypes.remove(CardType.CREATURE);
             return cardTypes;

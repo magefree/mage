@@ -27,9 +27,8 @@
  */
 package mage.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Mode;
@@ -71,7 +70,7 @@ public class CardView extends SimpleCardView {
     protected String toughness;
     protected String loyalty;
     protected String startingLoyalty;
-    protected List<CardType> cardTypes;
+    protected EnumSet<CardType> cardTypes;
     protected List<String> subTypes;
     protected List<String> superTypes;
     protected ObjectColor color;
@@ -519,7 +518,7 @@ public class CardView extends SimpleCardView {
         this.toughness = "";
         this.loyalty = "";
         this.startingLoyalty = "";
-        this.cardTypes = new ArrayList<>();
+        this.cardTypes = EnumSet.noneOf(CardType.class);
         this.subTypes = new ArrayList<>();
         this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();
@@ -640,7 +639,7 @@ public class CardView extends SimpleCardView {
         return startingLoyalty;
     }
 
-    public List<CardType> getCardTypes() {
+    public Set<CardType> getCardTypes() {
         return cardTypes;
     }
 
