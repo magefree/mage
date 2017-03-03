@@ -114,7 +114,9 @@ public class ModernMasters2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Molten Rain", 103, Rarity.UNCOMMON, mage.cards.m.MoltenRain.class));
         cards.add(new SetCardInfo("Momentary Blink", 16, Rarity.COMMON, mage.cards.m.MomentaryBlink.class));
         cards.add(new SetCardInfo("Mortician Beetle", 78, Rarity.COMMON, mage.cards.m.MorticianBeetle.class));
+        cards.add(new SetCardInfo("Mystical Teachings", 44, Rarity.COMMON, mage.cards.m.MysticalTeachings.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Dracogenius", 175, Rarity.RARE, mage.cards.n.NivMizzetDracogenius.class));
+        cards.add(new SetCardInfo("Olivia Voldaren", 177, Rarity.MYTHIC, mage.cards.o.OliviaVoldaren.class));
         cards.add(new SetCardInfo("Orzhov Guildgate", 241, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class));
         cards.add(new SetCardInfo("Orzhov Signet", 224, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Past in Flames", 105, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
