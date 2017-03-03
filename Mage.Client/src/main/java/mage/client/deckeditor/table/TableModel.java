@@ -177,7 +177,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                                         String key1 = cv.getName() + cv.getExpansionSetCode() + cv.getCardNumber();
                                         for (CardView cardView : cards.values()) {
                                             String key2 = cardView.getName() + cardView.getExpansionSetCode() + cardView.getCardNumber();
-                                            if ((key1).equals(key2)) {
+                                            if (key1.equals(key2)) {
                                                 view.set(j, cardView);
                                                 break;
                                             }
