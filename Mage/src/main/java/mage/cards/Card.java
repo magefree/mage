@@ -35,6 +35,7 @@ import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
@@ -174,4 +175,7 @@ public interface Card extends MageObject {
      * returned
      */
     Card getMainCard();
+
+
+
 }

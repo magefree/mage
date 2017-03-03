@@ -120,7 +120,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                                 }
                             }
                         }
-                        if (type != null && type.isEmpty() || type == null && permanent.getCardType().contains(CardType.LAND)) {
+                        if (type != null && type.isEmpty() || type == null && permanent.isLand()) {
                             permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
                         }
                         if (!token.getSubtype(game).isEmpty()) {

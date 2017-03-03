@@ -183,7 +183,7 @@ public abstract class MageObjectImpl implements MageObject {
     public ObjectColor getFrameColor(Game game) {
         // For lands, add any colors of mana the land can produce to
         // its frame colors.
-        if (getCardType().contains(CardType.LAND)) {
+        if (this.isLand()) {
             ObjectColor cl = frameColor.copy();
             for (Ability ab: getAbilities()) {
                 if (ab instanceof ActivatedManaAbilityImpl) {

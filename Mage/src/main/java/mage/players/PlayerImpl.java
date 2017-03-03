@@ -938,7 +938,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         boolean result;
-        if (card.getCardType().contains(CardType.LAND)) {
+        if (card.isLand()) {
             result = playLand(card, game, ignoreTiming);
         } else {
             result = cast(card.getSpellAbility(), game, noMana);
@@ -1264,7 +1264,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             useable.put(ability.getId(), (ActivatedAbility) ability);
                         }
                     } else if (ability instanceof AlternativeSourceCosts) {
-                        if (object.getCardType().contains(CardType.LAND)) {
+                        if (object.isLand()) {
                             for (Ability ability2 : object.getAbilities().copy()) {
                                 if (ability2 instanceof PlayLandAbility) {
                                     useable.put(ability2.getId(), (ActivatedAbility) ability2);
@@ -1319,7 +1319,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (card.isSplitCard() && ability instanceof FlashbackAbility) {
                         FlashbackAbility flashbackAbility;
                         // Left Half
-                        if (card.getCardType().contains(CardType.INSTANT)) {
+                        if (card.isInstant()) {
                             flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.INSTANT);
                         } else {
                             flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.SORCERY);
@@ -1332,7 +1332,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             useable.put(flashbackAbility.getId(), flashbackAbility);
                         }
                         // Right Half
-                        if (card.getCardType().contains(CardType.INSTANT)) {
+                        if (card.isInstant()) {
                             flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), TimingRule.INSTANT);
                         } else {
                             flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), TimingRule.SORCERY);
@@ -2616,11 +2616,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                                     }
                                 }
                             } else if (ability instanceof AlternativeSourceCosts) {
-                                if (card.getCardType().contains(CardType.LAND)) {
+                                if (card.isLand()) {
                                     if (canLandPlayAlternateSourceCostsAbility(card, availableMana, ability, game)) { // e.g. Land with Morph
                                         playable.add(ability);
                                     }
-                                } else if (card.getCardType().contains(CardType.CREATURE)) { // e.g. makes a card available for play by Morph if the card may not be cast normally
+                                } else if (card.isCreature()) { // e.g. makes a card available for play by Morph if the card may not be cast normally
                                     if (!playable.contains(card.getSpellAbility())) {
                                         if (((AlternativeSourceCosts) ability).isAvailable(card.getSpellAbility(), game)) {
                                             playable.add(card.getSpellAbility());
@@ -2766,7 +2766,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 }
                                 break;
                             case STATIC:
-                                if (card.getCardType().contains(CardType.LAND) && ability instanceof AlternativeSourceCosts) {
+                                if (card.isLand() && ability instanceof AlternativeSourceCosts) {
                                     if (canLandPlayAlternateSourceCostsAbility(card, available, ability, game)) { // e.g. Land with Morph
                                         if (game.canPlaySorcery(getId())) {
                                             playable.add(card.getId());

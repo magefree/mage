@@ -124,7 +124,7 @@ public final class CardUtil {
             throw new IllegalArgumentException("Params can't be null");
         }
 
-        if (card1.getCardType().contains(CardType.CREATURE) && card2.getCardType().contains(CardType.CREATURE)) {
+        if (card1.isCreature() && card2.isCreature()) {
             if (card1.getAbilities().contains(ChangelingAbility.getInstance())
                     || card1.getSubtype(game).contains(ChangelingAbility.ALL_CREATURE_TYPE)
                     || card2.getAbilities().contains(ChangelingAbility.getInstance())
@@ -411,11 +411,11 @@ public final class CardUtil {
     public static boolean isPermanentCard(Card card) {
         boolean permanent = false;
 
-        permanent |= card.getCardType().contains(CardType.ARTIFACT);
-        permanent |= card.getCardType().contains(CardType.CREATURE);
-        permanent |= card.getCardType().contains(CardType.ENCHANTMENT);
-        permanent |= card.getCardType().contains(CardType.LAND);
-        permanent |= card.getCardType().contains(CardType.PLANESWALKER);
+        permanent |= card.isArtifact();
+        permanent |= card.isCreature();
+        permanent |= card.isEnchantment();
+        permanent |= card.isLand();
+        permanent |= card.isPlaneswalker();
 
         return permanent;
     }
@@ -676,7 +676,7 @@ public final class CardUtil {
     }
 
     public static boolean cardCanBePlayedNow(Card card, UUID playerId, Game game) {
-        if (card.getCardType().contains(CardType.LAND)) {
+        if (card.isLand()) {
             return game.canPlaySorcery(playerId) && game.getPlayer(playerId).canPlayLand();
         } else {
             return card.getSpellAbility() != null && card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game);

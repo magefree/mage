@@ -61,7 +61,7 @@ public class DomainValue implements DynamicValue {
             targetPlayer = sourceAbility.getControllerId();
         }
         for (Permanent p : game.getBattlefield().getAllActivePermanents(targetPlayer)) {
-            if (p.getCardType().contains(CardType.LAND)) {
+            if (p.isLand()) {
                 if (havePlains == 0 && p.getSubtype(game).contains("Plains")) {
                     havePlains = 1;
                 }

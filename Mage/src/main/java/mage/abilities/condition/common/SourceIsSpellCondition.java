@@ -49,6 +49,6 @@ public class SourceIsSpellCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        return object != null && !object.getCardType().contains(CardType.LAND);
+        return object != null && !object.isLand();
     }
 }

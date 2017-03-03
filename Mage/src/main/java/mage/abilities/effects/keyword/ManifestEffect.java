@@ -78,7 +78,7 @@ public class ManifestEffect extends OneShotEffect {
             Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
             for (Card card : cards) {
                 ManaCosts manaCosts = null;
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
                     if (manaCosts == null) {
                         manaCosts = new ManaCostsImpl("{0}");

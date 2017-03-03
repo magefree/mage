@@ -78,7 +78,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
         if (cardOnTop != null
                 && affectedControllerId.equals(source.getControllerId())
                 && cardOnTop.getOwnerId().equals(source.getControllerId())
-                && (!cardOnTop.getManaCost().isEmpty() || cardOnTop.getCardType().contains(CardType.LAND))
+                && (!cardOnTop.getManaCost().isEmpty() || cardOnTop.isLand())
                 && filter.match(cardOnTop, game)) {
             Player player = game.getPlayer(cardOnTop.getOwnerId());
             if (player != null && cardOnTop.equals(player.getLibrary().getFromTop(game))) {

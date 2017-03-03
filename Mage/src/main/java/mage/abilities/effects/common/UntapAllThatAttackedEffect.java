@@ -68,7 +68,7 @@ public class UntapAllThatAttackedEffect extends OneShotEffect {
             Set<UUID> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
             for (UUID uuid : attackedThisTurn) {
                 Permanent permanent = game.getPermanent(uuid);
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+                if (permanent != null && permanent.isCreature()) {
                     permanent.untap(game);
                 }
             }

@@ -82,4 +82,34 @@ public interface MageObject extends MageItem, Serializable {
 
     void setZoneChangeCounter(int value, Game game);
 
+
+
+    default boolean isCreature(){
+        return getCardType().contains(CardType.CREATURE);
+    }
+
+    default boolean isArtifact(){
+        return getCardType().contains(CardType.ARTIFACT);
+    }
+
+    default boolean isLand(){
+        return getCardType().contains(CardType.LAND);
+    }
+
+    default boolean isEnchantment(){
+        return getCardType().contains(CardType.ENCHANTMENT);
+    }
+
+    default boolean isInstant(){
+        return getCardType().contains(CardType.INSTANT);
+    }
+
+    default boolean isSorcery(){
+        return getCardType().contains(CardType.SORCERY);
+    }
+
+    default boolean isPlaneswalker(){
+        return getCardType().contains(CardType.PLANESWALKER);
+    }
+
 }

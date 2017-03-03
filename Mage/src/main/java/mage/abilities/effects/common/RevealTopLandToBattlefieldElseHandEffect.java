@@ -42,7 +42,7 @@ public class RevealTopLandToBattlefieldElseHandEffect extends OneShotEffect {
             }
             cards.add(card);
             controller.revealCards(sourceObject.getName(), cards, game);
-            if (card.getCardType().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             } else {
                 controller.moveCards(card, Zone.HAND, source, game);

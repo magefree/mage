@@ -58,7 +58,7 @@ public final class TraceUtil {
                     if (hasIntimidate(attacker)) {
                         for (UUID blockerId : group.getBlockers()) {
                             Permanent blocker = game.getPermanent(blockerId);
-                            if (blocker != null && !blocker.getCardType().contains(CardType.ARTIFACT)
+                            if (blocker != null && !blocker.isArtifact()
                                     && !attacker.getColor(game).shares(blocker.getColor(game))) {
                                 log.warn("Found creature with intimidate blocked by non artifact not sharing color creature");
                                 traceCombat(game, attacker, blocker);                                
