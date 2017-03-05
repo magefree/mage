@@ -29,6 +29,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
+import mage.abilities.CountType;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -64,7 +66,7 @@ public class SaruliGatekeepers extends CardImpl {
         // When Saruli Gatekeepers enters the battlefield, if you control two or more Gates, gain 7 life.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(7)),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 1),
+                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1),
                 "When {this} enters the battlefield, if you control two or more Gates, gain 7 life."));
     }
 

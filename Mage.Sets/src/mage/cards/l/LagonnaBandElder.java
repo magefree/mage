@@ -28,8 +28,10 @@
 package mage.cards.l;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -40,13 +42,12 @@ import mage.constants.CardType;
 import mage.filter.common.FilterEnchantmentPermanent;
 
 /**
- *
  * @author LevelX2
  */
 public class LagonnaBandElder extends CardImpl {
 
     public LagonnaBandElder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Centaur");
         this.subtype.add("Advisor");
 
@@ -56,7 +57,7 @@ public class LagonnaBandElder extends CardImpl {
         // When Lagonna-Band Elder enters the battlefield, if you control an enchantment, you gain 3 life.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), false),
-                new PermanentsOnTheBattlefieldCondition(new FilterEnchantmentPermanent(), PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(new FilterEnchantmentPermanent(), CountType.MORE_THAN, 0),
                 "When Lagonna-Band Elder enters the battlefield, if you control an enchantment, you gain 3 life");
         this.addAbility(ability);
     }

@@ -29,6 +29,7 @@ package mage.abilities.condition.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.condition.Condition;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -44,9 +45,6 @@ import mage.util.CardUtil;
  */
 public class CardsInHandCondition implements Condition {
 
-    public enum CountType {
-        MORE_THAN, FEWER_THAN, EQUAL_TO
-    }
 
     private Condition condition;
     private CountType type;

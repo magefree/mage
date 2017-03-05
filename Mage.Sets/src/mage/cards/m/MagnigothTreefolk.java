@@ -30,9 +30,9 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ForestwalkAbility;
@@ -69,7 +69,7 @@ public class MagnigothTreefolk extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(new PlainswalkAbility()), 
-                        new PermanentsOnTheBattlefieldCondition(filterPlains, CountType.MORE_THAN, 0, true), 
+                        new PermanentsOnTheBattlefieldCondition(filterPlains, CountType.MORE_THAN, 0, true),
                         "Domain &mdash; For each basic land type among lands you control, {this} has landwalk of that type."));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new IslandwalkAbility(), Duration.WhileOnBattlefield, false, true), 

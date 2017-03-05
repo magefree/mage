@@ -30,6 +30,7 @@ package mage.abilities.condition.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -44,7 +45,6 @@ import mage.game.Game;
 
 public class OpponentControlsPermanentCondition implements Condition {
 
-    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO }
 
     private FilterPermanent filter;
     private CountType type;
