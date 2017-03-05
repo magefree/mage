@@ -89,7 +89,7 @@ class FlourishingDefensesTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(CounterType.M1M1.getName())) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.isCreature()) {
                 return true;
             }
         }

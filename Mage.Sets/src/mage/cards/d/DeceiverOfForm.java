@@ -106,7 +106,7 @@ class DeceiverOfFormEffect extends OneShotEffect {
             if (card != null) {
                 Cards cards = new CardsImpl(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     if (controller.chooseUse(outcome, "Let creatures you control other than "
                             + sourceObject.getLogName() + " becomes copies of " + card.getLogName() + " until end of turn?", source, game)) {
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controller.getId(), game)) {

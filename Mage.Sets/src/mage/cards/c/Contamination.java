@@ -114,6 +114,6 @@ class ContaminationReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject mageObject = game.getObject(event.getSourceId());
-        return mageObject != null && mageObject.getCardType().contains(CardType.LAND);
+        return mageObject != null && mageObject.isLand();
     }
 }

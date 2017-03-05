@@ -101,7 +101,7 @@ class UrborgJusticeDynamicValue implements DynamicValue {
             for (MageObjectReference mor : cardsInGraveyard) {
                 if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
                     Card card = game.getCard(mor.getSourceId());
-                    if (card != null && card.getOwnerId().equals(sourceAbility.getControllerId()) && card.getCardType().contains(CardType.CREATURE)) {
+                    if (card != null && card.getOwnerId().equals(sourceAbility.getControllerId()) && card.isCreature()) {
                         count++;
                     }
                 }

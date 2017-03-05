@@ -95,7 +95,7 @@ class RefractionTrapCondition implements Condition {
                 List<Spell> spells = watcher.getSpellsCastThisTurn(opponentId);
                 if (spells != null) {
                     for (Spell spell : spells) {
-                        if ((spell.getCardType().contains(CardType.SORCERY) || spell.getCardType().contains(CardType.INSTANT))
+                        if ((spell.isSorcery() || spell.isInstant())
                                 && spell.getColor(game).isRed()) {
                             return true;
                         }

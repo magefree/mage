@@ -102,7 +102,7 @@ class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
-                && permanent.getCardType().contains(CardType.LAND)
+                && permanent.isLand()
                 && permanent.getControllerId().equals(getControllerId())) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
             if (sourcePermanent != null) {

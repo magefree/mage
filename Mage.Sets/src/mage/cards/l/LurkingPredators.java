@@ -96,7 +96,7 @@ class LurkingPredatorsEffect extends OneShotEffect {
             controller.revealCards(sourceObject.getIdName(), cards, game);
 
             if (card != null) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " on the bottom of your library?", source, game)) {
                     controller.putCardsOnBottomOfLibrary(cards, game, source, false);

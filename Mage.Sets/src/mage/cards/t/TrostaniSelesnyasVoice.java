@@ -101,7 +101,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.getCardType().contains(CardType.CREATURE)
+        if (permanent.isCreature()
                 && permanent.getControllerId().equals(this.controllerId)
                 && !Objects.equals(event.getTargetId(), this.getSourceId())) {
             Effect effect = this.getEffects().get(0);

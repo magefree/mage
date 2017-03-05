@@ -98,7 +98,7 @@ class FleshAllergyWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && card.isCreature()) {
                 creaturesDiedThisTurn++;
             }
         }

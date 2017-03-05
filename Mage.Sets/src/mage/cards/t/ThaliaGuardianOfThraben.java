@@ -99,7 +99,7 @@ class ThaliaGuardianOfThrabenCostReductionEffect extends CostModificationEffectI
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             Card card = game.getCard(abilityToModify.getSourceId());
-            if (card != null && !card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && !card.isCreature()) {
                 return true;
             }
         }

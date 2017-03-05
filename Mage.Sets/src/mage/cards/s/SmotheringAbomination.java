@@ -105,7 +105,7 @@ class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getCardType().contains(CardType.CREATURE);
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature();
     }
 
     @Override

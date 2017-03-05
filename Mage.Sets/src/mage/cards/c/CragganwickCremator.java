@@ -95,7 +95,7 @@ class CragganwickCrematorEffect extends OneShotEffect {
         if (controller != null) {
             Card discardedCard = controller.discardOne(true, source, game);
             if (discardedCard != null
-                    && discardedCard.getCardType().contains(CardType.CREATURE)) {
+                    && discardedCard.isCreature()) {
                 Player targetedPlayer = game.getPlayer(source.getFirstTarget());
                 if (targetedPlayer != null) {
                     int damage = discardedCard.getPower().getValue();

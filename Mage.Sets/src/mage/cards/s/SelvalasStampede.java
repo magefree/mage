@@ -91,7 +91,7 @@ class SelvalasStampedeDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
             while (cardsToReveal > 0 && controller.getLibrary().size() > 0) {
                 Card card = controller.getLibrary().removeFromTop(game);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     cardsToReveal--;
                 } else {

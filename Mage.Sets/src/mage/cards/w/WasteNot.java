@@ -96,7 +96,7 @@ class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             Card discarded = game.getCard(event.getTargetId());
-            if (discarded != null && discarded.getCardType().contains(CardType.CREATURE)) {
+            if (discarded != null && discarded.isCreature()) {
                 return true;
             }
         }
@@ -133,7 +133,7 @@ class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             Card discarded = game.getCard(event.getTargetId());
-            if (discarded != null && discarded.getCardType().contains(CardType.LAND)) {
+            if (discarded != null && discarded.isLand()) {
                 return true;
             }
         }
@@ -170,7 +170,7 @@ class WasteNotOtherTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             Card discarded = game.getCard(event.getTargetId());
-            if (discarded != null && !discarded.getCardType().contains(CardType.LAND) && !discarded.getCardType().contains(CardType.CREATURE)) {
+            if (discarded != null && !discarded.isLand() && !discarded.isCreature()) {
                 return true;
             }
         }

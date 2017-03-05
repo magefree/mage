@@ -139,7 +139,7 @@ class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
         if (affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             MageObject sourceObject = source.getSourceObject(game);
-            if (card != null && card.getCardType().contains(CardType.LAND) && sourceObject != null) {
+            if (card != null && card.isLand() && sourceObject != null) {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 if (exileId != null) {
                     ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
@@ -182,7 +182,7 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
         if (affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             MageObject sourceObject = source.getSourceObject(game);
-            if (card != null && !card.getCardType().contains(CardType.LAND) && sourceObject != null) {
+            if (card != null && !card.isLand() && sourceObject != null) {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 if (exileId != null) {
                     ExileZone exileZone = game.getState().getExile().getExileZone(exileId);

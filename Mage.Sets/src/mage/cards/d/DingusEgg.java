@@ -84,7 +84,7 @@ class DingusEggTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.BATTLEFIELD
                 && zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTarget().getCardType().contains(CardType.LAND)) {
+                && zEvent.getTarget().isLand()) {
             if (getTargets().isEmpty()) {
                 UUID targetId = zEvent.getTarget().getControllerId();
                 for (Effect effect : this.getEffects()) {

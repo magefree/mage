@@ -80,7 +80,7 @@ class BlackSunsZenithEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int amount = source.getManaCostsToPay().getX();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.isCreature()) {
                 permanent.addCounters(CounterType.M1M1.createInstance(amount), source, game);
             }
         }

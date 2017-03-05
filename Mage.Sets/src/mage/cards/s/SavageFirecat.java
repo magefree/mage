@@ -99,7 +99,7 @@ class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCard(event.getSourceId()).getCardType().contains(CardType.LAND) &&
+        return game.getCard(event.getSourceId()).isLand() &&
                 event.getPlayerId().equals(this.controllerId);
     }
     

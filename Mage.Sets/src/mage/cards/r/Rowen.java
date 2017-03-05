@@ -99,7 +99,7 @@ class RowenAbility extends TriggeredAbilityImpl {
                     lastTriggeredTurn = game.getTurnNum();
                     controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
                     this.getEffects().clear();
-                    if (card.getCardType().contains(CardType.LAND) && card.getSupertype().contains("Basic")) {
+                    if (card.isLand() && card.getSupertype().contains("Basic")) {
                         this.addEffect(new DrawCardSourceControllerEffect(1));
                     }
                     return true;

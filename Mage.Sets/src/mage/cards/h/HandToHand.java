@@ -101,7 +101,7 @@ class HandToHandEffect extends ContinuousRuleModifyingEffectImpl {
         if (game.getPhase().getType() == TurnPhase.COMBAT) {
             MageObject object = game.getObject(event.getSourceId());
             if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-                if (object.getCardType().contains(CardType.INSTANT)) {
+                if (object.isInstant()) {
                     return true;
                 }
             }

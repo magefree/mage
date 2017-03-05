@@ -103,7 +103,7 @@ class WindingConstrictorPermanentEffect extends ReplacementEffectImpl {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
         return permanent != null
-                && (permanent.getCardType().contains(CardType.CREATURE) || permanent.getCardType().contains(CardType.ARTIFACT))
+                && (permanent.isCreature() || permanent.isArtifact())
                 && permanent.getControllerId().equals(source.getControllerId());
     }
 

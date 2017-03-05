@@ -125,7 +125,7 @@ class CreaturesDiedThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (mageObject != null && mageObject.getCardType().contains(CardType.CREATURE)) {
+            if (mageObject != null && mageObject.isCreature()) {
                 creaturesDiedThisTurn++;
             }
         }

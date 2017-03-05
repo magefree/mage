@@ -120,7 +120,7 @@ class FellShepherdWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && ((Card)card).getOwnerId().equals(this.controllerId) && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && ((Card)card).getOwnerId().equals(this.controllerId) && card.isCreature()) {
                 creatureIds.add(card.getId());
             }
         }

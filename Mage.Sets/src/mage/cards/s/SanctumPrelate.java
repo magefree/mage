@@ -151,7 +151,7 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         choiceValue = (Integer) game.getState().getValue(source.getSourceId().toString());
         Spell spell = game.getStack().getSpell(event.getTargetId());
         
-        if (spell != null && !spell.getCardType().contains(CardType.CREATURE)){
+        if (spell != null && !spell.isCreature()){
             return spell.getConvertedManaCost() == choiceValue;
         }
         return false;

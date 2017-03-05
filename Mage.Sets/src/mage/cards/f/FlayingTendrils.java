@@ -106,7 +106,7 @@ class FlayingTendrilsReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zce = (ZoneChangeEvent) event;
-        return zce.isDiesEvent() && zce.getTarget().getCardType().contains(CardType.CREATURE);
+        return zce.isDiesEvent() && zce.getTarget().isCreature();
     }
 
 }

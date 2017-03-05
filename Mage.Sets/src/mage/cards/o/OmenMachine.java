@@ -123,7 +123,7 @@ class OmenMachineEffect2 extends OneShotEffect {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
-                if (card.getCardType().contains(CardType.LAND)) {
+                if (card.isLand()) {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
                     if (card.getSpellAbility().canChooseTarget(game)) {

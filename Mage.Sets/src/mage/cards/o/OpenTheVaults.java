@@ -90,7 +90,7 @@ class OpenTheVaultsEffect extends OneShotEffect {
                 for (UUID cardId : graveyard) {
                     Card card = game.getCard(cardId);
                     if (card != null
-                            && (card.getCardType().contains(CardType.ENCHANTMENT) || card.getCardType().contains(CardType.ARTIFACT))) {
+                            && (card.isEnchantment() || card.isArtifact())) {
                         cardsToReturn.add(card);
                     }
                 }

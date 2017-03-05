@@ -116,7 +116,7 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             Card sourceCard = game.getCard(abilityToModify.getSourceId());
-            if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.getCardType().contains(CardType.CREATURE))) {
+            if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.isCreature())) {
                 return true;
             }
         }

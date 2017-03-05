@@ -98,7 +98,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
 		Card card = game.getPlayer(source.getControllerId()).getGraveyard().getTopCard(game);
         Permanent permanent = game.getPermanent(source.getSourceId());
         
-        if (card == null || permanent == null || !card.getCardType().contains(CardType.CREATURE)) {
+        if (card == null || permanent == null || !card.isCreature()) {
             return false;
         }
         

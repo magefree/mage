@@ -120,8 +120,8 @@ class NonArtifactCreaturesDiedWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.isDiesEvent() && zEvent.getTarget() != null
-                    && zEvent.getTarget().getCardType().contains(CardType.CREATURE)
-                    && !zEvent.getTarget().getCardType().contains(CardType.ARTIFACT)) {
+                    && zEvent.getTarget().isCreature()
+                    && !zEvent.getTarget().isArtifact()) {
                 condition = true;
             }
         }

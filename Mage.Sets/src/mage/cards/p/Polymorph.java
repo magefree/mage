@@ -100,12 +100,12 @@ class PolymorphEffect extends OneShotEffect {
                     Cards cards = new CardsImpl();
                     Card card = library.removeFromTop(game);
                     cards.add(card);
-                    while (!card.getCardType().contains(CardType.CREATURE) && library.size() > 0) {
+                    while (!card.isCreature() && library.size() > 0) {
                         card = library.removeFromTop(game);
                         cards.add(card);
                     }
 
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                     }
 

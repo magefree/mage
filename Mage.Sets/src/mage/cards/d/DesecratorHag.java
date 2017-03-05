@@ -99,7 +99,7 @@ class DesecratorHagEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             for (Card card : you.getGraveyard().getCards(game)) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     if (card.getPower().getValue() > creatureGreatestPower) {
                         creatureGreatestPower = card.getPower().getValue();
                         cards.clear();

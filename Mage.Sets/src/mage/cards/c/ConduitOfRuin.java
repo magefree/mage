@@ -115,7 +115,7 @@ class ConduitOfRuinWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
+            if (spell != null && spell.isCreature()) {
                 if (playerCreatureSpells.containsKey(event.getPlayerId())) {
                     playerCreatureSpells.put(event.getPlayerId(), playerCreatureSpells.get(event.getPlayerId()) + 1);
                 } else {
@@ -149,7 +149,7 @@ class FirstCastCreatureSpellPredicate implements ObjectPlayerPredicate<ObjectPla
     @Override
     public boolean apply(ObjectPlayer<Controllable> input, Game game) {
         if (input.getObject() instanceof Spell
-                && ((Spell) input.getObject()).getCardType().contains(CardType.CREATURE)) {
+                && ((Spell) input.getObject()).isCreature()) {
             ConduitOfRuinWatcher watcher = (ConduitOfRuinWatcher) game.getState().getWatchers().get("FirstCreatureSpellCastThisTurn");
             return watcher != null && watcher.creatureSpellsCastThisTurn(input.getPlayerId()) == 0;
         }

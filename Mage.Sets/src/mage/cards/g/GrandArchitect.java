@@ -172,7 +172,7 @@ class GrandArchitectManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object != null && object.getCardType().contains(CardType.ARTIFACT)) {
+        if (object != null && object.isArtifact()) {
             return true;
         }
         return false;

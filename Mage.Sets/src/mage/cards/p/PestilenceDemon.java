@@ -85,7 +85,7 @@ class PestilenceDemonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID permanentId : game.getBattlefield().getAllPermanentIds()) {
             Permanent p = game.getPermanent(permanentId);
-            if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+            if (p != null && p.isCreature()) {
                 p.damage(1, source.getSourceId(), game, false, true);
             }
         }

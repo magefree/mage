@@ -96,7 +96,7 @@ class DeathSparkCondition implements Condition {
             boolean nextCard = false;
             for (Card card : controller.getGraveyard().getCards(game)) {
                 if (nextCard) {
-                    return card.getCardType().contains(CardType.CREATURE);
+                    return card.isCreature();
                 }
                 if (card.getId().equals(source.getSourceId())) {
                     nextCard = true;

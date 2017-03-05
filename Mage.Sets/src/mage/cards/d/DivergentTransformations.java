@@ -116,12 +116,12 @@ class DivergentTransformationsEffect extends OneShotEffect {
                         Cards cards = new CardsImpl();
                         Card card = player.getLibrary().removeFromTop(game);
                         cards.add(card);
-                        while (!card.getCardType().contains(CardType.CREATURE) && player.getLibrary().size() > 0) {
+                        while (!card.isCreature() && player.getLibrary().size() > 0) {
                             card = player.getLibrary().removeFromTop(game);
                             cards.add(card);
                         }
 
-                        if (card.getCardType().contains(CardType.CREATURE)) {
+                        if (card.isCreature()) {
                             card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                         }
 

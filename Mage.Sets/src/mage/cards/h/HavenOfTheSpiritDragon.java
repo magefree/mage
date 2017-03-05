@@ -124,7 +124,7 @@ class HavenOfTheSpiritManaCondition extends CreatureCastManaCondition {
         if (super.apply(game, source)) {
             MageObject object = game.getObject(source.getSourceId());
             if (object.hasSubtype("Dragon", game)
-                    && object.getCardType().contains(CardType.CREATURE)) {
+                    && object.isCreature()) {
                 return true;
             }
         }
@@ -139,7 +139,7 @@ class DragonCreatureCardPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        return input.getCardType().contains(CardType.CREATURE)
+        return input.isCreature()
                 && input.getSubtype(game).contains("Dragon");
     }
 
@@ -156,7 +156,7 @@ class UginPlaneswalkerCardPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        return input.getCardType().contains(CardType.PLANESWALKER)
+        return input.isPlaneswalker()
                 && input.getName().contains("Ugin, the Spirit Dragon");
     }
 

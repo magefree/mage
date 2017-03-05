@@ -90,7 +90,7 @@ class RedirectArtifactDamageFromPlayerToSourceEffect extends RedirectionEffect {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getControllerId())&&
-                game.getPermanentOrLKIBattlefield(event.getSourceId()).getCardType().contains(CardType.ARTIFACT)) {
+                game.getPermanentOrLKIBattlefield(event.getSourceId()).isArtifact()) {
             this.redirectTarget.updateTarget(source.getSourceId(), game);
             return true;
         }

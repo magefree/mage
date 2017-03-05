@@ -110,7 +110,7 @@ class PhyrexianTotemTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkInterveningIfClause(Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(getSourceId());
         if (permanent != null) {
-            return permanent.getCardType().contains(CardType.CREATURE);
+            return permanent.isCreature();
         }
         return false;
     }

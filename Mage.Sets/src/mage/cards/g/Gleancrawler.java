@@ -110,7 +110,7 @@ class GleancrawlerEffect extends OneShotEffect {
             for (MageObjectReference mor : cardsToGraveyardThisTurn) {
                 if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
                     Card card = game.getCard(mor.getSourceId());
-                    if (card != null && card.getCardType().contains(CardType.CREATURE)
+                    if (card != null && card.isCreature()
                             && card.getOwnerId().equals(source.getControllerId())) {
                         cardsToHand.add(card);
                     }

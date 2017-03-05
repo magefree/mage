@@ -102,7 +102,7 @@ class GaddockTeegReplacementEffect4 extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        if (card != null && !card.getCardType().contains(CardType.CREATURE) && card.getConvertedManaCost() >= 4) {  
+        if (card != null && !card.isCreature() && card.getConvertedManaCost() >= 4) {
             return true;
         }
         return false;
@@ -139,7 +139,7 @@ class GaddockTeegReplacementEffectX extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        if (card != null && !card.getCardType().contains(CardType.CREATURE) && card.getManaCost().getText().contains("X")) {  
+        if (card != null && !card.isCreature() && card.getManaCost().getText().contains("X")) {
             return true;
         }
         return false;

@@ -94,7 +94,7 @@ class RootMazeEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && (permanent.getCardType().contains(CardType.LAND) || permanent.getCardType().contains(CardType.ARTIFACT));
+        return permanent != null && (permanent.isLand() || permanent.isArtifact());
     }
 
     @Override

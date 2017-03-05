@@ -154,8 +154,8 @@ class FrontierSiegeFightEffect extends OneShotEffect {
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (triggeredCreature != null
                 && target != null
-                && triggeredCreature.getCardType().contains(CardType.CREATURE)
-                && target.getCardType().contains(CardType.CREATURE)) {
+                && triggeredCreature.isCreature()
+                && target.isCreature()) {
             triggeredCreature.fight(target, source, game);
             return true;
         }

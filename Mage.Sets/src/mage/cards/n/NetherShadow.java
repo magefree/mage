@@ -95,7 +95,7 @@ class NetherShadowTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
                 }
                 else{
                     Card card = game.getCard(uuid);
-                    if(card != null && card.getCardType().contains(CardType.CREATURE)){
+                    if(card != null && card.isCreature()){
                         count++;
                     }
                 }

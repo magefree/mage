@@ -85,7 +85,7 @@ class BalothCageTrapCondition implements Condition {
                 List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
                 if (permanents != null) {
                     for (Permanent permanent : permanents) {
-                        if (permanent.getCardType().contains(CardType.ARTIFACT)) {
+                        if (permanent.isArtifact()) {
                             return true;
                         }
                     }

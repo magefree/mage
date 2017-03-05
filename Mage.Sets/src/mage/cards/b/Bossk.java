@@ -105,7 +105,7 @@ class BosskTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.getControllerId())) {
+        if (permanent != null && permanent.isLand() && permanent.getControllerId().equals(this.getControllerId())) {
             return true;
         }
         return false;

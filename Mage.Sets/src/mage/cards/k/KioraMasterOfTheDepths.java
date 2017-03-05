@@ -158,10 +158,10 @@ class KioraRevealEffect extends OneShotEffect {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     cards.add(card);
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         creatureCardFound = true;
                     }
-                    if (card.getCardType().contains(CardType.LAND)) {
+                    if (card.isLand()) {
                         landCardFound = true;
                     }
                 }
@@ -230,8 +230,8 @@ class KioraFightEffect extends OneShotEffect {
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (triggeredCreature != null
                 && target != null
-                && triggeredCreature.getCardType().contains(CardType.CREATURE)
-                && target.getCardType().contains(CardType.CREATURE)) {
+                && triggeredCreature.isCreature()
+                && target.isCreature()) {
             triggeredCreature.fight(target, source, game);
             return true;
         }

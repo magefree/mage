@@ -100,7 +100,7 @@ class TrackersInstinctsEffect extends OneShotEffect {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         creaturesFound = true;
                     }
                 }

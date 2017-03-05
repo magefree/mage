@@ -94,7 +94,7 @@ class ZoZuThePunisherAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+        if (permanent != null && permanent.isLand()) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 for (Effect effect : this.getEffects()) {

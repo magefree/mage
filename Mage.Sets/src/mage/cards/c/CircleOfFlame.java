@@ -102,7 +102,7 @@ class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl {
         } else{ // check attacks your planeswalker
             Permanent permanent = game.getPermanent(event.getTargetId());
             youOrYourPlaneswalker = permanent != null
-                    && permanent.getCardType().contains(CardType.PLANESWALKER)
+                    && permanent.isPlaneswalker()
                     && permanent.getControllerId().equals(this.getControllerId());
         }
         if (youOrYourPlaneswalker) {

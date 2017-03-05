@@ -136,7 +136,7 @@ class MindsDilationEffect extends OneShotEffect {
             if (opponent.getLibrary().size() > 0) {
                 Card card = opponent.getLibrary().getFromTop(game);
                 if (card != null && opponent.moveCards(card, Zone.EXILED, source, game)) {
-                    if (!card.getCardType().contains(CardType.LAND)) {
+                    if (!card.isLand()) {
                         if (controller.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost from exile?", source, game)) {
                             controller.cast(card.getSpellAbility(), game, true);
                         }

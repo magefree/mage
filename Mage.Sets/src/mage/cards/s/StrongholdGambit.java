@@ -107,7 +107,7 @@ class StrongholdGambitEffect extends OneShotEffect {
                     if (card != null) {
                         Cards cardsToReveal = new CardsImpl(card);
                         player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', cardsToReveal, game);
-                        if (card.getCardType().contains(CardType.CREATURE)
+                        if (card.isCreature()
                                 && lowestCMC > card.getConvertedManaCost()) {
                             lowestCMC = card.getConvertedManaCost();
                         }
@@ -121,7 +121,7 @@ class StrongholdGambitEffect extends OneShotEffect {
                     if (player != null && choosenCard.containsKey(playerId)) {
                         Card card = game.getCard(choosenCard.get(playerId));
                         if (card != null) {
-                            if (card.getCardType().contains(CardType.CREATURE)
+                            if (card.isCreature()
                                     && lowestCMC == card.getConvertedManaCost()) {
                                 creaturesToBattlefield.add(card);
                             }

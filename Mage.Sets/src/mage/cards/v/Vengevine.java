@@ -134,7 +134,7 @@ class VengevineWatcher extends Watcher {
         condition = false;
         if (event.getType() == EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
+            if (spell != null && spell.isCreature()) {
                 creatureSpellCount++;
                 if (creatureSpellCount == 2)
                     condition = true;

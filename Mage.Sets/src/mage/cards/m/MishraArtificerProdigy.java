@@ -101,7 +101,7 @@ class MishraArtificerProdigyTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
+            if (spell != null && spell.isArtifact()) {
                 ((MishraArtificerProdigyEffect) this.getEffects().get(0)).setName(spell.getName());
                 return true;
             }

@@ -101,7 +101,7 @@ class AAT1TriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Card card = game.getCard(event.getTargetId());
         if (event.getPlayerId().equals(game.getControllerId(sourceId))
-                && card.getCardType().contains(CardType.CREATURE)
+                && card.isCreature()
                 && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
                 && event.getData().equals("repair")) {
             return true;

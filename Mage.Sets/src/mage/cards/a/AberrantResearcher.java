@@ -97,7 +97,7 @@ class AberrantResearcherEffect extends OneShotEffect {
         if (controller != null && controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().getFromTop(game);
             controller.moveCards(card, Zone.GRAVEYARD, source, game);
-            if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
+            if (card.isInstant() || card.isSorcery()) {
                 new TransformSourceEffect(true).apply(game, source);
             }
             return true;

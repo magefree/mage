@@ -127,7 +127,7 @@ class CivilizedScholarEffect extends OneShotEffect {
         if (player != null) {
             player.drawCards(1, game);
             Card card = player.discardOne(false, source, game);
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && card.isCreature()) {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     permanent.untap(game);

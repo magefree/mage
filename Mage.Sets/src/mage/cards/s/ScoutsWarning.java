@@ -113,7 +113,7 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (watcher.isScoutsWarningSpellActive(source.getSourceId(), zoneChangeCounter)) {
             Card card = game.getCard(sourceId);
-            if (card != null && card.getCardType().contains(CardType.CREATURE) && source.getControllerId().equals(affectedControllerId)) {
+            if (card != null && card.isCreature() && source.getControllerId().equals(affectedControllerId)) {
                 return true;
             }
         }
@@ -144,7 +144,7 @@ class ScoutsWarningWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             if (!activeScoutsWarningSpells.isEmpty() && event.getPlayerId().equals(getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
+                if (spell != null && spell.isCreature()) {
                     activeScoutsWarningSpells.clear();
                 }
             }

@@ -110,7 +110,7 @@ class BramblewoodParagonReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         return creature != null && creature.getControllerId().equals(source.getControllerId())
-                && creature.getCardType().contains(CardType.CREATURE)
+                && creature.isCreature()
                 && creature.hasSubtype("Warrior", game)
                 && !event.getTargetId().equals(source.getSourceId());
     }

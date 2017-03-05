@@ -134,7 +134,7 @@ class SyntheticDestinyDelayedEffect extends OneShotEffect {
             while (creatureCards.size() < numberOfCards && controller.getLibrary().size() > 0) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 revealed.add(card);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     creatureCards.add(card);
                 } else {
                     nonCreatureCards.add(card);

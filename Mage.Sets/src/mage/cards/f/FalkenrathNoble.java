@@ -103,7 +103,7 @@ class FalkenrathNobleTriggeredAbility extends TriggeredAbilityImpl {
                 if (permanent.getId().equals(this.getSourceId())) {
                     return true;
                 } else {
-                    if (permanent.getCardType().contains(CardType.CREATURE)) {
+                    if (permanent.isCreature()) {
                         return true;
                     }
                 }

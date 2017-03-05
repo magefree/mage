@@ -94,7 +94,7 @@ class LodestoneGolemCostReductionEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             Card card = game.getCard(abilityToModify.getSourceId());
-            if (card != null && !card.getCardType().contains(CardType.ARTIFACT)) {
+            if (card != null && !card.isArtifact()) {
                 return true;
             }
         }
