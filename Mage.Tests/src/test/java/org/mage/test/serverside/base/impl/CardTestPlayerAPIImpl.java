@@ -306,7 +306,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Returns card list containter for specified game zone and player.
+     * Returns card list container for specified game zone and player.
      *
      * @param gameZone
      * @param player
