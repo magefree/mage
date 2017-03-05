@@ -27,13 +27,6 @@
  */
 package mage.util;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
@@ -41,13 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.HybridManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.MonoHybridManaCost;
-import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.costs.mana.*;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
@@ -58,6 +45,11 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.util.functions.CopyTokenFunction;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -409,10 +401,6 @@ public final class CardUtil {
         adjustedCost.setSourceFilter(previousCost.getSourceFilter());  // keep mana source restrictions
         spellAbility.getManaCostsToPay().clear();
         spellAbility.getManaCostsToPay().addAll(adjustedCost);
-    }
-
-    private void reduceMana(Mana mana, Mana reduceMana, Supplier<Integer> manaAmountSupplier, Consumer<Integer> manaAmountConsumer) {
-
     }
 
     /**
