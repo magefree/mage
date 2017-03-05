@@ -29,6 +29,8 @@
 package mage.cards.o;
 
 import java.util.UUID;
+
+import mage.abilities.CountType;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -64,7 +66,7 @@ public class OpalLakeGatekeepers extends CardImpl {
         // When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 1),
+                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1),
                 "When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card."));
     }
 

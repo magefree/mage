@@ -29,6 +29,8 @@
 package mage.cards.d;
 
 import java.util.UUID;
+
+import mage.abilities.CountType;
 import mage.constants.CardType;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
@@ -59,7 +61,7 @@ public class DarkslickShores extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // Darkslick Shores enters the battlefield tapped unless you control two or fewer other lands.
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 3));
+        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, CountType.FEWER_THAN, 3));
         String abilityText = "tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         

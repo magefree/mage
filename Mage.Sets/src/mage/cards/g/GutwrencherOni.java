@@ -29,6 +29,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 
+import mage.abilities.CountType;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -69,7 +70,7 @@ public class GutwrencherOni extends CardImpl {
         // At the beginning of your upkeep, discard a card if you don't control an Ogre.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
                 new DiscardControllerEffect(1),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 0),
+                new PermanentsOnTheBattlefieldCondition(filter, CountType.EQUAL_TO, 0),
                 "discard a card if you don't control an Ogre"), TargetController.YOU, false));
 
     }

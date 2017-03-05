@@ -28,6 +28,8 @@
 package mage.cards.n;
 
 import java.util.UUID;
+
+import mage.abilities.CountType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -72,7 +74,7 @@ public class NezumiShortfang extends CardImpl {
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new ConditionalOneShotEffect(
                     new FlipSourceEffect(new StabwhiskerTheOdious()),
-                    new CardsInTargetOpponentHandCondition(CardsInTargetOpponentHandCondition.CountType.FEWER_THAN, 1),
+                    new CardsInTargetOpponentHandCondition(CountType.FEWER_THAN, 1),
                     "Then if that player has no cards in hand, flip {this}"));
         this.addAbility(ability);
     }
@@ -136,8 +138,6 @@ class StabwhiskerLoseLifeEffect extends OneShotEffect {
 }
 
 class CardsInTargetOpponentHandCondition implements Condition {
-
-    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO }
 
     private Condition condition;
     private CountType type;

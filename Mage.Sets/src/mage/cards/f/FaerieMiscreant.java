@@ -30,6 +30,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -71,7 +72,7 @@ public class FaerieMiscreant extends CardImpl {
         // When Faerie Miscreant enters the battlefield, if you control another creature named Faerie Miscreant, draw a card.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0),
                 "When Faerie Miscreant enters the battlefield, if you control another creature named Faerie Miscreant, draw a card");
         this.addAbility(ability);
     }

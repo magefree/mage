@@ -28,11 +28,12 @@
 package mage.cards.r;
 
 import java.util.UUID;
+
 import mage.MageInt;
+import mage.abilities.CountType;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -45,9 +46,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
- *
  * @author LoneFox
-
  */
 public class Ramroller extends CardImpl {
 
@@ -58,7 +57,7 @@ public class Ramroller extends CardImpl {
     }
 
     public Ramroller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add("Juggernaut");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -68,7 +67,7 @@ public class Ramroller extends CardImpl {
         // Ramroller gets +2/+0 as long as you control another artifact.
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(2, 0,
-             Duration.WhileOnBattlefield), condition, "{this} gets +2/+0 as long as you control another artifact.");
+                Duration.WhileOnBattlefield), condition, "{this} gets +2/+0 as long as you control another artifact.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

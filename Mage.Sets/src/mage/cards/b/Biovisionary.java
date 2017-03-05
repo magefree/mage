@@ -29,6 +29,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.CountType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
@@ -62,7 +63,7 @@ public class Biovisionary extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), 
                 TargetController.ANY, 
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 3), 
+                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 3),
                 false));
     }
 

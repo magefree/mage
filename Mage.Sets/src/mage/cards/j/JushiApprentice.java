@@ -28,13 +28,14 @@
 package mage.cards.j;
 
 import java.util.UUID;
+
+import mage.abilities.CountType;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
-import mage.abilities.condition.common.CardsInHandCondition.CountType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;

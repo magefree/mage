@@ -28,6 +28,7 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.condition.Condition;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -41,9 +42,7 @@ import java.util.List;
  */
 public class PermanentHasCounterCondition implements Condition {
 
-    public static enum CountType {
-        MORE_THAN, FEWER_THAN, EQUAL_TO
-    }
+
 
     private CounterType counterType;
     private int amount;
