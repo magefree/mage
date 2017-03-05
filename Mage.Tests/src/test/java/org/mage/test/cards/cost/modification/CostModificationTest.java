@@ -163,7 +163,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         
         addCard(Zone.HAND, playerB, doomBlade);
-        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2); // {1}{B} Instant: destroy target non-black creature
         
         // Divination should only cost {1}{U} now with the cost reduction in place for your blue spells.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, divination);
