@@ -1166,12 +1166,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Set target permanents
      *
      * @param player
-     * @param target you can add multiple targets by seperating them by the "^"
+     * @param target you can add multiple targets by separating them by the "^"
      * character e.g. "creatureName1^creatureName2" you can qualify the target
      * additional by setcode e.g. "creatureName-M15" you can add [no copy] to
-     * the end of the target name to prohibite targets that are copied you can
+     * the end of the target name to prohibit targets that are copied you can
      * add [only copy] to the end of the target name to allow only targets that
-     * are copies For modal spells use a prefix with the mode number:
+     * are copies. For modal spells use a prefix with the mode number:
      * mode=1Lightning Bolt^mode=2Silvercoat Lion
      */
     public void addTarget(TestPlayer player, String target) {
