@@ -235,6 +235,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Earth", 166, Rarity.COMMON, mage.cards.w.WallOfEarth.class));
         cards.add(new SetCardInfo("Wall of Heat", 167, Rarity.COMMON, mage.cards.w.WallOfHeat.class));
         cards.add(new SetCardInfo("Wall of Light", 212, Rarity.UNCOMMON, mage.cards.w.WallOfLight.class));
+        cards.add(new SetCardInfo("Wall of Opposition", 168, Rarity.RARE, mage.cards.w.WallOfOpposition.class));
         cards.add(new SetCardInfo("Wall of Putrid Flesh", 41, Rarity.UNCOMMON, mage.cards.w.WallOfPutridFlesh.class));
         cards.add(new SetCardInfo("Wall of Wonder", 85, Rarity.UNCOMMON, mage.cards.w.WallOfWonder.class));
         cards.add(new SetCardInfo("Whirling Dervish", 125, Rarity.UNCOMMON, mage.cards.w.WhirlingDervish.class));
