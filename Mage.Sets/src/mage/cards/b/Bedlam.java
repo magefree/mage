@@ -78,7 +78,7 @@ class BedlamEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent.isCreature()) {
             return true;
         }
         return false;

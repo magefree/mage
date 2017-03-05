@@ -102,7 +102,7 @@ class NetherTraitorTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {            
             if (zEvent.getTarget() != null &&
                     zEvent.getTarget().getOwnerId().equals(this.getControllerId()) &&
-                    zEvent.getTarget().getCardType().contains(CardType.CREATURE)&&
+                    zEvent.getTarget().isCreature()&&
                     !zEvent.getTarget().getId().equals(this.getSourceId())) {
                 return true;
             }

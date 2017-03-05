@@ -89,7 +89,7 @@ class AmnesiaEffect extends OneShotEffect {
             player.revealCards("Amnesia", hand, game);
             Set<Card> cards = hand.getCards(game);
             for (Card card : cards) {
-                if (card != null && !card.getCardType().contains(CardType.LAND)) {
+                if (card != null && !card.isLand()) {
                     player.discard(card, source, game);
                 }
             }

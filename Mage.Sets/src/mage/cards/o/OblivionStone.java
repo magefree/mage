@@ -89,7 +89,7 @@ class OblivionStoneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent p : game.getBattlefield().getAllActivePermanents()) {
-            if (!(p.getCardType().contains(CardType.LAND) || p.getCounters(game).containsKey(CounterType.FATE))) {
+            if (!(p.isLand() || p.getCounters(game).containsKey(CounterType.FATE))) {
                 p.destroy(source.getSourceId(), game, false);
             }
         }

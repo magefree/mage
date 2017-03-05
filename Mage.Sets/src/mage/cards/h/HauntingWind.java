@@ -86,7 +86,7 @@ class AbilityActivatedTriggeredAbility2 extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent isArtifact = game.getPermanent(event.getSourceId());
-        return isArtifact != null && isArtifact.getCardType().contains(CardType.ARTIFACT);
+        return isArtifact != null && isArtifact.isArtifact();
         
     }
 

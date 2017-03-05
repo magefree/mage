@@ -173,7 +173,7 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
         }
 
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-            if (!chosen.contains(permanent) && !permanent.getCardType().contains(CardType.LAND)) {
+            if (!chosen.contains(permanent) && !permanent.isLand()) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
         }

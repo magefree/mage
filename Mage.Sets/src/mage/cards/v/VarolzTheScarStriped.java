@@ -108,7 +108,7 @@ class VarolzTheScarStripedEffect extends ContinuousEffectImpl {
         if (controller != null) {
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                if (card != null && card.isCreature()) {
                     ScavengeAbility ability = new ScavengeAbility(new ManaCostsImpl(card.getManaCost().getText()));
                     ability.setSourceId(cardId);
                     ability.setControllerId(card.getOwnerId());

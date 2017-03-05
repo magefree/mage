@@ -114,7 +114,7 @@ class DimensionalInfiltratorEffect extends OneShotEffect {
             Card card = opponent.getLibrary().getFromTop(game);
             if (card != null) {
                 card.moveToExile(null, "Dimensional Infiltrator", source.getSourceId(), game);
-                if (card.getCardType().contains(CardType.LAND)) {
+                if (card.isLand()) {
                     if (controller.chooseUse(Outcome.Neutral, "Return " + sourceObject.getIdName() + " to its owner's hand?", source, game)) {
                         new ReturnToHandSourceEffect(true).apply(game, source);
                     }

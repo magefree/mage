@@ -97,7 +97,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
             if (player != null) {
                 for (UUID cardId: player.getGraveyard()) {
                     Card card = game.getCard(cardId);
-                    if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
+                    if (card.isInstant() || card.isSorcery()) {
                         affectedObjectList.add(new MageObjectReference(card, game));
                     }
                 }
@@ -113,10 +113,10 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
                 if (affectedObjectList.contains(new MageObjectReference(cardId, game))) {
                     Card card = game.getCard(cardId);
                     FlashbackAbility ability = null;
-                    if (card.getCardType().contains(CardType.INSTANT)) {
+                    if (card.isInstant()) {
                         ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
                     }
-                    else if (card.getCardType().contains(CardType.SORCERY)) {
+                    else if (card.isSorcery()) {
                         ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
                     }
                     if (ability != null) {

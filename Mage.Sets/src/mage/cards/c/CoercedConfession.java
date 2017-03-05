@@ -92,7 +92,7 @@ class CoercedConfessionMillEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             for(Card card: player.getLibrary().getTopCards(game, 4)) {
                 cards.add(card);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     ++foundCreatures;
                 }
             }

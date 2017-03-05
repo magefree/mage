@@ -86,7 +86,7 @@ class ManabondEffect extends OneShotEffect {
             Set<Card> toBattlefield = new LinkedHashSet<>();
             for (UUID uuid : controller.getHand()) {
                 Card card = game.getCard(uuid);
-                if (card != null && card.getCardType().contains(CardType.LAND)) {
+                if (card != null && card.isLand()) {
                     toBattlefield.add(card);
                 }
 

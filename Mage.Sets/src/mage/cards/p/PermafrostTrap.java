@@ -88,7 +88,7 @@ class PermafrostTrapCondition implements Condition {
                 List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
                 if (permanents != null) {
                     for (Permanent permanent : permanents) {
-                        if (permanent.getCardType().contains(CardType.CREATURE) && permanent.getColor(game).isGreen()) {
+                        if (permanent.isCreature() && permanent.getColor(game).isGreen()) {
                             return true;
                         }
                     }

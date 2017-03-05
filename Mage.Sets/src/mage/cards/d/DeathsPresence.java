@@ -92,7 +92,7 @@ class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.getControllerId().equals(this.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.getControllerId().equals(this.getControllerId()) && permanent.isCreature()) {
                 this.getTargets().clear();
                 this.addTarget(new TargetControlledCreaturePermanent());
                 this.getEffects().clear();

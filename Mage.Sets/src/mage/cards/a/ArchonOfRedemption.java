@@ -97,7 +97,7 @@ class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
         if (permanent.getControllerId().equals(this.controllerId)
-                && permanent.getCardType().contains(CardType.CREATURE)
+                && permanent.isCreature()
                 && (targetId.equals(this.getSourceId())
                 || (permanent.getAbilities().contains(FlyingAbility.getInstance()) && !targetId.equals(this.getSourceId())))) {
             for (Effect effect : this.getEffects()) {

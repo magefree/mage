@@ -99,7 +99,7 @@ class StolenGoodsEffect extends OneShotEffect {
                 if (card != null) {
                     opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
                 }
-            } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
+            } while (library.size() > 0 && card != null && card.isLand());
 
             if (card != null) {
                 ContinuousEffect effect = new StolenGoodsCastFromExileEffect();

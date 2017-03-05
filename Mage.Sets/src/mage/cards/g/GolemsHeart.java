@@ -86,7 +86,7 @@ class GolemsHeartAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getCardType().contains(CardType.ARTIFACT);
+        return spell != null && spell.isArtifact();
     }
 
     @Override

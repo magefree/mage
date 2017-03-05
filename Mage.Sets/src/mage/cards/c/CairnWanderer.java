@@ -96,7 +96,7 @@ public class CairnWanderer extends CardImpl {
 
                 if (player != null) {
                     for (Card card : player.getGraveyard().getCards(game)) {
-                        if (card.getCardType().contains(CardType.CREATURE)) {
+                        if (card.isCreature()) {
                             for (Ability ability : card.getAbilities(game)) {
                                 if (ability instanceof MageSingleton) {
                                     if (ability instanceof FlyingAbility

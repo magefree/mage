@@ -130,7 +130,7 @@ class MomirVigSimicVisionaryEffect extends OneShotEffect {
         Set<Card> cardsList = cards.getCards(game);
         Cards cardsToHand = new CardsImpl();
         for (Card card : cardsList) {
-            if (card.getCardType().contains(CardType.CREATURE)) {
+            if (card.isCreature()) {
                 cardsToHand.add(card);
                 cards.remove(card);
             }

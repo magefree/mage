@@ -113,7 +113,7 @@ class GeneratorServantWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.MANA_PAYED) {
             MageObject target = game.getObject(event.getTargetId());
             if (event.getSourceId() != null
-                    && event.getSourceId().equals(this.getSourceId()) && target != null && target.getCardType().contains(CardType.CREATURE) && event.getFlag()) {
+                    && event.getSourceId().equals(this.getSourceId()) && target != null && target.isCreature() && event.getFlag()) {
                 if (target instanceof Spell) {
                     this.creatures.add(((Spell) target).getCard().getId());
                 }

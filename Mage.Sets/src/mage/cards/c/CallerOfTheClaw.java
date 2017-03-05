@@ -107,7 +107,7 @@ class CallerOfTheClawWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             Permanent card = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card.getOwnerId().equals(this.controllerId) && card.getCardType().contains(CardType.CREATURE) && !(card instanceof PermanentToken)) {
+            if (card != null && card.getOwnerId().equals(this.controllerId) && card.isCreature() && !(card instanceof PermanentToken)) {
                 creaturesCount++;
             }
         }

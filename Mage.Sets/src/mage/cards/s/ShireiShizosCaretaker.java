@@ -107,7 +107,7 @@ class ShireiShizosCaretakerTriggeredAbility extends TriggeredAbilityImpl {
                 && card.getOwnerId().equals(this.controllerId)
                 && zEvent.getToZone() == Zone.GRAVEYARD
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
-                && card.getCardType().contains(CardType.CREATURE)
+                && card.isCreature()
                 && LKIpermanent.getPower().getValue() <= 1) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));

@@ -166,7 +166,7 @@ class OathOfNissaSpendAnyManaEffect extends AsThoughEffectImpl implements AsThou
         if (source.getControllerId().equals(affectedControllerId)) {
             MageObject mageObject = game.getObject(objectId);
             if (mageObject != null) {
-                if (mageObject.getCardType().contains(CardType.PLANESWALKER)) {
+                if (mageObject.isPlaneswalker()) {
                     return true;
                 }
             }

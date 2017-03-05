@@ -101,7 +101,7 @@ class LilianaVessEffect extends OneShotEffect {
             if (player != null) {
                 Set<Card> creatureCards = new LinkedHashSet<>();
                 for (Card card : player.getGraveyard().getCards(game)) {
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         creatureCards.add(card);
                     }
                 }

@@ -160,7 +160,7 @@ class IntetTheDreamerCastEffect extends AsThoughEffectImpl {
                 if (card != null && card.isFaceDown(game)) {
                     ExileZone zone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
                     if (zone != null && zone.contains(card.getId())/* && CardUtil.cardCanBePlayedNow(card, controller.getId(), game)*/) {
-                        if (card.getCardType().contains(CardType.LAND)) {
+                        if (card.isLand()) {
                             if (game.canPlaySorcery(controller.getId()) && game.getPlayer(controller.getId()).canPlayLand()) {
                                 return controller.chooseUse(outcome, "Play " + card.getIdName() + '?', source, game);
                             }

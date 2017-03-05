@@ -47,6 +47,7 @@ import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEf
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.continuous.CastFromHandWithoutPayingManaCostEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -207,66 +208,7 @@ class TamiyoFieldResearcherEmblem extends Emblem {
 
         this.setName("Emblem Tamiyo");
 
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new TamiyoFieldResearcherCastingEffect()));
+        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new CastFromHandWithoutPayingManaCostEffect()));
     }
 }
 
-class TamiyoFieldResearcherCastingEffect extends ContinuousEffectImpl {
-
-    public TamiyoFieldResearcherCastingEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You may cast nonland cards from your hand without paying their mana costs";
-    }
-
-    public TamiyoFieldResearcherCastingEffect(final TamiyoFieldResearcherCastingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TamiyoFieldResearcherCastingEffect copy() {
-        return new TamiyoFieldResearcherCastingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.getAlternativeSourceCosts().add(new AlternativeCostSourceAbility(
-                    null, new CompoundCondition(SourceIsSpellCondition.getInstance(), new IsBeingCastFromHandCondition()), null, new FilterNonlandCard(), true));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
-    }
-}
-
-class IsBeingCastFromHandCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
-        if (object instanceof SplitCardHalf) {
-            UUID splitCardId = ((Card) object).getMainCard().getId();
-            object = game.getObject(splitCardId);
-        }
-        if (object instanceof Spell) { // needed to check if it can be cast by alternate cost
-            Spell spell = (Spell) object;
-            return spell.getFromZone() == Zone.HAND;
-        }
-        if (object instanceof Card) { // needed for the check what's playable
-            Card card = (Card) object;
-            return game.getPlayer(card.getOwnerId()).getHand().get(card.getId(), game) != null;
-        }
-        return false;
-    }
-
-}

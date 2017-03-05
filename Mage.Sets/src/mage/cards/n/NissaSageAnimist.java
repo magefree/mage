@@ -118,7 +118,7 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
             }
             controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             Zone targetZone = Zone.HAND;
-            if (card.getCardType().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 targetZone = Zone.BATTLEFIELD;
             }
             return controller.moveCards(card, targetZone, source, game);
@@ -164,7 +164,7 @@ class NissaSageAnimistMinusSevenEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 switch (layer) {
                     case TypeChangingEffects_4:
-                        if (!permanent.getCardType().contains(CardType.CREATURE)) {
+                        if (!permanent.isCreature()) {
                             permanent.getCardType().add(CardType.CREATURE);
                         }
                         if (!permanent.getSubtype(game).contains("Elemental")) {

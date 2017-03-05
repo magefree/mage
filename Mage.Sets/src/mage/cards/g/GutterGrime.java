@@ -108,7 +108,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD
                     && permanent.getControllerId().equals(this.controllerId)
                     && (targetId.equals(this.getSourceId())
-                        || (permanent.getCardType().contains(CardType.CREATURE)
+                        || (permanent.isCreature()
                             && !(permanent instanceof PermanentToken)))) {
                 return true;
             }

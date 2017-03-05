@@ -107,7 +107,7 @@ class GrimoireOfTheDeadEffect extends OneShotEffect {
             Set<Card> creatureCards = new LinkedHashSet<>();
             for (Player player : game.getPlayers().values()) {
                 for (Card card : player.getGraveyard().getCards(game)) {
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         creatureCards.add(card);
                         game.addEffect(new GrimoireOfTheDeadEffect2(card.getId()), source);
                     }

@@ -91,12 +91,12 @@ class BloodfireEnforcersCondition implements Condition {
         Player player = game.getPlayer(source.getControllerId());
         if  (player != null) {
             for(Card card : player.getGraveyard().getCards(game)) {
-                if (card.getCardType().contains(CardType.INSTANT)) {
+                if (card.isInstant()) {
                     if (sorceryFound) {
                         return true;
                     }
                     instantFound = true;                    
-                } else if (card.getCardType().contains(CardType.SORCERY)) {
+                } else if (card.isSorcery()) {
                     if (instantFound) {
                         return true;
                     }

@@ -113,7 +113,7 @@ class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
             }
             player.revealCards("Top three cards of library revealed", cards, game);
             for (Card revealedCard : cards.getCards(game)) {
-                if (revealedCard.getCardType().contains(CardType.CREATURE)) {
+                if (revealedCard.isCreature()) {
                     revealedCard.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     cards.remove(revealedCard);
                 }

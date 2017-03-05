@@ -145,7 +145,7 @@ class DreamPillagerEffect extends OneShotEffect {
                 if (!cards.isEmpty()) {
                     controller.moveCards(cards, Zone.EXILED, source, game);
                     for (Card card : cards) {
-                        if (!card.getCardType().contains(CardType.LAND)) {
+                        if (!card.isLand()) {
                             ContinuousEffect effect = new DreamPillagerCastFromExileEffect();
                             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                             game.addEffect(effect, source);

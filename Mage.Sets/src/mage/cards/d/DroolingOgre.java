@@ -127,7 +127,7 @@ public class DroolingOgre extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
+            if (spell != null && spell.isArtifact()) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }

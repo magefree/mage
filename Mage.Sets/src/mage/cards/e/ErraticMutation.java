@@ -98,7 +98,7 @@ class ErraticMutationEffect extends OneShotEffect {
             while (nonLandCard == null && controller.getLibrary().size() > 0) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 toReveal.add(card);
-                if (!card.getCardType().contains(CardType.LAND)) {
+                if (!card.isLand()) {
                     nonLandCard = card;
                 }
             }

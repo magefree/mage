@@ -81,7 +81,7 @@ class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffe
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             MageObject sourceObject = game.getObject(event.getSourceId());
-            if (sourceObject != null && sourceObject.getCardType().contains(CardType.CREATURE)) {
+            if (sourceObject != null && sourceObject.isCreature()) {
                 if (event.getTargetId().equals(source.getSourceId())) {
                     return true;
                 }

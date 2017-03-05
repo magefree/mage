@@ -110,7 +110,7 @@ class GlissaTheTraitorTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent)event).isDiesEvent()) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (p != null && p.getCardType().contains(CardType.CREATURE) && game.getOpponents(this.getControllerId()).contains(p.getControllerId())) {
+            if (p != null && p.isCreature() && game.getOpponents(this.getControllerId()).contains(p.getControllerId())) {
                 return true;
             }
         }

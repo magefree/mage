@@ -106,7 +106,7 @@ class MirrorwingDragonCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean checkSpell(Spell spell, Game game) {
         if (spell != null
-                && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
+                && (spell.isInstant() || spell.isSorcery())) {
             boolean noTargets = true;
             for (TargetAddress addr : TargetAddress.walk(spell)) {
                 noTargets = false;

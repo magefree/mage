@@ -107,26 +107,26 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
+                if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
+                if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
@@ -134,7 +134,7 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
             for (UUID commanderId : controller.getCommandersIds()) {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         game.getState().addOtherAbility(card, FlashAbility.getInstance());
                     }
                 }

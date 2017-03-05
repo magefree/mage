@@ -168,7 +168,7 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
 //            Card sourceCard = game.getCard(abilityToModify.getSourceId());
 //            StackObject stackObject = game.getStack().getStackObject(abilityToModify.getSourceId());
 //            if (stackObject != null && stackObject instanceof Spell) {
-//                if (sourceCard != null && sourceCard.getCardType().contains(CardType.CREATURE) && sourceCard.getConvertedManaCost() <= 3) {
+//                if (sourceCard != null && sourceCard.isCreature() && sourceCard.getConvertedManaCost() <= 3) {
 //                    Player player = game.getPlayer(stackObject.getControllerId());
 //                    String message = "Cast " + sourceCard.getName() + " without paying its mana costs?";
 //                    if (player != null && 

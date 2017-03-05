@@ -92,7 +92,7 @@ class TeleminPerformanceEffect extends OneShotEffect {
         while (opponent.getLibrary().size() > 0 && !creatureFound) {
             Card card = opponent.getLibrary().removeFromTop(game);
             if (card != null) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     creature = card;
                     creatureFound = true;
                 }

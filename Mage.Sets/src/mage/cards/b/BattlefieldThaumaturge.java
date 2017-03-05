@@ -107,7 +107,7 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
         for (Target target: abilityToModify.getTargets()) {
             for (UUID uuid: target.getTargets()) {
                 Permanent permanent = game.getPermanent(uuid); 
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+                if (permanent != null && permanent.isCreature()) {
                     creaturesTargeted.add(permanent.getId());
                 }
             }

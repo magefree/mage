@@ -163,12 +163,12 @@ public abstract class MageObjectImpl implements MageObject {
     public MageInt getToughness() {
         return toughness;
     }
-    
+
     @Override
     public int getStartingLoyalty() {
-        for (Ability ab: getAbilities()) {
+        for (Ability ab : getAbilities()) {
             if (ab instanceof PlanswalkerEntersWithLoyalityCountersAbility) {
-                return ((PlanswalkerEntersWithLoyalityCountersAbility)ab).getStartingLoyalty();
+                return ((PlanswalkerEntersWithLoyalityCountersAbility) ab).getStartingLoyalty();
             }
         }
         return 0;
@@ -178,19 +178,19 @@ public abstract class MageObjectImpl implements MageObject {
     public ObjectColor getColor(Game game) {
         return color;
     }
-    
+
     @Override
     public ObjectColor getFrameColor(Game game) {
         // For lands, add any colors of mana the land can produce to
         // its frame colors.
         if (this.isLand()) {
             ObjectColor cl = frameColor.copy();
-            for (Ability ab: getAbilities()) {
+            for (Ability ab : getAbilities()) {
                 if (ab instanceof ActivatedManaAbilityImpl) {
-                    ActivatedManaAbilityImpl mana = (ActivatedManaAbilityImpl)ab;
+                    ActivatedManaAbilityImpl mana = (ActivatedManaAbilityImpl) ab;
                     try {
                         List<Mana> manaAdded = mana.getNetMana(game);
-                        for (Mana m: manaAdded) {
+                        for (Mana m : manaAdded) {
                             if (m.getAny() > 0) {
                                 return new ObjectColor("WUBRG");
                             }

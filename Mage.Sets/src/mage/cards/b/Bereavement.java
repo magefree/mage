@@ -89,7 +89,7 @@ class BereavementTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent)event).isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getColor(game).isGreen()) {
+            if (permanent != null && permanent.isCreature() && permanent.getColor(game).isGreen()) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
                 return true;
             }

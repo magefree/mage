@@ -107,7 +107,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean checkSpell(Spell spell, Game game) {
         if (spell != null
-                && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
+                && (spell.isInstant() || spell.isSorcery())) {
             UUID targetGolem = null;
             for (TargetAddress addr : TargetAddress.walk(spell)) {
                 Target targetInstance = addr.getTarget(spell);

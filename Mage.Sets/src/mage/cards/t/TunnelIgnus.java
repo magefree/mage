@@ -97,7 +97,7 @@ class TunnelIgnusWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.LAND) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
+            if (permanent.isLand() && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
                 int count = 1;
                 if (counts.containsKey(permanent.getControllerId())) {
                     count += counts.get(permanent.getControllerId());
@@ -137,7 +137,7 @@ class TunnelIgnusTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCardType().contains(CardType.LAND) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
+        if (permanent != null && permanent.isLand() && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
             TunnelIgnusWatcher watcher = (TunnelIgnusWatcher) game.getState().getWatchers().get("LandPlayedCount", this.controllerId);
             if (watcher != null && watcher.counts.get(permanent.getControllerId()) > 1) {
                 for (Effect effect : this.getEffects()) {

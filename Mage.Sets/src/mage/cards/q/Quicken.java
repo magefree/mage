@@ -114,7 +114,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (quickenWatcher.isQuickenSpellActive(affectedControllerId, source.getSourceId(), zoneChangeCounter)) {
             Card card = game.getCard(sourceId);
-            if (card != null && card.getCardType().contains(CardType.SORCERY) && source.getControllerId().equals(affectedControllerId)) {
+            if (card != null && card.isSorcery() && source.getControllerId().equals(affectedControllerId)) {
                 return true;
             }
         }
@@ -145,7 +145,7 @@ class QuickenWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             if (!activeQuickenSpells.isEmpty() && event.getPlayerId().equals(getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && spell.getCardType().contains(CardType.SORCERY)) {
+                if (spell != null && spell.isSorcery()) {
                     activeQuickenSpells.clear();
                 }
             }

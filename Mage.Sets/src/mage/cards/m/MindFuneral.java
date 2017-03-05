@@ -97,7 +97,7 @@ class MindFuneralEffect extends OneShotEffect {
                 if (card == null) {
                     break;
                 }
-                if (card.getCardType().contains(CardType.LAND)) {
+                if (card.isLand()) {
                     landsFound++;
                 }
                 cards.add(card);

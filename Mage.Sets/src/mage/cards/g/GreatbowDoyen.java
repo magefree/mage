@@ -113,7 +113,7 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
         Permanent creature = game.getPermanent(event.getSourceId());
         Permanent damagedCreature = game.getPermanent(event.getTargetId());
         if (creature != null && damagedCreature != null 
-                && creature.getCardType().contains(CardType.CREATURE)
+                && creature.isCreature()
                 && creature.hasSubtype("Archer", game)
                 && creature.getControllerId().equals(controllerId)) {
             this.getEffects().get(0).setValue("damageAmount", event.getAmount());

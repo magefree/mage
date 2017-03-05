@@ -94,7 +94,7 @@ class EchoingRuinEffect extends OneShotEffect {
             permanent.destroy(source.getSourceId(), game, false);
             if (!permanent.getName().isEmpty()) { // in case of face down artifact creature
                 for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                    if (!perm.getId().equals(permanent.getId()) && perm.getName().equals(permanent.getName()) && perm.getCardType().contains(CardType.ARTIFACT)) {
+                    if (!perm.getId().equals(permanent.getId()) && perm.getName().equals(permanent.getName()) && perm.isArtifact()) {
                         perm.destroy(source.getSourceId(), game, false);
                     }
                 }

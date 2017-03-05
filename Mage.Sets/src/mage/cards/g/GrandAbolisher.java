@@ -117,8 +117,8 @@ class GrandAbolisherEffect extends ContinuousRuleModifyingEffectImpl {
                 case ACTIVATE_ABILITY:
                     Permanent permanent = game.getPermanent(event.getSourceId());
                     if (permanent != null) {
-                        return permanent.getCardType().contains(CardType.ARTIFACT) || permanent.getCardType().contains(CardType.CREATURE)
-                                || permanent.getCardType().contains(CardType.ENCHANTMENT);
+                        return permanent.isArtifact() || permanent.isCreature()
+                                || permanent.isEnchantment();
                     }            
             }   
         }

@@ -103,7 +103,7 @@ class IkraShidiqiTheUsurperTriggeredAbility extends TriggeredAbilityImpl {
         DamagedEvent damageEvent = (DamagedEvent) event;
         if (damageEvent.isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId())) {
+            if (permanent != null && permanent.isCreature() && permanent.getControllerId().equals(this.getControllerId())) {
                 this.getEffects().clear();
                 this.getEffects().add(new GainLifeEffect(permanent.getToughness().getValue()));
                 return true;

@@ -109,7 +109,7 @@ class ReyhanLastOfTheAbzanTriggeredAbility extends TriggeredAbilityImpl {
         if ((((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD || ((ZoneChangeEvent) event).getToZone() == Zone.COMMAND)
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent.getControllerId().equals(this.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent.getControllerId().equals(this.getControllerId()) && permanent.isCreature()) {
                 int countersOn = permanent.getCounters(game).getCount(CounterType.P1P1);
                 if (countersOn > 0) {
                     this.getEffects().clear();

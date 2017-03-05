@@ -138,12 +138,12 @@ class IndomitableCreativityEffect extends OneShotEffect {
                         }
                         Card card = library.removeFromTop(game);
                         cards.add(card);
-                        while (!card.getCardType().contains(CardType.CREATURE) && !card.getCardType().contains(CardType.ARTIFACT) && library.size() > 0) {
+                        while (!card.isCreature() && !card.isArtifact() && library.size() > 0) {
                             card = library.removeFromTop(game);
                             cards.add(card);
                         }
 
-                        if (card.getCardType().contains(CardType.CREATURE) || card.getCardType().contains(CardType.ARTIFACT)) {
+                        if (card.isCreature() || card.isArtifact()) {
                             controllerOfDestroyedCreature.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
 

@@ -117,7 +117,7 @@ class InstantOrSorceryCastManaCondition extends ManaCondition implements Conditi
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object != null && (object.getCardType().contains(CardType.INSTANT) || object.getCardType().contains(CardType.SORCERY))) {
+            if (object != null && (object.isInstant() || object.isSorcery())) {
                 return true;
             }
         }

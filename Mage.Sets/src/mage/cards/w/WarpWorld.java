@@ -143,9 +143,9 @@ class WarpWorldEffect extends OneShotEffect {
             if (player != null) {
                 CardsImpl cards = cardsRevealed.get(player.getId());
                 for (Card card : cards.getCards(game)) {
-                    if (card != null && (card.getCardType().contains(CardType.ARTIFACT)
-                            || card.getCardType().contains(CardType.CREATURE)
-                            || card.getCardType().contains(CardType.LAND))) {
+                    if (card != null && (card.isArtifact()
+                            || card.isCreature()
+                            || card.isLand())) {
                         card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                         cards.remove(card);
                     }
@@ -159,7 +159,7 @@ class WarpWorldEffect extends OneShotEffect {
             if (player != null) {
                 CardsImpl cards = cardsRevealed.get(player.getId());
                 for (Card card : cards.getCards(game)) {
-                    if (card != null && card.getCardType().contains(CardType.ENCHANTMENT)) {
+                    if (card != null && card.isEnchantment()) {
                         card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                         cards.remove(card);
                     }

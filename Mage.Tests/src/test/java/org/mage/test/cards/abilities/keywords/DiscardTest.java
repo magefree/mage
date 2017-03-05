@@ -33,7 +33,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class DiscardTest extends CardTestPlayerBase {
@@ -62,6 +61,19 @@ public class DiscardTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Tranquil Thicket", 0);
         assertExileCount("Tranquil Thicket", 1);
         assertHandCount(playerA, 1); // the card drawn by Cycling
+    }
+
+    @Test
+    public void AmnesiaTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 20);
+        addCard(Zone.HAND, playerA, "Shock");
+        addCard(Zone.HAND, playerA, "Shock");
+        addCard(Zone.HAND, playerA, "Amnesia");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Amnesia", playerA);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertHandCount(playerA, 0);
     }
 
     /**

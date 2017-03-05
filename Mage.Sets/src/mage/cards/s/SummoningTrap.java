@@ -129,7 +129,7 @@ class SummoningTrapWatcher extends Watcher {
             if (counteredSpell != null
                     && counteredSpell instanceof Spell
                     && !players.contains(counteredSpell.getControllerId())
-                    && counteredSpell.getCardType().contains(CardType.CREATURE)) {
+                    && counteredSpell.isCreature()) {
                 StackObject counteringStackObject = game.getStack().getStackObject(event.getSourceId());
                 if (counteringStackObject == null) {
                     counteringStackObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);

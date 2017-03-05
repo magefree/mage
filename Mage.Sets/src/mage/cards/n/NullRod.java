@@ -75,7 +75,7 @@ class NullRodCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getCardType().contains(CardType.ARTIFACT);
+        return permanent.isArtifact();
     }
 
     @Override

@@ -86,7 +86,7 @@ class CatastropheEffect extends OneShotEffect {
         if (controller != null) {
             if (controller.chooseUse(outcome, "Destroy all lands? (otherwise all creatures are destroyed)", source, game)) {
                 for (Permanent permanent:  game.getBattlefield().getActivePermanents(new FilterLandPermanent(), controller.getId(), source.getSourceId(), game)) {
-                    permanent.destroy(source.getSourceId(), game, permanent.getCardType().contains(CardType.CREATURE));
+                    permanent.destroy(source.getSourceId(), game, permanent.isCreature());
                 }
             } else {
                 for (Permanent permanent:  game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), source.getSourceId(), game)) {

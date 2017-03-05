@@ -93,7 +93,7 @@ class OathOfGideonReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         return creature != null && creature.getControllerId().equals(source.getControllerId())
-                && creature.getCardType().contains(CardType.PLANESWALKER)
+                && creature.isPlaneswalker()
                 && !event.getTargetId().equals(source.getSourceId());
     }
 

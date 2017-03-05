@@ -150,7 +150,7 @@ class OvermasterWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && ready) {
             if (uncounterableSpell == null && event.getPlayerId().equals(this.getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && (spell.getCardType().contains(CardType.SORCERY) || spell.getCardType().contains(CardType.INSTANT))) {                    
+                if (spell != null && (spell.isSorcery() || spell.isInstant())) {
                     uncounterableSpell = spell.getId();
                     ready = false;
                 }

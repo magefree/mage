@@ -92,7 +92,7 @@ class BladeOfTheBloodChiefTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+            if (p != null && p.isCreature()) {
                 Permanent enchantment = game.getPermanent(getSourceId());
                 if (enchantment != null && enchantment.getAttachedTo() != null) {
                     return true;

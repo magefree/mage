@@ -205,7 +205,7 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getToZone() == Zone.GRAVEYARD
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
-                && zEvent.getTarget().getCardType().contains(CardType.ARTIFACT)
+                && zEvent.getTarget().isArtifact()
                 && zEvent.getTarget().getOwnerId().equals(this.controllerId)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));

@@ -99,10 +99,10 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     creatureCardFound = true;
                 }
-                if (card.getCardType().contains(CardType.LAND)) {
+                if (card.isLand()) {
                     landCardFound = true;
                 }
             }

@@ -110,7 +110,7 @@ class NightfallPredatorEffect extends OneShotEffect {
         Permanent creature2 = game.getPermanent(source.getFirstTarget());
         // 20110930 - 701.10
         if (creature1 != null && creature2 != null) {
-            if (creature1.getCardType().contains(CardType.CREATURE) && creature2.getCardType().contains(CardType.CREATURE)) {
+            if (creature1.isCreature() && creature2.isCreature()) {
                 return creature1.fight(creature2, source, game);
             }
         }

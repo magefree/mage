@@ -87,8 +87,8 @@ class SecondSunriseEffect extends OneShotEffect {
             for (UUID id : watcher.cards) {
                 Card c = game.getCard(id);
                 if (c != null && game.getState().getZone(id) == Zone.GRAVEYARD) {
-                    if (c.getCardType().contains(CardType.ARTIFACT) || c.getCardType().contains(CardType.CREATURE) ||
-                        c.getCardType().contains(CardType.ENCHANTMENT) || c.getCardType().contains(CardType.LAND))
+                    if (c.isArtifact() || c.isCreature() ||
+                        c.isEnchantment() || c.isLand())
                     c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
                 }
             }

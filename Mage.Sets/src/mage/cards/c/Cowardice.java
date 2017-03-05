@@ -83,7 +83,7 @@ class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) &&
+        if (permanent != null && permanent.isCreature() &&
                 StackObject.class.isInstance(game.getObject(event.getSourceId()))) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;

@@ -98,8 +98,8 @@ public class GoblinWelder extends CardImpl {
                 Zone currentZone = game.getState().getZone(card.getId());
                 Player owner = game.getPlayer(card.getOwnerId());
                 if (owner != null
-                        && artifact.getCardType().contains(CardType.ARTIFACT)
-                        && card.getCardType().contains(CardType.ARTIFACT)
+                        && artifact.isArtifact()
+                        && card.isArtifact()
                         && currentZone == Zone.GRAVEYARD
                         && card.getOwnerId().equals(artifact.getControllerId())) {
                     boolean sacrifice = artifact.sacrifice(source.getSourceId(), game);
