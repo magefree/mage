@@ -31,6 +31,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
@@ -271,12 +274,12 @@ public final class CardUtil {
                 reduceMana.add(manaCost.getMana());
             }
         }
-        ManaCosts<ManaCost> manaCostToCheckForColorless = new ManaCostsImpl<>();
-        // subtract colored mana
+        ManaCosts<ManaCost> manaCostToCheckForGeneric = new ManaCostsImpl<>();
+        // subtract non-generic mana
         for (ManaCost newManaCost : previousCost) {
             Mana mana = newManaCost.getMana();
             if (!(newManaCost instanceof MonoHybridManaCost) && mana.getGeneric() > 0) {
-                manaCostToCheckForColorless.add(newManaCost);
+                manaCostToCheckForGeneric.add(newManaCost);
                 continue;
             }
             boolean hybridMana = newManaCost instanceof HybridManaCost;
@@ -340,6 +343,17 @@ public final class CardUtil {
                     continue;
                 }
             }
+
+            if(mana.getColorless() > 0 && reduceMana.getColorless() > 0) {
+                if(reduceMana.getColorless() > mana.getColorless()) {
+                    reduceMana.setColorless(reduceMana.getColorless() - mana.getColorless());
+                    mana.setColorless(0);
+                } else {
+                    mana.setColorless(mana.getColorless() - reduceMana.getColorless());
+                    reduceMana.setColorless(0);
+                }
+            }
+
             if (mana.count() > 0) {
                 if (newManaCost instanceof MonoHybridManaCost) {
                     if (mana.count() == 2) {
@@ -347,7 +361,7 @@ public final class CardUtil {
                         continue;
                     }
                 }
-                manaCostToCheckForColorless.add(newManaCost);
+                manaCostToCheckForGeneric.add(newManaCost);
             }
 
         }
@@ -360,7 +374,7 @@ public final class CardUtil {
             reduceAmount = reduceMana.getGeneric();
         }
         if (reduceAmount > 0) {
-            for (ManaCost newManaCost : manaCostToCheckForColorless) {
+            for (ManaCost newManaCost : manaCostToCheckForGeneric) {
                 Mana mana = newManaCost.getMana();
                 if (mana.getGeneric() == 0 || reduceAmount == 0) {
                     adjustedCost.add(newManaCost);
@@ -387,7 +401,7 @@ public final class CardUtil {
                 }
             }
         } else {
-            adjustedCost.addAll(manaCostToCheckForColorless);
+            adjustedCost.addAll(manaCostToCheckForGeneric);
         }
         if (adjustedCost.isEmpty()) {
             adjustedCost.add(new GenericManaCost(0)); // neede to check if cost was reduced to 0
@@ -395,6 +409,10 @@ public final class CardUtil {
         adjustedCost.setSourceFilter(previousCost.getSourceFilter());  // keep mana source restrictions
         spellAbility.getManaCostsToPay().clear();
         spellAbility.getManaCostsToPay().addAll(adjustedCost);
+    }
+
+    private void reduceMana(Mana mana, Mana reduceMana, Supplier<Integer> manaAmountSupplier, Consumer<Integer> manaAmountConsumer) {
+
     }
 
     /**
