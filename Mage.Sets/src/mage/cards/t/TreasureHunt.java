@@ -94,7 +94,7 @@ class TreasureHuntEffect extends OneShotEffect {
                     cards.add(card);
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
-            } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
+            } while (library.size() > 0 && card != null && card.isLand());
 
             if (!cards.isEmpty()) {
                 player.revealCards("Treasure Hunt", cards, game);

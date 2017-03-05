@@ -88,7 +88,7 @@ class WhiplashTrapCondition implements Condition {
                 if (permanents != null) {
                     int count = 0;
                     for (Permanent permanent : permanents) {
-                        if (permanent.getCardType().contains(CardType.CREATURE)) {
+                        if (permanent.isCreature()) {
                             count++;
                             if (count == 2) {
                                 return true;

@@ -117,8 +117,8 @@ class MelekIzzetParagonTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null
                     && spell.getOwnerId().equals(super.getControllerId())
-                    && (spell.getCardType().contains(CardType.INSTANT)
-                    || spell.getCardType().contains(CardType.SORCERY))) {
+                    && (spell.isInstant()
+                    || spell.isSorcery())) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }

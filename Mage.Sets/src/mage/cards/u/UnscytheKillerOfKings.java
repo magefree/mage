@@ -112,7 +112,7 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) { // target token can't create Zombie
+            if (zEvent.getTarget().isCreature()) { // target token can't create Zombie
                 Permanent equipment = game.getPermanent(getSourceId());
                 // the currently equiped creature must have done damage to the dying creature
                 if (equipment != null && equipment.getAttachedTo() != null) {

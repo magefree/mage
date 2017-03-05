@@ -98,7 +98,7 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null
-                && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
+                && (spell.isInstant() || spell.isSorcery())) {
             for (Effect effect : getEffects()) {
                 effect.setValue("triggeringSpell", spell);
             }

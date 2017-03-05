@@ -94,7 +94,7 @@ class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (getControllerId().equals(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.isCreature()) {
                 Player controller = game.getPlayer(getControllerId());
                 if (controller != null && controller.hasOpponent(permanent.getControllerId(), game)) {
                     getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));

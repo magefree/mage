@@ -89,8 +89,8 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && (spell.getCardType().contains(CardType.INSTANT)
-                || spell.getCardType().contains(CardType.SORCERY))) {
+        if (spell != null && (spell.isInstant()
+                || spell.isSorcery())) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof HiveMindEffect) {
                     ((HiveMindEffect) effect).setTargetPointer(new FixedTarget(spell.getId()));

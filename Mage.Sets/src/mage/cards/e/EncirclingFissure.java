@@ -91,7 +91,7 @@ class EncirclingFissurePreventEffect extends PreventionEffectImpl {
             if (damageEvent.isCombatDamage()) {
                 Permanent permanent = game.getPermanent(damageEvent.getSourceId());
                 if (permanent != null
-                        && permanent.getCardType().contains(CardType.CREATURE)
+                        && permanent.isCreature()
                         && permanent.getControllerId().equals(getTargetPointer().getFirst(game, source))) {
                     return true;
                 }

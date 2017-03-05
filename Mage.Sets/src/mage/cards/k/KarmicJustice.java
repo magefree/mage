@@ -92,7 +92,7 @@ class KarmicJusticeTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getPlayerId().equals(controllerId) 
                 && game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId()))) {
             MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (!mageObject.getCardType().contains(CardType.CREATURE)) {
+            if (!mageObject.isCreature()) {
                 this.getTargets().clear();
                 FilterPermanent filter = new FilterPermanent("target permanent that opponent controls");
                 filter.add(new ControllerIdPredicate(game.getControllerId(event.getSourceId())));

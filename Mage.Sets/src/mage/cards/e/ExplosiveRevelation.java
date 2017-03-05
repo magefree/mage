@@ -97,7 +97,7 @@ class ExplosiveRevelationEffect extends OneShotEffect {
                 if (card != null) {
                     cards.add(card);
                 }
-            } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
+            } while (library.size() > 0 && card != null && card.isLand());
             // reveal cards
             if (!cards.isEmpty()) {
                 player.revealCards("Explosive Revelation", cards, game);

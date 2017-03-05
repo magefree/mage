@@ -105,7 +105,7 @@ class SidisiBroodTyrantTriggeredAbility extends TriggeredAbilityImpl {
                     if (cardOwnerId != null
                             && card.getOwnerId().equals(getControllerId())
                             && cardType != null
-                            && card.getCardType().contains(CardType.CREATURE)) {
+                            && card.isCreature()) {
                         return true;
                     }
                 }

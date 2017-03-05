@@ -111,7 +111,7 @@ class SnapcasterMageEffect extends ContinuousEffectImpl {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
             FlashbackAbility ability;
-            if (card.getCardType().contains(CardType.INSTANT)) {
+            if (card.isInstant()) {
                 ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
             }
             else {

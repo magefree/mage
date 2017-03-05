@@ -143,7 +143,7 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         return permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                && permanent.getCardType().contains(CardType.CREATURE)
+                && permanent.isCreature()
                 && !(permanent instanceof PermanentToken);
     }
 

@@ -94,7 +94,7 @@ class WandOfDenialEffect extends OneShotEffect {
             if (card != null) {
                 MageObject sourceObject = game.getObject(source.getSourceId());
                 controller.lookAtCards(sourceObject != null ? sourceObject.getName() : "", new CardsImpl(card), game);
-                if (!card.getCardType().contains(CardType.LAND)
+                if (!card.isLand()
                         && controller.canPayLifeCost()
                         && controller.getLife() >= 2
                         && controller.chooseUse(Outcome.Neutral, "Pay 2 life to put " + card.getLogName() + " into graveyard?", source, game)) {

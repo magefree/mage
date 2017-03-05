@@ -89,7 +89,7 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)
+        if (permanent != null && permanent.isCreature()
                 && permanent.getControllerId().equals(this.controllerId)) {
             this.getEffects().get(0).setValue("damageSource", event.getTargetId());                
             return true;

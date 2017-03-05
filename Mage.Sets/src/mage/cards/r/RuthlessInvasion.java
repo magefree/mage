@@ -74,7 +74,7 @@ class RuthlessInvasionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (!permanent.getCardType().contains(CardType.ARTIFACT)) {
+        if (!permanent.isArtifact()) {
             return true;
         }
         return false;

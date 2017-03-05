@@ -84,7 +84,7 @@ class EmperorCrocodileStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         for (Permanent perm : game.getBattlefield().getAllActivePermanents(controllerId)) {
-            if (!perm.getId().equals(this.getSourceId()) && perm.getCardType().contains(CardType.CREATURE)) {
+            if (!perm.getId().equals(this.getSourceId()) && perm.isCreature()) {
                 return false;
             }
         }

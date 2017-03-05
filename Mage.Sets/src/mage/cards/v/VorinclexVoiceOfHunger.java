@@ -106,7 +106,7 @@ class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+            if (permanent != null && permanent.isLand()) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
                 return true;
             }

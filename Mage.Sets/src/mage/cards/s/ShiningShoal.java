@@ -178,7 +178,7 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
             // check target
             //   check creature first
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.isCreature()) {
                 if (permanent.getControllerId().equals(source.getControllerId())) {
                     // it's your creature
                     return true;

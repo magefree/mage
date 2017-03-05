@@ -83,7 +83,7 @@ public class SynodCenturion extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(controllerId)) {
-                if (!perm.getId().equals(this.getSourceId()) &&  perm.getCardType().contains(CardType.ARTIFACT)) {
+                if (!perm.getId().equals(this.getSourceId()) &&  perm.isArtifact()) {
                     return false;
                 }
             }

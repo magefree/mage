@@ -42,13 +42,12 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author noxx
  */
 public class ArcaneMelee extends CardImpl {
 
     public ArcaneMelee(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
 
         // Instant and sorcery spells cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArcaneMeleeCostReductionEffect()));
@@ -66,7 +65,7 @@ public class ArcaneMelee extends CardImpl {
 
 class ArcaneMeleeCostReductionEffect extends CostModificationEffectImpl {
 
-    ArcaneMeleeCostReductionEffect ( ) {
+    ArcaneMeleeCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Instant and sorcery spells cost {2} less to cast";
     }
@@ -84,9 +83,9 @@ class ArcaneMeleeCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ( abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
-            Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
-            if ( sourceCard != null && (sourceCard.getCardType().contains(CardType.INSTANT) || sourceCard.getCardType().contains(CardType.SORCERY))) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
+            Card sourceCard = game.getCard((abilityToModify).getSourceId());
+            if (sourceCard != null && (sourceCard.isInstant() || sourceCard.isSorcery())) {
                 return true;
             }
         }

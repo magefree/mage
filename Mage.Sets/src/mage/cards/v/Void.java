@@ -104,7 +104,7 @@ class VoidEffect extends OneShotEffect {
             controller.choose(Outcome.DestroyPermanent, numberChoice, game);
             int number = Integer.parseInt(numberChoice.getChoice());
             for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                if ((permanent.getCardType().contains(CardType.ARTIFACT) || permanent.getCardType().contains(CardType.CREATURE))
+                if ((permanent.isArtifact() || permanent.isCreature())
                         && permanent.getConvertedManaCost() == number) {
                     permanent.destroy(source.getSourceId(), game, false);
                 }

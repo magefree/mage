@@ -104,7 +104,7 @@ class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId);
+        return permanent != null && permanent.isLand() && permanent.getControllerId().equals(this.controllerId);
     }
 
     @Override

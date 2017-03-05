@@ -108,9 +108,9 @@ class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 if (sourceObjectDamage != null) {
                     if (sourceObjectDamage.getColor(game).isRed()
-                            && (sourceObjectDamage.getCardType().contains(CardType.PLANESWALKER)
-                            || sourceObjectDamage.getCardType().contains(CardType.INSTANT)
-                            || sourceObjectDamage.getCardType().contains(CardType.SORCERY))) {
+                            && (sourceObjectDamage.isPlaneswalker()
+                            || sourceObjectDamage.isInstant()
+                            || sourceObjectDamage.isSorcery())) {
                         return true;
                     }
                 }

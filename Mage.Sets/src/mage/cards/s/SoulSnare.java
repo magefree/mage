@@ -104,7 +104,7 @@ class SoulSnareFilter extends FilterAttackingCreature {
                     }
                     else {
                         Permanent planeswalker = game.getPermanent(defenderId);
-                        if(planeswalker != null && planeswalker.getCardType().contains(CardType.PLANESWALKER)
+                        if(planeswalker != null && planeswalker.isPlaneswalker()
                             && planeswalker.getControllerId().equals(playerId)) {
                             return true;
                         }

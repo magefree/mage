@@ -103,7 +103,7 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent sourcePermanent = game.getPermanent(this.getSourceId());
         if (sourcePermanent != null) {
-            if (sourcePermanent.getCardType().contains(CardType.CREATURE)) {
+            if (sourcePermanent.isCreature()) {
                 if (event.getSourceId() != null
                         && event.getSourceId().equals(this.getSourceId())) {
                     UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);

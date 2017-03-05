@@ -102,7 +102,7 @@ class QuestForUlasTempleEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             controller.lookAtCards(sourcePermanent.getName(), cards, game);
-            if (card.getCardType().contains(CardType.CREATURE)) {
+            if (card.isCreature()) {
                 if (controller.chooseUse(Outcome.DrawCard, "Do you wish to reveal the creature card at the top of the library?", source, game)) {
                     controller.revealCards(sourcePermanent.getName(), cards, game);
                     Permanent questForUlasTemple = game.getPermanent(source.getSourceId());

@@ -151,7 +151,7 @@ class ChronatogTotemCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return permanent.getCardType().contains(CardType.CREATURE);
+            return permanent.isCreature();
         }
         return false;
     }

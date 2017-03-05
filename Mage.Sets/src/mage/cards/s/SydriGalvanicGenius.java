@@ -124,7 +124,7 @@ class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    if (!artifact.getCardType().contains(CardType.CREATURE)) {
+                    if (!artifact.isCreature()) {
                         artifact.getCardType().add(CardType.CREATURE);
                     }
                 }

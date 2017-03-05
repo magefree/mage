@@ -106,7 +106,7 @@ class BrutalDeceiverAbility extends LimitedTimesPerTurnActivatedAbility {
             Card card = player.getLibrary().getFromTop(game);
             cards.add(card);
             player.revealCards("Brutal Deceiver", cards, game);
-            if (card != null && card.getCardType().contains(CardType.LAND)) {
+            if (card != null && card.isLand()) {
                 return true;
             }
         }

@@ -154,6 +154,6 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        return permanent != null && permanent.getCardType().contains(CardType.LAND);
+        return permanent != null && permanent.isLand();
     }
 }

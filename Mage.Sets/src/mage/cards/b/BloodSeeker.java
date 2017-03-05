@@ -96,7 +96,7 @@ class BloodSeekerTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent) event;
             Card card = zEvent.getTarget();
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && card.isCreature()) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }

@@ -135,7 +135,7 @@ class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
             if (((DamagedPlayerEvent) event).isCombatDamage()) {
                 Permanent creature = game.getPermanent(event.getSourceId());
                 if (creature != null && creature.getControllerId().equals(controllerId)
-                        && creature.getCardType().contains(CardType.ARTIFACT) && !damagedPlayerIds.contains(event.getTargetId())) {
+                        && creature.isArtifact() && !damagedPlayerIds.contains(event.getTargetId())) {
                     damagedPlayerIds.add(event.getTargetId());
                     return true;
                 }

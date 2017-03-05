@@ -129,7 +129,7 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
                     controller.revealCards(sourcePermanent.getIdName(), new CardsImpl(card), game);
                     this.getTargets().clear();
                     this.getEffects().clear();
-                    if (card.getCardType().contains(CardType.LAND)) {
+                    if (card.isLand()) {
                         this.addEffect(new DrawCardSourceControllerEffect(1));
                     } else {
                         this.addEffect(new DamageTargetEffect(3));

@@ -145,7 +145,7 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-        return mageObject != null && mageObject.getCardType().contains(CardType.CREATURE);
+        return mageObject != null && mageObject.isCreature();
     }
 
     @Override

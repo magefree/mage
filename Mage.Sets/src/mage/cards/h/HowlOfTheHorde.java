@@ -98,7 +98,7 @@ class HowlOfTheHordeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
          if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
+            if (spell != null && (spell.isInstant() || spell.isSorcery())) {
                 for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }

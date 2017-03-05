@@ -95,9 +95,9 @@ class KismetEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && (permanent.getCardType().contains(CardType.ARTIFACT)
-                    || permanent.getCardType().contains(CardType.CREATURE)
-                    || permanent.getCardType().contains(CardType.LAND))) {
+            if (permanent != null && (permanent.isArtifact()
+                    || permanent.isCreature()
+                    || permanent.isLand())) {
                 return true;
             }
         }

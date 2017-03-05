@@ -93,7 +93,7 @@ class DreadSummonsEffect extends OneShotEffect {
                     if (player != null) {
                         Set<Card> movedCards = player.moveCardsToGraveyardWithInfo(player.getLibrary().getTopCards(game, numberOfCards), source, game, Zone.LIBRARY);
                         for (Card card : movedCards) {
-                            if (card.getCardType().contains(CardType.CREATURE)) {
+                            if (card.isCreature()) {
                                 numberOfCreatureCards++;
                             }
                         }

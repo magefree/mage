@@ -103,7 +103,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && !permanent.getControllerId().equals(this.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && !permanent.getControllerId().equals(this.getControllerId()) && permanent.isCreature()) {
                 Card card = (Card) game.getObject(permanent.getId());
                 if (card != null) {
                     Effect effect = new GraveBetrayalEffect();

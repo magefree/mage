@@ -75,7 +75,7 @@ public class PhyrexianMetamorph extends CardImpl {
 
             @Override
             public Boolean apply(Game game, MageObject mageObject) {
-                if (!mageObject.getCardType().contains(CardType.ARTIFACT)) {
+                if (!mageObject.isArtifact()) {
                     mageObject.getCardType().add(CardType.ARTIFACT);
                 }
                 return true;

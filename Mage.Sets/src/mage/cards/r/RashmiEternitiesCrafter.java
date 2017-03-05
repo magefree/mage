@@ -141,7 +141,7 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
                 controller.revealCards("Rashmi, Eternities Crafter", new CardsImpl(card), game);
                 Object cmcObject = this.getValue("RashmiEternitiesCrafterCMC");
                 if (cmcObject == null
-                        || card.getCardType().contains(CardType.LAND)
+                        || card.isLand()
                         || card.getConvertedManaCost() >= (int) cmcObject
                         || !controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game)
                         || !controller.cast(card.getSpellAbility(), game, true)) {

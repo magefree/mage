@@ -104,7 +104,7 @@ class MirrorMatchEffect extends OneShotEffect {
                     boolean isCreature = false;
                     if (group != null) {
                         for (Permanent addedToken : effect.getAddedPermanent()) {
-                            if (addedToken.getCardType().contains(CardType.CREATURE)) {
+                            if (addedToken.isCreature()) {
                                 group.addBlockerToGroup(addedToken.getId(), attackerId, game);
                                 isCreature = true;
                             }

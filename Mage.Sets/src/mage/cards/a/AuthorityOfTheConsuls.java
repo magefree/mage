@@ -109,7 +109,7 @@ class AuthorityOfTheConsulsTapEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.isCreature()) {
                 return true;
             }
         }

@@ -149,7 +149,7 @@ class FallEffect extends OneShotEffect {
                     }
                     targetPlayer.revealCards(sourceObject.getIdName(), cards, game);
                     for (Card cardToDiscard : cards.getCards(game)) {
-                        if (!cardToDiscard.getCardType().contains(CardType.LAND)) {
+                        if (!cardToDiscard.isLand()) {
                             targetPlayer.discard(cardToDiscard, source, game);
                         }
                     }

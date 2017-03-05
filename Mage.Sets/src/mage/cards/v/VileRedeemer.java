@@ -134,7 +134,7 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.isDiesEvent() && zEvent.getTarget() != null
-                    && zEvent.getTarget().getCardType().contains(CardType.CREATURE)
+                    && zEvent.getTarget().isCreature()
                     && !(zEvent.getTarget() instanceof PermanentToken)) {
                 int count = amountOfCreaturesThatDied.containsKey(zEvent.getTarget().getControllerId())
                         ? amountOfCreaturesThatDied.get(zEvent.getTarget().getControllerId()) : 0;

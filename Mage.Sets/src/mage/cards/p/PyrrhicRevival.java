@@ -91,7 +91,7 @@ class PyrrhicRevivalEffect extends OneShotEffect {
             if (player != null) {
                 Cards cards = player.getGraveyard();
                 for (Card card : cards.getCards(game)) {
-                    if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                    if (card != null && card.isCreature()) {
                         if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), card.getOwnerId(), false)) {
                             Permanent permanent = game.getPermanent(card.getId());
                             if (permanent != null) {

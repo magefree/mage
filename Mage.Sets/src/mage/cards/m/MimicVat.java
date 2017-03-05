@@ -118,7 +118,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
                 && zEvent.getToZone() == Zone.GRAVEYARD
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
                 && !(permanent instanceof PermanentToken)
-                && permanent.getCardType().contains(CardType.CREATURE)) {
+                && permanent.isCreature()) {
 
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
             return true;

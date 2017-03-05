@@ -94,7 +94,7 @@ class NoRestForTheWickedEffect extends OneShotEffect {
                 Card c = game.getCard(cardId);
                 if (c != null) {
                     if (game.getState().getZone(cardId) == Zone.GRAVEYARD
-                            && c.getCardType().contains(CardType.CREATURE)
+                            && c.isCreature()
                             && c.getOwnerId().equals(source.getControllerId())) {
                         cardsToHand.add(c);
                     }

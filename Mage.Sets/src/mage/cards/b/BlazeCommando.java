@@ -117,7 +117,7 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
         if (getControllerId().equals(game.getControllerId(event.getSourceId()))) {
             MageObject damageSource = game.getObject(event.getSourceId());
             if (damageSource != null) {
-                if (damageSource.getCardType().contains(CardType.INSTANT) || damageSource.getCardType().contains(CardType.SORCERY)) {
+                if (damageSource.isInstant()|| damageSource.isSorcery()) {
                     if (!handledStackObjects.contains(damageSource.getId())) {
                         handledStackObjects.add(damageSource.getId());
                         return true;

@@ -114,7 +114,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
                 if (player != null) {
                     int count = 0;
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                        if (permanent.sacrifice(source.getSourceId(), game) && permanent.getCardType().contains(CardType.LAND)) {
+                        if (permanent.sacrifice(source.getSourceId(), game) && permanent.isLand()) {
                             count++;
                         }
                     }

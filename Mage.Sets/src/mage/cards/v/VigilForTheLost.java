@@ -92,7 +92,7 @@ class VigilForTheLostTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD &&
                 ((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (p.getControllerId().equals(this.getControllerId()) && p.getCardType().contains(CardType.CREATURE)) {
+            if (p.getControllerId().equals(this.getControllerId()) && p.isCreature()) {
                 return true;
             }
         }

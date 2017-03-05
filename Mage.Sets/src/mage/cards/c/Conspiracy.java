@@ -103,26 +103,26 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     setCreatureSubtype(card, choice, game);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     setCreatureSubtype(card, choice, game);
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
+                if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
                     setCreatureSubtype(card, choice, game);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
+                if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
                     setCreatureSubtype(card, choice, game);
                 }
             }
@@ -130,7 +130,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             for (UUID commanderId : controller.getCommandersIds()) {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         setCreatureSubtype(card, choice, game);
                     }
                 }
@@ -140,7 +140,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
                 StackObject stackObject = iterator.next();
                 if (stackObject instanceof Spell &&
                         stackObject.getControllerId().equals(source.getControllerId()) &&
-                        stackObject.getCardType().contains(CardType.CREATURE)) {
+                        stackObject.isCreature()) {
                     Card card = ((Spell) stackObject).getCard();
                     setCreatureSubtype(card, choice, game);
                 }

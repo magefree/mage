@@ -94,13 +94,13 @@ class MadcapExperimentEffect extends OneShotEffect {
                 if (card != null) {
                     cards.add(card);
                 }
-            } while (library.size() > 0 && card != null && !card.getCardType().contains(CardType.ARTIFACT));
+            } while (library.size() > 0 && card != null && !card.isArtifact());
             // reveal cards
             if (!cards.isEmpty()) {
                 controller.revealCards(sourceObject.getIdName(), cards, game);
             }
             int revealed = cards.size();
-            if (card != null && card.getCardType().contains(CardType.ARTIFACT)) {
+            if (card != null && card.isArtifact()) {
                 // put artifact card to battlefield
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 // remove it from revealed card list

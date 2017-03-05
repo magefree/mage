@@ -184,7 +184,7 @@ class AureliasFuryCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && player.getId().equals(event.getPlayerId())) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && !card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && !card.isCreature()) {
                 return true;
             }
         }

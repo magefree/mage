@@ -98,7 +98,7 @@ class AuraOfSilenceCostModificationEffect extends CostModificationEffectImpl {
         if (abilityToModify instanceof SpellAbility) {
             if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
                 Card card = game.getCard(abilityToModify.getSourceId());
-                if (card != null && (card.getCardType().contains(CardType.ARTIFACT) || card.getCardType().contains(CardType.ENCHANTMENT))) {
+                if (card != null && (card.isArtifact() || card.isEnchantment())) {
                     return true;
                 }
             }

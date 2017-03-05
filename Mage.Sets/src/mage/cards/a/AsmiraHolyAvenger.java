@@ -28,6 +28,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -50,13 +51,12 @@ import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author Plopman
  */
 public class AsmiraHolyAvenger extends CardImpl {
 
     public AsmiraHolyAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
@@ -108,7 +108,7 @@ class AsmiraHolyAvengerWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && ((Card)card).getOwnerId().equals(this.controllerId) && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && ((Card) card).getOwnerId().equals(this.controllerId) && card.isCreature()) {
                 creaturesCount++;
             }
         }

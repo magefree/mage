@@ -89,7 +89,7 @@ class GalvanothEffect extends OneShotEffect {
             Cards cards = new CardsImpl(card);
             controller.lookAtCards("Galvanoth", cards, game);
 
-            if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
+            if (card.isInstant() || card.isSorcery()) {
                 StringBuilder message = new StringBuilder("Cast ").append(card.getName()).append(" without paying its mana cost?");
                 if (controller.chooseUse(Outcome.PlayForFree, message.toString(), source, game)) {
                     controller.getLibrary().removeFromTop(game);

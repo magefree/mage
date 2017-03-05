@@ -99,13 +99,13 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
             for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
-                        if (!permanent.getCardType().contains(CardType.CREATURE)) {
+                        if (!permanent.isCreature()) {
                             permanent.getCardType().add(CardType.CREATURE);
                         }
                         if (!permanent.getSubtype(game).contains("Saproling")) {
                             permanent.getSubtype(game).add("Saproling");
                         }
-                        if (!permanent.getCardType().contains(CardType.LAND)) {
+                        if (!permanent.isLand()) {
                             permanent.getCardType().add(CardType.LAND);
                         }
                         if (!permanent.getSubtype(game).contains("Forest")) {

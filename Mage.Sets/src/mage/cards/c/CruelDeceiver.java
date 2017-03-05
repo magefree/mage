@@ -105,7 +105,7 @@ class CruelDeceiverEffect extends OneShotEffect {
             Card card = player.getLibrary().getFromTop(game);
             cards.add(card);
             player.revealCards("Cruel Deceiver", cards, game);
-            if (card != null && card.getCardType().contains(CardType.LAND)) {
+            if (card != null && card.isLand()) {
                 game.addEffect(new BoostSourceEffect(2,2,Duration.EndOfTurn), source);
                 game.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(),Duration.EndOfTurn), source);
             }

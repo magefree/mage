@@ -98,12 +98,12 @@ class SpellshiftEffect extends OneShotEffect {
                 Cards cards = new CardsImpl();
                 Card card = library.removeFromTop(game);
                 cards.add(card);
-                while (!(card.getCardType().contains(CardType.SORCERY) || card.getCardType().contains(CardType.INSTANT)) && library.size() > 0) {
+                while (!(card.isSorcery() || card.isInstant()) && library.size() > 0) {
                     card = library.removeFromTop(game);
                     cards.add(card);
                 }
 
-                if (card.getCardType().contains(CardType.SORCERY) || card.getCardType().contains(CardType.INSTANT)) {
+                if (card.isSorcery() || card.isInstant()) {
                     if (player.chooseUse(outcome, "Cast " + card.getLogName() + " ?", source, game)) {
                         if (player.cast(card.getSpellAbility(), game, true)) {
                             cards.remove(card.getId());

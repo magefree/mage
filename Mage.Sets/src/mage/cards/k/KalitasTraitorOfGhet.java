@@ -151,10 +151,10 @@ class KalitasTraitorOfGhetEffect extends ReplacementEffectImpl {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId()) && !(permanent instanceof PermanentToken)) {
                 if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
-                    if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
+                    if (zEvent.getTarget().isCreature()) {
                         return true;
                     }
-                } else if (permanent.getCardType().contains(CardType.CREATURE)) {
+                } else if (permanent.isCreature()) {
                     return true;
                 }
             }

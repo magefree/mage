@@ -92,7 +92,7 @@ class TreasureKeeperEffect extends OneShotEffect {
             while (nonLandCard == null && controller.getLibrary().size() > 0) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 toReveal.add(card);
-                if (!card.getCardType().contains(CardType.LAND) && card.getConvertedManaCost() < 4) {
+                if (!card.isLand() && card.getConvertedManaCost() < 4) {
                     nonLandCard = card;
                 }
             }

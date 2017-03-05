@@ -125,7 +125,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
             if (damageSource != null) {            
                 if (game.getOpponents(getControllerId()).contains(event.getTargetId())) {
                     MageObject object = game.getObject(event.getSourceId());
-                    if (object.getCardType().contains(CardType.INSTANT) || object.getCardType().contains(CardType.SORCERY)) { 
+                    if (object.isInstant() || object.isSorcery()) {
                         if (!(damageSource instanceof StackObject) || !handledStackObjects.contains(damageSource.getId())) {
                             if (damageSource instanceof StackObject) {
                                 handledStackObjects.add(damageSource.getId());

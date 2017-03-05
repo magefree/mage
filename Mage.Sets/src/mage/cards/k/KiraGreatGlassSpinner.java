@@ -111,7 +111,7 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.isCreature()) {
                 CreatureWasTargetedThisTurnWatcher watcher = (CreatureWasTargetedThisTurnWatcher) game.getState().getWatchers().get("CreatureWasTargetedThisTurn");
                 if (watcher != null && watcher.notMoreThanOnceTargetedThisTurn(permanent, game)) {
                     for (Effect effect : getEffects()) {
@@ -148,7 +148,7 @@ class CreatureWasTargetedThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TARGETED) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.isCreature()) {
                 MageObjectReference mor = new MageObjectReference(permanent, game);
                 int amount = 0;
                 if (creaturesTargeted.containsKey(mor)) {

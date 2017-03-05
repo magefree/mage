@@ -145,7 +145,7 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
         if (permanent != null) {
             if(!permanent.getImprinted().isEmpty()){
                 Card card = game.getCard(permanent.getImprinted().get(0));
-                if(card != null && card.getCardType().contains(CardType.CREATURE))
+                if(card != null && card.isCreature())
                 {
                     switch (layer) {
                         case TypeChangingEffects_4:

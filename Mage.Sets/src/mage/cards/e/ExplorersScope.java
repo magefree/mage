@@ -101,7 +101,7 @@ class ExplorersScopeEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             cards.add(card);
             controller.lookAtCards(sourceObject.getIdName(), cards, game);
-            if (card.getCardType().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 String message = "Put " + card.getLogName() + " onto the battlefield tapped?";
                 if (controller.chooseUse(Outcome.PutLandInPlay, message, source, game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
