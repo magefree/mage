@@ -39,13 +39,9 @@ import mage.players.Player;
  */
 public class TopLibraryCardTypeCondition implements Condition {
 
-    public enum CheckType {
-        CREATURE, LAND, SORCERY, INSTANT
-    }
+    private CardType type;
 
-    private CheckType type;
-
-    public TopLibraryCardTypeCondition(CheckType type) {
+    public TopLibraryCardTypeCondition(CardType type) {
         this.type = type;
     }
 
