@@ -203,6 +203,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Paupers' Cage", 279, Rarity.RARE, mage.cards.p.PaupersCage.class));
         cards.add(new SetCardInfo("Pearl Dragon", 237, Rarity.RARE, mage.cards.p.PearlDragon.class));
         cards.add(new SetCardInfo("Phyrexian Dreadnought", 280, Rarity.RARE, mage.cards.p.PhyrexianDreadnought.class));
+        cards.add(new SetCardInfo("Phyrexian Purge", 333, Rarity.RARE, mage.cards.p.PhyrexianPurge.class));
         cards.add(new SetCardInfo("Phyrexian Tribute", 32, Rarity.RARE, mage.cards.p.PhyrexianTribute.class));
         cards.add(new SetCardInfo("Phyrexian Vault", 281, Rarity.UNCOMMON, mage.cards.p.PhyrexianVault.class));
         cards.add(new SetCardInfo("Plains", 306, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
