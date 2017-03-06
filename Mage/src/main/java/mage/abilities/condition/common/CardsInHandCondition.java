@@ -28,6 +28,7 @@
 package mage.abilities.condition.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.CountType;
 import mage.abilities.condition.Condition;
@@ -39,7 +40,6 @@ import mage.util.CardUtil;
 /**
  * Cards in controller hand condition. This condition can decorate other
  * conditions as well as be used standalone.
- *
  *
  * @author LevelX
  */
@@ -77,70 +77,24 @@ public class CardsInHandCondition implements Condition {
         if (controller != null) {
             switch (targetController) {
                 case YOU:
-                    switch (this.type) {
-                        case FEWER_THAN:
-                            conditionApplies = game.getPlayer(source.getControllerId()).getHand().size() < this.count;
-                            break;
-                        case MORE_THAN:
-                            conditionApplies = game.getPlayer(source.getControllerId()).getHand().size() > this.count;
-                            break;
-                        case EQUAL_TO:
-                            conditionApplies = game.getPlayer(source.getControllerId()).getHand().size() == this.count;
-                            break;
-                    }
+                    conditionApplies = CountType.compare(game.getPlayer(source.getControllerId()).getHand().size(), type, count);
                     break;
                 case ACTIVE:
                     Player player = game.getPlayer(game.getActivePlayerId());
                     if (player != null) {
-                        switch (this.type) {
-                            case FEWER_THAN:
-                                conditionApplies = player.getHand().size() < this.count;
-                                break;
-                            case MORE_THAN:
-                                conditionApplies = player.getHand().size() > this.count;
-                                break;
-                            case EQUAL_TO:
-                                conditionApplies = player.getHand().size() == this.count;
-                                break;
-                        }
+                        conditionApplies = CountType.compare(player.getHand().size(), type, count);
                     }
                     break;
                 case ANY:
                     boolean conflict = false;
-                    switch (this.type) {
-                        case FEWER_THAN:
-                            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                                player = game.getPlayer(playerId);
-                                if (player != null) {
-                                    if (player.getHand().size() >= this.count) {
-                                        conflict = true;
-                                        break;
-                                    }
-                                }
+                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                        player = game.getPlayer(playerId);
+                        if (player != null) {
+                            if (!CountType.compare(player.getHand().size(), type, this.count)) {
+                                conflict = true;
+                                break;
                             }
-                            break;
-                        case MORE_THAN:
-                            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                                player = game.getPlayer(playerId);
-                                if (player != null) {
-                                    if (player.getHand().size() <= this.count) {
-                                        conflict = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            break;
-                        case EQUAL_TO:
-                            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                                player = game.getPlayer(playerId);
-                                if (player != null) {
-                                    if (player.getHand().size() != this.count) {
-                                        conflict = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            break;
+                        }
                     }
                     conditionApplies = !conflict;
                     break;

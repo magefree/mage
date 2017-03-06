@@ -40,7 +40,7 @@ import mage.players.PlayerList;
  */
 public class TenOrLessLifeCondition implements Condition {
 
-    public static enum CheckType { AN_OPPONENT, CONTROLLER, TARGET_OPPONENT, EACH_PLAYER }
+    public enum CheckType { AN_OPPONENT, CONTROLLER, TARGET_OPPONENT, EACH_PLAYER }
 
     private final CheckType type;
 

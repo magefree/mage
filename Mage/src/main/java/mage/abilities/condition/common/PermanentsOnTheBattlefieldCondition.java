@@ -38,11 +38,10 @@ import mage.game.Game;
  * Battlefield checking condition.  This condition can decorate other conditions
  * as well as be used standalone.
  *
- * @see #Controls(mage.filter.Filter)
- * @see #Controls(mage.filter.Filter, mage.abilities.condition.Condition)
- *
  * @author nantuko
  * @author maurer.it_at_gmail.com
+ * @see #Controls(mage.filter.Filter)
+ * @see #Controls(mage.filter.Filter, mage.abilities.condition.Condition)
  */
 public class PermanentsOnTheBattlefieldCondition implements Condition {
 
@@ -56,7 +55,7 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
      * Applies a filter and delegates creation to
      * {@link #ControlsPermanent(mage.filter.FilterPermanent, mage.abilities.condition.common.ControlsPermanent.CountType, int)}
      * with {@link CountType#MORE_THAN}, and 0.
-     * 
+     *
      * @param filter
      */
     public PermanentsOnTheBattlefieldCondition(FilterPermanent filter) {
@@ -72,14 +71,14 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
      * @param type
      * @param count
      */
-    public PermanentsOnTheBattlefieldCondition ( FilterPermanent filter, CountType type, int count ) {
+    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, CountType type, int count) {
         this(filter, type, count, true);
     }
-    
-    public PermanentsOnTheBattlefieldCondition ( FilterPermanent filter, CountType type, int count, boolean onlyControlled ) {
+
+    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, CountType type, int count, boolean onlyControlled) {
         this.filter = filter;
         this.type = type;
-        this.count = count;        
+        this.count = count;
         this.onlyControlled = onlyControlled;
     }
 
@@ -94,7 +93,7 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
      * @param count
      * @param conditionToDecorate
      */
-    public PermanentsOnTheBattlefieldCondition ( FilterPermanent filter, CountType type, int count, Condition conditionToDecorate ) {
+    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, CountType type, int count, Condition conditionToDecorate) {
         this(filter, type, count);
         this.condition = conditionToDecorate;
     }
@@ -108,20 +107,11 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
             localFilter.add(new ControllerIdPredicate(source.getControllerId()));
         }
 
-        switch ( this.type ) {
-            case FEWER_THAN:
-                conditionApplies = game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game) < this.count;
-                break;
-            case MORE_THAN:
-                conditionApplies = game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game) > this.count;
-                break;
-            case EQUAL_TO:
-                conditionApplies = game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game) == this.count;
-                break;
-        }
+        int permanentsOnBattlefield = game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game);
+        conditionApplies = CountType.compare(permanentsOnBattlefield, type, count);
 
         //If a decorated condition exists, check it as well and apply them together.
-        if ( this.condition != null ) {
+        if (this.condition != null) {
             conditionApplies = conditionApplies && this.condition.apply(game, source);
         }
 
