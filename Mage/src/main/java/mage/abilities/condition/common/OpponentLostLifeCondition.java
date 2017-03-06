@@ -28,6 +28,7 @@
 package mage.abilities.condition.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.IntCompareCondition;
@@ -50,7 +51,7 @@ public class OpponentLostLifeCondition extends IntCompareCondition {
         int maxLostLive = 0;
         PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
         if (watcher != null) {
-            for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 int lostLive = watcher.getLiveLost(opponentId);
                 if (lostLive > maxLostLive) {
                     maxLostLive = lostLive;
@@ -63,9 +64,9 @@ public class OpponentLostLifeCondition extends IntCompareCondition {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("if an opponent lost ");
-        switch(type) {
+        switch (type) {
             case GreaterThan:
-                sb.append(value+1).append(" or more life this turn ");
+                sb.append(value + 1).append(" or more life this turn ");
                 break;
             case Equal:
                 sb.append(value).append(" life this turn ");
