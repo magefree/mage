@@ -178,4 +178,41 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
 
     }
 
+    /*
+     * Reported bug: could not use Clever Impersonator to copy Dawn's Reflection
+     */
+    @Test
+    public void dawnsReflectionCopiedByImpersonator()
+    {
+        String impersonator = "Clever Impersonator";
+        String dReflection = "Dawn's Reflection";
+
+        /*
+        {3}{G} Dawn's Reflection
+        Enchantment - Aura, Enchant Land
+        Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool (in addition to the mana the land produces).
+         */
+        addCard(Zone.HAND, playerA, dReflection);
+
+        /*
+        {2}{U}{U} Creature - Shapeshifter 0/0
+        You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
+         */
+        addCard(Zone.HAND, playerA, impersonator);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, dReflection, "Forest"); // enchant a forest
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, impersonator);
+        setChoice(playerA, dReflection); // have Impersonator enter as copy of Dawn's Reflection
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, dReflection, 0);
+        assertHandCount(playerA, impersonator, 0);
+        assertPermanentCount(playerA, dReflection, 2);
+        assertPermanentCount(playerA, impersonator, 0);
+    }
+
 }
