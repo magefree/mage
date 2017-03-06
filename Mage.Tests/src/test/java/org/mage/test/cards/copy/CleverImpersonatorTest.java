@@ -27,6 +27,7 @@
  */
 package org.mage.test.cards.copy;
 
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -213,6 +214,7 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         assertHandCount(playerA, impersonator, 0);
         assertPermanentCount(playerA, dReflection, 2);
         assertPermanentCount(playerA, impersonator, 0);
+        assertType(dReflection, CardType.ENCHANTMENT, true);
     }
 
 }
