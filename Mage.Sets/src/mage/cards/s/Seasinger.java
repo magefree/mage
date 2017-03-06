@@ -29,6 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 
+import mage.abilities.CountType;
 import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -90,7 +91,7 @@ public class Seasinger extends CardImpl {
         // {tap}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
-                new PermanentsOnTheBattlefieldCondition(seasinger, PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 1, SourceTappedCondition.getInstance()), rule);
+                new PermanentsOnTheBattlefieldCondition(seasinger, CountType.EQUAL_TO, 1, SourceTappedCondition.getInstance()), rule);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         creatureWhoseControllerControlsIsland.add(new ControllerControlsIslandPredicate());
         ability.addTarget(new TargetCreaturePermanent(creatureWhoseControllerControlsIsland));

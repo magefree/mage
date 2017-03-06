@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.Cost;
@@ -74,7 +75,7 @@ public class KozilekTheGreatDistortion extends CardImpl {
         // When you cast Kozilek, the Great Distortion, if you have fewer than seven cards in hand, draw cards equal to the difference.
         this.addAbility(new ConditionalTriggeredAbility(
                 new CastSourceTriggeredAbility(new KozilekDrawEffect(), false),
-                new CardsInHandCondition(CardsInHandCondition.CountType.FEWER_THAN, 7),
+                new CardsInHandCondition(CountType.FEWER_THAN, 7),
                 "When you cast {this}, if you have fewer than seven cards in hand, draw cards equal to the difference."));
         // Menace
         this.addAbility(new MenaceAbility());

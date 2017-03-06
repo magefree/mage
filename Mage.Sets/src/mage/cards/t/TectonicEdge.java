@@ -30,6 +30,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.costs.Cost;
@@ -66,7 +67,7 @@ public class TectonicEdge extends CardImpl {
                 new ManaCostsImpl("{1}"),
                 new OpponentControlsPermanentCondition(
                         new FilterLandPermanent("an opponent controls four or more lands"),
-                        OpponentControlsPermanentCondition.CountType.MORE_THAN, 3));
+                        CountType.MORE_THAN, 3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetNonBasicLandPermanent());

@@ -28,6 +28,7 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -44,8 +45,6 @@ import mage.game.Game;
  * @author maurer.it_at_gmail.com
  */
 public class PermanentsOnTheBattlefieldCondition implements Condition {
-
-    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO }
 
     private FilterPermanent filter;
     private Condition condition;

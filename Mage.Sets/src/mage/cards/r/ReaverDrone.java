@@ -29,10 +29,10 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.CountType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.DevoidAbility;

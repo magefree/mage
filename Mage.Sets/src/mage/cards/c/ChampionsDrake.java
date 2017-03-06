@@ -28,6 +28,8 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
+import mage.abilities.CountType;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.constants.Duration;
@@ -62,7 +64,7 @@ public class ChampionsDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Champion's Drake gets +3/+3 as long as you control a creature with three or more level counters on it.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new PermanentHasCounterCondition(CounterType.LEVEL, 2, new FilterControlledCreaturePermanent(), PermanentHasCounterCondition.CountType.MORE_THAN), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new PermanentHasCounterCondition(CounterType.LEVEL, 2, new FilterControlledCreaturePermanent(), CountType.MORE_THAN), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

@@ -28,8 +28,9 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
+import mage.abilities.CountType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;

@@ -30,6 +30,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -99,7 +100,7 @@ class ChroniclerOfHeroesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0).apply(game, source)) {
+            if (new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0).apply(game, source)) {
                 controller.drawCards(1, game);
             }
             return true;

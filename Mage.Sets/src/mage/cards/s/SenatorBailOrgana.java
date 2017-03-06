@@ -29,6 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.CountType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -57,7 +58,7 @@ public class SenatorBailOrgana extends CardImpl {
         // As long as you control four or more creatures, creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(), PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 3),
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(), CountType.MORE_THAN, 3),
                 "As long as you control four or more creatures, creatures you control get +1/+1")
         ));
 

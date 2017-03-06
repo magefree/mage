@@ -29,10 +29,10 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.CountType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect.Gender;
@@ -77,7 +77,7 @@ public class NissaVastwoodSeer extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.FEMAL), new FilterLandPermanent()), 
-                new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), CountType.MORE_THAN, 6, true), 
+                new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), CountType.MORE_THAN, 6, true),
                 "Whenever a land enters the battlefield under your control, if you control seven or more lands, exile {this}, then return her to the battlefield transformed under her owner's control."));
     }
 

@@ -29,6 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.Mana;
+import mage.abilities.CountType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.BasicManaEffect;
@@ -55,7 +56,7 @@ public class TempleOfTheFalseGod extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.ColorlessMana(2)),
                 new TapSourceCost(),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 4)));
+                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 4)));
     }
 
     public TempleOfTheFalseGod(final TempleOfTheFalseGod card) {
