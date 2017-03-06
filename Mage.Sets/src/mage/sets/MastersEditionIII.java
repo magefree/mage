@@ -152,6 +152,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Lady Caleria", 157, Rarity.UNCOMMON, mage.cards.l.LadyCaleria.class));
         cards.add(new SetCardInfo("Lady Evangela", 158, Rarity.UNCOMMON, mage.cards.l.LadyEvangela.class));
         cards.add(new SetCardInfo("Lady Orca", 159, Rarity.COMMON, mage.cards.l.LadyOrca.class));
+        cards.add(new SetCardInfo("Land Equilibrium", 40, Rarity.RARE, mage.cards.l.LandEquilibrium.class));
         cards.add(new SetCardInfo("Land Tax", 17, Rarity.RARE, mage.cards.l.LandTax.class));
         cards.add(new SetCardInfo("Lightning Blow", 18, Rarity.COMMON, mage.cards.l.LightningBlow.class));
         cards.add(new SetCardInfo("Liu Bei, Lord of Shu", 19, Rarity.RARE, mage.cards.l.LiuBeiLordOfShu.class));
