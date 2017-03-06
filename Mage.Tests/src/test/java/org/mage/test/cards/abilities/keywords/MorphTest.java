@@ -616,15 +616,21 @@ public class MorphTest extends CardTestPlayerBase {
     }
 
     /**
-     * Linvala, Keep of Silence is preventing morph creatures from turning face
-     * up Turning face up is a special ability not an active ability. This
-     * should not be prevented by the loss of active abilities.
+     * Linvala, Keep of Silence is preventing morph creatures from turning face up.
+     * Turning face up is a special ability not an active ability.
+     * This should not be prevented by the loss of active abilities.
      */
     @Test
     public void testTurnFaceUpWithLinvala() {
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
 
+        /*
+            Linvala, Keeper of Silence {2}{W}{W}
+            Legendary Creature - Angel 3/4
+            Flying
+            Activated abilities of creatures your opponents control can't be activated.
+         */
         addCard(Zone.BATTLEFIELD, playerB, "Linvala, Keeper of Silence", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
