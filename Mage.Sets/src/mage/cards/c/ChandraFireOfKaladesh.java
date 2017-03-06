@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.Gender;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.SourceDealtDamageCondition;
@@ -38,7 +39,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
-import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect.Gender;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
@@ -78,7 +78,7 @@ public class ChandraFireOfKaladesh extends CardImpl {
         // {T}: Chandra, Fire of Kaladesh deals 1 damage to target player. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.        
         this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addEffect(new ConditionalOneShotEffect(new ExileAndReturnTransformedSourceEffect(Gender.FEMAL), new SourceDealtDamageCondition(3)));
+        ability.addEffect(new ConditionalOneShotEffect(new ExileAndReturnTransformedSourceEffect(Gender.FEMALE), new SourceDealtDamageCondition(3)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
