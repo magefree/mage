@@ -47,7 +47,7 @@ public class PermanentHasCounterCondition implements Condition {
     private CounterType counterType;
     private int amount;
     private FilterPermanent filter;
-    private CountType type;
+    private CountType counttype;
     private boolean anyPlayer;
 
     public PermanentHasCounterCondition(CounterType counterType, int amount, FilterPermanent filter) {
@@ -59,7 +59,7 @@ public class PermanentHasCounterCondition implements Condition {
         this.counterType = counterType;
         this.amount = amount;
         this.filter = filter;
-        this.type = type;
+        this.counttype = type;
         this.anyPlayer = false;
     }
 
@@ -67,32 +67,19 @@ public class PermanentHasCounterCondition implements Condition {
         this.counterType = counterType;
         this.amount = amount;
         this.filter = filter;
-        this.type = type;
+        this.counttype = type;
         this.anyPlayer = any; 
     }
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(this.filter, source.getControllerId(), game);
-        if(this.anyPlayer == true) {
+        if(this.anyPlayer) {
             permanents = game.getBattlefield().getAllActivePermanents(this.filter, game);
         }
         for (Permanent permanent : permanents) {
-            switch (this.type) {
-                case FEWER_THAN:
-                    if (permanent.getCounters(game).getCount(this.counterType) < this.amount) {
-                        return true;
-                    }
-                    break;
-                case MORE_THAN:
-                    if (permanent.getCounters(game).getCount(this.counterType) > this.amount) {
-                        return true;
-                    }
-                    break;
-                case EQUAL_TO:
-                    if (permanent.getCounters(game).getCount(this.counterType) == this.amount) {
-                        return true;
-                    }
-                    break;
+            if(CountType.compare(permanent.getCounters(game).getCount(this.counterType), counttype, this.amount))
+            {
+                return true;
             }
         }
         return false;

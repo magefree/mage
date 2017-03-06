@@ -13,7 +13,7 @@ import mage.game.Game;
 @FunctionalInterface
 public interface Condition extends Serializable {
 
-    public enum ComparisonType {
+    enum ComparisonType {
 
         GreaterThan(">"),
         Equal("=="),
