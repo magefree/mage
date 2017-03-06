@@ -28,12 +28,10 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import static jdk.nashorn.internal.objects.NativeRegExp.source;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import static mage.cards.m.ManaVortex.filter;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
@@ -50,7 +48,7 @@ public class LandEquilibrium extends CardImpl {
 
     public LandEquilibrium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        
+
         // If an opponent who controls at least as many lands as you do would put a land onto the battlefield, that player instead puts that land onto the battlefield then sacrifices a land.
         this.addAbility(new LandEquilibriumAbility());
     }
@@ -66,6 +64,8 @@ public class LandEquilibrium extends CardImpl {
 }
 
 class LandEquilibriumAbility extends TriggeredAbilityImpl {
+
+    private static final FilterLandPermanent filter = new FilterLandPermanent("land");
 
     public LandEquilibriumAbility() {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterLandPermanent(), 1, ""), false);
@@ -88,11 +88,12 @@ class LandEquilibriumAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         int numMyLands = game.getBattlefield().countAll(filter, this.getControllerId(), game);
-        if (numMyLands < game.getBattlefield().countAll(filter, event.getPlayerId(), game)) {
+        int theirLands = game.getBattlefield().countAll(filter, event.getPlayerId(), game);
+        if (numMyLands < theirLands) {
             this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;
         }
-        return false;        
+        return false;
     }
 
     @Override
