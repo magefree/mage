@@ -44,6 +44,7 @@ import mage.client.util.NaturalOrderCardNumberComparator;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.sets.ConstructedFormats;
 import mage.components.ImagePanel;
+import mage.components.ImagePanelStyle;
 import mage.constants.Rarity;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
@@ -89,12 +90,12 @@ public class MageBook extends JComponent {
         setMinimumSize(new Dimension(conf.WIDTH, conf.HEIGHT));
         //setBorder(BorderFactory.createLineBorder(Color.green));
 
-        jPanelLeft = getImagePanel(LEFT_PANEL_IMAGE_PATH, ImagePanel.TILED);
+        jPanelLeft = getImagePanel(LEFT_PANEL_IMAGE_PATH, ImagePanelStyle.TILED);
         jPanelLeft.setPreferredSize(new Dimension(LEFT_RIGHT_PAGES_WIDTH, 0));
         jPanelLeft.setLayout(null);
-        jPanelCenter = getImagePanel(CENTER_PANEL_IMAGE_PATH, ImagePanel.SCALED);
+        jPanelCenter = getImagePanel(CENTER_PANEL_IMAGE_PATH, ImagePanelStyle.SCALED);
         jPanelCenter.setLayout(new BorderLayout());
-        jPanelRight = getImagePanel(RIGHT_PANEL_IMAGE_PATH, ImagePanel.TILED);
+        jPanelRight = getImagePanel(RIGHT_PANEL_IMAGE_PATH, ImagePanelStyle.TILED);
         jPanelRight.setPreferredSize(new Dimension(LEFT_RIGHT_PAGES_WIDTH, 0));
         jPanelRight.setLayout(null);
 
@@ -267,7 +268,7 @@ public class MageBook extends JComponent {
         return cards.subList(start, end);
     }
 
-    private ImagePanel getImagePanel(String filename, int type) {
+    private ImagePanel getImagePanel(String filename, ImagePanelStyle type) {
         try {
             InputStream is = this.getClass().getResourceAsStream(filename);
 

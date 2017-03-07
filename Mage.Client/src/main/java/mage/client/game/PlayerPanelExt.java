@@ -70,6 +70,7 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.components.ImagePanel;
+import mage.components.ImagePanelStyle;
 import mage.constants.CardType;
 import static mage.constants.Constants.DEFAULT_AVATAR_ID;
 import static mage.constants.Constants.MAX_AVATAR_ID;
@@ -417,7 +418,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         lifeLabel.setToolTipText("Life");
         Image imageLife = ImageHelper.getImageFromResources("/info/life.png");
         BufferedImage resizedLife = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageLife, BufferedImage.TYPE_INT_ARGB), r);
-        life = new ImagePanel(resizedLife, ImagePanel.ACTUAL);
+        life = new ImagePanel(resizedLife, ImagePanelStyle.ACTUAL);
         life.setToolTipText("Life");
         life.setOpaque(false);
         // hand area
@@ -425,7 +426,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         handLabel.setToolTipText("Hand");
         Image imageHand = ImageHelper.getImageFromResources("/info/hand.png");
         BufferedImage resizedHand = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageHand, BufferedImage.TYPE_INT_ARGB), r);
-        hand = new ImagePanel(resizedHand, ImagePanel.ACTUAL);
+        hand = new ImagePanel(resizedHand, ImagePanelStyle.ACTUAL);
         hand.setToolTipText("Hand");
         hand.setOpaque(false);
 
@@ -435,7 +436,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         poisonLabel.setToolTipText("Poison");
         Image imagePoison = ImageHelper.getImageFromResources("/info/poison.png");
         BufferedImage resizedPoison = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imagePoison, BufferedImage.TYPE_INT_ARGB), r);
-        poison = new ImagePanel(resizedPoison, ImagePanel.ACTUAL);
+        poison = new ImagePanel(resizedPoison, ImagePanelStyle.ACTUAL);
         poison.setToolTipText("Poison");
         poison.setOpaque(false);
 
@@ -512,7 +513,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         energyLabel.setToolTipText("Energy");
         Image imageEnergy = ImageHelper.getImageFromResources("/info/energy.png");
         BufferedImage resizedEnergy = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageEnergy, BufferedImage.TYPE_INT_ARGB), r);
-        energy = new ImagePanel(resizedEnergy, ImagePanel.ACTUAL);
+        energy = new ImagePanel(resizedEnergy, ImagePanelStyle.ACTUAL);
         energy.setToolTipText("Energy");
         energy.setOpaque(false);
 
@@ -522,7 +523,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         experienceLabel.setToolTipText("Experience");
         Image imageExperience = ImageHelper.getImageFromResources("/info/experience.png");
         BufferedImage resizedExperience = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageExperience, BufferedImage.TYPE_INT_ARGB), r);
-        experience = new ImagePanel(resizedExperience, ImagePanel.ACTUAL);
+        experience = new ImagePanel(resizedExperience, ImagePanelStyle.ACTUAL);
         experience.setToolTipText("Experience");
         experience.setOpaque(false);
 

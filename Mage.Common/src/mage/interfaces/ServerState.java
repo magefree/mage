@@ -31,12 +31,13 @@ package mage.interfaces;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import mage.utils.MageVersion;
 import mage.view.GameTypeView;
 import mage.view.TournamentTypeView;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ServerState implements Serializable {
@@ -52,8 +53,8 @@ public class ServerState implements Serializable {
     private final long expansionsContentVersion;
 
     public ServerState(List<GameTypeView> gameTypes, List<TournamentTypeView> tournamentTypes,
-            String[] playerTypes, String[] deckTypes, String[] draftCubes, boolean testMode,
-            MageVersion version, long cardsContentVersion, long expansionsContentVersion) {
+                       String[] playerTypes, String[] deckTypes, String[] draftCubes, boolean testMode,
+                       MageVersion version, long cardsContentVersion, long expansionsContentVersion) {
         this.gameTypes = gameTypes;
         this.tournamentTypes = tournamentTypes;
         this.playerTypes = playerTypes;
@@ -71,13 +72,9 @@ public class ServerState implements Serializable {
     }
 
     public List<GameTypeView> getTournamentGameTypes() {
-        List<GameTypeView> tournamentGameTypes = new ArrayList<>();
-        for(GameTypeView gameTypeView: gameTypes) {
-            if (gameTypeView.getMinPlayers() == 2 && gameTypeView.getMaxPlayers() == 2) {
-                tournamentGameTypes.add(gameTypeView);
-            }
-        }
-        return tournamentGameTypes;
+        return gameTypes.stream()
+                .filter(gameTypeView -> gameTypeView.getMinPlayers() == 2 && gameTypeView.getMaxPlayers() == 2)
+                .collect(Collectors.toList());
     }
 
     public List<TournamentTypeView> getTournamentTypes() {
@@ -111,5 +108,5 @@ public class ServerState implements Serializable {
     public long getExpansionsContentVersion() {
         return expansionsContentVersion;
     }
-    
+
 }

@@ -55,6 +55,7 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
+import mage.components.ImagePanelStyle;
 import mage.constants.PlayerAction;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
@@ -426,7 +427,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             } else {
                 InputStream is = this.getClass().getResourceAsStream(filename);
                 BufferedImage background = ImageIO.read(is);
-                backgroundPane = new ImagePanel(background, ImagePanel.SCALED);
+                backgroundPane = new ImagePanel(background, ImagePanelStyle.SCALED);
             }
             backgroundPane.setSize(1024, 768);
             desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
