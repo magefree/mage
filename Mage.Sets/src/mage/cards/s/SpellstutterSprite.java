@@ -126,7 +126,8 @@ class SpellstutterSpriteCounterTargetEffect extends OneShotEffect {
          */
         int numberFaeries = game.getState().getBattlefield().countAll(SpellstutterSprite.filter, source.getControllerId(), game);
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        if (stackObject.getConvertedManaCost() <= numberFaeries) {
+        // If do'nt have any spell targeted
+        if (stackObject != null && stackObject.getConvertedManaCost() <= numberFaeries) {
             if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
                 return true;
             }
