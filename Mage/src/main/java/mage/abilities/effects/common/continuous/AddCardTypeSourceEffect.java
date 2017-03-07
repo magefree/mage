@@ -63,7 +63,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (Duration.Custom.equals(this.duration) || this.duration.toString().startsWith("End")) {
+        if (this.duration == Duration.Custom || this.duration.toString().startsWith("End")) {
             affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()), game));
             if (affectedObjectList.isEmpty()) {
                 this.discard();

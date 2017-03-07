@@ -26,8 +26,9 @@ public class AfterBlockersAreDeclaredCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return !(game.getStep().getType().equals(PhaseStep.BEGIN_COMBAT)
-                || game.getStep().getType().equals(PhaseStep.DECLARE_ATTACKERS));
+
+        return !(game.getStep().getType() == PhaseStep.BEGIN_COMBAT
+                || game.getStep().getType() == PhaseStep.DECLARE_ATTACKERS);
     }
 
     @Override

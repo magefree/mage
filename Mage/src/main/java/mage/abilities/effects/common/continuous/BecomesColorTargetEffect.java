@@ -116,7 +116,7 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
                     targetObject.getColor(game).setColor(setColor);                        
                 }
             }
-            if (!objectFound && this.getDuration().equals(Duration.Custom)) {
+            if (!objectFound && this.getDuration() == Duration.Custom) {
                 this.discard();
             }
             return true;

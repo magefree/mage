@@ -148,7 +148,7 @@ public class Table implements Serializable {
      *
      */
     public void closeTable() {
-        if (!getState().equals(TableState.WAITING) && !getState().equals(TableState.READY_TO_START)) {
+        if (getState() != TableState.WAITING && getState() != TableState.READY_TO_START) {
             setState(TableState.FINISHED); // otherwise the table can be removed completely
         }
         this.validator = null;

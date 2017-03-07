@@ -54,7 +54,7 @@ public class SurgedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getAbilityType().equals(AbilityType.TRIGGERED)) {
+        if (source.getAbilityType() == AbilityType.TRIGGERED) {
             @SuppressWarnings("unchecked")
             ArrayList<Integer> surgeActivations = (ArrayList) game.getState().getValue(SurgeAbility.SURGE_ACTIVATION_VALUE_KEY + source.getSourceId());
             if (surgeActivations != null) {

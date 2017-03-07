@@ -104,13 +104,13 @@ public class ConditionalMana extends Mana implements Serializable {
             if (!applied) {
                 // if one condition fails, return false only if All conditions should be met
                 // otherwise it may happen that Any other condition will be ok
-                if (scope.equals(Filter.ComparisonScope.All)) {
+                if (scope == Filter.ComparisonScope.All) {
                     return false;
                 }
             } else {
                 // if one condition succeeded, return true only if Any conditions should be met
                 // otherwise it may happen that any other condition will fail
-                if (scope.equals(Filter.ComparisonScope.Any)) {
+                if (scope == Filter.ComparisonScope.Any) {
                     return true;
                 }
             }
@@ -118,7 +118,7 @@ public class ConditionalMana extends Mana implements Serializable {
         // we are here
         // if All conditions should be met, then it's Ok (return true)
         // if Any, then it should have already returned true, so returning false here
-        return scope.equals(Filter.ComparisonScope.All);
+        return scope == Filter.ComparisonScope.All;
     }
 
     @Override
