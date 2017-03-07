@@ -172,6 +172,10 @@ public class Session {
     }
 
     static private String validateEmail(String email) {
+
+        if (email == null || email.isEmpty()) {
+            return "Email address cannot be blank";
+        }
         AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByEmail(email);
         if (authorizedUser != null) {
             return "Email address '" + email + "' is associated with another user";
