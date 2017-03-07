@@ -108,9 +108,8 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
                 if (!controller.getManaPool().isAutoPayment() && unpaidAmount > 1) {
                     unpaidAmount = 1;
                 }
-                // TODO: make delve not target cards in graveyard. setNotTarget?
                 specialAction.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                        0, Math.min(controller.getGraveyard().size(), unpaidAmount), new FilterCard())));
+                        0, Math.min(controller.getGraveyard().size(), unpaidAmount), new FilterCard(), true)));
                 if (specialAction.canActivate(source.getControllerId(), game)) {
                     game.getState().getSpecialActions().add(specialAction);
                 }
