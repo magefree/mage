@@ -85,7 +85,7 @@ class GhoulcallersBellEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Collection<Player> players = game.getPlayers().values();
         for (Player player : players) {
-            if (player.getLibrary().size() > 0) {
+            if (player.getLibrary().hasCards()) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     player.moveCards(card, Zone.GRAVEYARD, source, game);

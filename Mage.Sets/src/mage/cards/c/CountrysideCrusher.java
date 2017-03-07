@@ -105,7 +105,7 @@ class CountrysideCrusherEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             Cards cards = new CardsImpl();
-            while (controller.getLibrary().size() > 0) {
+            while (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().getFromTop(game);
                 cards.add(card);
                 if (card.isLand()) {

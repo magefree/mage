@@ -174,7 +174,7 @@ class ExileTopCardLibraryCost extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            return controller.getLibrary().size() > 0;
+            return controller.getLibrary().hasCards();
         }
         return false;
     }

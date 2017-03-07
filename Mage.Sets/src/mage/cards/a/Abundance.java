@@ -104,7 +104,7 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
                 filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
             }
             Cards cards = new CardsImpl();
-            while (controller.getLibrary().size() > 0) {
+            while (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
                     controller.moveCards(card, Zone.HAND, source, game);

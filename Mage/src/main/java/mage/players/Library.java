@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -47,7 +48,6 @@ import mage.game.Game;
 import mage.util.RandomUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Library implements Serializable {
@@ -253,6 +253,11 @@ public class Library implements Serializable {
             }
         }
         return null;
+    }
+
+
+    public boolean hasCards() {
+        return size() > 0;
     }
 
     public void reset() {

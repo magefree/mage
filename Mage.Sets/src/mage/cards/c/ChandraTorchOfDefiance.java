@@ -114,7 +114,7 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null && controller.getLibrary().size() > 0) {
+        if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
             Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
             if (card != null) {

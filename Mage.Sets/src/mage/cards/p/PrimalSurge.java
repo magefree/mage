@@ -92,7 +92,7 @@ class PrimalSurgeEffect extends OneShotEffect {
         boolean repeat;
         do {
             repeat = false;
-            if (player.getLibrary().size() > 0) {
+            if (player.getLibrary().hasCards()) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     card.moveToExile(null, "", source.getSourceId(), game);

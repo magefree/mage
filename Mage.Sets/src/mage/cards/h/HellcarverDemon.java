@@ -107,7 +107,7 @@ class HellcarverDemonEffect extends OneShotEffect {
         }
 
         for (int i = 0; i < 6; i++) {
-            if (player != null && player.getLibrary().size() > 0) {
+            if (player != null && player.getLibrary().hasCards()) {
                 Card topCard = player.getLibrary().getFromTop(game);
                 topCard.moveToExile(source.getSourceId(), "Cards exiled by Hellcarver Demon", source.getSourceId(), game);
             }

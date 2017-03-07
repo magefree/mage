@@ -111,7 +111,7 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
             return false;
         }
 
-        if (player.getLibrary().size() > 0) {
+        if (player.getLibrary().hasCards()) {
             Card card = player.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl();
             cards.add(card);

@@ -92,7 +92,7 @@ class ConundrumSphinxEffect extends OneShotEffect {
         Choice cardChoice = new ChoiceImpl();
         cardChoice.setChoices(CardRepository.instance.getNames());
         for (Player player: game.getPlayers().values()) {
-            if(player.getLibrary().size() > 0){
+            if(player.getLibrary().hasCards()){
                 cardChoice.clearChoice();
                 while (!player.choose(Outcome.DrawCard, cardChoice, game)  && player.canRespond()) {
                     if (!player.canRespond()) {

@@ -90,7 +90,7 @@ class ErraticExplosionEffect extends OneShotEffect {
             CardsImpl toReveal = new CardsImpl();
             Card nonLandCard = null;
 
-            while (nonLandCard == null && controller.getLibrary().size() > 0) {
+            while (nonLandCard == null && controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 toReveal.add(card);
                 if (!card.isLand()) {

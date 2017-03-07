@@ -98,7 +98,7 @@ class ScribNibblersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null && targetPlayer.getLibrary().size() > 0) {
+        if (targetPlayer != null && targetPlayer.getLibrary().hasCards()) {
             Card card = targetPlayer.getLibrary().getFromTop(game);
             card.moveToExile(id, "Scrib Nibblers Exile", source.getSourceId(), game);
             if (card != null && card.isLand()) {

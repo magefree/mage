@@ -98,7 +98,7 @@ class StormchaserChimeraEffect extends OneShotEffect {
         if (player == null || sourcePermanent == null) {
             return false;
         }
-        if (player.getLibrary().size() > 0) {
+        if (player.getLibrary().hasCards()) {
             Card card = player.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             player.revealCards(sourcePermanent.getName(), cards, game);

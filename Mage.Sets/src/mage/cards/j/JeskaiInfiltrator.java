@@ -118,7 +118,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                 controller.moveCardToExileWithInfo(sourcePermanent, sourcePermanent.getId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 cardsToManifest.add(sourceCard);
             }
-            if (sourcePermanent != null && controller.getLibrary().size() > 0) {
+            if (sourcePermanent != null && controller.getLibrary().hasCards()) {
                 Card cardFromLibrary = controller.getLibrary().removeFromTop(game);
                 controller.moveCardToExileWithInfo(cardFromLibrary, sourcePermanent.getId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                 cardsToManifest.add(cardFromLibrary);

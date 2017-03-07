@@ -136,7 +136,7 @@ class PossibilityStormEffect extends OneShotEffect {
             Player spellController = game.getPlayer(spell.getControllerId());
             if (spellController != null
                     && spellController.moveCardsToExile(spell, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
-                if (spellController.getLibrary().size() > 0) {
+                if (spellController.getLibrary().hasCards()) {
                     Library library = spellController.getLibrary();
                     Card card;
                     do {
@@ -144,7 +144,7 @@ class PossibilityStormEffect extends OneShotEffect {
                         if (card != null) {
                             spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
                         }
-                    } while (library.size() > 0 && card != null && !sharesType(card, spell.getCardType()));
+                    } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType()));
 
                     if (card != null && sharesType(card, spell.getCardType())
                             && !card.isLand()

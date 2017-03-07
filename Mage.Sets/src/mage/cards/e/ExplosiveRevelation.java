@@ -88,7 +88,7 @@ class ExplosiveRevelationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
+        if (player != null && player.getLibrary().hasCards()) {
             CardsImpl cards = new CardsImpl();
             Library library = player.getLibrary();
             Card card = null;
@@ -97,7 +97,7 @@ class ExplosiveRevelationEffect extends OneShotEffect {
                 if (card != null) {
                     cards.add(card);
                 }
-            } while (library.size() > 0 && card != null && card.isLand());
+            } while (library.hasCards() && card != null && card.isLand());
             // reveal cards
             if (!cards.isEmpty()) {
                 player.revealCards("Explosive Revelation", cards, game);

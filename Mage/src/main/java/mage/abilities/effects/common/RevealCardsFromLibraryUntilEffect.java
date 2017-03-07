@@ -89,7 +89,7 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && controller.getLibrary().size() > 0) {
+        if (controller != null && controller.getLibrary().hasCards()) {
             Cards cards = new CardsImpl();
             Library library = controller.getLibrary();
             Card card = null;
@@ -98,7 +98,7 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
                 if (card != null) {
                     cards.add(card);
                 }
-            } while (library.size() > 0 && card != null && !filter.match(card, game));
+            } while (library.hasCards() && card != null && !filter.match(card, game));
             // reveal cards
             if (!cards.isEmpty()) {
                 controller.revealCards(sourceObject.getIdName(), cards, game);

@@ -89,7 +89,7 @@ class CellarDoorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null && player.getLibrary().size() > 0) {
+        if (player != null && player.getLibrary().hasCards()) {
             Card card = player.getLibrary().removeFromBottom(game);
             if (card != null) {
                 player.moveCards(card, Zone.GRAVEYARD, source, game);

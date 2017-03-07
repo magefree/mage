@@ -34,6 +34,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import mage.cards.Card;
 import mage.counters.Counters;
 import mage.game.ExileZone;
@@ -47,7 +48,6 @@ import mage.players.Player;
 import mage.players.net.UserData;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayerView implements Serializable {
@@ -125,7 +125,7 @@ public class PlayerView implements Serializable {
         } catch (ConcurrentModificationException e) {
             // can happen as a player left battlefield while PlayerView is created
         }
-        Card cardOnTop = (player.isTopCardRevealed() && player.getLibrary().size() > 0)
+        Card cardOnTop = (player.isTopCardRevealed() && player.getLibrary().hasCards())
                 ? player.getLibrary().getFromTop(game) : null;
         this.topCard = cardOnTop != null ? new CardView(cardOnTop) : null;
         if (player.getUserData() != null) {

@@ -103,7 +103,7 @@ class BalustradeSpyEffect extends OneShotEffect {
         }
         CardsImpl cards = new CardsImpl();
         boolean landFound = false;
-        while (controller.getLibrary().size() > 0 && !landFound) {
+        while (controller.getLibrary().hasCards() && !landFound) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);

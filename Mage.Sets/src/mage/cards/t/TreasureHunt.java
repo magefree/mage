@@ -84,7 +84,7 @@ class TreasureHuntEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
+        if (player != null && player.getLibrary().hasCards()) {
             CardsImpl cards = new CardsImpl();
             Library library = player.getLibrary();
             Card card = null;
@@ -94,7 +94,7 @@ class TreasureHuntEffect extends OneShotEffect {
                     cards.add(card);
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
-            } while (library.size() > 0 && card != null && card.isLand());
+            } while (library.hasCards() && card != null && card.isLand());
 
             if (!cards.isEmpty()) {
                 player.revealCards("Treasure Hunt", cards, game);

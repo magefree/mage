@@ -110,7 +110,7 @@ class GrindstoneEffect extends OneShotEffect {
                 cards.addAll(targetPlayer.getLibrary().getTopCards(game, 2));
                 if (!cards.isEmpty()) {
                     Card card1 = targetPlayer.getLibrary().removeFromTop(game);
-                    if (targetPlayer.getLibrary().size() > 0) {
+                    if (targetPlayer.getLibrary().hasCards()) {
                         colorShared = card1.getColor(game).shares(targetPlayer.getLibrary().removeFromTop(game).getColor(game));
                     }
                 }

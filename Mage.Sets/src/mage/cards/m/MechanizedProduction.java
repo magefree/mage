@@ -111,12 +111,7 @@ class MechanizedProductionEffect extends OneShotEffect {
             }
             Map<String, Integer> countNames = new HashMap<>();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), game)) {
-                int counter;
-                if (countNames.containsKey(permanent.getName())) {
-                    counter = countNames.get(permanent.getName());
-                } else {
-                    counter = 0;
-                }
+                int counter = countNames.getOrDefault(permanent.getName(),0);
                 countNames.put(permanent.getName(), counter + 1);
             }
             for (Entry<String, Integer> entry : countNames.entrySet()) {

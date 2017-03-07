@@ -107,7 +107,7 @@ class NayaSoulbeastCastEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (player.getLibrary().size() > 0) {
+                    if (player.getLibrary().hasCards()) {
                         Card card = player.getLibrary().getFromTop(game);
                         cmc += card.getConvertedManaCost();
                         player.revealCards(sourceObject.getName() + " (" + player.getName() + ')', new CardsImpl(card), game);

@@ -103,7 +103,7 @@ class MindGrindEffect extends OneShotEffect {
             }
             int landsToReveal = xValue;
             Cards cards = new CardsImpl();
-            while(player.getLibrary().size() > 0){
+            while(player.getLibrary().hasCards()){
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);

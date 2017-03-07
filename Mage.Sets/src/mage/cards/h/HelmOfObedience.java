@@ -102,7 +102,7 @@ class HelmOfObedienceEffect extends OneShotEffect {
             if(max != 0){
                 int numberOfCard = 0;
 
-                while(targetOpponent.getLibrary().size() > 0) {
+                while(targetOpponent.getLibrary().hasCards()) {
                     Card card = targetOpponent.getLibrary().removeFromTop(game);
                     if (card != null){
                         if (targetOpponent.moveCards(card, Zone.GRAVEYARD, source, game)) {

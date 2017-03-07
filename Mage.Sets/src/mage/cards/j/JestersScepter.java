@@ -115,7 +115,7 @@ class JestersScepterEffect extends OneShotEffect {
         if (controller != null
                 && targetedPlayer != null
                 && sourceObject != null) {
-            if (targetedPlayer.getLibrary().size() > 0) {
+            if (targetedPlayer.getLibrary().hasCards()) {
                 Set<Card> cardsToExile = targetedPlayer.getLibrary().getTopCards(game, 5);
                 for (Card card : cardsToExile) {
                     if (card.moveToExile(CardUtil.getCardExileZoneId(game, source), new StringBuilder(sourceObject.getName()).toString(), source.getSourceId(), game)) {

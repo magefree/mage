@@ -127,7 +127,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
                 Player controllerOfDestroyedCreature = game.getPlayer(permanent.getControllerId());
                 if (controllerOfDestroyedCreature != null) {
                     Library library = controllerOfDestroyedCreature.getLibrary();
-                    if (library.size() > 0) {
+                    if (library.hasCards()) {
                         Cards cards = new CardsImpl();
                         Cards revealCards;
                         if (cardsToReveal.containsKey(controllerOfDestroyedCreature)) {
@@ -138,7 +138,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
                         }
                         Card card = library.removeFromTop(game);
                         cards.add(card);
-                        while (!card.isCreature() && !card.isArtifact() && library.size() > 0) {
+                        while (!card.isCreature() && !card.isArtifact() && library.hasCards()) {
                             card = library.removeFromTop(game);
                             cards.add(card);
                         }
