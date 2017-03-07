@@ -33,6 +33,7 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
+
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -40,7 +41,6 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
-import mage.constants.Constants.SessionState;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.GameException;
@@ -63,10 +63,13 @@ import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SessionImpl implements Session {
+
+    private enum SessionState {
+        DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_STARTING
+    }
 
     private static final Logger logger = Logger.getLogger(SessionImpl.class);
 
@@ -216,32 +219,32 @@ public class SessionImpl implements Session {
     public synchronized boolean connect(final Connection connection) {
         return establishJBossRemotingConnection(connection)
                 && handleRemotingTaskExceptions(new RemotingTask() {
-                    @Override
-                    public boolean run() throws Throwable {
-                        logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
-                        boolean registerResult;
-                        if (connection.getAdminPassword() == null) {
-                            // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                            registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
-                            if (registerResult) {
-                                server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
-                            }
-                        } else {
-                            registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
-                        }
-                        if (registerResult) {
-                            serverState = server.getServerState();
-                            if (!connection.getUsername().equals("Admin")) {
-                                updateDatabase(connection.isForceDBComparison(), serverState);
-                            }
-                            logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
-                            client.connected(getUserName() + '@' + connection.getHost() + ':' + connection.getPort() + ' ');
-                            return true;
-                        }
-                        disconnect(false);
-                        return false;
+            @Override
+            public boolean run() throws Throwable {
+                logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
+                boolean registerResult;
+                if (connection.getAdminPassword() == null) {
+                    // for backward compatibility. don't remove twice call - first one does nothing but for version checking
+                    registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
+                    if (registerResult) {
+                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
                     }
-                });
+                } else {
+                    registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
+                }
+                if (registerResult) {
+                    serverState = server.getServerState();
+                    if (!connection.getUsername().equals("Admin")) {
+                        updateDatabase(connection.isForceDBComparison(), serverState);
+                    }
+                    logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
+                    client.connected(getUserName() + '@' + connection.getHost() + ':' + connection.getPort() + ' ');
+                    return true;
+                }
+                disconnect(false);
+                return false;
+            }
+        });
     }
 
     public Optional<String> getServerHostname() {
@@ -468,9 +471,8 @@ public class SessionImpl implements Session {
     }
 
     /**
-     *
      * @param askForReconnect - true = connection was lost because of error and
-     * ask the user if he want to try to reconnect
+     *                        ask the user if he want to try to reconnect
      */
     @Override
     public synchronized void disconnect(boolean askForReconnect) {
@@ -965,7 +967,6 @@ public class SessionImpl implements Session {
     }
 
 
-
     @Override
     public boolean joinGame(UUID gameId) {
         try {
@@ -1175,7 +1176,7 @@ public class SessionImpl implements Session {
         return false;
     }
 
-//    @Override
+    //    @Override
 //    public boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId) {
 //        try {
 //            if (isConnected()) {
