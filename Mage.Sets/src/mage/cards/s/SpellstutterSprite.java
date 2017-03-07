@@ -135,21 +135,6 @@ class SpellstutterSpriteCounterTargetEffect extends OneShotEffect {
         return false;
     }
 
-//    @Override
-//    public boolean apply(Game game, Ability source) {
-//        Player controller = game.getPlayer(source.getControllerId());
-//        MageObject sourceObject = source.getSourceObject(game);
-//        if (controller != null && sourceObject != null) {
-//            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-//            if (spell != null) {
-//                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-//                return controller.moveCardsToExile(spell, source, game, true, exileId, sourceObject.getIdName());
-//            }
-//            return true;
-//        }
-//        return false;
-//    }
-
     @Override
     public String getText(Mode mode) {
         return "counter target spell with converted mana cost X or less, where X is the number of Faeries you control";

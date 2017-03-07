@@ -22,5 +22,7 @@ public class SakashimaTheImpostorTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Spellstutter Sprite", 1);
+
+        assertPowerToughness(playerB, "Sakashima the Impostor", 1, 1);
     }
 }
