@@ -28,6 +28,7 @@
 package mage.cards.n;
 
 import java.util.UUID;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -47,7 +48,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 
 /**
- *
  * @author dustinconrad
  */
 public class NimbusMaze extends CardImpl {
@@ -61,7 +61,7 @@ public class NimbusMaze extends CardImpl {
     }
 
     public NimbusMaze(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
@@ -89,33 +89,3 @@ public class NimbusMaze extends CardImpl {
     }
 }
 
-class FilterPermanentCost extends CostImpl {
-
-    private final FilterPermanent filter;
-
-    public FilterPermanentCost(FilterPermanent filter) {
-        this.filter = filter;
-        this.text = "Activate this ability only if " + filter.getMessage();
-    }
-
-    public FilterPermanentCost(final FilterPermanentCost cost) {
-        super(cost);
-        this.filter = cost.filter;
-    }
-
-    @Override
-    public FilterPermanentCost copy() {
-        return new FilterPermanentCost(this);
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, controllerId, 1, game);
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.paid = true;
-        return paid;
-    }
-}

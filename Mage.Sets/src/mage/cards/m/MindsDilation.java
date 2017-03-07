@@ -133,7 +133,7 @@ class MindsDilationEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && sourceObject != null && opponent != null) {
-            if (opponent.getLibrary().size() > 0) {
+            if (opponent.getLibrary().hasCards()) {
                 Card card = opponent.getLibrary().getFromTop(game);
                 if (card != null && opponent.moveCards(card, Zone.EXILED, source, game)) {
                     if (!card.isLand()) {

@@ -94,11 +94,11 @@ class SpellshiftEffect extends OneShotEffect {
         Player player = game.getPlayer(((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK)).getControllerId());
         if (player != null) {
             Library library = player.getLibrary();
-            if (library.size() > 0) {
+            if (library.hasCards()) {
                 Cards cards = new CardsImpl();
                 Card card = library.removeFromTop(game);
                 cards.add(card);
-                while (!(card.isSorcery() || card.isInstant()) && library.size() > 0) {
+                while (!(card.isSorcery() || card.isInstant()) && library.hasCards()) {
                     card = library.removeFromTop(game);
                     cards.add(card);
                 }

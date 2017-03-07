@@ -110,7 +110,7 @@ class DimensionalInfiltratorEffect extends OneShotEffect {
             return false;
         }
 
-        if (opponent.getLibrary().size() > 0) {
+        if (opponent.getLibrary().hasCards()) {
             Card card = opponent.getLibrary().getFromTop(game);
             if (card != null) {
                 card.moveToExile(null, "Dimensional Infiltrator", source.getSourceId(), game);

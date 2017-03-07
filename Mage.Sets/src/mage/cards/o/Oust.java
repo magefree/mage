@@ -93,7 +93,7 @@ class OustEffect extends OneShotEffect {
             }
 
             Card card = null;
-            if (owner.getLibrary().size() > 0) {
+            if (owner.getLibrary().hasCards()) {
                 card = owner.getLibrary().removeFromTop(game);
             }
 

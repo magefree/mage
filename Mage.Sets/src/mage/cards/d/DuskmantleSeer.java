@@ -100,7 +100,7 @@ class DuskmantleSeerEffect extends OneShotEffect {
             return false;
         }
         for (Player player: game.getPlayers().values()) {
-            if(player.getLibrary().size() > 0){
+            if(player.getLibrary().hasCards()){
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     Cards cards  = new CardsImpl();

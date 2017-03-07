@@ -92,7 +92,7 @@ class DescendantsPathEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            if (controller.getLibrary().size() > 0) {
+            if (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().getFromTop(game);
                 if (card == null) {
                     return false;

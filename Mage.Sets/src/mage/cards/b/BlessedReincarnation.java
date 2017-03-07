@@ -114,11 +114,11 @@ class BlessedReincarnationEffect extends OneShotEffect {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 Library library = player.getLibrary();
-                if (library.size() > 0) {
+                if (library.hasCards()) {
                     Cards cards = new CardsImpl();
                     Card card = library.removeFromTop(game);
                     cards.add(card);
-                    while (!card.isCreature() && library.size() > 0) {
+                    while (!card.isCreature() && library.hasCards()) {
                         card = library.removeFromTop(game);
                         cards.add(card);
                     }

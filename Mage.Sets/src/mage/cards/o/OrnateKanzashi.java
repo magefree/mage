@@ -100,7 +100,7 @@ class OrnateKanzashiEffect extends OneShotEffect {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && opponent != null) {
-            if (opponent.getLibrary().size() > 0) {
+            if (opponent.getLibrary().hasCards()) {
                 Library library = opponent.getLibrary();
                 Card card = library.getFromTop(game);
                 if (card != null) {

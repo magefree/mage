@@ -28,6 +28,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
+
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -44,13 +45,12 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author North
  */
 public class Galvanoth extends CardImpl {
 
     public Galvanoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(3);
@@ -84,7 +84,7 @@ class GalvanothEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLibrary().size() > 0) {
+        if (controller != null && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             controller.lookAtCards("Galvanoth", cards, game);

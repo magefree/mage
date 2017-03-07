@@ -93,7 +93,7 @@ class MindshriekerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
-            if (targetPlayer.getLibrary().size() > 0) {
+            if (targetPlayer.getLibrary().hasCards()) {
                 Card card = targetPlayer.getLibrary().removeFromTop(game);
                 if (card != null) {
                     targetPlayer.moveCards(card, Zone.GRAVEYARD, source, game);

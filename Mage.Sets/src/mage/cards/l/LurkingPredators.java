@@ -90,7 +90,7 @@ class LurkingPredatorsEffect extends OneShotEffect {
             return false;
         }
 
-        if (controller.getLibrary().size() > 0) {
+        if (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             controller.revealCards(sourceObject.getIdName(), cards, game);

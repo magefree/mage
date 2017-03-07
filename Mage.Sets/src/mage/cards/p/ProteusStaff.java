@@ -102,7 +102,7 @@ class ProteusStaffEffect extends OneShotEffect {
 
                 // That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card.
                 Cards cards = new CardsImpl();
-                while (controller.getLibrary().size() > 0) {
+                while (controller.getLibrary().hasCards()) {
                     Card card = controller.getLibrary().removeFromTop(game);
                     if (card != null) {
                         if (card.isCreature()) {

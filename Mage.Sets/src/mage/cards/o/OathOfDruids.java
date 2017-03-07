@@ -145,7 +145,7 @@ class OathOfDruidsEffect extends OneShotEffect {
         Card creatureCard = null;
         Cards nonCreatureCards = new CardsImpl();
         //The first player may reveal cards from the top of his or her library
-        while (creatureCard == null && controller.getLibrary().size() > 0) {
+        while (creatureCard == null && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().removeFromTop(game);
             revealed.add(card);
             // until he or she reveals a creature card.

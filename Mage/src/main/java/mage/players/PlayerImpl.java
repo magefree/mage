@@ -2685,7 +2685,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
                 Player player = game.getPlayer(playerInRangeId);
                 if (player != null) {
-                    if (player.isTopCardRevealed() && player.getLibrary().size() > 0) {
+                    if (player.isTopCardRevealed() && player.getLibrary().hasCards()) {
                         Card card = player.getLibrary().getFromTop(game);
                         if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, getId(), game)) {
                             for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {

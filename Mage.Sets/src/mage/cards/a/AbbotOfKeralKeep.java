@@ -98,7 +98,7 @@ class AbbotOfKeralKeepExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanent != null && controller != null && controller.getLibrary().size() > 0) {
+        if (sourcePermanent != null && controller != null && controller.getLibrary().hasCards()) {
             Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
             if (card != null) {

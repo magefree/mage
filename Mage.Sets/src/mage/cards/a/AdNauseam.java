@@ -28,6 +28,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -41,13 +42,12 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author North
  */
 public class AdNauseam extends CardImpl {
 
     public AdNauseam(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
 
         // Reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost. You may repeat this process any number of times.
         this.getSpellAbility().addEffect(new AdNauseamEffect());
@@ -87,7 +87,7 @@ class AdNauseamEffect extends OneShotEffect {
         if (controller == null || sourceCard == null) {
             return false;
         }
-        while (controller.chooseUse(outcome, message, source, game) && controller.getLibrary().size() > 0) {
+        while (controller.chooseUse(outcome, message, source, game) && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 controller.moveCards(card, Zone.HAND, source, game);

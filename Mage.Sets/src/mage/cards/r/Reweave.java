@@ -104,11 +104,11 @@ class ReweaveEffect extends OneShotEffect {
                 Player permanentController = game.getPlayer(permanent.getControllerId());
                 if (permanentController != null) {
                     Library library = permanentController.getLibrary();
-                    if (library.size() > 0) {
+                    if (library.hasCards()) {
                         Cards cards = new CardsImpl();
                         Card card = null;
                         boolean cardFound = false;
-                        if (library.size() > 0) {
+                        if (library.hasCards()) {
                             do {
                                 card = library.removeFromTop(game);
                                 cards.add(card);
@@ -121,7 +121,7 @@ class ReweaveEffect extends OneShotEffect {
                                         }
                                     }
                                 }
-                            } while (!cardFound && library.size() > 0);
+                            } while (!cardFound && library.hasCards());
                             permanentController.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
 

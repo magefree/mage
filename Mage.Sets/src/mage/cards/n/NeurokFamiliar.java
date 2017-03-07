@@ -98,7 +98,7 @@ class NeurokFamiliarEffect extends OneShotEffect {
             return false;
         }
 
-        if (controller.getLibrary().size() > 0) {
+        if (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 Cards cards = new CardsImpl(card);

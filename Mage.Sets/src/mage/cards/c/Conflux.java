@@ -107,7 +107,7 @@ class ConfluxEffect extends OneShotEffect {
         TargetCardInLibrary targetRed = new TargetCardInLibrary(filterRed);
         TargetCardInLibrary targetGreen = new TargetCardInLibrary(filterGreen);
 
-        if (you != null && you.getLibrary().size() > 0) {
+        if (you != null && you.getLibrary().hasCards()) {
             if (you.searchLibrary(targetWhite, game)) {
                 if (!targetWhite.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetWhite.getTargets()) {
@@ -119,7 +119,7 @@ class ConfluxEffect extends OneShotEffect {
                 }
             }
         }
-        if (you != null && you.getLibrary().size() > 0) {
+        if (you != null && you.getLibrary().hasCards()) {
             if (you.searchLibrary(targetBlue, game)) {
                 if (!targetBlue.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetBlue.getTargets()) {
@@ -131,7 +131,7 @@ class ConfluxEffect extends OneShotEffect {
                 }
             }
         }
-        if (you != null && you.getLibrary().size() > 0) {
+        if (you != null && you.getLibrary().hasCards()) {
             if (you.searchLibrary(targetBlack, game)) {
                 if (!targetBlack.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetBlack.getTargets()) {
@@ -143,7 +143,7 @@ class ConfluxEffect extends OneShotEffect {
                 }
             }
         }
-        if (you != null && you.getLibrary().size() > 0) {
+        if (you != null && you.getLibrary().hasCards()) {
             if (you.searchLibrary(targetRed, game)) {
                 if (!targetRed.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetRed.getTargets()) {
@@ -155,7 +155,7 @@ class ConfluxEffect extends OneShotEffect {
                 }
             }
         }
-        if (you != null && you.getLibrary().size() > 0) {
+        if (you != null && you.getLibrary().hasCards()) {
             if (you.searchLibrary(targetGreen, game)) {
                 if (!targetGreen.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetGreen.getTargets()) {

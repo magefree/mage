@@ -133,7 +133,7 @@ class ChaosWarpRevealEffect extends OneShotEffect {
             return false;
         }
 
-        if (owner.getLibrary().size() > 0) {
+        if (owner.getLibrary().hasCards()) {
             Card card = owner.getLibrary().getFromTop(game);
             if (card != null) {
                 Cards cards = new CardsImpl(card);

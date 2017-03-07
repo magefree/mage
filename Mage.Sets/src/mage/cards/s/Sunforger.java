@@ -112,7 +112,7 @@ class SunforgerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.getLibrary().size() > 0) {
+            if (controller.getLibrary().hasCards()) {
                 /**
                  * 10/1/2005 Any card you find must be legally castable (for
                  * example, you have to be able to choose a legal target for

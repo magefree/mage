@@ -100,7 +100,7 @@ class DestroyTheEvidenceEffect extends OneShotEffect {
             }
             boolean landFound = false;
             Cards cards = new CardsImpl();            
-            while (player.getLibrary().size() > 0 && !landFound) {
+            while (player.getLibrary().hasCards() && !landFound) {
                 if (!player.canRespond()) {
                     return false;
                 }

@@ -99,7 +99,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         boolean landFound = false;
-        while (controller.getLibrary().size() > 0) {
+        while (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);

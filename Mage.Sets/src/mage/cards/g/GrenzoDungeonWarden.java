@@ -98,7 +98,7 @@ class GrenzoDungeonWardenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.getLibrary().size() > 0) {
+            if (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().getFromBottom(game);
                 if (card != null) {
                     controller.moveCards(card, Zone.GRAVEYARD, source, game);

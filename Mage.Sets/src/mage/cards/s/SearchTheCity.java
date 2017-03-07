@@ -96,7 +96,7 @@ class SearchTheCityExileEffect extends OneShotEffect {
         if (player != null) {
             // move cards from library to exile
             for (int i = 0; i < 5; i++) {
-                if (player != null && player.getLibrary().size() > 0) {
+                if (player != null && player.getLibrary().hasCards()) {
                     Card topCard = player.getLibrary().getFromTop(game);
                     topCard.moveToExile(source.getSourceId(), "Cards exiled by Search the City", source.getSourceId(), game);
                 }

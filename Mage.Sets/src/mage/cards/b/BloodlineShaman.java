@@ -119,7 +119,7 @@ class BloodlineShamanEffect extends OneShotEffect {
             filterSubtype.add(new SubtypePredicate(typeChoice.getChoice()));
 
             // Reveal the top card of your library.
-            if (controller.getLibrary().size() > 0) {
+            if (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             controller.revealCards(sourceObject.getIdName(), cards, game);

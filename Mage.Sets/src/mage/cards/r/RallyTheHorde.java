@@ -87,12 +87,12 @@ class RallyTheHordeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int nonLandCardsExiled = 0;
-            while(controller.getLibrary().size() > 0) {
+            while(controller.getLibrary().hasCards()) {
                 nonLandCardsExiled += checkIfNextLibCardIsNonLandAndExile(controller, source, game);
-                if (controller.getLibrary().size() > 0) {
+                if (controller.getLibrary().hasCards()) {
                     nonLandCardsExiled += checkIfNextLibCardIsNonLandAndExile(controller, source, game);
                 }
-                if (controller.getLibrary().size() > 0) {
+                if (controller.getLibrary().hasCards()) {
                     int nonLands = checkIfNextLibCardIsNonLandAndExile(controller, source, game);
                     if (nonLands == 0) {
                         break;

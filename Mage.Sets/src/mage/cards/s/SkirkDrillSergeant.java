@@ -112,7 +112,7 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
             return false;
         }
 
-        if (controller.getLibrary().size() > 0) {
+        if (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             if (card != null) {

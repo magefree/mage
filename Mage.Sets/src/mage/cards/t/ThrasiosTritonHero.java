@@ -103,7 +103,7 @@ class ThrasiosTritonHeroEffect extends OneShotEffect {
         if (sourceObject == null || controller == null) {
             return false;
         }
-        if (controller.getLibrary().size() > 0) {
+        if (controller.getLibrary().hasCards()) {
             CardsImpl cards = new CardsImpl();
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {

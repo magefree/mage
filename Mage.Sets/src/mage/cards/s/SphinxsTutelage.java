@@ -112,7 +112,7 @@ class SphinxsTutelageEffect extends OneShotEffect {
                 cards.addAll(targetPlayer.getLibrary().getTopCards(game, 2));
                 if (!cards.isEmpty()) {
                     Card card1 = targetPlayer.getLibrary().removeFromTop(game);
-                    if (!card1.isLand() && targetPlayer.getLibrary().size() > 0) {
+                    if (!card1.isLand() && targetPlayer.getLibrary().hasCards()) {
                         Card card2 = targetPlayer.getLibrary().removeFromTop(game);
                         if (!card2.isLand()) {
                             colorShared = card1.getColor(game).shares(card2.getColor(game));

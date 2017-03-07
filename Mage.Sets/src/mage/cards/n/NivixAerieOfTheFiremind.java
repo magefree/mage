@@ -98,7 +98,7 @@ class NivixAerieOfTheFiremindEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Library library = controller.getLibrary();
-            if (library.size() > 0) {
+            if (library.hasCards()) {
                 Card card = library.removeFromTop(game);
                 if (card != null
                         && controller.moveCardsToExile(card, source, game, true, source.getSourceId(), "Nivix, Aerie of the Firemind")
