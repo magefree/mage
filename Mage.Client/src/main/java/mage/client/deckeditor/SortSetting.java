@@ -31,16 +31,15 @@ import mage.client.constants.Constants.SortBy;
 import mage.client.dialog.PreferencesDialog;
 
 /**
- *
  * @author LevelX2
  */
 public abstract class SortSetting {
-    
+
     SortBy sortBy;
     int sortIndex;
     boolean ascending;
     boolean pilesToggle;
-    
+
     final String prefSortBy;
     final String prefSortIndex;
     final String prefSortAscending;
@@ -60,7 +59,7 @@ public abstract class SortSetting {
         this.ascending = PreferencesDialog.getCachedValue(this.prefSortAscending, "1").equals("1");
         this.pilesToggle = PreferencesDialog.getCachedValue(this.prefPilesToggle, "true").equals("true");
     }
-    
+
     public void setSortBy(SortBy sortBy) {
         this.sortBy = sortBy;
         PreferencesDialog.saveValue(prefSortBy, sortBy.toString());
@@ -73,12 +72,12 @@ public abstract class SortSetting {
 
     public void setAscending(boolean ascending) {
         this.ascending = ascending;
-        PreferencesDialog.saveValue(this.prefSortAscending, this.ascending ? "1":"0");
+        PreferencesDialog.saveValue(this.prefSortAscending, this.ascending ? "1" : "0");
     }
 
     public void setPilesToggle(boolean pileToggle) {
         this.pilesToggle = pileToggle;
-        PreferencesDialog.saveValue(this.prefSortAscending, this.pilesToggle ? "true":"false");
+        PreferencesDialog.saveValue(this.prefSortAscending, this.pilesToggle ? "true" : "false");
     }
 
     public SortBy getSortBy() {

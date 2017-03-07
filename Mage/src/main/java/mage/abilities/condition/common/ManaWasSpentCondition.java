@@ -53,7 +53,7 @@ public class ManaWasSpentCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getAbilityType().equals(AbilityType.SPELL)) {
+        if (source.getAbilityType() == AbilityType.SPELL) {
             return (source.getManaCostsToPay().getPayment().getColor(coloredManaSymbol) > 0);
         }
         ManaSpentToCastWatcher watcher = (ManaSpentToCastWatcher) game.getState().getWatchers().get("ManaSpentToCast", source.getSourceId());

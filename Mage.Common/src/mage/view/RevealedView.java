@@ -29,12 +29,12 @@
 package mage.view;
 
 import java.io.Serializable;
+
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class RevealedView implements Serializable {
@@ -44,7 +44,7 @@ public class RevealedView implements Serializable {
 
     public RevealedView(String name, Cards cards, Game game) {
         this.name = name;
-        for (Card card: cards.getCards(game)) {
+        for (Card card : cards.getCards(game)) {
             this.cards.put(card.getId(), new CardView(card, game, card.getId()));
         }
     }

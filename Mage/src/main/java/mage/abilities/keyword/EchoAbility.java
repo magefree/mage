@@ -91,7 +91,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         // reset the echo paid state back, if creature enteres the battlefield
-        if (event.getType().equals(GameEvent.EventType.ENTERS_THE_BATTLEFIELD) 
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                 && event.getTargetId().equals(this.getSourceId())) {
             
             this.echoPaid = false;

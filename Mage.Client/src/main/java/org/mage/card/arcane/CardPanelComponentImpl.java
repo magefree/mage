@@ -7,6 +7,7 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ImageCaches;
 import mage.client.util.ImageHelper;
 import mage.components.ImagePanel;
+import mage.components.ImagePanelStyle;
 import mage.constants.AbilityType;
 import mage.utils.CardUtil;
 import mage.view.CardView;
@@ -243,7 +244,7 @@ public class CardPanelComponentImpl extends CardPanel {
 
         // Sickness overlay
         BufferedImage sickness = ImageManagerImpl.getInstance().getSicknessImage();
-        overlayPanel = new ImagePanel(sickness, ImagePanel.SCALED);
+        overlayPanel = new ImagePanel(sickness, ImagePanelStyle.SCALED);
         overlayPanel.setOpaque(false);
         add(overlayPanel);
 

@@ -65,12 +65,12 @@ public class SourceTappedBeforeUntapStepCondition implements Condition {
         Permanent permanent = game.getBattlefield().getPermanent(permanentId);
 
         if (permanent != null) {
-            if (lastTurnNum != game.getTurnNum() && turnPhase.equals(TurnPhase.BEGINNING)) {
+            if (lastTurnNum != game.getTurnNum() && turnPhase == TurnPhase.BEGINNING) {
                 lastTurnNum = game.getTurnNum();
                 permanentWasTappedBeforeUntapStep = permanent.isTapped();
             }
 
-            if (step.getType().equals(PhaseStep.UNTAP)) {
+            if (step.getType() == PhaseStep.UNTAP) {
                 return permanentWasTappedBeforeUntapStep;
             } else {
                 return permanent.isTapped();

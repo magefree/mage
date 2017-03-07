@@ -9,20 +9,18 @@ import javax.swing.JViewport;
 
 @SuppressWarnings("serial")
 public class ImagePanel extends JPanel {
-    public static final int TILED = 0;
-    public static final int SCALED = 1;
-    public static final int ACTUAL = 2;
+
 
     private BufferedImage image;
-    private int style;
+    private ImagePanelStyle style;
     private float alignmentX = 0.5f;
     private float alignmentY = 0.5f;
 
     public ImagePanel(BufferedImage image) {
-        this(image, TILED);
+        this(image, ImagePanelStyle.TILED);
     }
 
-    public ImagePanel(BufferedImage image, int style) {
+    public ImagePanel(BufferedImage image, ImagePanelStyle style) {
         this.image = image;
         this.style = style;
         setLayout(new BorderLayout());
@@ -65,18 +63,16 @@ public class ImagePanel extends JPanel {
             return;
 
         switch (style) {
-        case TILED:
-            drawTiled(g);
-            break;
-
-        case SCALED:
-            Dimension d = getSize();
-            g.drawImage(image, 0, 0, d.width, d.height, null);
-            break;
-
-        case ACTUAL:
-            drawActual(g);
-            break;
+            case TILED:
+                drawTiled(g);
+                break;
+            case SCALED:
+                Dimension d = getSize();
+                g.drawImage(image, 0, 0, d.width, d.height, null);
+                break;
+            case ACTUAL:
+                drawActual(g);
+                break;
         }
     }
 

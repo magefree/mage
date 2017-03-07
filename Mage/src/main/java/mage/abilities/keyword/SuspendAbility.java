@@ -236,7 +236,7 @@ public class SuspendAbility extends SpecialAction {
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        if (!game.getState().getZone(getSourceId()).equals(Zone.HAND)) {
+        if (game.getState().getZone(getSourceId()) != Zone.HAND) {
             // Supend can only be activated from hand
             return false;
         }

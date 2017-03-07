@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import mage.client.dialog.PreferencesDialog;
 import mage.components.ImagePanel;
+import mage.components.ImagePanelStyle;
 import mage.interfaces.plugin.ThemePlugin;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
@@ -82,7 +83,7 @@ public class ThemePluginImpl implements ThemePlugin {
             }
 
             if (ui.containsKey("gamePanel") && ui.containsKey("jLayeredPane")) {
-                ImagePanel bgPanel = new ImagePanel(backgroundImage, ImagePanel.TILED);
+                ImagePanel bgPanel = new ImagePanel(backgroundImage, ImagePanelStyle.TILED);
 
                 unsetOpaque(ui.get("jSplitPane1"));
                 unsetOpaque(ui.get("pnlBattlefield"));
@@ -190,7 +191,7 @@ public class ThemePluginImpl implements ThemePlugin {
                 }
             }
         }
-        return new ImagePanel(background, ImagePanel.SCALED);
+        return new ImagePanel(background, ImagePanelStyle.SCALED);
     }
 
     private void unsetOpaque(JComponent c) {
