@@ -33,7 +33,15 @@ package mage.constants;
  */
 public enum Zone {
 
-    HAND(false), GRAVEYARD(true), LIBRARY(false), BATTLEFIELD(true), STACK(true), EXILED(true), ALL(false), OUTSIDE(false), COMMAND(false);
+    HAND(false),
+    GRAVEYARD(true),
+    LIBRARY(false),
+    BATTLEFIELD(true),
+    STACK(true),
+    EXILED(true),
+    ALL(false),
+    OUTSIDE(false),
+    COMMAND(true);
 
     private boolean isPublic;
 
