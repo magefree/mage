@@ -30,6 +30,7 @@ package mage.cards.g;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -112,7 +113,7 @@ class GhostlyFlickerEffect extends OneShotEffect {
             Set<Card> toBattlefield = new HashSet<>();
             for (Card card : toExile) {
                 Zone currentZone = game.getState().getZone(card.getId());
-                if (!(Zone.BATTLEFIELD == currentZone) && Zone.isPublicZone(currentZone)) {
+                if (Zone.BATTLEFIELD != currentZone && currentZone.isPublicZone()) {
                     toBattlefield.add(game.getCard(card.getId()));
                 }
             }
