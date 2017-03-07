@@ -30,6 +30,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.abilities.Ability;
@@ -63,9 +64,10 @@ public class ApostlesBlessing extends CardImpl {
     }
 
     public ApostlesBlessing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{WP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W/P}");
         
-        // ({WP} can be paid with either {W} or 2 life.)
+        // ({W/P} can be paid with either {W} or 2 life.)
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
         // Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new ApostlesBlessingEffect());
         this.getSpellAbility().addTarget(new TargetControlledPermanent(filter));

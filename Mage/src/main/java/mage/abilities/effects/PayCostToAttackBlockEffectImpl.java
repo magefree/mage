@@ -29,8 +29,10 @@ package mage.abilities.effects;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -141,8 +143,9 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             attackBlockManaTax.clearPaid();
             if (attackBlockManaTax.canPay(source, source.getSourceId(), player.getId(), game)
                     && player.chooseUse(Outcome.Neutral, chooseText, source, game)) {
-                if (attackBlockManaTax instanceof ManaCostsImpl) {
-                    if (attackBlockManaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
+                ManaCosts finalAttackBlockManaTax = handlePhyrexianManaCosts(attackBlockManaTax, player, source, game);
+                if (finalAttackBlockManaTax instanceof ManaCostsImpl) {
+                    if (finalAttackBlockManaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                         return false;
                     }
                 }
@@ -150,6 +153,19 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             return true;
         }
         return false;
+    }
+
+    private ManaCosts handlePhyrexianManaCosts(ManaCosts<ManaCost> manaCosts, Player player, Ability source, Game game) {
+        ManaCosts<ManaCost> finalManaCosts = new ManaCostsImpl<>();
+        for(ManaCost manaCost : manaCosts) {
+            if(manaCost instanceof PhyrexianManaCost && player.isLifeTotalCanChange() && player.getLife() >= 2 &&
+                player.chooseUse(Outcome.Benefit,  "Pay 2 life to reduce the cost by " + ((PhyrexianManaCost) manaCost).getBaseText() + "?", source, game)) {
+                player.loseLife(2, game, false);
+            } else {
+                finalManaCosts.add(manaCost);
+            }
+        }
+        return finalManaCosts;
     }
 
     private boolean handleOtherCosts(Cost attackBlockOtherTax, GameEvent event, Ability source, Game game) {

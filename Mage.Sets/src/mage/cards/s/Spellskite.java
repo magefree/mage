@@ -30,6 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.PhyrexianManaAbilityCostReductionAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ChangeATargetOfTargetSpellAbilityToSourceEffect;
@@ -51,10 +52,13 @@ public class Spellskite extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        // {UP}: Change a target of target spell or ability to Spellskite.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeATargetOfTargetSpellAbilityToSourceEffect(), new ManaCostsImpl("{UP}"));
+        // {U/P}: Change a target of target spell or ability to Spellskite.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeATargetOfTargetSpellAbilityToSourceEffect(), new ManaCostsImpl("{U/P}"));
         ability.addTarget(new TargetStackObject());
         this.addAbility(ability);
+
+        // {U/P} can be paid with either {U} or 2 life.
+        this.addAbility(new PhyrexianManaAbilityCostReductionAbility(ability.getManaCosts(), ability.getOriginalId()));
     }
 
     public Spellskite(final Spellskite card) {

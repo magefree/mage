@@ -177,7 +177,7 @@ public class SacredGroundTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Surgical Extraction", 1);
         assertExileCount("Caves of Koilos", 1);
 
-        assertLife(playerA, 20);
+        assertLife(playerA, 18);
         assertLife(playerB, 18);
     }
 

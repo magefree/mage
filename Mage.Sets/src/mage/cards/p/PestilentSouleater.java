@@ -28,6 +28,8 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaAbilityCostReductionAbility;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
@@ -53,9 +55,13 @@ public class PestilentSouleater extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(InfectAbility.getInstance(), Duration.EndOfTurn),
-                new PhyrexianManaCost(ColoredManaSymbol.B)));
+                new PhyrexianManaCost(ColoredManaSymbol.B));
+        this.addAbility(ability);
+
+        // {B/P} can be paid with either {B} or 2 life.
+        this.addAbility(new PhyrexianManaAbilityCostReductionAbility(ability.getManaCosts(), ability.getOriginalId()));
     }
 
     public PestilentSouleater(final PestilentSouleater card) {

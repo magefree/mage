@@ -52,7 +52,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{UP}: Change a target of target spell or ability to {this}.", "Lightning Bolt");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{U/P}: Change a target of target spell or ability to {this}.", "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -60,7 +60,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Spellskite", 1);
 
-        assertLife(playerA, 20);
+        assertLife(playerA, 18);
         assertLife(playerB, 20);
 
         assertPowerToughness(playerA, "Spellskite", 3, 7);
@@ -102,7 +102,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Frost Titan");
         addTarget(playerB, "Silvercoat Lion");
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{UP}: Change a target", "stack ability (Whenever {this} enters ");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{U/P}: Change a target", "stack ability (Whenever {this} enters ");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -141,7 +141,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         setModeChoice(playerA, "1"); // Counter target spell
         setModeChoice(playerA, "2"); // return target permanent to its owner's hand
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Cryptic Command", "Cryptic Command");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target of target spell or ability to {this}.", "Cryptic Command", "Cryptic Command");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -154,7 +154,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
 
         assertLife(playerA, 20);
-        assertLife(playerB, 20);
+        assertLife(playerB, 18);
 
     }
 
@@ -182,7 +182,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         setModeChoice(playerA, "2"); // return target permanent to its owner's hand
         setModeChoice(playerA, "3"); // tap all creatures your opponents control
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Cryptic Command");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target of target spell or ability to {this}.", "Cryptic Command");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -194,7 +194,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         assertTapped("Silvercoat Lion", true);
 
         assertLife(playerA, 20);
-        assertLife(playerB, 20);
+        assertLife(playerB, 18);
 
     }
 
@@ -214,7 +214,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Lightning Bolt");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target of target spell or ability to {this}.", "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -222,7 +222,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
 
         assertLife(playerA, 20);
-        assertLife(playerB, 20);
+        assertLife(playerB, 18);
 
     }
 
@@ -248,6 +248,35 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Flame Slash", 1);
         assertPowerToughness(playerB, "Spellskite", 3, 7);
+    }
+
+
+    @Test
+    public void testThatSplitDamageCanGetRedirected() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Spellskite");
+        addCard(Zone.BATTLEFIELD, playerB, "Scute Mob");
+        addCard(Zone.BATTLEFIELD, playerB, "Island");
+
+        addCard(Zone.HAND, playerA, "Fiery Justice");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Justice");
+        addTarget(playerA, "Scute Mob");
+        setChoice(playerA, "X=1");
+        addTarget(playerA, "Spellskite");
+        setChoice(playerA, "X=4");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target of target spell or ability to {this}.", "Fiery Justice", "Fiery Justice");
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, 1);
+        assertPowerToughness(playerB, "Scute Mob", 1, 1);
     }
 
 }

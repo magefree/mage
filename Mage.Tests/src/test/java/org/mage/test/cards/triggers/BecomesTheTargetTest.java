@@ -52,13 +52,13 @@ public class BecomesTheTargetTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{WP},{T}: Tap target creature", "Silvercoat Lion");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{W/P},{T}: Tap target creature", "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
-        assertLife(playerB, 20);
+        assertLife(playerB, 18);
 
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
         assertTapped("Silvercoat Lion", true);

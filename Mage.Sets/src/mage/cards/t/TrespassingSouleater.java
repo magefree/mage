@@ -28,6 +28,8 @@
 package mage.cards.t;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaAbilityCostReductionAbility;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
@@ -52,10 +54,15 @@ public class TrespassingSouleater extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {UP}: Trespassing Souleater can't be blocked this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
-                new PhyrexianManaCost(ColoredManaSymbol.U)));
+                new PhyrexianManaCost(ColoredManaSymbol.U));
+
+        // {U/P}: Trespassing Souleater can't be blocked this turn.
+        this.addAbility(ability);
+
+        // {U/P} can be paid with either {U} or 2 life.
+        this.addAbility(new PhyrexianManaAbilityCostReductionAbility(ability.getManaCosts(), ability.getOriginalId()));
     }
 
     public TrespassingSouleater(final TrespassingSouleater card) {

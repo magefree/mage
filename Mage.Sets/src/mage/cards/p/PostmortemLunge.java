@@ -29,6 +29,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -60,7 +61,10 @@ import mage.target.targetpointer.FixedTarget;
 public class PostmortemLunge extends CardImpl {
 
     public PostmortemLunge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{BP}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B/P}");
+
+        // {B/P} can be paid with either {B} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         // Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new PostmortemLungeEffect());

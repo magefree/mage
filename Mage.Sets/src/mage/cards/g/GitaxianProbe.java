@@ -28,6 +28,8 @@
 package mage.cards.g;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.cards.CardImpl;
@@ -42,7 +44,10 @@ import mage.target.TargetPlayer;
 public class GitaxianProbe extends CardImpl {
 
     public GitaxianProbe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{UP}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U/P}");
+
+        // {U/P} can be paid with either {U} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         // Look at target player's hand.
         this.getSpellAbility().addEffect(new LookAtTargetPlayerHandEffect());

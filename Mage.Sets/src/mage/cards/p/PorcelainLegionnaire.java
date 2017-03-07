@@ -28,6 +28,8 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -46,6 +48,9 @@ public class PorcelainLegionnaire extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
+
+        // {W/P} can be paid with either {W} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.addAbility(FirstStrikeAbility.getInstance());
     }

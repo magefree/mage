@@ -27,30 +27,13 @@
  */
 package mage.player.human;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.PlayLandAbility;
-import mage.abilities.SpecialAction;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
@@ -58,22 +41,7 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.Constants;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.PlayerAction;
-import static mage.constants.PlayerAction.HOLD_PRIORITY;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_NO;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_LAST;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
-import mage.constants.RangeOfInfluence;
-import static mage.constants.SpellAbilityType.SPLIT;
-import static mage.constants.SpellAbilityType.SPLIT_FUSED;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreatureForCombat;
@@ -101,6 +69,12 @@ import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.MessageToClient;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
+
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 
 /**
  *
@@ -823,9 +797,6 @@ public class HumanPlayer extends PlayerImpl {
     protected boolean playManaHandling(Ability abilityToCast, ManaCost unpaid, String promptText, Game game) {
         updateGameStatePriority("playMana", game);
         Map<String, Serializable> options = new HashMap<>();
-        if (unpaid.getText().contains("P}")) {
-            options.put(Constants.Option.SPECIAL_BUTTON, (Serializable) "Pay 2 life");
-        }
         game.firePlayManaEvent(playerId, "Pay " + promptText, options);
         waitForResponse(game);
         if (!this.canRespond()) {
@@ -838,18 +809,6 @@ public class HumanPlayer extends PlayerImpl {
         } else if (response.getString() != null && response.getString().equals("special")) {
             if (unpaid instanceof ManaCostsImpl) {
                 specialManaAction(unpaid, game);
-                // TODO: delve or convoke cards with PhyrexianManaCost won't work together (this combinaton does not exist yet)
-                @SuppressWarnings("unchecked")
-                ManaCostsImpl<ManaCost> costs = (ManaCostsImpl<ManaCost>) unpaid;
-                for (ManaCost cost : costs.getUnpaid()) {
-                    if (cost instanceof PhyrexianManaCost) {
-                        PhyrexianManaCost ph = (PhyrexianManaCost) cost;
-                        if (ph.canPay(null, null, playerId, game)) {
-                            ((PhyrexianManaCost) cost).pay(null, game, null, playerId, false, null);
-                        }
-                        break;
-                    }
-                }
             }
         } else if (response.getManaType() != null) {
             // this mana type can be paid once from pool
@@ -907,7 +866,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         Spell spell = game.getStack().getSpell(abilityToCast.getSourceId());
         if (spell != null && spell.isDoneActivatingManaAbilities()) {
-            game.informPlayer(this, "You can't no longer use activated mana abilities to pay for the current spell. Cancel and recast the spell and activate mana abilities first.");
+            game.informPlayer(this, "You can no longer use activated mana abilities to pay for the current spell. Cancel and recast the spell and activate mana abilities first.");
             return;
         }
         Zone zone = game.getState().getZone(object.getId());

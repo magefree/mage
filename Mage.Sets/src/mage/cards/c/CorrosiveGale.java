@@ -28,6 +28,8 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -50,8 +52,11 @@ public class CorrosiveGale extends CardImpl {
     }
 
     public CorrosiveGale(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{GP}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G/P}");
 
+
+        // {G/P} can be paid with either {G} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filter));
     }

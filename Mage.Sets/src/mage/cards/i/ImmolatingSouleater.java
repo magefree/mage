@@ -28,6 +28,8 @@
 package mage.cards.i;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaAbilityCostReductionAbility;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
@@ -52,9 +54,13 @@ public class ImmolatingSouleater extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new PhyrexianManaCost(ColoredManaSymbol.R)));
+                new PhyrexianManaCost(ColoredManaSymbol.R));
+        this.addAbility(ability);
+
+        // {R/P} can be paid with either {R} or 2 life.
+        this.addAbility(new PhyrexianManaAbilityCostReductionAbility(ability.getManaCosts(), ability.getOriginalId()));
     }
 
     public ImmolatingSouleater(final ImmolatingSouleater card) {

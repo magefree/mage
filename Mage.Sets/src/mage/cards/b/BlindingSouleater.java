@@ -29,15 +29,14 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.PhyrexianManaAbilityCostReductionAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,13 +52,16 @@ public class BlindingSouleater extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // {WP},{T}: Tap target creature. ( can be paid with either or 2 life.)
+        // {W/P},{T}: Tap target creature.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new TapTargetEffect(),
                 new PhyrexianManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+
+        // {W/P} can be paid with either {W} or 2 life.
+        this.addAbility(new PhyrexianManaAbilityCostReductionAbility(ability.getManaCosts(), ability.getOriginalId()));
     }
 
     public BlindingSouleater(final BlindingSouleater card) {
@@ -71,3 +73,4 @@ public class BlindingSouleater extends CardImpl {
         return new BlindingSouleater(this);
     }
 }
+

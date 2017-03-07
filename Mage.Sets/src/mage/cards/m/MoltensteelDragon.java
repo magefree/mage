@@ -29,6 +29,8 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.PhyrexianManaAbilityCostReductionAbility;
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -53,12 +55,18 @@ public class MoltensteelDragon extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        // {R/P} can be paid with either {R} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new PhyrexianManaCost(ColoredManaSymbol.R)));
+                new PhyrexianManaCost(ColoredManaSymbol.R));
+
+        this.addAbility(ability);
+        this.addAbility(new PhyrexianManaAbilityCostReductionAbility(ability.getManaCosts(), ability.getOriginalId()));
     }
 
     public MoltensteelDragon(final MoltensteelDragon card) {

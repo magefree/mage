@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
@@ -61,7 +62,7 @@ public class PhyrexianMetamorph extends CardImpl {
     }
 
     public PhyrexianMetamorph(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{UP}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U/P}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);
@@ -83,7 +84,9 @@ public class PhyrexianMetamorph extends CardImpl {
 
         };
 
-        // {UP} ( can be paid with either {U} or 2 life.)
+        // {U/P} can be paid with either {U} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
+
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
         Effect effect = new CopyPermanentEffect(filter, phyrexianMetamorphApplier);
         effect.setText("You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types");

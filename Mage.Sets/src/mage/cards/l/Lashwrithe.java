@@ -28,6 +28,8 @@
 package mage.cards.l;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaAbilityCostReductionAbility;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -64,7 +66,12 @@ public class Lashwrithe extends CardImpl {
         this.addAbility(new LivingWeaponAbility());
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{BP}{BP}")));
+
+        EquipAbility ability = new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{B/P}{B/P}"));
+        this.addAbility(ability);
+
+        // {B/P} can be paid with either {B} or 2 life.
+        this.addAbility(new PhyrexianManaAbilityCostReductionAbility(ability.getManaCosts(), ability.getOriginalId()));
     }
 
     public Lashwrithe(final Lashwrithe card) {

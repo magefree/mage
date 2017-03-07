@@ -28,6 +28,8 @@
 package mage.cards.n;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
@@ -42,11 +44,14 @@ import mage.constants.Zone;
 public class NornsAnnex extends CardImpl {
 
     public NornsAnnex(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}{WP}{WP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}{W/P}{W/P}");
 
-        // {WP} ({WP} can be paid with either or 2 life.)
-        // Creatures can't attack you or a planeswalker you control unless their controller pays {WP} for each of those creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{WP}"), true)));
+        // {W/P} can be paid with either {W} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
+
+        // Creatures can't attack you or a planeswalker you control unless their controller pays {W/P} for each of those creatures.
+        CantAttackYouUnlessPayManaAllEffect effect = new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{W/P}"), true);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public NornsAnnex(final NornsAnnex card) {

@@ -28,6 +28,8 @@
 package mage.cards.i;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaAbilityCostReductionAbility;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
@@ -53,9 +55,13 @@ public class InsatiableSouleater extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
-                new PhyrexianManaCost(ColoredManaSymbol.G)));
+                new PhyrexianManaCost(ColoredManaSymbol.G));
+        this.addAbility(ability);
+
+        // {G/P} can be paid with either {G} or 2 life.
+        this.addAbility(new PhyrexianManaAbilityCostReductionAbility(ability.getManaCosts(), ability.getOriginalId()));
     }
 
     public InsatiableSouleater(final InsatiableSouleater card) {

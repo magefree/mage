@@ -29,6 +29,8 @@
 package mage.cards.n;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
@@ -42,7 +44,11 @@ import mage.target.common.TargetCardInGraveyard;
 public class NoxiousRevival extends CardImpl {
 
     public NoxiousRevival (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{GP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/P}");
+
+
+        // {G/P} can be paid with either {G} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());

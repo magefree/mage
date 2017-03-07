@@ -2438,7 +2438,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!copy.canActivate(playerId, game)) {
                 return false;
             }
-            game.getContinuousEffects().costModification(copy, game);
+            // This breaks any continuous effect cost modification with a choice, such as Training Grounds.
+            // You have to make the same decision twice: once here, and once in the real activation.
+            if(available != null) {
+                game.getContinuousEffects().costModification(copy, game);
+            }
 
             Card card = game.getCard(ability.getSourceId());
             if (card != null) {
@@ -3300,7 +3304,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         boolean result = false;
         //    Zone fromZone = game.getState().getZone(card.getId());
-        if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null ? fromZone == Zone.BATTLEFIELD : false)) {
+        if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null && fromZone == Zone.BATTLEFIELD)) {
             if (!game.isSimulation()) {
                 if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                     card = game.getCard(card.getId());

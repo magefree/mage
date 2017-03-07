@@ -57,7 +57,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         // Look at target player's hand.
         // Draw a card.
-        addCard(Zone.HAND, playerB, "Gitaxian Probe"); // Sorcery {UP}
+        addCard(Zone.HAND, playerB, "Gitaxian Probe"); // Sorcery {U/P}
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Gitaxian Probe", playerA);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);

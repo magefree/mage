@@ -28,6 +28,8 @@
 package mage.cards.t;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
@@ -41,11 +43,14 @@ import mage.cards.CardSetInfo;
 public class ThunderingTanadon extends CardImpl {
 
     public ThunderingTanadon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{GP}{GP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{G/P}{G/P}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
+
+        // {G/P} can be paid with either {G} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.addAbility(TrampleAbility.getInstance());
     }
