@@ -129,12 +129,14 @@ class SpellskiteEffect extends OneShotEffect {
                     for (Target target : targets) {
                         for (UUID targetId : target.getTargets()) {
                             String name = getTargetName(targetId, game);
-                            if (!targetId.equals(source.getSourceId()) && target.getTargets().contains(source.getSourceId())) {
+                            if (targetId.equals(source.getSourceId())
+                                    || target.getTargets().contains(source.getSourceId())) {
                                 // you can't change this target to source because the source is already another targetId of that target.
                                 twoTimesTarget = true;
                                 continue;
                             }
-                            if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
+                            if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)
+                                    && !twoTimesTarget) {
                                 validTargets = true;
                                 if (name != null
                                         && controller.chooseUse(Outcome.Neutral, "Change target from " + name + " to " + sourceObject.getLogName() + '?', source, game)) {
