@@ -31,12 +31,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -63,19 +58,13 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.duration == Duration.Custom || this.duration.toString().startsWith("End")) {
-            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()), game));
-            if (affectedObjectList.isEmpty()) {
-                this.discard();
-            }
-        }
+        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()), game));
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null
-                && (affectedObjectList.isEmpty() || affectedObjectList.contains(new MageObjectReference(permanent, game)))) {
+        if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game))) {
             if (!permanent.getCardType().contains(addedCardType)) {
                 permanent.getCardType().add(addedCardType);
             }
@@ -97,7 +86,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("{this} becomes ").append(addedCardType.toString()).append(" in addition to its other types until end of turn");
+        sb.append("{this} becomes ").append(addedCardType.toString()).append(" in addition to its other types " + this.getDuration().toString());
         return sb.toString();
     }
 }
