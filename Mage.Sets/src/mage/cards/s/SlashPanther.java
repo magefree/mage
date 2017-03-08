@@ -28,6 +28,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
@@ -41,11 +43,14 @@ import mage.cards.CardSetInfo;
 public class SlashPanther extends CardImpl {
 
     public SlashPanther(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{R/P}");
         this.subtype.add("Cat");
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
+
+        // {R/P} can be paid with either {R} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.addAbility(HasteAbility.getInstance());
     }

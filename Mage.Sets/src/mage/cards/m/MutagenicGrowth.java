@@ -29,6 +29,8 @@
 package mage.cards.m;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -43,7 +45,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class MutagenicGrowth extends CardImpl {
 
     public MutagenicGrowth (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{GP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/P}");
+
+
+        // {G/P} can be paid with either {G} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));

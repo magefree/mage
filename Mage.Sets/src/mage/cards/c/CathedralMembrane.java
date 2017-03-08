@@ -29,6 +29,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -51,13 +52,15 @@ import java.util.UUID;
 public class CathedralMembrane extends CardImpl {
 
     public CathedralMembrane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{WP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{W/P}");
         this.subtype.add("Wall");
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        // <i>({WP} can be paid with either {W} or 2 life.)</i>
+        // {W/P} can be paid with either {W} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
+
         this.addAbility(DefenderAbility.getInstance());
 
         // When Cathedral Membrane dies during combat, it deals 6 damage to each creature it blocked this combat.

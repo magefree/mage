@@ -29,6 +29,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -49,8 +50,10 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class RageExtractor extends CardImpl {
 
     public RageExtractor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}{R/P}");
 
+        // {R/P} can be paid with either {R} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.addAbility(new RageExtractorTriggeredAbility());
     }

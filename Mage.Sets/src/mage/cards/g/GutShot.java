@@ -28,6 +28,8 @@
 package mage.cards.g;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -41,7 +43,11 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class GutShot extends CardImpl {
 
     public GutShot(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R/P}");
+
+
+        // {R/P} can be paid with either {R} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

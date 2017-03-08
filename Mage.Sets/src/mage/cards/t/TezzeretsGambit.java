@@ -28,6 +28,8 @@
 package mage.cards.t;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -41,7 +43,10 @@ import mage.cards.CardSetInfo;
 public class TezzeretsGambit extends CardImpl {
 
     public TezzeretsGambit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{UP}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U/P}");
+
+        // {U/P} can be paid with either {U} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new ProliferateEffect());

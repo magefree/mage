@@ -28,6 +28,8 @@
 package mage.cards.v;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
@@ -42,11 +44,14 @@ import mage.cards.CardSetInfo;
 public class VaultSkirge extends CardImpl {
 
     public VaultSkirge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{BP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{B/P}");
         this.subtype.add("Imp");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
+        // {B/P} can be paid with either {B} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());

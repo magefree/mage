@@ -30,6 +30,7 @@ package mage.cards.s;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -63,7 +64,10 @@ public class SurgicalExtraction extends CardImpl {
     }
 
     public SurgicalExtraction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{BP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B/P}");
+
+        // {B/P} can be paid with either {B} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard,
         // hand, and library for any number of cards with the same name as that card and exile them.

@@ -28,6 +28,8 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -44,11 +46,15 @@ import mage.target.common.TargetCreaturePermanent;
 public class PithDriller extends CardImpl {
 
     public PithDriller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{BP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{B/P}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
+
+
+        // {B/P} can be paid with either {B} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());

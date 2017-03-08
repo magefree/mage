@@ -28,6 +28,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
@@ -41,11 +43,14 @@ import mage.cards.CardSetInfo;
 public class SpinedThopter extends CardImpl {
 
     public SpinedThopter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{UP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U/P}");
         this.subtype.add("Thopter");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
+        // {U/P} can be paid with either {U} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.addAbility(FlyingAbility.getInstance());
     }

@@ -28,6 +28,8 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -54,7 +56,11 @@ public class ActOfAggression extends CardImpl {
     }
 
     public ActOfAggression(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{RP}{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R/P}{R/P}");
+
+
+        // {R/P} can be paid with either {R} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));

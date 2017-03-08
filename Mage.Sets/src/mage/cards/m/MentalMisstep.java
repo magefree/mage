@@ -28,6 +28,8 @@
 package mage.cards.m;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,7 +52,10 @@ public class MentalMisstep extends CardImpl {
     }
 
     public MentalMisstep(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{UP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U/P}");
+
+        // {U/P} can be paid with either {U} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         // Counter target spell with converted mana cost 1.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

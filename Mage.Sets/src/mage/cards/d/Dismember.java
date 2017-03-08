@@ -30,6 +30,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -44,9 +45,12 @@ import mage.target.common.TargetCreaturePermanent;
 public class Dismember extends CardImpl {
 
     public Dismember (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{BP}{BP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B/P}{B/P}");
 
-        
+
+        // {B/P} can be paid with either {B} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
+
         // Target creature gets -5/-5 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

@@ -225,31 +225,31 @@ public final class CardUtil {
         return adjustedCost;
     }
 
-    public static void reduceCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
-        adjustCost(spellAbility, manaCostsToReduce, true);
+    public static void reduceCost(Ability ability, ManaCosts<ManaCost> manaCostsToReduce) {
+        adjustCost(ability, manaCostsToReduce, true);
     }
 
-    public static void increaseCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToIncrease) {
-        ManaCosts<ManaCost> increasedCost = spellAbility.getManaCostsToPay().copy();
+    public static void increaseCost(Ability ability, ManaCosts<ManaCost> manaCostsToIncrease) {
+        ManaCosts<ManaCost> increasedCost = ability.getManaCostsToPay().copy();
 
         for (ManaCost manaCost : manaCostsToIncrease) {
             increasedCost.add(manaCost.copy());
         }
 
-        spellAbility.getManaCostsToPay().clear();
-        spellAbility.getManaCostsToPay().addAll(increasedCost);
+        ability.getManaCostsToPay().clear();
+        ability.getManaCostsToPay().addAll(increasedCost);
     }
 
     /**
      * Adjusts spell or ability cost to be paid by colored and generic mana.
      *
-     * @param spellAbility
+     * @param ability
      * @param manaCostsToReduce costs to reduce
      * @param convertToGeneric colored mana does reduce generic mana if no
      * appropriate colored mana is in the costs included
      */
-    public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
-        ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
+    public static void adjustCost(Ability ability, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
+        ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
         ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
         // save X value (e.g. convoke ability)
         for (VariableCost vCost : previousCost.getVariableCosts()) {
@@ -399,8 +399,8 @@ public final class CardUtil {
             adjustedCost.add(new GenericManaCost(0)); // neede to check if cost was reduced to 0
         }
         adjustedCost.setSourceFilter(previousCost.getSourceFilter());  // keep mana source restrictions
-        spellAbility.getManaCostsToPay().clear();
-        spellAbility.getManaCostsToPay().addAll(adjustedCost);
+        ability.getManaCostsToPay().clear();
+        ability.getManaCostsToPay().addAll(adjustedCost);
     }
 
     /**
@@ -569,10 +569,7 @@ public final class CardUtil {
      * @return
      */
     public static boolean isCheckPlayableMode(Ability ability) {
-        if (ability instanceof ActivatedAbility) {
-            return ((ActivatedAbility) ability).isCheckPlayableMode();
-        }
-        return false;
+        return ability instanceof ActivatedAbility && ((ActivatedAbility) ability).isCheckPlayableMode();
     }
 
     /**

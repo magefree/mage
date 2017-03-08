@@ -28,6 +28,8 @@
 package mage.cards.m;
 
 import java.util.UUID;
+
+import mage.abilities.common.PhyrexianManaSpellCostReductionAbility;
 import mage.constants.CardType;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
@@ -41,8 +43,11 @@ import mage.filter.common.FilterAttackingCreature;
 public class MarrowShards extends CardImpl {
 
     public MarrowShards(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{WP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W/P}");
 
+
+        // {W/P} can be paid with either {W} or 2 life.
+        this.addAbility(new PhyrexianManaSpellCostReductionAbility(this.getManaCost()));
 
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterAttackingCreature()));
     }
