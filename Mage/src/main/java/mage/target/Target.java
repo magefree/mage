@@ -53,7 +53,7 @@ public interface Target extends Serializable {
     boolean isNotTarget();
 
     /**
-     * controlls if it will be checked, if the target can be targeted from
+     * controls if it will be checked, if the target can be targeted from
      * source
      *
      * @param notTarget true = do not check for protection, false = check for
@@ -157,4 +157,8 @@ public interface Target extends Serializable {
     void setTargetTag(int tag);
 
     Target getOriginalTarget();
+    
+    // used for cards like Spellskite
+    void setTargetAmount(UUID targetId, int amount, Game game);
+    
 }
