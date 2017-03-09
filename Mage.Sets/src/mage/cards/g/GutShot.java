@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class GutShot extends CardImpl {
 
     public GutShot(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R/P}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

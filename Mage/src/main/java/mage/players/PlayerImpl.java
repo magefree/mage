@@ -2438,7 +2438,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!copy.canActivate(playerId, game)) {
                 return false;
             }
-            game.getContinuousEffects().costModification(copy, game);
+            if(available != null) {
+                game.getContinuousEffects().costModification(copy, game);
+            }
 
             Card card = game.getCard(ability.getSourceId());
             if (card != null) {

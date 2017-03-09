@@ -18,7 +18,7 @@ public class PostMortemLungeTest extends CardTestPlayerBase {
     public void testExilesCreatureAtEndStep() {
 
         /*
-        {P}{X} - Sorcery
+        {X}{B/P} - Sorcery
         Return target creature card with converted mana cost X from your graveyard to the battlefield. 
         It gains haste. Exile it at the beginning of the next end step.
         */

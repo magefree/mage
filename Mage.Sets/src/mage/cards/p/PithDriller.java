@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class PithDriller extends CardImpl {
 
     public PithDriller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{BP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{B/P}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(2);

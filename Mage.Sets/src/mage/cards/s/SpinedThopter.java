@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 public class SpinedThopter extends CardImpl {
 
     public SpinedThopter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{UP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U/P}");
         this.subtype.add("Thopter");
 
         this.power = new MageInt(2);

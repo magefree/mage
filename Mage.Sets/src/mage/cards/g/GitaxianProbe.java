@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
 public class GitaxianProbe extends CardImpl {
 
     public GitaxianProbe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{UP}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U/P}");
 
         // Look at target player's hand.
         this.getSpellAbility().addEffect(new LookAtTargetPlayerHandEffect());

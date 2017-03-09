@@ -63,7 +63,7 @@ public class SurgicalExtraction extends CardImpl {
     }
 
     public SurgicalExtraction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{BP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B/P}");
 
         // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard,
         // hand, and library for any number of cards with the same name as that card and exile them.

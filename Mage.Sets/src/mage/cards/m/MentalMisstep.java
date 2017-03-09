@@ -50,7 +50,7 @@ public class MentalMisstep extends CardImpl {
     }
 
     public MentalMisstep(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{UP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U/P}");
 
         // Counter target spell with converted mana cost 1.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

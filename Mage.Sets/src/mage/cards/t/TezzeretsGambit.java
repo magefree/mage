@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 public class TezzeretsGambit extends CardImpl {
 
     public TezzeretsGambit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{UP}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U/P}");
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new ProliferateEffect());

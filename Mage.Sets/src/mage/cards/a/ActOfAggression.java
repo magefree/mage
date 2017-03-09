@@ -54,7 +54,7 @@ public class ActOfAggression extends CardImpl {
     }
 
     public ActOfAggression(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{RP}{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R/P}{R/P}");
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));

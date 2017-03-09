@@ -42,7 +42,7 @@ import mage.cards.CardSetInfo;
 public class VaultSkirge extends CardImpl {
 
     public VaultSkirge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{BP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{B/P}");
         this.subtype.add("Imp");
 
         this.power = new MageInt(1);

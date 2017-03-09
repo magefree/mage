@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
 public class PostmortemLunge extends CardImpl {
 
     public PostmortemLunge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{BP}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B/P}");
 
         // Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new PostmortemLungeEffect());
