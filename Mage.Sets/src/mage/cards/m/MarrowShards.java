@@ -41,7 +41,7 @@ import mage.filter.common.FilterAttackingCreature;
 public class MarrowShards extends CardImpl {
 
     public MarrowShards(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{WP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W/P}");
 
 
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterAttackingCreature()));

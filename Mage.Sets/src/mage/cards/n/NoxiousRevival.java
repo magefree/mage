@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInGraveyard;
 public class NoxiousRevival extends CardImpl {
 
     public NoxiousRevival (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{GP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/P}");
 
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());

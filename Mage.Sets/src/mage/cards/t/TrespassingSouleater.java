@@ -52,7 +52,7 @@ public class TrespassingSouleater extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {UP}: Trespassing Souleater can't be blocked this turn.
+        // {U/P}: Trespassing Souleater can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new PhyrexianManaCost(ColoredManaSymbol.U)));

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Dismember extends CardImpl {
 
     public Dismember (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{BP}{BP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B/P}{B/P}");
 
         
         // Target creature gets -5/-5 until end of turn.

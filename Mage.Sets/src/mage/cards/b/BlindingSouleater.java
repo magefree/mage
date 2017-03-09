@@ -53,7 +53,7 @@ public class BlindingSouleater extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // {WP},{T}: Tap target creature. ( can be paid with either or 2 life.)
+        // {W/P},{T}: Tap target creature. ( can be paid with either or 2 life.)
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new TapTargetEffect(),
                 new PhyrexianManaCost(ColoredManaSymbol.W));

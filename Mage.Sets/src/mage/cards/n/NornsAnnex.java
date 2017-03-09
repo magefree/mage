@@ -42,11 +42,11 @@ import mage.constants.Zone;
 public class NornsAnnex extends CardImpl {
 
     public NornsAnnex(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}{WP}{WP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}{W/P}{W/P}");
 
-        // {WP} ({WP} can be paid with either or 2 life.)
-        // Creatures can't attack you or a planeswalker you control unless their controller pays {WP} for each of those creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{WP}"), true)));
+        // {W/P} ({W/P} can be paid with either or 2 life.)
+        // Creatures can't attack you or a planeswalker you control unless their controller pays {W/P} for each of those creatures.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{W/P}"), true)));
     }
 
     public NornsAnnex(final NornsAnnex card) {
