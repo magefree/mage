@@ -27,13 +27,14 @@
  */
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class PayLoyaltyCost extends CostImpl {
         Permanent planeswalker = game.getPermanent(sourceId);
         if (planeswalker != null && planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + amount >= 0 && planeswalker.canLoyaltyBeUsed(game)) {
             if (amount > 0) {
-                planeswalker.getCounters(game).addCounter(CounterType.LOYALTY.createInstance(amount));
+                planeswalker.addCounters(CounterType.LOYALTY.createInstance(amount), ability, game, null);
             } else if (amount < 0) {
                 planeswalker.removeCounters(CounterType.LOYALTY.getName(), Math.abs(amount), game);
             }
