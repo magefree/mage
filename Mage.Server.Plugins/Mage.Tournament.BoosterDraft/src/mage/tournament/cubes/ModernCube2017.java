@@ -34,7 +34,6 @@ import mage.game.draft.DraftCube;
  * @author fireshoes
  */
 public class ModernCube2017 extends DraftCube {
-
     public ModernCube2017() {
         super("Modern Cube 2017"); // http://magic.wizards.com/en/articles/archive/magic-online/modern-cube-cardlist-2017-03-02
 
@@ -60,6 +59,7 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Arbor Elf", ""));
         cubeCards.add(new CardIdentity("Arc Trail", ""));
         cubeCards.add(new CardIdentity("Archangel Avacyn", ""));
+        cubeCards.add(new CardIdentity("Archangel of Thune", ""));
         cubeCards.add(new CardIdentity("Arid Mesa", ""));
         cubeCards.add(new CardIdentity("Arlinn Kord", ""));
         cubeCards.add(new CardIdentity("Ashiok, Nightmare Weaver", ""));
@@ -70,6 +70,7 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Azure Mage", ""));
         cubeCards.add(new CardIdentity("Banefire", ""));
         cubeCards.add(new CardIdentity("Baneslayer Angel", ""));
+        cubeCards.add(new CardIdentity("Banishing Light", ""));
         cubeCards.add(new CardIdentity("Bant Charm", ""));
         cubeCards.add(new CardIdentity("Baral, Chief of Compliance", ""));
         cubeCards.add(new CardIdentity("Batterskull", ""));
@@ -124,6 +125,7 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Coalition Relic", ""));
         cubeCards.add(new CardIdentity("Coldsteel Heart", ""));
         cubeCards.add(new CardIdentity("Collective Defiance", ""));
+        cubeCards.add(new CardIdentity("Collective Effort", ""));
         cubeCards.add(new CardIdentity("Compulsive Research", ""));
         cubeCards.add(new CardIdentity("Condemn", ""));
         cubeCards.add(new CardIdentity("Condescend", ""));
@@ -249,13 +251,14 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Hellrider", ""));
         cubeCards.add(new CardIdentity("Herald of Torment", ""));
         cubeCards.add(new CardIdentity("Hero of Bladehold", ""));
+        cubeCards.add(new CardIdentity("Hero of Oxid Ridge", ""));
         cubeCards.add(new CardIdentity("Hero's Downfall", ""));
         cubeCards.add(new CardIdentity("Hinterland Harbor", ""));
         cubeCards.add(new CardIdentity("Honor of the Pure", ""));
         cubeCards.add(new CardIdentity("Hornet Nest", ""));
         cubeCards.add(new CardIdentity("Hornet Queen", ""));
         cubeCards.add(new CardIdentity("Huntmaster of the Fells", ""));
-        cubeCards.add(new CardIdentity("Hypotic Specter", ""));
+        cubeCards.add(new CardIdentity("Hypnotic Specter", ""));
         cubeCards.add(new CardIdentity("Icy Manipulator", ""));
         cubeCards.add(new CardIdentity("Imposing Sovereign", ""));
         cubeCards.add(new CardIdentity("Imprisoned in the Moon", ""));
@@ -268,7 +271,7 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Isolated Chapel", ""));
         cubeCards.add(new CardIdentity("Izzet Charm", ""));
         cubeCards.add(new CardIdentity("Jace Beleren", ""));
-        cubeCards.add(new CardIdentity("Jace, Architect of Though", ""));
+        cubeCards.add(new CardIdentity("Jace, Architect of Thought", ""));
         cubeCards.add(new CardIdentity("Jace, Unraveler of Secrets", ""));
         cubeCards.add(new CardIdentity("Jace, Vryn's Prodigy", ""));
         cubeCards.add(new CardIdentity("Jinxed Choker", ""));
@@ -280,7 +283,7 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Karplusan Forest", ""));
         cubeCards.add(new CardIdentity("Kessig Prowler", ""));
         cubeCards.add(new CardIdentity("Kessig Wolf Run", ""));
-        cubeCards.add(new CardIdentity("Kik-Jiki, Mirror Breaker", ""));
+        cubeCards.add(new CardIdentity("Kiki-Jiki, Mirror Breaker", ""));
         cubeCards.add(new CardIdentity("Kiora, Master of the Depths", ""));
         cubeCards.add(new CardIdentity("Kira, Great Glass-Spinner", ""));
         cubeCards.add(new CardIdentity("Kitchen Finks", ""));
@@ -297,8 +300,8 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Lightning Helix", ""));
         cubeCards.add(new CardIdentity("Lightning Mauler", ""));
         cubeCards.add(new CardIdentity("Lightning Strike", ""));
-        cubeCards.add(new CardIdentity("Liliana of the Veil", ""));
         cubeCards.add(new CardIdentity("Liliana Vess", ""));
+        cubeCards.add(new CardIdentity("Liliana of the Veil", ""));
         cubeCards.add(new CardIdentity("Liliana's Specter", ""));
         cubeCards.add(new CardIdentity("Liliana, Heretical Healer", ""));
         cubeCards.add(new CardIdentity("Liliana, the Last Hope", ""));
@@ -360,7 +363,7 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Overwhelming Stampede", ""));
         cubeCards.add(new CardIdentity("Pack Rat", ""));
         cubeCards.add(new CardIdentity("Pact of Negation", ""));
-        cubeCards.add(new CardIdentity("Palldium Myr", ""));
+        cubeCards.add(new CardIdentity("Palladium Myr", ""));
         cubeCards.add(new CardIdentity("Path to Exile", ""));
         cubeCards.add(new CardIdentity("Perilous Myr", ""));
         cubeCards.add(new CardIdentity("Pestermite", ""));
@@ -415,7 +418,7 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Rune Snag", ""));
         cubeCards.add(new CardIdentity("Rune-Scarred Demon", ""));
         cubeCards.add(new CardIdentity("Ruthless Ripper", ""));
-        cubeCards.add(new CardIdentity("Scader Foundry", ""));
+        cubeCards.add(new CardIdentity("Sacred Foundry", ""));
         cubeCards.add(new CardIdentity("Saheeli Rai", ""));
         cubeCards.add(new CardIdentity("Sakura-Tribe Elder", ""));
         cubeCards.add(new CardIdentity("Sarkhan, the Dragonspeaker", ""));
@@ -425,6 +428,7 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Seachrome Coast", ""));
         cubeCards.add(new CardIdentity("Search for Tomorrow", ""));
         cubeCards.add(new CardIdentity("Searing Blaze", ""));
+        cubeCards.add(new CardIdentity("Searing Blood", ""));
         cubeCards.add(new CardIdentity("Seeker of the Way", ""));
         cubeCards.add(new CardIdentity("Selesnya Charm", ""));
         cubeCards.add(new CardIdentity("Selfless Spirit", ""));
@@ -459,7 +463,7 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Sower of Temptation", ""));
         cubeCards.add(new CardIdentity("Spear of Heliod", ""));
         cubeCards.add(new CardIdentity("Spectral Procession", ""));
-        cubeCards.add(new CardIdentity("Spell Piece", ""));
+        cubeCards.add(new CardIdentity("Spell Pierce", ""));
         cubeCards.add(new CardIdentity("Spell Queller", ""));
         cubeCards.add(new CardIdentity("Spellskite", ""));
         cubeCards.add(new CardIdentity("Sphere of the Suns", ""));
@@ -488,15 +492,17 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Sword of Light and Shadow", ""));
         cubeCards.add(new CardIdentity("Sword of War and Peace", ""));
         cubeCards.add(new CardIdentity("Sylvan Advocate", ""));
+        cubeCards.add(new CardIdentity("Sylvan Caryatid", ""));
         cubeCards.add(new CardIdentity("Tamiyo, the Moon Sage", ""));
-        cubeCards.add(new CardIdentity("Tasigur, the Golder Fang", ""));
+        cubeCards.add(new CardIdentity("Tasigur, the Golden Fang", ""));
         cubeCards.add(new CardIdentity("Teferi, Mage of Zhalfir", ""));
         cubeCards.add(new CardIdentity("Temple Garden", ""));
         cubeCards.add(new CardIdentity("Temple of Epiphany", ""));
-        cubeCards.add(new CardIdentity("Temple of Maladay", ""));
+        cubeCards.add(new CardIdentity("Temple of Malady", ""));
         cubeCards.add(new CardIdentity("Temple of Mystery", ""));
         cubeCards.add(new CardIdentity("Temple of Silence", ""));
         cubeCards.add(new CardIdentity("Temple of Triumph", ""));
+        cubeCards.add(new CardIdentity("Temporal Isolation", ""));
         cubeCards.add(new CardIdentity("Temporal Mastery", ""));
         cubeCards.add(new CardIdentity("Terastodon", ""));
         cubeCards.add(new CardIdentity("Terramorphic Expanse", ""));
@@ -507,7 +513,7 @@ public class ModernCube2017 extends DraftCube {
         cubeCards.add(new CardIdentity("Thragtusk", ""));
         cubeCards.add(new CardIdentity("Threads of Disloyalty", ""));
         cubeCards.add(new CardIdentity("Thriving Grubs", ""));
-        cubeCards.add(new CardIdentity("Thurn, the Last Troll", ""));
+        cubeCards.add(new CardIdentity("Thrun, the Last Troll", ""));
         cubeCards.add(new CardIdentity("Thunderbreak Regent", ""));
         cubeCards.add(new CardIdentity("Thundermaw Hellkite", ""));
         cubeCards.add(new CardIdentity("Tidings", ""));
