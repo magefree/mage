@@ -28,8 +28,6 @@
 package mage.cards.p;
 
 import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -131,11 +129,18 @@ class PossibilityStormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        boolean noLongerOnStack = false; // spell was exiled already by another effect, for example NivMagus Elemental
+        if (spell == null) {
+            spell = ((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK));
+            noLongerOnStack = true;
+        }
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && spell != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
-            if (spellController != null
-                    && spellController.moveCardsToExile(spell, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
+            if (spellController != null) {
+                if (!noLongerOnStack) {
+                    spellController.moveCardsToExile(spell, source, game, true, source.getSourceId(), sourceObject.getIdName());
+                }
                 if (spellController.getLibrary().hasCards()) {
                     Library library = spellController.getLibrary();
                     Card card;
