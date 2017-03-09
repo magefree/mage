@@ -68,7 +68,7 @@ public class PayLoyaltyCost extends CostImpl {
         Permanent planeswalker = game.getPermanent(sourceId);
         if (planeswalker != null && planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + amount >= 0 && planeswalker.canLoyaltyBeUsed(game)) {
             if (amount > 0) {
-                planeswalker.addCounters(CounterType.LOYALTY.createInstance(amount), ability, game, null);
+                planeswalker.getCounters(game).addCounter(CounterType.LOYALTY.createInstance(amount));
             } else if (amount < 0) {
                 planeswalker.removeCounters(CounterType.LOYALTY.getName(), Math.abs(amount), game);
             }

@@ -192,22 +192,4 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
 
     }
-
-    @Test
-    public void testDoublePlaneswalkerLoyalty() {
-        addCard(Zone.BATTLEFIELD, playerA, "Tibalt, the Fiend-Blooded");
-
-        addCard(Zone.BATTLEFIELD, playerA, "Doubling Season");
-
-
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,"+1: Draw a card, then discard a card at random.");
-
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-
-        assertCounterCount("Tibalt, the Fiend-Blooded", CounterType.LOYALTY, 4);
-    }
 }
