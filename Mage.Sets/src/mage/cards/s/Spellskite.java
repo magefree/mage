@@ -61,8 +61,8 @@ public class Spellskite extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        // {UP}: Change a target of target spell or ability to Spellskite.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpellskiteEffect(), new ManaCostsImpl("{UP}"));
+        // {U/P}: Change a target of target spell or ability to Spellskite.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpellskiteEffect(), new ManaCostsImpl("{U/P}"));
         ability.addTarget(new TargetStackObject());
         this.addAbility(ability);
     }
@@ -129,12 +129,14 @@ class SpellskiteEffect extends OneShotEffect {
                     for (Target target : targets) {
                         for (UUID targetId : target.getTargets()) {
                             String name = getTargetName(targetId, game);
-                            if (!targetId.equals(source.getSourceId()) && target.getTargets().contains(source.getSourceId())) {
+                            if (targetId.equals(source.getSourceId())
+                                    || target.getTargets().contains(source.getSourceId())) {
                                 // you can't change this target to source because the source is already another targetId of that target.
                                 twoTimesTarget = true;
                                 continue;
                             }
-                            if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
+                            if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)
+                                    && !twoTimesTarget) {
                                 validTargets = true;
                                 if (name != null
                                         && controller.chooseUse(Outcome.Neutral, "Change target from " + name + " to " + sourceObject.getLogName() + '?', source, game)) {

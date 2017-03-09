@@ -31,11 +31,9 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.costs.*;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -62,6 +60,7 @@ import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -298,6 +297,9 @@ public abstract class AbilityImpl implements Ability {
                 && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, getId(), getSourceId(), getControllerId()), this)) {
             return false;
         }
+
+        handlePhyrexianManaCosts(game, sourceId, controller);
+
         for (UUID modeId : this.getModes().getSelectedModes()) {
             this.getModes().setActiveMode(modeId);
             //20121001 - 601.2c
@@ -501,6 +503,27 @@ public abstract class AbilityImpl implements Ability {
             }
         }
         return announceString.toString();
+    }
+
+    /**
+     * 601.2b
+     * If a cost that will be paid as the spell is being cast includes Phyrexian mana symbols,
+     * the player announces whether he or she intends to pay 2 life or the corresponding colored mana cost for each of those symbols.
+     */
+    private void handlePhyrexianManaCosts(Game game, UUID sourceId, Player controller) {
+        Iterator<ManaCost> costIterator = manaCostsToPay.iterator();
+        while(costIterator.hasNext()) {
+            ManaCost cost = costIterator.next();
+            if(cost instanceof PhyrexianManaCost) {
+                PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost)cost;
+                PayLifeCost payLifeCost = new PayLifeCost(2);
+                if(payLifeCost.canPay(this, sourceId, controller.getId(), game) &&
+                        controller.chooseUse(Outcome.LoseLife,  "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + "?", this, game)) {
+                    costIterator.remove();
+                    costs.add(payLifeCost);
+                }
+            }
+        }
     }
 
     /**

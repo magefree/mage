@@ -50,7 +50,7 @@ public class CorrosiveGale extends CardImpl {
     }
 
     public CorrosiveGale(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{GP}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G/P}");
 
 
         this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filter));

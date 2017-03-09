@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class MutagenicGrowth extends CardImpl {
 
     public MutagenicGrowth (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{GP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/P}");
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));

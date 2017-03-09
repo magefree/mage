@@ -823,9 +823,6 @@ public class HumanPlayer extends PlayerImpl {
     protected boolean playManaHandling(Ability abilityToCast, ManaCost unpaid, String promptText, Game game) {
         updateGameStatePriority("playMana", game);
         Map<String, Serializable> options = new HashMap<>();
-        if (unpaid.getText().contains("P}")) {
-            options.put(Constants.Option.SPECIAL_BUTTON, (Serializable) "Pay 2 life");
-        }
         game.firePlayManaEvent(playerId, "Pay " + promptText, options);
         waitForResponse(game);
         if (!this.canRespond()) {
@@ -838,18 +835,6 @@ public class HumanPlayer extends PlayerImpl {
         } else if (response.getString() != null && response.getString().equals("special")) {
             if (unpaid instanceof ManaCostsImpl) {
                 specialManaAction(unpaid, game);
-                // TODO: delve or convoke cards with PhyrexianManaCost won't work together (this combinaton does not exist yet)
-                @SuppressWarnings("unchecked")
-                ManaCostsImpl<ManaCost> costs = (ManaCostsImpl<ManaCost>) unpaid;
-                for (ManaCost cost : costs.getUnpaid()) {
-                    if (cost instanceof PhyrexianManaCost) {
-                        PhyrexianManaCost ph = (PhyrexianManaCost) cost;
-                        if (ph.canPay(null, null, playerId, game)) {
-                            ((PhyrexianManaCost) cost).pay(null, game, null, playerId, false, null);
-                        }
-                        break;
-                    }
-                }
             }
         } else if (response.getManaType() != null) {
             // this mana type can be paid once from pool
@@ -907,7 +892,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         Spell spell = game.getStack().getSpell(abilityToCast.getSourceId());
         if (spell != null && spell.isDoneActivatingManaAbilities()) {
-            game.informPlayer(this, "You can't no longer use activated mana abilities to pay for the current spell. Cancel and recast the spell and activate mana abilities first.");
+            game.informPlayer(this, "You can no longer use activated mana abilities to pay for the current spell. Cancel and recast the spell and activate mana abilities first.");
             return;
         }
         Zone zone = game.getState().getZone(object.getId());

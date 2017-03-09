@@ -51,33 +51,19 @@ public class PhyrexianManaCost extends ColoredManaCost {
     }
 
     @Override
-    public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
-        assignColored(ability, game, pool, this.mana, costToPay);
-    }
-
-    @Override
     public String getText() {
-        return '{' + mana.toString() + "P}";
+        return '{' + mana.toString() + "/P}";
+    }
+
+    public String getBaseText() {
+        return super.getText();
     }
 
     @Override
-    public PhyrexianManaCost getUnpaid() {
-        return this;
+    public ColoredManaCost getUnpaid() {
+        return new ColoredManaCost(this);
     }
 
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        if (!game.getPlayer(controllerId).isLifeTotalCanChange()) {
-            return false;
-        }
-        return game.getPlayer(controllerId).getLife() >= 2;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.paid = game.getPlayer(controllerId).loseLife(2, game, false) == 2;
-        return paid;
-    }
 
     @Override
     public PhyrexianManaCost copy() {

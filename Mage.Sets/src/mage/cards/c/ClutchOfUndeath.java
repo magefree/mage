@@ -25,37 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.n;
+package mage.cards.c;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
+import mage.abilities.condition.common.EnchantedCreatureSubtypeCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- * @author Loki
+ *
+ * @author JRHerlehy
  */
-public class NornsAnnex extends CardImpl {
+public class ClutchOfUndeath extends CardImpl {
 
-    public NornsAnnex(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}{W/P}{W/P}");
+    public ClutchOfUndeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
+        
+        this.subtype.add("Aura");
 
-        // {W/P} ({W/P} can be paid with either or 2 life.)
-        // Creatures can't attack you or a planeswalker you control unless their controller pays {W/P} for each of those creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{W/P}"), true)));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Enchanted creature gets +3/+3 as long as it's a Zombie. Otherwise, it gets -3/-3.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(
+                        new BoostEnchantedEffect(3, 3),
+                        new BoostEnchantedEffect(-3, -3),
+                        new EnchantedCreatureSubtypeCondition("Zombie"),
+                        "Enchanted creature gets +3/+3 as long as it's a Zombie. Otherwise, it gets -3/-3.")
+                )
+        );
     }
 
-    public NornsAnnex(final NornsAnnex card) {
+    public ClutchOfUndeath(final ClutchOfUndeath card) {
         super(card);
     }
 
     @Override
-    public NornsAnnex copy() {
-        return new NornsAnnex(this);
+    public ClutchOfUndeath copy() {
+        return new ClutchOfUndeath(this);
     }
-
 }

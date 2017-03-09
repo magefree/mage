@@ -47,7 +47,7 @@ import mage.constants.Zone;
 public class MoltensteelDragon extends CardImpl {
 
     public MoltensteelDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{RP}{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{R/P}{R/P}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(4);

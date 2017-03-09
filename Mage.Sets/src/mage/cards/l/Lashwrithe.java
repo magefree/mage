@@ -64,7 +64,7 @@ public class Lashwrithe extends CardImpl {
         this.addAbility(new LivingWeaponAbility());
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{BP}{BP}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{B/P}{B/P}")));
     }
 
     public Lashwrithe(final Lashwrithe card) {

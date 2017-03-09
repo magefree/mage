@@ -44,7 +44,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
 
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
-        addCard(Zone.HAND, playerA, "Phyrexian Metamorph"); // {3}{UP}
+        addCard(Zone.HAND, playerA, "Phyrexian Metamorph"); // {3}{U/P}
         addCard(Zone.HAND, playerA, "Cloudshift");
 
         //Flying
@@ -64,7 +64,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertLife(playerA, 24);
+        assertLife(playerA, 22);
         assertLife(playerB, 20);
 
         assertGraveyardCount(playerA, "Cloudshift", 1);
@@ -87,7 +87,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
-        addCard(Zone.HAND, playerA, "Phyrexian Metamorph"); // {3}{UP}
+        addCard(Zone.HAND, playerA, "Phyrexian Metamorph"); // {3}{U/P}
 
         // Flying
         // When Brago, King Eternal deals combat damage to a player, exile any number of target nonland permanents you control, then return those cards to the battlefield under their owner's control.
@@ -109,7 +109,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
+        assertLife(playerA, 18);
         assertLife(playerB, 18);
 
         assertPermanentCount(playerA, "Ponyback Brigade", 1);
@@ -128,7 +128,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
-        addCard(Zone.HAND, playerA, "Phyrexian Metamorph"); // {3}{UP}
+        addCard(Zone.HAND, playerA, "Phyrexian Metamorph"); // {3}{U/P}
 
         addCard(Zone.BATTLEFIELD, playerB, "Alloy Myr", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Kitesail", 1);

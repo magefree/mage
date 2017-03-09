@@ -27,9 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.SpellAbility;
@@ -59,6 +56,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetArtifactPermanent;
+import mage.target.targetpointer.FixedTargets;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -135,7 +137,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean returnValue = false;
-        List<UUID> targettedPermanents = new ArrayList<>(0);
+        List<UUID> targetedPermanentIds = new ArrayList<>(0);
         Player player = game.getPlayer(this.getControllerId());
         if (player != null) {
             if (event.getPlayerId().equals(this.getControllerId())) {
@@ -147,7 +149,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
                             for (UUID targetId : target.getTargets()) {
                                 if (game.getBattlefield().containsPermanent(targetId)) {
                                     returnValue = true;
-                                    targettedPermanents.add(targetId);
+                                    targetedPermanentIds.add(targetId);
                                 }
                             }
                         }
@@ -156,7 +158,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
                         for (UUID targetId : effect.getTargetPointer().getTargets(game, spellAbility)) {
                             if (game.getBattlefield().containsPermanent(targetId)) {
                                 returnValue = true;
-                                targettedPermanents.add(targetId);
+                                targetedPermanentIds.add(targetId);
                             }
                         }
                     }
@@ -166,7 +168,15 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
         for (Effect effect : this.getEffects()) {
             if (effect instanceof DackFaydenEmblemEffect) {
                 DackFaydenEmblemEffect dackEffect = (DackFaydenEmblemEffect) effect;
-                dackEffect.setPermanents(targettedPermanents);
+                List<Permanent> permanents = new ArrayList<>();
+                for(UUID permanentId : targetedPermanentIds) {
+                    Permanent permanent = game.getPermanent(permanentId);
+                    if(permanent != null) {
+                        permanents.add(permanent);
+                    }
+                }
+
+                dackEffect.setTargets(permanents, game);
             }
         }
         return returnValue;
@@ -180,7 +190,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
 class DackFaydenEmblemEffect extends ContinuousEffectImpl {
 
-    protected List<UUID> permanents;
+    protected FixedTargets fixedTargets;
 
     DackFaydenEmblemEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
@@ -189,7 +199,7 @@ class DackFaydenEmblemEffect extends ContinuousEffectImpl {
 
     DackFaydenEmblemEffect(final DackFaydenEmblemEffect effect) {
         super(effect);
-        this.permanents = effect.permanents;
+        this.fixedTargets = effect.fixedTargets;
     }
 
     @Override
@@ -199,7 +209,7 @@ class DackFaydenEmblemEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID permanentId : this.permanents) {
+        for (UUID permanentId : fixedTargets.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
                 permanent.changeControllerId(source.getControllerId(), game);
@@ -208,7 +218,7 @@ class DackFaydenEmblemEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    public void setPermanents(List<UUID> targettedPermanents) {
-        this.permanents = new ArrayList<>(targettedPermanents);
+    public void setTargets(List<Permanent> targetedPermanents, Game game) {
+        this.fixedTargets = new FixedTargets(targetedPermanents, game);
     }
 }

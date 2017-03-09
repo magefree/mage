@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
 public class RuthlessInvasion extends CardImpl {
 
     public RuthlessInvasion (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R/P}");
 
         this.getSpellAbility().addEffect(new RuthlessInvasionEffect());
     }

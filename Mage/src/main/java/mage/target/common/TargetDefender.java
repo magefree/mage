@@ -135,12 +135,12 @@ public class TargetDefender extends TargetImpl {
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(player, game)) {
+            if (player != null && (player.canBeTargetedBy(targetSource, sourceControllerId, game) || notTarget)  && filter.match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }
         for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, game)) {
+            if ((permanent.canBeTargetedBy(targetSource, sourceControllerId, game) || notTarget)  && filter.match(permanent, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }

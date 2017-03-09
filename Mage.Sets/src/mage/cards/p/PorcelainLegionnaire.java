@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 public class PorcelainLegionnaire extends CardImpl {
 
     public PorcelainLegionnaire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{WP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W/P}");
         this.subtype.add("Soldier");
 
         this.power = new MageInt(3);
