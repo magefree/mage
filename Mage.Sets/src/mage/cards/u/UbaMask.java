@@ -146,11 +146,14 @@ class UbaMaskPlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(objectId);
-        if (card != null && affectedControllerId.equals(card.getOwnerId()) && game.getState().getZone(card.getId()) == Zone.EXILED) {
+        if (card != null
+                && affectedControllerId.equals(card.getOwnerId())
+                && game.getState().getZone(card.getId()) == Zone.EXILED) {
             UbaMaskExiledCardsWatcher watcher = (UbaMaskExiledCardsWatcher) game.getState().getWatchers().get(UbaMaskExiledCardsWatcher.class.getName());
             if (watcher != null) {
                 List<MageObjectReference> exiledThisTurn = watcher.getUbaMaskExiledCardsThisTurn(affectedControllerId);
-                return exiledThisTurn != null && exiledThisTurn.contains(new MageObjectReference(card, game));
+                return exiledThisTurn != null
+                        && exiledThisTurn.contains(new MageObjectReference(card, game));
             }
         }
         return false;
@@ -167,11 +170,7 @@ class UbaMaskExiledCardsWatcher extends Watcher {
 
     public UbaMaskExiledCardsWatcher(final UbaMaskExiledCardsWatcher watcher) {
         super(watcher);
-        for (UUID playerId : watcher.exiledCards.keySet()) {
-            List<MageObjectReference> cards = new ArrayList<>();
-            cards.addAll(watcher.exiledCards.get(playerId));
-            this.exiledCards.put(playerId, cards);
-        }
+        exiledCards.putAll(watcher.exiledCards);
     }
 
     @Override
@@ -194,12 +193,11 @@ class UbaMaskExiledCardsWatcher extends Watcher {
         List<MageObjectReference> exiledCardsByPlayer;
         if (exiledCards.containsKey(playerId)) {
             exiledCardsByPlayer = exiledCards.get(playerId);
-
         } else {
             exiledCardsByPlayer = new ArrayList<>();
         }
         exiledCardsByPlayer.add(new MageObjectReference(card, game));
-
+        exiledCards.put(playerId, exiledCardsByPlayer);
     }
 
     public List<MageObjectReference> getUbaMaskExiledCardsThisTurn(UUID playerId) {
