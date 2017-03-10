@@ -50,7 +50,7 @@ public class SolemnRecruit extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
 
         this.subtype.add("Dwarf");
-        this.subtype.add("Soldier");
+        this.subtype.add("Warrior");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
