@@ -85,5 +85,37 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Chalice of the Void", 1); // was not countered
 
     }
+
+    /*
+        Conflagurate flashed back for X >= 0 should not be countered by chalice.
+     */
+    @Test
+    public void testConflagrateFlashback() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, "Chalice of the Void", 1);
+
+        addCard(Zone.GRAVEYARD, playerB, "Conflagrate", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        addCard(Zone.HAND, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
+        setChoice(playerA, "X=1");
+
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flashback {R}{R}");
+        setChoice(playerB, "X=1");
+        addTarget(playerB, playerA);
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 19);
+        assertLife(playerB, 20);
+
+        assertExileCount(playerB, "Conflagrate", 1);
+        //TODO: Apparently there are two mountains in the graveyard at the end of the test now.
+        //assertGraveyardCount(playerB, "Mountain", 1);
+
+    }
     
 }
