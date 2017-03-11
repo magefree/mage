@@ -9,5 +9,5 @@ import mage.game.permanent.Permanent;
  */
 public abstract class ApplyToPermanent extends ApplyToMageObject implements Serializable {
 
-    public abstract Boolean apply(Game game, Permanent permanent);
+    public abstract boolean apply(Game game, Permanent permanent);
 }

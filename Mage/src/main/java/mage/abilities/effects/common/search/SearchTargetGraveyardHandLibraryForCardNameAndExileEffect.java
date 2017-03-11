@@ -57,9 +57,9 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
      * Sowing Salt
      * 2/1/2005: The copies must be found if they are in publicly viewable zones. Finding copies while searching private zones is optional.
      */
-    protected Boolean graveyardExileOptional;
+    protected boolean graveyardExileOptional;
 
-    public SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(Boolean graveyardExileOptional, String searchWhatText, String searchForText) {
+    public SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText) {
         super(Outcome.Exile);
         this.searchWhatText = searchWhatText;
         this.searchForText = searchForText;

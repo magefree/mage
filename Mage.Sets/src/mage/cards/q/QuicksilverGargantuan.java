@@ -70,14 +70,14 @@ public class QuicksilverGargantuan extends CardImpl {
 class QuicksilverGargantuanApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         permanent.getPower().modifyBaseValue(7);
         permanent.getToughness().modifyBaseValue(7);
         return true;
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         mageObject.getPower().modifyBaseValue(7);
         mageObject.getToughness().modifyBaseValue(7);
         return true;

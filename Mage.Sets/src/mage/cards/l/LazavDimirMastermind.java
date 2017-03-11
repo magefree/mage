@@ -130,7 +130,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
 class LazavDimirMastermindApplier extends ApplyToPermanent {
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new LazavDimirMastermindEffect(), true,
                 new FilterCreatureCard("a creature card"),
@@ -143,7 +143,7 @@ class LazavDimirMastermindApplier extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new LazavDimirMastermindEffect(), true,
                 new FilterCreatureCard("a creature card"),

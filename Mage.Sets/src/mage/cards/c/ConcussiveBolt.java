@@ -110,7 +110,7 @@ class ConcussiveBoltRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Boolean metalcraft = (Boolean) this.getValue("MetalcraftConcussiveBolt");
+        boolean metalcraft = (Boolean) this.getValue("MetalcraftConcussiveBolt");
         if (metalcraft && permanent.getControllerId().equals(source.getFirstTarget())) {
             return true;
         }

@@ -91,7 +91,7 @@ class EssenceBacklashEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Boolean result = false;
+        boolean result = false;
         Spell spell = game.getStack().getSpell(source.getFirstTarget());
         if (spell != null) {
             Player spellController = game.getPlayer(spell.getControllerId());

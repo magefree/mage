@@ -55,7 +55,7 @@ public class GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public Float getAverageSize() {
+    public float getAverageSize() {
         return 26.7f;
     }
 
@@ -1670,7 +1670,7 @@ public class GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public Integer getTotalImages() {
+    public int getTotalImages() {
         if (copyUrlToImage == null) {
             setupLinks();
         }
@@ -1681,7 +1681,7 @@ public class GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public Boolean isTokenSource() {
+    public boolean isTokenSource() {
         return false;
     }
 

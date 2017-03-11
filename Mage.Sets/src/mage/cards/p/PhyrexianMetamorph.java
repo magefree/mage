@@ -69,12 +69,12 @@ public class PhyrexianMetamorph extends CardImpl {
 
         ApplyToPermanent phyrexianMetamorphApplier = new ApplyToPermanent() {
             @Override
-            public Boolean apply(Game game, Permanent permanent) {
+            public boolean apply(Game game, Permanent permanent) {
                 return apply(game, (MageObject) permanent);
             }
 
             @Override
-            public Boolean apply(Game game, MageObject mageObject) {
+            public boolean apply(Game game, MageObject mageObject) {
                 if (!mageObject.isArtifact()) {
                     mageObject.getCardType().add(CardType.ARTIFACT);
                 }

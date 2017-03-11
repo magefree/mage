@@ -45,7 +45,7 @@ public class CardTypeApplier extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         if (!permanent.getCardType().contains(cardType)) {
             permanent.getCardType().add(cardType);
         }
@@ -53,7 +53,7 @@ public class CardTypeApplier extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         if (!mageObject.getCardType().contains(cardType)) {
             mageObject.getCardType().add(cardType);
         }
