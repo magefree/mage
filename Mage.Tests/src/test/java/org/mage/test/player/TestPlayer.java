@@ -190,6 +190,16 @@ public class TestPlayer implements Player {
                 }
             }
             return false;
+        } else if (groups[2].startsWith("spellCopyOnStack=")) {
+            String spellOnStack = groups[2].substring(17);
+            for (StackObject stackObject : game.getStack()) {
+                if (stackObject.getStackAbility().toString().contains(spellOnStack)) {
+                    if (stackObject.isCopy()) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         } else if (groups[2].startsWith("!spellOnStack=")) {
             String spellNotOnStack = groups[2].substring(14);
             for (StackObject stackObject : game.getStack()) {
@@ -223,7 +233,7 @@ public class TestPlayer implements Player {
         boolean result = true;
         for (int i = 1; i < groupsForTargetHandling.length; i++) {
             String group = groupsForTargetHandling[i];
-            if (group.startsWith("spellOnStack") || group.startsWith("spellOnTopOfStack") || group.startsWith("!spellOnStack") || group.startsWith("target=null") || group.startsWith("manaInPool=")) {
+            if (group.startsWith("spell") || group.startsWith("!spell") || group.startsWith("target=null") || group.startsWith("manaInPool=")) {
                 break;
             }
             if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {

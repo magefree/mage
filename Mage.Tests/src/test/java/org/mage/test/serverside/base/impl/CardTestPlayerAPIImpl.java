@@ -1022,6 +1022,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public enum StackClause {
 
         WHILE_ON_STACK,
+        WHILE_COPY_ON_STACK,
         WHILE_NOT_ON_STACK
     }
 
@@ -1105,6 +1106,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param targetName if not target has to be defined use the constant
      * NO_TARGET
      * @param spellOnStack
+     * @param clause
      */
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack, StackClause clause) {
         StringBuilder sb = new StringBuilder("activate:").append(ability);
@@ -1112,7 +1114,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             sb.append("$target=").append(targetName);
         }
         if (spellOnStack != null && !spellOnStack.isEmpty()) {
-            sb.append('$').append(StackClause.WHILE_ON_STACK.equals(clause) ? "" : "!").append("spellOnStack=").append(spellOnStack);
+            sb.append('$');
+            switch (clause) {
+                case WHILE_ON_STACK:
+                    sb.append("spellOnStack=");
+                    break;
+                case WHILE_NOT_ON_STACK:
+                    sb.append("!spellOnStack=");
+                    break;
+                case WHILE_COPY_ON_STACK:
+                    sb.append("spellCopyOnStack=");
+                    break;
+            }
+            sb.append(spellOnStack);
         }
         player.addAction(turnNum, step, sb.toString());
     }

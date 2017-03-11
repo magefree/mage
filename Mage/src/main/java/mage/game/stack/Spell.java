@@ -27,6 +27,10 @@
  */
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -62,11 +66,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.util.GameLog;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -394,7 +393,8 @@ public class Spell extends StackObjImpl implements Card {
                 }
             }
         } else {
-            card.removeFromZone(game, Zone.STACK, sourceId);
+            // Copied spell, only remove from stack
+            game.getStack().remove(this);
         }
     }
 
