@@ -53,7 +53,7 @@ public class PhantasmalImage extends CardImpl {
 
     ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
         @Override
-        public Boolean apply(Game game, Permanent permanent) {
+        public boolean apply(Game game, Permanent permanent) {
             if (!permanent.getSubtype(game).contains("Illusion")) {
                 permanent.getSubtype(game).add("Illusion");
             }
@@ -64,7 +64,7 @@ public class PhantasmalImage extends CardImpl {
         }
 
         @Override
-        public Boolean apply(Game game, MageObject mageObject) {
+        public boolean apply(Game game, MageObject mageObject) {
             if (!mageObject.getSubtype(game).contains("Illusion")) {
                 mageObject.getSubtype(game).add("Illusion");
             }

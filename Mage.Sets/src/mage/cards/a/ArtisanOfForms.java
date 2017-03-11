@@ -78,7 +78,7 @@ public class ArtisanOfForms extends CardImpl {
 class ArtisanOfFormsApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         Effect effect = new CopyPermanentEffect(new ArtisanOfFormsApplyToPermanent());
         effect.setText("have {this} become a copy of target creature and gain this ability");
         mageObject.getAbilities().add(new HeroicAbility(effect, true));
@@ -86,7 +86,7 @@ class ArtisanOfFormsApplyToPermanent extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         Effect effect = new CopyPermanentEffect(new ArtisanOfFormsApplyToPermanent());
         effect.setText("have {this} become a copy of target creature and gain this ability");
         permanent.addAbility(new HeroicAbility(effect, true), game);

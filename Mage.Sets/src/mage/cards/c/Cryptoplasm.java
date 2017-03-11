@@ -102,7 +102,7 @@ class CryptoplasmEffect extends OneShotEffect {
         if (creatureToCopy != null) {
             ApplyToPermanent applier = new ApplyToPermanent() {
                 @Override
-                public Boolean apply(Game game, Permanent permanent) {
+                public boolean apply(Game game, Permanent permanent) {
                     Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
                     upkeepAbility.addTarget(new TargetCreaturePermanent());
                     permanent.addAbility(upkeepAbility, source.getSourceId(), game);
@@ -110,7 +110,7 @@ class CryptoplasmEffect extends OneShotEffect {
                 }
 
                 @Override
-                public Boolean apply(Game game, MageObject mageObject) {
+                public boolean apply(Game game, MageObject mageObject) {
                     Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
                     upkeepAbility.addTarget(new TargetCreaturePermanent());
                     mageObject.getAbilities().add(upkeepAbility);

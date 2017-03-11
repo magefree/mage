@@ -173,7 +173,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
                     // Check if spell's color matches the imprinted card
                     ObjectColor spellColor = spell.getColor(game);
                     ObjectColor imprintedColor = imprintedCard.getColor(game);
-                    Boolean matches = false;
+                    boolean matches = false;
 
                     if (spellColor.shares(imprintedColor)) {
                         matches = true;

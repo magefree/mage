@@ -10,13 +10,13 @@ import mage.game.permanent.Permanent;
 public class EmptyApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         // do nothing
         return true;
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         return true;
     }
 

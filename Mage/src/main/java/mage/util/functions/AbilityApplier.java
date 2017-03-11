@@ -45,13 +45,13 @@ public class AbilityApplier extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         permanent.addAbility(ability, game);
         return true;
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         mageObject.getAbilities().add(ability);
         return true;
     }

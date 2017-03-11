@@ -88,7 +88,7 @@ class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
         this(Zone.GRAVEYARD, effect, optional);
     }
 
-    public AkoumFirebirdLandfallAbility (Zone zone, Effect effect, Boolean optional ) {
+    public AkoumFirebirdLandfallAbility (Zone zone, Effect effect, boolean optional ) {
         super(zone, effect, optional);
     }
 

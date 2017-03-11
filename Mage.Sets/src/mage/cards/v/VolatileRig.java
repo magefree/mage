@@ -89,7 +89,7 @@ public class VolatileRig extends CardImpl {
 
 class VolatileRigTriggeredAbility extends TriggeredAbilityImpl {
 
-    private Boolean triggerdThisCombatStep = false;
+    private boolean triggerdThisCombatStep = false;
 
     public VolatileRigTriggeredAbility() {
         super(Zone.BATTLEFIELD, new VolatileRigEffect());

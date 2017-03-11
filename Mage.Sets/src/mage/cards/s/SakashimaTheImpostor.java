@@ -80,7 +80,7 @@ public class SakashimaTheImpostor extends CardImpl {
 class SakashimaTheImpostorApplier extends ApplyToPermanent {
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         if (!permanent.getSupertype().contains("Legendary")) {
             permanent.getSupertype().add("Legendary");
         }
@@ -94,7 +94,7 @@ class SakashimaTheImpostorApplier extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         if (!mageObject.getSupertype().contains("Legendary")) {
             mageObject.getSupertype().add("Legendary");
         }

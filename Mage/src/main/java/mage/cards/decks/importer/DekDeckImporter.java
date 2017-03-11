@@ -20,7 +20,7 @@ public class DekDeckImporter extends DeckImporter {
             // e.g. <Cards CatID="61202" Quantity="1" Sideboard="false" Name="Vildin-Pack Outcast" />
             Integer cardCount = Integer.parseInt(extractAttribute(line, "Quantity"));
             String cardName = extractAttribute(line, "Name");
-            Boolean isSideboard = "true".equals(extractAttribute(line, "Sideboard"));
+            boolean isSideboard = "true".equals(extractAttribute(line, "Sideboard"));
             CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);
             if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(cardName).append("' at line ").append(lineCount).append('\n');

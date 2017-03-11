@@ -81,7 +81,7 @@ public class Gigantoplasm extends CardImpl {
 class GigantoplasmApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         DynamicValue variableMana = new ManacostVariableValue();
         Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
@@ -91,7 +91,7 @@ class GigantoplasmApplyToPermanent extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         DynamicValue variableMana = new ManacostVariableValue();
         Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");

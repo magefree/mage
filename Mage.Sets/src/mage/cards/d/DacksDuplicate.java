@@ -75,7 +75,7 @@ public class DacksDuplicate extends CardImpl {
 class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         /**
          * 29/05/2014	The ability of Dack’s Duplicate doesn’t target the
          * creature.
@@ -86,7 +86,7 @@ class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         mageObject.getAbilities().add(new DethroneAbility());
         mageObject.getAbilities().add(HasteAbility.getInstance());
         return true;
