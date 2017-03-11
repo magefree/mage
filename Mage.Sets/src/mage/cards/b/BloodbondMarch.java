@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -43,8 +44,6 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -88,14 +87,18 @@ public class BloodbondMarch extends CardImpl {
 
             Spell spell = (Spell) game.getStack().getStackObject(targetPointer.getFirst(game, source));
 
-            if (spell == null) return false;
+            if (spell == null) {
+                return false;
+            }
 
             FilterCard filter = new FilterCard();
             filter.add(new NamePredicate(spell.getName()));
 
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                player.moveCards(player.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
+                if (player != null) {
+                    player.moveCards(player.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
+                }
             }
 
             return true;
