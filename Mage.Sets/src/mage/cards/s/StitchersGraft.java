@@ -33,20 +33,20 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.UnattachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -55,19 +55,17 @@ import mage.game.events.GameEvent.EventType;
 public class StitchersGraft extends CardImpl {
 
     public StitchersGraft(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +3/+3.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));
 
         // Whenever equipped creature attacks, it doesn't untap during its controller's next untap step.
-        Effect effect = new GainAbilityAttachedEffect(new StitchersGraftTriggeredAbility(), AttachmentType.EQUIPMENT);
-        effect.setText("Equipped creature has \"Whenever equipped creature attacks, it doesn't untap during its controller's next untap step.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new StitchersGraftTriggeredAbility());
 
         // Whenever Stitcher's Graft becomes unattached from a permanent, sacrifice that permanent.
-        effect = new SacrificeTargetEffect();
+        Effect effect = new SacrificeTargetEffect();
         effect.setText("sacrifice that permanent");
         this.addAbility(new UnattachedTriggeredAbility(effect, false));
 
@@ -88,7 +86,7 @@ public class StitchersGraft extends CardImpl {
 class StitchersGraftTriggeredAbility extends TriggeredAbilityImpl {
 
     public StitchersGraftTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepSourceEffect());
+        super(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect());
     }
 
     public StitchersGraftTriggeredAbility(final StitchersGraftTriggeredAbility ability) {
@@ -107,7 +105,12 @@ class StitchersGraftTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+        Permanent equipment = game.getPermanent(this.sourceId);
+        if (equipment != null && equipment.getAttachedTo() != null
+                && event.getSourceId().equals(equipment.getAttachedTo())) {
+            for (Effect effect : getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
+            }
             return true;
         }
         return false;
@@ -115,6 +118,6 @@ class StitchersGraftTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature attacks, it doesn't untap during its controller's next untap step";
+        return "Whenever equipped creature attacks, it doesn't untap during its controller's next untap step.";
     }
 }
