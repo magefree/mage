@@ -13,7 +13,7 @@ import mage.game.permanent.Permanent;
  */
 public class DomainValue implements DynamicValue {
 
-    private Integer amount;
+    private int amount;
     private boolean countTargetPlayer;
     private UUID playerId;
 
@@ -25,16 +25,16 @@ public class DomainValue implements DynamicValue {
         this(1, countTargetPlayer);
     }
 
-    public DomainValue(Integer amount) {
+    public DomainValue(int amount) {
         this(amount, false);
     }
 
-    public DomainValue(Integer amount, boolean countTargetPlayer) {
+    public DomainValue(int amount, boolean countTargetPlayer) {
         this.amount = amount;
         this.countTargetPlayer = countTargetPlayer;
     }
 
-    public DomainValue(Integer amount, UUID playerId) {
+    public DomainValue(int amount, UUID playerId) {
         this(amount, false);
         this.playerId = playerId;
     }
@@ -89,10 +89,10 @@ public class DomainValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return amount.toString();
+        return String.valueOf(amount);
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return amount;
     }
 

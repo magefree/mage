@@ -225,7 +225,7 @@ public class MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
-    public Float getAverageSize() {
+    public float getAverageSize() {
         return 50.0f;
     }
 
@@ -240,12 +240,12 @@ public class MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
-    public Integer getTotalImages() {
+    public int getTotalImages() {
         return -1;
     }
 
     @Override
-    public Boolean isTokenSource() {
+    public boolean isTokenSource() {
         return false;
     }
 

@@ -132,7 +132,7 @@ class CrownOfTheAgesEffect extends OneShotEffect {
         Permanent fromPermanent = game.getPermanent(aura.getAttachedTo());
         Player controller = game.getPlayer(source.getControllerId());
         if (fromPermanent != null && controller != null) {
-            Boolean passed = true;
+            boolean passed = true;
             FilterCreaturePermanent filterChoice = new FilterCreaturePermanent("another creature");
             filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));
 

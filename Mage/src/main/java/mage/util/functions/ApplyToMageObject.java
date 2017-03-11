@@ -36,5 +36,5 @@ import mage.game.Game;
  */
 public abstract class ApplyToMageObject {
 
-    public abstract Boolean apply(Game game, MageObject mageObject);
+    public abstract boolean apply(Game game, MageObject mageObject);
 }

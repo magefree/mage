@@ -39,7 +39,7 @@ import mage.game.Game;
 public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
 
     private Duration duration;
-    private Boolean triggerOnlyOnce;
+    private boolean triggerOnlyOnce;
 
     public DelayedTriggeredAbility(Effect effect) {
         this(effect, Duration.EndOfGame);
@@ -49,11 +49,11 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
         this(effect, duration, true);
     }
 
-    public DelayedTriggeredAbility(Effect effect, Duration duration, Boolean triggerOnlyOnce) {
+    public DelayedTriggeredAbility(Effect effect, Duration duration, boolean triggerOnlyOnce) {
         this(effect, duration, triggerOnlyOnce, false);
     }
 
-    public DelayedTriggeredAbility(Effect effect, Duration duration, Boolean triggerOnlyOnce, boolean optional) {
+    public DelayedTriggeredAbility(Effect effect, Duration duration, boolean triggerOnlyOnce, boolean optional) {
         super(Zone.ALL, effect, optional);
         this.duration = duration;
         this.triggerOnlyOnce = triggerOnlyOnce;
@@ -72,7 +72,7 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
         return duration;
     }
 
-    public Boolean getTriggerOnlyOnce() {
+    public boolean getTriggerOnlyOnce() {
         return triggerOnlyOnce;
     }
 

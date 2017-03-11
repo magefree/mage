@@ -354,7 +354,7 @@ public class WizardCardsImageSource implements CardImageSource {
         return doc;
     }
 
-    private Map<String, String> getLandVariations(Integer multiverseId, String cardName) throws IOException, NumberFormatException {
+    private Map<String, String> getLandVariations(int multiverseId, String cardName) throws IOException, NumberFormatException {
         String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
         Document landDoc = getDocument(urlLandDocument);
         Elements variations = landDoc.select("a.variationlink");
@@ -373,11 +373,11 @@ public class WizardCardsImageSource implements CardImageSource {
         return links;
     }
 
-    private static String generateLink(Integer landMultiverseId) {
+    private static String generateLink(int landMultiverseId) {
         return "/Handlers/Image.ashx?multiverseid=" +landMultiverseId + "&type=card";
     }
 
-    private Integer getLocalizedMultiverseId(String preferedLanguage, Integer multiverseId) throws IOException {
+    private int getLocalizedMultiverseId(String preferedLanguage, Integer multiverseId) throws IOException {
         if (preferedLanguage.equals("en")) {
             return multiverseId;
         }
@@ -474,18 +474,18 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public Float getAverageSize() {
+    public float getAverageSize() {
         return 60.0f;
     }
 
     private final class GetImageLinkTask implements Runnable {
 
-        private final Integer multiverseId;
+        private final int multiverseId;
         private final String cardName;
         private final String preferedLanguage;
         private final ConcurrentHashMap setLinks;
 
-        public GetImageLinkTask(Integer multiverseId, String cardName, String preferedLanguage, ConcurrentHashMap setLinks) {
+        public GetImageLinkTask(int multiverseId, String cardName, String preferedLanguage, ConcurrentHashMap setLinks) {
             this.multiverseId = multiverseId;
             this.cardName = cardName;
             this.preferedLanguage = preferedLanguage;
@@ -509,12 +509,12 @@ public class WizardCardsImageSource implements CardImageSource {
     }
     
     @Override
-    public Integer getTotalImages() {
+    public int getTotalImages() {
         return -1;
     }
     
     @Override
-    public Boolean isTokenSource() {
+    public boolean isTokenSource() {
         return false;
     }
     

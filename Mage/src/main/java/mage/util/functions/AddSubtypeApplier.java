@@ -22,7 +22,7 @@ public class AddSubtypeApplier extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         if (!permanent.getSubtype(game).contains(subtype)) {
             permanent.getSubtype(game).add(subtype);
         }
@@ -30,7 +30,7 @@ public class AddSubtypeApplier extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         if (!mageObject.getSubtype(game).contains(subtype)) {
             mageObject.getSubtype(game).add(subtype);
         }

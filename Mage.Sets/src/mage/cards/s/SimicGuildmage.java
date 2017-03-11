@@ -206,7 +206,7 @@ class MoveAuraEffect extends OneShotEffect {
         Permanent fromPermanent = game.getPermanent(aura.getAttachedTo());
         Player controller = game.getPlayer(source.getControllerId());
         if (fromPermanent != null && controller != null) {
-            Boolean passed = true;
+            boolean passed = true;
             FilterPermanent filterChoice = new FilterPermanent("a different permanent with the same controller as the target to attach the enchantments to");
             filterChoice.add(new ControllerIdPredicate(fromPermanent.getControllerId()));
             filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));

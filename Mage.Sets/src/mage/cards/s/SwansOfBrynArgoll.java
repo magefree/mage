@@ -95,7 +95,7 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
         if (preventionEffectData.getPreventedDamage() > 0) {
-            Boolean passed = false;
+            boolean passed = false;
             MageObject sourceOfDamage = game.getObject(event.getSourceId());
             if (sourceOfDamage != null) {
                 Spell spell = game.getStack().getSpell(sourceOfDamage.getId());

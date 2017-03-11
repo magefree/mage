@@ -20,7 +20,7 @@ public class AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility extends DelayedTr
         this(effect, Duration.Custom, true);
     }
 
-    public AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(Effect effect, Duration duration, Boolean triggerOnlyOnce) {
+    public AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(Effect effect, Duration duration, boolean triggerOnlyOnce) {
         super(effect, duration, triggerOnlyOnce);
     }
 

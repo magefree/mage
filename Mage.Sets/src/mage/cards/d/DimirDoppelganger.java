@@ -130,7 +130,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
 class DimirDoppelgangerApplier extends ApplyToPermanent {
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         permanent.getAbilities().add(ability);
@@ -138,7 +138,7 @@ class DimirDoppelgangerApplier extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         mageObject.getAbilities().add(ability);

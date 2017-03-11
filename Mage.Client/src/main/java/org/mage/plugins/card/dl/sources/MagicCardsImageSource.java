@@ -213,17 +213,17 @@ public class MagicCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public Float getAverageSize() {
+    public float getAverageSize() {
         return 70.0f;
     }
     
     @Override
-    public Integer getTotalImages() {
+    public int getTotalImages() {
         return -1;
     }
     
     @Override
-    public Boolean isTokenSource() {
+    public boolean isTokenSource() {
         return true;
     }
     
