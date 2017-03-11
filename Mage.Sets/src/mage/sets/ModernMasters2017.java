@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -92,9 +91,11 @@ public class ModernMasters2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Call of the Herd", 121, Rarity.RARE, mage.cards.c.CallOfTheHerd.class));
         cards.add(new SetCardInfo("Carnage Gladiator", 155, Rarity.UNCOMMON, mage.cards.c.CarnageGladiator.class));
         cards.add(new SetCardInfo("Cavern of Souls", 232, Rarity.MYTHIC, mage.cards.c.CavernOfSouls.class));
+        cards.add(new SetCardInfo("Centaur Healer", 156, Rarity.COMMON, mage.cards.c.CentaurHealer.class));
         cards.add(new SetCardInfo("Chandra's Outrage", 92, Rarity.COMMON, mage.cards.c.ChandrasOutrage.class));
-        cards.add(new SetCardInfo("Coiling Oracle", 156, Rarity.COMMON, mage.cards.c.CoilingOracle.class));
+        cards.add(new SetCardInfo("Coiling Oracle", 157, Rarity.COMMON, mage.cards.c.CoilingOracle.class));
         cards.add(new SetCardInfo("Compulsive Research", 33, Rarity.UNCOMMON, mage.cards.c.CompulsiveResearch.class));
+        cards.add(new SetCardInfo("Cower in Fear", 62, Rarity.COMMON, mage.cards.c.CowerInFear.class));
         cards.add(new SetCardInfo("Corpse Connoisseur", 61, Rarity.UNCOMMON, mage.cards.c.CorpseConnoisseur.class));
         cards.add(new SetCardInfo("Craterhoof Behemoth", 122, Rarity.MYTHIC, mage.cards.c.CraterhoofBehemoth.class));
         cards.add(new SetCardInfo("Crippling Chill", 34, Rarity.COMMON, mage.cards.c.CripplingChill.class));
@@ -295,7 +296,7 @@ public class ModernMasters2017 extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Frost", 56, Rarity.UNCOMMON, mage.cards.w.WallOfFrost.class));
         cards.add(new SetCardInfo("Wayfaring Temple", 202, Rarity.UNCOMMON, mage.cards.w.WayfaringTemple.class));
         cards.add(new SetCardInfo("Wing Splicer", 57, Rarity.UNCOMMON, mage.cards.w.WingSplicer.class));
-        cards.add(new SetCardInfo("Wingcrafter", 587, Rarity.COMMON, mage.cards.w.Wingcrafter.class));
+        cards.add(new SetCardInfo("Wingcrafter", 58, Rarity.COMMON, mage.cards.w.Wingcrafter.class));
         cards.add(new SetCardInfo("Woolly Thoctar", 203, Rarity.UNCOMMON, mage.cards.w.WoollyThoctar.class));
         cards.add(new SetCardInfo("Wort, the Raidmother", 214, Rarity.RARE, mage.cards.w.WortTheRaidmother.class));
         cards.add(new SetCardInfo("Youthful Knight", 29, Rarity.COMMON, mage.cards.y.YouthfulKnight.class));
