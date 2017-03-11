@@ -65,6 +65,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Blazing Archon", 4, Rarity.RARE, mage.cards.b.BlazingArchon.class));
         cards.add(new SetCardInfo("Blockbuster", 115, Rarity.UNCOMMON, mage.cards.b.Blockbuster.class));
         cards.add(new SetCardInfo("Blood Funnel", 77, Rarity.RARE, mage.cards.b.BloodFunnel.class));
+        cards.add(new SetCardInfo("Bloodbond March", 192, Rarity.RARE, mage.cards.b.BloodbondMarch.class));
         cards.add(new SetCardInfo("Boros Fury-Shield", 5, Rarity.COMMON, mage.cards.b.BorosFuryShield.class));
         cards.add(new SetCardInfo("Boros Garrison", 275, Rarity.COMMON, mage.cards.b.BorosGarrison.class));
         cards.add(new SetCardInfo("Boros Guildmage", 242, Rarity.UNCOMMON, mage.cards.b.BorosGuildmage.class));
