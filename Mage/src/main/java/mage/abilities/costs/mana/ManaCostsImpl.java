@@ -231,7 +231,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof ColorlessManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -240,7 +240,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof ColoredManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -249,7 +249,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof HybridManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -265,7 +265,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                         || ((cost.containsColor(ColoredManaSymbol.G)) && pool.getGreen() > 0)
                         || ((cost.containsColor(ColoredManaSymbol.U)) && pool.getBlue() > 0)) {
                     cost.assignPayment(game, ability, pool, costToPay);
-                    if (pool.count() == 0) {
+                    if (pool.isEmpty()) {
                         return;
                     }
                 }
@@ -275,7 +275,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof MonoHybridManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -284,7 +284,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof SnowManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -293,7 +293,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof GenericManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -357,6 +357,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     private boolean isNumeric(String symbol) {
+
         try {
             Integer.parseInt(symbol);
             return true;
