@@ -27,8 +27,10 @@
  */
 package mage.game.stack;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -391,7 +393,8 @@ public class Spell extends StackObjImpl implements Card {
                 }
             }
         } else {
-            card.removeFromZone(game, Zone.STACK, sourceId);
+            // Copied spell, only remove from stack
+            game.getStack().remove(this);
         }
     }
 
@@ -554,7 +557,7 @@ public class Spell extends StackObjImpl implements Card {
             return 0;
         }
         for (SpellAbility spellAbility : spellAbilities) {
-            cmc += spellAbility.getConvertedXManaCost();
+            cmc += spellAbility.getConvertedXManaCost(getCard());
         }
         cmc += getCard().getManaCost().convertedManaCost();
         return cmc;

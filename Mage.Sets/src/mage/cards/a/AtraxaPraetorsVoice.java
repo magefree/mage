@@ -64,7 +64,7 @@ public class AtraxaPraetorsVoice extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // At the beginning of your end step, proliferate.
+        // At the beginning of your end step, proliferate.  (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ProliferateEffect(), TargetController.YOU, false));
     }
 

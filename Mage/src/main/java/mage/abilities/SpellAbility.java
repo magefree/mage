@@ -28,10 +28,18 @@
 package mage.abilities;
 
 import mage.MageObject;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.keyword.FlashAbility;
+import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.SpellAbilityType;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -172,17 +180,32 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return cardName;
     }
 
-    public int getConvertedXManaCost() {
+    public int getConvertedXManaCost(Card card) {
         int xMultiplier = 0;
-        for (String symbolString : getManaCosts().getSymbols()) {
-            int index = symbolString.indexOf("{X}");
-            while (index != -1) {
-                xMultiplier++;
-                symbolString = symbolString.substring(index + 3);
-                index = symbolString.indexOf("{X}");
+        int amount = 0;
+        if(card == null) {
+            return 0;
+        }
+
+        for(ManaCost manaCost : card.getManaCost()) {
+            if(manaCost instanceof VariableManaCost) {
+                xMultiplier = ((VariableManaCost)manaCost).getMultiplier();
+                break;
             }
         }
-        return getManaCostsToPay().getX() * xMultiplier;
 
+        boolean hasNonManaXCost = false;
+        for(Cost cost : getCosts()) {
+            if(cost instanceof VariableCost) {
+                hasNonManaXCost = true;
+                amount = ((VariableCost) cost).getAmount();
+                break;
+            }
+        }
+
+        if(!hasNonManaXCost) {
+            amount = getManaCostsToPay().getX();
+        }
+        return amount * xMultiplier;
     }
 }
