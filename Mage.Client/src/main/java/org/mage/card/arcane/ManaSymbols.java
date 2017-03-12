@@ -271,7 +271,7 @@ public final class ManaSymbols {
         for (String s : manaCost) {
             sb.append(s);
         }
-        return sb.toString().replace("{", "").replace("}", " ").trim();
+        return sb.toString().replace("/", "").replace("{", "").replace("}", " ").trim();
     }
 
     public enum Type {
