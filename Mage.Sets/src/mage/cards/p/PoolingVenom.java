@@ -33,7 +33,7 @@ import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.effects.common.DestroyAttachedToEffect;
 import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -63,7 +63,7 @@ public class PoolingVenom extends CardImpl {
         // Whenever enchanted land becomes tapped, its controller loses 2 life.
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(2), "enchanted land"));
         // {3}{B}: Destroy enchanted land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAttachedEffect("enchanted land"), new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAttachedToEffect("enchanted land"), new ManaCostsImpl("{3}{B}")));
     }
 
     public PoolingVenom(final PoolingVenom card) {

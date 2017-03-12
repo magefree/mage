@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -40,13 +39,11 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-
-
 public class EnchantedCreatureSubtypeCondition implements Condition {
 
     private final FilterPermanent filter = new FilterCreaturePermanent();
 
-    public EnchantedCreatureSubtypeCondition(String string){
+    public EnchantedCreatureSubtypeCondition(String string) {
         filter.add(new SubtypePredicate(string));
     }
 
@@ -56,11 +53,17 @@ public class EnchantedCreatureSubtypeCondition implements Condition {
         if (enchantment != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
-                if(filter.match(creature, source.getSourceId(), enchantment.getControllerId(), game)){
+                if (filter.match(creature, source.getSourceId(), enchantment.getControllerId(), game)) {
                     return true;
                 }
             }
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return filter.getMessage();
+    }
+
 }

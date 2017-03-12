@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.effects.common.DestroyAttachedToEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -66,7 +66,7 @@ public class SpreadingAlgae extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // When enchanted land becomes tapped, destroy it.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedEffect("it"), "enchanted land"));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), "enchanted land"));
 
         // When Spreading Algae is put into a graveyard from the battlefield, return Spreading Algae to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
