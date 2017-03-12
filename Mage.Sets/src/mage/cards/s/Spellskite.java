@@ -127,16 +127,12 @@ class SpellskiteEffect extends OneShotEffect {
                 boolean validTargets = false;
                 do {
                     for (Target target : targets) {
+                        if (target.getTargets().contains(source.getSourceId())) { // You can't change a traget to Spellskite, if Spellskite is already targeted by this target
+                            continue;
+                        }
                         for (UUID targetId : target.getTargets()) {
                             String name = getTargetName(targetId, game);
-                            if (targetId.equals(source.getSourceId())
-                                    || target.getTargets().contains(source.getSourceId())) {
-                                // you can't change this target to source because the source is already another targetId of that target.
-                                twoTimesTarget = true;
-                                continue;
-                            }
-                            if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)
-                                    && !twoTimesTarget) {
+                            if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
                                 validTargets = true;
                                 if (name != null
                                         && controller.chooseUse(Outcome.Neutral, "Change target from " + name + " to " + sourceObject.getLogName() + '?', source, game)) {
