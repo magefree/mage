@@ -27,7 +27,9 @@
  */
 package mage.cards.e;
 
+import java.util.Iterator;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -63,7 +65,7 @@ import mage.players.Player;
 public class ElsewhereFlask extends CardImpl {
 
     public ElsewhereFlask(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // When Elsewhere Flask enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
@@ -131,10 +133,21 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                affectedObjectList.add(new MageObjectReference(permanent, game));
+            }
+        }
+    }
+
+    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_ElsewhereFlask");
         if (choice != null) {
-            for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+                Permanent land = it.next().getPermanent(game);
                 if (land != null) {
                     switch (layer) {
                         case TypeChangingEffects_4:
@@ -164,6 +177,8 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
                             }
                             break;
                     }
+                } else {
+                    it.remove();
                 }
             }
             return true;
