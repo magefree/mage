@@ -56,7 +56,7 @@ public class GiantTortoise extends CardImpl {
         // Giant Tortoise gets +0/+3 as long as it's untapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(0,3, Duration.WhileOnBattlefield),
-                new InvertCondition(new SourceTappedCondition()),
+                new InvertCondition(SourceTappedCondition.instance),
                 "{this} gets +0/+3 as long as it's untapped")));
     }
 

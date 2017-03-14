@@ -14,10 +14,10 @@ import mage.game.match.Match;
  */
 public class ChallengeManager {
 
-    public static final ChallengeManager fInstance = new ChallengeManager();
+    public static final ChallengeManager instance = new ChallengeManager();
 
     public static ChallengeManager getInstance() {
-        return fInstance;
+        return instance;
     }
 
     public void prepareChallenge(UUID playerId, Match match) {

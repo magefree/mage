@@ -40,10 +40,10 @@ import mage.cards.CardGraphicInfo;
 
 public class Commander extends ExpansionSet {
 
-    private static final Commander fINSTANCE = new Commander();
+    private static final Commander instance = new Commander();
 
     public static Commander getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Commander() {

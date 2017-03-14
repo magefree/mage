@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class TheDark extends ExpansionSet {
 
-    private static final TheDark fINSTANCE = new TheDark();
+    private static final TheDark instance = new TheDark();
 
     public static TheDark getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private TheDark() {

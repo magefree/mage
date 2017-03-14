@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class AlaraReborn extends ExpansionSet {
 
-    private static final AlaraReborn fINSTANCE = new AlaraReborn();
+    private static final AlaraReborn instance = new AlaraReborn();
 
     public static AlaraReborn getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private AlaraReborn() {

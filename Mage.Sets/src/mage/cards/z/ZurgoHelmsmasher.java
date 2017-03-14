@@ -67,7 +67,7 @@ public class ZurgoHelmsmasher extends CardImpl {
         // Zurgo Helmsmasher has indestructible as long as it's your turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.getInstance(),
+                MyTurnCondition.instance,
                 "{this} has indestructible as long as it's your turn")));
 
         // Whenever a creature dealt damage by Zurgo Helmsmasher this turn dies, put a +1/+1 counter on Zurgo Helmsmasher.

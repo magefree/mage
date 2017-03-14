@@ -59,7 +59,7 @@ public class BloodhallPriest extends CardImpl {
         triggeredAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
-                HellbentCondition.getInstance(),
+                HellbentCondition.instance,
                 "Whenever {this} enters the battlefield or attacks, if you have no cards in hand, {this} deals 2 damage to target creature or player"
         ));
 

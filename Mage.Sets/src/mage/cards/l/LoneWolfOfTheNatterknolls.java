@@ -63,13 +63,13 @@ public class LoneWolfOfTheNatterknolls extends CardImpl {
         // Whenever an opponent cast a spell during your turn, draw two cards.
         this.addAbility(new ConditionalTriggeredAbility(
                 new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(2), new FilterSpell("a spell"), true),
-                new MyTurnCondition(),
+                MyTurnCondition.instance,
                 "Whenever an opponent casts a spell during your turn, draw two card."
         ));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Lone Wolf of the Natterknolls.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
     public LoneWolfOfTheNatterknolls(final LoneWolfOfTheNatterknolls card) {

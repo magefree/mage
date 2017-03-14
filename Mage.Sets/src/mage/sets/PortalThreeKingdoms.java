@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class PortalThreeKingdoms extends ExpansionSet {
 
-    private static final PortalThreeKingdoms fINSTANCE = new PortalThreeKingdoms();
+    private static final PortalThreeKingdoms instance = new PortalThreeKingdoms();
 
     public static PortalThreeKingdoms getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PortalThreeKingdoms() {

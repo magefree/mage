@@ -65,7 +65,7 @@ public class CurtainOfLight extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Cast Curtain of Light only during combat after blockers are declared.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, AfterBlockersAreDeclaredCondition.getInstance()));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, AfterBlockersAreDeclaredCondition.instance));
 
         // Target unblocked attacking creature becomes blocked.
         this.getSpellAbility().addEffect(new CurtainOfLightEffect());

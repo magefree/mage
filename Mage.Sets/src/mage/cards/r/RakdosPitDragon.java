@@ -68,7 +68,7 @@ public class RakdosPitDragon extends CardImpl {
         // Hellbent — Rakdos Pit Dragon has double strike as long as you have no cards in hand.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                HellbentCondition.getInstance(),
+                HellbentCondition.instance,
                 "Hellbent - Rakdos Pit Dragon has double strike as long as you have no cards in hand")));
     }
 

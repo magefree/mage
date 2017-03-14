@@ -7,10 +7,10 @@ import mage.constants.SetType;
 
 public class Tempest extends ExpansionSet {
 
-    private static final Tempest fINSTANCE = new Tempest();
+    private static final Tempest instance = new Tempest();
 
     public static Tempest getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Tempest() {

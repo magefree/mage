@@ -50,10 +50,10 @@ import java.util.*;
 public class Sets extends HashMap<String, ExpansionSet> {
 
     private static final Logger logger = Logger.getLogger(Sets.class);
-    private static final Sets fINSTANCE = new Sets();
+    private static final Sets instance = new Sets();
 
     public static Sets getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Set<String> customSets = new HashSet<>();
@@ -136,8 +136,8 @@ public class Sets extends HashMap<String, ExpansionSet> {
     }
 
     public static ExpansionSet findSet(String code) {
-        if (fINSTANCE.containsKey(code)) {
-            return fINSTANCE.get(code);
+        if (instance.containsKey(code)) {
+            return instance.get(code);
         }
         return null;
     }

@@ -88,10 +88,10 @@ public class FiremaneAngel extends CardImpl {
 
 class SourceOnBattelfieldOrGraveyardCondition implements Condition {
 
-    private static final SourceOnBattelfieldOrGraveyardCondition fInstance = new SourceOnBattelfieldOrGraveyardCondition();
+    private static final SourceOnBattelfieldOrGraveyardCondition instance = new SourceOnBattelfieldOrGraveyardCondition();
 
     public static SourceOnBattelfieldOrGraveyardCondition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

@@ -35,7 +35,7 @@ public class Plugins implements MagePlugins {
 
     public static final String PLUGINS_DIRECTORY = "plugins/";
 
-    private static final MagePlugins fINSTANCE = new Plugins();
+    private static final MagePlugins instance = new Plugins();
     private static final Logger LOGGER = Logger.getLogger(Plugins.class);
     private static PluginManager pm;
 
@@ -46,7 +46,7 @@ public class Plugins implements MagePlugins {
     private final Map<String, String> sortingOptions = new HashMap<>();
 
     public static MagePlugins getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override

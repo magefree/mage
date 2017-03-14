@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Worldwake extends ExpansionSet {
 
-    private static final Worldwake fINSTANCE = new Worldwake();
+    private static final Worldwake instance = new Worldwake();
 
     public static Worldwake getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Worldwake() {

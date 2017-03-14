@@ -74,7 +74,7 @@ public class DragonWhisperer extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new CreateTokenEffect(new DragonToken()), 
                 new ManaCostsImpl("{4}{R}{R}"), 
-                FormidableCondition.getInstance());
+                FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);        
         this.addAbility(ability);
     }

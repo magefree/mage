@@ -101,10 +101,10 @@ class ResoluteArchangelEffect extends OneShotEffect {
 
 class ControllerLifeLowerThanStrtingLife implements Condition {
 
-    private static final ControllerLifeLowerThanStrtingLife fInstance = new ControllerLifeLowerThanStrtingLife();
+    private static final ControllerLifeLowerThanStrtingLife instance = new ControllerLifeLowerThanStrtingLife();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

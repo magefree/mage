@@ -64,7 +64,7 @@ public class TasteForMayhem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0)));
 
         // Hellbent - Enchanted creature gets an additional +2/+0 as long as you have no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(2, 0), HellbentCondition.getInstance(), "<i>Hellbent</i> &mdash; Enchanted creature gets an additional +2/+0 as long as you have no cards in hand")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(2, 0), HellbentCondition.instance, "<i>Hellbent</i> &mdash; Enchanted creature gets an additional +2/+0 as long as you have no cards in hand")));
     }
 
     public TasteForMayhem(final TasteForMayhem card) {

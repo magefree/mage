@@ -42,7 +42,7 @@ public class ThreadExecutor {
 
     private static final ExecutorService callExecutor = Executors.newCachedThreadPool();
     private static final ExecutorService userExecutor = Executors.newCachedThreadPool();
-    private static final ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.getInstance().getMaxGameThreads());
+    private static final ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.instance.getMaxGameThreads());
     private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(4);
     private static final ScheduledExecutorService timeoutIdleExecutor = Executors.newScheduledThreadPool(4);
 

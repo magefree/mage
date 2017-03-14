@@ -60,7 +60,7 @@ public class LumengridDrake extends CardImpl {
 
         // Metalcraft — When Lumengrid Drake enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.
         TriggeredAbility conditional = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), MetalcraftCondition.getInstance(), ruleText);
+                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), MetalcraftCondition.instance, ruleText);
         conditional.addTarget(new TargetCreaturePermanent());
         this.addAbility(conditional);
     }

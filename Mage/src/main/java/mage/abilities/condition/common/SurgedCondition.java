@@ -38,19 +38,9 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class SurgedCondition implements Condition {
+public enum SurgedCondition implements Condition {
 
-    private static SurgedCondition fInstance = null;
-
-    private SurgedCondition() {
-    }
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new SurgedCondition();
-        }
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

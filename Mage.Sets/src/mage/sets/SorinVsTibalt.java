@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class SorinVsTibalt extends ExpansionSet {
-    private static final SorinVsTibalt fINSTANCE = new SorinVsTibalt();
+    private static final SorinVsTibalt instance = new SorinVsTibalt();
 
     public static SorinVsTibalt getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private SorinVsTibalt() {

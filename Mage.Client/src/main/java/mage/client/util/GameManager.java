@@ -8,10 +8,10 @@ import java.util.UUID;
  * @author nantuko
  */
 public class GameManager {
-    private static final GameManager fInstance = new GameManager();
+    private static final GameManager instance = new GameManager();
 
     public static GameManager getInstance() {
-        return fInstance;
+        return instance;
     }
 
     public void setStackSize(int stackSize) {

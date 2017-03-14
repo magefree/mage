@@ -70,7 +70,7 @@ public class Chronozoa extends CardImpl {
         Effect effect = new PutTokenOntoBattlefieldCopySourceEffect(2);
         effect.setText("create two tokens that are copies of it");
         this.addAbility(new ConditionalTriggeredAbility(new DiesCreatureTriggeredAbility(effect, false),
-                new LastTimeCounterRemovedCondition(),
+                LastTimeCounterRemovedCondition.instance,
                 "When {this} dies, if it had no time counters on it, create two tokens that are copies of it."));
     }
 

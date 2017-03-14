@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class MercadianMasques extends ExpansionSet {
 
-    private static final MercadianMasques fINSTANCE = new MercadianMasques();
+    private static final MercadianMasques instance = new MercadianMasques();
 
     public static MercadianMasques getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MercadianMasques() {

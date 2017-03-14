@@ -42,14 +42,14 @@ import mage.game.permanent.Permanent;
  */
 public class SpaceflightAbility extends EvasionAbility implements MageSingleton {
 
-    private static final SpaceflightAbility fINSTANCE = new SpaceflightAbility();
+    private static final SpaceflightAbility instance = new SpaceflightAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static SpaceflightAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private SpaceflightAbility() {
@@ -63,7 +63,7 @@ public class SpaceflightAbility extends EvasionAbility implements MageSingleton 
 
     @Override
     public SpaceflightAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

@@ -56,7 +56,7 @@ public class NimAbomination extends CardImpl {
 
         // At the beginning of your end step, if Nim Abomination is untapped, you lose 3 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(3),
-                TargetController.YOU, new SourceUntappedCondition(), false));
+                TargetController.YOU, SourceUntappedCondition.instance, false));
     }
 
     public NimAbomination(final NimAbomination card) {
@@ -69,13 +69,9 @@ public class NimAbomination extends CardImpl {
     }
 }
 
-class SourceUntappedCondition implements Condition {
+enum SourceUntappedCondition implements Condition {
 
-    private static final SourceUntappedCondition fInstance = new SourceUntappedCondition();
-
-    public static SourceUntappedCondition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

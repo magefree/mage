@@ -80,7 +80,7 @@ public class Topplegeist extends CardImpl {
         // tap target creature that player controls.
         ability = new ConditionalTriggeredAbility(
                 new TopplegeistAbility(),
-                new DeliriumCondition(),
+                DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
                         + "tap target creature that player controls.");
         this.addAbility(ability);

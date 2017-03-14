@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Exodus extends ExpansionSet {
 
-    private static final Exodus fINSTANCE = new Exodus();
+    private static final Exodus instance = new Exodus();
 
     public static Exodus getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Exodus() {

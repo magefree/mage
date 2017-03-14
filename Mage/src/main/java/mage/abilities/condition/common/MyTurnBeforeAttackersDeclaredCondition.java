@@ -38,10 +38,10 @@ import mage.game.Game;
  * @author LevelX2
  */
 public class MyTurnBeforeAttackersDeclaredCondition implements Condition {
-    private static final MyTurnBeforeAttackersDeclaredCondition fInstance = new MyTurnBeforeAttackersDeclaredCondition();
+    private static final MyTurnBeforeAttackersDeclaredCondition instance = new MyTurnBeforeAttackersDeclaredCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

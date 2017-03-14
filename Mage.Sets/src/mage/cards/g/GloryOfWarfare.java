@@ -55,11 +55,11 @@ public class GloryOfWarfare extends CardImpl {
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield),
-                MyTurnCondition.getInstance(),
+                MyTurnCondition.instance,
                 "As long as it's your turn, creatures you control get +2/+0")));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield),
-                NotMyTurnCondition.getInstance(),
+                NotMyTurnCondition.instance,
                 "As long as it's not your turn, creatures you control get +0/+2")));
     }
 

@@ -19,10 +19,10 @@ import org.mage.plugins.card.utils.Transparency;
 
 public class ImageManagerImpl implements ImageManager {
 
-    private static final ImageManagerImpl fInstance = new ImageManagerImpl();
+    private static final ImageManagerImpl instance = new ImageManagerImpl();
 
     public static ImageManagerImpl getInstance() {
-        return fInstance;
+        return instance;
     }
     
     public ImageManagerImpl() {

@@ -40,10 +40,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class SeventhEdition extends ExpansionSet {
 
-    private static final SeventhEdition fINSTANCE = new SeventhEdition();
+    private static final SeventhEdition instance = new SeventhEdition();
 
     public static SeventhEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private SeventhEdition() {

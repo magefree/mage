@@ -37,10 +37,10 @@ import mage.constants.SetType;
 
 public class ArchenemyNicolBolas extends ExpansionSet {
 
-    private static final ArchenemyNicolBolas fINSTANCE = new ArchenemyNicolBolas();
+    private static final ArchenemyNicolBolas instance = new ArchenemyNicolBolas();
 
     public static ArchenemyNicolBolas getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ArchenemyNicolBolas() {

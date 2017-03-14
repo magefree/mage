@@ -63,14 +63,14 @@ public class OrimsThunder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new OrimsThunderEffect2(),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature"));
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            if (KickedCondition.getInstance().apply(game, ability)) {
+            if (KickedCondition.instance.apply(game, ability)) {
                 ability.addTarget(new TargetCreaturePermanent());
             }
         }
@@ -104,7 +104,7 @@ class OrimsThunderEffect2 extends OneShotEffect {
         if (firstTarget != null) {
             damage = firstTarget.getConvertedManaCost();
         }
-        boolean kicked = KickedCondition.getInstance().apply(game, source);
+        boolean kicked = KickedCondition.instance.apply(game, source);
         if (kicked && secondTarget != null) {
             secondTarget.damage(damage, source.getSourceId(), game, false, true);
             return true;

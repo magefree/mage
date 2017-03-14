@@ -9,10 +9,10 @@ import mage.constants.SetType;
 
 public class EighthEdition extends ExpansionSet {
 
-    private static final EighthEdition fINSTANCE = new EighthEdition();
+    private static final EighthEdition instance = new EighthEdition();
 
     public static EighthEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private EighthEdition() {

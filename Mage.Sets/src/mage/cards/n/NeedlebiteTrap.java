@@ -72,10 +72,10 @@ public class NeedlebiteTrap extends CardImpl {
 
 class NeedlebiteTrapCondition implements Condition {
 
-    private static final NeedlebiteTrapCondition fInstance = new NeedlebiteTrapCondition();
+    private static final NeedlebiteTrapCondition instance = new NeedlebiteTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

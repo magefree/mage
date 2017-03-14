@@ -54,7 +54,7 @@ public class WildSlash extends CardImpl {
         ContinuousRuleModifyingEffect effect = new DamageCantBePreventedEffect(Duration.EndOfTurn, "damage can't be prevented this turn", false, false);
         effect.setText("<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, damage can't be prevented this turn.<br>");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(effect,
-                new LockedInCondition(FerociousCondition.getInstance())));
+                new LockedInCondition(FerociousCondition.instance)));
 
         // Wild Slash deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

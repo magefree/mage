@@ -10,14 +10,9 @@ import mage.game.permanent.Permanent;
 /**
  * Created by glerman on 20/6/15.
  */
-public class LastTimeCounterRemovedCondition implements Condition{
+public enum LastTimeCounterRemovedCondition implements Condition{
 
-
-  private static final LastTimeCounterRemovedCondition fInstance = new LastTimeCounterRemovedCondition();
-
-  public static LastTimeCounterRemovedCondition getInstance() {
-    return fInstance;
-  }
+instance;
 
   @Override
   public boolean apply(Game game, Ability source) {

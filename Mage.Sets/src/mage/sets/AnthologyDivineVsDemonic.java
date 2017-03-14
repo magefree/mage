@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class AnthologyDivineVsDemonic extends ExpansionSet {
 
-    private static final AnthologyDivineVsDemonic fINSTANCE = new AnthologyDivineVsDemonic();
+    private static final AnthologyDivineVsDemonic instance = new AnthologyDivineVsDemonic();
 
     public static AnthologyDivineVsDemonic getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private AnthologyDivineVsDemonic() {

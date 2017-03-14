@@ -40,10 +40,10 @@ import mage.constants.Rarity;
 
 public class MastersEditionIV extends ExpansionSet {
 
-    private static final MastersEditionIV fINSTANCE = new MastersEditionIV();
+    private static final MastersEditionIV instance = new MastersEditionIV();
 
     public static MastersEditionIV getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MastersEditionIV() {

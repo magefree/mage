@@ -63,7 +63,7 @@ public class JorKadeenThePrevailer extends CardImpl {
 
         // Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false),
-                MetalcraftCondition.getInstance(), effectText);
+                MetalcraftCondition.instance, effectText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

@@ -43,15 +43,10 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ControlsCreatureGreatestToughnessCondition implements Condition {
+public enum ControlsCreatureGreatestToughnessCondition implements Condition {
 
-    private static final ControlsCreatureGreatestToughnessCondition fInstance = new ControlsCreatureGreatestToughnessCondition();
-
+    instance;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {

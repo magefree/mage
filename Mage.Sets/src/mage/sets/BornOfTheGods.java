@@ -38,10 +38,10 @@ import mage.constants.Rarity;
  */
 public class BornOfTheGods extends ExpansionSet {
 
-    private static final BornOfTheGods fINSTANCE = new BornOfTheGods();
+    private static final BornOfTheGods instance = new BornOfTheGods();
 
     public static BornOfTheGods getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private BornOfTheGods() {

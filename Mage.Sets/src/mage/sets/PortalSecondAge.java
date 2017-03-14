@@ -40,14 +40,14 @@ import mage.cards.CardGraphicInfo;
 
 public class PortalSecondAge extends ExpansionSet {
 
-    private static final PortalSecondAge fINSTANCE = new PortalSecondAge();
+    private static final PortalSecondAge instance = new PortalSecondAge();
 
     /**
      *
      * @return
      */
     public static PortalSecondAge getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PortalSecondAge() {

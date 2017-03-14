@@ -57,7 +57,7 @@ public class CitanulWoodreaders extends CardImpl {
         // When Citanul Woodreaders enters the battlefield, if it was kicked, draw two cards.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2)),
-                KickedCondition.getInstance(),"When Citanul Woodreaders enters the battlefield, if it was kicked, draw two cards."));
+                KickedCondition.instance,"When Citanul Woodreaders enters the battlefield, if it was kicked, draw two cards."));
     }
 
     public CitanulWoodreaders(final CitanulWoodreaders card) {

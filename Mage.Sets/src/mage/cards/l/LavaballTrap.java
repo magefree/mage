@@ -77,10 +77,10 @@ public class LavaballTrap extends CardImpl {
 
 class LavaballTrapCondition implements Condition {
 
-    private static final LavaballTrapCondition fInstance = new LavaballTrapCondition();
+    private static final LavaballTrapCondition instance = new LavaballTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

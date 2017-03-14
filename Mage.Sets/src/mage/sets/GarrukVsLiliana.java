@@ -17,10 +17,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class GarrukVsLiliana extends ExpansionSet {
-    private static final GarrukVsLiliana fINSTANCE = new GarrukVsLiliana();
+    private static final GarrukVsLiliana instance = new GarrukVsLiliana();
 
     public static GarrukVsLiliana getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private GarrukVsLiliana() {

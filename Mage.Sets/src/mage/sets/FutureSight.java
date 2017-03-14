@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class FutureSight extends ExpansionSet {
 
-    private static final FutureSight fINSTANCE = new FutureSight();
+    private static final FutureSight instance = new FutureSight();
 
     public static FutureSight getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FutureSight() {

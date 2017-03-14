@@ -45,10 +45,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class ArabianNights extends ExpansionSet {
 
-    private static final ArabianNights fINSTANCE = new ArabianNights();
+    private static final ArabianNights instance = new ArabianNights();
 
     public static ArabianNights getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ArabianNights() {

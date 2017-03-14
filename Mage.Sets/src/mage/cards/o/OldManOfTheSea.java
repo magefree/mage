@@ -73,7 +73,7 @@ public class OldManOfTheSea extends CardImpl {
         FilterCreaturePermanent controllableCreatures = new FilterCreaturePermanent("creature with power less than or equal to Old Man of the Sea's power");
         controllableCreatures.add(new PowerLowerEqualSourcePredicate(this.getId()));
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new OldManOfTheSeaGainControlTargetEffect(Duration.Custom, true), new CompoundCondition(SourceTappedCondition.getInstance(), new SourcePowerGreaterEqualTargetCondition()),
+                new OldManOfTheSeaGainControlTargetEffect(Duration.Custom, true), new CompoundCondition(SourceTappedCondition.instance, new SourcePowerGreaterEqualTargetCondition()),
                 "Gain control of target creature with power less than or equal to {this}'s power for as long as {this} remains tapped and that creature's power remains less than or equal to {this}'s power");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(controllableCreatures));

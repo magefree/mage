@@ -30,29 +30,23 @@ package mage.server.tournament;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentManager {
-
-    private static final TournamentManager INSTANCE = new TournamentManager();
-
+public enum TournamentManager {
+    instance;
     private final ConcurrentHashMap<UUID, TournamentController> controllers = new ConcurrentHashMap<>();
-
-    public static TournamentManager getInstance() {
-        return INSTANCE;
-    }
 
     public TournamentController getTournamentController(UUID tournamentId) {
         return controllers.get(tournamentId);
     }
-    
+
     public void createTournamentSession(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         TournamentController tournamentController = new TournamentController(tournament, userPlayerMap, tableId);
         controllers.put(tournament.getId(), tournamentController);
@@ -84,7 +78,7 @@ public class TournamentManager {
     }
 
     public TournamentView getTournamentView(UUID tournamentId) {
-        TournamentController tournamentController =  controllers.get(tournamentId);
+        TournamentController tournamentController = controllers.get(tournamentId);
         if (tournamentController != null) {
             return tournamentController.getTournamentView();
         }
@@ -94,13 +88,13 @@ public class TournamentManager {
     public UUID getChatId(UUID tournamentId) {
         return controllers.get(tournamentId).getChatId();
     }
-    
+
     public void removeTournament(UUID tournamentId) {
         TournamentController tournamentController = controllers.get(tournamentId);
         if (tournamentController != null) {
             controllers.remove(tournamentId);
             tournamentController.cleanUpOnRemoveTournament();
-            
+
         }
     }
 

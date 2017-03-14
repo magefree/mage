@@ -57,7 +57,7 @@ public class SnapsailGlider extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         ContinuousEffect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.getInstance(), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, rule)));
     }
 
     public SnapsailGlider (final SnapsailGlider card) {

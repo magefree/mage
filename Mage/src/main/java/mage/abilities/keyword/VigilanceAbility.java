@@ -40,14 +40,14 @@ import java.io.ObjectStreamException;
  */
 public class VigilanceAbility extends StaticAbility implements MageSingleton {
 
-    private static final VigilanceAbility fINSTANCE =  new VigilanceAbility();
+    private static final VigilanceAbility instance =  new VigilanceAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static VigilanceAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private VigilanceAbility() {
@@ -61,7 +61,7 @@ public class VigilanceAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public VigilanceAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

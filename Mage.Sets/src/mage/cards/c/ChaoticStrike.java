@@ -55,7 +55,7 @@ public class ChaoticStrike extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Cast Chaotic Strike only during combat after blockers are declared.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, AfterBlockersAreDeclaredCondition.getInstance()));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, AfterBlockersAreDeclaredCondition.instance));
 
         // Flip a coin. If you win the flip, target creature gets +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new ChaoticStrikeEffect());

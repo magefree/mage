@@ -44,10 +44,10 @@ import mage.cards.FrameStyle;
  */
 public class BattleForZendikar extends ExpansionSet {
 
-    private static final BattleForZendikar fINSTANCE = new BattleForZendikar();
+    private static final BattleForZendikar instance = new BattleForZendikar();
 
     public static BattleForZendikar getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();

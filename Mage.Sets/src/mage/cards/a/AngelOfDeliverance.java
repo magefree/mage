@@ -73,7 +73,7 @@ public class AngelOfDeliverance extends CardImpl {
         // exile target creature an opponent controls.
         Ability ability = new ConditionalTriggeredAbility(
                 new AngelOfDeliveranceDealsDamageTriggeredAbility(),
-                new DeliriumCondition(),
+                DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; Whenever {this} deals damage, if there are four or more card types among cards in your graveyard, exile target creature an opponent controls"
         );
         ability.addTarget(new TargetCreaturePermanent(filter));

@@ -84,14 +84,14 @@ public class ArcTrail extends CardImpl {
 
 class ArcTrailEffect extends OneShotEffect {
 
-    private static final ArcTrailEffect fINSTANCE =  new ArcTrailEffect();
+    private static final ArcTrailEffect instance =  new ArcTrailEffect();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static ArcTrailEffect getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ArcTrailEffect ( ) {
@@ -128,7 +128,7 @@ class ArcTrailEffect extends OneShotEffect {
 
     @Override
     public Effect copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

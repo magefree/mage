@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class KnightsVsDragons extends ExpansionSet {
-    private static final KnightsVsDragons fINSTANCE = new KnightsVsDragons();
+    private static final KnightsVsDragons instance = new KnightsVsDragons();
 
     public static KnightsVsDragons getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private KnightsVsDragons() {

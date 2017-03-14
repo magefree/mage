@@ -62,7 +62,7 @@ public class ShrikeHarpy extends CardImpl {
         // When Shrike Harpy enters the battlefield, if tribute wasn't paid, target opponent sacrifices a creature.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent("a creature"), 1, "target opponent"), false);
         ability.addTarget(new TargetOpponent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, target opponent sacrifices a creature."));
     }
 

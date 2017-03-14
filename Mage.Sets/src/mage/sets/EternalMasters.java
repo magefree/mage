@@ -39,10 +39,10 @@ import mage.constants.Rarity;
  */
 public class EternalMasters extends ExpansionSet {
 
-    private static final EternalMasters fINSTANCE = new EternalMasters();
+    private static final EternalMasters instance = new EternalMasters();
 
     public static EternalMasters getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private EternalMasters() {

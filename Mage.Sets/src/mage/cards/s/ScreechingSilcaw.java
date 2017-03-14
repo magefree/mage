@@ -59,7 +59,7 @@ public class ScreechingSilcaw extends CardImpl {
 
         TriggeredAbility conditional = new ConditionalTriggeredAbility(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false, true),
-                MetalcraftCondition.getInstance(), text);
+                MetalcraftCondition.instance, text);
         this.addAbility(conditional);
     }
 

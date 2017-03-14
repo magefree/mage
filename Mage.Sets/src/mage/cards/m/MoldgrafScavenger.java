@@ -54,7 +54,7 @@ public class MoldgrafScavenger extends CardImpl {
         // <i>Delirium</i> &mdash; Moldgraf Scavenger gets +3/+0 as long as there are four or more card types among cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield),
-                DeliriumCondition.getInstance(),
+                DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; {this} gets +3/+0 as long as there are four or more card types among cards in your graveyard")));
     }
 

@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class JudgePromo extends ExpansionSet {
 
-    private static final JudgePromo fINSTANCE = new JudgePromo();
+    private static final JudgePromo instance = new JudgePromo();
 
     public static JudgePromo getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private JudgePromo() {

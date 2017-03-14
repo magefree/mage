@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Torment extends ExpansionSet {
 
-    private static final Torment fINSTANCE = new Torment();
+    private static final Torment instance = new Torment();
 
     public static Torment getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Torment() {

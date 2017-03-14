@@ -59,7 +59,7 @@ public class AtarkaBeastbreaker extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(4,4, Duration.EndOfTurn),
                 new ManaCostsImpl("{4}{G}"),
-                FormidableCondition.getInstance());
+                FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);
     }

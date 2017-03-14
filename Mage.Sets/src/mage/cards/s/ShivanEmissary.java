@@ -69,7 +69,7 @@ public class ShivanEmissary extends CardImpl {
         // When Shivan Emissary enters the battlefield, if it was kicked, destroy target nonblack creature. It can't be regenerated.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(true));
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance,
             "When {this} enters the battlefield, if it was kicked, destroy target nonblack creature. It can't be regenerated."));
     }
 

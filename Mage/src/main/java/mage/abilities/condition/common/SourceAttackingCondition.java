@@ -39,10 +39,10 @@ import mage.game.permanent.Permanent;
 
 public class SourceAttackingCondition implements Condition {
 
-    private static final SourceAttackingCondition fInstance = new SourceAttackingCondition();
+    private static final SourceAttackingCondition instance = new SourceAttackingCondition();
 
     public static SourceAttackingCondition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

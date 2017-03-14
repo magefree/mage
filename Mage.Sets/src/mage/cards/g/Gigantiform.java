@@ -82,7 +82,7 @@ public class Gigantiform extends CardImpl {
         // When Gigantiform enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GigantiformEffect(), true),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "When {this} enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library."));
     }
 

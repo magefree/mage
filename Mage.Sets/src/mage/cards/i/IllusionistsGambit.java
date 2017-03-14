@@ -59,7 +59,7 @@ public class IllusionistsGambit extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         // Cast Illusionist's Gambit only during the declare blockers step on an opponent's turn.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS, OnOpponentsTurnCondition.getInstance()));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS, OnOpponentsTurnCondition.instance));
 
         // Remove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or a planeswalker you control that combat.
         this.getSpellAbility().addEffect(new IllusionistsGambitRemoveFromCombatEffect());

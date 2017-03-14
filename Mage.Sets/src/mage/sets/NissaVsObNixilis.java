@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class NissaVsObNixilis extends ExpansionSet {
 
-    private static final NissaVsObNixilis fINSTANCE = new NissaVsObNixilis();
+    private static final NissaVsObNixilis instance = new NissaVsObNixilis();
 
     public static NissaVsObNixilis getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private NissaVsObNixilis() {

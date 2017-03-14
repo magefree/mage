@@ -10,10 +10,10 @@ import org.mage.card.arcane.CardPanel;
  * @author nantuko
  */
 public class SettingsManager {
-    private static final SettingsManager fInstance = new SettingsManager();
+    private static final SettingsManager instance = new SettingsManager();
 
     public static SettingsManager getInstance() {
-        return fInstance;
+        return instance;
     }
 
     public int getScreenWidth() {

@@ -49,7 +49,7 @@ public class ConquerorsPledge extends CardImpl {
         this.addAbility(new KickerAbility("{6}"));
 
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new KorSoldierToken(), 12),
-                new CreateTokenEffect(new KorSoldierToken(), 6), KickedCondition.getInstance(),
+                new CreateTokenEffect(new KorSoldierToken(), 6), KickedCondition.instance,
                 "Create six 1/1 white Kor Soldier creature tokens. If {this} was kicked, create twelve of those tokens instead"));
     }
 

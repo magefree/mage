@@ -38,10 +38,10 @@ import mage.constants.Rarity;
  */
 public class ModernMasters2015 extends ExpansionSet {
 
-    private static final ModernMasters2015 fINSTANCE = new ModernMasters2015();
+    private static final ModernMasters2015 instance = new ModernMasters2015();
 
     public static ModernMasters2015 getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ModernMasters2015() {

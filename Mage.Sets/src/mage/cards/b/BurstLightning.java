@@ -54,7 +54,7 @@ public class BurstLightning extends CardImpl {
         // Burst Lightning deals 2 damage to target creature or player. If Burst Lightning was kicked, it deals 4 damage to that creature or player instead.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(4),
-                new DamageTargetEffect(2), KickedCondition.getInstance(), "{this} deals 2 damage to target creature or player. If {this} was kicked, it deals 4 damage to that creature or player instead"));
+                new DamageTargetEffect(2), KickedCondition.instance, "{this} deals 2 damage to target creature or player. If {this} was kicked, it deals 4 damage to that creature or player instead"));
     }
 
     public BurstLightning(final BurstLightning card) {

@@ -71,7 +71,7 @@ public class ThirstingAxe extends CardImpl {
         // At the beginning of your end step, if equipped creature didn't deal combat damage to a creature this turn, sacrifice it.
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new SacrificeEquippedEffect(), false);
         Condition condition = new CompoundCondition(
-                AttachedCondition.getInstance(),
+                AttachedCondition.instance,
                 new InvertCondition(new EquippedDealtCombatDamageToCreatureCondition()));
         String triggeredAbilityText = "At the beginning of your end step, if equipped creature " +
             "didn't deal combat damage to a creature this turn, sacrifice it.";

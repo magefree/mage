@@ -18,10 +18,10 @@ import mage.game.Game;
  */
 public class BeforeBlockersAreDeclaredCondition implements Condition {
 
-    private static final BeforeBlockersAreDeclaredCondition fInstance = new BeforeBlockersAreDeclaredCondition();
+    private static final BeforeBlockersAreDeclaredCondition instance = new BeforeBlockersAreDeclaredCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

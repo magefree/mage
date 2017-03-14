@@ -53,7 +53,7 @@ public class Decommission extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
 
         // <i>Revolt</i> &mdash; If a permanent you controlled left the battlefield this turn, you gain 3 life.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new GainLifeEffect(3), RevoltCondition.getInstance(), "<br><i>Revolt</i> &mdash; If a permanent you controlled left the battlefield this turn, you gain 3 life."));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new GainLifeEffect(3), RevoltCondition.instance, "<br><i>Revolt</i> &mdash; If a permanent you controlled left the battlefield this turn, you gain 3 life."));
         this.getSpellAbility().addWatcher(new RevoltWatcher());
     }
 

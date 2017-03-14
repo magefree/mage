@@ -107,10 +107,10 @@ public class RasputinDreamweaver extends CardImpl {
 
 class RasputinDreamweaverStartedUntappedCondition implements Condition {
 
-    private static final RasputinDreamweaverStartedUntappedCondition fInstance = new RasputinDreamweaverStartedUntappedCondition();
+    private static final RasputinDreamweaverStartedUntappedCondition instance = new RasputinDreamweaverStartedUntappedCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

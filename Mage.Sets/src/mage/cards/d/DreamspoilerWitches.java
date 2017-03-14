@@ -58,7 +58,7 @@ public class DreamspoilerWitches extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a spell during an opponent's turn, you may have target creature get -1/-1 until end of turn.
-        Ability ability = new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true), OnOpponentsTurnCondition.getInstance(),
+        Ability ability = new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true), OnOpponentsTurnCondition.instance,
                 "Whenever you cast a spell during an opponent's turn, you may have target creature get -1/-1 until end of turn.");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

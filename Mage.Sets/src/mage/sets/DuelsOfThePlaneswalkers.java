@@ -38,10 +38,10 @@ import mage.constants.Rarity;
  */
 
 public class DuelsOfThePlaneswalkers extends ExpansionSet {
-    private static final DuelsOfThePlaneswalkers fINSTANCE = new DuelsOfThePlaneswalkers();
+    private static final DuelsOfThePlaneswalkers instance = new DuelsOfThePlaneswalkers();
 
     public static DuelsOfThePlaneswalkers getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private DuelsOfThePlaneswalkers() {

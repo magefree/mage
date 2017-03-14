@@ -35,13 +35,9 @@ import mage.watchers.Watcher;
 /**
  * @author nantuko
  */
-public class MorbidCondition implements Condition {
+public enum MorbidCondition implements Condition {
 
-    private static final MorbidCondition fInstance = new MorbidCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

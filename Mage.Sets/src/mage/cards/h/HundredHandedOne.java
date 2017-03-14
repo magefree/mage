@@ -66,11 +66,11 @@ public class HundredHandedOne extends CardImpl {
         // As long as Hundred-Handed One is monstrous, it has reach and can block an additional ninety-nine creatures each combat.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield), 
-                MonstrousCondition.getInstance(), 
+                MonstrousCondition.instance,
                 "As long as Hundred-Handed One is monstrous, it has reach");
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(
                 new CanBlockAdditionalCreatureEffect(99), 
-                MonstrousCondition.getInstance(), 
+                MonstrousCondition.instance,
                 "and can block an additional ninety-nine creatures each combat");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         ability.addEffect(effect2);

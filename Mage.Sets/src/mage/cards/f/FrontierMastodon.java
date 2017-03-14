@@ -52,7 +52,7 @@ public class FrontierMastodon extends CardImpl {
         // <i>Ferocious</i> - Frontier Mastodon enters the battlefield with a +1/+1 counter on it if you control a creature with power 4 or greater.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-                FerociousCondition.getInstance(),
+                FerociousCondition.instance,
                 "<i>Ferocious</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it if you control a creature with power 4 or greater.",""
         ));
     }

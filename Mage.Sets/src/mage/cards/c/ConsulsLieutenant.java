@@ -61,7 +61,7 @@ public class ConsulsLieutenant extends CardImpl {
         // Whenever Consul's Lieutenant attacks, if it's renowned, other attacking creatures you control get +1/+1 until end of turn.
         this.addAbility(new ConditionalTriggeredAbility(new AttacksTriggeredAbility(
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterAttackingCreature("other attacking creatures you control"), true), false),
-                RenownedSourceCondition.getInstance(),
+                RenownedSourceCondition.instance,
                 "Whenever Consul's Lieutenant attacks, if it's renowned, other attacking creatures you control get +1/+1 until end of turn."));
 
     }

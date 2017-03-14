@@ -59,7 +59,7 @@ public class ScourgeWolf extends CardImpl {
 
         // <i>Delirium</i> &mdash; Scourge Wolf has double strike as long as there are four or more card types among cards in your graveyard.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                DeliriumCondition.getInstance(), "<i>Delirium</i> &mdash; {this} has double strike as long as there are four or more card types among cards in your graveyard.");
+                DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} has double strike as long as there are four or more card types among cards in your graveyard.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

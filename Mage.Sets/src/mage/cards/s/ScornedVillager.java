@@ -65,7 +65,7 @@ public class ScornedVillager extends CardImpl {
         this.addAbility(new TransformAbility());
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability,
-                NoSpellsWereCastLastTurnCondition.getInstance(),
+                NoSpellsWereCastLastTurnCondition.instance,
                 TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 

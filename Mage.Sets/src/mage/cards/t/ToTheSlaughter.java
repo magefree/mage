@@ -52,17 +52,17 @@ public class ToTheSlaughter extends CardImpl {
         // Target player sacrifices a creature or planeswalker.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SacrificeEffect(new FilterCreatureOrPlaneswalkerPermanent(), 1, "Target player"),
-                new InvertCondition(DeliriumCondition.getInstance()),
+                new InvertCondition(DeliriumCondition.instance),
                 "Target player sacrifices a creature or planeswalker."));
 
         // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, instead that player sacrifices a creature and a planeswalker.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"),
-                DeliriumCondition.getInstance(),
+                DeliriumCondition.instance,
                 "<br><i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, instead that player sacrifices a creature"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SacrificeEffect(new FilterPlaneswalkerPermanent(), 1, "Target player"),
-                DeliriumCondition.getInstance(), "and a planeswalker."));
+                DeliriumCondition.instance, "and a planeswalker."));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

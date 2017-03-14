@@ -48,7 +48,7 @@ public class Festival extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Cast Festival only during an opponent's upkeep.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.UPKEEP, OnOpponentsTurnCondition.getInstance(),
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.UPKEEP, OnOpponentsTurnCondition.instance,
                 "Cast {this} only during an opponent's upkeep"));
         
         // Creatures can't attack this turn.

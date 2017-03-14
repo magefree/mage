@@ -58,7 +58,7 @@ public class DagobahMawSlug extends CardImpl {
         // As long as Dagobah Maw Slug is monstrous it has swampwalk.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new SwampwalkAbility()),
-                MonstrousCondition.getInstance(),
+                MonstrousCondition.instance,
                 "As long as Dagobah Maw Slug is monstrous it has swampwalk")
         ));
     }

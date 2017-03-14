@@ -60,7 +60,7 @@ public class VengefulRebel extends CardImpl {
         // target creature an opponent controls gets -3/-3 until end of turn.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), false),
-                RevoltCondition.getInstance(),
+                RevoltCondition.instance,
                 "When {this} enters the battlefield, if a permanent you controlled left the battlefield this turn, "
                 + "target creature an opponent controls gets -3/-3 until end of turn"
         );

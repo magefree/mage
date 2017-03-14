@@ -168,7 +168,7 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return MyTurnCondition.getInstance().apply(game, this);
+        return MyTurnCondition.instance.apply(game, this);
     }
 
     @Override

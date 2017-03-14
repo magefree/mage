@@ -83,10 +83,10 @@ public class AngusMackenzie extends CardImpl {
 }
 
 class BeforeCombatDamageCondition implements Condition {
-    private static final BeforeCombatDamageCondition fInstance = new BeforeCombatDamageCondition();
+    private static final BeforeCombatDamageCondition instance = new BeforeCombatDamageCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Theros extends ExpansionSet {
 
-    private static final Theros fINSTANCE = new Theros();
+    private static final Theros instance = new Theros();
 
     public static Theros getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Theros() {

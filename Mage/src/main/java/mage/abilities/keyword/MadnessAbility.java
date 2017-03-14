@@ -67,7 +67,7 @@ public class MadnessAbility extends StaticAbility {
     }
 
     public static Condition GetCondition() {
-        return MadnessCondition.getInstance();
+        return MadnessCondition.instance;
     }
 
     @Override
@@ -248,19 +248,9 @@ class MadnessCastEffect extends OneShotEffect {
     }
 }
 
-class MadnessCondition implements Condition {
+enum MadnessCondition implements Condition {
 
-    private static MadnessCondition fInstance = null;
-
-    private MadnessCondition() {
-    }
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new MadnessCondition();
-        }
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -268,7 +258,7 @@ class MadnessCondition implements Condition {
         if (card != null) {
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof MadnessTriggeredAbility) {
-                    if (((MadnessTriggeredAbility) ability).isActivated()) {
+                    if (ability.isActivated()) {
                         return true;
                     }
                 }

@@ -8,10 +8,10 @@ import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
 
 public class Onslaught extends ExpansionSet {
-    private static final Onslaught fINSTANCE = new Onslaught();
+    private static final Onslaught instance = new Onslaught();
 
     public static Onslaught getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Onslaught() {

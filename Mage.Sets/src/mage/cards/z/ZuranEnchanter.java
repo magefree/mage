@@ -55,7 +55,7 @@ public class ZuranEnchanter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{B}, {tap}: Target player discards a card. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{2}{B}"), MyTurnCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{2}{B}"), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

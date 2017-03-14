@@ -56,7 +56,7 @@ public class RootwaterMatriarch extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Gain control of target creature for as long as that creature is enchanted
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom), EnchantedTargetCondition.getInstance(),
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom), EnchantedTargetCondition.instance,
                 "Gain control of target creature for as long as that creature is enchanted");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -7,10 +7,10 @@ import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
 
 public class PrereleaseEvents extends ExpansionSet {
-    private static final PrereleaseEvents fINSTANCE = new PrereleaseEvents();
+    private static final PrereleaseEvents instance = new PrereleaseEvents();
 
     public static PrereleaseEvents getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PrereleaseEvents() {

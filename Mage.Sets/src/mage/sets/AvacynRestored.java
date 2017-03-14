@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class AvacynRestored extends ExpansionSet {
 
-    private static final AvacynRestored fINSTANCE = new AvacynRestored();
+    private static final AvacynRestored instance = new AvacynRestored();
 
     public static AvacynRestored getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private AvacynRestored() {

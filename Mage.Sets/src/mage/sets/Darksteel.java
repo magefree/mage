@@ -7,10 +7,10 @@ import mage.constants.Rarity;
 
 public class Darksteel extends ExpansionSet {
 
-    private static final Darksteel fINSTANCE = new Darksteel();
+    private static final Darksteel instance = new Darksteel();
 
     public static Darksteel getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     public Darksteel() {

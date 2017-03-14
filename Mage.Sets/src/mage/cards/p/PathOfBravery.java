@@ -83,10 +83,10 @@ public class PathOfBravery extends CardImpl {
 
 class LifeCondition implements Condition {
 
-    private static LifeCondition fInstance = new LifeCondition();
+    private static LifeCondition instance = new LifeCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

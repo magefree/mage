@@ -73,7 +73,7 @@ public class OracleEnVec extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target opponent chooses any number of creatures he or she controls. During that player's next turn, the chosen creatures attack if able, and other creatures can't attack. At the beginning of that turn's end step, destroy each of the chosen creatures that didn't attack. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new OracleEnVecEffect(), new TapSourceCost(), MyTurnCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new OracleEnVecEffect(), new TapSourceCost(), MyTurnCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new AttackedThisTurnWatcher());
     }

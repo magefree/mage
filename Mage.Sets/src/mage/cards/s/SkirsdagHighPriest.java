@@ -68,7 +68,7 @@ public class SkirsdagHighPriest extends CardImpl {
 
         // Morbid - {tap}, Tap two untapped creatures you control: Create a 5/5 black Demon creature token with flying. Activate this ability only if a creature died this turn.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DemonToken()),
-            new TapSourceCost(), MorbidCondition.getInstance());
+            new TapSourceCost(), MorbidCondition.instance);
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
         ability.setAbilityWord(AbilityWord.MORBID);
         this.addAbility(ability);

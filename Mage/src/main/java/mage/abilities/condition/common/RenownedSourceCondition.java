@@ -16,19 +16,9 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class RenownedSourceCondition implements Condition {
+public enum RenownedSourceCondition implements Condition {
 
-    private static RenownedSourceCondition fInstance = null;
-
-    private RenownedSourceCondition() {}
-
-    public static RenownedSourceCondition getInstance() {
-        if (fInstance == null) {
-            fInstance = new RenownedSourceCondition();
-        }
-        return fInstance;
-    }
-
+    instance;
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());

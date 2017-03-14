@@ -57,7 +57,7 @@ public class IronFistOfTheEmpire extends CardImpl {
         triggeredAbility.addEffect(new CreateTokenEffect(new RoyalGuardToken()));
         Ability ability = new ConditionalTriggeredAbility(
                 triggeredAbility,
-                HateCondition.getInstance(),
+                HateCondition.instance,
                 "<i>Hate</i> &mdash; At the beggining of each end step, if opponent lost life from a source other than combat damage this turn, you gain 1 life and create a 2/2 red Soldier creature token with first strike named Royal Guard.");
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }

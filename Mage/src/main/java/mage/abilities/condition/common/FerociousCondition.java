@@ -36,24 +36,16 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
-public class FerociousCondition  implements Condition {
-
+public enum FerociousCondition implements Condition {
+    instance;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    private static final FerociousCondition fInstance = new FerociousCondition();
-
-    private FerociousCondition() {}
-
-    public static FerociousCondition getInstance() {
-        return fInstance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {

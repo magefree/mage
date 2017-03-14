@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  * @author fireshoes
  */
 public class PDSGraveborn extends ExpansionSet {
-    private static final PDSGraveborn fINSTANCE = new PDSGraveborn();
+    private static final PDSGraveborn instance = new PDSGraveborn();
 
     public static PDSGraveborn getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PDSGraveborn() {

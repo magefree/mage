@@ -107,7 +107,7 @@ class PsychicRebuttalEffect extends OneShotEffect {
         if (spell != null) {
             game.getStack().counter(spell.getId(), source.getSourceId(), game);
 
-            if (SpellMasteryCondition.getInstance().apply(game, source)
+            if (SpellMasteryCondition.instance.apply(game, source)
                     && controller.chooseUse(Outcome.PlayForFree, "Copy " + spell.getName() + " (you may choose new targets for the copy)?", source, game)) {
 
                 StackObject newStackObject = spell.createCopyOnStack(game, source, source.getControllerId(), true);

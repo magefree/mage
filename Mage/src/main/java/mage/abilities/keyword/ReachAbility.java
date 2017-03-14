@@ -40,14 +40,14 @@ import java.io.ObjectStreamException;
  */
 public class ReachAbility extends StaticAbility implements MageSingleton {
 
-    private static final ReachAbility fINSTANCE =  new ReachAbility();
+    private static final ReachAbility instance =  new ReachAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static ReachAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ReachAbility() {
@@ -61,7 +61,7 @@ public class ReachAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public ReachAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

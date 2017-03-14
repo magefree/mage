@@ -56,7 +56,7 @@ public class SithMarauder extends CardImpl {
         // <i>Hate</i> &mdash; When Sith Marauder enters the battlefield, if an opponent lost life from a source other than combat damage this turn, Sith Marauder deals 3 damage to target creature or player.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3)),
-                HateCondition.getInstance(),
+                HateCondition.instance,
                 "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, {this} deals 3 damage to target creature or player");
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());

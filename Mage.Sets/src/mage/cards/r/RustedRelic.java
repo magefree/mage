@@ -53,7 +53,7 @@ public class RustedRelic extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                         new ConditionalContinuousEffect(
                                 new BecomesCreatureSourceEffect(new RustedRelicToken(), "artifact", Duration.WhileOnBattlefield),
-                                MetalcraftCondition.getInstance(),
+                                MetalcraftCondition.instance,
                                 "Metalcraft - {this} is a 5/5 Golem artifact creature as long as you control three or more artifacts")));
     }
 

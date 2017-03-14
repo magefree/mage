@@ -9,13 +9,9 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class AttachedCondition implements Condition {
+public enum AttachedCondition implements Condition {
 
-    private static final AttachedCondition fInstance = new AttachedCondition();
-
-    public static AttachedCondition getInstance() {
-        return fInstance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

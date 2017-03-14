@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Chronicles extends ExpansionSet {
 
-    private static final Chronicles fINSTANCE = new Chronicles();
+    private static final Chronicles instance = new Chronicles();
 
     public static Chronicles getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Chronicles() {

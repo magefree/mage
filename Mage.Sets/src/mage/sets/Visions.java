@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Visions extends ExpansionSet {
 
-    private static final Visions fINSTANCE = new Visions();
+    private static final Visions instance = new Visions();
 
     public static Visions getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Visions() {

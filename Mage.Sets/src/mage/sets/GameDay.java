@@ -38,10 +38,10 @@ import mage.constants.Rarity;
  */
 public class GameDay extends ExpansionSet {
 
-    private static final GameDay fINSTANCE = new GameDay();
+    private static final GameDay instance = new GameDay();
 
     public static GameDay getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private GameDay() {

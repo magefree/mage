@@ -50,7 +50,7 @@ public class HauntingHymn extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardTargetEffect(4),
                 new DiscardTargetEffect(2),
-                MyMainPhaseCondition.getInstance(),
+                MyMainPhaseCondition.instance,
                 "Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead"));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
