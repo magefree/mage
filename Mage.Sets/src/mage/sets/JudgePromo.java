@@ -49,6 +49,7 @@ public class JudgePromo extends ExpansionSet {
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Argothian Enchantress", 12, Rarity.RARE, mage.cards.a.ArgothianEnchantress.class));
         cards.add(new SetCardInfo("Armageddon", 14, Rarity.RARE, mage.cards.a.Armageddon.class));
+        cards.add(new SetCardInfo("Avacyn, Angel of Hope", 110, Rarity.SPECIAL, mage.cards.a.AvacynAngelOfHope.class));
         cards.add(new SetCardInfo("Azusa, Lost but Seeking", 102, Rarity.RARE, mage.cards.a.AzusaLostButSeeking.class));// 2016 003/008
         cards.add(new SetCardInfo("Balance", 15, Rarity.RARE, mage.cards.b.Balance.class));
         cards.add(new SetCardInfo("Ball Lightning", 7, Rarity.RARE, mage.cards.b.BallLightning.class));
@@ -89,6 +90,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Hammer of Bogardan", 9, Rarity.RARE, mage.cards.h.HammerOfBogardan.class));
         cards.add(new SetCardInfo("Hanna, Ship's Navigator", 84, Rarity.RARE, mage.cards.h.HannaShipsNavigator.class));
         cards.add(new SetCardInfo("Hermit Druid", 19, Rarity.RARE, mage.cards.h.HermitDruid.class));
+        cards.add(new SetCardInfo("Homeward Path", 113, Rarity.SPECIAL, mage.cards.h.HomewardPath.class));
         cards.add(new SetCardInfo("Imperial Recruiter", 74, Rarity.UNCOMMON, mage.cards.i.ImperialRecruiter.class));
         cards.add(new SetCardInfo("Imperial Seal", 109, Rarity.SPECIAL, mage.cards.i.ImperialSeal.class));// 2016 006/008
         cards.add(new SetCardInfo("Intuition", 11, Rarity.RARE, mage.cards.i.Intuition.class));
