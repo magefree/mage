@@ -150,8 +150,9 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
         if (damageEvent.isCombatDamage()) {
+            UUID controllerId = source.getControllerId();
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.hasSubtype("Zombie", game)) {
+            if (permanent != null && permanent.hasSubtype("Zombie", game) && permanent.getControllerId() == controllerId) {
                 return true;
             }
         }
