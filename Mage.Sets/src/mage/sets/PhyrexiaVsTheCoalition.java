@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class PhyrexiaVsTheCoalition extends ExpansionSet {
 
-    private static final PhyrexiaVsTheCoalition fINSTANCE = new PhyrexiaVsTheCoalition();
+    private static final PhyrexiaVsTheCoalition instance = new PhyrexiaVsTheCoalition();
 
     public static PhyrexiaVsTheCoalition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PhyrexiaVsTheCoalition() {

@@ -55,9 +55,9 @@ public class DeckEditorPane extends MagePane {
     public DeckEditorPane() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         boolean initialized = false;
-        if (Plugins.getInstance().isThemePluginLoaded()) {
+        if (Plugins.instance.isThemePluginLoaded()) {
             Map<String, JComponent> uiMap = new HashMap<>();
-            JComponent container = Plugins.getInstance().updateTablePanel(uiMap);
+            JComponent container = Plugins.instance.updateTablePanel(uiMap);
             if (container != null) {
                 deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
                 initComponents(container);

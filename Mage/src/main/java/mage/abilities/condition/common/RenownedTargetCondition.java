@@ -38,16 +38,16 @@ import mage.game.permanent.Permanent;
  */
 public class RenownedTargetCondition implements Condition {
 
-    private static RenownedTargetCondition fInstance = null;
+    private static RenownedTargetCondition instance = null;
 
     private RenownedTargetCondition() {
     }
 
     public static RenownedTargetCondition getInstance() {
-        if (fInstance == null) {
-            fInstance = new RenownedTargetCondition();
+        if (instance == null) {
+            instance = new RenownedTargetCondition();
         }
-        return fInstance;
+        return instance;
     }
 
     @Override

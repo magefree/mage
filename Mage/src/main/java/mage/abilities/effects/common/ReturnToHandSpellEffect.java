@@ -15,10 +15,10 @@ import mage.players.Player;
  */
 public class ReturnToHandSpellEffect extends OneShotEffect implements MageSingleton {
 
-    private static final ReturnToHandSpellEffect fINSTANCE = new ReturnToHandSpellEffect();
+    private static final ReturnToHandSpellEffect instance = new ReturnToHandSpellEffect();
 
     public static ReturnToHandSpellEffect getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ReturnToHandSpellEffect() {
@@ -39,6 +39,6 @@ public class ReturnToHandSpellEffect extends OneShotEffect implements MageSingle
 
     @Override
     public ReturnToHandSpellEffect copy() {
-        return fINSTANCE;
+        return instance;
     }
 }

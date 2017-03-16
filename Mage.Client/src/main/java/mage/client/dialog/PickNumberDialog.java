@@ -60,7 +60,7 @@ public class PickNumberDialog extends MageDialog {
         this.btnCancel.setVisible(false);
         this.pack();
 
-        Point centered = SettingsManager.getInstance().getComponentPosition(getWidth(), getHeight());
+        Point centered = SettingsManager.instance.getComponentPosition(getWidth(), getHeight());
         this.setLocation(centered.x, centered.y);
         GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
         

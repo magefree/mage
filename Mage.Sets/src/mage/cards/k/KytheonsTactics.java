@@ -53,7 +53,7 @@ public class KytheonsTactics extends CardImpl {
         // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, those creatures also gain vigilance until end of turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn)),
-                SpellMasteryCondition.getInstance(),
+                SpellMasteryCondition.instance,
                 "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, those creatures also gain vigilance until end of turn"));
     }
 

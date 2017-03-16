@@ -51,12 +51,12 @@ public class CacklingFlames extends CardImpl {
         // Cackling Flames deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(3),
-                new InvertCondition(HellbentCondition.getInstance()),
+                new InvertCondition(HellbentCondition.instance),
                 "{this} deals 3 damage to target creature or player"));        
         // Hellbent - Cackling Flames deals 5 damage to that creature or player instead if you have no cards in hand.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(5),
-                HellbentCondition.getInstance(),
+                HellbentCondition.instance,
                 "<br/><br/><i>Hellbent</i> - {this} deals 5 damage to that creature or player instead if you have no cards in hand."));
         
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

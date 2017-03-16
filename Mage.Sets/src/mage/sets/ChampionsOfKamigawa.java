@@ -7,10 +7,10 @@ import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
 
 public class ChampionsOfKamigawa extends ExpansionSet {
-    private static final ChampionsOfKamigawa fINSTANCE = new ChampionsOfKamigawa();
+    private static final ChampionsOfKamigawa instance = new ChampionsOfKamigawa();
 
     public static ChampionsOfKamigawa getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ChampionsOfKamigawa() {

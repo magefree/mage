@@ -57,7 +57,7 @@ public class ArdentRecruit extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.getInstance(), "Ardent Recruit gets +2/+2 as long as you control three or more artifacts");
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance, "Ardent Recruit gets +2/+2 as long as you control three or more artifacts");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ability.setAbilityWord(AbilityWord.METALCRAFT);
         this.addAbility(ability);

@@ -63,7 +63,7 @@ public class UrzasRage extends CardImpl {
 
         // Urza's Rage deals 3 damage to target creature or player. If Urza's Rage was kicked, instead it deals 10 damage to that creature or player and the damage can't be prevented.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(10, false),
-                new DamageTargetEffect(3), KickedCondition.getInstance(),
+                new DamageTargetEffect(3), KickedCondition.instance,
                 "{this} deals 3 damage to target creature or player. If {this} was kicked, instead it deals 10 damage to that creature or player and the damage can't be prevented."));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }

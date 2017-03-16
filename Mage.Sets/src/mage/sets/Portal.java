@@ -43,14 +43,14 @@ import mage.cards.CardGraphicInfo;
 
 public class Portal extends ExpansionSet {
 
-    private static final Portal fINSTANCE = new Portal();
+    private static final Portal instance = new Portal();
 
     /**
      *
      * @return
      */
     public static Portal getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Portal() {

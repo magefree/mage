@@ -38,10 +38,10 @@ import mage.constants.Rarity;
 
 public class CommandersArsenal extends ExpansionSet {
 
-    private static final CommandersArsenal fINSTANCE = new CommandersArsenal();
+    private static final CommandersArsenal instance = new CommandersArsenal();
 
     public static CommandersArsenal getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private CommandersArsenal() {

@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Judgment extends ExpansionSet {
 
-    private static final Judgment fINSTANCE = new Judgment();
+    private static final Judgment instance = new Judgment();
 
     public static Judgment getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Judgment() {

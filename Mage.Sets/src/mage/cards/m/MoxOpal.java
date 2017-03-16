@@ -53,7 +53,7 @@ public class MoxOpal extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddManaOfAnyColorEffect(),
                 new TapSourceCost(),
-                MetalcraftCondition.getInstance());
+                MetalcraftCondition.instance);
         ability.setAbilityWord(AbilityWord.METALCRAFT);
         this.addAbility(ability);
     }

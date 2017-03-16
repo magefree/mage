@@ -37,10 +37,10 @@ import mage.cards.CardGraphicInfo;
  * @author North
  */
 public class Mirage extends ExpansionSet {
-    private static final Mirage fINSTANCE = new Mirage();
+    private static final Mirage instance = new Mirage();
 
     public static Mirage getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Mirage() {

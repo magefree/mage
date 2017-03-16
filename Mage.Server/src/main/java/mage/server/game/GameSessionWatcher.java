@@ -65,7 +65,7 @@ public class GameSessionWatcher {
 
     public boolean init() {
         if (!killed) {
-            Optional<User> user = UserManager.getInstance().getUser(userId);
+            Optional<User> user = UserManager.instance.getUser(userId);
             if (user.isPresent()) {
                 user.get().fireCallback(new ClientCallback("gameInit", game.getId(), getGameView()));
                 return true;
@@ -76,28 +76,28 @@ public class GameSessionWatcher {
 
     public void update() {
         if (!killed) {
-            UserManager.getInstance().getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView())));
+            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView())));
         }
 
     }
 
     public void inform(final String message) {
         if (!killed) {
-            UserManager.getInstance().getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback("gameInform", game.getId(), new GameClientMessage(getGameView(), message))));
+            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback("gameInform", game.getId(), new GameClientMessage(getGameView(), message))));
         }
 
     }
 
     public void informPersonal(final String message) {
         if (!killed) {
-            UserManager.getInstance().getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback("gameInformPersonal", game.getId(), new GameClientMessage(getGameView(), message))));
+            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback("gameInformPersonal", game.getId(), new GameClientMessage(getGameView(), message))));
         }
 
     }
 
     public void gameOver(final String message) {
         if (!killed) {
-            UserManager.getInstance().getUser(userId).ifPresent(user -> {
+            UserManager.instance.getUser(userId).ifPresent(user -> {
                 user.removeGameWatchInfo(game.getId());
                 user.fireCallback(new ClientCallback("gameOver", game.getId(), message));
             });
@@ -113,7 +113,7 @@ public class GameSessionWatcher {
 
     public void gameError(final String message) {
         if (!killed) {
-            UserManager.getInstance().getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback("gameError", game.getId(), message)));
+            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback("gameError", game.getId(), message)));
 
         }
     }

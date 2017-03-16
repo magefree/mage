@@ -173,10 +173,10 @@ class NotOfThisWorldCondition implements Condition {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    private static final NotOfThisWorldCondition fInstance = new NotOfThisWorldCondition();
+    private static final NotOfThisWorldCondition instance = new NotOfThisWorldCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

@@ -34,10 +34,10 @@ import mage.game.permanent.Permanent;
 
 public class FlippedCondition implements Condition {
 
-    private static FlippedCondition fInstance = new FlippedCondition();
+    private static FlippedCondition instance = new FlippedCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

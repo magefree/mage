@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class ReturnToRavnica extends ExpansionSet {
 
-    private static final ReturnToRavnica fINSTANCE = new ReturnToRavnica();
+    private static final ReturnToRavnica instance = new ReturnToRavnica();
 
     public static ReturnToRavnica getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ReturnToRavnica() {

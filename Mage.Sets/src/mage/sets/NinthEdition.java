@@ -9,10 +9,10 @@ import mage.cards.CardGraphicInfo;
 
 public class NinthEdition extends ExpansionSet {
 
-    private static final NinthEdition fINSTANCE = new NinthEdition();
+    private static final NinthEdition instance = new NinthEdition();
 
     public static NinthEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private NinthEdition() {

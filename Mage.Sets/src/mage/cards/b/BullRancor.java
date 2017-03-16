@@ -59,7 +59,7 @@ public class BullRancor extends CardImpl {
         // As long as Bull Rancor is monstrous, creatures you control have menace.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                MonstrousCondition.getInstance(),
+                MonstrousCondition.instance,
                 "As long as Bull Rancor is monstrous, creatures you control have menace")
         ));
     }

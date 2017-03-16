@@ -51,7 +51,7 @@ public class MightBeyondReason extends CardImpl {
         getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)),
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)),
-                DeliriumCondition.getInstance(),
+                DeliriumCondition.instance,
                 "Put two +1/+1 counter on target creature.<br>"
                 + "<i>Delirium</i> &mdash; Put three +1/+1 counter on that creature instead if there are four or more card types among cards in your graveyard"
         ));

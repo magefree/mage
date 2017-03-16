@@ -68,10 +68,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class FallenEmpires extends ExpansionSet {
 
-    private static final FallenEmpires fINSTANCE = new FallenEmpires();
+    private static final FallenEmpires instance = new FallenEmpires();
 
     public static FallenEmpires getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FallenEmpires() {

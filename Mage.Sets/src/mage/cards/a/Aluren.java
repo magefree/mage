@@ -102,7 +102,7 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
     }
     
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(null, SourceIsSpellCondition.getInstance(), null, filter,  true);
+    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(null, SourceIsSpellCondition.instance, null, filter,  true);
     
     public AlurenRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

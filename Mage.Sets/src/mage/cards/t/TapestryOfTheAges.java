@@ -77,11 +77,11 @@ public class TapestryOfTheAges extends CardImpl {
     }
 }
 
-class PlayerCastNonCreatureSpellCondition implements Condition {
-    private final static PlayerCastNonCreatureSpellCondition fInstance = new PlayerCastNonCreatureSpellCondition();
+enum PlayerCastNonCreatureSpellCondition implements Condition {
+    instance;
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

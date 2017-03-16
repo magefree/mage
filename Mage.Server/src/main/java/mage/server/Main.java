@@ -107,7 +107,7 @@ public final class Main {
             }
         }
 
-        if (ConfigSettings.getInstance().isAuthenticationActivated()) {
+        if (ConfigSettings.instance.isAuthenticationActivated()) {
             logger.info("Check authorized user DB version ...");
             if (!AuthorizedUserRepository.instance.checkAlterAndMigrateAuthorizedUser()) {
                 logger.fatal("Failed to start server.");
@@ -162,7 +162,7 @@ public final class Main {
         UserStatsRepository.instance.updateUserStats();
         logger.info("Done.");
         deleteSavedGames();
-        ConfigSettings config = ConfigSettings.getInstance();
+        ConfigSettings config = ConfigSettings.instance;
         for (GamePlugin plugin : config.getGameTypes()) {
             GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }
@@ -240,7 +240,7 @@ public final class Main {
     }
 
     static void initStatistics() {
-        ServerMessagesUtil.getInstance().setStartDate(System.currentTimeMillis());
+        ServerMessagesUtil.instance.setStartDate(System.currentTimeMillis());
     }
 
     static boolean isAlreadyRunning(InvokerLocator serverLocator) {
@@ -263,11 +263,11 @@ public final class Main {
 
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
-            Session session = SessionManager.getInstance().getSession(client.getSessionId());
+            Session session = SessionManager.instance.getSession(client.getSessionId());
             if (session != null) {
 
                 StringBuilder sessionInfo = new StringBuilder();
-                Optional<User> user = UserManager.getInstance().getUser(session.getUserId());
+                Optional<User> user = UserManager.instance.getUser(session.getUserId());
                 if (user.isPresent()) {
                     sessionInfo.append(user.get().getName()).append(" [").append(user.get().getGameInfo()).append(']');
                 } else {
@@ -277,12 +277,12 @@ public final class Main {
                 if (throwable instanceof ClientDisconnectedException) {
                     // Seems like the random diconnects from public server land here and should not be handled as explicit disconnects
                     // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
-                    //SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.Disconnected);
-                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
+                    //SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.Disconnected);
+                    SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("CLIENT DISCONNECTED - " + sessionInfo);
                     logger.debug("Stack Trace", throwable);
                 } else {
-                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
+                    SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("LOST CONNECTION - " + sessionInfo);
                     if (logger.isDebugEnabled()) {
                         if (throwable == null) {
@@ -305,7 +305,7 @@ public final class Main {
         public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler serverInvocationHandler) throws Exception {
             super(locator, target, subsystem);
             connector.addInvocationHandler("callback", serverInvocationHandler);
-            connector.setLeasePeriod(ConfigSettings.getInstance().getLeasePeriod());
+            connector.setLeasePeriod(ConfigSettings.instance.getLeasePeriod());
             connector.addConnectionListener(new ClientConnectionListener());
         }
 
@@ -343,9 +343,9 @@ public final class Main {
 
         @Override
         public void setInvoker(ServerInvoker invoker) {
-            ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.getInstance().getSecondaryBindPort());
-            ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.getInstance().getBacklogSize());
-            ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.getInstance().getNumAcceptThreads());
+            ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.instance.getSecondaryBindPort());
+            ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.instance.getBacklogSize());
+            ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.instance.getNumAcceptThreads());
         }
 
         @Override
@@ -354,7 +354,7 @@ public final class Main {
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             try {
                 String sessionId = handler.getClientSessionId();
-                SessionManager.getInstance().createSession(sessionId, callbackHandler);
+                SessionManager.instance.createSession(sessionId, callbackHandler);
             } catch (Throwable ex) {
                 logger.fatal("", ex);
             }
@@ -372,7 +372,7 @@ public final class Main {
             } else {
                 host = "localhost";
             }
-            SessionManager.getInstance().getSession(sessionId).setHost(host);
+            SessionManager.instance.getSession(sessionId).setHost(host);
             return null;
         }
 
@@ -380,7 +380,7 @@ public final class Main {
         public void removeListener(InvokerCallbackHandler callbackHandler) {
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             String sessionId = handler.getClientSessionId();
-            SessionManager.getInstance().disconnect(sessionId, DisconnectReason.Disconnected);
+            SessionManager.instance.disconnect(sessionId, DisconnectReason.Disconnected);
         }
 
     }

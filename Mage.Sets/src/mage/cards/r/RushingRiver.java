@@ -62,7 +62,7 @@ public class RushingRiver extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());        
         Effect effect = new ConditionalOneShotEffect(
                 new ReturnToHandTargetEffect(),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "If {this} was kicked, return another target nonland permanent to its owner's hand");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
@@ -72,7 +72,7 @@ public class RushingRiver extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility && KickedCondition.getInstance().apply(game, ability)) {
+        if (ability instanceof SpellAbility && KickedCondition.instance.apply(game, ability)) {
             ability.getTargets().clear();
             ability.addTarget(new TargetNonlandPermanent(2));
         }

@@ -38,10 +38,10 @@ import mage.constants.Rarity;
  */
 public class Conflux extends ExpansionSet {
 
-    private static final Conflux fINSTANCE = new Conflux();
+    private static final Conflux instance = new Conflux();
 
     public static Conflux getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Conflux() {

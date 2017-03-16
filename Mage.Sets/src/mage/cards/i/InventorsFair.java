@@ -75,7 +75,7 @@ public class InventorsFair extends CardImpl {
         // {4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle your library.
         // Activate this ability only if you control threeor more artifacts.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, filter), true),
-                new GenericManaCost(4), MetalcraftCondition.getInstance());
+                new GenericManaCost(4), MetalcraftCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

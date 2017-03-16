@@ -43,10 +43,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Kaladesh extends ExpansionSet {
 
-    private static final Kaladesh fINSTANCE = new Kaladesh();
+    private static final Kaladesh instance = new Kaladesh();
 
     public static Kaladesh getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();

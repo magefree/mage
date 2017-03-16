@@ -81,7 +81,7 @@ public class BigCard extends JComponent {
 
     public BigCard(boolean rotated) {
         initComponents();
-        if (!Plugins.getInstance().isCardPluginLoaded()) {
+        if (!Plugins.instance.isCardPluginLoaded()) {
             initBounds(rotated);
         }
         setDoubleBuffered(true);

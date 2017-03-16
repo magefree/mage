@@ -81,18 +81,12 @@ public class Revenge extends CardImpl {
     }
 }
 
-class LostLifeCondition implements Condition {
+enum LostLifeCondition implements Condition {
 
-    private static LostLifeCondition fInstance = null;
+    instance;
 
     public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new LostLifeCondition();
-        }
-        return fInstance;
-    }
-
-    private LostLifeCondition() {
+       return instance;
     }
 
     @Override

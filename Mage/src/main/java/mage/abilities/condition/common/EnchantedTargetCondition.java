@@ -1,6 +1,7 @@
 package mage.abilities.condition.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.CardType;
@@ -9,16 +10,11 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 
 /**
- *
  * @author Jeff
  */
-public class EnchantedTargetCondition implements Condition {
+public enum EnchantedTargetCondition implements Condition {
 
-    private static final EnchantedTargetCondition fInstance = new EnchantedTargetCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

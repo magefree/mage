@@ -42,20 +42,16 @@ import javax.annotation.Nonnull;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class SessionManager {
-
+public enum SessionManager {
+    instance;
     private static final Logger logger = Logger.getLogger(SessionManager.class);
-    private static final SessionManager INSTANCE = new SessionManager();
 
-    public static SessionManager getInstance() {
-        return INSTANCE;
-    }
 
     private final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
     public Session getSession(@Nonnull String sessionId) {
         Session session = sessions.get(sessionId);
-        if (session != null && session.getUserId() != null && UserManager.getInstance().getUser(session.getUserId()) == null) {
+        if (session != null && session.getUserId() != null && UserManager.instance.getUser(session.getUserId()) == null) {
             logger.error("User for session " + sessionId + " with userId " + session.getUserId() + " is missing. Session removed.");
             // can happen if user from same host signs in multiple time with multiple clients, after he disconnects with one client
             disconnect(sessionId, DisconnectReason.ConnectingOtherInstance);
@@ -191,7 +187,7 @@ public class SessionManager {
         if (session == null) {
             return null;
         }
-        return UserManager.getInstance().getUser(session.getUserId()).get();
+        return UserManager.instance.getUser(session.getUserId()).get();
     }
 
     public void endUserSession(String sessionId, String userSessionId) {
@@ -215,7 +211,7 @@ public class SessionManager {
     public Optional<User> getUser(@Nonnull String sessionId) {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            return UserManager.getInstance().getUser(sessions.get(sessionId).getUserId());
+            return UserManager.instance.getUser(sessions.get(sessionId).getUserId());
         }
         logger.error(String.format("Session %s could not be found", sessionId));
         return Optional.empty();
@@ -224,7 +220,7 @@ public class SessionManager {
     public boolean extendUserSession(String sessionId, String pingInfo) {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            return UserManager.getInstance().extendUserSession(session.getUserId(), pingInfo);
+            return UserManager.instance.extendUserSession(session.getUserId(), pingInfo);
         }
         return false;
     }

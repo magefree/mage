@@ -55,7 +55,7 @@ public class SavageBeating extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");
 
         // Cast Savage Beating only during your turn and only during combat.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, null, MyTurnCondition.getInstance(),
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, null, MyTurnCondition.instance,
                 "Cast {this} only during your turn and only during combat"));
 
         // Choose one - Creatures you control gain double strike until end of turn;

@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:01
  */
 public class Guildpact extends ExpansionSet {
-    private static final Guildpact fINSTANCE = new Guildpact();
+    private static final Guildpact instance = new Guildpact();
 
     public static Guildpact getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Guildpact() {

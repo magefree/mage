@@ -55,7 +55,7 @@ public class RoarOfChallenge extends CardImpl {
         // <i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new LockedInCondition(FerociousCondition.getInstance()),
+                new LockedInCondition(FerociousCondition.instance),
                 "<br><i>Ferocious</i> &mdash; That creature gains indestructible until end of turn if you control a creature with power 4 or greater."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

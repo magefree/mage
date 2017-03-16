@@ -61,7 +61,7 @@ public class ChatSession {
     }
 
     public void join(UUID userId) {
-       UserManager.getInstance().getUser(userId).ifPresent(user-> {
+       UserManager.instance.getUser(userId).ifPresent(user-> {
            if (!clients.containsKey(userId)) {
                String userName = user.getName();
                clients.put(userId, userName);
@@ -142,7 +142,7 @@ public class ChatSession {
             HashSet<UUID> clientsToRemove = null;
             ClientCallback clientCallback = new ClientCallback("chatMessage", chatId, new ChatMessage(userName, message, (withTime ? timeFormatter.format(new Date()) : ""), color, messageType, soundToPlay));
             for (UUID userId : clients.keySet()) {
-                Optional<User> user = UserManager.getInstance().getUser(userId);
+                Optional<User> user = UserManager.instance.getUser(userId);
                 if (user.isPresent()) {
                     user.get().fireCallback(clientCallback);
                 } else {

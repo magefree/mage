@@ -47,15 +47,15 @@ import mage.game.Game;
 
 public class SuspendedCondition implements Condition {
 
-    private static SuspendedCondition fInstance = null;
+    private static SuspendedCondition instance = null;
 
     private SuspendedCondition() {}
 
     public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new SuspendedCondition();
+        if (instance == null) {
+            instance = new SuspendedCondition();
         }
-        return fInstance;
+        return instance;
     }
 
     @Override

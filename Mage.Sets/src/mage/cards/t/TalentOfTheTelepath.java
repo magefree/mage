@@ -113,7 +113,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
             // cast an instant or sorcery for free
             if (!cardsToCast.isEmpty()) {
                 int numberOfSpells = 1;
-                if (SpellMasteryCondition.getInstance().apply(game, source)) {
+                if (SpellMasteryCondition.instance.apply(game, source)) {
                     numberOfSpells++;
                 }
                 Player controller = game.getPlayer(source.getControllerId());

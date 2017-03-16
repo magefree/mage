@@ -58,12 +58,12 @@ public class Prickleboar extends CardImpl {
         /// As long as it's your turn, Prickleboar gets +2/+0
         Effect boostEffect = new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
-                MyTurnCondition.getInstance(),
+                MyTurnCondition.instance,
                 "As long as it's your turn, {this} gets +2/+0");
         // and has first strike.
         Effect gainAbilityEffect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.getInstance(),
+                MyTurnCondition.instance,
                 "and has first strike");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
         ability.addEffect(gainAbilityEffect);

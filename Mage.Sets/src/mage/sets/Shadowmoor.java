@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Shadowmoor extends ExpansionSet {
 
-    private static final Shadowmoor fINSTANCE = new Shadowmoor();
+    private static final Shadowmoor instance = new Shadowmoor();
 
     public static Shadowmoor getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Shadowmoor() {

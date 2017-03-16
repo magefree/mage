@@ -78,7 +78,7 @@ public class ToothCollector extends CardImpl {
         // target creature that player controls gets -1/-1 until end of turn.
         ability = new ConditionalTriggeredAbility(
                 new ToothCollectorAbility(),
-                new DeliriumCondition(),
+                DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
                         + "target creature that player controls gets -1/-1 until end of turn.");
         this.addAbility(ability);

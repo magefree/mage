@@ -45,9 +45,9 @@ public class TablesPane extends MagePane {
      */
     public TablesPane() {
         boolean initialized = false;
-        if (Plugins.getInstance().isThemePluginLoaded()) {
+        if (Plugins.instance.isThemePluginLoaded()) {
             tablesPanel = new mage.client.table.TablesPanel();
-            JComponent container = Plugins.getInstance().updateTablePanel(tablesPanel.getUIComponents());
+            JComponent container = Plugins.instance.updateTablePanel(tablesPanel.getUIComponents());
             if (container != null) {
                 initComponents(container);
                 container.add(tablesPanel);

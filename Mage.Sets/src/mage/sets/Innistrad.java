@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Innistrad extends ExpansionSet {
 
-    private static final Innistrad fINSTANCE = new Innistrad();
+    private static final Innistrad instance = new Innistrad();
 
     public static Innistrad getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Innistrad() {

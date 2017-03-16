@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  * @author loki
  */
 public class RavnicaCityOfGuilds extends ExpansionSet {
-    private static final RavnicaCityOfGuilds fINSTANCE = new RavnicaCityOfGuilds();
+    private static final RavnicaCityOfGuilds instance = new RavnicaCityOfGuilds();
 
     public static RavnicaCityOfGuilds getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private RavnicaCityOfGuilds() {

@@ -68,7 +68,7 @@ public class ElementalAppeal extends CardImpl {
         // If Elemental Appeal was kicked, that creature gets +7/+0 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(7, 0, Duration.EndOfTurn),
-                new LockedInCondition(KickedCondition.getInstance()),
+                new LockedInCondition(KickedCondition.instance),
                 "If {this} was kicked, that creature gets +7/+0 until end of turn"));
     }
 

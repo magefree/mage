@@ -38,10 +38,10 @@ import mage.constants.Rarity;
  */
 public class LaunchParty extends ExpansionSet {
 
-    private static final LaunchParty fINSTANCE = new LaunchParty();
+    private static final LaunchParty instance = new LaunchParty();
 
     public static LaunchParty getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private LaunchParty() {

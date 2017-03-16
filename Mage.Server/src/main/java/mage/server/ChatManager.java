@@ -44,19 +44,12 @@ import java.util.regex.Pattern;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ChatManager {
+public enum ChatManager {
 
+    instance;
     private static final Logger logger = Logger.getLogger(ChatManager.class);
     private static final HashMap<String, String> userMessages = new HashMap<>();
 
-    private static final ChatManager INSTANCE = new ChatManager();
-
-    public static ChatManager getInstance() {
-        return INSTANCE;
-    }
-
-    private ChatManager() {
-    }
 
     private final ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<>();
 
@@ -113,7 +106,7 @@ public class ChatManager {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
             if (message.startsWith("\\") || message.startsWith("/")) {
-                User user = UserManager.getInstance().getUserByName(userName);
+                User user = UserManager.instance.getUserByName(userName);
                 if (user != null) {
                     if (!performUserCommand(user, message, chatId, false)) {
                         performUserCommand(user, message, chatId, true);
@@ -123,7 +116,7 @@ public class ChatManager {
             }
 
             if (messageType != MessageType.GAME) {
-                User user = UserManager.getInstance().getUserByName(userName);
+                User user = UserManager.instance.getUserByName(userName);
                 if (message != null && userName != null && !userName.isEmpty()) {
 
                     if (message.equals(userMessages.get(userName))) {
@@ -205,12 +198,12 @@ public class ChatManager {
         }
 
         if (command.startsWith("H ") || command.startsWith("HISTORY ")) {
-            message += "<br/>" + UserManager.getInstance().getUserHistory(message.substring(command.startsWith("H ") ? 3 : 9));
+            message += "<br/>" + UserManager.instance.getUserHistory(message.substring(command.startsWith("H ") ? 3 : 9));
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
         if (command.equals("ME")) {
-            message += "<br/>" + UserManager.getInstance().getUserHistory(user.getName());
+            message += "<br/>" + UserManager.instance.getUserHistory(user.getName());
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
@@ -220,7 +213,7 @@ public class ChatManager {
             if (first > 1) {
                 String userToName = rest.substring(0, first);
                 rest = rest.substring(first + 1).trim();
-                User userTo = UserManager.getInstance().getUserByName(userToName);
+                User userTo = UserManager.instance.getUserByName(userToName);
                 if (userTo != null) {
                     if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest)) {
                         message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
@@ -251,7 +244,7 @@ public class ChatManager {
      * @param color
      */
     public void broadcast(UUID userId, String message, MessageColor color) throws UserNotFoundException {
-        UserManager.getInstance().getUser(userId).ifPresent(user-> {
+        UserManager.instance.getUser(userId).ifPresent(user-> {
             chatSessions.values()
                     .stream()
                     .filter(chat -> chat.hasUser(userId))
@@ -261,7 +254,7 @@ public class ChatManager {
     }
 
     public void sendReconnectMessage(UUID userId) {
-        UserManager.getInstance().getUser(userId).ifPresent(user ->
+        UserManager.instance.getUser(userId).ifPresent(user ->
                 chatSessions.values()
                         .stream()
                         .filter(chat -> chat.hasUser(userId))

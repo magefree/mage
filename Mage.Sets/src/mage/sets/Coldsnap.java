@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class Coldsnap extends ExpansionSet {
 
-    private static final Coldsnap fINSTANCE = new Coldsnap();
+    private static final Coldsnap instance = new Coldsnap();
 
     public static Coldsnap getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Coldsnap() {

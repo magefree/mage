@@ -16,14 +16,14 @@ import mage.constants.Zone;
  */
 public class PartnerAbility extends StaticAbility implements MageSingleton {
 
-    private static final PartnerAbility fINSTANCE = new PartnerAbility();
+    private static final PartnerAbility instance = new PartnerAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static PartnerAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PartnerAbility() {
@@ -37,7 +37,7 @@ public class PartnerAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public PartnerAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

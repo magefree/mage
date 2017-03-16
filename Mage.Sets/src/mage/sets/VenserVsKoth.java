@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class VenserVsKoth extends ExpansionSet {
-    private static final VenserVsKoth fINSTANCE = new VenserVsKoth();
+    private static final VenserVsKoth instance = new VenserVsKoth();
 
     public static VenserVsKoth getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private VenserVsKoth() {

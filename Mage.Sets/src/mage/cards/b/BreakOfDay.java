@@ -56,7 +56,7 @@ public class BreakOfDay extends CardImpl {
         // Fateful hour - If you have 5 or less life, those creatures also are indestructible this turn.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control"), false),
-                new LockedInCondition(FatefulHourCondition.getInstance()),
+                new LockedInCondition(FatefulHourCondition.instance),
                 "If you have 5 or less life, those creatures also are indestructible this turn"));
     }
 

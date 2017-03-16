@@ -43,10 +43,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class ClassicSixthEdition extends ExpansionSet {
 
-    private static final ClassicSixthEdition fINSTANCE = new ClassicSixthEdition();
+    private static final ClassicSixthEdition instance = new ClassicSixthEdition();
 
     public static ClassicSixthEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ClassicSixthEdition() {

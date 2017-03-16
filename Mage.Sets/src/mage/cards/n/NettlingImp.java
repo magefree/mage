@@ -79,7 +79,7 @@ public class NettlingImp extends CardImpl {
 
         // {tap}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost(), new NettlingImpTurnCondition(), "{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.");
-        ability.addEffect(new ConditionalOneShotEffect(new DestroyTargetAtBeginningOfNextEndStepEffect(), new InvertCondition(new TargetAttackedThisTurnCondition())));
+        ability.addEffect(new ConditionalOneShotEffect(new DestroyTargetAtBeginningOfNextEndStepEffect(), new InvertCondition(TargetAttackedThisTurnCondition.instance)));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability, new AttackedThisTurnWatcher());
         

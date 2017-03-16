@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Nemesis extends ExpansionSet {
 
-    private static final Nemesis fINSTANCE = new Nemesis();
+    private static final Nemesis instance = new Nemesis();
 
     public static Nemesis getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Nemesis() {

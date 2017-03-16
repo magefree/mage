@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  * @author LevelX2
  */
 public class AjaniVsNicolBolas extends ExpansionSet {
-    private static final AjaniVsNicolBolas fINSTANCE = new AjaniVsNicolBolas();
+    private static final AjaniVsNicolBolas instance = new AjaniVsNicolBolas();
 
     public static AjaniVsNicolBolas getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private AjaniVsNicolBolas() {

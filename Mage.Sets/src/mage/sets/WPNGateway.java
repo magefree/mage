@@ -16,10 +16,10 @@ import mage.constants.Rarity;
  */
 public class WPNGateway extends ExpansionSet {
 
-    private static final WPNGateway fINSTANCE = new WPNGateway();
+    private static final WPNGateway instance = new WPNGateway();
 
     public static WPNGateway getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private WPNGateway() {

@@ -23,10 +23,10 @@ import mage.game.permanent.Permanent;
  *
  */
 public class IntimidateAbility extends EvasionAbility implements MageSingleton  {
-    private static final IntimidateAbility fInstance = new IntimidateAbility();
+    private static final IntimidateAbility instance = new IntimidateAbility();
 
     public static IntimidateAbility getInstance() {
-        return fInstance;
+        return instance;
     }
 
     private IntimidateAbility() {
@@ -40,7 +40,7 @@ public class IntimidateAbility extends EvasionAbility implements MageSingleton  
 
     @Override
     public IntimidateAbility copy() {
-        return fInstance;
+        return instance;
     }
 }
 

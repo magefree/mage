@@ -17,10 +17,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class ElvesVsGoblins extends ExpansionSet {
-    private static final ElvesVsGoblins fINSTANCE = new ElvesVsGoblins();
+    private static final ElvesVsGoblins instance = new ElvesVsGoblins();
 
     public static ElvesVsGoblins getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ElvesVsGoblins() {

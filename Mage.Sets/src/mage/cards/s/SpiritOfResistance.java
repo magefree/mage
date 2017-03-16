@@ -75,10 +75,10 @@ public class SpiritOfResistance extends CardImpl {
 
 class SpiritOfResistanceCondition implements Condition {
 
-    private static final SpiritOfResistanceCondition fInstance = new SpiritOfResistanceCondition();
+    private static final SpiritOfResistanceCondition instance = new SpiritOfResistanceCondition();
 
     public static SpiritOfResistanceCondition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     private SpiritOfResistanceCondition() {}

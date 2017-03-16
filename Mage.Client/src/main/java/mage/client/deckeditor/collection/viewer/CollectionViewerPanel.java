@@ -185,7 +185,7 @@ public final class CollectionViewerPanel extends JPanel {
     }
 
     private void hidePopup() {
-        Plugins.getInstance().getActionCallback().mouseExited(null, null);
+        Plugins.instance.getActionCallback().mouseExited(null, null);
     }
 
     public void removeCollectionViewer() {

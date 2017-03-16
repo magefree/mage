@@ -50,7 +50,7 @@ public class FatedInfatuation extends CardImpl {
         // Create a token that's a copy of target creature you control. If it's your turn, scry 2.
         this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.getInstance(), "If it's your turn, scry 2"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.instance, "If it's your turn, scry 2"));
     }
 
     public FatedInfatuation(final FatedInfatuation card) {

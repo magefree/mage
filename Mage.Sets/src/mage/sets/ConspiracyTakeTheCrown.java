@@ -39,10 +39,10 @@ import mage.constants.Rarity;
 
 public class ConspiracyTakeTheCrown extends ExpansionSet {
 
-    private static final ConspiracyTakeTheCrown fINSTANCE = new ConspiracyTakeTheCrown();
+    private static final ConspiracyTakeTheCrown instance = new ConspiracyTakeTheCrown();
 
     public static ConspiracyTakeTheCrown getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ConspiracyTakeTheCrown() {

@@ -40,14 +40,14 @@ import java.io.ObjectStreamException;
  */
 public class DefenderAbility extends StaticAbility implements MageSingleton {
 
-    private static final DefenderAbility fINSTANCE =  new DefenderAbility();
+    private static final DefenderAbility instance =  new DefenderAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static DefenderAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private DefenderAbility() {
@@ -61,7 +61,7 @@ public class DefenderAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public DefenderAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

@@ -69,10 +69,10 @@ public class MightOfTheNephilim extends CardImpl {
 
 class MightOfTheNephilimValue implements DynamicValue {
 
-    private static final MightOfTheNephilimValue fINSTANCE =  new MightOfTheNephilimValue();
+    private static final MightOfTheNephilimValue instance =  new MightOfTheNephilimValue();
 
     public static MightOfTheNephilimValue getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MightOfTheNephilimValue() {}
@@ -88,7 +88,7 @@ class MightOfTheNephilimValue implements DynamicValue {
 
     @Override
     public MightOfTheNephilimValue copy() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override

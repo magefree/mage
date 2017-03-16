@@ -35,13 +35,11 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
 /**
  * @author nantuko
  */
-public class NoSpellsWereCastLastTurnCondition implements Condition {
+public enum NoSpellsWereCastLastTurnCondition implements Condition {
 
-    private static NoSpellsWereCastLastTurnCondition fInstance = new NoSpellsWereCastLastTurnCondition();
+    instance;
 
-    public static Condition getInstance() {
-        return fInstance;
-    }
+
 
     @Override
     public boolean apply(Game game, Ability source) {

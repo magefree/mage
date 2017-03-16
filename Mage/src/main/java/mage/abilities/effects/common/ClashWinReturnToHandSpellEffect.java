@@ -42,10 +42,10 @@ import mage.players.Player;
  */
 public class ClashWinReturnToHandSpellEffect extends OneShotEffect implements MageSingleton {
 
-    private static final ClashWinReturnToHandSpellEffect fINSTANCE = new ClashWinReturnToHandSpellEffect();
+    private static final ClashWinReturnToHandSpellEffect instance = new ClashWinReturnToHandSpellEffect();
 
     public static ClashWinReturnToHandSpellEffect getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ClashWinReturnToHandSpellEffect() {
@@ -70,6 +70,6 @@ public class ClashWinReturnToHandSpellEffect extends OneShotEffect implements Ma
 
     @Override
     public ClashWinReturnToHandSpellEffect copy() {
-        return fINSTANCE;
+        return instance;
     }
 }

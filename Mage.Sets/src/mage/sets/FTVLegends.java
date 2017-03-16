@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class FTVLegends extends ExpansionSet {
 
-    private static final FTVLegends fINSTANCE = new FTVLegends();
+    private static final FTVLegends instance = new FTVLegends();
 
     public static FTVLegends getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FTVLegends() {

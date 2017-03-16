@@ -34,10 +34,10 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
- *
  * @author MTGfan
  */
-public class TargetAttackedThisTurnCondition implements Condition {
+public enum TargetAttackedThisTurnCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

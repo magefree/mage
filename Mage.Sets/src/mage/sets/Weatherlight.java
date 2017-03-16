@@ -39,10 +39,10 @@ import mage.constants.Rarity;
  */
 public class Weatherlight extends ExpansionSet {
 
-    private static final Weatherlight fINSTANCE = new Weatherlight();
+    private static final Weatherlight instance = new Weatherlight();
 
     public static Weatherlight getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Weatherlight() {

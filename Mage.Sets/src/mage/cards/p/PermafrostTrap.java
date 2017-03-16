@@ -74,10 +74,10 @@ public class PermafrostTrap extends CardImpl {
 
 class PermafrostTrapCondition implements Condition {
 
-    private static final PermafrostTrapCondition fInstance = new PermafrostTrapCondition();
+    private static final PermafrostTrapCondition instance = new PermafrostTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

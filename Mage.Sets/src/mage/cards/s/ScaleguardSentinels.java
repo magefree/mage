@@ -102,10 +102,10 @@ public class ScaleguardSentinels extends CardImpl {
 
 class ScaleguardSentinelsCondition implements Condition {
 
-    private static final ScaleguardSentinelsCondition fInstance = new ScaleguardSentinelsCondition();
+    private static final ScaleguardSentinelsCondition instance = new ScaleguardSentinelsCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

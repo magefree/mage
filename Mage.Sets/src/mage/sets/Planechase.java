@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Planechase extends ExpansionSet {
 
-    private static final Planechase fINSTANCE = new Planechase();
+    private static final Planechase instance = new Planechase();
 
     public static Planechase getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Planechase() {

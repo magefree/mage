@@ -69,7 +69,7 @@ public class FlamewakePhoenix extends CardImpl {
                         Zone.GRAVEYARD,
                         new DoIfCostPaid(new ReturnToBattlefieldUnderOwnerControlSourceEffect(), new ManaCostsImpl("{R")),
                         TargetController.YOU, false, false),
-                FerociousCondition.getInstance(),
+                FerociousCondition.instance,
                 "<i>Ferocious</i> &mdash; At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return {this} from your graveyard to the battlefield."
         ));
     }

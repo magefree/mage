@@ -44,14 +44,14 @@ import mage.game.turn.Step;
 
 public class SourceTappedBeforeUntapStepCondition implements Condition {
 
-    private static final SourceTappedBeforeUntapStepCondition fInstance = new SourceTappedBeforeUntapStepCondition();
+    private static final SourceTappedBeforeUntapStepCondition instance = new SourceTappedBeforeUntapStepCondition();
     UUID permanentId = null;
     boolean permanentWasTappedBeforeUntapStep = false;
     int lastTurnNum = -1;
     
 
     public static SourceTappedBeforeUntapStepCondition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     public void setPermanentId(UUID permanentId) {

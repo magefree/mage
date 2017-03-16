@@ -13,15 +13,11 @@ import mage.game.Game;
 /**
  * @author LevelX2
  */
-public class AfterUpkeepStepCondtion implements Condition {
+public enum AfterUpkeepStepCondtion implements Condition {
 
-    private static final AfterUpkeepStepCondtion fInstance = new AfterUpkeepStepCondtion();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
-
+    instance;
     @Override
+
     public boolean apply(Game game, Ability source) {
         return game.getStep().getType().isAfter(PhaseStep.UPKEEP);
     }

@@ -83,10 +83,10 @@ public class SummoningTrap extends CardImpl {
 
 class SummoningTrapCondition implements Condition {
 
-    private static final SummoningTrapCondition fInstance = new SummoningTrapCondition();
+    private static final SummoningTrapCondition instance = new SummoningTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

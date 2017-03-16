@@ -59,14 +59,14 @@ public class TraverseTheUlvenwald extends CardImpl {
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true),
-                new InvertCondition(DeliriumCondition.getInstance()),
+                new InvertCondition(DeliriumCondition.instance),
                 "Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library."));
 
         // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, instead search your library
         // for a creature or land card, reveal it, put it into your hand, then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true),
-                DeliriumCondition.getInstance(),
+                DeliriumCondition.instance,
                 "<br><i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, instead search your library for a creature or land card, "
                         + "reveal it, put it into your hand, then shuffle your library."));
     }

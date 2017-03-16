@@ -16,14 +16,14 @@ import mage.constants.Zone;
  */
 public class CanBlockSpaceflightAbility extends StaticAbility implements MageSingleton {
 
-    private static final CanBlockSpaceflightAbility fINSTANCE = new CanBlockSpaceflightAbility();
+    private static final CanBlockSpaceflightAbility instance = new CanBlockSpaceflightAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static CanBlockSpaceflightAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private CanBlockSpaceflightAbility() {
@@ -37,7 +37,7 @@ public class CanBlockSpaceflightAbility extends StaticAbility implements MageSin
 
     @Override
     public CanBlockSpaceflightAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

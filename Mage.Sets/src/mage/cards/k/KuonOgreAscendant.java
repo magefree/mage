@@ -68,7 +68,7 @@ public class KuonOgreAscendant extends CardImpl {
                 Zone.BATTLEFIELD,
                 new FlipSourceEffect(new KuonsEssenceToken()),
                 TargetController.ANY,
-                new KuonOgreAscendantCondition(), false), 
+                KuonOgreAscendantCondition.instance, false),
                 new CreaturesDiedWatcher());
     }
 
@@ -100,13 +100,10 @@ class KuonsEssenceToken extends Token {
     }
 }
 
-class KuonOgreAscendantCondition implements Condition {
+enum KuonOgreAscendantCondition implements Condition {
 
-    private static final KuonOgreAscendantCondition fInstance = new KuonOgreAscendantCondition();
+    instance;
 
-    public static KuonOgreAscendantCondition getInstance() {
-        return fInstance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {

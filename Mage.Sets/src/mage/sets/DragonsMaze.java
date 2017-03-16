@@ -46,10 +46,10 @@ import mage.constants.SetType;
 
 public class DragonsMaze extends ExpansionSet {
 
-    private static final DragonsMaze fINSTANCE = new DragonsMaze();
+    private static final DragonsMaze instance = new DragonsMaze();
 
     public static DragonsMaze getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     List<CardInfo> savedSpecialRares = new ArrayList<>();

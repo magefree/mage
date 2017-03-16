@@ -61,7 +61,7 @@ public class ManicScribe extends CardImpl {
         // that player puts the top three cards of his or her library into his or her graveyard.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(3), TargetController.OPPONENT, false, true),
-                DeliriumCondition.getInstance(),
+                DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
                         + "that player puts the top three cards of his or her library into his or her graveyard."));
     }

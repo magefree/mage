@@ -55,7 +55,7 @@ public class GwendlynDiCorci extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {tap}: Target player discards a card at random. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1, true), new TapSourceCost(), MyTurnCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1, true), new TapSourceCost(), MyTurnCondition.instance);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

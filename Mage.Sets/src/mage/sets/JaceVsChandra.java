@@ -17,10 +17,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class JaceVsChandra extends ExpansionSet {
-    private static final JaceVsChandra fINSTANCE = new JaceVsChandra();
+    private static final JaceVsChandra instance = new JaceVsChandra();
 
     public static JaceVsChandra getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private JaceVsChandra() {

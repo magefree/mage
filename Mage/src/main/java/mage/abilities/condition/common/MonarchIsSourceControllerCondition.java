@@ -37,10 +37,10 @@ import mage.game.Game;
  */
 public class MonarchIsSourceControllerCondition implements Condition {
 
-    private final static MonarchIsSourceControllerCondition fInstance = new MonarchIsSourceControllerCondition();
+    private final static MonarchIsSourceControllerCondition instance = new MonarchIsSourceControllerCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

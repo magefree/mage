@@ -36,10 +36,10 @@ import mage.constants.SetType;
  */
 public class Amonkhet extends ExpansionSet {
 
-    private static final Amonkhet fINSTANCE = new Amonkhet();
+    private static final Amonkhet instance = new Amonkhet();
 
     public static Amonkhet getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Amonkhet() {

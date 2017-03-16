@@ -37,10 +37,10 @@ import mage.constants.SetType;
  * @author North
  */
 public class Odyssey extends ExpansionSet {
-    private static final Odyssey fINSTANCE = new Odyssey();
+    private static final Odyssey instance = new Odyssey();
 
     public static Odyssey getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Odyssey() {

@@ -48,13 +48,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  * @author nantuko
  */
-public class ServerMessagesUtil {
-
-    private static final ServerMessagesUtil instance = new ServerMessagesUtil();
-
+public enum ServerMessagesUtil {
+instance;
     private static final Logger log = Logger.getLogger(ServerMessagesUtil.class);
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
-    private static ScheduledExecutorService updateExecutor;
+    private ScheduledExecutorService updateExecutor;
 
     private final List<String> messages = new ArrayList<>();
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
@@ -73,14 +71,12 @@ public class ServerMessagesUtil {
         pathToExternalMessages = System.getProperty("messagesPath");
     }
 
-    public ServerMessagesUtil() {
+    ServerMessagesUtil() {
         updateExecutor = Executors.newSingleThreadScheduledExecutor();
         updateExecutor.scheduleAtFixedRate(this::reloadMessages, 5, 5 * 60, TimeUnit.SECONDS);
     }
 
-    public static ServerMessagesUtil getInstance() {
-        return instance;
-    }
+
 
     public List<String> getMessages() {
         lock.readLock().lock();

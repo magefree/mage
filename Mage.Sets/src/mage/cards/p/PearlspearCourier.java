@@ -71,10 +71,10 @@ public class PearlspearCourier extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}{W}, {tap}: Target Soldier creature gets +2/+2 and has vigilance for as long as Pearlspear Courier remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.getInstance(),
+            new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.instance,
             "target Soldier creature gets +2/+2"), new ManaCostsImpl("{2}{W}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(),
-            Duration.Custom), SourceTappedCondition.getInstance(),"and has vigilance for as long as {this} remains tapped"));
+            Duration.Custom), SourceTappedCondition.instance,"and has vigilance for as long as {this} remains tapped"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class TempestRemastered extends ExpansionSet {
 
-    private static final TempestRemastered fINSTANCE = new TempestRemastered();
+    private static final TempestRemastered instance = new TempestRemastered();
 
     public static TempestRemastered getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private TempestRemastered() {

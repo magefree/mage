@@ -39,10 +39,10 @@ import mage.constants.SetType;
  */
 public class FridayNightMagic extends ExpansionSet {
 
-    private static final FridayNightMagic fINSTANCE = new FridayNightMagic();
+    private static final FridayNightMagic instance = new FridayNightMagic();
 
     public static FridayNightMagic getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FridayNightMagic() {

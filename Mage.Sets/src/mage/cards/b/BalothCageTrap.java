@@ -71,10 +71,10 @@ public class BalothCageTrap extends CardImpl {
 
 class BalothCageTrapCondition implements Condition {
 
-    private static final BalothCageTrapCondition fInstance = new BalothCageTrapCondition();
+    private static final BalothCageTrapCondition instance = new BalothCageTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

@@ -58,7 +58,7 @@ public class MartyrsOfKorlis extends CardImpl {
         // As long as Martyrs of Korlis is untapped, all damage that would be dealt to you by artifacts is dealt to Martyrs of Korlis instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new RedirectArtifactDamageFromPlayerToSourceEffect(Duration.WhileOnBattlefield),
-                new InvertCondition(new SourceTappedCondition()),
+                new InvertCondition(SourceTappedCondition.instance),
                 "{this} redirects artifact damage from controller as long as it's untapped")));
     }
 

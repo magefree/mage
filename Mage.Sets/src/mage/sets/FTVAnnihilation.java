@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class FTVAnnihilation extends ExpansionSet {
 
-    private static final FTVAnnihilation fINSTANCE = new FTVAnnihilation();
+    private static final FTVAnnihilation instance = new FTVAnnihilation();
 
     public static FTVAnnihilation getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FTVAnnihilation() {

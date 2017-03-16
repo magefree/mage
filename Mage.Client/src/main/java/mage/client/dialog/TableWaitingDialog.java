@@ -432,12 +432,12 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
             if (current != count) {
                 if (count > 0) {
                     if (current > count) {
-                        MageTray.getInstance().displayMessage("New player joined your game.");
+                        MageTray.instance.displayMessage("New player joined your game.");
                         AudioManager.playPlayerJoinedTable();
                     } else {
-                        MageTray.getInstance().displayMessage("A player left your game.");
+                        MageTray.instance.displayMessage("A player left your game.");
                     }
-                    MageTray.getInstance().blink();
+                    MageTray.instance.blink();
                 }
                 count = current;
             }

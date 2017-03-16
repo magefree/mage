@@ -147,10 +147,10 @@ class JandorsRingWatcher extends Watcher {
 
 class WatchedCardInHandCondition implements Condition {
 
-    private static final WatchedCardInHandCondition fInstance = new WatchedCardInHandCondition();
+    private static final WatchedCardInHandCondition instance = new WatchedCardInHandCondition();
 
     public static WatchedCardInHandCondition getInstance() {
-        return fInstance;
+        return instance;
     }
     
     @Override

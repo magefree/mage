@@ -58,7 +58,7 @@ public class SithManipulator extends CardImpl {
         // When Sith Manipulator enters the battlefield, return target creature to its owner's hand.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()),
-                new InvertCondition(HateCondition.getInstance()),
+                new InvertCondition(HateCondition.instance),
                 "When Sith Manipulator enters the battlefield, return target creature to its owner's hand");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
@@ -66,7 +66,7 @@ public class SithManipulator extends CardImpl {
         // <i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead.
         ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToLibraryPermanentEffect(true)),
-                HateCondition.getInstance(),
+                HateCondition.instance,
                 "<i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());

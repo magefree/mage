@@ -78,10 +78,10 @@ public class WardenOfTheBeyond extends CardImpl {
 
 class OpponentOwnsCardInExileCondition implements Condition {
 
-    private static final OpponentOwnsCardInExileCondition fInstance = new OpponentOwnsCardInExileCondition();
+    private static final OpponentOwnsCardInExileCondition instance = new OpponentOwnsCardInExileCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

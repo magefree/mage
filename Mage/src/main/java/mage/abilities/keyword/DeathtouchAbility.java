@@ -40,14 +40,14 @@ import java.io.ObjectStreamException;
  */
 public class DeathtouchAbility extends StaticAbility implements MageSingleton {
 
-    private static final DeathtouchAbility fINSTANCE =  new DeathtouchAbility();
+    private static final DeathtouchAbility instance =  new DeathtouchAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static DeathtouchAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private DeathtouchAbility() {
@@ -61,7 +61,7 @@ public class DeathtouchAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public DeathtouchAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 

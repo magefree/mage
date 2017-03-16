@@ -207,15 +207,15 @@ public class CardPanelComponentImpl extends CardPanel {
         // Ability icon
         if (newGameCard.isAbility()) {
             if (newGameCard.getAbilityType() == AbilityType.TRIGGERED) {
-                setTypeIcon(ImageManagerImpl.getInstance().getTriggeredAbilityImage(), "Triggered Ability");
+                setTypeIcon(ImageManagerImpl.instance.getTriggeredAbilityImage(), "Triggered Ability");
             } else if (newGameCard.getAbilityType() == AbilityType.ACTIVATED) {
-                setTypeIcon(ImageManagerImpl.getInstance().getActivatedAbilityImage(), "Activated Ability");
+                setTypeIcon(ImageManagerImpl.instance.getActivatedAbilityImage(), "Activated Ability");
             }
         }
         
         // Token icon
         if (this.gameCard.isToken()) {
-            setTypeIcon(ImageManagerImpl.getInstance().getTokenIconImage(), "Token Permanent");
+            setTypeIcon(ImageManagerImpl.instance.getTokenIconImage(), "Token Permanent");
         }
 
         displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_CARD_NAMES, "true").equals("true");
@@ -243,7 +243,7 @@ public class CardPanelComponentImpl extends CardPanel {
         add(ptText);
 
         // Sickness overlay
-        BufferedImage sickness = ImageManagerImpl.getInstance().getSicknessImage();
+        BufferedImage sickness = ImageManagerImpl.instance.getSicknessImage();
         overlayPanel = new ImagePanel(sickness, ImagePanelStyle.SCALED);
         overlayPanel.setOpaque(false);
         add(overlayPanel);
@@ -620,21 +620,21 @@ public class CardPanelComponentImpl extends CardPanel {
                     case "+1/+1":
                         if (counterView.getCount() != plusCounter) {
                             plusCounter = counterView.getCount();
-                            plusCounterLabel.setIcon(getCounterImageWithAmount(plusCounter, ImageManagerImpl.getInstance().getCounterImageGreen(), getCardWidth()));
+                            plusCounterLabel.setIcon(getCounterImageWithAmount(plusCounter, ImageManagerImpl.instance.getCounterImageGreen(), getCardWidth()));
                         }
                         plusCounterLabel.setVisible(true);
                         break;
                     case "-1/-1":
                         if (counterView.getCount() != minusCounter) {
                             minusCounter = counterView.getCount();
-                            minusCounterLabel.setIcon(getCounterImageWithAmount(minusCounter, ImageManagerImpl.getInstance().getCounterImageRed(), getCardWidth()));
+                            minusCounterLabel.setIcon(getCounterImageWithAmount(minusCounter, ImageManagerImpl.instance.getCounterImageRed(), getCardWidth()));
                         }
                         minusCounterLabel.setVisible(true);
                         break;
                     case "loyalty":
                         if (counterView.getCount() != loyaltyCounter) {
                             loyaltyCounter = counterView.getCount();
-                            loyaltyCounterLabel.setIcon(getCounterImageWithAmount(loyaltyCounter, ImageManagerImpl.getInstance().getCounterImageViolet(), getCardWidth()));
+                            loyaltyCounterLabel.setIcon(getCounterImageWithAmount(loyaltyCounter, ImageManagerImpl.instance.getCounterImageViolet(), getCardWidth()));
                         }
                         loyaltyCounterLabel.setVisible(true);
                         break;
@@ -643,7 +643,7 @@ public class CardPanelComponentImpl extends CardPanel {
                             name = counterView.getName();
                             otherCounter = counterView.getCount();
                             otherCounterLabel.setToolTipText(name);
-                            otherCounterLabel.setIcon(getCounterImageWithAmount(otherCounter, ImageManagerImpl.getInstance().getCounterImageGrey(), getCardWidth()));
+                            otherCounterLabel.setIcon(getCounterImageWithAmount(otherCounter, ImageManagerImpl.instance.getCounterImageGrey(), getCardWidth()));
                             otherCounterLabel.setVisible(true);
                         }
                 }

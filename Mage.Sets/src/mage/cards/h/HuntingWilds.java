@@ -73,7 +73,7 @@ public class HuntingWilds extends CardImpl {
 
         // If Hunting Wilds was kicked, untap all Forests put onto the battlefield this way.
         // They become 3/3 green creatures with haste that are still lands.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new HuntingWildsEffect(), KickedCondition.getInstance()));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new HuntingWildsEffect(), KickedCondition.instance));
     }
 
     public HuntingWilds(final HuntingWilds card) {

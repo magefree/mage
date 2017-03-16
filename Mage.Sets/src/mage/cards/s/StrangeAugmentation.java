@@ -64,7 +64,7 @@ public class StrangeAugmentation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1)));
 
         // <i>Delirium</i> &mdash Enchanted creature gets an additional +2/+2 as long as there are four or more card types among cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(2, 2), DeliriumCondition.getInstance(),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(2, 2), DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; Enchanted creature gets an additional +2/+2 as long as there are four or more card types among cards in your graveyard.")));
     }
 

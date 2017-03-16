@@ -113,10 +113,10 @@ class ArchiveTrapWatcher extends Watcher {
 
 class OpponentSearchesLibCondition implements Condition {
 
-    private static final OpponentSearchesLibCondition fInstance = new OpponentSearchesLibCondition();
+    private static final OpponentSearchesLibCondition instance = new OpponentSearchesLibCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

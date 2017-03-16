@@ -56,9 +56,9 @@ public class InquisitorsOx extends CardImpl {
         this.color.setWhite(true);
 
         // <i>Delirium</i> &mdash; Inquisitor's Ox gets +1/+0 and has vigilance as long as there are four or more card types among cards in your graveyard.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield), DeliriumCondition.getInstance(), "<i>Delirium</i> &mdash; {this} gets +1/+0");
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield), DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} gets +1/+0");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), DeliriumCondition.getInstance(), "and has vigilance as long as there are four or more card types among cards in your graveyard."));
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), DeliriumCondition.instance, "and has vigilance as long as there are four or more card types among cards in your graveyard."));
         this.addAbility(ability);
     }
 

@@ -40,10 +40,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class FourthEdition extends ExpansionSet {
 
-    private static final FourthEdition fINSTANCE = new FourthEdition();
+    private static final FourthEdition instance = new FourthEdition();
 
     public static FourthEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FourthEdition() {

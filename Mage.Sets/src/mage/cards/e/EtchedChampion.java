@@ -71,7 +71,7 @@ public class EtchedChampion extends CardImpl {
         this.toughness = new MageInt(2);
 
         ContinuousEffect effect = new GainAbilitySourceEffect(new ProtectionAbility(filter), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, ruleText)));
     }
 
     public EtchedChampion(final EtchedChampion card) {

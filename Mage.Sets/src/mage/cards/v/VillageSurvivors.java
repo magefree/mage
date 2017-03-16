@@ -59,7 +59,7 @@ public class VillageSurvivors extends CardImpl {
         // Fateful hour - As long as you have 5 or less life, other creatures you control have vigilance.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true),
-                FatefulHourCondition.getInstance(),
+                FatefulHourCondition.instance,
                 "Fateful hour - As long as you have 5 or less life, other creatures you control have vigilance")));
     }
 

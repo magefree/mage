@@ -59,7 +59,7 @@ public class MorselTheft extends CardImpl {
         effect.setText("and you gain 3 life");
         getSpellAbility().addEffect(effect);
         getSpellAbility().addTarget(new TargetPlayer());
-        getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), ProwlCondition.getInstance()));
+        getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), ProwlCondition.instance));
 
     }
 

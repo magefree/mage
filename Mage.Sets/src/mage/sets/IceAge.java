@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class IceAge extends ExpansionSet {
 
-    private static final IceAge fINSTANCE = new IceAge();
+    private static final IceAge instance = new IceAge();
 
     public static IceAge getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private IceAge() {

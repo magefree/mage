@@ -60,7 +60,7 @@ public class WindsOfQalSisma extends CardImpl {
         // Ferocious - If you control a creature with power 4 or greater, instead prevent all combat damage that would be dealt this turn by creatures your opponents control.
         Effect effect = new ConditionalReplacementEffect(
                 new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true),
-                new LockedInCondition(FerociousCondition.getInstance()),
+                new LockedInCondition(FerociousCondition.instance),
                 new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
         effect.setText("Prevent all combat damage that would be dealt this turn.<br>" +
                        "<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, instead prevent all combat damage that would be dealt this turn by creatures your opponents control");

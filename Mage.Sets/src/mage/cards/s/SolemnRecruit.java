@@ -63,7 +63,7 @@ public class SolemnRecruit extends CardImpl {
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                         false
                 ),
-                RevoltCondition.getInstance(),
+                RevoltCondition.instance,
                 "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a +1/+1 counter on {this}."
         ), new RevoltWatcher());
     }

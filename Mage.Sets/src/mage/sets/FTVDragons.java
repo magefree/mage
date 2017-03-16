@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class FTVDragons extends ExpansionSet {
 
-    private static final FTVDragons fINSTANCE = new FTVDragons();
+    private static final FTVDragons instance = new FTVDragons();
 
     public static FTVDragons getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FTVDragons() {

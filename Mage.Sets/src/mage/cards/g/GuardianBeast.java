@@ -79,7 +79,7 @@ public class GuardianBeast extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As long as Guardian Beast is untapped, noncreature artifacts you control can't be enchanted, they're indestructible, and other players can't gain control of them. This effect doesn't remove Auras already attached to those artifacts.
-        Effect effect = new ConditionalContinuousEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter), new InvertCondition(new SourceTappedCondition()), "noncreature artifacts you control can't be enchanted, they're indestructible, and other players can't gain control of them");
+        Effect effect = new ConditionalContinuousEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter), new InvertCondition(SourceTappedCondition.instance), "noncreature artifacts you control can't be enchanted, they're indestructible, and other players can't gain control of them");
         GuardianBeastConditionalEffect effect2 = new GuardianBeastConditionalEffect(this.getId());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

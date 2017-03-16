@@ -58,7 +58,7 @@ public class SithThoughtseeker extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new ManaCostsImpl<>("{2}{U}"),
-                HateCondition.getInstance());
+                HateCondition.instance);
         ability.setAbilityWord(AbilityWord.HATE);
         this.addAbility(ability);
     }

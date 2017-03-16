@@ -60,7 +60,7 @@ public class CinderhazeWretch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Target player discards a card. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new TapSourceCost(), MyTurnCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new TapSourceCost(), MyTurnCondition.instance);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

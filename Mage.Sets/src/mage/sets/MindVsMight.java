@@ -16,10 +16,10 @@ import mage.constants.SetType;
  */
 
 public class MindVsMight extends ExpansionSet {
-    private static final MindVsMight fINSTANCE = new MindVsMight();
+    private static final MindVsMight instance = new MindVsMight();
 
     public static MindVsMight getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MindVsMight() {

@@ -79,10 +79,10 @@ public class BriarbridgePatrol extends CardImpl {
 
 class BriarbridgePatrolCondition implements Condition {
 
-    private static final BriarbridgePatrolCondition fInstance = new BriarbridgePatrolCondition();
+    private static final BriarbridgePatrolCondition instance = new BriarbridgePatrolCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

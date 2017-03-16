@@ -40,10 +40,10 @@ import mage.game.Game;
  */
 public class SourceOnBattlefieldCondition implements Condition {
 
-    private static final SourceOnBattlefieldCondition fInstance = new SourceOnBattlefieldCondition();
+    private static final SourceOnBattlefieldCondition instance = new SourceOnBattlefieldCondition();
 
     public static SourceOnBattlefieldCondition getInstance() {
-        return fInstance;
+        return instance;
     }
     
     @Override

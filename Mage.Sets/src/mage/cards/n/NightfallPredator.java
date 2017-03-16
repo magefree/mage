@@ -75,7 +75,7 @@ public class NightfallPredator extends CardImpl {
         this.addAbility(activatedAbility);
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Nightfall Predator.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
     public NightfallPredator(final NightfallPredator card) {

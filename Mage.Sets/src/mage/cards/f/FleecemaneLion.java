@@ -62,12 +62,12 @@ public class FleecemaneLion extends CardImpl {
         // As long as Fleecemane Lion is monstrous, it has hexproof and indestructible.
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
-                MonstrousCondition.getInstance(),
+                MonstrousCondition.instance,
                 "As long as {this} is monstrous, it has hexproof");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                MonstrousCondition.getInstance(),
+                MonstrousCondition.instance,
                 "and indestructible");
         ability.addEffect(effect);
         this.addAbility(ability);

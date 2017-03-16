@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class ZendikarVsEldrazi extends ExpansionSet {
-    private static final ZendikarVsEldrazi fINSTANCE = new ZendikarVsEldrazi();
+    private static final ZendikarVsEldrazi instance = new ZendikarVsEldrazi();
 
     public static ZendikarVsEldrazi getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ZendikarVsEldrazi() {

@@ -57,7 +57,7 @@ public class GreenwheelLiberator extends CardImpl {
         // <i>Revolt</i> &mdash; Greenbelt Liberator enters the battlefield with two +1/+1 counters on it if a
         // permanent you controlled left the battlefield this turn.
         Ability ability = new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false, RevoltCondition.getInstance(),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false, RevoltCondition.instance,
                 "<i>Revolt</i> &mdash; enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn", null);
         ability.addWatcher(new RevoltWatcher());
         this.addAbility(ability);

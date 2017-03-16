@@ -82,7 +82,7 @@ public class PolisCrusher extends CardImpl {
         // Whenever Polis Crusher deals combat damage to a player, if Polis Crusher is monstrous, destroy target enchantment that player controls.
         Ability ability = new ConditionalTriggeredAbility(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true),
-                MonstrousCondition.getInstance(),
+                MonstrousCondition.instance,
                 "Whenever {this} deals combat damage to a player, if {this} is monstrous, destroy target enchantment that player controls.");
         originalId = ability.getOriginalId();
         this.addAbility(ability);

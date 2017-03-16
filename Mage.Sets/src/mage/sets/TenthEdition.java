@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class TenthEdition extends ExpansionSet {
 
-    private static final TenthEdition fINSTANCE = new TenthEdition();
+    private static final TenthEdition instance = new TenthEdition();
 
     public static TenthEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private TenthEdition() {

@@ -68,7 +68,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         super(Zone.ALL, null);
         name = EVOKE_KEYWORD;
         this.addEvokeCost(manaString);
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()), EvokedCondition.getInstance(), "Sacrifice {this} when it enters the battlefield and was evoked.");
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()), EvokedCondition.instance, "Sacrifice {this} when it enters the battlefield and was evoked.");
         ability.setRuleVisible(false);
         addSubAbility(ability);
 

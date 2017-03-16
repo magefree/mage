@@ -67,7 +67,7 @@ public class MaliciousAffliction extends CardImpl {
         // Morbid - When you cast Malicious Affliction, if a creature died this turn, you may copy Malicious Affliction and may choose a new target for the copy.
         Ability ability = new ConditionalTriggeredAbility(
                 new CastSourceTriggeredAbility(new CopySourceSpellEffect(), true),
-                new LockedInCondition(MorbidCondition.getInstance()),
+                new LockedInCondition(MorbidCondition.instance),
                 "<i>Morbid</i> - When you cast {this}, if a creature died this turn, you may copy {this} and may choose a new target for the copy");
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);

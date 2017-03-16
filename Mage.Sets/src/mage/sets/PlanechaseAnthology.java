@@ -36,10 +36,10 @@ import mage.constants.SetType;
  */
 public class PlanechaseAnthology extends ExpansionSet {
 
-    private static final PlanechaseAnthology fINSTANCE = new PlanechaseAnthology();
+    private static final PlanechaseAnthology instance = new PlanechaseAnthology();
 
     public static PlanechaseAnthology getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PlanechaseAnthology() {

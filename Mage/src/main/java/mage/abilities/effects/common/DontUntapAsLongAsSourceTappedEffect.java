@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
 public class DontUntapAsLongAsSourceTappedEffect extends ConditionalContinuousRuleModifyingEffect {
 
     public DontUntapAsLongAsSourceTappedEffect() {
-        super(new DontUntapInControllersUntapStepTargetEffect(Duration.Custom), SourceTappedCondition.getInstance());
+        super(new DontUntapInControllersUntapStepTargetEffect(Duration.Custom), SourceTappedCondition.instance);
         staticText = "It doesn't untap during its controller's untap step for as long as {source} remains tapped.";
     }
 

@@ -60,9 +60,9 @@ public class AuriokSunchaser extends CardImpl {
         this.toughness = new MageInt(1);
 
         ContinuousEffect effect1 = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect1, MetalcraftCondition.getInstance(), effect1Text)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect1, MetalcraftCondition.instance, effect1Text)));
         ContinuousEffect effect2 = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect2, MetalcraftCondition.getInstance(), effect2Text)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect2, MetalcraftCondition.instance, effect2Text)));
     }
 
     public AuriokSunchaser(final AuriokSunchaser card) {

@@ -39,10 +39,10 @@ import mage.constants.SetType;
  */
 public class MasterpieceSeries extends ExpansionSet {
 
-    private static final MasterpieceSeries fINSTANCE = new MasterpieceSeries();
+    private static final MasterpieceSeries instance = new MasterpieceSeries();
 
     public static MasterpieceSeries getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MasterpieceSeries() {

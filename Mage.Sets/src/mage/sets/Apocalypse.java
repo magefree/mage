@@ -5,10 +5,10 @@ import mage.constants.SetType;
 import mage.constants.Rarity;
 
 public class Apocalypse extends ExpansionSet {
-    private static final Apocalypse fINSTANCE = new Apocalypse();
+    private static final Apocalypse instance = new Apocalypse();
 
     public static Apocalypse getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Apocalypse() {

@@ -66,7 +66,7 @@ public class SadisticSacrament extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SadisticSacramentEffect(15),
                 new SadisticSacramentEffect(3),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 ruleText));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
