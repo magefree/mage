@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -24,6 +26,11 @@ import mage.target.Target;
  * 6/8/2016 If a spell or ability’s targets are changed, or if a copy of a spell
  * or ability is put onto the stack and has new targets chosen, it doesn’t have
  * to target a Flagbearer.
+ * 
+ * 3/16/2017 A Flagbearer only requires targeting of itself when choosing targets
+ * as a result of casting a spell or activating an ability.  Notably, triggered
+ * abilities are exempt from this targeting restriction (in addition to the note
+ * about choosing targets for a copy from 6/8/2016).
  *
  * @author LevelX2
  */
@@ -71,6 +78,12 @@ public class TargetsHaveToTargetPermanentIfAbleEffect extends ContinuousRuleModi
                 && controller.hasOpponent(event.getPlayerId(), game)) {
             StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
             if (stackObject.isCopy()) {
+                return false;
+            }
+            Ability stackAbility = stackObject.getStackAbility();
+            // Ensure that this ability is activated or a cast spell, because Flag Bearer effects don't require triggered abilities to choose a Standard Bearer
+            if (!(stackAbility instanceof ActivatedAbility) &&
+                !(stackAbility instanceof SpellAbility)) {
                 return false;
             }
             Ability ability = (Ability) getValue("targetAbility");
