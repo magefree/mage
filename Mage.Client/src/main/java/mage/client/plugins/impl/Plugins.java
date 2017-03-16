@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import javax.swing.JComponent;
+
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
@@ -31,11 +32,10 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.CardPluginImpl;
 import org.mage.plugins.theme.ThemePluginImpl;
 
-public class Plugins implements MagePlugins {
-
+public enum Plugins implements MagePlugins {
+    instance;
     public static final String PLUGINS_DIRECTORY = "plugins/";
 
-    private static final MagePlugins instance = new Plugins();
     private static final Logger LOGGER = Logger.getLogger(Plugins.class);
     private static PluginManager pm;
 
@@ -45,9 +45,6 @@ public class Plugins implements MagePlugins {
     private static final MageActionCallback mageActionCallback = new MageActionCallback();
     private final Map<String, String> sortingOptions = new HashMap<>();
 
-    public static MagePlugins getInstance() {
-        return instance;
-    }
 
     @Override
     public void loadPlugins() {

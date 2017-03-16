@@ -130,7 +130,7 @@ public class ChoiceDialog extends IDialogPanel {
             return;
         }
 
-        java.util.List<Component> toRemove = new ArrayList<>();
+        ArrayList<Component> toRemove = new ArrayList<>();
         for (int i = getComponentCount() - 1; i > 0; i--) {
             Component o = getComponent(i);
             if (o instanceof MageCard) {
@@ -141,10 +141,10 @@ public class ChoiceDialog extends IDialogPanel {
             remove(toRemove.get(i));
         }
 
-        java.util.List<CardView> cardList = new ArrayList<>(cards.values());
+        ArrayList<CardView> cardList = new ArrayList<>(cards.values());
 
-        int width = SettingsManager.getInstance().getCardSize().width;
-        int height = SettingsManager.getInstance().getCardSize().height;
+        int width = SettingsManager.instance.getCardSize().width;
+        int height = SettingsManager.instance.getCardSize().height;
 
         int dx = 0;
         int dy = 30;
@@ -161,7 +161,7 @@ public class ChoiceDialog extends IDialogPanel {
             }
 
             CardView card = cardList.get(i);
-            MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
+            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
 
             cardImg.setLocation(dx, dy + j*(height + 30));
             add(cardImg);
@@ -174,9 +174,9 @@ public class ChoiceDialog extends IDialogPanel {
 
     private HoverButton getJButtonOK() {
         if (jButtonOK == null) {
-            jButtonOK = new HoverButton("", ImageManagerImpl.getInstance().getDlgAcceptButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgActiveAcceptButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgAcceptButtonImage(),
+            jButtonOK = new HoverButton("", ImageManagerImpl.instance.getDlgAcceptButtonImage(),
+                    ImageManagerImpl.instance.getDlgActiveAcceptButtonImage(),
+                    ImageManagerImpl.instance.getDlgAcceptButtonImage(),
                     new Rectangle(60, 60));
             int w = getDlgParams().rect.width - 75;
             int h = getDlgParams().rect.height - 90;
@@ -190,9 +190,9 @@ public class ChoiceDialog extends IDialogPanel {
 
     private HoverButton getJButtonPrevPage() {
         if (jButtonPrevPage == null) {
-            jButtonPrevPage = new HoverButton("", ImageManagerImpl.getInstance().getDlgPrevButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgActivePrevButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgPrevButtonImage(),
+            jButtonPrevPage = new HoverButton("", ImageManagerImpl.instance.getDlgPrevButtonImage(),
+                    ImageManagerImpl.instance.getDlgActivePrevButtonImage(),
+                    ImageManagerImpl.instance.getDlgPrevButtonImage(),
                     new Rectangle(60, 60));
             int w = getDlgParams().rect.width - 75;
             int h = getDlgParams().rect.height - 90;
@@ -229,9 +229,9 @@ public class ChoiceDialog extends IDialogPanel {
      */
     private HoverButton getJButtonNextPage() {
         if (jButtonNextPage == null) {
-            jButtonNextPage = new HoverButton("", ImageManagerImpl.getInstance().getDlgNextButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgActiveNextButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgNextButtonImage(),
+            jButtonNextPage = new HoverButton("", ImageManagerImpl.instance.getDlgNextButtonImage(),
+                    ImageManagerImpl.instance.getDlgActiveNextButtonImage(),
+                    ImageManagerImpl.instance.getDlgNextButtonImage(),
                     new Rectangle(60, 60));
             int w = getDlgParams().rect.width - 75;
             int h = getDlgParams().rect.height - 90;
@@ -317,9 +317,9 @@ public class ChoiceDialog extends IDialogPanel {
      */
     private HoverButton getJButtonCancel() {
         if (jButtonCancel == null) {
-            jButtonCancel = new HoverButton("", ImageManagerImpl.getInstance().getDlgCancelButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgActiveCancelButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgCancelButtonImage(),
+            jButtonCancel = new HoverButton("", ImageManagerImpl.instance.getDlgCancelButtonImage(),
+                    ImageManagerImpl.instance.getDlgActiveCancelButtonImage(),
+                    ImageManagerImpl.instance.getDlgCancelButtonImage(),
                     new Rectangle(60, 60));
             int w = getDlgParams().rect.width - 75;
             int h = getDlgParams().rect.height - 90;

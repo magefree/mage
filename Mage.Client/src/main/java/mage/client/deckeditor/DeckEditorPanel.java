@@ -288,7 +288,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.deckArea.clearDeckEventListeners();
         this.deckArea.addDeckEventListener(
                 (Listener<Event>) event -> {
-                    if (mode == DeckEditorMode.FREE_BUILDING){
+                    if (mode == DeckEditorMode.FREE_BUILDING) {
                         switch (event.getEventName()) {
                             case "double-click": {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
@@ -336,7 +336,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 break;
                             }
                         }
-                    }else{
+                    } else {
                         // constructing phase or sideboarding during match -> card goes always to sideboard
                         switch (event.getEventName()) {
                             case "double-click":
@@ -541,7 +541,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void hidePopup() {
-        Plugins.getInstance().getActionCallback().mouseExited(null, null);
+        Plugins.instance.getActionCallback().mouseExited(null, null);
     }
 
     public void removeDeckEditor() {
@@ -631,7 +631,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         bigCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        cardInfoPane = Plugins.getInstance().getCardInfoPane();
+        cardInfoPane = Plugins.instance.getCardInfoPane();
         if (cardInfoPane != null && System.getProperty("testCardInfo") != null) {
             cardInfoPane.setPreferredSize(new Dimension(170, 150));
             cardInfoPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 0, 0)));

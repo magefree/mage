@@ -136,7 +136,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             dayNightButton = new JButton("");
             dayNightButton.setSize(32, 32);
             dayNightButton.setToolTipText("This permanent is a double faced card. To see the back face card, push this button or turn mouse wheel down while hovering with the mouse pointer over the permanent.");
-            BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
+            BufferedImage day = ImageManagerImpl.instance.getDayImage();
             dayNightButton.setIcon(new ImageIcon(day));
             dayNightButton.addActionListener(e -> {
                 // if card is being rotated, ignore action performed
@@ -159,9 +159,9 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             showCopySourceButton.setSize(32, 32);
             showCopySourceButton.setToolTipText("This permanent is copying a target. To see original card, push this button or turn mouse wheel down while hovering with the mouse pointer over the permanent.");
             showCopySourceButton.setVisible(((PermanentView) this.gameCard).isCopy());
-            showCopySourceButton.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getCopyInformIconImage()));
+            showCopySourceButton.setIcon(new ImageIcon(ImageManagerImpl.instance.getCopyInformIconImage()));
             showCopySourceButton.addActionListener(e -> {
-                ActionCallback callback1 = Plugins.getInstance().getActionCallback();
+                ActionCallback callback1 = Plugins.instance.getActionCallback();
                 ((MageActionCallback) callback1).enlargeCard(EnlargeMode.COPY);
             });
 
@@ -553,9 +553,9 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         if (card.canTransform()) {
             BufferedImage transformIcon;
             if (isTransformed() || card.isTransformed()) {
-                transformIcon = ImageManagerImpl.getInstance().getNightImage();
+                transformIcon = ImageManagerImpl.instance.getNightImage();
             } else {
-                transformIcon = ImageManagerImpl.getInstance().getDayImage();
+                transformIcon = ImageManagerImpl.instance.getDayImage();
             }
             if (dayNightButton != null) {
                 dayNightButton.setVisible(!isPermanent);
@@ -763,7 +763,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         this.transformed = !this.transformed;
         if (transformed) {
             if (dayNightButton != null) { // if transformbable card is copied, button can be null
-                BufferedImage night = ImageManagerImpl.getInstance().getNightImage();
+                BufferedImage night = ImageManagerImpl.instance.getNightImage();
                 dayNightButton.setIcon(new ImageIcon(night));
             }
             if (this.gameCard.getSecondCardFace() == null) {
@@ -776,7 +776,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             }
         } else {
             if (dayNightButton != null) { // if transformbable card is copied, button can be null
-                BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
+                BufferedImage day = ImageManagerImpl.instance.getDayImage();
                 dayNightButton.setIcon(new ImageIcon(day));
             }
             if (!isPermanent) { // use only for custom transformation (when pressing day-night button)

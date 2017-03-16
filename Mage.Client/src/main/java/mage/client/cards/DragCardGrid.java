@@ -1767,7 +1767,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         updateCounts();
 
         // Create the card view
-        final MageCard cardPanel = Plugins.getInstance().getMageCard(card, lastBigCard, new Dimension(getCardWidth(), getCardHeight()), null, true, true);
+        final MageCard cardPanel = Plugins.instance.getMageCard(card, lastBigCard, new Dimension(getCardWidth(), getCardHeight()), null, true, true);
         cardPanel.update(card);
         cardPanel.setTextOffset(0);
 

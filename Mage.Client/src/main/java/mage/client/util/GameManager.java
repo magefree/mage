@@ -7,12 +7,8 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class GameManager {
-    private static final GameManager instance = new GameManager();
-
-    public static GameManager getInstance() {
-        return instance;
-    }
+public enum GameManager {
+    instance;
 
     public void setStackSize(int stackSize) {
         this.stackSize = stackSize;

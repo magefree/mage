@@ -110,7 +110,7 @@ public class StackDialog extends IDialogPanel {
         /**
          * Display spells and theis targets above them
          */
-        int dx = (SettingsManager.getInstance().getCardSize().width + 15) * (cards.size() - 1);
+        int dx = (SettingsManager.instance.getCardSize().width + 15) * (cards.size() - 1);
         int dy = 30;
 
         for (CardView card : cards.values()) {
@@ -124,21 +124,21 @@ public class StackDialog extends IDialogPanel {
                 card = tmp;
             }
 
-            MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
+            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
             //cardImg.setBorder(BorderFactory.createLineBorder(Color.red));
             cardImg.setLocation(dx, dy);
 
             jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 1);
 
-            dx -= (SettingsManager.getInstance().getCardSize().width + 15);
+            dx -= (SettingsManager.instance.getCardSize().width + 15);
         }
     }
 
     private HoverButton getJButtonAccept() {
         if (jButtonAccept == null) {
-            jButtonAccept = new HoverButton("", ImageManagerImpl.getInstance().getDlgAcceptButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgActiveAcceptButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgAcceptButtonImage(),
+            jButtonAccept = new HoverButton("", ImageManagerImpl.instance.getDlgAcceptButtonImage(),
+                    ImageManagerImpl.instance.getDlgActiveAcceptButtonImage(),
+                    ImageManagerImpl.instance.getDlgAcceptButtonImage(),
                     new Rectangle(60, 60));
             int w = getDlgParams().rect.width - 90;
             int h = getDlgParams().rect.height - 90;
@@ -160,9 +160,9 @@ public class StackDialog extends IDialogPanel {
 
     private HoverButton getJButtonResponse() {
         if (jButtonResponse == null) {
-            jButtonResponse = new HoverButton("", ImageManagerImpl.getInstance().getDlgCancelButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgActiveCancelButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgCancelButtonImage(),
+            jButtonResponse = new HoverButton("", ImageManagerImpl.instance.getDlgCancelButtonImage(),
+                    ImageManagerImpl.instance.getDlgActiveCancelButtonImage(),
+                    ImageManagerImpl.instance.getDlgCancelButtonImage(),
                     new Rectangle(60, 60));
             int w = getDlgParams().rect.width - 90;
             int h = getDlgParams().rect.height - 90;

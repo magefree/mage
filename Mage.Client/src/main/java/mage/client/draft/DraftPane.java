@@ -52,9 +52,9 @@ public class DraftPane extends MagePane {
      */
     public DraftPane() {
         boolean initialized = false;
-        if (Plugins.getInstance().isThemePluginLoaded()) {
+        if (Plugins.instance.isThemePluginLoaded()) {
             Map<String, JComponent> uiComponents = new HashMap<>();
-            JComponent container = Plugins.getInstance().updateTablePanel(uiComponents);
+            JComponent container = Plugins.instance.updateTablePanel(uiComponents);
             if (container != null) {
                 draftPanel1 = new mage.client.draft.DraftPanel();
                 initComponents(container);

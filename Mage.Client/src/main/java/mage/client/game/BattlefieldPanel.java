@@ -252,8 +252,8 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         if (cardDimension == null) {
             cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         }
-        final MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, cardDimension, gameId, true);
-        if (!Plugins.getInstance().isCardPluginLoaded()) {
+        final MagePermanent perm = Plugins.instance.getMagePermanent(permanent, bigCard, cardDimension, gameId, true);
+        if (!Plugins.instance.isCardPluginLoaded()) {
             //perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
         } else {
             //perm.setAlpha(0);
@@ -262,12 +262,12 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
         BattlefieldPanel.this.jPanel.add(perm, 10);
         //this.jPanel.add(perm);
-        if (!Plugins.getInstance().isCardPluginLoaded()) {
+        if (!Plugins.instance.isCardPluginLoaded()) {
             moveToFront(perm);
             perm.update(permanent);
         } else {
             moveToFront(jPanel);
-            Plugins.getInstance().onAddCard(perm, 1);
+            Plugins.instance.onAddCard(perm, 1);
             /*Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -299,7 +299,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             } else if (comp instanceof MagePermanent) {
                 if (((MagePermanent) comp).getOriginal().getId().equals(permanentId)) {
                     Thread t = new Thread(() -> {
-                        Plugins.getInstance().onRemoveCard((MagePermanent) comp, count);
+                        Plugins.instance.onRemoveCard((MagePermanent) comp, count);
                         comp.setVisible(false);
                         BattlefieldPanel.this.jPanel.remove(comp);
                     });
