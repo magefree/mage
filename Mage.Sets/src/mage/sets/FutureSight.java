@@ -92,6 +92,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Emberwilde Augur", 97, Rarity.COMMON, mage.cards.e.EmberwildeAugur.class));
         cards.add(new SetCardInfo("Emblem of the Warmind", 112, Rarity.UNCOMMON, mage.cards.e.EmblemOfTheWarmind.class));
         cards.add(new SetCardInfo("Epochrasite", 162, Rarity.RARE, mage.cards.e.Epochrasite.class));
+        cards.add(new SetCardInfo("Festering March", 65, Rarity.UNCOMMON, mage.cards.f.FesteringMarch.class));
         cards.add(new SetCardInfo("Fleshwrither", 84, Rarity.UNCOMMON, mage.cards.f.Fleshwrither.class));
         cards.add(new SetCardInfo("Flowstone Embrace", 113, Rarity.COMMON, mage.cards.f.FlowstoneEmbrace.class));
         cards.add(new SetCardInfo("Fomori Nomad", 114, Rarity.COMMON, mage.cards.f.FomoriNomad.class));
@@ -167,6 +168,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Quiet Disrepair", 134, Rarity.COMMON, mage.cards.q.QuietDisrepair.class));
         cards.add(new SetCardInfo("Ramosian Revivalist", 30, Rarity.UNCOMMON, mage.cards.r.RamosianRevivalist.class));
         cards.add(new SetCardInfo("Ravaging Riftwurm", 135, Rarity.UNCOMMON, mage.cards.r.RavagingRiftwurm.class));
+        cards.add(new SetCardInfo("Reality Strobe", 43, Rarity.UNCOMMON, mage.cards.r.RealityStrobe.class));
         cards.add(new SetCardInfo("Riddle of Lightning", 105, Rarity.COMMON, mage.cards.r.RiddleOfLightning.class));
         cards.add(new SetCardInfo("Rift Elemental", 106, Rarity.COMMON, mage.cards.r.RiftElemental.class));
         cards.add(new SetCardInfo("Riftsweeper", 136, Rarity.UNCOMMON, mage.cards.r.Riftsweeper.class));
