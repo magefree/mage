@@ -69,7 +69,7 @@ public class LighthouseChronologist extends LevelerCard {
         // At the beginning of each end step, if it's not your turn, take an extra turn after this one.
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(false), TargetController.ANY, NotMyTurnCondition.getInstance(), false));
+                Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(false), TargetController.ANY, NotMyTurnCondition.instance, false));
 
         this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(4, 6, abilities1, 2, 4),

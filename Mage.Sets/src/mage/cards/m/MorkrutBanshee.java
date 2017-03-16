@@ -58,7 +58,7 @@ public class MorkrutBanshee extends CardImpl {
 
         // Morbid - When Morkut Banshee enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
-        TriggeredAbility ability = new ConditionalTriggeredAbility(triggeredAbility, MorbidCondition.getInstance(), staticText);
+        TriggeredAbility ability = new ConditionalTriggeredAbility(triggeredAbility, MorbidCondition.instance, staticText);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

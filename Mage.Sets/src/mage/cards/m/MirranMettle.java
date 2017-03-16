@@ -54,7 +54,7 @@ public class MirranMettle extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
 
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), 
-                new LockedInCondition(MetalcraftCondition.getInstance()), effectText));
+                new LockedInCondition(MetalcraftCondition.instance), effectText));
     }
 
     public MirranMettle(final MirranMettle card) {

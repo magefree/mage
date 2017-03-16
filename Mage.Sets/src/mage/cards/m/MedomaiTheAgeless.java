@@ -81,15 +81,15 @@ public class MedomaiTheAgeless extends CardImpl {
 
 class ExtraTurnCondition implements Condition {
 
-    private static ExtraTurnCondition fInstance = null;
+    private static ExtraTurnCondition instance = null;
 
     private ExtraTurnCondition() {}
 
     public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new ExtraTurnCondition();
+        if (instance == null) {
+            instance = new ExtraTurnCondition();
         }
-        return fInstance;
+        return instance;
     }
 
     @Override

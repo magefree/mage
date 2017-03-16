@@ -68,7 +68,7 @@ public class VoyagerDrake extends CardImpl {
         // When Voyager Drake enters the battlefield, up to X target creatures gain flying until end of turn, where X is the number of times Voyager Drake was kicked.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "When {this} enters the battlefield, up to X target creatures gain flying until end of turn, where X is the number of times {this} was kicked.");
         originalId = ability.getOriginalId();
         this.addAbility(ability);

@@ -59,7 +59,7 @@ public class SoulSwallower extends CardImpl {
         // <i>Delirium</i> &mdash; At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, put three +1/+1 counters on Soul Swallower.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), TargetController.YOU, false),
-                DeliriumCondition.getInstance(),
+                DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, "
                         + "put three +1/+1 counters on Soul Swallower."));
     }

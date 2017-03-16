@@ -39,14 +39,14 @@ import java.io.ObjectStreamException;
  */
 public class CantBlockAloneAbility extends StaticAbility implements MageSingleton {
 
-    private static final CantBlockAloneAbility fINSTANCE = new CantBlockAloneAbility();
+    private static final CantBlockAloneAbility instance = new CantBlockAloneAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static CantBlockAloneAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private CantBlockAloneAbility() {
@@ -60,7 +60,7 @@ public class CantBlockAloneAbility extends StaticAbility implements MageSingleto
 
     @Override
     public CantBlockAloneAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

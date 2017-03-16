@@ -51,7 +51,7 @@ public class PredatorsHowl extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(
                 new CreateTokenEffect(new WolfToken(), 3),
                 new CreateTokenEffect(new WolfToken(), 1),
-                new MorbidCondition(),
+                MorbidCondition.instance,
                 "Create a 2/2 green Wolf creature token. <br/><br/><i>Morbid</i> - Create three 2/2 green Wolf creature tokens instead if a creature died this turn.");
         this.getSpellAbility().addEffect(effect);
     }

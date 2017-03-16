@@ -112,7 +112,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         this.selected = false; // back to false - waiting for selection
         setVisible(true);
 
-        Point centered = SettingsManager.getInstance().getComponentPosition(DIALOG_WIDTH, DIALOG_HEIGHT);
+        Point centered = SettingsManager.instance.getComponentPosition(DIALOG_WIDTH, DIALOG_HEIGHT);
         this.setLocation(centered.x, centered.y);
         GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
 

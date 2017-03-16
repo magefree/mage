@@ -52,7 +52,7 @@ public class GhostTown extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         
         // {0}: Return Ghost Town to its owner's hand. Activate this ability only if it's not your turn.
-        this.addAbility(new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new GenericManaCost(0), new InvertCondition(MyTurnCondition.getInstance())));
+        this.addAbility(new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new GenericManaCost(0), new InvertCondition(MyTurnCondition.instance)));
     }
 
     public GhostTown(final GhostTown card) {

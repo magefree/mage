@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class DivineVsDemonic extends ExpansionSet {
-    private static final DivineVsDemonic fINSTANCE = new DivineVsDemonic();
+    private static final DivineVsDemonic instance = new DivineVsDemonic();
 
     public static DivineVsDemonic getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private DivineVsDemonic() {

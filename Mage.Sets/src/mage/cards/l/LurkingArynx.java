@@ -60,7 +60,7 @@ public class LurkingArynx extends CardImpl {
                 Zone.BATTLEFIELD,
                 new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl("{2}{G}"),
-                FormidableCondition.getInstance());
+                FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

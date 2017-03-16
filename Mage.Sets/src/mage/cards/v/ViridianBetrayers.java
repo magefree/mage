@@ -79,10 +79,10 @@ public class ViridianBetrayers extends CardImpl {
 
 class PoisonedCondition implements Condition {
 
-    private static PoisonedCondition fInstance = new PoisonedCondition();
+    private static PoisonedCondition instance = new PoisonedCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

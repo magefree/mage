@@ -38,10 +38,10 @@ import mage.constants.Rarity;
  */
 public class JourneyIntoNyx extends ExpansionSet {
 
-    private static final JourneyIntoNyx fINSTANCE = new JourneyIntoNyx();
+    private static final JourneyIntoNyx instance = new JourneyIntoNyx();
 
     public static JourneyIntoNyx getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private JourneyIntoNyx() {

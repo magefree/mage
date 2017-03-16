@@ -58,9 +58,9 @@ public class ScorchingLava extends CardImpl {
         // Scorching Lava deals 2 damage to target creature or player. If Scorching Lava was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
-            new CantRegenerateTargetEffect(Duration.EndOfTurn, "That creature"), new LockedInCondition(KickedCondition.getInstance())));
+            new CantRegenerateTargetEffect(Duration.EndOfTurn, "That creature"), new LockedInCondition(KickedCondition.instance)));
         Effect effect = new ConditionalReplacementEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn),
-            new LockedInCondition(KickedCondition.getInstance()));
+            new LockedInCondition(KickedCondition.instance));
         effect.setText("and if it would die this turn, exile it instead");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

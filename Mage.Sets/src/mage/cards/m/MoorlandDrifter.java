@@ -52,7 +52,7 @@ public class MoorlandDrifter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Delirium</i> &mdash; Moorland Drifter has flying as long as there are four or more card types among cards in your graveyard.
-       ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), DeliriumCondition.getInstance(), "<i>Delirium</i> &mdash; Moorland Drifter has flying as long as there are four or more card types among cards in your graveyard.");
+       ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), DeliriumCondition.instance, "<i>Delirium</i> &mdash; Moorland Drifter has flying as long as there are four or more card types among cards in your graveyard.");
        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

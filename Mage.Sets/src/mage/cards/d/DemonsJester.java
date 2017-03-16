@@ -57,7 +57,7 @@ public class DemonsJester extends CardImpl {
         
         // Hellbent - Demon's Jester gets +2/+1 as long as you have no cards in hand.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostSourceEffect(2,1,Duration.WhileOnBattlefield), HellbentCondition.getInstance(),
+            new BoostSourceEffect(2,1,Duration.WhileOnBattlefield), HellbentCondition.instance,
             "<i>Hellbent</i> - {this} gets +2/+1 as long as you have no cards in hand")));
     }
 

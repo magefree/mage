@@ -57,7 +57,7 @@ public class UlvenwaldBear extends CardImpl {
 
         // Morbid - When Ulvenwald Bear enters the battlefield, if a creature died this turn, put two +1/+1 counters on target creature.
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2), Outcome.BoostCreature)),
-                MorbidCondition.getInstance(), "When {this} enters the battlefield, if a creature died this turn, put two +1/+1 counters on target creature.");
+                MorbidCondition.instance, "When {this} enters the battlefield, if a creature died this turn, put two +1/+1 counters on target creature.");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

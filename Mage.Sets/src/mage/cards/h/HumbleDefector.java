@@ -63,7 +63,7 @@ public class HumbleDefector extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Draw two cards. Target opponent gains control of Humble Defector. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new HumbleDefectorEffect(), new TapSourceCost(), MyTurnCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new HumbleDefectorEffect(), new TapSourceCost(), MyTurnCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

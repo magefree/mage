@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class ZendikarExpeditions extends ExpansionSet {
 
-    private static final ZendikarExpeditions fINSTANCE = new ZendikarExpeditions();
+    private static final ZendikarExpeditions instance = new ZendikarExpeditions();
 
     public static ZendikarExpeditions getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ZendikarExpeditions() {

@@ -41,10 +41,10 @@ import mage.cards.FrameStyle;
  */
 public class Zendikar extends ExpansionSet {
 
-    private static final Zendikar fINSTANCE = new Zendikar();
+    private static final Zendikar instance = new Zendikar();
 
     public static Zendikar getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Zendikar() {

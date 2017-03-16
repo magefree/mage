@@ -9,10 +9,10 @@ import java.util.Map;
 
 
 public class DelayedViewerThread extends Thread {
-    private static final DelayedViewerThread fInstance = new DelayedViewerThread();
+    private static final DelayedViewerThread instance = new DelayedViewerThread();
 
     public static DelayedViewerThread getInstance() {
-        return fInstance;
+        return instance;
     }
 
     private final Map<Component, Long> delayedViewers;

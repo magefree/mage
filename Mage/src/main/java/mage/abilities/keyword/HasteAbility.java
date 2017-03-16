@@ -38,14 +38,14 @@ import mage.constants.Zone;
  */
 public class HasteAbility extends StaticAbility implements MageSingleton {
 
-    private static final HasteAbility fINSTANCE = new HasteAbility();
+    private static final HasteAbility instance = new HasteAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static HasteAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private HasteAbility() {
@@ -59,7 +59,7 @@ public class HasteAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public HasteAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

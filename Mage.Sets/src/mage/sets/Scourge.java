@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Scourge extends ExpansionSet {
 
-    private static final Scourge fINSTANCE = new Scourge();
+    private static final Scourge instance = new Scourge();
 
     public static Scourge getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Scourge() {

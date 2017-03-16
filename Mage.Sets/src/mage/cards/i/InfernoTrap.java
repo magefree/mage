@@ -78,10 +78,10 @@ public class InfernoTrap extends CardImpl {
 
 class InfernoTrapCondition implements Condition {
 
-    private static final InfernoTrapCondition fInstance = new InfernoTrapCondition();
+    private static final InfernoTrapCondition instance = new InfernoTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

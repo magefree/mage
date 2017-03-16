@@ -54,7 +54,7 @@ public class BogDown extends CardImpl {
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
         // Target player discards two cards. If Bog Down was kicked, that player discards three cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DiscardTargetEffect(3),
-            new DiscardTargetEffect(2), KickedCondition.getInstance(),
+            new DiscardTargetEffect(2), KickedCondition.instance,
             "Target player discards two cards. If {this} was kicked, that player discards three cards instead."));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

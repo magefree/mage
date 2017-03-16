@@ -35,13 +35,9 @@ import mage.watchers.common.RevoltWatcher;
 /**
  * @author emerald000
  */
-public class RevoltCondition implements Condition {
+public enum RevoltCondition implements Condition {
 
-    private static final RevoltCondition fInstance = new RevoltCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

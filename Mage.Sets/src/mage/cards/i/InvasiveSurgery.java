@@ -113,7 +113,7 @@ class InvasiveSurgeryEffect extends SearchTargetGraveyardHandLibraryForCardNameA
         }
 
         // Check the Delirium condition
-        if (!DeliriumCondition.getInstance().apply(game, source)) {
+        if (!DeliriumCondition.instance.apply(game, source)) {
             return true;
         }
         return this.applySearchAndExile(game, source, cardName, spellController);

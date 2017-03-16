@@ -62,7 +62,7 @@ public class Jilt extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         Effect effect = new ConditionalOneShotEffect(
                 new DamageTargetEffect(2),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "If {this} was kicked, it deals 2 damage to another target creature");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
@@ -73,7 +73,7 @@ public class Jilt extends CardImpl {
     
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility && KickedCondition.getInstance().apply(game, ability)) {
+        if (ability instanceof SpellAbility && KickedCondition.instance.apply(game, ability)) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("Another creature: Damaged");
             filter.add(new AnotherTargetPredicate(2));
             Target target = new TargetCreaturePermanent(filter);

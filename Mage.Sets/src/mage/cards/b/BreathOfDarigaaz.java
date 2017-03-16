@@ -60,7 +60,7 @@ public class BreathOfDarigaaz extends CardImpl {
 
         // Breath of Darigaaz deals 1 damage to each creature without flying and each player. If Breath of Darigaaz was kicked, it deals 4 damage to each creature without flying and each player instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageEverythingEffect(4, filter),
-                new DamageEverythingEffect(1, filter), KickedCondition.getInstance(),
+                new DamageEverythingEffect(1, filter), KickedCondition.instance,
                 "{this} deals 1 damage to each creature without flying and each player. If {this} was kicked, it deals 4 damage to each creature without flying and each player instead."));
     }
 

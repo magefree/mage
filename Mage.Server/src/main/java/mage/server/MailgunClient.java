@@ -19,8 +19,8 @@ public final class MailgunClient {
             return false;
         }
         Client client = Client.create();
-        client.addFilter(new HTTPBasicAuthFilter("api", ConfigSettings.getInstance().getMailgunApiKey()));
-        String domain = ConfigSettings.getInstance().getMailgunDomain();
+        client.addFilter(new HTTPBasicAuthFilter("api", ConfigSettings.instance.getMailgunApiKey()));
+        String domain = ConfigSettings.instance.getMailgunDomain();
         WebResource webResource = client.resource("https://api.mailgun.net/v3/" + domain + "/messages");
         MultivaluedMapImpl formData = new MultivaluedMapImpl();
         formData.add("from", "XMage <postmaster@" + domain + '>');

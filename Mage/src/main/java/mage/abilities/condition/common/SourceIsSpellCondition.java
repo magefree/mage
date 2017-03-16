@@ -38,13 +38,9 @@ import mage.game.Game;
  * @author LevelX2
  */
 
-public class SourceIsSpellCondition implements Condition {
+public enum  SourceIsSpellCondition implements Condition {
 
-    private static final SourceIsSpellCondition fInstance = new SourceIsSpellCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

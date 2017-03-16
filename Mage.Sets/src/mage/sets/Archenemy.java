@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
 
 public class Archenemy extends ExpansionSet {
 
-    private static final Archenemy fINSTANCE = new Archenemy();
+    private static final Archenemy instance = new Archenemy();
 
     public static Archenemy getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Archenemy() {

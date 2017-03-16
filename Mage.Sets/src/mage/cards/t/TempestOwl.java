@@ -63,7 +63,7 @@ public class TempestOwl extends CardImpl {
         // When Tempest Owl enters the battlefield, if it was kicked, tap up to three target permanents.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addTarget(new TargetPermanent(0, 3, new FilterPermanent(), false));
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, tap up to three target permanents."));
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, tap up to three target permanents."));
     }
 
     public TempestOwl(final TempestOwl card) {

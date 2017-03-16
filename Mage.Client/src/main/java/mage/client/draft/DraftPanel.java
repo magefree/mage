@@ -328,7 +328,7 @@ public class DraftPanel extends javax.swing.JPanel {
                         if (view != null) {
                             loadCardsToPickedCardsArea(view.getPicks());
                             draftBooster.loadBooster(EMPTY_VIEW, bigCard);
-                            Plugins.getInstance().getActionCallback().hideOpenComponents();
+                            Plugins.instance.getActionCallback().hideOpenComponents();
                             setMessage("Waiting for other players");
                         }
                     }
@@ -340,8 +340,8 @@ public class DraftPanel extends javax.swing.JPanel {
         );
         setMessage("Pick a card");
         if (!MageFrame.getInstance().isActive()) {
-            MageTray.getInstance().displayMessage("Pick the next card.");
-            MageTray.getInstance().blink();
+            MageTray.instance.displayMessage("Pick the next card.");
+            MageTray.instance.blink();
         }
         countdown.stop();
         this.timeout = draftPickView.getTimeout();

@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class PlanarChaos extends ExpansionSet {
 
-    private static final PlanarChaos fINSTANCE = new PlanarChaos();
+    private static final PlanarChaos instance = new PlanarChaos();
 
     public static PlanarChaos getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PlanarChaos() {

@@ -35,7 +35,7 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
         Map<UUID, MagePermanent> permanents = battlefieldPanel.getPermanents();
         JLayeredPane jPanel = battlefieldPanel.getMainPanel();
 
-        int height = Plugins.getInstance().sortPermanents(battlefieldPanel.getUiComponentsList(), permanents.values(), battlefieldPanel.isTopPanelBattlefield());
+        int height = Plugins.instance.sortPermanents(battlefieldPanel.getUiComponentsList(), permanents.values(), battlefieldPanel.isTopPanelBattlefield());
         jPanel.setPreferredSize(new Dimension(width - 30, height));
 
         for (PermanentView permanent : battlefieldPanel.getBattlefield().values()) {
@@ -54,7 +54,7 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
         int position = jLayeredPane.getPosition(perm);
         perm.getLinks().clear();
         Rectangle rectangleBaseCard = perm.getBounds();
-        if (!Plugins.getInstance().isCardPluginLoaded()) {
+        if (!Plugins.instance.isCardPluginLoaded()) {
             for (UUID attachmentId : permanent.getAttachments()) {
                 MagePermanent link = permanents.get(attachmentId);
                 if (link != null) {

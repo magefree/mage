@@ -82,7 +82,7 @@ public class PickChoiceDialog extends MageDialog {
             mageDialogState.setStateToDialog(this);
             
         } else {
-            Point centered = SettingsManager.getInstance().getComponentPosition(getWidth(), getHeight());
+            Point centered = SettingsManager.instance.getComponentPosition(getWidth(), getHeight());
             this.setLocation(centered.x, centered.y);
             GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
         }

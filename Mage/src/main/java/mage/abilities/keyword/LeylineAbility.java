@@ -43,14 +43,14 @@ import mage.players.Player;
  */
 public class LeylineAbility extends StaticAbility implements MageSingleton, OpeningHandAction {
 
-    private static final LeylineAbility fINSTANCE = new LeylineAbility();
+    private static final LeylineAbility instance = new LeylineAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static LeylineAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private LeylineAbility() {
@@ -64,7 +64,7 @@ public class LeylineAbility extends StaticAbility implements MageSingleton, Open
 
     @Override
     public LeylineAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override

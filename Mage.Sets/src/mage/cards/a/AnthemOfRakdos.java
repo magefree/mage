@@ -28,6 +28,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,13 +47,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author JotaPeRL
  */
 public class AnthemOfRakdos extends CardImpl {
 
     public AnthemOfRakdos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{R}{R}");
 
         // Whenever a creature you control attacks, it gets +2/+0 until end of turn and Anthem of Rakdos deals 1 damage to you.
         Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
@@ -101,7 +101,7 @@ class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return game.getControllerId(event.getSourceId()).equals(source.getControllerId()) && HellbentCondition.getInstance().apply(game, source);
+        return game.getControllerId(event.getSourceId()).equals(source.getControllerId()) && HellbentCondition.instance.apply(game, source);
     }
 
     @Override

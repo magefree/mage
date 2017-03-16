@@ -64,7 +64,7 @@ public class RagMan extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}{B}{B}, {tap}: Target opponent reveals his or her hand and discards a creature card at random. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new RevealHandTargetEffect(), new ManaCostsImpl("{B}{B}{B}"), MyTurnCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new RevealHandTargetEffect(), new ManaCostsImpl("{B}{B}{B}"), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addEffect(new RagManDiscardEffect());
         ability.addTarget(new TargetOpponent());

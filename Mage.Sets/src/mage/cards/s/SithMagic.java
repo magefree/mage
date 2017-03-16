@@ -74,7 +74,7 @@ public class SithMagic extends CardImpl {
         triggeredAbility.addEffect(new SithMagicReplacementEffect());
         Ability ability = new ConditionalTriggeredAbility(
                 triggeredAbility,
-                HateCondition.getInstance(),
+                HateCondition.instance,
                 "<i>Hate</i> &mdash; At the beggining of each combat, if opponent lost life from a source other than combat damage this turn, you may return target card from a graveyard to the battlefield under your control. It gains lifelink and haste. Exile it at the beginning of the next end step or if it would leave the battlefield.");
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard()));
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());

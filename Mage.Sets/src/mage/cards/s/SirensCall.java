@@ -58,7 +58,7 @@ public class SirensCall extends CardImpl {
 
         // Cast Siren's Call only during an opponent's turn, before attackers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,
-                new CompoundCondition(OnOpponentsTurnCondition.getInstance(), BeforeAttackersAreDeclaredCondition.getInstance()),
+                new CompoundCondition(OnOpponentsTurnCondition.instance, BeforeAttackersAreDeclaredCondition.instance),
                 "Cast {this} only during an opponent's turn, before attackers are declared"));
 
         // Creatures the active player controls attack this turn if able.

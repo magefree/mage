@@ -12,10 +12,10 @@ import mage.cards.FrameStyle;
  * @author magenoxx
  */
 public class Unhinged extends ExpansionSet {
-    private static final Unhinged fINSTANCE = new Unhinged();
+    private static final Unhinged instance = new Unhinged();
 
     public static Unhinged getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Unhinged() {

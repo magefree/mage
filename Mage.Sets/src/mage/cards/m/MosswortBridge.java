@@ -76,13 +76,13 @@ public class MosswortBridge extends CardImpl {
     }
 }
 
-class MosswortBridgeTotalPowerCondition implements Condition {
+enum MosswortBridgeTotalPowerCondition implements Condition {
 
-    private static MosswortBridgeTotalPowerCondition fInstance = new MosswortBridgeTotalPowerCondition();
+    instance;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

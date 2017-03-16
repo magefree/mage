@@ -61,10 +61,10 @@ public class SpireSerpent extends CardImpl {
         this.toughness = new MageInt(5);
 
         this.addAbility(DefenderAbility.getInstance());
-        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), MetalcraftCondition.getInstance(), abilityText1);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), MetalcraftCondition.instance, abilityText1);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
-                MetalcraftCondition.getInstance());
+                MetalcraftCondition.instance);
         effect.setText("and can attack as though it didn't have defender");
         ability.addEffect(effect);
         this.addAbility(ability);

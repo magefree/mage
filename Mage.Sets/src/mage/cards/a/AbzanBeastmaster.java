@@ -54,7 +54,7 @@ public class AbzanBeastmaster extends CardImpl {
         // At the beginning of your upkeep, draw a card if you control the creature with the greatest toughness or tied for the greatest toughness.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false),
-                ControlsCreatureGreatestToughnessCondition.getInstance(),
+                ControlsCreatureGreatestToughnessCondition.instance,
                 "At the beginning of your upkeep, draw a card if you control the creature with the greatest toughness or tied for the greatest toughness."
         ));
     }

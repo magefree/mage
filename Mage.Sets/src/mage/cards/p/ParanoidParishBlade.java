@@ -57,11 +57,11 @@ public class ParanoidParishBlade extends CardImpl {
 
         // <i>Delirium</i> &mdash; Paranoid Parish-Blade gets +1/+0 and has first strike as long as there are four or more card types among cards in your graveyard.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield), 
-                DeliriumCondition.getInstance(), "<i>Delirium</i> &mdash; {this} gets +1/+0 ");
+                DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} gets +1/+0 ");
         effect.setText("<i>Delirium</i> &mdash; {this} gets +1/+0");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield), 
-                DeliriumCondition.getInstance(), "and has first strike as long as there are four or more card types among cards in your graveyard.");
+                DeliriumCondition.instance, "and has first strike as long as there are four or more card types among cards in your graveyard.");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

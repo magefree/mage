@@ -59,7 +59,7 @@ public class VerduranEmissary extends CardImpl {
         // When {this} enters the battlefield, if it was kicked, destroy target artifact. It can't be regenerated.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(true));
         ability.addTarget(new TargetArtifactPermanent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance,
                 "When {this} enters the battlefield, if it was kicked, destroy target artifact. It can't be regenerated."));
     }
 

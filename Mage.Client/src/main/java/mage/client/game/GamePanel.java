@@ -219,7 +219,7 @@ public final class GamePanel extends javax.swing.JPanel {
         jLayeredBackgroundPane.add(jSplitPane0, JLayeredPane.DEFAULT_LAYER);
 
         Map<String, JComponent> myUi = getUIComponents(jLayeredBackgroundPane);
-        Plugins.getInstance().updateGamePanel(myUi);
+        Plugins.instance.updateGamePanel(myUi);
 
         // Enlarge jlayeredpane on resize of game panel
         addComponentListener(new ComponentAdapter() {
@@ -332,7 +332,7 @@ public final class GamePanel extends javax.swing.JPanel {
             pickTargetDialog.cleanUp();
             pickTargetDialog.removeDialog();
         }
-        Plugins.getInstance().getActionCallback().hideOpenComponents();
+        Plugins.instance.getActionCallback().hideOpenComponents();
         try {
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
@@ -839,7 +839,7 @@ public final class GamePanel extends javax.swing.JPanel {
             gamePane.setTitle(sb.toString());
         }
 
-        GameManager.getInstance().setStackSize(game.getStack().size());
+        GameManager.instance.setStackSize(game.getStack().size());
         displayStack(game, bigCard, feedbackPanel, gameId);
 
         for (ExileView exile : game.getExile()) {
@@ -902,7 +902,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.repaint();
     }
 
-    static final int BORDER_SIZE = 2;
+    private static final int BORDER_SIZE = 2;
 
     private void updateSkipButtons(boolean turn, boolean endOfTurn, boolean nextMain, boolean allTurns, boolean stack, boolean endStepBeforeYourStep) {
         if (turn) { //F4
@@ -1249,7 +1249,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void hideAll() {
-        ActionCallback callback = Plugins.getInstance().getActionCallback();
+        ActionCallback callback = Plugins.instance.getActionCallback();
         ((MageActionCallback) callback).hideGameUpdate(gameId);
     }
 
@@ -1442,7 +1442,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnCancelSkip.setContentAreaFilled(false);
         btnCancelSkip.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnCancelSkip.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getCancelSkipButtonImage()));
+        btnCancelSkip.setIcon(new ImageIcon(ImageManagerImpl.instance.getCancelSkipButtonImage()));
         btnCancelSkip.setToolTipText("Cancel all skip actions ("
                 + getCachedKeyText(KEY_CONTROL_CANCEL_SKIP) + ").");
         btnCancelSkip.setFocusable(false);
@@ -1457,7 +1457,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipToNextTurn.setContentAreaFilled(false);
         btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipToNextTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipNextTurnButtonImage()));
+        btnSkipToNextTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipNextTurnButtonImage()));
         btnSkipToNextTurn.setToolTipText("Skip to next turn ("
                 + getCachedKeyText(KEY_CONTROL_NEXT_TURN) + ").");
         btnSkipToNextTurn.setFocusable(false);
@@ -1481,7 +1481,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipToEndTurn.setContentAreaFilled(false);
         btnSkipToEndTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipToEndTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipEndTurnButtonImage()));
+        btnSkipToEndTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEndTurnButtonImage()));
         btnSkipToEndTurn.setToolTipText("Skip to (opponents/next) end of turn step ("
                 + getCachedKeyText(KEY_CONTROL_END_STEP) + ") - adjust using preferences.");
         btnSkipToEndTurn.setFocusable(false);
@@ -1514,7 +1514,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipToNextMain.setContentAreaFilled(false);
         btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipMainButtonImage()));
+        btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipMainButtonImage()));
         btnSkipToNextMain.setToolTipText("Skip to (your) next main phase ("
                 + getCachedKeyText(KEY_CONTROL_MAIN_STEP) + ") - adjust using preferences.");
         btnSkipToNextMain.setFocusable(false);
@@ -1538,7 +1538,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipToYourTurn.setContentAreaFilled(false);
         btnSkipToYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipToYourTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipYourNextTurnButtonImage()));
+        btnSkipToYourTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipYourNextTurnButtonImage()));
         btnSkipToYourTurn.setToolTipText("Skip to your next turn ("
                 + getCachedKeyText(KEY_CONTROL_YOUR_TURN) + ").");
         btnSkipToYourTurn.setFocusable(false);
@@ -1562,7 +1562,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipToEndStepBeforeYourTurn.setContentAreaFilled(false);
         btnSkipToEndStepBeforeYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipToEndStepBeforeYourTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipEndStepBeforeYourTurnButtonImage()));
+        btnSkipToEndStepBeforeYourTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEndStepBeforeYourTurnButtonImage()));
         btnSkipToEndStepBeforeYourTurn.setToolTipText("Skip to the end step before your turn ("
                 + getCachedKeyText(KEY_CONTROL_PRIOR_END) + ") - adjust using preferences.");
         btnSkipToEndStepBeforeYourTurn.setFocusable(false);
@@ -1586,7 +1586,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipStack.setContentAreaFilled(false);
         btnSkipStack.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipStack.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipStackButtonImage()));
+        btnSkipStack.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipStackButtonImage()));
         btnSkipStack.setToolTipText("Skip until stack is resolved ("
                 + getCachedKeyText(KEY_CONTROL_SKIP_STACK) + ").");
         btnSkipStack.setFocusable(false);
@@ -1610,7 +1610,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnConcede.setContentAreaFilled(false);
         btnConcede.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnConcede.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getConcedeButtonImage()));
+        btnConcede.setIcon(new ImageIcon(ImageManagerImpl.instance.getConcedeButtonImage()));
         btnConcede.setToolTipText("Concede the current game.");
         btnConcede.setFocusable(false);
         btnConcede.addMouseListener(new MouseAdapter() {
@@ -1638,7 +1638,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("ENLARGE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ActionCallback callback = Plugins.getInstance().getActionCallback();
+                ActionCallback callback = Plugins.instance.getActionCallback();
                 ((MageActionCallback) callback).enlargeCard(EnlargeMode.NORMAL);
             }
         });
@@ -1648,7 +1648,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("ENLARGE_SOURCE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ActionCallback callback = Plugins.getInstance().getActionCallback();
+                ActionCallback callback = Plugins.instance.getActionCallback();
                 ((MageActionCallback) callback).enlargeCard(EnlargeMode.ALTERNATE);
             }
         });
@@ -1697,7 +1697,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("ENLARGE_RELEASE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ActionCallback callback = Plugins.getInstance().getActionCallback();
+                ActionCallback callback = Plugins.instance.getActionCallback();
                 ((MageActionCallback) callback).hideEnlargedCard();
             }
         });
@@ -1718,7 +1718,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSwitchHands.setContentAreaFilled(false);
         btnSwitchHands.setBorder(new EmptyBorder(0, 0, 0, 0));
-        btnSwitchHands.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSwitchHandsButtonImage()));
+        btnSwitchHands.setIcon(new ImageIcon(ImageManagerImpl.instance.getSwitchHandsButtonImage()));
         btnSwitchHands.setFocusable(false);
         btnSwitchHands.setToolTipText("Switch between your hand cards and hand cards of controlled players.");
         btnSwitchHands.addMouseListener(new MouseAdapter() {
@@ -1732,7 +1732,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnStopWatching.setContentAreaFilled(false);
         btnStopWatching.setBorder(new EmptyBorder(0, 0, 0, 0));
-        btnStopWatching.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getStopWatchButtonImage()));
+        btnStopWatching.setIcon(new ImageIcon(ImageManagerImpl.instance.getStopWatchButtonImage()));
         btnStopWatching.setFocusable(false);
         btnStopWatching.setToolTipText("Stop watching this game.");
         btnStopWatching.addMouseListener(new MouseAdapter() {
@@ -2192,7 +2192,7 @@ public final class GamePanel extends javax.swing.JPanel {
             hoverButtons = new LinkedHashMap<>();
         }
         Rectangle rect = new Rectangle(36, 36);
-        HoverButton button = new HoverButton("", ImageManagerImpl.getInstance().getPhaseImage(name), rect);
+        HoverButton button = new HoverButton("", ImageManagerImpl.instance.getPhaseImage(name), rect);
         button.setToolTipText(name.replaceAll("_", " "));
         button.setPreferredSize(new Dimension(36, 36));
         button.addMouseListener(mouseAdapter);

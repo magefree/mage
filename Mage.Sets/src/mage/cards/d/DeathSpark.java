@@ -83,10 +83,10 @@ public class DeathSpark extends CardImpl {
 
 class DeathSparkCondition implements Condition {
 
-    private static final DeathSparkCondition fInstance = new DeathSparkCondition();
+    private static final DeathSparkCondition instance = new DeathSparkCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

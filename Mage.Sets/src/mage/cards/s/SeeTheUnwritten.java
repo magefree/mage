@@ -61,7 +61,7 @@ public class SeeTheUnwritten extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SeeTheUnwrittenEffect(1),
                 new SeeTheUnwrittenEffect(2),
-                new InvertCondition(FerociousCondition.getInstance()),
+                new InvertCondition(FerociousCondition.instance),
                 "Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard."
                 + "<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one"));
     }

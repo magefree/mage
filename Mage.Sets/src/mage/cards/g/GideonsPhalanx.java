@@ -57,7 +57,7 @@ public class GideonsPhalanx extends CardImpl {
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.
         Effect effect = new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent())),
-                SpellMasteryCondition.getInstance(),
+                SpellMasteryCondition.instance,
                 "<br><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn");
         this.getSpellAbility().addEffect(effect);
     }

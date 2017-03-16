@@ -6,10 +6,10 @@ import mage.constants.SetType;
 import mage.constants.Rarity;
 
 public class Eventide extends ExpansionSet {
-    private static final Eventide fINSTANCE = new Eventide();
+    private static final Eventide instance = new Eventide();
 
     public static Eventide getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Eventide() {

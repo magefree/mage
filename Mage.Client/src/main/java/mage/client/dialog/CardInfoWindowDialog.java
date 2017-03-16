@@ -83,11 +83,11 @@ public class CardInfoWindowDialog extends MageDialog {
         this.setModal(false);
         switch (this.showType) {
             case LOOKED_AT:
-                this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getLookedAtImage()));
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getLookedAtImage()));
                 this.setClosable(true);
                 break;
             case REVEAL:
-                this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getRevealedImage()));
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getRevealedImage()));
                 this.setClosable(true);
                 break;
             case REVEAL_TOP_LIBRARY:
@@ -106,7 +106,7 @@ public class CardInfoWindowDialog extends MageDialog {
                 });
                 break;
             case EXILE:
-                this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getExileImage()));
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getExileImage()));
                 break;
             default:
                 // no icon yet
@@ -189,7 +189,7 @@ public class CardInfoWindowDialog extends MageDialog {
             int width = CardInfoWindowDialog.this.getWidth();
             int height = CardInfoWindowDialog.this.getHeight();
             if (width > 0 && height > 0) {
-                Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+                Point centered = SettingsManager.instance.getComponentPosition(width, height);
                 if (!positioned) {
                     int xPos = centered.x / 2;
                     int yPos = centered.y / 2;

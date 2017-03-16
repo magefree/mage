@@ -134,7 +134,7 @@ public class ShowCardsDialog extends MageDialog {
                 int width = ShowCardsDialog.this.getWidth();
                 int height = ShowCardsDialog.this.getHeight();
                 if (width > 0 && height > 0) {
-                    Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+                    Point centered = SettingsManager.instance.getComponentPosition(width, height);
                     ShowCardsDialog.this.setLocation(centered.x, centered.y);
                     positioned = true;
                     GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, ShowCardsDialog.this);

@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Starter1999 extends ExpansionSet {
 
-    private static final Starter1999 fINSTANCE = new Starter1999();
+    private static final Starter1999 instance = new Starter1999();
 
     public static Starter1999 getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Starter1999() {

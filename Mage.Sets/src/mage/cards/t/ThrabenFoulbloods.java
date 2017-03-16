@@ -56,9 +56,9 @@ public class ThrabenFoulbloods extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Delirium</i> &mdash; Thraben Foulbloods gets +1/+1 and has menace as long as there are four or more card types among cards in your graveyard. <i>(A creature with menace can't be blocked except by two or more creatures.)<i>
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), DeliriumCondition.getInstance(), "<i>Delirium</i> &mdash; {this} gets +1/+1");
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} gets +1/+1");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility()), DeliriumCondition.getInstance(),
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility()), DeliriumCondition.instance,
                 "and has menace as long as there are four or more card types among cards in your graveyard.  <i>(A creature with menace can't be blocked except by two or more creatures.)<i>"));
         this.addAbility(ability);
     }

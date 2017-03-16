@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class GrandPrix extends ExpansionSet {
 
-    private static final GrandPrix fINSTANCE = new GrandPrix();
+    private static final GrandPrix instance = new GrandPrix();
 
     public static GrandPrix getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private GrandPrix() {

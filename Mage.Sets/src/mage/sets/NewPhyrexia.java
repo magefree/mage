@@ -6,10 +6,10 @@ import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
 
 public class NewPhyrexia extends ExpansionSet {
-    private static final NewPhyrexia fINSTANCE = new NewPhyrexia();
+    private static final NewPhyrexia instance = new NewPhyrexia();
 
     public static NewPhyrexia getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private NewPhyrexia() {

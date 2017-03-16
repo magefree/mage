@@ -59,7 +59,7 @@ public class RocketLauncher extends CardImpl {
         Watcher watcher = new RocketLauncherWatcher(this.getId());        
         // {2}: Rocket Launcher deals 1 damage to target creature or player. Destroy Rocket Launcher at the beginning of the next end step. Activate this ability only if you've controlled Rocket Launcher continuously since the beginning of your most recent turn.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                                new DamageTargetEffect(1), new GenericManaCost(2), new ControlledTurnCondition());
+                                new DamageTargetEffect(1), new GenericManaCost(2), ControlledTurnCondition.instance);
         ability.addTarget(new TargetCreatureOrPlayer());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DestroySourceEffect(true))));
 
@@ -116,13 +116,10 @@ class RocketLauncherWatcher extends Watcher {
     }
 }
 
-class ControlledTurnCondition implements Condition {
+enum ControlledTurnCondition implements Condition {
 
-    private static final ControlledTurnCondition fInstance = new ControlledTurnCondition();
+    instance;
 
-    public static ControlledTurnCondition getInstance() {
-        return fInstance;
-    }
     
     @Override
     public boolean apply(Game game, Ability source) {

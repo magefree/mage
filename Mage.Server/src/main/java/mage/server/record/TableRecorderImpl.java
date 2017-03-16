@@ -17,6 +17,6 @@ public class TableRecorderImpl implements TableRecorder {
     public void record(Table table) {
         TableProto proto = table.toProto();
         TableRecordRepository.instance.add(new TableRecord(proto, proto.getEndTimeMs()));
-        UserManager.getInstance().updateUserHistory();
+        UserManager.instance.updateUserHistory();
     }
 }

@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class SpeedVsCunning extends ExpansionSet {
-    private static final SpeedVsCunning fINSTANCE = new SpeedVsCunning();
+    private static final SpeedVsCunning instance = new SpeedVsCunning();
 
     public static SpeedVsCunning getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private SpeedVsCunning() {

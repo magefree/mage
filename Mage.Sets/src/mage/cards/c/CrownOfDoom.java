@@ -73,7 +73,7 @@ public class CrownOfDoom extends CardImpl {
         this.addAbility(new AttacksAllTriggeredAbility(effect, false, new FilterCreaturePermanent(), SetTargetPointer.PERMANENT, true));
 
         // {2}: Target player other than Crown of Doom's owner gains control of it. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new CrownOfDoomEffect(), new ManaCostsImpl("{2}"), MyTurnCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new CrownOfDoomEffect(), new ManaCostsImpl("{2}"), MyTurnCondition.instance);
         ability.addTarget(new TargetPlayer(1, 1, false, new FilterPlayer("player other than Crown of Doom's owner")));
         abilityId = ability.getOriginalId();
         this.addAbility(ability);

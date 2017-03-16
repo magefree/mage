@@ -57,7 +57,7 @@ public class PharagaxGiant extends CardImpl {
         this.addAbility(new TributeAbility(2));
         // When Pharagax Giant enters the battlefield, if tribute wasn't paid, Pharagax Giant deals 5 damage to each opponent.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(5, TargetController.OPPONENT), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, {this} deals 5 damage to each opponent."));
     }
 

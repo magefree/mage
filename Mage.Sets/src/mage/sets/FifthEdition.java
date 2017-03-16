@@ -19,10 +19,10 @@ import mage.cards.CardGraphicInfo;
 
 public class FifthEdition extends ExpansionSet {
 
-    private static final FifthEdition fINSTANCE = new FifthEdition();
+    private static final FifthEdition instance = new FifthEdition();
 
     public static FifthEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FifthEdition() {

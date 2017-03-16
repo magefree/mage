@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class ModernMasters2017 extends ExpansionSet {
 
-    private static final ModernMasters2017 fINSTANCE = new ModernMasters2017();
+    private static final ModernMasters2017 instance = new ModernMasters2017();
 
     public static ModernMasters2017 getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ModernMasters2017() {

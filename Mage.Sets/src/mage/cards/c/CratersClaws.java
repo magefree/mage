@@ -52,7 +52,7 @@ public class CratersClaws extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(new IntPlusDynamicValue(2, new ManacostVariableValue())),
                 new DamageTargetEffect(new ManacostVariableValue()),
-                FerociousCondition.getInstance(),
+                FerociousCondition.instance,
                 "{this} deals X damage to target creature or player." +
                 "<br><i>Ferocious</i> &mdash; {this} deals X plus 2 damage to that creature or player instead if you control a creature with power 4 or greater"));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

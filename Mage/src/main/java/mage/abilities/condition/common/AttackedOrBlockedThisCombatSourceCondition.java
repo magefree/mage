@@ -16,13 +16,9 @@ import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
  *
  * @author LevelX2
  */
-public class AttackedOrBlockedThisCombatSourceCondition implements Condition {
+public enum AttackedOrBlockedThisCombatSourceCondition implements Condition {
 
-    private static final AttackedOrBlockedThisCombatSourceCondition fInstance = new AttackedOrBlockedThisCombatSourceCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

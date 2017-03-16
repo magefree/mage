@@ -67,7 +67,7 @@ public class RenegadeRallier extends CardImpl {
         // <i>Revolt</i> &mdash; When Renegade Rallier enters the battlefield, if a permanent you controlled left the battlefield this turn,
         // return target permanent card with converted mana cost 2 or less from your graveyard to your battlefield.
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(), false), RevoltCondition.getInstance(),
+                new ReturnFromGraveyardToBattlefieldTargetEffect(), false), RevoltCondition.instance,
                 "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
                 + " the battlefield this turn, return target permanent card with converted mana cost 2 or less from your graveyard to your battlefield.");
         ability.setAbilityWord(AbilityWord.REVOLT);

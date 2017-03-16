@@ -58,7 +58,7 @@ public class TemurBattleRage extends CardImpl {
         // <i>Ferocious</i> That creature also gains trample until end of turn if you control a creature with power 4 or greater.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
-                new LockedInCondition(FerociousCondition.getInstance()),
+                new LockedInCondition(FerociousCondition.instance),
                 rule));
         
     }

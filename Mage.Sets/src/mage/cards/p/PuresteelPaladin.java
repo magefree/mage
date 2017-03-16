@@ -71,7 +71,7 @@ public class PuresteelPaladin extends CardImpl {
         // Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)), Duration.WhileOnBattlefield, filter),
-                MetalcraftCondition.getInstance(),
+                MetalcraftCondition.instance,
                 "Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts")));
     }
 

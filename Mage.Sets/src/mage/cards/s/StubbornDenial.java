@@ -59,12 +59,12 @@ public class StubbornDenial extends CardImpl {
         // Counter target noncreature spell unless its controller pays {1}.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterUnlessPaysEffect(new GenericManaCost(1)),
-                new InvertCondition(FerociousCondition.getInstance()),
+                new InvertCondition(FerociousCondition.instance),
                 "Counter target noncreature spell unless its controller pays {1}."));
         // <i>Ferocious</i> - If you control a creature with power 4 or greater, counter that spell instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterTargetEffect(),
-                FerociousCondition.getInstance(),
+                FerociousCondition.instance,
                 "<br><i>Ferocious</i> &mdash If you control a creature with power 4 or greater, counter that spell instead"));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }

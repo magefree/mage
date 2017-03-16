@@ -41,14 +41,8 @@ import mage.view.GameView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameManager {
-    private static final GameManager INSTANCE = new GameManager();
-
-    public static GameManager getInstance() {
-        return INSTANCE;
-    }
-
-    private GameManager() {}
+public enum GameManager {
+    instance;
 
     private final ConcurrentHashMap<UUID, GameController> gameControllers = new ConcurrentHashMap<>();
 

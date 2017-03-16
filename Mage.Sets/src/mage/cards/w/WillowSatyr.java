@@ -69,7 +69,7 @@ public class WillowSatyr extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {tap}: Gain control of target legendary creature for as long as you control Willow Satyr and Willow Satyr remains tapped.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-            new GainControlTargetEffect(Duration.Custom), new CompoundCondition(SourceTappedCondition.getInstance(), new SourceOnBattlefieldControlUnchangedCondition()),
+            new GainControlTargetEffect(Duration.Custom), new CompoundCondition(SourceTappedCondition.instance, new SourceOnBattlefieldControlUnchangedCondition()),
             "Gain control of target legendary creature for as long as you control {this} and {this} remains tapped");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));

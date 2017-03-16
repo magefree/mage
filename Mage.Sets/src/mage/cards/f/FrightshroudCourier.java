@@ -70,10 +70,10 @@ public class FrightshroudCourier extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}{B}, {tap}: Target Zombie creature gets +2/+2 and has fear for as long as Frightshroud Courier remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.getInstance(),
+            new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.instance,
             "target Zombie creature gets +2/+2"), new ManaCostsImpl("{2}{B}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(FearAbility.getInstance(),
-            Duration.Custom), SourceTappedCondition.getInstance(),"and has fear for as long as {this} remains tapped"));
+            Duration.Custom), SourceTappedCondition.instance,"and has fear for as long as {this} remains tapped"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

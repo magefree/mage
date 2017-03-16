@@ -55,7 +55,7 @@ public class PhyrexianScuta extends CardImpl {
         // Kicker-Pay 3 life.
         this.addAbility(new KickerAbility(new PayLifeCost(3)));
         // If Phyrexian Scuta was kicked, it enters the battlefield with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.getInstance(), "If Phyrexian Scuta was kicked, it enters the battlefield with two +1/+1 counters on it.", ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.instance, "If Phyrexian Scuta was kicked, it enters the battlefield with two +1/+1 counters on it.", ""));
     }
 
     public PhyrexianScuta(final PhyrexianScuta card) {

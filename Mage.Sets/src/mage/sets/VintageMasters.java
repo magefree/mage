@@ -44,10 +44,10 @@ import mage.constants.SetType;
  */
 public class VintageMasters extends ExpansionSet {
 
-    private static final VintageMasters fINSTANCE = new VintageMasters();
+    private static final VintageMasters instance = new VintageMasters();
 
     public static VintageMasters getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private VintageMasters() {

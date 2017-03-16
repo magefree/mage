@@ -37,10 +37,10 @@ import mage.cards.CardGraphicInfo;
  * @author fireshoes
  */
 public class BlessedVsCursed extends ExpansionSet {
-    private static final BlessedVsCursed fINSTANCE = new BlessedVsCursed();
+    private static final BlessedVsCursed instance = new BlessedVsCursed();
 
     public static BlessedVsCursed getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private BlessedVsCursed() {

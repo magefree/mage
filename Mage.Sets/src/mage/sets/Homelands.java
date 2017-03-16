@@ -50,10 +50,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Homelands extends ExpansionSet {
 
-    private static final Homelands fINSTANCE = new Homelands();
+    private static final Homelands instance = new Homelands();
 
     public static Homelands getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Homelands() {

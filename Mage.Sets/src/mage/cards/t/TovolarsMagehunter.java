@@ -70,7 +70,7 @@ public class TovolarsMagehunter extends CardImpl {
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Tovolar's Magehunter.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability,
-                TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(),
+                TwoOrMoreSpellsWereCastLastTurnCondition.instance,
                 TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 

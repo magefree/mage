@@ -62,7 +62,7 @@ public class Mournwillow extends CardImpl {
         // creatures with power 2 or less can't block this turn.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new MournwillowEffect(), false),
-                new DeliriumCondition(),
+                DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; When {this} enters the battlefield, if there are four or more card types among cards in your graveyard, "
                 + "creatures with power 2 or less can't block this turn.");
         this.addAbility(ability);

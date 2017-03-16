@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  * @author LevelX2
  */
 public class ClashPack extends ExpansionSet {
-    private static final ClashPack fINSTANCE = new ClashPack();
+    private static final ClashPack instance = new ClashPack();
 
     public static ClashPack getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ClashPack() {

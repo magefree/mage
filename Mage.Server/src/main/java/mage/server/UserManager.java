@@ -42,9 +42,10 @@ import java.util.concurrent.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UserManager {
+public enum  UserManager {
+    instance;
 
-    protected static final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private static final Logger LOGGER = Logger.getLogger(UserManager.class);
 
@@ -53,13 +54,7 @@ public class UserManager {
 
     private static final ExecutorService USER_EXECUTOR = ThreadExecutor.getInstance().getCallExecutor();
 
-    private static final UserManager INSTANCE = new UserManager();
-
-    public static UserManager getInstance() {
-        return INSTANCE;
-    }
-
-    private UserManager() {
+    UserManager() {
         expireExecutor.scheduleAtFixedRate(this::checkExpired, 60, 60, TimeUnit.SECONDS);
     }
 
@@ -112,7 +107,7 @@ public class UserManager {
             if (user != null) {
                 user.setSessionId(""); // Session will be set again with new id if user reconnects
             }
-            ChatManager.getInstance().removeUser(userId, reason);
+            ChatManager.instance.removeUser(userId, reason);
         }
     }
 

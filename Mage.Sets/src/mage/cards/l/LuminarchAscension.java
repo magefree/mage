@@ -141,10 +141,10 @@ class SourceHasCountersCost extends CostImpl {
 
 class YouLostNoLifeThisTurnCondition implements Condition {
 
-    private static final YouLostNoLifeThisTurnCondition fInstance = new YouLostNoLifeThisTurnCondition();
+    private static final YouLostNoLifeThisTurnCondition instance = new YouLostNoLifeThisTurnCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

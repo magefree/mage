@@ -77,10 +77,10 @@ public class LethargyTrap extends CardImpl {
 
 class LethargyTrapCondition implements Condition {
 
-    private static final LethargyTrapCondition fInstance = new LethargyTrapCondition();
+    private static final LethargyTrapCondition instance = new LethargyTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

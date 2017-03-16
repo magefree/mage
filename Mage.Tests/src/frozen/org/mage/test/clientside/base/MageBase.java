@@ -33,7 +33,7 @@ public class MageBase {
     /**
      * MageBase single instance
      */
-    private static MageBase fInstance = new MageBase();
+    private static MageBase instance = new MageBase();
 
     /**
      * Default logger
@@ -41,7 +41,7 @@ public class MageBase {
     private static Logger logger = Logging.getLogger(MageBase.class.getName());
 
     public static MageBase getInstance() {
-        return fInstance;
+        return instance;
     }
 
     private static UUID sessionId;

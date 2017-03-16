@@ -40,18 +40,9 @@ import mage.game.Game;
  * @author LevelX2
  */
 
-public class EvokedCondition implements Condition {
+public enum EvokedCondition implements Condition {
 
-    private static EvokedCondition fInstance = null;
-
-    private EvokedCondition() {}
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new EvokedCondition();
-        }
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

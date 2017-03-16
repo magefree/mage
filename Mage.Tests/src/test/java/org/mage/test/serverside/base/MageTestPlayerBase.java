@@ -96,7 +96,7 @@ public abstract class MageTestPlayerBase {
         logger.debug("Starting MAGE tests");
         logger.debug("Logging level: " + logger.getLevel());
         deleteSavedGames();
-        ConfigSettings config = ConfigSettings.getInstance();
+        ConfigSettings config = ConfigSettings.instance;
         for (GamePlugin plugin : config.getGameTypes()) {
             GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }

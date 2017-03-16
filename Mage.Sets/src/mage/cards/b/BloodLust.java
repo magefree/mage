@@ -105,10 +105,10 @@ class TargetMatchesFilterCondition implements Condition {
 
 class TargetPermanentToughnessMinus1Value implements DynamicValue {
 
-    private static final TargetPermanentToughnessMinus1Value fINSTANCE = new TargetPermanentToughnessMinus1Value();
+    private static final TargetPermanentToughnessMinus1Value instance = new TargetPermanentToughnessMinus1Value();
 
     public static TargetPermanentToughnessMinus1Value getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override

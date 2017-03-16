@@ -49,14 +49,14 @@ import java.io.ObjectStreamException;
  */
 public class WitherAbility extends StaticAbility implements MageSingleton {
 
-    private static final WitherAbility fINSTANCE =  new WitherAbility();
+    private static final WitherAbility instance =  new WitherAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static WitherAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private WitherAbility() {
@@ -70,7 +70,7 @@ public class WitherAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public WitherAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

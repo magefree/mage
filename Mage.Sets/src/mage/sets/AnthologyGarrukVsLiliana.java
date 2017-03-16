@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class AnthologyGarrukVsLiliana extends ExpansionSet {
 
-    private static final AnthologyGarrukVsLiliana fINSTANCE = new AnthologyGarrukVsLiliana();
+    private static final AnthologyGarrukVsLiliana instance = new AnthologyGarrukVsLiliana();
 
     public static AnthologyGarrukVsLiliana getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private AnthologyGarrukVsLiliana() {

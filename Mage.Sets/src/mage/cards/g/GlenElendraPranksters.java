@@ -56,7 +56,7 @@ public class GlenElendraPranksters extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
-        Ability ability = new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), true), OnOpponentsTurnCondition.getInstance(),
+        Ability ability = new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), true), OnOpponentsTurnCondition.instance,
                 "Whenever you cast a spell during an opponent's turn, you may have target creature get -1/-1 until end of turn.");
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

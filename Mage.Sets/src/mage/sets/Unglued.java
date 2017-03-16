@@ -12,10 +12,10 @@ import mage.cards.FrameStyle;
  * @author lopho
  */
 public class Unglued extends ExpansionSet {
-    private static final Unglued fINSTANCE = new Unglued();
+    private static final Unglued instance = new Unglued();
 
     public static Unglued getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Unglued() {

@@ -19,7 +19,7 @@ public final class MailClient {
             logger.info("Email is not sent because the address is empty");
             return false;
         }
-        ConfigSettings config = ConfigSettings.getInstance();
+        ConfigSettings config = ConfigSettings.instance;
 
         Properties properties = System.getProperties();
         properties.setProperty("mail.smtps.host", config.getMailSmtpHost());

@@ -76,10 +76,10 @@ public class CobraTrap extends CardImpl {
 
 class CobraTrapCondition implements Condition {
 
-    private static final CobraTrapCondition fInstance = new CobraTrapCondition();
+    private static final CobraTrapCondition instance = new CobraTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

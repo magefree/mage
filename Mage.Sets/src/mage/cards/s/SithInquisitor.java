@@ -56,7 +56,7 @@ public class SithInquisitor extends CardImpl {
         // <i>Hate</i> &mdash; When Sith Assassin enters the battlefield, if opponent lost life from source other than combat damage this turn, target player discard a card at random.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1, true)),
-                HateCondition.getInstance(),
+                HateCondition.instance,
                 "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other then combat damage this turn, target player discard a card at random.");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());

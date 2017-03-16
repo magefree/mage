@@ -81,9 +81,9 @@ public class VengefulFirebrand extends CardImpl {
     }
 }
 
-class VengefulFirebrandCondition implements Condition {
+enum VengefulFirebrandCondition implements Condition {
 
-    private static VengefulFirebrandCondition fInstance = new VengefulFirebrandCondition();
+    instance;
     private static final FilterCard filter = new FilterCard("Warrior");
 
     static {
@@ -91,7 +91,7 @@ class VengefulFirebrandCondition implements Condition {
     }
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

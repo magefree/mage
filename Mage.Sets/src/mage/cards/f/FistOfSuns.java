@@ -71,7 +71,7 @@ public class FistOfSuns extends CardImpl {
 
 class FistOfSunsRuleEffect extends ContinuousEffectImpl {
 
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"), SourceIsSpellCondition.getInstance());
+    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"), SourceIsSpellCondition.instance);
     
     public FistOfSunsRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

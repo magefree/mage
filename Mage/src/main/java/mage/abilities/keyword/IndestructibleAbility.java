@@ -54,18 +54,18 @@ import mage.abilities.StaticAbility;
 
 public class IndestructibleAbility extends StaticAbility {
 
-    private static final IndestructibleAbility fINSTANCE;
+    private static final IndestructibleAbility instance;
 
     static {
-        fINSTANCE = new IndestructibleAbility();
+        instance = new IndestructibleAbility();
     }
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static IndestructibleAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private IndestructibleAbility() {
@@ -74,7 +74,7 @@ public class IndestructibleAbility extends StaticAbility {
 
     @Override
     public IndestructibleAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override

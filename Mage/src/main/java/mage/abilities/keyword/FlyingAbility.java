@@ -45,14 +45,14 @@ import mage.constants.AsThoughEffectType;
  */
 public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
-    private static final FlyingAbility fINSTANCE =  new FlyingAbility();
+    private static final FlyingAbility instance =  new FlyingAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static FlyingAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FlyingAbility() {
@@ -66,7 +66,7 @@ public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public FlyingAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

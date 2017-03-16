@@ -88,7 +88,7 @@ class ConcussiveBoltEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        source.getEffects().get(2).setValue("MetalcraftConcussiveBolt", MetalcraftCondition.getInstance().apply(game, source));
+        source.getEffects().get(2).setValue("MetalcraftConcussiveBolt", MetalcraftCondition.instance.apply(game, source));
         return true;
     }
 }

@@ -60,7 +60,7 @@ public class WardenOfTheWall extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BecomesCreatureSourceEffect(new GargoyleToken(), "", Duration.WhileOnBattlefield), NotMyTurnCondition.getInstance(), "As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BecomesCreatureSourceEffect(new GargoyleToken(), "", Duration.WhileOnBattlefield), NotMyTurnCondition.instance, "As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying")));
     }
 
     public WardenOfTheWall(final WardenOfTheWall card) {

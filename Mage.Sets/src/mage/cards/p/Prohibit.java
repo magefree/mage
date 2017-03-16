@@ -71,7 +71,7 @@ public class Prohibit extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            if (!KickedCondition.getInstance().apply(game, ability)) {
+            if (!KickedCondition.instance.apply(game, ability)) {
                 ability.getTargets().clear();
                 ability.getTargets().add(new TargetSpell(filter2));
             }

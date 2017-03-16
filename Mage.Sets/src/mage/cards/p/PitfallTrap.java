@@ -79,10 +79,10 @@ public class PitfallTrap extends CardImpl {
 
 class PitfallTrapCondition implements Condition {
 
-    private static final PitfallTrapCondition fInstance = new PitfallTrapCondition();
+    private static final PitfallTrapCondition instance = new PitfallTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

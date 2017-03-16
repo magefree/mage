@@ -80,7 +80,7 @@ class DreamHallsEffect extends ContinuousEffectImpl {
         filter.add(new SharesColorWithSourcePredicate());
     }
 
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new DiscardCardCost(filter), SourceIsSpellCondition.getInstance());
+    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new DiscardCardCost(filter), SourceIsSpellCondition.instance);
 
     public DreamHallsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

@@ -106,7 +106,7 @@ public class MageActionCallback implements ActionCallback {
 
     public synchronized void refreshSession() {
         if (cardInfoPane == null) {
-            cardInfoPane = Plugins.getInstance().getCardInfoPane();
+            cardInfoPane = Plugins.instance.getCardInfoPane();
         }
     }
 
@@ -268,7 +268,7 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseMoved(MouseEvent e, TransferData transferData) {
-        if (!Plugins.getInstance().isCardPluginLoaded()) {
+        if (!Plugins.instance.isCardPluginLoaded()) {
             return;
         }
         if (!popupData.card.equals(transferData.card)) {

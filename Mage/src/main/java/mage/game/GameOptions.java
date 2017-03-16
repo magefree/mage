@@ -11,10 +11,10 @@ import mage.constants.PhaseStep;
  */
 public class GameOptions implements Serializable {
 
-    private static final GameOptions defInstance = new GameOptions();
+    private static final GameOptions deinstance = new GameOptions();
 
     public static GameOptions getDefault() {
-        return defInstance;
+        return deinstance;
     }
 
     /**

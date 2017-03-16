@@ -11,10 +11,10 @@ import mage.cards.CardGraphicInfo;
 
 public class TimeSpiral extends ExpansionSet {
 
-    private static final TimeSpiral fINSTANCE = new TimeSpiral();
+    private static final TimeSpiral instance = new TimeSpiral();
 
     public static TimeSpiral getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private TimeSpiral() {

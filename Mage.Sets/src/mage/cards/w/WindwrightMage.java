@@ -81,7 +81,7 @@ public class WindwrightMage extends CardImpl {
 
 class WindwrightMageCondition implements Condition {
 
-    private static WindwrightMageCondition fInstance = new WindwrightMageCondition();
+    private static WindwrightMageCondition instance = new WindwrightMageCondition();
     private static final FilterCard filter = new FilterCard("artifact");
 
     static {
@@ -89,7 +89,7 @@ class WindwrightMageCondition implements Condition {
     }
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

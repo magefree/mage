@@ -83,10 +83,10 @@ public class OathOfLiliana extends CardImpl {
 
 class OathOfLilianaCondition implements Condition {
 
-    private static final OathOfLilianaCondition fInstance = new OathOfLilianaCondition();
+    private static final OathOfLilianaCondition instance = new OathOfLilianaCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

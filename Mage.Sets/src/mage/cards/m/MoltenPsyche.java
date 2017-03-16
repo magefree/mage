@@ -106,13 +106,13 @@ class MoltenPsycheEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     player.drawCards(cardsToDraw.get(playerId), game);
-                    if (MetalcraftCondition.getInstance().apply(game, source) && !playerId.equals(source.getControllerId())) {
+                    if (MetalcraftCondition.instance.apply(game, source) && !playerId.equals(source.getControllerId())) {
                         MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get("CardsDrawn");
                         player.damage(watcher.getDraws(playerId), source.getSourceId(), game, false, true);
                     }
                 }
             }
-            if (MetalcraftCondition.getInstance().apply(game, source)) {
+            if (MetalcraftCondition.instance.apply(game, source)) {
                 MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get("CardsDrawn");
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     if (game.isOpponent(controller, playerId)) {

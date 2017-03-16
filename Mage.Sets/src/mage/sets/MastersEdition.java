@@ -50,10 +50,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class MastersEdition extends ExpansionSet {
 
-    private static final MastersEdition fINSTANCE = new MastersEdition();
+    private static final MastersEdition instance = new MastersEdition();
 
     public static MastersEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MastersEdition() {

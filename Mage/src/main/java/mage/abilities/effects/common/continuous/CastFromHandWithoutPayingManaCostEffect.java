@@ -38,7 +38,7 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.getAlternativeSourceCosts().add(new AlternativeCostSourceAbility(
-                    null, new CompoundCondition(SourceIsSpellCondition.getInstance(), new IsBeingCastFromHandCondition()), null, new FilterNonlandCard(), true));
+                    null, new CompoundCondition(SourceIsSpellCondition.instance, new IsBeingCastFromHandCondition()), null, new FilterNonlandCard(), true));
             return true;
         }
         return false;

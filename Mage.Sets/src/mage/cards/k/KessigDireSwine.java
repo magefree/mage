@@ -56,7 +56,7 @@ public class KessigDireSwine extends CardImpl {
         // <i>Delirium</i> &mdash; Kessig Dire Swine has trample as long as there are four or more card types among cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
-                        new DeliriumCondition(), "<i>Delirium</i> &mdash; {this} has trample as long as there are four or more card types among cards in your graveyard")));
+                        DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} has trample as long as there are four or more card types among cards in your graveyard")));
     }
 
     public KessigDireSwine(final KessigDireSwine card) {

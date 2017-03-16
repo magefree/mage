@@ -46,10 +46,10 @@ import mage.util.RandomUtil;
  */
 public class ShadowsOverInnistrad extends ExpansionSet {
 
-    private static final ShadowsOverInnistrad fINSTANCE = new ShadowsOverInnistrad();
+    private static final ShadowsOverInnistrad instance = new ShadowsOverInnistrad();
 
     public static ShadowsOverInnistrad getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     protected final EnumMap<Rarity, List<CardInfo>> savedDoubleFacedCards;

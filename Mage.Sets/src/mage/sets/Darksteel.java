@@ -7,10 +7,10 @@ import mage.constants.Rarity;
 
 public class Darksteel extends ExpansionSet {
 
-    private static final Darksteel fINSTANCE = new Darksteel();
+    private static final Darksteel instance = new Darksteel();
 
     public static Darksteel getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     public Darksteel() {
@@ -96,6 +96,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Leonin Shikari", 6, Rarity.RARE, mage.cards.l.LeoninShikari.class));
         cards.add(new SetCardInfo("Lich's Tomb", 128, Rarity.RARE, mage.cards.l.LichsTomb.class));
         cards.add(new SetCardInfo("Loxodon Mystic", 7, Rarity.COMMON, mage.cards.l.LoxodonMystic.class));
+        cards.add(new SetCardInfo("Machinate", 24, Rarity.COMMON, mage.cards.m.Machinate.class));
         cards.add(new SetCardInfo("Magnetic Flux", 25, Rarity.COMMON, mage.cards.m.MagneticFlux.class));
         cards.add(new SetCardInfo("Memnarch", 129, Rarity.RARE, mage.cards.m.Memnarch.class));
         cards.add(new SetCardInfo("Mephitic Ooze", 47, Rarity.RARE, mage.cards.m.MephiticOoze.class));

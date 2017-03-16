@@ -60,7 +60,7 @@ public class EyesOfTheWisent extends CardImpl {
         // Whenever an opponent casts a blue spell during your turn, you may create a 4/4 green Elemental creature token.
         this.addAbility(new ConditionalTriggeredAbility(
                 new SpellCastOpponentTriggeredAbility(new CreateTokenEffect(new EyesOfTheWisentElementalToken()), filter, true),
-                new MyTurnCondition(),
+                MyTurnCondition.instance,
                 "Whenever an opponent casts a blue spell during your turn, you may create a 4/4 green Elemental creature token."
         ));
     }

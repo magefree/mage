@@ -60,7 +60,7 @@ public class AirdropAeronauts extends CardImpl {
 
         // <i>Revolt</i> &mdash; When Airdrop Aeronauts enters the battlefield, if a permanent you controlled left the battlefield this turn, you gain 5 life.
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new GainLifeEffect(5), false), RevoltCondition.getInstance(),
+                new GainLifeEffect(5), false), RevoltCondition.instance,
                 "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
                 + " the battlefield this turn, you gain 5 life."
         );

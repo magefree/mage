@@ -71,7 +71,7 @@ public class SwarmbornGiant extends CardImpl {
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield),
-                MonstrousCondition.getInstance(),
+                MonstrousCondition.instance,
                 "As long as {this} is monstrous, it has reach"));
         this.addAbility(ability);
     }

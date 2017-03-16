@@ -70,10 +70,10 @@ public class RavenousTrap extends CardImpl {
 
 class RavenousTrapCondition implements Condition {
 
-    private static final RavenousTrapCondition fInstance = new RavenousTrapCondition();
+    private static final RavenousTrapCondition instance = new RavenousTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override
