@@ -44,13 +44,13 @@ import mage.cards.CardGraphicInfo;
  */
 public class FateReforged extends ExpansionSet {
 
-    private static final FateReforged fINSTANCE = new FateReforged();
+    private static final FateReforged instance = new FateReforged();
 
     List<CardInfo> savedSpecialRares = new ArrayList<>();
     List<CardInfo> savedSpecialCommon = new ArrayList<>();
 
     public static FateReforged getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FateReforged() {

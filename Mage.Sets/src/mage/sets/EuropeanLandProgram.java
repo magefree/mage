@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class EuropeanLandProgram extends ExpansionSet {
 
-    private static final EuropeanLandProgram fINSTANCE = new EuropeanLandProgram();
+    private static final EuropeanLandProgram instance = new EuropeanLandProgram();
 
     public static EuropeanLandProgram getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private EuropeanLandProgram() {

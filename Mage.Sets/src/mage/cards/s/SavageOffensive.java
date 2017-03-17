@@ -68,7 +68,7 @@ public class SavageOffensive extends CardImpl {
         // If Savage Offensive was kicked, they get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new BoostControlledEffect(1, 1, Duration.EndOfTurn)),
-                new LockedInCondition(KickedCondition.getInstance()),
+                new LockedInCondition(KickedCondition.instance),
                 "If {this} was kicked, they get +1/+1 until end of turn."));
     }
 

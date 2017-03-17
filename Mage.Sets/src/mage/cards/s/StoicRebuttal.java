@@ -51,7 +51,7 @@ public class StoicRebuttal extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
         // Metalcraft - Stoic Rebuttal costs {1} less to cast if you control three or more artifacts.
-        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(1, MetalcraftCondition.getInstance()));
+        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(1, MetalcraftCondition.instance));
         ability.setRuleAtTheTop(true);
         ability.setAbilityWord(AbilityWord.METALCRAFT);
         this.addAbility(ability);

@@ -28,6 +28,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
+
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.common.AfterUpkeepStepCondtion;
@@ -38,17 +39,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
 /**
- *
  * @author LevelX2
  */
 public class Reset extends CardImpl {
 
     public Reset(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{U}");
 
         // Cast Reset only during an opponent's turn after his or her upkeep step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,
-                new CompoundCondition(OnOpponentsTurnCondition.getInstance(), AfterUpkeepStepCondtion.getInstance()),
+                new CompoundCondition(OnOpponentsTurnCondition.instance, AfterUpkeepStepCondtion.instance),
                 "Cast {this} only during an opponent's turn after his or her upkeep step"));
 
         // Untap all lands you control.

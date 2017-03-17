@@ -17,15 +17,11 @@ import mage.client.util.gui.BufferedImageBuilder;
 import org.mage.plugins.card.utils.ImageManager;
 import org.mage.plugins.card.utils.Transparency;
 
-public class ImageManagerImpl implements ImageManager {
+public enum ImageManagerImpl implements ImageManager {
+    instance;
 
-    private static final ImageManagerImpl fInstance = new ImageManagerImpl();
-
-    public static ImageManagerImpl getInstance() {
-        return fInstance;
-    }
     
-    public ImageManagerImpl() {
+    ImageManagerImpl() {
         init();
     }
 

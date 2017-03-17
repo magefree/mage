@@ -58,7 +58,7 @@ public class ThicketElemental extends CardImpl {
 
         // When Thicket Elemental enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new RevealCardsFromLibraryUntilEffect(new FilterCreatureCard(), Zone.BATTLEFIELD, Zone.LIBRARY, true));
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance,
                 "When {this} enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library."));
     }
 

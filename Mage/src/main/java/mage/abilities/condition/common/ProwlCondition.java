@@ -38,19 +38,9 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class ProwlCondition implements Condition {
+public enum ProwlCondition implements Condition {
 
-    private static ProwlCondition fInstance = null;
-
-    private ProwlCondition() {
-    }
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new ProwlCondition();
-        }
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

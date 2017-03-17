@@ -8,12 +8,8 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class FatefulHourCondition implements Condition {
-    private static FatefulHourCondition fInstance = new FatefulHourCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+public enum FatefulHourCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

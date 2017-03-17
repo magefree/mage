@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.EquippedMatchesFilterCondition;
+import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.ReplacementEffect;
@@ -76,7 +76,7 @@ public class ArmamentOfNyx extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        Condition condition = new EquippedMatchesFilterCondition(filter);
+        Condition condition = new AttachedToMatchesFilterCondition(filter);
         // Enchanted creature has double strike as long as it's an enchantment. Otherwise, prevent all damage that would be dealt by enchanted creature
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield),

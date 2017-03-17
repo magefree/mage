@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class RiseOfTheEldrazi extends ExpansionSet {
 
-    private static final RiseOfTheEldrazi fINSTANCE = new RiseOfTheEldrazi();
+    private static final RiseOfTheEldrazi instance = new RiseOfTheEldrazi();
 
     public static RiseOfTheEldrazi getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private RiseOfTheEldrazi() {

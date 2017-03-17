@@ -36,10 +36,10 @@ import mage.constants.SetType;
  */
 public class HourOfDevastation extends ExpansionSet {
 
-    private static final HourOfDevastation fINSTANCE = new HourOfDevastation();
+    private static final HourOfDevastation instance = new HourOfDevastation();
 
     public static HourOfDevastation getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private HourOfDevastation() {

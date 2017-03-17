@@ -121,7 +121,7 @@ public class DraftController {
         UUID playerId = userPlayerMap.get(userId);
         DraftSession draftSession = new DraftSession(draft, userId, playerId);
         draftSessions.put(playerId, draftSession);
-        UserManager.getInstance().getUser(userId).ifPresent(user-> {
+        UserManager.instance.getUser(userId).ifPresent(user-> {
                     user.addDraft(playerId, draftSession);
                     logger.debug("User " + user.getName() + " has joined draft " + draft.getId());
                     draft.getPlayer(playerId).setJoined();
@@ -187,8 +187,8 @@ public class DraftController {
             draftSession.draftOver();
             draftSession.removeDraft();
         }
-        TableManager.getInstance().endDraft(tableId, draft);
-        DraftManager.getInstance().removeDraft(draft.getId());
+        TableManager.instance.endDraft(tableId, draft);
+        DraftManager.instance.removeDraft(draft.getId());
     }
 
     public void kill(UUID userId) {

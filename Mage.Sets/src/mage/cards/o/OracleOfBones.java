@@ -69,7 +69,7 @@ public class OracleOfBones extends CardImpl {
         this.addAbility(new TributeAbility(2));
         // When Oracle of Bones enters the battlefield, if tribute wasn't paid, you may cast an instant or sorcery card from your hand without paying its mana cost.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new OracleOfBonesCastEffect(), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, you may cast an instant or sorcery card from your hand without paying its mana cost."));
     }
 

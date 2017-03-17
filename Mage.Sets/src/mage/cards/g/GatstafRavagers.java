@@ -62,7 +62,7 @@ public class GatstafRavagers extends CardImpl {
         this.addAbility(new MenaceAbility());
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Gatstaf Ravagers.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
     public GatstafRavagers(final GatstafRavagers card) {

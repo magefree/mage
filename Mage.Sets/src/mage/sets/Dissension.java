@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class Dissension extends ExpansionSet {
 
-    private static final Dissension fINSTANCE = new Dissension();
+    private static final Dissension instance = new Dissension();
 
     public static Dissension getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Dissension() {

@@ -74,7 +74,7 @@ public class ShamanOfForgottenWays extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new ShamanOfForgottenWaysEffect(), 
                 new ManaCostsImpl("{9}{G}{G}"), 
-                FormidableCondition.getInstance());
+                FormidableCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.setAbilityWord(AbilityWord.FORMIDABLE);        
         this.addAbility(ability);

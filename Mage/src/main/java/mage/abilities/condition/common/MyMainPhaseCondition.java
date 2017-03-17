@@ -27,30 +27,23 @@
  */
 package mage.abilities.condition.common;
 
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
+
 import mage.constants.TurnPhase;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 
-public class MyMainPhaseCondition implements Condition {
+public enum MyMainPhaseCondition implements Condition {
 
-    private static final MyMainPhaseCondition fInstance = new MyMainPhaseCondition();
-
-    private static final  Set<TurnPhase> turnPhases = new HashSet<TurnPhase>() {{
-        add(TurnPhase.PRECOMBAT_MAIN);
-        add(TurnPhase.POSTCOMBAT_MAIN);
-    }};
-    
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
+    private static final Set<TurnPhase> turnPhases = EnumSet.of(TurnPhase.PRECOMBAT_MAIN, TurnPhase.POSTCOMBAT_MAIN);
 
     @Override
     public boolean apply(Game game, Ability source) {

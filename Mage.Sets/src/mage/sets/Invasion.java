@@ -37,10 +37,10 @@ import mage.cards.CardGraphicInfo;
  * @author North
  */
 public class Invasion extends ExpansionSet {
-    private static final Invasion fINSTANCE = new Invasion();
+    private static final Invasion instance = new Invasion();
 
     public static Invasion getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Invasion() {

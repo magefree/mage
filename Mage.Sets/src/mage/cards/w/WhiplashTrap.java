@@ -73,10 +73,10 @@ public class WhiplashTrap extends CardImpl {
 
 class WhiplashTrapCondition implements Condition {
 
-    private static final WhiplashTrapCondition fInstance = new WhiplashTrapCondition();
+    private static final WhiplashTrapCondition instance = new WhiplashTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

@@ -47,7 +47,7 @@ public class FaerieTauntings extends CardImpl {
         this.subtype.add("Faerie");
 
         // Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life
-        this.addAbility(new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), true), OnOpponentsTurnCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), true), OnOpponentsTurnCondition.instance,
                 "Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life."));
 
     }

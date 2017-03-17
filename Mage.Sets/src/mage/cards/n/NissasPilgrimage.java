@@ -100,7 +100,7 @@ class NissasPilgrimageEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             int number = 2;
-            if (SpellMasteryCondition.getInstance().apply(game, source)) {
+            if (SpellMasteryCondition.instance.apply(game, source)) {
                 number++;
             }
             TargetCardInLibrary target = new TargetCardInLibrary(0, number, filter);

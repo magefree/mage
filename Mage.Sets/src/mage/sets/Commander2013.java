@@ -41,10 +41,10 @@ import mage.cards.CardGraphicInfo;
 
 public class Commander2013 extends ExpansionSet {
 
-    private static final Commander2013 fINSTANCE = new Commander2013();
+    private static final Commander2013 instance = new Commander2013();
 
     public static Commander2013 getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Commander2013() {

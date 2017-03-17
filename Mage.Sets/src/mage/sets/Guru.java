@@ -6,10 +6,10 @@ import mage.constants.SetType;
 import mage.constants.Rarity;
 
 public class Guru extends ExpansionSet {
-    private static final Guru fINSTANCE = new Guru();
+    private static final Guru instance = new Guru();
 
     public static Guru getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Guru() {

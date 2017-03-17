@@ -36,21 +36,15 @@ import mage.server.UserManager;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReplayManager {
-    private static final ReplayManager INSTANCE = new ReplayManager();
-
-    public static ReplayManager getInstance() {
-        return INSTANCE;
-    }
-
-    private ReplayManager() {}
+public enum ReplayManager {
+    instance;
 
     private final ConcurrentHashMap<String, ReplaySession> replaySessions = new ConcurrentHashMap<>();
 
     public void replayGame(UUID gameId, UUID userId) {
         ReplaySession replaySession = new ReplaySession(gameId, userId);
         replaySessions.put(gameId.toString() + userId.toString(), replaySession);
-        UserManager.getInstance().getUser(userId).ifPresent(user->user.ccReplayGame(gameId));
+        UserManager.instance.getUser(userId).ifPresent(user->user.ccReplayGame(gameId));
     }
 
     public void startReplay(UUID gameId, UUID userId) {

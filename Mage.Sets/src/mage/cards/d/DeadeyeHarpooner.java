@@ -65,7 +65,7 @@ public class DeadeyeHarpooner extends CardImpl {
 
         // <i>Revolt</i> &mdash; When Deadeye Harpooner enters the battlefield, if a permanent you controlled left the battlefield this turn, destroy target tapped creature an opponent controls.
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new DestroyTargetEffect(), false), RevoltCondition.getInstance(),
+                new DestroyTargetEffect(), false), RevoltCondition.instance,
                 "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
                 + " the battlefield this turn, destroy target tapped creature an opponent controls."
         );

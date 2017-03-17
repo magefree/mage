@@ -31,13 +31,9 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 
-public class HellbentCondition implements Condition {
+public enum HellbentCondition implements Condition {
 
-    private static HellbentCondition fInstance = new HellbentCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

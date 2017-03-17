@@ -62,7 +62,7 @@ public class SwiftReckoning extends CardImpl {
         AsThoughEffect effect = new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame);
         effect.setText("<i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may cast {this} as though it had flash");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalAsThoughEffect(effect,
-                SpellMasteryCondition.getInstance())));
+                SpellMasteryCondition.instance)));
         // Destroy target tapped creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

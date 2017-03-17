@@ -40,10 +40,10 @@ import mage.cards.CardGraphicInfo;
 
 public class DragonsOfTarkir extends ExpansionSet {
 
-    private static final DragonsOfTarkir fINSTANCE = new DragonsOfTarkir();
+    private static final DragonsOfTarkir instance = new DragonsOfTarkir();
 
     public static DragonsOfTarkir getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private DragonsOfTarkir() {

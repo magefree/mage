@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class HeroesVsMonsters extends ExpansionSet {
-    private static final HeroesVsMonsters fINSTANCE = new HeroesVsMonsters();
+    private static final HeroesVsMonsters instance = new HeroesVsMonsters();
 
     public static HeroesVsMonsters getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private HeroesVsMonsters() {

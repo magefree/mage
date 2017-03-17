@@ -59,14 +59,13 @@ import org.apache.log4j.Logger;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class TableManager {
-
-    protected static final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
+public enum TableManager {
+    instance;
+    protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
     // protected static ScheduledExecutorService expireExecutor = ThreadExecutor.getInstance().getExpireExecutor();
 
-    private static final TableManager INSTANCE = new TableManager();
-    private static final Logger logger = Logger.getLogger(TableManager.class);
+    private final Logger logger = Logger.getLogger(TableManager.class);
     private static final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
     private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<>();
@@ -79,11 +78,8 @@ public class TableManager {
      */
     private static final int EXPIRE_CHECK_PERIOD = 10;
 
-    public static TableManager getInstance() {
-        return INSTANCE;
-    }
 
-    private TableManager() {
+    TableManager() {
         expireExecutor.scheduleAtFixedRate(() -> {
             try {
                 checkTableHealthState();
@@ -151,7 +147,7 @@ public class TableManager {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).submitDeck(userId, deckList);
         }
-        UserManager.getInstance().getUser(userId).ifPresent(user -> {
+        UserManager.instance.getUser(userId).ifPresent(user -> {
             user.removeSideboarding(tableId);
             user.showUserMessage("Submit deck", "Table no longer active");
 
@@ -198,12 +194,12 @@ public class TableManager {
     }
 
     public boolean removeTable(UUID userId, UUID tableId) {
-        if (isTableOwner(tableId, userId) || UserManager.getInstance().isAdmin(userId)) {
+        if (isTableOwner(tableId, userId) || UserManager.instance.isAdmin(userId)) {
             logger.debug("Table remove request - userId: " + userId + " tableId: " + tableId);
             TableController tableController = controllers.get(tableId);
             if (tableController != null) {
                 tableController.leaveTableAll();
-                ChatManager.getInstance().destroyChatSession(tableController.getChatId());
+                ChatManager.instance.destroyChatSession(tableController.getChatId());
                 removeTable(tableId);
             }
             return true;
@@ -236,7 +232,7 @@ public class TableManager {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startMatch(userId);
             // chat of start dialog can be killed
-            ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());
+            ChatManager.instance.destroyChatSession(controllers.get(tableId).getChatId());
         }
     }
 
@@ -255,7 +251,7 @@ public class TableManager {
     public void startTournament(UUID userId, UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startTournament(userId);
-            ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());
+            ChatManager.instance.destroyChatSession(controllers.get(tableId).getChatId());
         }
     }
 
@@ -343,9 +339,9 @@ public class TableManager {
             // If table is not finished, the table has to be removed completly because it's not a normal state (if finished it will be removed in GamesRoomImpl.Update())
             if (table.getState() != TableState.FINISHED) {
                 if (game != null) {
-                    GameManager.getInstance().removeGame(game.getId());
+                    GameManager.instance.removeGame(game.getId());
                 }
-                GamesRoomManager.getInstance().removeTable(tableId);
+                GamesRoomManager.instance.removeTable(tableId);
             }
 
         }
@@ -353,12 +349,12 @@ public class TableManager {
 
     public void debugServerState() {
         logger.debug("--- Server state ----------------------------------------------");
-        Collection<User> users = UserManager.getInstance().getUsers();
+        Collection<User> users = UserManager.instance.getUsers();
         logger.debug("--------User: " + users.size() + " [userId | since | lock | name -----------------------");
         for (User user : users) {
-            Session session = SessionManager.getInstance().getSession(user.getSessionId());
+            Session session = SessionManager.instance.getSession(user.getSessionId());
             String sessionState = "N";
-            if (session!=null) {
+            if (session != null) {
                 if (session.isLocked()) {
                     sessionState = "L";
                 } else {
@@ -370,14 +366,14 @@ public class TableManager {
                     + " | " + sessionState
                     + " | " + user.getName() + " (" + user.getUserState().toString() + " - " + user.getPingInfo() + ')');
         }
-        ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
+        ArrayList<ChatSession> chatSessions = ChatManager.instance.getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");
         for (ChatSession chatSession : chatSessions) {
             logger.debug(chatSession.getChatId() + " " + formatter.format(chatSession.getCreateTime()) + ' ' + chatSession.getInfo() + ' ' + chatSession.getClients().values().toString());
         }
-        logger.debug("------- Games: " + GameManager.getInstance().getNumberActiveGames() + " --------------------------------------------");
+        logger.debug("------- Games: " + GameManager.instance.getNumberActiveGames() + " --------------------------------------------");
         logger.debug(" Active Game Worker: " + ThreadExecutor.getInstance().getActiveThreads(ThreadExecutor.getInstance().getGameExecutor()));
-        for (Entry<UUID, GameController> entry : GameManager.getInstance().getGameController().entrySet()) {
+        for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
             logger.debug(entry.getKey() + entry.getValue().getPlayerNameList());
         }
         logger.debug("--- Server state END ------------------------------------------");

@@ -66,7 +66,7 @@ public class DarthMaul extends CardImpl {
         // <i>Hate</i> &mdash; Whenever Darth Maul attacks, if an opponent loses life from a source other than combat damage this turn, target creature can't block this turn.
         Ability ability = new ConditionalTriggeredAbility(
                 new AttacksTriggeredAbility(new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn), false),
-                HateCondition.getInstance(),
+                HateCondition.instance,
                 "<i>Hate</i> &mdash; Whenever Darth Maul attacks, if an opponent loses life from a source other than combat damage this turn, target creature can't block this turn.");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());

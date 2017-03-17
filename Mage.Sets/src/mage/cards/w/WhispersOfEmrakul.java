@@ -49,13 +49,13 @@ public class WhispersOfEmrakul extends CardImpl {
         // Target opponent discards a card at random.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardTargetEffect(1, true),
-                new InvertCondition(DeliriumCondition.getInstance()),
+                new InvertCondition(DeliriumCondition.instance),
                 "Target opponent discards a card at random."));
 
         // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, that player discards two cards at random instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardTargetEffect(2, true),
-                DeliriumCondition.getInstance(),
+                DeliriumCondition.instance,
                 "<br><i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, that player discards two cards at random instead"));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }

@@ -61,7 +61,7 @@ public class PrisonBarricade extends CardImpl {
         this.addAbility(new KickerAbility("{1}{W}"));
         // If Prison Barricade was kicked, it enters the battlefield with a +1/+1 counter on it and with "Prison Barricade can attack as though it didn't have defender."
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            KickedCondition.getInstance(), "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it and with \"{this} can attack as though it didn't have defender.\"", "");
+            KickedCondition.instance, "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it and with \"{this} can attack as though it didn't have defender.\"", "");
         ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield));
         this.addAbility(ability);
    }

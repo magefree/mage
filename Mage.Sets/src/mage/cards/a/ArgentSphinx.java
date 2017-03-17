@@ -66,7 +66,7 @@ public class ArgentSphinx extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Metalcraft - {U}: Exile Argent Sphinx. Return it to the battlefield under your control at the beginning of the next end step. Activate this ability only if you control three or more artifacts.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ArgentSphinxEffect(), new ManaCostsImpl("{U}"), MetalcraftCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ArgentSphinxEffect(), new ManaCostsImpl("{U}"), MetalcraftCondition.instance);
         ability.setAbilityWord(AbilityWord.METALCRAFT);
         this.addAbility(ability);
     }

@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
 
 public class ArenaLeague extends ExpansionSet {
 
-    private static final ArenaLeague fINSTANCE = new ArenaLeague();
+    private static final ArenaLeague instance = new ArenaLeague();
 
     public static ArenaLeague getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ArenaLeague() {

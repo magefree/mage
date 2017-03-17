@@ -42,10 +42,10 @@ import mage.constants.SetType;
  */
 public class AetherRevolt extends ExpansionSet {
 
-    private static final AetherRevolt fINSTANCE = new AetherRevolt();
+    private static final AetherRevolt instance = new AetherRevolt();
 
     public static AetherRevolt getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();

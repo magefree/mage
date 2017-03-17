@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class EldritchMoon extends ExpansionSet {
 
-    private static final EldritchMoon fINSTANCE = new EldritchMoon();
+    private static final EldritchMoon instance = new EldritchMoon();
 
     public static EldritchMoon getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private EldritchMoon() {

@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class FTVRealms extends ExpansionSet {
 
-    private static final FTVRealms fINSTANCE = new FTVRealms();
+    private static final FTVRealms instance = new FTVRealms();
 
     public static FTVRealms getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FTVRealms() {

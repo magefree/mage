@@ -40,10 +40,10 @@ import mage.game.permanent.Permanent;
  */
 public class EquippedSourceCondition implements Condition {
 
-    private static final EquippedSourceCondition fInstance = new EquippedSourceCondition();
+    private static final EquippedSourceCondition instance = new EquippedSourceCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

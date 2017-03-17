@@ -71,7 +71,7 @@ public class CraterElemental extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new SetPowerSourceEffect(new StaticValue(8), Duration.EndOfTurn), 
                 new ManaCostsImpl("{2}{R}"),
-                FormidableCondition.getInstance());
+                FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);        
         this.addAbility(ability);
     }

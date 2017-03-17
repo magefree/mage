@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class BetrayersOfKamigawa extends ExpansionSet {
 
-    private static final BetrayersOfKamigawa fINSTANCE = new BetrayersOfKamigawa();
+    private static final BetrayersOfKamigawa instance = new BetrayersOfKamigawa();
 
     public static BetrayersOfKamigawa getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private BetrayersOfKamigawa() {

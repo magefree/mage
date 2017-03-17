@@ -57,7 +57,7 @@ public class Probe extends CardImpl {
         // If Probe was kicked, target player discards two cards.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
             new DiscardTargetEffect(2),
-            KickedCondition.getInstance(),
+            KickedCondition.instance,
             "If {this} was kicked, target player discards two cards"));
     }
 
@@ -65,7 +65,7 @@ public class Probe extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
-            if (KickedCondition.getInstance().apply(game, ability)) {
+            if (KickedCondition.instance.apply(game, ability)) {
                 ability.addTarget(new TargetPlayer());
             }
         }

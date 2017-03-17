@@ -61,7 +61,7 @@ public class GladeWatcher extends CardImpl {
                 Zone.BATTLEFIELD,
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl("{G}"),
-                FormidableCondition.getInstance());
+                FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);
     }

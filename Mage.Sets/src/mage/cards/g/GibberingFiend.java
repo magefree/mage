@@ -60,7 +60,7 @@ public class GibberingFiend extends CardImpl {
         // Gibbering Fiend deals 1 damage to that player.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), TargetController.OPPONENT, false, true),
-                DeliriumCondition.getInstance(),
+                DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
                         + "{this} deals 1 damage to that player."));
     }

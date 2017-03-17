@@ -28,6 +28,7 @@
 package mage.cards.v;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
@@ -39,13 +40,12 @@ import mage.counters.CounterType;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
- *
  * @author LevelX2
  */
 public class VoraciousWurm extends CardImpl {
 
     public VoraciousWurm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(2);
@@ -53,7 +53,7 @@ public class VoraciousWurm extends CardImpl {
 
         // Voracious Wurm enters the battlefield with X +1/+1 counters on it, where X is the amount of life you've gained this turn.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), ControllerGotLifeCount.getInstance(), true)),
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), ControllerGotLifeCount.getInstance(), true)),
                 new PlayerGainedLifeWatcher());
     }
 

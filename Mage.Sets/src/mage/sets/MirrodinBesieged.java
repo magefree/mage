@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class MirrodinBesieged extends ExpansionSet {
 
-    private static final MirrodinBesieged fINSTANCE = new MirrodinBesieged();
+    private static final MirrodinBesieged instance = new MirrodinBesieged();
 
     public static MirrodinBesieged getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MirrodinBesieged() {

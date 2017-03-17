@@ -82,10 +82,10 @@ public class RicochetTrap extends CardImpl {
 
 class RicochetTrapCondition implements Condition {
 
-    private static final RicochetTrapCondition fInstance = new RicochetTrapCondition();
+    private static final RicochetTrapCondition instance = new RicochetTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

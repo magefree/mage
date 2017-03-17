@@ -58,7 +58,7 @@ public class AuriokEdgewright extends CardImpl {
         this.toughness = new MageInt(2);
 
         ContinuousEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.getInstance(), effectText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, effectText)));
     }
 
     public AuriokEdgewright(final AuriokEdgewright card) {

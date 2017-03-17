@@ -57,7 +57,7 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         currentCards = new ArrayList<>(source.dragCardList());
 
         // Make a view for the first one and add it to us
-        dragView = Plugins.getInstance().getMageCard(currentCards.get(0), null, new Dimension(100, 140), null, true, false);
+        dragView = Plugins.instance.getMageCard(currentCards.get(0), null, new Dimension(100, 140), null, true, false);
         for (MouseListener l: dragView.getMouseListeners()) {
             dragView.removeMouseListener(l);
         }

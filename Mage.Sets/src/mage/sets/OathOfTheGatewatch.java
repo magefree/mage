@@ -23,10 +23,10 @@ import mage.constants.SetType;
  */
 public class OathOfTheGatewatch extends ExpansionSet {
 
-    private static final OathOfTheGatewatch fINSTANCE = new OathOfTheGatewatch();
+    private static final OathOfTheGatewatch instance = new OathOfTheGatewatch();
 
     public static OathOfTheGatewatch getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();

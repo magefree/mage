@@ -64,7 +64,7 @@ public class BarrageOfBoulders extends CardImpl {
         Effect effect = new ConditionalRestrictionEffect(
                 Duration.EndOfTurn,
                 new CantBlockAllEffect(new FilterCreaturePermanent("creatures"), Duration.EndOfTurn),
-                new LockedInCondition(FerociousCondition.getInstance()), null);
+                new LockedInCondition(FerociousCondition.instance), null);
         effect.setText("<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, creatures can't block this turn");
         this.getSpellAbility().addEffect(effect);
     }

@@ -40,10 +40,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class ScarsOfMirrodin extends ExpansionSet {
 
-    private static final ScarsOfMirrodin fINSTANCE = new ScarsOfMirrodin();
+    private static final ScarsOfMirrodin instance = new ScarsOfMirrodin();
 
     public static ScarsOfMirrodin getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ScarsOfMirrodin() {

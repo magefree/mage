@@ -57,7 +57,7 @@ public class GavonyIronwright extends CardImpl {
 
         // Fateful hour - As long as you have 5 or less life, other creatures you control get +1/+4.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostControlledEffect(1, 4, Duration.WhileOnBattlefield, false),
-                FatefulHourCondition.getInstance(), "As long as you have 5 or less life, other creatures you control get +1/+4")));
+                FatefulHourCondition.instance, "As long as you have 5 or less life, other creatures you control get +1/+4")));
     }
 
     public GavonyIronwright(final GavonyIronwright card) {

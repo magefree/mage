@@ -62,7 +62,7 @@ public class BleakCovenVampires extends CardImpl {
         Target target = new TargetPlayer();
         ability.addTarget(target);
 
-        this.addAbility(new ConditionalTriggeredAbility(ability, MetalcraftCondition.getInstance(), effectText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, MetalcraftCondition.instance, effectText));
     }
 
     public BleakCovenVampires(final BleakCovenVampires card) {

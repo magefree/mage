@@ -70,10 +70,10 @@ public class ArrowVolleyTrap extends CardImpl {
 
 class ArrowVolleyTrapCondition implements Condition {
 
-    private static final ArrowVolleyTrapCondition fInstance = new ArrowVolleyTrapCondition();
+    private static final ArrowVolleyTrapCondition instance = new ArrowVolleyTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

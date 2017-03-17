@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class ShardsOfAlara extends ExpansionSet {
 
-    private static final ShardsOfAlara fINSTANCE = new ShardsOfAlara();
+    private static final ShardsOfAlara instance = new ShardsOfAlara();
 
     public static ShardsOfAlara getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ShardsOfAlara() {

@@ -54,7 +54,7 @@ public class StallionOfAshmouth extends CardImpl {
 
         // <i>Delirium</i> &mdash; {1}{B}: Stallion of Ashmouth gets +1/+1 until end of turn. Activate this ability only if there are
         // four or more card types among cards in your graveyard.
-        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}"), new DeliriumCondition()));
+        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}"), DeliriumCondition.instance));
     }
 
     public StallionOfAshmouth(final StallionOfAshmouth card) {

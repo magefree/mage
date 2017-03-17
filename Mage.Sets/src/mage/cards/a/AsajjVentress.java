@@ -28,6 +28,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -47,13 +48,12 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
- *
  * @author Styxo
  */
 public class AsajjVentress extends CardImpl {
 
     public AsajjVentress(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Dathomirian");
         this.subtype.add("Sith");
@@ -72,7 +72,7 @@ public class AsajjVentress extends CardImpl {
         // <i>Hate</i> &mdash; Whenever Asajj Ventress attacks, if an opponent lost life from a source other than combat damage this turn, target creature blocks this turn if able.
         Ability ability = new ConditionalTriggeredAbility(
                 new AttacksTriggeredAbility(new BlocksIfAbleTargetEffect(Duration.EndOfTurn), false),
-                HateCondition.getInstance(),
+                HateCondition.instance,
                 "<i>Hate</i> &mdash; Whenever Asajj Ventress attacks, if an opponent lost life from a source other than combat damage this turn, target creature blocks this turn if able");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());

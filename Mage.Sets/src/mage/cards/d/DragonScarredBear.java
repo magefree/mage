@@ -57,7 +57,7 @@ public class DragonScarredBear extends CardImpl {
             Zone.BATTLEFIELD,
             new RegenerateSourceEffect(),
             new ManaCostsImpl("{1}{G}"),
-            FormidableCondition.getInstance());
+            FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);
     }

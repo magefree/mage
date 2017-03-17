@@ -83,10 +83,10 @@ import mage.target.common.TargetOpponent;
  */
 public class ClashEffect extends OneShotEffect implements MageSingleton {
 
-    private static final ClashEffect fINSTANCE = new ClashEffect();
+    private static final ClashEffect instance = new ClashEffect();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     private ClashEffect() {
@@ -95,7 +95,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
     }
 
     public static ClashEffect getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     public ClashEffect(final ClashEffect effect) {

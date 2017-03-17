@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.effects.common.DestroyAttachedToEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FadingAbility;
@@ -66,7 +66,7 @@ public class ParallaxDementia extends CardImpl {
         // Enchanted creature gets +3/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 2, Duration.WhileOnBattlefield)));
         // When Parallax Dementia leaves the battlefield, destroy enchanted creature. That creature can't be regenerated.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new DestroyAttachedEffect("enchanted creature", true), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new DestroyAttachedToEffect("enchanted creature", true), false));
     }
 
     public ParallaxDementia(final ParallaxDementia card) {

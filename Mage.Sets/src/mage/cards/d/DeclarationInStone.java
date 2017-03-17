@@ -98,7 +98,10 @@ class DeclarationInStoneEffect extends OneShotEffect {
                         nonTokenCount++;
                     }
                 } else {
-                    cardsToExile.add(targetPermanent);
+                    if (cardsToExile.add(targetPermanent)
+                            && !(targetPermanent instanceof PermanentToken)) {
+                        nonTokenCount++;
+                    }
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), targetPermanent.getControllerId(), game)) {
                         if (!permanent.getId().equals(targetPermanent.getId())
                                 && permanent.getName().equals(targetPermanent.getName())) {

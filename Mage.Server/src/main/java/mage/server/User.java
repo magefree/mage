@@ -210,10 +210,10 @@ public class User {
         // Because watched games don't get restored after reconnection call stop watching
         for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext();) {
             UUID gameId = iterator.next();
-            GameManager.getInstance().stopWatching(gameId, userId);
+            GameManager.instance.stopWatching(gameId, userId);
             iterator.remove();
         }
-        ServerMessagesUtil.getInstance().incLostConnection();
+        ServerMessagesUtil.instance.incLostConnection();
     }
 
     public boolean isConnected() {
@@ -246,7 +246,7 @@ public class User {
 
     public void fireCallback(final ClientCallback call) {
         if (isConnected()) {
-            Session session = SessionManager.getInstance().getSession(sessionId);
+            Session session = SessionManager.instance.getSession(sessionId);
             if (session != null) {
                 session.fireCallback(call);
             }
@@ -304,27 +304,27 @@ public class User {
 
     public void sendPlayerUUID(final UUID gameId, final UUID data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerUUID(gameId, userId, data);
+        GameManager.instance.sendPlayerUUID(gameId, userId, data);
     }
 
     public void sendPlayerString(final UUID gameId, final String data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerString(gameId, userId, data);
+        GameManager.instance.sendPlayerString(gameId, userId, data);
     }
 
     public void sendPlayerManaType(final UUID gameId, final UUID playerId, final ManaType data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerManaType(gameId, playerId, userId, data);
+        GameManager.instance.sendPlayerManaType(gameId, playerId, userId, data);
     }
 
     public void sendPlayerBoolean(final UUID gameId, final Boolean data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerBoolean(gameId, userId, data);
+        GameManager.instance.sendPlayerBoolean(gameId, userId, data);
     }
 
     public void sendPlayerInteger(final UUID gameId, final Integer data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerInteger(gameId, userId, data);
+        GameManager.instance.sendPlayerInteger(gameId, userId, data);
     }
 
     public void updateLastActivity(String pingInfo) {
@@ -355,7 +355,7 @@ public class User {
             ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
         }
         for (Entry<UUID, UUID> entry : userTournaments.entrySet()) {
-            TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(entry.getValue());
+            TournamentController tournamentController = TournamentManager.instance.getTournamentController(entry.getValue());
             if (tournamentController != null) {
                 ccTournamentStarted(entry.getValue(), entry.getKey());
                 tournamentController.rejoin(entry.getKey());
@@ -365,7 +365,7 @@ public class User {
         for (Entry<UUID, GameSessionPlayer> entry : gameSessions.entrySet()) {
             ccGameStarted(entry.getValue().getGameId(), entry.getKey());
             entry.getValue().init();
-            GameManager.getInstance().sendPlayerString(entry.getValue().getGameId(), userId, "");
+            GameManager.instance.sendPlayerString(entry.getValue().getGameId(), userId, "");
         }
 
         for (Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
@@ -378,10 +378,10 @@ public class User {
             entry.getValue().construct(0); // TODO: Check if this is correct
         }
         for (Entry<UUID, Deck> entry : sideboarding.entrySet()) {
-            TableController controller = TableManager.getInstance().getController(entry.getKey());
+            TableController controller = TableManager.instance.getController(entry.getKey());
             ccSideboard(entry.getValue(), entry.getKey(), controller.getRemainingTime(), controller.getOptions().isLimited());
         }
-        ServerMessagesUtil.getInstance().incReconnects();
+        ServerMessagesUtil.instance.incReconnects();
         logger.trace(userName + " ended reconnect");
     }
 
@@ -437,29 +437,29 @@ public class User {
         draftSessions.clear();
         logger.trace("REMOVE " + userName + " Tournament sessions " + userTournaments.size());
         for (UUID tournamentId : userTournaments.values()) {
-            TournamentManager.getInstance().quit(tournamentId, userId);
+            TournamentManager.instance.quit(tournamentId, userId);
         }
         userTournaments.clear();
         logger.trace("REMOVE " + userName + " Tables " + tables.size());
         for (Entry<UUID, Table> entry : tables.entrySet()) {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
-            TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
+            TableManager.instance.leaveTable(userId, entry.getValue().getId());
         }
         tables.clear();
         logger.trace("REMOVE " + userName + " Game sessions: " + gameSessions.size());
         for (GameSessionPlayer gameSessionPlayer : gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSessionPlayer.getGameId());
-            GameManager.getInstance().quitMatch(gameSessionPlayer.getGameId(), userId);
+            GameManager.instance.quitMatch(gameSessionPlayer.getGameId(), userId);
             gameSessionPlayer.quitGame();
         }
         gameSessions.clear();
         logger.trace("REMOVE " + userName + " watched Games " + watchedGames.size());
         for (UUID gameId : watchedGames) {
-            GameManager.getInstance().stopWatching(gameId, userId);
+            GameManager.instance.stopWatching(gameId, userId);
         }
         watchedGames.clear();
         logger.trace("REMOVE " + userName + " Chats ");
-        ChatManager.getInstance().removeUser(userId, reason);
+        ChatManager.instance.removeUser(userId, reason);
     }
 
     public void setUserData(UserData userData) {
@@ -784,7 +784,7 @@ public class User {
             if (table.getState() == TableState.FINISHED) {
                 number++;
             } else {
-                TableController tableController = TableManager.getInstance().getController(table.getId());
+                TableController tableController = TableManager.instance.getController(table.getId());
                 if (tableController != null && tableController.isUserStillActive(userId)) {
                     number++;
                 }

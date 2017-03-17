@@ -102,10 +102,10 @@ class TargetPlayerCardsInHandCount implements DynamicValue {
 
 class RuneflareTrapCondition implements Condition {
 
-    private static final RuneflareTrapCondition fInstance = new RuneflareTrapCondition();
+    private static final RuneflareTrapCondition instance = new RuneflareTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

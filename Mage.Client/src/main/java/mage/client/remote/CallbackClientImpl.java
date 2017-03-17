@@ -87,7 +87,7 @@ public class CallbackClientImpl implements CallbackClient {
                 switch (callback.getMethod()) {
                     case "startGame": {
                         TableClientMessage message = (TableClientMessage) callback.getData();
-                        GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
+                        GameManager.instance.setCurrentPlayerUUID(message.getPlayerId());
                         gameStarted(message.getGameId(), message.getPlayerId());
                         break;
                     }
@@ -457,8 +457,8 @@ public class CallbackClientImpl implements CallbackClient {
             handleException(ex);
         }
 
-        if (Plugins.getInstance().isCounterPluginLoaded()) {
-            Plugins.getInstance().addGamesPlayed();
+        if (Plugins.instance.isCounterPluginLoaded()) {
+            Plugins.instance.addGamesPlayed();
         }
     }
 

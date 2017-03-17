@@ -72,7 +72,7 @@ public class GibberingDescent extends CardImpl {
         // Hellbent - Skip your upkeep step if you have no cards in hand.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(
                 new GibberingDescentSkipUpkeepEffect(),
-                HellbentCondition.getInstance())));
+                HellbentCondition.instance)));
         
         // Madness {2}{B}{B}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{2}{B}{B}")));

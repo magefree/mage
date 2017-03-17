@@ -8,10 +8,10 @@ import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
 
 public class Onslaught extends ExpansionSet {
-    private static final Onslaught fINSTANCE = new Onslaught();
+    private static final Onslaught instance = new Onslaught();
 
     public static Onslaught getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Onslaught() {
@@ -54,7 +54,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Blackmail", 127, Rarity.UNCOMMON, mage.cards.b.Blackmail.class));
         cards.add(new SetCardInfo("Blatant Thievery", 71, Rarity.RARE, mage.cards.b.BlatantThievery.class));
         cards.add(new SetCardInfo("Blistering Firecat", 189, Rarity.RARE, mage.cards.b.BlisteringFirecat.class));
-	    cards.add(new SetCardInfo("Bloodline Shaman", 249, Rarity.UNCOMMON, mage.cards.b.BloodlineShaman.class));
+        cards.add(new SetCardInfo("Bloodline Shaman", 249, Rarity.UNCOMMON, mage.cards.b.BloodlineShaman.class));
         cards.add(new SetCardInfo("Bloodstained Mire", 313, Rarity.RARE, mage.cards.b.BloodstainedMire.class, new CardGraphicInfo(new ObjectColor("RB"), null,false)));
         cards.add(new SetCardInfo("Boneknitter", 128, Rarity.UNCOMMON, mage.cards.b.Boneknitter.class));
         cards.add(new SetCardInfo("Brightstone Ritual", 191, Rarity.COMMON, mage.cards.b.BrightstoneRitual.class));
@@ -176,6 +176,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Krosan Colossus", 270, Rarity.RARE, mage.cards.k.KrosanColossus.class));
         cards.add(new SetCardInfo("Krosan Groundshaker", 271, Rarity.UNCOMMON, mage.cards.k.KrosanGroundshaker.class));
         cards.add(new SetCardInfo("Krosan Tusker", 272, Rarity.COMMON, mage.cards.k.KrosanTusker.class));
+        cards.add(new SetCardInfo("Lavamancer's Skill", 215, Rarity.COMMON, mage.cards.l.LavamancersSkill.class));
         cards.add(new SetCardInfo("Lay Waste", 216, Rarity.COMMON, mage.cards.l.LayWaste.class));
         cards.add(new SetCardInfo("Leery Fogbeast", 273, Rarity.COMMON, mage.cards.l.LeeryFogbeast.class));
         cards.add(new SetCardInfo("Lightning Rift", 217, Rarity.UNCOMMON, mage.cards.l.LightningRift.class));

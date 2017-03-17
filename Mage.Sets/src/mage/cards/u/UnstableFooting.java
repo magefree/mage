@@ -62,7 +62,7 @@ public class UnstableFooting extends CardImpl {
         this.getSpellAbility().addEffect(new UnstableFootingEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(5),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "If {this} was kicked, it deals 5 damage to target player"));
 
     }
@@ -71,7 +71,7 @@ public class UnstableFooting extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
-            if (KickedCondition.getInstance().apply(game, ability)) {
+            if (KickedCondition.instance.apply(game, ability)) {
                 ability.addTarget(new TargetPlayer());
             }
         }

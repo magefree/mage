@@ -86,10 +86,10 @@ public class QueenMarchesa extends CardImpl {
 
 class OpponentIsMonarchCondition implements Condition {
 
-    private final static OpponentIsMonarchCondition fInstance = new OpponentIsMonarchCondition();
+    private final static OpponentIsMonarchCondition instance = new OpponentIsMonarchCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

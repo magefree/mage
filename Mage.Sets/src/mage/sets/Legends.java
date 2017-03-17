@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Legends extends ExpansionSet {
 
-    private static final Legends fINSTANCE = new Legends();
+    private static final Legends instance = new Legends();
 
     public static Legends getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Legends() {

@@ -79,7 +79,7 @@ public class MarshalsAnthem extends CardImpl {
         // When Marshal's Anthem enters the battlefield, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times Marshal's Anthem was kicked.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "When {this} enters the battlefield, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times {this} was kicked.");
         originalId = ability.getOriginalId();
         this.addAbility(ability);

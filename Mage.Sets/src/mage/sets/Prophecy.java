@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Prophecy extends ExpansionSet {
 
-    private static final Prophecy fINSTANCE = new Prophecy();
+    private static final Prophecy instance = new Prophecy();
 
     public static Prophecy getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Prophecy() {

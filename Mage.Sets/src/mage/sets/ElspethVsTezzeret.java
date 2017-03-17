@@ -7,10 +7,10 @@ import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
 
 public class ElspethVsTezzeret extends ExpansionSet {
-    private static final ElspethVsTezzeret fINSTANCE = new ElspethVsTezzeret();
+    private static final ElspethVsTezzeret instance = new ElspethVsTezzeret();
 
     public static ElspethVsTezzeret getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ElspethVsTezzeret() {

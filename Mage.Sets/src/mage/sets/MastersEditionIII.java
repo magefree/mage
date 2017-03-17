@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class MastersEditionIII extends ExpansionSet {
 
-    private static final MastersEditionIII fINSTANCE = new MastersEditionIII();
+    private static final MastersEditionIII instance = new MastersEditionIII();
 
     public static MastersEditionIII getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MastersEditionIII() {

@@ -73,7 +73,7 @@ public class AnyaMercilessAngel extends CardImpl {
         // As long as an opponent's life total is less than half his or her starting life total, Anya has indestructible.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                        AnyaMercilessAngelCondition.getInstance(),
+                        AnyaMercilessAngelCondition.instance,
                         "As long as an opponent's life total is less than half his or her starting life total, {this} has indestructible")));
     }
 
@@ -121,16 +121,9 @@ class AnyaMercilessAngelDynamicValue implements DynamicValue {
     }
 }
 
-class AnyaMercilessAngelCondition implements Condition {
+enum AnyaMercilessAngelCondition implements Condition {
 
-    private static final AnyaMercilessAngelCondition fInstance = new AnyaMercilessAngelCondition();
-
-    public static AnyaMercilessAngelCondition getInstance() {
-        return fInstance;
-    }
-
-    private AnyaMercilessAngelCondition() {}
-
+    instance;
     @Override
     public boolean apply(Game game, Ability source) {
         return new AnyaMercilessAngelDynamicValue().calculate(game, source, null) > 0;

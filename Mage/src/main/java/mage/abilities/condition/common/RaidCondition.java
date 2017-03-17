@@ -34,21 +34,11 @@ import mage.game.Game;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
- *
  * @author LevelX2
  */
-public class RaidCondition implements Condition {
+public enum RaidCondition implements Condition {
 
-    private static RaidCondition fInstance = null;
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new RaidCondition();
-        }
-        return fInstance;
-    }
-
-    private RaidCondition() {}
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

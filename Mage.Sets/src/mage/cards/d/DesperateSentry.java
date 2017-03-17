@@ -61,7 +61,7 @@ public class DesperateSentry extends CardImpl {
 
         // <i>Delirium</i> &mdash; Desperate Sentry gets +3/+0 as long as there are four or more card types among cards in your graveyard.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield), DeliriumCondition.getInstance(),
+                new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield), DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; {this} gets +3/+0 as long as there are four or more card types among cards in your graveyard.");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         this.addAbility(ability);

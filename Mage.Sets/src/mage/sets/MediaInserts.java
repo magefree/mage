@@ -35,10 +35,10 @@ import mage.constants.SetType;
 
 public class MediaInserts extends ExpansionSet {
 
-    private static final MediaInserts fINSTANCE = new MediaInserts();
+    private static final MediaInserts instance = new MediaInserts();
 
     public static MediaInserts getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MediaInserts() {

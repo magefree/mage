@@ -118,12 +118,12 @@ public class CombatManager {
                     blockerPoint.translate(-parentPoint.x, -parentPoint.y);
                     Point attackerPoint = attackerCard.getLocationOnScreen();
                     attackerPoint.translate(-parentPoint.x, -parentPoint.y);
-                    double yRateA = (attackerCard.getSize().height / SettingsManager.getInstance().getCardSize().height);
-                    double xRateA = (attackerCard.getSize().width / SettingsManager.getInstance().getCardSize().width);
-                    double yRateB = (blockerCard.getSize().height / SettingsManager.getInstance().getCardSize().height);
-                    double xRateB = (blockerCard.getSize().width / SettingsManager.getInstance().getCardSize().width);
-                    ArrowBuilder.getBuilder().addArrow(gameId, (int) blockerPoint.getX() + (int)(55*xRateB), (int) blockerPoint.getY() + (int)(25*xRateB),
-                            (int) attackerPoint.getX() + (int)(70*xRateA), (int) attackerPoint.getY() + (int)(25*yRateA), Color.blue, ArrowBuilder.Type.COMBAT);
+                    double yRateA = (attackerCard.getSize().height / SettingsManager.instance.getCardSize().height);
+                    double xRateA = (attackerCard.getSize().width / SettingsManager.instance.getCardSize().width);
+                    double yRateB = (blockerCard.getSize().height / SettingsManager.instance.getCardSize().height);
+                    double xRateB = (blockerCard.getSize().width / SettingsManager.instance.getCardSize().width);
+                    ArrowBuilder.getBuilder().addArrow(gameId, (int) blockerPoint.getX() + (int) (55 * xRateB), (int) blockerPoint.getY() + (int) (25 * xRateB),
+                            (int) attackerPoint.getX() + (int) (70 * xRateA), (int) attackerPoint.getY() + (int) (25 * yRateA), Color.blue, ArrowBuilder.Type.COMBAT);
                     globalBlockersCount++;
                 }
             }

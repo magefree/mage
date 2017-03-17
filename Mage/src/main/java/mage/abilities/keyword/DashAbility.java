@@ -76,7 +76,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         this.addDashCost(manaString);
         Ability ability = new EntersBattlefieldAbility(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom, false),
-                DashedCondition.getInstance(), "", "");
+                DashedCondition.instance, "", "");
         ability.addEffect(new DashAddDelayedTriggeredAbilityEffect());
         addSubAbility(ability);
 

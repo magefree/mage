@@ -38,14 +38,8 @@ import mage.view.DraftPickView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DraftManager {
-    private static final DraftManager INSTANCE = new DraftManager();
-
-    public static DraftManager getInstance() {
-        return INSTANCE;
-    }
-
-    private DraftManager() {}
+public enum DraftManager {
+    instance;
 
     private final ConcurrentHashMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<>();
 

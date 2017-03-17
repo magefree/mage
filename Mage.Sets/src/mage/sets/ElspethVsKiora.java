@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  * @author fireshoes
  */
 public class ElspethVsKiora extends ExpansionSet {
-    private static final ElspethVsKiora fINSTANCE = new ElspethVsKiora();
+    private static final ElspethVsKiora instance = new ElspethVsKiora();
 
     public static ElspethVsKiora getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ElspethVsKiora() {

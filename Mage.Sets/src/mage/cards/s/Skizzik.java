@@ -60,7 +60,7 @@ public class Skizzik extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of the end step, sacrifice Skizzik unless it was kicked.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceUnlessConditionEffect(KickedCondition.getInstance()), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceUnlessConditionEffect(KickedCondition.instance), TargetController.ANY, false));
     }
 
     public Skizzik(final Skizzik card) {

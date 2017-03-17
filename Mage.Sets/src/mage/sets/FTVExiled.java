@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class FTVExiled extends ExpansionSet {
 
-    private static final FTVExiled fINSTANCE = new FTVExiled();
+    private static final FTVExiled instance = new FTVExiled();
 
     public static FTVExiled getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FTVExiled() {

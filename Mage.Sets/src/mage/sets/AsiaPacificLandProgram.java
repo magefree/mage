@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
 
 public class AsiaPacificLandProgram extends ExpansionSet {
 
-    private static final AsiaPacificLandProgram fINSTANCE = new AsiaPacificLandProgram();
+    private static final AsiaPacificLandProgram instance = new AsiaPacificLandProgram();
 
     public static AsiaPacificLandProgram getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private AsiaPacificLandProgram() {

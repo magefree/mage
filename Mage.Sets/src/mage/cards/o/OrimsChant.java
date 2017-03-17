@@ -122,7 +122,7 @@ class OrimsChantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && KickedCondition.getInstance().apply(game, source)) {
+        if (controller != null && KickedCondition.instance.apply(game, source)) {
             game.addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, new FilterCreaturePermanent("creatures")), source);
             return true;
         }

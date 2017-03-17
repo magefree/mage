@@ -7,10 +7,10 @@ import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
 
 public class Mirrodin extends ExpansionSet {
-    private static final Mirrodin fINSTANCE = new Mirrodin();
+    private static final Mirrodin instance = new Mirrodin();
 
     public static Mirrodin getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Mirrodin() {

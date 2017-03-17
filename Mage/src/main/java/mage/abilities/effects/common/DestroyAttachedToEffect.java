@@ -37,40 +37,40 @@ import mage.game.permanent.Permanent;
  *
  * @author LoneFox
  */
-public class DestroyAttachedEffect extends OneShotEffect {
+public class DestroyAttachedToEffect extends OneShotEffect {
 
     private final boolean noRegen;
 
-    public DestroyAttachedEffect(String description) {
+    public DestroyAttachedToEffect(String description) {
         this(description, false);
     }
 
-    public DestroyAttachedEffect(String description, boolean noRegen) {
+    public DestroyAttachedToEffect(String description, boolean noRegen) {
         super(Outcome.DestroyPermanent);
         this.noRegen = noRegen;
         this.staticText = "destroy " + description;
-        if(noRegen) {
+        if (noRegen) {
             this.staticText += ". It can't be regenerated";
         }
     }
 
-    public DestroyAttachedEffect(final DestroyAttachedEffect effect) {
+    public DestroyAttachedToEffect(final DestroyAttachedToEffect effect) {
         super(effect);
         this.noRegen = effect.noRegen;
     }
 
     @Override
-    public DestroyAttachedEffect copy() {
-        return new DestroyAttachedEffect(this);
+    public DestroyAttachedToEffect copy() {
+        return new DestroyAttachedToEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if(enchantment != null) {
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if(enchanted != null) {
-                return enchanted.destroy(source.getSourceId(), game, noRegen);
+        Permanent attachment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (attachment != null && attachment.getAttachedTo() != null) {
+            Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+            if (attachedTo != null) {
+                return attachedTo.destroy(source.getSourceId(), game, noRegen);
             }
         }
         return false;

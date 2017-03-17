@@ -79,10 +79,10 @@ public class SlingbowTrap extends CardImpl {
 
 class SlingbowTrapCondition implements Condition {
 
-    private static final SlingbowTrapCondition fInstance = new SlingbowTrapCondition();
+    private static final SlingbowTrapCondition instance = new SlingbowTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

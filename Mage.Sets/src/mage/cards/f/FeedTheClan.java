@@ -49,7 +49,7 @@ public class FeedTheClan extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(10),
                 new GainLifeEffect(5),
-                FerociousCondition.getInstance(),
+                FerociousCondition.instance,
                 "You gain 5 life. <br><i>Ferocious</i> &mdash; You gain 10 life instead if you control a creature with power 4 or greater"));
 
     }

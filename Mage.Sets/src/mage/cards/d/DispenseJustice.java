@@ -84,7 +84,7 @@ class DispenseJusticeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if ( MetalcraftCondition.getInstance().apply(game, source) ) {
+        if ( MetalcraftCondition.instance.apply(game, source) ) {
             return new SacrificeEffect(filter, 2, effectText).apply(game, source);
         }
         else {

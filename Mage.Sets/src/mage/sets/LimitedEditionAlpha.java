@@ -11,10 +11,10 @@ import mage.constants.SetType;
  */
 public class LimitedEditionAlpha extends ExpansionSet {
 
-    private static final LimitedEditionAlpha fINSTANCE = new LimitedEditionAlpha();
+    private static final LimitedEditionAlpha instance = new LimitedEditionAlpha();
 
     public static LimitedEditionAlpha getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private LimitedEditionAlpha() {

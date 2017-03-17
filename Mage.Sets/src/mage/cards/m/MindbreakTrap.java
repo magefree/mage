@@ -73,10 +73,10 @@ public class MindbreakTrap extends CardImpl {
 
 class MindbreakTrapCondition implements Condition {
 
-    private static final MindbreakTrapCondition fInstance = new MindbreakTrapCondition();
+    private static final MindbreakTrapCondition instance = new MindbreakTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

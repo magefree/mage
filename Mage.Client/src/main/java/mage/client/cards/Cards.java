@@ -98,7 +98,7 @@ public class Cards extends javax.swing.JPanel {
             jScrollPane1.getViewport().setOpaque(false);
             jScrollPane1.setBorder(EMPTY_BORDER);
         }
-        if (Plugins.getInstance().isCardPluginLoaded()) {
+        if (Plugins.instance.isCardPluginLoaded()) {
             cardArea.setLayout(null);
         }
         cardArea.setBorder(EMPTY_BORDER);
@@ -263,7 +263,7 @@ public class Cards extends javax.swing.JPanel {
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId) {
-        MageCard mageCard = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
+        MageCard mageCard = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
         if (zone != null) {
             mageCard.setZone(zone);
         }

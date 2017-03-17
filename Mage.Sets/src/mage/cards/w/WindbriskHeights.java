@@ -76,10 +76,10 @@ public class WindbriskHeights extends CardImpl {
 
 class WindbriskHeightsAttackersCondition implements Condition {
 
-    private static final WindbriskHeightsAttackersCondition fInstance = new WindbriskHeightsAttackersCondition();
+    private static final WindbriskHeightsAttackersCondition instance = new WindbriskHeightsAttackersCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

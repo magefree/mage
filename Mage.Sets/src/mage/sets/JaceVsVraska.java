@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class JaceVsVraska extends ExpansionSet {
-    private static final JaceVsVraska fINSTANCE = new JaceVsVraska();
+    private static final JaceVsVraska instance = new JaceVsVraska();
 
     public static JaceVsVraska getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private JaceVsVraska() {

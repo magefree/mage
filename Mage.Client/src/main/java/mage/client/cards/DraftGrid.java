@@ -127,7 +127,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
             List<CardView> sortedCards = new ArrayList<>(booster.values());
             sortedCards.sort(new CardViewRarityComparator());
             for (CardView card: sortedCards) {
-                MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, null, true, true);
+                MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, dimension, null, true, true);
                 cardImg.addMouseListener(this);
                 add(cardImg);
                 cardImg.update(card);
@@ -156,7 +156,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
     }
 
     private void hidePopup() {
-        Plugins.getInstance().getActionCallback().mouseExited(null, null);
+        Plugins.instance.getActionCallback().mouseExited(null, null);
     }
 
     /** This method is called from within the constructor to

@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Stronghold extends ExpansionSet {
 
-    private static final Stronghold fINSTANCE = new Stronghold();
+    private static final Stronghold instance = new Stronghold();
 
     public static Stronghold getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Stronghold() {

@@ -76,10 +76,10 @@ public class FeastOnTheFallen extends CardImpl {
 
 class FeastOnTheFallenCondition implements Condition {
 
-    private static final FeastOnTheFallenCondition fInstance = new FeastOnTheFallenCondition();
+    private static final FeastOnTheFallenCondition instance = new FeastOnTheFallenCondition();
 
     public static FeastOnTheFallenCondition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

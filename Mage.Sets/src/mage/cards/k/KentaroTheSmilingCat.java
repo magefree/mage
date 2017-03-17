@@ -94,7 +94,7 @@ class KentaroTheSmilingCatCastingEffect extends ContinuousEffectImpl {
 	}
 	
     static final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(
-    		SourceIsSpellCondition.getInstance(), null, filterSamurai, true, new ColorlessConvertedManaCost());
+    		SourceIsSpellCondition.instance, null, filterSamurai, true, new ColorlessConvertedManaCost());
 	
     public KentaroTheSmilingCatCastingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

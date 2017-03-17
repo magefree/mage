@@ -25,44 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.cards.r;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
+import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.SuspendAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.counters.CounterType;
+import mage.target.TargetPermanent;
 
 /**
- * Describes condition when equipped permanent has superType
  *
- * @author LevelX
+ * @author fireshoes
  */
-public class EquippedMatchesFilterCondition implements Condition {
+public class RealityStrobe extends CardImpl {
 
-    private final FilterPermanent filter;
+    public RealityStrobe(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
-    public EquippedMatchesFilterCondition(FilterPermanent filter) {
-        this.filter = filter;
+
+        // Return target permanent to its owner's hand.
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        // Exile Reality Strobe
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        // with three time counters on it.
+        Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), new StaticValue(3), false, true);
+        effect.setText("with 3 time counters on it");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetPermanent());
+        
+        // Suspend 3-{2}{U}
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{U}"), this));
+    }
+
+    public RealityStrobe(final RealityStrobe card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getAttachedTo() != null) {
-            Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
-            if (attachedTo == null) {
-                attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
-            }
-            if (attachedTo != null) {
-                if (filter.match(attachedTo, attachedTo.getId(),attachedTo.getControllerId(), game)) {
-                    return true;
-                }
-
-            }
-        }
-        return false;
+    public RealityStrobe copy() {
+        return new RealityStrobe(this);
     }
 }

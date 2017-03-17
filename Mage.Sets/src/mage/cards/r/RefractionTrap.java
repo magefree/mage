@@ -81,10 +81,10 @@ public class RefractionTrap extends CardImpl {
 
 class RefractionTrapCondition implements Condition {
 
-    private static final RefractionTrapCondition fInstance = new RefractionTrapCondition();
+    private static final RefractionTrapCondition instance = new RefractionTrapCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

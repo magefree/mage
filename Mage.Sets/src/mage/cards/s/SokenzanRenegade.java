@@ -131,12 +131,12 @@ class SokenzanRenegadeEffect extends OneShotEffect {
     }
 }
 
-class OnePlayerHasTheMostCards implements Condition {
+enum OnePlayerHasTheMostCards implements Condition {
 
-    private static final OnePlayerHasTheMostCards fInstance = new OnePlayerHasTheMostCards();
+    instance;
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

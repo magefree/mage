@@ -40,18 +40,9 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class KickedCondition implements Condition {
+public enum KickedCondition implements Condition {
 
-    private static KickedCondition fInstance = null;
-
-    private KickedCondition() {}
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new KickedCondition();
-        }
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -236,7 +236,7 @@ public class MageBook extends JComponent {
         if (cardDimension == null) {
             cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         }
-        final MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true, true);
+        final MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true);
         cardImg.setBounds(rectangle);
         jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
         cardImg.update(card);

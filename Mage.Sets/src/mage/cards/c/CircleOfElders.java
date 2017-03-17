@@ -63,7 +63,7 @@ public class CircleOfElders extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.ColorlessMana(3)),
                 new TapSourceCost(),
-                FormidableCondition.getInstance());
+                FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);
     }

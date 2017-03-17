@@ -32,9 +32,8 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,16 +41,14 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -60,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
 public class DeceiverOfForm extends CardImpl {
 
     public DeceiverOfForm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{C}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{C}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -101,91 +98,35 @@ class DeceiverOfFormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            Card card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                Cards cards = new CardsImpl(card);
+        if (controller != null
+                && sourceObject != null) {
+            Card copyFromCard = controller.getLibrary().getFromTop(game);
+            if (copyFromCard != null) {
+                Cards cards = new CardsImpl(copyFromCard);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                if (card.isCreature()) {
+                if (copyFromCard.isCreature()) {
                     if (controller.chooseUse(outcome, "Let creatures you control other than "
-                            + sourceObject.getLogName() + " becomes copies of " + card.getLogName() + " until end of turn?", source, game)) {
+                            + sourceObject.getLogName() + " becomes copies of " + copyFromCard.getLogName() + " until end of turn?", source, game)) {
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controller.getId(), game)) {
                             if (!permanent.getId().equals(sourceObject.getId())) {
-                                ContinuousEffect effect = new DeceiverOfFormCopyEffect(card);
-                                effect.setTargetPointer(new FixedTarget(permanent, game));
-                                game.addEffect(effect, source);
+                                Permanent newBluePrint = null;
+                                newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
+                                newBluePrint.assignNewId();
+                                CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, permanent.getId());
+                                copyEffect.newId();
+                                Ability newAbility = source.copy();
+                                copyEffect.init(newAbility, game);
+                                game.addEffect(copyEffect, newAbility);
                             }
                         }
                     }
                 }
-                if (controller.chooseUse(outcome, "Move " + card.getLogName() + " to the bottom of your library?", source, game)) {
-                    controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, true);
+                if (controller.chooseUse(outcome, "Move " + copyFromCard.getLogName() + " to the bottom of your library?", source, game)) {
+                    controller.moveCardToLibraryWithInfo(copyFromCard, source.getSourceId(), game, Zone.LIBRARY, false, true);
                 }
             }
             return true;
         }
         return false;
-    }
-}
-
-class DeceiverOfFormCopyEffect extends ContinuousEffectImpl {
-
-    private final Card card;
-
-    public DeceiverOfFormCopyEffect(Card card) {
-        super(Duration.EndOfTurn, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
-        this.card = card;
-        staticText = "becomes copies of that card until end of turn";
-    }
-
-    public DeceiverOfFormCopyEffect(final DeceiverOfFormCopyEffect effect) {
-        super(effect);
-        this.card = effect.card;
-    }
-
-    @Override
-    public DeceiverOfFormCopyEffect copy() {
-        return new DeceiverOfFormCopyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (card == null || permanent == null) {
-            discard();
-            return false;
-        }
-        permanent.setName(card.getName());
-        permanent.getPower().setValue(card.getPower().getValue());
-        permanent.getToughness().setValue(card.getToughness().getValue());
-        permanent.getColor(game).setColor(card.getColor(game));
-        permanent.getManaCost().clear();
-        permanent.getManaCost().add(card.getManaCost());
-        permanent.getCardType().clear();
-        for (CardType type : card.getCardType()) {
-            if (!permanent.getCardType().contains(type)) {
-                permanent.getCardType().add(type);
-            }
-        }
-        permanent.getSubtype(game).clear();
-        for (String type : card.getSubtype(game)) {
-            if (!permanent.getSubtype(game).contains(type)) {
-                permanent.getSubtype(game).add(type);
-            }
-        }
-        permanent.getSupertype().clear();
-        for (String type : card.getSupertype()) {
-            if (!permanent.getSupertype().contains(type)) {
-                permanent.getSupertype().add(type);
-            }
-        }
-        permanent.removeAllAbilities(source.getSourceId(), game);
-
-        for (Ability ability : card.getAbilities()) {
-            if (!permanent.getAbilities().contains(ability)) {
-                permanent.addAbility(ability, source.getSourceId(), game);
-            }
-        }
-        return true;
     }
 }

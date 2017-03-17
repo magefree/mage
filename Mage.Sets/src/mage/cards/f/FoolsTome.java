@@ -50,7 +50,7 @@ public class FoolsTome extends CardImpl {
 
         // {2}, {tap}: Draw a card. Activate this ability only if you have no cards in hand.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-            new ManaCostsImpl("{2}"), HellbentCondition.getInstance());
+            new ManaCostsImpl("{2}"), HellbentCondition.instance);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.effects.common.DestroyAttachedToEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -58,7 +58,7 @@ public class MireBlight extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // When enchanted creature is dealt damage, destroy it.
-        this.addAbility(new DealtDamageAttachedTriggeredAbility(new DestroyAttachedEffect("it"), false));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), false));
     }
 
     public MireBlight(final MireBlight card) {

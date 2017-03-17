@@ -48,7 +48,7 @@ public class SulfurousBlast extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageEverythingEffect(3),
                 new DamageEverythingEffect(2),
-                MyMainPhaseCondition.getInstance(),
+                MyMainPhaseCondition.instance,
                 "Sulfurous Blast deals 2 damage to each creature and each player. If you cast this spell during your main phase, Sulfurous Blast deals 3 damage to each creature and each player instead"));
     }
 

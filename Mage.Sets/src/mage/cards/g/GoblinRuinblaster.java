@@ -65,7 +65,7 @@ public class GoblinRuinblaster extends CardImpl {
         // When Goblin Ruinblaster enters the battlefield, if it was kicked, destroy target nonbasic land.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetNonBasicLandPermanent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target nonbasic land."));
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, destroy target nonbasic land."));
     }
 
     public GoblinRuinblaster(final GoblinRuinblaster card) {

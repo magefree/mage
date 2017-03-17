@@ -74,7 +74,7 @@ public class ClockworkAvian extends CardImpl {
         // At end of combat, if Clockwork Avian attacked or blocked this combat, remove a +1/+0 counter from it.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EndOfCombatTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P0.createInstance()), false),
-                new AttackedOrBlockedThisCombatSourceCondition(),
+                AttackedOrBlockedThisCombatSourceCondition.instance,
                 "At end of combat, if {this} attacked or blocked this combat, remove a +1/+0 counter from it."),
                 new AttackedOrBlockedThisCombatWatcher());
 

@@ -90,12 +90,12 @@ public class MightMakesRight extends CardImpl {
 
 class ControlsEachCreatureWithGreatestPowerCondition implements Condition {
 
-    private static final ControlsEachCreatureWithGreatestPowerCondition fInstance = new ControlsEachCreatureWithGreatestPowerCondition();
+    private static final ControlsEachCreatureWithGreatestPowerCondition instance = new ControlsEachCreatureWithGreatestPowerCondition();
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
     
     @Override

@@ -24,10 +24,10 @@ import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
 
 public class Alliances extends ExpansionSet {
-    private static final Alliances fINSTANCE = new Alliances();
+    private static final Alliances instance = new Alliances();
 
     public static Alliances getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Alliances() {

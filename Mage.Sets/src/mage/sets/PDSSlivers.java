@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  * @author fireshoes
  */
 public class PDSSlivers extends ExpansionSet {
-    private static final PDSSlivers fINSTANCE = new PDSSlivers();
+    private static final PDSSlivers instance = new PDSSlivers();
 
     public static PDSSlivers getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PDSSlivers() {

@@ -62,7 +62,7 @@ public class StrengthOfNight extends CardImpl {
         // Creatures you control get +1/+1 until end of turn. If Strength of Night was kicked, Zombie creatures you control get an additional +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         ContinuousEffect effect = new BoostControlledEffect(2, 2, Duration.EndOfTurn, filter);
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(effect, new LockedInCondition(KickedCondition.getInstance()),
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(effect, new LockedInCondition(KickedCondition.instance),
             "If {this} was kicked, Zombie creatures you control get an additional +2/+2 until end of turn."));
     }
 

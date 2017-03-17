@@ -64,7 +64,7 @@ public class SavagePunch extends CardImpl {
         // <i>Ferocious</i> - The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater.
         Effect effect = new ConditionalContinuousEffect(
                 new BoostTargetEffect(2,2,Duration.EndOfTurn),
-                new LockedInCondition(FerociousCondition.getInstance()),
+                new LockedInCondition(FerociousCondition.instance),
                 "<i>Ferocious</i> &mdash; The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater");
         effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);

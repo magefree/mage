@@ -21,14 +21,14 @@ import mage.game.stack.Spell;
  */
 public class ColorsOfManaSpentToCastCount implements DynamicValue {
 
-    private static final ColorsOfManaSpentToCastCount fINSTANCE = new ColorsOfManaSpentToCastCount();
+    private static final ColorsOfManaSpentToCastCount instance = new ColorsOfManaSpentToCastCount();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static ColorsOfManaSpentToCastCount getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override

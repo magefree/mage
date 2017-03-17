@@ -66,7 +66,7 @@ public class MagmaBurst extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if(ability.getOriginalId().equals(originalId)) {
-             ability.addTarget(new TargetCreatureOrPlayer(KickedCondition.getInstance().apply(game, ability) ? 2 : 1));
+             ability.addTarget(new TargetCreatureOrPlayer(KickedCondition.instance.apply(game, ability) ? 2 : 1));
         }
     }
 

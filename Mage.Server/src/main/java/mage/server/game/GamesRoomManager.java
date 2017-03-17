@@ -32,22 +32,16 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class GamesRoomManager {
-
-    private static final GamesRoomManager INSTANCE = new GamesRoomManager();
-//    private static final Logger logger = Logger.getLogger(GamesRoomManager.class);
+public enum GamesRoomManager {
+    instance;
 
     private final ConcurrentHashMap<UUID, GamesRoom> rooms = new ConcurrentHashMap<>();
     private final UUID mainRoomId;
 
-    public static GamesRoomManager getInstance() {
-        return INSTANCE;
-    }
 
-    private GamesRoomManager() {
+    GamesRoomManager() {
         GamesRoom mainRoom = new GamesRoomImpl();
         mainRoomId = mainRoom.getRoomId();
         rooms.put(mainRoomId, mainRoom);
@@ -68,7 +62,7 @@ public class GamesRoomManager {
     }
 
     public void removeTable(UUID tableId) {
-        for (GamesRoom room: rooms.values()) {
+        for (GamesRoom room : rooms.values()) {
             room.removeTable(tableId);
         }
     }

@@ -79,10 +79,10 @@ public class FairgroundsTrumpeter extends CardImpl {
 
 class FairgroundsTrumpeterCondition implements Condition {
 
-    private static final FairgroundsTrumpeterCondition fInstance = new FairgroundsTrumpeterCondition();
+    private static final FairgroundsTrumpeterCondition instance = new FairgroundsTrumpeterCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return instance;
     }
 
     @Override

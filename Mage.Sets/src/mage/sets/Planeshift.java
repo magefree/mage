@@ -41,10 +41,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Planeshift extends ExpansionSet {
 
-    private static final Planeshift fINSTANCE = new Planeshift();
+    private static final Planeshift instance = new Planeshift();
 
     public static Planeshift getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Planeshift() {

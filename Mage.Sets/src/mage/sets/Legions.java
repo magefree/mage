@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Legions extends ExpansionSet {
 
-    private static final Legions fINSTANCE = new Legions();
+    private static final Legions instance = new Legions();
 
     public static Legions getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Legions() {

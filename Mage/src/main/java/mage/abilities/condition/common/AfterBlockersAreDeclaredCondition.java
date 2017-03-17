@@ -16,13 +16,9 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class AfterBlockersAreDeclaredCondition implements Condition {
+public enum AfterBlockersAreDeclaredCondition implements Condition {
 
-    private static final AfterBlockersAreDeclaredCondition fInstance = new AfterBlockersAreDeclaredCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

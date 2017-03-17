@@ -41,16 +41,16 @@ import mage.players.Player;
  */
 public class CommanderInPlayCondition implements Condition {
 
-    private static CommanderInPlayCondition fInstance = null;
+    private static CommanderInPlayCondition instance = null;
 
     private CommanderInPlayCondition() {
     }
 
     public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new CommanderInPlayCondition();
+        if (instance == null) {
+            instance = new CommanderInPlayCondition();
         }
-        return fInstance;
+        return instance;
     }
 
     @Override

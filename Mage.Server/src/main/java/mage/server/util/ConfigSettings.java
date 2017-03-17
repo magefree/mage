@@ -33,27 +33,23 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+
 import mage.server.util.config.Config;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class ConfigSettings {
-
-    private static final Logger logger = Logger.getLogger(ConfigSettings.class);
-    private static final ConfigSettings INSTANCE = new ConfigSettings();
+public enum ConfigSettings {
+    instance;
+    private final Logger logger = Logger.getLogger(ConfigSettings.class);
 
     private Config config;
 
-    public static ConfigSettings getInstance() {
-        return INSTANCE;
-    }
 
-    private ConfigSettings() {
+    ConfigSettings() {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance("mage.server.util.config");
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();

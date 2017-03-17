@@ -62,7 +62,7 @@ public class DeathcapCultivator extends CardImpl {
         // <i>Delirium</i> &mdash; Deathcap Cultivator has deathtouch as long as there are four or more card types among cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield),
-                new DeliriumCondition(), "<i>Delirium</i> &mdash; {this} has deathtouch as long as there are four or more card types among cards in your graveyard")));
+                DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} has deathtouch as long as there are four or more card types among cards in your graveyard")));
     }
 
     public DeathcapCultivator(final DeathcapCultivator card) {

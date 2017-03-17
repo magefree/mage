@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class Magic2010 extends ExpansionSet {
 
-    private static final Magic2010 fINSTANCE = new Magic2010();
+    private static final Magic2010 instance = new Magic2010();
 
     public static Magic2010 getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Magic2010() {

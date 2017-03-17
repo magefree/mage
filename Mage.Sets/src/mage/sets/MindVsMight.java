@@ -7,6 +7,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -15,15 +16,18 @@ import mage.constants.SetType;
  */
 
 public class MindVsMight extends ExpansionSet {
-    private static final MindVsMight fINSTANCE = new MindVsMight();
+    private static final MindVsMight instance = new MindVsMight();
 
     public static MindVsMight getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MindVsMight() {
         super("Duel Decks: Mind vs. Might", "DDS", ExpansionSet.buildDate(2017, 3, 31), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
+
+        cards.add(new SetCardInfo("Jhoira of the Ghitu", 1, Rarity.MYTHIC, mage.cards.j.JhoiraOfTheGhitu.class));
+        cards.add(new SetCardInfo("Lovisa Coldeyes", 34, Rarity.MYTHIC, mage.cards.l.LovisaColdeyes.class));
     }
 }

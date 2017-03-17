@@ -42,10 +42,10 @@ import mage.players.Player;
  */
 public class ShuffleSpellEffect extends OneShotEffect implements MageSingleton {
 
-    private static final ShuffleSpellEffect fINSTANCE = new ShuffleSpellEffect();
+    private static final ShuffleSpellEffect instance = new ShuffleSpellEffect();
 
     public static ShuffleSpellEffect getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ShuffleSpellEffect() {
@@ -75,6 +75,6 @@ public class ShuffleSpellEffect extends OneShotEffect implements MageSingleton {
 
     @Override
     public ShuffleSpellEffect copy() {
-        return fINSTANCE;
+        return instance;
     }
 }

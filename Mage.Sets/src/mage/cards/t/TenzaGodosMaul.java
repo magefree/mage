@@ -36,7 +36,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.EquippedMatchesFilterCondition;
+import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -79,11 +79,11 @@ public class TenzaGodosMaul extends CardImpl {
         // As long as it's legendary, it gets an additional +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostEquippedEffect(2, 2), 
-                new EquippedMatchesFilterCondition(legendaryFilter), rule1)));
+                new AttachedToMatchesFilterCondition(legendaryFilter), rule1)));
         // As long as it's red, it has trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT),
-                new EquippedMatchesFilterCondition(redFilter), rule2)));
+                new AttachedToMatchesFilterCondition(redFilter), rule2)));
         // Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetControlledCreaturePermanent()));
 

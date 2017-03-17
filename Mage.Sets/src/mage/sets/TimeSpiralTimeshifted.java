@@ -39,10 +39,10 @@ import mage.constants.Rarity;
  */
 public class TimeSpiralTimeshifted extends ExpansionSet {
 
-    private static final TimeSpiralTimeshifted fINSTANCE = new TimeSpiralTimeshifted();
+    private static final TimeSpiralTimeshifted instance = new TimeSpiralTimeshifted();
 
     public static TimeSpiralTimeshifted getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private TimeSpiralTimeshifted() {

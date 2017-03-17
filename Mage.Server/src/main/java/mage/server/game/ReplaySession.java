@@ -51,7 +51,7 @@ public class ReplaySession implements GameCallback {
 
     public void replay() {
         replay.start();
-        UserManager.getInstance().getUser(userId).ifPresent(user ->
+        UserManager.instance.getUser(userId).ifPresent(user ->
                 user.fireCallback(new ClientCallback("replayInit", replay.getGame().getId(), new GameView(replay.next(), replay.getGame(), null, null))));
 
     }
@@ -77,17 +77,17 @@ public class ReplaySession implements GameCallback {
 
     @Override
     public void gameResult(final String result) {
-        UserManager.getInstance().getUser(userId).ifPresent(user ->
+        UserManager.instance.getUser(userId).ifPresent(user ->
                 user.fireCallback(new ClientCallback("replayDone", replay.getGame().getId(), result)));
 
-        ReplayManager.getInstance().endReplay(replay.getGame().getId(), userId);
+        ReplayManager.instance.endReplay(replay.getGame().getId(), userId);
     }
 
     private void updateGame(final GameState state, Game game) {
         if (state == null) {
             gameResult("game ended");
         } else {
-            UserManager.getInstance().getUser(userId).ifPresent(user ->
+            UserManager.instance.getUser(userId).ifPresent(user ->
                     user.fireCallback(new ClientCallback("replayUpdate", replay.getGame().getId(), new GameView(state, game, null, null))));
 
         }

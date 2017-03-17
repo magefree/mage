@@ -53,7 +53,7 @@ public class TragicSlip extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(-13, -13, Duration.EndOfTurn),
                 new BoostTargetEffect(-1, -1, Duration.EndOfTurn),
-                new LockedInCondition(MorbidCondition.getInstance()),
+                new LockedInCondition(MorbidCondition.instance),
                 "Target creature gets -1/-1 until end of turn. Morbid - That creature gets -13/-13 until end of turn instead if a creature died this turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

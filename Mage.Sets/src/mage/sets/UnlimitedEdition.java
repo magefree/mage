@@ -11,10 +11,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class UnlimitedEdition extends ExpansionSet {
 
-    private static final UnlimitedEdition fINSTANCE = new UnlimitedEdition();
+    private static final UnlimitedEdition instance = new UnlimitedEdition();
 
     public static UnlimitedEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private UnlimitedEdition() {

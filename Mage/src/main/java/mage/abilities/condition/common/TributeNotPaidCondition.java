@@ -36,19 +36,9 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class TributeNotPaidCondition implements Condition {
+public enum TributeNotPaidCondition implements Condition {
 
-    private static TributeNotPaidCondition fInstance = null;
-
-    private TributeNotPaidCondition() {
-    }
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new TributeNotPaidCondition();
-        }
-        return fInstance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

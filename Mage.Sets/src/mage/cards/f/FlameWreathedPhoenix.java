@@ -66,7 +66,7 @@ public class FlameWreathedPhoenix extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
         Effect effect = new GainAbilitySourceEffect(new DiesTriggeredAbility(new ReturnToHandSourceEffect()));
         ability.addEffect(effect);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(), 
+        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, it gains haste and \"When this creature dies, return it to its owner's hand.\""));
 
     }

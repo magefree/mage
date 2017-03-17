@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class FTVLore extends ExpansionSet {
 
-    private static final FTVLore fINSTANCE = new FTVLore();
+    private static final FTVLore instance = new FTVLore();
 
     public static FTVLore getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FTVLore() {

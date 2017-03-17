@@ -99,7 +99,7 @@ class WarbringerSpellsCostReductionEffect extends CostModificationEffectImpl {
             if (abilityToModify.getControllerId().equals(source.getControllerId())) {
                 Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
                 if (spell != null) {
-                    return DashedCondition.getInstance().apply(game, abilityToModify);
+                    return DashedCondition.instance.apply(game, abilityToModify);
                 }
             }
         }

@@ -27,8 +27,10 @@
  */
 package mage.cards.t;
 
+import java.util.Iterator;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -62,7 +64,7 @@ import mage.players.Player;
 public class Terraformer extends CardImpl {
 
     public Terraformer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);
@@ -83,21 +85,21 @@ public class Terraformer extends CardImpl {
 }
 
 class TerraformerEffect extends OneShotEffect {
-    
+
     TerraformerEffect() {
         super(Outcome.Neutral);
         this.staticText = "Choose a basic land type. Each land you control becomes that type until end of turn";
     }
-    
+
     TerraformerEffect(final TerraformerEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public TerraformerEffect copy() {
         return new TerraformerEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -131,10 +133,21 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                affectedObjectList.add(new MageObjectReference(permanent, game));
+            }
+        }
+    }
+
+    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_Terraformer");
         if (choice != null) {
-            for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+                Permanent land = it.next().getPermanent(game);
                 if (land != null) {
                     switch (layer) {
                         case TypeChangingEffects_4:
@@ -164,13 +177,15 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
                             }
                             break;
                     }
+                } else {
+                    it.remove();
                 }
             }
             return true;
         }
         return false;
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return false;

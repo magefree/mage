@@ -68,7 +68,7 @@ public class KuldothaPhoenix extends CardImpl {
                 new ReturnSourceFromGraveyardToBattlefieldEffect(), 
                 new ManaCostsImpl("{4}"), 
                 new CompoundCondition("during your upkeep and only if you control three or more artifacts",
-                        new IsStepCondition(PhaseStep.UPKEEP), new MetalcraftCondition())
+                        new IsStepCondition(PhaseStep.UPKEEP), MetalcraftCondition.instance)
         );
         ability.setAbilityWord(AbilityWord.METALCRAFT);
         this.addAbility(ability);
