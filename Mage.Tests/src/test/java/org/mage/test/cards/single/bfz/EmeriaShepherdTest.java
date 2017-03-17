@@ -16,7 +16,6 @@ public class EmeriaShepherdTest extends CardTestPlayerBase {
     @Test
     public void emeriaInteractionWithBruna()
     {
-
         /*
          *
          * Emeria Shepherd (5)(W)(W)
@@ -33,7 +32,7 @@ public class EmeriaShepherdTest extends CardTestPlayerBase {
             Flying, vigilance
             (Melds with Gisela, the Broken Blade.)
          */
-        String bruna = "Bruna, The Fading Light";
+        String bruna = "Bruna, the Fading Light";
 
         addCard(Zone.BATTLEFIELD, playerA, emeria);
         addCard(Zone.HAND, playerA, "Plains");
@@ -49,6 +48,7 @@ public class EmeriaShepherdTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Plains", 0);
         assertGraveyardCount(playerA, bruna, 0);
-        assertHandCount(playerA, bruna, 1);
+        assertHandCount(playerA, bruna, 0);
+        assertPermanentCount(playerA, bruna, 1);
     }
 }
