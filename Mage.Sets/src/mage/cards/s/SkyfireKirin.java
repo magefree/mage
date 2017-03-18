@@ -41,9 +41,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -86,6 +88,7 @@ public class SkyfireKirin extends CardImpl {
                 int cmc = spell.getConvertedManaCost();
                 ability.getTargets().clear();
                 FilterPermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with converted mana costs of ").append(cmc).toString());
+                filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
                 Target target = new TargetPermanent(filter);
                 ability.addTarget(target);
             }
