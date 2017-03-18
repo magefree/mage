@@ -37,7 +37,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author jeffwadsworth
  */
-public class WatcherInTheWebMultipleBlocks extends CardTestPlayerBase {
+public class CanBlockMultipleCreatures extends CardTestPlayerBase {
 
     // test must be ignored until creature blocking multiple supported by test framework
     @Ignore
@@ -73,5 +73,47 @@ public class WatcherInTheWebMultipleBlocks extends CardTestPlayerBase {
         assertLife(playerA, 19);
 
     }
-
+    
+    /*
+     * Reported bug: Night Market Guard was able to block a creature with Menace
+    */
+    @Test
+    public void testNightMarketGuardShouldNotBlockCreatureWithMenace()
+    {
+        /*
+        Night Market Guard {3} 3/1
+    Artifact Creature — Construct
+    Night Market Guard can block an additional creature each combat.
+        */
+        String nMarketGuard = "Night Market Guard";
+        
+        /*
+        Embraal Bruiser {1}{B}
+        Creature - Human Warrior
+    Embraal Bruiser enters the battlefield tapped.
+    Embraal Bruiser has menace as long as you control an artifact.
+        */
+        String eBruiser = "Embraal Bruiser";
+        
+        /* 
+        {0} 1/1
+         * Artifact Creature — Construct
+        */
+        String memnite = "Memnite";
+        
+        addCard(Zone.BATTLEFIELD, playerA, nMarketGuard);
+        addCard(Zone.BATTLEFIELD, playerB, eBruiser);
+        addCard(Zone.BATTLEFIELD, playerB, memnite); // only here to grant Embraal Menace
+        
+        attack(4, playerB, eBruiser);
+        block(4, playerA, nMarketGuard, eBruiser);
+        
+        setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertTapped(eBruiser, true);        
+        assertLife(playerA, 17); // could not block, so 3 damage goes through
+        assertPermanentCount(playerA, nMarketGuard, 1);
+        assertPermanentCount(playerB, eBruiser, 1);               
+    }
 }

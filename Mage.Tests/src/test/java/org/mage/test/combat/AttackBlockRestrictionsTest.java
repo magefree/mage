@@ -355,7 +355,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, flunkies);
         addCard(Zone.BATTLEFIELD, playerB, gAssault);
         
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         
         assertTapped(flunkies, false);
