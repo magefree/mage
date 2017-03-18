@@ -332,4 +332,33 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Storm Crow", 0);
     }
 
+    /*
+     * Mogg Flunkies cannot attack alone. Cards like Goblin Assault force all goblins to attack each turn.
+     * Mogg Flunkies should not be able to attack.
+    */
+    @Test
+    public void testMustAttackButCannotAttackAlone()
+    {        
+        /* Mogg Flunkies {1}{R} 3/3
+         Creature — Goblin
+            Mogg Flunkies can't attack or block alone.
+        */
+        String flunkies = "Mogg Flunkies";
+        
+        /* Goblin Assault {2}{R}
+         * Enchantment 
+            At the beginning of your upkeep, create a 1/1 red Goblin creature token with haste.
+            Goblin creatures attack each turn if able.
+        */
+        String gAssault = "Goblin Assault";
+        
+        addCard(Zone.BATTLEFIELD, playerA, flunkies);
+        addCard(Zone.BATTLEFIELD, playerB, gAssault);
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertTapped(flunkies, false);
+        assertLife(playerB, 20);
+    }
 }
