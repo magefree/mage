@@ -103,11 +103,10 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         // under control of Shackles even if it's no longer a creature
         assertPermanentCount(playerB, "Mutavault", 0);
         assertPermanentCount(playerA, "Mutavault", 1);
-
     }
     
     /**
-     * Steel Golem, once Donate'd to another player does not disable their ability to play creature cards.
+     * Steel Golem, once donated to another player does not disable their ability to play creature cards.
      */
     @Test
     public void testDonateSteelGolem() {
@@ -134,7 +133,99 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Steel Golem", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 0);
         assertHandCount(playerB, "Silvercoat Lion", 1);
-
     }
-
+    
+    /*
+     Reported bug: Skyfire Kirin was allowed to steal a creature with a different CMC
+    than the card cast for it. Played a 5 CMC creature and stole a 3 CMC creature.
+    */
+    @Test
+    public void testSkyfireKirinStealCreatureDifferentCMC()
+    {
+        /*
+        Skyfire Kirin {2}{R}{R}
+        Legendary Creature - Kirin Spirit 3/3
+        Flying
+        Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.
+        */
+        String sKirin = "Skyfire Kirin";
+        
+        /*
+        Ore Gorger {3}{R}{R}
+        Creature — Spirit 3/1
+        Whenever you cast a Spirit or Arcane spell, you may destroy target nonbasic land.
+        */
+        String oGorger = "Ore Gorger"; 
+        
+        /*
+        Leovold, Emissary of Trest {B}{G}{U}
+         Legendary Creature — Elf Advisor 3/3
+        Each opponent can't draw more than one card each turn.
+        Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
+        */
+        String leovold = "Leovold, Emissary of Trest";
+        
+        addCard(Zone.BATTLEFIELD, playerA, sKirin);
+        addCard(Zone.HAND, playerA, oGorger);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerB, leovold);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, oGorger);
+        setChoice(playerA, "Yes"); // opt to use Kirin's ability
+        addTarget(playerA, leovold); // attempt to target Leovold with Kirin's take control ability
+        setChoice(playerB, "Yes"); // opt to use Leovold's ability to draw a card when targetted (should not occur)
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertPermanentCount(playerA, oGorger, 1);
+        assertPermanentCount(playerA, leovold, 0); // should not have gained control
+        assertPermanentCount(playerB, leovold, 1); // still under playerB control
+        assertHandCount(playerB, 0); // leovold ability should not have triggered due to not targetted, so no extra cards
+    }
+    
+        /*
+     Skyfire Kirin should steal be able to steal creatures with same CMC.
+    */
+    @Test
+    public void testSkyfireKirinStealCreatureSameCMC()
+    {
+        /*
+        Skyfire Kirin {2}{R}{R}
+        Legendary Creature - Kirin Spirit 3/3
+        Flying
+        Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.
+        */
+        String sKirin = "Skyfire Kirin";
+        
+        /*
+        Ore Gorger {3}{R}{R}
+        Creature — Spirit 3/1
+        Whenever you cast a Spirit or Arcane spell, you may destroy target nonbasic land.
+        */
+        String oGorger = "Ore Gorger"; 
+        
+        /*
+         Angel of Light {4}{W}
+        Creature — Angel (3/3)
+         Flying, vigilance
+        */
+        String aLight = "Angel of Light"; // 5 cmc creature, so valid to steal with Ore Gorger
+        
+        addCard(Zone.BATTLEFIELD, playerA, sKirin);
+        addCard(Zone.HAND, playerA, oGorger);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerB, aLight);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, oGorger);
+        setChoice(playerA, "Yes"); // opt to use Kirin's ability
+        addTarget(playerA, aLight); // target Angel of Light with Kirin's take control ability
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertPermanentCount(playerA, oGorger, 1);
+        assertPermanentCount(playerA, aLight, 1); // should have gained control of Angel
+        assertPermanentCount(playerB, aLight, 0); // Angel no longer under opponent's control
+    }
 }
