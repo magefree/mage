@@ -31,6 +31,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.cards.Card;
 import mage.choices.ChoiceImpl;
@@ -85,6 +86,12 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         if (upTo) {
+            if (abilityToModify instanceof ActivatedAbility) {
+                if (((ActivatedAbility) abilityToModify).isCheckPlayableMode()) {
+                    CardUtil.reduceCost(abilityToModify, this.amount);
+                    return true;
+                }
+            }
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
             int reduceMax = mana.getGeneric();
             if (reduceMax > 2) {
