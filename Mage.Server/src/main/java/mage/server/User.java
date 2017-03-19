@@ -27,14 +27,8 @@
  */
 package mage.server;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
@@ -246,10 +240,9 @@ public class User {
 
     public void fireCallback(final ClientCallback call) {
         if (isConnected()) {
-            Session session = SessionManager.instance.getSession(sessionId);
-            if (session != null) {
-                session.fireCallback(call);
-            }
+            SessionManager.instance.getSession(sessionId).ifPresent(session ->
+                session.fireCallback(call)
+            );
         }
     }
 
@@ -378,8 +371,13 @@ public class User {
             entry.getValue().construct(0); // TODO: Check if this is correct
         }
         for (Entry<UUID, Deck> entry : sideboarding.entrySet()) {
-            TableController controller = TableManager.instance.getController(entry.getKey());
-            ccSideboard(entry.getValue(), entry.getKey(), controller.getRemainingTime(), controller.getOptions().isLimited());
+            Optional<TableController> controller = TableManager.instance.getController(entry.getKey());
+            if(controller.isPresent()) {
+                ccSideboard(entry.getValue(), entry.getKey(), controller.get().getRemainingTime(), controller.get().getOptions().isLimited());
+            }
+            else{
+                logger.error("sideboarding id not found : "+entry.getKey());
+            }
         }
         ServerMessagesUtil.instance.incReconnects();
         logger.trace(userName + " ended reconnect");
@@ -784,8 +782,11 @@ public class User {
             if (table.getState() == TableState.FINISHED) {
                 number++;
             } else {
-                TableController tableController = TableManager.instance.getController(table.getId());
-                if (tableController != null && tableController.isUserStillActive(userId)) {
+                Optional<TableController> tableController = TableManager.instance.getController(table.getId());
+                if(!tableController.isPresent()){
+                    logger.error("table not found : "+table.getId());
+                }
+                else if (tableController.get().isUserStillActive(userId)) {
                     number++;
                 }
             }

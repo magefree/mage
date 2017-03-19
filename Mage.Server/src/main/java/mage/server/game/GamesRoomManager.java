@@ -28,6 +28,7 @@
 
 package mage.server.game;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -57,8 +58,12 @@ public enum GamesRoomManager {
         return mainRoomId;
     }
 
-    public GamesRoom getRoom(UUID roomId) {
-        return rooms.get(roomId);
+    public Optional<GamesRoom> getRoom(UUID roomId) {
+        if(rooms.containsKey(roomId)) {
+            return Optional.of(rooms.get(roomId));
+        }
+        return Optional.empty();
+
     }
 
     public void removeTable(UUID tableId) {

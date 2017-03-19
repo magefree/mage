@@ -49,15 +49,15 @@ public enum SessionManager {
 
     private final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
-    public Session getSession(@Nonnull String sessionId) {
+    public Optional<Session> getSession(@Nonnull String sessionId) {
         Session session = sessions.get(sessionId);
         if (session != null && session.getUserId() != null && UserManager.instance.getUser(session.getUserId()) == null) {
             logger.error("User for session " + sessionId + " with userId " + session.getUserId() + " is missing. Session removed.");
             // can happen if user from same host signs in multiple time with multiple clients, after he disconnects with one client
             disconnect(sessionId, DisconnectReason.ConnectingOtherInstance);
-            return null;
+            return Optional.empty();
         }
-        return session;
+        return Optional.of(session);
     }
 
     public void createSession(String sessionId, InvokerCallbackHandler callbackHandler) {
@@ -168,26 +168,26 @@ public enum SessionManager {
      */
     public void disconnectUser(String sessionId, String userSessionId) {
         if (isAdmin(sessionId)) {
-            User userAdmin;
-            if ((userAdmin = getUserFromSession(sessionId)) != null) {
-                User user;
-                if ((user = getUserFromSession(userSessionId)) != null) {
+            getUserFromSession(sessionId).ifPresent(admin -> {
+               Optional<User> u = getUserFromSession(userSessionId);
+                if (u.isPresent()) {
+                    User user = u.get();
                     user.showUserMessage("Admin operation", "Your session was disconnected by Admin.");
-                    userAdmin.showUserMessage("Admin action", "User" + user.getName() + " was disconnected.");
+                    admin.showUserMessage("Admin action", "User" + user.getName() + " was disconnected.");
                     disconnect(userSessionId, DisconnectReason.AdminDisconnect);
                 } else {
-                    userAdmin.showUserMessage("Admin operation", "User with sessionId " + userSessionId + " could not be found!");
+                    admin.showUserMessage("Admin operation", "User with sessionId " + userSessionId + " could not be found!");
                 }
-            }
+            });
         }
     }
 
-    private User getUserFromSession(String sessionId) {
-        Session session = getSession(sessionId);
-        if (session == null) {
-            return null;
+    private Optional<User> getUserFromSession(String sessionId) {
+        Optional<Session> session = getSession(sessionId);
+        if (!session.isPresent()) {
+            return Optional.empty();
         }
-        return UserManager.instance.getUser(session.getUserId()).get();
+        return UserManager.instance.getUser(session.get().getUserId());
     }
 
     public void endUserSession(String sessionId, String userSessionId) {

@@ -28,6 +28,7 @@
 
 package mage.server.draft;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -87,12 +88,7 @@ public enum DraftManager {
         return draftControllers.get(draftId);
     }
 
-    public DraftController getController(UUID tableId) {
-        for (DraftController controller: draftControllers.values()) {
-            if (controller.getTableId().equals(tableId)) {
-                return controller;
-            }
-        }
-        return null;
+    public Optional<DraftController> getController(UUID tableId) {
+        return draftControllers.values().stream().filter(controller -> controller.getTableId().equals(tableId)).findFirst();
     }
 }

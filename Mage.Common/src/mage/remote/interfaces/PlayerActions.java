@@ -34,6 +34,7 @@ import mage.remote.MageRemoteException;
 import mage.view.TableView;
 import mage.view.TournamentView;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -71,7 +72,7 @@ public interface PlayerActions {
 
     boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password);
 
-    TableView getTable(UUID roomId, UUID tableId);
+    Optional<TableView> getTable(UUID roomId, UUID tableId);
 
     TournamentView getTournament(UUID tournamentId) throws MageRemoteException;
 

@@ -30,6 +30,7 @@ package mage.server.draft;
 
 import java.io.File;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -129,11 +130,11 @@ public class DraftController {
         checkStart();
     }
 
-    public DraftSession getDraftSession(UUID playerId) {
+    public Optional<DraftSession> getDraftSession(UUID playerId) {
         if (draftSessions.containsKey(playerId)) {
-            return draftSessions.get(playerId);
+            return Optional.of(draftSessions.get(playerId));
         }
-        return null;
+        return Optional.empty();
     }
 
     public boolean replacePlayer(Player oldPlayer, Player newPlayer) {

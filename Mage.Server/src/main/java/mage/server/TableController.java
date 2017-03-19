@@ -242,7 +242,7 @@ public class TableController {
         newTournamentPlayer.setState(oldTournamentPlayer.getState());
         newTournamentPlayer.setReplacedTournamentPlayer(oldTournamentPlayer);
 
-        DraftManager.instance.getController(table.getId()).replacePlayer(oldPlayer, newPlayer);
+        DraftManager.instance.getController(table.getId()).ifPresent(controller -> controller.replacePlayer(oldPlayer, newPlayer));
         return true;
     }
 
@@ -307,29 +307,29 @@ public class TableController {
                 user.showUserMessage("Join Table", message);
                 return false;
             }
-            
+
             boolean restrictedColor = false;
             String badColor = "";
             int colorVal = edhPowerLevel % 10;
             if (colorVal == 6 && deckEdhPowerLevel >= 10000000) {
                 restrictedColor = true;
-                badColor = "white";                
+                badColor = "white";
             }
             if (colorVal == 4 && deckEdhPowerLevel % 10000000 >= 1000000) {
                 restrictedColor = true;
-                badColor = "blue";                
+                badColor = "blue";
             }
             if (colorVal == 3 && deckEdhPowerLevel % 1000000 >= 100000) {
                 restrictedColor = true;
-                badColor = "black";                
+                badColor = "black";
             }
             if (colorVal == 2 && deckEdhPowerLevel % 100000 >= 10000) {
                 restrictedColor = true;
-                badColor = "red";                
+                badColor = "red";
             }
             if (colorVal == 1 && deckEdhPowerLevel % 10000 >= 1000) {
                 restrictedColor = true;
-                badColor = "green";                
+                badColor = "green";
             }
             if (restrictedColor) {
                 String message = new StringBuilder("Your deck contains ")

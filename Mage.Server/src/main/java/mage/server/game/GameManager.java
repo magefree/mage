@@ -28,6 +28,7 @@
 
 package mage.server.game;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.DeckCardLists;
@@ -59,12 +60,12 @@ public enum GameManager {
         }
     }
 
-    public UUID getChatId(UUID gameId) {
+    public Optional<UUID> getChatId(UUID gameId) {
         GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {
-            return gameController.getChatId();
+            return Optional.of(gameController.getChatId());
         }
-        return null;
+        return Optional.empty();
     }
 
     public void sendPlayerUUID(UUID gameId, UUID userId, UUID data) {

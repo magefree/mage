@@ -49,6 +49,7 @@ import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
+import mage.game.tournament.TournamentPlayer;
 import mage.players.Player;
 import mage.server.game.GameController;
 import mage.server.game.GameManager;
@@ -114,19 +115,22 @@ public enum TableManager {
         return tables.get(tableId);
     }
 
-    public Match getMatch(UUID tableId) {
+    public Optional<Match> getMatch(UUID tableId) {
         if (controllers.containsKey(tableId)) {
-            return controllers.get(tableId).getMatch();
+            return Optional.of(controllers.get(tableId).getMatch());
         }
-        return null;
+        return Optional.empty();
     }
 
     public Collection<Table> getTables() {
         return tables.values();
     }
 
-    public TableController getController(UUID tableId) {
-        return controllers.get(tableId);
+    public Optional<TableController> getController(UUID tableId) {
+        if (controllers.containsKey(tableId)) {
+            return Optional.of(controllers.get(tableId));
+        }
+        return Optional.empty();
     }
 
     public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException {
@@ -214,11 +218,11 @@ public enum TableManager {
         }
     }
 
-    public UUID getChatId(UUID tableId) {
+    public Optional<UUID> getChatId(UUID tableId) {
         if (controllers.containsKey(tableId)) {
-            return controllers.get(tableId).getChatId();
+            return Optional.of(controllers.get(tableId).getChatId());
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
@@ -313,9 +317,9 @@ public enum TableManager {
         }
     }
 
-    public void addPlayer(UUID userId, UUID tableId, Player player, String playerType, Deck deck) throws GameException {
+    public void addPlayer(UUID userId, UUID tableId, TournamentPlayer player) throws GameException {
         if (controllers.containsKey(tableId)) {
-            controllers.get(tableId).addPlayer(userId, player, playerType, deck);
+            controllers.get(tableId).addPlayer(userId, player.getPlayer(), player.getPlayerType(), player.getDeck());
         }
     }
 
@@ -352,10 +356,10 @@ public enum TableManager {
         Collection<User> users = UserManager.instance.getUsers();
         logger.debug("--------User: " + users.size() + " [userId | since | lock | name -----------------------");
         for (User user : users) {
-            Session session = SessionManager.instance.getSession(user.getSessionId());
+            Optional<Session> session = SessionManager.instance.getSession(user.getSessionId());
             String sessionState = "N";
-            if (session != null) {
-                if (session.isLocked()) {
+            if (session.isPresent()) {
+                if (session.get().isLocked()) {
                     sessionState = "L";
                 } else {
                     sessionState = "+";
@@ -390,8 +394,7 @@ public enum TableManager {
                 if (table.getState() != TableState.FINISHED) {
                     // remove tables and games not valid anymore
                     logger.debug(table.getId() + " [" + table.getName() + "] " + formatter.format(table.getStartTime() == null ? table.getCreateTime() : table.getCreateTime()) + " (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament" : ""));
-                    TableController tableController = getController(table.getId());
-                    if (tableController != null) {
+                    getController(table.getId()).ifPresent(tableController -> {
                         if ((table.isTournament() && !tableController.isTournamentStillValid()) ||
                                 (!table.isTournament() && !tableController.isMatchTableStillValid())) {
                             try {
@@ -401,7 +404,7 @@ public enum TableManager {
                                 logger.error(e);
                             }
                         }
-                    }
+                    });
                 }
             } catch (Exception ex) {
                 logger.debug("Table Health check error tableId: " + table.getId());
