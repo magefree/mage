@@ -31,17 +31,14 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -51,7 +48,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ElementalToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -114,14 +110,7 @@ class LightningCoilsEffect extends OneShotEffect {
                 effect.apply(game, source);
                 
                 // exile those tokens at next end step
-                for (UUID tokenId : effect.getLastAddedTokenIds()) {
-                    Permanent tokenPermanent = game.getPermanent(tokenId);
-                    if (tokenPermanent != null) {
-                        ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-                        exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-                    }
-                }
+                effect.exileTokensCreatedAtNextEndStep(game, source);
                 return true;
             }
         }
