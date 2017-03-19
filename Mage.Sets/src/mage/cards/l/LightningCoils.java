@@ -94,7 +94,7 @@ class LightningCoilsEffect extends OneShotEffect {
 
     LightningCoilsEffect() {
         super(Outcome.Benefit);
-        staticText = "if {this} has five or more charge counters on it, remove all of them from it and put that man 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.";
+        staticText = "if {this} has five or more charge counters on it, remove all of them from it and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.";
     }
 
     LightningCoilsEffect(final LightningCoilsEffect effect) {
