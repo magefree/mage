@@ -28,10 +28,7 @@
 package mage.server.game;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -180,11 +177,11 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public TableView getTable(UUID tableId) {
+    public Optional<TableView> getTable(UUID tableId) {
         if (tables.containsKey(tableId)) {
-            return new TableView(tables.get(tableId));
+            return Optional.of(new TableView(tables.get(tableId)));
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

@@ -480,7 +480,7 @@ public class TablesPanel extends javax.swing.JPanel {
         if (SessionHandler.getSession() != null) {
             btnQuickStart.setVisible(SessionHandler.isTestMode());
             gameChooser.init();
-            chatRoomId = SessionHandler.getRoomChatId(roomId);
+            chatRoomId = SessionHandler.getRoomChatId(roomId).orElse(null);
         }
         if (newTableDialog == null) {
             newTableDialog = new NewTableDialog();
@@ -520,7 +520,7 @@ public class TablesPanel extends javax.swing.JPanel {
             this.messages = serverMessages;
             this.currentMessage = 0;
         }
-        if (serverMessages == null || serverMessages.isEmpty()) {
+        if (serverMessages.isEmpty()) {
             this.jPanelBottom.setVisible(false);
         } else {
             this.jPanelBottom.setVisible(true);
@@ -1447,7 +1447,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             Collection<TableView> tables = SessionHandler.getTables(roomId);
-            if (tables != null) {
+            if (!tables.isEmpty()) {
                 this.publish(tables);
             }
             Thread.sleep(3000);
@@ -1633,7 +1633,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             Collection<MatchView> matches = SessionHandler.getFinishedMatches(roomId);
-            if (matches != null) {
+            if (!matches.isEmpty()) {
                 this.publish(matches);
             }
             Thread.sleep(10000);

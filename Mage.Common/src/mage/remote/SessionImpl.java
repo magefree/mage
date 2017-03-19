@@ -600,7 +600,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public UUID getRoomChatId(UUID roomId) {
+    public Optional<UUID> getRoomChatId(UUID roomId) {
         try {
             if (isConnected()) {
                 return server.getRoomChatId(roomId);
@@ -608,11 +608,11 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
-    public UUID getTableChatId(UUID tableId) {
+    public Optional<UUID> getTableChatId(UUID tableId) {
         try {
             if (isConnected()) {
                 return server.getTableChatId(tableId);
@@ -620,11 +620,11 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
-    public UUID getGameChatId(UUID gameId) {
+    public Optional<UUID> getGameChatId(UUID gameId) {
         try {
             if (isConnected()) {
                 return server.getGameChatId(gameId);
@@ -634,11 +634,11 @@ public class SessionImpl implements Session {
         } catch (Throwable t) {
             handleThrowable(t);
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
-    public TableView getTable(UUID roomId, UUID tableId) {
+    public Optional<TableView> getTable(UUID roomId, UUID tableId) {
         try {
             if (isConnected()) {
                 return server.getTable(roomId, tableId);
@@ -646,7 +646,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
@@ -735,7 +735,7 @@ public class SessionImpl implements Session {
         } catch (Throwable t) {
             handleThrowable(t);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -750,7 +750,7 @@ public class SessionImpl implements Session {
         } catch (Throwable t) {
             handleThrowable(t);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -765,7 +765,7 @@ public class SessionImpl implements Session {
         } catch (Throwable t) {
             handleThrowable(t);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -784,7 +784,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public UUID getTournamentChatId(UUID tournamentId) {
+    public Optional<UUID> getTournamentChatId(UUID tournamentId) {
         try {
             if (isConnected()) {
                 return server.getTournamentChatId(tournamentId);
@@ -794,7 +794,7 @@ public class SessionImpl implements Session {
         } catch (Throwable t) {
             handleThrowable(t);
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
@@ -1420,7 +1420,7 @@ public class SessionImpl implements Session {
         } catch (Throwable t) {
             handleThrowable(t);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override

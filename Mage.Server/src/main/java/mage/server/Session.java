@@ -27,16 +27,12 @@
  */
 package mage.server;
 
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.MageException;
 import mage.constants.Constants;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
+import mage.server.game.GamesRoom;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.SystemUtil;
@@ -47,8 +43,13 @@ import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Session {
@@ -129,7 +130,7 @@ public class Session {
         }
     }
 
-    static private String validateUserName(String userName) {
+    private static String validateUserName(String userName) {
         if (userName.equals("Admin")) {
             return "User name Admin already in use";
         }
@@ -152,7 +153,7 @@ public class Session {
         return null;
     }
 
-    static private String validatePassword(String password, String userName) {
+    private static String validatePassword(String password, String userName) {
         ConfigSettings config = ConfigSettings.instance;
         if (password.length() < config.getMinPasswordLength()) {
             return "Password may not be shorter than " + config.getMinPasswordLength() + " characters";
@@ -171,7 +172,7 @@ public class Session {
         return null;
     }
 
-    static private String validateEmail(String email) {
+    private static String validateEmail(String email) {
 
         if (email == null || email.isEmpty()) {
             return "Email address cannot be blank";
@@ -248,10 +249,12 @@ public class Session {
         }
         this.userId = user.getId();
         if (reconnect) { // must be connected to receive the message
-            UUID chatId = GamesRoomManager.instance.getRoom(GamesRoomManager.instance.getMainRoomId()).getChatId();
-            if (chatId != null) {
-                ChatManager.instance.joinChat(chatId, userId);
+            Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(GamesRoomManager.instance.getMainRoomId());
+            if (!room.isPresent()) {
+                logger.error("main room not found");
+                return null;
             }
+            ChatManager.instance.joinChat(room.get().getChatId(), userId);
             ChatManager.instance.sendReconnectMessage(userId);
         }
         return null;
@@ -331,7 +334,7 @@ public class Session {
                 return; //user was already disconnected by other thread
             }
             User user = _user.get();
-            if(!user.isConnected()){
+            if (!user.isConnected()) {
                 return;
             }
             if (!user.getSessionId().equals(sessionId)) {
@@ -381,7 +384,7 @@ public class Session {
             callbackHandler.handleCallbackOneway(new Callback(call));
         } catch (HandleCallbackException ex) {
             ex.printStackTrace();
-            UserManager.instance.getUser(userId).ifPresent(user-> {
+            UserManager.instance.getUser(userId).ifPresent(user -> {
                 logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId);
                 logger.warn(" - method: " + call.getMethod());
                 logger.warn(" - cause: " + getBasicCause(ex).toString());

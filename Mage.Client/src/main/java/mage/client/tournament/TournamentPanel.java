@@ -40,6 +40,7 @@ import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -48,6 +49,8 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
+
+import mage.cards.o.Opt;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
@@ -202,9 +205,9 @@ public class TournamentPanel extends javax.swing.JPanel {
     public synchronized void showTournament(UUID tournamentId) {
         this.tournamentId = tournamentId;
         // MageFrame.addTournament(tournamentId, this);
-        UUID chatRoomId = SessionHandler.getTournamentChatId(tournamentId);
-        if (SessionHandler.joinTournament(tournamentId) && chatRoomId != null) {
-            this.chatPanel1.connect(chatRoomId);
+        Optional<UUID> chatRoomId = SessionHandler.getTournamentChatId(tournamentId);
+        if (SessionHandler.joinTournament(tournamentId) && chatRoomId.isPresent()) {
+            this.chatPanel1.connect(chatRoomId.get());
             startTasks();
             this.setVisible(true);
             this.repaint();

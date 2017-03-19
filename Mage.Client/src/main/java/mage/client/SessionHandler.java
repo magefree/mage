@@ -1,9 +1,7 @@
 package mage.client;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.cards.decks.DeckCardLists;
 import mage.client.chat.LocalCommands;
 import mage.constants.ManaType;
@@ -129,7 +127,7 @@ public final class SessionHandler {
         return session.isTableOwner(roomId, tableId);
     }
 
-    public static UUID getTableChatId(UUID tableId) {
+    public static Optional<UUID> getTableChatId(UUID tableId) {
         return session.getTableChatId(tableId);
     }
 
@@ -141,7 +139,7 @@ public final class SessionHandler {
         return session.startMatch(roomId, tableId);
     }
 
-    public static UUID getGameChatId(UUID gameId) {
+    public static Optional<UUID> getGameChatId(UUID gameId) {
         return session.getGameChatId(gameId);
     }
 
@@ -161,7 +159,7 @@ public final class SessionHandler {
         return session.joinTournament(tournamentId);
     }
 
-    public static UUID getTournamentChatId(UUID tournamentId) {
+    public static Optional<UUID> getTournamentChatId(UUID tournamentId) {
         return session.getTournamentChatId(tournamentId);
     }
 
@@ -255,7 +253,7 @@ public final class SessionHandler {
         session.sendCardMark(draftId, id);
     }
 
-    public static UUID getRoomChatId(UUID roomId) {
+    public static Optional<UUID> getRoomChatId(UUID roomId) {
         return session.getRoomChatId(roomId);
     }
 
@@ -264,7 +262,7 @@ public final class SessionHandler {
             return session.getRoomUsers(roomId);
         } catch (MageRemoteException e) {
             e.printStackTrace();
-            return null;
+            return Collections.emptyList();
         }
     }
 
@@ -273,7 +271,7 @@ public final class SessionHandler {
             return session.getFinishedMatches(roomId);
         } catch (MageRemoteException e) {
             e.printStackTrace();
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -290,7 +288,7 @@ public final class SessionHandler {
             return session.getTables(roomId);
         } catch (MageRemoteException e) {
             e.printStackTrace();
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -318,7 +316,7 @@ public final class SessionHandler {
         return session.sendPlayerManaType(gameId, playerId, data);
     }
 
-    public static TableView getTable(UUID roomId, UUID tableId) {
+    public static Optional<TableView> getTable(UUID roomId, UUID tableId) {
         return session.getTable(roomId, tableId);
     }
 

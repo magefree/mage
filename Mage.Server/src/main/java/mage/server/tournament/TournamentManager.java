@@ -28,6 +28,7 @@
 
 package mage.server.tournament;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -85,9 +86,13 @@ public enum TournamentManager {
         return null;
     }
 
-    public UUID getChatId(UUID tournamentId) {
-        return controllers.get(tournamentId).getChatId();
+    public Optional<UUID> getChatId(UUID tournamentId) {
+        if(controllers.containsKey(tournamentId)) {
+            return Optional.of(controllers.get(tournamentId).getChatId());
+        }
+        return Optional.empty();
     }
+
 
     public void removeTournament(UUID tournamentId) {
         TournamentController tournamentController = controllers.get(tournamentId);
