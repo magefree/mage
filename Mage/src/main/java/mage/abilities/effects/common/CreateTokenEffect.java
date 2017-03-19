@@ -30,12 +30,16 @@ package mage.abilities.effects.common;
 import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -108,6 +112,17 @@ public class CreateTokenEffect extends OneShotEffect {
     public ArrayList<UUID> getLastAddedTokenIds() {
         return lastAddedTokenIds;
     }
+    
+    public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
+        for (UUID tokenId : this.getLastAddedTokenIds()) {
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+            }
+        }        
+    }
 
     private void setText() {
         StringBuilder sb = new StringBuilder("create ");
@@ -144,5 +159,4 @@ public class CreateTokenEffect extends OneShotEffect {
         sb.append(message);
         staticText = sb.toString();
     }
-
 }
