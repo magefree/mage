@@ -27,6 +27,7 @@
 */
 package mage.remote.interfaces;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -34,13 +35,13 @@ import java.util.UUID;
  */
 public interface ChatSession {
 
-    UUID getRoomChatId(UUID roomId);
+    Optional<UUID> getRoomChatId(UUID roomId);
 
-    UUID getTableChatId(UUID tableId);
+    Optional<UUID> getTableChatId(UUID tableId);
 
-    UUID getGameChatId(UUID gameId);
+    Optional<UUID> getGameChatId(UUID gameId);
 
-    UUID getTournamentChatId(UUID tournamentId);
+    Optional<UUID> getTournamentChatId(UUID tournamentId);
 
     boolean joinChat(UUID chatId);
 

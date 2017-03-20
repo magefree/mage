@@ -28,6 +28,7 @@
 package mage.interfaces;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageException;
@@ -113,7 +114,7 @@ public interface MageServer {
 
     boolean isTableOwner(String sessionId, UUID roomId, UUID tableId) throws MageException;
 
-    TableView getTable(UUID roomId, UUID tableId) throws MageException;
+    Optional<TableView> getTable(UUID roomId, UUID tableId) throws MageException;
 
     List<TableView> getTables(UUID roomId) throws MageException;
 
@@ -124,13 +125,13 @@ public interface MageServer {
 
     void leaveChat(UUID chatId, String sessionId) throws MageException;
 
-    UUID getTableChatId(UUID tableId) throws MageException;
+    Optional<UUID> getTableChatId(UUID tableId) throws MageException;
 
-    UUID getGameChatId(UUID gameId) throws MageException;
+    Optional<UUID> getGameChatId(UUID gameId) throws MageException;
 
-    UUID getRoomChatId(UUID roomId) throws MageException;
+    Optional<UUID> getRoomChatId(UUID roomId) throws MageException;
 
-    UUID getTournamentChatId(UUID tournamentId) throws MageException;
+    Optional<UUID> getTournamentChatId(UUID tournamentId) throws MageException;
 
     //room methods
     UUID getMainRoomId() throws MageException;

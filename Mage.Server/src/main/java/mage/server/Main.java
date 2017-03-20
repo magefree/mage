@@ -263,17 +263,20 @@ public final class Main {
 
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
-            Session session = SessionManager.instance.getSession(client.getSessionId());
-            if (session != null) {
-
+            String sessionId = client.getSessionId();
+            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+            if (!session.isPresent()) {
+                logger.error("Session not found : " + sessionId);
+            } else {
+                UUID userId = session.get().getUserId();
                 StringBuilder sessionInfo = new StringBuilder();
-                Optional<User> user = UserManager.instance.getUser(session.getUserId());
+                Optional<User> user = UserManager.instance.getUser(userId);
                 if (user.isPresent()) {
                     sessionInfo.append(user.get().getName()).append(" [").append(user.get().getGameInfo()).append(']');
                 } else {
                     sessionInfo.append("[user missing] ");
                 }
-                sessionInfo.append(" at ").append(session.getHost()).append(" sessionId: ").append(session.getId());
+                sessionInfo.append(" at ").append(session.get().getHost()).append(" sessionId: ").append(session.get().getId());
                 if (throwable instanceof ClientDisconnectedException) {
                     // Seems like the random diconnects from public server land here and should not be handled as explicit disconnects
                     // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
@@ -372,7 +375,12 @@ public final class Main {
             } else {
                 host = "localhost";
             }
-            SessionManager.instance.getSession(sessionId).setHost(host);
+            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+            if (!session.isPresent()) {
+                logger.error("Session not found : " + sessionId);
+            } else {
+                session.get().setHost(host);
+            }
             return null;
         }
 

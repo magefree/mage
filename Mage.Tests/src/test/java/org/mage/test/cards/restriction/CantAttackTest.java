@@ -166,5 +166,88 @@ public class CantAttackTest extends CardTestPlayerBase {
         assertTapped("Silvercoat Lion", false);
         assertPowerToughness(playerB, "Silvercoat Lion", 4, 4);
     }
-
+    
+    /*
+    Reported bug: Medomai was able to attack on an extra turn when cheated into play.
+    */
+    @Test
+    public void testMedomaiShouldNotAttackOnExtraTurns() {
+        
+        /*
+        Medomai the Ageless {4}{W}{U}
+        Legendary Creature — Sphinx 4/4
+        Flying
+        Whenever Medomai the Ageless deals combat damage to a player, take an extra turn after this one.
+        Medomai the Ageless can't attack during extra turns.
+        */
+        String medomai = "Medomai the Ageless";
+        
+        /*
+         Cauldron Dance {4}{B}{R} Instant
+        Cast Cauldron Dance only during combat.
+        Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.
+        You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
+        */
+        String cDance = "Cauldron Dance";
+        String dBlade = "Doom Blade"; // {1}{B} instant destroy target creature        
+        addCard(Zone.BATTLEFIELD, playerA, medomai);
+        addCard(Zone.HAND, playerA, dBlade);
+        addCard(Zone.HAND, playerA, cDance);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        
+        // attack with Medomai, connect, and destroy him after combat
+        attack(1, playerA, medomai);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, dBlade, medomai);
+        
+        // next turn granted, return Medomai to field with Cauldron and try to attack again
+        castSpell(2, PhaseStep.BEGIN_COMBAT, playerA, cDance);
+        addTarget(playerA, medomai);
+        attack(2, playerA, medomai);
+        
+        // medomai should not have been allowed to attack, but returned to hand at beginning of next end step still
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        
+        assertLife(playerB, 16); // one hit from medomai
+        assertGraveyardCount(playerA, dBlade, 1);
+        assertGraveyardCount(playerA, cDance, 1);
+        assertGraveyardCount(playerA, medomai, 0);
+        assertHandCount(playerA, medomai, 1);
+    }
+    
+    @Test
+    public void basicMedomaiTestForExtraTurn() {
+        /*
+        Medomai the Ageless {4}{W}{U}
+        Legendary Creature — Sphinx 4/4
+        Flying
+        Whenever Medomai the Ageless deals combat damage to a player, take an extra turn after this one.
+        Medomai the Ageless can't attack during extra turns.
+        */
+        String medomai = "Medomai the Ageless";
+        
+        /*
+         Exquisite Firecraft {1}{R}{R}
+            Sorcery
+            Exquisite Firecraft deals 4 damage to target creature or player.
+        */
+        String eFirecraft = "Exquisite Firecraft";
+        
+        addCard(Zone.BATTLEFIELD, playerA, medomai);
+        addCard(Zone.HAND, playerA, eFirecraft);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        
+        // attack with medomai, get extra turn, confirm cannot attack again with medomai and can cast sorcery
+        attack(1, playerA, medomai);
+        attack(2, playerA, medomai); // should not be allowed to
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, eFirecraft, playerB);
+        
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        
+        assertLife(playerB, 12); // 1 hit from medomai and firecraft = 8 damage
+        assertGraveyardCount(playerA, eFirecraft, 1);
+        assertPermanentCount(playerA, medomai, 1);
+    }
 }

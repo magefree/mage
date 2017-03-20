@@ -316,6 +316,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         List<CardDownloadData> cardsToDownload = Collections.synchronizedList(new ArrayList<>());
         allCardsUrls.parallelStream().forEach(card -> {
             TFile file = new TFile(CardImageUtils.generateImagePath(card));
+            logger.debug(card.getName() + " (is_token=" + card.isToken() + "). Image is here:" + file.getAbsolutePath() + " (exists=" + file.exists() +')');
             if (!file.exists()) {
                 logger.debug("Missing: " + file.getAbsolutePath());
                 cardsToDownload.add(card);

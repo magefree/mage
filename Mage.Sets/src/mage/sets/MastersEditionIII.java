@@ -56,6 +56,7 @@ public class MastersEditionIII extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Active Volcano", 85, Rarity.UNCOMMON, mage.cards.a.ActiveVolcano.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 1, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
+        cards.add(new SetCardInfo("All Hallow's Eve", 57, Rarity.RARE, mage.cards.a.AllHallowsEve.class));
         cards.add(new SetCardInfo("Amrou Kithkin", 3, Rarity.COMMON, mage.cards.a.AmrouKithkin.class));
         cards.add(new SetCardInfo("Anaba Ancestor", 86, Rarity.COMMON, mage.cards.a.AnabaAncestor.class));
         cards.add(new SetCardInfo("Anaba Spirit Crafter", 87, Rarity.COMMON, mage.cards.a.AnabaSpiritCrafter.class));

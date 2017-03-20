@@ -970,6 +970,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 game.informPlayers(player.getLogName() + " sacrificed " + this.getLogName());
             }
             game.fireEvent(GameEvent.getEvent(EventType.SACRIFICED_PERMANENT, objectId, sourceId, controllerId));
+            game.checkStateAndTriggered();
             return true;
         }
         return false;
