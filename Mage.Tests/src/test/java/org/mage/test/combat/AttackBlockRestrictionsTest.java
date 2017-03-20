@@ -361,4 +361,72 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         assertTapped(flunkies, false);
         assertLife(playerB, 20);
     }
+    
+    /*
+    Reported bug: Tromokratis is unable to be blocked.
+    */
+    @Test
+    public void tromokratisBlockedByAll() {
+        /*    
+        Tromokratis {5}{U}{U}
+        Legendary Creature — Kraken 8/8
+        Tromokratis has hexproof unless it's attacking or blocking.
+        Tromokratis can't be blocked unless all creatures defending player controls block it. (If any creature that player controls doesn't block this creature, it can't be blocked.)
+        */
+        String tromokratis = "Tromokratis";
+        String gBears = "Grizzly Bears"; // {1}{G} 2/2
+        String memnite = "Memnite"; // {0} 1/1
+        
+        addCard(Zone.BATTLEFIELD, playerA, tromokratis);
+        addCard(Zone.BATTLEFIELD, playerB, gBears);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+        
+        attack(1, playerA, tromokratis);
+        block(1, playerB, gBears, tromokratis);
+        block(1, playerB, memnite, tromokratis);
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerB, gBears, 1);
+        assertGraveyardCount(playerB, memnite, 1);
+        assertTapped(tromokratis, true);
+    }
+    
+    /*
+    Reported bug: Tromokratis is unable to be blocked.
+    */
+    @Test
+    public void tromokratisNotBlockedByAll() {
+        /*    
+        Tromokratis {5}{U}{U}
+        Legendary Creature — Kraken 8/8
+        Tromokratis has hexproof unless it's attacking or blocking.
+        Tromokratis can't be blocked unless all creatures defending player controls block it. (If any creature that player controls doesn't block this creature, it can't be blocked.)
+        */
+        String tromokratis = "Tromokratis";
+        String gBears = "Grizzly Bears"; // {1}{G} 2/2
+        String memnite = "Memnite"; // {0} 1/1
+        String hGiant = "Hill Giant"; // {3}{R} 3/3
+        
+        addCard(Zone.BATTLEFIELD, playerA, tromokratis);
+        addCard(Zone.BATTLEFIELD, playerB, gBears);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+        addCard(Zone.BATTLEFIELD, playerB, hGiant);
+        
+        attack(2, playerB, hGiant); // forces a creature to be tapped so unable to block Tromokratis, which means it cannot be blocked at all
+        attack(3, playerA, tromokratis);
+        block(3, playerB, gBears, tromokratis);
+        block(3, playerB, memnite, tromokratis);
+        
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertLife(playerB, 12); // Hill Giant could not block it, so no other creature could block Tromokratis either
+        assertPermanentCount(playerB, gBears, 1);
+        assertPermanentCount(playerB, memnite, 1);
+        assertTapped(tromokratis, true);
+        assertTapped(hGiant, true);
+    }
 }
