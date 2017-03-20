@@ -1407,7 +1407,7 @@ public class HumanPlayer extends PlayerImpl {
     public void setResponseString(String responseString) {
         synchronized (response) {
             response.setString(responseString);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got response string from player: " + getId());
         }
     }
@@ -1417,7 +1417,7 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             response.setManaType(manaType);
             response.setResponseManaTypePlayerId(manaTypePlayerId);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got response mana type from player: " + getId());
         }
     }
@@ -1426,7 +1426,7 @@ public class HumanPlayer extends PlayerImpl {
     public void setResponseUUID(UUID responseUUID) {
         synchronized (response) {
             response.setUUID(responseUUID);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got response UUID from player: " + getId());
         }
     }
@@ -1435,7 +1435,7 @@ public class HumanPlayer extends PlayerImpl {
     public void setResponseBoolean(Boolean responseBoolean) {
         synchronized (response) {
             response.setBoolean(responseBoolean);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got response boolean from player: " + getId());
         }
     }
@@ -1444,7 +1444,7 @@ public class HumanPlayer extends PlayerImpl {
     public void setResponseInteger(Integer responseInteger) {
         synchronized (response) {
             response.setInteger(responseInteger);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got response integer from player: " + getId());
         }
     }
@@ -1453,7 +1453,7 @@ public class HumanPlayer extends PlayerImpl {
     public void abort() {
         abort = true;
         synchronized (response) {
-            response.notify();
+            response.notifyAll();
             logger.debug("Got cancel action from player: " + getId());
         }
     }
@@ -1462,7 +1462,7 @@ public class HumanPlayer extends PlayerImpl {
     public void skip() {
         synchronized (response) {
             response.setInteger(0);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got skip action from player: " + getId());
         }
     }
