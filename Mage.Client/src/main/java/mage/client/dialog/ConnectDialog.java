@@ -391,7 +391,7 @@ public class ConnectDialog extends MageDialog {
             connection.setUsername(this.txtUserName.getText().trim());
             connection.setPassword(this.txtPassword.getText().trim());
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected());
-            connection.setUserIdStr(System.getProperty("user.name") + ":" + MagePreferences.getUserNames());
+            connection.setUserIdStr(System.getProperty("user.name") + ':' + MagePreferences.getUserNames());
             MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
             PreferencesDialog.setProxyInformation(connection);
 
