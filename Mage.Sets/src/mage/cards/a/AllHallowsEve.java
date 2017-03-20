@@ -106,7 +106,8 @@ class AllHallowsEveEffect extends OneShotEffect {
             if (allHallowsEve.getCounters(game).getCount(CounterType.SCREAM) == 0) {
                 allHallowsEve.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                 Cards creatures = new CardsImpl();
-                for (Player player : game.getPlayers().values()) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                    Player player = game.getPlayer(playerId);
                     if (player != null) {
                         for (Card creatureCard : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
                             creatures.add(creatureCard);
