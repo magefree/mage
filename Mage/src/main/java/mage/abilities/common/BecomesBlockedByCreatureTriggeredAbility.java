@@ -79,7 +79,9 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
 
     @Override
     public String getRule() {
-        return "Whenever {this} becomes blocked by a " + filter.getMessage() + ", " + super.getRule();
+        return "Whenever {this} becomes blocked by "
+                + (filter.getMessage().startsWith("an ") ? "" : "a ")
+                + filter.getMessage() + ", " + super.getRule();
     }
 
     @Override
