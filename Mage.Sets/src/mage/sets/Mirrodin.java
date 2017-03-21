@@ -186,6 +186,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Nim Shrieker", 73, Rarity.COMMON, mage.cards.n.NimShrieker.class));
         cards.add(new SetCardInfo("Nuisance Engine", 221, Rarity.UNCOMMON, mage.cards.n.NuisanceEngine.class));
         cards.add(new SetCardInfo("Oblivion Stone", 222, Rarity.RARE, mage.cards.o.OblivionStone.class));
+        cards.add(new SetCardInfo("Ogre Leadfoot", 102, Rarity.COMMON, mage.cards.o.OgreLeadfoot.class));
         cards.add(new SetCardInfo("Omega Myr", 223, Rarity.COMMON, mage.cards.o.OmegaMyr.class));
         cards.add(new SetCardInfo("One Dozen Eyes", 126, Rarity.UNCOMMON, mage.cards.o.OneDozenEyes.class));
         cards.add(new SetCardInfo("Ornithopter", 224, Rarity.UNCOMMON, mage.cards.o.Ornithopter.class));
