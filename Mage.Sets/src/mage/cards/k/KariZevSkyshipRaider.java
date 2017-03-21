@@ -91,7 +91,7 @@ class KariZevSkyshipRaiderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenEffect effect = new CreateTokenEffect(new RagavanToken());
+        CreateTokenEffect effect = new CreateTokenEffect(new RagavanToken(), 1, true, true);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);

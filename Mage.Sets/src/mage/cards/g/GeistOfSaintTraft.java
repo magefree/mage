@@ -85,7 +85,7 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {        
-        CreateTokenEffect effect = new CreateTokenEffect(new AngelToken());        
+        CreateTokenEffect effect = new CreateTokenEffect(new AngelToken(), 1, true, true);
         Player controller = game.getPlayer(source.getControllerId());
         
         if (controller != null && effect.apply(game, source)) {
