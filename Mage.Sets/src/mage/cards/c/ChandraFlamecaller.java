@@ -29,11 +29,9 @@ package mage.cards.c;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -41,20 +39,15 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageAllEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ElementalToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -108,36 +101,13 @@ class ChandraElementalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreateTokenEffect effect = new CreateTokenEffect(new ChandraElementalElementalToken(), 2);
+            CreateTokenEffect effect = new CreateTokenEffect(new ElementalToken("OGW", 1, true), 2);
             effect.apply(game, source);
-            for (UUID tokenId : effect.getLastAddedTokenIds()) {
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-                }
-            }
+            effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;
         }
 
         return false;
-    }
-}
-
-class ChandraElementalElementalToken extends Token {
-
-    public ChandraElementalElementalToken() {
-        super("Elemental", "3/1 red Elemental creature tokens with haste");
-        setTokenType(1);
-        setOriginalExpansionSetCode("OGW");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Elemental");
-        power = new MageInt(3);
-        toughness = new MageInt(1);
-
-        this.addAbility(HasteAbility.getInstance());
     }
 }
 

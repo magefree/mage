@@ -32,11 +32,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -51,7 +50,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -73,7 +71,6 @@ public class ElementalMastery extends CardImpl {
         // Enchanted creature has "{tap}: create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step."
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElementalMasteryEffect(), new TapSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.AURA)));
-
     }
 
     public ElementalMastery(final ElementalMastery card) {
@@ -108,18 +105,11 @@ class ElementalMasteryEffect extends OneShotEffect {
         if (creatureAttached != null) {
             int power = creatureAttached.getPower().getValue();
             if (power > 0) {
-                ElementalToken token = new ElementalToken();
-                token.putOntoBattlefield(power, game, creatureAttached.getId(), creatureAttached.getControllerId());
-                for (UUID tokenId : token.getLastAddedTokenIds()) {
-                    Permanent tokenPermanent = game.getPermanent(tokenId);
-                    if (tokenPermanent != null) {
-                        ExileTargetEffect exileEffect = new ExileTargetEffect();
-                        exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-                    }
-                }
+                CreateTokenEffect effect = new CreateTokenEffect(new ElementalToken(), power);
+                effect.apply(game, source);
+                effect.exileTokensCreatedAtNextEndStep(game, source);                
+                return true;
             }
-            return true;
         }
         return false;
     }

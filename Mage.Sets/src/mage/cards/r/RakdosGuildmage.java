@@ -31,11 +31,10 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -45,10 +44,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -103,16 +100,10 @@ class RakdosGuildmageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new RakdosGuildmageGoblinToken();
-        if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
-            for (UUID tokenId : token.getLastAddedTokenIds()) {
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-                }
-            }
+        CreateTokenEffect effect = new CreateTokenEffect(new RakdosGuildmageGoblinToken());
+        if (effect.apply(game, source))
+        {
+            effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;
         }
         return false;
