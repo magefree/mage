@@ -30,14 +30,12 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -45,14 +43,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -116,14 +111,7 @@ class FirecatBlitzEffect extends OneShotEffect {
             }
             CreateTokenEffect effect = new CreateTokenEffect(new ElementalCatToken(), xValue);
             effect.apply(game, source);
-            for (UUID tokenId : effect.getLastAddedTokenIds()) {
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-                }
-            }
+            effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;
         }
 
