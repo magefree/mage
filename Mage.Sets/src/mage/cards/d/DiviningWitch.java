@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author anonymous
+ * @author maxlebedev
  */
 public class DiviningWitch extends CardImpl {
 
