@@ -17,7 +17,7 @@ public class CitadelOfPainTest extends CardTestPlayerBase {
         // player, where X is the number of untapped lands he or she controls.
         addCard(Zone.BATTLEFIELD, playerA, "Citadel of Pain");
 
-        setStopAt(3, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 17);
