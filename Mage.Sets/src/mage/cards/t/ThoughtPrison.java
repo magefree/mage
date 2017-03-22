@@ -169,7 +169,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
             }
             if (sourcePermanent != null && sourcePermanent.getImprinted() != null && !sourcePermanent.getImprinted().isEmpty()) {
                 Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
-                if (imprintedCard != null && game.getState().getZone(imprintedCard.getId()).equals(Zone.EXILED)) {
+                if (imprintedCard != null && game.getState().getZone(imprintedCard.getId()) == Zone.EXILED) {
                     // Check if spell's color matches the imprinted card
                     ObjectColor spellColor = spell.getColor(game);
                     ObjectColor imprintedColor = imprintedCard.getColor(game);

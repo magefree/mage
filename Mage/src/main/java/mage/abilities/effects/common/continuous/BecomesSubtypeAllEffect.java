@@ -86,7 +86,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
                         }
                         break;
                 }
-            } else if (duration.equals(Duration.Custom)) {
+            } else if (duration == Duration.Custom) {
                 discard();
             }
         }
@@ -102,7 +102,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
         StringBuilder sb = new StringBuilder();
         sb.append("Target creature becomes that type");
         if (!duration.toString().isEmpty()
-                && !duration.equals(Duration.EndOfGame)) {
+                && duration != Duration.EndOfGame) {
             sb.append(' ').append(duration.toString());
         }
         return sb.toString();

@@ -460,7 +460,7 @@ public class CardPluginImpl implements CardPlugin {
                     continue;
                 }
                 // all attached permanents are grouped separately later
-                if (!type.equals(RowType.attached) && RowType.attached.isType(permanent)) {
+                if (type != RowType.attached && RowType.attached.isType(permanent)) {
                     continue;
                 }
                 Stack stack = new Stack();

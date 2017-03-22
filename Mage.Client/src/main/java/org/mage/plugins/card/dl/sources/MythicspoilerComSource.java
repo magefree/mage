@@ -142,7 +142,7 @@ public class MythicspoilerComSource implements CardImageSource {
 
         String urlDocument;
         Document doc;
-        if (proxyType.equals(ProxyType.NONE)) {
+        if (proxyType == ProxyType.NONE) {
             urlDocument = pageUrl;
             doc = Jsoup.connect(urlDocument).get();
         } else {

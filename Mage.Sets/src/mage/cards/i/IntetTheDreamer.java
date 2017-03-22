@@ -152,7 +152,7 @@ class IntetTheDreamerCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId).equals(Zone.EXILED)) {
+        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = source.getSourceObject(game);
             if (controller != null && sourceObject != null) {
@@ -200,7 +200,7 @@ class IntetTheDreamerLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId).equals(Zone.EXILED)) {
+        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = source.getSourceObject(game);
             if (controller != null && sourceObject != null) {

@@ -149,7 +149,7 @@ class TuktukScrapperEffect extends OneShotEffect {
         if (controller != null && targetArtifact != null) {
             targetArtifact.destroy(source.getSourceId(), game, false);
             Player targetController = game.getPlayer(targetArtifact.getControllerId());
-            if (targetController != null && game.getState().getZone(targetArtifact.getId()).equals(Zone.GRAVEYARD)) {
+            if (targetController != null && game.getState().getZone(targetArtifact.getId()) == Zone.GRAVEYARD) {
                 int alliesControlled = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
                 if (alliesControlled > 0) {
                     targetController.damage(alliesControlled, source.getSourceId(), game, false, true);

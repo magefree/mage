@@ -418,8 +418,8 @@ public class ContinuousEffects implements Serializable {
             return true;
         }
         MageObject object;
-        if (event.getType().equals(EventType.ZONE_CHANGE)
-                && ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)
+        if (event.getType() == EventType.ZONE_CHANGE
+                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
                 && event.getTargetId().equals(ability.getSourceId())) {
             object = ((ZoneChangeEvent) event).getTarget();
         } else {
@@ -645,7 +645,7 @@ public class ContinuousEffects implements Serializable {
      * @param game
      */
     public void applySpliceEffects(Ability abilityToModify, Game game) {
-        if (((SpellAbility) abilityToModify).getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
+        if (((SpellAbility) abilityToModify).getSpellAbilityType() == SpellAbilityType.SPLICE) {
             // on a spliced ability of a spell can't be spliced again
             return;
         }
@@ -778,7 +778,7 @@ public class ContinuousEffects implements Serializable {
             if (rEffects.size() == 1) {
                 ReplacementEffect effect = rEffects.keySet().iterator().next();
                 HashSet<Ability> abilities;
-                if (effect.getEffectType().equals(EffectType.REPLACEMENT)) {
+                if (effect.getEffectType() == EffectType.REPLACEMENT) {
                     abilities = replacementEffects.getAbility(effect.getId());
                 } else {
                     abilities = preventionEffects.getAbility(effect.getId());

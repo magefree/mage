@@ -127,7 +127,7 @@ class SerraAscendantEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return Layer.AbilityAddingRemovingEffects_6.equals(layer) || Layer.PTChangingEffects_7.equals(layer);
+        return Layer.AbilityAddingRemovingEffects_6 == layer || Layer.PTChangingEffects_7 == layer;
     }
 
 }

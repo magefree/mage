@@ -82,7 +82,7 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
                     }
                 }
             }
-        } else if (applied && layer.equals(Layer.RulesEffects)) {
+        } else if (applied && layer == Layer.RulesEffects) {
             if (game.getStep().getType() == PhaseStep.END_TURN) {
                 game.getState().setValue(source.getSourceId() + "applied", false);
             }

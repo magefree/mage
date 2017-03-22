@@ -84,7 +84,7 @@ class SuppressionFieldCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED);
+        return abilityToModify.getAbilityType() == AbilityType.ACTIVATED;
     }
 
     @Override

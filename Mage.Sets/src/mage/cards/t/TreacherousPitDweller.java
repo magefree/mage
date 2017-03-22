@@ -93,7 +93,7 @@ class TreacherousPitDwellerTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return  event.getTargetId().equals(getSourceId()) && ((EntersTheBattlefieldEvent) event).getFromZone().equals(Zone.GRAVEYARD);
+        return  event.getTargetId().equals(getSourceId()) && ((EntersTheBattlefieldEvent) event).getFromZone() == Zone.GRAVEYARD;
     }    
     
     @Override

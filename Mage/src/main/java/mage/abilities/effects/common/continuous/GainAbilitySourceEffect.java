@@ -128,7 +128,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
                 return true;
             }
         }
-        if (duration.equals(Duration.Custom)) {
+        if (duration == Duration.Custom) {
             this.discard();
         }
         return true;

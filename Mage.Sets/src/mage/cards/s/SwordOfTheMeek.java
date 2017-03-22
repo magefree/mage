@@ -106,7 +106,7 @@ class SwordOfTheMeekEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card equipment = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (equipment != null && controller != null && game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
+        if (equipment != null && controller != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
             controller.moveCards(equipment, Zone.BATTLEFIELD, source, game);
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {

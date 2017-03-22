@@ -99,7 +99,7 @@ public class Spell extends StackObjImpl implements Card {
         id = ability.getId();
         this.ability = ability;
         this.ability.setControllerId(controllerId);
-        if (ability.getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+        if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
             spellCards.add(((SplitCard) card).getLeftHalfCard());
             spellAbilities.add(((SplitCard) card).getLeftHalfCard().getSpellAbility().copy());
             spellCards.add(((SplitCard) card).getRightHalfCard());
@@ -155,7 +155,7 @@ public class Spell extends StackObjImpl implements Card {
                     ignoreAbility = false;
                 } else {
                     // costs for spliced abilities were added to main spellAbility, so pay no mana for spliced abilities
-                    payNoMana |= spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE);
+                    payNoMana |= spellAbility.getSpellAbilityType() == SpellAbilityType.SPLICE;
                     if (!spellAbility.activate(game, payNoMana)) {
                         return false;
                     }
@@ -375,15 +375,15 @@ public class Spell extends StackObjImpl implements Card {
                 if (counteringObject instanceof StackObject) {
                     counteringAbility = ((StackObject) counteringObject).getStackAbility();
                 }
-                if (zone.equals(Zone.LIBRARY)) {
-                    if (zoneDetail.equals(ZoneDetail.CHOOSE)) {
+                if (zone == Zone.LIBRARY) {
+                    if (zoneDetail == ZoneDetail.CHOOSE) {
                         if (player.chooseUse(Outcome.Detriment, "Move countered spell to the top of the library? (otherwise it goes to the bottom)", counteringAbility, game)) {
                             zoneDetail = ZoneDetail.TOP;
                         } else {
                             zoneDetail = ZoneDetail.BOTTOM;
                         }
                     }
-                    if (zoneDetail.equals(ZoneDetail.TOP)) {
+                    if (zoneDetail == ZoneDetail.TOP) {
                         player.putCardsOnTopOfLibrary(new CardsImpl(card), game, counteringAbility, false);
                     } else {
                         player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, counteringAbility, false);
@@ -740,7 +740,7 @@ public class Spell extends StackObjImpl implements Card {
         // 706.10a If a copy of a spell is in a zone other than the stack, it ceases to exist.
         // If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
         // These are state-based actions. See rule 704.
-        if (this.isCopiedSpell() && !zone.equals(Zone.STACK)) {
+        if (this.isCopiedSpell() && zone != Zone.STACK) {
             return true;
         }
         return card.moveToZone(zone, sourceId, game, flag, appliedEffects);

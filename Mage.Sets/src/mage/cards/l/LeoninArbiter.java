@@ -154,7 +154,7 @@ class LeoninArbiterCantSearchEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.SEARCH_LIBRARY.equals(event.getType());
+        return EventType.SEARCH_LIBRARY == event.getType();
     }
 
     @Override

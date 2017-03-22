@@ -110,7 +110,7 @@ class HomuraReturnFlippedSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card sourceCard = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (sourceCard != null && controller != null && game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
+        if (sourceCard != null && controller != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
             ContinuousEffect effect = new ConditionalContinuousEffect(new CopyTokenEffect(flipToken), FlippedCondition.getInstance(), "");
             game.addEffect(effect, source);
             controller.moveCards(sourceCard, Zone.BATTLEFIELD, source, game);

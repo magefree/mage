@@ -215,7 +215,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                 sb.append(landType);
             }
         }
-        if (!duration.toString().isEmpty() && !duration.equals(Duration.EndOfGame)) {
+        if (!duration.toString().isEmpty() && duration != Duration.EndOfGame) {
             sb.append(' ').append(duration.toString());
         }
         return sb.toString();

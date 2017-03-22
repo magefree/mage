@@ -82,7 +82,7 @@ class GreaterHarvesterAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return EventType.DAMAGED_PLAYER.equals(event.getType());
+        return EventType.DAMAGED_PLAYER == event.getType();
     }
 
     

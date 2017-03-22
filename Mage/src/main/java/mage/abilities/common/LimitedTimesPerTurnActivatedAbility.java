@@ -121,7 +121,7 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
         if (condition != null) {
             sb.append("only ").append(condition.toString()).append(" and ");
         }
-        if (getTiming().equals(TimingRule.SORCERY)) {
+        if (getTiming() == TimingRule.SORCERY) {
             sb.append("only any time you could cast a sorcery and ");
         }
         switch (maxActivationsPerTurn) {

@@ -129,7 +129,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             if (spellAbility.getTargets().isEmpty()) {
                 for (Ability ability : card.getAbilities(game)) {
                     if ((ability instanceof SpellAbility)
-                            && SpellAbilityType.BASE_ALTERNATE.equals(((SpellAbility) ability).getSpellAbilityType())
+                            && SpellAbilityType.BASE_ALTERNATE == ((SpellAbility) ability).getSpellAbilityType()
                             && !ability.getTargets().isEmpty()) {
                         spellAbility = (SpellAbility) ability;
                         break;

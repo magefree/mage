@@ -151,7 +151,7 @@ class MindreaverNamePredicate implements Predicate<MageObject> {
         // A split card has the chosen name if one of its two names matches the chosen name.
         if (input instanceof SplitCard) {
             return cardNames.contains(((SplitCard) input).getLeftHalfCard().getName()) || cardNames.contains(((SplitCard) input).getRightHalfCard().getName());
-        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
             SplitCard card = (SplitCard) ((Spell) input).getCard();
             return cardNames.contains(card.getLeftHalfCard().getName()) || cardNames.contains(card.getRightHalfCard().getName());
         } else {

@@ -102,7 +102,7 @@ class SoulSeparatorEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (creatureCard != null && controller != null) {
             boolean result = false;
-            if (game.getState().getZone(creatureCard.getId()).equals(Zone.GRAVEYARD)) {
+            if (game.getState().getZone(creatureCard.getId()) == Zone.GRAVEYARD) {
                 result = controller.moveCardToExileWithInfo(creatureCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                 ZombieToken2 token = new ZombieToken2(creatureCard.getPower().getValue(), creatureCard.getToughness().getValue());
                 token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());

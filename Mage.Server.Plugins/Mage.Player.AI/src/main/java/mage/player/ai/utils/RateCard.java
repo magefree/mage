@@ -83,11 +83,11 @@ public final class RateCard {
 
             for (Ability ability : card.getAbilities()) {
                 for (Effect effect : ability.getEffects()) {
-                    if (effect.getOutcome().equals(Outcome.Removal)) {
+                    if (effect.getOutcome() == Outcome.Removal) {
                         log.debug("Found removal: " + card.getName());
                         return 1;
                     }
-                    if (effect.getOutcome().equals(Outcome.Damage)) {
+                    if (effect.getOutcome() == Outcome.Damage) {
                         if (effect instanceof DamageTargetEffect) {
                             DamageTargetEffect damageEffect = (DamageTargetEffect) effect;
                             if (damageEffect.getAmount() > 1) {
@@ -100,7 +100,7 @@ public final class RateCard {
                             }
                         }
                     }
-                    if (effect.getOutcome().equals(Outcome.DestroyPermanent)) {
+                    if (effect.getOutcome() == Outcome.DestroyPermanent) {
                         for (Target target : ability.getTargets()) {
                             if (target instanceof TargetCreaturePermanent) {
                                 log.debug("Found destroyer: " + card.getName());

@@ -133,7 +133,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             sb.append("this turn ");
         }
         sb.append("to any number of target creatures and/or players, divided as you choose");
