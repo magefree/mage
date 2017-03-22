@@ -169,8 +169,8 @@ class SithMagicReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getFirstTarget())
-                && ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)
-                && !((ZoneChangeEvent) event).getToZone().equals(Zone.EXILED)) {
+                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
             return true;
         }
         return false;

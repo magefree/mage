@@ -48,7 +48,7 @@ public class StartMultiGamesTest {
             synchronized (sync) {
                 frame = new MageFrame();
                 frame.setVisible(true);
-                sync.notify();
+                sync.notifyAll();
             }
         });
         synchronized (sync) {

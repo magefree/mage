@@ -94,7 +94,7 @@ class AlhammarretsArchiveEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.GAIN_LIFE);
+        return event.getType() == GameEvent.EventType.GAIN_LIFE;
     }
 
     @Override

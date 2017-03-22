@@ -1046,8 +1046,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             // close & remove sideboarding or construction pane if open
             if (window instanceof DeckEditorPane) {
                 DeckEditorPane deckEditorPane = (DeckEditorPane) window;
-                if (deckEditorPane.getDeckEditorMode().equals(DeckEditorMode.LIMITED_BUILDING)
-                        || deckEditorPane.getDeckEditorMode().equals(DeckEditorMode.SIDEBOARDING)) {
+                if (deckEditorPane.getDeckEditorMode() == DeckEditorMode.LIMITED_BUILDING
+                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.SIDEBOARDING) {
                     deckEditorPane.removeFrame();
                 }
             }

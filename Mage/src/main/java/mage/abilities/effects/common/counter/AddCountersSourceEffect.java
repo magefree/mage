@@ -115,7 +115,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                 }
             } else {
                 Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent == null && source.getAbilityType().equals(AbilityType.STATIC)) {
+                if (permanent == null && source.getAbilityType() == AbilityType.STATIC) {
                     permanent = game.getPermanentEntering(source.getSourceId());
                 }
                 if (permanent != null) {

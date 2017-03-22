@@ -1372,7 +1372,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
 
     private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
         // pass or casting two times a spell multiple times on hand is ok
-        if (action instanceof PassAbility || action instanceof SpellAbility || action.getAbilityType().equals(AbilityType.MANA)) {
+        if (action instanceof PassAbility || action instanceof SpellAbility || action.getAbilityType() == AbilityType.MANA) {
             return false;
         }
         int newVal = GameStateEvaluator2.evaluate(playerId, sim);

@@ -83,7 +83,7 @@ public class JSONParser {
         String currentPath = "";
         for (int i = 0; i < params.length - 1; i++) {
             String param = params[i];
-            if (cachePolicy.equals(CachePolicy.CACHE_ALL_LEVELS)) {
+            if (cachePolicy == CachePolicy.CACHE_ALL_LEVELS) {
                 if (!currentPath.isEmpty()) {
                     currentPath += ".";
                 }
@@ -123,7 +123,7 @@ public class JSONParser {
                 }
 
             }
-            if (cachePolicy.equals(CachePolicy.CACHE_ALL_LEVELS)) {
+            if (cachePolicy == CachePolicy.CACHE_ALL_LEVELS) {
                 saveToCache(currentPath, json);
             }
         }

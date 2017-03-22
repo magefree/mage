@@ -160,7 +160,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                     }
             }
             return true;
-        } else if (duration.equals(Duration.Custom)) {
+        } else if (duration == Duration.Custom) {
             this.discard();
         }
         return false;

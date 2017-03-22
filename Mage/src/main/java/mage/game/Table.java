@@ -234,7 +234,7 @@ public class Table implements Serializable {
             Player player = seats[i].getPlayer();
             if (player != null && player.getId().equals(playerId)) {
                 seats[i].setPlayer(null);
-                if (getState().equals(TableState.READY_TO_START)) {
+                if (getState() == TableState.READY_TO_START) {
                     setState(TableState.WAITING);
                 }
                 break;

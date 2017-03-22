@@ -58,7 +58,7 @@ public final class CardScanner {
                     || !expansionInfo.code.equals(set.getCode())
                     || (expansionInfo.blockName == null ? set.getBlockName() != null : !expansionInfo.blockName.equals(set.getBlockName()))
                     || !expansionInfo.releaseDate.equals(set.getReleaseDate())
-                    || !expansionInfo.type.equals(set.getSetType())
+                    || expansionInfo.type != set.getSetType()
                     || expansionInfo.boosters != set.hasBoosters()
                     || expansionInfo.basicLands != set.hasBasicLands()) {
                 ExpansionRepository.instance.update(expansionInfo);

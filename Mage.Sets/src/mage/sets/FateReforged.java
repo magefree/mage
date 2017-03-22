@@ -256,7 +256,7 @@ public class FateReforged extends ExpansionSet {
     @Override
     public List<CardInfo> getCardsByRarity(Rarity rarity) {
         // Common cards retrievement of Fate Reforged boosters - prevent the retrievement of the common lands (e.g. Blossoming Sands)
-        if (rarity.equals(Rarity.COMMON)) {
+        if (rarity == Rarity.COMMON) {
             List<CardInfo> savedCardsInfos = savedCards.get(rarity);
             if (savedCardsInfos == null) {
                 CardCriteria criteria = new CardCriteria();

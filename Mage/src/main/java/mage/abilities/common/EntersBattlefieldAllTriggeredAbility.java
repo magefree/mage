@@ -105,7 +105,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-            if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
+            if (setTargetPointer != SetTargetPointer.NONE) {
                 for (Effect effect : this.getEffects()) {
                     switch (setTargetPointer) {
                         case PERMANENT:

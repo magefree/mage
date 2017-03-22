@@ -120,7 +120,7 @@ class PhantomNishobaPreventionEffect extends PreventionEffectImpl {
         if (permanent != null) {
             boolean removeCounter = true;
             // check if in the same combat damage step already a counter was removed
-            if (game.getTurn().getPhase().getStep().getType().equals(PhaseStep.COMBAT_DAMAGE)) {
+            if (game.getTurn().getPhase().getStep().getType() == PhaseStep.COMBAT_DAMAGE) {
                 if (game.getTurnNum() == turn 
                         && game.getTurn().getStep().equals(combatPhaseStep)) {
                     removeCounter = false;

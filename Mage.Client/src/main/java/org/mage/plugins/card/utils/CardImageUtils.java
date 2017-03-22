@@ -216,7 +216,7 @@ public final class CardImageUtils {
     public static Proxy getProxyFromPreferences() {
         Preferences prefs = MageFrame.getPreferences();
         Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
-        if (!proxyType.equals(ProxyType.NONE)) {
+        if (proxyType != ProxyType.NONE) {
             String proxyServer = prefs.get("proxyAddress", "");
             int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
             return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));

@@ -76,7 +76,7 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.DESTROY_PERMANENT.equals(event.getType());
+        return EventType.DESTROY_PERMANENT == event.getType();
     }
 
     @Override

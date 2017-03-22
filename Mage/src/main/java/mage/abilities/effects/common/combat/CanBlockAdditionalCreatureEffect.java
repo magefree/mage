@@ -103,10 +103,10 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
             default:
                 text += CardUtil.numberToText(amount, "an") + " additional creature" + (amount > 1 ? "s" : "");
         }
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             text += " this turn";
         }
-        if (duration.equals(Duration.WhileOnBattlefield)) {
+        if (duration == Duration.WhileOnBattlefield) {
             text += " each combat";
         }
         return text;

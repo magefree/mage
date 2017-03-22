@@ -113,11 +113,11 @@ public class ManaPool implements Serializable {
      * @return
      */
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay) {
-        if (!autoPayment && !manaType.equals(unlockedManaType)) {
+        if (!autoPayment && manaType != unlockedManaType) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
         }
-        if (autoPayment && autoPaymentRestricted && !wasManaAddedBeyondStock() && !manaType.equals(unlockedManaType)) {
+        if (autoPayment && autoPaymentRestricted && !wasManaAddedBeyondStock() && manaType != unlockedManaType) {
             // if automatic restricted payment and there is laready mana in the pool
             // and the needed mana type was not unlocked, nothing will be paid
             return false;
@@ -137,7 +137,7 @@ public class ManaPool implements Serializable {
                     }
                 }
             }
-            if (!manaType.equals(unlockedManaType) && autoPayment && autoPaymentRestricted && mana.count() == mana.getStock()) {
+            if (manaType != unlockedManaType && autoPayment && autoPaymentRestricted && mana.count() == mana.getStock()) {
                 // no mana added beyond the stock so don't auto pay this
                 continue;
             }

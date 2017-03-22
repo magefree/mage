@@ -107,12 +107,12 @@ class TawnossCoffinTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return super.checkEventType(event, game) || event.getType().equals(GameEvent.EventType.UNTAPPED);
+        return super.checkEventType(event, game) || event.getType() == GameEvent.EventType.UNTAPPED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.UNTAPPED)) {
+        if (event.getType() == GameEvent.EventType.UNTAPPED) {
             return event.getTargetId().equals(sourceId);
         } else {
             return super.checkTrigger(event, game);

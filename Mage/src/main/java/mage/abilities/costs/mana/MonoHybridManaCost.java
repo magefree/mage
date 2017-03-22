@@ -119,7 +119,7 @@ public class MonoHybridManaCost extends ManaCostImpl {
 
     @Override
     public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
-        return mana.equals(coloredManaSymbol);
+        return mana == coloredManaSymbol;
     }
 
     @Override

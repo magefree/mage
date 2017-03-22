@@ -117,7 +117,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             case ATTACK:
                 return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
             case BLOCK:
-                return event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER);
+                return event.getType() == EventType.DECLARE_BLOCKER;
             case ATTACK_AND_BLOCK:
                 return event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER;
         }
@@ -141,7 +141,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             String chooseText;
-            if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
+            if (event.getType() == EventType.DECLARE_ATTACKER) {
                 chooseText = "Pay " + attackBlockManaTax.getText() + " to attack?";
             } else {
                 chooseText = "Pay " + attackBlockManaTax.getText() + " to block?";
@@ -171,7 +171,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
                 PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost)manaCost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
                 if(payLifeCost.canPay(source, source.getSourceId(), player.getId(), game) &&
-                        player.chooseUse(Outcome.LoseLife,  "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + "?", source, game)) {
+                        player.chooseUse(Outcome.LoseLife,  "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', source, game)) {
                     manaCostIterator.remove();
                     costs.add(payLifeCost);
                 }
@@ -188,7 +188,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             attackBlockOtherTax.clearPaid();
             if (attackBlockOtherTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
                     && player.chooseUse(Outcome.Neutral,
-                            attackBlockOtherTax.getText() + " to " + (event.getType().equals(EventType.DECLARE_ATTACKER) ? "attack?" : "block?"), source, game)) {
+                            attackBlockOtherTax.getText() + " to " + (event.getType() == EventType.DECLARE_ATTACKER ? "attack?" : "block?"), source, game)) {
                 if (attackBlockOtherTax.pay(source, game, source.getSourceId(), event.getPlayerId(), false, null)) {
                     return false;
                 }

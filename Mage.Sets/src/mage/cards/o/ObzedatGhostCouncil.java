@@ -176,7 +176,7 @@ class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
         if (card != null) {
             Zone zone = game.getState().getZone(source.getSourceId());
             // return it from every public zone - http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/513186-obzedat-gc-as-edh-commander
-            if (!zone.equals(Zone.BATTLEFIELD) && !zone.equals(Zone.LIBRARY) && !zone.equals(Zone.HAND)) {
+            if (zone != Zone.BATTLEFIELD && zone != Zone.LIBRARY && zone != Zone.HAND) {
                 Player owner = game.getPlayer(card.getOwnerId());
                 if (owner != null) {
                     owner.moveCards(card, Zone.BATTLEFIELD, source, game);

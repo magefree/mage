@@ -187,7 +187,7 @@ class MeanderingTowershellReturnEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && game.getState().getZone(source.getSourceId()).equals(Zone.EXILED)) {
+            if (card != null && game.getState().getZone(source.getSourceId()) == Zone.EXILED) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                 game.getCombat().addAttackingCreature(card.getId(), game);
                 return true;
