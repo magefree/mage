@@ -27,25 +27,18 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.PhantomPreventionEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.turn.Step;
+
+import java.util.UUID;
 
 /**
  * @author Temba
@@ -63,7 +56,7 @@ public class PhantomTiger extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
 
         // If damage would be dealt to Phantom Tiger, prevent that damage. Remove a +1/+1 counter from Phantom Tiger.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomTigerPreventionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomPreventionEffect()));
     }
 
     public PhantomTiger(final PhantomTiger card) {
@@ -74,72 +67,4 @@ public class PhantomTiger extends CardImpl {
     public PhantomTiger copy() {
         return new PhantomTiger(this);
     }
-}
-
-class PhantomTigerPreventionEffect extends PreventionEffectImpl {
-
-    // remember turn and phase step to check if counter in this step was already removed
-    private int turn = 0;
-    private Step combatPhaseStep = null;
-
-    public PhantomTigerPreventionEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "If damage would be dealt to {this}, prevent that damage. Remove a +1/+1 counter from {this}";
-    }
-
-    public PhantomTigerPreventionEffect(final PhantomTigerPreventionEffect effect) {
-        super(effect);
-        this.turn = effect.turn;
-        this.combatPhaseStep = effect.combatPhaseStep;
-    }
-
-    @Override
-    public PhantomTigerPreventionEffect copy() {
-        return new PhantomTigerPreventionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        preventDamageAction(event, source, game);
-
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            boolean removeCounter = true;
-            // check if in the same combat damage step already a counter was removed
-            if (game.getTurn().getPhase().getStep().getType() == PhaseStep.COMBAT_DAMAGE) {
-                if (game.getTurnNum() == turn
-                        && game.getTurn().getStep().equals(combatPhaseStep)) {
-                    removeCounter = false;
-                } else {
-                    turn = game.getTurnNum();
-                    combatPhaseStep = game.getTurn().getStep();
-                }
-            }
-
-            if (removeCounter && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
-                StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
-                permanent.removeCounters(CounterType.P1P1.createInstance(), game);
-                sb.append("Removed a +1/+1 counter ");
-                game.informPlayers(sb.toString());
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
