@@ -24,7 +24,7 @@ public class DelayedViewerThread extends Thread {
 
     public synchronized void show(Component component, long delay) {
         delayedViewers.put(component, System.currentTimeMillis() + delay);
-        notify();
+        notifyAll();
     }
 
     public synchronized void hide(Component component) {

@@ -171,7 +171,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
                 PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost)manaCost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
                 if(payLifeCost.canPay(source, source.getSourceId(), player.getId(), game) &&
-                        player.chooseUse(Outcome.LoseLife,  "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + "?", source, game)) {
+                        player.chooseUse(Outcome.LoseLife,  "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', source, game)) {
                     manaCostIterator.remove();
                     costs.add(payLifeCost);
                 }
