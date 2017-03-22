@@ -217,55 +217,59 @@ public class Session {
                 if (authorizedUser.lockedUntil.compareTo(Calendar.getInstance().getTime()) > 0) {
                     return "Your profile is deactivated until " + SystemUtil.dateFormat.format(authorizedUser.lockedUntil);
                 } else {
-                    User user = UserManager.instance.createUser(userName, host, authorizedUser);
-                    if (user != null && authorizedUser.lockedUntil != null) {
-                        user.setLockedUntil(null);
+                    UserManager.instance.createUser(userName, host, authorizedUser).ifPresent(user ->
+                            user.setLockedUntil(null)
+                    );
+
+                }
+                Optional<User> selectUser = UserManager.instance.createUser(userName, host, authorizedUser);
+                boolean reconnect = false;
+                if (!selectUser.isPresent()) {  // user already exists
+                    selectUser = UserManager.instance.getUserByName(userName);
+                    if (selectUser.isPresent()) {
+                        User user = selectUser.get();
+                        // If authentication is not activated, check the identity using IP address.
+                        if (ConfigSettings.instance.isAuthenticationActivated() || user.getHost().equals(host)) {
+                            user.updateLastActivity(null);  // minimizes possible expiration
+                            this.userId = user.getId();
+                            if (user.getSessionId().isEmpty()) {
+                                logger.info("Reconnecting session for " + userName);
+                                reconnect = true;
+                            } else {
+                                //disconnect previous session
+                                logger.info("Disconnecting another user instance: " + userName);
+                                SessionManager.instance.disconnect(user.getSessionId(), DisconnectReason.ConnectingOtherInstance);
+                            }
+                        } else {
+                            return "User name " + userName + " already in use (or your IP address changed)";
+                        }
                     }
                 }
-            }
-        }
-        User user = UserManager.instance.createUser(userName, host, authorizedUser);
-        boolean reconnect = false;
-        if (user == null) {  // user already exists
-            user = UserManager.instance.getUserByName(userName);
-            // If authentication is not activated, check the identity using IP address.
-            if (ConfigSettings.instance.isAuthenticationActivated() || user.getHost().equals(host)) {
-                user.updateLastActivity(null);  // minimizes possible expiration
-                this.userId = user.getId();
-                if (user.getSessionId().isEmpty()) {
-                    logger.info("Reconnecting session for " + userName);
-                    reconnect = true;
-                } else {
-                    //disconnect previous session
-                    logger.info("Disconnecting another user instance: " + userName);
-                    SessionManager.instance.disconnect(user.getSessionId(), DisconnectReason.ConnectingOtherInstance);
+                User user = selectUser.get();
+                if (!UserManager.instance.connectToSession(sessionId, user.getId())) {
+                    return "Error connecting " + userName;
                 }
-            } else {
-                return "User name " + userName + " already in use (or your IP address changed)";
+                this.userId = user.getId();
+                if (reconnect) { // must be connected to receive the message
+                    Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(GamesRoomManager.instance.getMainRoomId());
+                    if (!room.isPresent()) {
+                        logger.error("main room not found");
+                        return null;
+                    }
+                    ChatManager.instance.joinChat(room.get().getChatId(), userId);
+                    ChatManager.instance.sendReconnectMessage(userId);
+                }
             }
-        }
-        if (!UserManager.instance.connectToSession(sessionId, user.getId())) {
-            return "Error connecting " + userName;
-        }
-        this.userId = user.getId();
-        if (reconnect) { // must be connected to receive the message
-            Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(GamesRoomManager.instance.getMainRoomId());
-            if (!room.isPresent()) {
-                logger.error("main room not found");
-                return null;
-            }
-            ChatManager.instance.joinChat(room.get().getChatId(), userId);
-            ChatManager.instance.sendReconnectMessage(userId);
         }
         return null;
+
     }
 
     public void connectAdmin() {
         this.isAdmin = true;
-        User user = UserManager.instance.createUser("Admin", host, null);
-        if (user == null) {
-            user = UserManager.instance.getUserByName("Admin");
-        }
+        User user = UserManager.instance.createUser("Admin", host, null).orElse(
+                UserManager.instance.getUserByName("Admin").get());
+
         UserData adminUserData = UserData.getDefaultUserDataView();
         adminUserData.setGroupId(UserGroup.ADMIN.getGroupId());
         user.setUserData(adminUserData);
@@ -276,8 +280,8 @@ public class Session {
     }
 
     public boolean setUserData(String userName, UserData userData, String clientVersion, String userIdStr) {
-        User user = UserManager.instance.getUserByName(userName);
-        if (user != null) {
+        Optional<User> _user = UserManager.instance.getUserByName(userName);
+        _user.ifPresent(user -> {
             if (clientVersion != null) {
                 user.setClientVersion(clientVersion);
             }
@@ -294,9 +298,8 @@ public class Session {
             if (user.getUserData().getAvatarId() == 11) {
                 user.getUserData().setAvatarId(updateAvatar(user.getName()));
             }
-            return true;
-        }
-        return false;
+        });
+        return _user.isPresent();
     }
 
     private int updateAvatar(String userName) {

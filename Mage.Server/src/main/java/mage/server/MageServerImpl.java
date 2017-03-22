@@ -1071,12 +1071,11 @@ public class MageServerImpl implements MageServer {
     @Override
     public void muteUser(final String sessionId, final String userName, final long durationMinutes) throws MageException {
         execute("muteUser", sessionId, () -> {
-            User user = UserManager.instance.getUserByName(userName);
-            if (user != null) {
+            UserManager.instance.getUserByName(userName).ifPresent(user -> {
                 Date muteUntil = new Date(Calendar.getInstance().getTimeInMillis() + (durationMinutes * Timer.ONE_MINUTE));
                 user.showUserMessage("Admin info", "You were muted for chat messages until " + SystemUtil.dateFormat.format(muteUntil) + '.');
                 user.setChatLockedUntil(muteUntil);
-            }
+            });
 
         });
     }
@@ -1084,15 +1083,14 @@ public class MageServerImpl implements MageServer {
     @Override
     public void lockUser(final String sessionId, final String userName, final long durationMinutes) throws MageException {
         execute("lockUser", sessionId, () -> {
-            User user = UserManager.instance.getUserByName(userName);
-            if (user != null) {
+            UserManager.instance.getUserByName(userName).ifPresent(user -> {
                 Date lockUntil = new Date(Calendar.getInstance().getTimeInMillis() + (durationMinutes * Timer.ONE_MINUTE));
                 user.showUserMessage("Admin info", "Your user profile was locked until " + SystemUtil.dateFormat.format(lockUntil) + '.');
                 user.setLockedUntil(lockUntil);
                 if (user.isConnected()) {
                     SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
                 }
-            }
+            });
 
         });
     }
@@ -1101,8 +1099,9 @@ public class MageServerImpl implements MageServer {
     public void setActivation(final String sessionId, final String userName, boolean active) throws MageException {
         execute("setActivation", sessionId, () -> {
             AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
-            User user = UserManager.instance.getUserByName(userName);
-            if (user != null) {
+            Optional<User> u = UserManager.instance.getUserByName(userName);
+            if (u.isPresent()) {
+                User user = u.get();
                 user.setActive(active);
                 if (!user.isActive() && user.isConnected()) {
                     SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
@@ -1117,16 +1116,14 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public void toggleActivation(final String sessionId, final String userName) throws MageException {
-        execute("toggleActivation", sessionId, () -> {
-            User user = UserManager.instance.getUserByName(userName);
-            if (user != null) {
-                user.setActive(!user.isActive());
-                if (!user.isActive() && user.isConnected()) {
-                    SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
-                }
-            }
-
-        });
+        execute("toggleActivation", sessionId, () ->
+                UserManager.instance.getUserByName(userName).ifPresent(user ->
+                {
+                    user.setActive(!user.isActive());
+                    if (!user.isActive() && user.isConnected()) {
+                        SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
+                    }
+                }));
     }
 
     @Override
@@ -1144,13 +1141,10 @@ public class MageServerImpl implements MageServer {
     @Override
     public void removeTable(final String sessionId, final UUID tableId) throws MageException {
         execute("removeTable", sessionId, () -> {
-            Optional<Session> session = SessionManager.instance.getSession(sessionId);
-            if (!session.isPresent()) {
-                logger.error("Session not found : " + sessionId);
-            } else {
-                UUID userId = session.get().getUserId();
+            SessionManager.instance.getSession(sessionId).ifPresent(session -> {
+                UUID userId = session.getUserId();
                 TableManager.instance.removeTable(userId, tableId);
-            }
+            });
         });
     }
 
@@ -1162,15 +1156,12 @@ public class MageServerImpl implements MageServer {
     @Override
     public void sendFeedbackMessage(final String sessionId, final String username, final String title, final String type, final String message, final String email) throws MageException {
         if (title != null && message != null) {
-            execute("sendFeedbackMessage", sessionId, () -> {
-                Optional<Session> session = SessionManager.instance.getSession(sessionId);
-                if (!session.isPresent()) {
-                    logger.error(String.format("Session not found: %s", sessionId));
-                } else {
-                    FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.get().getHost());
+            execute("sendFeedbackMessage", sessionId, () ->
+                    SessionManager.instance.getSession(sessionId).ifPresent(
+                            session -> FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.getHost())
 
-                }
-            });
+
+            ));
         }
     }
 
