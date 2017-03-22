@@ -30,6 +30,7 @@ package mage.cards.c;
 import java.util.UUID;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -55,7 +56,8 @@ public class CitadelOfPain extends CardImpl {
     public CitadelOfPain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-        TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true,
+        TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE,
+                "beginning of the end step", true,
                 new CitadelOfPainEffect());
         // At the beginning of each player's end step, Citadel of Pain deals X damage to that player, where X is the number of untapped lands he or she controls.
         this.addAbility(triggered);
@@ -75,6 +77,11 @@ class CitadelOfPainEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterControlledLandPermanent();
 
+    @Override
+    public String getText(Mode mode) {
+        return "{this} deals X damage to that player, where X is the number of untapped lands he or she controls.";
+    }
+
     static {
         filter.add(Predicates.not(new TappedPredicate()));
     }
@@ -89,7 +96,7 @@ class CitadelOfPainEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
             int damage = game.getBattlefield().countAll(filter, game.getActivePlayerId(), game);
             player.damage(damage, source.getSourceId(), game, false, true);
