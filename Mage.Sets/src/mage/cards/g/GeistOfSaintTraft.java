@@ -31,19 +31,16 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AngelToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author Loki
@@ -87,18 +84,12 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        AngelToken token = new AngelToken();
+    public boolean apply(Game game, Ability source) {        
+        CreateTokenEffect effect = new CreateTokenEffect(new AngelToken(), 1, true, true);
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true)) {
-            for (UUID tokenId : token.getLastAddedTokenIds()) {
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                    game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
-                }
-            }
+        
+        if (controller != null && effect.apply(game, source)) {
+            effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;
         }
         return false;
