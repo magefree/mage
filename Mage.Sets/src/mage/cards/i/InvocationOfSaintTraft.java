@@ -97,7 +97,7 @@ class InvocationOfSaintTraftEffect extends OneShotEffect {
         CreateTokenEffect effect = new CreateTokenEffect(new AngelToken(), 1, true, true);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && (effect.apply(game, source))) {
-            effect.exileTokensCreatedAtNextEndStep(game, source);
+            effect.exileTokensCreatedAtEndOfCombat(game, source);
             return true;
         }
         return false;
