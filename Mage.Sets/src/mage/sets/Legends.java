@@ -67,6 +67,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Arena of the Ancients", 215, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));
         cards.add(new SetCardInfo("Avoid Fate", 89, Rarity.COMMON, mage.cards.a.AvoidFate.class));
         cards.add(new SetCardInfo("Azure Drake", 46, Rarity.UNCOMMON, mage.cards.a.AzureDrake.class));
+        cards.add(new SetCardInfo("Backfire", 47, Rarity.UNCOMMON, mage.cards.b.Backfire.class));
         cards.add(new SetCardInfo("Barbary Apes", 90, Rarity.COMMON, mage.cards.b.BarbaryApes.class));
         cards.add(new SetCardInfo("Barktooth Warbeard", 261, Rarity.UNCOMMON, mage.cards.b.BarktoothWarbeard.class));
         cards.add(new SetCardInfo("Bartel Runeaxe", 262, Rarity.RARE, mage.cards.b.BartelRuneaxe.class));
