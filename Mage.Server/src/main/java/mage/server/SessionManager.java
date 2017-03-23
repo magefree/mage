@@ -51,7 +51,11 @@ public enum SessionManager {
 
     public Optional<Session> getSession(@Nonnull String sessionId) {
         Session session = sessions.get(sessionId);
-        if (session != null && session.getUserId() != null && UserManager.instance.getUser(session.getUserId()) == null) {
+        if(session == null){
+            logger.error("Session with sessionId " + sessionId + " is not found");
+            return Optional.empty();
+        }
+        if (session.getUserId() != null && UserManager.instance.getUser(session.getUserId()) == null) {
             logger.error("User for session " + sessionId + " with userId " + session.getUserId() + " is missing. Session removed.");
             // can happen if user from same host signs in multiple time with multiple clients, after he disconnects with one client
             disconnect(sessionId, DisconnectReason.ConnectingOtherInstance);
