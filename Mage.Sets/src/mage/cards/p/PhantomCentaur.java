@@ -27,35 +27,28 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.PhantomPreventionEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.turn.Step;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class PhantomCentaur extends CardImpl {
 
     public PhantomCentaur(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add("Centaur");
         this.subtype.add("Spirit");
 
@@ -69,7 +62,7 @@ public class PhantomCentaur extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
 
         // If damage would be dealt to Phantom Centaur, prevent that damage. Remove a +1/+1 counter from Phantom Centaur.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomCentaurPreventionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomPreventionEffect()));
     }
 
     public PhantomCentaur(final PhantomCentaur card) {
@@ -80,72 +73,4 @@ public class PhantomCentaur extends CardImpl {
     public PhantomCentaur copy() {
         return new PhantomCentaur(this);
     }
-}
-
-class PhantomCentaurPreventionEffect extends PreventionEffectImpl {
-
-    // remember turn and phase step to check if counter in this step was already removed
-    private int turn = 0;
-    private Step combatPhaseStep = null;
-
-    public PhantomCentaurPreventionEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "If damage would be dealt to {this}, prevent that damage. Remove a +1/+1 counter from {this}";
-    }
-
-    public PhantomCentaurPreventionEffect(final PhantomCentaurPreventionEffect effect) {
-        super(effect);
-        this.turn = effect.turn;
-        this.combatPhaseStep = effect.combatPhaseStep;
-    }
-
-    @Override
-    public PhantomCentaurPreventionEffect copy() {
-        return new PhantomCentaurPreventionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        preventDamageAction(event, source, game);
-
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            boolean removeCounter = true;
-            // check if in the same combat damage step already a counter was removed
-            if (game.getTurn().getPhase().getStep().getType() == PhaseStep.COMBAT_DAMAGE) {
-                if (game.getTurnNum() == turn
-                        && game.getTurn().getStep().equals(combatPhaseStep)) {
-                    removeCounter = false;
-                } else {
-                    turn = game.getTurnNum();
-                    combatPhaseStep = game.getTurn().getStep();
-                }
-            }
-
-            if(removeCounter && permanent.getCounters(game).containsKey(CounterType.P1P1)) {
-                StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
-                permanent.removeCounters(CounterType.P1P1.createInstance(), game);
-                sb.append("Removed a +1/+1 counter ");
-                game.informPlayers(sb.toString());
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
