@@ -89,7 +89,7 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         
         if (controller != null && effect.apply(game, source)) {
-            effect.exileTokensCreatedAtNextEndStep(game, source);
+            effect.exileTokensCreatedAtEndOfCombat(game, source);
             return true;
         }
         return false;

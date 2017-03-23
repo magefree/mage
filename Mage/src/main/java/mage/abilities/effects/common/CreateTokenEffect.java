@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -124,6 +125,17 @@ public class CreateTokenEffect extends OneShotEffect {
         }        
     }
 
+    public void exileTokensCreatedAtEndOfCombat(Game game, Ability source) {
+        for (UUID tokenId : this.getLastAddedTokenIds()) {
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
+            }
+        }        
+    }
+    
     private void setText() {
         StringBuilder sb = new StringBuilder("create ");
         if (amount.toString().equals("1")) {
