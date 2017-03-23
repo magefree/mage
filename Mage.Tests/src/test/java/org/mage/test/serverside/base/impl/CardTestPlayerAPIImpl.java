@@ -278,7 +278,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
-        if (gameZone.equals(Zone.BATTLEFIELD)) {
+        if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 CardInfo cardInfo = CardRepository.instance.findCard(cardName);
                 Card card = cardInfo != null ? cardInfo.getCard() : null;
@@ -445,12 +445,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
             if (permanent.getName().equals(cardName) && permanent.getControllerId().equals(player.getId())) {
                 count++;
-                if (scope.equals(Filter.ComparisonScope.All)) {
+                if (scope == Filter.ComparisonScope.All) {
                     Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ')',
                             power, permanent.getPower().getValue());
                     Assert.assertEquals("Toughness is not the same (" + toughness + " vs. " + permanent.getToughness().getValue() + ')',
                             toughness, permanent.getToughness().getValue());
-                } else if (scope.equals(Filter.ComparisonScope.Any)) {
+                } else if (scope == Filter.ComparisonScope.Any) {
                     if (power == permanent.getPower().getValue() && toughness == permanent.getToughness().getValue()) {
                         fit++;
                         break;
@@ -465,7 +465,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertTrue("There is no such permanent under player's control, player=" + player.getName()
                 + ", cardName=" + cardName, count > 0);
 
-        if (scope.equals(Filter.ComparisonScope.Any)) {
+        if (scope == Filter.ComparisonScope.Any) {
             Assert.assertTrue("There is no such creature under player's control with specified p/t of " + power + '/' + toughness + ", player=" + player.getName()
                     + ", cardName=" + cardName + " (found similar: " + found + ", one of them: power=" + foundPower + " toughness=" + foundToughness + ')', fit > 0);
         }
@@ -1055,7 +1055,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param clause
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, StackClause clause) {
-        if (StackClause.WHILE_ON_STACK.equals(clause)) {
+        if (StackClause.WHILE_ON_STACK == clause) {
             player.addAction(turnNum, step, "activate:Cast " + cardName
                     + '$' + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
                     + "$spellOnStack=" + spellOnStack);
@@ -1253,7 +1253,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (currentGame == null) {
             throw new IllegalStateException("Current game is null");
         }
-        if (scope.equals(Filter.ComparisonScope.All)) {
+        if (scope == Filter.ComparisonScope.All) {
             throw new UnsupportedOperationException("ComparisonScope.All is not implemented.");
         }
 

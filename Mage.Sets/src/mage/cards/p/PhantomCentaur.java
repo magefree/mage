@@ -74,4 +74,3 @@ public class PhantomCentaur extends CardImpl {
         return new PhantomCentaur(this);
     }
 }
-

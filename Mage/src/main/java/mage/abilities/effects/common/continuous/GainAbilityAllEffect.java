@@ -179,7 +179,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             sb.append("Other ");
         }
         sb.append(filter.getMessage());
-        if (duration.equals(Duration.WhileOnBattlefield)) {
+        if (duration == Duration.WhileOnBattlefield) {
             if (filter.getMessage().toLowerCase().startsWith("each")) {
                 sb.append(" has ");
             } else {

@@ -94,7 +94,7 @@ class KembasLegionEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && !permanent.getAttachments().isEmpty()) {
-            if (layer.equals(Layer.RulesEffects)) {
+            if (layer == Layer.RulesEffects) {
                 // maxBlocks = 0 equals to "can block any number of creatures"
                 if (permanent.getMaxBlocks() > 0) {
                     List<UUID> attachments = permanent.getAttachments();

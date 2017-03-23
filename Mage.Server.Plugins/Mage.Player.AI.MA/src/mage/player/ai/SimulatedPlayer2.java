@@ -124,7 +124,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         List<Ability> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
         playables = filterAbilities(game, playables, suggested);
         for (Ability ability : playables) {
-            if (ability.getAbilityType().equals(AbilityType.MANA)) {
+            if (ability.getAbilityType() == AbilityType.MANA) {
                 continue;
             }
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);

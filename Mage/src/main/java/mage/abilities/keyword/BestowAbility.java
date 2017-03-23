@@ -175,7 +175,7 @@ class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.ENTERS_THE_BATTLEFIELD_SELF.equals(event.getType());
+        return EventType.ENTERS_THE_BATTLEFIELD_SELF == event.getType();
     }
 
     @Override

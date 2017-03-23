@@ -332,7 +332,7 @@ public class WizardCardsImageSource implements CardImageSource {
         Preferences prefs = MageFrame.getPreferences();
         Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
         Document doc;
-        if (proxyType.equals(ProxyType.NONE)) {
+        if (proxyType == ProxyType.NONE) {
             doc = Jsoup.connect(urlString).get();
         } else {
             String proxyServer = prefs.get("proxyAddress", "");

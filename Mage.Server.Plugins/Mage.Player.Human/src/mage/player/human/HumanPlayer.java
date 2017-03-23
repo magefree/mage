@@ -297,7 +297,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        if (Outcome.PutManaInPool.equals(outcome)) {
+        if (Outcome.PutManaInPool == outcome) {
             if (currentlyUnpaidMana != null
                     && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
                 return true;
@@ -593,12 +593,12 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
             if (getJustActivatedType() != null && !holdingPriority) {
-                if (controllingPlayer.getUserData().isPassPriorityCast() && getJustActivatedType().equals(AbilityType.SPELL)) {
+                if (controllingPlayer.getUserData().isPassPriorityCast() && getJustActivatedType() == AbilityType.SPELL) {
                     setJustActivatedType(null);
                     pass(game);
                     return false;
                 }
-                if (controllingPlayer.getUserData().isPassPriorityActivation() && getJustActivatedType().equals(AbilityType.ACTIVATED)) {
+                if (controllingPlayer.getUserData().isPassPriorityActivation() && getJustActivatedType() == AbilityType.ACTIVATED) {
                     setJustActivatedType(null);
                     pass(game);
                     return false;
@@ -612,7 +612,7 @@ public class HumanPlayer extends PlayerImpl {
                 }
                 if (passedUntilEndStepBeforeMyTurn) {
 
-                    if (!game.getTurn().getStepType().equals(PhaseStep.END_TURN)) {
+                    if (game.getTurn().getStepType() != PhaseStep.END_TURN) {
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
@@ -634,7 +634,7 @@ public class HumanPlayer extends PlayerImpl {
                         }
                     }
                     if (passedUntilNextMain) {
-                        if (game.getTurn().getStepType().equals(PhaseStep.POSTCOMBAT_MAIN) || game.getTurn().getStepType().equals(PhaseStep.PRECOMBAT_MAIN)) {
+                        if (game.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN || game.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN) {
                             // it's a main phase
                             if (!skippedAtLeastOnce || (!playerId.equals(game.getActivePlayerId()) && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
                                 skippedAtLeastOnce = true;
@@ -653,7 +653,7 @@ public class HumanPlayer extends PlayerImpl {
                         }
                     }
                     if (passedUntilEndOfTurn) {
-                        if (game.getTurn().getStepType().equals(PhaseStep.END_TURN)) {
+                        if (game.getTurn().getStepType() == PhaseStep.END_TURN) {
                             // It's end of turn phase
                             if (!skippedAtLeastOnce || (playerId.equals(game.getActivePlayerId()) && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
@@ -1376,7 +1376,7 @@ public class HumanPlayer extends PlayerImpl {
                             }
                         }
                     }
-                    if (!source.getAbilityType().equals(AbilityType.TRIGGERED)) {
+                    if (source.getAbilityType() != AbilityType.TRIGGERED) {
                         done = true;
                     }
                     if (!canRespond()) {
@@ -1407,7 +1407,7 @@ public class HumanPlayer extends PlayerImpl {
     public void setResponseString(String responseString) {
         synchronized (response) {
             response.setString(responseString);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got response string from player: " + getId());
         }
     }
@@ -1417,7 +1417,7 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             response.setManaType(manaType);
             response.setResponseManaTypePlayerId(manaTypePlayerId);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got response mana type from player: " + getId());
         }
     }
@@ -1426,7 +1426,7 @@ public class HumanPlayer extends PlayerImpl {
     public void setResponseUUID(UUID responseUUID) {
         synchronized (response) {
             response.setUUID(responseUUID);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got response UUID from player: " + getId());
         }
     }
@@ -1435,7 +1435,7 @@ public class HumanPlayer extends PlayerImpl {
     public void setResponseBoolean(Boolean responseBoolean) {
         synchronized (response) {
             response.setBoolean(responseBoolean);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got response boolean from player: " + getId());
         }
     }
@@ -1444,7 +1444,7 @@ public class HumanPlayer extends PlayerImpl {
     public void setResponseInteger(Integer responseInteger) {
         synchronized (response) {
             response.setInteger(responseInteger);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got response integer from player: " + getId());
         }
     }
@@ -1453,7 +1453,7 @@ public class HumanPlayer extends PlayerImpl {
     public void abort() {
         abort = true;
         synchronized (response) {
-            response.notify();
+            response.notifyAll();
             logger.debug("Got cancel action from player: " + getId());
         }
     }
@@ -1462,7 +1462,7 @@ public class HumanPlayer extends PlayerImpl {
     public void skip() {
         synchronized (response) {
             response.setInteger(0);
-            response.notify();
+            response.notifyAll();
             logger.debug("Got skip action from player: " + getId());
         }
     }
@@ -1516,7 +1516,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     private void setRequestAutoAnswer(PlayerAction playerAction, Game game, Object data) {
-        if (playerAction.equals(REQUEST_AUTO_ANSWER_RESET_ALL)) {
+        if (playerAction == REQUEST_AUTO_ANSWER_RESET_ALL) {
             requestAutoAnswerId.clear();
             requestAutoAnswerText.clear();
             return;
@@ -1541,7 +1541,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     private void setTriggerAutoOrder(PlayerAction playerAction, Game game, Object data) {
-        if (playerAction.equals(TRIGGER_AUTO_ORDER_RESET_ALL)) {
+        if (playerAction == TRIGGER_AUTO_ORDER_RESET_ALL) {
             triggerAutoOrderAbilityFirst.clear();
             triggerAutoOrderAbilityLast.clear();
             triggerAutoOrderNameFirst.clear();

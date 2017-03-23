@@ -144,7 +144,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                 result = true;
             }
         }
-        if (!result && this.duration.equals(Duration.Custom)) {
+        if (!result && this.duration == Duration.Custom) {
             this.discard();
         }
         return result;

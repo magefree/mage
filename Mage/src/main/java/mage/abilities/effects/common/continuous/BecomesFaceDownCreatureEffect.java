@@ -89,7 +89,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         this.objectReference = objectReference;
         this.zoneChangeCounter = Integer.MIN_VALUE;
         if (turnFaceUpCosts != null) {
-            this.turnFaceUpAbility = new TurnFaceUpAbility(turnFaceUpCosts, faceDownType.equals(FaceDownType.MEGAMORPHED));
+            this.turnFaceUpAbility = new TurnFaceUpAbility(turnFaceUpCosts, faceDownType == FaceDownType.MEGAMORPHED);
         }
         staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
         foundPermanent = false;
@@ -124,7 +124,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (faceDownType.equals(FaceDownType.MANUAL)) {
+        if (faceDownType == FaceDownType.MANUAL) {
             Permanent permanent;
             if (objectReference != null) {
                 permanent = objectReference.getPermanent(game);
@@ -200,7 +200,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                         permanent.getToughness().setValue(2);
                     }
             }
-        } else if (duration.equals(Duration.Custom) && foundPermanent == true) {
+        } else if (duration == Duration.Custom && foundPermanent == true) {
             discard();
         }
         return true;

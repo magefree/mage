@@ -42,7 +42,7 @@ public class SpellsCastWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (EventType.SPELL_CAST.equals(event.getType())) {
+        if (EventType.SPELL_CAST == event.getType()) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell == null) {
                 MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.STACK);

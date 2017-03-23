@@ -1144,7 +1144,7 @@ public final class GamePanel extends javax.swing.JPanel {
         PopUpMenuType popupMenuType = null;
         if (options != null) {
             if (options.containsKey("targetZone")) {
-                if (Zone.HAND.equals(options.get("targetZone"))) { // mark selectable target cards in hand
+                if (Zone.HAND == options.get("targetZone")) { // mark selectable target cards in hand
                     List<UUID> choosen = null;
                     if (options.containsKey("chosen")) {
                         choosen = (List<UUID>) options.get("chosen");
@@ -1163,7 +1163,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     }
                 }
             }
-            if (options.containsKey("queryType") && PlayerQueryEvent.QueryType.PICK_ABILITY.equals(options.get("queryType"))) {
+            if (options.containsKey("queryType") && PlayerQueryEvent.QueryType.PICK_ABILITY == options.get("queryType")) {
                 popupMenuType = PopUpMenuType.TRIGGER_ORDER;
             }
         }
@@ -1263,7 +1263,7 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         ShowCardsDialog showCards = new ShowCardsDialog();
         JPopupMenu popupMenu = null;
-        if (PopUpMenuType.TRIGGER_ORDER.equals(popupMenuType)) {
+        if (PopUpMenuType.TRIGGER_ORDER == popupMenuType) {
             popupMenu = popupMenuTriggerOrder;
         }
         showCards.loadCards(title, cards, bigCard, gameId, required, options, popupMenu, getShowCardsEventListener(showCards));

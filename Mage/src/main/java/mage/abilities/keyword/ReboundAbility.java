@@ -108,7 +108,7 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
                 && event.getSourceId() != null
                 && event.getSourceId().equals(source.getSourceId())) { // if countered the source.sourceId is different or null if it fizzles
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getFromZone().equals(Zone.HAND)) {
+            if (spell != null && spell.getFromZone() == Zone.HAND) {
                 return true;
             }
         }

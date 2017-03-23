@@ -88,7 +88,7 @@ class GrafdiggersCageEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.ZONE_CHANGE.equals(event.getType());
+        return EventType.ZONE_CHANGE == event.getType();
     }
 
     @Override

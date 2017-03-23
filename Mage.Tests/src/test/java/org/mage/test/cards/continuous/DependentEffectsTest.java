@@ -137,7 +137,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         Permanent necroticOoze = getPermanent("Necrotic Ooze", playerA);
         int numberOfActivatedAbilities = 0;
         for (Ability ability : necroticOoze.getAbilities(currentGame)) {
-            if (ability.getAbilityType().equals(AbilityType.ACTIVATED)) {
+            if (ability.getAbilityType() == AbilityType.ACTIVATED) {
                 numberOfActivatedAbilities++;
             }
         }
@@ -166,7 +166,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         Permanent necroticOoze = getPermanent("Necrotic Ooze", playerA);
         int numberOfActivatedAbilities = 0;
         for (Ability ability : necroticOoze.getAbilities(currentGame)) {
-            if (ability.getAbilityType().equals(AbilityType.ACTIVATED)) {
+            if (ability.getAbilityType() == AbilityType.ACTIVATED) {
                 numberOfActivatedAbilities++;
             }
         }

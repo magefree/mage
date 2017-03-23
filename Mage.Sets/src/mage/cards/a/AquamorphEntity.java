@@ -117,7 +117,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                 }
             }
         }
-        if (event.getType().equals(EventType.TURNFACEUP)) {
+        if (event.getType() == EventType.TURNFACEUP) {
             if (event.getTargetId().equals(source.getSourceId())) {
                 return true;
             }

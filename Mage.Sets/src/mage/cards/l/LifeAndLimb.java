@@ -128,7 +128,7 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
                         }
                         break;
                     case PTChangingEffects_7:
-                        if (sublayer.equals(SubLayer.SetPT_7b)) {
+                        if (sublayer == SubLayer.SetPT_7b) {
                             permanent.getPower().setValue(1);
                             permanent.getToughness().setValue(1);
                         }

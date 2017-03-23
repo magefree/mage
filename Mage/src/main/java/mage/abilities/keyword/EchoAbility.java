@@ -96,7 +96,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
             
             this.echoPaid = false;
         }
-        if (event.getType().equals(GameEvent.EventType.UPKEEP_STEP_PRE)) {
+        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
             if(lastController != null){
                 if(!lastController.equals(this.controllerId)){
                     this.echoPaid = false;

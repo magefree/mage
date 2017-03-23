@@ -518,7 +518,7 @@ public abstract class AbilityImpl implements Ability {
                 PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost)cost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
                 if(payLifeCost.canPay(this, sourceId, controller.getId(), game) &&
-                        controller.chooseUse(Outcome.LoseLife,  "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + "?", this, game)) {
+                        controller.chooseUse(Outcome.LoseLife,  "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', this, game)) {
                     costIterator.remove();
                     costs.add(payLifeCost);
                 }

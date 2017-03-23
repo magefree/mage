@@ -75,6 +75,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Bridge from Below", 81, Rarity.RARE, mage.cards.b.BridgeFromBelow.class));
         cards.add(new SetCardInfo("Centaur Omenreader", 143, Rarity.UNCOMMON, mage.cards.c.CentaurOmenreader.class));
         cards.add(new SetCardInfo("Char-Rumbler", 96, Rarity.UNCOMMON, mage.cards.c.CharRumbler.class));
+        cards.add(new SetCardInfo("Chronomantic Escape", 4, Rarity.UNCOMMON, mage.cards.c.ChronomanticEscape.class));
         cards.add(new SetCardInfo("Cloud Key", 160, Rarity.RARE, mage.cards.c.CloudKey.class));
         cards.add(new SetCardInfo("Cloudseeder", 33, Rarity.UNCOMMON, mage.cards.c.Cloudseeder.class));
         cards.add(new SetCardInfo("Coalition Relic", 161, Rarity.RARE, mage.cards.c.CoalitionRelic.class));

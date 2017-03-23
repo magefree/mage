@@ -147,7 +147,7 @@ public final class GuiDisplayUtil {
         for (String rule : card.getRules()) {
             textLines.basicTextLength += rule.length();
         }
-        if (card.getMageObjectType().equals(MageObjectType.PERMANENT)) {
+        if (card.getMageObjectType() == MageObjectType.PERMANENT) {
             if (card.getPairedCard() != null) {
                 textLines.lines.add("<span color='green'><i>Paired with another creature</i></span>");
                 textLines.basicTextLength += 30;

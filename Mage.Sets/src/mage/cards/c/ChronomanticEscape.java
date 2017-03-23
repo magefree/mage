@@ -25,58 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.cards.c;
 
-package mage.abilities.effects.common.combat;
-
-import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.SuspendAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
- * The creatures defined by filter can't attack any opponent
  *
- * @author LevelX2
+ * @author spjspj
  */
-public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
+public class ChronomanticEscape extends CardImpl {
 
-    private final FilterCreaturePermanent filter;
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
 
-    public CantAttackAnyPlayerAllEffect(Duration duration, FilterCreaturePermanent filter) {
-        super(duration);
-        this.filter = filter;
-        StringBuilder sb = new StringBuilder(filter.getMessage()).append(" can't attack");
-        if (!duration.toString().isEmpty()) {
-            sb.append(' ');
-            if (duration == Duration.EndOfTurn) {
-                sb.append(" this turn");
-            } else {
-                sb.append(' ').append(duration.toString());
-            }
-        }
-        staticText = sb.toString();        
+    public ChronomanticEscape(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
+
+        // Until your next turn, creatures can't attack you. Exile Chronomantic Escape with three time counters on it.
+        getSpellAbility().addEffect(new CantAttackYouAllEffect(Duration.UntilYourNextTurn, filter));
+        getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), new StaticValue(3), true, true);
+        effect.setText("with 3 time counters on it");
+        getSpellAbility().addEffect(effect);
+
+        // Suspend 3-{2}{W}
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{2}{W}"), this));
     }
 
-    public CantAttackAnyPlayerAllEffect(final CantAttackAnyPlayerAllEffect effect) {
-        super(effect);
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+    public ChronomanticEscape(final ChronomanticEscape card) {
+        super(card);
     }
 
     @Override
-    public boolean canAttack(Game game) {
-        return false;
+    public ChronomanticEscape copy() {
+        return new ChronomanticEscape(this);
     }
-
-    @Override
-    public CantAttackAnyPlayerAllEffect copy() {
-        return new CantAttackAnyPlayerAllEffect(this);
-    }
-
 }

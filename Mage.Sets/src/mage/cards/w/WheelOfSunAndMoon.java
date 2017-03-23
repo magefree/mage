@@ -105,7 +105,7 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone().equals(Zone.GRAVEYARD)) {
+        if (zEvent.getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
                 Permanent enchantment = game.getPermanent(source.getSourceId());

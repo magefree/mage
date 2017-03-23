@@ -225,7 +225,7 @@ public class DragonsMaze extends ExpansionSet {
 
     @Override
     public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        if (rarity.equals(Rarity.COMMON)) {
+        if (rarity == Rarity.COMMON) {
             List<CardInfo> savedCardsInfos = savedCards.get(rarity);
             if (savedCardsInfos == null) {
                 CardCriteria criteria = new CardCriteria();

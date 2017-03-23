@@ -152,7 +152,7 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-       if (game.getState().getZone(objectId).equals(Zone.EXILED)) {
+       if (game.getState().getZone(objectId) == Zone.EXILED) {
             Player player = game.getPlayer(affectedControllerId);
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game);
@@ -192,7 +192,7 @@ class SharedFateLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-       if (game.getState().getZone(objectId).equals(Zone.EXILED)) {
+       if (game.getState().getZone(objectId) == Zone.EXILED) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game);
             if (exileId != null) {
