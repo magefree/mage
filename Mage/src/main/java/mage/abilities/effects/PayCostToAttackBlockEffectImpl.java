@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects;
 
+import java.util.Iterator;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -42,9 +43,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-
-import java.util.Iterator;
-import java.util.List;
 
 /**
  *
@@ -72,7 +70,6 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
 
     protected final Cost cost;
     protected final ManaCosts manaCosts;
-
     protected final RestrictType restrictType;
 
     public PayCostToAttackBlockEffectImpl(Duration duration, Outcome outcome, RestrictType restrictType) {
@@ -149,7 +146,9 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             attackBlockManaTax.clearPaid();
             if (attackBlockManaTax.canPay(source, source.getSourceId(), player.getId(), game)
                     && player.chooseUse(Outcome.Neutral, chooseText, source, game)) {
-                handlePhyrexianManaCosts(manaCosts, player, source, game);
+                
+                handlePhyrexianManaCosts(getManaCostToPay(event, source, game), player, source, game);
+                
                 if (attackBlockManaTax instanceof ManaCostsImpl) {
                     if (attackBlockManaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                         return false;
@@ -162,6 +161,9 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
     }
 
     private void handlePhyrexianManaCosts(ManaCosts<ManaCost> manaCosts, Player player, Ability source, Game game) {
+                
+        if (manaCosts == null) return; // nothing to be done without any mana costs. prevents NRE from occurring here
+        
         Iterator<ManaCost> manaCostIterator = manaCosts.iterator();
         Costs<PayLifeCost> costs = new CostsImpl<>();
 

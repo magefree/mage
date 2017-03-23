@@ -40,8 +40,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class CantAttackTest extends CardTestPlayerBase {
 
     /**
-     * Tests "If all other elves get the Forestwalk ability and can't be blockt
-     * from creatures whose controler has a forest in game"
+     * Tests "If all other elves get the Forestwalk ability and can't be blocked
+     * from creatures whose controller has a forest in game"
      */
     @Test
     public void testAttack() {
@@ -249,5 +249,159 @@ public class CantAttackTest extends CardTestPlayerBase {
         assertLife(playerB, 12); // 1 hit from medomai and firecraft = 8 damage
         assertGraveyardCount(playerA, eFirecraft, 1);
         assertPermanentCount(playerA, medomai, 1);
+    }
+    
+    @Test
+    public void sphereOfSafetyPaidCostAllowsAttack() {        
+        /*
+        Sphere of Safety {4}{W}
+         Enchantment
+        Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
+        */
+        String sphere = "Sphere of Safety";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, sphere);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "Yes");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, sphere, 1);
+        assertLife(playerB, 19); // took the hit from memnite
+        assertTapped("Forest", true); // forest had to be tapped
+    }
+    
+    @Test
+    public void sphereOfSafetyCostNotPaid_NoAttackAllowed() {
+        /*
+        Sphere of Safety {4}{W}
+         Enchantment
+        Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
+        */
+        String sphere = "Sphere of Safety";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, sphere);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "No");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, sphere, 1);
+        assertLife(playerB, 20); // no damage went through, did not elect to pay
+        assertTapped("Forest", false); // forest not tapped
+    }
+    
+    @Test
+    public void collectiveResistanceCostPaid_AttackAllowed()
+    {
+        /*
+        Collective Restraint {3}{U}
+        Enchantment
+        Domain — Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types among lands you control.
+        */
+        String cRestraint = "Collective Restraint";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, cRestraint);
+        addCard(Zone.BATTLEFIELD, playerB, "Island"); // 1 basic land type = pay 1 to attack
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "Yes");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, cRestraint, 1);
+        assertLife(playerB, 19); // took the hit from memnite
+        assertTapped("Forest", true); // forest had to be tapped
+    }
+    
+    @Test
+    public void collectiveResistanceCostNotPaid_NoAttackAllowed()
+    {
+        /*
+        Collective Restraint {3}{U}
+        Enchantment
+        Domain — Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types among lands you control.
+        */
+        String cRestraint = "Collective Restraint";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, cRestraint);
+        addCard(Zone.BATTLEFIELD, playerB, "Island"); // 1 basic land type = pay 1 to attack
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "No");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, cRestraint, 1);
+        assertLife(playerB, 20); // no damage went through, did not elect to pay
+        assertTapped("Forest", false); // forest not tapped
+    }
+    
+    @Test
+    public void ghostlyPrison_PaidCost_AllowsAttack() {        
+        /*
+        Ghostly Prison {2}{W}
+        Enchantment
+        Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
+        */
+        String gPrison = "Ghostly Prison";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, gPrison);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "Yes");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, gPrison, 1);
+        assertLife(playerB, 19); // took the hit from memnite
+        assertTappedCount("Forest", true, 2);  // forests had to be tapped
+    }
+    
+    @Test
+    public void ghostlyPrison_CostNotPaid_NoAttackAllowed() {
+        /*
+        Ghostly Prison {2}{W}
+        Enchantment
+        Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
+        */
+        String gPrison = "Ghostly Prison";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, gPrison);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "No");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, gPrison, 1);
+        assertLife(playerB, 20); // no damage went through, did not elect to pay
+        assertTapped("Forest", false); // no forests tapped
     }
 }
