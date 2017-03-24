@@ -203,7 +203,6 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Voidslime", 137, Rarity.RARE, mage.cards.v.Voidslime.class));
         cards.add(new SetCardInfo("Wakestone Gargoyle", 21, Rarity.RARE, mage.cards.w.WakestoneGargoyle.class));
         cards.add(new SetCardInfo("Walking Archive", 169, Rarity.RARE, mage.cards.w.WalkingArchive.class));
-        cards.add(new SetCardInfo("War's Toll", 77, Rarity.RARE, mage.cards.w.WarsToll.class));
         cards.add(new SetCardInfo("Whiptail Moloch", 79, Rarity.COMMON, mage.cards.w.WhiptailMoloch.class));
         cards.add(new SetCardInfo("Windreaver", 138, Rarity.RARE, mage.cards.w.Windreaver.class));
         cards.add(new SetCardInfo("Wit's End", 58, Rarity.RARE, mage.cards.w.WitsEnd.class));
