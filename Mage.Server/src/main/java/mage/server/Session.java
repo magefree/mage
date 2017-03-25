@@ -222,45 +222,47 @@ public class Session {
                     );
 
                 }
-                Optional<User> selectUser = UserManager.instance.createUser(userName, host, authorizedUser);
-                boolean reconnect = false;
-                if (!selectUser.isPresent()) {  // user already exists
-                    selectUser = UserManager.instance.getUserByName(userName);
-                    if (selectUser.isPresent()) {
-                        User user = selectUser.get();
-                        // If authentication is not activated, check the identity using IP address.
-                        if (ConfigSettings.instance.isAuthenticationActivated() || user.getHost().equals(host)) {
-                            user.updateLastActivity(null);  // minimizes possible expiration
-                            this.userId = user.getId();
-                            if (user.getSessionId().isEmpty()) {
-                                logger.info("Reconnecting session for " + userName);
-                                reconnect = true;
-                            } else {
-                                //disconnect previous session
-                                logger.info("Disconnecting another user instance: " + userName);
-                                SessionManager.instance.disconnect(user.getSessionId(), DisconnectReason.ConnectingOtherInstance);
-                            }
-                        } else {
-                            return "User name " + userName + " already in use (or your IP address changed)";
-                        }
-                    }
-                }
+            }
+        }
+        Optional<User> selectUser = UserManager.instance.createUser(userName, host, authorizedUser);
+        boolean reconnect = false;
+        if (!selectUser.isPresent()) {  // user already exists
+            selectUser = UserManager.instance.getUserByName(userName);
+            if (selectUser.isPresent()) {
                 User user = selectUser.get();
-                if (!UserManager.instance.connectToSession(sessionId, user.getId())) {
-                    return "Error connecting " + userName;
-                }
-                this.userId = user.getId();
-                if (reconnect) { // must be connected to receive the message
-                    Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(GamesRoomManager.instance.getMainRoomId());
-                    if (!room.isPresent()) {
-                        logger.error("main room not found");
-                        return null;
+                // If authentication is not activated, check the identity using IP address.
+                if (ConfigSettings.instance.isAuthenticationActivated() || user.getHost().equals(host)) {
+                    user.updateLastActivity(null);  // minimizes possible expiration
+                    this.userId = user.getId();
+                    if (user.getSessionId().isEmpty()) {
+                        logger.info("Reconnecting session for " + userName);
+                        reconnect = true;
+                    } else {
+                        //disconnect previous session
+                        logger.info("Disconnecting another user instance: " + userName);
+                        SessionManager.instance.disconnect(user.getSessionId(), DisconnectReason.ConnectingOtherInstance);
                     }
-                    ChatManager.instance.joinChat(room.get().getChatId(), userId);
-                    ChatManager.instance.sendReconnectMessage(userId);
+                } else {
+                    return "User name " + userName + " already in use (or your IP address changed)";
                 }
             }
         }
+        User user = selectUser.get();
+        if (!UserManager.instance.connectToSession(sessionId, user.getId())) {
+            return "Error connecting " + userName;
+        }
+        this.userId = user.getId();
+        if (reconnect) { // must be connected to receive the message
+            Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(GamesRoomManager.instance.getMainRoomId());
+            if (!room.isPresent()) {
+                logger.error("main room not found");
+                return null;
+            }
+            ChatManager.instance.joinChat(room.get().getChatId(), userId);
+            ChatManager.instance.sendReconnectMessage(userId);
+        }
+
+
         return null;
 
     }
