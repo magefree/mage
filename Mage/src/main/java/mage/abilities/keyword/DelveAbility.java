@@ -100,7 +100,7 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
     public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && !controller.getGraveyard().isEmpty()) {
-            if (unpaid.getMana().getGeneric() > 0 && source.getAbilityType().equals(AbilityType.SPELL)) {
+            if (unpaid.getMana().getGeneric() > 0 && source.getAbilityType() == AbilityType.SPELL) {
                 SpecialAction specialAction = new DelveSpecialAction();
                 specialAction.setControllerId(source.getControllerId());
                 specialAction.setSourceId(source.getSourceId());

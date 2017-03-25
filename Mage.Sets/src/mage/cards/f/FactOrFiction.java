@@ -125,7 +125,7 @@ class FactOrFictionEffect extends OneShotEffect {
                 pile2Zone = Zone.GRAVEYARD;
             }
 
-            StringBuilder sb = new StringBuilder("Pile 1, going to ").append(pile1Zone.equals(Zone.HAND) ? "Hand" : "Graveyard").append(": ");
+            StringBuilder sb = new StringBuilder("Pile 1, going to ").append(pile1Zone == Zone.HAND ? "Hand" : "Graveyard").append(": ");
             int i = 0;
             for (Card card : pile1) {
                 i++;

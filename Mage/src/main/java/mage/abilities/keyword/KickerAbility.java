@@ -197,13 +197,13 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     private String getActivationKey(Ability source, String costText, Game game) {
         int zcc = 0;
-        if (source.getAbilityType().equals(AbilityType.TRIGGERED)) {
+        if (source.getAbilityType() == AbilityType.TRIGGERED) {
             zcc = source.getSourceObjectZoneChangeCounter();
         }
         if (zcc == 0) {
             zcc = game.getState().getZoneChangeCounter(source.getSourceId());
         }
-        if (zcc > 0 && (source.getAbilityType().equals(AbilityType.TRIGGERED))) {
+        if (zcc > 0 && (source.getAbilityType() == AbilityType.TRIGGERED)) {
             --zcc;
         }
         return String.valueOf(zcc) + ((kickerCosts.size() > 1) ? costText : "");

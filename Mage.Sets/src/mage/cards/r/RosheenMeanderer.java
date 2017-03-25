@@ -101,7 +101,7 @@ class RosheenMeandererManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (AbilityType.SPELL.equals(source.getAbilityType())) {
+        if (AbilityType.SPELL == source.getAbilityType()) {
             MageObject object = game.getObject(source.getSourceId());
             return object != null
                     && object.getManaCost().getText().contains("X");

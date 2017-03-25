@@ -184,8 +184,8 @@ class KheruLichLordReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && event.getTargetId().equals(getTargetPointer().getFirst(game, source))
-                && ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)
-                && !((ZoneChangeEvent) event).getToZone().equals(Zone.EXILED)) {
+                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
             return true;
         }
         return false;

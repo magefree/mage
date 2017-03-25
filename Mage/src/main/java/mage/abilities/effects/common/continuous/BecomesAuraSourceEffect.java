@@ -108,7 +108,7 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements Sou
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return Layer.AbilityAddingRemovingEffects_6.equals(layer) || Layer.TypeChangingEffects_4.equals(layer);
+        return Layer.AbilityAddingRemovingEffects_6 == layer || Layer.TypeChangingEffects_4 == layer;
     }
 
 }

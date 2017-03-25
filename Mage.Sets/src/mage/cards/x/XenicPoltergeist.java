@@ -127,7 +127,7 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
         if (super.isInactive(source, game)) {
             return true;
         }
-        if (durationPhaseStep != null && durationPhaseStep.equals(game.getPhase().getStep().getType())) {
+        if (durationPhaseStep != null && durationPhaseStep == game.getPhase().getStep().getType()) {
             if (!sameStep && game.getActivePlayerId().equals(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving()) {
                 return true;
             }

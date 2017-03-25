@@ -60,7 +60,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (targetController.equals(TargetController.OPPONENT)) {
+        if (targetController == TargetController.OPPONENT) {
             Player controller = game.getPlayer(this.getControllerId());
             if (controller == null || !game.isOpponent(controller, event.getPlayerId())) {
                 return false;

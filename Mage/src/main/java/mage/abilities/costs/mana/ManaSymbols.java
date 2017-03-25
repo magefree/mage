@@ -116,7 +116,7 @@ public class ManaSymbols extends ArrayList<ManaSymbol> {
      * @return
      */
     private static boolean compareHybridCosts(HybridManaCost h1, HybridManaCost h2) {
-        return h1.getMana1().equals(h2.getMana1()) && h1.getMana2().equals(h2.getMana2())
-            || h1.getMana1().equals(h2.getMana2()) && h1.getMana2().equals(h2.getMana1());
+        return h1.getMana1() == h2.getMana1() && h1.getMana2() == h2.getMana2()
+            || h1.getMana1() == h2.getMana2() && h1.getMana2() == h2.getMana1();
     }
 }

@@ -91,7 +91,7 @@ public final class ArtificialScoringSystem {
                             Outcome outcome = effect.getOutcome();
                             if (outcome.isGood()) {
                                 enchantments++;
-                            } else if (!outcome.equals(Outcome.Detriment)) {
+                            } else if (outcome != Outcome.Detriment) {
                                 enchantments--;
                             }
                         }

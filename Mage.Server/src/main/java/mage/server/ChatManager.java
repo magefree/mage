@@ -106,27 +106,28 @@ public enum ChatManager {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
             if (message.startsWith("\\") || message.startsWith("/")) {
-                User user = UserManager.instance.getUserByName(userName);
-                if (user != null) {
-                    if (!performUserCommand(user, message, chatId, false)) {
-                        performUserCommand(user, message, chatId, true);
+                Optional<User> user = UserManager.instance.getUserByName(userName);
+                if (user.isPresent()) {
+                    if (!performUserCommand(user.get(), message, chatId, false)) {
+                        performUserCommand(user.get(), message, chatId, true);
                     }
                     return;
                 }
             }
 
             if (messageType != MessageType.GAME) {
-                User user = UserManager.instance.getUserByName(userName);
-                if (message != null && userName != null && !userName.isEmpty()) {
+                Optional<User> u = UserManager.instance.getUserByName(userName);
+                if (u.isPresent()) {
 
+                    User user = u.get();
                     if (message.equals(userMessages.get(userName))) {
                         // prevent identical messages
                         String informUser = "Your message appears to be identical to your last message";
                         chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
                         return;
                     }
-                    
-                    if (message.length() > 500) {                        
+
+                    if (message.length() > 500) {
                         message = message.replaceFirst("^(.{500}).*", "$1 (rest of message truncated)");
                     }
 
@@ -157,10 +158,9 @@ public enum ChatManager {
                     }
 
                     userMessages.put(userName, message);
-                }
 
-                if (messageType == MessageType.TALK) {
-                    if (user != null) {
+
+                    if (messageType == MessageType.TALK) {
                         if (user.getChatLockedUntil() != null) {
                             if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) > 0) {
                                 chatSessions.get(chatId).broadcastInfoToUser(user, "Your chat is muted until " + SystemUtil.dateFormat.format(user.getChatLockedUntil()));
@@ -169,11 +169,12 @@ public enum ChatManager {
                                 user.setChatLockedUntil(null);
                             }
                         }
-                    }
-                }
 
+                    }
+
+                }
+                chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
             }
-            chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
         }
     }
 
@@ -213,9 +214,9 @@ public enum ChatManager {
             if (first > 1) {
                 String userToName = rest.substring(0, first);
                 rest = rest.substring(first + 1).trim();
-                User userTo = UserManager.instance.getUserByName(userToName);
-                if (userTo != null) {
-                    if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest)) {
+                Optional<User> userTo = UserManager.instance.getUserByName(userToName);
+                if (userTo.isPresent()) {
+                    if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo.get(), rest)) {
                         message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
                         chatSessions.get(chatId).broadcastInfoToUser(user, message);
                     }
@@ -244,7 +245,7 @@ public enum ChatManager {
      * @param color
      */
     public void broadcast(UUID userId, String message, MessageColor color) throws UserNotFoundException {
-        UserManager.instance.getUser(userId).ifPresent(user-> {
+        UserManager.instance.getUser(userId).ifPresent(user -> {
             chatSessions.values()
                     .stream()
                     .filter(chat -> chat.hasUser(userId))

@@ -38,7 +38,7 @@ public class DivergentTransformationsTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, hGiant);
         addCard(Zone.LIBRARY, playerB, mFlunkies);
         
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, dTransformations, memnite + "^" + gBears);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, dTransformations, memnite + '^' + gBears);
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

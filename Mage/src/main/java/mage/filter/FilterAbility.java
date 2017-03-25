@@ -94,7 +94,7 @@ public class FilterAbility extends FilterImpl<Ability> {
 
         @Override
         public boolean apply(Ability input, Game game) {
-            return input.getAbilityType().equals(type);
+            return input.getAbilityType() == type;
         }
 
         @Override

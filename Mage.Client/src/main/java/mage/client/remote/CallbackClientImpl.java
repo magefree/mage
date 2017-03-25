@@ -145,7 +145,7 @@ public class CallbackClientImpl implements CallbackClient {
                                 createChatStartMessage(panel);
                             }
                             // send the message to subchat if exists and it's not a game message
-                            if (!message.getMessageType().equals(MessageType.GAME) && panel.getConnectedChat() != null) {
+                            if (message.getMessageType() != MessageType.GAME && panel.getConnectedChat() != null) {
                                 panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), ChatMessage.MessageColor.BLACK);
                             } else {
                                 panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), message.getColor());
@@ -157,7 +157,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case "serverMessage":
                         if (callback.getData() != null) {
                             ChatMessage message = (ChatMessage) callback.getData();
-                            if (message.getColor().equals(ChatMessage.MessageColor.RED)) {
+                            if (message.getColor() == ChatMessage.MessageColor.RED) {
                                 JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.WARNING_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);

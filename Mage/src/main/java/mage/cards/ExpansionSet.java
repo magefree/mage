@@ -399,7 +399,7 @@ public abstract class ExpansionSet implements Serializable {
             savedCardsInfos = CardRepository.instance.findCards(criteria);
             // Workaround after card number is numeric
             if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                savedCardsInfos.removeIf(next -> Integer.valueOf(next.getCardNumber()) > maxCardNumberInBooster && !rarity.equals(Rarity.LAND));
+                savedCardsInfos.removeIf(next -> Integer.valueOf(next.getCardNumber()) > maxCardNumberInBooster && rarity != Rarity.LAND);
             }
 
             savedCards.put(rarity, savedCardsInfos);

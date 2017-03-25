@@ -106,14 +106,14 @@ public class ExileTargetEffect extends OneShotEffect {
                         Permanent permanent = game.getPermanent(targetId);
                         if (permanent != null) {
                             Zone currentZone = game.getState().getZone(permanent.getId());
-                            if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(Zone.BATTLEFIELD))) {
+                            if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == Zone.BATTLEFIELD)) {
                                 toExile.add(permanent);
                             }
                         } else {
                             Card card = game.getCard(targetId);
                             if (card != null) {
                                 Zone currentZone = game.getState().getZone(card.getId());
-                                if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(currentZone))) {
+                                if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == currentZone)) {
                                     toExile.add(card);
                                 }
                             }
@@ -125,14 +125,14 @@ public class ExileTargetEffect extends OneShotEffect {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
                         Zone currentZone = game.getState().getZone(permanent.getId());
-                        if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(Zone.BATTLEFIELD))) {
+                        if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == Zone.BATTLEFIELD)) {
                             toExile.add(permanent);
                         }
                     } else {
                         Card card = game.getCard(targetId);
                         if (card != null) {
                             Zone currentZone = game.getState().getZone(card.getId());
-                            if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(currentZone))) {
+                            if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == currentZone)) {
                                 toExile.add(card);
                             }
                         } else {

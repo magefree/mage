@@ -83,7 +83,7 @@ class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(controllerId) && event.getZone().equals(Zone.GRAVEYARD);
+        return event.getPlayerId().equals(controllerId) && event.getZone() == Zone.GRAVEYARD;
     }
 
     @Override

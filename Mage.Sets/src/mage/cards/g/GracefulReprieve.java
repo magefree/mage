@@ -165,7 +165,7 @@ class GracefulReprieveDelayedEffect extends OneShotEffect {
             Player player = game.getPlayer(permanent.getOwnerId());
             if (player != null) {
                 Card card = game.getCard(target);
-                if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                     return card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), player.getId());
                 }
                 return true;

@@ -136,7 +136,7 @@ class AthreosGodOfPassageReturnEffect extends OneShotEffect {
                     }
                 }
                 if (opponent == null || !paid) {
-                    if (game.getState().getZone(creature.getId()).equals(Zone.GRAVEYARD)) {
+                    if (game.getState().getZone(creature.getId()) == Zone.GRAVEYARD) {
                         controller.moveCards(game.getCard(creatureId), Zone.HAND, source, game);
                     }
                 }
@@ -174,7 +174,7 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
                 for (Effect effect : this.getEffects()) {

@@ -149,7 +149,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
                 }
             }
         }
-        if (duration.equals(Duration.Custom) && affectedTargets == 0) {
+        if (duration == Duration.Custom && affectedTargets == 0) {
             this.discard();
         }
         return affectedTargets > 0;

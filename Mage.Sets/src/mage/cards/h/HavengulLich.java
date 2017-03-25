@@ -117,7 +117,7 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl {
         if (targetId != null) {
             return targetId.equals(objectId)
                     && source.getControllerId().equals(affectedControllerId)
-                    && Zone.GRAVEYARD.equals(game.getState().getZone(objectId));
+                    && Zone.GRAVEYARD == game.getState().getZone(objectId);
         } else {
             // the target card has changed zone meanwhile, so the effect is no longer needed
             discard();

@@ -178,7 +178,7 @@ public abstract class MageTestPlayerBase {
     }
 
     private void parseLine(String line) {
-        if (parserState.equals(ParserState.EXPECTED)) {
+        if (parserState == ParserState.EXPECTED) {
             expectedResults.add(line); // just remember for future use
             return;
         }
@@ -226,7 +226,7 @@ public abstract class MageTestPlayerBase {
                         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
                         Card card = cardInfo != null ? cardInfo.getCard() : null;
                         if (card != null) {
-                            if (gameZone.equals(Zone.BATTLEFIELD)) {
+                            if (gameZone == Zone.BATTLEFIELD) {
                                 PermanentCard p = new PermanentCard(card, null, currentGame);
                                 p.setTapped(tapped);
                                 perms.add(p);

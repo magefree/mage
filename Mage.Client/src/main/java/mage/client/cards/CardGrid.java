@@ -192,7 +192,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                             }
                             break;
                         case RARITY:
-                            if (!cardImg.getOriginal().getRarity().equals(lastCard.getOriginal().getRarity())) {
+                            if (cardImg.getOriginal().getRarity() != lastCard.getOriginal().getRarity()) {
                                 curColumn++;
                                 curRow = 0;
                             }

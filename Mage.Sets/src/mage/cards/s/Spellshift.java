@@ -115,6 +115,7 @@ class SpellshiftEffect extends OneShotEffect {
                     library.addAll(cards.getCards(game), game);
                 }
             }
+            player.shuffleLibrary(source, game);
             return true;
         }
         return false;

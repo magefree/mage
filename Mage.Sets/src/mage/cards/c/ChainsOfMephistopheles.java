@@ -115,7 +115,7 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getActivePlayerId().equals(event.getPlayerId()) && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
+        if (game.getActivePlayerId().equals(event.getPlayerId()) && game.getPhase().getStep().getType() == PhaseStep.DRAW) {
             CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
             if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
                 return true;

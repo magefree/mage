@@ -101,7 +101,7 @@ class PithingNeedleEffect extends ContinuousRuleModifyingEffectImpl {
         MageObject object = game.getObject(event.getSourceId());
         Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
         if (ability != null && object != null) {
-            if (!ability.getAbilityType().equals(AbilityType.MANA)
+            if (ability.getAbilityType() != AbilityType.MANA
                     && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                 return true;
             }

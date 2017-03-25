@@ -65,7 +65,7 @@ public class CardPanelRenderImpl extends CardPanel {
         if (a.getRarity() == null || b.getRarity() == null) {
             return false;
         }
-        if (!a.getRarity().equals(b.getRarity())) {
+        if (a.getRarity() != b.getRarity()) {
             return false;
         }
         if (a.getCardNumber() != null && !a.getCardNumber().equals(b.getCardNumber())) {

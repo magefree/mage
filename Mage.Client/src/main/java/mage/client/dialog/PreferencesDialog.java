@@ -2958,7 +2958,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
 
         connection.setProxyType(configProxyType);
-        if (!configProxyType.equals(ProxyType.NONE)) {
+        if (configProxyType != ProxyType.NONE) {
             String host = getCachedValue(KEY_PROXY_ADDRESS, "");
             String port = getCachedValue(KEY_PROXY_PORT, "");
             if (!host.isEmpty() && !port.isEmpty()) {

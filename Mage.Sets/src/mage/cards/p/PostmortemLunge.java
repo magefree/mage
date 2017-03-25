@@ -78,7 +78,7 @@ public class PostmortemLunge extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getAbilityType().equals(AbilityType.SPELL)) { // otherwise the target is also added to the delayed triggered ability
+        if (ability.getAbilityType() == AbilityType.SPELL) { // otherwise the target is also added to the delayed triggered ability
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
             FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less from your graveyard");

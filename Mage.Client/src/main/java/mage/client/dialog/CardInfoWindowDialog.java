@@ -162,7 +162,7 @@ public class CardInfoWindowDialog extends MageDialog {
 
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId, boolean revertOrder) {
         cards.loadCards(showCards, bigCard, gameId, revertOrder);
-        if (showType.equals(ShowType.GRAVEYARD)) {
+        if (showType == ShowType.GRAVEYARD) {
             int qty = qtyCardTypes(showCards);
             String titel = name + "'s Graveyard (" + showCards.size() + ")  -  " + qty + ((qty == 1) ? " Card Type" : " Card Types");
             setTitle(titel);
@@ -173,7 +173,7 @@ public class CardInfoWindowDialog extends MageDialog {
 
     @Override
     public void show() {
-        if (showType.equals(ShowType.EXILE)) {
+        if (showType == ShowType.EXILE) {
             if (cards == null || cards.getNumberOfCards() == 0) {
                 return;
             }

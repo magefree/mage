@@ -63,7 +63,7 @@ public class TargetActivatedAbility extends TargetObject {
             return false;
         }
         StackObject stackObject = game.getStack().getStackObject(id);
-        return stackObject != null && stackObject.getStackAbility() != null && stackObject.getStackAbility().getAbilityType().equals(AbilityType.ACTIVATED);
+        return stackObject != null && stackObject.getStackAbility() != null && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class TargetActivatedAbility extends TargetObject {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject.getStackAbility().getAbilityType().equals(AbilityType.ACTIVATED) && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())) {
+            if (stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }
         }
