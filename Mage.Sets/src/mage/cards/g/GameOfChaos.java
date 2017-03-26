@@ -86,39 +86,34 @@ class GameOfChaosEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         
-        if (you != null && targetOpponent != null) {  
+        if (you != null && targetOpponent != null) {
+            
             boolean continueFlipping = true;
-            boolean youWinFlip = you.flipCoin(game); // controller flips first
+            boolean youWonFlip = you.flipCoin(game); // controller flips first
             boolean youWonLastFlip = false; // tracks if you won the flip last, negation of it means opponent won last
-            int lifeAmount = 1; // starts with 1 life
-                
-            while (continueFlipping) {
-                
-                if (youWinFlip) { // flipper of coin wins, flipper gain 1 and non-flipper loses 1
+            int lifeAmount = 1; // starts stakes with 1 life
+            
+            while (continueFlipping) {                
+                if (youWonFlip) { // flipper of coin wins, flipper gain 1 and non-flipper loses 1
                     handleLifeChangesFromFlip(game, you, targetOpponent, lifeAmount);
-                    if (targetOpponent.canRespond() && you.canRespond()) {
-                        continueFlipping = you.chooseUse(outcome, "Flip again?", source, game);
+                    if (!cannotContinueFlipping(you, targetOpponent)) {
+                        continueFlipping = you.chooseUse(outcome, "You gained " + lifeAmount + " life! Flip again for double the life stakes?", source, game);
                         youWonLastFlip = true;
                     }
                 } else { // non-flipper wins, flipper lose 1 and non-flipper gains 1
                     handleLifeChangesFromFlip(game, targetOpponent, you, lifeAmount);
-                    if (targetOpponent.canRespond() && you.canRespond()) {
-                        continueFlipping = targetOpponent.chooseUse(outcome, "Flip again?", source, game);
+                    if (!cannotContinueFlipping(you, targetOpponent)) {
+                        continueFlipping = targetOpponent.chooseUse(outcome, "You gained " + lifeAmount + " life! Flip again for double the life stakes?", source, game);
                         youWonLastFlip = false;
                     }
                 }
                 
-                if (!targetOpponent.canRespond() || !you.canRespond()) {
+                if (cannotContinueFlipping(you, targetOpponent))
                     continueFlipping = false;
-                }
-                
+                                
                 if (continueFlipping) {
                     lifeAmount *= 2; // double the life each time
-                    if (youWonLastFlip) {
-                        youWinFlip = you.flipCoin(game);
-                    } else {
-                        youWinFlip = !targetOpponent.flipCoin(game); // negate the results for proper evaluation above
-                    }
+                    youWonFlip = youWonLastFlip ? you.flipCoin(game) : !targetOpponent.flipCoin(game); // negate the opponent's results for proper evaluation of if you won in next iteration
                 }
             }
 
@@ -130,5 +125,9 @@ class GameOfChaosEffect extends OneShotEffect {
     private void handleLifeChangesFromFlip(Game game, Player playerGainingLife, Player playerLosingLife, int lifeAmount) {        
         playerGainingLife.gainLife(lifeAmount, game);
         playerLosingLife.loseLife(lifeAmount, game, false);
+    }
+    
+    private boolean cannotContinueFlipping(Player you, Player opponent) {
+        return (!you.canRespond() || !opponent.canRespond() || (you.canLoseByZeroOrLessLife() && you.getLife() <= 0) || (opponent.canLoseByZeroOrLessLife() && opponent.getLife() <= 0));        
     }
 }
