@@ -85,38 +85,36 @@ class GameOfChaosEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (you != null && targetOpponent != null) {
-  
+        
+        if (you != null && targetOpponent != null) {  
             boolean continueFlipping = true;
             boolean youWinFlip = you.flipCoin(game); // controller flips first
-            boolean controllerWonLast = false;
+            boolean youWonLastFlip = false; // tracks if you won the flip last, negation of it means opponent won last
             int lifeAmount = 1; // starts with 1 life
                 
             while (continueFlipping) {
                 
                 if (youWinFlip) { // flipper of coin wins, flipper gain 1 and non-flipper loses 1
-                    you.gainLife(lifeAmount, game);
-                    targetOpponent.loseLife(lifeAmount, game, false);
+                    handleLifeChangesFromFlip(game, you, targetOpponent, lifeAmount);
                     if (targetOpponent.canRespond() && you.canRespond()) {
                         continueFlipping = you.chooseUse(outcome, "Flip again?", source, game);
-                        controllerWonLast = true;
+                        youWonLastFlip = true;
                     }
                 } else { // non-flipper wins, flipper lose 1 and non-flipper gains 1
-                    you.loseLife(lifeAmount, game, false);
-                    targetOpponent.gainLife(lifeAmount, game);
+                    handleLifeChangesFromFlip(game, targetOpponent, you, lifeAmount);
                     if (targetOpponent.canRespond() && you.canRespond()) {
                         continueFlipping = targetOpponent.chooseUse(outcome, "Flip again?", source, game);
-                        controllerWonLast = false;
+                        youWonLastFlip = false;
                     }
                 }
                 
-                if (!targetOpponent.canRespond() && !you.canRespond()) {
+                if (!targetOpponent.canRespond() || !you.canRespond()) {
                     continueFlipping = false;
                 }
                 
-                if (continueFlipping) {                    
+                if (continueFlipping) {
                     lifeAmount *= 2; // double the life each time
-                    if (controllerWonLast) {
+                    if (youWonLastFlip) {
                         youWinFlip = you.flipCoin(game);
                     } else {
                         youWinFlip = !targetOpponent.flipCoin(game); // negate the results for proper evaluation above
@@ -127,5 +125,10 @@ class GameOfChaosEffect extends OneShotEffect {
             return true;
         }
         return false;
+    }
+        
+    private void handleLifeChangesFromFlip(Game game, Player playerGainingLife, Player playerLosingLife, int lifeAmount) {        
+        playerGainingLife.gainLife(lifeAmount, game);
+        playerLosingLife.loseLife(lifeAmount, game, false);
     }
 }
