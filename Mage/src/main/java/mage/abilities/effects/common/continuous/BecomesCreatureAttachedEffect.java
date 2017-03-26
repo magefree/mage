@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
 /**
- * @author jeff
+ * @author jeffwadsworth
  */
 public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
@@ -167,7 +167,10 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7 
+                || layer == Layer.AbilityAddingRemovingEffects_6 
+                || layer == Layer.ColorChangingEffects_5 
+                || layer == Layer.TypeChangingEffects_4;
     }
 
 }

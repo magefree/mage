@@ -34,7 +34,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,6 +47,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
+import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect;
 
 /**
  *
@@ -69,7 +69,7 @@ public class GenjuOfTheSpires extends CardImpl {
         this.addAbility(ability);
 
         // {2}: Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
         this.addAbility(ability2);
 
         // When enchanted Mountain is put into a graveyard, you may return Genju of the Spires from your graveyard to your hand.
