@@ -32,34 +32,38 @@ import mage.abilities.Ability;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
  * @author LevelX2
  */
-public class TargetCreaturePermanentSameController extends TargetCreaturePermanent {
+public class TargetCreaturePermanentWithDifferentTypes extends TargetCreaturePermanent {
 
-    public TargetCreaturePermanentSameController(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
+    public TargetCreaturePermanentWithDifferentTypes(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetCreaturePermanentSameController(final TargetCreaturePermanentSameController target) {
+    public TargetCreaturePermanentWithDifferentTypes(final TargetCreaturePermanentWithDifferentTypes target) {
         super(target);
+    }
+
+    @Override
+    public TargetCreaturePermanentWithDifferentTypes copy() {
+        return new TargetCreaturePermanentWithDifferentTypes(this);
     }
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         if (super.canTarget(controllerId, id, source, game)) {
-            Permanent firstTargetPermanent = game.getPermanent(id);
-            if (firstTargetPermanent != null) {
+            Permanent creature = game.getPermanent(id);
+            if (creature != null) {
                 for (Object object : getTargets()) {
                     UUID targetId = (UUID) object;
-                    Permanent targetPermanent = game.getPermanent(targetId);
-                    if (targetPermanent != null) {
-                        if (firstTargetPermanent.getId() != targetPermanent.getId()) {
-                            if (!firstTargetPermanent.getControllerId().equals(targetPermanent.getOwnerId())) {
-                                return false;
-                            }
+                    Permanent selectedCreature = game.getPermanent(targetId);
+                    if (creature.getId() != selectedCreature.getId()) {
+                        if (CardUtil.shareSubtypes(creature, selectedCreature, game)) {
+                            return false;
                         }
                     }
                 }
@@ -67,10 +71,5 @@ public class TargetCreaturePermanentSameController extends TargetCreaturePermane
             }
         }
         return false;
-    }
-
-    @Override
-    public TargetCreaturePermanentSameController copy() {
-        return new TargetCreaturePermanentSameController(this);
     }
 }
