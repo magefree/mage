@@ -5,22 +5,18 @@
  */
 package org.mage.card.arcane;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Paint;
-import java.awt.Polygon;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * @author stravant@gmail.com
@@ -379,7 +375,7 @@ public abstract class CardRenderer {
             }
         } else {
             StringBuilder sbType = new StringBuilder();
-            for (String superType : cardView.getSuperTypes()) {
+            for (SuperType superType : cardView.getSuperTypes()) {
                 sbType.append(superType).append(' ');
             }
             for (CardType cardType : cardView.getCardTypes()) {

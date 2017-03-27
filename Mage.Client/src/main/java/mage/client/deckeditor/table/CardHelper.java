@@ -30,6 +30,7 @@ package mage.client.deckeditor.table;
 
 import mage.constants.CardType;
 import mage.cards.MageCard;
+import mage.constants.SuperType;
 import mage.view.CardView;
 
 /**
@@ -54,8 +55,8 @@ public final class CardHelper {
 
     public static String getType(CardView c) {
         StringBuilder type = new StringBuilder();
-        for (String superType : c.getSuperTypes()) {
-            type.append(superType);
+        for (SuperType superType : c.getSuperTypes()) {
+            type.append(superType.toString());
             type.append(' ');
         }
         for (CardType cardType : c.getCardTypes()) {

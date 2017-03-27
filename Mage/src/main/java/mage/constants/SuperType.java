@@ -5,11 +5,21 @@ package mage.constants;
  */
 public enum SuperType {
 
-    BASIC,
-    ELITE,
-    LEGENDARY,
-    ONGOING,
-    SNOW,
-    WORLD
+    BASIC("Basic"),
+    ELITE("Elite"),
+    LEGENDARY("Legendary"),
+    ONGOING("Ongoing"),
+    SNOW("Snow"),
+    WORLD("World");
+
+    String text;
+
+    SuperType(String text){
+        this.text = text;
+    }
+
+    public String toString(){
+        return text;
+    }
 
 }
