@@ -41,7 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCreaturePermanentSameController;
 
 /**
  *
@@ -66,8 +66,6 @@ public class Cannibalize extends CardImpl {
         return new Cannibalize(this);
     }
 }
-
-
 
 class CannibalizeEffect extends OneShotEffect {
     
@@ -109,35 +107,5 @@ class CannibalizeEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class TargetCreaturePermanentSameController extends TargetCreaturePermanent {
-
-    public TargetCreaturePermanentSameController(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
-        super(minNumTargets, maxNumTargets, filter, notTarget);
-    }
-
-    public TargetCreaturePermanentSameController(final TargetCreaturePermanentSameController target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        UUID firstTarget = this.getFirstTarget();
-        if (firstTarget != null) {
-            Permanent permanent = game.getPermanent(firstTarget);
-            Permanent targetPermanent = game.getPermanent(id);
-            if (permanent == null || targetPermanent == null
-                    || !permanent.getControllerId().equals(targetPermanent.getOwnerId())) {
-                return false;
-            }
-        }
-        return super.canTarget(id, source, game);
-    }
-
-    @Override
-    public TargetCreaturePermanentSameController copy() {
-        return new TargetCreaturePermanentSameController(this);
     }
 }
