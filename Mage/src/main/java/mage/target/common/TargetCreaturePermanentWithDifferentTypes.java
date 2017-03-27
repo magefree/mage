@@ -61,7 +61,7 @@ public class TargetCreaturePermanentWithDifferentTypes extends TargetCreaturePer
                 for (Object object : getTargets()) {
                     UUID targetId = (UUID) object;
                     Permanent selectedCreature = game.getPermanent(targetId);
-                    if (creature.getId() != selectedCreature.getId()) {
+                    if (!creature.getId().equals(selectedCreature.getId())) {
                         if (CardUtil.shareSubtypes(creature, selectedCreature, game)) {
                             return false;
                         }
