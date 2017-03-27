@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.effects.common.continuous.LoseAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -49,7 +50,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  * @author fireshoes
  */
 public class ThundercloudElemental extends CardImpl {
-    
+
     private static final FilterCreaturePermanent toughnessFilter = new FilterCreaturePermanent("creatures with toughness 2 or less");
     private static final FilterCreaturePermanent flyingFilter = new FilterCreaturePermanent("All other creatures");
 
@@ -59,19 +60,22 @@ public class ThundercloudElemental extends CardImpl {
     }
 
     public ThundercloudElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add("Elemental");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // {3}{U}: Tap all creatures with toughness 2 or less.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(toughnessFilter), new ManaCostsImpl("{3}{U}")));
-        
+
         // {3}{U}: All other creatures lose flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilityAllEffect(flyingFilter, FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{3}{U}")));
+        Effect effect = new LoseAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, flyingFilter);
+        effect.setText("All other creatures lose flying until end of turn");
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{U}")));
+
     }
 
     public ThundercloudElemental(final ThundercloudElemental card) {

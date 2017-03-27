@@ -48,13 +48,13 @@ import mage.filter.common.FilterCreaturePermanent;
 public class MysticDecree extends CardImpl {
 
     public MysticDecree(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.supertype.add("World");
 
         // All creatures lose flying and islandwalk.
-        Effect effect = new LoseAbilityAllEffect(new FilterCreaturePermanent("All creatures"), FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
+        Effect effect = new LoseAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("All creatures"));
         effect.setText("All creatures lose flying");
-        Effect effect2 = new LoseAbilityAllEffect(new FilterCreaturePermanent("all creatures"), new IslandwalkAbility(), Duration.WhileOnBattlefield);
+        Effect effect2 = new LoseAbilityAllEffect(new IslandwalkAbility(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("all creatures"));
         effect2.setText("and islandwalk");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ability.addEffect(effect2);
