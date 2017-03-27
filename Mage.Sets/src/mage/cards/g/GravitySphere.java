@@ -28,6 +28,7 @@
 package mage.cards.g;
 
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.LoseAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -36,7 +37,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 import java.util.UUID;
 
@@ -46,12 +48,21 @@ import java.util.UUID;
  */
 public class GravitySphere extends CardImpl {
 
+    final static private FilterPermanent filter = new FilterPermanent("All creatures");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
+
     public GravitySphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
         addSuperType(SuperType.WORLD);
 
         // All creatures lose flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LoseAbilityAllEffect(new FilterCreaturePermanent("All creatures"), FlyingAbility.getInstance(), Duration.WhileOnBattlefield)));
+        Effect effect = new LoseAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter);
+        effect.setText("All creatures lose flying");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+
     }
 
     public GravitySphere(final GravitySphere card) {

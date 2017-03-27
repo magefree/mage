@@ -56,7 +56,7 @@ public class TargetCreaturePermanentSameController extends TargetCreaturePermane
                     UUID targetId = (UUID) object;
                     Permanent targetPermanent = game.getPermanent(targetId);
                     if (targetPermanent != null) {
-                        if (firstTargetPermanent.getId() != targetPermanent.getId()) {
+                        if (!firstTargetPermanent.getId().equals(targetPermanent.getId())) {
                             if (!firstTargetPermanent.getControllerId().equals(targetPermanent.getOwnerId())) {
                                 return false;
                             }

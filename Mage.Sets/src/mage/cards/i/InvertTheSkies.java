@@ -27,51 +27,58 @@
  */
 package mage.cards.i;
 
-import java.util.Set;
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.LoseAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class InvertTheSkies extends CardImpl {
 
-    public InvertTheSkies(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G/U}");
+    private static final FilterPermanent filter = new FilterPermanent();
 
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(new AbilityPredicate(FlyingAbility.class));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
+
+    public InvertTheSkies(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G/U}");
 
         // Creatures your opponents control lose flying until end of turn if {G} was spent to cast Invert the Skies, and creatures you control gain flying until end of turn if {U} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new InvertTheSkiesEffect(),
+                new LoseAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter),
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.G)),
                 "Creatures your opponents control lose flying until end of turn if {G} was spent to cast {this},"));
+
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.U)),
                 "and creatures you control gain flying until end of turn if {U} was spent to cast it"));
+
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {G}{U} was spent.)</i>"));
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
+
     }
 
     public InvertTheSkies(final InvertTheSkies card) {
@@ -82,34 +89,4 @@ public class InvertTheSkies extends CardImpl {
     public InvertTheSkies copy() {
         return new InvertTheSkies(this);
     }
-}
-
-class InvertTheSkiesEffect extends ContinuousEffectImpl {
-
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public InvertTheSkiesEffect() {
-        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
-    }
-
-    public InvertTheSkiesEffect(final InvertTheSkiesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public InvertTheSkiesEffect copy() {
-        return new InvertTheSkiesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            if (opponents.contains(perm.getControllerId())) {
-                perm.getAbilities().remove(FlyingAbility.getInstance());
-            }
-        }
-        return true;
-    }
-
 }
