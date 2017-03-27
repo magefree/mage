@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -35,6 +34,9 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +46,7 @@ public class Gallowbraid extends CardImpl {
 
     public Gallowbraid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Horror");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

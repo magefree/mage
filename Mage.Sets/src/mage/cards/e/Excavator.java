@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -37,25 +36,18 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.SourceEffect;
-import mage.abilities.keyword.ForestwalkAbility;
-import mage.abilities.keyword.IslandwalkAbility;
-import mage.abilities.keyword.MountainwalkAbility;
-import mage.abilities.keyword.PlainswalkAbility;
-import mage.abilities.keyword.SwampwalkAbility;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +58,7 @@ public class Excavator extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("basic land");
     static
     {
-        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
     }
    
     public Excavator(UUID ownerId, CardSetInfo setInfo) {

@@ -28,13 +28,15 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +46,7 @@ public class KodamaOfTheNorthTree extends CardImpl {
 
     public KodamaOfTheNorthTree (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(6);

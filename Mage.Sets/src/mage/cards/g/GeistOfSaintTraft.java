@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -38,9 +37,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -49,7 +51,7 @@ public class GeistOfSaintTraft extends CardImpl {
 
     public GeistOfSaintTraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
         this.subtype.add("Cleric");
 

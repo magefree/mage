@@ -1608,7 +1608,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         int cardNum = 0;
         while (deck.getCards().size() < 23 && sortedCards.size() > cardNum) {
             Card card = sortedCards.get(cardNum);
-            if (!card.getSupertype().contains("Basic")) {
+            if (!card.isBasic()) {
                 deck.getCards().add(card);
                 deck.getSideboard().remove(card);
             }

@@ -27,11 +27,13 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +43,7 @@ public class SivitriScarzam extends CardImpl {
 
     public SivitriScarzam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
 
         this.power = new MageInt(6);

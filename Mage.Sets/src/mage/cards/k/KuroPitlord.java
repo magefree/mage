@@ -50,7 +50,7 @@ public class KuroPitlord extends CardImpl {
 
     public KuroPitlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
 

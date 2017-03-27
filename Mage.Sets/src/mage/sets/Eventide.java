@@ -1,9 +1,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 public class Eventide extends ExpansionSet {
     private static final Eventide instance = new Eventide();

@@ -27,14 +27,16 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +46,7 @@ public class KamiOfTheCrescentMoon extends CardImpl {
 
     public KamiOfTheCrescentMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(1);

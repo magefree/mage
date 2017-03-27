@@ -32,6 +32,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -63,7 +64,7 @@ public class SlobadGoblinTinkerer extends CardImpl {
 
     public SlobadGoblinTinkerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Goblin");
         this.subtype.add("Artificer");
 

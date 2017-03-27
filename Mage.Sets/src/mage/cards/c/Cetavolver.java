@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCostCondition;
@@ -41,7 +38,11 @@ import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *

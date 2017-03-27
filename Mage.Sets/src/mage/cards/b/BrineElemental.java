@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -42,6 +41,8 @@ import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *

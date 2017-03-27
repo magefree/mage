@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
@@ -45,6 +44,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.GoblinTokenWithHaste;
+
+import java.util.UUID;
 
 /**
  *

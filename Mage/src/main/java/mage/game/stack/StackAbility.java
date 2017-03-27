@@ -49,13 +49,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
-import mage.constants.AbilityType;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.EffectType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.constants.ZoneDetail;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -174,8 +168,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public List<String> getSupertype() {
-        return emptyString;
+    public EnumSet<SuperType> getSuperType() {
+        return EnumSet.noneOf(SuperType.class);
     }
 
     @Override

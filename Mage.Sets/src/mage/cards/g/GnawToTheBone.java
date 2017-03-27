@@ -27,9 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
@@ -37,8 +34,11 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterCreatureCard;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -42,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -52,6 +52,8 @@ import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +71,7 @@ public class NoyanDarRoilShaper extends CardImpl {
 
     public NoyanDarRoilShaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Merfolk");
         this.subtype.add("Ally");
         this.power = new MageInt(4);

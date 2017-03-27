@@ -44,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
@@ -93,7 +94,7 @@ class Scarmaker extends Token {
 
     Scarmaker() {
         super("Scarmaker", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Spirit");

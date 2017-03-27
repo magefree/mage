@@ -27,17 +27,17 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.constants.CardType;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+
+import java.util.UUID;
 
 /**
  *

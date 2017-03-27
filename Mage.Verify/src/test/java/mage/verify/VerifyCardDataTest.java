@@ -1,5 +1,12 @@
 package mage.verify;
 
+import mage.ObjectColor;
+import mage.cards.*;
+import mage.cards.basiclands.BasicLand;
+import mage.constants.CardType;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -8,17 +15,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mage.ObjectColor;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.SplitCard;
-import mage.cards.basiclands.BasicLand;
-import mage.constants.CardType;
-import org.junit.Assert;
-import org.junit.Test;
+import java.util.stream.Collectors;
 
 public class VerifyCardDataTest {
 
@@ -168,8 +165,8 @@ public class VerifyCardDataTest {
 
     private void checkSupertypes(Card card, JsonCard ref) {
         Collection<String> expected = ref.supertypes;
-        if (!eqSet(card.getSupertype(), expected)) {
-            fail(card, "supertypes", card.getSupertype() + " != " + expected);
+        if (!eqSet(card.getSuperType().stream().map(s->s.toString()).collect(Collectors.toList()), expected)) {
+            fail(card, "supertypes", card.getSuperType() + " != " + expected);
         }
     }
 

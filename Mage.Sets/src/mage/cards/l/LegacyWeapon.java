@@ -29,6 +29,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,7 +48,7 @@ public class LegacyWeapon extends CardImpl {
 
     public LegacyWeapon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
 
         // {W}{U}{B}{R}{G}: Exile target permanent.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

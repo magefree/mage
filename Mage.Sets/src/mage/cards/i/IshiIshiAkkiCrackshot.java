@@ -27,18 +27,16 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.filter.predicate.permanent.ControllerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +52,7 @@ public class IshiIshiAkkiCrackshot extends CardImpl {
 
     public IshiIshiAkkiCrackshot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 

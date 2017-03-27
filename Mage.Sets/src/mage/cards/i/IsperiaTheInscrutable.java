@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,7 +57,7 @@ public class IsperiaTheInscrutable extends CardImpl {
 
     public IsperiaTheInscrutable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}{U}{U}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Sphinx");
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);

@@ -27,7 +27,6 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -36,7 +35,10 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +49,7 @@ public class IshaiOjutaiDragonspeaker extends CardImpl {
     public IshaiOjutaiDragonspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Bird");
         this.subtype.add("Monk");
         this.power = new MageInt(1);

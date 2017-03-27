@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
@@ -48,15 +47,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +64,7 @@ public class HomuraHumanAscendant extends CardImpl {
 
     public HomuraHumanAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Monk");
 
@@ -134,7 +132,7 @@ class HomurasEssence2 extends Token {
 
     HomurasEssence2() {
         super("Homura's Essence", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
         color.setRed(true);
         // Creatures you control get +2/+2 and have flying and "{R}: This creature gets +1/+0 until end of turn."

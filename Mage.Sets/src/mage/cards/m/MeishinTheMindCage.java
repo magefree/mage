@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
@@ -37,8 +36,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +50,7 @@ public class MeishinTheMindCage extends CardImpl {
 
     public MeishinTheMindCage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
 
         // All creatures get -X/-0, where X is the number of cards in your hand.

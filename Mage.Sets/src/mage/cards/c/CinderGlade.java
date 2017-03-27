@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.abilities.CountType;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
@@ -41,8 +39,11 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +54,7 @@ public class CinderGlade extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     
     static {
-        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
     }
 
     public CinderGlade(UUID ownerId, CardSetInfo setInfo) {

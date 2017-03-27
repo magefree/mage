@@ -1,5 +1,6 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.b.BrassclawOrcs;
 import mage.cards.d.DwarvenSoldier;
@@ -13,9 +14,8 @@ import mage.cards.n.Necrite;
 import mage.cards.r.ReefPirates;
 import mage.cards.t.Torture;
 import mage.cards.v.VodalianSoldiers;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 public class FifthEdition extends ExpansionSet {
 

@@ -48,7 +48,7 @@ public class JinGitaxiasCoreAugur extends CardImpl {
 
     public JinGitaxiasCoreAugur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{U}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Praetor");
 
         this.power = new MageInt(5);

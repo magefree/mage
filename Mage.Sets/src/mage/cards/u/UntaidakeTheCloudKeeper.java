@@ -44,6 +44,7 @@ import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.game.Game;
 
 /**
@@ -54,7 +55,7 @@ public class UntaidakeTheCloudKeeper extends CardImpl {
 
     public UntaidakeTheCloudKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
 
         // Untaidake, the Cloud Keeper enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -103,7 +104,7 @@ class LegendaryCastManaCondition extends ManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object != null && object.getSupertype().contains("Legendary")) {
+            if (object != null && object.isLegendary()) {
                 return true;
             }
         }

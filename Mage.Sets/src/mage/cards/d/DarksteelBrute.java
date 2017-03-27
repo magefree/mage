@@ -28,10 +28,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,8 +35,12 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *

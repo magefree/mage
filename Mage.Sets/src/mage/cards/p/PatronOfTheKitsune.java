@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -35,6 +34,9 @@ import mage.abilities.keyword.OfferingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -43,7 +45,7 @@ public class PatronOfTheKitsune extends CardImpl {
 
     public PatronOfTheKitsune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(5);

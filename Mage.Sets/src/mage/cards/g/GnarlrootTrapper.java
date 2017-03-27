@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
@@ -52,6 +51,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

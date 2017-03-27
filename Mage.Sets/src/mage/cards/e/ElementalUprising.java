@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
@@ -40,6 +39,8 @@ import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *

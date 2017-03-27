@@ -27,9 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -39,9 +36,13 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *

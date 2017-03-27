@@ -27,10 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.LandfallAbility;
@@ -43,6 +39,11 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *

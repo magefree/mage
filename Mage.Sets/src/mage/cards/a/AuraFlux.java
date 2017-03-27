@@ -27,9 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,7 +35,13 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
  *

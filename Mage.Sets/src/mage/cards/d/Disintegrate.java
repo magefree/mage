@@ -27,8 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -40,6 +38,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
+
+import java.util.UUID;
 
 /**
  *

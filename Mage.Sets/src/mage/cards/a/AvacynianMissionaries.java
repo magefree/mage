@@ -27,18 +27,19 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.l.LunarchInquisitors;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.l.LunarchInquisitors;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *

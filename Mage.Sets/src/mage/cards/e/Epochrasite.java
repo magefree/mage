@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -49,6 +48,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CastFromHandWatcher;
+
+import java.util.UUID;
 
 /**
  *

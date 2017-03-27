@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
@@ -47,7 +48,7 @@ public class LivingPlane extends CardImpl {
 
     public LivingPlane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.supertype.add("World");
+        this.addSuperType(SuperType.WORLD);
 
         // All lands are 1/1 creatures that are still lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new LivingPlaneToken(), "lands", new FilterLandPermanent("lands"), Duration.WhileOnBattlefield)));

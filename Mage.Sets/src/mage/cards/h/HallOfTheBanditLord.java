@@ -27,9 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -44,10 +41,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -55,6 +49,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +62,7 @@ public class HallOfTheBanditLord extends CardImpl {
 
     public HallOfTheBanditLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // Hall of the Bandit Lord enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

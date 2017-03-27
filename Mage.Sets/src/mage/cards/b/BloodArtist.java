@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
@@ -35,6 +34,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 

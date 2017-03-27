@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
@@ -35,6 +34,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *

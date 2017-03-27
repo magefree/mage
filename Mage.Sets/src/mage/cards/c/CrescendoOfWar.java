@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -43,6 +42,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
+
+import java.util.UUID;
 
 /**
  *

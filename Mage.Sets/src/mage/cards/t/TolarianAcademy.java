@@ -28,15 +28,17 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +55,7 @@ public class TolarianAcademy extends CardImpl {
 
     public TolarianAcademy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         DynamicManaAbility ability = new DynamicManaAbility(Mana.BlueMana(1), new PermanentsOnBattlefieldCount(filter));
         this.addAbility(ability);

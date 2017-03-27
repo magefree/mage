@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -46,6 +45,8 @@ import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.DamagedByWatcher;
+
+import java.util.UUID;
 
 /**
  *

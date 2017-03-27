@@ -27,8 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
@@ -37,7 +35,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *

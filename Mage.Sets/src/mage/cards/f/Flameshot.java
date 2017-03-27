@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DamageMultiEffect;
@@ -38,6 +37,8 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanentAmount;
+
+import java.util.UUID;
 
 /**
  *

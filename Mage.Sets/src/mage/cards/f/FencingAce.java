@@ -27,11 +27,11 @@
  */
 package mage.cards.f;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 import java.util.UUID;
 

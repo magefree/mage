@@ -27,9 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,7 +35,10 @@ import mage.abilities.keyword.ForestcyclingAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *

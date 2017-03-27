@@ -27,18 +27,19 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.HasteAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -42,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -53,6 +53,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetNonBasicLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -127,7 +129,7 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
 
     static {
         filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
     }
 
 

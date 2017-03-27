@@ -1,18 +1,19 @@
 package mage;
 
-import java.io.Serializable;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+
+import java.io.Serializable;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 public interface MageObject extends MageItem, Serializable {
 
@@ -32,16 +33,16 @@ public interface MageObject extends MageItem, Serializable {
 
     boolean hasSubtype(String subtype, Game game);
 
-    List<String> getSupertype();
+    EnumSet<SuperType> getSuperType();
 
     Abilities<Ability> getAbilities();
 
     boolean hasAbility(UUID abilityId, Game game);
 
     ObjectColor getColor(Game game);
-    
+
     ObjectColor getFrameColor(Game game);
-    
+
     FrameStyle getFrameStyle();
 
     ManaCosts<ManaCost> getManaCost();
@@ -51,10 +52,9 @@ public interface MageObject extends MageItem, Serializable {
     MageInt getPower();
 
     MageInt getToughness();
-    
+
     int getStartingLoyalty();
-    
-    
+
 
     void adjustCosts(Ability ability, Game game);
 
@@ -83,33 +83,53 @@ public interface MageObject extends MageItem, Serializable {
     void setZoneChangeCounter(int value, Game game);
 
 
-
-    default boolean isCreature(){
+    default boolean isCreature() {
         return getCardType().contains(CardType.CREATURE);
     }
 
-    default boolean isArtifact(){
+    default boolean isArtifact() {
         return getCardType().contains(CardType.ARTIFACT);
     }
 
-    default boolean isLand(){
+    default boolean isLand() {
         return getCardType().contains(CardType.LAND);
     }
 
-    default boolean isEnchantment(){
+    default boolean isEnchantment() {
         return getCardType().contains(CardType.ENCHANTMENT);
     }
 
-    default boolean isInstant(){
+    default boolean isInstant() {
         return getCardType().contains(CardType.INSTANT);
     }
 
-    default boolean isSorcery(){
+    default boolean isSorcery() {
         return getCardType().contains(CardType.SORCERY);
     }
 
-    default boolean isPlaneswalker(){
+    default boolean isPlaneswalker() {
         return getCardType().contains(CardType.PLANESWALKER);
     }
 
+    default boolean isPermanent() {
+        return isCreature() || isArtifact() || isPlaneswalker() || isEnchantment() || isLand();
+    }
+
+    default boolean isLegendary() {
+        return getSuperType().contains(SuperType.LEGENDARY);
+    }
+
+    default boolean isSnow() {
+        return getSuperType().contains(SuperType.SNOW);
+    }
+
+    default void addSuperType(SuperType superType){
+        getSuperType().add(superType);
+    }
+
+    default boolean isBasic() { return getSuperType().contains(SuperType.BASIC);}
+
+    default boolean isWorld() {
+        return getSuperType().contains(SuperType.WORLD);
+    }
 }

@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -56,6 +54,8 @@ import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes

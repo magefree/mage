@@ -27,21 +27,13 @@
  */
 package mage.cards.e;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.MeldCard;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -53,6 +45,10 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

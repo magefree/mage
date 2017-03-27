@@ -27,18 +27,19 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.constants.Zone;
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.abilities.common.BecomesTargetControllerSpellTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.common.BecomesTargetControllerSpellTriggeredAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *

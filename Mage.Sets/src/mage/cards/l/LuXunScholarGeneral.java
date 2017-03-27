@@ -35,6 +35,7 @@ import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class LuXunScholarGeneral extends CardImpl {
 
     public LuXunScholarGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

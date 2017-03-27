@@ -27,13 +27,13 @@
  */
 package mage.cards.e;
 
-import mage.constants.CardType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.permanent.token.AngelToken;
 
 import java.util.UUID;

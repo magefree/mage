@@ -27,10 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -38,7 +34,12 @@ import mage.abilities.condition.common.OpponentLostLifeCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public class SyggRiverCutthroat extends CardImpl {
 
     public SyggRiverCutthroat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
 

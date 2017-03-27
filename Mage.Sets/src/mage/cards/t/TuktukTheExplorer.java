@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SuperType;
 import mage.game.permanent.token.Token;
 
 /**
@@ -46,7 +47,7 @@ public class TuktukTheExplorer extends CardImpl {
 
     public TuktukTheExplorer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Goblin");
 
         this.power = new MageInt(1);
@@ -73,7 +74,7 @@ class TuktukTheReturnedToken extends Token {
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         subtype.add("Goblin");
         power = new MageInt(5);
         toughness = new MageInt(5);

@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *

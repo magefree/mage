@@ -27,12 +27,13 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.effects.common.PreventAllDamageToPlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+
+import java.util.UUID;
 
 /**
  *

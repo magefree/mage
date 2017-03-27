@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
@@ -38,6 +37,8 @@ import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,9 +39,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +54,7 @@ public class Thermopod extends CardImpl {
 
     public Thermopod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.supertype.add("Snow");
+        addSuperType(SuperType.SNOW);
         this.subtype.add("Slug");
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

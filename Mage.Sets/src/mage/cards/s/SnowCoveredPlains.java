@@ -32,6 +32,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 
 /**
  *
@@ -41,8 +42,8 @@ public class SnowCoveredPlains extends CardImpl {
 
     public SnowCoveredPlains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Basic");
-        this.supertype.add("Snow");
+        addSuperType(SuperType.BASIC);
+        addSuperType(SuperType.SNOW);
         this.subtype.add("Plains");
 
         // W

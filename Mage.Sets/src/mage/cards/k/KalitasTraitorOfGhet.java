@@ -28,6 +28,7 @@
 package mage.cards.k;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,10 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -59,7 +57,6 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
- *
  * @author fireshoes
  */
 public class KalitasTraitorOfGhet extends CardImpl {
@@ -73,8 +70,8 @@ public class KalitasTraitorOfGhet extends CardImpl {
     }
 
     public KalitasTraitorOfGhet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);

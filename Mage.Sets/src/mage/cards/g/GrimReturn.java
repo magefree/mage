@@ -27,9 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -44,6 +41,10 @@ import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *

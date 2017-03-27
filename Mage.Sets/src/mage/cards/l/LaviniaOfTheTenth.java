@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DetainAllEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -63,7 +64,7 @@ public class LaviniaOfTheTenth  extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
 
 
         this.power = new MageInt(4);

@@ -27,12 +27,13 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.ObjectColor;
-import mage.constants.CardType;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *

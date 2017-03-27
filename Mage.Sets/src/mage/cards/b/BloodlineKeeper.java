@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.CountType;
@@ -40,14 +39,16 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.l.LordOfLineage;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.l.LordOfLineage;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *

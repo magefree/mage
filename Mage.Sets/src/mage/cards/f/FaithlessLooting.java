@@ -27,15 +27,15 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TimingRule;
+
+import java.util.UUID;
 
 /**
  *

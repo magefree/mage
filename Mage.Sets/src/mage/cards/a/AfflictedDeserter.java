@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -35,11 +34,13 @@ import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.w.WerewolfRansacker;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.w.WerewolfRansacker;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *

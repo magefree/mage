@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SacrificeSourceTriggeredAbility;
@@ -45,6 +44,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.EldraziHorrorToken;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *

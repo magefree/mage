@@ -27,9 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
@@ -38,9 +35,12 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *

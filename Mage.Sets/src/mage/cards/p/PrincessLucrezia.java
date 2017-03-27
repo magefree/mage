@@ -27,12 +27,14 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.abilities.mana.BlueManaAbility;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +44,7 @@ public class PrincessLucrezia extends CardImpl {
 
     public PrincessLucrezia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(5);

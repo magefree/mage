@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -42,6 +41,8 @@ import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.watchers.common.RevoltWatcher;
+
+import java.util.UUID;
 
 /**
  *

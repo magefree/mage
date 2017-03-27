@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -39,6 +38,8 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *

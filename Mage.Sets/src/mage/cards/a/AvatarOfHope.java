@@ -27,29 +27,24 @@
  */
 package mage.cards.a;
 
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.constants.AbilityType;
-import mage.constants.CostModificationType;
 
 /**
  *

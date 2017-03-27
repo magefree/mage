@@ -28,7 +28,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -41,10 +40,13 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +58,7 @@ public class PrimeSpeakerZegana extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{U}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         
         this.power = new MageInt(1);

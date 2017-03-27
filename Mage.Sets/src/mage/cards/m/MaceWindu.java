@@ -27,20 +27,22 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.keyword.FlashAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterSpellOrPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetSpellOrPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +58,7 @@ public class MaceWindu extends CardImpl {
 
     public MaceWindu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Jedi");
         this.power = new MageInt(2);

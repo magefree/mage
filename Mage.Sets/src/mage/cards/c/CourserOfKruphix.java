@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
