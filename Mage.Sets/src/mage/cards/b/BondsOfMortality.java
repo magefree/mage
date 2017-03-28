@@ -65,10 +65,10 @@ public class BondsOfMortality extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
 
         // {G}: Creatures your opponents control lose hexproof and indestructible until end of turn.
-        Effect effect = new LoseAbilityAllEffect(filter, HexproofAbility.getInstance(), Duration.EndOfTurn);
+        Effect effect = new LoseAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, filter);
         effect.setText("Creatures your opponents control lose hexproof");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{G}"));
-        effect = new LoseAbilityAllEffect(filter, IndestructibleAbility.getInstance(), Duration.EndOfTurn);
+        effect = new LoseAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, filter);
         effect.setText("and indestructible until end of turn");
         ability.addEffect(effect);
         this.addAbility(ability);
