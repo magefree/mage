@@ -105,6 +105,7 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Object object = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
         if (player != null && object instanceof String) {
+            player.revealCards(player.getLogName() + "hand", player.getHand(), game, true);
             String namedCard = (String) object;
             for (Card card : player.getHand().getCards(game)) {
                 if (card != null && card.getName().equals(namedCard)) {
