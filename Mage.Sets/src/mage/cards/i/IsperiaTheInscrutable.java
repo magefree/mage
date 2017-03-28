@@ -66,7 +66,7 @@ public class IsperiaTheInscrutable extends CardImpl {
         
         // Whenever Isperia the Inscrutable deals combat damage to a player, name a card. That player reveals his or her hand. If he or she reveals the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library.
         Effect effect1 = new NameACardEffect(NameACardEffect.TypeOfName.ALL);
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect1, true, true);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect1, false, true);
         Effect effect2 = new IsperiaTheInscrutableEffect();
         ability.addEffect(effect2);
         this.addAbility(ability);
@@ -105,7 +105,7 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Object object = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
         if (player != null && object instanceof String) {
-            player.revealCards(player.getLogName() + "hand", player.getHand(), game, true);
+            player.revealCards(player.getLogName() + " hand", player.getHand(), game, true);
             String namedCard = (String) object;
             for (Card card : player.getHand().getCards(game)) {
                 if (card != null && card.getName().equals(namedCard)) {
