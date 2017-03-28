@@ -100,7 +100,6 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Snapcaster Mage", 0);
         assertGraveyardCount(playerA, "Repeal", 0);
         assertExileCount("Repeal", 1);
-
     }
 
     /**
@@ -132,7 +131,6 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Snapcaster Mage", 0);
         assertGraveyardCount(playerA, "Blaze", 0);
         assertExileCount("Blaze", 1);
-
     }
 
     /**
@@ -208,7 +206,6 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Snapcaster Mage", 1);
         assertPermanentCount(playerA, "Kor Ally", 4);
         assertExileCount("Unified Front", 1);
-
     }
 
     /**
@@ -238,7 +235,6 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertLife(playerB, 14);
 
         assertExileCount("Conflagrate", 1);
-
     }
 
     /**
@@ -274,7 +270,6 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Snapcaster Mage", 1);
         assertGraveyardCount(playerA, "Ancestral Vision", 1);
         assertHandCount(playerA, 0);
-
     }
 
     /**
@@ -364,7 +359,6 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertTappedCount("Mountain", true, 2);
         assertTappedCount("Island", true, 2);
         assertTappedCount("Swamp", true, 2);
-
     }
 
     @Test
@@ -389,7 +383,6 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Whispers of the Muse", 0);
         assertHandCount(playerA, 1);
         assertExileCount("Whispers of the Muse", 1);
-
     }
 
     /**
@@ -412,6 +405,36 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertHandCount(playerA, 2);
         assertTappedCount("Island", true, 2);
+    }
 
+    /*
+     * Bug: Firecat Blitz when cast via Flashback requests sacrificing mountains twice
+     */
+    @Test
+    public void firecatBlitzFlashback() {
+
+        /*
+        Firecat Blitz {X}{R}{R}
+         Sorcery
+        Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step.
+        Flashback—{R}{R}, Sacrifice X Mountains.
+        */
+        String fCatBlitz = "Firecat Blitz";
+        String mountain = "Mountain";
+
+        addCard(Zone.GRAVEYARD, playerA, fCatBlitz);
+        addCard(Zone.BATTLEFIELD, playerA, mountain, 6);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback"); // Flashback blitz
+
+        setChoice(playerA, "X=2");
+        addTarget(playerA, mountain);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertExileCount(playerA, fCatBlitz, 1);
+        assertGraveyardCount(playerA, mountain, 2);
+        assertPermanentCount(playerA, "Elemental Cat", 2);
     }
 }
