@@ -153,4 +153,68 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         Assert.assertEquals("amount of green mana", 5, playerA.getManaPool().getGreen()); // 6 green mana
         assertPowerToughness(playerA, "Omnath, Locus of Mana", 6, 6);
     }
+    
+    @Test
+    public void testNykthosDevotionAccurate() {
+
+            /*		
+            Nykthos, Shrine to Nyx
+            Legendary Land
+            {T}: Add {1} to your mana pool.
+            {2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.
+            */
+            String nykthos = "Nykthos, Shrine to Nyx";
+
+            /*
+             Stronghold Assassin {1}{B}{B}
+            Creature — Zombie Assassin 2/1
+            {T}, Sacrifice a creature: Destroy target nonblack creature.
+            */
+            String sAssassin = "Stronghold Assassin";
+
+            /*	
+            Graf Harvest {B}
+            Enchantment
+            Zombies you control have menace. (They can't be blocked except by two or more creatures.)
+            {3}{B}, Exile a creature card from your graveyard: Create a 2/2 black Zombie creature token.
+            */
+            String gHarvest = "Graf Harvest";
+
+            /*
+            Erebos, God of the Dead {3}{B}
+            Legendary Enchantment Creature — God 5/7
+            Indestructible
+            As long as your devotion to black is less than five, Erebos isn't a creature.
+            Your opponents can't gain life.
+            {1}{B}, Pay 2 life: Draw a card.
+            */
+            String erebos = "Erebos, God of the Dead";
+            
+            /*
+            Phyrexian Obliterator {B}{B}{B}{B}
+            Creature — Horror
+            Trample
+            Whenever a source deals damage to Phyrexian Obliterator, that source's controller sacrifices that many permanents.
+            */
+            String pObliterator = "Phyrexian Obliterator";
+
+            addCard(Zone.BATTLEFIELD, playerA, nykthos);
+            addCard(Zone.BATTLEFIELD, playerA, sAssassin);
+            addCard(Zone.BATTLEFIELD, playerA, gHarvest);
+            addCard(Zone.BATTLEFIELD, playerA, erebos);
+            addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2); // two colorless to pay for nykthos
+            //addCard(Zone.HAND, playerA, pObliterator); // just for something to cast for 4 black mana
+
+            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.");
+            setChoice(playerA, "Black"); // should produce 4 black mana
+            //castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pObliterator); // costs exactly 4 black mana should be castable
+            setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+            execute();
+            
+            assertTappedCount("Wastes", true, 2);
+            assertTapped(nykthos, true);
+            Assert.assertEquals("amount of black mana", 4, playerA.getManaPool().getBlack()); // should be 4 black mana
+            //assertHandCount(playerA, pObliterator, 0);
+            //assertPermanentCount(playerA, pObliterator, 1);
+    }
 }
