@@ -41,6 +41,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
@@ -53,7 +54,7 @@ public class SmolderingMarsh extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     
     static {
-        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
     }
 
     public SmolderingMarsh(UUID ownerId, CardSetInfo setInfo) {

@@ -33,6 +33,7 @@ package mage.cards.o;
 import mage.abilities.CountType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -93,7 +94,7 @@ class ShidakoBroodmistress extends Token {
 
     ShidakoBroodmistress() {
         super("Shidako, Broodmistress", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Snake");

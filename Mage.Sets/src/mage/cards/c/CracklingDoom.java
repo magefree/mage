@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -46,6 +44,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *

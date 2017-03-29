@@ -28,16 +28,17 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.keyword.EvolveAbility;
-import mage.abilities.mana.DynamicManaAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.counters.CounterType;
+    import mage.MageInt;
+    import mage.Mana;
+    import mage.abilities.dynamicvalue.common.CountersSourceCount;
+    import mage.abilities.keyword.EvolveAbility;
+    import mage.abilities.mana.DynamicManaAbility;
+    import mage.cards.CardImpl;
+    import mage.cards.CardSetInfo;
+    import mage.constants.CardType;
+    import mage.counters.CounterType;
+
+    import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -41,6 +40,8 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *

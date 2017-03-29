@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,18 +38,16 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public class ArcadesSabboth extends CardImpl {
@@ -64,8 +61,8 @@ public class ArcadesSabboth extends CardImpl {
     }
 
     public ArcadesSabboth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{W}{W}{U}{U}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{W}{W}{U}{U}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elder");
         this.subtype.add("Dragon");
         this.power = new MageInt(7);

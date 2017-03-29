@@ -27,8 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -45,6 +43,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *

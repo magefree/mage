@@ -37,6 +37,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 
 /**
@@ -47,7 +48,7 @@ public class PhyrexianIronfoot extends CardImpl {
 
     public PhyrexianIronfoot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.supertype.add("Snow");
+        this.addSuperType(SuperType.SNOW);
         this.subtype.add("Construct");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

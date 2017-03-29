@@ -51,7 +51,7 @@ public class LeovoldEmissaryOfTrest extends CardImpl {
 
     public LeovoldEmissaryOfTrest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Advisor");
         this.power = new MageInt(3);

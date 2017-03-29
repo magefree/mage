@@ -27,12 +27,13 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

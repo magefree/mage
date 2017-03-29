@@ -40,12 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -132,7 +127,7 @@ class NissaSageAnimistToken extends Token {
     NissaSageAnimistToken() {
         super("Ashaya, the Awoken World", "legendary 4/4 green Elemental creature token named Ashaya, the Awoken World");
         this.setOriginalExpansionSetCode("ORI");
-        this.getSupertype().add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.getPower().modifyBaseValue(4);
         this.getToughness().modifyBaseValue(4);
         this.color.setGreen(true);

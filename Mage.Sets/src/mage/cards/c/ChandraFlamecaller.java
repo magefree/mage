@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -48,6 +46,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.ElementalToken;
 import mage.players.Player;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

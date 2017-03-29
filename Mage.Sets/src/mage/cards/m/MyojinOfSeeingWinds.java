@@ -64,7 +64,7 @@ public class MyojinOfSeeingWinds extends CardImpl {
 
     public MyojinOfSeeingWinds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}{U}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

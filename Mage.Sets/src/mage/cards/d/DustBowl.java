@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -43,6 +42,8 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonBasicLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

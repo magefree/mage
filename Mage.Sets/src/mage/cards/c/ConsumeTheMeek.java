@@ -27,14 +27,15 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+
+import java.util.UUID;
 
 /**
  *

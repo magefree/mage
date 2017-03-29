@@ -28,12 +28,13 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlayerAmount;
+
+import java.util.UUID;
 
 /**
  *

@@ -47,7 +47,7 @@ public class UrborgTombOfYawgmoth extends CardImpl {
 
     public UrborgTombOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // Each land is a Swamp in addition to its other land types.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),

@@ -27,8 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.OneShotEffect;
@@ -47,6 +45,8 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
+
+import java.util.UUID;
 
 /**
  *

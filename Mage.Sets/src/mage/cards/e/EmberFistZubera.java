@@ -28,18 +28,18 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
-
-import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.ZuberasDiedWatcher;
+
+import java.util.UUID;
 
 /**
  *

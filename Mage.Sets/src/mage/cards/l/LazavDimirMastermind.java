@@ -38,11 +38,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,7 +55,7 @@ public class LazavDimirMastermind extends CardImpl {
 
     public LazavDimirMastermind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{B}{B}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(3);
@@ -137,7 +133,7 @@ class LazavDimirMastermindApplier extends ApplyToPermanent {
                 TargetController.OPPONENT, SetTargetPointer.CARD);
         permanent.getAbilities().add(ability);
         permanent.setName("Lazav, Dimir Mastermind");
-        permanent.getSupertype().add("Legendary");
+        permanent.addSuperType(SuperType.LEGENDARY);
         permanent.getAbilities().add(HexproofAbility.getInstance());
         return true;
     }
@@ -150,7 +146,7 @@ class LazavDimirMastermindApplier extends ApplyToPermanent {
                 TargetController.OPPONENT, SetTargetPointer.CARD);
         mageObject.getAbilities().add(ability);
         mageObject.setName("Lazav, Dimir Mastermind");
-        mageObject.getSupertype().add("Legendary");
+        mageObject.addSuperType(SuperType.LEGENDARY);
         mageObject.getAbilities().add(HexproofAbility.getInstance());
         return true;
     }

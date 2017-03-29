@@ -27,6 +27,7 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.a.ArmorThrull;
 import mage.cards.b.BasalThrull;
@@ -58,9 +59,8 @@ import mage.cards.o.OrderOfTheEbonHand;
 import mage.cards.t.ThornThallid;
 import mage.cards.v.VodalianMage;
 import mage.cards.v.VodalianSoldiers;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *

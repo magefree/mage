@@ -33,13 +33,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -134,9 +128,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         for (String type : copyFromObject.getSubtype(game)) {
             permanent.getSubtype(game).add(type);
         }
-        permanent.getSupertype().clear();
-        for (String type : copyFromObject.getSupertype()) {
-            permanent.getSupertype().add(type);
+        permanent.getSuperType().clear();
+        for (SuperType type : copyFromObject.getSuperType()) {
+            permanent.getSuperType().add(type);
         }
 
         permanent.removeAllAbilities(source.getSourceId(), game);

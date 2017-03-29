@@ -28,15 +28,16 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

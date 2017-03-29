@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -36,6 +35,7 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;

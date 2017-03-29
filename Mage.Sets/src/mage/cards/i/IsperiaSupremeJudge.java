@@ -27,15 +27,16 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public class IsperiaSupremeJudge extends CardImpl {
     public IsperiaSupremeJudge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{U}{U}");
         this.subtype.add("Sphinx");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         
 
 

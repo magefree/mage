@@ -1,9 +1,9 @@
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 public class NewPhyrexia extends ExpansionSet {
     private static final NewPhyrexia instance = new NewPhyrexia();

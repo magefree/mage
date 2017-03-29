@@ -40,6 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -58,7 +59,7 @@ public class AureliaTheWarleader extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{W}{W}");
 
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Angel");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

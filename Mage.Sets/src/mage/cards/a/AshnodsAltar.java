@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.mana.SimpleManaAbility;
@@ -37,6 +36,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

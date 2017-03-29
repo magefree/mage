@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
@@ -37,6 +36,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

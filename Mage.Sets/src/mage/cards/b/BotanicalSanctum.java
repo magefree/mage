@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.abilities.CountType;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
@@ -42,6 +40,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

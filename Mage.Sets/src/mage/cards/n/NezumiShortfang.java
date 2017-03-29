@@ -27,15 +27,9 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
-
-import mage.abilities.CountType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -43,14 +37,17 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -92,7 +89,7 @@ class StabwhiskerTheOdious extends Token {
 
     StabwhiskerTheOdious() {
         super("Stabwhisker the Odious", "");
-        supertype.add("Legendary");
+       addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Rat");

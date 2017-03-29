@@ -27,9 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -47,6 +44,10 @@ import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.RandomUtil;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

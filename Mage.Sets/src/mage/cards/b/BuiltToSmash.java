@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.TargetHasCardTypeCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -39,6 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetAttackingCreature;
+
+import java.util.UUID;
 
 /**
  *

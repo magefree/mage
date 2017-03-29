@@ -27,11 +27,8 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-
-import mage.abilities.CountType;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.abilities.CountType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -39,10 +36,13 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.DragonToken2;
+
+import java.util.UUID;
 
 /**
  *

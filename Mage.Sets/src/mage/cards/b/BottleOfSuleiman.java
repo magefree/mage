@@ -27,8 +27,7 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -43,7 +42,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.MageInt;
+
+import java.util.UUID;
 
 /**
  *

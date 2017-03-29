@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -44,6 +43,8 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  *

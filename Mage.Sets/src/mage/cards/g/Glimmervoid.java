@@ -27,8 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.abilities.CountType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -41,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
 */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -41,6 +40,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 public class GlimpseOfNature extends CardImpl {
 

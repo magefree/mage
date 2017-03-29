@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -40,6 +39,8 @@ import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.SoldierToken;
 import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.UUID;
 
 /**
  *

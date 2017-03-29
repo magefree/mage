@@ -29,9 +29,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:01

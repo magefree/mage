@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -38,6 +37,8 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterNonlandCard;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *

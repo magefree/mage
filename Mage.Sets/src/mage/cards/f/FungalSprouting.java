@@ -27,14 +27,14 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.permanent.token.SaprolingToken;
+
+import java.util.UUID;
 
 /**
  *

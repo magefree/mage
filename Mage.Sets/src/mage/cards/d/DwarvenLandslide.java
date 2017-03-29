@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -45,6 +44,8 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

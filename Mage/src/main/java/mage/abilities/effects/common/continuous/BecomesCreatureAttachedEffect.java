@@ -30,11 +30,7 @@ package mage.abilities.effects.common.continuous;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -85,10 +81,9 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            for (String t : token.getSupertype()) {
-                                if (!permanent.getSupertype().contains(t)) {
-                                    permanent.getSupertype().add(t);
-                                }
+                            for (SuperType t : token.getSuperType()) {
+                                permanent.addSuperType(t);
+
                             }
                             // card type
                             switch (loseType) {
@@ -167,9 +162,9 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 
-                || layer == Layer.AbilityAddingRemovingEffects_6 
-                || layer == Layer.ColorChangingEffects_5 
+        return layer == Layer.PTChangingEffects_7
+                || layer == Layer.AbilityAddingRemovingEffects_6
+                || layer == Layer.ColorChangingEffects_5
                 || layer == Layer.TypeChangingEffects_4;
     }
 

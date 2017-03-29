@@ -27,9 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -50,6 +47,10 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.common.TargetOpponent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -37,16 +36,14 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.counters.CounterType;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.counters.CounterType;
+
+import java.util.UUID;
 
 
 /**

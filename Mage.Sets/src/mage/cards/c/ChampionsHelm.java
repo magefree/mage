@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedHasSupertypeCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -38,10 +37,9 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -61,7 +59,7 @@ public class ChampionsHelm extends CardImpl {
         // As long as equipped creature is legendary, it has hexproof.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT), 
-                new EquippedHasSupertypeCondition("Legendary"), staticText)));
+                new EquippedHasSupertypeCondition(SuperType.LEGENDARY), staticText)));
         
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));

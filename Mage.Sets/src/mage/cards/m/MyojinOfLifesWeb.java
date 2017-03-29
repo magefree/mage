@@ -60,7 +60,7 @@ public class MyojinOfLifesWeb extends CardImpl {
 
     public MyojinOfLifesWeb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(8);

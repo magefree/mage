@@ -27,8 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -44,6 +42,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *

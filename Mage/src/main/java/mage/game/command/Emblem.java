@@ -41,6 +41,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
@@ -163,8 +164,8 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public List<String> getSupertype() {
-        return emptyList;
+    public EnumSet<SuperType> getSuperType() {
+        return EnumSet.noneOf(SuperType.class);
     }
 
     @Override

@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -37,6 +36,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.Filter;
 import mage.filter.common.FilterArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *

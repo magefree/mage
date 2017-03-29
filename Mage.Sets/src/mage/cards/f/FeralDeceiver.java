@@ -27,14 +27,9 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
-
-import mage.abilities.common.FeralDeceiverAbility;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.FeralDeceiverAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -44,6 +39,11 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,17 +27,11 @@
  */
 package mage.cards.b;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -47,6 +41,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  *

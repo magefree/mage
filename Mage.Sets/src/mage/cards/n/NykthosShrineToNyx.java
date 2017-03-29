@@ -27,24 +27,26 @@
  */
 package mage.cards.n;
 
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +56,7 @@ public class NykthosShrineToNyx extends CardImpl {
 
     public NykthosShrineToNyx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

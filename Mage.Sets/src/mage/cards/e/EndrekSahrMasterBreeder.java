@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.StaticFilters;
@@ -48,6 +48,8 @@ import mage.game.permanent.token.ThrullToken;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -56,7 +58,7 @@ public class EndrekSahrMasterBreeder extends CardImpl {
 
     public EndrekSahrMasterBreeder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

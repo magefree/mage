@@ -27,8 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -47,6 +45,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,7 +89,7 @@ class AttachedToBasicMountainCondition implements Condition {
         if (enchantment != null) {
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {
-                if (enchanted.hasSubtype("Mountain", game) && enchanted.getSupertype().contains("Basic")) {
+                if (enchanted.hasSubtype("Mountain", game) && enchanted.isBasic()) {
                     return true;
                 }
             }

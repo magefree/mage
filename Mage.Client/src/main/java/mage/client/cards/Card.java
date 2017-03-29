@@ -33,52 +33,12 @@
  */
 package mage.client.cards;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
-import javax.swing.text.StyledDocument;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
 import mage.cards.Sets;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
-import static mage.client.constants.Constants.CONTENT_MAX_XOFFSET;
-import static mage.client.constants.Constants.FRAME_MAX_HEIGHT;
-import static mage.client.constants.Constants.FRAME_MAX_WIDTH;
-import static mage.client.constants.Constants.NAME_FONT_MAX_SIZE;
-import static mage.client.constants.Constants.NAME_MAX_YOFFSET;
-import static mage.client.constants.Constants.POWBOX_TEXT_MAX_LEFT;
-import static mage.client.constants.Constants.POWBOX_TEXT_MAX_TOP;
-import static mage.client.constants.Constants.SYMBOL_MAX_XOFFSET;
-import static mage.client.constants.Constants.SYMBOL_MAX_YOFFSET;
-import static mage.client.constants.Constants.TYPE_MAX_YOFFSET;
 import mage.client.game.PlayAreaPanel;
 import mage.client.util.Config;
 import mage.client.util.DefaultActionCallback;
@@ -86,12 +46,20 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
-import mage.view.AbilityView;
-import mage.view.CardView;
-import mage.view.CounterView;
-import mage.view.PermanentView;
-import mage.view.StackAbilityView;
+import mage.constants.SuperType;
+import mage.view.*;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.text.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import static mage.client.constants.Constants.*;
 
 /**
  *
@@ -300,7 +268,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     protected String getType(CardView card) {
         StringBuilder sbType = new StringBuilder();
 
-        for (String superType : card.getSuperTypes()) {
+        for (SuperType superType : card.getSuperTypes()) {
             sbType.append(superType).append(' ');
         }
 

@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -40,6 +39,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

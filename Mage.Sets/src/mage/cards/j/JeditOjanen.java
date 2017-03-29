@@ -27,11 +27,13 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +43,7 @@ public class JeditOjanen extends CardImpl {
 
     public JeditOjanen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
 

@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,14 +38,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
@@ -56,6 +48,8 @@ import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.sets.Commander;
+
+import java.util.UUID;
 
 /**
  *

@@ -118,7 +118,7 @@ public abstract class GameImpl implements Game, Serializable {
         FILTER_FORTIFICATION.add(new CardTypePredicate(CardType.ARTIFACT));
         FILTER_FORTIFICATION.add(new SubtypePredicate("Fortification"));
 
-        FILTER_LEGENDARY.add(new SupertypePredicate("Legendary"));
+        FILTER_LEGENDARY.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     private transient Object customData;
@@ -1733,7 +1733,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
                 planeswalkers.add(perm);
             }
-            if (perm.getSupertype().contains("World")) {
+            if (perm.isWorld()) {
                 worldEnchantment.add(perm);
             }
             if (FILTER_AURA.match(perm, this)) {
@@ -1931,7 +1931,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (legendary.size() > 1) {  //don't bother checking if less than 2 legends in play
             for (Permanent legend : legendary) {
                 FilterPermanent filterLegendName = new FilterPermanent();
-                filterLegendName.add(new SupertypePredicate("Legendary"));
+                filterLegendName.add(new SupertypePredicate(SuperType.LEGENDARY));
                 filterLegendName.add(new NamePredicate(legend.getName()));
                 filterLegendName.add(new ControllerIdPredicate(legend.getControllerId()));
                 if (getBattlefield().contains(filterLegendName, legend.getControllerId(), this, 2)) {

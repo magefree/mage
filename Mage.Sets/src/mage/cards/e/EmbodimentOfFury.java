@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -46,6 +45,8 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *

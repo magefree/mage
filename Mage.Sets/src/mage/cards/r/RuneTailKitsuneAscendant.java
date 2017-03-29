@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,12 +36,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreatureInPlay;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +54,7 @@ public class RuneTailKitsuneAscendant extends CardImpl {
 
     public RuneTailKitsuneAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Fox");
         this.subtype.add("Monk");
 
@@ -110,7 +112,7 @@ class RuneTailEssence extends Token {
 
     RuneTailEssence() {
         super("Rune-Tail's Essence", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
 
         color.setWhite(true);

@@ -27,8 +27,6 @@
  */
 package mage.view;
 
-import java.util.*;
-
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Mode;
@@ -37,11 +35,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.cards.SplitCard;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.MageObjectType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.designations.Designation;
@@ -54,6 +48,8 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -72,7 +68,7 @@ public class CardView extends SimpleCardView {
     protected String startingLoyalty;
     protected EnumSet<CardType> cardTypes;
     protected List<String> subTypes;
-    protected List<String> superTypes;
+    protected EnumSet<SuperType> superTypes;
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
@@ -349,7 +345,7 @@ public class CardView extends SimpleCardView {
         this.toughness = Integer.toString(card.getToughness().getValue());
         this.cardTypes = card.getCardType();
         this.subTypes = card.getSubtype(game);
-        this.superTypes = card.getSupertype();
+        this.superTypes = card.getSuperType();
         this.color = card.getColor(game);
         this.transformable = card.isTransformable();
         this.flipCard = card.isFlipCard();
@@ -436,7 +432,7 @@ public class CardView extends SimpleCardView {
         }
         this.cardTypes = object.getCardType();
         this.subTypes = object.getSubtype(null);
-        this.superTypes = object.getSupertype();
+        this.superTypes = object.getSuperType();
         this.color = object.getColor(null);
         this.manaCost = object.getManaCost().getSymbols();
         this.convertedManaCost = object.getManaCost().convertedManaCost();
@@ -520,7 +516,7 @@ public class CardView extends SimpleCardView {
         this.startingLoyalty = "";
         this.cardTypes = EnumSet.noneOf(CardType.class);
         this.subTypes = new ArrayList<>();
-        this.superTypes = new ArrayList<>();
+        this.superTypes = EnumSet.noneOf(SuperType.class);
         this.color = new ObjectColor();
         this.frameColor = new ObjectColor();
         this.frameStyle = FrameStyle.M15_NORMAL;
@@ -567,7 +563,7 @@ public class CardView extends SimpleCardView {
         this.startingLoyalty = "";
         this.cardTypes = token.getCardType();
         this.subTypes = token.getSubtype(null);
-        this.superTypes = token.getSupertype();
+        this.superTypes = token.getSuperType();
         this.color = token.getColor(null);
         this.frameColor = token.getFrameColor(null);
         this.frameStyle = token.getFrameStyle();
@@ -647,7 +643,7 @@ public class CardView extends SimpleCardView {
         return subTypes;
     }
 
-    public List<String> getSuperTypes() {
+    public EnumSet<SuperType> getSuperTypes() {
         return superTypes;
     }
 

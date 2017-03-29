@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -48,6 +46,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.AttackedThisTurnWatcher;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

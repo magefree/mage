@@ -27,8 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,14 +37,11 @@ import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author ImperatorPrime
@@ -119,11 +114,10 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
             }
         }
 
-        permanent.getSupertype().clear();
-        for (String type : card.getSupertype()) {
-            if (!permanent.getSupertype().contains(type)) {
-                permanent.getSupertype().add(type);
-            }
+        permanent.getSuperType().clear();
+        for (SuperType type : card.getSuperType()) {
+                permanent.getSuperType().add(type);
+
         }
 
         for (Ability ability : card.getAbilities()) {

@@ -40,8 +40,8 @@ import mage.cards.l.LimDulsHighGuard;
 import mage.cards.n.Necrite;
 import mage.cards.n.NightSoil;
 import mage.cards.o.OrcishVeteran;
-import mage.constants.SetType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *

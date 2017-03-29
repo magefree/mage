@@ -146,8 +146,8 @@ public class Commander extends Constructed {
                     invalid.put("Commander", "Commander banned (" + commander.getName() + ')');
                     valid = false;
                 }
-                if ((!commander.getCardType().contains(CardType.CREATURE) || !commander.getSupertype().contains("Legendary"))
-                        && (!commander.getCardType().contains(CardType.PLANESWALKER) || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+                if ((!commander.isCreature() || !commander.isLegendary())
+                        && (!commander.isPlaneswalker() || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
                     invalid.put("Commander", "Commander invalid (" + commander.getName() + ')');
                     valid = false;
                 }

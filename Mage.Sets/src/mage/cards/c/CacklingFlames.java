@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -36,6 +35,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,6 +38,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.DragonToken2;
+
+import java.util.UUID;
 
 /**
  *

@@ -28,23 +28,21 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +55,7 @@ public class MirkoVoskMindDrinker extends CardImpl {
     public MirkoVoskMindDrinker (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
         this.subtype.add("Vampire");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
 
         this.power = new MageInt(2);

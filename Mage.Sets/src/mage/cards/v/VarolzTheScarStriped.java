@@ -29,8 +29,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,10 +42,6 @@ import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -67,7 +62,7 @@ public class VarolzTheScarStriped extends CardImpl {
 
     public VarolzTheScarStriped(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Troll");
         this.subtype.add("Warrior");
 

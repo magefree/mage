@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
@@ -44,14 +43,16 @@ import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
-import mage.cards.v.VoraciousReader;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.v.VoraciousReader;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *

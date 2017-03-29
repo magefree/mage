@@ -30,7 +30,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -40,9 +39,12 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -56,7 +58,7 @@ public class BushiTenderfoot extends CardImpl {
     }
 
     public BushiTenderfoot(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -85,7 +87,7 @@ class KenzoTheHardhearted extends Token {
 
     KenzoTheHardhearted() {
         super("Kenzo the Hardhearted", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Human");
