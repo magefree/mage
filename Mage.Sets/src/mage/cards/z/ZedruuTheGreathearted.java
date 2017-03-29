@@ -41,13 +41,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -61,7 +55,7 @@ public class ZedruuTheGreathearted extends CardImpl {
 
     public ZedruuTheGreathearted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Minotaur");
         this.subtype.add("Monk");
         this.power = new MageInt(2);

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -42,17 +41,12 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *

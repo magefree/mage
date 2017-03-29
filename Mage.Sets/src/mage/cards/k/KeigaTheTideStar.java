@@ -28,9 +28,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -38,8 +35,12 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -48,7 +49,7 @@ public class KeigaTheTideStar extends CardImpl {
 
     public KeigaTheTideStar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dragon");
         this.subtype.add("Spirit");
 

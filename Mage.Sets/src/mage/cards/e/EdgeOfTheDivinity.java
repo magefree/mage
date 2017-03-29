@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,13 +35,15 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.constants.CardType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

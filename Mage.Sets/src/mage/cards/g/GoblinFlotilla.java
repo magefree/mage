@@ -27,11 +27,11 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -41,7 +41,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
+
+import java.util.UUID;
 
 /**
  *

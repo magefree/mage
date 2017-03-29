@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,10 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,6 +46,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
  * @author duncant
  */
@@ -57,7 +55,7 @@ public class ScionOfTheUrDragon extends CardImpl {
 
     public ScionOfTheUrDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dragon");
         this.subtype.add("Avatar");
         this.power = new MageInt(4);

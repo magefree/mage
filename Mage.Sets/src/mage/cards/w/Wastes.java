@@ -32,6 +32,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class Wastes extends CardImpl {
 
     public Wastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Basic");
+        addSuperType(SuperType.BASIC);
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

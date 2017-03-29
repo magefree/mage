@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
@@ -40,6 +39,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *

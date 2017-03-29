@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
@@ -44,6 +43,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *

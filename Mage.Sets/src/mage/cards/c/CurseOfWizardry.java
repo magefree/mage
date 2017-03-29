@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -44,6 +43,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth

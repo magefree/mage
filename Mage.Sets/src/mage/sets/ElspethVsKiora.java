@@ -27,11 +27,11 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.i.IcatianJavelineers;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *

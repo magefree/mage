@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -35,6 +34,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;

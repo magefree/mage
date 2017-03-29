@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
@@ -35,6 +34,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanentAmount;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -51,6 +51,8 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -59,7 +61,7 @@ public class UlamogTheCeaselessHunger extends CardImpl {
 
     public UlamogTheCeaselessHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Eldrazi");
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);

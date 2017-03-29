@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -53,6 +50,10 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *

@@ -31,6 +31,7 @@ package mage.view;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -57,7 +58,7 @@ public class AbilityView extends CardView {
         this.loyalty = "";
         this.cardTypes = EnumSet.noneOf(CardType.class);
         this.subTypes = new ArrayList<>();
-        this.superTypes = new ArrayList<>();
+        this.superTypes =EnumSet.noneOf(SuperType.class);
         this.color = new ObjectColor();
         this.manaCost = ability.getManaCosts().getSymbols();
     }

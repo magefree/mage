@@ -27,10 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -47,14 +43,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.RemoveAllCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.SubLayer;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -67,6 +56,11 @@ import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

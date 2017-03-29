@@ -28,15 +28,16 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
 import mage.game.permanent.token.ElephantToken;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *

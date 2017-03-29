@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -36,6 +35,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
  *

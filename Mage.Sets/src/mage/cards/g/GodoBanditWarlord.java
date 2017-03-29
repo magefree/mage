@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -51,6 +51,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +68,7 @@ public class GodoBanditWarlord extends CardImpl {
 
     public GodoBanditWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Barbarian");
 

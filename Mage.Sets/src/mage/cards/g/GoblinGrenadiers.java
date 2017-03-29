@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
@@ -40,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,13 +34,11 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *

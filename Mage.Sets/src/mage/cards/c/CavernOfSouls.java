@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -46,16 +43,16 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *

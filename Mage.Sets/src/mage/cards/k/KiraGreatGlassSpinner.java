@@ -27,9 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,10 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,6 +45,10 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -61,7 +59,7 @@ public class KiraGreatGlassSpinner extends CardImpl {
     public KiraGreatGlassSpinner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Spirit");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

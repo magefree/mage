@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -50,7 +51,7 @@ public class KreshTheBloodbraided extends CardImpl {
 
     public KreshTheBloodbraided(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

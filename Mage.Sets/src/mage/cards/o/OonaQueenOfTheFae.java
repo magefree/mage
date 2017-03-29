@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -55,7 +56,7 @@ public class OonaQueenOfTheFae extends CardImpl {
 
     public OonaQueenOfTheFae(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U/B}{U/B}{U/B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 

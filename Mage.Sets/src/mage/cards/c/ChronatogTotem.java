@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -50,6 +49,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *

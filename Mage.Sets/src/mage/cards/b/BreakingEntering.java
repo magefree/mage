@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -48,6 +47,8 @@ import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 public class BreakingEntering extends SplitCard {
 

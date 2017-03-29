@@ -27,11 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,8 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Duration;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -50,6 +44,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
  * @author LevelX2
  */
@@ -57,7 +53,7 @@ public class HokoriDustDrinker extends CardImpl {
 
     public HokoriDustDrinker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,6 +42,8 @@ import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,11 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -43,10 +38,13 @@ import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  *
@@ -57,7 +55,7 @@ public class KydeleChosenOfKruphix extends CardImpl {
     public KydeleChosenOfKruphix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);

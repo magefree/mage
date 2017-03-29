@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -38,11 +37,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -52,6 +47,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
@@ -37,15 +36,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +52,7 @@ public class MaralenOfTheMornsong extends CardImpl {
 
     public MaralenOfTheMornsong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);

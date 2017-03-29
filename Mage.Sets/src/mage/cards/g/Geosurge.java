@@ -28,7 +28,6 @@
 package mage.cards.g;
 
 import mage.ConditionalMana;
-import mage.constants.CardType;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.Game;
 
 import java.util.UUID;

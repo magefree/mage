@@ -28,11 +28,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -42,6 +37,11 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *

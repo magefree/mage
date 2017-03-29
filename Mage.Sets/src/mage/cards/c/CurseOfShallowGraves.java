@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -49,6 +48,8 @@ import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *

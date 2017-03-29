@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -37,13 +36,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -53,6 +46,8 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
  *

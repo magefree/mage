@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
@@ -98,9 +99,9 @@ public class CopyTokenFunction implements Function<Token, Card> {
         for (String type : sourceObj.getSubtype(null)) {
             target.getSubtype(null).add(type);
         }
-        target.getSupertype().clear();
-        for (String type : sourceObj.getSupertype()) {
-            target.getSupertype().add(type);
+        target.getSuperType().clear();
+        for (SuperType type : sourceObj.getSuperType()) {
+            target.getSuperType().add(type);
         }
 
         target.getAbilities().clear();

@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
@@ -51,6 +51,8 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -59,7 +61,7 @@ public class RaziaBorosArchangel extends CardImpl {
 
     public RaziaBorosArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{W}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Angel");
 
         this.power = new MageInt(6);

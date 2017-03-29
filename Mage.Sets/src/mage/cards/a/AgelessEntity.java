@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
@@ -39,6 +38,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *

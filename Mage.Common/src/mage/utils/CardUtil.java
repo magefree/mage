@@ -49,14 +49,6 @@ public final class CardUtil {
         return card.getCardTypes().contains(type);
     }
 
-    public static boolean isBasicLand(Card card) {
-        return card.getSupertype().contains("Basic");
-    }
-
-    public static boolean isLand(Card card) {
-        return card.getCardType().contains(CardType.LAND);
-    }
-
     public static int getColorIdentitySortValue(List<String> manaCost, ObjectColor originalColor, List<String> rules) {
         ObjectColor color = new ObjectColor(originalColor);
         for (String rule : rules) {

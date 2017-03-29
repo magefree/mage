@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -38,6 +37,8 @@ import mage.filter.Filter;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
@@ -39,6 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 
 /**

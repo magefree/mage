@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -46,6 +45,8 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *

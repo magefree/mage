@@ -28,9 +28,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,7 +35,12 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +51,7 @@ public class JenaraAsuraOfWar extends CardImpl {
     public JenaraAsuraOfWar (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
         this.subtype.add("Angel");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
 
         

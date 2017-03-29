@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -43,6 +42,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.CastSpellLastTurnWatcher;
+
+import java.util.UUID;
 
 /**
  *

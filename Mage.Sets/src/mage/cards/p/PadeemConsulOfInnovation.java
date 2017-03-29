@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,11 +38,10 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +51,7 @@ public class PadeemConsulOfInnovation extends CardImpl {
 
     public PadeemConsulOfInnovation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Vedalken");
         this.subtype.add("Artificer");
         this.power = new MageInt(1);

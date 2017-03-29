@@ -27,8 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.VariableManaCost;
@@ -42,6 +40,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *

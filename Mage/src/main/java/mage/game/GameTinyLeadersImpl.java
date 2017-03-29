@@ -41,12 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
@@ -166,7 +161,7 @@ class DefaultCommander extends CardImpl {
 
     public DefaultCommander(UUID ownerId, String commanderName, String manaString) {
         super(ownerId, new CardSetInfo(commanderName, "", "999", Rarity.RARE), new CardType[]{CardType.CREATURE}, manaString);
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
 
         if (manaString.contains("{G}")) {
             this.color.setGreen(true);

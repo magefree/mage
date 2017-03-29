@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.keyword.InvestigateEffect;
@@ -39,6 +38,8 @@ import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+
+import java.util.UUID;
 
 /**
  *

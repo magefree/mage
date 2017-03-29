@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
@@ -47,7 +48,7 @@ public class SliverHivelord extends CardImpl {
 
     public SliverHivelord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Sliver");
 
         this.power = new MageInt(5);

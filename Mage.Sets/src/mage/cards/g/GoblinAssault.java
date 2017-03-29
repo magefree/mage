@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -41,6 +40,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.GoblinTokenWithHaste;
 import mage.watchers.common.AttackedThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  *

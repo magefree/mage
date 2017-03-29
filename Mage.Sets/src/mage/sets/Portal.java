@@ -28,13 +28,13 @@
 
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.d.DrySpell;
 import mage.cards.e.EliteCatWarrior;
 import mage.cards.w.WarriorsCharge;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
@@ -42,6 +41,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *

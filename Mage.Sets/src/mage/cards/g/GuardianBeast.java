@@ -27,8 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,25 +35,28 @@ import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterObject;
+import mage.filter.FilterStackObject;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.constants.Outcome;
-import mage.filter.FilterObject;
-import mage.filter.FilterStackObject;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *

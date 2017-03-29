@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -41,6 +40,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

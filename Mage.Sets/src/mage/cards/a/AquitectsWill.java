@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -46,6 +45,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

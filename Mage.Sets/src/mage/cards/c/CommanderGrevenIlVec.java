@@ -27,15 +27,17 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +47,7 @@ public class CommanderGrevenIlVec extends CardImpl {
 
     public CommanderGrevenIlVec(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

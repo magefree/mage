@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -52,7 +53,7 @@ public class TheAbyss extends CardImpl {
 
     public TheAbyss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
-        this.supertype.add("World");
+        addSuperType(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.
         this.addAbility(new TheAbyssTriggeredAbility());

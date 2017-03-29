@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
@@ -43,6 +42,8 @@ import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

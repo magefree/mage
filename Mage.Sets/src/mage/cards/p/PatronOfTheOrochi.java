@@ -27,19 +27,18 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.ObjectColor;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -50,6 +49,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 
 /**
  * @author LevelX2
@@ -58,7 +59,7 @@ public class PatronOfTheOrochi extends CardImpl {
 
     public PatronOfTheOrochi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(7);

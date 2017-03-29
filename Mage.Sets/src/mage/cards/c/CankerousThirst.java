@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -40,6 +39,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.ManaSpentToCastWatcher;
+
+import java.util.UUID;
 
 /**
  *

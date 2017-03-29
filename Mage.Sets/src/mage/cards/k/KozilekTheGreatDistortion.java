@@ -27,9 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.CountType;
@@ -47,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -59,6 +57,10 @@ import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -67,7 +69,7 @@ public class KozilekTheGreatDistortion extends CardImpl {
 
     public KozilekTheGreatDistortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{C}{C}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Eldrazi");
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);

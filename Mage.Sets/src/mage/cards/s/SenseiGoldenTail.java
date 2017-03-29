@@ -28,10 +28,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -43,9 +39,14 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public class SenseiGoldenTail extends CardImpl {
 
     public SenseiGoldenTail (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Fox");
         this.subtype.add("Samurai");
 

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,11 +35,12 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 

@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,16 +34,15 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KorAllyToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +52,7 @@ public class OathOfGideon extends CardImpl {
 
     public OathOfGideon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // When Oath of Gideon enters the battlefield, create two 1/1 Kor Ally creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KorAllyToken(), 2), false));

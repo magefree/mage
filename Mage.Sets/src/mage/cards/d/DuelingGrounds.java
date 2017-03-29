@@ -27,9 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,6 +41,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 import mage.watchers.common.BlockedThisTurnWatcher;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

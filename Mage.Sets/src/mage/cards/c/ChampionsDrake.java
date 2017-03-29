@@ -27,22 +27,22 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-
-import mage.abilities.CountType;
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.constants.Duration;
+import mage.abilities.CountType;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentHasCounterCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.counters.CounterType;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

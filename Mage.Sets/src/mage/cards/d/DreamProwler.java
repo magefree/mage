@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.CountType;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
+
+import java.util.UUID;
 
 /**
  *

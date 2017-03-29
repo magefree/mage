@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,6 +46,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

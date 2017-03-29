@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -49,6 +49,8 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.EwokToken;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +71,7 @@ public class ChiefChirpa extends CardImpl {
 
     public ChiefChirpa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Ewok");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);

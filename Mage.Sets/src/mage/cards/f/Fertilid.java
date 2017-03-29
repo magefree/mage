@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -44,6 +43,8 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *

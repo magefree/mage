@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -52,6 +51,8 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *

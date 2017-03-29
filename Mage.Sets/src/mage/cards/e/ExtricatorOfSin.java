@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -47,6 +46,8 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.permanent.token.EldraziHorrorToken;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *

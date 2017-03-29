@@ -27,7 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -38,12 +37,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -51,6 +45,8 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +56,7 @@ public class WortTheRaidmother extends CardImpl {
 
     public WortTheRaidmother(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R/G}{R/G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
         this.power = new MageInt(3);

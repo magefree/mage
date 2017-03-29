@@ -27,19 +27,20 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+
+import java.util.UUID;
 
 /**
  *

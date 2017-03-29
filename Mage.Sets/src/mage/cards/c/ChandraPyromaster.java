@@ -27,10 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -39,16 +35,8 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -61,6 +49,10 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth

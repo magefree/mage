@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -43,6 +42,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *

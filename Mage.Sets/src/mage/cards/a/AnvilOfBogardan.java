@@ -27,13 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,8 +36,11 @@ import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *

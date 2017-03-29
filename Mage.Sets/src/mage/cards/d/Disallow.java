@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +35,6 @@ import mage.constants.CardType;
 import mage.target.TargetStackObject;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 
 /**
  * @author JRHerlehy

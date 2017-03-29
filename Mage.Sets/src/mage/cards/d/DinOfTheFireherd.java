@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -46,6 +45,8 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *

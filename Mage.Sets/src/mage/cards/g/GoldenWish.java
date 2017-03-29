@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.WishEffect;
 import mage.cards.CardImpl;
@@ -36,6 +35,8 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
@@ -39,6 +38,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *

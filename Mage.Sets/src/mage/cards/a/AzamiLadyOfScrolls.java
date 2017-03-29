@@ -28,21 +28,22 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -58,7 +59,7 @@ public class AzamiLadyOfScrolls extends CardImpl {
 
     public AzamiLadyOfScrolls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

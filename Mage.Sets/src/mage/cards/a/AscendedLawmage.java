@@ -28,13 +28,14 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *

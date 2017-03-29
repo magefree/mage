@@ -38,10 +38,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -58,7 +55,7 @@ public class GenjuOfTheRealm extends CardImpl {
     public GenjuOfTheRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}{B}{R}{G}");
         this.subtype.add("Aura");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // Enchant Land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -89,7 +86,7 @@ public class GenjuOfTheRealm extends CardImpl {
 
         SpiritToken() {
             super("Spirit", "legendary 8/12 Spirit creature with trample");
-            supertype.add("Legendary");
+            addSuperType(SuperType.LEGENDARY);
             cardType.add(CardType.CREATURE);
             this.color.setWhite(true);
             this.color.setBlue(true);

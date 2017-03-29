@@ -1,5 +1,6 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.a.AesthirGlider;
 import mage.cards.a.AgentOfStromgald;
@@ -18,10 +19,8 @@ import mage.cards.s.SoldeviSage;
 import mage.cards.s.StormShaman;
 import mage.cards.s.SwampMosquito;
 import mage.cards.w.WhipVine;
-import mage.constants.SetType;
-
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 public class Alliances extends ExpansionSet {
     private static final Alliances instance = new Alliances();

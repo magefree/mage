@@ -28,7 +28,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
@@ -44,6 +43,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,19 +27,20 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.ObjectColor;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,9 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -41,12 +38,16 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ public class HigureTheStillWind extends CardImpl {
     private static final FilterCard filter = new FilterCard("Ninja card");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Ninja creature");
     static {
-        filter.add((new SubtypePredicate("Ninja")));
+        filter.add(new SubtypePredicate("Ninja"));
         filterCreature.add((new SubtypePredicate("Ninja")));
     }
 
@@ -65,7 +66,7 @@ public class HigureTheStillWind extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Ninja");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

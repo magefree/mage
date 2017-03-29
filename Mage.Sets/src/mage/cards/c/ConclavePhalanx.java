@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -36,7 +34,10 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

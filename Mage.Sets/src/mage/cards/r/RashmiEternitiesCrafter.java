@@ -27,8 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -40,12 +38,16 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.common.SpellsCastWatcher;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class RashmiEternitiesCrafter extends CardImpl {
 
     public RashmiEternitiesCrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.power = new MageInt(2);

@@ -27,9 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
@@ -40,8 +37,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PlainscyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *

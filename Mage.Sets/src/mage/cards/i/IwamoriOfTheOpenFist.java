@@ -27,19 +27,15 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,6 +45,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -57,7 +55,7 @@ public class IwamoriOfTheOpenFist extends CardImpl {
 
     public IwamoriOfTheOpenFist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Monk");
 

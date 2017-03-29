@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,6 +39,8 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *

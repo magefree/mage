@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
@@ -36,6 +35,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.permanent.token.ElephantToken;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

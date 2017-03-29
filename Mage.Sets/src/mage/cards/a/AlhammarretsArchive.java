@@ -27,21 +27,18 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +48,7 @@ public class AlhammarretsArchive extends CardImpl {
 
     public AlhammarretsArchive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // If you would gain life, you gain twice that much life instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AlhammarretsArchiveEffect()));

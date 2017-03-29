@@ -28,24 +28,21 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +52,7 @@ public class HaakonStromgaldScourge extends CardImpl {
 
     public HaakonStromgaldScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Knight");
 

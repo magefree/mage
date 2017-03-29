@@ -27,9 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -53,6 +50,10 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ServoToken;
 import mage.players.Player;
 import mage.target.common.TargetPermanentOrPlayer;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

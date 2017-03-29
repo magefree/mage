@@ -28,17 +28,17 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
-
-import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.permanent.token.SpiritToken;
 import mage.watchers.common.ZuberasDiedWatcher;
+
+import java.util.UUID;
 
 /**
  *

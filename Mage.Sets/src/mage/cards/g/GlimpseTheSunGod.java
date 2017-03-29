@@ -27,17 +27,18 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

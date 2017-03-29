@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -43,17 +40,17 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledEnchantmentPermanent;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPlaneswalkerPermanent;
+import mage.filter.common.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class CatchRelease extends SplitCard {
 

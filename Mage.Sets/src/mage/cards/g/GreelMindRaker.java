@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,8 +37,11 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +52,7 @@ public class GreelMindRaker extends CardImpl {
     public GreelMindRaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Horror");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(3);

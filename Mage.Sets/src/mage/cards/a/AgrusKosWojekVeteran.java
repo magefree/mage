@@ -27,18 +27,19 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ public class AgrusKosWojekVeteran extends CardImpl {
 
     public AgrusKosWojekVeteran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

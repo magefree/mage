@@ -40,6 +40,7 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
@@ -56,7 +57,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected FrameStyle frameStyle;
     protected EnumSet<CardType> cardType = EnumSet.noneOf(CardType.class);
     protected List<String> subtype = new ArrayList<>();
-    protected List<String> supertype = new ArrayList<>();
+    protected EnumSet<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
     protected String text;
     protected MageInt power;
@@ -91,7 +92,7 @@ public abstract class MageObjectImpl implements MageObject {
         abilities = object.abilities.copy();
         this.cardType.addAll(object.cardType);
         this.subtype.addAll(object.subtype);
-        this.supertype.addAll(object.supertype);
+        supertype.addAll(object.supertype);
         this.copy = object.copy;
     }
 
@@ -136,7 +137,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public List<String> getSupertype() {
+    public EnumSet<SuperType> getSuperType() {
         return supertype;
     }
 

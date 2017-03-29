@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
@@ -36,6 +35,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
+
+import java.util.UUID;
 
 /**
  *

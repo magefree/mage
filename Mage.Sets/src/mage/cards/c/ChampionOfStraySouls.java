@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,6 +46,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -37,6 +36,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -46,6 +46,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -54,7 +56,7 @@ public class PyromancersGoggles extends CardImpl {
 
     public PyromancersGoggles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // {T}: Add {R} to your mana pool.
         Ability ability = new RedManaAbility();

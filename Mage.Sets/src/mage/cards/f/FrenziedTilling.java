@@ -27,15 +27,16 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

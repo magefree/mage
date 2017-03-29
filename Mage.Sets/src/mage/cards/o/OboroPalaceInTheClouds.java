@@ -27,16 +27,17 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public class OboroPalaceInTheClouds extends CardImpl {
 
     public OboroPalaceInTheClouds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         // {tap}: Add {U} to your mana pool.
         this.addAbility(new BlueManaAbility());
         // {1}: Return Oboro, Palace in the Clouds to its owner's hand.

@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -36,7 +34,10 @@ import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

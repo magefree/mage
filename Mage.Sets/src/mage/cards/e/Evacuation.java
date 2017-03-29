@@ -27,13 +27,13 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
-
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
-import mage.constants.CardType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

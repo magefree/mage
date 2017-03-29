@@ -27,9 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -43,11 +40,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -56,6 +49,10 @@ import mage.target.Target;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * Gatecrash FAQ (01.2013)

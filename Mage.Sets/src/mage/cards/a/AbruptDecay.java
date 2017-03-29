@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -41,6 +40,8 @@ import mage.filter.Filter;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  *

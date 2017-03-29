@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -41,12 +40,15 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +58,7 @@ public class VendilionClique extends CardImpl {
 
     public VendilionClique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 

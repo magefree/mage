@@ -27,18 +27,20 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *

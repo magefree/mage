@@ -68,6 +68,7 @@ import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.util.RandomUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -1312,8 +1313,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         }
                         // Sub & Super Types
                         if (!s) {
-                            for (String str : card.getSuperTypes()) {
-                                s |= str.toLowerCase().contains(searchStr);
+                            for (SuperType str : card.getSuperTypes()) {
+                                s |= str.toString().toLowerCase().contains(searchStr);
                             }
                             for (String str : card.getSubTypes()) {
                                 s |= str.toLowerCase().contains(searchStr);
@@ -1388,8 +1389,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         t += ' ' + type.toString();
                     }
                     // Sub & Super Types
-                    for (String str : card.getSuperTypes()) {
-                        t += ' ' + str.toLowerCase();
+                    for (SuperType type : card.getSuperTypes()) {
+                        t += ' ' + type.toString().toLowerCase();
                     }
                     for (String str : card.getSubTypes()) {
                         t += ' ' + str.toLowerCase();
@@ -1523,7 +1524,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         for (ArrayList<ArrayList<CardView>> gridRow : cardGrid) {
             for (ArrayList<CardView> stack : gridRow) {
                 for (CardView card : stack) {
-                    if (card.getSuperTypes().contains("Basic")) {
+                    if (card.getSuperTypes().contains(SuperType.BASIC)) {
                         continue;
                     }
 

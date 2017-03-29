@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -48,6 +47,8 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.StormAbility;
@@ -38,6 +37,8 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *

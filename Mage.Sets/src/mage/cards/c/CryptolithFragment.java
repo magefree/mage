@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -37,11 +36,13 @@ import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.cards.a.AuroraOfEmrakul;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.a.AuroraOfEmrakul;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *

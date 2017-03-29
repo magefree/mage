@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceCost;
@@ -42,6 +41,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *

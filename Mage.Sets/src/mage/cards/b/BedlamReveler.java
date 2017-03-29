@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -40,15 +39,13 @@ import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *

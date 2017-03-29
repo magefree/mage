@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeAllTriggeredAbility;
@@ -39,6 +38,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *

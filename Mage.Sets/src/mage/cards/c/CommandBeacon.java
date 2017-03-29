@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -44,6 +41,10 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *

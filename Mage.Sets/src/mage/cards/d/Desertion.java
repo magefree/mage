@@ -27,9 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -42,6 +39,10 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

@@ -27,9 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -45,6 +42,10 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

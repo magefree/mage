@@ -28,8 +28,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -39,7 +37,10 @@ import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 
 

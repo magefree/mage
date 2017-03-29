@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
@@ -36,6 +35,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.watchers.common.DamagedByWatcher;
+
+import java.util.UUID;
 
 /**
  *

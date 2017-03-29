@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.CountType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -40,6 +39,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+
+import java.util.UUID;
 
 /**
  *

@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SuperType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class RorixBladewing extends CardImpl {
 
     public RorixBladewing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dragon");
 
         this.power = new MageInt(6);

@@ -28,9 +28,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,7 +37,12 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +53,7 @@ public class RakkaMar extends CardImpl {
 
     public RakkaMar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

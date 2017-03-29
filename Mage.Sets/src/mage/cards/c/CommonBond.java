@@ -27,19 +27,19 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 
 /**

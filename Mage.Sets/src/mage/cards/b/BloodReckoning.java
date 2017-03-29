@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -36,6 +35,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

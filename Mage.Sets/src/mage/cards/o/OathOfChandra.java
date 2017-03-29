@@ -27,9 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,11 +37,7 @@ import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -52,6 +45,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +64,7 @@ public class OathOfChandra extends CardImpl {
 
     public OathOfChandra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // When Oath of Chandra enters the battlefield, it deals 3 damage to target creature an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), false);

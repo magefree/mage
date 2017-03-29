@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -38,6 +37,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
 import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
+
+import java.util.UUID;
 
 /**
  *

@@ -41,10 +41,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -61,7 +58,7 @@ public class TymnaTheWeaver extends CardImpl {
     public TymnaTheWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
 
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);

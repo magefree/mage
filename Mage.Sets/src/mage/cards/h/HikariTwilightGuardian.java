@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -36,7 +35,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +50,7 @@ public class HikariTwilightGuardian extends CardImpl {
 
     public HikariTwilightGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(4);

@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -39,8 +38,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +52,7 @@ public class SurrakTheHuntCaller extends CardImpl {
 
     public SurrakTheHuntCaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(5);

@@ -27,24 +27,20 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *

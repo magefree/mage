@@ -27,13 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
@@ -43,9 +36,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 
 

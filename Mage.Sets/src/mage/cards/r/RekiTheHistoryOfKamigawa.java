@@ -34,6 +34,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
@@ -46,12 +47,12 @@ public class RekiTheHistoryOfKamigawa extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("legendary spell");
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     public RekiTheHistoryOfKamigawa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -38,6 +37,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *

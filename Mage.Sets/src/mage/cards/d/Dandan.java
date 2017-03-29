@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,9 +34,12 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

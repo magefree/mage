@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,6 +38,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *

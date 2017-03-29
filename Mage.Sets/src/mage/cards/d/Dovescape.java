@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
@@ -44,6 +43,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *

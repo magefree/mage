@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.PayLifeCost;
@@ -42,6 +41,8 @@ import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *

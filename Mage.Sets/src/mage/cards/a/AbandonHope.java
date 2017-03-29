@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -44,6 +43,8 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *

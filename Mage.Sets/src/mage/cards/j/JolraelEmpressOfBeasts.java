@@ -27,7 +27,6 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,10 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -52,6 +48,8 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -60,7 +58,7 @@ public class JolraelEmpressOfBeasts extends CardImpl {
 
     public JolraelEmpressOfBeasts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(3);

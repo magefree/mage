@@ -27,11 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -44,13 +39,15 @@ import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Duration;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetSource;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -59,7 +56,7 @@ public class OpalEyeKondasYojimbo extends CardImpl {
 
     public OpalEyeKondasYojimbo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Fox");
         this.subtype.add("Samurai");
 

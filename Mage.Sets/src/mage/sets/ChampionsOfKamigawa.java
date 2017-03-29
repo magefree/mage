@@ -1,10 +1,10 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.b.BrothersYamazaki;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 public class ChampionsOfKamigawa extends ExpansionSet {
     private static final ChampionsOfKamigawa instance = new ChampionsOfKamigawa();

@@ -30,7 +30,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -46,6 +45,8 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  * @author cbt33 / LevelX2

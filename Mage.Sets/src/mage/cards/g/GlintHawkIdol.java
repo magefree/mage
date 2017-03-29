@@ -28,12 +28,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,12 +36,14 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *

@@ -29,11 +29,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
-
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
@@ -45,11 +40,13 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +68,7 @@ public class TenzaGodosMaul extends CardImpl {
 
     public TenzaGodosMaul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+1.  

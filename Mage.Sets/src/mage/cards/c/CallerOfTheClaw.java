@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -47,6 +46,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.BearToken;
 import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
  *

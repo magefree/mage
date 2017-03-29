@@ -43,6 +43,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
@@ -127,8 +128,8 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public List<String> getSupertype() {
-        return sourceObject.getSupertype();
+    public EnumSet<SuperType> getSuperType() {
+        return sourceObject.getSuperType();
     }
 
     @Override

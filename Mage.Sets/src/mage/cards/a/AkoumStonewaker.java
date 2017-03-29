@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -43,6 +42,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *

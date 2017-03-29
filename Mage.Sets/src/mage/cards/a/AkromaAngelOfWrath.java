@@ -27,13 +27,15 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +45,7 @@ public class AkromaAngelOfWrath extends CardImpl {
 
     public AkromaAngelOfWrath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Angel");
 
         this.power = new MageInt(6);

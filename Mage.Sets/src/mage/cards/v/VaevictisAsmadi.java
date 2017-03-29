@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,10 +36,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +48,7 @@ public class VaevictisAsmadi extends CardImpl {
 
     public VaevictisAsmadi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{R}{R}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elder");
         this.subtype.add("Dragon");
         this.power = new MageInt(7);

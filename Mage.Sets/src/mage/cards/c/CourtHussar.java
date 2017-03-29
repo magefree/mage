@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
@@ -42,6 +41,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.watchers.common.ManaSpentToCastWatcher;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,15 +27,14 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
@@ -44,6 +43,8 @@ import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

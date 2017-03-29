@@ -28,16 +28,17 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayerAmount;
+
+import java.util.UUID;
 
 /**
  *

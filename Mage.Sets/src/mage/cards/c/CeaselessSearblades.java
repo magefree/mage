@@ -27,21 +27,21 @@
  */
 package mage.cards.c;
 
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *

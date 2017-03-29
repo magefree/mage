@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -39,6 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.BearToken;
+
+import java.util.UUID;
 
 /**
  *

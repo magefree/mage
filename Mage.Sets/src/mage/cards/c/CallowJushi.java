@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -43,12 +42,15 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -92,7 +94,7 @@ class JarakuTheInterloper extends Token {
 
     JarakuTheInterloper() {
         super("Jaraku the Interloper", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add("Spirit");

@@ -27,9 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,9 +36,12 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -37,12 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
@@ -51,6 +45,8 @@ import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *

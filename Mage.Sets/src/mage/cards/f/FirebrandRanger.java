@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,6 +46,8 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *

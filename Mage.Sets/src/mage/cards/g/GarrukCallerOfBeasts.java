@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -48,6 +47,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.command.Emblem;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *

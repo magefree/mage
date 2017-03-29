@@ -27,11 +27,8 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-
-import mage.abilities.CountType;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.abilities.CountType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -39,10 +36,13 @@ import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *

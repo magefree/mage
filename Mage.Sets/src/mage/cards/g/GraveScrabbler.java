@@ -1,7 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -18,6 +16,8 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 public class GraveScrabbler extends CardImpl {
 

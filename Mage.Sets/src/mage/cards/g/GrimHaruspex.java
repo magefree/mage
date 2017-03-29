@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -43,6 +42,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
+
+import java.util.UUID;
 
 /**
  *

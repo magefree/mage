@@ -174,8 +174,8 @@ public class TinyLeaders extends Constructed {
                 }
                 return false;
             }
-            if ((commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary"))
-                    || (commander.getCardType().contains(CardType.PLANESWALKER) && commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if ((commander.isCreature() && commander.isLegendary())
+                    || (commander.isPlaneswalker() && commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
                 if (!bannedCommander.contains(commander.getName())) {
                     FilterMana color = CardUtil.getColorIdentity(commander);
                     for (Card card : deck.getCards()) {

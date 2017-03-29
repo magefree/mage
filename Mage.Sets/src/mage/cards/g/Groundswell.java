@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
@@ -38,6 +37,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LandfallWatcher;
+
+import java.util.UUID;
 
 /**
  *

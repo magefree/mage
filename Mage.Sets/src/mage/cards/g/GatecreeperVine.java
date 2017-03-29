@@ -27,20 +27,22 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +56,7 @@ public class GatecreeperVine extends CardImpl {
             Predicates.or(
                 Predicates.and(
                          new CardTypePredicate(CardType.LAND),
-                         new SupertypePredicate("Basic")),
+                         new SupertypePredicate(SuperType.BASIC)),
                 new SubtypePredicate("Gate")));
     }
 

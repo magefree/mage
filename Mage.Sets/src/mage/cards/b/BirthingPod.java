@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -50,6 +49,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki

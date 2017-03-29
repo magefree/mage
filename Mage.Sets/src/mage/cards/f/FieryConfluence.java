@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -38,6 +37,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *

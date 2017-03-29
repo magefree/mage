@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.mana.SimpleManaAbility;
@@ -37,6 +36,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterOwnedCard;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *

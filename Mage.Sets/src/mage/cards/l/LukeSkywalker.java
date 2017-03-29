@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -64,7 +65,7 @@ public class LukeSkywalker extends CardImpl {
 
     public LukeSkywalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Jedi");
         this.power = new MageInt(2);

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
@@ -37,6 +36,8 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreatureInPlay;
 import mage.filter.predicate.permanent.AttackingPredicate;
+
+import java.util.UUID;
 
 /**
  *

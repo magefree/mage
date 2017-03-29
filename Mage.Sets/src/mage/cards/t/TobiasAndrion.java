@@ -32,6 +32,7 @@ import mage.constants.CardType;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SuperType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class TobiasAndrion extends CardImpl {
 
     public TobiasAndrion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 

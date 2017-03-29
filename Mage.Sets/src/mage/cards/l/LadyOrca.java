@@ -27,11 +27,13 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +43,7 @@ public class LadyOrca extends CardImpl {
 
     public LadyOrca(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Demon");
 
         this.power = new MageInt(7);

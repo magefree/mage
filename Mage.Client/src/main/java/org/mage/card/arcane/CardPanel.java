@@ -1,27 +1,5 @@
 package org.mage.card.arcane;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
@@ -31,12 +9,21 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.audio.AudioManager;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
+import mage.constants.SuperType;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Main class for drawing Mage card object.
@@ -680,8 +667,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     protected final String getType(CardView card) {
         StringBuilder sbType = new StringBuilder();
 
-        for (String superType : card.getSuperTypes()) {
-            sbType.append(superType).append(' ');
+        for (SuperType superType : card.getSuperTypes()) {
+            sbType.append(superType.toString()).append(' ');
         }
 
         for (CardType cardType : card.getCardTypes()) {

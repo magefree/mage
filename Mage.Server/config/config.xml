@@ -49,7 +49,7 @@
             maxPasswordLength="100"
             maxAiOpponents="15"
             saveGameActivated="false"
-            authenticationActivated="true"
+            authenticationActivated="false"
             googleAccount=""
             mailgunApiKey="key-d93e81f19a9c9ed243ebb7cc9381385c"
             mailgunDomain="sandbox401a433f30d445309a5e86b6c53f7812.mailgun.org"

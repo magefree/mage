@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -41,6 +40,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
 import mage.watchers.common.PlayerGainedLifeWatcher;
+
+import java.util.UUID;
 
 /**
  *

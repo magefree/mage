@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
@@ -50,6 +49,8 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * If the land Chained to the Rocks is enchanting stops being a Mountain or

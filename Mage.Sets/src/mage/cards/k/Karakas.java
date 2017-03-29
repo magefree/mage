@@ -27,9 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -37,10 +34,14 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public class Karakas extends CardImpl {
     
     public Karakas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // {tap}: Add {W} to your mana pool.
         this.addAbility(new WhiteManaAbility());

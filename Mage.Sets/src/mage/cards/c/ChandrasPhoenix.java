@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
@@ -43,6 +42,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+
+import java.util.UUID;
 
 /**
  *

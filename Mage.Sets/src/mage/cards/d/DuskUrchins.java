@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -38,6 +37,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *

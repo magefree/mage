@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -36,17 +35,8 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -59,6 +49,8 @@ import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *

@@ -28,13 +28,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
-
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -45,11 +38,13 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

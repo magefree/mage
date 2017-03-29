@@ -27,15 +27,16 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *

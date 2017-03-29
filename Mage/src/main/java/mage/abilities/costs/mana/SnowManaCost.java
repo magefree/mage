@@ -31,6 +31,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SuperType;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
@@ -41,7 +42,7 @@ public class SnowManaCost extends ManaCostImpl {
     private static final FilterObject filter = new FilterObject("Snow object");
 
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
 
     public SnowManaCost() {

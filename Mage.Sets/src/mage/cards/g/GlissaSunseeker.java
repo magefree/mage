@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,12 +37,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +55,7 @@ public class GlissaSunseeker extends CardImpl {
 
     public GlissaSunseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

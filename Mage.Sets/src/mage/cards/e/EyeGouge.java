@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.condition.common.TargetHasSubtypeCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
@@ -38,6 +37,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

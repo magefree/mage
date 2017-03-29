@@ -27,13 +27,9 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
-
-import mage.abilities.CountType;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -45,8 +41,13 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -86,7 +87,7 @@ class TomoyaTheRevealer extends Token {
 
     TomoyaTheRevealer() {
         super("Tomoya the Revealer", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add("Human");

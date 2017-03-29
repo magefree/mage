@@ -28,9 +28,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -38,6 +35,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterLandPermanent;
@@ -45,6 +44,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

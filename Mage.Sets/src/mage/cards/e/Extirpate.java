@@ -27,8 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -38,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -50,6 +49,9 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author jonubuu
@@ -59,7 +61,7 @@ public class Extirpate extends CardImpl {
     private static final FilterCard filter = new FilterCard("card in a graveyard other than a basic land card");
 
     static {
-        filter.add(Predicates.not(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic"))));
+        filter.add(Predicates.not(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate(SuperType.BASIC))));
     }
 
     public Extirpate(UUID ownerId, CardSetInfo setInfo) {

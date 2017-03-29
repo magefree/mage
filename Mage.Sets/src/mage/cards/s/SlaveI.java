@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -36,7 +35,10 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +48,7 @@ public class SlaveI extends CardImpl {
 
     public SlaveI(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{B}{R}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Starship");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

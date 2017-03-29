@@ -414,18 +414,6 @@ public final class CardUtil {
         return new CopyTokenFunction(target);
     }
 
-    public static boolean isPermanentCard(Card card) {
-        boolean permanent = false;
-
-        permanent |= card.isArtifact();
-        permanent |= card.isCreature();
-        permanent |= card.isEnchantment();
-        permanent |= card.isLand();
-        permanent |= card.isPlaneswalker();
-
-        return permanent;
-    }
-
     /**
      * Converts an integer number to string Numbers > 20 will be returned as
      * digits

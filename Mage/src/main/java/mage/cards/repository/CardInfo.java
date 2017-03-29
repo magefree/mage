@@ -47,10 +47,10 @@ import mage.cards.mock.MockSplitCard;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
+import mage.constants.SuperType;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author North
  */
 @DatabaseTable(tableName = "card")
@@ -153,7 +153,7 @@ public class CardInfo {
 
         this.setTypes(card.getCardType());
         this.setSubtypes(card.getSubtype(null));
-        this.setSuperTypes(card.getSupertype());
+        this.setSuperTypes(card.getSuperType());
         this.setManaCosts(card.getManaCost().getSymbols());
 
         int length = 0;
@@ -249,6 +249,7 @@ public class CardInfo {
         if (list.isEmpty()) {
             return Collections.emptyList();
         }
+
         return Arrays.asList(list.split(SEPARATOR));
     }
 
@@ -311,12 +312,23 @@ public class CardInfo {
         this.subtypes = joinList(subtypes);
     }
 
-    public final List<String> getSupertypes() {
-        return parseList(supertypes);
+    public final EnumSet<SuperType> getSupertypes() {
+        EnumSet<SuperType> list = EnumSet.noneOf(SuperType.class);
+        for (String type : this.types.split(SEPARATOR)) {
+            try {
+                list.add(SuperType.valueOf(type));
+            } catch (IllegalArgumentException e) {
+            }
+        }
+        return list;
     }
 
-    public final void setSuperTypes(List<String> superTypes) {
-        this.supertypes = joinList(superTypes);
+    public final void setSuperTypes(Set<SuperType> superTypes) {
+        StringBuilder sb = new StringBuilder();
+        for (SuperType item : superTypes) {
+            sb.append(item.name()).append(SEPARATOR);
+        }
+        this.supertypes = sb.toString();
     }
 
     public String getToughness() {

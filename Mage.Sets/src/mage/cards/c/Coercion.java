@@ -27,12 +27,13 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *

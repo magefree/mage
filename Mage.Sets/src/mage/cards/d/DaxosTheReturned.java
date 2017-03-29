@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -41,12 +40,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,6 +48,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +65,7 @@ public class DaxosTheReturned extends CardImpl {
 
     public DaxosTheReturned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

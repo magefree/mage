@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.condition.common.TargetHasCounterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -42,6 +41,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

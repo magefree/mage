@@ -28,15 +28,16 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+
+import java.util.UUID;
 
 /**
  *

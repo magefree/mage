@@ -27,9 +27,9 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
@@ -40,7 +40,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.abilities.dynamicvalue.IntPlusDynamicValue;
+
+import java.util.UUID;
 
 
 /**

@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.AwakenAbility;
 import mage.cards.CardImpl;
@@ -35,6 +34,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
@@ -38,6 +37,8 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+
+import java.util.UUID;
 
 /**
  *

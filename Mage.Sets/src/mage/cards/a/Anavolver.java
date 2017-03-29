@@ -28,10 +28,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,7 +41,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  * @author Loki

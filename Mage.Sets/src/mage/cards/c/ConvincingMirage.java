@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,23 +34,16 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ChooseBasicLandTypeEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

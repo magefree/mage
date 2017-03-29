@@ -27,9 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -41,11 +38,15 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +63,7 @@ public class RhysTheExiled extends CardImpl {
 
     public RhysTheExiled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 

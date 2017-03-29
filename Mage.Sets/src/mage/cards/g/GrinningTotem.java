@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -41,12 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,6 +50,8 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
