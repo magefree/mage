@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
 public class PathbreakerIbex extends CardImpl {
 
     public PathbreakerIbex(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.subtype.add("Goat");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -72,30 +72,30 @@ public class PathbreakerIbex extends CardImpl {
 }
 
 class PathbreakerIbexEffect extends OneShotEffect {
-    
+
     public PathbreakerIbexEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "creatures you control gain trample and get +X/+X until end of turn, where X is the greatest power among creatures you control";
     }
-    
+
     public PathbreakerIbexEffect(final PathbreakerIbexEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PathbreakerIbexEffect copy() {
         return new PathbreakerIbexEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         int maxPower = 0;
-        for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
             if (perm.getPower().getValue() > maxPower) {
                 maxPower = perm.getPower().getValue();
             }
         }
-        ContinuousEffect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfStep, new FilterCreaturePermanent());
+        ContinuousEffect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent());
         game.addEffect(effect, source);
         if (maxPower != 0) {
             effect = new BoostControlledEffect(maxPower, maxPower, Duration.EndOfTurn);
