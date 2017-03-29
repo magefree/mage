@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -211,11 +212,7 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
             Card card = library.removeFromTop(game);
             if (card != null) {
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName() + " <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
-                if (!card.getManaCost().isEmpty()) {
-                    ContinuousEffect effect = new ChandraPyromasterCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
-                }
+                game.addEffect(new ChandraPyromasterPlayEffect(new MageObjectReference(card, game)), source);
             }
             return true;
         }
@@ -223,15 +220,19 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
     }
 }
 
-class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl {
+class ChandraPyromasterPlayEffect extends AsThoughEffectImpl {
 
-    public ChandraPyromasterCastFromExileEffect() {
+    private final MageObjectReference objectReference;
+
+    public ChandraPyromasterPlayEffect(MageObjectReference objectReference) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may play the card from exile this turn";
+        this.objectReference = objectReference;
+        staticText = "you may play that card until end of turn";
     }
 
-    public ChandraPyromasterCastFromExileEffect(final ChandraPyromasterCastFromExileEffect effect) {
+    public ChandraPyromasterPlayEffect(final ChandraPyromasterPlayEffect effect) {
         super(effect);
+        this.objectReference = effect.objectReference;
     }
 
     @Override
@@ -240,14 +241,19 @@ class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public ChandraPyromasterCastFromExileEffect copy() {
-        return new ChandraPyromasterCastFromExileEffect(this);
+    public ChandraPyromasterPlayEffect copy() {
+        return new ChandraPyromasterPlayEffect(this);
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (targetPointer.getTargets(game, source).contains(sourceId)) {
-            return game.getState().getZone(sourceId) == Zone.EXILED;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectReference.refersTo(objectId, game) && affectedControllerId.equals(source.getControllerId())) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                return true;
+            } else {
+                discard();
+            }
         }
         return false;
     }
