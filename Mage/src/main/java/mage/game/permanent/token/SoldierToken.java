@@ -44,7 +44,7 @@ public class SoldierToken extends Token {
 
     static {
         tokenImageSets.addAll(Arrays.asList("10E", "M15", "C14", "ORI", "ALA", "DDF", "THS", "M12", "M13", "MM2", "MMA", "RTR",
-                "SOM", "DDO", "M10", "ORI", "EMN", "EMA", "CN2", "C16"));
+                "SOM", "DDO", "M10", "ORI", "EMN", "EMA", "CN2", "C16", "MM3"));
     }
 
     public SoldierToken() {
@@ -65,7 +65,7 @@ public class SoldierToken extends Token {
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("THS")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CN2")) {
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CN2") || getOriginalExpansionSetCode().equals("MM3")) {
             setTokenType(1);
         }
     }

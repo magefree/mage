@@ -128,6 +128,7 @@ Mercadian Masques|MMQ|
 Morningtide|MOR|
 Magic Player Rewards|MPRP|
 Masterpiece Series|MPS|
+Masterpiece Series Amonkhet|MPS-AKH|
 Mirrodin|MRD|
 Nemesis|NEM|
 New Phyrexia|NPH|

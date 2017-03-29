@@ -43,7 +43,7 @@ public class GolemToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("MM2", "NPH", "SOM"));
+        tokenImageSets.addAll(Arrays.asList("MM2", "NPH", "SOM", "MM3"));
     }
 
     public GolemToken() {

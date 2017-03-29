@@ -47,7 +47,7 @@ public class BirdToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("BNG", "RTR", "ZEN", "C16"));
+        availableImageSetCodes.addAll(Arrays.asList("BNG", "RTR", "ZEN", "C16", "MM3", "DGM"));
     }
 
     public BirdToken(final BirdToken token) {

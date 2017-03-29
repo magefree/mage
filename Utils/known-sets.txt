@@ -110,6 +110,7 @@ Magic Player Rewards|MagicPlayerRewards|
 Magic: The Gathering-Commander|Commander|
 Magic: The Gathering-Conspiracy|Conspiracy|
 Masterpiece Series|MasterpieceSeries|
+Masterpiece Series Amonkhet|MasterpieceSeriesAmonkhet|
 Masters Edition|MastersEdition|
 Masters Edition II|MastersEditionII|
 Masters Edition III|MastersEditionIII|

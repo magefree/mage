@@ -43,7 +43,7 @@ public class GoblinToken extends Token {
 
     static {
         tokenImageSets.addAll(Arrays.asList("10E", "ALA", "SOM", "M10", "NPH", "M13", "RTR",
-            "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN", "DD3EVG", "MM2"));
+            "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN", "DD3EVG", "MM2", "MM3", "EMA", "C16"));
     }
 
     public GoblinToken() {
