@@ -1,7 +1,6 @@
 
 package mage.abilities.keyword;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -14,7 +13,6 @@ import mage.target.targetpointer.FixedTarget;
 
 
 /**
- *
  * @author Plopman
  */
 
@@ -38,16 +36,12 @@ public class FlankingAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if(permanent != null)
-            {
-                boolean hasFlankingAbility = false;
-                for(Ability ability : permanent.getAbilities()){
-                    if(ability instanceof FlankingAbility){
-                        hasFlankingAbility = true;
-                    }
-                }
-                
-                if(!hasFlankingAbility){
+            if (permanent != null) {
+                boolean hasFlankingAbility =
+                        permanent.getAbilities().stream().anyMatch(ability -> ability instanceof FlankingAbility);
+
+
+                if (!hasFlankingAbility) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                     }
@@ -68,5 +62,5 @@ public class FlankingAbility extends TriggeredAbilityImpl {
         return new FlankingAbility(this);
     }
 
-    
+
 }

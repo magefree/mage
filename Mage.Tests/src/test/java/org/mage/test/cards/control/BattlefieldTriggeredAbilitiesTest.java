@@ -1,6 +1,5 @@
 package org.mage.test.cards.control;
 
-import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
@@ -47,7 +46,7 @@ public class BattlefieldTriggeredAbilitiesTest extends CardTestPlayerBase {
         int playerACount = 0;
         int playerBCount = 0;
         for (Permanent p : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (p.getCardType().contains(CardType.LAND)) {
+            if (p.isLand()) {
                 if (p.getControllerId().equals(playerB.getId())) {
                     playerBCount++;
                 }

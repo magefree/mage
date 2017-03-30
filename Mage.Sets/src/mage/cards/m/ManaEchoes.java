@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -42,7 +41,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +91,7 @@ class ManaEchoesEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             int foundCreatures = 0;
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-                if (CardUtil.shareSubtypes(permanent, perm, game)) {
+                if (permanent.shareSubtypes(perm, game)) {
                     foundCreatures++;
                 }
             }

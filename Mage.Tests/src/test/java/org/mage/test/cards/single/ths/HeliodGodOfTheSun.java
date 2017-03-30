@@ -4,7 +4,6 @@
  */
 package org.mage.test.cards.single.ths;
 
-import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
@@ -47,7 +46,7 @@ public class HeliodGodOfTheSun extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Hold the Gates", 1);
 
         Permanent heliodGodOfTheSun = getPermanent("Heliod, God of the Sun", playerA);
-        Assert.assertTrue(heliodGodOfTheSun.getCardType().contains(CardType.CREATURE));
+        Assert.assertTrue(heliodGodOfTheSun.isCreature());
     }
 
  
