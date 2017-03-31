@@ -30,6 +30,7 @@ package mage.abilities.costs;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
@@ -165,7 +166,9 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     public int announceXValue(Ability source, Game game) {
         int xValue = 0;
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Spell spell = game.getStack().getSpell(source.getId());
+        if (controller != null
+                && spell != null) {
             xValue = controller.announceXCost(getMinValue(source, game), getMaxValue(source, game),
                     "Announce the number of " + actionText, game, source, this);
         }
