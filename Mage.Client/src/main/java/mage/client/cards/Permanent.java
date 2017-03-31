@@ -34,28 +34,25 @@
 
 package mage.client.cards;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import mage.cards.CardDimensions;
+import mage.cards.MagePermanent;
+import mage.cards.Sets;
+import mage.client.util.Config;
+import mage.client.util.TransformedImageCache;
+import mage.constants.CardType;
+import mage.view.CounterView;
+import mage.view.PermanentView;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import javax.swing.PopupFactory;
-import mage.cards.CardDimensions;
-import mage.cards.MagePermanent;
-import mage.cards.Sets;
+
 import static mage.client.constants.Constants.DAMAGE_MAX_LEFT;
 import static mage.client.constants.Constants.POWBOX_TEXT_MAX_TOP;
-import mage.client.util.Config;
-import mage.constants.CardType;
-import mage.view.CounterView;
-import mage.view.PermanentView;
-import mage.client.util.TransformedImageCache;
 
 /**
  *

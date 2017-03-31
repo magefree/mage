@@ -46,8 +46,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.CardUtil;
 
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -134,9 +134,9 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
         return new TargetControlledPermanentSharingOpponentPermanentCardType(this);
     }
     
-    private Set<CardType> getOpponentPermanentCardTypes(UUID sourceId, UUID sourceControllerId, Game game) {
+    private EnumSet<CardType> getOpponentPermanentCardTypes(UUID sourceId, UUID sourceControllerId, Game game) {
         Player controller = game.getPlayer(sourceControllerId);
-        Set<CardType> cardTypes = new HashSet<>();
+        EnumSet<CardType> cardTypes =EnumSet.noneOf(CardType.class);
         if (controller != null) {
             for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
                 if (controller.hasOpponent(permanent.getControllerId(), game)) {
@@ -171,7 +171,7 @@ class DaringThiefSecondTarget extends TargetPermanent {
             Permanent target1 = game.getPermanent(source.getFirstTarget());
             Permanent opponentPermanent = game.getPermanent(id);
             if (target1 != null && opponentPermanent != null) {
-                return CardUtil.shareTypes(target1, opponentPermanent);
+                return target1.shareTypes(opponentPermanent);
             }
         }
         return false;
@@ -184,7 +184,7 @@ class DaringThiefSecondTarget extends TargetPermanent {
             MageObject targetSource = game.getObject(sourceId);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                    if (CardUtil.shareTypes(permanent, firstTarget)) {
+                    if (permanent.shareTypes(firstTarget)) {
                         possibleTargets.add(permanent.getId());
                     }
                 }

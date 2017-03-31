@@ -41,7 +41,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.HashSet;
+import java.util.EnumSet;
 import java.util.UUID;
 
 /**
@@ -106,7 +106,7 @@ class DuskFeasterCostReductionEffect extends CostModificationEffectImpl {
         boolean hasDelirium = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            HashSet<CardType> foundCardTypes = new HashSet<>();
+            EnumSet<CardType> foundCardTypes = EnumSet.noneOf(CardType.class);
             for (Card card : controller.getGraveyard().getCards(game)) {
                 foundCardTypes.addAll(card.getCardType());
             }

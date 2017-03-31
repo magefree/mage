@@ -27,9 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
@@ -41,7 +38,10 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +88,7 @@ class TargetPermanentsThatShareCardType extends TargetPermanent {
                 if (targetOne == null || targetTwo == null) {
                     return false;
                 }
-                return CardUtil.shareTypes(targetOne, targetTwo);
+                return targetOne.shareTypes(targetTwo);
             }
             return true;
         }

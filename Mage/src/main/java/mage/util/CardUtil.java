@@ -35,10 +35,8 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.constants.CardType;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -84,57 +82,9 @@ public final class CardUtil {
         "Trap", "Arcane"};
     public static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));
 
-    /**
-     * Checks whether two cards share card types.
-     *
-     * @param card1
-     * @param card2
-     * @return
-     */
-    public static boolean shareTypes(Card card1, Card card2) {
 
-        if (card1 == null || card2 == null) {
-            throw new IllegalArgumentException("Params can't be null");
-        }
 
-        for (CardType type : card1.getCardType()) {
-            if (card2.getCardType().contains(type)) {
-                return true;
-            }
-        }
 
-        return false;
-    }
-
-    /**
-     * Checks whether two cards share card subtypes.
-     *
-     * @param card1
-     * @param card2
-     * @return
-     */
-    public static boolean shareSubtypes(Card card1, Card card2, Game game) {
-
-        if (card1 == null || card2 == null) {
-            throw new IllegalArgumentException("Params can't be null");
-        }
-
-        if (card1.isCreature() && card2.isCreature()) {
-            if (card1.getAbilities().contains(ChangelingAbility.getInstance())
-                    || card1.getSubtype(game).contains(ChangelingAbility.ALL_CREATURE_TYPE)
-                    || card2.getAbilities().contains(ChangelingAbility.getInstance())
-                    || card2.getSubtype(game).contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
-                return true;
-            }
-        }
-        for (String subtype : card1.getSubtype(game)) {
-            if (card2.getSubtype(game).contains(subtype)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     /**
      * Increase spell or ability cost to be paid.

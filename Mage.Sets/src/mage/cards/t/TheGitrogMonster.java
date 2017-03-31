@@ -112,7 +112,7 @@ class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
                     if (cardOwnerId != null
                             && card.getOwnerId().equals(getControllerId())
                             && cardType != null
-                            && cardType.contains(CardType.LAND)) {
+                            && card.isLand()) {
                         return true;
                     }
                 }

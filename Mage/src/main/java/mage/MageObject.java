@@ -4,6 +4,8 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.keyword.ChangelingAbility;
+import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SuperType;
@@ -132,4 +134,52 @@ public interface MageObject extends MageItem, Serializable {
     default boolean isWorld() {
         return getSuperType().contains(SuperType.WORLD);
     }
+
+
+    /**
+     * Checks whether two cards share card types.
+     *
+     *
+     * @param otherCard
+     * @return
+     */
+    default boolean shareTypes(Card otherCard) {
+
+        if (otherCard == null) {
+            throw new IllegalArgumentException("Params can't be null");
+        }
+
+        for (CardType type : getCardType()) {
+            if (otherCard.getCardType().contains(type)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    default boolean shareSubtypes(Card otherCard, Game game) {
+
+        if (otherCard == null) {
+            throw new IllegalArgumentException("Params can't be null");
+        }
+
+        if (this.isCreature() && otherCard.isCreature()) {
+            if (this.getAbilities().contains(ChangelingAbility.getInstance())
+                    || this.getSubtype(game).contains(ChangelingAbility.ALL_CREATURE_TYPE)
+                    || otherCard.getAbilities().contains(ChangelingAbility.getInstance())
+                    || otherCard.getSubtype(game).contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
+                return true;
+            }
+        }
+        for (String subtype : this.getSubtype(game)) {
+            if (otherCard.getSubtype(game).contains(subtype)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
