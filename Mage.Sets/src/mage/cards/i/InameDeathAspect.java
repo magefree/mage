@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -73,7 +73,7 @@ public class InameDeathAspect extends CardImpl {
 
 class InameDeathAspectEffect extends SearchEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
+    private static final FilterCard filter = new FilterCard();
 
     static {
         filter.add(new SubtypePredicate("Spirit"));
