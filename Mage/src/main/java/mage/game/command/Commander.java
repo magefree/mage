@@ -27,10 +27,6 @@
  */
 package mage.game.command;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -48,18 +44,22 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
+
 public class Commander implements CommandObject {
 
     private final Card sourceObject;
-    private final Abilities<Ability> abilites = new AbilitiesImpl<>();
+    private final Abilities<Ability> abilities = new AbilitiesImpl<>();
 
     public Commander(Card card) {
         this.sourceObject = card;
-        abilites.add(new CastCommanderAbility(card));
+        abilities.add(new CastCommanderAbility(card));
         for (Ability ability : card.getAbilities()) {
             if (!(ability instanceof SpellAbility)) {
                 Ability newAbility = ability.copy();
-                abilites.add(newAbility);
+                abilities.add(newAbility);
             }
         }
     }
@@ -134,7 +134,7 @@ public class Commander implements CommandObject {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return abilites;
+        return abilities;
     }
 
     @Override

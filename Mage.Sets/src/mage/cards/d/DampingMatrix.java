@@ -46,6 +46,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -108,8 +109,8 @@ class DampingMatrixEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         if (object instanceof Permanent && filter.match((Permanent)object, game)) {
-            Ability ability = object.getAbilities().get(event.getTargetId());
-            if (ability != null && !(ability instanceof ActivatedManaAbilityImpl)) {
+            Optional<Ability> ability = object.getAbilities().get(event.getTargetId());
+            if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
                 return true;
             }
         }

@@ -27,25 +27,15 @@
  */
 package mage.players;
 
-import java.io.Serializable;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.RandomUtil;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -182,11 +172,7 @@ public class Library implements Serializable {
     }
 
     public List<Card> getCards(Game game) {
-        List<Card> cards = new ArrayList<>();
-        for (UUID cardId : library) {
-            cards.add(game.getCard(cardId));
-        }
-        return cards;
+        return library.stream().map(game::getCard).collect(Collectors.toList());
     }
 
     public Set<Card> getTopCards(Game game, int amount) {
@@ -214,13 +200,7 @@ public class Library implements Serializable {
     }
 
     public int count(FilterCard filter, Game game) {
-        int result = 0;
-        for (UUID card : library) {
-            if (filter.match(game.getCard(card), game)) {
-                result++;
-            }
-        }
-        return result;
+        return (int) library.stream().filter(cardId -> filter.match(game.getCard(cardId), game)).count();
     }
 
     public boolean isEmptyDraw() {

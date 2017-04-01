@@ -27,9 +27,6 @@
  */
 package mage.abilities;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -48,6 +45,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.watchers.Watcher;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Practically everything in the game is started from an Ability. This interface

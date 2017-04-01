@@ -29,6 +29,7 @@ package mage.abilities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -245,7 +246,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @param abilityId
      * @return
      */
-    T get(UUID abilityId);
+    Optional<T> get(UUID abilityId);
 
     /**
      * TODO The usage of this method seems redundant to that of

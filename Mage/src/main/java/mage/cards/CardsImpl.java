@@ -34,6 +34,7 @@ import mage.util.ThreadLocalStringBuilder;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -109,13 +110,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public int count(FilterCard filter, Game game) {
-        int result = 0;
-        for (UUID cardId : this) {
-            if (filter.match(game.getCard(cardId), game)) {
-                result++;
-            }
-        }
-        return result;
+        return (int) stream().filter(cardId -> filter.match(game.getCard(cardId), game)).count();
     }
 
     @Override
@@ -150,14 +145,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Set<Card> getCards(FilterCard filter, Game game) {
-        Set<Card> cards = new LinkedHashSet<>();
-        for (UUID card : this) {
-            boolean match = filter.match(game.getCard(card), game);
-            if (match) {
-                cards.add(game.getCard(card));
-            }
-        }
-        return cards;
+        return stream().map(game::getCard).filter(card -> filter.match(card, game)).collect(Collectors.toSet());
     }
 
     @Override

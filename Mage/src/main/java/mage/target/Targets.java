@@ -27,13 +27,15 @@
  */
 package mage.target;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -51,13 +53,7 @@ public class Targets extends ArrayList<Target> {
     }
 
     public List<Target> getUnchosen() {
-        List<Target> unchosen = new ArrayList<>();
-        for (Target target : this) {
-            if (!target.isChosen()) {
-                unchosen.add(target);
-            }
-        }
-        return unchosen;
+        return stream().filter(target -> !target.isChosen()).collect(Collectors.toList());
     }
 
     public void clearChosen() {
@@ -67,12 +63,7 @@ public class Targets extends ArrayList<Target> {
     }
 
     public boolean isChosen() {
-        for (Target target : this) {
-            if (!target.isChosen()) {
-                return false;
-            }
-        }
-        return true;
+        return stream().allMatch(Target::isChosen);
     }
 
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
@@ -122,12 +113,8 @@ public class Targets extends ArrayList<Target> {
     public boolean stillLegal(Ability source, Game game) {
         // 608.2
         // The spell or ability is countered if all its targets, for every instance of the word "target," are now illegal
-        int illegalCount = 0;
-        for (Target target : this) {
-            if (!target.isLegal(source, game)) {
-                illegalCount++;
-            }
-        }
+        int illegalCount = (int) stream().filter(target -> !target.isLegal(source, game)).count();
+
         // it is legal when either there is no target or not all targets are illegal
         return this.isEmpty() || this.size() != illegalCount;
     }
@@ -142,12 +129,7 @@ public class Targets extends ArrayList<Target> {
      * @return - true if enough valid targets exist
      */
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        for (Target target : this) {
-            if (!target.canChoose(sourceId, sourceControllerId, game)) {
-                return false;
-            }
-        }
-        return true;
+        return stream().allMatch(target -> target.canChoose(sourceId, sourceControllerId, game));
     }
 
     /**
@@ -160,12 +142,7 @@ public class Targets extends ArrayList<Target> {
      * @return - true if enough valid objects exist
      */
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        for (Target target : this) {
-            if (!target.canChoose(sourceControllerId, game)) {
-                return false;
-            }
-        }
-        return true;
+        return stream().allMatch(target -> target.canChoose(sourceControllerId, game));
     }
 
     public UUID getFirstTarget() {
@@ -174,7 +151,6 @@ public class Targets extends ArrayList<Target> {
         }
         return null;
     }
-
     public Targets copy() {
         return new Targets(this);
     }

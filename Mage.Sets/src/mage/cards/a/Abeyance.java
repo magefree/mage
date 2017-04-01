@@ -41,6 +41,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -110,8 +111,8 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
                 }
             }
             if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-                Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                if (ability != null && !(ability instanceof ActivatedManaAbilityImpl)) {
+                Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+                if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
                     return true;
                 }
             }

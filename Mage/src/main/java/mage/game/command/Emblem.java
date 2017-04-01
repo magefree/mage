@@ -27,8 +27,6 @@
  */
 package mage.game.command;
 
-import java.util.*;
-
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -45,6 +43,11 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -92,7 +95,7 @@ public class Emblem implements CommandObject {
         this.sourceObject = sourceObject;
         if (sourceObject instanceof Card) {
             if (name.isEmpty()) {
-                name = ((Card) sourceObject).getSubtype(null).toString();
+                name = sourceObject.getSubtype(null).toString();
             }
             if (expansionSetCodeForImage.isEmpty()) {
                 expansionSetCodeForImage = ((Card) sourceObject).getExpansionSetCode();
