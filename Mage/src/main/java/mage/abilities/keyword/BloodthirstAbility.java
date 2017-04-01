@@ -1,5 +1,7 @@
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -71,7 +73,8 @@ class BloodthirstEffect extends OneShotEffect {
             if (watcher != null && watcher.conditionMet()) {
                 Permanent permanent = game.getPermanentEntering(source.getSourceId());
                 if (permanent != null) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+                    ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game, appliedEffects);
                 }
             }
             return true;

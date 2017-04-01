@@ -76,7 +76,7 @@ public class MageDrawAction extends MageAction {
      */
     protected int drawCard(Game game) {
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.DRAW_CARD, player.getId(), player.getId());
-        event.setAppliedEffects(appliedEffects);
+        event.addAppliedEffects(appliedEffects);
         if (!game.replaceEvent(event)) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {

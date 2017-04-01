@@ -451,12 +451,19 @@ public class GameEvent implements Serializable {
         return type == EventType.CUSTOM_EVENT && this.customEventType.equals(customEventType);
     }
 
-    public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
-        if (this.appliedEffects == null) {
-            this.appliedEffects = new ArrayList<>();
-        }
+    public void addAppliedEffects(ArrayList<UUID> appliedEffects) {
         if (appliedEffects != null) {
             this.appliedEffects.addAll(appliedEffects);
+        }
+    }
+
+    public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
+        if (appliedEffects != null) {
+            if (this.appliedEffects.isEmpty()) {
+                this.appliedEffects = appliedEffects; // Use object refecence to handle that an replacement effect can only be once applied to an event
+            } else {
+                this.appliedEffects.addAll(appliedEffects);
+            }
         }
     }
 }

@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class LongRoadHome extends CardImpl {
 
     public LongRoadHome(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new LongRoadHomeEffect());
@@ -163,7 +163,7 @@ class LongRoadHomeEntersBattlefieldEffect extends ReplacementEffectImpl {
     public LongRoadHomeEntersBattlefieldEffect(MageObjectReference objectToReturn) {
         super(Duration.Custom, Outcome.BoostCreature);
         this.objectToReturn = objectToReturn;
-        staticText = "that card returns to the battlefield with a +1/+1 counter on it";
+        staticText = "that card to the battlefield under its owner's control with a +1/+1 counter on it";
     }
 
     public LongRoadHomeEntersBattlefieldEffect(LongRoadHomeEntersBattlefieldEffect effect) {
@@ -188,7 +188,7 @@ class LongRoadHomeEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
             discard(); // use only once
         }
         return false;

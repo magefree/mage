@@ -30,17 +30,20 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -51,12 +54,14 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class VigorMortis extends CardImpl {
 
     public VigorMortis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // Return target creature card from your graveyard to the battlefield. If {G} was spent to cast Vigor Mortis, that creature enters the battlefield with an additional +1/+1 counter on it.
+        this.getSpellAbility().addEffect(new VigorMortisReplacementEffect()); // has to be added before the moving effect
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addEffect(new InfoEffect("If {G} was spent to cast {this}, that creature enters the battlefield with an additional +1/+1 counter on it"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new VigorMortisAddCounterEffect(), new ManaWasSpentCondition(ColoredManaSymbol.G)));
+
     }
 
     public VigorMortis(final VigorMortis card) {
@@ -69,29 +74,46 @@ public class VigorMortis extends CardImpl {
     }
 }
 
-class VigorMortisAddCounterEffect extends OneShotEffect {
-    
-    VigorMortisAddCounterEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "that creature enters the battlefield with an additional +1/+1 counter on it";
+class VigorMortisReplacementEffect extends ReplacementEffectImpl {
+
+    VigorMortisReplacementEffect() {
+        super(Duration.EndOfStep, Outcome.BoostCreature);
     }
-    
-    VigorMortisAddCounterEffect(final VigorMortisAddCounterEffect effect) {
+
+    VigorMortisReplacementEffect(VigorMortisReplacementEffect effect) {
         super(effect);
     }
-    
+
     @Override
-    public VigorMortisAddCounterEffect copy() {
-        return new VigorMortisAddCounterEffect(this);
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
-    public boolean apply(Game game, Ability source) {
-        // targetPointer can't be used because target moved from graveyard to battlefield
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
+            return new ManaWasSpentCondition(ColoredManaSymbol.G).apply(game, source);
         }
         return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (creature != null) {
+            creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
+            discard();
+        }
+        return false;
+    }
+
+    @Override
+    public VigorMortisReplacementEffect copy() {
+        return new VigorMortisReplacementEffect(this);
     }
 }
