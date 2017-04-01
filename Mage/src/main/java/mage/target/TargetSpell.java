@@ -27,15 +27,17 @@
  */
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -112,13 +114,10 @@ public class TargetSpell extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (StackObject stackObject : game.getStack()) {
-            if (canBeChosen(stackObject, sourceId, sourceControllerId, game)) {
-                possibleTargets.add(stackObject.getId());
-            }
-        }
-        return possibleTargets;
+        return game.getStack().stream()
+                .filter(stackObject -> canBeChosen(stackObject, sourceId, sourceControllerId, game))
+                .map(StackObject::getId)
+                .collect(Collectors.toSet());
     }
 
     @Override

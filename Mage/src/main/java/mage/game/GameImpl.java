@@ -503,12 +503,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Ability getAbility(UUID abilityId, UUID sourceId) {
+    public Optional<Ability> getAbility(UUID abilityId, UUID sourceId) {
         MageObject object = getObject(sourceId);
         if (object != null) {
             return object.getAbilities().get(abilityId);
         }
-        return null;
+        return Optional.empty();
     }
 
 //    @Override
@@ -2336,10 +2336,10 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
-        Iterator it = gameCards.entrySet().iterator();
+        Iterator<Entry<UUID, Card>> it = gameCards.entrySet().iterator();
 
         while (it.hasNext()) {
-            Entry<UUID, Card> entry = (Entry<UUID, Card>) it.next();
+            Entry<UUID, Card> entry = it.next();
             Card card = entry.getValue();
             if (card.getOwnerId().equals(playerId)) {
                 it.remove();
