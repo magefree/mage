@@ -61,14 +61,14 @@ public class ChatSession {
     }
 
     public void join(UUID userId) {
-       UserManager.instance.getUser(userId).ifPresent(user-> {
-           if (!clients.containsKey(userId)) {
-               String userName = user.getName();
-               clients.put(userId, userName);
-               broadcast(null, userName + " has joined (" + user.getClientVersion() + ')', MessageColor.BLUE, true, MessageType.STATUS, null);
-               logger.trace(userName + " joined chat " + chatId);
-           }
-       });
+        UserManager.instance.getUser(userId).ifPresent(user -> {
+            if (!clients.containsKey(userId)) {
+                String userName = user.getName();
+                clients.put(userId, userName);
+                broadcast(null, userName + " has joined (" + user.getClientVersion() + ')', MessageColor.BLUE, true, MessageType.STATUS, null);
+                logger.trace(userName + " joined chat " + chatId);
+            }
+        });
     }
 
     public void kill(UUID userId, DisconnectReason reason) {
@@ -139,24 +139,20 @@ public class ChatSession {
 
     public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         if (!message.isEmpty()) {
-            HashSet<UUID> clientsToRemove = null;
+            HashSet<UUID> clientsToRemove = new HashSet<>();
             ClientCallback clientCallback = new ClientCallback("chatMessage", chatId, new ChatMessage(userName, message, (withTime ? timeFormatter.format(new Date()) : ""), color, messageType, soundToPlay));
             for (UUID userId : clients.keySet()) {
                 Optional<User> user = UserManager.instance.getUser(userId);
                 if (user.isPresent()) {
                     user.get().fireCallback(clientCallback);
                 } else {
-                    if (clientsToRemove == null) {
-                        clientsToRemove = new HashSet<>();
-                    }
-                    clientsToRemove.add(userId);
+                    clientsToRemove = new HashSet<>();
                 }
             }
-            if (clientsToRemove != null) {
-                for (UUID userIdToRemove : clientsToRemove) {
-                    clients.remove(userIdToRemove);
-                }
+            for (UUID userIdToRemove : clientsToRemove) {
+                clients.remove(userIdToRemove);
             }
+
         }
     }
 

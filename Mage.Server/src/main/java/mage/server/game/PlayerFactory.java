@@ -30,32 +30,26 @@ package mage.server.game;
 
 import mage.constants.RangeOfInfluence;
 import mage.players.Player;
+import mage.players.PlayerType;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.EnumMap;
 import java.util.Optional;
 import java.util.Set;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlayerFactory {
+public enum PlayerFactory {
 
-    private static final PlayerFactory INSTANCE = new PlayerFactory();
+    instance;
     private static final Logger logger = Logger.getLogger(PlayerFactory.class);
 
-    private final Map<String, Class> playerTypes = new LinkedHashMap<>();
+    private final EnumMap<PlayerType, Class> playerTypes = new EnumMap<>(PlayerType.class);
 
-    public static PlayerFactory getInstance() {
-        return INSTANCE;
-    }
 
-    private PlayerFactory() {}
-
-    public Optional<Player> createPlayer(String playerType, String name, RangeOfInfluence range, int skill) {
+    public Optional<Player> createPlayer(PlayerType playerType, String name, RangeOfInfluence range, int skill) {
         try {
             Class playerTypeClass = playerTypes.get(playerType);
             if (playerTypeClass != null) {
@@ -63,8 +57,7 @@ public class PlayerFactory {
                 Player player = (Player) con.newInstance(name, range, skill);
                 logger.trace("Player created: " + name + " - " + player.getId());
                 return Optional.of(player);
-            }
-            else {
+            } else {
                 logger.fatal("Unknown player type: " + playerType);
             }
         } catch (Exception ex) {
@@ -73,13 +66,16 @@ public class PlayerFactory {
         return Optional.empty();
     }
 
-    public Set<String> getPlayerTypes() {
+    public Set<PlayerType> getPlayerTypes() {
         return playerTypes.keySet();
     }
 
     public void addPlayerType(String name, Class playerType) {
-        if (playerType != null) {
-            this.playerTypes.put(name, playerType);
+        PlayerType type = PlayerType.getByDescription(name);
+        if (type != null) {
+            if (playerType != null) {
+                this.playerTypes.put(type, playerType);
+            }
         }
     }
 

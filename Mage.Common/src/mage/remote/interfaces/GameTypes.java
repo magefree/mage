@@ -28,6 +28,8 @@
 package mage.remote.interfaces;
 
 import java.util.List;
+
+import mage.players.PlayerType;
 import mage.view.GameTypeView;
 import mage.view.TournamentTypeView;
 
@@ -36,7 +38,7 @@ import mage.view.TournamentTypeView;
  */
 public interface GameTypes {
 
-    String[] getPlayerTypes();
+    PlayerType[] getPlayerTypes();
 
     List<GameTypeView> getGameTypes();
     List<GameTypeView> getTournamentGameTypes();

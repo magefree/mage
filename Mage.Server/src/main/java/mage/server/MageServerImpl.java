@@ -45,6 +45,7 @@ import mage.interfaces.ActionWithResult;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
+import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.remote.MageVersionException;
 import mage.server.draft.CubeFactory;
@@ -74,7 +75,7 @@ import java.util.concurrent.ExecutorService;
 public class MageServerImpl implements MageServer {
 
     private static final Logger logger = Logger.getLogger(MageServerImpl.class);
-    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
+    private static final ExecutorService callExecutor = ThreadExecutor.instance.getCallExecutor();
     private static final SecureRandom RANDOM = new SecureRandom();
 
     private final String adminPassword;
@@ -233,8 +234,8 @@ public class MageServerImpl implements MageServer {
                     String maxAiOpponents = ConfigSettings.instance.getMaxAiOpponents();
                     if (maxAiOpponents != null) {
                         int aiPlayers = 0;
-                        for (String playerType : options.getPlayerTypes()) {
-                            if (!playerType.equals("Human")) {
+                        for (PlayerType playerType : options.getPlayerTypes()) {
+                            if (playerType != PlayerType.HUMAN) {
                                 aiPlayers++;
                             }
                         }
@@ -282,7 +283,7 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
+    public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final PlayerType playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
         return executeWithResult("joinTable", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
@@ -309,7 +310,7 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
+    public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final PlayerType playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
         return executeWithResult("joinTournamentTable", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
@@ -989,11 +990,11 @@ public class MageServerImpl implements MageServer {
     public ServerState getServerState() throws MageException {
         try {
             return new ServerState(
-                    GameFactory.getInstance().getGameTypes(),
-                    TournamentFactory.getInstance().getTournamentTypes(),
-                    PlayerFactory.getInstance().getPlayerTypes().toArray(new String[PlayerFactory.getInstance().getPlayerTypes().size()]),
-                    DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[DeckValidatorFactory.getInstance().getDeckTypes().size()]),
-                    CubeFactory.getInstance().getDraftCubes().toArray(new String[CubeFactory.getInstance().getDraftCubes().size()]),
+                    GameFactory.instance.getGameTypes(),
+                    TournamentFactory.instance.getTournamentTypes(),
+                    PlayerFactory.instance.getPlayerTypes().toArray(new PlayerType[PlayerFactory.instance.getPlayerTypes().size()]),
+                    DeckValidatorFactory.instance.getDeckTypes().toArray(new String[DeckValidatorFactory.instance.getDeckTypes().size()]),
+                    CubeFactory.instance.getDraftCubes().toArray(new String[CubeFactory.instance.getDraftCubes().size()]),
                     testMode,
                     Main.getVersion(),
                     CardRepository.instance.getContentVersionConstant(),
@@ -1161,7 +1162,7 @@ public class MageServerImpl implements MageServer {
                             session -> FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.getHost())
 
 
-            ));
+                    ));
         }
     }
 

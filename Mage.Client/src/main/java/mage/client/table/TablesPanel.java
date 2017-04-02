@@ -33,75 +33,46 @@
  */
 package mage.client.table;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.HeadlessException;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyVetoException;
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
-import javax.swing.JToggleButton;
-import javax.swing.RowFilter;
-import javax.swing.SwingWorker;
-import javax.swing.table.AbstractTableModel;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
-import mage.client.dialog.JoinTableDialog;
-import mage.client.dialog.NewTableDialog;
-import mage.client.dialog.NewTournamentDialog;
-import mage.client.dialog.PreferencesDialog;
-import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
-import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
-import mage.client.dialog.TableWaitingDialog;
-import static mage.client.table.TablesPanel.PASSWORDED;
+import mage.client.dialog.*;
 import mage.client.util.ButtonColumn;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.IgnoreList;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.TableUtil;
-import mage.constants.MatchTimeLimit;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.PlayerAction;
-import mage.constants.RangeOfInfluence;
-import mage.constants.SkillLevel;
+import mage.constants.*;
 import mage.game.match.MatchOptions;
+import mage.players.PlayerType;
 import mage.remote.MageRemoteException;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
+import static mage.client.table.TablesPanel.PASSWORDED;
 
 /**
  *
@@ -216,7 +187,7 @@ public class TablesPanel extends javax.swing.JPanel {
                                 if (PASSWORDED.equals(pwdColumn)) {
                                     joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
                                 } else {
-                                    SessionHandler.joinTournamentTable(roomId, tableId, SessionHandler.getUserName(), "Human", 1, null, "");
+                                    SessionHandler.joinTournamentTable(roomId, tableId, SessionHandler.getUserName(), PlayerType.HUMAN, 1, null, "");
                                 }
                             } else {
                                 joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
@@ -1188,8 +1159,8 @@ public class TablesPanel extends javax.swing.JPanel {
             }
 
             MatchOptions options = new MatchOptions("1", "Two Player Duel", false, 2);
-            options.getPlayerTypes().add("Human");
-            options.getPlayerTypes().add("Computer - mad");
+            options.getPlayerTypes().add(PlayerType.HUMAN);
+            options.getPlayerTypes().add(PlayerType.COMPUTER_MAD);
             options.setDeckType("Limited");
             options.setAttackOption(MultiplayerAttackOption.LEFT);
             options.setRange(RangeOfInfluence.ALL);
@@ -1203,8 +1174,8 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setBannedUsers(IgnoreList.ignoreList(serverAddress));
             table = SessionHandler.createTable(roomId, options);
 
-            SessionHandler.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"), "");
-            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"), "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, DeckImporterUtil.importDeck("test.dck"), "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", PlayerType.COMPUTER_MAD, 5, DeckImporterUtil.importDeck("test.dck"), "");
             SessionHandler.startMatch(roomId, table.getTableId());
         } catch (HeadlessException ex) {
             handleError(ex);

@@ -1,19 +1,20 @@
 package mage.client;
 
-import java.util.*;
-
 import mage.cards.decks.DeckCardLists;
 import mage.client.chat.LocalCommands;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
+import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.remote.Connection;
 import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.view.*;
+
+import java.util.*;
 
 /**
  * Created by IGOUDT on 15-9-2016.
@@ -91,11 +92,11 @@ public final class SessionHandler {
         session.sendPlayerBoolean(gameId, b);
     }
 
-    public static String[] getPlayerTypes() {
+    public static PlayerType[] getPlayerTypes() {
         return session.getPlayerTypes();
     }
 
-    public static boolean joinTournamentTable(UUID roomId, UUID tableId, String text, String selectedItem, Integer integer, DeckCardLists deckCardLists, String s) {
+    public static boolean joinTournamentTable(UUID roomId, UUID tableId, String text, PlayerType selectedItem, Integer integer, DeckCardLists deckCardLists, String s) {
         return session.joinTournamentTable(roomId, tableId, text, selectedItem, integer, deckCardLists, s);
     }
 
@@ -233,7 +234,7 @@ public final class SessionHandler {
         return session.createTable(roomId, options);
     }
 
-    public static boolean joinTable(UUID roomId, UUID tableId, String playerName, String human, int skill, DeckCardLists deckCardLists, String text) {
+    public static boolean joinTable(UUID roomId, UUID tableId, String playerName, PlayerType human, int skill, DeckCardLists deckCardLists, String text) {
         return session.joinTable(roomId, tableId, playerName, human, skill, deckCardLists, text);
     }
 

@@ -27,13 +27,6 @@
  */
 package mage.server.game;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
@@ -41,6 +34,7 @@ import mage.game.GameException;
 import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
+import mage.players.PlayerType;
 import mage.server.RoomImpl;
 import mage.server.TableManager;
 import mage.server.User;
@@ -53,6 +47,13 @@ import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UsersView;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -133,7 +134,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         List<RoomUsersView> roomUserInfo = new ArrayList<>();
         roomUserInfo.add(new RoomUsersView(users,
                 GameManager.instance.getNumberActiveGames(),
-                ThreadExecutor.getInstance().getActiveThreads(ThreadExecutor.getInstance().getGameExecutor()),
+                ThreadExecutor.instance.getActiveThreads(ThreadExecutor.instance.getGameExecutor()),
                 ConfigSettings.instance.getMaxGameThreads()
         ));
         roomUsersView = roomUserInfo;
@@ -145,7 +146,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException {
+    public boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
         if (tables.containsKey(tableId)) {
             return TableManager.instance.joinTable(userId, tableId, name, playerType, skill, deckList, password);
         } else {
@@ -161,7 +162,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public boolean joinTournamentTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws GameException {
+    public boolean joinTournamentTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
         if (tables.containsKey(tableId)) {
             return TableManager.instance.joinTournament(userId, tableId, name, playerType, skill, deckList, password);
         } else {
