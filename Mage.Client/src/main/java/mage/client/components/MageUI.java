@@ -93,7 +93,7 @@ public class MageUI {
 
     public void doClick(MageComponents name, int waitBeforeClick) throws InterruptedException {
         final JButton j = getButton(name);
-        Thread.sleep(waitBeforeClick);
+        TimeUnit.MILLISECONDS.sleep(waitBeforeClick);
         while (!j.isEnabled()) {
             TimeUnit.MILLISECONDS.sleep(10);
         }
