@@ -56,7 +56,7 @@ public class TournamentSession {
     protected boolean killed = false;
 
     private ScheduledFuture<?> futureTimeout;
-    protected static final ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
+    protected static final ScheduledExecutorService timeoutExecutor = ThreadExecutor.instance.getTimeoutExecutor();
 
     public TournamentSession(Tournament tournament, UUID userId, UUID tableId, UUID playerId) {
         this.userId = userId;

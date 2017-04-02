@@ -28,14 +28,6 @@
 
 package mage.server.draft;
 
-import java.rmi.RemoteException;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
 import mage.game.draft.Draft;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
@@ -45,6 +37,14 @@ import mage.view.DraftClientMessage;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
 import org.apache.log4j.Logger;
+
+import java.rmi.RemoteException;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -60,7 +60,7 @@ public class DraftSession {
     protected UUID markedCard;
 
     private ScheduledFuture<?> futureTimeout;
-    protected static final ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
+    protected static final ScheduledExecutorService timeoutExecutor = ThreadExecutor.instance.getTimeoutExecutor();
 
     public DraftSession(Draft draft, UUID userId, UUID playerId) {
         this.userId = userId;

@@ -28,12 +28,6 @@
 
 package mage.server.draft;
 
-import java.io.File;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftPlayer;
@@ -47,6 +41,13 @@ import mage.server.game.GameController;
 import mage.server.util.ThreadExecutor;
 import mage.view.DraftPickView;
 import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -152,7 +153,7 @@ public class DraftController {
     private synchronized void checkStart() {
         if (!draft.isStarted() && allJoined()) {
             draft.setStarted();
-            ThreadExecutor.getInstance().getCallExecutor().execute(this::startDraft);
+            ThreadExecutor.instance.getCallExecutor().execute(this::startDraft);
         }
     }
 

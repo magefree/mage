@@ -27,10 +27,6 @@
  */
 package mage.interfaces;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -40,15 +36,15 @@ import mage.constants.PlayerAction;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
+import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.utils.MageVersion;
-import mage.view.DraftPickView;
-import mage.view.GameView;
-import mage.view.MatchView;
-import mage.view.RoomUsersView;
-import mage.view.TableView;
-import mage.view.TournamentView;
-import mage.view.UserView;
+import mage.view.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -94,9 +90,9 @@ public interface MageServer {
 
     TableView createTournamentTable(String sessionId, UUID roomId, TournamentOptions tournamentOptions) throws MageException;
 
-    boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException, GameException;
+    boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException, GameException;
 
-    boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException, GameException;
+    boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException, GameException;
 
     boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
 

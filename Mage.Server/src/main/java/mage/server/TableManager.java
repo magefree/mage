@@ -28,17 +28,7 @@
 
 package mage.server;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import mage.MageException;
-import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
 import mage.game.Game;
@@ -50,12 +40,21 @@ import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentPlayer;
-import mage.players.Player;
+import mage.players.PlayerType;
 import mage.server.game.GameController;
 import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -133,14 +132,14 @@ public enum TableManager {
         return Optional.empty();
     }
 
-    public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException {
+    public boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTable(userId, name, playerType, skill, deckList, password);
         }
         return false;
     }
 
-    public boolean joinTournament(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws GameException {
+    public boolean joinTournament(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTournament(userId, name, playerType, skill, deckList, password);
         }
@@ -376,7 +375,7 @@ public enum TableManager {
             logger.debug(chatSession.getChatId() + " " + formatter.format(chatSession.getCreateTime()) + ' ' + chatSession.getInfo() + ' ' + chatSession.getClients().values().toString());
         }
         logger.debug("------- Games: " + GameManager.instance.getNumberActiveGames() + " --------------------------------------------");
-        logger.debug(" Active Game Worker: " + ThreadExecutor.getInstance().getActiveThreads(ThreadExecutor.getInstance().getGameExecutor()));
+        logger.debug(" Active Game Worker: " + ThreadExecutor.instance.getActiveThreads(ThreadExecutor.instance.getGameExecutor()));
         for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
             logger.debug(entry.getKey() + entry.getValue().getPlayerNameList());
         }

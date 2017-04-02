@@ -28,13 +28,15 @@
 
 package mage.game.tournament;
 
-import java.util.Set;
 import mage.cards.decks.Deck;
 import mage.constants.TournamentPlayerState;
 import mage.game.result.ResultProtos.TourneyPlayerProto;
 import mage.game.result.ResultProtos.TourneyQuitStatus;
 import mage.players.Player;
+import mage.players.PlayerType;
 import mage.util.TournamentUtil;
+
+import java.util.Set;
 
 /**
  *
@@ -43,7 +45,7 @@ import mage.util.TournamentUtil;
 public class TournamentPlayer {
 
     protected int points;
-    protected String playerType;
+    protected PlayerType playerType;
     protected TournamentPlayerState state;
     protected String stateInfo;
     protected String disconnectInfo;
@@ -57,7 +59,7 @@ public class TournamentPlayer {
     protected TourneyQuitStatus quitStatus = TourneyQuitStatus.NO_TOURNEY_QUIT;
     protected TournamentPlayer replacedTournamentPlayer;
 
-    public TournamentPlayer(Player player, String playerType) {
+    public TournamentPlayer(Player player, PlayerType playerType) {
         this.player = player;
         this.playerType = playerType;
         this.state = TournamentPlayerState.JOINED;
@@ -70,7 +72,7 @@ public class TournamentPlayer {
         return player;
     }
 
-    public String getPlayerType() {
+    public PlayerType getPlayerType() {
         return playerType;
     }
 
@@ -232,7 +234,7 @@ public class TournamentPlayer {
     public TourneyPlayerProto toProto() {
         return TourneyPlayerProto.newBuilder()
                 .setName(this.player.getName())
-                .setPlayerType(this.playerType)
+                .setPlayerType(this.playerType.toString())
                 .setQuit(this.quitStatus)
                 .build();
     }

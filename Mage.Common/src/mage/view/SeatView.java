@@ -27,10 +27,12 @@
  */
 package mage.view;
 
+import mage.game.Seat;
+import mage.players.PlayerType;
+import mage.players.net.UserData;
+
 import java.io.Serializable;
 import java.util.UUID;
-import mage.game.Seat;
-import mage.players.net.UserData;
 
 /**
  *
@@ -43,7 +45,7 @@ public class SeatView implements Serializable {
     private final String flagName;
     private UUID playerId;
     private final String playerName;
-    private final String playerType;
+    private final PlayerType playerType;
     private final String history;
     private final int generalRating;
     private final int constructedRating;
@@ -86,7 +88,7 @@ public class SeatView implements Serializable {
         return playerName;
     }
 
-    public String getPlayerType() {
+    public PlayerType getPlayerType() {
         return playerType;
     }
 

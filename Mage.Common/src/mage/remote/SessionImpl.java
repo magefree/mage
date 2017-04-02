@@ -27,13 +27,6 @@
  */
 package mage.remote;
 
-import java.io.IOException;
-import java.lang.reflect.UndeclaredThrowableException;
-import java.net.*;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import javax.swing.JOptionPane;
-
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -50,6 +43,7 @@ import mage.interfaces.MageClient;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
+import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.utils.CompressUtil;
 import mage.view.*;
@@ -61,6 +55,13 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
+
+import javax.swing.*;
+import java.io.IOException;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -550,7 +551,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public String[] getPlayerTypes() {
+    public PlayerType[] getPlayerTypes() {
         return serverState.getPlayerTypes();
     }
 
@@ -680,7 +681,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
+    public boolean joinTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
                 // Workaround to fix Can't join table problem
@@ -703,7 +704,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
+    public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
                 // Workaround to fix Can't join table problem
