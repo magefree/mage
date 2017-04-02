@@ -40,16 +40,17 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
 
     /**
      * Theres a Chalice of the Void with 1 counter in play under my control.
-     * Then I cast second chalice with x=1. For spells on the stack the cmc is the base CMC + X value * {X} in casting costs on top right of card.
-     * So cmc should be 2 in this case, it shouldnt be countered.
+     * Then I cast second chalice with x=1. For spells on the stack the cmc is
+     * the base CMC + X value * {X} in casting costs on top right of card. So
+     * cmc should be 2 in this case, it shouldnt be countered.
      * http://boardgames.stackexchange.com/questions/7327/what-is-the-converted-mana-cost-of-a-spell-with-x-when-cast-with-the-miracle-m
      */
-
     @Test
     public void testX1CountsFor2CMC() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        // Chalice of the Void enters the battlefield with X charge counters on it.
+        // Whenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
         addCard(Zone.HAND, playerA, "Chalice of the Void", 2);
-
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
         setChoice(playerA, "X=1");
@@ -62,10 +63,10 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Chalice of the Void", 2);
 
     }
-    
+
     /*
     If X=1 the cmc of Chalice on the stack is 2. So it can't be countered by Mental Misstep
-    */
+     */
     @Test
     public void testCantBeCounteredByMentalMisstep() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
@@ -94,13 +95,14 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         addCard(Zone.HAND, playerA, "Chalice of the Void", 1);
 
+        // Conflagrate deals X damage divided as you choose among any number of target creatures and/or players.
+        // Flashback-{R}{R}, Discard X cards.
         addCard(Zone.GRAVEYARD, playerB, "Conflagrate", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
         addCard(Zone.HAND, playerB, "Mountain", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
         setChoice(playerA, "X=1");
-
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flashback {R}{R}");
         setChoice(playerB, "X=1");
@@ -109,13 +111,12 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 19);
-        assertLife(playerB, 20);
-
         assertExileCount(playerB, "Conflagrate", 1);
         //TODO: Apparently there are two mountains in the graveyard at the end of the test now.
-        //assertGraveyardCount(playerB, "Mountain", 1);
+        assertGraveyardCount(playerB, "Mountain", 1);
 
+        assertLife(playerA, 19);
+        assertLife(playerB, 20);
     }
-    
+
 }
