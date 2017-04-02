@@ -1,5 +1,22 @@
 package org.mage.plugins.card.images;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.*;
+import java.nio.file.AccessDeniedException;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.swing.*;
 import mage.cards.repository.CardInfo;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
@@ -14,23 +31,6 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
-
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.net.*;
-import java.nio.file.AccessDeniedException;
-import java.util.*;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
@@ -316,7 +316,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         List<CardDownloadData> cardsToDownload = Collections.synchronizedList(new ArrayList<>());
         allCardsUrls.parallelStream().forEach(card -> {
             TFile file = new TFile(CardImageUtils.generateImagePath(card));
-            logger.debug(card.getName() + " (is_token=" + card.isToken() + "). Image is here:" + file.getAbsolutePath() + " (exists=" + file.exists() +')');
+            logger.debug(card.getName() + " (is_token=" + card.isToken() + "). Image is here:" + file.getAbsolutePath() + " (exists=" + file.exists() + ')');
             if (!file.exists()) {
                 logger.debug("Missing: " + file.getAbsolutePath());
                 cardsToDownload.add(card);
@@ -345,9 +345,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             return list;
         }
 
-
-        try(InputStreamReader input = new InputStreamReader(in);
-            BufferedReader reader = new BufferedReader(input)) {
+        try (InputStreamReader input = new InputStreamReader(in);
+                BufferedReader reader = new BufferedReader(input)) {
 
             String line = reader.readLine();
             while (line != null) {
@@ -486,7 +485,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             executor.shutdown();
             while (!executor.isTerminated()) {
                 try {
-                    Thread.sleep(1000);
+                    TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException ie) {
                 }
             }

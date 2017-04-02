@@ -1450,7 +1450,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
             if (!tables.isEmpty()) {
                 this.publish(tables);
             }
-            Thread.sleep(3000);
+            TimeUnit.SECONDS.sleep(3);
         }
         return null;
     }
@@ -1494,7 +1494,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             this.publish(SessionHandler.getRoomUsers(roomId));
-            Thread.sleep(3000);
+            TimeUnit.SECONDS.sleep(3);
         }
         return null;
     }
@@ -1636,7 +1636,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
             if (!matches.isEmpty()) {
                 this.publish(matches);
             }
-            Thread.sleep(10000);
+            TimeUnit.SECONDS.sleep(10);
         }
         return null;
     }

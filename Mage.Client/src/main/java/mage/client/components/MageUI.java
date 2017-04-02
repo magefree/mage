@@ -3,6 +3,7 @@ package mage.client.components;
 import java.awt.Component;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 
 public class MageUI {
@@ -94,7 +95,7 @@ public class MageUI {
         final JButton j = getButton(name);
         Thread.sleep(waitBeforeClick);
         while (!j.isEnabled()) {
-            Thread.sleep(10);
+            TimeUnit.MILLISECONDS.sleep(10);
         }
         Thread t = new Thread(() -> j.doClick());
         t.start();
