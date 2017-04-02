@@ -65,7 +65,6 @@ public class SoulBurn extends CardImpl {
         VariableCost variableCost = this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0);
         if (variableCost instanceof VariableManaCost) {
             ((VariableManaCost) variableCost).setFilter(filterBlackOrRed);
-            ((VariableManaCost) variableCost).setFilter(filterBlackOrRed);
         }
     }
 
@@ -83,7 +82,7 @@ class SoulBurnEffect extends OneShotEffect {
 
     public SoulBurnEffect() {
         super(Outcome.Damage);
-        staticText = "Soul Burn deals X damage to target creature or player for each black or red mana spent on X. You gain life equal to the damage dealt for each black mana spent; not more life than the player's life total before Soul Burn dealt damage, or the creature's toughness.";
+        staticText = "{this} deals X damage to target creature or player for each black or red mana spent on X. You gain life equal to the damage dealt for each black mana spent; not more life than the player's life total before Soul Burn dealt damage, or the creature's toughness.";
     }
 
     public SoulBurnEffect(final SoulBurnEffect effect) {
