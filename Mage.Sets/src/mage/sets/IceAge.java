@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
-import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.constants.Rarity;
+import mage.cards.CardGraphicInfo;
 
 /**
  *
@@ -247,6 +247,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Soldevi Simulacrum", 314, Rarity.UNCOMMON, mage.cards.s.SoldeviSimulacrum.class));
         cards.add(new SetCardInfo("Songs of the Damned", 48, Rarity.COMMON, mage.cards.s.SongsOfTheDamned.class));
         cards.add(new SetCardInfo("Soul Barrier", 103, Rarity.UNCOMMON, mage.cards.s.SoulBarrier.class));
+        cards.add(new SetCardInfo("Soul Burn", 361, Rarity.COMMON, mage.cards.s.SoulBurn.class));
         cards.add(new SetCardInfo("Soul Kiss", 50, Rarity.COMMON, mage.cards.s.SoulKiss.class));
         cards.add(new SetCardInfo("Spoils of Evil", 51, Rarity.RARE, mage.cards.s.SpoilsOfEvil.class));
         cards.add(new SetCardInfo("Stampede", 153, Rarity.RARE, mage.cards.s.Stampede.class));

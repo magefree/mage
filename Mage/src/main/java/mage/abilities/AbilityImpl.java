@@ -558,7 +558,11 @@ public abstract class AbilityImpl implements Ability {
                     } else {
                         String manaSymbol = null;
                         if (variableManaCost.getFilter().isBlack()) {
-                            manaSymbol = "B";
+                            if (variableManaCost.getFilter().isRed()) {
+                                manaSymbol = "B/R";
+                            } else {
+                                manaSymbol = "B";
+                            }
                         } else if (variableManaCost.getFilter().isRed()) {
                             manaSymbol = "R";
                         } else if (variableManaCost.getFilter().isBlue()) {
