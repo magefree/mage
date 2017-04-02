@@ -27,6 +27,10 @@
  */
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -57,11 +61,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.util.GameLog;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -334,8 +333,8 @@ public class Spell extends StackObjImpl implements Card {
      * determine whether card was kicked or not. E.g. Desolation Angel
      */
     private void updateOptionalCosts(int index) {
-        spellCards.get(index).getAbilities().get(spellAbilities.get(index).getId()).ifPresent(abilityOrig ->
-        {
+        spellCards.get(index).getAbilities().get(spellAbilities.get(index).getId()).ifPresent(abilityOrig
+                -> {
             for (Object object : spellAbilities.get(index).getOptionalCosts()) {
                 Cost cost = (Cost) object;
                 for (Cost costOrig : abilityOrig.getOptionalCosts()) {
@@ -749,24 +748,7 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
-        ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.STACK, Zone.EXILED, appliedEffects);
-        if (!game.replaceEvent(event)) {
-            game.getStack().remove(this);
-            game.rememberLKI(this.getId(), event.getFromZone(), this);
-
-            if (!this.isCopiedSpell()) {
-                if (exileId == null) {
-                    game.getExile().getPermanentExile().add(this.card);
-                } else {
-                    game.getExile().createZone(exileId, name).add(this.card);
-                }
-
-                game.setZone(this.card.getId(), event.getToZone());
-            }
-            game.fireEvent(event);
-            return event.getToZone() == Zone.EXILED;
-        }
-        return false;
+        return this.card.moveToExile(exileId, name, sourceId, game, appliedEffects);
     }
 
     @Override

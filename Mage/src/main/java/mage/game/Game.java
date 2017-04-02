@@ -27,6 +27,8 @@
  */
 package mage.game;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -64,9 +66,6 @@ import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
-
-import java.io.Serializable;
-import java.util.*;
 
 public interface Game extends MageItem, Serializable {
 
@@ -393,7 +392,7 @@ public interface Game extends MageItem, Serializable {
 
     void playPriority(UUID activePlayerId, boolean resuming);
 
-    boolean endTurn();
+    boolean endTurn(Ability source);
 
     int doAction(MageAction action);
 

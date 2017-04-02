@@ -27,6 +27,10 @@
  */
 package mage.game;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.MageException;
 import mage.MageObject;
 import mage.abilities.*;
@@ -91,11 +95,6 @@ import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watchers;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -2672,8 +2671,8 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public boolean endTurn() {
-        getTurn().endTurn(this, getActivePlayerId());
+    public boolean endTurn(Ability source) {
+        getTurn().endTurn(this, getActivePlayerId(), source);
         return true;
     }
 
