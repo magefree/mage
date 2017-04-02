@@ -27,6 +27,10 @@
  */
 package mage.server;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.server.exceptions.UserNotFoundException;
@@ -36,11 +40,6 @@ import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -49,7 +48,6 @@ public enum ChatManager {
     instance;
     private static final Logger logger = Logger.getLogger(ChatManager.class);
     private static final HashMap<String, String> userMessages = new HashMap<>();
-
 
     private final ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<>();
 
@@ -159,7 +157,6 @@ public enum ChatManager {
 
                     userMessages.put(userName, message);
 
-
                     if (messageType == MessageType.TALK) {
                         if (user.getChatLockedUntil() != null) {
                             if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) > 0) {
@@ -173,8 +170,8 @@ public enum ChatManager {
                     }
 
                 }
-                chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
             }
+            chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
         }
     }
 
@@ -255,11 +252,11 @@ public enum ChatManager {
     }
 
     public void sendReconnectMessage(UUID userId) {
-        UserManager.instance.getUser(userId).ifPresent(user ->
-                chatSessions.values()
-                        .stream()
-                        .filter(chat -> chat.hasUser(userId))
-                        .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS, null)));
+        UserManager.instance.getUser(userId).ifPresent(user
+                -> chatSessions.values()
+                .stream()
+                .filter(chat -> chat.hasUser(userId))
+                .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS, null)));
 
     }
 
@@ -275,6 +272,4 @@ public enum ChatManager {
         return new ArrayList<>(chatSessions.values());
     }
 
-
 }
-
