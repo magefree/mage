@@ -115,7 +115,7 @@ public class CardPluginImpl implements CardPlugin {
      */
     private CardPanel makePanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback, boolean isFoil, Dimension dimension) {
         String fallback = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false");
-        if (view.isSplitCard() || fallback.equals("true")) {
+        if (fallback.equals("true")) {
             return new CardPanelComponentImpl(view, gameId, loadImage, callback, isFoil, dimension);
         } else {
             return new CardPanelRenderImpl(view, gameId, loadImage, callback, isFoil, dimension);
