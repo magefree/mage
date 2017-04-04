@@ -85,30 +85,9 @@ public class ChatSession {
                     clients.remove(userId);
                     logger.debug(userName + '(' + reason.toString() + ')' + " removed from chatId " + chatId);
                 }
-                String message;
-                switch (reason) {
-                    case Disconnected:
-                        message = " has left XMage";
-                        break;
-                    case LostConnection:
-                        message = " has lost connection";
-                        break;
-                    case SessionExpired:
-                        message = " session expired";
-                        break;
-                    case AdminDisconnect:
-                        message = " was disconnected by the Admin";
-                        break;
-                    case ConnectingOtherInstance:
-                        message = " reconnected and replaced still active old session";
-                        break;
-                    case CleaningUp:
-                        message = null;
-                        break;
-                    default:
-                        message = " left (" + reason.toString() + ')';
-                }
-                if (message != null) {
+                String message = reason.getMessage();
+
+                if (!message.isEmpty()) {
                     broadcast(null, userName + message, MessageColor.BLUE, true, MessageType.STATUS, null);
                 }
             }
