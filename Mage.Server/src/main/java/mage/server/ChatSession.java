@@ -146,7 +146,7 @@ public class ChatSession {
                 if (user.isPresent()) {
                     user.get().fireCallback(clientCallback);
                 } else {
-                    clientsToRemove = new HashSet<>();
+                    clientsToRemove.add(userId);
                 }
             }
             for (UUID userIdToRemove : clientsToRemove) {
