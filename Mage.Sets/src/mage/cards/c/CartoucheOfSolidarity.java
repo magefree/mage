@@ -28,7 +28,6 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,14 +39,13 @@ import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WarriorVigilantToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -84,19 +82,5 @@ public class CartoucheOfSolidarity extends CardImpl {
     @Override
     public CartoucheOfSolidarity copy() {
         return new CartoucheOfSolidarity(this);
-    }
-}
-
-class WarriorVigilantToken extends Token {
-
-    WarriorVigilantToken() {
-        super("Warrior", "1/1 white Warrior creature token with vigilance");
-        cardType.add(CardType.CREATURE);
-        setOriginalExpansionSetCode("AKH");
-        color.setWhite(true);
-        subtype.add("Warrior");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(VigilanceAbility.getInstance());
     }
 }
