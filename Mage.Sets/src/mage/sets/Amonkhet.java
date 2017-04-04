@@ -66,6 +66,7 @@ public class Amonkhet extends ExpansionSet {
 
         cards.add(new SetCardInfo("Ancient Crab", 40, Rarity.COMMON, mage.cards.a.AncientCrab.class));
         cards.add(new SetCardInfo("Angler Drake", 41, Rarity.UNCOMMON, mage.cards.a.AnglerDrake.class));
+        cards.add(new SetCardInfo("Anointer Priest", 3, Rarity.COMMON, mage.cards.a.AnointerPriest.class));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 78, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
         cards.add(new SetCardInfo("Aven Mindcensor", 3, Rarity.RARE, mage.cards.a.AvenMindcensor.class));
         cards.add(new SetCardInfo("Canyon Slough", 239, Rarity.RARE, mage.cards.c.CanyonSlough.class));
