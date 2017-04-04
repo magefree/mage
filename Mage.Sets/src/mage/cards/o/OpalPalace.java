@@ -110,7 +110,7 @@ class OpalPalaceWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.MANA_PAYED) {
+        if (event.getType() == GameEvent.EventType.MANA_PAID) {
             if (event.getData() != null && event.getData().equals(originalId)) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null) {

@@ -103,7 +103,7 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.MANA_PAYED) {
+        if (event.getType() == GameEvent.EventType.MANA_PAID) {
             MageObject object = game.getObject(event.getSourceId());
             // TODO: Replace identification by name by better method that also works if ability is copied from other land with other name
             if (object != null && object.getName().equals("Boseiju, Who Shelters All") && event.getFlag()) {
