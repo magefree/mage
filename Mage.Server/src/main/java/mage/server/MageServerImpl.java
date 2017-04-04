@@ -45,6 +45,7 @@ import mage.interfaces.ActionWithResult;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.remote.MageVersionException;
@@ -1172,9 +1173,9 @@ public class MageServerImpl implements MageServer {
             execute("sendBroadcastMessage", sessionId, () -> {
                 for (User user : UserManager.instance.getUsers()) {
                     if (message.toLowerCase(Locale.ENGLISH).startsWith("warn")) {
-                        user.fireCallback(new ClientCallback("serverMessage", null, new ChatMessage("SERVER", message, null, MessageColor.RED)));
+                        user.fireCallback(new ClientCallback(ClientCallbackMethod.SERVER_MESSAGE, null, new ChatMessage("SERVER", message, null, MessageColor.RED)));
                     } else {
-                        user.fireCallback(new ClientCallback("serverMessage", null, new ChatMessage("SERVER", message, null, MessageColor.BLUE)));
+                        user.fireCallback(new ClientCallback(ClientCallbackMethod.SERVER_MESSAGE, null, new ChatMessage("SERVER", message, null, MessageColor.BLUE)));
                     }
                 }
             }, true);
