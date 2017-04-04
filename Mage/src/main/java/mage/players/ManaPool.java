@@ -37,7 +37,6 @@ import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.constants.Duration;
 import mage.constants.ManaType;
@@ -204,6 +203,10 @@ public class ManaPool implements Serializable {
 
     public void addDoNotEmptyManaType(ManaType manaType) {
         doNotEmptyManaTypes.add(manaType);
+    }
+
+    public void init() {
+        manaItems.clear();
     }
 
     public int emptyPool(Game game) {
