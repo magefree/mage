@@ -7,6 +7,7 @@ public enum PlayerType {
     HUMAN("Human"),
     COMPUTER_DRAFT_BOT("Computer - draftbot"),
     COMPUTER_MINIMAX_HYBRID("Computer - minimax hybrid"),
+    COMPUTER_MONTE_CARLO("Computer - monte carlo"),
     COMPUTER_MAD("Computer - mad");
 
     String description;
