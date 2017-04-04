@@ -1,5 +1,7 @@
 package mage.constants;
 
+import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.HashSet;
 
 /**
@@ -33,13 +35,9 @@ public enum CardType {
      * Duplicates are eliminated.
      */
     public static CardType[] mergeTypes(CardType[] a, CardType[] b) {
-        HashSet<CardType> cardTypes = new HashSet<>();
-        for (CardType t: a) {
-            cardTypes.add(t);
-        }
-        for (CardType t: b) {
-            cardTypes.add(t);
-        }
+        EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
+        cardTypes.addAll(Arrays.asList(a));
+        cardTypes.addAll(Arrays.asList(b));
         return cardTypes.toArray(new CardType[0]);
     }
 

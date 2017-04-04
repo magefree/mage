@@ -54,18 +54,8 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         rightHalf.name = cardView.getRightSplitName();
         leftHalf.name = cardView.getLeftSplitName();
 
-        for (String rule: view.getRules()) {
-            if (rule.contains("Fuse")) {
-                isFuse = true;
-                break;
-            }
-        }
-        for (String rule: view.getRightSplitRules()) {
-            if (rule.contains("Aftermath")) {
-                isAftermath = true;
-                break;
-            }
-        }
+        isFuse = view.getRules().stream().anyMatch(rule -> rule.contains("Fuse"));
+        isAftermath = view.getRightSplitRules().stream().anyMatch(rule -> rule.contains("Aftermath"));
 
         // It's easier for rendering to swap the card halves here because for aftermath cards
         // they "rotate" in opposite directions making consquence and normal split cards

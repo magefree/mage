@@ -26,21 +26,37 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.cards.d;
+package mage.cards.p;
 
+import mage.abilities.Ability;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
-import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.*;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.Target;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -49,38 +65,45 @@ import java.util.UUID;
  */
 
 
-public class DestinedLead extends SplitCard {
+public class PreparedFight extends SplitCard {
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
+    static {
+        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+    }
 
-    public DestinedLead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY},"{1}{B}","{3}{G}",false);
+    public PreparedFight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY},"{1}{W}","{3}{G}",false);
 
-        // Destined
-        // Target creature gets +1/+0 and gains indestructible until end of turn.
+        // Prepared
+        // Untap target creature. It gets +2/+2 and gains lifelink until end of turn.
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
-        effect.setText("Target creature gets +1/+0");
+        Effect effect = new UntapTargetEffect();
+        effect.setText("Untap target creature.");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
-
-        effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains indestructible until end of turn");
+        effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
+        effect.setText("It gets +2/+2");
+        getLeftHalfCard().getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains lifelink until end of turn.");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
 
         // to
 
-        // Lead
-        // All creatures able to block target creature this turn must do so.
+        // Fight
+        // Target creature you control fights target creature you don't control.
         ((CardImpl)(getRightHalfCard())).addAbility(new AftermathAbility());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getRightHalfCard().getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
+        getRightHalfCard().getSpellAbility().addEffect(new FightTargetsEffect());
+        getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        Target target = new TargetCreaturePermanent(filter);
+        getRightHalfCard().getSpellAbility().addTarget(target);
     }
 
-    public DestinedLead(final DestinedLead card) {
+    public PreparedFight(final PreparedFight card) {
         super(card);
     }
 
     @Override
-    public DestinedLead copy() {
-        return new DestinedLead(this);
+    public PreparedFight copy() {
+        return new PreparedFight(this);
     }
 }
-
