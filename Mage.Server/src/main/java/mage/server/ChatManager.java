@@ -50,7 +50,6 @@ public enum ChatManager {
     private static final Logger logger = Logger.getLogger(ChatManager.class);
     private static final HashMap<String, String> userMessages = new HashMap<>();
 
-
     private final ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<>();
 
     public UUID createChatSession(String info) {
@@ -159,7 +158,6 @@ public enum ChatManager {
 
                     userMessages.put(userName, message);
 
-
                     if (messageType == MessageType.TALK) {
                         if (user.getChatLockedUntil() != null) {
                             if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) > 0) {
@@ -173,8 +171,8 @@ public enum ChatManager {
                     }
 
                 }
-                chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
             }
+            chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
         }
     }
 
@@ -255,11 +253,11 @@ public enum ChatManager {
     }
 
     public void sendReconnectMessage(UUID userId) {
-        UserManager.instance.getUser(userId).ifPresent(user ->
-                chatSessions.values()
-                        .stream()
-                        .filter(chat -> chat.hasUser(userId))
-                        .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS, null)));
+        UserManager.instance.getUser(userId).ifPresent(user
+                -> chatSessions.values()
+                .stream()
+                .filter(chat -> chat.hasUser(userId))
+                .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS, null)));
 
     }
 
@@ -275,6 +273,4 @@ public enum ChatManager {
         return new ArrayList<>(chatSessions.values());
     }
 
-
 }
-

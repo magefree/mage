@@ -27,14 +27,6 @@
  */
 package mage.client.dialog;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-import javax.swing.*;
-
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -48,9 +40,17 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
+import mage.players.PlayerType;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +65,7 @@ public class NewTableDialog extends MageDialog {
     private UUID roomId;
     private String lastSessionId;
     private final List<TablePlayerPanel> players = new ArrayList<>();
-    private final List<String> prefPlayerTypes = new ArrayList<>();
+    private final List<PlayerType> prefPlayerTypes = new ArrayList<>();
 
     private static final String LIMITED = "Limited";
 
@@ -370,7 +370,7 @@ public class NewTableDialog extends MageDialog {
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
         MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName(), false, 2);
-        options.getPlayerTypes().add("Human");
+        options.getPlayerTypes().add(PlayerType.HUMAN);
         for (TablePlayerPanel player : players) {
             options.getPlayerTypes().add(player.getPlayerType());
         }
@@ -404,7 +404,7 @@ public class NewTableDialog extends MageDialog {
                     roomId,
                     table.getTableId(),
                     this.player1Panel.getPlayerName(),
-                    "Human", 1,
+                    PlayerType.HUMAN, 1,
                     DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),
                     this.txtPassword.getText())) {
                 for (TablePlayerPanel player : players) {
@@ -509,7 +509,7 @@ public class NewTableDialog extends MageDialog {
         if (numPlayers > players.size()) {
             while (players.size() != numPlayers) {
                 TablePlayerPanel playerPanel = new TablePlayerPanel();
-                String playerType = "Human";
+                PlayerType playerType = PlayerType.HUMAN;
                 if (prefPlayerTypes.size() >= players.size() && !players.isEmpty()) {
                     playerType = prefPlayerTypes.get(players.size() - 1);
                 }
@@ -597,7 +597,9 @@ public class NewTableDialog extends MageDialog {
 
         String playerTypes = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, "Human");
         prefPlayerTypes.clear();
-        prefPlayerTypes.addAll(Arrays.asList(playerTypes.split(",")));
+        for(String pType : playerTypes.split(",")) {
+            prefPlayerTypes.add(PlayerType.getByDescription(pType));
+        }
         this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, "2")));
 
         String gameTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, "Two Player Duel");

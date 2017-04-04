@@ -45,7 +45,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  *
@@ -126,7 +125,7 @@ class KinshipBaseEffect extends OneShotEffect {
                 if (card != null) {
                     Cards cards = new CardsImpl(card);
                     controller.lookAtCards(sourcePermanent.getName(), cards, game);
-                    if (CardUtil.shareSubtypes(sourcePermanent, card, game)) {
+                    if (sourcePermanent.shareSubtypes(card, game)) {
                         if (controller.chooseUse(outcome,new StringBuilder("Kinship - Reveal ").append(card.getLogName()).append('?').toString(), source, game)) {
                             controller.revealCards(sourcePermanent.getName(), cards, game);
                             for (Effect effect: kinshipEffects) {

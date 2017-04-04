@@ -27,11 +27,6 @@
  */
 package mage.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -42,10 +37,11 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.filter.FilterMana;
 import mage.util.CardUtil;
+
+import java.util.*;
 
 /**
  *
@@ -501,7 +497,7 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 1);
             }
 
-            if (card.getCardType().contains(CardType.PLANESWALKER)) {
+            if (card.isPlaneswalker()) {
                 if (card.getName().toLowerCase().equals("jace, the mind sculptor")) {
                     thisMaxPower = Math.max(thisMaxPower, 6);
                 }
@@ -511,7 +507,7 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
 
-            if (card.getCardType().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 thisMaxPower = 0;
             }
 

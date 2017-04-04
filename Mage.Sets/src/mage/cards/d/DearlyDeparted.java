@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,15 +46,13 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  * @author nantuko
  */
 public class DearlyDeparted extends CardImpl {
 
     public DearlyDeparted(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(5);
@@ -104,7 +103,7 @@ class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
-            target.addCounters(CounterType.P1P1.createInstance(), source, game);
+            target.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
         }
         return false;
     }

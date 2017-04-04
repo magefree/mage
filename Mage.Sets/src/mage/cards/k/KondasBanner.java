@@ -29,7 +29,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,7 +45,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -111,7 +111,7 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect {
             Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
             if (equipedCreature != null) {
                 for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    if (CardUtil.shareSubtypes(perm, equipedCreature, game)) {
+                    if (perm.shareSubtypes(equipedCreature, game)) {
                         perm.addPower(power.calculate(game, source, this));
                         perm.addToughness(toughness.calculate(game, source, this));
 

@@ -44,16 +44,16 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class FaithsFetters extends CardImpl {
 
     public FaithsFetters(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.subtype.add("Aura");
 
         // Enchant permanent
@@ -114,12 +114,11 @@ class FaithsFettersEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo().equals(event.getSourceId())) {
-            Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability != null) {
-                if (ability.getAbilityType() != AbilityType.MANA) {
-                    return true;
-                }
+            Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+            if (ability.isPresent() && ability.get().getAbilityType() != AbilityType.MANA) {
+                return true;
             }
+
         }
         return false;
     }

@@ -27,6 +27,9 @@
  */
 package mage.abilities.effects;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
@@ -48,10 +51,6 @@ import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -691,8 +690,7 @@ public class ContinuousEffects implements Serializable {
                             spliceAbilities.remove(selectedAbility);
                         }
                     }
-                }
-                while (!spliceAbilities.isEmpty() && controller.chooseUse(Outcome.Benefit, "Splice another card?", abilityToModify, game));
+                } while (!spliceAbilities.isEmpty() && controller.chooseUse(Outcome.Benefit, "Splice another card?", abilityToModify, game));
                 controller.revealCards("Spliced cards", cardsToReveal, game);
             }
         }
@@ -702,10 +700,10 @@ public class ContinuousEffects implements Serializable {
      * Checks if an event won't happen because of an rule modifying effect
      *
      * @param event
-     * @param targetAbility     ability the event is attached to. can be null.
+     * @param targetAbility ability the event is attached to. can be null.
      * @param game
      * @param checkPlayableMode true if the event does not really happen but
-     *                          it's checked if the event would be replaced
+     * it's checked if the event would be replaced
      * @return
      */
     public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean checkPlayableMode) {
@@ -752,7 +750,7 @@ public class ContinuousEffects implements Serializable {
         do {
             HashMap<ReplacementEffect, HashSet<Ability>> rEffects = getApplicableReplacementEffects(event, game);
             // Remove all consumed effects (ability dependant)
-            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext(); ) {
+            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext();) {
                 ReplacementEffect entry = it1.next();
                 if (consumed.containsKey(entry.getId())) {
                     HashSet<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
@@ -933,7 +931,7 @@ public class ContinuousEffects implements Serializable {
 
                     if (!waitingEffects.isEmpty()) {
                         // check if waiting effects can be applied now
-                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext(); ) {
+                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext();) {
                             Map.Entry<ContinuousEffect, Set<UUID>> entry = iterator.next();
                             if (appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
                                 appliedAbilities = appliedEffectAbilities.get(entry.getKey());

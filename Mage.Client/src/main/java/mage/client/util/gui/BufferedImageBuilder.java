@@ -3,6 +3,7 @@ package mage.client.util.gui;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Utility class for creating BufferedImage object from Image instance.
@@ -65,7 +66,7 @@ public class BufferedImageBuilder {
         });
         while (!imageLoadStatus.widthDone && !imageLoadStatus.heightDone) {
             try {
-                Thread.sleep(300);
+                TimeUnit.MILLISECONDS.sleep(300);
             } catch (InterruptedException e) {
 
             }
@@ -73,6 +74,7 @@ public class BufferedImageBuilder {
     }
 
     static class ImageLoadStatus {
+
         public boolean widthDone = false;
         public boolean heightDone = false;
     }

@@ -27,13 +27,6 @@
  */
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ProtectionAbility;
@@ -43,6 +36,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
+
+import java.util.*;
 
 /**
  * @param <T>
@@ -277,12 +272,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean containsRule(T ability) {
-        for (T test : this) {
-            if (ability.getRule().equals(test.getRule())) {
-                return true;
-            }
-        }
-        return false;
+        return stream().anyMatch(rule -> rule.getRule().equals(ability.getRule()));
     }
 
     @Override
@@ -301,32 +291,16 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean containsKey(UUID abilityId) {
-        for (T ability : this) {
-            if (ability.getId().equals(abilityId)) {
-                return true;
-            }
-        }
-        return false;
+        return stream().anyMatch(ability -> ability.getId().equals(abilityId));
     }
 
     @Override
     public boolean containsClass(Class classObject) {
-        for (T ability : this) {
-            if (ability.getClass().equals(classObject)) {
-                return true;
-            }
-        }
-        return false;
+        return stream().anyMatch(ability -> ability.getClass().equals(classObject));
     }
 
-    @Override
-    public T get(UUID abilityId) {
-        for (T ability : this) {
-            if (ability.getId().equals(abilityId)) {
-                return ability;
-            }
-        }
-        return null;
+    public Optional<T> get(UUID abilityId) {
+        return stream().filter(ability -> ability.getId().equals(abilityId)).findFirst();
     }
 
     @Override

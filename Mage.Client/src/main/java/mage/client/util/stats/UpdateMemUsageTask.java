@@ -3,6 +3,7 @@ package mage.client.util.stats;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import org.apache.log4j.Logger;
 
@@ -29,7 +30,7 @@ public class UpdateMemUsageTask extends SwingWorker<Void, Float> {
         while (!isCancelled()) {
             float memUsage = MemoryUsageStatUtil.getMemoryFreeStatPercentage();
             this.publish(memUsage >= 0 ? memUsage : null);
-            Thread.sleep(MEM_USAGE_UPDATE_TIME);
+            TimeUnit.MILLISECONDS.sleep(MEM_USAGE_UPDATE_TIME);
         }
         return null;
     }

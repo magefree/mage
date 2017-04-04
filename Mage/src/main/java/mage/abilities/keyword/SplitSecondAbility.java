@@ -10,6 +10,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.Optional;
+
 /**
  * Split Second
  *
@@ -66,8 +68,8 @@ class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
             return true;
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability != null && !(ability instanceof ActivatedManaAbilityImpl)) {
+            Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+            if (ability != null && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
                 return true;
             }
         }

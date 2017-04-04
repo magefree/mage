@@ -27,6 +27,8 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
@@ -75,7 +77,8 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
                     if (amount > 0) {
                         Counter counterToAdd = counter.copy();
                         counterToAdd.add(amount - counter.getCount());
-                        permanent.addCounters(counterToAdd, source, game);
+                        ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                        permanent.addCounters(counterToAdd, source, game, appliedEffects);
                     }
                 }
             }

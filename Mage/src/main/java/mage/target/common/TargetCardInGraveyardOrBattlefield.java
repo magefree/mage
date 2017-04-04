@@ -27,8 +27,6 @@
  */
 package mage.target.common;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -39,8 +37,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetCard;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class TargetCardInGraveyardOrBattlefield extends TargetCard {
@@ -82,8 +82,7 @@ public class TargetCardInGraveyardOrBattlefield extends TargetCard {
     }
 
     @Override
-    public boolean canTarget(UUID id, Ability source, Game game
-    ) {
+    public boolean canTarget(UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         if (permanent != null) {
             return filter.match(permanent, game);
@@ -93,8 +92,7 @@ public class TargetCardInGraveyardOrBattlefield extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game
-    ) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         //return super.possibleTargets(sourceControllerId, game); //To change body of generated methods, choose Tools | Templates.
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, game);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPermanent(), sourceControllerId, game)) {
@@ -106,8 +104,7 @@ public class TargetCardInGraveyardOrBattlefield extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game
-    ) {
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         MageObject targetSource = game.getObject(sourceId);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPermanent(), sourceControllerId, game)) {

@@ -38,8 +38,8 @@ import java.util.concurrent.TimeUnit;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ThreadExecutor {
-
+public enum ThreadExecutor {
+instance;
     private static final ExecutorService callExecutor = Executors.newCachedThreadPool();
     private static final ExecutorService userExecutor = Executors.newCachedThreadPool();
     private static final ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.instance.getMaxGameThreads());
@@ -74,14 +74,6 @@ public class ThreadExecutor {
         ((ThreadPoolExecutor) timeoutIdleExecutor).setThreadFactory(new XMageThreadFactory("TIMEOUT_IDLE"));
     }
 
-    private static final ThreadExecutor INSTANCE = new ThreadExecutor();
-
-    public static ThreadExecutor getInstance() {
-        return INSTANCE;
-    }
-
-    private ThreadExecutor() {
-    }
 
     public int getActiveThreads(ExecutorService executerService) {
         if (executerService instanceof ThreadPoolExecutor) {

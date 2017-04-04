@@ -29,6 +29,7 @@ package org.mage.plugins.card.dl.sources;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 
@@ -1697,7 +1698,7 @@ public class GrabbagImageSource implements CardImageSource {
     public void doPause(String httpImageUrl) {
         if (!httpImageUrl.startsWith("/MTG")) {
             try {
-                Thread.sleep(2000);
+                TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException ex) {
             }
         }

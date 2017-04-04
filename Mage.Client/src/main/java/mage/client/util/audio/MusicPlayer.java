@@ -1,7 +1,8 @@
 package mage.client.util.audio;
 
-import java.io.File;
 import java.awt.List;
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.*;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
@@ -75,7 +76,7 @@ public class MusicPlayer {
             player.breaked_out = true;
             player.breaked = true;
             try {
-                Thread.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (Exception e) {
                 log.error("Thread error: " + e);
             }
@@ -119,7 +120,7 @@ public class MusicPlayer {
 
         public void run() {
             try {
-                Thread.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (Exception e) {
             }
             while (!stopped) {
@@ -130,7 +131,7 @@ public class MusicPlayer {
                 PlayThread.start();
                 while (!(breaked || breaked_out)) {
                     try {
-                        Thread.sleep(10);
+                        TimeUnit.MILLISECONDS.sleep(10);
                     } catch (Exception e) {
                         log.error("Thread error: " + e);
                     }

@@ -166,7 +166,7 @@ public class GameEvent implements Serializable {
          mana        the mana added
          */
         MANA_ADDED,
-        /* MANA_PAYED
+        /* MANA_PAID
          targetId    id if the ability the mana was paid for (not the sourceId)
          sourceId    sourceId of the mana source
          playerId    controller of the ability the mana was paid for
@@ -174,7 +174,7 @@ public class GameEvent implements Serializable {
          flag        indicates a special condition
          data        originalId of the mana producing ability
          */
-        MANA_PAYED,
+        MANA_PAID,
         LOSES, LOST, WINS,
         TARGET, TARGETED,
         /* TARGETS_VALID
@@ -451,12 +451,19 @@ public class GameEvent implements Serializable {
         return type == EventType.CUSTOM_EVENT && this.customEventType.equals(customEventType);
     }
 
-    public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
-        if (this.appliedEffects == null) {
-            this.appliedEffects = new ArrayList<>();
-        }
+    public void addAppliedEffects(ArrayList<UUID> appliedEffects) {
         if (appliedEffects != null) {
             this.appliedEffects.addAll(appliedEffects);
+        }
+    }
+
+    public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
+        if (appliedEffects != null) {
+            if (this.appliedEffects.isEmpty()) {
+                this.appliedEffects = appliedEffects; // Use object refecence to handle that an replacement effect can only be once applied to an event
+            } else {
+                this.appliedEffects.addAll(appliedEffects);
+            }
         }
     }
 }

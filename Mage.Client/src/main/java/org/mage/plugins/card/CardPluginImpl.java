@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLayeredPane;
@@ -33,6 +34,7 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.Animation;
 import org.mage.card.arcane.CardPanel;
 import org.mage.card.arcane.CardPanelComponentImpl;
+import org.mage.card.arcane.CardPanelRenderImpl;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
@@ -43,7 +45,6 @@ import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
-import org.mage.card.arcane.CardPanelRenderImpl;
 
 /**
  * {@link CardPlugin} implementation.
@@ -108,10 +109,10 @@ public class CardPluginImpl implements CardPlugin {
         cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();
         cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();
     }
-    
+
     /**
-     * Temporary card rendering shim. Split card rendering isn't implemented yet, so
-     * use old component based rendering for the split cards.
+     * Temporary card rendering shim. Split card rendering isn't implemented
+     * yet, so use old component based rendering for the split cards.
      */
     private CardPanel makePanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback, boolean isFoil, Dimension dimension) {
         String fallback = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false");
@@ -584,7 +585,7 @@ public class CardPluginImpl implements CardPlugin {
             Animation.showCard(card, count > 0 ? count : 1);
             try {
                 while ((card).getAlpha() + 0.05f < 1) {
-                    Thread.sleep(30);
+                    TimeUnit.MILLISECONDS.sleep(30);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -598,7 +599,7 @@ public class CardPluginImpl implements CardPlugin {
             Animation.hideCard(card, count > 0 ? count : 1);
             try {
                 while ((card).getAlpha() - 0.05f > 0) {
-                    Thread.sleep(30);
+                    TimeUnit.MILLISECONDS.sleep(30);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

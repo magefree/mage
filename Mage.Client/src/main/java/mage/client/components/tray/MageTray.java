@@ -1,7 +1,7 @@
 package mage.client.components.tray;
 
 import java.awt.*;
-
+import java.util.concurrent.TimeUnit;
 import mage.client.MageFrame;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -20,7 +20,6 @@ public enum MageTray {
     private TrayIcon trayIcon;
 
     private int state = 0;
-
 
     public void install() {
         if (!SystemTray.isSupported()) {
@@ -97,7 +96,7 @@ public enum MageTray {
                             int i = 0;
                             while (state != 3) {
                                 trayIcon.setImage(i == 0 ? mainImage : flashedImage);
-                                Thread.sleep(600);
+                                TimeUnit.MILLISECONDS.sleep(600);
                                 i = i == 0 ? 1 : 0;
                             }
                             trayIcon.setImage(mainImage);

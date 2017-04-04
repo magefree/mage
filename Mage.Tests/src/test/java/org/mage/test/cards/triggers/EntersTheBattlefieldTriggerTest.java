@@ -29,7 +29,6 @@ package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -313,14 +312,14 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         /*
         * playerA's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 3/4
         * playerB's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 3/4
-        */
+         */
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, "Noxious Ghoul");
         /*
         * playerA's Carnivorous Plant will get -1/-1 from Clone -> 2/3
         * playerB's Carnivorous Plant will get -1/-1 from Clone -> 2/3
-        */
+         */
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Ego Erasure", "targetPlayer=PlayerA", "Whenever");
         /*
         * playerA' Noxious Ghoul will get -2/0 -> 1/3
@@ -329,7 +328,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         * playerA' Noxious Ghoul will get -1/-1 from itself -> -1/1
         * playerA's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> -1/2
         * playerB's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 1/2
-        */
+         */
         setStopAt(1, PhaseStep.END_TURN);
 
         execute();
@@ -342,72 +341,22 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Carnivorous Plant", 1, 2);
         assertPowerToughness(playerA, "Carnivorous Plant", -1, 2);
     }
-    
+
     @Test
     public void testHearthcageGiant() {
         // {6}{R}{R} Creature — Giant Warrior
         //When Hearthcage Giant enters the battlefield, put two 3/1 red Elemental Shaman creature tokens onto the battlefield.
         //Sacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
-        addCard(Zone.HAND,playerA,"Hearthcage Giant");
+        addCard(Zone.HAND, playerA, "Hearthcage Giant");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hearthcage Giant");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertPermanentCount(playerA, "Hearthcage Giant", 1);
         assertPermanentCount(playerA, "Elemental Shaman", 2);
         assertPowerToughness(playerA, "Elemental Shaman", 3, 1);
     }
 
-    /*
-     Reported bug: HAngarback interaciton with Hardened Scales and Metallic Mimic on board is incorrect.
-     */
-    @Test
-    public void hangarBackHardenedScalesMetallicMimicTest() {
-
-        /*
-          Hangarback Walker {X}{X}
-        Artifact Creature — Construct 0/0
-        Hangarback Walker enters the battlefield with X +1/+1 counters on it.
-        When Hangarback Walker dies, create a 1/1 colorless Thopter artifact creature token with flying for each +1/+1 counter on Hangarback Walker.
-        {1}, {T}: Put a +1/+1 counter on Hangarback Walker.
-         */
-        String hWalker = "Hangarback Walker";
-
-        /*
-        Hardened Scales {G}
-        Enchantment
-        If one or more +1/+1 counters would be placed on a creature you control, that many plus one +1/+1 counters are placed on it instead.
-         */
-        String hScales = "Hardened Scales";
-
-        /*
-         Metallic Mimic {2}
-        Artifact Creature — Shapeshifter 2/1
-        As Metallic Mimic enters the battlefield, choose a creature type.
-        Metallic Mimic is the chosen type in addition to its other types.
-        Each other creature you control of the chosen type enters the battlefield with an additional +1/+1 counter on it.
-         */
-        String mMimic = "Metallic Mimic";
-
-        addCard(Zone.BATTLEFIELD, playerA, hScales);
-        addCard(Zone.HAND, playerA, mMimic);
-        addCard(Zone.HAND, playerA, hWalker);
-        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 4);
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mMimic);
-        setChoice(playerA, "Construct");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hWalker);
-        setChoice(playerA, "X=1");
-
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
-        assertPermanentCount(playerA, mMimic, 1);
-        assertPermanentCount(playerA, hWalker, 1);
-        assertCounterCount(playerA, hWalker, CounterType.P1P1, 3);
-        assertPowerToughness(playerA, hWalker, 3, 3);
-    }
 }

@@ -27,30 +27,27 @@
 */
 package mage.server.draft;
 
+import mage.cards.decks.Deck;
+import mage.game.draft.DraftCube;
+import org.apache.log4j.Logger;
+
 import java.lang.reflect.Constructor;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import mage.cards.decks.Deck;
-import mage.game.draft.DraftCube;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author LevelX2
  */
-public class CubeFactory {
+public enum CubeFactory {
 
-    private static final CubeFactory INSTANCE = new CubeFactory();
+    instance;
     private static final Logger logger = Logger.getLogger(CubeFactory.class);
 
     private final Map<String, Class> draftCubes = new LinkedHashMap<>();
 
-    public static CubeFactory getInstance() {
-        return INSTANCE;
-    }
 
-    private CubeFactory() {}
 
     public DraftCube createDraftCube(String draftCubeName) {
 

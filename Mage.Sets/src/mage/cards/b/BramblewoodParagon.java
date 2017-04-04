@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,8 +48,6 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author emerald000
@@ -62,7 +61,7 @@ public class BramblewoodParagon extends CardImpl {
     }
 
     public BramblewoodParagon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);
@@ -120,7 +119,7 @@ class BramblewoodParagonReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(), source, game);
+            creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
         }
         return false;
     }

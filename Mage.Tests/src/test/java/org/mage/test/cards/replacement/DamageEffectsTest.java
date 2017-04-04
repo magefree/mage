@@ -95,4 +95,48 @@ public class DamageEffectsTest extends CardTestPlayerBase {
         assertLife(playerA, 32);
 
     }
+
+    @Test
+    public void vexingDevilFurnaceRathRedirectToPlaneswalker() {
+
+        /*
+    Vexing Devil {R}
+    Creature — Devil
+    When Vexing Devil enters the battlefield, any opponent may have it deal 4 damage to him or her. If a player does, sacrifice Vexing Devil.
+         */
+        String vDevil = "Vexing Devil";
+
+        /*
+    Nissa, Worldwaker {3}{G}{G}
+    Planeswalker — Nissa
+    +1: Target land you control becomes a 4/4 Elemental creature with trample. It's still a land.
+    +1: Untap up to four target Forests.
+    −7: Search your library for any number of basic land cards, put them onto the battlefield, then shuffle your library. Those lands become 4/4 Elemental creatures with trample. They're still lands.
+         */
+        String nissa = "Nissa, Worldwaker";
+
+        /*
+    Furnace of Rath {1}{R}{R}{R}
+    Enchantment
+    If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+         */
+        addCard(Zone.BATTLEFIELD, playerB, "Furnace of Rath");
+        addCard(Zone.HAND, playerB, vDevil);
+        addCard(Zone.HAND, playerA, nissa);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, nissa);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, vDevil);
+        setChoice(playerA, "Yes"); // deal 8 damage to playerA and sac vexing devil (8 due to furnace)
+        setChoice(playerB, "Yes"); // redirect to planeswalker
+        addTarget(playerB, nissa);
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, vDevil, 1);
+        assertLife(playerA, 20);
+        assertGraveyardCount(playerA, nissa, 1);
+    }
 }
