@@ -53,5 +53,6 @@ public class Amonkhet extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         cards.add(new SetCardInfo("Dusk // Dawn", 210, Rarity.RARE, mage.cards.d.DuskDawn.class));
+        cards.add(new SetCardInfo("Destined // Lead", 217, Rarity.UNCOMMON, mage.cards.d.DestinedLead.class));
     }
 }

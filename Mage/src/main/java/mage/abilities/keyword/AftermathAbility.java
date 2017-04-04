@@ -27,23 +27,19 @@
  */
 package mage.abilities.keyword;
 
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.*;
 import mage.cards.Card;
-import mage.cards.SplitCard;
+import mage.cards.SplitCardHalf;
+import mage.cards.SplitCardHalfImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
-import org.junit.After;
-
 import java.util.UUID;
 
 /**
@@ -57,8 +53,9 @@ import java.util.UUID;
  */
 public class AftermathAbility extends SimpleStaticAbility {
     public AftermathAbility() {
-        super(Zone.ALL, new AftermathCantCastFromHand());
-        addEffect(new AftermathCastFromGraveyard());
+        super(Zone.ALL, new AftermathCastFromGraveyard());
+        addEffect(new AftermathCantCastFromHand());
+        addEffect(new AftermathExileAsResolvesFromGraveyard());
     }
 
     public AftermathAbility(final AftermathAbility ability) {
@@ -101,9 +98,13 @@ class AftermathCastFromGraveyard extends AsThoughEffectImpl {
         return new AftermathCastFromGraveyard(this);
     }
 
+    private static String msb(UUID id) {
+        return Integer.toUnsignedString((int)id.getMostSignificantBits(), 16);
+    }
+
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(source.getSourceId()) &&
+        if (objectId.equals(source.getSourceId()) &
                 affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(source.getSourceId());
             if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
@@ -151,4 +152,76 @@ class AftermathCantCastFromHand extends ContinuousRuleModifyingEffectImpl {
         }
         return false;
     }
+}
+
+class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
+
+    AftermathExileAsResolvesFromGraveyard() {
+        super(Duration.WhileOnStack, Outcome.Detriment);
+        this.staticText = "Exile it afterwards.";
+    }
+
+    AftermathExileAsResolvesFromGraveyard(AftermathExileAsResolvesFromGraveyard effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
+    public boolean applies(GameEvent evt, Ability source, Game game) {
+        ZoneChangeEvent event = (ZoneChangeEvent) evt;
+        if (event.getFromZone() == Zone.STACK && event.getToZone() != Zone.EXILED) {
+            // Moving something from stack to somewhere else
+
+            // Get the source id, getting the whole split card's ID, because
+            // that's the card that is changing zones in the event, but
+            // source.getSourceId is only the split card half.
+            // If branch so that we also support putting Aftermath on
+            // non-split cards for... whatever reason, in case somebody
+            // wants to do that in the future.
+            UUID sourceId = source.getSourceId();
+            Card sourceCard = game.getCard(source.getSourceId());
+            if (sourceCard != null && sourceCard instanceof SplitCardHalf) {
+                sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
+                sourceId = sourceCard.getId();
+            }
+
+            if (event.getTargetId() == sourceId) {
+                // Moving this spell from stack to yard
+                Spell spell = game.getStack().getSpell(source.getSourceId());
+                if (spell != null && spell.getFromZone() == Zone.GRAVEYARD) {
+                    // And this spell was cast from the graveyard, so we need to exile it
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        UUID sourceId = source.getSourceId();
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (sourceCard != null && sourceCard instanceof SplitCardHalf) {
+            sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
+            sourceId = sourceCard.getId();
+        }
+
+        if (sourceCard != null) {
+            Player player = game.getPlayer(sourceCard.getOwnerId());
+            if (player != null) {
+                return player.moveCardToExileWithInfo(sourceCard, null, "", sourceId, game, ((ZoneChangeEvent)event).getFromZone(), true);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public AftermathExileAsResolvesFromGraveyard copy() {
+        return new AftermathExileAsResolvesFromGraveyard(this);
+    }
+
 }

@@ -35,9 +35,9 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     private int dividerAt;
     private int dividerSize;
 
-    // Is fuse / consequence
+    // Is fuse / aftermath
     private boolean isFuse = false;
-    private boolean isConsequence = false;
+    private boolean isAftermath = false;
 
     public ModernSplitCardRenderer(CardView view, boolean isTransformed) {
         super(view, isTransformed);
@@ -54,26 +54,31 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         rightHalf.name = cardView.getRightSplitName();
         leftHalf.name = cardView.getLeftSplitName();
 
-        isConsequence = cardView.getName().equalsIgnoreCase("fire // ice");
         for (String rule: view.getRules()) {
             if (rule.contains("Fuse")) {
                 isFuse = true;
                 break;
             }
         }
+        for (String rule: view.getRightSplitRules()) {
+            if (rule.contains("Aftermath")) {
+                isAftermath = true;
+                break;
+            }
+        }
 
-        // It's easier for rendering to swap the card halves here because for consequence cards
+        // It's easier for rendering to swap the card halves here because for aftermath cards
         // they "rotate" in opposite directions making consquence and normal split cards
         // have the "right" vs "left" as the top half.
-        if (!isConsequence()) {
+        if (!isAftermath()) {
             HalfCardProps tmp = leftHalf;
             leftHalf = rightHalf;
             rightHalf = tmp;
         }
     }
 
-    private boolean isConsequence() {
-        return isConsequence;
+    private boolean isAftermath() {
+        return isAftermath;
     }
 
     private boolean isFuse() {
@@ -86,7 +91,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         super.layout(cardWidth, cardHeight);
 
         // Decide size of divider
-        if (isConsequence()) {
+        if (isAftermath()) {
             dividerSize = borderWidth;
             dividerAt = (int)(cardHeight*0.54);
         } else {
@@ -104,7 +109,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         rightHalf.h = cardHeight - rightHalf.y - borderWidth*3;
 
         // Content width / height (Exchanged from width / height if the card part is rotated)
-        if (isConsequence()) {
+        if (isAftermath()) {
             leftHalf.cw = leftHalf.w;
             leftHalf.ch = leftHalf.h;
         } else {
@@ -190,7 +195,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     @Override
     protected void drawArt(Graphics2D g) {
         if (artImage != null && !cardView.isFaceDown()) {
-            if (isConsequence()) {
+            if (isAftermath()) {
                 Rectangle2D topRect = new Rectangle2D.Double(0.075, 0.113, 0.832, 0.227);
                 int topLineY = (int) (leftHalf.ch * TYPE_LINE_Y_FRAC);
                 drawArtIntoRect(g,
@@ -273,7 +278,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         return g2;
     }
 
-    private Graphics2D getConsequenceHalfContext(Graphics2D g) {
+    private Graphics2D getAftermathHalfContext(Graphics2D g) {
         Graphics2D g2 = (Graphics2D)g.create();
         g2.translate(rightHalf.x, rightHalf.y);
         g2.rotate(Math.PI / 2);
@@ -299,9 +304,9 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
     @Override
     protected void drawFrame(Graphics2D g) {
-        if (isConsequence()) {
+        if (isAftermath()) {
             drawSplitHalfFrame(getUnmodifiedHalfContext(g), leftHalf, (int)(leftHalf.ch * TYPE_LINE_Y_FRAC));
-            drawSplitHalfFrame(getConsequenceHalfContext(g), rightHalf, (rightHalf.ch - boxHeight) / 2);
+            drawSplitHalfFrame(getAftermathHalfContext(g), rightHalf, (rightHalf.ch - boxHeight) / 2);
         } else {
             drawSplitHalfFrame(getLeftHalfContext(g), leftHalf, (int)(leftHalf.ch * TYPE_LINE_Y_FRAC));
             drawSplitHalfFrame(getRightHalfContext(g), rightHalf, (int)(rightHalf.ch * TYPE_LINE_Y_FRAC));
