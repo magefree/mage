@@ -30,6 +30,7 @@ package mage.server;
 import mage.MageException;
 import mage.constants.Constants;
 import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.server.game.GamesRoom;
@@ -423,14 +424,14 @@ public class Session {
         List<String> messageData = new LinkedList<>();
         messageData.add("Error while connecting to server");
         messageData.add(message);
-        fireCallback(new ClientCallback("showUserMessage", null, messageData));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
     }
 
     public void sendInfoMessageToClient(String message) {
         List<String> messageData = new LinkedList<>();
         messageData.add("Information about connecting to the server");
         messageData.add(message);
-        fireCallback(new ClientCallback("showUserMessage", null, messageData));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
     }
 
     public static Throwable getBasicCause(Throwable cause) {

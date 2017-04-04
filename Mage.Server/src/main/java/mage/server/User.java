@@ -27,10 +27,6 @@
  */
 package mage.server;
 
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
 import mage.constants.ManaType;
 import mage.constants.TableState;
@@ -38,6 +34,7 @@ import mage.game.Table;
 import mage.game.result.ResultProtos;
 import mage.game.tournament.TournamentPlayer;
 import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
@@ -53,6 +50,11 @@ import mage.server.util.ServerMessagesUtil;
 import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -247,52 +249,52 @@ public class User {
     }
 
     public void ccJoinedTable(final UUID roomId, final UUID tableId, boolean isTournament) {
-        fireCallback(new ClientCallback("joinedTable", tableId, new TableClientMessage(roomId, tableId, isTournament)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.JOINED_TABLE, tableId, new TableClientMessage(roomId, tableId, isTournament)));
     }
 
     public void ccGameStarted(final UUID gameId, final UUID playerId) {
-        fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.START_GAME, gameId, new TableClientMessage(gameId, playerId)));
     }
 
     public void ccDraftStarted(final UUID draftId, final UUID playerId) {
-        fireCallback(new ClientCallback("startDraft", draftId, new TableClientMessage(draftId, playerId)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.START_DRAFT, draftId, new TableClientMessage(draftId, playerId)));
     }
 
     public void ccTournamentStarted(final UUID tournamentId, final UUID playerId) {
-        fireCallback(new ClientCallback("startTournament", tournamentId, new TableClientMessage(tournamentId, playerId)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.START_TOURNAMENT, tournamentId, new TableClientMessage(tournamentId, playerId)));
     }
 
     public void ccSideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
-        fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time, limited)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SIDEBOARD, tableId, new TableClientMessage(deck, tableId, time, limited)));
         sideboarding.put(tableId, deck);
     }
 
     public void ccConstruct(final Deck deck, final UUID tableId, final int time) {
-        fireCallback(new ClientCallback("construct", tableId, new TableClientMessage(deck, tableId, time)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.CONSTRUCT, tableId, new TableClientMessage(deck, tableId, time)));
     }
 
     public void ccShowTournament(final UUID tournamentId) {
-        fireCallback(new ClientCallback("showTournament", tournamentId));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_TOURNAMENT, tournamentId));
     }
 
     public void ccShowGameEndDialog(final UUID gameId) {
-        fireCallback(new ClientCallback("showGameEndDialog", gameId));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_GAME_END_DIALOG, gameId));
     }
 
     public void showUserMessage(final String titel, String message) {
         List<String> messageData = new LinkedList<>();
         messageData.add(titel);
         messageData.add(message);
-        fireCallback(new ClientCallback("showUserMessage", null, messageData));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
     }
 
     public boolean ccWatchGame(final UUID gameId) {
-        fireCallback(new ClientCallback("watchGame", gameId));
+        fireCallback(new ClientCallback(ClientCallbackMethod.WATCHGAME, gameId));
         return true;
     }
 
     public void ccReplayGame(final UUID gameId) {
-        fireCallback(new ClientCallback("replayGame", gameId));
+        fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_GAME, gameId));
     }
 
     public void sendPlayerUUID(final UUID gameId, final UUID data) {
