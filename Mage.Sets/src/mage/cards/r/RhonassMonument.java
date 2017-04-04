@@ -32,6 +32,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
@@ -75,7 +76,9 @@ public class RhonassMonument extends CardImpl {
 
         // Whenever you cast a creature spell, target creature you control gets +2/+2 and gains trample until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), filter2, false);
-        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText(" and gains trample until end of turn");
+        ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

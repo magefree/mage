@@ -28,8 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,9 +45,8 @@ public class SplendidAgony extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Distribute two -1/-1 counters among one or two target creatures.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(CounterType.M1M1, 2, false, "one or two target creatures you control"), false);
-        ability.addTarget(new TargetCreaturePermanentAmount(2));
-        this.addAbility(ability);
+        getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.M1M1, 2, false, "one or two target creatures you control"));
+        getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2));
     }
 
     public SplendidAgony(final SplendidAgony card) {
