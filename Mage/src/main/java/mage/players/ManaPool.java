@@ -118,7 +118,7 @@ public class ManaPool implements Serializable {
             return false;
         }
         if (autoPayment && autoPaymentRestricted && !wasManaAddedBeyondStock() && manaType != unlockedManaType) {
-            // if automatic restricted payment and there is laready mana in the pool
+            // if automatic restricted payment and there is already mana in the pool
             // and the needed mana type was not unlocked, nothing will be paid
             return false;
         }
