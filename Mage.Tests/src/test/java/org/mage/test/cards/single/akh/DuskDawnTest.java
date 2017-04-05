@@ -13,67 +13,73 @@ public class DuskDawnTest extends CardTestPlayerBase {
 
     @Test
     public void testCastDusk() {
-        addCard(Zone.BATTLEFIELD, playerB, "Tarmogoyf");
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        //Cast dusk from hand
+        addCard(Zone.BATTLEFIELD, playerB, "Watchwolf");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.HAND, playerA, "Dusk // Dawn");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dusk // Dawn");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dusk");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTappedCount("Plains", true, 4); // check that we paid the right side's mana
+        assertPermanentCount(playerB, "Watchwolf", 0);
+        assertGraveyardCount(playerB, "Watchwolf", 1);
+        assertGraveyardCount(playerA, "Dusk // Dawn", 1);
     }
 
     @Test
-    public void testCastDawnFail() {
+    public void testCastDuskFromGraveyardFail() {
+        //Fail to cast dusk from graveyard
+        addCard(Zone.BATTLEFIELD, playerB, "Watchwolf");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.GRAVEYARD, playerA, "Dusk // Dawn");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dusk");
 
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerB, "Watchwolf", 1);
+        assertGraveyardCount(playerB, "Watchwolf", 0);
+        assertGraveyardCount(playerA, "Dusk // Dawn", 1);
     }
 
     @Test
     public void testCastDawnFromGraveyard() {
+        addCard(Zone.GRAVEYARD, playerA, "Dusk // Dawn");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.GRAVEYARD, playerA, "Devoted Hero");
+        addCard(Zone.GRAVEYARD, playerA, "Watchwolf");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dawn");
 
-    }
-
-    /*
-    @Test
-    public void testThatNoncreatureSpellsCannotBeCast() {
-        addCard(Zone.BATTLEFIELD, playerA, "Hope of Ghirapur");
-
-        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
-        addCard(Zone.HAND, playerB, "Shock");
-
-        attack(1, playerA, "Hope of Ghirapur");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice", playerB);
-
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Shock", playerA);
-
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 19);
-        assertPermanentCount(playerA, "Hope of Ghirapur", 0);
+        // Dusk dawn should have been cast and exiled
+        // devoted hero should be in the hand
+        // watchwolf should still be in the yard
+        assertHandCount(playerA, "Devoted Hero", 1);
+        assertGraveyardCount(playerA, "Devoted Hero", 0);
+        assertGraveyardCount(playerA, "Watchwolf", 1);
+        assertExileCount(playerA, "Dusk // Dawn", 1);
+        assertGraveyardCount(playerA, "Dusk // Dawn", 0);
     }
 
-    // Test that ability cannot be activated if after damage Hope of Ghirapur was removed
-    // from the battlefield and returned back.
     @Test
-    public void testWhenHopeOfGhirapurWasRemovedAndReturnedBack() {
-        addCard(Zone.BATTLEFIELD, playerA, "Hope of Ghirapur");
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
-        addCard(Zone.HAND, playerA, "Cloudshift");
+    public void testCastDawnFail() {
+        // Fail to cast dawn from hand
+        addCard(Zone.HAND, playerA, "Dusk // Dawn");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.GRAVEYARD, playerA, "Devoted Hero");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dawn");
 
-        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
-        addCard(Zone.HAND, playerB, "Shock");
-
-        attack(1, playerA, "Hope of Ghirapur");
-        castSpell(1, PhaseStep.END_COMBAT, playerA, "Cloudshift", "Hope of Ghirapur");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice", playerB);
-
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Shock", playerA);
-
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertLife(playerA, 18);
-        assertLife(playerB, 19);
-        assertPermanentCount(playerA, "Hope of Ghirapur", 1);
+        // Dusk dawn shouldn't have been cast and devoted hero should still be in the yard
+        assertHandCount(playerA, "Dusk // Dawn", 1);
+        assertGraveyardCount(playerA, "Devoted Hero", 1);
     }
-    */
+
 
 }

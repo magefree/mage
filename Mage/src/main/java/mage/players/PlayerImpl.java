@@ -2609,6 +2609,23 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
+    private void getPlayableFromGraveyardCard(Game game, Card card, Abilities<Ability> candidateAbilities, ManaOptions availableMana, List<Ability> output) {
+        boolean asThoughtCast = game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this.getId(), game);
+        for (ActivatedAbility ability : candidateAbilities.getActivatedAbilities(Zone.ALL)) {
+            boolean possible = false;
+            if (ability.getZone().match(Zone.GRAVEYARD)) {
+                possible = true;
+            } else if (ability.getZone().match(Zone.HAND) && (ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
+                if (asThoughtCast || canPlayCardsFromGraveyard()) {
+                    possible = true;
+                }
+            }
+            if (possible && canPlay(ability, availableMana, card, game)) {
+                output.add(ability);
+            }
+        }
+    }
+
     @Override
     public List<Ability> getPlayable(Game game, boolean hidden) {
         List<Ability> playable = new ArrayList<>();
@@ -2649,20 +2666,17 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
             for (Card card : graveyard.getUniqueCards(game)) {
-                boolean asThoughtCast = game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this.getId(), game);
-                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.ALL)) {
-                    boolean possible = false;
-                    if (ability.getZone().match(Zone.GRAVEYARD)) {
-                        possible = true;
-                    } else if (ability.getZone().match(Zone.HAND) && (ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
-                        if (asThoughtCast || canPlayCardsFromGraveyard()) {
-                            possible = true;
-                        }
-                    }
-                    if (possible && canPlay(ability, availableMana, card, game)) {
-                        playable.add(ability);
-                    }
+                // Handle split cards in graveyard to support Aftermath
+                if (card instanceof SplitCard) {
+                    SplitCard splitCard = (SplitCard) card;
+                    getPlayableFromGraveyardCard(game, splitCard.getLeftHalfCard(), splitCard.getLeftHalfCard().getAbilities(), availableMana, playable);
+                    getPlayableFromGraveyardCard(game, splitCard.getRightHalfCard(), splitCard.getRightHalfCard().getAbilities(), availableMana, playable);
+                    getPlayableFromGraveyardCard(game, splitCard, splitCard.getSharedAbilities(), availableMana, playable);
+                } else {
+                    getPlayableFromGraveyardCard(game, card, card.getAbilities(), availableMana, playable);
                 }
+
+                // Other activated abilities
                 LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
                 getOtherUseableActivatedAbilities(card, Zone.GRAVEYARD, game, useable);
                 for (Ability ability : useable.values()) {
