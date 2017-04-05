@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -44,13 +43,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
@@ -60,6 +53,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +74,7 @@ public class Necromancy extends CardImpl {
         // When Necromancy leaves the battlefield, that creature's controller sacrifices it.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new NecromancyReAttachEffect(), false),
-                SourceOnBattlefieldCondition.getInstance(),
+                SourceOnBattlefieldCondition.instance,
                 "When {this} enters the battlefield, if it's on the battlefield,  it becomes an Aura with \"enchant creature put onto the battlefield with {this}.\" Put target creature card from a graveyard onto the battlefield under your control and attach {this} to it.");
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);

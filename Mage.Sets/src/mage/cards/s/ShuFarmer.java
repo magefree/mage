@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -38,6 +37,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +54,7 @@ public class ShuFarmer extends CardImpl {
 
         // {tap}: You gain 1 life. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
-                new GainLifeEffect(1), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
+                new GainLifeEffect(1), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         this.addAbility(ability);
     }
 

@@ -99,7 +99,7 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                     for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
                         Permanent permanent = it.next().getPermanent(game);
                         if (permanent != null) {
-                            permanent.getCardType().add(CardType.CREATURE);
+                            permanent.addCardType(CardType.CREATURE);
                         } else {
                             it.remove();
                         }

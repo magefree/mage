@@ -73,7 +73,7 @@ public class CytoplastManipulator extends CardImpl {
         // {U}, {tap}: Gain control of target creature with a +1/+1 counter on it for as long as Cytoplast Manipulator remains on the battlefield.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom, true),
-                new SourceOnBattlefieldCondition(),
+                SourceOnBattlefieldCondition.instance,
                 "gain control of target creature with a +1/+1 counter on it for as long as {this} remains on the battlefield");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());

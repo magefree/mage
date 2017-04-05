@@ -117,7 +117,7 @@ class GraspOfFateExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return new ConditionalOneShotEffect(new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName(), Zone.BATTLEFIELD, true), new SourceOnBattlefieldCondition()).apply(game, source);
+            return new ConditionalOneShotEffect(new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName(), Zone.BATTLEFIELD, true), SourceOnBattlefieldCondition.instance).apply(game, source);
         }
         return false;
     }

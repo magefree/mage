@@ -112,7 +112,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
                         if (!token.getCardType().isEmpty()) {
                             for (CardType t : token.getCardType()) {
                                 if (!permanent.getCardType().contains(t)) {
-                                    permanent.getCardType().add(t);
+                                    permanent.addCardType(t);
                                 }
                             }
                         }

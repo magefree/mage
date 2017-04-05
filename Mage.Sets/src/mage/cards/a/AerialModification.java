@@ -29,22 +29,23 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureIfVehicleEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -94,37 +95,5 @@ public class AerialModification extends CardImpl {
     @Override
     public AerialModification copy() {
         return new AerialModification(this);
-    }
-}
-
-class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
-
-    private CardType addedType = CardType.CREATURE;
-
-    public BecomesCreatureIfVehicleEffect() {
-        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        this.staticText = "As long as enchanted permanent is a Vehicle, it's a creature in addition to its other types";
-    }
-
-    public BecomesCreatureIfVehicleEffect(final BecomesCreatureIfVehicleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent aura = game.getPermanent(source.getSourceId());
-        if (aura != null && aura.getAttachedTo() != null) {
-            Permanent enchanted = game.getPermanent(aura.getAttachedTo());
-            if (enchanted != null && enchanted.getSubtype(game).contains("Vehicle")) {
-                enchanted.getCardType().add(addedType);
-            }
-        }
-
-        return true;
-    }
-
-    @Override
-    public BecomesCreatureIfVehicleEffect copy() {
-        return new BecomesCreatureIfVehicleEffect(this);
     }
 }

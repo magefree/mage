@@ -133,7 +133,7 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         if (!permanent.isCreature()) {
-                            permanent.getCardType().add(CardType.CREATURE);
+                            permanent.addCardType(CardType.CREATURE);
                         }
                     }
                     break;

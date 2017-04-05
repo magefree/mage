@@ -145,7 +145,7 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
                     UUID permanentId = targetPointer.getFirst(game, source);
                     Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
                     if(permanent != null){
-                        permanent.getCardType().add(CardType.CREATURE);
+                        permanent.addCardType(CardType.CREATURE);
                     }                    
                 }
                 break;

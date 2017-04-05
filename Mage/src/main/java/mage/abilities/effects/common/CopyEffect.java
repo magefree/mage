@@ -122,7 +122,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.getManaCost().add(copyFromObject.getManaCost());
         permanent.getCardType().clear();
         for (CardType type : copyFromObject.getCardType()) {
-            permanent.getCardType().add(type);
+            permanent.addCardType(type);
         }
         permanent.getSubtype(game).clear();
         for (String type : copyFromObject.getSubtype(game)) {

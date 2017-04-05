@@ -109,7 +109,7 @@ public class BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect extends Co
                                         break;
                                 }
                                 for (CardType cardType : token.getCardType()) {
-                                    permanentAttachedTo.getCardType().add(cardType);
+                                    permanentAttachedTo.addCardType(cardType);
                                 }
 
                                 // sub type

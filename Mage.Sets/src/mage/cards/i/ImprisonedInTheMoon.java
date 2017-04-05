@@ -130,7 +130,7 @@ class BecomesColorlessLandEffect extends ContinuousEffectImpl {
                     case TypeChangingEffects_4:
                         boolean isLand = permanent.isLand();
                         permanent.getCardType().clear();
-                        permanent.getCardType().add(CardType.LAND);
+                        permanent.addCardType(CardType.LAND);
                         if (!isLand) {
                             permanent.getSubtype(game).clear();
                         }

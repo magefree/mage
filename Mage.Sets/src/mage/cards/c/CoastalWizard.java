@@ -67,7 +67,7 @@ public class CoastalWizard extends CardImpl {
         Effect effect = new ReturnToHandSourceEffect(true);
         effect.setText("Return Coastal Wizard");
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
-                effect, new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
+                effect, new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         effect = new ReturnToHandTargetEffect();
         effect.setText("and another target creature to their owners' hands");
         ability.addTarget(new TargetCreaturePermanent(filter));

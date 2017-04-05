@@ -80,7 +80,7 @@ class CatWarriorToken extends Token {
         this.color.setGreen(true);
         this.getSubtype(null).add("Cat");
         this.getSubtype(null).add("Warrior");
-        this.getCardType().add(CardType.CREATURE);
+        this.addCardType(CardType.CREATURE);
         this.addAbility(new ForestwalkAbility());
     }
 }

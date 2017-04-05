@@ -93,7 +93,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                     break;
                             }
                             for (CardType t : token.getCardType()) {
-                                permanent.getCardType().add(t);
+                                permanent.addCardType(t);
                             }
 
                             // sub type

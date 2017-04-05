@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -42,6 +41,8 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +65,7 @@ public class KeeperOfKeys extends CardImpl {
         // At the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new CantBeBlockedAllEffect(new FilterControlledCreaturePermanent("creatures you control"), Duration.EndOfTurn),
-                TargetController.YOU, false), MonarchIsSourceControllerCondition.getInstance(),
+                TargetController.YOU, false), MonarchIsSourceControllerCondition.instance,
                 "At the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn."));
     }
 

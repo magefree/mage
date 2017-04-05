@@ -60,7 +60,7 @@ public class ZhugeJinWuStrategist extends CardImpl {
 
         // {tap}: Target creature can't be blocked this turn. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
-                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
+                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

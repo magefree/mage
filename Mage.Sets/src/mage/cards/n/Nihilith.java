@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
@@ -44,6 +43,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class Nihilith extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new PutCardIntoGraveFromAnywhereAllTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), true, 
                         new FilterCard(), TargetController.OPPONENT, SetTargetPointer.NONE),
-                SuspendedCondition.getInstance(),
+                SuspendedCondition.instance,
                 "Whenever a card is put into an opponent's graveyard from anywhere, if {this} is suspended, you may remove a time counter from {this}."
                 ));        
         

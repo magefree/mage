@@ -54,7 +54,7 @@ public class GorillaWarCry extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Cast Gorilla War Cry only during combat before blockers are declared.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, BeforeBlockersAreDeclaredCondition.getInstance()));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, BeforeBlockersAreDeclaredCondition.instance));
 
         // All creatures gain menace until end of turn. <i>(They can't be blocked except by two or more creatures.)</i>
         Effect effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, new FilterCreaturePermanent());

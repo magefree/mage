@@ -37,13 +37,9 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class SourceAttackingCondition implements Condition {
+public enum SourceAttackingCondition implements Condition {
 
-    private static final SourceAttackingCondition instance = new SourceAttackingCondition();
-
-    public static SourceAttackingCondition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

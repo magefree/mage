@@ -81,7 +81,7 @@ public class DanceOfTheDead extends CardImpl {
         // When Dance of the Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with Dance of the Dead." Put enchanted creature card to the battlefield tapped under your control and attach Dance of the Dead to it. When Dance of the Dead leaves the battlefield, that creature's controller sacrifices it.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DanceOfTheDeadReAttachEffect(), false),
-                SourceOnBattlefieldCondition.getInstance(),
+                SourceOnBattlefieldCondition.instance,
                 "When {this} enters the battlefield, if it's on the battlefield, it loses \"enchant creature card in a graveyard\" and gains \"enchant creature put onto the battlefield with {this}.\" Return enchanted creature card to the battlefield under your control and attach {this} to it.");
         ability.addEffect(new DanceOfTheDeadChangeAbilityEffect());
         this.addAbility(ability);
