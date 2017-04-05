@@ -422,6 +422,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdWithAlternateMana = null;
         this.castSourceIdManaCosts = null;
         this.castSourceIdCosts = null;
+        this.getManaPool().init(); // needed to remove mana that not empties on step change from previous game if left
     }
 
     /**

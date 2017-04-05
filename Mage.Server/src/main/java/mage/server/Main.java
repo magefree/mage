@@ -62,7 +62,6 @@ import org.w3c.dom.Element;
 import javax.management.MBeanServer;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.util.*;
@@ -164,31 +163,31 @@ public final class Main {
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.instance;
         for (GamePlugin plugin : config.getGameTypes()) {
-            GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
+            GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }
         for (GamePlugin plugin : config.getTournamentTypes()) {
-            TournamentFactory.getInstance().addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
+            TournamentFactory.instance.addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getPlayerTypes()) {
-            PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));
+            PlayerFactory.instance.addPlayerType(plugin.getName(), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getDraftCubes()) {
-            CubeFactory.getInstance().addDraftCube(plugin.getName(), loadPlugin(plugin));
+            CubeFactory.instance.addDraftCube(plugin.getName(), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getDeckTypes()) {
-            DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
+            DeckValidatorFactory.instance.addDeckType(plugin.getName(), loadPlugin(plugin));
         }
 
         for (ExtensionPackage pkg : extensions) {
             Map<String, Class> draftCubes = pkg.getDraftCubes();
             for (String name : draftCubes.keySet()) {
                 logger.info("Loading extension: [" + name + "] " + draftCubes.get(name).toString());
-                CubeFactory.getInstance().addDraftCube(name, draftCubes.get(name));
+                CubeFactory.instance.addDraftCube(name, draftCubes.get(name));
             }
             Map<String, Class> deckTypes = pkg.getDeckTypes();
             for (String name : deckTypes.keySet()) {
                 logger.info("Loading extension: [" + name + "] " + deckTypes.get(name));
-                DeckValidatorFactory.getInstance().addDeckType(name, deckTypes.get(name));
+                DeckValidatorFactory.instance.addDeckType(name, deckTypes.get(name));
             }
         }
 

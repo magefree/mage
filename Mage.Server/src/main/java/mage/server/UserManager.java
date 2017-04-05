@@ -51,7 +51,7 @@ public enum UserManager {
 
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
 
-    private static final ExecutorService USER_EXECUTOR = ThreadExecutor.getInstance().getCallExecutor();
+    private static final ExecutorService USER_EXECUTOR = ThreadExecutor.instance.getCallExecutor();
 
     UserManager() {
         expireExecutor.scheduleAtFixedRate(this::checkExpired, 60, 60, TimeUnit.SECONDS);

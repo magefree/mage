@@ -47,6 +47,7 @@ public class MasterpieceSeries extends ExpansionSet {
 
     private MasterpieceSeries() {
         super("Masterpiece Series", "MPS", ExpansionSet.buildDate(2016, 9, 30), SetType.PROMOTIONAL);
+        this.blockName = "Masterpiece Series";
         this.hasBoosters = false;
         this.hasBasicLands = false;
         CardGraphicInfo cardGraphicInfo = new CardGraphicInfo(FrameStyle.KLD_INVENTION, false);

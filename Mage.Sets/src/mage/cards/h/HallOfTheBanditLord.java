@@ -110,7 +110,7 @@ class HallOfTheBanditLordWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.MANA_PAYED) {
+        if (event.getType() == EventType.MANA_PAID) {
             MageObject target = game.getObject(event.getTargetId());
             if (event.getSourceId() != null
                     && event.getSourceId().equals(this.getSourceId())

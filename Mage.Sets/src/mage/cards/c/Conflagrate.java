@@ -53,7 +53,7 @@ import java.util.UUID;
 public class Conflagrate extends CardImpl {
 
     public Conflagrate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
 
         // Conflagrate deals X damage divided as you choose among any number of target creatures and/or players.
         DynamicValue xValue = new ConflagrateVariableValue();
@@ -81,12 +81,13 @@ class ConflagrateVariableValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        int xValue = sourceAbility.getManaCostsToPay().getX();
         for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof DiscardTargetCost) {
-                return ((DiscardTargetCost) cost).getCards().size();
+                xValue = ((DiscardTargetCost) cost).getCards().size();
             }
         }
-        return sourceAbility.getManaCostsToPay().getX();
+        return xValue;
     }
 
     @Override

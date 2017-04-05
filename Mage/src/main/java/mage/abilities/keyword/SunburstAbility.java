@@ -27,13 +27,14 @@
  */
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SunburstCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -97,8 +98,8 @@ class SunburstEffect extends OneShotEffect {
                 counter = CounterType.CHARGE.createInstance(amount.calculate(game, source, this));
             }
             if (counter != null) {
-
-                permanent.addCounters(counter, source, game);
+                ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
+                permanent.addCounters(counter, source, game, appliedEffects);
                 if (!game.isSimulation()) {
                     Player player = game.getPlayer(source.getControllerId());
                     if (player != null) {

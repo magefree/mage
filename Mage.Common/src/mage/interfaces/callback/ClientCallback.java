@@ -39,18 +39,18 @@ public class ClientCallback implements Serializable {
 
     private UUID objectId;
     private Object data;
-    private String method;
+    private ClientCallbackMethod method;
     private int messageId;
 
     public ClientCallback() {}
 
-    public ClientCallback(String method, UUID objectId, Object data) {
+    public ClientCallback(ClientCallbackMethod method, UUID objectId, Object data) {
         this.method = method;
         this.objectId = objectId;
         this.data = data;
     }
 
-    public ClientCallback(String method, UUID objectId) {
+    public ClientCallback(ClientCallbackMethod method, UUID objectId) {
         this(method, objectId, null);
     }
 
@@ -75,11 +75,11 @@ public class ClientCallback implements Serializable {
         this.data = data;
     }
 
-    public String getMethod() {
+    public ClientCallbackMethod getMethod() {
         return method;
     }
 
-    public void setMethod(String method) {
+    public void setMethod(ClientCallbackMethod method) {
         this.method = method;
     }
 

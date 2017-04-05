@@ -37,17 +37,19 @@ import mage.game.draft.Draft;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
-import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.result.ResultProtos.TourneyQuitStatus;
 import mage.game.tournament.MultiplayerRound;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
-import mage.server.*;
+import mage.players.PlayerType;
+import mage.server.ChatManager;
+import mage.server.TableManager;
+import mage.server.User;
+import mage.server.UserManager;
 import mage.server.draft.DraftController;
 import mage.server.draft.DraftManager;
-import mage.server.draft.DraftSession;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
@@ -198,7 +200,7 @@ public class TournamentController {
 
     private void checkStart() {
         if (!started && allJoined()) {
-            ThreadExecutor.getInstance().getCallExecutor().execute(this::startTournament);
+            ThreadExecutor.instance.getCallExecutor().execute(this::startTournament);
         }
     }
 
@@ -434,7 +436,7 @@ public class TournamentController {
                 if (user.isPresent()) {
                     replacePlayerName = "Draftbot (" + user.get().getName() + ')';
                 }
-                tableController.replaceDraftPlayer(leavingPlayer.getPlayer(), replacePlayerName, "Computer - draftbot", 5);
+                tableController.replaceDraftPlayer(leavingPlayer.getPlayer(), replacePlayerName, PlayerType.COMPUTER_DRAFT_BOT, 5);
                 if (user.isPresent()) {
                     user.get().removeDraft(leavingPlayer.getPlayer().getId());
                     user.get().removeTable(leavingPlayer.getPlayer().getId());

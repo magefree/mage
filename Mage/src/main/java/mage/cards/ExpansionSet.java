@@ -36,6 +36,7 @@ import mage.util.RandomUtil;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -160,13 +161,7 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     public List<SetCardInfo> findCardInfoByClass(Class<?> clazz) {
-        ArrayList<SetCardInfo> result = new ArrayList<>();
-        for (SetCardInfo info : cards) {
-            if (info.getCardClass().equals(clazz)) {
-                result.add(info);
-            }
-        }
-        return result;
+        return cards.stream().filter(info -> info.getCardClass().equals(clazz)).collect(Collectors.toList());
     }
 
     public List<Card> create15CardBooster() {

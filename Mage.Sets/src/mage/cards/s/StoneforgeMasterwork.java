@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -43,7 +42,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -85,7 +85,7 @@ class StoneforgeMasterworkDynamicValue implements DynamicValue {
             if (equipped != null) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), sourceAbility.getControllerId(), game)) {
                     if (!permanent.getId().equals(equipped.getId())) {
-                        if (CardUtil.shareSubtypes(equipped, permanent, game)) {
+                        if (equipped.shareSubtypes(permanent, game)) {
                             xValue++;
                         }
                     }

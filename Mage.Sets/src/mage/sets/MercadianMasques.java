@@ -85,6 +85,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Cavern Crawler", 181, Rarity.COMMON, mage.cards.c.CavernCrawler.class));
         cards.add(new SetCardInfo("Cave Sense", 179, Rarity.COMMON, mage.cards.c.CaveSense.class));
         cards.add(new SetCardInfo("Chambered Nautilus", 64, Rarity.UNCOMMON, mage.cards.c.ChamberedNautilus.class));
+        cards.add(new SetCardInfo("Charisma", 66, Rarity.RARE, mage.cards.c.Charisma.class));
         cards.add(new SetCardInfo("Cho-Arrim Alchemist", 8, Rarity.RARE, mage.cards.c.ChoArrimAlchemist.class));
         cards.add(new SetCardInfo("Cho-Arrim Bruiser", 9, Rarity.RARE, mage.cards.c.ChoArrimBruiser.class));
         cards.add(new SetCardInfo("Cho-Arrim Legate", 10, Rarity.UNCOMMON, mage.cards.c.ChoArrimLegate.class));

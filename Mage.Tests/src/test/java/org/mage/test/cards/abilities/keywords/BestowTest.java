@@ -27,7 +27,6 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
-import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
@@ -109,7 +108,7 @@ public class BestowTest extends CardTestPlayerBase {
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertPermanentCount(playerA, "Boon Satyr", 1);
         Permanent boonSatyr = getPermanent("Boon Satyr", playerA);
-        Assert.assertTrue("Boon Satyr may not be a creature", !boonSatyr.getCardType().contains(CardType.CREATURE));
+        Assert.assertTrue("Boon Satyr may not be a creature", !boonSatyr.isCreature());
         assertPermanentCount(playerA, "Silent Artisan", 1);
         assertPermanentCount(playerA, "Experiment One", 1);
         assertPowerToughness(playerA, "Experiment One", 1, 1);
@@ -145,8 +144,8 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Hopeful Eidolon", 1, 1);
 
         Permanent hopefulEidolon = getPermanent("Hopeful Eidolon", playerA);
-        Assert.assertTrue("Hopeful Eidolon has to be a creature but is not", hopefulEidolon.getCardType().contains(CardType.CREATURE));
-        Assert.assertTrue("Hopeful Eidolon has to be an enchantment but is not", hopefulEidolon.getCardType().contains(CardType.ENCHANTMENT));
+        Assert.assertTrue("Hopeful Eidolon has to be a creature but is not", hopefulEidolon.isCreature());
+        Assert.assertTrue("Hopeful Eidolon has to be an enchantment but is not", hopefulEidolon.isEnchantment());
 
     }
 
@@ -360,7 +359,7 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Nighthowler", 2, 2);
         Permanent nighthowler = getPermanent("Nighthowler", playerB);
 
-        Assert.assertEquals("Nighthowler has to be a creature", true, nighthowler.getCardType().contains(CardType.CREATURE));
+        Assert.assertEquals("Nighthowler has to be a creature", true, nighthowler.isCreature());
     }
 
     @Test

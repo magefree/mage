@@ -27,6 +27,10 @@
  */
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
@@ -58,11 +62,6 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -489,7 +488,7 @@ public abstract class AbilityImpl implements Ability {
     protected String handleOtherXCosts(Game game, Player controller) {
         StringBuilder announceString = new StringBuilder();
         for (VariableCost variableCost : this.costs.getVariableCosts()) {
-            if (!(variableCost instanceof VariableManaCost)) {
+            if (!(variableCost instanceof VariableManaCost) && !((Cost) variableCost).isPaid()) {
                 int xValue = variableCost.announceXValue(this, game);
                 Cost fixedCost = variableCost.getFixedCostsFromAnnouncedValue(xValue);
                 if (fixedCost != null) {
@@ -506,19 +505,20 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
-     * 601.2b
-     * If a cost that will be paid as the spell is being cast includes Phyrexian mana symbols,
-     * the player announces whether he or she intends to pay 2 life or the corresponding colored mana cost for each of those symbols.
+     * 601.2b If a cost that will be paid as the spell is being cast includes
+     * Phyrexian mana symbols, the player announces whether he or she intends to
+     * pay 2 life or the corresponding colored mana cost for each of those
+     * symbols.
      */
     private void handlePhyrexianManaCosts(Game game, UUID sourceId, Player controller) {
         Iterator<ManaCost> costIterator = manaCostsToPay.iterator();
-        while(costIterator.hasNext()) {
+        while (costIterator.hasNext()) {
             ManaCost cost = costIterator.next();
-            if(cost instanceof PhyrexianManaCost) {
-                PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost)cost;
+            if (cost instanceof PhyrexianManaCost) {
+                PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) cost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
-                if(payLifeCost.canPay(this, sourceId, controller.getId(), game) &&
-                        controller.chooseUse(Outcome.LoseLife,  "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', this, game)) {
+                if (payLifeCost.canPay(this, sourceId, controller.getId(), game)
+                        && controller.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', this, game)) {
                     costIterator.remove();
                     costs.add(payLifeCost);
                 }
@@ -558,7 +558,11 @@ public abstract class AbilityImpl implements Ability {
                     } else {
                         String manaSymbol = null;
                         if (variableManaCost.getFilter().isBlack()) {
-                            manaSymbol = "B";
+                            if (variableManaCost.getFilter().isRed()) {
+                                manaSymbol = "B/R";
+                            } else {
+                                manaSymbol = "B";
+                            }
                         } else if (variableManaCost.getFilter().isRed()) {
                             manaSymbol = "R";
                         } else if (variableManaCost.getFilter().isBlue()) {

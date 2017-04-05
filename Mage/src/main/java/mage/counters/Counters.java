@@ -28,10 +28,10 @@
 package mage.counters;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -122,12 +122,9 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
     }
 
     public List<BoostCounter> getBoostCounters() {
-        List<BoostCounter> boosters = new ArrayList<>();
-        for (Counter counter : this.values()) {
-            if (counter instanceof BoostCounter) {
-                boosters.add((BoostCounter) counter);
-            }
-        }
-        return boosters;
+        return values().stream().
+                filter(counter -> counter instanceof BoostCounter).
+                map(counter -> (BoostCounter) counter).
+                collect(Collectors.toList());
     }
 }

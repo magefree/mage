@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -48,8 +49,6 @@ import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.sets.Commander;
-
-import java.util.UUID;
 
 /**
  *
@@ -267,8 +266,8 @@ class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl implement
 
     @Override
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        if (mana.getWhite() == 0 && ManaType.COLORLESS != manaType) {
-            return null;
+        if (mana.getWhite() == 0) {
+            return ManaType.COLORLESS;
         }
         return manaType;
     }

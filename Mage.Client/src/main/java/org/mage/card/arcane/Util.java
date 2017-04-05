@@ -11,20 +11,21 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
 import javax.swing.SwingUtilities;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 public final class Util {
+
     public static final boolean isMac = System.getProperty("os.name").toLowerCase().contains("mac");
     public static final boolean isWindows = !System.getProperty("os.name").toLowerCase().contains("windows");
 
     public static final ThreadPoolExecutor threadPool;
     static private int threadCount;
+
     static {
         threadPool = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
             @Override
-            public Thread newThread (Runnable runnable) {
+            public Thread newThread(Runnable runnable) {
                 threadCount++;
                 Thread thread = new Thread(runnable, "Util" + threadCount);
                 thread.setDaemon(true);
@@ -34,14 +35,14 @@ public final class Util {
         threadPool.prestartAllCoreThreads();
     }
 
-    public static void broadcast (byte[] data, int port) throws IOException {
+    public static void broadcast(byte[] data, int port) throws IOException {
         DatagramSocket socket = new DatagramSocket();
         broadcast(socket, data, port, NetworkInterface.getNetworkInterfaces());
         socket.close();
     }
 
-    private static void broadcast (DatagramSocket socket, byte[] data, int port, Enumeration<NetworkInterface> ifaces)
-        throws IOException {
+    private static void broadcast(DatagramSocket socket, byte[] data, int port, Enumeration<NetworkInterface> ifaces)
+            throws IOException {
         for (NetworkInterface iface : Collections.list(ifaces)) {
             for (InetAddress address : Collections.list(iface.getInetAddresses())) {
                 if (!address.isSiteLocalAddress()) {
@@ -57,14 +58,14 @@ public final class Util {
         }
     }
 
-    public static void sleep (int millis) {
+    public static void sleep(int millis) {
         try {
-            Thread.sleep(millis);
+            TimeUnit.MILLISECONDS.sleep(millis);
         } catch (InterruptedException ignored) {
         }
     }
 
-    public static boolean classExists (String className) {
+    public static boolean classExists(String className) {
         try {
             Class.forName(className);
             return true;
@@ -73,7 +74,7 @@ public final class Util {
         }
     }
 
-    public static void wait (Object lock) {
+    public static void wait(Object lock) {
         synchronized (lock) {
             try {
                 lock.wait();
@@ -82,7 +83,7 @@ public final class Util {
         }
     }
 
-    public static void invokeAndWait (Runnable runnable) {
+    public static void invokeAndWait(Runnable runnable) {
         try {
             SwingUtilities.invokeAndWait(runnable);
         } catch (Exception ex) {

@@ -143,7 +143,7 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
                     List<UUID> imprinted = permanent.getImprinted();
                     if (!imprinted.isEmpty()) {
                         Card imprintedCard = game.getCard(imprinted.get(0));
-                        if (imprintedCard != null && CardUtil.shareTypes(imprintedCard, sourceCard)) {
+                        if (imprintedCard != null && imprintedCard.shareTypes(sourceCard)) {
                             return true;
                         }
                     }

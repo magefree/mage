@@ -427,14 +427,14 @@ public class FlashbackTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback"); // Flashback blitz
 
-        setChoice(playerA, "X=2");
+        setChoice(playerA, "X=1");
         addTarget(playerA, mountain);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertExileCount(playerA, fCatBlitz, 1);
-        assertGraveyardCount(playerA, mountain, 2);
-        assertPermanentCount(playerA, "Elemental Cat", 2);
+        assertPermanentCount(playerA, "Elemental Cat", 1);        
+        assertGraveyardCount(playerA, mountain, 1);
     }
 }

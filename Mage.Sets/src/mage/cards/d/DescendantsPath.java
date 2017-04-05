@@ -42,7 +42,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -102,7 +101,7 @@ class DescendantsPathEffect extends OneShotEffect {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                     boolean found = false;
                     for (Permanent  permanent: game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-                        if (CardUtil.shareSubtypes(card, permanent, game)) {
+                        if (card.shareSubtypes(permanent, game)) {
                             found = true;
                             break;
                         }

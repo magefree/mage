@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
 public class OonasBlackguard extends CardImpl {
 
     public OonasBlackguard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add("Faerie");
         this.subtype.add("Rogue");
         this.power = new MageInt(1);
@@ -121,7 +121,7 @@ class OonasBlackguardReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(), source, game);
+            creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
         }
         return false;
     }

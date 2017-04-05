@@ -27,6 +27,8 @@
  */
 package mage.abilities.effects.common.counter;
 
+import java.util.ArrayList;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -103,7 +105,8 @@ public class AddCountersSourceEffect extends OneShotEffect {
                             countersToAdd--;
                         }
                         newCounter.add(countersToAdd);
-                        card.addCounters(newCounter, source, game);
+                        ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                        card.addCounters(newCounter, source, game, appliedEffects);
                         if (informPlayers && !game.isSimulation()) {
                             Player player = game.getPlayer(source.getControllerId());
                             if (player != null) {
@@ -128,7 +131,8 @@ public class AddCountersSourceEffect extends OneShotEffect {
                             }
                             newCounter.add(countersToAdd);
                             int before = permanent.getCounters(game).getCount(newCounter.getName());
-                            permanent.addCounters(newCounter, source, game);
+                            ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                            permanent.addCounters(newCounter, source, game, appliedEffects); // if used from a replacement effect, the basic event determines if an effect was already applied to an event
                             if (informPlayers && !game.isSimulation()) {
                                 int amountAdded = permanent.getCounters(game).getCount(newCounter.getName()) - before;
                                 Player player = game.getPlayer(source.getControllerId());
@@ -150,12 +154,10 @@ public class AddCountersSourceEffect extends OneShotEffect {
         sb.append("put ");
         if (counter.getCount() > 1) {
             sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
+        } else if (amount.toString().equals("X") && amount.getMessage().isEmpty()) {
+            sb.append("X ");
         } else {
-            if (amount.toString().equals("X") && amount.getMessage().isEmpty()) {
-                sb.append("X ");
-            } else {
-                sb.append("a ");
-            }
+            sb.append("a ");
         }
         sb.append(counter.getName().toLowerCase()).append(" counter on {this}");
         if (!amount.getMessage().isEmpty()) {

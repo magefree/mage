@@ -27,12 +27,12 @@
  */
 package mage.target.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +62,7 @@ public class TargetCreaturePermanentWithDifferentTypes extends TargetCreaturePer
                     UUID targetId = (UUID) object;
                     Permanent selectedCreature = game.getPermanent(targetId);
                     if (!creature.getId().equals(selectedCreature.getId())) {
-                        if (CardUtil.shareSubtypes(creature, selectedCreature, game)) {
+                        if (creature.shareSubtypes(selectedCreature, game)) {
                             return false;
                         }
                     }

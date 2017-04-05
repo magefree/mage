@@ -52,7 +52,7 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        Assert.assertEquals("Player B has to have 4 cards in hand", 8, playerB.getHand().size());
+        Assert.assertEquals("Player B has to have 8 cards in hand", 8, playerB.getHand().size());
 
     }
 

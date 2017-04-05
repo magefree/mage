@@ -36,6 +36,7 @@ package mage.client.table;
 
 import mage.cards.decks.DeckCardLists;
 import mage.client.SessionHandler;
+import mage.players.PlayerType;
 
 import javax.swing.*;
 import java.util.UUID;
@@ -68,8 +69,8 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
                     roomId,
                     tableId,
                     this.txtPlayerName.getText(),
-                    (String)this.cbPlayerType.getSelectedItem(),
-                    (Integer)spnLevel.getValue(),
+                    (PlayerType) this.cbPlayerType.getSelectedItem(),
+                    (Integer) spnLevel.getValue(),
                     deckCardLists,
                     "");
          }

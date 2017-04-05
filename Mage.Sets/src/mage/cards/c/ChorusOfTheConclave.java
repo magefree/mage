@@ -27,6 +27,9 @@
  */
 package mage.cards.c;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -45,10 +48,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth
@@ -57,7 +56,7 @@ import java.util.UUID;
 public class ChorusOfTheConclave extends CardImpl {
 
     public ChorusOfTheConclave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dryad");
 
@@ -198,7 +197,7 @@ class ChorusOfTheConclaveReplacementEffect2 extends ReplacementEffectImpl {
             String key = event.getSourceId().toString() + (game.getState().getZoneChangeCounter(event.getSourceId()) - 1);
             int xValue = spellX.get(key);
             if (xValue > 0) {
-                creature.addCounters(CounterType.P1P1.createInstance(xValue), source, game);
+                creature.addCounters(CounterType.P1P1.createInstance(xValue), source, game, event.getAppliedEffects());
                 game.informPlayers(sourceObject.getLogName() + ": " + creature.getLogName() + " enters the battlefield with " + xValue + " +1/+1 counter" + (xValue > 1 ? "s" : "") + " on it");
             }
             spellX.remove(key);

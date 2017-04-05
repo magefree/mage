@@ -103,22 +103,20 @@ public class Battlefield implements Serializable {
      * @return count
      */
     public int count(FilterPermanent filter, UUID sourceId, UUID sourcePlayerId, Game game) {
-        int count;
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
-            count = (int) field.values()
+            return (int) field.values()
                     .stream()
                     .filter(permanent -> filter.match(permanent, sourceId, sourcePlayerId, game)
                             && permanent.isPhasedIn())
                     .count();
         } else {
             Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
-            count = (int) field.values()
+            return  (int) field.values()
                     .stream()
                     .filter(permanent -> range.contains(permanent.getControllerId())
                             && filter.match(permanent, sourceId, sourcePlayerId, game)
                             && permanent.isPhasedIn()).count();
         }
-        return count;
     }
 
     /**
@@ -319,20 +317,18 @@ public class Battlefield implements Serializable {
      * @see Permanent
      */
     public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, UUID sourceId, Game game) {
-        List<Permanent> active = new ArrayList<>();
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
-            active = field.values()
+            return field.values()
                     .stream()
                     .filter(perm -> perm.isPhasedIn() && filter.match(perm, sourceId, sourcePlayerId, game))
                     .collect(Collectors.toList());
         } else {
             Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
-            active = field.values()
+            return  field.values()
                     .stream()
                     .filter(perm -> perm.isPhasedIn() && range.contains(perm.getControllerId())
                             && filter.match(perm, sourceId, sourcePlayerId, game)).collect(Collectors.toList());
         }
-        return active;
     }
 
     /**

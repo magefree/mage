@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -49,6 +48,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  *
@@ -109,8 +111,8 @@ class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl 
             }
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability != null && !(ability instanceof ActivatedManaAbilityImpl)) {
+            Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+            if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
                 if (KickedCondition.instance.apply(game, source)) {
                     return true;
                 }

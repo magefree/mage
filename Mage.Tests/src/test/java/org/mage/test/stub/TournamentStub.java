@@ -27,10 +27,6 @@
  */
 package org.mage.test.stub;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.game.draft.Draft;
@@ -38,12 +34,14 @@ import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.game.result.ResultProtos;
-import mage.game.tournament.Round;
-import mage.game.tournament.Tournament;
-import mage.game.tournament.TournamentOptions;
-import mage.game.tournament.TournamentPlayer;
-import mage.game.tournament.TournamentType;
+import mage.game.tournament.*;
 import mage.players.Player;
+import mage.players.PlayerType;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +57,7 @@ public class TournamentStub implements Tournament {
     }
 
     @Override
-    public void addPlayer(Player player, String playerType) {
+    public void addPlayer(Player player, PlayerType playerType) {
 
     }
 

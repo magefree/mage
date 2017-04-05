@@ -30,11 +30,9 @@ package mage.cards.t;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddConditionalColorlessManaEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
@@ -53,6 +51,7 @@ import mage.players.Player;
 
 import java.util.HashSet;
 import java.util.UUID;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -61,7 +60,7 @@ import java.util.UUID;
 public class ThranTurbine extends CardImpl {
 
     public ThranTurbine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // At the beginning of your upkeep, you may add {C} or {C}{C} to your mana pool. You can't spend this mana to cast spells.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ThranTurbineEffect(), TargetController.YOU, true));
@@ -145,14 +144,9 @@ class ThranTurbineManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
-        if (!(source instanceof SpellAbility)) {
-            Permanent object = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (object != null && object.getColor(game).isColorless()) {
-                return true;
-            }
-        }
-        if (costToPay instanceof ManaCost) {
-            return ((ManaCost) costToPay).getText().contains("{C}");
+        if (!(source instanceof Spell)) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            return permanent != null;
         }
         return false;
     }

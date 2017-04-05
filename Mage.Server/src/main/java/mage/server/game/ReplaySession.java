@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.UserManager;
 import mage.view.GameView;
 
@@ -52,7 +53,7 @@ public class ReplaySession implements GameCallback {
     public void replay() {
         replay.start();
         UserManager.instance.getUser(userId).ifPresent(user ->
-                user.fireCallback(new ClientCallback("replayInit", replay.getGame().getId(), new GameView(replay.next(), replay.getGame(), null, null))));
+                user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_INIT, replay.getGame().getId(), new GameView(replay.next(), replay.getGame(), null, null))));
 
     }
 
@@ -78,7 +79,7 @@ public class ReplaySession implements GameCallback {
     @Override
     public void gameResult(final String result) {
         UserManager.instance.getUser(userId).ifPresent(user ->
-                user.fireCallback(new ClientCallback("replayDone", replay.getGame().getId(), result)));
+                user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_DONE, replay.getGame().getId(), result)));
 
         ReplayManager.instance.endReplay(replay.getGame().getId(), userId);
     }
@@ -88,7 +89,7 @@ public class ReplaySession implements GameCallback {
             gameResult("game ended");
         } else {
             UserManager.instance.getUser(userId).ifPresent(user ->
-                    user.fireCallback(new ClientCallback("replayUpdate", replay.getGame().getId(), new GameView(state, game, null, null))));
+                    user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_UPDATE, replay.getGame().getId(), new GameView(state, game, null, null))));
 
         }
     }

@@ -27,10 +27,12 @@
  */
 package mage.game.tournament;
 
+import mage.game.match.MatchOptions;
+import mage.players.PlayerType;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import mage.game.match.MatchOptions;
 
 /**
  *
@@ -40,7 +42,7 @@ public class TournamentOptions implements Serializable {
 
     protected String name;
     protected String tournamentType;
-    protected List<String> playerTypes = new ArrayList<>();
+    protected List<PlayerType> playerTypes = new ArrayList<>();
     protected MatchOptions matchOptions;
     protected LimitedOptions limitedOptions;
     protected boolean watchingAllowed = true;
@@ -65,7 +67,7 @@ public class TournamentOptions implements Serializable {
         this.tournamentType = tournamentType;
     }
 
-    public List<String> getPlayerTypes() {
+    public List<PlayerType> getPlayerTypes() {
         return playerTypes;
     }
 

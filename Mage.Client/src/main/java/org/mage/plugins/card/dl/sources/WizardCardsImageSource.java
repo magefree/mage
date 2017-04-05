@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package org.mage.plugins.card.dl.sources;
 
 import java.io.BufferedReader;
@@ -41,6 +40,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
@@ -271,12 +271,12 @@ public class WizardCardsImageSource implements CardImageSource {
     public String getNextHttpImageUrl() {
         return null;
     }
-    
+
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
     }
-    
+
     private Map<String, String> getSetLinks(String cardSet) {
         ConcurrentHashMap<String, String> setLinks = new ConcurrentHashMap<>();
         ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -289,7 +289,7 @@ public class WizardCardsImageSource implements CardImageSource {
                 int firstMultiverseIdLastPage = 0;
                 Pages:
                 while (page < 999) {
-                    String searchUrl = "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=" + page +"&output=spoiler&method=visual&action=advanced&set=+[%22" + URLSetName + "%22]";
+                    String searchUrl = "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=" + page + "&output=spoiler&method=visual&action=advanced&set=+[%22" + URLSetName + "%22]";
                     Document doc = getDocument(searchUrl);
                     Elements cardsImages = doc.select("img[src^=../../Handlers/]");
                     if (cardsImages.isEmpty()) {
@@ -320,7 +320,7 @@ public class WizardCardsImageSource implements CardImageSource {
 
         while (!executor.isTerminated()) {
             try {
-                Thread.sleep(1000);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException ie) {
             }
         }
@@ -339,7 +339,7 @@ public class WizardCardsImageSource implements CardImageSource {
             int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
             URL url = new URL(urlString);
             Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
-            HttpURLConnection uc = (HttpURLConnection)url.openConnection(proxy);
+            HttpURLConnection uc = (HttpURLConnection) url.openConnection(proxy);
 
             uc.connect();
 
@@ -359,7 +359,7 @@ public class WizardCardsImageSource implements CardImageSource {
         Document landDoc = getDocument(urlLandDocument);
         Elements variations = landDoc.select("a.variationlink");
         Map<String, String> links = new HashMap<>();
-        if(!variations.isEmpty()) {
+        if (!variations.isEmpty()) {
             int landNumber = 1;
             for (Element variation : variations) {
                 Integer landMultiverseId = Integer.parseInt(variation.attr("onclick").replaceAll("[^\\d]", ""));
@@ -374,7 +374,7 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     private static String generateLink(int landMultiverseId) {
-        return "/Handlers/Image.ashx?multiverseid=" +landMultiverseId + "&type=card";
+        return "/Handlers/Image.ashx?multiverseid=" + landMultiverseId + "&type=card";
     }
 
     private int getLocalizedMultiverseId(String preferedLanguage, Integer multiverseId) throws IOException {
@@ -396,7 +396,7 @@ public class WizardCardsImageSource implements CardImageSource {
         Document cardLanguagesDoc = getDocument(cardLanguagesUrl);
         Elements languageTableRows = cardLanguagesDoc.select("tr.cardItem");
         HashMap<String, Integer> localizedIds = new HashMap<>();
-        if(!languageTableRows.isEmpty()) {
+        if (!languageTableRows.isEmpty()) {
             for (Element languageTableRow : languageTableRows) {
                 Elements languageTableColumns = languageTableRow.select("td");
                 Integer localizedId = Integer.parseInt(languageTableColumns.get(0).select("a").first().attr("href").replaceAll("[^\\d]", ""));
@@ -408,14 +408,14 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     private String normalizeName(String name) {
-    	//Split card
-    	if(name.contains("//")) {
-    		name = name.substring(0, name.indexOf('(') - 1);
-    	}
-    	//Special timeshifted name
-    	if(name.startsWith("XX")) {
-    		name = name.substring(name.indexOf('(') + 1, name.length() - 1);
-    	}
+        //Split card
+        if (name.contains("//")) {
+            name = name.substring(0, name.indexOf('(') - 1);
+        }
+        //Special timeshifted name
+        if (name.startsWith("XX")) {
+            name = name.substring(name.indexOf('(') + 1, name.length() - 1);
+        }
         return name.replace("\u2014", "-").replace("\u2019", "'")
                 .replace("\u00C6", "AE").replace("\u00E6", "ae")
                 .replace("\u00C3\u2020", "AE")
@@ -445,7 +445,7 @@ public class WizardCardsImageSource implements CardImageSource {
             if (link == null) {
                 int length = collectorId.length();
 
-                if (Character.isLetter(collectorId.charAt(length -1))) {
+                if (Character.isLetter(collectorId.charAt(length - 1))) {
                     length -= 1;
                 }
 
@@ -507,17 +507,17 @@ public class WizardCardsImageSource implements CardImageSource {
         }
 
     }
-    
+
     @Override
     public int getTotalImages() {
         return -1;
     }
-    
+
     @Override
     public boolean isTokenSource() {
         return false;
     }
-    
+
     @Override
     public void doPause(String httpImageUrl) {
     }
