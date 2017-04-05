@@ -227,6 +227,10 @@ foreach my $ability (@abilities) {
                         $ability =~ m/({.*})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, new ManaCostsImpl("' . fixCost($1) . '")));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
+					} elsif ($keywords{$kw} eq 'cost, card') {
+                        $ability =~ m/({.*})/g;
+                        $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(new ManaCostsImpl("' . fixCost($1) . '"), this));';
+                        $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                     } elsif ($keywords{$kw} eq 'type') {
                         $ability =~ m/\s([a-zA-Z\s]*)/g;
                         if ($1 =~ m/(^.*\s.*)/g) {

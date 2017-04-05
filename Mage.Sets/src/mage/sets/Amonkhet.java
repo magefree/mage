@@ -103,6 +103,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 258, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 259, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 260, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Kefnet the Mindful", 59, Rarity.MYTHIC, mage.cards.k.KefnetTheMindful.class));
         cards.add(new SetCardInfo("Kefnet's Monument", 231, Rarity.UNCOMMON, mage.cards.k.KefnetsMonument.class));
         cards.add(new SetCardInfo("Lay Bare the Heart", 96, Rarity.UNCOMMON, mage.cards.l.LayBareTheHeart.class));
         cards.add(new SetCardInfo("Liliana, Death Wielder", 274, Rarity.MYTHIC, mage.cards.l.LilianaDeathWielder.class));
@@ -122,6 +123,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Prowling Serpopard", 180, Rarity.RARE, mage.cards.p.ProwlingSerpopard.class));
         cards.add(new SetCardInfo("Renewed Faith", 25, Rarity.UNCOMMON, mage.cards.r.RenewedFaith.class));
         cards.add(new SetCardInfo("Rhonas's Monument", 236, Rarity.UNCOMMON, mage.cards.r.RhonassMonument.class));
+        cards.add(new SetCardInfo("Sacred Cat", 27, Rarity.COMMON, mage.cards.s.SacredCat.class));
         cards.add(new SetCardInfo("Scattered Groves", 247, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scribe of the Mindful", 68, Rarity.COMMON, mage.cards.s.ScribeOfTheMindful.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 248, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
@@ -133,7 +135,10 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Swamp", 263, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Tattered Mummy", 278, Rarity.COMMON, mage.cards.t.TatteredMummy.class));
+        cards.add(new SetCardInfo("Temmet, Vizier of Naktamun", 207, Rarity.RARE, mage.cards.t.TemmetVizierOfNaktamun.class));
         cards.add(new SetCardInfo("Trial of Knowledge", 73, Rarity.UNCOMMON, mage.cards.t.TrialOfKnowledge.class));
+        cards.add(new SetCardInfo("Trueheart Duelist", 35, Rarity.UNCOMMON, mage.cards.t.TrueheartDuelist.class));
+        cards.add(new SetCardInfo("Unwavering Initiate", 36, Rarity.COMMON, mage.cards.u.UnwaveringInitiate.class));
     }
 
     @Override
