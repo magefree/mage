@@ -53,20 +53,19 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public class SpinerockKnoll extends CardImpl {
 
     public SpinerockKnoll(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Hideaway
         this.addAbility(new HideawayAbility());
-        
+
         // {tap}: Add {R} to your mana pool.
         this.addAbility(new RedManaAbility());
-        
+
         // {R}, {tap}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
@@ -98,7 +97,7 @@ class SpinerockKnollCondition extends IntCompareCondition {
         int maxDamageReceived = 0;
         SpinerockKnollWatcher watcher = (SpinerockKnollWatcher) game.getState().getWatchers().get("SpinerockKnollWatcher", source.getSourceId());
         if (watcher != null) {
-            for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 int damageReceived = watcher.getDamageReceived(opponentId);
                 if (damageReceived > maxDamageReceived) {
                     maxDamageReceived = damageReceived;
@@ -134,23 +133,15 @@ class SpinerockKnollWatcher extends Watcher {
         if (event.getType() == EventType.DAMAGED_PLAYER) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                Integer amount = amountOfDamageReceivedThisTurn.get(playerId);
-                if (amount == null) {
-                    amount = event.getAmount();
-                } else {
-                    amount += event.getAmount();
-                }
+                Integer amount = amountOfDamageReceivedThisTurn.getOrDefault(playerId, 0);
+                amount += event.getAmount();
                 amountOfDamageReceivedThisTurn.put(playerId, amount);
             }
         }
     }
 
     public int getDamageReceived(UUID playerId) {
-        Integer amount = amountOfDamageReceivedThisTurn.get(playerId);
-        if (amount != null) {
-            return amount;
-        }
-        return 0;
+        return amountOfDamageReceivedThisTurn.getOrDefault(playerId, 0);
     }
 
     @Override
