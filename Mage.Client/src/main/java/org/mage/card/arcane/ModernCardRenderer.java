@@ -6,9 +6,12 @@
 package org.mage.card.arcane;
 
 import mage.ObjectColor;
+import mage.cards.ArtRect;
 import mage.cards.FrameStyle;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
+import mage.constants.MageObjectType;
+import mage.constants.SpellAbilityType;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
@@ -311,7 +314,7 @@ public class ModernCardRenderer extends CardRenderer {
         } else if (cardView.getFrameStyle().isFullArt() || (cardView.isToken())) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
         } else {
-            rect = new Rectangle2D.Float(.079f, .11f, .84f, .42f);
+            rect = ArtRect.NORMAL.rect;
         }
         return rect;
     }
@@ -346,10 +349,42 @@ public class ModernCardRenderer extends CardRenderer {
     @Override
     protected void drawArt(Graphics2D g) {
         if (artImage != null && !cardView.isFaceDown()) {
+            // Invention rendering, art fills the entire frame
+            if (useInventionFrame()) {
+                drawArtIntoRect(g,
+                        borderWidth, borderWidth,
+                        cardWidth - 2*borderWidth, cardHeight - 2*borderWidth,
+                        getArtRect(), false);
+            }
+
+            boolean shouldPreserveAspect = true;
+            Rectangle2D sourceRect = getArtRect();
+
+            if (cardView.getMageObjectType() == MageObjectType.SPELL) {
+                ArtRect rect = cardView.getArtRect();
+                if (rect == ArtRect.SPLIT_FUSED) {
+                    // Special handling for fused, draw the art from both halves stacked on top of one and other
+                    // each filling half of the art rect
+                    drawArtIntoRect(g,
+                            totalContentInset + 1, totalContentInset + boxHeight,
+                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight)/2,
+                            ArtRect.SPLIT_LEFT.rect, useInventionFrame());
+                    drawArtIntoRect(g,
+                            totalContentInset + 1, totalContentInset + boxHeight + (typeLineY - totalContentInset - boxHeight)/2,
+                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight)/2,
+                            ArtRect.SPLIT_RIGHT.rect, useInventionFrame());
+                    return;
+                } else if (rect != ArtRect.NORMAL) {
+                    sourceRect = rect.rect;
+                    shouldPreserveAspect = false;
+                }
+            }
+
+            // Normal drawing of art from a source part of the card frame into the rect
             drawArtIntoRect(g,
                     totalContentInset + 1, totalContentInset + boxHeight,
                     contentWidth - 2, typeLineY - totalContentInset - boxHeight,
-                    getArtRect(), useInventionFrame());
+                    sourceRect, shouldPreserveAspect);
         }
     }
 
@@ -443,7 +478,7 @@ public class ModernCardRenderer extends CardRenderer {
         int nameOffset = drawTransformationCircle(g, borderPaint);
 
         // Draw the name line
-        drawNameLine(g, cardView.getName(), manaCostString,
+        drawNameLine(g, cardView.getDisplayName(), manaCostString,
                 totalContentInset + nameOffset, totalContentInset,
                 contentWidth - nameOffset, boxHeight);
 

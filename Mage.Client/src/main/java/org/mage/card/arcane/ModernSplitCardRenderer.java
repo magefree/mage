@@ -2,6 +2,7 @@ package org.mage.card.arcane;
 
 import mage.ObjectColor;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.cards.ArtRect;
 import mage.constants.CardType;
 import mage.view.CardView;
 
@@ -19,6 +20,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         int x, y, w, h, cw, ch;
 
         String name;
+        String typeLineString;
         String manaCostString;
         ObjectColor color;
         ArrayList<TextboxRule> rules = new ArrayList<>();
@@ -50,6 +52,9 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
         parseRules(view.getRightSplitRules(), rightHalf.keywords, rightHalf.rules);
         parseRules(view.getLeftSplitRules(), leftHalf.keywords, leftHalf.rules);
+
+        rightHalf.typeLineString = cardView.getRightSplitTypeLine();
+        leftHalf.typeLineString = cardView.getLeftSplitTypeLine();
 
         rightHalf.name = cardView.getRightSplitName();
         leftHalf.name = cardView.getLeftSplitName();
@@ -186,26 +191,28 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     protected void drawArt(Graphics2D g) {
         if (artImage != null && !cardView.isFaceDown()) {
             if (isAftermath()) {
-                Rectangle2D topRect = new Rectangle2D.Double(0.075, 0.113, 0.832, 0.227);
+                Rectangle2D topRect = ArtRect.AFTERMATH_TOP.rect;
                 int topLineY = (int) (leftHalf.ch * TYPE_LINE_Y_FRAC);
                 drawArtIntoRect(g,
                         leftHalf.x, leftHalf.y + boxHeight, leftHalf.cw, topLineY - boxHeight,
                         topRect, false);
 
-                Rectangle2D bottomRect = new Rectangle2D.Double(0.546, 0.562, 0.272, 0.346);
+                Rectangle2D bottomRect = ArtRect.AFTERMATH_BOTTOM.rect;
                 int bottomLineY = (rightHalf.ch - boxHeight) / 2;
                 drawArtIntoRect(g,
                         rightHalf.x + rightHalf.w - bottomLineY, rightHalf.y, bottomLineY - boxHeight, rightHalf.h,
                         bottomRect, false);
 
             } else {
-                Rectangle2D topRect = new Rectangle2D.Double(0.152, 0.058, 0.386, 0.400);
+                // NOTE: Art rects are reversed here, that is on purpose because we swap the left / right half
+                // of split cards for rendering for consistency between aftermath and normal split
+                Rectangle2D topRect = ArtRect.SPLIT_RIGHT.rect;
                 int topLineY = (int) (leftHalf.ch * TYPE_LINE_Y_FRAC);
                 drawArtIntoRect(g,
                         leftHalf.x + boxHeight, leftHalf.y, topLineY - boxHeight, leftHalf.h,
                         topRect, false);
 
-                Rectangle2D bottomRect = new Rectangle2D.Double(0.152, 0.539, 0.386, 0.400);
+                Rectangle2D bottomRect = ArtRect.SPLIT_LEFT.rect;
                 int bottomLineY = (int) (rightHalf.ch * TYPE_LINE_Y_FRAC);
                 drawArtIntoRect(g,
                         rightHalf.x + boxHeight, rightHalf.y, bottomLineY - boxHeight, rightHalf.h,
@@ -252,7 +259,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
                 half.cw, boxHeight);
 
         // Draw the type line
-        drawTypeLine(g, getCardTypeLine(),
+        drawTypeLine(g, half.typeLineString,
                 0, typeLineY,
                 half.cw, boxHeight - 4);
 

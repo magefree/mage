@@ -5,6 +5,7 @@
  */
 package org.mage.card.arcane;
 
+import mage.cards.ArtRect;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -124,7 +125,12 @@ public abstract class CardRenderer {
         this.cardView = card;
         this.isTransformed = isTransformed;
 
-        parseRules(card.getRules(), textboxKeywords, textboxRules);
+        if (card.getArtRect() == ArtRect.SPLIT_FUSED) {
+            parseRules(card.getLeftSplitRules(), textboxKeywords, textboxRules);
+            parseRules(card.getRightSplitRules(), textboxKeywords, textboxRules);
+        } else {
+            parseRules(card.getRules(), textboxKeywords, textboxRules);
+        }
     }
 
     protected void parseRules(List<String> stringRules, ArrayList<TextboxRule> keywords, ArrayList<TextboxRule> rules) {
@@ -261,7 +267,7 @@ public abstract class CardRenderer {
         }
     }
 
-    protected void drawArtIntoRect(Graphics2D g, int x, int y, int w, int h, Rectangle2D artRect, boolean noAspectAdjust) {
+    protected void drawArtIntoRect(Graphics2D g, int x, int y, int w, int h, Rectangle2D artRect, boolean shouldPreserveAspect) {
         // Perform a process to make sure that the art is scaled uniformly to fill the frame, cutting
         // off the minimum amount necessary to make it completely fill the frame without "squashing" it.
         double fullCardImgWidth = artImage.getWidth();
@@ -271,7 +277,7 @@ public abstract class CardRenderer {
         double targetWidth = w;
         double targetHeight = h;
         double targetAspect = targetWidth / targetHeight;
-        if (noAspectAdjust) {
+        if (!shouldPreserveAspect) {
             // No adjustment to art
         } else if (targetAspect * artHeight < artWidth) {
             // Trim off some width
@@ -285,17 +291,10 @@ public abstract class CardRenderer {
                     = artImage.getSubimage(
                     (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
                     (int) artWidth, (int) artHeight);
-            if (noAspectAdjust) {
-                g.drawImage(subImg,
-                        borderWidth, borderWidth,
-                        cardWidth - 2 * borderWidth, cardHeight - 2 * borderWidth,
-                        null);
-            } else {
-                g.drawImage(subImg,
-                        x, y,
-                        (int) targetWidth, (int) targetHeight,
-                        null);
-            }
+            g.drawImage(subImg,
+                    x, y,
+                    (int) targetWidth, (int) targetHeight,
+                    null);
         } catch (RasterFormatException e) {
             // At very small card sizes we may encounter a problem with rounding error making the rect not fit
         }
