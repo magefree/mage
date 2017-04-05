@@ -138,7 +138,7 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default void addCardType(CardType cardType) {
-        addCardType(cardType);
+        getCardType().add(cardType);
     }
 
     /**

@@ -28,6 +28,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.IntCompareCondition;
@@ -76,7 +77,7 @@ public class GhirapurOrrery extends CardImpl {
 class GhirapurOrreryCondition extends IntCompareCondition {
 
     GhirapurOrreryCondition() {
-        super(ComparisonType.Equal, 0);
+        super(CountType.EQUAL_TO, 0);
     }
 
     @Override

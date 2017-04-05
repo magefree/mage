@@ -27,11 +27,8 @@
  */
 package mage.cards.s;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -49,6 +46,11 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +90,7 @@ public class SpinerockKnoll extends CardImpl {
 class SpinerockKnollCondition extends IntCompareCondition {
 
     SpinerockKnollCondition() {
-        super(ComparisonType.GreaterThan, 6);
+        super(CountType.MORE_THAN, 6);
     }
 
     @Override

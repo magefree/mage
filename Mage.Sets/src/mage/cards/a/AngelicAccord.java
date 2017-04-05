@@ -28,8 +28,8 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -54,7 +54,7 @@ public class AngelicAccord extends CardImpl {
 
         // At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), TargetController.ANY,
-                new YouGainedLifeCondition(Condition.ComparisonType.GreaterThan, 3), false), new PlayerGainedLifeWatcher());
+                new YouGainedLifeCondition(CountType.MORE_THAN, 3), false), new PlayerGainedLifeWatcher());
     }
 
     public AngelicAccord(final AngelicAccord card) {
@@ -69,7 +69,7 @@ public class AngelicAccord extends CardImpl {
 
 class YouGainedLifeCondition extends IntCompareCondition {
 
-    public YouGainedLifeCondition(Condition.ComparisonType type, int value) {
+    public YouGainedLifeCondition(CountType type, int value) {
         super(type, value);
     }
 

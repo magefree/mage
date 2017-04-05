@@ -27,12 +27,11 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -46,6 +45,8 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,7 +75,7 @@ public class LoneRider extends CardImpl {
         // At the beginning of the end step, if you gained 3 or more life this turn, transform Lone Rider.
         this.addAbility(new TransformAbility());
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new TransformSourceEffect(true));
-        this.addAbility(new ConditionalTriggeredAbility(triggered, new YouGainedLifeCondition(Condition.ComparisonType.GreaterThan, 2), ruleText), new PlayerGainedLifeWatcher());
+        this.addAbility(new ConditionalTriggeredAbility(triggered, new YouGainedLifeCondition(CountType.MORE_THAN, 2), ruleText), new PlayerGainedLifeWatcher());
     }
 
     public LoneRider(final LoneRider card) {
@@ -89,7 +90,7 @@ public class LoneRider extends CardImpl {
 
 class YouGainedLifeCondition extends IntCompareCondition {
 
-    public YouGainedLifeCondition(Condition.ComparisonType type, int value) {
+    public YouGainedLifeCondition(CountType type, int value) {
         super(type, value);
     }
 
