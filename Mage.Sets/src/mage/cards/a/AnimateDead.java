@@ -76,7 +76,7 @@ public class AnimateDead extends CardImpl {
         // under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AnimateDeadReAttachEffect(), false),
-                SourceOnBattlefieldCondition.getInstance(),
+                SourceOnBattlefieldCondition.instance,
                 "When {this} enters the battlefield, if it's on the battlefield, it loses \"enchant creature card in a graveyard\" and gains \"enchant creature put onto the battlefield with {this}.\" Return enchanted creature card to the battlefield under your control and attach {this} to it.");
         ability.addEffect(new AnimateDeadChangeAbilityEffect());
         this.addAbility(ability);

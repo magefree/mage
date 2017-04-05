@@ -27,24 +27,21 @@
  */
 package mage.abilities.condition.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * Describes condition when creature is equipped.
  *
  * @author nantuko
  */
-public class EquippedSourceCondition implements Condition {
+public enum EquippedSourceCondition implements Condition {
 
-    private static final EquippedSourceCondition instance = new EquippedSourceCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

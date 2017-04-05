@@ -57,7 +57,7 @@ public class LuSuWuAdvisor extends CardImpl {
 
         // {tap}: Draw a card. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
-                new DrawCardSourceControllerEffect(1), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
+                new DrawCardSourceControllerEffect(1), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         this.addAbility(ability);
     }
 

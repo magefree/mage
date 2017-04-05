@@ -58,7 +58,7 @@ public class HuaTuoHonoredPhysician extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Put target creature card from your graveyard on top of your library. Activate this ability only during your turn, before attackers are declared.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.addAbility(ability);
     }

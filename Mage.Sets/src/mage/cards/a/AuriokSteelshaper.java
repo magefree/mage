@@ -74,7 +74,7 @@ public class AuriokSteelshaper extends CardImpl {
         // As long as Auriok Steelshaper is equipped, each creature you control that's a Soldier or a Knight gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, soldiersOrKnights, false),
-                EquippedSourceCondition.getInstance(),
+                EquippedSourceCondition.instance,
                 "As long as {this} is equipped, each creature you control that's a Soldier or a Knight gets +1/+1"
         )));
     }

@@ -65,7 +65,7 @@ public class FreneticSliver extends CardImpl {
 
         // All Slivers have "{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it."
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new FreneticSliverEffect(), new ManaCostsImpl("{0}"), SourceOnBattlefieldCondition.getInstance(), "{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it.");
+                new FreneticSliverEffect(), new ManaCostsImpl("{0}"), SourceOnBattlefieldCondition.instance, "{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it.");
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter, "All Slivers have \"{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it.\"")));

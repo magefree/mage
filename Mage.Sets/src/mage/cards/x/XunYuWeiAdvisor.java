@@ -27,7 +27,6 @@
  */
 package mage.cards.x;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -41,6 +40,8 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ public class XunYuWeiAdvisor extends CardImpl {
 
         // {tap}: Target creature you control gets +2/+0 until end of turn. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
-                new BoostTargetEffect(2, 0, Duration.EndOfTurn), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
+                new BoostTargetEffect(2, 0, Duration.EndOfTurn), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
