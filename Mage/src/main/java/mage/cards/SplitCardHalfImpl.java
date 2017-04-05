@@ -82,4 +82,8 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
         this.splitCardParent = card;
     }
 
+    @Override
+    public SplitCard getParentCard() {
+        return this.splitCardParent;
+    }
 }

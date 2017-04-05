@@ -28,8 +28,11 @@
 package mage.cards;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
+
+import com.sun.deploy.util.ArrayUtil;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -49,10 +52,14 @@ public abstract class SplitCard extends CardImpl {
     protected Card rightHalfCard;
 
     public SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costsLeft, String costsRight, boolean fused) {
-        super(ownerId, setInfo, cardTypes, costsLeft + costsRight, (fused ? SpellAbilityType.SPLIT_FUSED : SpellAbilityType.SPLIT));
+        this(ownerId, setInfo, cardTypes, cardTypes, costsLeft, costsRight, fused);
+    }
+
+    public SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] typesLeft, CardType[] typesRight, String costsLeft, String costsRight, boolean fused) {
+        super(ownerId, setInfo, CardType.mergeTypes(typesLeft, typesRight), costsLeft + costsRight, (fused ? SpellAbilityType.SPLIT_FUSED : SpellAbilityType.SPLIT));
         String[] names = setInfo.getName().split(" // ");
-        leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), cardTypes, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
-        rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), cardTypes, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
+        leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesLeft, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
+        rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesRight, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
         this.splitCard = true;
     }
 
@@ -137,6 +144,14 @@ public abstract class SplitCard extends CardImpl {
         allAbilites.addAll(leftHalfCard.getAbilities());
         allAbilites.addAll(rightHalfCard.getAbilities());
         return allAbilites;
+    }
+
+    /**
+     * Currently only gets the fuse SpellAbility if there is one, but generally gets
+     * any abilities on a split card as a whole, and not on either half individually.
+     **/
+    public Abilities<Ability> getSharedAbilities() {
+        return super.getAbilities();
     }
 
     @Override

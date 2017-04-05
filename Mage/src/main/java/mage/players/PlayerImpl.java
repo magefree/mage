@@ -1246,29 +1246,30 @@ public abstract class PlayerImpl implements Player, Serializable {
         return useable;
     }
 
-    @Override
-    public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
-        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
+    // Get the usable activated abilities for a *single card object*, that is, either a card or half of a split card.
+    // Also called on the whole split card but only passing the fuse ability and other whole-split-card shared abilities
+    // as candidates.
+    private void getUseableActivatedAbilitiesHalfImpl(MageObject object, Zone zone, Game game, Abilities<Ability> candidateAbilites, LinkedHashMap<UUID, ActivatedAbility> output) {
         boolean canUse = !(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game);
         ManaOptions availableMana = null;
-//        ManaOptions availableMana = getManaAvailable(game); // can only be activated if mana calculation works flawless otherwise player can't play spells they could play if calculation would work correctly
-//        availableMana.addMana(manaPool.getMana());
-        for (Ability ability : object.getAbilities()) {
+        //        ManaOptions availableMana = getManaAvailable(game); // can only be activated if mana calculation works flawless otherwise player can't play spells they could play if calculation would work correctly
+        //        availableMana.addMana(manaPool.getMana());
+        for (Ability ability : candidateAbilites) {
             if (canUse || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
                 if (ability.getZone().match(zone)) {
                     if (ability instanceof ActivatedAbility) {
                         if (ability instanceof ActivatedManaAbilityImpl) {
                             if (((ActivatedAbility) ability).canActivate(playerId, game)) {
-                                useable.put(ability.getId(), (ActivatedAbility) ability);
+                                output.put(ability.getId(), (ActivatedAbility) ability);
                             }
                         } else if (canPlay(((ActivatedAbility) ability), availableMana, object, game)) {
-                            useable.put(ability.getId(), (ActivatedAbility) ability);
+                            output.put(ability.getId(), (ActivatedAbility) ability);
                         }
                     } else if (ability instanceof AlternativeSourceCosts) {
                         if (object.isLand()) {
                             for (Ability ability2 : object.getAbilities().copy()) {
                                 if (ability2 instanceof PlayLandAbility) {
-                                    useable.put(ability2.getId(), (ActivatedAbility) ability2);
+                                    output.put(ability2.getId(), (ActivatedAbility) ability2);
                                 }
                             }
                         }
@@ -1278,19 +1279,19 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         if (zone != Zone.HAND) {
             if (Zone.GRAVEYARD == zone && canPlayCardsFromGraveyard()) {
-                for (ActivatedAbility ability : object.getAbilities().getPlayableAbilities(Zone.HAND)) {
+                for (ActivatedAbility ability : candidateAbilites.getPlayableAbilities(Zone.HAND)) {
                     if (canUse || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
                         if (ability.getManaCosts().isEmpty() && ability.getCosts().isEmpty() && ability instanceof SpellAbility) {
                             continue; // You can't play spells from graveyard that have no costs
                         }
                         if (ability.canActivate(playerId, game)) {
-                            useable.put(ability.getId(), ability);
+                            output.put(ability.getId(), ability);
                         }
                     }
                 }
             }
             if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this.getId(), game)) {
-                for (Ability ability : object.getAbilities()) {
+                for (Ability ability : candidateAbilites) {
                     if (canUse || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
                         if (ability.getManaCosts().isEmpty() && ability.getCosts().isEmpty() && ability instanceof SpellAbility && !(Objects.equals(ability.getSourceId(), getCastSourceIdWithAlternateMana()))) {
                             continue; // You can't play spells that have no costs, unless you can play them without paying their mana costs
@@ -1298,11 +1299,24 @@ public abstract class PlayerImpl implements Player, Serializable {
                         ability.setControllerId(this.getId());
                         if (ability instanceof ActivatedAbility && ability.getZone().match(Zone.HAND)
                                 && ((ActivatedAbility) ability).canActivate(playerId, game)) {
-                            useable.put(ability.getId(), (ActivatedAbility) ability);
+                            output.put(ability.getId(), (ActivatedAbility) ability);
                         }
                     }
                 }
             }
+        }
+    }
+
+    @Override
+    public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
+        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
+        if (object instanceof SplitCard) {
+            SplitCard splitCard = (SplitCard) object;
+            getUseableActivatedAbilitiesHalfImpl(splitCard.getLeftHalfCard(), zone, game, splitCard.getLeftHalfCard().getAbilities(), useable);
+            getUseableActivatedAbilitiesHalfImpl(splitCard.getRightHalfCard(), zone, game, splitCard.getRightHalfCard().getAbilities(), useable);
+            getUseableActivatedAbilitiesHalfImpl(splitCard, zone, game, splitCard.getSharedAbilities(), useable);
+        } else {
+            getUseableActivatedAbilitiesHalfImpl(object, zone, game, object.getAbilities(), useable);
         }
         getOtherUseableActivatedAbilities(object, zone, game, useable);
 
@@ -2596,6 +2610,23 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
+    private void getPlayableFromGraveyardCard(Game game, Card card, Abilities<Ability> candidateAbilities, ManaOptions availableMana, List<Ability> output) {
+        boolean asThoughtCast = game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this.getId(), game);
+        for (ActivatedAbility ability : candidateAbilities.getActivatedAbilities(Zone.ALL)) {
+            boolean possible = false;
+            if (ability.getZone().match(Zone.GRAVEYARD)) {
+                possible = true;
+            } else if (ability.getZone().match(Zone.HAND) && (ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
+                if (asThoughtCast || canPlayCardsFromGraveyard()) {
+                    possible = true;
+                }
+            }
+            if (possible && canPlay(ability, availableMana, card, game)) {
+                output.add(ability);
+            }
+        }
+    }
+
     @Override
     public List<Ability> getPlayable(Game game, boolean hidden) {
         List<Ability> playable = new ArrayList<>();
@@ -2636,20 +2667,17 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
             for (Card card : graveyard.getUniqueCards(game)) {
-                boolean asThoughtCast = game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this.getId(), game);
-                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.ALL)) {
-                    boolean possible = false;
-                    if (ability.getZone().match(Zone.GRAVEYARD)) {
-                        possible = true;
-                    } else if (ability.getZone().match(Zone.HAND) && (ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
-                        if (asThoughtCast || canPlayCardsFromGraveyard()) {
-                            possible = true;
-                        }
-                    }
-                    if (possible && canPlay(ability, availableMana, card, game)) {
-                        playable.add(ability);
-                    }
+                // Handle split cards in graveyard to support Aftermath
+                if (card instanceof SplitCard) {
+                    SplitCard splitCard = (SplitCard) card;
+                    getPlayableFromGraveyardCard(game, splitCard.getLeftHalfCard(), splitCard.getLeftHalfCard().getAbilities(), availableMana, playable);
+                    getPlayableFromGraveyardCard(game, splitCard.getRightHalfCard(), splitCard.getRightHalfCard().getAbilities(), availableMana, playable);
+                    getPlayableFromGraveyardCard(game, splitCard, splitCard.getSharedAbilities(), availableMana, playable);
+                } else {
+                    getPlayableFromGraveyardCard(game, card, card.getAbilities(), availableMana, playable);
                 }
+
+                // Other activated abilities
                 LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
                 getOtherUseableActivatedAbilities(card, Zone.GRAVEYARD, game, useable);
                 for (Ability ability : useable.values()) {
