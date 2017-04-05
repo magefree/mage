@@ -27,10 +27,9 @@
  */
 package mage.cards.s;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.XorLessLifeCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
@@ -39,7 +38,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -56,7 +54,7 @@ public class SecondChance extends CardImpl {
         // At the beginning of your upkeep, if you have 5 or less life, sacrifice Second Chance and take an extra turn after this one.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new AddExtraTurnControllerEffect());
-        this.addAbility(new ConditionalTriggeredAbility(ability, new FiveOrLessLifeCondition(), "At the beginning of your upkeep, if you have 5 or less life, sacrifice {this} and take an extra turn after this one"));
+        this.addAbility(new ConditionalTriggeredAbility(ability, new XorLessLifeCondition(XorLessLifeCondition.CheckType.CONTROLLER, 5), "At the beginning of your upkeep, if you have 5 or less life, sacrifice {this} and take an extra turn after this one"));
         
     }
 
@@ -69,11 +67,5 @@ public class SecondChance extends CardImpl {
         return new SecondChance(this);
     }
     
-    static class FiveOrLessLifeCondition implements Condition {
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return game.getPlayer(source.getControllerId()).getLife() <= 5;
-        }
-    }
 }
