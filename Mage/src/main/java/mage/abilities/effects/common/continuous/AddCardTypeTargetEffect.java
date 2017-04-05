@@ -69,7 +69,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
             Permanent target = game.getPermanent(targetId);
             if (target != null) {
                 if (!target.getCardType().contains(addedCardType)) {
-                    target.getCardType().add(addedCardType);
+                    target.addCardType(addedCardType);
                 }
                 result = true;
             }

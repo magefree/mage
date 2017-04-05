@@ -132,7 +132,7 @@ class NissaSageAnimistToken extends Token {
         this.getToughness().modifyBaseValue(4);
         this.color.setGreen(true);
         this.getSubtype(null).add("Elemental");
-        this.getCardType().add(CardType.CREATURE);
+        this.addCardType(CardType.CREATURE);
     }
 }
 
@@ -160,7 +160,7 @@ class NissaSageAnimistMinusSevenEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (!permanent.isCreature()) {
-                            permanent.getCardType().add(CardType.CREATURE);
+                            permanent.addCardType(CardType.CREATURE);
                         }
                         if (!permanent.getSubtype(game).contains("Elemental")) {
                             permanent.getSubtype(game).add("Elemental");

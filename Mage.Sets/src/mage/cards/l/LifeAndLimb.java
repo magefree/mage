@@ -100,13 +100,13 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (!permanent.isCreature()) {
-                            permanent.getCardType().add(CardType.CREATURE);
+                            permanent.addCardType(CardType.CREATURE);
                         }
                         if (!permanent.getSubtype(game).contains("Saproling")) {
                             permanent.getSubtype(game).add("Saproling");
                         }
                         if (!permanent.isLand()) {
-                            permanent.getCardType().add(CardType.LAND);
+                            permanent.addCardType(CardType.LAND);
                         }
                         if (!permanent.getSubtype(game).contains("Forest")) {
                             permanent.getSubtype(game).add("Forest");

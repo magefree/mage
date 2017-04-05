@@ -139,7 +139,7 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     licid.getCardType().clear();
-                    licid.getCardType().add(CardType.ENCHANTMENT);
+                    licid.addCardType(CardType.ENCHANTMENT);
                     licid.getSubtype(game).clear();
                     licid.getSubtype(game).add("Aura");
                     break;

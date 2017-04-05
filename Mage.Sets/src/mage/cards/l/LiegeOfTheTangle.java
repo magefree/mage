@@ -28,8 +28,6 @@
 
 package mage.cards.l;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -39,12 +37,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -55,6 +48,9 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.Iterator;
+import java.util.UUID;
 
 /**
  *
@@ -138,7 +134,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
                     switch (layer) {
                         case TypeChangingEffects_4:
                             if (sublayer == SubLayer.NA) {
-                                perm.getCardType().addAll(token.getCardType());
+                                perm.addCardTypes(token.getCardType());
                                 perm.getSubtype(game).addAll(token.getSubtype(game));
                             }
                             break;

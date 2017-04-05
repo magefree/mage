@@ -79,7 +79,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                             if (!token.getCardType().isEmpty()) {
                                 for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
-                                        permanent.getCardType().add(t);
+                                        permanent.addCardType(t);
                                     }
                                 }
                             }

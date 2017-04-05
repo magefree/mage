@@ -253,14 +253,14 @@ public class Spell extends StackObjImpl implements Card {
                         Permanent permanent = game.getPermanent(card.getId());
                         if (permanent != null && permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                            card.getCardType().add(CardType.CREATURE);
+                            card.addCardType(CardType.CREATURE);
                             card.getSubtype(game).remove("Aura");
                         }
                     }
                     return ability.resolve(game);
                 }
                 if (bestow) {
-                    card.getCardType().add(CardType.CREATURE);
+                    card.addCardType(CardType.CREATURE);
                 }
                 return false;
             }
@@ -270,7 +270,7 @@ public class Spell extends StackObjImpl implements Card {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null && permanent instanceof PermanentCard) {
-                        ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
+                        ((PermanentCard) permanent).getCard().addCardType(CardType.CREATURE);
                         ((PermanentCard) permanent).getCard().getSubtype(game).remove("Aura");
                         return true;
                     }

@@ -117,6 +117,6 @@ class RagavanToken extends Token {
         this.getToughness().modifyBaseValue(1);
         this.color.setRed(true);
         this.getSubtype(null).add("Monkey");
-        this.getCardType().add(CardType.CREATURE);
+        this.addCardType(CardType.CREATURE);
     }
 }

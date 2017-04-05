@@ -66,7 +66,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game))) {
             if (!permanent.getCardType().contains(addedCardType)) {
-                permanent.getCardType().add(addedCardType);
+                permanent.addCardType(addedCardType);
             }
             return true;
         } else if (this.getDuration() == Duration.Custom) {
