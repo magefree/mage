@@ -28,11 +28,10 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.CountType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.condition.IntCompareCondition;
+import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -42,7 +41,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.i.ItThatRidesAsOne;
 import mage.constants.CardType;
-import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -85,27 +83,5 @@ public class LoneRider extends CardImpl {
     @Override
     public LoneRider copy() {
         return new LoneRider(this);
-    }
-}
-
-class YouGainedLifeCondition extends IntCompareCondition {
-
-    public YouGainedLifeCondition(CountType type, int value) {
-        super(type, value);
-    }
-
-    @Override
-    protected int getInputValue(Game game, Ability source) {
-        int gainedLife = 0;
-        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get(PlayerGainedLifeWatcher.class.getName());
-        if (watcher != null) {
-            gainedLife = watcher.getLiveGained(source.getControllerId());
-        }
-        return gainedLife;
-    }
-
-    @Override
-    public String toString() {
-        return "if you gained 3 or more life this turn ";
     }
 }
