@@ -28,11 +28,9 @@
 package mage.cards;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
-import com.sun.deploy.util.ArrayUtil;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -147,9 +145,11 @@ public abstract class SplitCard extends CardImpl {
     }
 
     /**
-     * Currently only gets the fuse SpellAbility if there is one, but generally gets
-     * any abilities on a split card as a whole, and not on either half individually.
-     **/
+     * Currently only gets the fuse SpellAbility if there is one, but generally
+     * gets any abilities on a split card as a whole, and not on either half
+     * individually.
+     *
+     */
     public Abilities<Ability> getSharedAbilities() {
         return super.getAbilities();
     }
