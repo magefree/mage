@@ -125,20 +125,24 @@ public interface MageObject extends MageItem, Serializable {
         return getSuperType().contains(SuperType.SNOW);
     }
 
-    default void addSuperType(SuperType superType){
+    default void addSuperType(SuperType superType) {
         getSuperType().add(superType);
     }
 
-    default boolean isBasic() { return getSuperType().contains(SuperType.BASIC);}
+    default boolean isBasic() {
+        return getSuperType().contains(SuperType.BASIC);
+    }
 
     default boolean isWorld() {
         return getSuperType().contains(SuperType.WORLD);
     }
 
+    default void addCardType(CardType cardType) {
+        getCardType().add(cardType);
+    }
 
     /**
      * Checks whether two cards share card types.
-     *
      *
      * @param otherCard
      * @return
