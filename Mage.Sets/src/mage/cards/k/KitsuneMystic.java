@@ -43,7 +43,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.mageobject.AttachmentAttachedToCardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -110,31 +110,6 @@ class AutumnTailKitsuneSage extends Token {
         ability.addTarget(new TargetPermanent(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-    }
-}
-
-class AttachmentAttachedToCardTypePredicate implements Predicate<Permanent> {
-
-    private final CardType cardType;
-
-    public AttachmentAttachedToCardTypePredicate(CardType cardType) {
-        this.cardType = cardType;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        if (input.getAttachedTo() != null) {
-            Permanent attachedTo = game.getPermanent(input.getAttachedTo());
-            if (attachedTo != null && attachedTo.getCardType().contains(cardType)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "AttachmentAttachedToCardType(" + cardType + ')';
     }
 }
 
