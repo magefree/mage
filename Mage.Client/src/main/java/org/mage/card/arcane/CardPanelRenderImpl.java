@@ -217,11 +217,15 @@ public class CardPanelRenderImpl extends CardPanel {
         }
     }
 
+
     // Map of generated images
     private final static Map<ImageKey, BufferedImage> IMAGE_CACHE = new MapMaker().softValues().makeMap();
 
     // The art image for the card, loaded in from the disk
     private BufferedImage artImage;
+
+    // Factory to generate card appropriate views
+    private CardRendererFactory cardRendererFactory = new CardRendererFactory();
 
     // The rendered card image, with or without the art image loaded yet
     // = null while invalid
@@ -233,7 +237,7 @@ public class CardPanelRenderImpl extends CardPanel {
         super(newGameCard, gameId, loadImage, callback, foil, dimension);
 
         // Renderer
-        cardRenderer = new ModernCardRenderer(gameCard, isTransformed());
+        cardRenderer = cardRendererFactory.create(gameCard, isTransformed());
 
         // Draw the parts
         initialDraw();
@@ -268,6 +272,10 @@ public class CardPanelRenderImpl extends CardPanel {
         // And draw the image we now have
         g.drawImage(cardImage, getCardXOffset(), getCardYOffset(), null);
     }
+
+    /**
+     * Create an appropriate card renderer for the
+     */
 
     /**
      * Render the card to a new BufferedImage at it's current dimensions
@@ -359,7 +367,7 @@ public class CardPanelRenderImpl extends CardPanel {
 
         // Update renderer
         cardImage = null;
-        cardRenderer = new ModernCardRenderer(gameCard, isTransformed());
+        cardRenderer = cardRendererFactory.create(gameCard, isTransformed());
         cardRenderer.setArtImage(artImage);
 
         // Repaint

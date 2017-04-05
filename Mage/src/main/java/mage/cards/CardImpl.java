@@ -284,7 +284,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return all;
     }
 
-    protected void addAbility(Ability ability) {
+    /**
+     * Public in order to support adding abilities to SplitCardHalf's
+     * @param ability
+     */
+    public void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
         for (Ability subAbility : ability.getSubAbilities()) {

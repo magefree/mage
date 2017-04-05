@@ -346,45 +346,10 @@ public class ModernCardRenderer extends CardRenderer {
     @Override
     protected void drawArt(Graphics2D g) {
         if (artImage != null && !cardView.isFaceDown()) {
-            Rectangle2D artRect = getArtRect();
-
-            // Perform a process to make sure that the art is scaled uniformly to fill the frame, cutting
-            // off the minimum amount necessary to make it completely fill the frame without "squashing" it.
-            double fullCardImgWidth = artImage.getWidth();
-            double fullCardImgHeight = artImage.getHeight();
-            double artWidth = artRect.getWidth() * fullCardImgWidth;
-            double artHeight = artRect.getHeight() * fullCardImgHeight;
-            double targetWidth = contentWidth - 2;
-            double targetHeight = typeLineY - totalContentInset - boxHeight;
-            double targetAspect = targetWidth / targetHeight;
-            if (useInventionFrame()) {
-                // No adjustment to art
-            } else if (targetAspect * artHeight < artWidth) {
-                // Trim off some width
-                artWidth = targetAspect * artHeight;
-            } else {
-                // Trim off some height
-                artHeight = artWidth / targetAspect;
-            }
-            try {
-                BufferedImage subImg
-                        = artImage.getSubimage(
-                                (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
-                                (int) artWidth, (int) artHeight);
-                if (useInventionFrame()) {
-                    g.drawImage(subImg,
-                            borderWidth, borderWidth,
-                            cardWidth - 2 * borderWidth, cardHeight - 2 * borderWidth,
-                            null);
-                } else {
-                    g.drawImage(subImg,
-                            totalContentInset + 1, totalContentInset + boxHeight,
-                            (int) targetWidth, (int) targetHeight,
-                            null);
-                }
-            } catch (RasterFormatException e) {
-                // At very small card sizes we may encounter a problem with rounding error making the rect not fit
-            }
+            drawArtIntoRect(g,
+                    totalContentInset + 1, totalContentInset + boxHeight,
+                    contentWidth - 2, typeLineY - totalContentInset - boxHeight,
+                    getArtRect(), useInventionFrame());
         }
     }
 
@@ -478,17 +443,17 @@ public class ModernCardRenderer extends CardRenderer {
         int nameOffset = drawTransformationCircle(g, borderPaint);
 
         // Draw the name line
-        drawNameLine(g,
+        drawNameLine(g, cardView.getName(), manaCostString,
                 totalContentInset + nameOffset, totalContentInset,
                 contentWidth - nameOffset, boxHeight);
 
         // Draw the type line
-        drawTypeLine(g,
+        drawTypeLine(g, getCardTypeLine(),
                 totalContentInset, typeLineY,
                 contentWidth, boxHeight);
 
         // Draw the textbox rules
-        drawRulesText(g,
+        drawRulesText(g, textboxKeywords, textboxRules,
                 totalContentInset + 2, typeLineY + boxHeight + 2,
                 contentWidth - 4, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3);
 
@@ -497,13 +462,13 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     // Draw the name line
-    protected void drawNameLine(Graphics2D g, int x, int y, int w, int h) {
+    protected void drawNameLine(Graphics2D g, String baseName, String manaCost, int x, int y, int w, int h) {
         // Width of the mana symbols
         int manaCostWidth;
         if (cardView.isAbility()) {
             manaCostWidth = 0;
         } else {
-            manaCostWidth = CardRendererUtils.getManaCostWidth(manaCostString, boxTextHeight);
+            manaCostWidth = CardRendererUtils.getManaCostWidth(manaCost, boxTextHeight);
         }
 
         // Available width for name. Add a little bit of slop so that one character
@@ -519,7 +484,7 @@ public class ModernCardRenderer extends CardRenderer {
                 nameStr = "Morph: " + cardView.getName();
             }
         } else {
-            nameStr = cardView.getName();
+            nameStr = baseName;
         }
         if (!nameStr.isEmpty()) {
             AttributedString str = new AttributedString(nameStr);
@@ -541,12 +506,12 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Draw the mana symbols
         if (!cardView.isAbility() && !cardView.isFaceDown()) {
-            ManaSymbols.draw(g, manaCostString, x + w - manaCostWidth, y + boxTextOffset, boxTextHeight);
+            ManaSymbols.draw(g, manaCost, x + w - manaCostWidth, y + boxTextOffset, boxTextHeight);
         }
     }
 
     // Draw the type line (color indicator, types, and expansion symbol)
-    protected void drawTypeLine(Graphics2D g, int x, int y, int w, int h) {
+    protected void drawTypeLine(Graphics2D g, String baseTypeLine, int x, int y, int w, int h) {
         // Draw expansion symbol
         int expansionSymbolWidth;
         if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_SET_SYMBOL, "false").equals("false")) {
@@ -561,7 +526,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Draw type line text
         int availableWidth = w - expansionSymbolWidth + 1;
-        String types = getCardTypeLine();
+        String types = baseTypeLine;
         g.setFont(boxTextFont);
 
         // Replace "Legendary" in type line if there's not enough space
@@ -583,7 +548,7 @@ public class ModernCardRenderer extends CardRenderer {
             if (breakIndex > 0) {
                 TextLayout layout = measure.getLayout(0, breakIndex);
                 g.setColor(getBoxTextColor());
-                layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);
+                layout.draw(g, x, y + (h - boxTextHeight) / 2 + boxTextHeight - 1);
             }
         }
     }
@@ -760,13 +725,13 @@ public class ModernCardRenderer extends CardRenderer {
         return layout;
     }
 
-    protected void drawRulesText(Graphics2D g, int x, int y, int w, int h) {
+    protected void drawRulesText(Graphics2D g, ArrayList<TextboxRule> keywords, ArrayList<TextboxRule> rules, int x, int y, int w, int h) {
         // Gather all rules to render
-        List<TextboxRule> allRules = new ArrayList<>(textboxRules);
+        List<TextboxRule> allRules = new ArrayList<>(rules);
 
         // Add the keyword rule if there are any keywords
-        if (!textboxKeywords.isEmpty()) {
-            String keywordRulesString = getKeywordRulesString();
+        if (!keywords.isEmpty()) {
+            String keywordRulesString = getKeywordRulesString(keywords);
             TextboxRule keywordsRule = new TextboxRule(keywordRulesString, new ArrayList<>());
             allRules.add(0, keywordsRule);
         }
@@ -828,11 +793,11 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     // Get the first line of the textbox, the keyword string
-    private String getKeywordRulesString() {
+    private static String getKeywordRulesString(ArrayList<TextboxRule> keywords) {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < textboxKeywords.size(); ++i) {
-            builder.append(textboxKeywords.get(i).text);
-            if (i != textboxKeywords.size() - 1) {
+        for (int i = 0; i < keywords.size(); ++i) {
+            builder.append(keywords.get(i).text);
+            if (i != keywords.size() - 1) {
                 builder.append(", ");
             }
         }
