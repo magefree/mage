@@ -46,17 +46,13 @@ public class CardTypeApplier extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, Permanent permanent) {
-        if (!permanent.getCardType().contains(cardType)) {
             permanent.addCardType(cardType);
-        }
         return true;
     }
 
     @Override
     public boolean apply(Game game, MageObject mageObject) {
-        if (!mageObject.getCardType().contains(cardType)) {
             mageObject.addCardType(cardType);
-        }
         return true;
     }
 }
