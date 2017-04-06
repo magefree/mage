@@ -961,4 +961,15 @@ public class CardView extends SimpleCardView {
         return cardTypes.contains(CardType.CREATURE);
     }
 
+    public String getColorText() {
+        if (getColor().getColorCount() == 0) return "Colorless";
+        else if (getColor().getColorCount() > 1) return "Gold";
+        else if (getColor().isBlack()) return "Black";
+        else if (getColor().isBlue()) return "Blue";
+        else if (getColor().isWhite()) return "White";
+        else if (getColor().isGreen()) return "Green";
+        else if (getColor().isRed()) return "Red";
+        return "";
+    }
+
 }

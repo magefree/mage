@@ -252,7 +252,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.TABLE);
                 return "<html>" + castingCost + "</html>";
             case 3:
-                return CardHelper.getColor(c);
+                return c.getColorText();
             case 4:
                 return CardHelper.getType(c);
             case 5:

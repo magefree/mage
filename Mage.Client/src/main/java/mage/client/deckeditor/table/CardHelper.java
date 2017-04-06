@@ -41,18 +41,7 @@ import mage.view.CardView;
 public final class CardHelper {
     private CardHelper() {
     }
-
-    public static String getColor(CardView c) {
-        if (c.getColor().getColorCount() == 0) return "Colorless";
-        else if (c.getColor().getColorCount() > 1) return "Gold";
-        else if (c.getColor().isBlack()) return "Black";
-        else if (c.getColor().isBlue()) return "Blue";
-        else if (c.getColor().isWhite()) return "White";
-        else if (c.getColor().isGreen()) return "Green";
-        else if (c.getColor().isRed()) return "Red";
-        return "";
-    }
-
+    
     public static String getType(CardView c) {
         StringBuilder type = new StringBuilder();
         for (SuperType superType : c.getSuperTypes()) {

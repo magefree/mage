@@ -74,8 +74,8 @@ public class MageCardComparator implements Comparator<CardView> {
                 break;
             // Color
             case 3:
-                aCom = CardHelper.getColor(a);
-                bCom = CardHelper.getColor(b);
+                aCom = a.getColorText();
+                bCom = a.getColorText();
                 break;
             // Type
             case 4:
