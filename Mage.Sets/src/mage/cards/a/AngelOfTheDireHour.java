@@ -62,7 +62,7 @@ public class AngelOfTheDireHour extends CardImpl {
         // When Angel of the Dire Hour enters the battlefield, if you cast it from your hand, exile all attacking creatures.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ExileAllEffect(new FilterAttackingCreature("attacking creatures")), false),
-                new CastFromHandSourceCondition(),
+                CastFromHandSourceCondition.instance,
                 "When {this} enters the battlefield, if you cast it from your hand, exile all attacking creatures."),
                 new CastFromHandWatcher());
     }

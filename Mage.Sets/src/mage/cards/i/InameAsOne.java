@@ -78,7 +78,7 @@ public class InameAsOne extends CardImpl {
         // When Iname as One enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle your library.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter)), true),
-                new CastFromHandSourceCondition(),
+                CastFromHandSourceCondition.instance,
                 "When {this} enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle your library."),
                 new CastFromHandWatcher());
 

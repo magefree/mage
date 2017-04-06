@@ -68,7 +68,7 @@ public class BreachingLeviathan extends CardImpl {
         // When Breaching Leviathan enters the battlefield, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BreachingLeviathanEffect(), false),
-                new CastFromHandSourceCondition(),
+                CastFromHandSourceCondition.instance,
                 "When {this} enters the battlefield, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps."),
                 new CastFromHandWatcher());
     }

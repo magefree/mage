@@ -62,7 +62,7 @@ public class LinvalaThePreserver extends CardImpl {
         
         // When Linvala, the Preserver enters the battlefield, if an opponent has more life than you, you gain 5 life.
         this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5), false), 
-                new OpponentHasMoreLifeCondition(),
+                OpponentHasMoreLifeCondition.instance,
                 "When {this} enters the battlefield, if an opponent has more life than you, you gain 5 life."));
         
         // When Linvala enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying.

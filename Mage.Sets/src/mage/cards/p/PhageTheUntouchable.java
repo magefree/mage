@@ -63,7 +63,7 @@ public class PhageTheUntouchable extends CardImpl {
         // When Phage the Untouchable enters the battlefield, if you didn't cast it from your hand, you lose the game.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new LoseGameSourceControllerEffect(), false),
-                new InvertCondition(new CastFromHandSourceCondition()),
+                new InvertCondition(CastFromHandSourceCondition.instance),
                 "When {this} enters the battlefield, if you didn't cast it from your hand, you lose the game"
         ), new CastFromHandWatcher());
 
