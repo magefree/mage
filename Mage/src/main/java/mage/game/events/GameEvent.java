@@ -239,6 +239,14 @@ public class GameEvent implements Serializable {
         UNFLIP, UNFLIPPED,
         TRANSFORM, TRANSFORMED,
         BECOMES_MONSTROUS,
+        BECOMES_EXERTED,
+        /* BECOMES_EXERTED
+         targetId    id of the exerted creature
+         sourceId    id of the exerted creature
+         playerId    playerId of the player that controlls the creature
+         amount      not used for this event
+         flag        not used for this event
+         */
         BECOMES_RENOWNED,
         /* BECOMES_MONARCH
          targetId    playerId of the player that becomes the monarch
