@@ -77,7 +77,4 @@ public final class CardHelper {
         return type.toString();
     }
 
-    public static boolean isCreature(CardView c) {
-        return c.getCardTypes().contains(CardType.CREATURE);
-    }
 }

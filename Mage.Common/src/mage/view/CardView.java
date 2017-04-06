@@ -957,4 +957,8 @@ public class CardView extends SimpleCardView {
         this.canAttack = canAttack;
     }
 
+    public boolean isCreature(){
+        return cardTypes.contains(CardType.CREATURE);
+    }
+
 }
