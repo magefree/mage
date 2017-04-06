@@ -71,7 +71,7 @@ public class ExileIntoDarkness extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
                     new ReturnSourceFromGraveyardToHandEffect(),
                     TargetController.YOU, true),
-                new MoreCardsInHandThanOpponentsCondition(),
+                MoreCardsInHandThanOpponentsCondition.instance,
                 "At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return {this} from your graveyard to your hand.");
         this.addAbility(ability);
     }

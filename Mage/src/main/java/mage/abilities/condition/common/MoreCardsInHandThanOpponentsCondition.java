@@ -7,7 +7,9 @@ import mage.players.Player;
 
 import java.util.UUID;
 
-public class MoreCardsInHandThanOpponentsCondition implements Condition {
+public enum MoreCardsInHandThanOpponentsCondition implements Condition {
+
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

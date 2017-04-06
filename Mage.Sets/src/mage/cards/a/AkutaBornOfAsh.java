@@ -74,7 +74,7 @@ public class AkutaBornOfAsh extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
                     new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filterSwamp))),
                     TargetController.YOU, false),
-                new MoreCardsInHandThanOpponentsCondition(),
+                MoreCardsInHandThanOpponentsCondition.instance,
                 "At the beginning of your upkeep, if you have more cards in hand than each opponent, you may sacrifice a Swamp. If you do, return {this} from your graveyard to the battlefield.");
         this.addAbility(ability);
     }

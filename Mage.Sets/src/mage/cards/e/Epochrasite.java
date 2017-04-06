@@ -67,7 +67,7 @@ public class Epochrasite extends CardImpl {
         // Epochrasite enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(
                     new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
-                    new InvertCondition(new CastFromHandSourceCondition()),
+                    new InvertCondition(CastFromHandSourceCondition.instance),
                     "{this} enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand",""), 
                 new CastFromHandWatcher());
 
