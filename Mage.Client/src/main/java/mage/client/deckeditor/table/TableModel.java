@@ -254,7 +254,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             case 3:
                 return c.getColorText();
             case 4:
-                return CardHelper.getType(c);
+                return c.getTypeText();
             case 5:
                 return c.isCreature() ? c.getPower() + '/'
                         + c.getToughness() : "-";

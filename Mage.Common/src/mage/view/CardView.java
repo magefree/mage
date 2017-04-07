@@ -972,4 +972,28 @@ public class CardView extends SimpleCardView {
         return "";
     }
 
+    public String getTypeText() {
+        StringBuilder type = new StringBuilder();
+        for (SuperType superType : getSuperTypes()) {
+            type.append(superType.toString());
+            type.append(' ');
+        }
+        for (CardType cardType : getCardTypes()) {
+            type.append(cardType.toString());
+            type.append(' ');
+        }
+        if (!getSubTypes().isEmpty()) {
+            type.append("- ");
+            for (String subType : getSubTypes()) {
+                type.append(subType);
+                type.append(' ');
+            }
+        }
+        if (type.length() > 0) {
+            // remove trailing space
+            type.deleteCharAt(type.length() - 1);
+        }
+        return type.toString();
+    }
+
 }
