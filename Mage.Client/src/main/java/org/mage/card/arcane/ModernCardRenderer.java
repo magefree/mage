@@ -21,6 +21,7 @@ import java.awt.font.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
@@ -74,10 +75,9 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     private static Font loadFont(String name) {
-        try {
+        try(InputStream in = ModernCardRenderer.class.getResourceAsStream("/cardrender/" + name + ".ttf")) {
             return Font.createFont(
-                    Font.TRUETYPE_FONT,
-                    ModernCardRenderer.class.getResourceAsStream("/cardrender/" + name + ".ttf"));
+                    Font.TRUETYPE_FONT,in);
         } catch (IOException e) {
             LOGGER.info("Failed to load font `" + name + "`, couldn't find resource.");
         } catch (FontFormatException e) {
