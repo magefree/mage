@@ -1,11 +1,11 @@
 package mage.utils;
 
-import java.util.List;
 import mage.ObjectColor;
-import mage.cards.Card;
 import mage.cards.MagePermanent;
 import mage.constants.CardType;
 import mage.view.CardView;
+
+import java.util.List;
 
 /**
  * Utility class for {@link CardView}
@@ -21,17 +21,8 @@ public final class CardUtil {
     private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
     private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
-    public static boolean isCreature(CardView card) {
-        return is(card, CardType.CREATURE);
-    }
 
-    public static boolean isPlaneswalker(CardView card) {
-        return is(card, CardType.PLANESWALKER);
-    }
 
-    public static boolean isLand(CardView card) {
-        return is(card, CardType.LAND);
-    }
 
     public static boolean isCreature(MagePermanent card) {
         return is(card.getOriginal(), CardType.CREATURE);

@@ -159,9 +159,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
         gImage.setFont(new Font("Arial", Font.PLAIN, NAME_FONT_MAX_SIZE));
         gImage.drawString(card.getName()+"TEST", CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
-        if (card.getCardTypes().contains(CardType.CREATURE)) {
+        if (card.isCreature()) {
             gImage.drawString(card.getPower() + '/' + card.getToughness(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
-        } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
+        } else if (card.isPlanesWalker()) {
             gImage.drawString(card.getLoyalty(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
         }
 
@@ -173,9 +173,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
         gSmall.setFont(new Font("Arial", Font.PLAIN, Config.dimensions.nameFontSize));
         gSmall.drawString(card.getName()+"TEST2", Config.dimensions.contentXOffset, Config.dimensions.nameYOffset);
-        if (card.getCardTypes().contains(CardType.CREATURE)) {
+        if (card.isCreature()) {
             gSmall.drawString(card.getPower() + "/-/" + card.getToughness(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
-        } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
+        } else if (card.isPlanesWalker()) {
             gSmall.drawString(card.getLoyalty(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
         }
 
@@ -207,9 +207,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             if (card.getColor().hasColor()) {
                 sb.append('\n').append(card.getColor().toString());
             }
-            if (card.getCardTypes().contains(CardType.CREATURE)) {
+            if (card.isCreature()) {
                 sb.append('\n').append(card.getPower()).append('/').append(card.getToughness());
-            } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
+            } else if (card.isPlanesWalker()) {
                 sb.append('\n').append(card.getLoyalty());
             }
             for (String rule : getRules()) {
@@ -230,9 +230,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             return "effect";
         }
         StringBuilder sb = new StringBuilder();
-        if (card.getCardTypes().contains(CardType.LAND)) {
+        if (card.isLand()) {
             sb.append("land").append(card.getSuperTypes()).append(card.getSubTypes());
-        } else if (card.getCardTypes() != null && (card.getCardTypes().contains(CardType.CREATURE) || card.getCardTypes().contains(CardType.PLANESWALKER))) {
+        } else if (card.getCardTypes() != null && (card.isCreature() || card.isPlanesWalker())) {
             sb.append("creature");
         }
         sb.append(card.getColor()).append(card.getRarity()).append(card.getExpansionSetCode());

@@ -39,7 +39,6 @@ import mage.cards.MagePermanent;
 import mage.cards.Sets;
 import mage.client.util.Config;
 import mage.client.util.TransformedImageCache;
-import mage.constants.CardType;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 
@@ -110,10 +109,10 @@ public class Permanent extends Card {
         if (permanent.getOriginal().getColor().hasColor()) {
             sb.append('\n').append(permanent.getOriginal().getColor().toString());
         }
-        if (permanent.getOriginal().getCardTypes().contains(CardType.CREATURE)) {
+        if (permanent.getOriginal().isCreature()) {
             sb.append('\n').append(permanent.getOriginal().getPower()).append('/').append(permanent.getOriginal().getToughness());
         }
-        else if (permanent.getOriginal().getCardTypes().contains(CardType.PLANESWALKER)) {
+        else if (permanent.getOriginal().isPlanesWalker()) {
             sb.append('\n').append(permanent.getOriginal().getLoyalty());
         }
         for (String rule: getRules()) {

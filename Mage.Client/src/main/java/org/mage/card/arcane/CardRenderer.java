@@ -10,7 +10,6 @@ import mage.client.dialog.PreferencesDialog;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -236,7 +235,7 @@ public abstract class CardRenderer {
 
     // Draw summoning sickness overlay, and possibly other overlays
     protected void drawOverlays(Graphics2D g) {
-        if (CardUtil.isCreature(cardView) && cardView instanceof PermanentView) {
+        if (cardView.isCreature() && cardView instanceof PermanentView) {
             if (((PermanentView) cardView).hasSummoningSickness()) {
                 int x1 = (int) (0.2 * cardWidth);
                 int x2 = (int) (0.8 * cardWidth);

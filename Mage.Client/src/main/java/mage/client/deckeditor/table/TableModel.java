@@ -37,7 +37,6 @@ import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
-import mage.constants.CardType;
 import mage.constants.EnlargeMode;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -125,22 +124,22 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                     addCard(card, bigCard, gameId);
                 }
                 if (updateCountsCallback != null) {
-                    if (card.getCardTypes().contains(CardType.LAND)) {
+                    if (card.isLand()) {
                         landCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         creatureCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.INSTANT)) {
+                    if (card.isInstant()) {
                         instantCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.SORCERY)) {
+                    if (card.isSorcery()) {
                         sorceryCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.ENCHANTMENT)) {
+                    if (card.isEnchantment()) {
                         enchantmentCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.ARTIFACT)) {
+                    if (card.isArtifact()) {
                         artifactCount++;
                     }
                 }

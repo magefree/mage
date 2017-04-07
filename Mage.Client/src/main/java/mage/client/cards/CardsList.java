@@ -44,7 +44,6 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.*;
 import mage.client.util.Event;
 import mage.client.util.gui.TableSpinnerEditor;
-import mage.constants.CardType;
 import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.SimpleCardView;
@@ -383,22 +382,22 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         int artifactCount = 0;
 
         for (CardView card : cards.values()) {
-            if (card.getCardTypes().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 landCount++;
             }
-            if (card.getCardTypes().contains(CardType.CREATURE)) {
+            if (card.isCreature()) {
                 creatureCount++;
             }
-            if (card.getCardTypes().contains(CardType.SORCERY)) {
+            if (card.isSorcery()) {
                 sorceryCount++;
             }
-            if (card.getCardTypes().contains(CardType.INSTANT)) {
+            if (card.isInstant()) {
                 instantCount++;
             }
-            if (card.getCardTypes().contains(CardType.ENCHANTMENT)) {
+            if (card.isEnchantment()) {
                 enchantmentCount++;
             }
-            if (card.getCardTypes().contains(CardType.ARTIFACT)) {
+            if (card.isArtifact()) {
                 artifactCount++;
             }
         }

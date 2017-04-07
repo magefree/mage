@@ -1,21 +1,5 @@
 package org.mage.plugins.card;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.Rectangle;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLayeredPane;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.client.dialog.PreferencesDialog;
@@ -31,11 +15,7 @@ import net.xeoh.plugins.base.annotations.events.Init;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
-import org.mage.card.arcane.Animation;
-import org.mage.card.arcane.CardPanel;
-import org.mage.card.arcane.CardPanelComponentImpl;
-import org.mage.card.arcane.CardPanelRenderImpl;
-import org.mage.card.arcane.ManaSymbols;
+import org.mage.card.arcane.*;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
@@ -45,6 +25,15 @@ import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * {@link CardPlugin} implementation.
