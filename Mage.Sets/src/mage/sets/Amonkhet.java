@@ -67,6 +67,7 @@ public class Amonkhet extends ExpansionSet {
 
         cards.add(new SetCardInfo("Ahn-Crop Crasher", 117, Rarity.UNCOMMON, mage.cards.a.AhnCropCrasher.class));
         cards.add(new SetCardInfo("Ancient Crab", 40, Rarity.COMMON, mage.cards.a.AncientCrab.class));
+        cards.add(new SetCardInfo("Angel of Sanctions", 1, Rarity.MYTHIC, mage.cards.a.AngelOfSanctions.class));
         cards.add(new SetCardInfo("Angler Drake", 41, Rarity.UNCOMMON, mage.cards.a.AnglerDrake.class));
         cards.add(new SetCardInfo("Anointer Priest", 3, Rarity.COMMON, mage.cards.a.AnointerPriest.class));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 78, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
@@ -84,6 +85,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Cut // Ribbons", 223, Rarity.RARE, mage.cards.c.CutRibbons.class));
         cards.add(new SetCardInfo("Decision Paralysis", 50, Rarity.COMMON, mage.cards.d.DecisionParalysis.class));
         cards.add(new SetCardInfo("Destined // Lead", 217, Rarity.UNCOMMON, mage.cards.d.DestinedLead.class));
+        cards.add(new SetCardInfo("Dissenter's Deliverance", 164, Rarity.COMMON, mage.cards.d.DissentersDeliverance.class));
         cards.add(new SetCardInfo("Djeru's Resolve", 11, Rarity.COMMON, mage.cards.d.DjerusResolve.class));
         cards.add(new SetCardInfo("Drake Haven", 51, Rarity.RARE, mage.cards.d.DrakeHaven.class));
         cards.add(new SetCardInfo("Dune Beetle", 89, Rarity.COMMON, mage.cards.d.DuneBeetle.class));
@@ -127,6 +129,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 266, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mouth // Feed", 214, Rarity.RARE, mage.cards.m.MouthFeed.class));
+        cards.add(new SetCardInfo("Nimble-Blade Khenra", 145, Rarity.COMMON, mage.cards.n.NimbleBladeKhenra.class));
         cards.add(new SetCardInfo("Oketra's Monument", 233, Rarity.UNCOMMON, mage.cards.o.OketrasMonument.class));
         cards.add(new SetCardInfo("Onward // Victory", 218, Rarity.UNCOMMON, mage.cards.o.OnwardVictory.class));
         cards.add(new SetCardInfo("Oracle's Vault", 234, Rarity.RARE, mage.cards.o.OraclesVault.class));
@@ -148,6 +151,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Sixth Sense", 187, Rarity.UNCOMMON, mage.cards.s.SixthSense.class));
         cards.add(new SetCardInfo("Spidery Grasp", 188, Rarity.COMMON, mage.cards.s.SpideryGrasp.class));
         cards.add(new SetCardInfo("Splendid Agony", 109, Rarity.COMMON, mage.cards.s.SplendidAgony.class));
+        cards.add(new SetCardInfo("Supply Caravan", 30, Rarity.COMMON, mage.cards.s.SupplyCaravan.class));
         cards.add(new SetCardInfo("Swamp", 252, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
@@ -157,6 +161,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Trial of Knowledge", 73, Rarity.UNCOMMON, mage.cards.t.TrialOfKnowledge.class));
         cards.add(new SetCardInfo("Trueheart Duelist", 35, Rarity.UNCOMMON, mage.cards.t.TrueheartDuelist.class));
         cards.add(new SetCardInfo("Unwavering Initiate", 36, Rarity.COMMON, mage.cards.u.UnwaveringInitiate.class));
+        cards.add(new SetCardInfo("Winged Shepherd", 39, Rarity.COMMON, mage.cards.w.WingedShepherd.class));
     }
 
     @Override
