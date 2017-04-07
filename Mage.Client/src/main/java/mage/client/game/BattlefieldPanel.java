@@ -33,15 +33,6 @@
  */
 package mage.client.game;
 
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
@@ -51,10 +42,19 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.layout.CardLayoutStrategy;
 import mage.client.util.layout.impl.OldCardLayoutStrategy;
-import mage.constants.CardType;
 import mage.utils.CardUtil;
 import mage.view.CounterView;
 import mage.view.PermanentView;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  *
@@ -279,9 +279,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             }*/
         }
 
-        if (permanent.getCardTypes().contains(CardType.ARTIFACT)) {
+        if (permanent.isArtifact()) {
             addedArtifact = true;
-        } else if (permanent.getCardTypes().contains(CardType.CREATURE)) {
+        } else if (permanent.isCreature()) {
             addedCreature = true;
         } else {
             addedPermanent = true;
@@ -305,7 +305,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                     });
                     t.start();
                 }
-                if (((MagePermanent) comp).getOriginal().getCardTypes().contains(CardType.CREATURE)) {
+                if (((MagePermanent) comp).getOriginal().isCreature()) {
                     removedCreature = true;
                 }
             }

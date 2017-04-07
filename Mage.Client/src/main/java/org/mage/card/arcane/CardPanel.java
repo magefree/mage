@@ -700,9 +700,9 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             if (card.getColor().hasColor()) {
                 sb.append('\n').append(card.getColor().toString());
             }
-            if (card.getCardTypes().contains(CardType.CREATURE)) {
+            if (card.isCreature()) {
                 sb.append('\n').append(card.getPower()).append('/').append(card.getToughness());
-            } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
+            } else if (card.isPlanesWalker()) {
                 sb.append('\n').append(card.getLoyalty());
             }
             if (card.getRules() == null) {

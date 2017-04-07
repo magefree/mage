@@ -216,12 +216,11 @@ public class CardView extends SimpleCardView {
     }
 
     /**
-     *
      * @param card
      * @param game
      * @param controlled is the card view created for the card controller - used
-     * for morph / face down cards to know which player may see information for
-     * the card
+     *                   for morph / face down cards to know which player may see information for
+     *                   the card
      */
     public CardView(Card card, Game game, boolean controlled) {
         this(card, game, controlled, false, false);
@@ -245,15 +244,14 @@ public class CardView extends SimpleCardView {
     }
 
     /**
-     *
      * @param card
      * @param game
-     * @param controlled is the card view created for the card controller - used
-     * for morph / face down cards to know which player may see information for
-     * the card
+     * @param controlled       is the card view created for the card controller - used
+     *                         for morph / face down cards to know which player may see information for
+     *                         the card
      * @param showFaceDownCard if true and the card is not on the battlefield,
-     * also a face down card is shown in the view, face down cards will be shown
-     * @param storeZone if true the card zone will be set in the zone attribute.
+     *                         also a face down card is shown in the view, face down cards will be shown
+     * @param storeZone        if true the card zone will be set in the zone attribute.
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null, card.getTokenDescriptor());
@@ -434,7 +432,7 @@ public class CardView extends SimpleCardView {
                     artRect = ArtRect.SPLIT_FUSED;
                 } else {
                     if (spell.getCard() != null) {
-                        SplitCard wholeCard = ((SplitCardHalf)spell.getCard()).getParentCard();
+                        SplitCard wholeCard = ((SplitCardHalf) spell.getCard()).getParentCard();
                         Abilities<Ability> aftermathHalfAbilities = wholeCard.getRightHalfCard().getAbilities();
                         if (aftermathHalfAbilities.stream().anyMatch(ability -> ability instanceof AftermathAbility)) {
                             if (ty == SpellAbilityType.SPLIT_RIGHT) {
@@ -957,8 +955,12 @@ public class CardView extends SimpleCardView {
         this.canAttack = canAttack;
     }
 
-    public boolean isCreature(){
+    public boolean isCreature() {
         return cardTypes.contains(CardType.CREATURE);
+    }
+
+    public boolean isPlanesWalker() {
+        return cardTypes.contains(CardType.PLANESWALKER);
     }
 
     public String getColorText() {
@@ -996,4 +998,27 @@ public class CardView extends SimpleCardView {
         return type.toString();
     }
 
+    public boolean isLand() {
+        return cardTypes.contains(CardType.LAND);
+    }
+
+    public boolean isInstant() {
+        return cardTypes.contains(CardType.INSTANT);
+    }
+
+    public boolean isSorcery() {
+        return cardTypes.contains(CardType.SORCERY);
+    }
+
+    public boolean isEnchantment() {
+        return cardTypes.contains(CardType.ENCHANTMENT);
+    }
+
+    public boolean isArtifact() {
+        return cardTypes.contains(CardType.ARTIFACT);
+    }
+
+    public boolean isTribal() {
+        return cardTypes.contains(CardType.TRIBAL);
+    }
 }

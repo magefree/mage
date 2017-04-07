@@ -11,7 +11,6 @@ import mage.cards.FrameStyle;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
-import mage.constants.SpellAbilityType;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
@@ -21,7 +20,6 @@ import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.RasterFormatException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.AttributedCharacterIterator;
@@ -427,7 +425,7 @@ public class ModernCardRenderer extends CardRenderer {
                 contentWidth - 2, cardHeight - borderWidth * 3 - typeLineY - 1);
 
         // If it's a planeswalker, extend the textbox left border by some
-        if (cardView.getCardTypes().contains(CardType.PLANESWALKER)) {
+        if (cardView.isPlanesWalker()) {
             g.setPaint(borderPaint);
             g.fillRect(
                     totalContentInset, typeLineY + boxHeight,
@@ -603,7 +601,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Is it a creature?
         boolean isVehicle = cardView.getSubTypes().contains("Vehicle");
-        if (cardView.getCardTypes().contains(CardType.CREATURE) || isVehicle) {
+        if (cardView.isCreature() || isVehicle) {
             int x = cardWidth - borderWidth - partWidth;
 
             // Draw PT box
@@ -623,7 +621,7 @@ public class ModernCardRenderer extends CardRenderer {
             // Draw text
             Color textColor;
             if (isVehicle) {
-                boolean isAnimated = !(cardView instanceof PermanentView) || cardView.getCardTypes().contains(CardType.CREATURE);
+                boolean isAnimated = !(cardView instanceof PermanentView) || cardView.isCreature();
                 if (isAnimated) {
                     textColor = Color.white;
                 } else {
@@ -646,7 +644,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Is it a walker? (But don't draw the box if it's a non-permanent view
         // of a walker without a starting loyalty (EG: Arlin Kord's flipped side).
-        if (cardView.getCardTypes().contains(CardType.PLANESWALKER)
+        if (cardView.isPlanesWalker()
                 && (cardView instanceof PermanentView || !cardView.getStartingLoyalty().equals("0"))) {
             // Draw the PW loyalty box
             int w = partWidth;
@@ -772,7 +770,7 @@ public class ModernCardRenderer extends CardRenderer {
         }
 
         // Basic mana draw mana symbol in textbox (for basic lands)
-        if (allRules.size() == 1 && (allRules.get(0) instanceof TextboxBasicManaRule) && cardView.getCardTypes().contains(CardType.LAND)) {
+        if (allRules.size() == 1 && (allRules.get(0) instanceof TextboxBasicManaRule) && cardView.isLand()) {
             drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
             return;
         }
