@@ -79,8 +79,8 @@ public class MageCardComparator implements Comparator<CardView> {
                 break;
             // Type
             case 4:
-                aCom = CardHelper.getType(a);
-                bCom = CardHelper.getType(b);
+                aCom = a.getTypeText();
+                bCom = b.getTypeText();
                 break;
             // Stats, attack and defense
             case 5:
