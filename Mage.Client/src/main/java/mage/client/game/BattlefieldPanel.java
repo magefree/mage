@@ -42,7 +42,6 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.layout.CardLayoutStrategy;
 import mage.client.util.layout.impl.OldCardLayoutStrategy;
-import mage.utils.CardUtil;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 
@@ -155,7 +154,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                 changed = true;
             } else {
                 if (!changed) {
-                    changed = CardUtil.isCreature(oldMagePermanent.getOriginalPermanent()) != CardUtil.isCreature(permanent);
+                    changed = oldMagePermanent.getOriginalPermanent().isCreature() != permanent.isCreature();
                     if (!changed) {
                         int s1 = permanent.getAttachments() == null ? 0 : permanent.getAttachments().size();
                         int s2 = oldMagePermanent.getLinks().size();

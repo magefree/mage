@@ -3,7 +3,6 @@ package mage.client.util.gui;
 import mage.client.MageFrame;
 import mage.client.util.GUISizeHelper;
 import mage.constants.*;
-import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -269,9 +268,9 @@ public final class GuiDisplayUtil {
         buffer.append("</td></tr></table>");
 
         String pt = "";
-        if (CardUtil.isCreature(card)) {
+        if (card.isCreature()) {
             pt = card.getPower() + '/' + card.getToughness();
-        } else if (CardUtil.isPlaneswalker(card)) {
+        } else if (card.isPlanesWalker()) {
             pt = card.getLoyalty();
         }
 

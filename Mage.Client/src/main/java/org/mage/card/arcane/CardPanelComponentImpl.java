@@ -9,7 +9,6 @@ import mage.client.util.ImageHelper;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.AbilityType;
-import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -232,9 +231,9 @@ public class CardPanelComponentImpl extends CardPanel {
 
         // PT Text
         ptText = new GlowText();
-        if (CardUtil.isCreature(gameCard)) {
+        if (gameCard.isCreature()) {
             ptText.setText(gameCard.getPower() + '/' + gameCard.getToughness());
-        } else if (CardUtil.isPlaneswalker(gameCard)) {
+        } else if (gameCard.isPlanesWalker()) {
             ptText.setText(gameCard.getLoyalty());
         }
 //        ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
@@ -424,7 +423,7 @@ public class CardPanelComponentImpl extends CardPanel {
         imagePanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
         imagePanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
 
-        if (hasSickness() && CardUtil.isCreature(gameCard) && isPermanent()) {
+        if (hasSickness() && gameCard.isCreature() && isPermanent()) {
             overlayPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
             overlayPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
         } else {
@@ -571,11 +570,11 @@ public class CardPanelComponentImpl extends CardPanel {
         super.update(card);
 
         // Update card text
-        if (CardUtil.isCreature(card) && CardUtil.isPlaneswalker(card)) {
+        if (card.isCreature() && card.isPlanesWalker()) {
             ptText.setText(card.getPower() + '/' + card.getToughness() + " (" + card.getLoyalty() + ')');
-        } else if (CardUtil.isCreature(card)) {
+        } else if (card.isCreature()) {
             ptText.setText(card.getPower() + '/' + card.getToughness());
-        } else if (CardUtil.isPlaneswalker(card)) {
+        } else if (card.isPlanesWalker()) {
             ptText.setText(card.getLoyalty());
         } else {
             ptText.setText("");
@@ -583,7 +582,7 @@ public class CardPanelComponentImpl extends CardPanel {
         setText(card);
 
         // Summoning Sickness overlay
-        if (hasSickness() && CardUtil.isCreature(gameCard) && isPermanent()) {
+        if (hasSickness() && card.isCreature() && isPermanent()) {
             overlayPanel.setVisible(true);
         } else {
             overlayPanel.setVisible(false);
