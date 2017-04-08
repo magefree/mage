@@ -53,7 +53,6 @@ public class DeckEditorPane extends MagePane {
      * Creates new form TablesPane
      */
     public DeckEditorPane() {
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         boolean initialized = false;
         if (Plugins.instance.isThemePluginLoaded()) {
             Map<String, JComponent> uiMap = new HashMap<>();
@@ -105,8 +104,8 @@ public class DeckEditorPane extends MagePane {
 
         deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(deckEditorPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
@@ -115,14 +114,12 @@ public class DeckEditorPane extends MagePane {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(deckEditorPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void initComponents(Component container) {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
@@ -132,7 +129,7 @@ public class DeckEditorPane extends MagePane {
                 .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
         );
 
-        pack();
+
     }
 
     public DeckEditorPanel getPanel() {
