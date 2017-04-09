@@ -33,6 +33,7 @@ import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -94,64 +95,13 @@ class DreadSlaverEffect extends OneShotEffect {
         if (card != null) {
             Zone currentZone = game.getState().getZone(card.getId());
             if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
-                ContinuousEffect effect = new DreadSlaverContiniousEffect();
+                ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
                 return true;
             }
         }
         return false;
-    }
-
-}
-
-class DreadSlaverContiniousEffect extends ContinuousEffectImpl {
-
-    public DreadSlaverContiniousEffect() {
-        super(Duration.Custom, Outcome.Neutral);
-        staticText = "That creature is a black Zombie in addition to its other colors and types";
-    }
-
-    public DreadSlaverContiniousEffect(final DreadSlaverContiniousEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DreadSlaverContiniousEffect copy() {
-        return new DreadSlaverContiniousEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
-        if (creature != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        creature.getSubtype(game).add("Zombie");
-                    }
-                    break;
-                case ColorChangingEffects_5:
-                    if (sublayer == SubLayer.NA) {
-                        creature.getColor(game).setBlack(true);
-                    }
-                    break;
-            }
-            return true;
-        } else {
-            this.used = true;
-        }
-        return false;
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
     }
 
 }
