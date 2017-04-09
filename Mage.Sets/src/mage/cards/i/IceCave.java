@@ -94,19 +94,23 @@ class IceCaveEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Spell spell = (Spell) game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if(sourcePermanent != null && spell != null) {
+        if(sourcePermanent != null && spell != null && controller != null) {
+            Player spellController = game.getPlayer(spell.getControllerId());
             Cost cost = new ManaCostsImpl(spell.getSpellAbility().getManaCosts().getText());
-            for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
-                Player player = game.getPlayer(playerId);
-                if(player.getId() != spell.getControllerId()) {
-                    cost.clearPaid();
-                    if (cost.canPay(source, source.getSourceId(), player.getId(), game)
-                            && player.chooseUse(outcome, "Pay " + cost.getText() + " to counter " + spell.getIdName() + '?', source, game)) {
-                        if (cost.pay(source, game, source.getSourceId(), playerId, false, null)) {
-                            game.informPlayers(player.getLogName() + " pays" + cost.getText() + " to counter " + spell.getIdName() + '.');
-                            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+            if (spellController != null) {
+                for (UUID playerId : game.getOpponents(spell.getControllerId())) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        cost.clearPaid();
+                        if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+                                && player.chooseUse(outcome, "Pay " + cost.getText() + " to counter " + spell.getIdName() + '?', source, game)) {
+                            if (cost.pay(source, game, source.getSourceId(), playerId, false, null)) {
+                                game.informPlayers(player.getLogName() + " pays" + cost.getText() + " to counter " + spell.getIdName() + '.');
+                                game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                                return true;
+                            }
                         }
-                    } 
+                    }
                 }
             }
         }
