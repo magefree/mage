@@ -51,7 +51,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 
 /**
  *
- * @author jeffwadsworth
+ * @author ThomasLerner
  */
 public class IceCave extends CardImpl {
 
