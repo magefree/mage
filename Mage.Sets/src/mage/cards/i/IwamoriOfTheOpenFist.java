@@ -83,7 +83,7 @@ class IwamoriOfTheOpenFistEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("legendary creature card");
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 

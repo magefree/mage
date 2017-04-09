@@ -56,8 +56,8 @@ public class TsaboTavoc extends CardImpl {
     private static final FilterCreaturePermanent filterDestroy = new FilterCreaturePermanent("legendary creature");
     
     static {
-        filter.add(new SupertypePredicate("Legendary"));
-        filterDestroy.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filterDestroy.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
     
     public TsaboTavoc(UUID ownerId, CardSetInfo setInfo) {

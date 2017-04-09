@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -92,7 +93,7 @@ public class UnderworldSlums extends CardImpl {
             subtypePredicates.add(new SubtypePredicate("Mountain"));
             subtypePredicates.add(new SubtypePredicate("Forest"));
             filter.add(Predicates.or(subtypePredicates));
-            filter.add(new SupertypePredicate("Basic"));
+            filter.add(new SupertypePredicate(SuperType.BASIC));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
         }

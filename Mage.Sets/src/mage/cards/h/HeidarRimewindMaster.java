@@ -55,7 +55,7 @@ public class HeidarRimewindMaster extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control four or more snow permanents");
 
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
 
     public HeidarRimewindMaster(UUID ownerId, CardSetInfo setInfo) {

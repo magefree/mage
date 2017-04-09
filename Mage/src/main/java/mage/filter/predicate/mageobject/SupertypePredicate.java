@@ -44,10 +44,6 @@ public class SupertypePredicate implements Predicate<MageObject> {
         this.supertype = supertype;
     }
 
-    public SupertypePredicate(String supertype){
-        this.supertype = SuperType.valueOf(supertype.trim().toUpperCase());
-    }
-
     @Override
     public boolean apply(MageObject input, Game game) {
         return input.getSuperType().contains(supertype);

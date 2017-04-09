@@ -57,7 +57,7 @@ public class HeroesPodium extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each legendary creature you control");
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
     
     public HeroesPodium(UUID ownerId, CardSetInfo setInfo) {
@@ -90,7 +90,7 @@ class HeroesPodiumLegendaryCount implements DynamicValue {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other legendary creature you control");
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     @Override
@@ -122,7 +122,7 @@ class HeroesPodiumEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a legendary creature card");
     static {
-        filter.add(new SupertypePredicate(("Legendary")));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     public HeroesPodiumEffect() {

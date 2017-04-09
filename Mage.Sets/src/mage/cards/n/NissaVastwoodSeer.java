@@ -57,7 +57,7 @@ public class NissaVastwoodSeer extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("basic Forest card");
     static {
-        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(new SubtypePredicate("Forest"));
     }
 

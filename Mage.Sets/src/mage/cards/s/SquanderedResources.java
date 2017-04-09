@@ -27,9 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -44,6 +41,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -52,6 +50,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -83,7 +85,7 @@ class SquanderedResourcesEffect extends ManaEffect {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
     }
 
     public SquanderedResourcesEffect() {

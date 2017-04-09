@@ -57,7 +57,7 @@ public class KondasBanner extends CardImpl {
     private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("legendary creatures");
 
     static {
-        legendaryFilter.add(new SupertypePredicate("Legendary"));
+        legendaryFilter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     public KondasBanner(UUID ownerId, CardSetInfo setInfo) {

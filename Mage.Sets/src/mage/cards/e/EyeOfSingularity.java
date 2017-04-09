@@ -83,7 +83,7 @@ class EyeOfSingularityETBEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
     }
 
     EyeOfSingularityETBEffect() {
@@ -171,7 +171,7 @@ class EyeOfSingularityTriggeredEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
     }
 
     EyeOfSingularityTriggeredEffect() {
