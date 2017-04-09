@@ -76,7 +76,7 @@ public class LilianaDeathsMajesty extends CardImpl {
 
         // -3: Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.
         ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), -3);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         ability.addEffect(new BecomesBlackZombieAdditionEffect());
         this.addAbility(ability);
 
