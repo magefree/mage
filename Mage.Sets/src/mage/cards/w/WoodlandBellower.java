@@ -30,6 +30,7 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -39,7 +40,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -99,7 +99,7 @@ class WoodlandBellowerEffect extends OneShotEffect {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
+        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (controller.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {

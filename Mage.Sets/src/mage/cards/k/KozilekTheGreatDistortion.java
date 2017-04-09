@@ -46,7 +46,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -146,7 +145,7 @@ class KozilekDiscardCost extends CostImpl {
             return false;
         }
         FilterCard filter = new FilterCard("card with converted mana cost of " + targetSpell.getConvertedManaCost());
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, targetSpell.getConvertedManaCost()));
+        filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, targetSpell.getConvertedManaCost()));
         TargetCardInHand target = new TargetCardInHand(filter);
         this.getTargets().clear();
         this.getTargets().add(target);

@@ -27,12 +27,9 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.abilities.CountType;
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
@@ -44,15 +41,20 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +84,7 @@ public class Seasinger extends CardImpl {
 
         // When you control no Islands, sacrifice Seasinger.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new FilterLandPermanent("Island", "no Islands"), CountType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
 
         // You may choose not to untap Seasinger during your untap step.

@@ -28,16 +28,16 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
+import mage.abilities.CountType;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
+import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -47,7 +47,7 @@ public class Thoughtbind extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));
+        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 5));
     }
 
     public Thoughtbind(UUID ownerId, CardSetInfo setInfo) {

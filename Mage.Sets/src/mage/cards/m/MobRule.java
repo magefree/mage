@@ -27,9 +27,8 @@
  */
 package mage.cards.m;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.CountType;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -38,17 +37,15 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.filter.Filter.ComparisonType;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -61,11 +58,11 @@ public class MobRule extends CardImpl {
 
         // Choose one
         // Gain control of all creatures with power 4 or greater until end of turn. Untap those creatures. They gain haste until end of turn.
-        this.getSpellAbility().addEffect(new MobRuleEffect(ComparisonType.GreaterThan, 3));
+        this.getSpellAbility().addEffect(new MobRuleEffect(CountType.MORE_THAN, 3));
 
         // Gain control of all creatures with power 3 or less until end of turn. Untap those creatures. They gain haste until end of turn.
         Mode mode = new Mode();
-        mode.getEffects().add(new MobRuleEffect(ComparisonType.LessThan, 4));
+        mode.getEffects().add(new MobRuleEffect(CountType.FEWER_THAN, 4));
         this.getSpellAbility().addMode(mode);
     }
 
@@ -81,14 +78,14 @@ public class MobRule extends CardImpl {
 
 class MobRuleEffect extends OneShotEffect {
 
-    ComparisonType type = null;
+    CountType type = null;
     int power = 0;
 
-    public MobRuleEffect(ComparisonType type, int power) {
+    public MobRuleEffect(CountType type, int power) {
         super(Outcome.GainControl);
         this.type = type;
         this.power = power;
-        if (type == ComparisonType.GreaterThan) {
+        if (type == CountType.MORE_THAN) {
             this.staticText = "Gain control of all creatures with power 4 or greater until end of turn. Untap those creatures. They gain haste until end of turn";
         } else {
             this.staticText = "Gain control of all creatures with power 3 or less until end of turn. Untap those creatures. They gain haste until end of turn";

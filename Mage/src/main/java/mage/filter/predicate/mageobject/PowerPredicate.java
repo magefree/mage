@@ -28,7 +28,7 @@
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
-import mage.filter.Filter;
+import mage.abilities.CountType;
 import mage.filter.predicate.IntComparePredicate;
 
 /**
@@ -37,7 +37,7 @@ import mage.filter.predicate.IntComparePredicate;
  */
 public class PowerPredicate extends IntComparePredicate<MageObject> {
 
-    public PowerPredicate(Filter.ComparisonType type, int value) {
+    public PowerPredicate(CountType type, int value) {
         super(type, value);
     }
 
