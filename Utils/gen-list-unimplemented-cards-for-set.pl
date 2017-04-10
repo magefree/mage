@@ -94,7 +94,7 @@ foreach my $card (sort cardSort @setCards) {
 
     $cardNames {@{$card}[0]} = 1;
 
-    my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
+    my $currentFileName = "../Mage.Sets/src/mage/cards/" . lc(substr($className, 0, 1)) . "/" . $className . ".java";
 	if(! -e $currentFileName) {
         $cardNames {@{$card}[0]} = 0;
 		if ($toPrint) {

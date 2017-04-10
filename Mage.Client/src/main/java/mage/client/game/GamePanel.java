@@ -2187,7 +2187,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void installComponents() {
         jLayeredPane.setOpaque(false);
-        jLayeredPane.add(abilityPicker);
+        jLayeredPane.add(abilityPicker, JLayeredPane.MODAL_LAYER);
         jLayeredPane.add(DialogManager.getManager(gameId), JLayeredPane.MODAL_LAYER, 0);
         abilityPicker.setVisible(false);
     }

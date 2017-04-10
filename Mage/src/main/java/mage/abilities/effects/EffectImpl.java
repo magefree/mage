@@ -61,8 +61,8 @@ public abstract class EffectImpl implements Effect {
     public EffectImpl(final EffectImpl effect) {
         this.id = effect.id;
         this.outcome = effect.outcome;
-        this.effectType = effect.effectType;
         this.staticText = effect.staticText;
+        this.effectType = effect.effectType;
         this.targetPointer = effect.targetPointer.copy();
         if (effect.values != null) {
             values = new HashMap<>();
