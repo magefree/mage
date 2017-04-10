@@ -32,11 +32,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreatureOrPlaneswalker;
 
 /**
  *
@@ -44,19 +40,13 @@ import mage.target.TargetPermanent;
  */
 public class HerosDownfall extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker");
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.PLANESWALKER)));
-    }
-
     public HerosDownfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{B}");
 
 
         // Destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Target target = new TargetPermanent(filter);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 
     public HerosDownfall(final HerosDownfall card) {

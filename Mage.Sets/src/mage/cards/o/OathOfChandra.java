@@ -49,6 +49,7 @@ import mage.watchers.Watcher;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  *
@@ -67,7 +68,9 @@ public class OathOfChandra extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
 
         // When Oath of Chandra enters the battlefield, it deals 3 damage to target creature an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), false);
+        Effect effect = new DamageTargetEffect(3);
+        effect.setText("it deals 3 damage to target creature an opponent controls");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, Oath of Chandra deals 2 damage to each opponent.

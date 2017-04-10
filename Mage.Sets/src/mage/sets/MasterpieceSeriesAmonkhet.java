@@ -69,9 +69,11 @@ public class MasterpieceSeriesAmonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Entomb", 23, Rarity.SPECIAL, mage.cards.e.Entomb.class));
         cards.add(new SetCardInfo("Force of Will", 14, Rarity.SPECIAL, mage.cards.f.ForceOfWill.class));
         cards.add(new SetCardInfo("Hazoret the Fervent", 27, Rarity.SPECIAL, mage.cards.h.HazoretTheFervent.class));
+        cards.add(new SetCardInfo("Kefnet the Mindful", 15, Rarity.SPECIAL, mage.cards.k.KefnetTheMindful.class));
         cards.add(new SetCardInfo("Loyal Retainers", 4, Rarity.SPECIAL, mage.cards.l.LoyalRetainers.class));
         cards.add(new SetCardInfo("Maelstrom Pulse", 29, Rarity.SPECIAL, mage.cards.m.MaelstromPulse.class));
         cards.add(new SetCardInfo("Mind Twist", 24, Rarity.SPECIAL, mage.cards.m.MindTwist.class));
+        cards.add(new SetCardInfo("Oketra the True", 5, Rarity.SPECIAL, mage.cards.o.OketraTheTrue.class));
         cards.add(new SetCardInfo("Pact of Negation", 16, Rarity.SPECIAL, mage.cards.p.PactOfNegation.class));
         cards.add(new SetCardInfo("Spell Pierce", 17, Rarity.SPECIAL, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Stifle", 18, Rarity.SPECIAL, mage.cards.s.Stifle.class));
