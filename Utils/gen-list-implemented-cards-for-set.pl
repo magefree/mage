@@ -67,7 +67,7 @@ my $toPrint = '';
 
 foreach my $card (sort cardSort @setCards) {
 	my $className = toCamelCase(@{$card}[0]);
-    my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
+    my $currentFileName = "../Mage.Sets/src/mage/cards/" . lc(substr($className, 0, 1)) . "/" . $className . ".java";
 	if (-e $currentFileName) {
 		if ($toPrint) {
 			$toPrint .= "\n";
