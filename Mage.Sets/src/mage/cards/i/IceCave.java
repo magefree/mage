@@ -30,10 +30,8 @@ package mage.cards.i;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
@@ -43,11 +41,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -97,14 +94,14 @@ class IceCaveEffect extends OneShotEffect {
         if(sourcePermanent != null && spell != null && controller != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
             Cost cost = new ManaCostsImpl(spell.getSpellAbility().getManaCosts().getText());
-            if (spellController != null) {
-                for (UUID playerId : game.getOpponents(spell.getControllerId())) {
+            if(spellController != null) {
+                for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player = game.getPlayer(playerId);
-                    if (player != null) {
+                    if(player != null && player != spellController) {
                         cost.clearPaid();
-                        if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+                        if(cost.canPay(source, source.getSourceId(), player.getId(), game)
                                 && player.chooseUse(outcome, "Pay " + cost.getText() + " to counter " + spell.getIdName() + '?', source, game)) {
-                            if (cost.pay(source, game, source.getSourceId(), playerId, false, null)) {
+                            if(cost.pay(source, game, source.getSourceId(), playerId, false, null)) {
                                 game.informPlayers(player.getLogName() + " pays" + cost.getText() + " to counter " + spell.getIdName() + '.');
                                 game.getStack().counter(spell.getId(), source.getSourceId(), game);
                                 return true;
@@ -117,4 +114,3 @@ class IceCaveEffect extends OneShotEffect {
         return true;
     }
 }
-
