@@ -89,6 +89,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Companion of the Trials", 271, Rarity.UNCOMMON, mage.cards.c.CompanionOfTheTrials.class));
         cards.add(new SetCardInfo("Consuming Fervor", 126, Rarity.UNCOMMON, mage.cards.c.ConsumingFervor.class));
         cards.add(new SetCardInfo("Crocodile of the Crossing", 162, Rarity.UNCOMMON, mage.cards.c.CrocodileOfTheCrossing.class));
+        cards.add(new SetCardInfo("Cruel Reality", 84, Rarity.MYTHIC, mage.cards.c.CruelReality.class));
         cards.add(new SetCardInfo("Curator of Mysteries", 49, Rarity.RARE, mage.cards.c.CuratorOfMysteries.class));
         cards.add(new SetCardInfo("Cursed Minotaur", 85, Rarity.COMMON, mage.cards.c.CursedMinotaur.class));
         cards.add(new SetCardInfo("Cut // Ribbons", 223, Rarity.RARE, mage.cards.c.CutRibbons.class));
