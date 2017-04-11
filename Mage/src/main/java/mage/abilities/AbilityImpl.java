@@ -286,6 +286,17 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
+        // 117.6. Some mana costs contain no mana symbols. This represents an unpayable cost. An ability can
+        // also have an unpayable cost if its cost is based on the mana cost of an object with no mana cost.
+        // Attempting to cast a spell or activate an ability that has an unpayable cost is a legal action.
+        // However, attempting to pay an unpayable cost is an illegal action.
+        //
+        // We apply this now, *AFTER* the user has made the choice to pay an alternative cost for the
+        // spell. You can also still cast a spell with an unplayable cost by... not paying it's mana cost.
+        if (getAbilityType() == AbilityType.SPELL && getManaCostsToPay().isEmpty() && !noMana) {
+            return false;
+        }
+
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.
