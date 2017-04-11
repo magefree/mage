@@ -93,6 +93,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Cursed Minotaur", 85, Rarity.COMMON, mage.cards.c.CursedMinotaur.class));
         cards.add(new SetCardInfo("Cut // Ribbons", 223, Rarity.RARE, mage.cards.c.CutRibbons.class));
         cards.add(new SetCardInfo("Decision Paralysis", 50, Rarity.COMMON, mage.cards.d.DecisionParalysis.class));
+        cards.add(new SetCardInfo("Deem Worthy", 127, Rarity.UNCOMMON, mage.cards.d.DeemWorthy.class));
         cards.add(new SetCardInfo("Desiccated Naga", 276, Rarity.UNCOMMON, mage.cards.d.DesiccatedNaga.class));
         cards.add(new SetCardInfo("Destined // Lead", 217, Rarity.UNCOMMON, mage.cards.d.DestinedLead.class));
         cards.add(new SetCardInfo("Dissenter's Deliverance", 164, Rarity.COMMON, mage.cards.d.DissentersDeliverance.class));
