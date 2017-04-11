@@ -1,4 +1,4 @@
-package mage.cards.f;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -17,7 +17,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Styxo
  */
-public class FallingEarth extends SplitCard {
+public class HeavenEarth extends SplitCard {
 
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
     private static final FilterCreaturePermanent filterWithouFlying = new FilterCreaturePermanent("creature without flying");
@@ -27,7 +27,7 @@ public class FallingEarth extends SplitCard {
         filterWithouFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public FallingEarth(UUID ownerId, CardSetInfo setInfo) {
+    public HeavenEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{X}{G}", "{X}{R}{R}", false);
 
         // Falling
@@ -41,12 +41,12 @@ public class FallingEarth extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filterWithouFlying));
     }
 
-    public FallingEarth(final FallingEarth card) {
+    public HeavenEarth(final HeavenEarth card) {
         super(card);
     }
 
     @Override
-    public FallingEarth copy() {
-        return new FallingEarth(this);
+    public HeavenEarth copy() {
+        return new HeavenEarth(this);
     }
 }
