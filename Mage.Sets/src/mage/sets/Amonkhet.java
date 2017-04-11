@@ -121,6 +121,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Glorybringer", 174, Rarity.RARE, mage.cards.g.Glorybringer.class));
         cards.add(new SetCardInfo("Graceful Cat", 273, Rarity.COMMON, mage.cards.g.GracefulCat.class));
         cards.add(new SetCardInfo("Gravedigger", 93, Rarity.UNCOMMON, mage.cards.g.Gravedigger.class));
+        cards.add(new SetCardInfo("Grim Strider", 93, Rarity.UNCOMMON, mage.cards.g.GrimStrider.class));
         cards.add(new SetCardInfo("Hapatra, Vizier of Poisons", 199, Rarity.RARE, mage.cards.h.HapatraVizierOfPoisons.class));
         cards.add(new SetCardInfo("Hazoret the Fervent", 136, Rarity.MYTHIC, mage.cards.h.HazoretTheFervent.class));
         cards.add(new SetCardInfo("Hazoret's Favor", 137, Rarity.RARE, mage.cards.h.HazoretsFavor.class));
