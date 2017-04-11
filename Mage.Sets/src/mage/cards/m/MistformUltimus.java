@@ -51,7 +51,7 @@ public class MistformUltimus extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Mistform Ultimus is every creature type.
-        this.subtype.add(ChangelingAbility.ALL_CREATURE_TYPE); // "All Creature Type"
+        this.addAbility(ChangelingAbility.getInstance());
     }
 
     public MistformUltimus(final MistformUltimus card) {
