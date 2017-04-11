@@ -203,6 +203,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Unburden", 114, Rarity.COMMON, mage.cards.u.Unburden.class));
         cards.add(new SetCardInfo("Unwavering Initiate", 36, Rarity.COMMON, mage.cards.u.UnwaveringInitiate.class));
         cards.add(new SetCardInfo("Vizier of the Menagerie", 192, Rarity.MYTHIC, mage.cards.v.VizierOfTheMenagerie.class));
+        cards.add(new SetCardInfo("Watchers of the Dead", 238, Rarity.UNCOMMON, mage.cards.w.WatchersOfTheDead.class));
         cards.add(new SetCardInfo("Watchful Naga", 193, Rarity.UNCOMMON, mage.cards.w.WatchfulNaga.class));
         cards.add(new SetCardInfo("Winged Shepherd", 39, Rarity.COMMON, mage.cards.w.WingedShepherd.class));
     }
