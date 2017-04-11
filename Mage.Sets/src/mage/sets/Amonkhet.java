@@ -74,11 +74,13 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Archfiend of Ifnir", 78, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
         cards.add(new SetCardInfo("As Foretold", 42, Rarity.MYTHIC, mage.cards.a.AsForetold.class));
         cards.add(new SetCardInfo("Aven Mindcensor", 5, Rarity.RARE, mage.cards.a.AvenMindcensor.class));
+        cards.add(new SetCardInfo("Battlefield Scavenger", 118, Rarity.UNCOMMON, mage.cards.b.BattlefieldScavenger.class));
         cards.add(new SetCardInfo("Bontu's Monument", 225, Rarity.UNCOMMON, mage.cards.b.BontusMonument.class));
         cards.add(new SetCardInfo("Canyon Slough", 239, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Cartouche of Ambition", 83, Rarity.COMMON, mage.cards.c.CartoucheOfAmbition.class));
         cards.add(new SetCardInfo("Cartouche of Knowledge", 45, Rarity.COMMON, mage.cards.c.CartoucheOfKnowledge.class));
         cards.add(new SetCardInfo("Cartouche of Solidarity", 7, Rarity.COMMON, mage.cards.c.CartoucheOfSolidarity.class));
+        cards.add(new SetCardInfo("Cartouche of Strength", 158, Rarity.COMMON, mage.cards.c.CartoucheOfStrength.class));
         cards.add(new SetCardInfo("Cartouche of Zeal", 124, Rarity.COMMON, mage.cards.c.CartoucheOfZeal.class));
         cards.add(new SetCardInfo("Cast Out", 8, Rarity.UNCOMMON, mage.cards.c.CastOut.class));
         cards.add(new SetCardInfo("Censor", 46, Rarity.UNCOMMON, mage.cards.c.Censor.class));
@@ -184,6 +186,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Scribe of the Mindful", 68, Rarity.COMMON, mage.cards.s.ScribeOfTheMindful.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 248, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Sixth Sense", 187, Rarity.UNCOMMON, mage.cards.s.SixthSense.class));
+        cards.add(new SetCardInfo("Soul-Scar Mage", 149, Rarity.RARE, mage.cards.s.SoulScarMage.class));
         cards.add(new SetCardInfo("Spidery Grasp", 188, Rarity.COMMON, mage.cards.s.SpideryGrasp.class));
         cards.add(new SetCardInfo("Splendid Agony", 109, Rarity.COMMON, mage.cards.s.SplendidAgony.class));
         cards.add(new SetCardInfo("Supply Caravan", 30, Rarity.COMMON, mage.cards.s.SupplyCaravan.class));

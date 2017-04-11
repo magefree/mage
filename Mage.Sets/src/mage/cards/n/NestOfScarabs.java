@@ -28,16 +28,14 @@
 package mage.cards.n;
 
 import java.util.UUID;
+
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.EffectKeyValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -47,7 +45,7 @@ import mage.game.permanent.token.Token;
 
 /**
  *
- * @author Styxo
+ * @author stravant
  */
 public class NestOfScarabs extends CardImpl {
 
@@ -55,7 +53,8 @@ public class NestOfScarabs extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // Whenever you put one or more -1/-1 counters on a creature, create that many 1/1 black Insect tokens.
-        this.addAbility(new NestOfScarabsTriggeredAbility(new NestOfScarabsEffect(), false));
+        this.addAbility(new NestOfScarabsTriggeredAbility());
+
     }
 
     public NestOfScarabs(final NestOfScarabs card) {
@@ -70,11 +69,11 @@ public class NestOfScarabs extends CardImpl {
 
 class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
 
-    public NestOfScarabsTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+    NestOfScarabsTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new BlackInsectToken(), new EffectKeyValue("countersAdded")));
     }
 
-    public NestOfScarabsTriggeredAbility(NestOfScarabsTriggeredAbility ability) {
+    NestOfScarabsTriggeredAbility(final NestOfScarabsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -85,20 +84,19 @@ class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getData().equals(CounterType.M1M1.getName())) {
+        boolean weAreDoingIt = getControllerId().equals(game.getControllerId(event.getSourceId()));
+        boolean isM1M1Counters = event.getData().equals(CounterType.M1M1.getName());
+        if (weAreDoingIt && isM1M1Counters) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
-            if (permanent != null && permanent.isCreature()) {
-                this.getEffects().forEach((effect) -> {
-                    effect.setValue("countersAdded", event.getAmount());
-                });
+            if (permanent.isCreature()) {
+                getEffects().forEach(effect -> effect.setValue("countersAdded", event.getAmount()));
                 return true;
             }
         }
         return false;
-
     }
 
     @Override
@@ -108,40 +106,13 @@ class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you put one or more -1/-1 counters on a creature, " + super.getRule();
-    }
-}
-
-class NestOfScarabsEffect extends OneShotEffect {
-
-    public NestOfScarabsEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "create that many 1/1 black Insect tokens";
-    }
-
-    public NestOfScarabsEffect(final NestOfScarabsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NestOfScarabsEffect copy() {
-        return new NestOfScarabsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int countersAdded = (Integer) this.getValue("countersAdded");
-        if (countersAdded > 0) {
-            return new CreateTokenEffect(new BlackInsectToken(), countersAdded).apply(game, source);
-        }
-        return false;
+        return "Whenever you put one or more -1/-1 counters on a creature, create that many 1/1 black Insect tokens.";
     }
 }
 
 class BlackInsectToken extends Token {
-
-    public BlackInsectToken() {
-        super("Insect", "1/1 black Insect creature token");
+    BlackInsectToken() {
+        super("Insect", "1/1 black Insect token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Insect");
