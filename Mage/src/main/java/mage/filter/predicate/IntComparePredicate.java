@@ -51,7 +51,7 @@ public abstract class IntComparePredicate<T extends MageObject> implements Predi
     @Override
     public final boolean apply(T input, Game game) {
         int inputValue = getInputValue(input);
-        return CountType.compare(value, type, inputValue);
+        return CountType.compare(inputValue, type, value);
     }
 
     @Override
