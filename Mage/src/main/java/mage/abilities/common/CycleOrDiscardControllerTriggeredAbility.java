@@ -37,7 +37,11 @@ import mage.game.events.GameEvent;
  *
  * @author fireshoes
  */
-public class CycleOrDiscardControllerTriggeredAbility  extends TriggeredAbilityImpl {
+public class CycleOrDiscardControllerTriggeredAbility extends TriggeredAbilityImpl {
+
+    public CycleOrDiscardControllerTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
 
     public CycleOrDiscardControllerTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);

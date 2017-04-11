@@ -120,6 +120,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Glorybringer", 174, Rarity.RARE, mage.cards.g.Glorybringer.class));
         cards.add(new SetCardInfo("Graceful Cat", 273, Rarity.COMMON, mage.cards.g.GracefulCat.class));
         cards.add(new SetCardInfo("Gravedigger", 93, Rarity.UNCOMMON, mage.cards.g.Gravedigger.class));
+        cards.add(new SetCardInfo("Hapatra, Vizier of Poisons", 199, Rarity.RARE, mage.cards.h.HapatraVizierOfPoisons.class));
         cards.add(new SetCardInfo("Hazoret the Fervent", 136, Rarity.MYTHIC, mage.cards.h.HazoretTheFervent.class));
         cards.add(new SetCardInfo("Hazoret's Favor", 137, Rarity.RARE, mage.cards.h.HazoretsFavor.class));
         cards.add(new SetCardInfo("Hazoret's Monument", 229, Rarity.UNCOMMON, mage.cards.h.HazoretsMonument.class));
@@ -152,6 +153,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 266, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mouth // Feed", 214, Rarity.RARE, mage.cards.m.MouthFeed.class));
         cards.add(new SetCardInfo("Neheb, the Worthy", 203, Rarity.RARE, mage.cards.n.NehebTheWorthy.class));
+        cards.add(new SetCardInfo("Nest of Scarabs", 101, Rarity.UNCOMMON, mage.cards.n.NestOfScarabs.class));
         cards.add(new SetCardInfo("Never // Return", 212, Rarity.RARE, mage.cards.n.NeverReturn.class));
         cards.add(new SetCardInfo("Nimble-Blade Khenra", 145, Rarity.COMMON, mage.cards.n.NimbleBladeKhenra.class));
         cards.add(new SetCardInfo("Oketra the True", 21, Rarity.MYTHIC, mage.cards.o.OketraTheTrue.class));
@@ -189,6 +191,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Tah-Crop Elite", 31, Rarity.COMMON, mage.cards.t.TahCropElite.class));
         cards.add(new SetCardInfo("Tattered Mummy", 278, Rarity.COMMON, mage.cards.t.TatteredMummy.class));
         cards.add(new SetCardInfo("Temmet, Vizier of Naktamun", 207, Rarity.RARE, mage.cards.t.TemmetVizierOfNaktamun.class));
+        cards.add(new SetCardInfo("Throne of the God-Pharaoh", 237, Rarity.RARE, mage.cards.t.ThroneOfTheGodPharaoh.class));
         cards.add(new SetCardInfo("Trial of Ambition", 113, Rarity.UNCOMMON, mage.cards.t.TrialOfAmbition.class));
         cards.add(new SetCardInfo("Trial of Knowledge", 73, Rarity.UNCOMMON, mage.cards.t.TrialOfKnowledge.class));
         cards.add(new SetCardInfo("Trial of Solidarity", 34, Rarity.UNCOMMON, mage.cards.t.TrialOfSolidarity.class));

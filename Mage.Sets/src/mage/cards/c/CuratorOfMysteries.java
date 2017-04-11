@@ -29,20 +29,14 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.CycleOrDiscardControllerTriggeredAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -61,7 +55,7 @@ public class CuratorOfMysteries extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cycle or discard another card, scry 1.
-        this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new ScryEffect(1), false));
+        this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new ScryEffect(1)));
 
         // Cycling {U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
@@ -75,39 +69,5 @@ public class CuratorOfMysteries extends CardImpl {
     @Override
     public CuratorOfMysteries copy() {
         return new CuratorOfMysteries(this);
-    }
-}
-
-class CuratorOfMysteriesTriggeredAbility extends TriggeredAbilityImpl {
-
-    CuratorOfMysteriesTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
-    }
-
-    CuratorOfMysteriesTriggeredAbility(final CuratorOfMysteriesTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CuratorOfMysteriesTriggeredAbility copy() {
-        return new CuratorOfMysteriesTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (getControllerId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cycle or discard a card, " + super.getRule();
     }
 }

@@ -28,18 +28,13 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.CycleOrDiscardControllerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.DrakeToken;
 
 /**
@@ -52,7 +47,11 @@ public class DrakeHaven extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // When you cycle or discard a card, you may pay {1}. If you do, create a 2/2 blue Drake creature token with flying.
-        this.addAbility(new DrakeHavenTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new DrakeToken()), new GenericManaCost(1))));
+        this.addAbility(new CycleOrDiscardControllerTriggeredAbility(
+                new DoIfCostPaid(
+                        new CreateTokenEffect(new DrakeToken()),
+                        new GenericManaCost(1)))
+        );
     }
 
     public DrakeHaven(final DrakeHaven card) {
@@ -62,39 +61,5 @@ public class DrakeHaven extends CardImpl {
     @Override
     public DrakeHaven copy() {
         return new DrakeHaven(this);
-    }
-}
-
-class DrakeHavenTriggeredAbility extends TriggeredAbilityImpl {
-
-    DrakeHavenTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
-    }
-
-    DrakeHavenTriggeredAbility(final DrakeHavenTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DrakeHavenTriggeredAbility copy() {
-        return new DrakeHavenTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (getControllerId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cycle or discard a card, " + super.getRule();
     }
 }
