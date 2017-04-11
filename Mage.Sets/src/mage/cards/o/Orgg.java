@@ -28,7 +28,7 @@
 package mage.cards.o;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanent;
@@ -55,8 +55,8 @@ public class Orgg extends CardImpl {
     static final private FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");
 
     static {
-        filter.add(Predicates.and(new PowerPredicate(CountType.MORE_THAN, 2), Predicates.not(new TappedPredicate())));
-        filter2.add(new PowerPredicate(CountType.MORE_THAN, 2));
+        filter.add(Predicates.and(new PowerPredicate(ComparisonType.MORE_THAN, 2), Predicates.not(new TappedPredicate())));
+        filter2.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
     public Orgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

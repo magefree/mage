@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -62,7 +62,7 @@ public class StatuteOfDenial extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawDiscardControllerEffect(1,1),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0, true),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, true),
                 "If you control a blue creature, draw a card, then discard a card"));
     }
 

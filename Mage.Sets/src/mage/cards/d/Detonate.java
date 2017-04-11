@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
@@ -67,7 +67,7 @@ public class Detonate extends CardImpl {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
             FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact with converted mana cost X");
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             ability.addTarget(new TargetArtifactPermanent(filter));
         }
     }

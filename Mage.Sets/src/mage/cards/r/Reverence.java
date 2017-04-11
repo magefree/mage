@@ -27,7 +27,7 @@
  */
 package mage.cards.r;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public class Reverence extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 2 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public Reverence(UUID ownerId, CardSetInfo setInfo) {

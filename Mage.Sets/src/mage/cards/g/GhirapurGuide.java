@@ -29,7 +29,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedByAllTargetEffect;
@@ -53,7 +53,7 @@ public class GhirapurGuide extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public GhirapurGuide(UUID ownerId, CardSetInfo setInfo) {

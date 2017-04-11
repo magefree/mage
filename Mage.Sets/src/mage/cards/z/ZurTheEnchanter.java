@@ -28,7 +28,7 @@
 package mage.cards.z;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -53,7 +53,7 @@ public class ZurTheEnchanter extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public ZurTheEnchanter(UUID ownerId, CardSetInfo setInfo) {

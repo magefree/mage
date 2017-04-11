@@ -28,7 +28,7 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
@@ -96,7 +96,7 @@ public class BolsterEffect extends OneShotEffect {
             if (leastToughness != Integer.MAX_VALUE) {
                 if (selectedCreature == null) {
                     FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control with toughness " + leastToughness);
-                    filter.add(new ToughnessPredicate(CountType.EQUAL_TO, leastToughness));
+                    filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, leastToughness));
                     Target target = new TargetPermanent(1,1, filter, true);
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         selectedCreature = game.getPermanent(target.getFirstTarget());

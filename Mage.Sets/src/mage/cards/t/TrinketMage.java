@@ -29,7 +29,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -52,7 +52,7 @@ public class TrinketMage extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public TrinketMage(UUID ownerId, CardSetInfo setInfo) {

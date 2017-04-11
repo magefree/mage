@@ -30,7 +30,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -58,7 +58,7 @@ public class SoratamiMirrorGuard extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature with power 2 or less");
 
     static {
-        filterCreature.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filterCreature.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public SoratamiMirrorGuard(UUID ownerId, CardSetInfo setInfo) {

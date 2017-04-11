@@ -28,7 +28,7 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.players.Player;
@@ -40,10 +40,10 @@ import java.util.UUID;
  */
 public class CardsInAnyLibraryCondition implements Condition {
 
-    protected final CountType type;
+    protected final ComparisonType type;
     protected final int value;
 
-    public CardsInAnyLibraryCondition(CountType type, int value) {
+    public CardsInAnyLibraryCondition(ComparisonType type, int value) {
         this.type = type;
         this.value = value;
     }
@@ -55,7 +55,7 @@ public class CardsInAnyLibraryCondition implements Condition {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    return CountType.compare(player.getLibrary().size(), type, value);
+                    return ComparisonType.compare(player.getLibrary().size(), type, value);
 
                 }
             }

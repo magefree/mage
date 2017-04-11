@@ -29,7 +29,7 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -43,7 +43,7 @@ public enum FerociousCondition implements Condition {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
 

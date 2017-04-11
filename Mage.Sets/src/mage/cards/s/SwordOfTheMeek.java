@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -57,8 +57,8 @@ public class SwordOfTheMeek extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a 1/1 creature");
 
     static {
-        filter.add(new PowerPredicate(CountType.EQUAL_TO, 1));
-        filter.add(new ToughnessPredicate(CountType.EQUAL_TO, 1));
+        filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, 1));
+        filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, 1));
     }
 
     public SwordOfTheMeek(UUID ownerId, CardSetInfo setInfo) {

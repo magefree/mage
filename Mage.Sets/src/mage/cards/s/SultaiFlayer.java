@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ public class SultaiFlayer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control with toughness 4 or greater");
 
     static {
-        filter.add(new ToughnessPredicate(CountType.MORE_THAN, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

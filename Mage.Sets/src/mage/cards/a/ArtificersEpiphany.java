@@ -27,7 +27,7 @@
  */
 package mage.cards.a;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -59,7 +59,7 @@ public class ArtificersEpiphany extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardControllerEffect(1),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.EQUAL_TO, 0)));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0)));
     }
 
     public ArtificersEpiphany(final ArtificersEpiphany card) {

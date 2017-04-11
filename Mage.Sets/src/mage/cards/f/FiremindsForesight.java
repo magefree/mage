@@ -28,7 +28,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -100,7 +100,7 @@ class FiremindsForesightSearchEffect extends  OneShotEffect {
         for (int cmc=3; cmc > 0; cmc--) {
             FilterCard filter = new FilterCard("instant card with converted mana cost " + cmc);
             filter.add(new CardTypePredicate(CardType.INSTANT));
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, cmc));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
 
 
             cardsCount = cardsInLibrary.count(filter, game);

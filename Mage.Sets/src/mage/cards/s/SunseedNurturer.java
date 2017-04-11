@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -80,7 +80,7 @@ class SunseedNurturerTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public SunseedNurturerTriggeredAbility() {

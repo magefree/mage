@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -96,7 +96,7 @@ class SwiftWarkiteEffect extends OneShotEffect {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     SwiftWarkiteEffect() {

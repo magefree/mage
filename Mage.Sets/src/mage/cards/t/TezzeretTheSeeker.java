@@ -28,7 +28,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
@@ -115,7 +115,7 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
         }
 
         FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost " + cmc + " or less");
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, cmc + 1));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc + 1));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
         if (controller.searchLibrary(target, game)) {

@@ -30,7 +30,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -65,7 +65,7 @@ public class SpellQueller extends CardImpl {
     private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public SpellQueller(UUID ownerId, CardSetInfo setInfo) {

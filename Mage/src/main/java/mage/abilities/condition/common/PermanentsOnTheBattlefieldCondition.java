@@ -28,7 +28,7 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -47,23 +47,23 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
 
     private FilterPermanent filter;
     private Condition condition;
-    private CountType type;
+    private ComparisonType type;
     private int count;
     private boolean onlyControlled;
 
     /**
      * Applies a filter and delegates creation to
      * {@link #ControlsPermanent(mage.filter.FilterPermanent, mage.abilities.condition.common.ControlsPermanent.CountType, int)}
-     * with {@link CountType#MORE_THAN}, and 0.
+     * with {@link ComparisonType#MORE_THAN}, and 0.
      *
      * @param filter
      */
     public PermanentsOnTheBattlefieldCondition(FilterPermanent filter) {
-        this(filter, CountType.MORE_THAN, 0);
+        this(filter, ComparisonType.MORE_THAN, 0);
     }
 
     /**
-     * Applies a filter, a {@link CountType}, and count to permanents on the
+     * Applies a filter, a {@link ComparisonType}, and count to permanents on the
      * battlefield when checking the condition during the
      * {@link #apply(mage.game.Game, mage.abilities.Ability) apply} method invocation.
      *
@@ -71,11 +71,11 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
      * @param type
      * @param count
      */
-    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, CountType type, int count) {
+    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, ComparisonType type, int count) {
         this(filter, type, count, true);
     }
 
-    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, CountType type, int count, boolean onlyControlled) {
+    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, ComparisonType type, int count, boolean onlyControlled) {
         this.filter = filter;
         this.type = type;
         this.count = count;
@@ -83,7 +83,7 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
     }
 
     /**
-     * Applies a filter, a {@link CountType}, and count to permanents on the
+     * Applies a filter, a {@link ComparisonType}, and count to permanents on the
      * battlefield and calls the decorated condition to see if it
      * {@link #apply(mage.game.Game, mage.abilities.Ability) applies}
      * as well.  This will force both conditions to apply for this to be true.
@@ -93,7 +93,7 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
      * @param count
      * @param conditionToDecorate
      */
-    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, CountType type, int count, Condition conditionToDecorate) {
+    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, ComparisonType type, int count, Condition conditionToDecorate) {
         this(filter, type, count);
         this.condition = conditionToDecorate;
     }
@@ -108,7 +108,7 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
         }
 
         int permanentsOnBattlefield = game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game);
-        conditionApplies = CountType.compare(permanentsOnBattlefield, type, count);
+        conditionApplies = ComparisonType.compare(permanentsOnBattlefield, type, count);
 
         //If a decorated condition exists, check it as well and apply them together.
         if (this.condition != null) {

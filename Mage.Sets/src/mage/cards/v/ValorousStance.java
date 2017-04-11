@@ -27,7 +27,7 @@
  */
 package mage.cards.v;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -51,7 +51,7 @@ public class ValorousStance extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 4 or greater");
 
     static {
-        filter.add(new ToughnessPredicate(CountType.MORE_THAN, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
     
     public ValorousStance(UUID ownerId, CardSetInfo setInfo) {

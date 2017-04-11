@@ -29,7 +29,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -55,7 +55,7 @@ public class MentorOfTheMeek extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public MentorOfTheMeek(UUID ownerId, CardSetInfo setInfo) {

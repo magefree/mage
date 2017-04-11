@@ -30,7 +30,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -59,7 +59,7 @@ public class CateranOverlord extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate("Mercenary"));
-	filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 7));
+	filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 7));
     }
 
     public CateranOverlord(UUID ownerId, CardSetInfo setInfo) {

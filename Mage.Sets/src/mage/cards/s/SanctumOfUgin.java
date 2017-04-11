@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.Effect;
@@ -56,7 +56,7 @@ public class SanctumOfUgin extends CardImpl {
     static {
         filter.add(new ColorlessPredicate());
         filterSpells.add(new ColorlessPredicate());
-        filterSpells.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 6));
+        filterSpells.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public SanctumOfUgin(UUID ownerId, CardSetInfo setInfo) {

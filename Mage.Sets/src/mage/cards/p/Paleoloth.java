@@ -29,7 +29,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -53,7 +53,7 @@ public class Paleoloth extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature with power 5 or greater");
     
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
         filter.add(new AnotherPredicate());
     }
     

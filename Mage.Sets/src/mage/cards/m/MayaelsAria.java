@@ -28,7 +28,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -95,7 +95,7 @@ class MayaelsAriaEffect extends OneShotEffect {
         }
         // put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater.
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
         if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 creature.addCounters(CounterType.P1P1.createInstance(), source, game);
@@ -105,14 +105,14 @@ class MayaelsAriaEffect extends OneShotEffect {
 
         // Then you gain 10 life if you control a creature with power 10 or greater.
         filter = new FilterCreaturePermanent();
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 9));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 9));
         if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
             controller.gainLife(10, game);
         }
 
         // Then you win the game if you control a creature with power 20 or greater.
         filter = new FilterCreaturePermanent();
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 19));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 19));
         if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
             controller.won(game);
         }

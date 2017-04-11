@@ -28,7 +28,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public class ImperialRecruiter extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with power 2 or less");
 
     static{
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
     
     public ImperialRecruiter(UUID ownerId, CardSetInfo setInfo) {

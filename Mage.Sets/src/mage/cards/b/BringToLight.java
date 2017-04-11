@@ -28,7 +28,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -98,7 +98,7 @@ class BringToLightEffect extends OneShotEffect {
             int numberColors = ColorsOfManaSpentToCastCount.getInstance().calculate(game, source, this);
             FilterCard filter = new FilterCard();
             filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
-            filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, numberColors + 1));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, numberColors + 1));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             controller.searchLibrary(target, game);
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);

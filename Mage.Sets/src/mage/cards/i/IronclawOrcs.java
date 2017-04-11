@@ -28,7 +28,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
 import mage.cards.CardImpl;
@@ -48,7 +48,7 @@ public class IronclawOrcs extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or greater");
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 1));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 1));
     }
 
     public IronclawOrcs(UUID ownerId, CardSetInfo setInfo) {

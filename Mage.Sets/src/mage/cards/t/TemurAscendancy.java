@@ -27,7 +27,7 @@
  */
 package mage.cards.t;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -52,7 +52,7 @@ public class TemurAscendancy extends CardImpl {
 
     final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public TemurAscendancy(UUID ownerId, CardSetInfo setInfo) {

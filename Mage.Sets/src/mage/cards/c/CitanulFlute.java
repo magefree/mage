@@ -28,7 +28,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -98,7 +98,7 @@ class CitanulFluteSearchEffect extends OneShotEffect {
         FilterCard filter = new FilterCard("creature card with converted mana cost X or less");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
 		
 	TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {

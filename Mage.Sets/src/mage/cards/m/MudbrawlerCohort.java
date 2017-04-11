@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -74,7 +74,7 @@ public class MudbrawlerCohort extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Mudbrawler Cohort gets +1/+1 as long as you control another red creature.
-        Condition condition = new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0);
+        Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0);
         Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

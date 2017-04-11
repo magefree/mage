@@ -27,7 +27,7 @@
  */
 package mage.cards.w;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -52,7 +52,7 @@ public class Wrangle extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 5));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public Wrangle(UUID ownerId, CardSetInfo setInfo) {

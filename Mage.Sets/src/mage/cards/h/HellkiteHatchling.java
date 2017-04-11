@@ -28,7 +28,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DevouredCreaturesCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -63,11 +63,11 @@ public class HellkiteHatchling extends CardImpl {
         // Hellkite Hatchling has flying and trample if it devoured a creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect( 
                 new GainAbilitySourceEffect(FlyingAbility.getInstance()),
-                new DevouredCreaturesCondition(CountType.MORE_THAN, 0),
+                new DevouredCreaturesCondition(ComparisonType.MORE_THAN, 0),
                 "{this} has flying if it devoured a creature")));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()),
-                new DevouredCreaturesCondition(CountType.MORE_THAN, 0),
+                new DevouredCreaturesCondition(ComparisonType.MORE_THAN, 0),
                 "{this} has trample if it devoured a creature")));
     }
 

@@ -27,7 +27,7 @@
  */
 package mage.cards.h;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
@@ -56,7 +56,7 @@ public class HearthCharm extends CardImpl {
     static {
         filter1.add(new CardTypePredicate(CardType.ARTIFACT));
         filter2.add(new AttackingPredicate());
-        filter3.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter3.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public HearthCharm(UUID ownerId, CardSetInfo setInfo) {

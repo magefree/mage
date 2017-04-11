@@ -28,7 +28,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -99,7 +99,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
         if (player != null) {
             int xValue = source.getManaCostsToPay().getX();
             FilterCreatureCard filter = new FilterCreatureCard();
-            filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, xValue + 1));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
             Set<Card> cards = player.getGraveyard().getCards(filter, game);
             player.moveCards(cards, Zone.BATTLEFIELD, source, game);
             ArrayList<Permanent> toExile = new ArrayList<>(cards.size());

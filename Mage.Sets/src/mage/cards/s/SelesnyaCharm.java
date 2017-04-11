@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -55,7 +55,7 @@ public class SelesnyaCharm extends CardImpl {
     static private final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
     
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public SelesnyaCharm(UUID ownerId, CardSetInfo setInfo) {

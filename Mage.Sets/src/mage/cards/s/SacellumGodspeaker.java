@@ -30,7 +30,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -80,7 +80,7 @@ class SacellumGodspeakerEffect extends ManaEffect {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with power 5 or greater from your hand");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public SacellumGodspeakerEffect() {

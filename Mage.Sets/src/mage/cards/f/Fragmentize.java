@@ -27,7 +27,7 @@
  */
 package mage.cards.f;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,7 +47,7 @@ public class Fragmentize extends CardImpl {
     private static final FilterArtifactOrEnchantmentPermanent filter = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment with converted mana cost 4 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public Fragmentize(UUID ownerId, CardSetInfo setInfo) {

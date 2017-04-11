@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -61,7 +61,7 @@ public class SkeletonShip extends CardImpl {
 
         // When you control no Islands, sacrifice Skeleton Ship.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), CountType.EQUAL_TO, 0,
+                new FilterLandPermanent("Island", "no Islands"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
 
         // {tap}: Put a -1/-1 counter on target creature.

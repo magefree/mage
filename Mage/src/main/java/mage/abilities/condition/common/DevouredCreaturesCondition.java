@@ -28,7 +28,7 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DevourEffect;
@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  */
 public class DevouredCreaturesCondition extends IntCompareCondition {
 
-    public DevouredCreaturesCondition(CountType type, int value) {
+    public DevouredCreaturesCondition(ComparisonType type, int value) {
         super(type, value);
     }
 

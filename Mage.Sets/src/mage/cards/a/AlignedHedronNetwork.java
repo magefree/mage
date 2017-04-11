@@ -28,7 +28,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -77,7 +77,7 @@ class AlignedHedronNetworkExileEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 5 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public AlignedHedronNetworkExileEffect() {

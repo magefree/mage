@@ -29,7 +29,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -69,7 +69,7 @@ public class RimewindTaskmage extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new MayTapOrUntapTargetEffect(),
                 new GenericManaCost(1),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 3));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

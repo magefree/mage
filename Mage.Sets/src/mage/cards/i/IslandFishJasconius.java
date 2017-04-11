@@ -28,7 +28,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -74,7 +74,7 @@ public class IslandFishJasconius extends CardImpl {
         
         // When you control no Islands, sacrifice Island Fish Jasconius.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), CountType.EQUAL_TO, 0,
+                new FilterLandPermanent("Island", "no Islands"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

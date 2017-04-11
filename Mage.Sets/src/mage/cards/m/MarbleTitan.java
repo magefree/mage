@@ -28,7 +28,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
@@ -51,7 +51,7 @@ public class MarbleTitan extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 3 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 2));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public MarbleTitan(UUID ownerId, CardSetInfo setInfo) {

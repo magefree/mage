@@ -28,7 +28,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
@@ -52,7 +52,7 @@ public class AbruptDecay extends CardImpl {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent with converted mana cost 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public AbruptDecay(UUID ownerId, CardSetInfo setInfo) {

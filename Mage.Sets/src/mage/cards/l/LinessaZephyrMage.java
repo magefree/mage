@@ -29,7 +29,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.abilityword.GrandeurAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -98,7 +98,7 @@ public class LinessaZephyrMage extends CardImpl {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost " + xValue);
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             ability.getTargets().add(new TargetCreaturePermanent(filter));
         }
     }

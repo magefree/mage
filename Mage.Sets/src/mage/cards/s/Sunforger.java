@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -127,7 +127,7 @@ class SunforgerEffect extends OneShotEffect {
                         new ColorPredicate(ObjectColor.RED),
                         new ColorPredicate(ObjectColor.WHITE)));
                 filter.add(new CardTypePredicate(CardType.INSTANT));
-                filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 5));
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
                 filter.add(new CardCanBeCastPredicate(source.getControllerId()));
                 if (controller.searchLibrary(target, game, controller.getId())) {
                     UUID targetId = target.getFirstTarget();

@@ -29,7 +29,7 @@ package mage.cards.v;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -94,7 +94,7 @@ class VillainousWealthEffect extends OneShotEffect {
         if (controller != null) {
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
             FilterCard filter = new FilterNonlandCard();
-            filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             if (player != null) {
                 Cards cardsToExile = new CardsImpl();

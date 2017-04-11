@@ -28,7 +28,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -51,7 +51,7 @@ public class Kurgadon extends CardImpl {
 
     static {
         filterSpell.add(new CardTypePredicate(CardType.CREATURE));
-		filterSpell.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 5));
+		filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
     }
 
     public Kurgadon(UUID ownerId, CardSetInfo setInfo) {

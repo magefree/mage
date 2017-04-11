@@ -27,7 +27,7 @@
  */
 package mage.cards.c;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,7 +46,7 @@ public class ConsumeTheMeek extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with converted mana cost 3 or less");
 
     static {
-    filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+    filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public ConsumeTheMeek(UUID ownerId, CardSetInfo setInfo) {

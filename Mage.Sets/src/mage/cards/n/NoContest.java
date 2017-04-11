@@ -28,7 +28,7 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -91,7 +91,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
         }
         // now check, if another creature has less power and can be targeted
         FilterCreaturePermanent checkFilter = new FilterCreaturePermanent();
-        checkFilter.add(new PowerPredicate(CountType.FEWER_THAN, maxPower));
+        checkFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, maxPower));
         for (Permanent permanent : game.getBattlefield().getActivePermanents(checkFilter, sourceControllerId, sourceId, game)) {
             if (permanent.canBeTargetedBy(sourceCard, sourceControllerId, game)) {
                 return true;
@@ -109,7 +109,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
                 int power = firstTarget.getPower().getValue();
                 // overwrite the filter with the power predicate
                 filter = new FilterCreaturePermanent("creature with power less than " + power);
-                filter.add(new PowerPredicate(CountType.FEWER_THAN, power));
+                filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, power));
             }
         }
         return super.possibleTargets(sourceId, sourceControllerId, game);

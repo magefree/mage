@@ -29,7 +29,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -66,7 +66,7 @@ public class KheruBloodsucker extends CardImpl {
     static {
         anotherFilter.add(new AnotherPredicate());
         toughnessFilter.add(new ControllerPredicate(TargetController.YOU));
-        toughnessFilter.add(new ToughnessPredicate(CountType.MORE_THAN, 3));
+        toughnessFilter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public KheruBloodsucker(UUID ownerId, CardSetInfo setInfo) {

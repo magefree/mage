@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -51,7 +51,7 @@ public class ScrollOfOrigins extends CardImpl {
 
         // {2}, {tap}: Draw a card if you have seven or more cards in hand.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2),
-                new CardsInHandCondition(CountType.MORE_THAN, 6),
+                new CardsInHandCondition(ComparisonType.MORE_THAN, 6),
                 "Draw a card if you have seven or more cards in hand.");
         ability.addCost(new TapSourceCost());        
         this.addAbility(ability);

@@ -28,7 +28,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -54,7 +54,7 @@ public class ExileIntoDarkness extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public ExileIntoDarkness(UUID ownerId, CardSetInfo setInfo) {

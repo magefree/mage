@@ -28,7 +28,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
 import mage.abilities.keyword.IntimidateAbility;
@@ -49,7 +49,7 @@ public class CyclopsTyrant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public CyclopsTyrant(UUID ownerId, CardSetInfo setInfo) {

@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.PayLifeCost;
@@ -65,7 +65,7 @@ public class SnuffOut extends CardImpl {
         // If you control a Swamp, you may pay 4 life rather than pay Snuff Out's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(
                 new PayLifeCost(4),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp, CountType.MORE_THAN, 0), null));
+                new PermanentsOnTheBattlefieldCondition(filterSwamp, ComparisonType.MORE_THAN, 0), null));
         // 
         // Destroy target nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

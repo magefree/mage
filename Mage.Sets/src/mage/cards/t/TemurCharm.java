@@ -27,7 +27,7 @@
  */
 package mage.cards.t;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -61,7 +61,7 @@ public class TemurCharm extends CardImpl {
     
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
-        filterCantBlock.add(new PowerPredicate(CountType.FEWER_THAN, 4));
+        filterCantBlock.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
     }
     
     public TemurCharm(UUID ownerId, CardSetInfo setInfo) {

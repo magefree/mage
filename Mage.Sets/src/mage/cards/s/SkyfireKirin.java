@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -85,7 +85,7 @@ public class SkyfireKirin extends CardImpl {
                 int cmc = spell.getConvertedManaCost();
                 ability.getTargets().clear();
                 FilterPermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with converted mana costs of ").append(cmc).toString());
-                filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, cmc));
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
                 Target target = new TargetPermanent(filter);
                 ability.addTarget(target);
             }

@@ -29,7 +29,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -124,7 +124,7 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
         int xCost = source.getManaCostsToPay().getX();
 
         FilterPermanentCard filter = new FilterPermanentCard(new StringBuilder("Rebel permanent card with converted mana cost ").append(xCost).append(" or less").toString());
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, xCost + 1));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xCost + 1));
         filter.add(new SubtypePredicate("Rebel"));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 

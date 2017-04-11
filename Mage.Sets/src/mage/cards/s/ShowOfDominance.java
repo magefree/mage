@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -110,7 +110,7 @@ class ShowOfDominanceEffect extends OneShotEffect {
             if (highestPower != Integer.MIN_VALUE) {
                 if (selectedCreature == null) {
                     FilterPermanent filter = new FilterCreaturePermanent("creature with power " + highestPower);
-                    filter.add(new PowerPredicate(CountType.EQUAL_TO, highestPower));
+                    filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, highestPower));
                     Target target = new TargetPermanent(1, 1, filter, true);
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         selectedCreature = game.getPermanent(target.getFirstTarget());

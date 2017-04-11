@@ -28,7 +28,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -51,7 +51,7 @@ public class BygoneBishop extends CardImpl {
 
     static {
         filterSpell.add(new CardTypePredicate(CardType.CREATURE));
-        filterSpell.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public BygoneBishop(UUID ownerId, CardSetInfo setInfo) {

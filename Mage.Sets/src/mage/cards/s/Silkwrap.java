@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -58,7 +58,7 @@ public class Silkwrap extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less an opponent controls");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

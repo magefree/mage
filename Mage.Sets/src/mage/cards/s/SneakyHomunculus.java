@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -52,7 +52,7 @@ public class SneakyHomunculus extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 1));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 1));
     }
 
     public SneakyHomunculus(UUID ownerId, CardSetInfo setInfo) {

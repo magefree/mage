@@ -29,7 +29,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ public class FleshpulperGiant extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughess 2 or less");
     
     static {
-        filter.add(new ToughnessPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public FleshpulperGiant(UUID ownerId, CardSetInfo setInfo) {

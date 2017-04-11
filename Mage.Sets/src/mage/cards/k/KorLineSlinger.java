@@ -29,7 +29,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -51,7 +51,7 @@ public class KorLineSlinger extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public KorLineSlinger(UUID ownerId, CardSetInfo setInfo) {

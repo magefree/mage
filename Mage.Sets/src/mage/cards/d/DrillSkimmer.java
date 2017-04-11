@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -69,7 +69,7 @@ public class DrillSkimmer extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Drill-Skimmer has shroud as long as you control another artifact creature.
-        Condition condition = new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0);
+        Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield),
                 condition, "{this} has shroud as long as you control another artifact creature.")));

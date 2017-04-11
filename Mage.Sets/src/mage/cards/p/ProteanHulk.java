@@ -29,7 +29,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -111,7 +111,7 @@ class ProteanHulkEffect extends OneShotEffect {
                 int librarySearchLimit = event.getAmount();
 
                 FilterCard filter = new FilterCreatureCard("number of creature cards with total converted mana cost 6 or less (6 CMC left)");
-                filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, manaCostLeftToFetch + 1));
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, manaCostLeftToFetch + 1));
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
                 target.setCardLimit(librarySearchLimit);
 
@@ -130,7 +130,7 @@ class ProteanHulkEffect extends OneShotEffect {
                     }
                     manaCostLeftToFetch -= card.getConvertedManaCost();
                     filter = new FilterCreatureCard("number of creature cards with total converted mana cost 6 or less (" + manaCostLeftToFetch + " CMC left)");
-                    filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, manaCostLeftToFetch + 1));
+                    filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, manaCostLeftToFetch + 1));
                     target = new TargetCardInLibrary(0, 1, filter);
                     target.setCardLimit(librarySearchLimit);
                 }

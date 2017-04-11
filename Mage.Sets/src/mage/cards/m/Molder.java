@@ -28,7 +28,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -64,7 +64,7 @@ public class Molder extends CardImpl {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
             FilterArtifactOrEnchantmentPermanent filter = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment with converted mana cost X");
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             ability.addTarget(new TargetPermanent(filter));
         }
     }

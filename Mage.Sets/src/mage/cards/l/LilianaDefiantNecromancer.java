@@ -28,7 +28,7 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -103,7 +103,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
                 }
             }
             FilterCard newFilter = filter.copy();
-            newFilter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, cmc));
+            newFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
             ability.getTargets().clear();
             ability.addTarget(new TargetCardInYourGraveyard(newFilter));
         }

@@ -28,7 +28,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -78,7 +78,7 @@ public class PostmortemLunge extends CardImpl {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
             FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less from your graveyard");
-            filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, xValue + 1));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
             ability.getTargets().add(new TargetCardInYourGraveyard(filter));
         }
     }

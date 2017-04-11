@@ -28,7 +28,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -51,7 +51,7 @@ public class ArtificersIntuition extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost 1 or less");
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
     public ArtificersIntuition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

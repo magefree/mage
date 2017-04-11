@@ -29,7 +29,7 @@
 package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -58,7 +58,7 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
     public CastWithoutPayingManaCostEffect(int maxCost) {
         super(Outcome.PlayForFree);
         filter = new FilterNonlandCard("card with converted mana cost " + maxCost + " or less from your hand");
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, maxCost + 1));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, maxCost + 1));
         this.manaCost = maxCost;
         this.staticText = "you may cast a card with converted mana cost " + maxCost + " or less from your hand without paying its mana cost";
     }

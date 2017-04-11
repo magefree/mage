@@ -30,7 +30,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -63,7 +63,7 @@ public class DaxosOfMeletis extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 3 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 2));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public DaxosOfMeletis(UUID ownerId, CardSetInfo setInfo) {

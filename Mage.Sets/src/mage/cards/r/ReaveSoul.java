@@ -27,7 +27,7 @@
  */
 package mage.cards.r;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,7 +47,7 @@ public class ReaveSoul extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public ReaveSoul(UUID ownerId, CardSetInfo setInfo) {

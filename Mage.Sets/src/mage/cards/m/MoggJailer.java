@@ -28,7 +28,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanent;
@@ -51,7 +51,7 @@ public class MoggJailer extends CardImpl {
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature with power 2 or less");
 
     static {
-        filter.add(Predicates.and(new PowerPredicate(CountType.FEWER_THAN, 2), Predicates.not(new TappedPredicate())));
+        filter.add(Predicates.and(new PowerPredicate(ComparisonType.FEWER_THAN, 2), Predicates.not(new TappedPredicate())));
     }
 
     public MoggJailer(UUID ownerId, CardSetInfo setInfo) {

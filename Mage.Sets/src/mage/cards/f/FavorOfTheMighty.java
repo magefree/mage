@@ -29,7 +29,7 @@ package mage.cards.f;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
@@ -108,7 +108,7 @@ class FavorOfTheMightyEffect extends ContinuousEffectImpl {
             }
         }
         FilterPermanent filterMaxCMC = new FilterCreaturePermanent();
-        filterMaxCMC.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, maxCMC));
+        filterMaxCMC.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, maxCMC));
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filterMaxCMC, source.getControllerId(), game)) {
             if (permanent != null) {
                 permanent.addAbility(new ProtectionAbility(filter), source.getSourceId(), game);

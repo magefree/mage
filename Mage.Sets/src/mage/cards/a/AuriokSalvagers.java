@@ -29,7 +29,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -51,7 +51,7 @@ public class AuriokSalvagers extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost 1 or less from your graveyard");
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
     
     public AuriokSalvagers(UUID ownerId, CardSetInfo setInfo) {

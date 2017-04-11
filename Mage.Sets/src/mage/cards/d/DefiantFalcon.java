@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -55,7 +55,7 @@ public class DefiantFalcon extends CardImpl {
     
     static {
         filter.add(new SubtypePredicate("Rebel"));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public DefiantFalcon(UUID ownerId, CardSetInfo setInfo) {

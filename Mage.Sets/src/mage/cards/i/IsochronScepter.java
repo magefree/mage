@@ -28,7 +28,7 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -87,7 +87,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
 
     static {
         filter.add(new CardTypePredicate(CardType.INSTANT));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public IsochronScepterImprintEffect() {

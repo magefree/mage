@@ -28,7 +28,7 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -81,7 +81,7 @@ public class LegacysAllure extends CardImpl {
             if (sourcePermanent != null) {
                 int numbCounters = sourcePermanent.getCounters(game).getCount("treasure");
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power less than or equal to the number of treasure counters on " + getLogName());
-                filter.add(new PowerPredicate(CountType.FEWER_THAN, numbCounters + 1));
+                filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, numbCounters + 1));
                 ability.getTargets().clear();
                 ability.getTargets().add(new TargetCreaturePermanent(filter));
             }

@@ -28,7 +28,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -53,7 +53,7 @@ public class BloodthornTaunter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public BloodthornTaunter(UUID ownerId, CardSetInfo setInfo) {

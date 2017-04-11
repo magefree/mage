@@ -30,7 +30,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -56,7 +56,7 @@ public class CateranPersuader extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate("Mercenary"));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public CateranPersuader(UUID ownerId, CardSetInfo setInfo) {

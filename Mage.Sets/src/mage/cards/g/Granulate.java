@@ -27,7 +27,7 @@
  */
 package mage.cards.g;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,7 +47,7 @@ public class Granulate extends CardImpl {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland artifact with converted mana cost 4 or less");
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
     public Granulate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");

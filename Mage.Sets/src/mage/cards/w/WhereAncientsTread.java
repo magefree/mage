@@ -28,7 +28,7 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ import java.util.UUID;
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public WhereAncientsTread(UUID ownerId, CardSetInfo setInfo) {

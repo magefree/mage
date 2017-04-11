@@ -29,7 +29,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -55,7 +55,7 @@ public class HiddenDragonslayer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater an opponent controls");
     
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

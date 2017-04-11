@@ -27,7 +27,7 @@
  */
 package mage.cards.w;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -54,7 +54,7 @@ public class WisdomOfTheJedi extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("spell with converted mana cost of 3 or less");
 
     static {
-        filterSpell.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public WisdomOfTheJedi(UUID ownerId, CardSetInfo setInfo) {

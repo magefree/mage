@@ -27,7 +27,7 @@
  */
 package mage.cards.w;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -59,8 +59,8 @@ public class WarpingWail extends CardImpl {
 
     static {
         filterCreature.add(Predicates.or(
-                new PowerPredicate(CountType.FEWER_THAN, 2),
-                new ToughnessPredicate(CountType.FEWER_THAN, 2)));
+                new PowerPredicate(ComparisonType.FEWER_THAN, 2),
+                new ToughnessPredicate(ComparisonType.FEWER_THAN, 2)));
         filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
     }
 

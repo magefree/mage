@@ -29,7 +29,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -52,7 +52,7 @@ public class GarruksPackleader extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 3 or greater");
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 2));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public GarruksPackleader(UUID ownerId, CardSetInfo setInfo) {

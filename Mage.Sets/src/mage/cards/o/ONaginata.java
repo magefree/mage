@@ -28,7 +28,7 @@
 package mage.cards.o;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -59,7 +59,7 @@ public class ONaginata extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with 3 or more power");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 2));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public ONaginata(UUID ownerId, CardSetInfo setInfo) {

@@ -28,7 +28,7 @@
 package mage.cards.v;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -110,7 +110,7 @@ class VoidEffect extends OneShotEffect {
                 }
             }
             FilterCard filterCard = new FilterCard();
-            filterCard.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, number));
+            filterCard.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, number));
             filterCard.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
 
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));

@@ -27,7 +27,7 @@
  */
 package mage.cards.k;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.RecoverAbility;
@@ -49,7 +49,7 @@ public class KrovikanRot extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public KrovikanRot(UUID ownerId, CardSetInfo setInfo) {

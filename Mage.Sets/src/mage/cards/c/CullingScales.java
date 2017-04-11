@@ -28,7 +28,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -83,7 +83,7 @@ class HasLowestCMCAmongstNonlandPermanentsPredicate implements Predicate<Permane
     @Override
     public boolean apply(Permanent input, Game game) {
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, input.getConvertedManaCost()));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, input.getConvertedManaCost()));
         return !game.getBattlefield().contains(filter, 1, game);
     }
     

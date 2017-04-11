@@ -29,7 +29,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantBeCounteredControlledEffect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
@@ -55,7 +55,7 @@ public class SpellbreakerBehemoth extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public SpellbreakerBehemoth(UUID ownerId, CardSetInfo setInfo) {

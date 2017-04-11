@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -56,7 +56,7 @@ public class SuspensionField extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 3 or greater");
 
     static {
-        filter.add(new ToughnessPredicate(CountType.MORE_THAN, 2));
+        filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public SuspensionField(UUID ownerId, CardSetInfo setInfo) {

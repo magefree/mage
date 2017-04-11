@@ -28,7 +28,7 @@
 package mage.cards.o;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -53,8 +53,8 @@ public class Overload extends CardImpl {
     private static final FilterArtifactPermanent filter5 = new FilterArtifactPermanent("artifact if its converted mana cost is 5 or less");
 
     static {
-        filter2.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
-        filter5.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 5));
+        filter2.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter5.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public Overload(UUID ownerId, CardSetInfo setInfo) {

@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -57,7 +57,7 @@ public class SilumgarAssassin extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less an opponent controls");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

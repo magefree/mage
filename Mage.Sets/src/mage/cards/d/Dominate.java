@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class Dominate extends CardImpl {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X or less");
-            filter.add(Predicates.not(new ConvertedManaCostPredicate(CountType.MORE_THAN, xValue)));
+            filter.add(Predicates.not(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, xValue)));
             ability.addTarget(new TargetCreaturePermanent(filter));
         }
     }

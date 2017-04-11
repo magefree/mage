@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
@@ -64,7 +64,7 @@ public class SpellBurst extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             FilterSpell filter = new FilterSpell("spell with converted mana cost X");
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, ability.getManaCostsToPay().getX()));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, ability.getManaCostsToPay().getX()));
             ability.addTarget(new TargetSpell(filter));
         }
     }

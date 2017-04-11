@@ -29,7 +29,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -82,7 +82,7 @@ public class MinamoSightbender extends CardImpl {
                     int manaX = ability.getManaCostsToPay().getX();
                     ability.getTargets().clear();
                     FilterCreaturePermanent newFilter = new FilterCreaturePermanent(new StringBuilder("creature with power ").append(manaX).append(" or less").toString());
-                    filter.add(new PowerPredicate(CountType.FEWER_THAN, manaX + 1));
+                    filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, manaX + 1));
                     Target target = new TargetCreaturePermanent(newFilter);
                     ability.addTarget(target);
                     break;

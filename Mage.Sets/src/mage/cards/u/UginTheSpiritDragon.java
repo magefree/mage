@@ -28,7 +28,7 @@
 package mage.cards.u;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
@@ -123,7 +123,7 @@ class UginTheSpiritDragonEffect2 extends OneShotEffect {
         }
 
         FilterPermanent filter = new FilterPermanent("permanent with converted mana cost X or less that's one or more colors");
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, cmc + 1));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc + 1));
         filter.add(Predicates.not(new ColorlessPredicate()));
         Set<Card> permanentsToExile = new HashSet<>();
         permanentsToExile.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));

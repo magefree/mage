@@ -27,7 +27,7 @@
  */
 package mage.cards.m;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -51,7 +51,7 @@ public class MightyEmergence extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature with power 5 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public MightyEmergence(UUID ownerId, CardSetInfo setInfo) {

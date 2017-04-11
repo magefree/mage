@@ -29,7 +29,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -93,7 +93,7 @@ class GrozothEffect extends SearchEffect {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, 9));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 9));
     }
 
     public GrozothEffect() {

@@ -28,7 +28,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -53,8 +53,8 @@ public class Prohibit extends CardImpl {
     private static final FilterSpell filter4 = new FilterSpell("spell if its converted mana cost is 4 or less");
 
     static {
-        filter2.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
-        filter4.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 5));
+        filter2.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter4.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public Prohibit(UUID ownerId, CardSetInfo setInfo) {

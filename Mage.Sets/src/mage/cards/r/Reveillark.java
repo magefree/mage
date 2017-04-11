@@ -29,7 +29,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.EvokeAbility;
@@ -51,7 +51,7 @@ public class Reveillark extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with power 2 or less from your graveyard");
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public Reveillark(UUID ownerId, CardSetInfo setInfo) {

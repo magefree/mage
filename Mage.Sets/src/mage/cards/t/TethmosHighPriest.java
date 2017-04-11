@@ -29,7 +29,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
@@ -51,7 +51,7 @@ public class TethmosHighPriest extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public TethmosHighPriest(UUID ownerId, CardSetInfo setInfo) {

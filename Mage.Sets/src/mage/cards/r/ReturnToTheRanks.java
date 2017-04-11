@@ -28,7 +28,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.ConvokeAbility;
@@ -51,7 +51,7 @@ public class ReturnToTheRanks extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with converted mana cost 2 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public ReturnToTheRanks(UUID ownerId, CardSetInfo setInfo) {

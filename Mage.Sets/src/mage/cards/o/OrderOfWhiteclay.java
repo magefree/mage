@@ -29,7 +29,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.UntapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -55,7 +55,7 @@ public class OrderOfWhiteclay extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 3 or less from your graveyard");
     
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public OrderOfWhiteclay(UUID ownerId, CardSetInfo setInfo) {

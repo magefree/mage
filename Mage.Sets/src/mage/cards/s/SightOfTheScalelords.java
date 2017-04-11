@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -56,7 +56,7 @@ public class SightOfTheScalelords extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new ToughnessPredicate(CountType.MORE_THAN, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public SightOfTheScalelords(UUID ownerId, CardSetInfo setInfo) {

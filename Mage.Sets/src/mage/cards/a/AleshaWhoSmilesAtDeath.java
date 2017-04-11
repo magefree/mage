@@ -29,7 +29,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -59,7 +59,7 @@ public class AleshaWhoSmilesAtDeath extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with power 2 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public AleshaWhoSmilesAtDeath(UUID ownerId, CardSetInfo setInfo) {

@@ -28,7 +28,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
@@ -66,7 +66,7 @@ public class ConduitOfRuin extends CardImpl {
 
     static {
         filter.add(new ColorlessPredicate());
-        filter.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 6));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
         filterCost.add(new FirstCastCreatureSpellPredicate());
     }
 

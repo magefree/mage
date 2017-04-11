@@ -28,7 +28,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -68,7 +68,7 @@ public class Repeal extends CardImpl {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
             FilterNonlandPermanent filter = new FilterNonlandPermanent(new StringBuilder("nonland permanent with converted mana cost ").append(xValue).toString());
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             ability.addTarget(new TargetNonlandPermanent(filter));
         }
     }

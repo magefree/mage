@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -58,7 +58,7 @@ public class Dandan extends CardImpl {
 
         // When you control no Islands, sacrifice Dandan.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), CountType.EQUAL_TO, 0,
+                new FilterLandPermanent("Island", "no Islands"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

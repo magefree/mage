@@ -29,7 +29,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
@@ -52,7 +52,7 @@ public class RangerOfEos extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public RangerOfEos(UUID ownerId, CardSetInfo setInfo) {

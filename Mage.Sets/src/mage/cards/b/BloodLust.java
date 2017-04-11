@@ -28,7 +28,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -58,7 +58,7 @@ public class BloodLust extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new ToughnessPredicate(CountType.MORE_THAN, 4));
+        filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public BloodLust(UUID ownerId, CardSetInfo setInfo) {

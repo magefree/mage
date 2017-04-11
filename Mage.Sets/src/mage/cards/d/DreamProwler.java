@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
@@ -55,7 +55,7 @@ public class DreamProwler extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Dream Prowler can't be blocked as long as it's attacking alone.
-        Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedSourceEffect(), new PermanentsOnTheBattlefieldCondition(new FilterAttackingCreature(), CountType.FEWER_THAN, 2));
+        Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedSourceEffect(), new PermanentsOnTheBattlefieldCondition(new FilterAttackingCreature(), ComparisonType.FEWER_THAN, 2));
         effect.setText("{this} can't be blocked as long as it's attacking alone");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

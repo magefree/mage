@@ -28,7 +28,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -55,7 +55,7 @@ public class RunnersBane extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
     }
     public RunnersBane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

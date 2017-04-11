@@ -29,7 +29,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -63,7 +63,7 @@ public class KalemneDiscipleOfIroas extends CardImpl {
 
     static {
         filterSpell.add(new CardTypePredicate(CardType.CREATURE));
-        filterSpell.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 4));
+        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public KalemneDiscipleOfIroas(UUID ownerId, CardSetInfo setInfo) {

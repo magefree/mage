@@ -28,7 +28,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -84,14 +84,14 @@ class PuppetsVerdictEffect extends OneShotEffect {
             if (controller.flipCoin(game)) {
                 
                 FilterCreaturePermanent filterPower2OrLess = new FilterCreaturePermanent("all creatures power 2 or less");
-                filterPower2OrLess.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+                filterPower2OrLess.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
                 for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filterPower2OrLess, game)) {
                     permanent.destroy(source.getSourceId(), game, false);
                 }
                 return true;
             } else {
                 FilterCreaturePermanent filterPower3OrGreater = new FilterCreaturePermanent("all creatures power 3 or greater");
-                filterPower3OrGreater.add(new PowerPredicate(CountType.MORE_THAN, 2));
+                filterPower3OrGreater.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
                 for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filterPower3OrGreater, game)) {
                     permanent.destroy(source.getSourceId(), game, false);
                 }

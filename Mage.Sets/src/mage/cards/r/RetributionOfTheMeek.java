@@ -27,7 +27,7 @@
  */
 package mage.cards.r;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -47,7 +47,7 @@ public class RetributionOfTheMeek extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 4 or greater");
     
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
     
     public RetributionOfTheMeek (UUID ownerId, CardSetInfo setInfo) {

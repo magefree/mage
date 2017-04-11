@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -108,7 +108,7 @@ class ScourgeOfFleetsEffect extends OneShotEffect {
             int islands = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
             FilterPermanent creatureFilter = new FilterCreaturePermanent();
             creatureFilter.add(new ControllerPredicate(TargetController.OPPONENT));
-            creatureFilter.add(new ToughnessPredicate(CountType.FEWER_THAN, islands + 1));
+            creatureFilter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, islands + 1));
             Cards cardsToHand = new CardsImpl();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source.getSourceId(), game)) {
                 cardsToHand.add(permanent);

@@ -28,7 +28,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ public class GodtrackerOfJund extends CardImpl {
     final private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
     
     String rule = "Whenever a creature with power 5 or greater enters the battlefield under your control, you may put a +1/+1 counter on {this}.";

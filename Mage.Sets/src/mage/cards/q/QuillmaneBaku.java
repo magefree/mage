@@ -29,7 +29,7 @@ package mage.cards.q;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -92,7 +92,7 @@ public class QuillmaneBaku extends CardImpl {
             }
             ability.getTargets().clear();
             FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with converted mana cost " + maxConvManaCost + " or less");
-            newFilter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, maxConvManaCost + 1));
+            newFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, maxConvManaCost + 1));
             TargetCreaturePermanent target = new TargetCreaturePermanent(newFilter);
             ability.getTargets().add(target);
         }

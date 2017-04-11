@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -106,7 +106,7 @@ class ScrapTrawlerTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent.getControllerId().equals(this.getControllerId()) && permanent.isArtifact()) {
                 FilterCard filter = new FilterArtifactCard("artifact card in your graveyard with converted mana cost less than " + permanent.getManaCost().convertedManaCost());
-                filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, permanent.getManaCost().convertedManaCost()));
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, permanent.getManaCost().convertedManaCost()));
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
                 getTargets().clear();
                 addTarget(target);

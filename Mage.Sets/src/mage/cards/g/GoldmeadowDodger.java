@@ -28,7 +28,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public class GoldmeadowDodger extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creatures with power 4 or greater");
 
     static {
-        FILTER.add(new PowerPredicate(CountType.MORE_THAN, 3));
+        FILTER.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public GoldmeadowDodger(UUID ownerId, CardSetInfo setInfo) {

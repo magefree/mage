@@ -28,7 +28,7 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
@@ -48,7 +48,7 @@ public class EndangeredArmodon extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 2 or less");
 
     static {
-        filter.add(new ToughnessPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public EndangeredArmodon(UUID ownerId, CardSetInfo setInfo) {
@@ -59,7 +59,7 @@ public class EndangeredArmodon extends CardImpl {
 
         // When you control a creature with toughness 2 or less, sacrifice Endangered Armodon.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                filter, CountType.MORE_THAN, 0,
+                filter, ComparisonType.MORE_THAN, 0,
                 new SacrificeSourceEffect()));
     }
 

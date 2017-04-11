@@ -29,7 +29,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -98,7 +98,7 @@ class SkymarkRocAbility extends TriggeredAbilityImpl {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls with toughness 2 or less");
             UUID defenderId = game.getCombat().getDefendingPlayerId(sourceId, game);
             filter.add(new ControllerIdPredicate(defenderId));
-            filter.add(new ToughnessPredicate(CountType.FEWER_THAN, 3));
+            filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
 
             this.getTargets().clear();
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);

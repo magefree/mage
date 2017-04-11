@@ -30,7 +30,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -72,7 +72,7 @@ public class KiyomaroFirstToStand extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
         
         // As long as you have four or more cards in hand, Kiyomaro has vigilance.
-        Condition condition = new CardsInHandCondition(CountType.MORE_THAN,3);
+        Condition condition = new CardsInHandCondition(ComparisonType.MORE_THAN,3);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield), condition,
                 "As long as you have four or more cards in hand, {this} has vigilance"));
@@ -81,7 +81,7 @@ public class KiyomaroFirstToStand extends CardImpl {
         // Whenever Kiyomaro deals damage, if you have seven or more cards in hand, you gain 7 life.
         this.addAbility(new ConditionalTriggeredAbility(
                 new KiyomaroFirstToStandDealsDamageTriggeredAbility(),
-                new CardsInHandCondition(CountType.MORE_THAN, 6),
+                new CardsInHandCondition(ComparisonType.MORE_THAN, 6),
                 "Whenever {this} deals damage, if you have seven or more cards in hand, you gain 7 life"
         ));
     }

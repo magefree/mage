@@ -27,7 +27,7 @@
  */
 package mage.cards.c;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
@@ -55,7 +55,7 @@ public class CopperlineGorge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // Copperline Gorge enters the battlefield tapped unless you control two or fewer other lands.
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, CountType.FEWER_THAN, 3));
+        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 3));
         String abilityText = "tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new RedManaAbility());

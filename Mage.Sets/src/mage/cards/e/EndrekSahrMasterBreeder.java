@@ -29,7 +29,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -68,7 +68,7 @@ public class EndrekSahrMasterBreeder extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new EndrekSahrMasterBreederEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false, true));
         // When you control seven or more Thrulls, sacrifice Endrek Sahr, Master Breeder.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterCreaturePermanent("Thrull", "seven or more Thrulls"), CountType.MORE_THAN, 6,
+                new FilterCreaturePermanent("Thrull", "seven or more Thrulls"), ComparisonType.MORE_THAN, 6,
                 new SacrificeSourceEffect()));
     }
 

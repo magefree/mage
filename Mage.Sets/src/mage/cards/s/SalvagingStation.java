@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -57,7 +57,7 @@ public class SalvagingStation extends CardImpl {
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
     
     public SalvagingStation(UUID ownerId, CardSetInfo setInfo) {

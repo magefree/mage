@@ -29,7 +29,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
@@ -54,7 +54,7 @@ public class ImaginaryPet extends CardImpl {
 
         // At the beginning of your upkeep, if you have a card in hand, return Imaginary Pet to its owner's hand.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new CardsInHandCondition(CountType.MORE_THAN, 0),
+        this.addAbility(new ConditionalTriggeredAbility(ability, new CardsInHandCondition(ComparisonType.MORE_THAN, 0),
             "At the beginning of your upkeep, if you have a card in hand, return {this} to its owner's hand."));
     }
 

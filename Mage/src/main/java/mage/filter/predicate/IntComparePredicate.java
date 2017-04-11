@@ -28,7 +28,7 @@
 package mage.filter.predicate;
 
 import mage.MageObject;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.game.Game;
 
 /**
@@ -38,10 +38,10 @@ import mage.game.Game;
  */
 public abstract class IntComparePredicate<T extends MageObject> implements Predicate<T> {
 
-    protected final CountType type;
+    protected final ComparisonType type;
     protected final int value;
 
-    public IntComparePredicate(CountType type, int value) {
+    public IntComparePredicate(ComparisonType type, int value) {
         this.type = type;
         this.value = value;
     }
@@ -51,7 +51,7 @@ public abstract class IntComparePredicate<T extends MageObject> implements Predi
     @Override
     public final boolean apply(T input, Game game) {
         int inputValue = getInputValue(input);
-        return CountType.compare(inputValue, type, value);
+        return ComparisonType.compare(inputValue, type, value);
     }
 
     @Override

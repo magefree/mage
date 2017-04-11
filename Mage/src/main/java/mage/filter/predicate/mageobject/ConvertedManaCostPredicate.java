@@ -28,7 +28,7 @@
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.filter.predicate.IntComparePredicate;
 
 /**
@@ -37,7 +37,7 @@ import mage.filter.predicate.IntComparePredicate;
  */
 public class ConvertedManaCostPredicate extends IntComparePredicate<MageObject> {
 
-    public ConvertedManaCostPredicate(CountType type, int value) {
+    public ConvertedManaCostPredicate(ComparisonType type, int value) {
         super(type, value);
     }
 

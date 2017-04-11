@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -52,8 +52,8 @@ public class SolarTide extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");
     
     static {
-        filter1.add(new PowerPredicate(CountType.FEWER_THAN, 3));
-        filter2.add(new PowerPredicate(CountType.MORE_THAN, 2));
+        filter1.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
+        filter2.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public SolarTide(UUID ownerId, CardSetInfo setInfo) {

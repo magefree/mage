@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
@@ -51,7 +51,7 @@ public class SunTitan extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 3 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public SunTitan(UUID ownerId, CardSetInfo setInfo) {

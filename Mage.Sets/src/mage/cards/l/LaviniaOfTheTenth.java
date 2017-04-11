@@ -30,7 +30,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DetainAllEffect;
 import mage.abilities.keyword.ProtectionAbility;
@@ -57,7 +57,7 @@ public class LaviniaOfTheTenth  extends CardImpl {
     static {
         filterDetain.add(new ControllerPredicate(TargetController.OPPONENT));
         filterDetain.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filterDetain.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 5));
+        filterDetain.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public LaviniaOfTheTenth (UUID ownerId, CardSetInfo setInfo) {

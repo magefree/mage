@@ -29,7 +29,7 @@ package mage.cards.j;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -181,7 +181,7 @@ class JarJarBinksTapEffect extends OneShotEffect {
             }
             if (multipleExist) {
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("one of the creatures with the highest power");
-                filter.add(new PowerPredicate(CountType.EQUAL_TO, highestPower));
+                filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, highestPower));
                 Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
                 if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {

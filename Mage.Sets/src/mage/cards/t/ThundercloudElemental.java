@@ -28,7 +28,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -56,7 +56,7 @@ public class ThundercloudElemental extends CardImpl {
     private static final FilterCreaturePermanent flyingFilter = new FilterCreaturePermanent("All other creatures");
 
     static {
-        toughnessFilter.add(new ToughnessPredicate(CountType.FEWER_THAN, 3));
+        toughnessFilter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
         flyingFilter.add(new AnotherPredicate());
     }
 

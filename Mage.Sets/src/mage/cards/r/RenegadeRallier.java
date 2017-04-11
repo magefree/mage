@@ -29,7 +29,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -54,7 +54,7 @@ public class RenegadeRallier extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 2 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public RenegadeRallier(UUID ownerId, CardSetInfo setInfo) {

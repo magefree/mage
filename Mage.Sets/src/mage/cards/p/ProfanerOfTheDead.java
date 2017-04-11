@@ -29,7 +29,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ExploitCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ExploitAbility;
@@ -95,7 +95,7 @@ class ProfanerOfTheDeadReturnEffect extends OneShotEffect {
         if (controller != null && exploitedCreature != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerPredicate(TargetController.OPPONENT));
-            filter.add(new ToughnessPredicate(CountType.FEWER_THAN, exploitedCreature.getToughness().getValue()));
+            filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, exploitedCreature.getToughness().getValue()));
             Cards cardsToHand = new CardsImpl();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 cardsToHand.add(permanent);

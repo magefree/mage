@@ -28,7 +28,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -56,7 +56,7 @@ public class TetheredGriffin extends CardImpl {
 
         // When you control no enchantments, sacrifice Tethered Griffin.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterEnchantmentPermanent(), CountType.EQUAL_TO, 0,
+                new FilterEnchantmentPermanent(), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

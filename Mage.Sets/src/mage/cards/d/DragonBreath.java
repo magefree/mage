@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -61,7 +61,7 @@ public class DragonBreath extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with converted mana cost 6 or greater");
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
     }
 
     public DragonBreath(UUID ownerId, CardSetInfo setInfo) {

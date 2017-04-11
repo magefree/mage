@@ -29,7 +29,7 @@ package mage.cards.e;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -91,7 +91,7 @@ class EpicExperimentEffect extends OneShotEffect {
             // cast the possible cards without paying the mana
             ExileZone epicExperimentExileZone = game.getExile().getExileZone(source.getSourceId());
             FilterCard filter = new FilterInstantOrSorceryCard();
-            filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
             filter.setMessage("instant and sorcery cards with converted mana cost " + source.getManaCostsToPay().getX() + " or less");
             Cards cardsToCast = new CardsImpl();
             if (epicExperimentExileZone == null) {

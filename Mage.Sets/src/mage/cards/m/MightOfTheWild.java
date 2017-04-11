@@ -27,7 +27,7 @@
  */
 package mage.cards.m;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
@@ -57,7 +57,7 @@ public class MightOfTheWild extends CardImpl {
     private static final FilterPermanent filterMode2 = new FilterPermanent("artifact or enchantment");
 
     static {
-        filterMode1.add(new PowerPredicate(CountType.FEWER_THAN, 4));
+        filterMode1.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
         filterMode2.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 

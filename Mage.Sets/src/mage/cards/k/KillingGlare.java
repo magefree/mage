@@ -28,7 +28,7 @@
 package mage.cards.k;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class KillingGlare extends CardImpl {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with power ").append(xValue).append(" or less").toString());
-            filter.add(new PowerPredicate(CountType.FEWER_THAN, xValue + 1));
+            filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
             ability.addTarget(new TargetCreaturePermanent(filter));
         }
     }

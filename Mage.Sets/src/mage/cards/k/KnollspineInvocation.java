@@ -28,7 +28,7 @@
 package mage.cards.k;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -74,7 +74,7 @@ public class KnollspineInvocation extends CardImpl {
                     DiscardTargetCost discardCost = (DiscardTargetCost) cost;
                     discardCost.getTargets().clear();
                     FilterCard adjustedFilter = filter.copy(); // don't use it directly, it's static!!!!
-                    adjustedFilter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, xValue));
+                    adjustedFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
                     discardCost.addTarget(new TargetCardInHand(adjustedFilter));
                     return;
                 }

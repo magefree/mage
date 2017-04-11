@@ -29,7 +29,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -60,7 +60,7 @@ import java.util.UUID;
 public class DuskDawn extends SplitCard {
     private static final FilterCreaturePermanent filterCreatures3orGreater = new FilterCreaturePermanent("creatures with power greater than or equal to 3");
     static {
-        filterCreatures3orGreater.add(new PowerPredicate(CountType.MORE_THAN, 2));
+        filterCreatures3orGreater.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public DuskDawn(UUID ownerId, CardSetInfo setInfo) {
@@ -93,7 +93,7 @@ class DawnEffect extends OneShotEffect {
 
     private static final FilterCard filter2orLess = new FilterCreatureCard("creatures with power less than or equal to 2");
     static {
-        filter2orLess.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter2orLess.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     DawnEffect() {

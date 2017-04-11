@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -88,7 +88,7 @@ public class SpellstutterSprite extends CardImpl {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             int numberFaeries = game.getState().getBattlefield().countAll(filter, ability.getControllerId(), game);
             FilterSpell xFilter = new FilterSpell(new StringBuilder("spell with converted mana cost ").append(numberFaeries).append(" or less").toString());
-            xFilter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, numberFaeries + 1));
+            xFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, numberFaeries + 1));
             ability.getTargets().clear();
             ability.addTarget(new TargetSpell(xFilter));
         }

@@ -29,7 +29,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -105,7 +105,7 @@ class NecroplasmEffect extends OneShotEffect {
         if (player != null && sourcePermanent != null) {
             int numCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, numCounters));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, numCounters));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 permanent.destroy(source.getSourceId(), game, false);
             }

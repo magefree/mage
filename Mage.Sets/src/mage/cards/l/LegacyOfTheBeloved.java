@@ -28,7 +28,7 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -100,7 +100,7 @@ class LegacyOfTheBelovedEffect extends OneShotEffect {
                 if (cost instanceof SacrificeTargetCost) {
                     Permanent p = (Permanent) game.getLastKnownInformation(((SacrificeTargetCost) cost).getPermanents().get(0).getId(), Zone.BATTLEFIELD);
                     if (p != null) {
-                        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, p.getConvertedManaCost()));
+                        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, p.getConvertedManaCost()));
                         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
                         Player player = game.getPlayer(source.getControllerId());
                         if (player != null && player.searchLibrary(target, game)) {

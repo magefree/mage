@@ -29,7 +29,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ public class DriverOfTheDead extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard to the battlefield");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public DriverOfTheDead(UUID ownerId, CardSetInfo setInfo) {

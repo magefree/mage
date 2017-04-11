@@ -28,7 +28,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -53,8 +53,8 @@ public class Pendelhaven extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
 
     static {
-        filter.add(new PowerPredicate(CountType.EQUAL_TO, 1));
-        filter.add(new ToughnessPredicate(CountType.EQUAL_TO, 1));
+        filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, 1));
+        filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, 1));
     }
 
     public Pendelhaven(UUID ownerId, CardSetInfo setInfo) {

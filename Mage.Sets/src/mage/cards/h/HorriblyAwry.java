@@ -28,7 +28,7 @@
 package mage.cards.h;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ public class HorriblyAwry extends CardImpl {
     private static final FilterCreatureSpell filter = new FilterCreatureSpell("creature spell with converted mana cost 4 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public HorriblyAwry(UUID ownerId, CardSetInfo setInfo) {

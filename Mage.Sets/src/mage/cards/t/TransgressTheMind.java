@@ -28,7 +28,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -50,7 +50,7 @@ public class TransgressTheMind extends CardImpl {
     private static final FilterCard filter = new FilterCard("a card from it with converted mana cost 3 or greater");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public TransgressTheMind(UUID ownerId, CardSetInfo setInfo) {

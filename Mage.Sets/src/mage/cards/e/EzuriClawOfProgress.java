@@ -29,7 +29,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -58,7 +58,7 @@ public class EzuriClawOfProgress extends CardImpl {
     final private static FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent();
     
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
         filter2.add(new AnotherPredicate());
     }
     

@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,7 +46,7 @@ public class SmiteTheMonstrous extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public SmiteTheMonstrous(UUID ownerId, CardSetInfo setInfo) {

@@ -29,7 +29,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -67,7 +67,7 @@ public class PirateShip extends CardImpl {
         this.addAbility(ability);
         // When you control no Islands, sacrifice Pirate Ship.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), CountType.EQUAL_TO, 0,
+                new FilterLandPermanent("Island", "no Islands"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

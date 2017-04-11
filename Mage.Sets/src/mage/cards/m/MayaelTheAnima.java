@@ -28,7 +28,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -53,7 +53,7 @@ public class MayaelTheAnima extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with power 5 or greater");
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public MayaelTheAnima(UUID ownerId, CardSetInfo setInfo) {

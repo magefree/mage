@@ -29,7 +29,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -52,7 +52,7 @@ public class ErrantDoomsayers extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 2 or less");
     static {
-        filter.add(new ToughnessPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public ErrantDoomsayers(UUID ownerId, CardSetInfo setInfo) {

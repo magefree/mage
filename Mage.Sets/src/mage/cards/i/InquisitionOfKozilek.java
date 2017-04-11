@@ -28,7 +28,7 @@
 
 package mage.cards.i;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,7 +52,7 @@ public class InquisitionOfKozilek extends CardImpl {
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public InquisitionOfKozilek(UUID ownerId, CardSetInfo setInfo){

@@ -27,7 +27,7 @@
  */
 package mage.cards.c;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +49,7 @@ public class CollectedCompany extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public CollectedCompany(UUID ownerId, CardSetInfo setInfo) {

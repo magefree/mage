@@ -27,7 +27,7 @@
  */
 package mage.cards.j;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ public class JuntuStakes extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 1 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 2));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public JuntuStakes(UUID ownerId, CardSetInfo setInfo) {

@@ -28,7 +28,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.condition.common.RaidCondition;
@@ -54,7 +54,7 @@ public class WarNameAspirant extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 1 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 2));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public WarNameAspirant(UUID ownerId, CardSetInfo setInfo) {

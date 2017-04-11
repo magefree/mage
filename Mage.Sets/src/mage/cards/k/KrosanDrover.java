@@ -28,7 +28,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
@@ -51,7 +51,7 @@ public class KrosanDrover extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
     }
     
     public KrosanDrover(UUID ownerId, CardSetInfo setInfo) {

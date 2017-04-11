@@ -28,7 +28,7 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -179,7 +179,7 @@ public class NightDealings extends CardImpl {
             }
 
             FilterNonlandCard filter = new FilterNonlandCard("nonland card with converted mana cost X = " + cmc);
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, cmc));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
             if (player.searchLibrary(target, game)) {

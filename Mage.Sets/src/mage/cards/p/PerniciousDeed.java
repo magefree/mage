@@ -28,7 +28,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.VariableManaCost;
@@ -103,7 +103,7 @@ class PerniciousDeedEffect extends OneShotEffect {
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.ENCHANTMENT)));
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
 
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {

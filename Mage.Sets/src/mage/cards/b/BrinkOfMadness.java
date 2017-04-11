@@ -28,7 +28,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
@@ -63,7 +63,7 @@ public class BrinkOfMadness extends CardImpl {
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new BrinkOfMadnessEffect());
         ability.addTarget(new TargetOpponent());
-        CardsInHandCondition contition = new CardsInHandCondition(CountType.EQUAL_TO, 0);
+        CardsInHandCondition contition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
         this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if you have no cards in hand, sacrifice {this} and target opponent discards his or her hand."));
         
     }

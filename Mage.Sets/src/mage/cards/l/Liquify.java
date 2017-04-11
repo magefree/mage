@@ -27,7 +27,7 @@
  */
 package mage.cards.l;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +48,7 @@ public class Liquify extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public Liquify(UUID ownerId, CardSetInfo setInfo) {

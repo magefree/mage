@@ -28,7 +28,7 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -170,7 +170,7 @@ class NotOfThisWorldCondition implements Condition {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control with power 7 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 6));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 6));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

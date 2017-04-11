@@ -27,7 +27,7 @@
  */
 package mage.cards.p;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +48,7 @@ public class PuncturingLight extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterAttackingOrBlockingCreature("attacking or blocking creature with power 3 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public PuncturingLight(UUID ownerId, CardSetInfo setInfo) {

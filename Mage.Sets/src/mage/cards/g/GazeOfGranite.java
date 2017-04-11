@@ -28,7 +28,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +49,7 @@ public class GazeOfGranite extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each nonland permanent with converted mana cost X or less");
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public GazeOfGranite(UUID ownerId, CardSetInfo setInfo) {

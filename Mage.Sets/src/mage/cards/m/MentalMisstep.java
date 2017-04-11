@@ -27,7 +27,7 @@
  */
 package mage.cards.m;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,7 +47,7 @@ public class MentalMisstep extends CardImpl {
     private static final FilterSpell FILTER = new FilterSpell("spell with converted mana cost 1");
 
     static {
-        FILTER.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, 1));
+        FILTER.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 1));
     }
 
     public MentalMisstep(UUID ownerId, CardSetInfo setInfo) {

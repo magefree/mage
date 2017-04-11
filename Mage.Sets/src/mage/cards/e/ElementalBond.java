@@ -27,7 +27,7 @@
  */
 package mage.cards.e;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -48,7 +48,7 @@ public class ElementalBond extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature with power 3 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 2));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public ElementalBond(UUID ownerId, CardSetInfo setInfo) {

@@ -28,7 +28,7 @@
 
 package mage.abilities.keyword;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -76,7 +76,7 @@ public class SoulshiftAbility extends DiesTriggeredAbility {
         this.getTargets().clear();
         int intValue = amount.calculate(game, this, null);
         FilterCard filter = new FilterCard("Spirit card with converted mana cost " + intValue + " or less from your graveyard");
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN,  intValue + 1));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN,  intValue + 1));
         filter.add(new SubtypePredicate("Spirit"));
         this.addTarget(new TargetCardInYourGraveyard(filter));
         super.trigger(game, controllerId); //To change body of generated methods, choose Tools | Templates.

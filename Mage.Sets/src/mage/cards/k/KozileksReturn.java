@@ -27,7 +27,7 @@
  */
 package mage.cards.k;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -56,7 +56,7 @@ public class KozileksReturn extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Eldrazi"));
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 6));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public KozileksReturn(UUID ownerId, CardSetInfo setInfo) {

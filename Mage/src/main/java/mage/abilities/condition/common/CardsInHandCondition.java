@@ -30,7 +30,7 @@ package mage.abilities.condition.common;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -47,23 +47,23 @@ public class CardsInHandCondition implements Condition {
 
 
     private Condition condition;
-    private CountType type;
+    private ComparisonType type;
     private int count;
     private TargetController targetController;
 
     public CardsInHandCondition() {
-        this(CountType.EQUAL_TO, 0);
+        this(ComparisonType.EQUAL_TO, 0);
     }
 
-    public CardsInHandCondition(CountType type, int count) {
+    public CardsInHandCondition(ComparisonType type, int count) {
         this(type, count, null);
     }
 
-    public CardsInHandCondition(CountType type, int count, Condition conditionToDecorate) {
+    public CardsInHandCondition(ComparisonType type, int count, Condition conditionToDecorate) {
         this(type, count, conditionToDecorate, TargetController.YOU);
     }
 
-    public CardsInHandCondition(CountType type, int count, Condition conditionToDecorate, TargetController targetController) {
+    public CardsInHandCondition(ComparisonType type, int count, Condition conditionToDecorate, TargetController targetController) {
         this.type = type;
         this.count = count;
         this.condition = conditionToDecorate;
@@ -77,12 +77,12 @@ public class CardsInHandCondition implements Condition {
         if (controller != null) {
             switch (targetController) {
                 case YOU:
-                    conditionApplies = CountType.compare(game.getPlayer(source.getControllerId()).getHand().size(), type, count);
+                    conditionApplies = ComparisonType.compare(game.getPlayer(source.getControllerId()).getHand().size(), type, count);
                     break;
                 case ACTIVE:
                     Player player = game.getPlayer(game.getActivePlayerId());
                     if (player != null) {
-                        conditionApplies = CountType.compare(player.getHand().size(), type, count);
+                        conditionApplies = ComparisonType.compare(player.getHand().size(), type, count);
                     }
                     break;
                 case ANY:
@@ -90,7 +90,7 @@ public class CardsInHandCondition implements Condition {
                     for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                         player = game.getPlayer(playerId);
                         if (player != null) {
-                            if (!CountType.compare(player.getHand().size(), type, this.count)) {
+                            if (!ComparisonType.compare(player.getHand().size(), type, this.count)) {
                                 conflict = true;
                                 break;
                             }

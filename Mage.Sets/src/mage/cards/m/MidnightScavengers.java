@@ -29,7 +29,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
@@ -54,7 +54,7 @@ public class MidnightScavengers extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 3 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public MidnightScavengers(UUID ownerId, CardSetInfo setInfo) {

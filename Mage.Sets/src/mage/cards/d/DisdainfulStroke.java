@@ -27,7 +27,7 @@
  */
 package mage.cards.d;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,7 +46,7 @@ public class DisdainfulStroke extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or greater");
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public DisdainfulStroke(UUID ownerId, CardSetInfo setInfo) {

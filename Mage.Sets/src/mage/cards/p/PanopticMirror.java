@@ -28,7 +28,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -100,7 +100,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
         int count = source.getManaCostsToPay().getX();
 
         FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost equal to " + count);
-        filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, count));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, count));
         String choiceText = "Exile a " + filter.getMessage() + " from your hand?";
 
         Player player = game.getPlayer(source.getControllerId());

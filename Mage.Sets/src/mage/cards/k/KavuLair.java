@@ -27,7 +27,7 @@
  */
 package mage.cards.k;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public class KavuLair extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
 
     static {
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
     
     public KavuLair(UUID ownerId, CardSetInfo setInfo) {

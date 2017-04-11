@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -61,7 +61,7 @@ public class Disembowel extends CardImpl {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X");
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             ability.addTarget(new TargetCreaturePermanent(filter));
         }
     }

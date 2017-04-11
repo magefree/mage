@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -59,7 +59,7 @@ public class SunstrikeLegionnaire extends CardImpl {
 
     static {
         untapFilter.add(new AnotherPredicate());
-        tapFilter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
+        tapFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public SunstrikeLegionnaire(UUID ownerId, CardSetInfo setInfo) {

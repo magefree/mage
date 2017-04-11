@@ -27,7 +27,7 @@
  */
 package mage.cards.p;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.ForecastAbility;
@@ -49,8 +49,8 @@ public class ProclamationOfRebirth extends CardImpl {
     private static final FilterCreatureCard filter1 = new FilterCreatureCard("creature card with converted mana cost {1} or less from your graveyard");
     private static final FilterCreatureCard filter3 = new FilterCreatureCard("creature cards with converted mana cost {1} or less from your graveyard");
     static {
-        filter1.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 2));
-        filter3.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 2));
+        filter1.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
+        filter3.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
     public ProclamationOfRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

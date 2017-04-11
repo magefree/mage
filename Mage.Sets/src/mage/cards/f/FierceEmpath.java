@@ -28,7 +28,7 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
@@ -48,7 +48,7 @@ public class FierceEmpath extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with converted mana cost 6 or greater");
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
     }
     public FierceEmpath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

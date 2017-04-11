@@ -29,7 +29,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -74,7 +74,7 @@ public class HearthKami extends CardImpl {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("artifact with converted mana cost ").append(xValue).toString());
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             Target target = new TargetPermanent(filter);
             ability.addTarget(target);
         }

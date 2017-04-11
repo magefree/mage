@@ -28,7 +28,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -102,7 +102,7 @@ public class ProfaneCommand extends CardImpl {
                 mode.getTargets().clear();
                 int xValue = ability.getManaCostsToPay().getX();
                 FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less from your graveyard");
-                filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, xValue + 1));
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
                 mode.getTargets().add(new TargetCardInYourGraveyard(filter));
             }
             if (effect instanceof GainAbilityTargetEffect) {

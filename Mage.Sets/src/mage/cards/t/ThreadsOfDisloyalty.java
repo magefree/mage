@@ -29,7 +29,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
@@ -55,7 +55,7 @@ public class ThreadsOfDisloyalty extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 2 or less");
 
     static {
-          filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
+          filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public ThreadsOfDisloyalty(UUID ownerId, CardSetInfo setInfo) {

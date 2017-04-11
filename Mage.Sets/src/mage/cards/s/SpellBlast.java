@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
@@ -74,7 +74,7 @@ public class SpellBlast extends CardImpl {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterSpell newfilter = new FilterSpell(new StringBuilder("spell with converted mana cost ").append(xValue).toString());
-            newfilter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, xValue));
+            newfilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             Target target = new TargetSpell(newfilter);
             ability.addTarget(target);
         }

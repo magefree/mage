@@ -29,7 +29,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -75,7 +75,7 @@ public class GorillaShaman extends CardImpl {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("noncreature artifact with converted mana cost ").append(xValue).toString());
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
             Target target = new TargetPermanent(filter);
             ability.addTarget(target);

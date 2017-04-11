@@ -27,7 +27,7 @@
  */
 package mage.cards.e;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public class EmrakulsInfluence extends CardImpl {
 
     static {
         filterSpell.add(new SubtypePredicate("Eldrazi"));
-        filterSpell.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 6));
+        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public EmrakulsInfluence(UUID ownerId, CardSetInfo setInfo) {

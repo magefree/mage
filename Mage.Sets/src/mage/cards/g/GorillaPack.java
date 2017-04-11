@@ -28,7 +28,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -58,7 +58,7 @@ public class GorillaPack extends CardImpl {
 
         // When you control no Forests, sacrifice Gorilla Pack.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Forest", "no Forests"), CountType.EQUAL_TO, 0,
+                new FilterLandPermanent("Forest", "no Forests"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

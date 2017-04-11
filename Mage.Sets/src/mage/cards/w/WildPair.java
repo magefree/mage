@@ -29,7 +29,7 @@ package mage.cards.w;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -108,7 +108,7 @@ class WildPairEffect extends OneShotEffect {
             if (permanent != null) {
                 int totalPT = permanent.getPower().getValue() + permanent.getToughness().getValue();
                 FilterCreatureCard filter = new FilterCreatureCard("creature card with total power and toughness " + totalPT);
-                filter.add(new TotalPowerAndToughnessPredicate(CountType.EQUAL_TO, totalPT));
+                filter.add(new TotalPowerAndToughnessPredicate(ComparisonType.EQUAL_TO, totalPT));
                 TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
                 if (controller.searchLibrary(target, game)) {
                     if (!target.getTargets().isEmpty()) {
@@ -129,7 +129,7 @@ class WildPairEffect extends OneShotEffect {
  */
 class TotalPowerAndToughnessPredicate extends IntComparePredicate<MageObject> {
 
-    public TotalPowerAndToughnessPredicate(CountType type, int value) {
+    public TotalPowerAndToughnessPredicate(ComparisonType type, int value) {
         super(type, value);
     }
 

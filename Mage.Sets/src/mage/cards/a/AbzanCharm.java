@@ -27,7 +27,7 @@
  */
 package mage.cards.a;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -53,7 +53,7 @@ public class AbzanCharm extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature with power 3 or greater");
 
     static {
-        FILTER.add(new PowerPredicate(CountType.MORE_THAN, 2));
+        FILTER.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public AbzanCharm(UUID ownerId, CardSetInfo setInfo) {

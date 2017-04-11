@@ -30,7 +30,7 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -148,7 +148,7 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterCard filter = new FilterCard();
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, source.getManaCostsToPay().getX()));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
             TargetCardInExile target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source));
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
             if (!cards.isEmpty() && controller.choose(Outcome.PlayForFree, cards, target, game)) {

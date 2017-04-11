@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -68,7 +68,7 @@ public class SerendibDjinn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SerendibDjinnEffect(), TargetController.YOU, false));
         // When you control no lands, sacrifice Serendib Djinn.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent(), CountType.EQUAL_TO, 0,
+                new FilterLandPermanent(), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

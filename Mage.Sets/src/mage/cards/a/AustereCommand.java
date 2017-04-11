@@ -27,7 +27,7 @@
  */
 package mage.cards.a;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
@@ -49,8 +49,8 @@ public class AustereCommand extends CardImpl {
     private static final FilterCreaturePermanent filter3orLess = new FilterCreaturePermanent("creatures with converted mana cost 3 or less");
     private static final FilterCreaturePermanent filter4orMore = new FilterCreaturePermanent("creatures with converted mana cost 4 or greater");
     static {
-        filter3orLess.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 4));
-        filter4orMore.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 3));
+        filter3orLess.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter4orMore.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public AustereCommand(UUID ownerId, CardSetInfo setInfo) {

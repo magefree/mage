@@ -29,7 +29,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -118,7 +118,7 @@ class EvershrikeEffect extends OneShotEffect {
                 filterAuraCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
                 filterAuraCard.add(new SubtypePredicate("Aura"));
                 filterAuraCard.add(new AuraCardCanAttachToPermanentId(evershrikePermanent.getId()));
-                filterAuraCard.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, xAmount));
+                filterAuraCard.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xAmount));
                 int count = controller.getHand().count(filterAuraCard, game);
                 while (controller.canRespond() && count > 0 && controller.chooseUse(Outcome.Benefit, "Do you wish to put an Aura card from your hand onto Evershrike", source, game)) {
                     TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);

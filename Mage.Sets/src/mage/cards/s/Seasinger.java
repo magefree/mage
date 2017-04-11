@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
@@ -84,7 +84,7 @@ public class Seasinger extends CardImpl {
 
         // When you control no Islands, sacrifice Seasinger.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), CountType.EQUAL_TO, 0,
+                new FilterLandPermanent("Island", "no Islands"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
 
         // You may choose not to untap Seasinger during your untap step.
@@ -93,7 +93,7 @@ public class Seasinger extends CardImpl {
         // {tap}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
-                new PermanentsOnTheBattlefieldCondition(seasinger, CountType.EQUAL_TO, 1, SourceTappedCondition.instance), rule);
+                new PermanentsOnTheBattlefieldCondition(seasinger, ComparisonType.EQUAL_TO, 1, SourceTappedCondition.instance), rule);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         creatureWhoseControllerControlsIsland.add(new ControllerControlsIslandPredicate());
         ability.addTarget(new TargetCreaturePermanent(creatureWhoseControllerControlsIsland));

@@ -29,7 +29,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -86,7 +86,7 @@ public class GethLordOfTheVault extends CardImpl {
             filter.add(Predicates.or(
                     new CardTypePredicate(CardType.ARTIFACT),
                     new CardTypePredicate(CardType.CREATURE)));
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             Target target = new TargetCardInOpponentsGraveyard(filter);
             ability.addTarget(target);
         }

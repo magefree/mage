@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -49,7 +49,7 @@ public class StranglingSoot extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughess 3 or less");
 
     static {
-        filter.add(new ToughnessPredicate(CountType.FEWER_THAN, 4));
+        filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public StranglingSoot(UUID ownerId, CardSetInfo setInfo) {

@@ -28,7 +28,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapTargetCost;
@@ -71,7 +71,7 @@ public class CollectiveEffort extends CardImpl {
 
     static {
         filterUntapped.add(Predicates.not(new TappedPredicate()));
-        filterDestroyCreature.add(new PowerPredicate(CountType.MORE_THAN, 3));
+        filterDestroyCreature.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public CollectiveEffort(UUID ownerId, CardSetInfo setInfo) {

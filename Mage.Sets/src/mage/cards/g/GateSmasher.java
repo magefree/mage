@@ -28,7 +28,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -59,7 +59,7 @@ public class GateSmasher extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with 3 or more power");
 
     static {
-        filter.add(new ToughnessPredicate(CountType.MORE_THAN, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public GateSmasher(UUID ownerId, CardSetInfo setInfo) {

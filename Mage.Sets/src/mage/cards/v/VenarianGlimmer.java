@@ -28,7 +28,7 @@
 package mage.cards.v;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
@@ -91,7 +91,7 @@ class VenarianGlimmerEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             FilterCard filter = new FilterNonlandCard();
-            filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
             Effect effect = new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY);
             effect.setTargetPointer(targetPointer);
             effect.apply(game, source);

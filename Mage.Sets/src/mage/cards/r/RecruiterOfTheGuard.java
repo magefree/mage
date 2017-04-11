@@ -28,7 +28,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
@@ -48,7 +48,7 @@ public class RecruiterOfTheGuard extends CardImpl {
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with toughness 2 or less");
     static {
-        filter.add(new ToughnessPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public RecruiterOfTheGuard(UUID ownerId, CardSetInfo setInfo) {

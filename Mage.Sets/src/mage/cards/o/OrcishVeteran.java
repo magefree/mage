@@ -29,7 +29,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -57,7 +57,7 @@ public class OrcishVeteran extends CardImpl {
     
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(new PowerPredicate(CountType.MORE_THAN, 1));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 1));
     }
 
     public OrcishVeteran(UUID ownerId, CardSetInfo setInfo) {

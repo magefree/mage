@@ -28,7 +28,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public class BalaGedScorpion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 1 or less");
 
     static {
-        filter.add(new PowerPredicate(CountType.FEWER_THAN, 2));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public BalaGedScorpion(UUID ownerId, CardSetInfo setInfo) {

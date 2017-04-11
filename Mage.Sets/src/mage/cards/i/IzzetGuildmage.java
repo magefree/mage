@@ -29,7 +29,7 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -57,10 +57,10 @@ public class IzzetGuildmage extends CardImpl {
 
     static {
         filterInstant.add(new CardTypePredicate(CardType.INSTANT));
-        filterInstant.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
+        filterInstant.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
         filterInstant.add(new ControllerPredicate(TargetController.YOU));
         filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
-        filterSorcery.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
+        filterSorcery.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
         filterSorcery.add(new ControllerPredicate(TargetController.YOU));
     }
 

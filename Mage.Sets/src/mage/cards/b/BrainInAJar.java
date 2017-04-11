@@ -28,7 +28,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -108,7 +108,7 @@ class BrainInAJarCastEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             int counters = sourceObject.getCounters(game).getCount(CounterType.CHARGE);
             FilterCard filter = new FilterInstantOrSorceryCard();
-            filter.add(new ConvertedManaCostPredicate(CountType.EQUAL_TO, counters));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, counters));
             int cardsToCast = controller.getHand().count(filter, source.getControllerId(), source.getSourceId(), game);
             if (cardsToCast > 0 && controller.chooseUse(outcome, "Cast an instant or sorcery card with converted mana costs of " + counters + " from your hand without paying its mana cost?", source, game)) {
                 TargetCardInHand target = new TargetCardInHand(filter);

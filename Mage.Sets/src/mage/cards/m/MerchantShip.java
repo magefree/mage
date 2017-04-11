@@ -28,7 +28,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -61,7 +61,7 @@ public class MerchantShip extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new GainLifeEffect(2)));
         // When you control no Islands, sacrifice Merchant Ship.
          this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), CountType.EQUAL_TO, 0,
+                new FilterLandPermanent("Island", "no Islands"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
    }
 

@@ -29,7 +29,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -53,7 +53,7 @@ public class TimelyHordemate extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(CountType.FEWER_THAN, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public TimelyHordemate(UUID ownerId, CardSetInfo setInfo) {

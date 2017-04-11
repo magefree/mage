@@ -1,6 +1,6 @@
 package mage.cards.m;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -23,7 +23,7 @@ public class MouthFeed extends SplitCard {
     private static final FilterControlledCreaturePermanent filterCreaturesYouControlPower3orGreater
             = new FilterControlledCreaturePermanent("creature you control with power 3 or greater.");
     static {
-        filterCreaturesYouControlPower3orGreater.add(new PowerPredicate(CountType.MORE_THAN, 2));
+        filterCreaturesYouControlPower3orGreater.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public MouthFeed(UUID ownerId, CardSetInfo setInfo) {

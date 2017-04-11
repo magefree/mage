@@ -29,7 +29,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -53,7 +53,7 @@ public class TreasureMage extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new ConvertedManaCostPredicate(CountType.MORE_THAN, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
     }
 
     public TreasureMage (UUID ownerId, CardSetInfo setInfo) {

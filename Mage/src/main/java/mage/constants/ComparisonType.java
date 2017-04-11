@@ -1,14 +1,14 @@
-package mage.abilities;
+package mage.constants;
 
 /**
  * Created by IGOUDT on 5-3-2017.
  */
-public enum CountType {
+public enum ComparisonType {
     MORE_THAN(">"), FEWER_THAN("<"), EQUAL_TO("==");
 
     String operator;
 
-    CountType(String op) {
+    ComparisonType(String op) {
         operator = op;
     }
 
@@ -18,7 +18,7 @@ public enum CountType {
     }
 
 
-    public static boolean compare(int source, CountType comparison, int target) {
+    public static boolean compare(int source, ComparisonType comparison, int target) {
         switch (comparison) {
             case MORE_THAN:
                 return source > target;
