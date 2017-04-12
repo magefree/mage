@@ -111,6 +111,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Dread Wanderer", 88, Rarity.RARE, mage.cards.d.DreadWanderer.class));
         cards.add(new SetCardInfo("Dune Beetle", 89, Rarity.COMMON, mage.cards.d.DuneBeetle.class));
         cards.add(new SetCardInfo("Dusk // Dawn", 210, Rarity.RARE, mage.cards.d.DuskDawn.class));
+        cards.add(new SetCardInfo("Enigma Drake", 198, Rarity.UNCOMMON, mage.cards.e.EnigmaDrake.class));
         cards.add(new SetCardInfo("Essence Scatter", 52, Rarity.COMMON, mage.cards.e.EssenceScatter.class));
         cards.add(new SetCardInfo("Exemplar of Strength", 165, Rarity.UNCOMMON, mage.cards.e.ExemplarOfStrength.class));
         cards.add(new SetCardInfo("Fetid Pools", 243, Rarity.RARE, mage.cards.f.FetidPools.class));
