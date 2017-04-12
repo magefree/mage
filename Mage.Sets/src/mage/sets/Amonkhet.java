@@ -75,6 +75,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("As Foretold", 42, Rarity.MYTHIC, mage.cards.a.AsForetold.class));
         cards.add(new SetCardInfo("Aven Mindcensor", 5, Rarity.RARE, mage.cards.a.AvenMindcensor.class));
         cards.add(new SetCardInfo("Battlefield Scavenger", 118, Rarity.UNCOMMON, mage.cards.b.BattlefieldScavenger.class));
+        cards.add(new SetCardInfo("Bounty of the Luxa", 196, Rarity.RARE, mage.cards.b.BountyOfTheLuxa.class));
         cards.add(new SetCardInfo("Bontu's Monument", 225, Rarity.UNCOMMON, mage.cards.b.BontusMonument.class));
         cards.add(new SetCardInfo("Canyon Slough", 239, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Cartouche of Ambition", 83, Rarity.COMMON, mage.cards.c.CartoucheOfAmbition.class));
@@ -126,7 +127,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Gravedigger", 93, Rarity.UNCOMMON, mage.cards.g.Gravedigger.class));
         cards.add(new SetCardInfo("Grim Strider", 94, Rarity.UNCOMMON, mage.cards.g.GrimStrider.class));
         cards.add(new SetCardInfo("Hapatra, Vizier of Poisons", 199, Rarity.RARE, mage.cards.h.HapatraVizierOfPoisons.class));
-        cards.add(new SetCardInfo("Harsh Mentor", 135, Rarity.RARE, mage.cards.h.HarshMentor.class));
+        //cards.add(new SetCardInfo("Harsh Mentor", 135, Rarity.RARE, mage.cards.h.HarshMentor.class));
         cards.add(new SetCardInfo("Hazoret the Fervent", 136, Rarity.MYTHIC, mage.cards.h.HazoretTheFervent.class));
         cards.add(new SetCardInfo("Hazoret's Favor", 137, Rarity.RARE, mage.cards.h.HazoretsFavor.class));
         cards.add(new SetCardInfo("Hazoret's Monument", 229, Rarity.UNCOMMON, mage.cards.h.HazoretsMonument.class));
