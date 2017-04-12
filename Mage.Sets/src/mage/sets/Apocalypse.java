@@ -72,6 +72,7 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Grave Defiler", 40, Rarity.UNCOMMON, mage.cards.g.GraveDefiler.class));
         cards.add(new SetCardInfo("Haunted Angel", 12, Rarity.UNCOMMON, mage.cards.h.HauntedAngel.class));
         cards.add(new SetCardInfo("Helionaut", 13, Rarity.COMMON, mage.cards.h.Helionaut.class));
+	cards.add(new SetCardInfo("Ice Cave", 24, Rarity.RARE, mage.cards.i.IceCave.class));
         cards.add(new SetCardInfo("Illuminate", 63, Rarity.UNCOMMON, mage.cards.i.Illuminate.class));
         cards.add(new SetCardInfo("Illusion // Reality", 129, Rarity.UNCOMMON, mage.cards.i.IllusionReality.class));
         cards.add(new SetCardInfo("Index", 25, Rarity.COMMON, mage.cards.i.Index.class));
