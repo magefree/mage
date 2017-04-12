@@ -27,12 +27,12 @@
  */
 package mage.cards.e;
 
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +49,7 @@ public class EmrakulsInfluence extends CardImpl {
 
     static {
         filterSpell.add(new SubtypePredicate("Eldrazi"));
-        filterSpell.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 6));
+        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public EmrakulsInfluence(UUID ownerId, CardSetInfo setInfo) {

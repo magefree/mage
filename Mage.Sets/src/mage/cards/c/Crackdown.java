@@ -28,6 +28,7 @@
 package mage.cards.c;
 
 import mage.ObjectColor;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
@@ -36,7 +37,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -54,7 +54,7 @@ public class Crackdown extends CardImpl {
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public Crackdown(UUID ownerId, CardSetInfo setInfo) {

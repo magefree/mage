@@ -28,13 +28,13 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.common.FilterArtifactPermanent;
 
 import java.util.UUID;
@@ -56,7 +56,7 @@ public class CovetousDragon extends CardImpl {
         
         // When you control no artifacts, sacrifice Covetous Dragon.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterArtifactPermanent("no artifacts"), Filter.ComparisonType.Equal, 0,
+                new FilterArtifactPermanent("no artifacts"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

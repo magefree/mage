@@ -27,8 +27,8 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -38,7 +38,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -46,6 +45,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -99,7 +100,7 @@ class LegacyOfTheBelovedEffect extends OneShotEffect {
                 if (cost instanceof SacrificeTargetCost) {
                     Permanent p = (Permanent) game.getLastKnownInformation(((SacrificeTargetCost) cost).getPermanents().get(0).getId(), Zone.BATTLEFIELD);
                     if (p != null) {
-                        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, p.getConvertedManaCost()));
+                        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, p.getConvertedManaCost()));
                         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
                         Player player = game.getPlayer(source.getControllerId());
                         if (player != null && player.searchLibrary(target, game)) {

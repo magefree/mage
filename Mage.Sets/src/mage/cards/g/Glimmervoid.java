@@ -27,7 +27,7 @@
  */
 package mage.cards.g;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -53,7 +53,7 @@ public class Glimmervoid extends CardImpl {
 
         // At the beginning of the end step, if you control no artifacts, sacrifice Glimmervoid.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
-        this.addAbility(new ConditionalTriggeredAbility(triggered, new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), CountType.FEWER_THAN, 1),
+        this.addAbility(new ConditionalTriggeredAbility(triggered, new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.FEWER_THAN, 1),
                 "At the beginning of the end step, if you control no artifacts, sacrifice {this}."));
         // {tap}: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility());

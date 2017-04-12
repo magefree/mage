@@ -28,6 +28,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -38,7 +39,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -107,7 +107,7 @@ class EldritchEvolutionEffect extends OneShotEffect {
         if (sacrificedPermanent != null && controller != null) {
             int newConvertedCost = sacrificedPermanent.getConvertedManaCost() + 2;
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost + " or less");
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, newConvertedCost+1));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, newConvertedCost+1));
             filter.add(new CardTypePredicate(CardType.CREATURE));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, game)) {

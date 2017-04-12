@@ -46,7 +46,7 @@ public class AyumiTheLastVisitor extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Legendary land");
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     public AyumiTheLastVisitor(UUID ownerId, CardSetInfo setInfo) {

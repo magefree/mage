@@ -28,7 +28,7 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.IntCompareCondition;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -42,7 +42,7 @@ import java.util.UUID;
  */
 public class OpponentLostLifeCondition extends IntCompareCondition {
 
-    public OpponentLostLifeCondition(CountType type, int value) {
+    public OpponentLostLifeCondition(ComparisonType type, int value) {
         super(type, value);
     }
 

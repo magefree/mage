@@ -61,7 +61,7 @@ public class KikiJikiMirrorBreaker extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nonlegendary creature you control");
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Legendary")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
     }
 
     public KikiJikiMirrorBreaker(UUID ownerId, CardSetInfo setInfo) {

@@ -29,6 +29,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -36,7 +37,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -81,7 +81,7 @@ public class DeepfireElemental extends CardImpl {
             ability.getTargets().clear();
             FilterPermanent newFilter = filter.copy();
             newFilter.setMessage(new StringBuilder("artifact or creature with converted mana cost {").append(ability.getManaCostsToPay().getX()).append('}').toString());
-            newFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, ability.getManaCostsToPay().getX()));
+            newFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, ability.getManaCostsToPay().getX()));
             Target target = new TargetPermanent(newFilter);
             ability.addTarget(target);
         }

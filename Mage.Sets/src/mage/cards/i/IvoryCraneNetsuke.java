@@ -29,7 +29,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
@@ -52,7 +52,7 @@ public class IvoryCraneNetsuke extends CardImpl {
 
         // At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), TargetController.YOU, false);
-        CardsInHandCondition condition = new CardsInHandCondition(CountType.MORE_THAN, 6);
+        CardsInHandCondition condition = new CardsInHandCondition(ComparisonType.MORE_THAN, 6);
         this.addAbility(new ConditionalTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life."));
         
     }

@@ -29,7 +29,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
@@ -53,7 +53,7 @@ public class PaupersCage extends CardImpl {
         // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Paupers' Cage deals 2 damage to him or her.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
                 new DamageTargetEffect(2), TargetController.OPPONENT, false, true);
-        CardsInHandCondition condition = new CardsInHandCondition(CountType.FEWER_THAN, 3);
+        CardsInHandCondition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 3);
         this.addAbility(new ConditionalTriggeredAbility(ability, condition, "At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, {this} deals 2 damage to him or her."));
     }
 

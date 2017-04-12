@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -70,7 +70,7 @@ public class DustStalker extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of each end step, if you control no other colorless creatures, return Dust Stalker to its owner's hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), TargetController.ANY,
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.EQUAL_TO, 0), false));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0), false));
     }
 
     public DustStalker(final DustStalker card) {

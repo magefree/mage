@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -53,7 +53,7 @@ public class SarkhansRage extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageControllerEffect(2),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent("Dragon","you control no Dragons"), CountType.EQUAL_TO, 0)
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent("Dragon","you control no Dragons"), ComparisonType.EQUAL_TO, 0)
         ));
 
     }

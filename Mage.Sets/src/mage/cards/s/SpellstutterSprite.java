@@ -27,12 +27,9 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -40,8 +37,9 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -50,6 +48,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +88,7 @@ public class SpellstutterSprite extends CardImpl {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             int numberFaeries = game.getState().getBattlefield().countAll(filter, ability.getControllerId(), game);
             FilterSpell xFilter = new FilterSpell(new StringBuilder("spell with converted mana cost ").append(numberFaeries).append(" or less").toString());
-            xFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, numberFaeries + 1));
+            xFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, numberFaeries + 1));
             ability.getTargets().clear();
             ability.addTarget(new TargetSpell(xFilter));
         }

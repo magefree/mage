@@ -28,6 +28,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanent;
@@ -37,7 +38,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -56,8 +56,8 @@ public class GoblinMutant extends CardImpl {
     static final private FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");
 
     static {
-        filter.add(Predicates.and(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2), Predicates.not(new TappedPredicate())));
-        filter2.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
+        filter.add(Predicates.and(new PowerPredicate(ComparisonType.MORE_THAN, 2), Predicates.not(new TappedPredicate())));
+        filter2.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public GoblinMutant(UUID ownerId, CardSetInfo setInfo) {

@@ -28,6 +28,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -39,7 +40,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -58,7 +58,7 @@ public class BloodLust extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new ToughnessPredicate(Filter.ComparisonType.GreaterThan, 4));
+        filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public BloodLust(UUID ownerId, CardSetInfo setInfo) {

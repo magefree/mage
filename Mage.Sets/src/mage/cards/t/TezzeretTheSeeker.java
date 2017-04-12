@@ -27,9 +27,8 @@
  */
 package mage.cards.t;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
@@ -40,13 +39,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -55,6 +48,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -119,7 +115,7 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
         }
 
         FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost " + cmc + " or less");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, cmc + 1));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc + 1));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
         if (controller.searchLibrary(target, game)) {

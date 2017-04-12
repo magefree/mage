@@ -27,11 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -40,6 +35,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBasicLandCard;
@@ -50,6 +46,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.*;
 
 /**
  *
@@ -85,7 +83,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
                 new CardTypePredicate(CardType.ENCHANTMENT),
                 Predicates.and(
                         new CardTypePredicate(CardType.LAND),
-                        Predicates.not(new SupertypePredicate("Basic"))
+                        Predicates.not(new SupertypePredicate(SuperType.BASIC))
                 )
         ));
     }

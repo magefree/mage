@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
@@ -63,7 +63,7 @@ public class SmolderingMarsh extends CardImpl {
         this.subtype.add("Mountain");
 
         // Smoldering Marsh enters the battlefield tapped unless you control two or more basic lands.
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
+        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));
         String abilityText = "tapped unless you control two or more basic lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new BlackManaAbility());

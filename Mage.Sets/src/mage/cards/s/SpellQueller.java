@@ -27,11 +27,10 @@
  */
 package mage.cards.s;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -43,7 +42,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.ExileZone;
@@ -55,6 +53,9 @@ import mage.target.TargetSpell;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -64,7 +65,7 @@ public class SpellQueller extends CardImpl {
     private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public SpellQueller(UUID ownerId, CardSetInfo setInfo) {

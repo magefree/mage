@@ -27,7 +27,7 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
@@ -36,9 +36,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class Meekstone extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 3 or greater");
     
     static {
-        filter.add(new PowerPredicate(ComparisonType.GreaterThan, 2));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
     
     public Meekstone(UUID ownerId, CardSetInfo setInfo) {

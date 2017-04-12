@@ -29,6 +29,7 @@ package mage.cards.a;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
@@ -37,7 +38,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -151,7 +151,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
         }
 
         FilterCard filter = new FilterCreatureCard("creature card with converted mana cost {" + cmc + "} exiled with " + sourceObject.getIdName());
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
 
         Target target = new TargetCardInExile(filter, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
 

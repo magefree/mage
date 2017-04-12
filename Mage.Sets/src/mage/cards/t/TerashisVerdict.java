@@ -27,15 +27,16 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
+import mage.constants.CardType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetAttackingCreature;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public class TerashisVerdict extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with power 3 or less");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 4));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public TerashisVerdict(UUID ownerId, CardSetInfo setInfo) {

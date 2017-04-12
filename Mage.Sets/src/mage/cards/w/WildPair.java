@@ -27,9 +27,9 @@
  */
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -37,12 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.Filter;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.IntComparePredicate;
@@ -53,6 +48,8 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.common.CastFromHandWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -111,7 +108,7 @@ class WildPairEffect extends OneShotEffect {
             if (permanent != null) {
                 int totalPT = permanent.getPower().getValue() + permanent.getToughness().getValue();
                 FilterCreatureCard filter = new FilterCreatureCard("creature card with total power and toughness " + totalPT);
-                filter.add(new TotalPowerAndToughnessPredicate(Filter.ComparisonType.Equal, totalPT));
+                filter.add(new TotalPowerAndToughnessPredicate(ComparisonType.EQUAL_TO, totalPT));
                 TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
                 if (controller.searchLibrary(target, game)) {
                     if (!target.getTargets().isEmpty()) {
@@ -132,7 +129,7 @@ class WildPairEffect extends OneShotEffect {
  */
 class TotalPowerAndToughnessPredicate extends IntComparePredicate<MageObject> {
 
-    public TotalPowerAndToughnessPredicate(Filter.ComparisonType type, int value) {
+    public TotalPowerAndToughnessPredicate(ComparisonType type, int value) {
         super(type, value);
     }
 

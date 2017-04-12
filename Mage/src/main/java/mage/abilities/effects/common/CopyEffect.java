@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -39,6 +38,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.util.functions.ApplyToPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -130,7 +131,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         }
         permanent.getSuperType().clear();
         for (SuperType type : copyFromObject.getSuperType()) {
-            permanent.getSuperType().add(type);
+            permanent.addSuperType(type);
         }
 
         permanent.removeAllAbilities(source.getSourceId(), game);

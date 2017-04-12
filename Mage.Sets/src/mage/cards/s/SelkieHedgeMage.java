@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -76,11 +76,11 @@ public class SelkieHedgeMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Selkie Hedge-Mage enters the battlefield, if you control two or more Forests, you may gain 3 life.
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), true), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1), rule1);
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), true), new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1), rule1);
         this.addAbility(ability);
 
         // When Selkie Hedge-Mage enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.
-        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2);
+        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 1), rule2);
         ability2.addTarget(new TargetPermanent(filter3));
         this.addAbility(ability2);
 

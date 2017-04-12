@@ -27,10 +27,10 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -40,11 +40,12 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +97,7 @@ class MatterReshaperEffect extends OneShotEffect {
             }
             controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 3 or less");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
             if (filter.match(card, game)) {
                 if (controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield (otherwise put in hand)?", source, game)) {
                     card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), false);

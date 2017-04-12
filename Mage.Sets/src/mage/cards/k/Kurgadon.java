@@ -27,18 +27,19 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public class Kurgadon extends CardImpl {
 
     static {
         filterSpell.add(new CardTypePredicate(CardType.CREATURE));
-		filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 5));
+		filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
     }
 
     public Kurgadon(UUID ownerId, CardSetInfo setInfo) {

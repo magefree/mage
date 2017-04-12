@@ -29,7 +29,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -66,7 +66,7 @@ public class LamplighterOfSelhoff extends CardImpl {
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1,1,true));
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0),
                 "When {this} enters the battlefield, if you control another Zombie, you may a draw card. If you do, discard a card."));
     }
 

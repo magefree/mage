@@ -29,7 +29,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -70,7 +70,7 @@ public class NezumiShortfang extends CardImpl {
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new ConditionalOneShotEffect(
                 new FlipSourceEffect(new StabwhiskerTheOdious()),
-                new CardsInTargetOpponentHandCondition(CountType.FEWER_THAN, 1),
+                new CardsInTargetOpponentHandCondition(ComparisonType.FEWER_THAN, 1),
                 "Then if that player has no cards in hand, flip {this}"));
         this.addAbility(ability);
     }
@@ -136,19 +136,19 @@ class StabwhiskerLoseLifeEffect extends OneShotEffect {
 class CardsInTargetOpponentHandCondition implements Condition {
 
     private Condition condition;
-    private CountType type;
+    private ComparisonType type;
     private int count;
 
     public CardsInTargetOpponentHandCondition() {
-        this(CountType.EQUAL_TO, 0);
+        this(ComparisonType.EQUAL_TO, 0);
     }
 
-    public CardsInTargetOpponentHandCondition(CountType type, int count) {
+    public CardsInTargetOpponentHandCondition(ComparisonType type, int count) {
         this.type = type;
         this.count = count;
     }
 
-    public CardsInTargetOpponentHandCondition(CountType type, int count, Condition conditionToDecorate) {
+    public CardsInTargetOpponentHandCondition(ComparisonType type, int count, Condition conditionToDecorate) {
         this(type, count);
         this.condition = conditionToDecorate;
     }
@@ -160,7 +160,7 @@ class CardsInTargetOpponentHandCondition implements Condition {
         if (opponent == null) {
             return false;
         }
-        conditionApplies = CountType.compare(opponent.getHand().size(), type, count);
+        conditionApplies = ComparisonType.compare(opponent.getHand().size(), type, count);
 
         //If a decorated condition exists, check it as well and apply them together.
         if (this.condition != null) {

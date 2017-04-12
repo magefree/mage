@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -52,7 +53,7 @@ public class LoyalRetainers extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("legendary creature card from your graveyard");
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     public LoyalRetainers(UUID ownerId, CardSetInfo setInfo) {

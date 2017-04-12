@@ -28,7 +28,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.Gender;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -57,7 +57,7 @@ public class NissaVastwoodSeer extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("basic Forest card");
     static {
-        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(new SubtypePredicate("Forest"));
     }
 
@@ -79,7 +79,7 @@ public class NissaVastwoodSeer extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.FEMALE), new FilterLandPermanent()),
-                new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), CountType.MORE_THAN, 6, true),
+                new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), ComparisonType.MORE_THAN, 6, true),
                 "Whenever a land enters the battlefield under your control, if you control seven or more lands, exile {this}, then return her to the battlefield transformed under her owner's control."));
     }
 
