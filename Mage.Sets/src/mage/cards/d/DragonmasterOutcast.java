@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -66,7 +66,7 @@ public class DragonmasterOutcast extends CardImpl {
 
         // At the beginning of your upkeep, if you control six or more lands, create a 5/5 red Dragon creature token with flying.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new DragonToken2(), 1), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 5), "At the beginning of your upkeep, if you control six or more lands, create a 5/5 red Dragon creature token with flying."));
+        this.addAbility(new ConditionalTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 5), "At the beginning of your upkeep, if you control six or more lands, create a 5/5 red Dragon creature token with flying."));
     }
 
     public DragonmasterOutcast(final DragonmasterOutcast card) {

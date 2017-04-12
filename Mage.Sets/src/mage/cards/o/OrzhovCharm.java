@@ -27,18 +27,16 @@
  */
 package mage.cards.o;
 
-import java.util.LinkedList;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -49,6 +47,9 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.LinkedList;
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -57,7 +58,7 @@ public class OrzhovCharm extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card with converted mana cost 1 or less from your graveyard");
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public OrzhovCharm(UUID ownerId, CardSetInfo setInfo) {

@@ -28,7 +28,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.IntCompareCondition;
@@ -72,7 +72,7 @@ public class MaskOfIntolerance extends CardImpl {
 class MaskOfIntoleranceCondition extends IntCompareCondition {
 
     public MaskOfIntoleranceCondition() {
-        super(CountType.MORE_THAN, 3);
+        super(ComparisonType.MORE_THAN, 3);
     }
 
     @Override

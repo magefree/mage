@@ -60,7 +60,7 @@ public class RimeTransfusion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by snow creatures until end of turn");
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Snow")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.SNOW)));
     }
 
     public RimeTransfusion(UUID ownerId, CardSetInfo setInfo) {

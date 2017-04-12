@@ -54,7 +54,7 @@ public class EmpressGalina extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("legendary permanent");
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     public EmpressGalina(UUID ownerId, CardSetInfo setInfo) {

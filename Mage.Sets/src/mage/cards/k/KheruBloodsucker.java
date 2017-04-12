@@ -27,9 +27,9 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -44,7 +44,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,6 +51,8 @@ import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +66,7 @@ public class KheruBloodsucker extends CardImpl {
     static {
         anotherFilter.add(new AnotherPredicate());
         toughnessFilter.add(new ControllerPredicate(TargetController.YOU));
-        toughnessFilter.add(new ToughnessPredicate(ComparisonType.GreaterThan, 3));
+        toughnessFilter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public KheruBloodsucker(UUID ownerId, CardSetInfo setInfo) {

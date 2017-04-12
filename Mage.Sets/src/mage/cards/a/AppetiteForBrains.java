@@ -27,11 +27,11 @@
  */
 package mage.cards.a;
 
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetOpponent;
@@ -47,7 +47,7 @@ public class AppetiteForBrains extends CardImpl {
     private static final FilterCard filter = new FilterCard("a card from it with converted mana cost 4 or greater");
     
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public AppetiteForBrains(UUID ownerId, CardSetInfo setInfo) {

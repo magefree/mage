@@ -53,7 +53,7 @@ public class MagusOfTheMoon extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
     }
 
     public MagusOfTheMoon(UUID ownerId, CardSetInfo setInfo) {

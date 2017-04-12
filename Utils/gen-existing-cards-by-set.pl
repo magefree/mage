@@ -56,12 +56,56 @@ while(my $line = <DATA>) {
 
     if ($data[1] eq $setName) {
         my $cardInfo = "$data[0],,,$data[2]";
+
         push(@setCards, $cardInfo);
-        $cardsFound = $cardsFound + 1;
     } else { 
         $all_sets {$data[1]} = 1;
     }
 }
+
+# Fix up split cards
+my $potentialSideA;
+my @tempSetCards;
+
+foreach $potentialSideA (sort @setCards) {
+    #print (">>$potentialSideA\n"); 
+    if ($potentialSideA =~ m/.*,,,(\d+)(a)$/) {
+        my $cardNumSideB = $1 . "b";
+        my $val;
+        foreach $val (sort @setCards) {
+            if ($val =~ m/$cardNumSideB$/) {
+                $potentialSideA =~ s/,,,.*//;
+                $val =~ s/,,,.*//;
+
+                # Add 'SideaSideb' to %cards
+                my $ds = $cards{$val}{$setName};
+                print ("$potentialSideA$val,,,$cardNumSideB\n");
+                my @newCard;
+                push (@newCard, "$potentialSideA$val");
+                push (@newCard, "$setName");
+                push (@newCard, "SPLIT");
+                push (@newCard, @$ds[3]);
+                push (@newCard, "$potentialSideA // $val");
+                $cards{$newCard[0]}{$newCard[1]} = \@newCard;
+
+                $cardNumSideB =~ s/.$//;
+                push (@tempSetCards, "$potentialSideA$val,,,$cardNumSideB");
+
+                print ("Adding in: $potentialSideA \/\/ $val,,,$cardNumSideB\n");
+                $cardsFound = $cardsFound - 1;
+            }
+        }
+    }
+    elsif ($potentialSideA =~ m/.*,,,(\d+)(b)$/) {
+        next;
+    }
+    else {
+        $cardsFound = $cardsFound + 1;
+        push (@tempSetCards, $potentialSideA);
+    }
+}
+@setCards = @tempSetCards;
+
 close(DATA);
 print "Number of cards found for set " . $setName . ": " . $cardsFound . "\n";
 
@@ -186,6 +230,8 @@ foreach $name_collectorid (sort @setCards)
             }
         }
         else {
+            my $ds;
+            $ds = $cards{$cardName}{$setName};
             my $className = toCamelCase($cardName);
             my $setId = lc($cardName);
             $setId =~ s/^(.).*/$1/;
@@ -193,6 +239,13 @@ foreach $name_collectorid (sort @setCards)
             $googleSetName =~ s/ /+/img;
             my $fn = "..\\Mage.Sets\\src\\mage\\cards\\$setId\\$className.java";
             my $str = "        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity." . getRarity ($cards{$cardName}{$setName}[3], $cardName) . ", mage.cards.$setId.$className.class));\n";
+
+            if (@$ds[2] eq "SPLIT") {
+                my $oldCardName = $cardName;
+                $cardName = @$ds[4];
+                $str = "        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity." . getRarity ($cards{$oldCardName}{$setName}[3], $oldCardName) . ", mage.cards.$setId.$className.class));\n";
+            }
+
             my $plus_cardName = $cardName;
             $plus_cardName =~ s/ /+/img;
             $plus_cardName =~ s/,/+/img;

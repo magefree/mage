@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -83,7 +83,7 @@ public class HellkiteTyrant extends CardImpl {
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(
                 ability,
-                new PermanentsOnTheBattlefieldCondition(new FilterArtifactPermanent(), CountType.MORE_THAN, 19),
+                new PermanentsOnTheBattlefieldCondition(new FilterArtifactPermanent(), ComparisonType.MORE_THAN, 19),
                 "At the beginning of your upkeep, if you control twenty or more artifacts, you win the game."));
 
     }

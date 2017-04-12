@@ -27,7 +27,7 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -38,10 +38,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public class TemurAscendancy extends CardImpl {
 
     final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public TemurAscendancy(UUID ownerId, CardSetInfo setInfo) {

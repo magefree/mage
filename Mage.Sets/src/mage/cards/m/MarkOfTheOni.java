@@ -30,7 +30,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -76,7 +76,7 @@ public class MarkOfTheOni extends CardImpl {
                 TargetController.ANY,
                 new PermanentsOnTheBattlefieldCondition(
                         new FilterControlledCreaturePermanent("Demon", "if you control no Demons"),
-                        CountType.FEWER_THAN, 1),
+                        ComparisonType.FEWER_THAN, 1),
                 false));
     }
 

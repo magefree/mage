@@ -27,10 +27,8 @@
  */
 package mage.cards.v;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -39,7 +37,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,14 +46,17 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class Void extends CardImpl {
 
     public Void(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{R}");
 
         // Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals his or her hand and discards all nonland cards with converted mana cost equal to the number.
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -110,7 +110,7 @@ class VoidEffect extends OneShotEffect {
                 }
             }
             FilterCard filterCard = new FilterCard();
-            filterCard.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, number));
+            filterCard.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, number));
             filterCard.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
 
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));

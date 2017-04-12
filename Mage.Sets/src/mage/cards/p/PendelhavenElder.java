@@ -27,8 +27,8 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -36,13 +36,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,8 +53,8 @@ public class PendelhavenElder extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each 1/1 creature you control");
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.Equal, 1));
-        filter.add(new ToughnessPredicate(Filter.ComparisonType.Equal, 1));
+        filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, 1));
+        filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, 1));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

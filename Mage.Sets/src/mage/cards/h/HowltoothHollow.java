@@ -29,7 +29,7 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -62,7 +62,7 @@ public class HowltoothHollow extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new HideawayPlayEffect(), 
                 new ManaCostsImpl("{B}"), 
-                new CardsInHandCondition(CountType.EQUAL_TO, 0, null, TargetController.ANY));
+                new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, null, TargetController.ANY));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);        
     }

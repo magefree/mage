@@ -211,7 +211,7 @@ public class VerifyCardDataTest {
             cost = null;
         }
         if (cost != null) {
-            cost = cost.replaceAll("P\\}", "/P}");
+            cost = cost.replaceAll("P\\}", "P}");
         }
         if (!Objects.equals(cost, expected)) {
             fail(card, "cost", cost + " != " + expected);

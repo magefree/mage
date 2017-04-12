@@ -30,7 +30,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -70,7 +70,7 @@ public class CompanionOfTheTrials extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new UntapTargetEffect(),
                 new ManaCostsImpl("{1}{W}"),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

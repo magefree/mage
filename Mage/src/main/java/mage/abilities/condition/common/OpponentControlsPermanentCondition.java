@@ -31,7 +31,7 @@ package mage.abilities.condition.common;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -48,18 +48,18 @@ public class OpponentControlsPermanentCondition implements Condition {
 
 
     private FilterPermanent filter;
-    private CountType type;
+    private ComparisonType type;
     private int count;
 
     /**
      * @param filter
      */
     public OpponentControlsPermanentCondition(FilterPermanent filter) {
-        this(filter, CountType.MORE_THAN, 0);
+        this(filter, ComparisonType.MORE_THAN, 0);
     }
 
     /**
-     * Applies a filter, a {@link CountType}, and count to permanents on the
+     * Applies a filter, a {@link ComparisonType}, and count to permanents on the
      * battlefield when checking the condition during the
      * {@link #apply(mage.game.Game, mage.abilities.Ability) apply} method invocation.
      *
@@ -67,7 +67,7 @@ public class OpponentControlsPermanentCondition implements Condition {
      * @param type
      * @param count
      */
-    public OpponentControlsPermanentCondition(FilterPermanent filter, CountType type, int count) {
+    public OpponentControlsPermanentCondition(FilterPermanent filter, ComparisonType type, int count) {
         this.filter = filter;
         this.type = type;
         this.count = count;
@@ -79,7 +79,7 @@ public class OpponentControlsPermanentCondition implements Condition {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             FilterPermanent localFilter = filter.copy();
             localFilter.add(new ControllerIdPredicate(opponentId));
-            if (CountType.compare(game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game), type, this.count)) {
+            if (ComparisonType.compare(game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game), type, this.count)) {
                 conditionApplies = true;
                 break;
             }

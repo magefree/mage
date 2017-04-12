@@ -30,7 +30,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -66,7 +66,7 @@ public class HollowbornBarghest extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.
-        Condition condition = new CardsInHandCondition(CountType.EQUAL_TO, 0);
+        Condition condition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new HollowbornBarghestEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, condition, rule));
 

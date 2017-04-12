@@ -30,6 +30,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -40,7 +41,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -112,7 +112,7 @@ class DiscipleOfDeceitEffect extends OneShotEffect {
                     }
                     String targetName = new StringBuilder("card with converted mana cost of ").append(card.getConvertedManaCost()).toString();
                     FilterCard filter = new FilterCard(targetName);
-                    filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, card.getConvertedManaCost()));
+                    filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, card.getConvertedManaCost()));
                     return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true).apply(game, source);                    
                 }
             }

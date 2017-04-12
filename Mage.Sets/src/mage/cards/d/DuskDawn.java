@@ -29,9 +29,10 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -40,7 +41,6 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,7 +60,7 @@ import java.util.UUID;
 public class DuskDawn extends SplitCard {
     private static final FilterCreaturePermanent filterCreatures3orGreater = new FilterCreaturePermanent("creatures with power greater than or equal to 3");
     static {
-        filterCreatures3orGreater.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
+        filterCreatures3orGreater.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public DuskDawn(UUID ownerId, CardSetInfo setInfo) {
@@ -93,7 +93,7 @@ class DawnEffect extends OneShotEffect {
 
     private static final FilterCard filter2orLess = new FilterCreatureCard("creatures with power less than or equal to 2");
     static {
-        filter2orLess.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+        filter2orLess.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     DawnEffect() {

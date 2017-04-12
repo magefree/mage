@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.OpponentLostLifeCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -60,7 +60,7 @@ public class SyggRiverCutthroat extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 TargetController.ANY,
-                new OpponentLostLifeCondition(CountType.MORE_THAN, 2),
+                new OpponentLostLifeCondition(ComparisonType.MORE_THAN, 2),
                 true));
     }
 

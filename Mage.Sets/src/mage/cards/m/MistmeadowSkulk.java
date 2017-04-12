@@ -27,16 +27,17 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter.ComparisonType;
+import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public class MistmeadowSkulk extends CardImpl {
     private static final FilterCard filter = new FilterCard("converted mana cost 3 or greater");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public MistmeadowSkulk(UUID ownerId, CardSetInfo setInfo) {

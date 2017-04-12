@@ -27,15 +27,17 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +48,7 @@ public class IntoTheNorth extends CardImpl {
     private static final FilterLandCard filter = new FilterLandCard("snow land card");
 
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
     
     public IntoTheNorth(UUID ownerId, CardSetInfo setInfo) {

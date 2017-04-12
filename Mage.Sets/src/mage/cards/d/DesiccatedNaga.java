@@ -30,7 +30,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -69,7 +69,7 @@ public class DesiccatedNaga extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new LoseLifeTargetEffect(2),
                 new ManaCostsImpl("{3}{B}"),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0));
         ability.addTarget(new TargetOpponent());
         Effect effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");

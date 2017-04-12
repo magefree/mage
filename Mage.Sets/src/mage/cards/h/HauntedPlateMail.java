@@ -30,7 +30,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -64,7 +64,7 @@ public class HauntedPlateMail extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BecomesCreatureSourceEffect(new HauntedPlateMailToken(),"", Duration.EndOfTurn),
                 new ManaCostsImpl("{0}"),
-                new PermanentsOnTheBattlefieldCondition(new FilterCreaturePermanent(), CountType.EQUAL_TO, 0),
+                new PermanentsOnTheBattlefieldCondition(new FilterCreaturePermanent(), ComparisonType.EQUAL_TO, 0),
                 "{0}: Until end of turn, Haunted Plate Mail becomes a 4/4 Spirit artifact creature that's no longer an Equipment. Activate this ability only if you control no creatures.");
         this.addAbility(ability);
         // Equip {4}

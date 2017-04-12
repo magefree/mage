@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -88,7 +88,7 @@ public class StarfieldOfNyx extends CardImpl {
 
         // As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its converted mana cost.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new StarfieldOfNyxEffect(), new PermanentsOnTheBattlefieldCondition(filterEnchantmentYouControl, CountType.MORE_THAN, 4), rule1);
+                new StarfieldOfNyxEffect(), new PermanentsOnTheBattlefieldCondition(filterEnchantmentYouControl, ComparisonType.MORE_THAN, 4), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

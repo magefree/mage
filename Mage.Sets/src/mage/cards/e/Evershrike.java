@@ -29,6 +29,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,7 +44,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -57,14 +57,12 @@ import mage.target.TargetCard;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
- *
  */
 public class Evershrike extends CardImpl {
 
     public Evershrike(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W/B}{W/B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W/B}{W/B}");
         this.subtype.add("Elemental");
         this.subtype.add("Spirit");
 
@@ -120,7 +118,7 @@ class EvershrikeEffect extends OneShotEffect {
                 filterAuraCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
                 filterAuraCard.add(new SubtypePredicate("Aura"));
                 filterAuraCard.add(new AuraCardCanAttachToPermanentId(evershrikePermanent.getId()));
-                filterAuraCard.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xAmount));
+                filterAuraCard.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xAmount));
                 int count = controller.getHand().count(filterAuraCard, game);
                 while (controller.canRespond() && count > 0 && controller.chooseUse(Outcome.Benefit, "Do you wish to put an Aura card from your hand onto Evershrike", source, game)) {
                     TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);

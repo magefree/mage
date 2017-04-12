@@ -27,18 +27,19 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class TransgressTheMind extends CardImpl {
     private static final FilterCard filter = new FilterCard("a card from it with converted mana cost 3 or greater");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public TransgressTheMind(UUID ownerId, CardSetInfo setInfo) {

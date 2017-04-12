@@ -27,10 +27,8 @@
  */
 package mage.cards.n;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -53,14 +51,17 @@ import mage.target.Target;
 import mage.target.TargetObject;
 import mage.target.Targets;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author Rafbill
  */
 public class NotOfThisWorld extends CardImpl {
 
     public NotOfThisWorld(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{7}");
         this.subtype.add("Eldrazi");
 
         // Counter target spell or ability that targets a permanent you control.
@@ -132,7 +133,7 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId,
-            Game game) {
+                                     Game game) {
         return possibleTargets(sourceControllerId, game);
     }
 
@@ -169,7 +170,7 @@ class NotOfThisWorldCondition implements Condition {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control with power 7 or greater");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 6));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 6));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

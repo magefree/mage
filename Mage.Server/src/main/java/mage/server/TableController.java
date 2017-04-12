@@ -527,7 +527,7 @@ public class TableController {
                         match.quitMatch(playerId);
                     }
                     Optional<User> user = UserManager.instance.getUser(userId);
-                    if (!user.isPresent()) {
+                    if (user.isPresent()) {
                         ChatManager.instance.broadcast(chatId, user.get().getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
                         if (!table.isTournamentSubTable()) {
                             user.get().removeTable(playerId);

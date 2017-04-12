@@ -29,7 +29,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -80,7 +80,7 @@ public class BloodlineKeeper extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new TransformSourceEffect(true),
                 new ManaCostsImpl("{B}"),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 4));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4));
         this.addAbility(ability);
     }
 

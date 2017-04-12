@@ -29,21 +29,16 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.CycleOrDiscardControllerTriggeredAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -62,8 +57,12 @@ public class ArchfiendOfIfnir extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cycle or discard another card, put a -1/-1 counter on each creature your opponents control.
-        this.addAbility(new ArchfiendOfIfnirTriggeredAbility(new AddCountersAllEffect(CounterType.M1M1.createInstance(1),
-                new FilterOpponentsCreaturePermanent("creature your opponents control"))));
+        this.addAbility(new CycleOrDiscardControllerTriggeredAbility(
+                new AddCountersAllEffect(
+                        CounterType.M1M1.createInstance(1),
+                        new FilterOpponentsCreaturePermanent("creature your opponents control")
+                )
+        ));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
@@ -76,39 +75,5 @@ public class ArchfiendOfIfnir extends CardImpl {
     @Override
     public ArchfiendOfIfnir copy() {
         return new ArchfiendOfIfnir(this);
-    }
-}
-
-class ArchfiendOfIfnirTriggeredAbility extends TriggeredAbilityImpl {
-
-    ArchfiendOfIfnirTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
-    }
-
-    ArchfiendOfIfnirTriggeredAbility(final ArchfiendOfIfnirTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ArchfiendOfIfnirTriggeredAbility copy() {
-        return new ArchfiendOfIfnirTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (getControllerId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cycle or discard another card, " + super.getRule();
     }
 }

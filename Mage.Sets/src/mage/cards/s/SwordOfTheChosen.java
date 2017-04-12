@@ -52,7 +52,7 @@ public class SwordOfTheChosen extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     public SwordOfTheChosen(UUID ownerId, CardSetInfo setInfo) {

@@ -28,6 +28,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -36,7 +37,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
 
 import java.util.UUID;
@@ -58,7 +58,7 @@ public class BogSerpent extends CardImpl {
 
         // When you control no Swamps, sacrifice Bog Serpent.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Swamp", "no Swamps"), Filter.ComparisonType.Equal, 0,
+                new FilterLandPermanent("Swamp", "no Swamps"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.Effect;
@@ -37,15 +37,15 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public class SanctumOfUgin extends CardImpl {
@@ -56,11 +56,11 @@ public class SanctumOfUgin extends CardImpl {
     static {
         filter.add(new ColorlessPredicate());
         filterSpells.add(new ColorlessPredicate());
-        filterSpells.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 6));
+        filterSpells.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public SanctumOfUgin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

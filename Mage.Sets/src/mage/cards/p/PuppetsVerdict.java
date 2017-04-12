@@ -27,19 +27,20 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -83,14 +84,14 @@ class PuppetsVerdictEffect extends OneShotEffect {
             if (controller.flipCoin(game)) {
                 
                 FilterCreaturePermanent filterPower2OrLess = new FilterCreaturePermanent("all creatures power 2 or less");
-                filterPower2OrLess.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+                filterPower2OrLess.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
                 for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filterPower2OrLess, game)) {
                     permanent.destroy(source.getSourceId(), game, false);
                 }
                 return true;
             } else {
                 FilterCreaturePermanent filterPower3OrGreater = new FilterCreaturePermanent("all creatures power 3 or greater");
-                filterPower3OrGreater.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
+                filterPower3OrGreater.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
                 for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filterPower3OrGreater, game)) {
                     permanent.destroy(source.getSourceId(), game, false);
                 }

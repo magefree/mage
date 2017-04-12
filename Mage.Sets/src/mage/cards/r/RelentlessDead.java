@@ -27,9 +27,9 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -44,7 +44,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -52,6 +51,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -111,7 +112,7 @@ class RelentlessDeadEffect extends OneShotEffect {
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     FilterCard filter = new FilterCard("Another target Zombie card with converted mana cost " + costX);
                     filter.add(new SubtypePredicate("Zombie"));
-                    filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, costX));
+                    filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, costX));
                     filter.add(new AnotherCardPredicate());
                     TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
                     if (controller.chooseTarget(outcome, target, source, game)) {

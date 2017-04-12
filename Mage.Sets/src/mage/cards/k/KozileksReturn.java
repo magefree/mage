@@ -27,7 +27,7 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -37,12 +37,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public class KozileksReturn extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Eldrazi"));
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 6));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public KozileksReturn(UUID ownerId, CardSetInfo setInfo) {

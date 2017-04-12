@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddConditionalColorlessManaEffect;
@@ -66,7 +66,7 @@ public class ShrineOfTheForsakenGods extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddConditionalColorlessManaEffect(2, new ConditionalSpellManaBuilder(filter)),
                 new TapSourceCost(),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent("you control seven or more lands"), CountType.MORE_THAN, 6)));
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent("you control seven or more lands"), ComparisonType.MORE_THAN, 6)));
     }
 
     public ShrineOfTheForsakenGods(final ShrineOfTheForsakenGods card) {

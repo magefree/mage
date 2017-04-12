@@ -28,7 +28,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -89,7 +89,7 @@ public class SpinerockKnoll extends CardImpl {
 class SpinerockKnollCondition extends IntCompareCondition {
 
     SpinerockKnollCondition() {
-        super(CountType.MORE_THAN, 6);
+        super(ComparisonType.MORE_THAN, 6);
     }
 
     @Override

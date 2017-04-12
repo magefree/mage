@@ -27,36 +27,17 @@
  */
 package mage.filter;
 
-import java.io.Serializable;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
+import java.io.Serializable;
+
 /**
- *
+ * @param <E>
  * @author BetaSteward_at_googlemail.com
  * @author North
- *
- * @param <E>
  */
 public interface Filter<E> extends Serializable {
-
-    enum ComparisonType {
-
-        GreaterThan(">"),
-        Equal("=="),
-        LessThan("<");
-
-        private final String text;
-
-        ComparisonType(String text) {
-            this.text = text;
-        }
-
-        @Override
-        public String toString() {
-            return text;
-        }
-    }
 
     enum ComparisonScope {
         Any, All

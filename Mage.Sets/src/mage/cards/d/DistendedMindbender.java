@@ -29,6 +29,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
@@ -39,7 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -91,8 +91,8 @@ class DistendedMindbenderEffect extends OneShotEffect {
     private static final FilterCard filterThreeOrLess = new FilterCard("a nonland card from it with converted mana cost 3 or less");
 
     static {
-        filterFourOrGreater.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 3));
-        filterThreeOrLess.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
+        filterFourOrGreater.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
+        filterThreeOrLess.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
         filterThreeOrLess.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 

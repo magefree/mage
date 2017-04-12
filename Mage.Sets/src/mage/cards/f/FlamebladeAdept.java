@@ -29,18 +29,13 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.CycleOrDiscardControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -60,7 +55,7 @@ public class FlamebladeAdept extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Whenever you cycle or discard a card, Flameblade Adept gets +1/+0 until end of turn.
-        this.addAbility(new FlamebladeAdeptTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn)));
+        this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn)));
     }
 
     public FlamebladeAdept(final FlamebladeAdept card) {
@@ -70,39 +65,5 @@ public class FlamebladeAdept extends CardImpl {
     @Override
     public FlamebladeAdept copy() {
         return new FlamebladeAdept(this);
-    }
-}
-
-class FlamebladeAdeptTriggeredAbility extends TriggeredAbilityImpl {
-
-    FlamebladeAdeptTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
-    }
-
-    FlamebladeAdeptTriggeredAbility(final FlamebladeAdeptTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FlamebladeAdeptTriggeredAbility copy() {
-        return new FlamebladeAdeptTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (getControllerId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cycle or discard another card, " + super.getRule();
     }
 }

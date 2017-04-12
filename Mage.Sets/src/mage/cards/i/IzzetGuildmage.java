@@ -27,9 +27,9 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -38,12 +38,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,10 +57,10 @@ public class IzzetGuildmage extends CardImpl {
 
     static {
         filterInstant.add(new CardTypePredicate(CardType.INSTANT));
-        filterInstant.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
+        filterInstant.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
         filterInstant.add(new ControllerPredicate(TargetController.YOU));
         filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
-        filterSorcery.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
+        filterSorcery.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
         filterSorcery.add(new ControllerPredicate(TargetController.YOU));
     }
 

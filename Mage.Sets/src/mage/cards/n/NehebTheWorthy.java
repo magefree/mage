@@ -30,7 +30,7 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -80,7 +80,7 @@ public class NehebTheWorthy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
 
         // As long as you have one or fewer cards in hand, Minotaurs you control get +2/+0.
-        Condition condition = new CardsInHandCondition(CountType.FEWER_THAN, 2);
+        Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 2);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter), condition, "As long as you have one or fewer cards in hand, Minotaurs you control gets +2/+0"));
         this.addAbility(ability);

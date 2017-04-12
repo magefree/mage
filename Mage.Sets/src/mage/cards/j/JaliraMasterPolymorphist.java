@@ -59,7 +59,7 @@ public class JaliraMasterPolymorphist extends CardImpl {
 
     static {
         filterPermanent.add(new AnotherPredicate());
-        filterCard.add(Predicates.not(new SupertypePredicate("Legendary")));
+        filterCard.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
     }
 
     public JaliraMasterPolymorphist(UUID ownerId, CardSetInfo setInfo) {
