@@ -51,11 +51,11 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class LordOfTheAccursed extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie", "Zombie creatures");
 
-    static {
-        filter.add(new SubtypePredicate("Zombie"));
-    }
+//    static {
+//        filter.add(new SubtypePredicate("Zombie"));
+//    }
 
     public LordOfTheAccursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
@@ -71,8 +71,8 @@ public class LordOfTheAccursed extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
                 new MenaceAbility(),
                 Duration.EndOfTurn,
-                filter, "Each Zombie you control gains menace until end of turn."),
-                new ManaCostsImpl("{2}{B}"));
+                filter, "All Zombies gains menace until end of turn."),
+                new ManaCostsImpl("{1}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
