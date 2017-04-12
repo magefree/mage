@@ -185,8 +185,8 @@ while ($type =~ m/([a-zA-Z]+)( )*/g) {
         }
     }
 }
-$vars{'type'} = join(', ', @types);
 
+$vars{'type'} = join(', ', @types);
 $vars{'abilitiesImports'} = '';
 $vars{'abilities'} = '';
 
