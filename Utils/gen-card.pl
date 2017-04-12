@@ -180,7 +180,8 @@ while ($type =~ m/([a-zA-Z]+)( )*/g) {
         if (@types) {
             $vars{'subType'} .= "\n        this.subtype.add(\"$1\");";
         } else {
-            $vars{'subType'} .= "\n        addSuperType(\"$1\");";
+            my $st = uc($1);
+            $vars{'subType'} .= "\n        addSuperType(Supertype.$st);";
         }
     }
 }
