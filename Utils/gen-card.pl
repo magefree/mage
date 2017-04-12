@@ -181,12 +181,12 @@ while ($type =~ m/([a-zA-Z]+)( )*/g) {
             $vars{'subType'} .= "\n        this.subtype.add(\"$1\");";
         } else {
             my $st = uc($1);
-            $vars{'subType'} .= "\n        addSuperType(Supertype.$st);";
+            $vars{'subType'} .= "\n        addSuperType(SuperType.$st);";
         }
     }
 }
-$vars{'type'} = join(', ', @types);
 
+$vars{'type'} = join(', ', @types);
 $vars{'abilitiesImports'} = '';
 $vars{'abilities'} = '';
 
