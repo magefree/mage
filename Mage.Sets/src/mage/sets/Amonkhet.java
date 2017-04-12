@@ -66,10 +66,12 @@ public class Amonkhet extends ExpansionSet {
         this.ratioBoosterSpecialLand = 144;
 
         cards.add(new SetCardInfo("Ahn-Crop Crasher", 117, Rarity.UNCOMMON, mage.cards.a.AhnCropCrasher.class));
+        cards.add(new SetCardInfo("Anointed Procession", 2, Rarity.RARE, mage.cards.a.AnointedProcession.class));
         cards.add(new SetCardInfo("Approach of the Second Sun", 4, Rarity.RARE, mage.cards.a.ApproachOfTheSecondSun.class));
         cards.add(new SetCardInfo("Ancient Crab", 40, Rarity.COMMON, mage.cards.a.AncientCrab.class));
         cards.add(new SetCardInfo("Angel of Sanctions", 1, Rarity.MYTHIC, mage.cards.a.AngelOfSanctions.class));
         cards.add(new SetCardInfo("Angler Drake", 41, Rarity.UNCOMMON, mage.cards.a.AnglerDrake.class));
+        cards.add(new SetCardInfo("Anointed Procession", 2, Rarity.RARE, mage.cards.a.AnointedProcession.class));
         cards.add(new SetCardInfo("Anointer Priest", 3, Rarity.COMMON, mage.cards.a.AnointerPriest.class));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 78, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
         cards.add(new SetCardInfo("As Foretold", 42, Rarity.MYTHIC, mage.cards.a.AsForetold.class));
@@ -89,6 +91,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Companion of the Trials", 271, Rarity.UNCOMMON, mage.cards.c.CompanionOfTheTrials.class));
         cards.add(new SetCardInfo("Consuming Fervor", 126, Rarity.UNCOMMON, mage.cards.c.ConsumingFervor.class));
         cards.add(new SetCardInfo("Crocodile of the Crossing", 162, Rarity.UNCOMMON, mage.cards.c.CrocodileOfTheCrossing.class));
+        cards.add(new SetCardInfo("Cryptic Serpent", 48, Rarity.UNCOMMON, mage.cards.c.CrypticSerpent.class));
         cards.add(new SetCardInfo("Curator of Mysteries", 49, Rarity.RARE, mage.cards.c.CuratorOfMysteries.class));
         cards.add(new SetCardInfo("Cursed Minotaur", 85, Rarity.COMMON, mage.cards.c.CursedMinotaur.class));
         cards.add(new SetCardInfo("Cut // Ribbons", 223, Rarity.RARE, mage.cards.c.CutRibbons.class));
@@ -100,6 +103,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Djeru's Resolve", 11, Rarity.COMMON, mage.cards.d.DjerusResolve.class));
         cards.add(new SetCardInfo("Doomed Dissenter", 87, Rarity.COMMON, mage.cards.d.DoomedDissenter.class));
         cards.add(new SetCardInfo("Drake Haven", 51, Rarity.RARE, mage.cards.d.DrakeHaven.class));
+        cards.add(new SetCardInfo("Dread Wanderer", 88, Rarity.RARE, mage.cards.d.DreadWanderer.class));
         cards.add(new SetCardInfo("Dune Beetle", 89, Rarity.COMMON, mage.cards.d.DuneBeetle.class));
         cards.add(new SetCardInfo("Dusk // Dawn", 210, Rarity.RARE, mage.cards.d.DuskDawn.class));
         cards.add(new SetCardInfo("Essence Scatter", 52, Rarity.COMMON, mage.cards.e.EssenceScatter.class));
@@ -118,7 +122,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Gideon's Resolve", 272, Rarity.RARE, mage.cards.g.GideonsResolve.class));
         cards.add(new SetCardInfo("Gideon, Martial Paragon", 270, Rarity.MYTHIC, mage.cards.g.GideonMartialParagon.class));
         cards.add(new SetCardInfo("Glory-Bound Initiate", 16, Rarity.RARE, mage.cards.g.GloryBoundInitiate.class));
-        cards.add(new SetCardInfo("Glorybringer", 174, Rarity.RARE, mage.cards.g.Glorybringer.class));
+        cards.add(new SetCardInfo("Glorybringer", 134, Rarity.RARE, mage.cards.g.Glorybringer.class));
         cards.add(new SetCardInfo("Graceful Cat", 273, Rarity.COMMON, mage.cards.g.GracefulCat.class));
         cards.add(new SetCardInfo("Gravedigger", 93, Rarity.UNCOMMON, mage.cards.g.Gravedigger.class));
         cards.add(new SetCardInfo("Grim Strider", 93, Rarity.UNCOMMON, mage.cards.g.GrimStrider.class));
@@ -158,17 +162,20 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Nest of Scarabs", 101, Rarity.UNCOMMON, mage.cards.n.NestOfScarabs.class));
         cards.add(new SetCardInfo("Never // Return", 212, Rarity.RARE, mage.cards.n.NeverReturn.class));
         cards.add(new SetCardInfo("Nimble-Blade Khenra", 145, Rarity.COMMON, mage.cards.n.NimbleBladeKhenra.class));
+        cards.add(new SetCardInfo("Nissa, Steward of Elements", 204, Rarity.MYTHIC, mage.cards.n.NissaStewardOfElements.class));
         cards.add(new SetCardInfo("Oketra the True", 21, Rarity.MYTHIC, mage.cards.o.OketraTheTrue.class));
         cards.add(new SetCardInfo("Oketra's Monument", 233, Rarity.UNCOMMON, mage.cards.o.OketrasMonument.class));
         cards.add(new SetCardInfo("Onward // Victory", 218, Rarity.UNCOMMON, mage.cards.o.OnwardVictory.class));
         cards.add(new SetCardInfo("Oracle's Vault", 234, Rarity.RARE, mage.cards.o.OraclesVault.class));
         cards.add(new SetCardInfo("Painful Lesson", 102, Rarity.COMMON, mage.cards.p.PainfulLesson.class));
+        cards.add(new SetCardInfo("Plague Belcher", 104, Rarity.RARE, mage.cards.p.PlagueBelcher.class));
         cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 255, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 256, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 257, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Pouncing Cheetah", 179, Rarity.COMMON, mage.cards.p.PouncingCheetah.class));
         cards.add(new SetCardInfo("Prepared // Fight", 220, Rarity.RARE, mage.cards.p.PreparedFight.class));
+        cards.add(new SetCardInfo("Protection of the Hekma", 23, Rarity.UNCOMMON, mage.cards.p.ProtectionOfTheHekma.class));
         cards.add(new SetCardInfo("Prowling Serpopard", 180, Rarity.RARE, mage.cards.p.ProwlingSerpopard.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 65, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Quarry Hauler", 181, Rarity.COMMON, mage.cards.q.QuarryHauler.class));
@@ -177,14 +184,18 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Regal Caracal", 24, Rarity.RARE, mage.cards.r.RegalCaracal.class));
         cards.add(new SetCardInfo("Renewed Faith", 25, Rarity.UNCOMMON, mage.cards.r.RenewedFaith.class));
         cards.add(new SetCardInfo("Rhonas's Monument", 236, Rarity.UNCOMMON, mage.cards.r.RhonassMonument.class));
+        cards.add(new SetCardInfo("Rhonas, the Indomitable", 182, Rarity.MYTHIC, mage.cards.r.RhonasTheIndomitable.class));
         cards.add(new SetCardInfo("Sacred Cat", 27, Rarity.COMMON, mage.cards.s.SacredCat.class));
         cards.add(new SetCardInfo("Scarab Feast", 106, Rarity.COMMON, mage.cards.s.ScarabFeast.class));
         cards.add(new SetCardInfo("Scattered Groves", 247, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scribe of the Mindful", 68, Rarity.COMMON, mage.cards.s.ScribeOfTheMindful.class));
+        cards.add(new SetCardInfo("Shefet Monitor", 186, Rarity.UNCOMMON, mage.cards.s.ShefetMonitor.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 248, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Sixth Sense", 187, Rarity.UNCOMMON, mage.cards.s.SixthSense.class));
         cards.add(new SetCardInfo("Spidery Grasp", 188, Rarity.COMMON, mage.cards.s.SpideryGrasp.class));
         cards.add(new SetCardInfo("Splendid Agony", 109, Rarity.COMMON, mage.cards.s.SplendidAgony.class));
+        cards.add(new SetCardInfo("Stir the Sands", 110, Rarity.UNCOMMON, mage.cards.s.StirTheSands.class));
+        cards.add(new SetCardInfo("Sunscorched Desert", 249, Rarity.COMMON, mage.cards.s.SunscorchedDesert.class));
         cards.add(new SetCardInfo("Supply Caravan", 30, Rarity.COMMON, mage.cards.s.SupplyCaravan.class));
         cards.add(new SetCardInfo("Swamp", 252, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
@@ -202,6 +213,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Trueheart Duelist", 35, Rarity.UNCOMMON, mage.cards.t.TrueheartDuelist.class));
         cards.add(new SetCardInfo("Unburden", 114, Rarity.COMMON, mage.cards.u.Unburden.class));
         cards.add(new SetCardInfo("Unwavering Initiate", 36, Rarity.COMMON, mage.cards.u.UnwaveringInitiate.class));
+        cards.add(new SetCardInfo("Vizier of Tumbling Sands", 75, Rarity.UNCOMMON, mage.cards.v.VizierOfTumblingSands.class));
         cards.add(new SetCardInfo("Vizier of the Menagerie", 192, Rarity.MYTHIC, mage.cards.v.VizierOfTheMenagerie.class));
         cards.add(new SetCardInfo("Watchers of the Dead", 238, Rarity.UNCOMMON, mage.cards.w.WatchersOfTheDead.class));
         cards.add(new SetCardInfo("Watchful Naga", 193, Rarity.UNCOMMON, mage.cards.w.WatchfulNaga.class));
