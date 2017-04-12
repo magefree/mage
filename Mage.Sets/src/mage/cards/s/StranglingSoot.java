@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -35,25 +35,25 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author ilcartographer
  */
 public class StranglingSoot extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughess 3 or less");
-    
+
     static {
-        filter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, 4));
+        filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public StranglingSoot(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Destroy target creature with toughness 3 or less.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

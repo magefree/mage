@@ -44,18 +44,18 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public class Karakas extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
-    static{
-        filter.add(new SupertypePredicate("Legendary"));
+
+    static {
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
-    
+
     public Karakas(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         addSuperType(SuperType.LEGENDARY);
 
         // {tap}: Add {W} to your mana pool.

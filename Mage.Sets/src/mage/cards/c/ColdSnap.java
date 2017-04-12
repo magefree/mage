@@ -35,10 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
@@ -77,7 +74,7 @@ class ColdSnapDamageTargetEffect extends OneShotEffect{
     private static final FilterLandPermanent filter = new FilterLandPermanent("snow lands");
 
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
     
     public ColdSnapDamageTargetEffect()

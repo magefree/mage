@@ -49,7 +49,7 @@ public class DayOfDestiny extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Legendary creatures");
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     public DayOfDestiny(UUID ownerId, CardSetInfo setInfo) {

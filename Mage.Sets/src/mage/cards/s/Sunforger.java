@@ -27,9 +27,9 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,7 +47,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -58,6 +57,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -126,7 +127,7 @@ class SunforgerEffect extends OneShotEffect {
                         new ColorPredicate(ObjectColor.RED),
                         new ColorPredicate(ObjectColor.WHITE)));
                 filter.add(new CardTypePredicate(CardType.INSTANT));
-                filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 5));
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
                 filter.add(new CardCanBeCastPredicate(source.getControllerId()));
                 if (controller.searchLibrary(target, game, controller.getId())) {
                     UUID targetId = target.getFirstTarget();

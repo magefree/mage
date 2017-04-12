@@ -101,7 +101,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
         }
         target.getSuperType().clear();
         for (SuperType type : sourceObj.getSuperType()) {
-            target.getSuperType().add(type);
+            target.addSuperType(type);
         }
 
         target.getAbilities().clear();

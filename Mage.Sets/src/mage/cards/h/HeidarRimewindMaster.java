@@ -29,7 +29,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -55,7 +55,7 @@ public class HeidarRimewindMaster extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control four or more snow permanents");
 
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
 
     public HeidarRimewindMaster(UUID ownerId, CardSetInfo setInfo) {
@@ -70,7 +70,7 @@ public class HeidarRimewindMaster extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new ReturnToHandTargetEffect(),
                 new GenericManaCost(2),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 3));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

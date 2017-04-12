@@ -27,23 +27,18 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -53,6 +48,8 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -103,7 +100,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
         int count = source.getManaCostsToPay().getX();
 
         FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost equal to " + count);
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, count));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, count));
         String choiceText = "Exile a " + filter.getMessage() + " from your hand?";
 
         Player player = game.getPlayer(source.getControllerId());

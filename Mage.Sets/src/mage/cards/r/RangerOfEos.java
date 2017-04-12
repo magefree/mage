@@ -28,18 +28,19 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter.ComparisonType;
+import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public class RangerOfEos extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public RangerOfEos(UUID ownerId, CardSetInfo setInfo) {

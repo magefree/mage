@@ -30,6 +30,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -38,7 +39,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,7 +47,6 @@ import mage.target.common.TargetCardInLibrary;
 import java.util.UUID;
 
 /**
- *
  * @author Backfir3
  */
 public class CateranKidnappers extends CardImpl {
@@ -56,11 +55,11 @@ public class CateranKidnappers extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate("Mercenary"));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public CateranKidnappers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Mercenary");
 

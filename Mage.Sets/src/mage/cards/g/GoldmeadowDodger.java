@@ -28,13 +28,13 @@
 package mage.cards.g;
 
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
@@ -49,7 +49,7 @@ public class GoldmeadowDodger extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creatures with power 4 or greater");
 
     static {
-        FILTER.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        FILTER.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public GoldmeadowDodger(UUID ownerId, CardSetInfo setInfo) {

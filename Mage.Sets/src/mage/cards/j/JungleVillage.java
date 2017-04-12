@@ -27,8 +27,6 @@
  */
 package mage.cards.j;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -39,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -47,6 +46,9 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +93,7 @@ public class JungleVillage extends CardImpl {
             subtypePredicates.add(new SubtypePredicate("Mountain"));
             subtypePredicates.add(new SubtypePredicate("Forest"));
             filter.add(Predicates.or(subtypePredicates));
-            filter.add(new SupertypePredicate("Basic"));
+            filter.add(new SupertypePredicate(SuperType.BASIC));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
         }

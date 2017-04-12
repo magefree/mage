@@ -29,6 +29,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,7 +42,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -93,7 +93,7 @@ class GrozothEffect extends SearchEffect {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, 9));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 9));
     }
 
     public GrozothEffect() {

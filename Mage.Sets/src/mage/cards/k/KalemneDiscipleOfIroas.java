@@ -29,6 +29,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -44,7 +45,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -63,7 +63,7 @@ public class KalemneDiscipleOfIroas extends CardImpl {
 
     static {
         filterSpell.add(new CardTypePredicate(CardType.CREATURE));
-        filterSpell.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 4));
+        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public KalemneDiscipleOfIroas(UUID ownerId, CardSetInfo setInfo) {

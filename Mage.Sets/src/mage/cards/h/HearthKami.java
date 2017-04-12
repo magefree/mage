@@ -27,9 +27,9 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,12 +38,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -53,7 +54,7 @@ public class HearthKami extends CardImpl {
     private final UUID originalId;
 
     public HearthKami(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);
@@ -73,7 +74,7 @@ public class HearthKami extends CardImpl {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("artifact with converted mana cost ").append(xValue).toString());
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             Target target = new TargetPermanent(filter);
             ability.addTarget(target);
         }

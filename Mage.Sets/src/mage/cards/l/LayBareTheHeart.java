@@ -27,17 +27,19 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +51,7 @@ public class LayBareTheHeart extends CardImpl {
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(Predicates.not(new SupertypePredicate("Legendary")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
     }
 
     public LayBareTheHeart(UUID ownerId, CardSetInfo setInfo) {

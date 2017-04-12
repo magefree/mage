@@ -55,7 +55,7 @@ import mage.watchers.Watcher;
  */
 public class ExertAbility extends SimpleStaticAbility {
 
-    final private String ruleText;
+    private String ruleText;
 
     public ExertAbility(BecomesExertSourceTriggeredAbility ability) {
         this(ability, false);
@@ -63,14 +63,17 @@ public class ExertAbility extends SimpleStaticAbility {
 
     public ExertAbility(BecomesExertSourceTriggeredAbility ability, boolean exertOnlyOncePerTurn) {
         super(Zone.BATTLEFIELD, new ExertReplacementEffect(exertOnlyOncePerTurn));
-        this.addSubAbility(ability);
         ruleText = (exertOnlyOncePerTurn
                 ? "If {this} hasn't been exerted this turn, you may exert it"
-                : "You may exert {this}")
-                + " as it attacks. When you do, "
-                + ability.getEffects().get(0).getText(ability.getModes().getMode())
-                + ". <i>(An exterted creature can't untap during your next untap step)</i>";
-        ability.setRuleVisible(false);
+                : "You may exert {this}") + " as it attacks. ";
+        if (ability != null) {
+            this.addSubAbility(ability);
+            ruleText += ("When you do, " +
+                    ability.getEffects().get(0).getText(ability.getModes().getMode())
+                    + ". ");
+            ability.setRuleVisible(false);
+        }
+        ruleText += "<i>(An exterted creature can't untap during your next untap step)</i>";
         if (exertOnlyOncePerTurn) {
             getWatchers().add(new ExertedThisTurnWatcher());
         }

@@ -27,9 +27,9 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,19 +41,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author KholdFuzion
- *
  */
 public class PirateShip extends CardImpl {
 
     public PirateShip(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.subtype.add("Human");
         this.subtype.add("Pirate");
 
@@ -68,7 +67,7 @@ public class PirateShip extends CardImpl {
         this.addAbility(ability);
         // When you control no Islands, sacrifice Pirate Ship.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new FilterLandPermanent("Island", "no Islands"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

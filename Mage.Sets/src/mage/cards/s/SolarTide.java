@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -35,11 +35,12 @@ import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,8 +52,8 @@ public class SolarTide extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");
     
     static {
-        filter1.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
-        filter2.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
+        filter1.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
+        filter2.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public SolarTide(UUID ownerId, CardSetInfo setInfo) {

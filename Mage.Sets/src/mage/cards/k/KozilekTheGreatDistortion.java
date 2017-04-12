@@ -29,7 +29,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.Cost;
@@ -46,7 +46,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -77,7 +76,7 @@ public class KozilekTheGreatDistortion extends CardImpl {
         // When you cast Kozilek, the Great Distortion, if you have fewer than seven cards in hand, draw cards equal to the difference.
         this.addAbility(new ConditionalTriggeredAbility(
                 new CastSourceTriggeredAbility(new KozilekDrawEffect(), false),
-                new CardsInHandCondition(CountType.FEWER_THAN, 7),
+                new CardsInHandCondition(ComparisonType.FEWER_THAN, 7),
                 "When you cast {this}, if you have fewer than seven cards in hand, draw cards equal to the difference."));
         // Menace
         this.addAbility(new MenaceAbility());
@@ -146,7 +145,7 @@ class KozilekDiscardCost extends CostImpl {
             return false;
         }
         FilterCard filter = new FilterCard("card with converted mana cost of " + targetSpell.getConvertedManaCost());
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, targetSpell.getConvertedManaCost()));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, targetSpell.getConvertedManaCost()));
         TargetCardInHand target = new TargetCardInHand(filter);
         this.getTargets().clear();
         this.getTargets().add(target);

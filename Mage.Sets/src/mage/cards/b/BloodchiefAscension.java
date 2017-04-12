@@ -28,7 +28,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.condition.common.OpponentLostLifeCondition;
@@ -61,7 +61,7 @@ public class BloodchiefAscension extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.QUEST.createInstance(1), false),
                 TargetController.ANY,
-                new OpponentLostLifeCondition(CountType.MORE_THAN, 1),
+                new OpponentLostLifeCondition(ComparisonType.MORE_THAN, 1),
                 true));
 
         // Whenever a card is put into an opponent's graveyard from anywhere, if Bloodchief Ascension has three or more quest counters on it, you may have that player lose 2 life. If you do, you gain 2 life.

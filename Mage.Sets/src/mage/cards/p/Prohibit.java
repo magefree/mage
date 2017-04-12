@@ -27,8 +27,8 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -36,11 +36,12 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,8 +53,8 @@ public class Prohibit extends CardImpl {
     private static final FilterSpell filter4 = new FilterSpell("spell if its converted mana cost is 4 or less");
 
     static {
-        filter2.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
-        filter4.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));
+        filter2.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter4.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public Prohibit(UUID ownerId, CardSetInfo setInfo) {

@@ -1,7 +1,7 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.IntCompareCondition;
 import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
@@ -11,7 +11,7 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  */
 public class YouGainedLifeCondition extends IntCompareCondition {
 
-    public YouGainedLifeCondition(CountType type, int value) {
+    public YouGainedLifeCondition(ComparisonType type, int value) {
         super(type, value);
     }
 

@@ -52,7 +52,7 @@ public class DiamondFaerie extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snow creatures");
 
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
 
     public DiamondFaerie(UUID ownerId, CardSetInfo setInfo) {

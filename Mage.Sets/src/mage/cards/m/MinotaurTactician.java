@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -74,12 +74,12 @@ public class MinotaurTactician extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         
         // Minotaur Tactician gets +1/+1 as long as you control a white creature.
-        Condition conditionWhite = new PermanentsOnTheBattlefieldCondition(filterWhite, CountType.MORE_THAN, 0);
+        Condition conditionWhite = new PermanentsOnTheBattlefieldCondition(filterWhite, ComparisonType.MORE_THAN, 0);
         Effect effectWhite = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionWhite, ruleWhite);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectWhite));
         
         // Minotaur Tactician gets +1/+1 as long as you control a blue creature.
-        Condition conditionBlue = new PermanentsOnTheBattlefieldCondition(filterBlue, CountType.MORE_THAN, 0);
+        Condition conditionBlue = new PermanentsOnTheBattlefieldCondition(filterBlue, ComparisonType.MORE_THAN, 0);
         Effect effectBlue = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionBlue, ruleBlue);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectBlue));
     }

@@ -28,19 +28,20 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
+import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class TreasureMage extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
     }
 
     public TreasureMage (UUID ownerId, CardSetInfo setInfo) {

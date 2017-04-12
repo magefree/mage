@@ -27,10 +27,9 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,10 +38,13 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetActivatedAbility;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +55,7 @@ public class RimewindCryomancer extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control four or more snow permanents");
 
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
 
     public RimewindCryomancer(UUID ownerId, CardSetInfo setInfo) {
@@ -67,7 +69,7 @@ public class RimewindCryomancer extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new CounterTargetEffect(),
                 new GenericManaCost(1),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 3));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetActivatedAbility());
         this.addAbility(ability);

@@ -29,7 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.constants.CardType;
 import mage.Mana;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -65,12 +65,12 @@ public class TaintedField extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.WhiteMana(1)),
                 new TapSourceCost(),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0)));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0)));
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.BlackMana(1)),
                 new TapSourceCost(),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0)));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0)));
     }
 
     public TaintedField(final TaintedField card) {

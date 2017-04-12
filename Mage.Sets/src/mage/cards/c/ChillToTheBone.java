@@ -31,6 +31,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -47,7 +48,7 @@ public class ChillToTheBone extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonsnow creature");
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Snow")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.SNOW)));
     }
 
     public ChillToTheBone(UUID ownerId, CardSetInfo setInfo) {

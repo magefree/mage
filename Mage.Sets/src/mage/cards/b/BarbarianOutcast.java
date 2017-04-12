@@ -28,12 +28,12 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -62,7 +62,7 @@ public class BarbarianOutcast extends CardImpl {
 
         // When you control no Swamps, sacrifice Barbarian Outcast.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Swamp", "no Swamps"), Filter.ComparisonType.Equal, 0,
+                new FilterLandPermanent("Swamp", "no Swamps"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

@@ -29,6 +29,7 @@ package mage.cards.y;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PutCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -42,7 +43,6 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.Counter;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -108,7 +108,7 @@ class YisanTheWandererBardEffect extends OneShotEffect {
         if (sourcePermanent != null && controller != null) {
             int newConvertedCost = sourcePermanent.getCounters(game).getCount("verse");
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, newConvertedCost));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
             filter.add(new CardTypePredicate(CardType.CREATURE));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, game)) {

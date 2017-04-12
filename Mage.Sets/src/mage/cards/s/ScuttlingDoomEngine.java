@@ -27,9 +27,9 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -38,10 +38,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class ScuttlingDoomEngine extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public ScuttlingDoomEngine(UUID ownerId, CardSetInfo setInfo) {

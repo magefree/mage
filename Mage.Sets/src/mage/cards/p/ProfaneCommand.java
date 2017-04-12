@@ -27,8 +27,8 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -43,7 +43,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,14 +52,15 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class ProfaneCommand extends CardImpl {
 
     public ProfaneCommand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
 
         DynamicValue xValue = new ManacostVariableValue();
@@ -89,20 +89,20 @@ public class ProfaneCommand extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Up to X target creatures gain fear until end of turn");
         mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetCreaturePermanent(0,1));
-        this.getSpellAbility().addMode(mode);        
+        mode.getTargets().add(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().addMode(mode);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
         // adjust targets is called for every selected mode
         Mode mode = ability.getModes().getMode();
-        for (Effect effect :mode.getEffects()) {
+        for (Effect effect : mode.getEffects()) {
             if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
                 mode.getTargets().clear();
                 int xValue = ability.getManaCostsToPay().getX();
-                FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue +  " or less from your graveyard");
-                filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xValue + 1));
+                FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less from your graveyard");
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
                 mode.getTargets().add(new TargetCardInYourGraveyard(filter));
             }
             if (effect instanceof GainAbilityTargetEffect) {

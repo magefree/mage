@@ -28,6 +28,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -35,7 +36,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -100,7 +100,7 @@ class EngulfTheShoreEffect extends OneShotEffect {
         if (controller != null) {
             int islands = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
             FilterPermanent creatureFilter = new FilterCreaturePermanent();
-            creatureFilter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, islands + 1));
+            creatureFilter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, islands + 1));
             Set<Card> cardsToHand = new HashSet<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source.getSourceId(), game)) {
                 cardsToHand.add(permanent);

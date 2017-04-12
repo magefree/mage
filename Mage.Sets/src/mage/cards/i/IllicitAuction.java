@@ -27,10 +27,15 @@
  */
 package mage.cards.i;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -49,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class IllicitAuction extends CardImpl {
 
     public IllicitAuction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Each player may bid life for control of target creature. You start the bidding with a bid of 0. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and gains control of the creature.
         this.getSpellAbility().addEffect(new IllicitAuctionEffect());
@@ -68,12 +73,12 @@ public class IllicitAuction extends CardImpl {
 
 // effect is based on GainControlTargetEffect
 class IllicitAuctionEffect extends GainControlTargetEffect {
-    
+
     public IllicitAuctionEffect() {
         super(Duration.EndOfGame);
         this.staticText = "Each player may bid life for control of target creature. You start the bidding with a bid of 0. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and gains control of the creature.";
     }
-    
+
     public IllicitAuctionEffect(final IllicitAuctionEffect effect) {
         super(effect);
     }
@@ -82,24 +87,32 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
     public IllicitAuctionEffect copy() {
         return new IllicitAuctionEffect(this);
     }
-    
+
     @Override
     public void init(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        if (controller != null && targetCreature != null) {
+        if (controller != null
+                && targetCreature != null) {
             PlayerList playerList = game.getPlayerList().copy();
             playerList.setCurrent(game.getActivePlayerId());
-            
+
             Player winner = game.getPlayer(game.getActivePlayerId());
             int highBid = 0;
-            game.informPlayers(winner.getLogName()+ " has bet 0 lifes");
-            
+            game.informPlayers(winner.getLogName() + " has bet 0 lifes");
             Player currentPlayer = playerList.getNextInRange(controller, game);
             while (!Objects.equals(currentPlayer, winner)) {
                 String text = winner.getLogName() + " has bet " + highBid + " life" + (highBid > 1 ? "s" : "") + ". Top the bid?";
-                if (currentPlayer.chooseUse(Outcome.Detriment, text, source, game)) {
-                    int newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", game);
+                if (currentPlayer.chooseUse(Outcome.GainControl, text, source, game)) {
+                    int newBid = 0;
+                    if (!currentPlayer.isHuman()) {//AI will evaluate the creature and bid
+                        CreatureEvaluator eval = new CreatureEvaluator();
+                        int computerLife = currentPlayer.getLife();
+                        int creatureValue = eval.evaluate(targetCreature, game);
+                        newBid = Math.max(creatureValue % 2, computerLife - 100);
+                    } else {
+                        newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", game);
+                    }
                     if (newBid > highBid) {
                         highBid = newBid;
                         winner = currentPlayer;
@@ -108,12 +121,34 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
                 }
                 currentPlayer = playerList.getNextInRange(controller, game);
             }
-            
+
             game.informPlayers(winner.getLogName() + " won the auction with a bid of " + highBid + " life" + (highBid > 1 ? "s" : ""));
             winner.loseLife(highBid, game, false);
             super.controllingPlayerId = winner.getId();
-        }        
+        }
         super.init(source, game);
     }
-    
+}
+
+class CreatureEvaluator {
+
+    private Map<UUID, Integer> values = new HashMap<>();
+
+    public int evaluate(Permanent creature, Game game) {
+        if (!values.containsKey(creature.getId())) {
+            int value = 0;
+            if (creature.canAttack(game))
+                value += 2;
+            value += creature.getPower().getValue();
+            value += creature.getToughness().getValue();
+            value += creature.getAbilities().getEvasionAbilities().size();
+            value += creature.getAbilities().getProtectionAbilities().size();
+            value += creature.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())?1:0;
+            value += creature.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())?2:0;
+            value += creature.getAbilities().containsKey(TrampleAbility.getInstance().getId())?1:0;
+            values.put(creature.getId(), value);
+        }
+        return values.get(creature.getId());
+    }
+
 }

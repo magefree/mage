@@ -27,15 +27,16 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import static mage.filter.Filter.ComparisonType.LessThan;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public class SearingLight extends CardImpl {
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("attacking or blocking creature with power 2 or less");
 
     static {
-        filter.add(new PowerPredicate(LessThan, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public SearingLight(UUID ownerId, CardSetInfo setInfo) {

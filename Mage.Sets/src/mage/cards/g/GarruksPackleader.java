@@ -29,13 +29,13 @@
 package mage.cards.g;
 
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -52,7 +52,7 @@ public class GarruksPackleader extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 3 or greater");
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public GarruksPackleader(UUID ownerId, CardSetInfo setInfo) {

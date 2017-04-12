@@ -28,7 +28,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -75,7 +75,7 @@ public class DominatorDrone extends CardImpl {
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(2));
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0),
                 "When {this} enters the battlefield, if you control another colorless creature, each opponent loses 2 life."));
 
     }

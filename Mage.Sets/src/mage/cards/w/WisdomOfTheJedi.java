@@ -27,7 +27,7 @@
  */
 package mage.cards.w;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -38,11 +38,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +54,7 @@ public class WisdomOfTheJedi extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("spell with converted mana cost of 3 or less");
 
     static {
-        filterSpell.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
+        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public WisdomOfTheJedi(UUID ownerId, CardSetInfo setInfo) {

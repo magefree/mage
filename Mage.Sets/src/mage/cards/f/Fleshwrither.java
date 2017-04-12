@@ -30,6 +30,7 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -42,7 +43,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -98,7 +98,7 @@ class FleshwritherEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && controller != null) {
             FilterCreatureCard filter = new FilterCreatureCard("creature with converted mana cost " + sourceObject.getConvertedManaCost());
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, sourceObject.getConvertedManaCost()));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, sourceObject.getConvertedManaCost()));
             TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
             if (controller.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {

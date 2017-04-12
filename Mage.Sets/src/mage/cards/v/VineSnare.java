@@ -27,15 +27,16 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public class VineSnare extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 4 or less");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 5));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public VineSnare(UUID ownerId, CardSetInfo setInfo) {

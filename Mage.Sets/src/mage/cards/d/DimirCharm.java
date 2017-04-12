@@ -28,6 +28,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -36,7 +37,6 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,7 +61,7 @@ public class DimirCharm extends CardImpl {
     private static final FilterSpell filterSorcery = new FilterSpell("sorcery spell");
     
     static {
-        filterCreature.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+        filterCreature.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
         filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
     }
 
