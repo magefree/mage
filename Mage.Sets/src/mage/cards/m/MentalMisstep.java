@@ -27,15 +27,16 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public class MentalMisstep extends CardImpl {
     private static final FilterSpell FILTER = new FilterSpell("spell with converted mana cost 1");
 
     static {
-        FILTER.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, 1));
+        FILTER.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 1));
     }
 
     public MentalMisstep(UUID ownerId, CardSetInfo setInfo) {

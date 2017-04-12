@@ -36,7 +36,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         }
         permanent.getSuperType().clear();
         for (SuperType type: token.getSuperType()) {
-            permanent.getSuperType().add(type);
+            permanent.addSuperType(type);
         }
         permanent.getAbilities().clear();
         for (Ability ability: token.getAbilities()) {

@@ -29,6 +29,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -39,7 +40,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -101,7 +101,7 @@ class CelestialKirinEffect extends OneShotEffect {
         if (spell != null) {
             int cmc = spell.getConvertedManaCost();
             FilterPermanent filter = new FilterPermanent();
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
             return new DestroyAllEffect(filter).apply(game, source);
         }
         return false;

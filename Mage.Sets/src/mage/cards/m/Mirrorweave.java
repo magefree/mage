@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -35,6 +34,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -45,6 +45,8 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -54,7 +56,7 @@ public class Mirrorweave extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Legendary")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
     }
 
     public Mirrorweave(UUID ownerId, CardSetInfo setInfo) {

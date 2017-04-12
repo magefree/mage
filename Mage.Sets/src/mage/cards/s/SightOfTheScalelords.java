@@ -27,8 +27,8 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -40,10 +40,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public class SightOfTheScalelords extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new ToughnessPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public SightOfTheScalelords(UUID ownerId, CardSetInfo setInfo) {

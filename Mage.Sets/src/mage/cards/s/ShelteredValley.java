@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -72,7 +72,7 @@ public class ShelteredValley extends CardImpl {
         this.addAbility(ability);
         
         // At the beginning of your upkeep, if you control three or fewer lands, you gain 1 life.
-        Condition controls = new PermanentsOnTheBattlefieldCondition(filter, CountType.FEWER_THAN, 4);
+        Condition controls = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 4);
         effect = new ConditionalOneShotEffect(new GainLifeEffect(1), controls);
         effect.setText("if you control three or fewer lands, you gain 1 life");
         ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false);

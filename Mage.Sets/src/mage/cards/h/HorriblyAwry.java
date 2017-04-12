@@ -27,18 +27,19 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class HorriblyAwry extends CardImpl {
     private static final FilterCreatureSpell filter = new FilterCreatureSpell("creature spell with converted mana cost 4 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public HorriblyAwry(UUID ownerId, CardSetInfo setInfo) {

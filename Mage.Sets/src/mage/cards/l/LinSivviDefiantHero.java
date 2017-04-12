@@ -27,9 +27,9 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -40,7 +40,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -50,6 +49,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -123,7 +124,7 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
         int xCost = source.getManaCostsToPay().getX();
 
         FilterPermanentCard filter = new FilterPermanentCard(new StringBuilder("Rebel permanent card with converted mana cost ").append(xCost).append(" or less").toString());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xCost + 1));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xCost + 1));
         filter.add(new SubtypePredicate("Rebel"));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 

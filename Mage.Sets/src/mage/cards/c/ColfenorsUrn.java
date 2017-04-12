@@ -29,6 +29,7 @@ package mage.cards.c;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -40,7 +41,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.ExileZone;
@@ -60,7 +60,7 @@ public class ColfenorsUrn extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with toughness 4 or greater");
 
     static {
-        filter.add(new ToughnessPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public ColfenorsUrn(UUID ownerId, CardSetInfo setInfo) {

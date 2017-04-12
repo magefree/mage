@@ -28,9 +28,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,9 +37,12 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -52,7 +52,7 @@ public class ShinkaTheBloodsoakedKeep extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     public ShinkaTheBloodsoakedKeep(UUID ownerId, CardSetInfo setInfo) {

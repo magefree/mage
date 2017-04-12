@@ -27,9 +27,7 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
-
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
@@ -41,8 +39,11 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +54,7 @@ public class PrairieStream extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     
     static {
-        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
     }
 
     public PrairieStream(UUID ownerId, CardSetInfo setInfo) {
@@ -62,7 +63,7 @@ public class PrairieStream extends CardImpl {
         this.subtype.add("Island");
 
         // Prairie Stream enters the battlefield tapped unless you control two or more basic lands.
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
+        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));
         String abilityText = "tapped unless you control two or more basic lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new WhiteManaAbility());

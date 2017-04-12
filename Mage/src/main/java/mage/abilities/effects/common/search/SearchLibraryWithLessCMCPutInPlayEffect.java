@@ -28,11 +28,11 @@
 package mage.abilities.effects.common.search;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -67,7 +67,7 @@ public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterCard advancedFilter = filter.copy(); // never change static objects so copy the object here before
-            advancedFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
+            advancedFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
             TargetCardInLibrary target = new TargetCardInLibrary(advancedFilter);
             if (controller.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {

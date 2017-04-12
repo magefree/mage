@@ -28,12 +28,12 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,7 +49,7 @@ public class BalaGedScorpion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 1 or less");
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.LessThan, 2));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public BalaGedScorpion(UUID ownerId, CardSetInfo setInfo) {

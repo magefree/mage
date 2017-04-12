@@ -27,7 +27,7 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
@@ -36,9 +36,10 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class ShamanicRevelation extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with power 4 or greater");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public ShamanicRevelation(UUID ownerId, CardSetInfo setInfo) {

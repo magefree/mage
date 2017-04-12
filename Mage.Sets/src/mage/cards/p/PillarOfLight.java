@@ -27,15 +27,16 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public class PillarOfLight extends CardImpl {
     static private final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 4 or greater");
 
     static {
-        filter.add(new ToughnessPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public PillarOfLight(UUID ownerId, CardSetInfo setInfo) {

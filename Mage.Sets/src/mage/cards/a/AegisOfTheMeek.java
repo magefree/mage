@@ -28,6 +28,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,7 +38,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -54,8 +54,8 @@ public class AegisOfTheMeek extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.Equal, 1));
-        filter.add(new ToughnessPredicate(Filter.ComparisonType.Equal, 1));
+        filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, 1));
+        filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, 1));
     }
 
     public AegisOfTheMeek(UUID ownerId, CardSetInfo setInfo) {

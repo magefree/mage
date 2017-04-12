@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -34,7 +35,6 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,7 +56,7 @@ public class FerocityOfTheUnderworld extends CardImpl {
     private static final FilterSpell filterMode2 = new FilterSpell("instant or sorcery spell");
 
     static {
-        filterMode1.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
+        filterMode1.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
         filterMode2.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
     }
 

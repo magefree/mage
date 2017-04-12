@@ -28,24 +28,23 @@
 package mage.cards.g;
 
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public class GoblinsOfTheFlarg extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Dwarf");
 
     static {
@@ -53,7 +52,7 @@ public class GoblinsOfTheFlarg extends CardImpl {
     }
 
     public GoblinsOfTheFlarg(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
         this.power = new MageInt(1);
@@ -61,10 +60,10 @@ public class GoblinsOfTheFlarg extends CardImpl {
 
         // Mountainwalk
         this.addAbility(new MountainwalkAbility());
-        
+
         // When you control a Dwarf, sacrifice Goblins of the Flarg.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                filter, Filter.ComparisonType.GreaterThan, 0,
+                filter, ComparisonType.MORE_THAN, 0,
                 new SacrificeSourceEffect()));
     }
 

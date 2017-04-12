@@ -28,7 +28,7 @@
 
 package mage.cards.c;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
@@ -60,7 +60,7 @@ public class ClifftopRetreat extends CardImpl {
     public ClifftopRetreat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0));
+        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0));
         String abilityText = "tap it unless you control a Mountain or a Plains";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new RedManaAbility());

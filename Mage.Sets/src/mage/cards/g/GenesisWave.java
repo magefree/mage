@@ -29,12 +29,12 @@ package mage.cards.g;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -101,7 +101,7 @@ class GenesisWaveEffect extends OneShotEffect {
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
             FilterCard filter = new FilterCard("cards with converted mana cost " + xValue + " or less to put onto the battlefield");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xValue + 1));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
             filter.add(
                     Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
                             new CardTypePredicate(CardType.CREATURE),

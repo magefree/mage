@@ -30,7 +30,7 @@
 
 package mage.cards.o;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
@@ -76,7 +76,7 @@ public class OrochiEggwatcher extends CardImpl {
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken()), new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new ShidakoBroodmistress()),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(), CountType.MORE_THAN, 9), "If you control ten or more creatures, flip {this}"));
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(), ComparisonType.MORE_THAN, 9), "If you control ten or more creatures, flip {this}"));
         this.addAbility(ability);
     }
 

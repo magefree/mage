@@ -27,8 +27,8 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,8 +43,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +74,7 @@ public class IslandFishJasconius extends CardImpl {
         
         // When you control no Islands, sacrifice Island Fish Jasconius.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new FilterLandPermanent("Island", "no Islands"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

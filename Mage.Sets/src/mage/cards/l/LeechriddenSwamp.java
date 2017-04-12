@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -76,7 +76,7 @@ public class LeechriddenSwamp extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new LeechriddenSwampLoseLifeEffect(),
                 new ManaCostsImpl("{B}"),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

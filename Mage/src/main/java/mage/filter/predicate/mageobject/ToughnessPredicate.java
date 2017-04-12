@@ -28,7 +28,7 @@
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
-import mage.filter.Filter;
+import mage.constants.ComparisonType;
 import mage.filter.predicate.IntComparePredicate;
 
 /**
@@ -37,7 +37,7 @@ import mage.filter.predicate.IntComparePredicate;
  */
 public class ToughnessPredicate extends IntComparePredicate<MageObject> {
 
-    public ToughnessPredicate(Filter.ComparisonType type, int value) {
+    public ToughnessPredicate(ComparisonType type, int value) {
         super(type, value);
     }
 

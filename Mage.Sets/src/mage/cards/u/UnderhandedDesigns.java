@@ -29,7 +29,7 @@ package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -68,7 +68,7 @@ public class UnderhandedDesigns extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new DestroyTargetEffect(),
                 new ManaCostsImpl("{1}{B}"),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent("you control two or more artifacts"), CountType.MORE_THAN, 1));
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent("you control two or more artifacts"), ComparisonType.MORE_THAN, 1));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -30,7 +30,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -122,7 +122,7 @@ class OketraTheTrueRestrictionEffect extends RestrictionEffect {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 int permanentsOnBattlefield = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-                return (CountType.compare(permanentsOnBattlefield, CountType.FEWER_THAN, 4));
+                return (ComparisonType.compare(permanentsOnBattlefield, ComparisonType.FEWER_THAN, 4));
             }
             return true;
         }  // do not apply to other creatures.

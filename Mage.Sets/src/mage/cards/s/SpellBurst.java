@@ -27,28 +27,28 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
+import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class SpellBurst extends CardImpl {
 
     public SpellBurst(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
 
         // Buyback {3}
@@ -64,7 +64,7 @@ public class SpellBurst extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             FilterSpell filter = new FilterSpell("spell with converted mana cost X");
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, ability.getManaCostsToPay().getX()));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, ability.getManaCostsToPay().getX()));
             ability.addTarget(new TargetSpell(filter));
         }
     }

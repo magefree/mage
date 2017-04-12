@@ -28,6 +28,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,7 +39,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -58,7 +58,7 @@ public class GoblinKites extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("controlled creature with power 2 or less");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

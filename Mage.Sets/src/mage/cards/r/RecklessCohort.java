@@ -29,7 +29,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
@@ -68,7 +68,7 @@ public class RecklessCohort extends CardImpl {
         // Reckless Cohort attacks each combat if able unless you control another Ally.
         Effect effect = new ConditionalRequirementEffect(
                 new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.FEWER_THAN, 1));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 1));
         effect.setText("{this} attacks each combat if able unless you control another Ally");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

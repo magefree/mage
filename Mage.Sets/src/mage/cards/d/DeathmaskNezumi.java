@@ -29,7 +29,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
@@ -60,7 +60,7 @@ public class DeathmaskNezumi extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you have seven or more cards in hand, Deathmask Nezumi gets +2/+1 and has fear.
-        Condition condition = new CardsInHandCondition(CountType.MORE_THAN,6);
+        Condition condition = new CardsInHandCondition(ComparisonType.MORE_THAN,6);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(2,1, Duration.WhileOnBattlefield), condition, "As long as you have seven or more cards in hand, {this} gets +2/+1"));
         ability.addEffect(new ConditionalContinuousEffect(

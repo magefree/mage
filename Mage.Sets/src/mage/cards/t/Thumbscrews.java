@@ -29,7 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
@@ -55,7 +55,7 @@ public class Thumbscrews extends CardImpl {
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
                 new DamageTargetEffect(1), TargetController.YOU, false);
         ability.addTarget(new TargetOpponent());
-        CardsInHandCondition condition = new CardsInHandCondition(CountType.MORE_THAN, 4);
+        CardsInHandCondition condition = new CardsInHandCondition(ComparisonType.MORE_THAN, 4);
         this.addAbility(new ConditionalTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have five or more cards in hand, {this} deals 1 damage to target opponent."));
     }
 

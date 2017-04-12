@@ -54,7 +54,7 @@ public class OhranYeti extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("snow creature");
 
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
 
     public OhranYeti(UUID ownerId, CardSetInfo setInfo) {

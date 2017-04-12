@@ -38,6 +38,7 @@ import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -88,7 +89,7 @@ class AnathemancerCount implements DynamicValue {
         }
 
         FilterLandPermanent filter = new FilterLandPermanent();
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
         filter.add(new ControllerIdPredicate(sourceAbility.getFirstTarget()));
 
         return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);

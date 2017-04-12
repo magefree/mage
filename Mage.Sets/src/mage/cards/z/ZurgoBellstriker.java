@@ -28,6 +28,7 @@
 package mage.cards.z;
 
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
 import mage.abilities.keyword.DashAbility;
@@ -36,7 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
@@ -51,7 +51,7 @@ public class ZurgoBellstriker extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or greater");
     
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 1));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 1));
     }
 
     public ZurgoBellstriker(UUID ownerId, CardSetInfo setInfo) {

@@ -28,6 +28,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -38,7 +39,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
@@ -114,7 +114,7 @@ class DropOfHoneyEffect extends OneShotEffect {
             }
             if (multipleExist) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("one of the creatures with the least power");
-                filter.add(new PowerPredicate(Filter.ComparisonType.Equal, leastPower));
+                filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, leastPower));
                 Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
                 if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {

@@ -29,6 +29,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -40,7 +41,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,7 +53,6 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
 import java.util.UUID;
 
 /**
- *
  * @author nantuko
  */
 public class GethLordOfTheVault extends CardImpl {
@@ -61,7 +60,7 @@ public class GethLordOfTheVault extends CardImpl {
     private final UUID originalId;
 
     public GethLordOfTheVault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
 
@@ -87,7 +86,7 @@ public class GethLordOfTheVault extends CardImpl {
             filter.add(Predicates.or(
                     new CardTypePredicate(CardType.ARTIFACT),
                     new CardTypePredicate(CardType.CREATURE)));
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             Target target = new TargetCardInOpponentsGraveyard(filter);
             ability.addTarget(target);
         }

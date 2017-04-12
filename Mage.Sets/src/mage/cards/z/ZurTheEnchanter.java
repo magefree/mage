@@ -27,8 +27,8 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -36,11 +36,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class ZurTheEnchanter extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public ZurTheEnchanter(UUID ownerId, CardSetInfo setInfo) {

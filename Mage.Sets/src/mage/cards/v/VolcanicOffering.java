@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -35,6 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -48,6 +48,8 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsChoicePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -58,7 +60,7 @@ public class VolcanicOffering extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature you don't control");
     static {
         filterLand.add(new ControllerPredicate(TargetController.NOT_YOU));
-        filterLand.add(Predicates.not(new SupertypePredicate("Basic")));
+        filterLand.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
         filterCreature.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
     public VolcanicOffering(UUID ownerId, CardSetInfo setInfo) {
@@ -84,7 +86,7 @@ public class VolcanicOffering extends CardImpl {
             ability.getTargets().clear();
             ability.addTarget(new TargetPermanent(filterLand));
             FilterLandPermanent filterLandForOpponent = new FilterLandPermanent("nonbasic land not controlled by " + controller.getLogName());
-            filterLandForOpponent.add(Predicates.not(new SupertypePredicate("Basic")));
+            filterLandForOpponent.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
             filterLandForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
             ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterLandForOpponent, false, true));
 

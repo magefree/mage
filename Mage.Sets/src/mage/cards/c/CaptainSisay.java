@@ -51,7 +51,7 @@ public class CaptainSisay extends CardImpl {
     private static final FilterCard filter = new FilterCard("legendary card");
     
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
     
     public CaptainSisay(UUID ownerId, CardSetInfo setInfo) {

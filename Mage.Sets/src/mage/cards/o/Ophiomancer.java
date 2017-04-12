@@ -29,7 +29,7 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -60,7 +60,7 @@ public class Ophiomancer extends CardImpl {
         // At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new OphiomancerSnakeToken()), TargetController.ANY, false, false),
-                new PermanentsOnTheBattlefieldCondition(new FilterCreaturePermanent("Snake", "no Snakes"), CountType.EQUAL_TO, 0),
+                new PermanentsOnTheBattlefieldCondition(new FilterCreaturePermanent("Snake", "no Snakes"), ComparisonType.EQUAL_TO, 0),
                 "At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch."));
     }
 

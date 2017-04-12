@@ -27,15 +27,13 @@
  */
 package mage.cards.n;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
@@ -44,14 +42,16 @@ import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public class NoContest extends CardImpl {
 
     public NoContest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Target creature you control fights target creature with power less than its power.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
@@ -91,7 +91,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
         }
         // now check, if another creature has less power and can be targeted
         FilterCreaturePermanent checkFilter = new FilterCreaturePermanent();
-        checkFilter.add(new PowerPredicate(Filter.ComparisonType.LessThan, maxPower));
+        checkFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, maxPower));
         for (Permanent permanent : game.getBattlefield().getActivePermanents(checkFilter, sourceControllerId, sourceId, game)) {
             if (permanent.canBeTargetedBy(sourceCard, sourceControllerId, game)) {
                 return true;
@@ -109,7 +109,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
                 int power = firstTarget.getPower().getValue();
                 // overwrite the filter with the power predicate
                 filter = new FilterCreaturePermanent("creature with power less than " + power);
-                filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, power));
+                filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, power));
             }
         }
         return super.possibleTargets(sourceId, sourceControllerId, game);

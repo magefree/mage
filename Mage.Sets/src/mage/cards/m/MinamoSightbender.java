@@ -27,9 +27,9 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,12 +39,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,7 +82,7 @@ public class MinamoSightbender extends CardImpl {
                     int manaX = ability.getManaCostsToPay().getX();
                     ability.getTargets().clear();
                     FilterCreaturePermanent newFilter = new FilterCreaturePermanent(new StringBuilder("creature with power ").append(manaX).append(" or less").toString());
-                    filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, manaX + 1));
+                    filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, manaX + 1));
                     Target target = new TargetCreaturePermanent(newFilter);
                     ability.addTarget(target);
                     break;

@@ -27,10 +27,8 @@
  */
 package mage.cards.r;
 
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -43,13 +41,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
+
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +99,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
         if (player != null) {
             int xValue = source.getManaCostsToPay().getX();
             FilterCreatureCard filter = new FilterCreatureCard();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xValue + 1));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
             Set<Card> cards = player.getGraveyard().getCards(filter, game);
             player.moveCards(cards, Zone.BATTLEFIELD, source, game);
             ArrayList<Permanent> toExile = new ArrayList<>(cards.size());

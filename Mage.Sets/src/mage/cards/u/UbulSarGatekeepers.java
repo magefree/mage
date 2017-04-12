@@ -30,7 +30,7 @@ package mage.cards.u;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -72,7 +72,7 @@ public class UbulSarGatekeepers extends CardImpl {
         // Whenever Ubul Sar Gatekeepers enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn)),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1),
                 "Whenever {this} enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.");
         Target target = new TargetCreaturePermanent(targetFilter);
         ability.addTarget(target);

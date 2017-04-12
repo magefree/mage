@@ -33,6 +33,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
@@ -69,7 +70,7 @@ class SkredDamageEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("equal to the number of snow permanents you control.");
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
     
     public SkredDamageEffect() {

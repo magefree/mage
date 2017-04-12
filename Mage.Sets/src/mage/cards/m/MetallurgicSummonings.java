@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.ExileSourceCost;
@@ -78,7 +78,7 @@ public class MetallurgicSummonings extends CardImpl {
         // {3}{U}{U}, Exile Metallurgic Summons: Return all instant and sorcery cards from your graveyard to your hand. Activate this ability only if you control six or more artifacts.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new MetallurgicSummoningsReturnEffect(), new ManaCostsImpl("{3}{U}{U}"),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), CountType.MORE_THAN, 5),
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.MORE_THAN, 5),
                 "{3}{U}{U}, Exile {this}: Return all instant and sorcery cards from your graveyard to your hand."
                         + " Activate this ability only if you control six or more artifacts.");
         ability.addCost(new ExileSourceCost());
