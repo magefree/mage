@@ -27,7 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -40,17 +39,9 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
@@ -60,6 +51,8 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -125,7 +118,7 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
         FilterPermanentCard filter = new FilterPermanentCard();
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.LAND)));
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, count));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, count));
         Card card = player.getLibrary().getFromTop(game);
         if (card != null) {
             Cards cards = new CardsImpl();
