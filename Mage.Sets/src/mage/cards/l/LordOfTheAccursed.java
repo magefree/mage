@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class LordOfTheAccursed extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
 
     static {
         filter.add(new SubtypePredicate("Zombie"));
@@ -70,8 +70,8 @@ public class LordOfTheAccursed extends CardImpl {
         //{2}{B}, Tap: All Zombies gain menace until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
                 new MenaceAbility(),
-                Duration.WhileOnBattlefield,
-                filter, "Each Zombie you control has menace."),
+                Duration.EndOfTurn,
+                filter, "Each Zombie you control gains menace until end of turn."),
                 new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
