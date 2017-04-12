@@ -66,11 +66,11 @@ public class Amonkhet extends ExpansionSet {
         this.ratioBoosterSpecialLand = 144;
 
         cards.add(new SetCardInfo("Ahn-Crop Crasher", 117, Rarity.UNCOMMON, mage.cards.a.AhnCropCrasher.class));
-        cards.add(new SetCardInfo("Approach of the Second Sun", 4, Rarity.RARE, mage.cards.a.ApproachOfTheSecondSun.class));
         cards.add(new SetCardInfo("Ancient Crab", 40, Rarity.COMMON, mage.cards.a.AncientCrab.class));
         cards.add(new SetCardInfo("Angel of Sanctions", 1, Rarity.MYTHIC, mage.cards.a.AngelOfSanctions.class));
         cards.add(new SetCardInfo("Angler Drake", 41, Rarity.UNCOMMON, mage.cards.a.AnglerDrake.class));
         cards.add(new SetCardInfo("Anointer Priest", 3, Rarity.COMMON, mage.cards.a.AnointerPriest.class));
+        cards.add(new SetCardInfo("Approach of the Second Sun", 4, Rarity.RARE, mage.cards.a.ApproachOfTheSecondSun.class));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 78, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
         cards.add(new SetCardInfo("As Foretold", 42, Rarity.MYTHIC, mage.cards.a.AsForetold.class));
         cards.add(new SetCardInfo("Aven Mindcensor", 5, Rarity.RARE, mage.cards.a.AvenMindcensor.class));
@@ -125,6 +125,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Graceful Cat", 273, Rarity.COMMON, mage.cards.g.GracefulCat.class));
         cards.add(new SetCardInfo("Gravedigger", 93, Rarity.UNCOMMON, mage.cards.g.Gravedigger.class));
         cards.add(new SetCardInfo("Grim Strider", 93, Rarity.UNCOMMON, mage.cards.g.GrimStrider.class));
+        cards.add(new SetCardInfo("Grim Strider", 94, Rarity.UNCOMMON, mage.cards.g.GrimStrider.class));
         cards.add(new SetCardInfo("Hapatra, Vizier of Poisons", 199, Rarity.RARE, mage.cards.h.HapatraVizierOfPoisons.class));
         cards.add(new SetCardInfo("Hazoret the Fervent", 136, Rarity.MYTHIC, mage.cards.h.HazoretTheFervent.class));
         cards.add(new SetCardInfo("Hazoret's Favor", 137, Rarity.RARE, mage.cards.h.HazoretsFavor.class));
@@ -143,8 +144,8 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Kefnet the Mindful", 59, Rarity.MYTHIC, mage.cards.k.KefnetTheMindful.class));
         cards.add(new SetCardInfo("Kefnet's Monument", 231, Rarity.UNCOMMON, mage.cards.k.KefnetsMonument.class));
         cards.add(new SetCardInfo("Lay Bare the Heart", 96, Rarity.UNCOMMON, mage.cards.l.LayBareTheHeart.class));
-        cards.add(new SetCardInfo("Liliana's Mastery", 98, Rarity.RARE, mage.cards.l.LilianasMastery.class));
         cards.add(new SetCardInfo("Liliana's Influence", 277, Rarity.RARE, mage.cards.l.LilianasInfluence.class));
+        cards.add(new SetCardInfo("Liliana's Mastery", 98, Rarity.RARE, mage.cards.l.LilianasMastery.class));
         cards.add(new SetCardInfo("Liliana, Death Wielder", 274, Rarity.MYTHIC, mage.cards.l.LilianaDeathWielder.class));
         cards.add(new SetCardInfo("Liliana, Death's Majesty", 97, Rarity.MYTHIC, mage.cards.l.LilianaDeathsMajesty.class));
         cards.add(new SetCardInfo("Limits of Solidarity", 140, Rarity.UNCOMMON, mage.cards.l.LimitsOfSolidarity.class));
@@ -186,6 +187,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Scribe of the Mindful", 68, Rarity.COMMON, mage.cards.s.ScribeOfTheMindful.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 248, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Sixth Sense", 187, Rarity.UNCOMMON, mage.cards.s.SixthSense.class));
+        cards.add(new SetCardInfo("Soul-Scar Mage", 148, Rarity.RARE, mage.cards.s.SoulScarMage.class));
         cards.add(new SetCardInfo("Soul-Scar Mage", 149, Rarity.RARE, mage.cards.s.SoulScarMage.class));
         cards.add(new SetCardInfo("Spidery Grasp", 188, Rarity.COMMON, mage.cards.s.SpideryGrasp.class));
         cards.add(new SetCardInfo("Splendid Agony", 109, Rarity.COMMON, mage.cards.s.SplendidAgony.class));
