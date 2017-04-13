@@ -29,29 +29,27 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.watchers.common.CreaturesDiedWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +65,7 @@ public class BontuTheGlorified extends CardImpl {
 
     public BontuTheGlorified(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.subtype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("God");
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
@@ -162,7 +160,7 @@ class BontuTheGlorifiedEffect extends OneShotEffect {
             new ScryEffect(1).apply(game, source);
             for (UUID opponentId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player opponent = game.getPlayer(opponentId);
-                if (opponent != controller) {
+                if (!opponent.getId().equals(controller.getId())) {
                     opponent.loseLife(1, game, false);
                 }
             }
