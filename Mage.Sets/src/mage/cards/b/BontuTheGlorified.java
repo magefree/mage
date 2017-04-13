@@ -29,11 +29,9 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import java.util.UUID;
@@ -41,11 +39,15 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -67,7 +69,7 @@ public class BontuTheGlorified extends CardImpl {
 
     public BontuTheGlorified(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.subtype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("God");
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
@@ -82,7 +84,11 @@ public class BontuTheGlorified extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BontuTheGlorifiedRestrictionEffect()), new CreaturesDiedWatcher());
 
         //{1}{B}, Sacrifice another creature: Scry 1.  Each opponent loses 1 life and you gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BontuTheGlorifiedEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl("{1}{B}"));
+        ability.addEffect(new LoseLifeOpponentsEffect(1));
+        Effect effect = new GainLifeEffect(1);
+        effect.setText("and you gain 1 life");
+        ability.addEffect(effect);
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
 
@@ -135,40 +141,6 @@ class BontuTheGlorifiedRestrictionEffect extends RestrictionEffect {
             }
             return true;
         }  // do not apply to other creatures.
-        return false;
-    }
-}
-
-class BontuTheGlorifiedEffect extends OneShotEffect {
-
-    public BontuTheGlorifiedEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Scry 1.  Each opponent loses 1 life and you gain 1 life";
-    }
-
-    public BontuTheGlorifiedEffect(final BontuTheGlorifiedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BontuTheGlorifiedEffect copy() {
-        return new BontuTheGlorifiedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            new ScryEffect(1).apply(game, source);
-            for (UUID opponentId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != controller) {
-                    opponent.loseLife(1, game, false);
-                }
-            }
-            controller.gainLife(1, game);
-            return true;
-        }
         return false;
     }
 }
