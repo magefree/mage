@@ -82,12 +82,14 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Bounty of the Luxa", 196, Rarity.RARE, mage.cards.b.BountyOfTheLuxa.class));
         cards.add(new SetCardInfo("Bontu's Monument", 225, Rarity.UNCOMMON, mage.cards.b.BontusMonument.class));
         cards.add(new SetCardInfo("Bontu the Glorified", 82, Rarity.MYTHIC, mage.cards.b.BontuTheGlorified.class));
+        cards.add(new SetCardInfo("By Force", 123, Rarity.UNCOMMON, mage.cards.b.ByForce.class));
         cards.add(new SetCardInfo("Canyon Slough", 239, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Cartouche of Ambition", 83, Rarity.COMMON, mage.cards.c.CartoucheOfAmbition.class));
         cards.add(new SetCardInfo("Cartouche of Knowledge", 45, Rarity.COMMON, mage.cards.c.CartoucheOfKnowledge.class));
         cards.add(new SetCardInfo("Cartouche of Solidarity", 7, Rarity.COMMON, mage.cards.c.CartoucheOfSolidarity.class));
         cards.add(new SetCardInfo("Cartouche of Strength", 158, Rarity.COMMON, mage.cards.c.CartoucheOfStrength.class));
         cards.add(new SetCardInfo("Cartouche of Zeal", 124, Rarity.COMMON, mage.cards.c.CartoucheOfZeal.class));
+        cards.add(new SetCardInfo("Cascading Cataracts", 240, Rarity.RARE, mage.cards.c.CascadingCataracts.class));
         cards.add(new SetCardInfo("Cast Out", 8, Rarity.UNCOMMON, mage.cards.c.CastOut.class));
         cards.add(new SetCardInfo("Censor", 46, Rarity.UNCOMMON, mage.cards.c.Censor.class));
         cards.add(new SetCardInfo("Champion of Rhonas", 159, Rarity.RARE, mage.cards.c.ChampionOfRhonas.class));
