@@ -203,6 +203,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Scarab Feast", 106, Rarity.COMMON, mage.cards.s.ScarabFeast.class));
         cards.add(new SetCardInfo("Scattered Groves", 247, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scribe of the Mindful", 68, Rarity.COMMON, mage.cards.s.ScribeOfTheMindful.class));
+        cards.add(new SetCardInfo("Shadow of the Grave", 107, Rarity.RARE, mage.cards.s.ShadowOfTheGrave.class));
         cards.add(new SetCardInfo("Shefet Monitor", 186, Rarity.UNCOMMON, mage.cards.s.ShefetMonitor.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 248, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Sixth Sense", 187, Rarity.UNCOMMON, mage.cards.s.SixthSense.class));
