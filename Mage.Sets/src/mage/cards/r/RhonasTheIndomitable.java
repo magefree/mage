@@ -86,7 +86,7 @@ public class RhonasTheIndomitable extends CardImpl {
         effect.setText("Another target creature gets +2/+0");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{G}"));
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gain trample until end of turn");
+        effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
