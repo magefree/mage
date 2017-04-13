@@ -112,6 +112,6 @@ class HarshMentorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent activates an ability that isn't a mana ability, {this} deals 2 damage to that player.";
+        return "Whenever an opponent activates an ability of an artifact, creature, or land on the battlefield, if it isn't a mana ability, {this} deals 2 damage to that player.";
     }
 }
