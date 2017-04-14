@@ -274,6 +274,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Temmet, Vizier of Naktamun", 207, Rarity.RARE, mage.cards.t.TemmetVizierOfNaktamun.class));
         cards.add(new SetCardInfo("Those Who Serve", 32, Rarity.COMMON, mage.cards.t.ThoseWhoServe.class));
         cards.add(new SetCardInfo("Throne of the God-Pharaoh", 237, Rarity.RARE, mage.cards.t.ThroneOfTheGodPharaoh.class));
+        cards.add(new SetCardInfo("Time to Reflect", 33, Rarity.UNCOMMON, mage.cards.t.TimeToReflect.class));
         cards.add(new SetCardInfo("Tormenting Voice", 151, Rarity.COMMON, mage.cards.t.TormentingVoice.class));
         cards.add(new SetCardInfo("Trial of Ambition", 113, Rarity.UNCOMMON, mage.cards.t.TrialOfAmbition.class));
         cards.add(new SetCardInfo("Trial of Knowledge", 73, Rarity.UNCOMMON, mage.cards.t.TrialOfKnowledge.class));
@@ -289,6 +290,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Wasteland Scorpion", 116, Rarity.COMMON, mage.cards.w.WastelandScorpion.class));
         cards.add(new SetCardInfo("Watchers of the Dead", 238, Rarity.UNCOMMON, mage.cards.w.WatchersOfTheDead.class));
         cards.add(new SetCardInfo("Watchful Naga", 193, Rarity.UNCOMMON, mage.cards.w.WatchfulNaga.class));
+        cards.add(new SetCardInfo("Wayward Servant", 208, Rarity.UNCOMMON, mage.cards.w.WaywardServant.class));
         cards.add(new SetCardInfo("Winged Shepherd", 39, Rarity.COMMON, mage.cards.w.WingedShepherd.class));
     }
 

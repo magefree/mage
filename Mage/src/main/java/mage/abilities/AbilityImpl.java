@@ -338,7 +338,7 @@ public abstract class AbilityImpl implements Ability {
                 Outcome outcome = getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome();
                 if (getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game) == false) {
                     if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
-                        game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");
+                        game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets");
                     }
                     return false; // when activation of ability is canceled during target selection
                 }
