@@ -54,7 +54,7 @@ public class GideonsIntervention extends CardImpl {
 
     public GideonsIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        
+
         // As Gideon's Intervention enters the battlefield, choose a card name.
         this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL)));
 
@@ -121,18 +121,18 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
 
 class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
 
-    public GideonsInterventionPreventAllDamageEffect () {
+    public GideonsInterventionPreventAllDamageEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Prevent all damage that would be dealt to you and permanents you control by sources with the chosen name.";
     }
 
-    public GideonsInterventionPreventAllDamageEffect (final GideonsInterventionPreventAllDamageEffect effect) {
+    public GideonsInterventionPreventAllDamageEffect(final GideonsInterventionPreventAllDamageEffect effect) {
         super(effect);
     }
 
     @Override
     public GideonsInterventionPreventAllDamageEffect copy() {
-        return new GideonsInterventionPreventAllDamageEffect (this);
+        return new GideonsInterventionPreventAllDamageEffect(this);
     }
 
     @Override
@@ -157,12 +157,12 @@ class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
         MageObject object = game.getObject(event.getSourceId());
         Permanent targetPerm = game.getPermanent(event.getTargetId());
 
-        if (object != null && (event.getType() == GameEvent.EventType.DAMAGE_PLAYER || 
-            targetPerm != null && (event.getType() == GameEvent.EventType.DAMAGE_CREATURE || 
-            event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER))) {
-                if (object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY)) &&
-                    (event.getTargetId().equals(source.getControllerId()) || 
-                     targetPerm != null && targetPerm.getControllerId().equals(source.getControllerId()))) {
+        if (object != null && (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
+                || targetPerm != null && (event.getType() == GameEvent.EventType.DAMAGE_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER))) {
+            if (object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))
+                    && (event.getTargetId().equals(source.getControllerId())
+                    || targetPerm != null && targetPerm.getControllerId().equals(source.getControllerId()))) {
                 return super.applies(event, source, game);
             }
         }
