@@ -54,7 +54,8 @@ public class HarvestSeason extends CardImpl {
     public HarvestSeason(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
-        // Search for up to X basic land cards from your library and put them onto the battlefield tapped, then shuffle your library. X is equal to number of tapped creature you control.
+        // Search your library for up to X basic land cards, where X is the number of tapped creatures you control,
+        // and put those card onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new HarvestSeasonEffect());
 
     }
@@ -79,7 +80,8 @@ class HarvestSeasonEffect extends OneShotEffect {
 
     HarvestSeasonEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search for up to X basic land cards from your library and put them onto the battlefield tapped, then shuffle your library. X is equal to number of tapped creature you control.";
+        this.staticText = "Search your library for up to X basic land cards, where X is the number of tapped creatures you control,"
+                + " and put those card onto the battlefield tapped, then shuffle your library.";
     }
 
     HarvestSeasonEffect(final HarvestSeasonEffect effect) {
