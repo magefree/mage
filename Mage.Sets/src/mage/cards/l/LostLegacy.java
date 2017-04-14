@@ -51,7 +51,7 @@ public class LostLegacy extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Name a nonartifact, nonland card. Search target player's graveyard, hand and library for any number of cards with that name and exile them. That player shuffles his or her library, then draws a card for each card exiled from hand this way.
-        this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_ARTFIACT_AND_NON_LAND_NAME)));
+        this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_ARTIFACT_AND_NON_LAND_NAME)));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new LostLegacyEffect());
     }
