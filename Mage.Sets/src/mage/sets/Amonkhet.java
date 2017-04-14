@@ -84,7 +84,9 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Bounty of the Luxa", 196, Rarity.RARE, mage.cards.b.BountyOfTheLuxa.class));
         cards.add(new SetCardInfo("Bontu's Monument", 225, Rarity.UNCOMMON, mage.cards.b.BontusMonument.class));
         cards.add(new SetCardInfo("Bontu the Glorified", 82, Rarity.MYTHIC, mage.cards.b.BontuTheGlorified.class));
+        cards.add(new SetCardInfo("Brute Strength", 122, Rarity.COMMON, mage.cards.b.BruteStrength.class));
         cards.add(new SetCardInfo("By Force", 123, Rarity.UNCOMMON, mage.cards.b.ByForce.class));
+        cards.add(new SetCardInfo("Cancel", 44, Rarity.COMMON, mage.cards.c.Cancel.class));
         cards.add(new SetCardInfo("Canyon Slough", 239, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Cartouche of Ambition", 83, Rarity.COMMON, mage.cards.c.CartoucheOfAmbition.class));
         cards.add(new SetCardInfo("Cartouche of Knowledge", 45, Rarity.COMMON, mage.cards.c.CartoucheOfKnowledge.class));
@@ -123,6 +125,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Embalmer's Tools", 227, Rarity.UNCOMMON, mage.cards.e.EmbalmersTools.class));
         cards.add(new SetCardInfo("Enigma Drake", 198, Rarity.UNCOMMON, mage.cards.e.EnigmaDrake.class));
         cards.add(new SetCardInfo("Essence Scatter", 52, Rarity.COMMON, mage.cards.e.EssenceScatter.class));
+        cards.add(new SetCardInfo("Evolving Wilds", 242, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exemplar of Strength", 165, Rarity.UNCOMMON, mage.cards.e.ExemplarOfStrength.class));
         cards.add(new SetCardInfo("Failure // Comply", 221, Rarity.RARE, mage.cards.f.FailureComply.class));
         cards.add(new SetCardInfo("Fetid Pools", 243, Rarity.RARE, mage.cards.f.FetidPools.class));
@@ -146,7 +149,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Gravedigger", 93, Rarity.UNCOMMON, mage.cards.g.Gravedigger.class));
         cards.add(new SetCardInfo("Grim Strider", 94, Rarity.UNCOMMON, mage.cards.g.GrimStrider.class));
         cards.add(new SetCardInfo("Hapatra, Vizier of Poisons", 199, Rarity.RARE, mage.cards.h.HapatraVizierOfPoisons.class));
-        //cards.add(new SetCardInfo("Harsh Mentor", 135, Rarity.RARE, mage.cards.h.HarshMentor.class));
+        cards.add(new SetCardInfo("Harsh Mentor", 135, Rarity.RARE, mage.cards.h.HarshMentor.class));
         cards.add(new SetCardInfo("Harvest Season", 170, Rarity.RARE, mage.cards.h.HarvestSeason.class));
         cards.add(new SetCardInfo("Hazoret the Fervent", 136, Rarity.MYTHIC, mage.cards.h.HazoretTheFervent.class));
         cards.add(new SetCardInfo("Hazoret's Favor", 137, Rarity.RARE, mage.cards.h.HazoretsFavor.class));
@@ -240,7 +243,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Tattered Mummy", 278, Rarity.COMMON, mage.cards.t.TatteredMummy.class));
         cards.add(new SetCardInfo("Temmet, Vizier of Naktamun", 207, Rarity.RARE, mage.cards.t.TemmetVizierOfNaktamun.class));
         cards.add(new SetCardInfo("Throne of the God-Pharaoh", 237, Rarity.RARE, mage.cards.t.ThroneOfTheGodPharaoh.class));
-        cards.add(new SetCardInfo("Trial of Ambition", 113, Rarity.UNCOMMON, mage.cards.t.TrialOfAmbition.class));
+        cards.add(new SetCardInfo("Tormenting Voice", 151, Rarity.COMMON, mage.cards.t.TormentingVoice.class));cards.add(new SetCardInfo("Trial of Ambition", 113, Rarity.UNCOMMON, mage.cards.t.TrialOfAmbition.class));
         cards.add(new SetCardInfo("Trial of Knowledge", 73, Rarity.UNCOMMON, mage.cards.t.TrialOfKnowledge.class));
         cards.add(new SetCardInfo("Trial of Solidarity", 34, Rarity.UNCOMMON, mage.cards.t.TrialOfSolidarity.class));
         cards.add(new SetCardInfo("Trial of Strength", 191, Rarity.UNCOMMON, mage.cards.t.TrialOfStrength.class));
