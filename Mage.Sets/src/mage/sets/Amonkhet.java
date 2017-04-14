@@ -136,6 +136,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Foul Orchard", 279, Rarity.COMMON, mage.cards.f.FoulOrchard.class));
         cards.add(new SetCardInfo("Giant Spider", 166, Rarity.COMMON, mage.cards.g.GiantSpider.class));
         cards.add(new SetCardInfo("Gideon of the Trials", 14, Rarity.MYTHIC, mage.cards.g.GideonOfTheTrials.class));
+        cards.add(new SetCardInfo("Gideon's Intervention", 15, Rarity.RARE, mage.cards.g.GideonsIntervention.class));
         cards.add(new SetCardInfo("Gideon's Resolve", 272, Rarity.RARE, mage.cards.g.GideonsResolve.class));
         cards.add(new SetCardInfo("Gideon, Martial Paragon", 270, Rarity.MYTHIC, mage.cards.g.GideonMartialParagon.class));
         cards.add(new SetCardInfo("Glorious End", 133, Rarity.MYTHIC, mage.cards.g.GloriousEnd.class));
