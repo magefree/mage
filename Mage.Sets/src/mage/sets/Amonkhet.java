@@ -78,7 +78,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("As Foretold", 42, Rarity.MYTHIC, mage.cards.a.AsForetold.class));
         cards.add(new SetCardInfo("Aven Mindcensor", 5, Rarity.RARE, mage.cards.a.AvenMindcensor.class));
         cards.add(new SetCardInfo("Battlefield Scavenger", 118, Rarity.UNCOMMON, mage.cards.b.BattlefieldScavenger.class));
-        cards.add(new SetCardInfo("Bloodfury Militant", 121, Rarity.UNCOMMON, mage.cards.b.BloodfuryMilitant.class));
+        cards.add(new SetCardInfo("Bloodrage Brawler", 121, Rarity.UNCOMMON, mage.cards.b.BloodrageBrawler.class));
         cards.add(new SetCardInfo("Bounty of the Luxa", 196, Rarity.RARE, mage.cards.b.BountyOfTheLuxa.class));
         cards.add(new SetCardInfo("Bontu's Monument", 225, Rarity.UNCOMMON, mage.cards.b.BontusMonument.class));
         cards.add(new SetCardInfo("Bontu the Glorified", 82, Rarity.MYTHIC, mage.cards.b.BontuTheGlorified.class));
