@@ -234,6 +234,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Neheb, the Worthy", 203, Rarity.RARE, mage.cards.n.NehebTheWorthy.class));
         cards.add(new SetCardInfo("Nest of Scarabs", 101, Rarity.UNCOMMON, mage.cards.n.NestOfScarabs.class));
         cards.add(new SetCardInfo("Never // Return", 212, Rarity.RARE, mage.cards.n.NeverReturn.class));
+        cards.add(new SetCardInfo("New Perspectives", 63, Rarity.RARE, mage.cards.n.NewPerspectives.class));
         cards.add(new SetCardInfo("Nimble-Blade Khenra", 145, Rarity.COMMON, mage.cards.n.NimbleBladeKhenra.class));
         cards.add(new SetCardInfo("Nissa, Steward of Elements", 204, Rarity.MYTHIC, mage.cards.n.NissaStewardOfElements.class));
         cards.add(new SetCardInfo("Oashra Cultivator", 177, Rarity.COMMON, mage.cards.o.OashraCultivator.class));
