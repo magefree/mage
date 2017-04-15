@@ -111,7 +111,10 @@ class EmbalmEffect extends OneShotEffect {
             if (!token.getSubtype(game).contains("Zombie")) {
                 token.getSubtype(game).add(0, "Zombie");
             }
+            token.getManaCost().clear();
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false, null);
+            // Probably it makes sense to remove also the Embalm ability (it's not shown on the token cards).
+            // Also it can never get active or? But it's not mentioned in the reminder text.
             return true;
         }
 
