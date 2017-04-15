@@ -27,6 +27,10 @@
  */
 package mage.server.tournament;
 
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.constants.TableState;
@@ -57,11 +61,6 @@ import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
-
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -158,8 +157,8 @@ public class TournamentController {
         UUID playerId = userPlayerMap.get(userId);
         if (playerId == null) {
             if (logger.isDebugEnabled()) {
-                UserManager.instance.getUser(userId).ifPresent(user ->
-                        logger.debug(user.getName() + " shows tournament panel  tournamentId: " + tournament.getId()));
+                UserManager.instance.getUser(userId).ifPresent(user
+                        -> logger.debug(user.getName() + " shows tournament panel  tournamentId: " + tournament.getId()));
 
             }
             return;
@@ -251,21 +250,35 @@ public class TournamentController {
             table.setState(TableState.WAITING);
             TournamentPlayer player1 = pair.getPlayer1();
             TournamentPlayer player2 = pair.getPlayer2();
-            Optional<UUID> user1Id = getPlayerUserId(player1.getPlayer().getId());
-            Optional<UUID> user2Id = getPlayerUserId(player2.getPlayer().getId());
-            if (user1Id.isPresent() && user2Id.isPresent()) {
-                tableManager.addPlayer(getPlayerUserId(player1.getPlayer().getId()).get(), table.getId(), player1);
-                tableManager.addPlayer(getPlayerUserId(player2.getPlayer().getId()).get(), table.getId(), player2);
-                table.setState(TableState.STARTING);
-                tableManager.startTournamentSubMatch(null, table.getId());
-                tableManager.getMatch(table.getId()).ifPresent(match -> {
-                    match.setTableId(tableId);
-                    pair.setMatch(match);
-                    pair.setTableId(table.getId());
-                    player1.setState(TournamentPlayerState.DUELING);
-                    player2.setState(TournamentPlayerState.DUELING);
-                });
+            UUID user1Uuid = null;
+            UUID user2Uuid = null;
+            if (player1.getPlayerType() == PlayerType.HUMAN) {
+                Optional<UUID> user1Id = getPlayerUserId(player1.getPlayer().getId());
+                if (!user1Id.isPresent()) {
+                    logger.fatal("Player 1 not found");
+                } else {
+                    user1Uuid = user1Id.get();
+                }
             }
+            if (player2.getPlayerType() == PlayerType.HUMAN) {
+                Optional<UUID> user2Id = getPlayerUserId(player2.getPlayer().getId());
+                if (!user2Id.isPresent()) {
+                    logger.fatal("Player 2 not found");
+                } else {
+                    user2Uuid = user2Id.get();
+                }
+            }
+            tableManager.addPlayer(user1Uuid, table.getId(), player1);
+            tableManager.addPlayer(user2Uuid, table.getId(), player2);
+            table.setState(TableState.STARTING);
+            tableManager.startTournamentSubMatch(null, table.getId());
+            tableManager.getMatch(table.getId()).ifPresent(match -> {
+                match.setTableId(tableId);
+                pair.setMatch(match);
+                pair.setTableId(table.getId());
+                player1.setState(TournamentPlayerState.DUELING);
+                player2.setState(TournamentPlayerState.DUELING);
+            });
         } catch (GameException ex) {
             logger.fatal("TournamentController startMatch error", ex);
         }
@@ -349,8 +362,8 @@ public class TournamentController {
                 tournament.autoSubmit(userPlayerMap.get(userId), tournamentPlayer.generateDeck());
             } else {
                 StringBuilder sb = new StringBuilder();
-                UserManager.instance.getUser(userId).ifPresent(user ->
-                        sb.append(user.getName()));
+                UserManager.instance.getUser(userId).ifPresent(user
+                        -> sb.append(user.getName()));
 
                 sb.append(" - no deck found for auto submit");
                 logger.fatal(sb);
@@ -399,8 +412,8 @@ public class TournamentController {
                     this.abortDraftTournament();
                 } else {
                     DraftManager.instance.getController(tableId).ifPresent(draftController -> {
-                        draftController.getDraftSession(playerId).ifPresent(draftSession ->
-                                DraftManager.instance.kill(draftSession.getDraftId(), userId));
+                        draftController.getDraftSession(playerId).ifPresent(draftSession
+                                -> DraftManager.instance.kill(draftSession.getDraftId(), userId));
 
                     });
                 }
