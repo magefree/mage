@@ -36,10 +36,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
@@ -50,14 +48,11 @@ import mage.target.TargetPermanent;
  */
 public class BindingMummy extends CardImpl {
 
-    private static final FilterControlledPermanent filter =  new FilterControlledPermanent("another Zombie");
-    private static final FilterPermanent filter2 = new FilterPermanent("artifact or creature");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Zombie");
 
     static {
         filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate("Zombie"));
-        filter2.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
     }
 
     public BindingMummy(UUID ownerId, CardSetInfo setInfo) {
@@ -68,8 +63,8 @@ public class BindingMummy extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another Zombie enters the battlefield under your control, you may tap target artifact or creature.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(), filter, true);
-        ability.addTarget(new TargetPermanent(filter2));
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(), filter, true, null, true);
+        ability.addTarget(new TargetPermanent(FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
     }
 

@@ -29,18 +29,17 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 
 import java.util.UUID;
+import mage.abilities.condition.common.HeckbentCondition;
 
 /**
  *
@@ -61,8 +60,7 @@ public class DreadWanderer extends CardImpl {
 
         // {2}{B}: Return Dread Wanderer from your graveyard to the battlefield.
         // Activate this ability only any time you could cast a sorcery and only if you have one or fewer cards in hand.
-        CardsInHandCondition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 2);
-        ConditionalActivatedAbility ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{2}{B}"), condition);
+        ConditionalActivatedAbility ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{2}{B}"), HeckbentCondition.instance);
         ability.setTiming(TimingRule.SORCERY);
         addAbility(ability);
     }

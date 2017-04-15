@@ -29,19 +29,12 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.ExertCreatureControllerTriggeredAbility;
 import mage.abilities.effects.common.RummageEffect;
 import mage.abilities.keyword.ExertAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -51,7 +44,7 @@ public class BattlefieldScavenger extends CardImpl {
 
     public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
+
         this.subtype.add("Jackal");
         this.subtype.add("Rogue");
         this.power = new MageInt(2);
@@ -61,7 +54,7 @@ public class BattlefieldScavenger extends CardImpl {
         this.addAbility(new ExertAbility(null, false));
 
         // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        this.addAbility(new ExertCreatureControllerTriggeredAbility(new RummageEffect()));
     }
 
     public BattlefieldScavenger(final BattlefieldScavenger card) {
@@ -73,5 +66,3 @@ public class BattlefieldScavenger extends CardImpl {
         return new BattlefieldScavenger(this);
     }
 }
-
-

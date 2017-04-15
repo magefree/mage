@@ -10,13 +10,13 @@ import mage.game.permanent.Permanent;
 /**
  * @author stravant
  */
-public class WheneverYouExertCreatureTriggeredAbility extends TriggeredAbilityImpl {
+public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImpl {
 
-    public WheneverYouExertCreatureTriggeredAbility(Effect effect) {
+    public ExertCreatureControllerTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public WheneverYouExertCreatureTriggeredAbility(final WheneverYouExertCreatureTriggeredAbility ability) {
+    public ExertCreatureControllerTriggeredAbility(final ExertCreatureControllerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -34,8 +34,8 @@ public class WheneverYouExertCreatureTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public WheneverYouExertCreatureTriggeredAbility copy() {
-        return new WheneverYouExertCreatureTriggeredAbility(this);
+    public ExertCreatureControllerTriggeredAbility copy() {
+        return new ExertCreatureControllerTriggeredAbility(this);
     }
 
     @Override

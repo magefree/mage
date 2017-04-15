@@ -30,20 +30,13 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGraveyardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -59,9 +52,7 @@ public class CrypticSerpent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Cryptic Serpent costs {1} less to cast for each instant and sorcery card in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new CrypticSerpentCostReductionEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(new FilterInstantOrSorceryCard())));
     }
 
     public CrypticSerpent(final CrypticSerpent card) {
@@ -71,41 +62,5 @@ public class CrypticSerpent extends CardImpl {
     @Override
     public CrypticSerpent copy() {
         return new CrypticSerpent(this);
-    }
-}
-
-class CrypticSerpentCostReductionEffect extends CostModificationEffectImpl {
-
-    CrypticSerpentCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {1} less to cast for each instant or sorcery card in your graveyard";
-    }
-
-    CrypticSerpentCostReductionEffect(CrypticSerpentCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int reductionAmount = player.getGraveyard().count(new FilterInstantOrSorceryCard(), game);
-            CardUtil.reduceCost(abilityToModify, reductionAmount);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
-            return game.getCard(abilityToModify.getSourceId()) != null;
-        }
-        return false;
-    }
-
-    @Override
-    public CrypticSerpentCostReductionEffect copy() {
-        return new CrypticSerpentCostReductionEffect(this);
     }
 }

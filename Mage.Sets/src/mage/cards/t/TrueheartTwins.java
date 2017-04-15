@@ -29,7 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
+import mage.abilities.common.ExertCreatureControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.ExertAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class TrueheartTwins extends CardImpl {
         this.addAbility(new ExertAbility(null, false));
 
         // Whenever you exert a creature, creatures you control get +1/+0 until end of turn.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn)));
+        this.addAbility(new ExertCreatureControllerTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn)));
     }
 
     public TrueheartTwins(final TrueheartTwins card) {

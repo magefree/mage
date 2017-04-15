@@ -32,9 +32,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterOpponentsCreaturePermanent;
 
 /**
  *
@@ -42,17 +40,11 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class BlazingVolley extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
-
     public BlazingVolley(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
-        // Blazing Volley deals damage to each creature your opponents control.
-        getSpellAbility().addEffect(new DamageAllEffect(1, filter));
+        // Blazing Volley deals 1 damage to each creature your opponents control.
+        getSpellAbility().addEffect(new DamageAllEffect(1, new FilterOpponentsCreaturePermanent("creature your opponents control")));
     }
 
     public BlazingVolley(final BlazingVolley card) {
