@@ -285,6 +285,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Unburden", 114, Rarity.COMMON, mage.cards.u.Unburden.class));
         cards.add(new SetCardInfo("Unwavering Initiate", 36, Rarity.COMMON, mage.cards.u.UnwaveringInitiate.class));
         cards.add(new SetCardInfo("Violent Impact", 154, Rarity.COMMON, mage.cards.v.ViolentImpact.class));
+        cards.add(new SetCardInfo("Vizier of Deferment", 37, Rarity.UNCOMMON, mage.cards.v.VizierOfDeferment.class));
         cards.add(new SetCardInfo("Vizier of Tumbling Sands", 75, Rarity.UNCOMMON, mage.cards.v.VizierOfTumblingSands.class));
         cards.add(new SetCardInfo("Vizier of the Menagerie", 192, Rarity.MYTHIC, mage.cards.v.VizierOfTheMenagerie.class));
         cards.add(new SetCardInfo("Wasteland Scorpion", 116, Rarity.COMMON, mage.cards.w.WastelandScorpion.class));
