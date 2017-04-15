@@ -25,53 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.HeckbentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *
- * @author anonymous
+ * @author stravant
  */
-public class BattlefieldScavenger extends CardImpl {
+public class ThresherLizard extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public ThresherLizard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
+        this.subtype.add("Lizard");
+        this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
-
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // Thresher Lizard gets +1/+2 as long as you have one or fewer cards in hand.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(
+                        new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
+                        HeckbentCondition.instance,
+                        "{this} gets +1/+2 as long as you have one or fewer cards in hand")));
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public ThresherLizard(final ThresherLizard card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public ThresherLizard copy() {
+        return new ThresherLizard(this);
     }
 }
-
-

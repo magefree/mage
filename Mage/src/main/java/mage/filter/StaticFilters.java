@@ -16,6 +16,8 @@ import mage.filter.common.FilterCreatureSpell;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
  *
@@ -38,7 +40,15 @@ public final class StaticFilters {
 
     public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");
 
+    public static final FilterPermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
+
+    public static final FilterPermanent FILTER_ATTACKING_CREATURES = new FilterCreaturePermanent("attacking creatures");
+
     static {
+        FILTER_CREATURE_TOKENS.add(new TokenPredicate());
+
+        FILTER_ATTACKING_CREATURES.add(new AttackingPredicate());
+
         FILTER_PERMANENT_ARTIFACT_OR_CREATURE.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)

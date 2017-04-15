@@ -25,53 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.CycleOrDiscardControllerTriggeredAbility;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.Duration;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author anonymous
  */
-public class BattlefieldScavenger extends CardImpl {
+public class ZenithSeeker extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public ZenithSeeker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
+        this.subtype.add("Bird");
+        this.subtype.add("Wizard");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // Whenever you cycle or discard a card, target creature gains flying until end of turn.
+        Ability ability =
+                new CycleOrDiscardControllerTriggeredAbility(
+                        new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public ZenithSeeker(final ZenithSeeker card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public ZenithSeeker copy() {
+        return new ZenithSeeker(this);
     }
 }
-
-

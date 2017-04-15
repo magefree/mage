@@ -25,53 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
+import mage.abilities.common.BecomesExertSourceTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ExertAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.Duration;
 
 /**
  *
- * @author anonymous
+ * @author stravant
  */
-public class BattlefieldScavenger extends CardImpl {
+public class RhetCropSpearmaster extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public RhetCropSpearmaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
-
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // You may exert Rhet-Crop Spearmaster as it attacks. When you do, it gets +1/+0 and gains first strike until end of turn.
+        BecomesExertSourceTriggeredAbility ability =
+                new BecomesExertSourceTriggeredAbility(
+                        new BoostSourceEffect(1, 0, Duration.EndOfTurn));
+        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        this.addAbility(new ExertAbility(ability));
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public RhetCropSpearmaster(final RhetCropSpearmaster card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public RhetCropSpearmaster copy() {
+        return new RhetCropSpearmaster(this);
     }
 }
-
-

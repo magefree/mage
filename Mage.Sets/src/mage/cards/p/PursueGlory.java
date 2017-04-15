@@ -25,53 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.Duration;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterAttackingCreature;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author stravant
  */
-public class BattlefieldScavenger extends CardImpl {
+public class PursueGlory extends CardImpl {
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    public PursueGlory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
+        // Attacking creatures get +2/+0 until end of turn.
+        getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
 
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // Cycling {2}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public PursueGlory(final PursueGlory card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public PursueGlory copy() {
+        return new PursueGlory(this);
     }
 }
-
-

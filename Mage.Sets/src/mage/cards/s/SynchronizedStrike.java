@@ -25,53 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.Duration;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author stravant
  */
-public class BattlefieldScavenger extends CardImpl {
+public class SynchronizedStrike extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    public SynchronizedStrike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
-
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // Untap up to two target creatures. They each get +2/+2 until end of turn.
+        getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
+        getSpellAbility().addEffect(new UntapTargetEffect());
+        getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public SynchronizedStrike(final SynchronizedStrike card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public SynchronizedStrike copy() {
+        return new SynchronizedStrike(this);
     }
 }
-
-

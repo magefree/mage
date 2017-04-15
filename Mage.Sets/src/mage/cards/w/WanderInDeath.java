@@ -25,53 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.w;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author anonymous
  */
-public class BattlefieldScavenger extends CardImpl {
+public class WanderInDeath extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    public WanderInDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
+        // Return up to two target creature cards from your graveyard to your hand.
+        getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
+        getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
 
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // Cycling {2}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public WanderInDeath(final WanderInDeath card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public WanderInDeath copy() {
+        return new WanderInDeath(this);
     }
 }
-
-

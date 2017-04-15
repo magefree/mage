@@ -25,53 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.mana.ManaCostImpl;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author anonymous
  */
-public class BattlefieldScavenger extends CardImpl {
+public class MercilessJavelineer extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public MercilessJavelineer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
         
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
+        this.subtype.add("Minotaur");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
-
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // {2}, Discard a card: Put a -1/-1 counter on target creature. That creature can't block this turn.
+        Ability ability =
+                new SimpleActivatedAbility(
+                        Zone.BATTLEFIELD,
+                        new AddCountersTargetEffect(
+                                CounterType.M1M1.createInstance(),
+                                new StaticValue(1),
+                                Outcome.Removal),
+                        new ManaCostsImpl("{2}"));
+        ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
+        ability.addCost(new DiscardCardCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        addAbility(ability);
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public MercilessJavelineer(final MercilessJavelineer card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public MercilessJavelineer copy() {
+        return new MercilessJavelineer(this);
     }
 }
-
-

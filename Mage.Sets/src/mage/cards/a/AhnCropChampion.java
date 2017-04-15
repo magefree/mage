@@ -25,53 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
+import mage.abilities.common.BecomesExertSourceTriggeredAbility;
+import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.ExertAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author anonymous
+ * @author stravant
  */
-public class BattlefieldScavenger extends CardImpl {
-
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
-
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+public class AhnCropChampion extends CardImpl {
+    private final static FilterControlledCreaturePermanent otherCreaturesFilter = new FilterControlledCreaturePermanent("other creatures you control");
+    static {
+        otherCreaturesFilter.add(new AnotherPredicate());
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public AhnCropChampion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
+        
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // You may exert Ahn-Crop Champion as it attacks. When you do, untap all other creatures you control.
+        addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new UntapAllControllerEffect(otherCreaturesFilter))));
+    }
+
+    public AhnCropChampion(final AhnCropChampion card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public AhnCropChampion copy() {
+        return new AhnCropChampion(this);
     }
 }
-
-

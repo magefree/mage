@@ -25,53 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterCard;
 
 /**
  *
- * @author anonymous
+ * @author stravant
  */
-public class BattlefieldScavenger extends CardImpl {
+public class NagaOracle extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public NagaOracle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
+        this.subtype.add("Naga");
+        this.subtype.add("Cleric");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(4);
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
-
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // When Naga Oracle enters the battlefield, look at the top three cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
+        addAbility(new EntersBattlefieldAbility(
+                new LookLibraryAndPickControllerEffect(
+                        /* oh god, Microsoft looks conservative with their function parameters in comparison */
+                        new StaticValue(3),
+                        false,
+                        new StaticValue(3),
+                        new FilterCard("cards"),
+                        Zone.LIBRARY,
+                        true,
+                        false,
+                        true,
+                        Zone.GRAVEYARD,
+                        false)));
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public NagaOracle(final NagaOracle card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public NagaOracle copy() {
+        return new NagaOracle(this);
     }
 }
-
-

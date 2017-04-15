@@ -25,53 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlSourceEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.Duration;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author anonymous
  */
-public class BattlefieldScavenger extends CardImpl {
+public class SupernaturalStamina extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    public SupernaturalStamina(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
-
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control."
+        getSpellAbility().addTarget(new TargetCreaturePermanent());
+        getSpellAbility().addEffect(
+                new BoostTargetEffect(2, 0, Duration.EndOfTurn));
+        getSpellAbility().addEffect(new GainAbilityTargetEffect(
+                new DiesTriggeredAbility(
+                        new ReturnToBattlefieldUnderYourControlSourceEffect(),
+                        /*optional=*/false),
+                Duration.EndOfTurn));
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public SupernaturalStamina(final SupernaturalStamina card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public SupernaturalStamina copy() {
+        return new SupernaturalStamina(this);
     }
 }
-
-

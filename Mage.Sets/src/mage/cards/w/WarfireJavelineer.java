@@ -25,53 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
  *
  * @author anonymous
  */
-public class BattlefieldScavenger extends CardImpl {
+public class WarfireJavelineer extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public WarfireJavelineer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
+        this.subtype.add("Minotaur");
+        this.subtype.add("Warrior");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
-
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // When Warfire Javelineer enters the battlefield, it deals X damage to target creature an opponent controls, where X is the number of instant and sorcery cards in your graveyard.
+        EntersBattlefieldTriggeredAbility ability =
+                new EntersBattlefieldTriggeredAbility(
+                        new DamageTargetEffect(
+                                new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard())));
+        ability.addTarget(new TargetOpponentsCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public WarfireJavelineer(final WarfireJavelineer card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public WarfireJavelineer copy() {
+        return new WarfireJavelineer(this);
     }
 }
-
-

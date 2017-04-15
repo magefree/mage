@@ -25,53 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.Outcome;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author stravant
  */
-public class BattlefieldScavenger extends CardImpl {
-
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
-
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+public class StingingShot extends CardImpl {
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public StingingShot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
+        
+
+        // Put three -1/-1 counters on target creature with flying.
+        getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        getSpellAbility().addEffect(
+                new AddCountersTargetEffect(
+                        CounterType.M1M1.createInstance(),
+                        new StaticValue(3),
+                        Outcome.Removal));
+
+        // Cycling {2}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+    }
+
+    public StingingShot(final StingingShot card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public StingingShot copy() {
+        return new StingingShot(this);
     }
 }
-
-

@@ -25,53 +25,79 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.r;
 
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.watchers.common.SpellsCastWatcher;
 
 /**
  *
- * @author anonymous
+ * @author stravant
  */
-public class BattlefieldScavenger extends CardImpl {
+public class RiverSerpent extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public RiverSerpent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
         
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.subtype.add("Serpent");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
+        // River Serpent can't attack unless there are five or more cards in your graveyard.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RiverSerpentEffect()));
 
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // Cycling {U}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public RiverSerpent(final RiverSerpent card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public RiverSerpent copy() {
+        return new RiverSerpent(this);
     }
 }
 
+class RiverSerpentEffect extends RestrictionEffect {
+    public RiverSerpentEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "{this} can't attack unless there are five or more cards in your graveyard";
+    }
 
+    public RiverSerpentEffect(final RiverSerpentEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public RiverSerpentEffect copy() {
+        return new RiverSerpentEffect(this);
+    }
+
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return new CardsInControllerGraveyardCount().calculate(game, source, this) < 5;
+    }
+}

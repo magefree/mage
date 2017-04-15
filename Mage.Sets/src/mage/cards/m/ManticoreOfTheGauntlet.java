@@ -25,53 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.AbilityImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.WheneverYouExertCreatureTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RummageEffect;
-import mage.abilities.keyword.ExertAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.counters.CounterType;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FirstTargetPointer;
+import mage.target.targetpointer.SecondTargetPointer;
+
+import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author stravant
  */
-public class BattlefieldScavenger extends CardImpl {
+public class ManticoreOfTheGauntlet extends CardImpl {
 
-    public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public ManticoreOfTheGauntlet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         
-        this.subtype.add("Jackal");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.subtype.add("Manticore");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(4);
 
-        // You may exert Battlefield Scavenger as it attacks.
-        this.addAbility(new ExertAbility(null, false));
-
-        // Whenever you exert a creature, you may discard a card. If you do, draw a card.
-        this.addAbility(new WheneverYouExertCreatureTriggeredAbility(new RummageEffect()));
+        // When Manticore of the Gauntlet enters the battlefield, put a -1/-1 counter on target creature you control. Manticore of the Gauntlet deals 3 damage to target opponent.
+        Effect counters = new AddCountersTargetEffect(CounterType.M1M1.createInstance(), new StaticValue(1));
+        counters.setTargetPointer(new FirstTargetPointer());
+        Ability ability = new EntersBattlefieldTriggeredAbility(counters);
+        Effect damage = new DamageTargetEffect(new StaticValue(3), true, "", true);
+        damage.setTargetPointer(new SecondTargetPointer());
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetOpponent());
+        addAbility(ability);
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    public ManticoreOfTheGauntlet(final ManticoreOfTheGauntlet card) {
         super(card);
     }
 
     @Override
-    public BattlefieldScavenger copy() {
-        return new BattlefieldScavenger(this);
+    public ManticoreOfTheGauntlet copy() {
+        return new ManticoreOfTheGauntlet(this);
     }
 }
-
-
