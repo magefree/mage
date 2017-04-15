@@ -213,6 +213,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana, Death's Majesty", 97, Rarity.MYTHIC, mage.cards.l.LilianaDeathsMajesty.class));
         cards.add(new SetCardInfo("Limits of Solidarity", 140, Rarity.UNCOMMON, mage.cards.l.LimitsOfSolidarity.class));
         cards.add(new SetCardInfo("Lord of the Accursed", 99, Rarity.UNCOMMON, mage.cards.l.LordOfTheAccursed.class));
+        cards.add(new SetCardInfo("Luxa River Shrine", 232, Rarity.COMMON, mage.cards.l.LuxaRiverShrine.class));
         cards.add(new SetCardInfo("Magma Spray", 141, Rarity.COMMON, mage.cards.m.MagmaSpray.class));
         cards.add(new SetCardInfo("Manglehorn", 175, Rarity.UNCOMMON, mage.cards.m.Manglehorn.class));
         cards.add(new SetCardInfo("Manticore of the Gauntlet", 142, Rarity.COMMON, mage.cards.m.ManticoreOfTheGauntlet.class));
