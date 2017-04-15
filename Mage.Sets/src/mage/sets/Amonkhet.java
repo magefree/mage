@@ -134,6 +134,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Dread Wanderer", 88, Rarity.RARE, mage.cards.d.DreadWanderer.class));
         cards.add(new SetCardInfo("Dune Beetle", 89, Rarity.COMMON, mage.cards.d.DuneBeetle.class));
         cards.add(new SetCardInfo("Dusk // Dawn", 210, Rarity.RARE, mage.cards.d.DuskDawn.class));
+        cards.add(new SetCardInfo("Edifice of Authority", 226, Rarity.UNCOMMON, mage.cards.e.EdificeOfAuthority.class));
         cards.add(new SetCardInfo("Electrify", 129, Rarity.COMMON, mage.cards.e.Electrify.class));
         cards.add(new SetCardInfo("Embalmer's Tools", 227, Rarity.UNCOMMON, mage.cards.e.EmbalmersTools.class));
         cards.add(new SetCardInfo("Emberhorn Minotaur", 130, Rarity.COMMON, mage.cards.e.EmberhornMinotaur.class));
@@ -168,6 +169,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Glorybringer", 134, Rarity.RARE, mage.cards.g.Glorybringer.class));
         cards.add(new SetCardInfo("Glyph Keeper", 55, Rarity.RARE, mage.cards.g.GlyphKeeper.class));
         cards.add(new SetCardInfo("Graceful Cat", 273, Rarity.COMMON, mage.cards.g.GracefulCat.class));
+        cards.add(new SetCardInfo("Grasping Dunes", 244, Rarity.UNCOMMON, mage.cards.g.GraspingDunes.class));
         cards.add(new SetCardInfo("Gravedigger", 93, Rarity.UNCOMMON, mage.cards.g.Gravedigger.class));
         cards.add(new SetCardInfo("Greater Sandwurm", 168, Rarity.COMMON, mage.cards.g.GreaterSandwurm.class));
         cards.add(new SetCardInfo("Grim Strider", 94, Rarity.UNCOMMON, mage.cards.g.GrimStrider.class));
