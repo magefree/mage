@@ -1,4 +1,29 @@
+
+|Generate|TOK:AKH|Angel of Sanctions||
+|Generate|TOK:AKH|Anointer Priest||
+|Generate|TOK:AKH|Aven Initiate||
+|Generate|TOK:AKH|Aven Wind Guide||
+|Generate|TOK:AKH|Beast||
+|Generate|TOK:AKH|Cat||
+|Generate|TOK:AKH|Drake||
+|Generate|TOK:AKH|Glyph Keeper||
+|Generate|TOK:AKH|Heart-Piercer Manticore||
+|Generate|TOK:AKH|Hippo||
+|Generate|TOK:AKH|Honored Hydra||
+|Generate|TOK:AKH|Insect||
+|Generate|TOK:AKH|Labyrinth Guardian||
+|Generate|TOK:AKH|Oketra's Attendant||
+|Generate|TOK:AKH|Sacred Cat||
+|Generate|TOK:AKH|Snake||
+|Generate|TOK:AKH|Tah-Crop Skirmisher||
+|Generate|TOK:AKH|Temmet, Vizier of Naktamun||
 |Generate|TOK:AKH|Trueheart Duelist||
+|Generate|TOK:AKH|Unwavering Initiate||
+|Generate|TOK:AKH|Vizier of Many Faces||
+|Generate|TOK:AKH|Warrior||
+|Generate|TOK:AKH|Wurm||
+|Generate|TOK:AKH|Zombie||
+|Generate|EMBLEM!:AKH|Emblem Gideon||
 
 |Generate|TOK:MM3|Angel||
 |Generate|TOK:MM3|Beast|1|

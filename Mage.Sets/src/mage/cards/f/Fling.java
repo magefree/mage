@@ -25,24 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.f;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 
 /**
  *
@@ -51,11 +46,13 @@ import java.util.UUID;
 public class Fling extends CardImpl {
 
     public Fling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
+        Effect effect = new DamageTargetEffect(new SacrificeCostCreaturesPower());
+        effect.setText("{this} deals damage equal to the sacrificed creature's power to target creature or player");
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        this.getSpellAbility().addEffect(new FlingEffect());
+        this.getSpellAbility().addEffect(effect);
     }
 
     public Fling(final Fling card) {
@@ -66,46 +63,4 @@ public class Fling extends CardImpl {
     public Fling copy() {
         return new Fling(this);
     }
-}
-
-class FlingEffect extends OneShotEffect {
-
-    public FlingEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals damage equal to the sacrificed creature's power to target creature or player";
-    }
-
-    public FlingEffect(final FlingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = 0;
-        for (Cost cost: source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
-                amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
-                break;
-            }
-        }
-        if (amount > 0) {
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                permanent.damage(amount, source.getSourceId(), game, false, true);
-                return true;
-            }
-            Player player = game.getPlayer(source.getFirstTarget());
-            if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public FlingEffect copy() {
-        return new FlingEffect(this);
-    }
-
 }

@@ -30,6 +30,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesExertSourceTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ExertAbility;
@@ -54,8 +55,12 @@ public class GloryBoundInitiate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // You may exert Glory-Bound Initiate as it attacks. When you do, it gets +1/+3 and gains lifelink until end of turn.
-        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(new BoostSourceEffect(1, 3, Duration.EndOfTurn));
-        ability.addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect = new BoostSourceEffect(1, 3, Duration.EndOfTurn);
+        effect.setText("it gets +1/+3");
+        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(effect);
+        effect = new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains lifelink until end of turn");
+        ability.addEffect(effect);
         this.addAbility(new ExertAbility(ability));
     }
 

@@ -87,7 +87,7 @@ class DueRespectEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
-            permanent.setTapped(true);
+            permanent.tap(game);
         }
         return false;
     }

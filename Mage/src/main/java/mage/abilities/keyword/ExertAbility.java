@@ -35,6 +35,7 @@ import mage.abilities.Mode;
 import mage.abilities.common.BecomesExertSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.constants.Duration;
@@ -68,9 +69,11 @@ public class ExertAbility extends SimpleStaticAbility {
                 : "You may exert {this}") + " as it attacks. ";
         if (ability != null) {
             this.addSubAbility(ability);
-            ruleText += ("When you do, " +
-                    ability.getEffects().get(0).getText(ability.getModes().getMode())
-                    + ". ");
+            ruleText += ("When you do,");
+            ability.getEffects().stream().forEach((effect) -> {
+                ruleText += " " + effect.getText(ability.getModes().getMode());
+            });
+            ruleText += ". ";
             ability.setRuleVisible(false);
         }
         ruleText += "<i>(An exterted creature can't untap during your next untap step)</i>";

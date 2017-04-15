@@ -50,10 +50,11 @@ public class NameACardEffect extends OneShotEffect {
     public enum TypeOfName {
 
         ALL,
-        NON_ARTFIACT_AND_NON_LAND_NAME,
+        NON_ARTIFACT_AND_NON_LAND_NAME,
         NON_LAND_NAME,
         NON_LAND_AND_NON_CREATURE_NAME,
-        CREATURE_NAME
+        CREATURE_NAME,
+        ARTIFACT_NAME
     }
 
     private final TypeOfName typeOfName;
@@ -83,7 +84,7 @@ public class NameACardEffect extends OneShotEffect {
                     cardChoice.setChoices(CardRepository.instance.getNames());
                     cardChoice.setMessage("Name a card");
                     break;
-                case NON_ARTFIACT_AND_NON_LAND_NAME:
+                case NON_ARTIFACT_AND_NON_LAND_NAME:
                     cardChoice.setChoices(CardRepository.instance.getNonArtifactAndNonLandNames());
                     cardChoice.setMessage("Name a non artifact and non land card");
                     break;
@@ -98,6 +99,10 @@ public class NameACardEffect extends OneShotEffect {
                 case CREATURE_NAME:
                     cardChoice.setChoices(CardRepository.instance.getCreatureNames());
                     cardChoice.setMessage("Name a creature card");
+                    break;
+                case ARTIFACT_NAME:
+                    cardChoice.setChoices(CardRepository.instance.getArtifactNames());
+                    cardChoice.setMessage("Name an artifact card");
                     break;
             }
             cardChoice.clearChoice();
@@ -130,7 +135,7 @@ public class NameACardEffect extends OneShotEffect {
             case ALL:
                 sb.append("card");
                 break;
-            case NON_ARTFIACT_AND_NON_LAND_NAME:
+            case NON_ARTIFACT_AND_NON_LAND_NAME:
                 sb.append("nonartifact, nonland card");
                 break;
             case NON_LAND_AND_NON_CREATURE_NAME:
@@ -138,6 +143,12 @@ public class NameACardEffect extends OneShotEffect {
                 break;
             case NON_LAND_NAME:
                 sb.append("nonland card");
+                break;
+            case CREATURE_NAME:
+                sb.append("creature card");
+                break;
+            case ARTIFACT_NAME:
+                sb.append("artifact card");
                 break;
         }
         return sb.toString();

@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
+import static mage.filter.StaticFilters.FILTER_SPELL_A_CREATURE;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -53,14 +53,10 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class BontusMonument extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Black creature spells");
-    private static final FilterSpell filter2 = new FilterSpell("a creature spell");
+    private static final FilterCard filter = new FilterCard("black creature spells");
 
     static {
         filter.add(Predicates.and(new ColorPredicate(ObjectColor.BLACK), new CardTypePredicate(CardType.CREATURE)));
-    }
-    static {
-        filter2.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public BontusMonument(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +68,7 @@ public class BontusMonument extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever you cast a creature spell, each opponent loses 1 life and you gain 1 life.
-        Ability ability = new SpellCastControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), filter2, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), FILTER_SPELL_A_CREATURE, false);
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
         ability.addEffect(effect);

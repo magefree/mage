@@ -25,40 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.w;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
+
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.TargetController;
+import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author anonymous
  */
-public class MiasmaMummy extends CardImpl {
+public class WindsOfRebuke extends CardImpl {
 
-    public MiasmaMummy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
+    public WindsOfRebuke(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        this.subtype.add("Zombie");
-        this.subtype.add("Jackal");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // When Miasma Mummy enters the battlefield, each player discards a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect()));
+        // Return target nonland permanent to its owner's hand. Each player puts the top two cards of his or her library into his or her graveyard.
+        getSpellAbility().addTarget(new TargetNonlandPermanent());
+        getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.ANY));
     }
 
-    public MiasmaMummy(final MiasmaMummy card) {
+    public WindsOfRebuke(final WindsOfRebuke card) {
         super(card);
     }
 
     @Override
-    public MiasmaMummy copy() {
-        return new MiasmaMummy(this);
+    public WindsOfRebuke copy() {
+        return new WindsOfRebuke(this);
     }
 }

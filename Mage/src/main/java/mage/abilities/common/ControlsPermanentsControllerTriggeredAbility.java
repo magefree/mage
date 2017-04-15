@@ -69,7 +69,7 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         int inputValue = game.getBattlefield().countAll(filter, getControllerId(), game);
-        return ComparisonType.compare(value, type, inputValue);
+        return ComparisonType.compare(inputValue, type, value);
     }
 
     @Override
