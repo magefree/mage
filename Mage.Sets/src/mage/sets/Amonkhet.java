@@ -27,6 +27,8 @@
  */
 package mage.sets;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
@@ -34,9 +36,6 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -239,6 +238,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Oketra's Attendant", 22, Rarity.UNCOMMON, mage.cards.o.OketrasAttendant.class));
         cards.add(new SetCardInfo("Oketra's Monument", 233, Rarity.UNCOMMON, mage.cards.o.OketrasMonument.class));
         cards.add(new SetCardInfo("Onward // Victory", 218, Rarity.UNCOMMON, mage.cards.o.OnwardVictory.class));
+        cards.add(new SetCardInfo("Open into Wonder", 64, Rarity.UNCOMMON, mage.cards.o.OpenIntoWonder.class));
         cards.add(new SetCardInfo("Oracle's Vault", 234, Rarity.RARE, mage.cards.o.OraclesVault.class));
         cards.add(new SetCardInfo("Ornery Kudu", 178, Rarity.COMMON, mage.cards.o.OrneryKudu.class));
         cards.add(new SetCardInfo("Painful Lesson", 102, Rarity.COMMON, mage.cards.p.PainfulLesson.class));
