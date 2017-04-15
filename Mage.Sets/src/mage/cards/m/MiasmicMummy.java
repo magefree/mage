@@ -39,9 +39,9 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class MiasmaMummy extends CardImpl {
+public class MiasmicMummy extends CardImpl {
 
-    public MiasmaMummy(UUID ownerId, CardSetInfo setInfo) {
+    public MiasmicMummy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
         this.subtype.add("Zombie");
@@ -49,16 +49,16 @@ public class MiasmaMummy extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Miasma Mummy enters the battlefield, each player discards a card.
+        // When Miasmic Mummy enters the battlefield, each player discards a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect()));
     }
 
-    public MiasmaMummy(final MiasmaMummy card) {
+    public MiasmicMummy(final MiasmicMummy card) {
         super(card);
     }
 
     @Override
-    public MiasmaMummy copy() {
-        return new MiasmaMummy(this);
+    public MiasmicMummy copy() {
+        return new MiasmicMummy(this);
     }
 }
