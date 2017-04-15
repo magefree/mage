@@ -71,7 +71,7 @@ public class EdificeOfAuthority extends CardImpl {
         this.addAbility(ability);
 
         // {1}, {T}: Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate this ability only if there are three or more brick counter on Edifice of Authority.
-        Condition condition = new SourceHasCounterCondition(CounterType.BRICK, 3);
+        Condition condition = new SourceHasCounterCondition(CounterType.BRICK, 3, Integer.MAX_VALUE);
         Ability ability2 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new EdificeOfAuthorityEffect(), new ManaCostsImpl("{1}"), condition, rule);
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
