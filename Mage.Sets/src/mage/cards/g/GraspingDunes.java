@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -59,6 +60,7 @@ public class GraspingDunes extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
     }
