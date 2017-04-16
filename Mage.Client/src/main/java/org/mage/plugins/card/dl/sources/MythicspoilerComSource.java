@@ -213,7 +213,8 @@ public class MythicspoilerComSource implements CardImageSource {
                 .replaceAll(" ", "")
                 .replaceAll("-", "")
                 .replaceAll("'", "")
-                .replaceAll(",", "");
+                .replaceAll(",", "")
+                .replaceAll("/", "");
         String link = setLinks.get(searchName);
         return link;
     }
