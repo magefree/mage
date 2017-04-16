@@ -250,6 +250,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Pathmaker Initiate", 146, Rarity.COMMON, mage.cards.p.PathmakerInitiate.class));
         cards.add(new SetCardInfo("Pitiless Vizier", 103, Rarity.COMMON, mage.cards.p.PitilessVizier.class));
         cards.add(new SetCardInfo("Plague Belcher", 104, Rarity.RARE, mage.cards.p.PlagueBelcher.class));
+        cards.add(new SetCardInfo("Pyramid of the Pantheon", 235, Rarity.RARE, mage.cards.p.PyramidOfThePantheon.class));
         cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 255, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 256, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));

@@ -258,6 +258,25 @@ public class Connection {
         return null;
     }
 
+    public static String getMAC() throws SocketException {
+        StringBuilder allMACs = new StringBuilder();
+        for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements();) {
+            NetworkInterface iface = interfaces.nextElement();
+            byte[] mac = iface.getHardwareAddress();
+
+            if (mac != null) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < mac.length; i++) {
+                    sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+                }
+                sb.append(';');
+                allMACs.append(sb.toString());
+            }
+        }
+        return allMACs.toString();
+    }
+
+
     public void setUserData(UserData userData) {
         this.userData = userData;
     }
