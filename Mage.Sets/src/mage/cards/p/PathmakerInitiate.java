@@ -48,14 +48,16 @@ import mage.target.common.TargetCreaturePermanent;
  * @author stravant
  */
 public class PathmakerInitiate extends CardImpl {
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
+
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public PathmakerInitiate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
+
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);
@@ -64,6 +66,7 @@ public class PathmakerInitiate extends CardImpl {
         // {T}: Target creature with power 2 or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
     public PathmakerInitiate(final PathmakerInitiate card) {

@@ -29,17 +29,13 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -47,18 +43,18 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author stravant
  */
 public class SacredExcavation extends CardImpl {
-    private static final FilterCard cardsWithCycling = new FilterCard();
+
+    private static final FilterCard cardsWithCycling = new FilterCard("cards with cycling from your graveyard");
+
     static {
-        cardsWithCycling.add(new CyclingPredicate());
+        cardsWithCycling.add(new AbilityPredicate(CyclingAbility.class));
     }
 
     public SacredExcavation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Return up to two target cards with cycling from your graveyard to your hand.
-        Effect effect = new ReturnFromGraveyardToHandTargetEffect();
-        effect.setText("Return up to two target cards with cycling from your graveyard to your hand");
-        getSpellAbility().addEffect(effect);
+        getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, cardsWithCycling));
     }
 
@@ -69,17 +65,5 @@ public class SacredExcavation extends CardImpl {
     @Override
     public SacredExcavation copy() {
         return new SacredExcavation(this);
-    }
-}
-
-class CyclingPredicate implements Predicate<MageObject> {
-    @Override
-    public boolean apply(MageObject input, Game game) {
-        for (Ability ability : input.getAbilities()) {
-            if (ability instanceof CyclingAbility) {
-                return true;
-            }
-        }
-        return false;
     }
 }
