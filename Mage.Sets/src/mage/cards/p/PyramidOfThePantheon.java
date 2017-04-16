@@ -61,7 +61,7 @@ public class PyramidOfThePantheon extends CardImpl {
         this.addAbility(new ActivateIfConditionManaAbility(Zone.BATTLEFIELD,
                 new AddManaOfAnyColorEffect(3),
                 new TapSourceCost(),
-                new SourceHasCounterCondition(CounterType.BRICK, 1)));
+                new SourceHasCounterCondition(CounterType.BRICK, 3)));
     }
 
     public PyramidOfThePantheon(final PyramidOfThePantheon card) {
