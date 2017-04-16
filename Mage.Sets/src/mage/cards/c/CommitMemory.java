@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.common.FilterSpellOrPermanent;
 import mage.filter.predicate.Predicates;
@@ -62,7 +63,7 @@ public class CommitMemory extends SplitCard {
     }
 
     public CommitMemory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{3}{U}", "{4}{U}{U}", false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{3}{U}", "{4}{U}{U}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Commit
         // Put target spell or nonland permanent into its owner's library second from the top.
@@ -72,7 +73,7 @@ public class CommitMemory extends SplitCard {
         // Memory
         // Aftermath
         // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards.
-        ((CardImpl)(getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
         getRightHalfCard().getSpellAbility().addEffect(new MemoryEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");

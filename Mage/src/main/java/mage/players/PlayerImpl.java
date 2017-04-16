@@ -1237,7 +1237,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                         continue;
                     }
                 }
-                if (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT) {
+                if (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
+                        || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH) {
                     continue;
                 }
                 useable.put(ability.getId(), (SpellAbility) ability);
@@ -2447,7 +2448,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!copy.canActivate(playerId, game)) {
                 return false;
             }
-            if(available != null) {
+            if (available != null) {
                 game.getContinuousEffects().costModification(copy, game);
             }
 

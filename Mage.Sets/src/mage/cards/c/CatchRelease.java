@@ -27,6 +27,9 @@
  */
 package mage.cards.c;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -39,6 +42,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.*;
 import mage.game.Game;
@@ -48,14 +52,10 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 public class CatchRelease extends SplitCard {
 
     public CatchRelease(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{R}","{4}{R}{W}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{R}", "{4}{R}{W}", SpellAbilityType.SPLIT_FUSED);
 
         // Catch
         // Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.

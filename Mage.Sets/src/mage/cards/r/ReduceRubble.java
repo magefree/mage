@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
@@ -48,7 +49,7 @@ import mage.target.TargetSpell;
 public class ReduceRubble extends SplitCard {
 
     public ReduceRubble(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{2}{U}", "{2}{R}", false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{2}{U}", "{2}{R}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Reduce
         // Counter target spell unless its controller pays {3}.
@@ -57,7 +58,7 @@ public class ReduceRubble extends SplitCard {
 
         // Rubble
         // Up to three target lands don't untap during their controller's next untap step.
-        ((CardImpl)(getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
         Effect effect = new DontUntapInControllersNextUntapStepTargetEffect();
         effect.setText("Up to three target lands don't untap during their controller's next untap step");
         getRightHalfCard().getSpellAbility().addEffect(effect);

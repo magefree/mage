@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.n;
 
 import java.util.Iterator;
@@ -35,12 +34,13 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.CardType;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -52,15 +52,14 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-
 public class NightDay extends SplitCard {
 
     public NightDay(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}","{2}{W}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}", "{2}{W}", SpellAbilityType.SPLIT);
 
         // Night
         // Target creature gets -1/-1 until end of turn.
-        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-1,-1,Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Day

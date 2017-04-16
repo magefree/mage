@@ -34,6 +34,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -46,13 +47,14 @@ public class RoughTumble extends SplitCard {
 
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
     private static final FilterCreaturePermanent filterWithoutFlying = new FilterCreaturePermanent("creature without flying");
+
     static {
         filterFlying.add(new AbilityPredicate(FlyingAbility.class));
         filterWithoutFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
     public RoughTumble(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}","{5}{R}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}", "{5}{R}", SpellAbilityType.SPLIT);
 
         // Rough
         // Rough deals 2 damage to each creature without flying.

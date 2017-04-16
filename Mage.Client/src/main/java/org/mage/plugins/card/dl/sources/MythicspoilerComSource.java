@@ -93,7 +93,6 @@ public class MythicspoilerComSource implements CardImageSource {
         cardNameAliases.put("AKH-illusorywrappins", "illusorywrappings");
         cardNameAliases.put("AKH-reducerumble", "reducerubble");
         cardNameAliases.put("AKH-forsakethewordly", "forsaketheworldly");
-        cardNameAliases.put("AKH-preparefight", "preparedfight");
         cardNameAliases.put("AKH-kefnatsmonument", "kefnetsmonument");
 
         cardNameAliasesStart = new HashMap<>();
@@ -184,14 +183,9 @@ public class MythicspoilerComSource implements CardImageSource {
                 if (cardNameAliases.containsKey(cardSet + '-' + cardName)) {
                     cardName = cardNameAliases.get(cardSet + '-' + cardName);
                 } else if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3") || cardName.endsWith("4") || cardName.endsWith("5")) {
-                    if (!cardName.startsWith("forest")
-                            && !cardName.startsWith("swamp")
-                            && !cardName.startsWith("mountain")
-                            && !cardName.startsWith("island")
-                            && !cardName.startsWith("plains")) {
-
-                        cardName = cardName.substring(0, cardName.length() - 1);
-                    }
+                    cardName = cardName.substring(0, cardName.length() - 1);
+                } else if (cardName.endsWith("promo")) {
+                    cardName = cardName.substring(0, cardName.length() - 5);
                 }
                 pageLinks.put(cardName, baseUrl + cardLink);
             }

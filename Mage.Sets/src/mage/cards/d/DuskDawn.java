@@ -25,11 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.d;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -39,7 +39,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -48,23 +50,16 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Set;
-import java.util.UUID;
-
-/**
- *
- * @author stravant
- */
-
-
 public class DuskDawn extends SplitCard {
+
     private static final FilterCreaturePermanent filterCreatures3orGreater = new FilterCreaturePermanent("creatures with power greater than or equal to 3");
+
     static {
         filterCreatures3orGreater.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public DuskDawn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}","{3}{W}{W}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{2}{W}{W}", "{3}{W}{W}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Dusk
         // Destroy all creatures with power 3 or greater.
@@ -74,7 +69,7 @@ public class DuskDawn extends SplitCard {
 
         // Dawn
         // Return all creature cards with power less than or equal to 2 from your graveyard to your hand.
-        ((CardImpl)(getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
         getRightHalfCard().getSpellAbility().addEffect(new DawnEffect());
 
     }
@@ -92,6 +87,7 @@ public class DuskDawn extends SplitCard {
 class DawnEffect extends OneShotEffect {
 
     private static final FilterCard filter2orLess = new FilterCreatureCard("creatures with power less than or equal to 2");
+
     static {
         filter2orLess.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }

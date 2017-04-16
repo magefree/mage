@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -35,11 +36,10 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SpellAbilityType;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,7 +48,7 @@ import java.util.UUID;
 public class TurnBurn extends SplitCard {
 
     public TurnBurn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}","{1}{R}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}", "{1}{R}", SpellAbilityType.SPLIT_FUSED);
 
         // Turn
         // Until end of turn, target creature loses all abilities and becomes a red Weird with base power and toughness 0/1.

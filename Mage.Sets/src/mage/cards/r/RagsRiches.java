@@ -1,5 +1,6 @@
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -10,28 +11,25 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
+import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  * @author Stravant
  */
 public class RagsRiches extends SplitCard {
+
     public RagsRiches(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}","{5}{U}{U}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{2}{B}{B}", "{5}{U}{U}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Rags
         // All creatures get -2/-2 until end of turn.
         getLeftHalfCard().getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
 
         // to
-
         // Riches
         // Each opponent chooses a creature he or she controls. You gain control of each of those creatures.
         ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
@@ -86,7 +84,7 @@ class RichesEffect extends OneShotEffect {
 
             // Has to be done as a separate loop in case there's a situation where one creature's
             // controller depends on another creatures controller.
-            for (UUID target: creaturesToSteal) {
+            for (UUID target : creaturesToSteal) {
                 GainControlTargetEffect eff = new GainControlTargetEffect(Duration.EndOfGame, true);
                 eff.setTargetPointer(new FixedTarget(target));
                 game.addEffect(eff, source);

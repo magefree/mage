@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -54,7 +55,7 @@ public class PureSimple extends SplitCard {
     }
 
     public PureSimple(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{G}","{1}{G}{W}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{G}", "{1}{G}{W}", SpellAbilityType.SPLIT_FUSED);
 
         // Pure
         // Destroy target multicolored permanent.

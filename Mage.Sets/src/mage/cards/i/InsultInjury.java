@@ -1,10 +1,9 @@
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.CardImpl;
@@ -13,9 +12,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -23,14 +20,13 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  * @author Stravant
  */
 public class InsultInjury extends SplitCard {
+
     public InsultInjury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}","{2}{R}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{2}{R}", "{2}{R}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Insult
         // Damage can't be prevented this turn. If a source you control would deal damage this turn it deals
@@ -39,7 +35,6 @@ public class InsultInjury extends SplitCard {
         getLeftHalfCard().getSpellAbility().addEffect(new InsultDoubleDamageEffect());
 
         // to
-
         // Injury
         // Injury deals 2 damage to target creature and 2 damage to target player.
         ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
@@ -59,6 +54,7 @@ public class InsultInjury extends SplitCard {
 }
 
 class InsultDoubleDamageEffect extends ReplacementEffectImpl {
+
     public InsultDoubleDamageEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
         staticText = "If a source you control would deal damage this turn, it deals double that damage to that creature or player instead.";
@@ -98,6 +94,7 @@ class InsultDoubleDamageEffect extends ReplacementEffectImpl {
 }
 
 class InjuryEffect extends OneShotEffect {
+
     InjuryEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 2 damage to target creature and 2 damage to target player";

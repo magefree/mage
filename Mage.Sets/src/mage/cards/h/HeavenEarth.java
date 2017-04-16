@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -28,7 +29,7 @@ public class HeavenEarth extends SplitCard {
     }
 
     public HeavenEarth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{X}{G}", "{X}{R}{R}", false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{X}{G}", "{X}{R}{R}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Falling
         // Falling deals X damage to each creature with flying.

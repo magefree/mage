@@ -37,6 +37,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
 public class HitRun extends SplitCard {
 
     public HitRun(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}","{3}{R}{G}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{R}", "{3}{R}{G}", SpellAbilityType.SPLIT);
 
         // Hit
         // Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's converted mana cost.

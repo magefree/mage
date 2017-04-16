@@ -25,56 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.p;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.common.OpponentControlsPermanentCondition;
+import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.AftermathAbility;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.*;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
  * @author stravant
  */
+public class PrepareFight extends SplitCard {
 
-
-public class PreparedFight extends SplitCard {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public PreparedFight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY},"{1}{W}","{3}{G}",false);
+    public PrepareFight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{1}{W}", "{3}{G}", SpellAbilityType.SPLIT_AFTERMATH);
 
-        // Prepared
+        // Prepare
         // Untap target creature. It gets +2/+2 and gains lifelink until end of turn.
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new UntapTargetEffect();
@@ -88,22 +73,21 @@ public class PreparedFight extends SplitCard {
         getLeftHalfCard().getSpellAbility().addEffect(effect);
 
         // to
-
         // Fight
         // Target creature you control fights target creature you don't control.
-        ((CardImpl)(getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
         getRightHalfCard().getSpellAbility().addEffect(new FightTargetsEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Target target = new TargetCreaturePermanent(filter);
         getRightHalfCard().getSpellAbility().addTarget(target);
     }
 
-    public PreparedFight(final PreparedFight card) {
+    public PrepareFight(final PrepareFight card) {
         super(card);
     }
 
     @Override
-    public PreparedFight copy() {
-        return new PreparedFight(this);
+    public PrepareFight copy() {
+        return new PrepareFight(this);
     }
 }

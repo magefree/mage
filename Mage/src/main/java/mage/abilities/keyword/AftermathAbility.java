@@ -27,31 +27,31 @@
  */
 package mage.abilities.keyword;
 
-import mage.MageObject;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.*;
 import mage.cards.Card;
 import mage.cards.SplitCardHalf;
-import mage.cards.SplitCardHalfImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import java.util.UUID;
 
 /**
  * Aftermath
  *
- * TODO: Implement once we get details on the comprehensive rules meaning of the ability
+ * TODO: Implement once we get details on the comprehensive rules meaning of the
+ * ability
  *
  * Current text is a shell copied from Flashback
  *
  * @author stravant
  */
 public class AftermathAbility extends SimpleStaticAbility {
+
     public AftermathAbility() {
         super(Zone.ALL, new AftermathCastFromGraveyard());
         addEffect(new AftermathCantCastFromHand());
@@ -99,13 +99,13 @@ class AftermathCastFromGraveyard extends AsThoughEffectImpl {
     }
 
     private static String msb(UUID id) {
-        return Integer.toUnsignedString((int)id.getMostSignificantBits(), 16);
+        return Integer.toUnsignedString((int) id.getMostSignificantBits(), 16);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(source.getSourceId()) &
-                affectedControllerId.equals(source.getControllerId())) {
+        if (objectId.equals(source.getSourceId())
+                & affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(source.getSourceId());
             if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 return true;
@@ -122,7 +122,7 @@ class AftermathCantCastFromHand extends ContinuousRuleModifyingEffectImpl {
         staticText = ", but not from anywhere else";
     }
 
-    public AftermathCantCastFromHand (final AftermathCantCastFromHand effect) {
+    public AftermathCantCastFromHand(final AftermathCantCastFromHand effect) {
         super(effect);
     }
 
@@ -213,7 +213,7 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
         if (sourceCard != null) {
             Player player = game.getPlayer(sourceCard.getOwnerId());
             if (player != null) {
-                return player.moveCardToExileWithInfo(sourceCard, null, "", sourceId, game, ((ZoneChangeEvent)event).getFromZone(), true);
+                return player.moveCardToExileWithInfo(sourceCard, null, "", sourceId, game, ((ZoneChangeEvent) event).getFromZone(), true);
             }
         }
         return false;
