@@ -55,7 +55,7 @@ public class TrespassersCurse extends CardImpl {
 
     public TrespassersCurse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        
+
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
@@ -67,6 +67,7 @@ public class TrespassersCurse extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a creature enters the battlefield under enchanted player's control, that player loses 1 life and you gain 1 life.
+        this.addAbility(new TrespassersCurseTriggeredAbility());
     }
 
     public TrespassersCurse(final TrespassersCurse card) {
@@ -78,7 +79,6 @@ public class TrespassersCurse extends CardImpl {
         return new TrespassersCurse(this);
     }
 }
-
 
 class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -101,7 +101,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getControllerId(event.getSourceId()).equals(enchantment.getAttachedTo())) {
-            for (Effect effect: this.getEffects()) {
+            for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
             }
             return true;

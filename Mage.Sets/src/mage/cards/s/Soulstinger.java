@@ -59,9 +59,7 @@ public class Soulstinger extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Soulstinger enters the battlefield, put two -1/-1 counter on target creature you control.
-        Ability ability =
-                new EntersBattlefieldTriggeredAbility(
-                        new AddCountersTargetEffect(CounterType.M1M1.createInstance(), new StaticValue(2), Outcome.Detriment));
+        Ability ability = new EntersBattlefieldTriggeredAbility( new AddCountersTargetEffect(CounterType.M1M1.createInstance(2)));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
@@ -72,7 +70,7 @@ public class Soulstinger extends CardImpl {
                         new CountersSourceCount(CounterType.M1M1),
                         Outcome.Detriment);
         effect.setText("you may put a -1/-1 counter on target creature for each -1/-1 counter on {this}");
-        ability = new DiesTriggeredAbility(effect);
+        ability = new DiesTriggeredAbility(effect, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

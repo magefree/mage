@@ -52,6 +52,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -66,6 +67,7 @@ public class ShedWeakness extends CardImpl {
         // Target creature gets +2/+2 until end of turn. You may remove a -1/-1 counter from it.
         getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         getSpellAbility().addEffect(new MayRemoveM1M1CouterTargetEffect());
+        getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public ShedWeakness(final ShedWeakness card) {
