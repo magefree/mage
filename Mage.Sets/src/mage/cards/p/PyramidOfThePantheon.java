@@ -29,21 +29,18 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
 
 /**
  *
@@ -61,9 +58,10 @@ public class PyramidOfThePantheon extends CardImpl {
         this.addAbility(ability);
 
         // {T}: Add three mana of any one color to your mana pool. Activate this ability only of there are three or more brick counters on Pyramid of the Pantheon.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
-        ability2.addCost(new SourceHasCountersCost(3, CounterType.BRICK));
-        this.addAbility(ability2);
+        this.addAbility(new ActivateIfConditionManaAbility(Zone.BATTLEFIELD,
+                new AddManaOfAnyColorEffect(3),
+                new TapSourceCost(),
+                new SourceHasCounterCondition(CounterType.BRICK, 1)));
     }
 
     public PyramidOfThePantheon(final PyramidOfThePantheon card) {
@@ -73,39 +71,5 @@ public class PyramidOfThePantheon extends CardImpl {
     @Override
     public PyramidOfThePantheon copy() {
         return new PyramidOfThePantheon(this);
-    }
-}
-
-class SourceHasCountersCost extends CostImpl {
-
-    private final int counters;
-    private final CounterType counterType;
-
-    public SourceHasCountersCost(int counters, CounterType counterType) {
-        this.counters = counters;
-        this.counterType = counterType;
-        this.text = "Activate this ability only if {this} has " + counters + " or more " + counterType.getName() + " counters on it";
-    }
-
-    public SourceHasCountersCost(final SourceHasCountersCost cost) {
-        super(cost);
-        this.counters = cost.counters;
-        this.counterType = cost.counterType;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return (game.getPermanent(sourceId).getCounters(game).getCount(counterType) >= counters);
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.paid = true;
-        return paid;
-    }
-
-    @Override
-    public SourceHasCountersCost copy() {
-        return new SourceHasCountersCost(this);
     }
 }
