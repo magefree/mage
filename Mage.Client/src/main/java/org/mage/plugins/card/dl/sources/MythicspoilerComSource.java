@@ -86,13 +86,15 @@ public class MythicspoilerComSource implements CardImageSource {
         cardNameAliases.put("THS-soldierofpantheon", "soldierofthepantheon");
         cardNameAliases.put("THS-vulpinegolaith", "vulpinegoliath");
         cardNameAliases.put("ORI-kothopedhoarderofsouls", "kothophedsoulhoarder");
-        cardNameAliases.put("BFZ-unisonstrike", "tandemtactics");
-        cardNameAliases.put("BFZ-eldrazidevastator", "eldrazidevastator");
         cardNameAliases.put("BFZ-kozliekschanneler", "kozilekschanneler");
         cardNameAliases.put("OGW-wastes", "wastes1");
         cardNameAliases.put("OGW-wastes2", "wastes2");
-        cardNameAliases.put("AER-locketofmyths", "lifecraftersbestiary");
         cardNameAliases.put("AER-aegisautomation", "aegisautomaton");
+        cardNameAliases.put("AKH-illusorywrappins", "illusorywrappings");
+        cardNameAliases.put("AKH-reducerumble", "reducerubble");
+        cardNameAliases.put("AKH-forsakethewordly", "forsaketheworldly");
+        cardNameAliases.put("AKH-preparefight", "preparedfight");
+        cardNameAliases.put("AKH-kefnatsmonument", "kefnetsmonument");
 
         cardNameAliasesStart = new HashMap<>();
         HashSet<String> names = new HashSet<>();
