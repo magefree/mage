@@ -29,6 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.AftermathAbility;
@@ -53,7 +54,9 @@ public class StartFinish extends SplitCard {
 
         // Start
         // Create two 1/1 white Warrior creature tokens with vigilance.
-        getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new WarriorVigilantToken(), 2));
+        Effect effect = new CreateTokenEffect(new WarriorVigilantToken(), 2);
+        effect.setText("Create two 1/1 white Warrior creature tokens with vigilance");
+        getLeftHalfCard().getSpellAbility().addEffect(effect);
 
         // Finish
         // Aftermath

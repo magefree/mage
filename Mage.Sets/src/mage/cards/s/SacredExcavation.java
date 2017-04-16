@@ -31,6 +31,7 @@ import java.util.UUID;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
@@ -38,7 +39,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -56,7 +56,9 @@ public class SacredExcavation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Return up to two target cards with cycling from your graveyard to your hand.
-        getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        Effect effect = new ReturnFromGraveyardToHandTargetEffect();
+        effect.setText("Return up to two target cards with cycling from your graveyard to your hand");
+        getSpellAbility().addEffect(effect);
         getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, cardsWithCycling));
     }
 

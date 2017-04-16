@@ -34,12 +34,15 @@ import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -47,6 +50,12 @@ import mage.target.TargetPermanent;
  * @author fireshoes
  */
 public class VizierOfTumblingSands extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("another target permanent");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public VizierOfTumblingSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -57,8 +66,10 @@ public class VizierOfTumblingSands extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Untap another target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPermanent());
+        Effect effect = new UntapTargetEffect();
+        effect.setText("Untap another target permanent");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Cycling {1}{U}

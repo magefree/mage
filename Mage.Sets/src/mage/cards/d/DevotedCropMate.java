@@ -30,6 +30,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesExertSourceTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.ExertAbility;
 import mage.cards.CardImpl;
@@ -61,7 +62,9 @@ public class DevotedCropMate extends CardImpl {
         this.toughness = new MageInt(2);
 
         // You may exert Devoted Crop-Mate as it attacks. When you do, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
-        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
+        effect.setText("return target creature card with converted mana cost 2 or less from your graveyard to the battlefield");
+        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(effect);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         addAbility(new ExertAbility(ability));
 

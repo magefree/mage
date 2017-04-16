@@ -117,7 +117,7 @@ class VizierOfDefermentEffect extends OneShotEffect {
 
     public VizierOfDefermentEffect() {
         super(Outcome.Detriment);
-        staticText = "you may exile target creature if it attacked or blocked this turn. Return it to the battlefield under its owner's control at the beginning of the next end step";
+        staticText = "you may exile target creature if it attacked or blocked this turn. Return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
     public VizierOfDefermentEffect(final VizierOfDefermentEffect effect) {
@@ -129,8 +129,8 @@ class VizierOfDefermentEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null 
-                && permanent != null 
+        if (controller != null
+                && permanent != null
                 && sourcePermanent != null) {
             if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();

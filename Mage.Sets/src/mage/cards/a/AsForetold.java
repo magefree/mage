@@ -60,7 +60,7 @@ import mage.watchers.Watcher;
 public class AsForetold extends CardImpl {
     public AsForetold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        
+
 
         // At the beginning of your upkeep, put a time counter on As Foretold.
         addAbility(
@@ -145,7 +145,7 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
 class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
     public AsForetoldAddAltCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spelly ou cast with converted mana cost X or less, where X is the number of time counters on {this}.";
+        staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with converted mana cost X or less, where X is the number of time counters on {this}.";
     }
 
     public AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {

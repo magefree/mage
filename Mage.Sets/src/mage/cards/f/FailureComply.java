@@ -45,6 +45,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.abilities.effects.common.NameACardEffect;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  * @author spjspj
@@ -63,7 +64,9 @@ public class FailureComply extends SplitCard {
         // Comply
         // Choose a card name.  Until your next turn, your opponents can't cast spells with the chosen name
         ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
-        getRightHalfCard().getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
+        Effect effect = new NameACardEffect(NameACardEffect.TypeOfName.ALL);
+        effect.setText("Choose a card name");
+        getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addEffect(new ComplyCantCastEffect());
     }
 
@@ -81,7 +84,7 @@ class ComplyCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     public ComplyCantCastEffect() {
         super(Duration.UntilYourNextTurn, Outcome.Benefit);
-        staticText = "Your opponents can't cast spells with the chosen name";
+        staticText = "Until your next turn, your opponents can't cast spells with the chosen name";
     }
 
     public ComplyCantCastEffect(final ComplyCantCastEffect effect) {

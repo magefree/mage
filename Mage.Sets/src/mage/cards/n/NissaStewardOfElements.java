@@ -53,6 +53,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  *
@@ -65,7 +66,9 @@ public class NissaStewardOfElements extends CardImpl {
 
         this.subtype.add("Nissa");
 
-        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.LOYALTY.createInstance())));
+        Ability abilityETB = new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.LOYALTY.createInstance()));
+        abilityETB.setRuleVisible(false);
+        this.addAbility(abilityETB);
 
         // +2: Scry 2.
         this.addAbility(new LoyaltyAbility(new ScryEffect(2), 2));
@@ -75,8 +78,12 @@ public class NissaStewardOfElements extends CardImpl {
         this.addAbility(new LoyaltyAbility(new NissaStewardOfElementsEffect(), 0));
 
         // -6: Untap up to two target lands you control. They become 5/5 Elemental creatures with flying and haste until end of turn. They're still lands.
-        LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), 6);
-        ability.addEffect(new BecomesCreatureTargetEffect(new NissaStewardOfElementsToken(), false, true, Duration.EndOfTurn));
+        Effect effect = new UntapTargetEffect();
+        effect.setText("Untap up to two target lands you control");
+        LoyaltyAbility ability = new LoyaltyAbility(effect, 6);
+        effect = new BecomesCreatureTargetEffect(new NissaStewardOfElementsToken(), false, true, Duration.EndOfTurn);
+        effect.setText("They become 5/5 Elemental creatures with flying and haste until end of turn. They're still lands");
+        ability.addEffect(effect);
         ability.addTarget(new TargetPermanent(0, 2, new FilterControlledLandPermanent(), false));
         this.addAbility(ability);
     }
@@ -95,7 +102,7 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
 
     public NissaStewardOfElementsEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "look at the top card of your library. If it's a land card or a creature card with converted mana cost less than or equal"
+        this.staticText = "look at the top card of your library. If it's a land card or a creature card with converted mana cost less than or equal "
                 + "to the number of loyalty counters on {this}, you may put that card onto the battlefield";
     }
 

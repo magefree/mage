@@ -33,7 +33,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -59,7 +58,7 @@ public class EnigmaDrake extends CardImpl {
 
         // Enigma Drakes's power is equal to the number of instant and sorcery cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
-                new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard("instant and sorcery cards in your graveyard")), Duration.EndOfGame)));
+                new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard("instant and sorcery cards")), Duration.EndOfGame)));
     }
 
     public EnigmaDrake(final EnigmaDrake card) {

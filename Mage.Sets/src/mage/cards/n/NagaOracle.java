@@ -29,8 +29,9 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,15 +47,15 @@ public class NagaOracle extends CardImpl {
 
     public NagaOracle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        
+
         this.subtype.add("Naga");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // When Naga Oracle enters the battlefield, look at the top three cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
-        addAbility(new EntersBattlefieldAbility(
-                new LookLibraryAndPickControllerEffect(
+        // When Naga Oracle enters the battlefield, look at the top three cards of your library. Put any number of them into your graveyard
+        // and the rest back on top of your library in any order.
+        Effect effect = new LookLibraryAndPickControllerEffect(
                         /* oh god, Microsoft looks conservative with their function parameters in comparison */
                         new StaticValue(3),
                         false,
@@ -65,7 +66,10 @@ public class NagaOracle extends CardImpl {
                         false,
                         true,
                         Zone.GRAVEYARD,
-                        false)));
+                        false);
+        effect.setText("look at the top three cards of your library. Put any number of them into your graveyard "
+                + "and the rest back on top of your library in any order");
+        addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 
     public NagaOracle(final NagaOracle card) {

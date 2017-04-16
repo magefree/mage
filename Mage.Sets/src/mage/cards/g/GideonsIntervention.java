@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
@@ -56,7 +57,9 @@ public class GideonsIntervention extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // As Gideon's Intervention enters the battlefield, choose a card name.
-        this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL)));
+        Effect effect = new NameACardEffect(NameACardEffect.TypeOfName.ALL);
+        effect.setText("choose a card name");
+        this.addAbility(new AsEntersBattlefieldAbility(effect));
 
         // Your opponents can't cast spells with the chosen name.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GideonsInterventionCantCastEffect()));

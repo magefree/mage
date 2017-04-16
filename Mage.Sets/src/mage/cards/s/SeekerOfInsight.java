@@ -51,7 +51,7 @@ public class SeekerOfInsight extends CardImpl {
 
     public SeekerOfInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        
+
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);
@@ -93,4 +93,9 @@ class CastNonCreatureSpellCondition implements Condition {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "you've cast a noncreature spell this turn";
+}
 }
