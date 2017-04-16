@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -44,8 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.ApplyToPermanent;
 
-import java.util.UUID;
-
 /**
  * @author Loki
  */
@@ -58,7 +57,7 @@ public class Cryptoplasm extends CardImpl {
     }
 
     public Cryptoplasm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(2);
@@ -103,7 +102,7 @@ class CryptoplasmEffect extends OneShotEffect {
         if (creatureToCopy != null) {
             ApplyToPermanent applier = new ApplyToPermanent() {
                 @Override
-                public boolean apply(Game game, Permanent permanent) {
+                public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
                     Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
                     upkeepAbility.addTarget(new TargetCreaturePermanent());
                     permanent.addAbility(upkeepAbility, source.getSourceId(), game);
@@ -111,7 +110,7 @@ class CryptoplasmEffect extends OneShotEffect {
                 }
 
                 @Override
-                public boolean apply(Game game, MageObject mageObject) {
+                public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
                     Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
                     upkeepAbility.addTarget(new TargetCreaturePermanent());
                     mageObject.getAbilities().add(upkeepAbility);

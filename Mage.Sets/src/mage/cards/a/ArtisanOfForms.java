@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,8 +43,6 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.ApplyToPermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -51,7 +50,7 @@ import java.util.UUID;
 public class ArtisanOfForms extends CardImpl {
 
     public ArtisanOfForms(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
@@ -79,7 +78,7 @@ public class ArtisanOfForms extends CardImpl {
 class ArtisanOfFormsApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         Effect effect = new CopyPermanentEffect(new ArtisanOfFormsApplyToPermanent());
         effect.setText("have {this} become a copy of target creature and gain this ability");
         mageObject.getAbilities().add(new HeroicAbility(effect, true));
@@ -87,7 +86,7 @@ class ArtisanOfFormsApplyToPermanent extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         Effect effect = new CopyPermanentEffect(new ArtisanOfFormsApplyToPermanent());
         effect.setText("have {this} become a copy of target creature and gain this ability");
         permanent.addAbility(new HeroicAbility(effect, true), game);

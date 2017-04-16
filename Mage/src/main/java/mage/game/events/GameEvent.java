@@ -282,6 +282,7 @@ public class GameEvent implements Serializable {
         FIGHTED_PERMANENT,
         EXPLOITED_CREATURE,
         EVOLVED_CREATURE,
+        EMBALMED_CREATURE,
         ATTACH, ATTACHED,
         STAY_ATTACHED,
         UNATTACH, UNATTACHED,

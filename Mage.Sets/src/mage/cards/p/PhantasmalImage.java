@@ -30,6 +30,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
@@ -53,7 +54,7 @@ public class PhantasmalImage extends CardImpl {
 
     ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
         @Override
-        public boolean apply(Game game, Permanent permanent) {
+        public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
             if (!permanent.getSubtype(game).contains("Illusion")) {
                 permanent.getSubtype(game).add("Illusion");
             }
@@ -64,7 +65,7 @@ public class PhantasmalImage extends CardImpl {
         }
 
         @Override
-        public boolean apply(Game game, MageObject mageObject) {
+        public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
             if (!mageObject.getSubtype(game).contains("Illusion")) {
                 mageObject.getSubtype(game).add("Illusion");
             }
@@ -76,7 +77,7 @@ public class PhantasmalImage extends CardImpl {
     };
 
     public PhantasmalImage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Illusion");
 
         this.color.setBlue(true);

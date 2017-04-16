@@ -109,7 +109,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
                 newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 ApplyToPermanent applier = new LazavDimirMastermindApplier();
-                applier.apply(game, newBluePrint);
+                applier.apply(game, newBluePrint, source);
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, lazavDimirMastermind.getId());
                 copyEffect.newId();
                 copyEffect.setApplier(applier);
@@ -126,7 +126,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
 class LazavDimirMastermindApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source) {
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new LazavDimirMastermindEffect(), true,
                 new FilterCreatureCard("a creature card"),
@@ -139,7 +139,7 @@ class LazavDimirMastermindApplier extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source) {
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new LazavDimirMastermindEffect(), true,
                 new FilterCreatureCard("a creature card"),

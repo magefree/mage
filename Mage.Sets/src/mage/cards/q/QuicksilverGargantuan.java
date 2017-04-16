@@ -46,7 +46,7 @@ import mage.util.functions.ApplyToPermanent;
 public class QuicksilverGargantuan extends CardImpl {
 
     public QuicksilverGargantuan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(7);
@@ -70,14 +70,14 @@ public class QuicksilverGargantuan extends CardImpl {
 class QuicksilverGargantuanApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         permanent.getPower().modifyBaseValue(7);
         permanent.getToughness().modifyBaseValue(7);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         mageObject.getPower().modifyBaseValue(7);
         mageObject.getToughness().modifyBaseValue(7);
         return true;

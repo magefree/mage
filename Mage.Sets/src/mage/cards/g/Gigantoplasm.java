@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -49,8 +50,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.ApplyToPermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author fireshoes
@@ -58,7 +57,7 @@ import java.util.UUID;
 public class Gigantoplasm extends CardImpl {
 
     public Gigantoplasm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -82,7 +81,7 @@ public class Gigantoplasm extends CardImpl {
 class GigantoplasmApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         DynamicValue variableMana = new ManacostVariableValue();
         Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
@@ -92,7 +91,7 @@ class GigantoplasmApplyToPermanent extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         DynamicValue variableMana = new ManacostVariableValue();
         Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
