@@ -64,8 +64,7 @@ public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
             reset();
         }
-        if (event.getType() == GameEvent.EventType.CYCLED_CARD
-                || event.getType() == GameEvent.EventType.DISCARDED_CARD) {
+        if (event.getType() == GameEvent.EventType.DISCARDED_CARD) {
             UUID playerId = event.getPlayerId();
             if (playerId != null 
                     && game.getCard(event.getTargetId()) != null) {
