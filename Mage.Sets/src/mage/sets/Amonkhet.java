@@ -211,7 +211,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Lay Claim", 61, Rarity.UNCOMMON, mage.cards.l.LayClaim.class));
         cards.add(new SetCardInfo("Liliana's Influence", 277, Rarity.RARE, mage.cards.l.LilianasInfluence.class));
         cards.add(new SetCardInfo("Liliana's Mastery", 98, Rarity.RARE, mage.cards.l.LilianasMastery.class));
-        cards.add(new SetCardInfo("Liliana, Death Wielder", 274, Rarity.MYTHIC, mage.cards.l.LilianaDeathWielder.class));
+        cards.add(new SetCardInfo("Liliana, Death Wielder", 275, Rarity.MYTHIC, mage.cards.l.LilianaDeathWielder.class));
         cards.add(new SetCardInfo("Liliana, Death's Majesty", 97, Rarity.MYTHIC, mage.cards.l.LilianaDeathsMajesty.class));
         cards.add(new SetCardInfo("Limits of Solidarity", 140, Rarity.UNCOMMON, mage.cards.l.LimitsOfSolidarity.class));
         cards.add(new SetCardInfo("Lord of the Accursed", 99, Rarity.UNCOMMON, mage.cards.l.LordOfTheAccursed.class));
@@ -298,6 +298,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Start // Finish", 215, Rarity.UNCOMMON, mage.cards.s.StartFinish.class));
         cards.add(new SetCardInfo("Stinging Shot", 189, Rarity.COMMON, mage.cards.s.StingingShot.class));
         cards.add(new SetCardInfo("Stir the Sands", 110, Rarity.UNCOMMON, mage.cards.s.StirTheSands.class));
+        cards.add(new SetCardInfo("Stone Quarry", 274, Rarity.COMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Sunscorched Desert", 249, Rarity.COMMON, mage.cards.s.SunscorchedDesert.class));
         cards.add(new SetCardInfo("Supernatural Stamina", 111, Rarity.COMMON, mage.cards.s.SupernaturalStamina.class));
         cards.add(new SetCardInfo("Supply Caravan", 30, Rarity.COMMON, mage.cards.s.SupplyCaravan.class));
