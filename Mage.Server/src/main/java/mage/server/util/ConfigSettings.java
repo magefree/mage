@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server.util;
 
 import java.io.File;
@@ -33,7 +32,6 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-
 import mage.server.util.config.Config;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
@@ -47,7 +45,6 @@ public enum ConfigSettings {
     private final Logger logger = Logger.getLogger(ConfigSettings.class);
 
     private Config config;
-
 
     ConfigSettings() {
         try {
@@ -77,6 +74,10 @@ public enum ConfigSettings {
 
     public int getLeasePeriod() {
         return config.getServer().getLeasePeriod().intValue();
+    }
+
+    public int getSocketWriteTimeout() {
+        return config.getServer().getSocketWriteTimeout().intValue();
     }
 
     public int getMaxPoolSize() {

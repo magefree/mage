@@ -56,6 +56,7 @@ public class Connection {
     private int clientCardDatabaseVersion;
     private boolean forceDBComparison;
     private String userIdStr;
+    private int socketWriteTimeout;
 
     private UserData userData;
 
@@ -76,6 +77,7 @@ public class Connection {
 
     public Connection(String parameter) {
         this.parameter = parameter;
+        socketWriteTimeout = 10000;
     }
 
     @Override
@@ -276,7 +278,6 @@ public class Connection {
         return allMACs.toString();
     }
 
-
     public void setUserData(UserData userData) {
         this.userData = userData;
     }
@@ -291,5 +292,9 @@ public class Connection {
 
     public void setForceDBComparison(boolean forceDBComparison) {
         this.forceDBComparison = forceDBComparison;
+    }
+
+    public int getSocketWriteTimeout() {
+        return socketWriteTimeout;
     }
 }

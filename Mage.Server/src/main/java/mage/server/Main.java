@@ -27,6 +27,12 @@
  */
 package mage.server;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.util.*;
+import javax.management.MBeanServer;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.repository.CardScanner;
@@ -58,13 +64,6 @@ import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
 import org.jboss.remoting.transporter.TransporterServer;
 import org.w3c.dom.Element;
-
-import javax.management.MBeanServer;
-import java.io.File;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -202,6 +201,7 @@ public final class Main {
         logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "true" : "false"));
         logger.info("Config - backlog size    : " + config.getBacklogSize());
         logger.info("Config - lease period    : " + config.getLeasePeriod());
+        logger.info("Config - sock wrt timeout: " + config.getSocketWriteTimeout());
         logger.info("Config - max pool size   : " + config.getMaxPoolSize());
         logger.info("Config - num accp.threads: " + config.getNumAcceptThreads());
         logger.info("Config - second.bind port: " + config.getSecondaryBindPort());
@@ -244,7 +244,7 @@ public final class Main {
 
     static boolean isAlreadyRunning(InvokerLocator serverLocator) {
         Map<String, String> metadata = new HashMap<>();
-        metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+        metadata.put(SocketWrapper.WRITE_TIMEOUT, String.valueOf(ConfigSettings.instance.getSocketWriteTimeout()));
         metadata.put("generalizeSocketException", "true");
         try {
             MageServer testServer = (MageServer) TransporterClient.createTransporterClient(serverLocator.getLocatorURI(), MageServer.class, metadata);
