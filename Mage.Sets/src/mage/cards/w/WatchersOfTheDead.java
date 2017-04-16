@@ -34,10 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -103,8 +100,9 @@ class WatchersOfTheDeadEffect extends OneShotEffect {
                     TargetCard target = new TargetCardInYourGraveyard(2, 2, new FilterCard());
                     target.setNotTarget(true);
                     Cards cardsInGraveyard = opponent.getGraveyard();
-                    opponent.choose(outcome, cardsInGraveyard, target, game);
-                    if (!cardsInGraveyard.isEmpty()) {
+
+                    if (cardsInGraveyard.size() > 2) {
+                        opponent.choose(outcome, cardsInGraveyard, target, game);
                         for (Card cardInGraveyard : cardsInGraveyard.getCards(game)) {
                             if (!target.getTargets().contains(cardInGraveyard.getId())) {
                                 opponent.moveCardToExileWithInfo(cardInGraveyard, CardUtil.getCardExileZoneId(game, source.getId()),
