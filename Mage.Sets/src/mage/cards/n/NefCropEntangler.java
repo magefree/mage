@@ -29,10 +29,14 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.BecomesExertSourceTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.ExertAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 
 /**
  *
@@ -42,7 +46,7 @@ public class NefCropEntangler extends CardImpl {
 
     public NefCropEntangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
+
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);
@@ -52,6 +56,7 @@ public class NefCropEntangler extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // You may exert Nef-Crop Entangler as it attacks. When you do, it gets +1/+2 until end of turn.
+        this.addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new BoostSourceEffect(1, 2, Duration.EndOfTurn))));
     }
 
     public NefCropEntangler(final NefCropEntangler card) {
