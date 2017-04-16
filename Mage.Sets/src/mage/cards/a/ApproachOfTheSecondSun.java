@@ -1,5 +1,8 @@
 package mage.cards.a;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -8,16 +11,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.constants.Zone;
-import mage.game.stack.Spell;
 
 /**
  * @author stravant
@@ -25,7 +24,7 @@ import mage.game.stack.Spell;
 public class ApproachOfTheSecondSun extends CardImpl {
 
     public ApproachOfTheSecondSun(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{W}");
 
         getSpellAbility().addEffect(new ApproachOfTheSecondSunEffect());
         getSpellAbility().addWatcher(new ApproachOfTheSecondSunWatcher());
@@ -42,10 +41,11 @@ public class ApproachOfTheSecondSun extends CardImpl {
 }
 
 class ApproachOfTheSecondSunEffect extends OneShotEffect {
+
     public ApproachOfTheSecondSunEffect() {
         super(Outcome.Win);
-        this.staticText =
-                "If {this} was cast from your hand and you've cast another spell named Approach of the Second Sun this game, you win the game. "
+        this.staticText
+                = "If {this} was cast from your hand and you've cast another spell named Approach of the Second Sun this game, you win the game. "
                 + "Otherwise, put {this} into its owner's library seventh from the top and you gain 7 life.";
     }
 
@@ -62,8 +62,8 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ApproachOfTheSecondSunWatcher watcher =
-                    (ApproachOfTheSecondSunWatcher) game.getState().getWatchers().get("approachOfTheSecondSunWatcher", source.getControllerId());
+            ApproachOfTheSecondSunWatcher watcher
+                    = (ApproachOfTheSecondSunWatcher) game.getState().getWatchers().get(ApproachOfTheSecondSunWatcher.class.getName(), source.getControllerId());
             if (watcher != null && watcher.getApproachesCast() > 1) {
                 // Win the game
                 controller.won(game);
@@ -98,12 +98,12 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
     }
 }
 
-
 class ApproachOfTheSecondSunWatcher extends Watcher {
+
     private int approachesCast = 0;
 
     public ApproachOfTheSecondSunWatcher() {
-        super("approachOfTheSecondSunWatcher", WatcherScope.PLAYER);
+        super(ApproachOfTheSecondSunWatcher.class.getName(), WatcherScope.PLAYER);
     }
 
     public ApproachOfTheSecondSunWatcher(final ApproachOfTheSecondSunWatcher watcher) {
@@ -114,7 +114,10 @@ class ApproachOfTheSecondSunWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
-            ++approachesCast;
+            Spell spell = game.getStack().getSpell(event.getSourceId());
+            if (spell != null && spell.getName().equals("Approach of the Second Sun")) {
+                ++approachesCast;
+            }
         }
     }
 
