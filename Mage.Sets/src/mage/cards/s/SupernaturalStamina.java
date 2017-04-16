@@ -28,10 +28,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
-import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlSourceEffect;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
@@ -51,13 +49,14 @@ public class SupernaturalStamina extends CardImpl {
 
         // Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control."
         getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getSpellAbility().addEffect(
-                new BoostTargetEffect(2, 0, Duration.EndOfTurn));
+        getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
         getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 new DiesTriggeredAbility(
-                        new ReturnToBattlefieldUnderYourControlSourceEffect(),
-                        /*optional=*/false),
-                Duration.EndOfTurn));
+                        new ReturnSourceFromGraveyardToBattlefieldEffect(true, true),
+                        false),
+                Duration.EndOfTurn,
+                "and gains \"When this creature dies, return it to the battlefield tapped under its owner's control.\""
+        ));
     }
 
     public SupernaturalStamina(final SupernaturalStamina card) {
