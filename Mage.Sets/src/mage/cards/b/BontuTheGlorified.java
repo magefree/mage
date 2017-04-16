@@ -61,7 +61,7 @@ import mage.watchers.common.CreaturesDiedWatcher;
  */
 public class BontuTheGlorified extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another creature");
 
     static {
         filter.add(new AnotherPredicate());
