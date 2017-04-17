@@ -91,4 +91,66 @@ public class AddingCountersToPermanentsTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testSoulstingerNormal() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        // When Soulstinger enters the battlefield, put two -1/-1 counter on target creature you control.
+        // When Soulstinger dies, you may put a -1/-1 counter on target creature for each -1/-1 counter on Soulstinger.
+        addCard(Zone.HAND, playerA, "Soulstinger", 1); // Creature 4/5  {3}{B}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 5);
+        // Turn to Slag deals 5 damage to target creature. Destroy all Equipment attached to that creature.
+        addCard(Zone.HAND, playerB, "Turn to Slag", 1); // Sorcery  {3}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soulstinger");
+        addTarget(playerA, "Soulstinger");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Slag", "Soulstinger");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Soulstinger", 1);
+
+        assertGraveyardCount(playerB, "Turn to Slag", 1);
+
+        assertPowerToughness(playerB, "Pillarfield Ox", 0, 2);
+
+    }
+
+    /**
+     * Soulstinger died and gave a -1/-1 counter to an opponent's creature.
+     * Soulstinger had no -1/-1 counters on it, but the opponent's creature did,
+     * so maybe checking quantity of counters on the wrong creature?
+     */
+    @Test
+    public void testSoulstinger() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        // When Soulstinger enters the battlefield, put two -1/-1 counter on target creature you control.
+        // When Soulstinger dies, you may put a -1/-1 counter on target creature for each -1/-1 counter on Soulstinger.
+        addCard(Zone.HAND, playerA, "Soulstinger", 1); // Creature 4/5  {3}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 5);
+        // Turn to Slag deals 5 damage to target creature. Destroy all Equipment attached to that creature.
+        addCard(Zone.HAND, playerB, "Turn to Slag", 1); // Sorcery  {3}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soulstinger");
+        addTarget(playerA, "Silvercoat Lion");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Slag", "Soulstinger");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Soulstinger", 1);
+
+        assertGraveyardCount(playerB, "Turn to Slag", 1);
+
+        assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
+
+    }
 }

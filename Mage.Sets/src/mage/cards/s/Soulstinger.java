@@ -33,8 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,21 +50,21 @@ public class Soulstinger extends CardImpl {
 
     public Soulstinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        
+
         this.subtype.add("Scorpion");
         this.subtype.add("Demon");
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
         // When Soulstinger enters the battlefield, put two -1/-1 counter on target creature you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility( new AddCountersTargetEffect(CounterType.M1M1.createInstance(2)));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance(2)));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
         // When Soulstinger dies, you may put a -1/-1 counter on target creature for each -1/-1 counter on Soulstinger.
-        AddCountersTargetEffect effect =
-                new AddCountersTargetEffect(
-                        CounterType.M1M1.createInstance(),
+        AddCountersTargetEffect effect
+                = new AddCountersTargetEffect(
+                        CounterType.M1M1.createInstance(0),
                         new CountersSourceCount(CounterType.M1M1),
                         Outcome.Detriment);
         effect.setText("you may put a -1/-1 counter on target creature for each -1/-1 counter on {this}");
