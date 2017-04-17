@@ -398,7 +398,6 @@ public class ConnectDialog extends MageDialog {
             } catch (SocketException ex) {
             }
             connection.setUserIdStr(System.getProperty("user.name") + ":" + System.getProperty("os.name") + ":" + MagePreferences.getUserNames() + ":" + allMAC);
-            connection.setUserIdStr(System.getProperty("user.name") + ':' + MagePreferences.getUserNames());
             MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
             PreferencesDialog.setProxyInformation(connection);
 
