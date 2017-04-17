@@ -27,6 +27,10 @@
  */
 package mage.server;
 
+import java.security.SecureRandom;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import javax.management.timer.Timer;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -64,11 +68,6 @@ import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
-
-import javax.management.timer.Timer;
-import java.security.SecureRandom;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
 
 /**
  * @author BetaSteward_at_googlemail.com, noxx
@@ -163,7 +162,7 @@ public class MageServerImpl implements MageServer {
     public boolean connectUser(String userName, String password, String sessionId, MageVersion version, String userIdStr) throws MageException {
         try {
             if (version.compareTo(Main.getVersion()) != 0) {
-                logger.info("MageVersionException: userName=" + userName + ", version=" + version);
+                logger.info("MageVersionException: userName=" + userName + ", version=" + version + " sessionId=" + sessionId);
                 throw new MageVersionException(version, Main.getVersion());
             }
             return SessionManager.instance.connectUser(sessionId, userName, password, userIdStr);
@@ -1118,14 +1117,14 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public void toggleActivation(final String sessionId, final String userName) throws MageException {
-        execute("toggleActivation", sessionId, () ->
-                UserManager.instance.getUserByName(userName).ifPresent(user ->
-                {
-                    user.setActive(!user.isActive());
-                    if (!user.isActive() && user.isConnected()) {
-                        SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
-                    }
-                }));
+        execute("toggleActivation", sessionId, ()
+                -> UserManager.instance.getUserByName(userName).ifPresent(user
+                -> {
+            user.setActive(!user.isActive());
+            if (!user.isActive() && user.isConnected()) {
+                SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
+            }
+        }));
     }
 
     @Override
@@ -1158,12 +1157,10 @@ public class MageServerImpl implements MageServer {
     @Override
     public void sendFeedbackMessage(final String sessionId, final String username, final String title, final String type, final String message, final String email) throws MageException {
         if (title != null && message != null) {
-            execute("sendFeedbackMessage", sessionId, () ->
-                    SessionManager.instance.getSession(sessionId).ifPresent(
-                            session -> FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.getHost())
-
-
-                    ));
+            execute("sendFeedbackMessage", sessionId, ()
+                    -> SessionManager.instance.getSession(sessionId).ifPresent(
+                    session -> FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.getHost())
+            ));
         }
     }
 
@@ -1253,6 +1250,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class MyActionWithNullNegativeResult extends ActionWithNullNegativeResult<Object> {
+
         @Override
         public Object execute() throws MageException {
             return CompressUtil.compress(ServerMessagesUtil.instance.getMessages());
@@ -1260,6 +1258,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class ListActionWithNullNegativeResult extends ActionWithNullNegativeResult<List<UserView>> {
+
         @Override
         public List<UserView> execute() throws MageException {
             List<UserView> users = new ArrayList<>();
@@ -1282,6 +1281,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class GameViewActionWithNullNegativeResult extends ActionWithNullNegativeResult<GameView> {
+
         private final String sessionId;
         private final UUID gameId;
         private final UUID playerId;
@@ -1306,6 +1306,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class MyActionWithBooleanResult extends ActionWithBooleanResult {
+
         private final String sessionId;
         private final UUID tableId;
 
@@ -1328,6 +1329,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class DraftPickViewActionWithNullNegativeResult extends ActionWithNullNegativeResult<DraftPickView> {
+
         private final String sessionId;
         private final UUID draftId;
         private final UUID cardPick;
@@ -1353,6 +1355,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class MyActionWithTableViewResult extends ActionWithTableViewResult {
+
         private final String sessionId;
         private final MatchOptions options;
         private final UUID roomId;

@@ -265,7 +265,7 @@ public final class Main {
             String sessionId = client.getSessionId();
             Optional<Session> session = SessionManager.instance.getSession(sessionId);
             if (!session.isPresent()) {
-                logger.error("Session not found : " + sessionId);
+                logger.trace("Session not found : " + sessionId);
             } else {
                 UUID userId = session.get().getUserId();
                 StringBuilder sessionInfo = new StringBuilder();
