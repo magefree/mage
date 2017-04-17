@@ -43,11 +43,6 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  * @author stravant
  */
 public class AhnCropChampion extends CardImpl {
-    private final static FilterControlledCreaturePermanent otherCreaturesFilter = new FilterControlledCreaturePermanent("other creatures you control");
-    static {
-        otherCreaturesFilter.add(new AnotherPredicate());
-    }
-
     public AhnCropChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
         
@@ -57,7 +52,7 @@ public class AhnCropChampion extends CardImpl {
         this.toughness = new MageInt(4);
 
         // You may exert Ahn-Crop Champion as it attacks. When you do, untap all other creatures you control.
-        addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new UntapAllControllerEffect(otherCreaturesFilter))));
+        addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new UntapAllControllerEffect(new FilterControlledCreaturePermanent("creatures you control"), null, false))));
     }
 
     public AhnCropChampion(final AhnCropChampion card) {
