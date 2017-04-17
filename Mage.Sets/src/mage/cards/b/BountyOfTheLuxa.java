@@ -27,16 +27,15 @@
  */
 package mage.cards.b;
 
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
@@ -89,9 +88,12 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent bountyOfLuxa = game.getPermanent(source.getSourceId());
-        if (controller != null
-                && bountyOfLuxa != null) {
-            if (bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) > 0) {
+        if (bountyOfLuxa != null && bountyOfLuxa.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter()) {
+            bountyOfLuxa = null;
+        }
+        if (controller != null) {
+            if (bountyOfLuxa != null
+                    && bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) > 0) {
                 bountyOfLuxa.removeCounters(CounterType.FLOOD.createInstance(bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD)), game);
                 if (bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) == 0) {
                     Mana manaToAdd = new Mana();
@@ -101,8 +103,10 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
                     controller.getManaPool().addMana(manaToAdd, game, source);
                 }
             } else {
-                new AddCountersSourceEffect(CounterType.FLOOD.createInstance()).apply(game, source);
-                new DrawCardSourceControllerEffect(1).apply(game, source);
+                if (bountyOfLuxa != null) {
+                    new AddCountersSourceEffect(CounterType.FLOOD.createInstance()).apply(game, source);
+                }
+                controller.drawCards(1, game);
             }
             return true;
         }
