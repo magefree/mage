@@ -268,7 +268,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Renewed Faith", 25, Rarity.UNCOMMON, mage.cards.r.RenewedFaith.class));
         cards.add(new SetCardInfo("Rhet-Crop Spearmaster", 26, Rarity.COMMON, mage.cards.r.RhetCropSpearmaster.class));
         cards.add(new SetCardInfo("Rhonas's Monument", 236, Rarity.UNCOMMON, mage.cards.r.RhonassMonument.class));
-        cards.add(new SetCardInfo("Rhonas, the Indomitable", 182, Rarity.MYTHIC, mage.cards.r.RhonasTheIndomitable.class));
+        cards.add(new SetCardInfo("Rhonas the Indomitable", 182, Rarity.MYTHIC, mage.cards.r.RhonasTheIndomitable.class));
         cards.add(new SetCardInfo("River Serpent", 66, Rarity.COMMON, mage.cards.r.RiverSerpent.class));
         cards.add(new SetCardInfo("Ruthless Sniper", 105, Rarity.UNCOMMON, mage.cards.r.RuthlessSniper.class));
         cards.add(new SetCardInfo("Sacred Cat", 27, Rarity.COMMON, mage.cards.s.SacredCat.class));
