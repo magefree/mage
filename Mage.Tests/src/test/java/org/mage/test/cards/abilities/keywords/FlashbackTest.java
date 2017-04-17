@@ -437,4 +437,78 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Elemental Cat", 1);        
         assertGraveyardCount(playerA, mountain, 1);
     }
+
+    /*
+     * Reported bug: Battle Screech doesn't flashback (i get the pop up to choose flashback, tap the creatures and nothing happens)
+     */
+    @Test
+    public void battleScreechFlashback() {
+
+        /*
+        Battle Screech {2}{W}{W}
+        Sorcery
+        Create two 1/1 white Bird creature tokens with flying.
+        Flashback—Tap three untapped white creatures you control.
+         */
+        String bScreech = "Battle Screech";
+        String eVanguard = "Elite Vanguard"; // {W} 2/1
+        String yOx = "Yoked Ox"; // {W} 0/4
+        String wKnight = "White Knight"; // {W}{W} 2/2
+
+        addCard(Zone.GRAVEYARD, playerA, bScreech);
+        addCard(Zone.BATTLEFIELD, playerA, eVanguard);
+        addCard(Zone.BATTLEFIELD, playerA, yOx);
+        addCard(Zone.BATTLEFIELD, playerA, wKnight);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback"); // Flashback Battle Screech
+        addTarget(playerA, eVanguard + '^' + yOx + '^' + wKnight);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertTapped(eVanguard, true);
+        assertTapped(yOx, true);
+        assertTapped(wKnight, true);
+        assertExileCount(playerA, bScreech, 1); // this fails, but the creatures are tapped as part of paying the cost
+        assertPermanentCount(playerA, "Bird", 2); // if you comment out the above line, this is failing as well
+    }
+
+    /*
+     Reported bug: tried to flashback Dread Return, it allowed me to sac the creatures but the spell did not resolve after the costs had been paid.
+     It did not allow me to select a creature to return from yard to board.
+     */
+    @Test
+    public void dreadReturnFlashback() {
+
+        /*
+        Dread Return {2}{B}{B}
+        Sorcery
+        Return target creature card from your graveyard to the battlefield.
+        Flashback—Sacrifice three creatures
+         */
+        String dReturn = "Dread Return";
+        String yOx = "Yoked Ox"; // {W} 0/4
+        String eVanguard = "Elite Vanguard"; // {W} 2/1
+        String memnite = "Memnite"; // {0} 1/1
+        String bSable = "Bronze Sable"; // {2} 2/1
+
+        addCard(Zone.GRAVEYARD, playerA, dReturn);
+        addCard(Zone.GRAVEYARD, playerA, bSable);
+        addCard(Zone.BATTLEFIELD, playerA, yOx);
+        addCard(Zone.BATTLEFIELD, playerA, eVanguard);
+        addCard(Zone.BATTLEFIELD, playerA, memnite);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback"); // Flashback Dread Return
+        addTarget(playerA, yOx + '^' + eVanguard + '^' + memnite); // sac 3 creatures
+        addTarget(playerA, bSable); // return to battlefield
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, eVanguard, 1);
+        assertGraveyardCount(playerA,yOx, 1);
+        assertGraveyardCount(playerA, memnite, 1);
+        assertExileCount(playerA, dReturn, 1);
+        assertPermanentCount(playerA, bSable, 1);
+    }
 }

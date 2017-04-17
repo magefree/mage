@@ -97,11 +97,11 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
+        Permanent enchantment = game.getPermanent(this.sourceId);
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
-                && game.getControllerId(event.getSourceId()).equals(enchantment.getAttachedTo())
-                && game.getPermanent(this.getSourceId()).isCreature()) {
+                && game.getControllerId(event.getTargetId()).equals(enchantment.getAttachedTo())
+                && game.getPermanent(event.getTargetId()).isCreature()) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
             }
