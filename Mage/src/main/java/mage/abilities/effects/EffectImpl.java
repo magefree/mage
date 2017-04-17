@@ -85,8 +85,9 @@ public abstract class EffectImpl implements Effect {
     }
 
     @Override
-    public void setText(String staticText) {
+    public Effect setText(String staticText) {
         this.staticText = staticText;
+        return this;
     }
 
     @Override
