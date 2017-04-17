@@ -111,6 +111,7 @@
         <draftCube name="MTGO Legacy Cube January 2016" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeJanuary2016"/>
         <draftCube name="MTGO Legacy Cube September 2016" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeSeptember2016"/>
         <draftCube name="MTGO Legacy Cube January 2017" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeJanuary2017"/>
+        <draftCube name="MTGO Legacy Cube April 2017" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeApril2017"/>
         <draftCube name="MTGO Legendary Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCube"/>
         <draftCube name="MTGO Legendary Cube April 2016" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCubeApril2016"/>
         <draftCube name="MTGO Modern Cube 2017" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.ModernCube2017"/>
