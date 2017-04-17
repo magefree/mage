@@ -33,15 +33,12 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
-
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-
 
 import java.util.UUID;
 
@@ -52,12 +49,10 @@ import java.util.UUID;
 public class GrimStrider extends CardImpl {
 
     public GrimStrider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Horror");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
-
-        this.addAbility(FlyingAbility.getInstance());
 
         // Grim Strider gets -1/-1 for each card in your hand.
         DynamicValue count = new SignInversionDynamicValue(new CardsInControllerHandCount());
@@ -76,4 +71,3 @@ public class GrimStrider extends CardImpl {
         return new GrimStrider(this);
     }
 }
-
