@@ -118,10 +118,11 @@ public class NewTournamentDialog extends MageDialog {
                 tournamentPlayerPanel.init(i++);
             }
             cbAllowSpectators.setSelected(true);
-            setTournamentSettingsFromPrefs();
             this.setModal(true);
             this.setLocation(150, 100);
         }
+        currentSettingVersion = 0;
+        setTournamentSettingsFromPrefs(currentSettingVersion);
         this.setVisible(true);
     }
 
@@ -175,6 +176,8 @@ public class NewTournamentDialog extends MageDialog {
         player1Panel = new mage.client.table.NewPlayerPanel();
         pnlPlayers = new javax.swing.JPanel();
         pnlOtherPlayers = new javax.swing.JPanel();
+        btnSavedConfiguration1 = new javax.swing.JButton();
+        btnSavedConfiguration2 = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         pnlRandomPacks = new javax.swing.JPanel();
@@ -185,7 +188,7 @@ public class NewTournamentDialog extends MageDialog {
 
         lblName.setText("Name:");
 
-        lbTimeLimit.setText("Time Limit:");
+        lbTimeLimit.setText("Time:");
         lbTimeLimit.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. ");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, cbTimeLimit, org.jdesktop.beansbinding.ObjectProperty.create(), lbTimeLimit, org.jdesktop.beansbinding.BeanProperty.create("labelFor"));
@@ -193,7 +196,7 @@ public class NewTournamentDialog extends MageDialog {
 
         cbTimeLimit.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. ");
 
-        lbSkillLevel.setText("Skill Level:");
+        lbSkillLevel.setText("Skill:");
         lbSkillLevel.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. ");
 
         cbSkillLevel.setToolTipText("<HTML>This option can be used to make it easier to find matches<br>\nwith opponents of the appropriate skill level.");
@@ -306,6 +309,19 @@ public class NewTournamentDialog extends MageDialog {
                         .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        btnSavedConfiguration1.setText("T1");
+        btnSavedConfiguration1.setToolTipText("Load saved tournament configuration #1");
+        btnSavedConfiguration1.addActionListener(evt -> btnSavedConfigurationActionPerformed(evt, 1));
+        btnSavedConfiguration1.setVisible(true);
+
+        btnSavedConfiguration2.setText("T2");
+        btnSavedConfiguration2.setToolTipText("Load saved tournament configuration #2");
+        btnSavedConfiguration2.addActionListener(evt -> btnSavedConfigurationActionPerformed(evt, 2));
+        btnSavedConfiguration2.setVisible(true);
+
+        btnOk.setText("OK");
+        btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
+
         btnOk.setText("OK");
         btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
 
@@ -396,7 +412,7 @@ public class NewTournamentDialog extends MageDialog {
                                                                 .addGroup(layout.createSequentialGroup()
                                                                         .addComponent(lblName)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                         .addComponent(lbTimeLimit)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -408,7 +424,11 @@ public class NewTournamentDialog extends MageDialog {
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                         .addComponent(lblPassword)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                        .addComponent(btnSavedConfiguration1)
+                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                        .addComponent(btnSavedConfiguration2))
                                                                 .addGroup(layout.createSequentialGroup()
                                                                         .addComponent(lblFreeMulligans)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -428,6 +448,8 @@ public class NewTournamentDialog extends MageDialog {
                                         .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblPassword)
                                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnSavedConfiguration1)
+                                        .addComponent(btnSavedConfiguration2)
                                         .addComponent(lbSkillLevel)
                                         .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -499,6 +521,11 @@ public class NewTournamentDialog extends MageDialog {
     private void cbTournamentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTournamentTypeActionPerformed
         setTournamentOptions((Integer) this.spnNumPlayers.getValue());
     }//GEN-LAST:event_cbTournamentTypeActionPerformed
+
+    private void btnSavedConfigurationActionPerformed(java.awt.event.ActionEvent evt, int setting) {//GEN-FIRST:event_btnSavedConfigurationActionPerformed
+        currentSettingVersion = setting; 
+        setTournamentSettingsFromPrefs(currentSettingVersion);
+    }//GEN-LAST:event_btnSavedConfigurationActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
@@ -945,58 +972,70 @@ public class NewTournamentDialog extends MageDialog {
     /**
      * set the tournament settings from java prefs
      */
-    private void setTournamentSettingsFromPrefs() {
+    int currentSettingVersion = 0; 
+    private void setTournamentSettingsFromPrefs(int version) {
+        currentSettingVersion = version;
+        String versionStr = "";
+        if (currentSettingVersion == 1) {
+            versionStr = "1";
+            btnSavedConfiguration1.requestFocus();
+        } else if (currentSettingVersion == 2) {
+            versionStr = "2";
+            btnSavedConfiguration2.requestFocus();
+        } else {
+            btnSavedConfiguration2.getParent().requestFocus();
+        }
         int numPlayers;
-        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME, "Tournament"));
-        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PASSWORD, ""));
-        int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT, "1500"));
+        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME + versionStr, "Tournament"));
+        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PASSWORD + versionStr, ""));
+        int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT + versionStr, "1500"));
         for (MatchTimeLimit mtl : MatchTimeLimit.values()) {
             if (mtl.getTimeLimit() == timeLimit) {
                 this.cbTimeLimit.setSelectedItem(mtl);
                 break;
             }
         }
-        String skillLevelDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL, "Casual");
+        String skillLevelDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL + versionStr, "Casual");
         for (SkillLevel skillLevel : SkillLevel.values()) {
             if (skillLevel.toString().equals(skillLevelDefault)) {
                 this.cbSkillLevel.setSelectedItem(skillLevel);
                 break;
             }
         }
-        int constructionTime = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME, "600")) / 60;
+        int constructionTime = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME + versionStr, "600")) / 60;
         if (constructionTime < CONSTRUCTION_TIME_MIN || constructionTime > CONSTRUCTION_TIME_MAX) {
             constructionTime = CONSTRUCTION_TIME_MIN;
         }
         this.spnConstructTime.setValue(constructionTime);
-        String tournamentTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE, "Sealed Elimination");
+        String tournamentTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE + versionStr, "Sealed Elimination");
         for (TournamentTypeView tournamentTypeView : SessionHandler.getTournamentTypes()) {
             if (tournamentTypeView.getName().equals(tournamentTypeName)) {
                 cbTournamentType.setSelectedItem(tournamentTypeView);
                 break;
             }
         }
-        this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS, "0")));
-        this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS, "2")));
-        this.spnQuitRatio.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_QUIT_RATIO, "100")));
+        this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
+        this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS + versionStr, "2")));
+        this.spnQuitRatio.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_QUIT_RATIO + versionStr, "100")));
 
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         activatePanelElements(tournamentType);
 
         if (tournamentType.isLimited()) {
             if (!tournamentType.isDraft()) {
-                numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED, "2"));
+                numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED + versionStr, "2"));
                 setTournamentOptions(numPlayers);
-                loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED, ""));
+                loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED + versionStr, ""));
             }
 
             if (tournamentType.isDraft()) {
-                numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, "4"));
+                numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT + versionStr, "4"));
                 setTournamentOptions(numPlayers);
                 if (!(tournamentType.isRandom() || tournamentType.isRichMan())) {
-                    loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT, ""));
+                    loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT + versionStr, ""));
                 }
 
-                String draftTiming = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING, "REGULAR");
+                String draftTiming = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING + versionStr, "REGULAR");
                 for (TimingOption timingOption : DraftOptions.TimingOption.values()) {
                     if (timingOption.toString().equals(draftTiming)) {
                         cbDraftTiming.setSelectedItem(draftTiming);
@@ -1005,9 +1044,9 @@ public class NewTournamentDialog extends MageDialog {
                 }
             }
         }
-        this.cbAllowSpectators.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS, "Yes").equals("Yes"));
-        this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS, "Yes").equals("Yes"));
-        this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED, "No").equals("Yes"));
+        this.cbAllowSpectators.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS + versionStr, "Yes").equals("Yes"));
+        this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS + versionStr, "Yes").equals("Yes"));
+        this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED + versionStr, "No").equals("Yes"));
     }
 
     private void loadBoosterPacks(String packString) {
@@ -1040,32 +1079,38 @@ public class NewTournamentDialog extends MageDialog {
      * @param tOptions Tournament options
      */
     private void saveTournamentSettingsToPrefs(TournamentOptions tOptions) {
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME, tOptions.getName());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PASSWORD, tOptions.getPassword());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT, Integer.toString(tOptions.getMatchOptions().getPriorityTime()));
-        if (this.spnConstructTime.isVisible()) {
-            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME, Integer.toString(tOptions.getLimitedOptions().getConstructionTime()));
+        String versionStr = "";
+        if (currentSettingVersion == 1) {
+            versionStr = "1";
+        } else if (currentSettingVersion == 2) {
+            versionStr = "2";
         }
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE, tOptions.getTournamentType());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS, Integer.toString(tOptions.getMatchOptions().getFreeMulligans()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS, Integer.toString(tOptions.getMatchOptions().getWinsNeeded()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_QUIT_RATIO, Integer.toString(tOptions.getQuitRatio()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME + versionStr, tOptions.getName());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PASSWORD + versionStr, tOptions.getPassword());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT + versionStr, Integer.toString(tOptions.getMatchOptions().getPriorityTime()));
+        if (this.spnConstructTime.isVisible()) {
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME + versionStr, Integer.toString(tOptions.getLimitedOptions().getConstructionTime()));
+        }
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE + versionStr, tOptions.getTournamentType());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS + versionStr, Integer.toString(tOptions.getMatchOptions().getFreeMulligans()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS + versionStr, Integer.toString(tOptions.getMatchOptions().getWinsNeeded()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_QUIT_RATIO + versionStr, Integer.toString(tOptions.getQuitRatio()));
 
         if (tOptions.getTournamentType().startsWith("Sealed")) {
-            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED, tOptions.getLimitedOptions().getSetCodes().toString());
-            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED, Integer.toString(tOptions.getPlayerTypes().size()));
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED + versionStr, tOptions.getLimitedOptions().getSetCodes().toString());
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED + versionStr, Integer.toString(tOptions.getPlayerTypes().size()));
         }
 
         if (tOptions.getTournamentType().startsWith("Booster")) {
             DraftOptions draftOptions = (DraftOptions) tOptions.getLimitedOptions();
             if (draftOptions != null) {
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT, draftOptions.getSetCodes().toString());
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, Integer.toString(tOptions.getPlayerTypes().size()));
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING, draftOptions.getTiming().name());
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT + versionStr, draftOptions.getSetCodes().toString());
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT + versionStr, Integer.toString(tOptions.getPlayerTypes().size()));
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING + versionStr, draftOptions.getTiming().name());
             }
             String deckFile = this.player1Panel.getDeckFile();
             if (deckFile != null && !deckFile.isEmpty()) {
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, deckFile);
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE + versionStr, deckFile);
             }
 
             if (tOptions.getLimitedOptions().getIsRandom()) {
@@ -1075,12 +1120,12 @@ public class NewTournamentDialog extends MageDialog {
                     packlist.append(pack);
                     packlist.append(';');
                 }
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, packlist.toString());
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT + versionStr, packlist.toString());
             }
         }
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS, (tOptions.isWatchingAllowed() ? "Yes" : "No"));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS, (tOptions.getMatchOptions().isRollbackTurnsAllowed() ? "Yes" : "No"));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED, (tOptions.getMatchOptions().isRated() ? "Yes" : "No"));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS + versionStr, (tOptions.isWatchingAllowed() ? "Yes" : "No"));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS + versionStr, (tOptions.getMatchOptions().isRollbackTurnsAllowed() ? "Yes" : "No"));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED + versionStr, (tOptions.getMatchOptions().isRated() ? "Yes" : "No"));
     }
 
     public TableView getTable() {
@@ -1090,6 +1135,8 @@ public class NewTournamentDialog extends MageDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnSavedConfiguration1;
+    private javax.swing.JButton btnSavedConfiguration2;
     private javax.swing.JCheckBox cbAllowSpectators;
     private javax.swing.JComboBox cbDeckType;
     private javax.swing.JComboBox cbDraftCube;
