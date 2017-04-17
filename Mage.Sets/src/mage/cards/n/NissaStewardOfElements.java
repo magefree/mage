@@ -27,11 +27,13 @@
  */
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -51,9 +53,6 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
-import mage.abilities.effects.Effect;
 
 /**
  *
@@ -80,7 +79,7 @@ public class NissaStewardOfElements extends CardImpl {
         // -6: Untap up to two target lands you control. They become 5/5 Elemental creatures with flying and haste until end of turn. They're still lands.
         Effect effect = new UntapTargetEffect();
         effect.setText("Untap up to two target lands you control");
-        LoyaltyAbility ability = new LoyaltyAbility(effect, 6);
+        LoyaltyAbility ability = new LoyaltyAbility(effect, -6);
         effect = new BecomesCreatureTargetEffect(new NissaStewardOfElementsToken(), false, true, Duration.EndOfTurn);
         effect.setText("They become 5/5 Elemental creatures with flying and haste until end of turn. They're still lands");
         ability.addEffect(effect);
