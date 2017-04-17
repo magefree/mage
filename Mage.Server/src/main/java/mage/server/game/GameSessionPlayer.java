@@ -27,6 +27,10 @@
  */
 package mage.server.game;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.constants.ManaType;
@@ -41,11 +45,6 @@ import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.*;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ExecutorService;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -70,7 +69,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void ask(final String question, final Map<String, Serializable> options) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_TARGET, game.getId(), new GameClientMessage(getGameView(), question, options)))
+            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_ASK, game.getId(), new GameClientMessage(getGameView(), question, options)))
             );
         }
     }
