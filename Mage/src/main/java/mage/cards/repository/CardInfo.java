@@ -318,7 +318,7 @@ public class CardInfo {
 
     public final EnumSet<SuperType> getSupertypes() {
         EnumSet<SuperType> list = EnumSet.noneOf(SuperType.class);
-        for (String type : this.types.split(SEPARATOR)) {
+        for (String type : this.supertypes.split(SEPARATOR)) {
             try {
                 list.add(SuperType.valueOf(type));
             } catch (IllegalArgumentException e) {
