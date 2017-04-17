@@ -37,10 +37,12 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -52,6 +54,7 @@ public class PlagueBelcher extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Zombie you control");
 
     static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Zombie"));
         filter.add(new AnotherPredicate());
     }
