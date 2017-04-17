@@ -32,6 +32,7 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
@@ -71,7 +72,9 @@ public class CompulsoryRest extends CardImpl {
 
         // Enchanted creature has "{2}, Sacrifice this creature: You gain 2 life."
         Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new GenericManaCost(2));
-        grantedAbility.addCost(new SacrificeSourceCost());
+        Cost cost = new SacrificeSourceCost();
+        cost.setText("Sacrifice this creature");
+        grantedAbility.addCost(cost);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield)));
 
     }

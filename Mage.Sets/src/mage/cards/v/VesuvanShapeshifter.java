@@ -28,7 +28,6 @@
 package mage.cards.v;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -105,7 +104,7 @@ public class VesuvanShapeshifter extends CardImpl {
 class VesuvanShapeShifterFaceUpApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         Effect effect = new VesuvanShapeshifterFaceDownEffect();
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
         permanent.getAbilities().add(ability);
@@ -114,7 +113,7 @@ class VesuvanShapeShifterFaceUpApplier extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         Effect effect = new VesuvanShapeshifterFaceDownEffect();
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
         mageObject.getAbilities().add(ability);

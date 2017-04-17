@@ -29,22 +29,18 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardSourceCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
+import mage.abilities.effects.common.ExileTargetEffect;
 
 /**
  *
@@ -53,7 +49,7 @@ import java.util.UUID;
 public class FaerieMacabre extends CardImpl {
 
     public FaerieMacabre(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add("Faerie");
         this.subtype.add("Rogue");
 
@@ -63,7 +59,7 @@ public class FaerieMacabre extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Discard Faerie Macabre: Exile up to two target cards from graveyards.
-        Ability ability = new SimpleActivatedAbility(Zone.HAND, new FaerieMacabreExileTargetEffect(), new DiscardSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.HAND, new ExileTargetEffect(), new DiscardSourceCost());
         ability.addTarget(new TargetCardInGraveyard(0, 2, new FilterCard("cards from graveyards")));
         this.addAbility(ability);
     }
@@ -75,37 +71,5 @@ public class FaerieMacabre extends CardImpl {
     @Override
     public FaerieMacabre copy() {
         return new FaerieMacabre(this);
-    }
-}
-
-class FaerieMacabreExileTargetEffect extends OneShotEffect {
-
-    public FaerieMacabreExileTargetEffect() {
-        super(Outcome.Exile);
-    }
-
-    public FaerieMacabreExileTargetEffect(final FaerieMacabreExileTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FaerieMacabreExileTargetEffect copy() {
-        return new FaerieMacabreExileTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for(UUID uuid : source.getTargets().get(0).getTargets()){
-            Card card = game.getCard(uuid);
-            if (card != null) {
-                card.moveToExile(null, "Faerie Macabre", source.getSourceId(), game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Exile up to two target cards from graveyards";
     }
 }

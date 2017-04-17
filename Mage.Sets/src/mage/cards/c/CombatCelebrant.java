@@ -45,12 +45,6 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class CombatCelebrant extends CardImpl {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures you control");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public CombatCelebrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
@@ -60,7 +54,7 @@ public class CombatCelebrant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
-        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(new UntapAllControllerEffect(filter));
+        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), null, false));
         ability.addEffect(new AdditionalCombatPhaseEffect("and after this phase, there is an additional combat phase"));
         this.addAbility(new ExertAbility(ability, true));
     }

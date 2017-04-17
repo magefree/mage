@@ -172,6 +172,8 @@ public class ExileTargetEffect extends OneShotEffect {
                     sb.append("target ");
                 }
                 sb.append(targetName);
+            } else if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
+                sb.append("exile up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
             } else {
                 sb.append("exile ").append(CardUtil.numberToText(target.getNumberOfTargets())).append(" target ").append(target.getTargetName());
             }

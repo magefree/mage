@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,23 +20,22 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.cards.b;
 
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
@@ -53,7 +52,7 @@ public class BountyOfTheLuxa extends CardImpl {
     public BountyOfTheLuxa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{U}");
 
-        //At the beginning of your precombat main phase, remove all flood counters from Bounty of the Luxa. If no flood counters were removed this way, put a flood counter on Bounty of the Luxa and draw a card. Otherwise, add {C}{G}{U} to your mana pool.
+        //At the beginning of your precombat main phase, remove all flood counters from Bounty of the Luxa. If no counters were removed this way, put a flood counter on Bounty of the Luxa and draw a card. Otherwise, add {C}{G}{U} to your mana pool.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new BountyOfTheLuxaEffect(), TargetController.YOU, false));
 
     }
@@ -73,7 +72,7 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
 
     public BountyOfTheLuxaEffect() {
         super(Outcome.Benefit);
-        staticText = "remove all flood counters from {this}. If no flood counters were removed this way, put a flood counter on {this} and draw a card. Otherwise, add {C}{G}{U} to your mana pool";
+        staticText = "remove all flood counters from {this}. If no counters were removed this way, put a flood counter on {this} and draw a card. Otherwise, add {C}{G}{U} to your mana pool";
     }
 
     public BountyOfTheLuxaEffect(final BountyOfTheLuxaEffect effect) {
@@ -89,9 +88,12 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent bountyOfLuxa = game.getPermanent(source.getSourceId());
-        if (controller != null
-                && bountyOfLuxa != null) {
-            if (bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) > 0) {
+        if (bountyOfLuxa != null && bountyOfLuxa.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter()) {
+            bountyOfLuxa = null;
+        }
+        if (controller != null) {
+            if (bountyOfLuxa != null
+                    && bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) > 0) {
                 bountyOfLuxa.removeCounters(CounterType.FLOOD.createInstance(bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD)), game);
                 if (bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) == 0) {
                     Mana manaToAdd = new Mana();
@@ -101,8 +103,10 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
                     controller.getManaPool().addMana(manaToAdd, game, source);
                 }
             } else {
-                new AddCountersSourceEffect(CounterType.FLOOD.createInstance()).apply(game, source);
-                new DrawCardSourceControllerEffect(1).apply(game, source);
+                if (bountyOfLuxa != null) {
+                    new AddCountersSourceEffect(CounterType.FLOOD.createInstance()).apply(game, source);
+                }
+                controller.drawCards(1, game);
             }
             return true;
         }

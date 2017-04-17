@@ -27,7 +27,9 @@
  */
 package mage.util.functions;
 
+import java.util.UUID;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -45,14 +47,14 @@ public class CardTypeApplier extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, Permanent permanent) {
-            permanent.addCardType(cardType);
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+        permanent.addCardType(cardType);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject) {
-            mageObject.addCardType(cardType);
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+        mageObject.addCardType(cardType);
         return true;
     }
 }

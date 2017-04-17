@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -46,8 +47,6 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.functions.ApplyToPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -110,7 +109,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
                 newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 ApplyToPermanent applier = new DimirDoppelgangerApplier();
-                applier.apply(game, newBluePrint);
+                applier.apply(game, newBluePrint, source, dimirDoppelganger.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, dimirDoppelganger.getId());
                 copyEffect.newId();
                 copyEffect.setApplier(applier);
@@ -127,7 +126,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
 class DimirDoppelgangerApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         permanent.getAbilities().add(ability);
@@ -135,7 +134,7 @@ class DimirDoppelgangerApplier extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         mageObject.getAbilities().add(ability);

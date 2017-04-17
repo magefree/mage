@@ -29,7 +29,6 @@ package mage.watchers.common;
 
 import java.util.HashMap;
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;

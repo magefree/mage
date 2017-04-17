@@ -82,7 +82,7 @@ public class NehebTheWorthy extends CardImpl {
         // As long as you have one or fewer cards in hand, Minotaurs you control get +2/+0.
         Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 2);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter), condition, "As long as you have one or fewer cards in hand, Minotaurs you control gets +2/+0"));
+                new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter), condition, "As long as you have one or fewer cards in hand, Minotaurs you control get +2/+0"));
         this.addAbility(ability);
 
         // Whenever Neheb, the Worthy deals combat damage to a player, each player discards a card.

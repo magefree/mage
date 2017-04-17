@@ -47,7 +47,7 @@ public class Decompose extends CardImpl {
 
         // Exile up to three target cards from a single graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("cards")));
+        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("cards from a single graveyard")));
     }
 
     public Decompose(final Decompose card) {

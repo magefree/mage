@@ -38,6 +38,7 @@ import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -111,7 +112,11 @@ class EmbalmEffect extends OneShotEffect {
             if (!token.getSubtype(game).contains("Zombie")) {
                 token.getSubtype(game).add(0, "Zombie");
             }
+            token.getManaCost().clear();
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EMBALMED_CREATURE, token.getId(), source.getSourceId(), controller.getId()));
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false, null);
+            // Probably it makes sense to remove also the Embalm ability (it's not shown on the token cards).
+            // Also it can never get active or? But it's not mentioned in the reminder text.
             return true;
         }
 

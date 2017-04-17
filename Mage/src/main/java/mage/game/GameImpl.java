@@ -1454,7 +1454,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         if (applier != null) {
-            applier.apply(this, newBluePrint);
+            applier.apply(this, newBluePrint, source, copyToPermanentId);
         }
 
         CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);

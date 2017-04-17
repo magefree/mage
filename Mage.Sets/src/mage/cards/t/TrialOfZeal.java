@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
@@ -57,9 +56,7 @@ public class TrialOfZeal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // When Trial of Zeal enters the battlefield, it deals 3 damage to target creature or player.
-        Effect effect = new DamageTargetEffect(3);
-        effect.setText("it deals 3 damage to target creature an opponent controls");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 

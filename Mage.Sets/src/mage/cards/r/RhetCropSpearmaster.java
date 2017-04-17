@@ -30,6 +30,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesExertSourceTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ExertAbility;
@@ -47,17 +48,19 @@ public class RhetCropSpearmaster extends CardImpl {
 
     public RhetCropSpearmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        
+
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
         // You may exert Rhet-Crop Spearmaster as it attacks. When you do, it gets +1/+0 and gains first strike until end of turn.
-        BecomesExertSourceTriggeredAbility ability =
-                new BecomesExertSourceTriggeredAbility(
-                        new BoostSourceEffect(1, 0, Duration.EndOfTurn));
-        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect = new BoostSourceEffect(1, 0, Duration.EndOfTurn);
+        effect.setText("it gets +1/+0");
+        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(effect);
+        effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText(" and gains first strike until end of turn");
+        ability.addEffect(effect);
         this.addAbility(new ExertAbility(ability));
     }
 

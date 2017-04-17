@@ -35,22 +35,19 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author stravant
  */
 public class PursueGlory extends CardImpl {
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 
     public PursueGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
         // Attacking creatures get +2/+0 until end of turn.
-        getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
+        getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

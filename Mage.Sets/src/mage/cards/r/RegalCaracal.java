@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -75,7 +76,9 @@ public class RegalCaracal extends CardImpl {
         this.addAbility(ability);
 
         // When Regal Caracal enters the battlefield, create two 1/1 white Cat creature tokens with lifelink.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CatToken2(), 2)));
+        Effect effect2 = new CreateTokenEffect(new CatToken2(), 2);
+        effect2.setText("create two 1/1 white Cat creature tokens with lifelink");
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect2));
     }
 
     public RegalCaracal(final RegalCaracal card) {

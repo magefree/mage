@@ -44,32 +44,42 @@ import mage.players.Player;
 public class UntapAllControllerEffect extends OneShotEffect {
 
     private final FilterPermanent filter;
+    private final boolean includeSource;
 
     public UntapAllControllerEffect(FilterPermanent filter) {
         this(filter, null);
     }
 
     public UntapAllControllerEffect(FilterPermanent filter, String rule) {
+        this(filter, rule, true);
+    }
+
+    public UntapAllControllerEffect(FilterPermanent filter, String rule, boolean includeSource) {
         super(Outcome.Untap);
         if (rule == null || rule.isEmpty()) {
-            staticText = "untap all " + filter.getMessage() + " you control";
+            staticText = "untap all " + (includeSource ? "" : "other ") + filter.getMessage() + " you control";
         } else {
             staticText = rule;
         }
         this.filter = filter;
+        this.includeSource = includeSource;
     }
 
     public UntapAllControllerEffect(final UntapAllControllerEffect effect) {
         super(effect);
         this.filter = effect.filter;
+        this.includeSource = effect.includeSource;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null) {
             for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                permanent.untap(game);
+                if (includeSource || sourcePermanent == null || !sourcePermanent.getId().equals(permanent.getId())) {
+                    permanent.untap(game);
+                }
             }
             return true;
         }

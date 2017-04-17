@@ -34,8 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -48,7 +46,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
@@ -63,20 +60,22 @@ public class GideonOfTheTrials extends CardImpl {
 
     public GideonOfTheTrials(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");
-        
+
         this.subtype.add("Gideon");
 
         //Starting Loyalty: 3
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Until your next turn, prevent all damage target permanent would deal.
-        LoyaltyAbility ability = new LoyaltyAbility(new PreventDamageByTargetEffect(Duration.UntilYourNextTurn), 1);
+        Effect effect = new PreventDamageByTargetEffect(Duration.UntilYourNextTurn);
+        effect.setText("Until your next turn, prevent all damage target permanent would deal");
+        LoyaltyAbility ability = new LoyaltyAbility(effect, 1);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
         // 0: Until end of turn, Gideon of the Trials becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonOfTheTrialsToken(), "planeswalker", Duration.EndOfTurn), 0);
-        Effect effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn);
+        effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all damage that would be dealt to him this turn");
         ability.addEffect(effect);
         this.addAbility(ability);
@@ -106,7 +105,7 @@ class GideonOfTheTrialsCantLoseEffect extends ContinuousRuleModifyingEffectImpl 
 
     public GideonOfTheTrialsCantLoseEffect() {
         super(Duration.EndOfGame, Outcome.Benefit);
-        staticText = "As long as you control a Gideon planeswalker, you can't lose the game and your opponent can't win the game";
+        staticText = "As long as you control a Gideon planeswalker, you can't lose the game and your opponents can't win the game";
     }
 
     public GideonOfTheTrialsCantLoseEffect(final GideonOfTheTrialsCantLoseEffect effect) {

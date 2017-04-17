@@ -56,6 +56,7 @@ public class Connection {
     private int clientCardDatabaseVersion;
     private boolean forceDBComparison;
     private String userIdStr;
+    private int socketWriteTimeout;
 
     private UserData userData;
 
@@ -76,6 +77,7 @@ public class Connection {
 
     public Connection(String parameter) {
         this.parameter = parameter;
+        socketWriteTimeout = 10000;
     }
 
     @Override
@@ -258,6 +260,24 @@ public class Connection {
         return null;
     }
 
+    public static String getMAC() throws SocketException {
+        StringBuilder allMACs = new StringBuilder();
+        for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements();) {
+            NetworkInterface iface = interfaces.nextElement();
+            byte[] mac = iface.getHardwareAddress();
+
+            if (mac != null) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < mac.length; i++) {
+                    sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+                }
+                sb.append(';');
+                allMACs.append(sb.toString());
+            }
+        }
+        return allMACs.toString();
+    }
+
     public void setUserData(UserData userData) {
         this.userData = userData;
     }
@@ -272,5 +292,9 @@ public class Connection {
 
     public void setForceDBComparison(boolean forceDBComparison) {
         this.forceDBComparison = forceDBComparison;
+    }
+
+    public int getSocketWriteTimeout() {
+        return socketWriteTimeout;
     }
 }

@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -35,8 +36,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,7 +50,9 @@ public class SynchronizedStrike extends CardImpl {
         // Untap up to two target creatures. They each get +2/+2 until end of turn.
         getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         getSpellAbility().addEffect(new UntapTargetEffect());
-        getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
+        effect.setText("They each get +2/+2 until end of turn");
+        getSpellAbility().addEffect(effect);
     }
 
     public SynchronizedStrike(final SynchronizedStrike card) {

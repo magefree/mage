@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -35,6 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -42,12 +44,10 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BirdToken;
 
-import java.util.UUID;
-
 public class BeckCall extends SplitCard {
 
     public BeckCall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{U}","{4}{W}{U}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{U}", "{4}{W}{U}", SpellAbilityType.SPLIT_FUSED);
 
         // Beck
         // Whenever a creature enters the battlefield this turn, you may draw a card.

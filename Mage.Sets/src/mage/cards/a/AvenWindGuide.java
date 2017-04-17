@@ -35,15 +35,14 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.keyword.EmbalmAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.v.Vigilance;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
  *
@@ -53,7 +52,7 @@ public class AvenWindGuide extends CardImpl {
 
     public AvenWindGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
-        
+
         this.subtype.add("Bird");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);
@@ -66,18 +65,18 @@ public class AvenWindGuide extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Creature tokens you control have flying and vigilance.
-        Ability ability =
-                new SimpleStaticAbility(
-                        Zone.BATTLEFIELD,
-                        new GainAbilityControlledEffect(
+        Effect effect = new GainAbilityControlledEffect(
                                 FlyingAbility.getInstance(),
                                 Duration.WhileOnBattlefield,
-                                StaticFilters.FILTER_CREATURE_TOKENS));
-        ability.addEffect(
-                new GainAbilityControlledEffect(
+                                StaticFilters.FILTER_CREATURE_TOKENS);
+        effect.setText("Creature tokens you control have flying");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        effect = new GainAbilityControlledEffect(
                         VigilanceAbility.getInstance(),
                         Duration.WhileOnBattlefield,
-                        StaticFilters.FILTER_CREATURE_TOKENS));
+                        StaticFilters.FILTER_CREATURE_TOKENS);
+        effect.setText("and vigilance");
+        ability.addEffect(effect);
         this.addAbility(ability);
 
         // Embalm {4}{W}{U}

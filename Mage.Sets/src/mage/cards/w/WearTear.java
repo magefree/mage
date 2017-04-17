@@ -28,10 +28,11 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.target.Target;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
@@ -43,7 +44,7 @@ import mage.target.common.TargetEnchantmentPermanent;
 public class WearTear extends SplitCard {
 
     public WearTear(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}","{W}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}", "{W}", SpellAbilityType.SPLIT_FUSED);
 
         // Wear
         // Destroy target artifact.

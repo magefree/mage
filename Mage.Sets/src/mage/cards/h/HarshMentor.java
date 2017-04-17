@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
 public class HarshMentor extends CardImpl {
 
     public HarshMentor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "1{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
         this.subtype.add("Human");
         this.subtype.add("Cleric");

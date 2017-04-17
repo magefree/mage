@@ -52,8 +52,7 @@ public class HoodedBrawler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // You may exert Hooded Brawler as it attacks. When you do, it gets +2/+2 until end of turn.
-        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn));
-        this.addAbility(new ExertAbility(ability));
+        this.addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn))));
     }
 
     public HoodedBrawler(final HoodedBrawler card) {

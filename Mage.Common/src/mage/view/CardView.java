@@ -27,6 +27,7 @@
  */
 package mage.view;
 
+import java.util.*;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -49,8 +50,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -219,8 +218,8 @@ public class CardView extends SimpleCardView {
      * @param card
      * @param game
      * @param controlled is the card view created for the card controller - used
-     *                   for morph / face down cards to know which player may see information for
-     *                   the card
+     * for morph / face down cards to know which player may see information for
+     * the card
      */
     public CardView(Card card, Game game, boolean controlled) {
         this(card, game, controlled, false, false);
@@ -246,12 +245,12 @@ public class CardView extends SimpleCardView {
     /**
      * @param card
      * @param game
-     * @param controlled       is the card view created for the card controller - used
-     *                         for morph / face down cards to know which player may see information for
-     *                         the card
+     * @param controlled is the card view created for the card controller - used
+     * for morph / face down cards to know which player may see information for
+     * the card
      * @param showFaceDownCard if true and the card is not on the battlefield,
-     *                         also a face down card is shown in the view, face down cards will be shown
-     * @param storeZone        if true the card zone will be set in the zone attribute.
+     * also a face down card is shown in the view, face down cards will be shown
+     * @param storeZone if true the card zone will be set in the zone attribute.
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null, card.getTokenDescriptor());
@@ -303,12 +302,16 @@ public class CardView extends SimpleCardView {
         SplitCard splitCard = null;
         if (card.isSplitCard()) {
             splitCard = (SplitCard) card;
-            rotate = true;
+            rotate = (((SplitCard) card).getSpellAbility().getSpellAbilityType()) != SpellAbilityType.SPLIT_AFTERMATH;
         } else if (card instanceof Spell) {
             switch (((Spell) card).getSpellAbility().getSpellAbilityType()) {
                 case SPLIT_FUSED:
                     splitCard = (SplitCard) ((Spell) card).getCard();
                     rotate = true;
+                    break;
+                case SPLIT_AFTERMATH:
+                    splitCard = (SplitCard) ((Spell) card).getCard();
+                    rotate = false;
                     break;
                 case SPLIT_LEFT:
                 case SPLIT_RIGHT:
@@ -430,23 +433,19 @@ public class CardView extends SimpleCardView {
                 // Needs a special art rect
                 if (ty == SpellAbilityType.SPLIT_FUSED) {
                     artRect = ArtRect.SPLIT_FUSED;
-                } else {
-                    if (spell.getCard() != null) {
-                        SplitCard wholeCard = ((SplitCardHalf) spell.getCard()).getParentCard();
-                        Abilities<Ability> aftermathHalfAbilities = wholeCard.getRightHalfCard().getAbilities();
-                        if (aftermathHalfAbilities.stream().anyMatch(ability -> ability instanceof AftermathAbility)) {
-                            if (ty == SpellAbilityType.SPLIT_RIGHT) {
-                                artRect = ArtRect.AFTERMATH_BOTTOM;
-                            } else {
-                                artRect = ArtRect.AFTERMATH_TOP;
-                            }
+                } else if (spell.getCard() != null) {
+                    SplitCard wholeCard = ((SplitCardHalf) spell.getCard()).getParentCard();
+                    Abilities<Ability> aftermathHalfAbilities = wholeCard.getRightHalfCard().getAbilities();
+                    if (aftermathHalfAbilities.stream().anyMatch(ability -> ability instanceof AftermathAbility)) {
+                        if (ty == SpellAbilityType.SPLIT_RIGHT) {
+                            artRect = ArtRect.AFTERMATH_BOTTOM;
                         } else {
-                            if (ty == SpellAbilityType.SPLIT_RIGHT) {
-                                artRect = ArtRect.SPLIT_RIGHT;
-                            } else {
-                                artRect = ArtRect.SPLIT_LEFT;
-                            }
+                            artRect = ArtRect.AFTERMATH_TOP;
                         }
+                    } else if (ty == SpellAbilityType.SPLIT_RIGHT) {
+                        artRect = ArtRect.SPLIT_RIGHT;
+                    } else {
+                        artRect = ArtRect.SPLIT_LEFT;
                     }
                 }
             }
@@ -964,13 +963,21 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorText() {
-        if (getColor().getColorCount() == 0) return "Colorless";
-        else if (getColor().getColorCount() > 1) return "Gold";
-        else if (getColor().isBlack()) return "Black";
-        else if (getColor().isBlue()) return "Blue";
-        else if (getColor().isWhite()) return "White";
-        else if (getColor().isGreen()) return "Green";
-        else if (getColor().isRed()) return "Red";
+        if (getColor().getColorCount() == 0) {
+            return "Colorless";
+        } else if (getColor().getColorCount() > 1) {
+            return "Gold";
+        } else if (getColor().isBlack()) {
+            return "Black";
+        } else if (getColor().isBlue()) {
+            return "Blue";
+        } else if (getColor().isWhite()) {
+            return "White";
+        } else if (getColor().isGreen()) {
+            return "Green";
+        } else if (getColor().isRed()) {
+            return "Red";
+        }
         return "";
     }
 

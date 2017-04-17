@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -39,20 +39,13 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SpellAbilityType;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
-
-/**
- *
- * @author stravant
- */
-
 
 public class DestinedLead extends SplitCard {
 
     public DestinedLead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY},"{1}{B}","{3}{G}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{1}{B}", "{3}{G}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Destined
         // Target creature gets +1/+0 and gains indestructible until end of turn.
@@ -66,10 +59,9 @@ public class DestinedLead extends SplitCard {
         getLeftHalfCard().getSpellAbility().addEffect(effect);
 
         // to
-
         // Lead
         // All creatures able to block target creature this turn must do so.
-        ((CardImpl)(getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getRightHalfCard().getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
     }
@@ -83,4 +75,3 @@ public class DestinedLead extends SplitCard {
         return new DestinedLead(this);
     }
 }
-

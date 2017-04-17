@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -49,8 +50,6 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.ApplyToPermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author BetaSteward
@@ -58,7 +57,7 @@ import java.util.UUID;
 public class EvilTwin extends CardImpl {
 
     public EvilTwin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);
@@ -90,7 +89,7 @@ class EvilTwinApplyToPermanent extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
@@ -99,7 +98,7 @@ class EvilTwinApplyToPermanent extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));

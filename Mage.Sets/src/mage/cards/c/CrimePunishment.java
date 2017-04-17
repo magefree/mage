@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -35,6 +35,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -42,20 +43,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
-import java.util.UUID;
-
-
-
 public class CrimePunishment extends SplitCard {
-    
+
     private static final FilterCard filter = new FilterCard("creature or enchantment card from an opponent's graveyard");
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
-                                 new CardTypePredicate(CardType.ENCHANTMENT)));
+                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public CrimePunishment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{B}","{X}{B}{G}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{B}", "{X}{B}{G}", SpellAbilityType.SPLIT);
 
         // Crime
         // Put target creature or enchantment card from an opponent's graveyard onto the battlefield under your control.
@@ -79,29 +77,29 @@ public class CrimePunishment extends SplitCard {
 }
 
 class PunishmentEffect extends OneShotEffect {
-    
+
     PunishmentEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy each artifact, creature, and enchantment with converted mana cost X";
     }
-    
+
     PunishmentEffect(final PunishmentEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PunishmentEffect copy() {
         return new PunishmentEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent != null
                     && permanent.getConvertedManaCost() == source.getManaCostsToPay().getX()
                     && (permanent.isArtifact()
-                            || permanent.isCreature()
-                            || permanent.isEnchantment())) {
+                    || permanent.isCreature()
+                    || permanent.isEnchantment())) {
                 permanent.destroy(source.getSourceId(), game, false);
             }
         }

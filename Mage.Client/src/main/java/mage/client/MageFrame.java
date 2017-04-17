@@ -27,6 +27,21 @@
  */
 package mage.client;
 
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.prefs.Preferences;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -76,22 +91,6 @@ import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.images.DownloadPictures;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.prefs.Preferences;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1056,7 +1055,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             // use already open editor
             Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
             for (Component window : windows) {
-                if (window instanceof DeckEditorPane && ((MagePane)window).getTitle().equals(name)) {
+                if (window instanceof DeckEditorPane && ((MagePane) window).getTitle().equals(name)) {
                     setActive((MagePane) window);
                     return;
                 }

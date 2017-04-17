@@ -27,7 +27,13 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,16 +41,11 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.TargetSpell;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.MageObject;
 import mage.game.events.GameEvent.EventType;
-import mage.abilities.effects.common.NameACardEffect;
-
-import java.util.UUID;
+import mage.target.TargetSpell;
 
 /**
  * @author spjspj
@@ -52,7 +53,7 @@ import java.util.UUID;
 public class FailureComply extends SplitCard {
 
     public FailureComply(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{1}{U}", "{W}", false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{1}{U}", "{W}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Failure
         // Return target spell to it's owner's hand
@@ -63,7 +64,9 @@ public class FailureComply extends SplitCard {
         // Comply
         // Choose a card name.  Until your next turn, your opponents can't cast spells with the chosen name
         ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
-        getRightHalfCard().getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
+        Effect effect = new NameACardEffect(NameACardEffect.TypeOfName.ALL);
+        effect.setText("Choose a card name");
+        getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addEffect(new ComplyCantCastEffect());
     }
 
@@ -81,7 +84,7 @@ class ComplyCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     public ComplyCantCastEffect() {
         super(Duration.UntilYourNextTurn, Outcome.Benefit);
-        staticText = "Your opponents can't cast spells with the chosen name";
+        staticText = "Until your next turn, your opponents can't cast spells with the chosen name";
     }
 
     public ComplyCantCastEffect(final ComplyCantCastEffect effect) {

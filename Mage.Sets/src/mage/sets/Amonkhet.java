@@ -158,6 +158,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Forsake the Worldly", 13, Rarity.COMMON, mage.cards.f.ForsakeTheWorldly.class));
         cards.add(new SetCardInfo("Foul Orchard", 279, Rarity.COMMON, mage.cards.f.FoulOrchard.class));
         cards.add(new SetCardInfo("Galestrike", 54, Rarity.UNCOMMON, mage.cards.g.Galestrike.class));
+        cards.add(new SetCardInfo("Gate to the Afterlife", 228, Rarity.UNCOMMON, mage.cards.g.GateToTheAfterlife.class));
         cards.add(new SetCardInfo("Giant Spider", 166, Rarity.COMMON, mage.cards.g.GiantSpider.class));
         cards.add(new SetCardInfo("Gideon of the Trials", 14, Rarity.MYTHIC, mage.cards.g.GideonOfTheTrials.class));
         cards.add(new SetCardInfo("Gideon's Intervention", 15, Rarity.RARE, mage.cards.g.GideonsIntervention.class));
@@ -210,7 +211,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Lay Claim", 61, Rarity.UNCOMMON, mage.cards.l.LayClaim.class));
         cards.add(new SetCardInfo("Liliana's Influence", 277, Rarity.RARE, mage.cards.l.LilianasInfluence.class));
         cards.add(new SetCardInfo("Liliana's Mastery", 98, Rarity.RARE, mage.cards.l.LilianasMastery.class));
-        cards.add(new SetCardInfo("Liliana, Death Wielder", 274, Rarity.MYTHIC, mage.cards.l.LilianaDeathWielder.class));
+        cards.add(new SetCardInfo("Liliana, Death Wielder", 275, Rarity.MYTHIC, mage.cards.l.LilianaDeathWielder.class));
         cards.add(new SetCardInfo("Liliana, Death's Majesty", 97, Rarity.MYTHIC, mage.cards.l.LilianaDeathsMajesty.class));
         cards.add(new SetCardInfo("Limits of Solidarity", 140, Rarity.UNCOMMON, mage.cards.l.LimitsOfSolidarity.class));
         cards.add(new SetCardInfo("Lord of the Accursed", 99, Rarity.UNCOMMON, mage.cards.l.LordOfTheAccursed.class));
@@ -233,6 +234,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Neheb, the Worthy", 203, Rarity.RARE, mage.cards.n.NehebTheWorthy.class));
         cards.add(new SetCardInfo("Nest of Scarabs", 101, Rarity.UNCOMMON, mage.cards.n.NestOfScarabs.class));
         cards.add(new SetCardInfo("Never // Return", 212, Rarity.RARE, mage.cards.n.NeverReturn.class));
+        cards.add(new SetCardInfo("New Perspectives", 63, Rarity.RARE, mage.cards.n.NewPerspectives.class));
         cards.add(new SetCardInfo("Nimble-Blade Khenra", 145, Rarity.COMMON, mage.cards.n.NimbleBladeKhenra.class));
         cards.add(new SetCardInfo("Nissa, Steward of Elements", 204, Rarity.MYTHIC, mage.cards.n.NissaStewardOfElements.class));
         cards.add(new SetCardInfo("Oashra Cultivator", 177, Rarity.COMMON, mage.cards.o.OashraCultivator.class));
@@ -248,12 +250,13 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Pathmaker Initiate", 146, Rarity.COMMON, mage.cards.p.PathmakerInitiate.class));
         cards.add(new SetCardInfo("Pitiless Vizier", 103, Rarity.COMMON, mage.cards.p.PitilessVizier.class));
         cards.add(new SetCardInfo("Plague Belcher", 104, Rarity.RARE, mage.cards.p.PlagueBelcher.class));
+        cards.add(new SetCardInfo("Pyramid of the Pantheon", 235, Rarity.RARE, mage.cards.p.PyramidOfThePantheon.class));
         cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 255, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 256, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 257, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Pouncing Cheetah", 179, Rarity.COMMON, mage.cards.p.PouncingCheetah.class));
-        cards.add(new SetCardInfo("Prepared // Fight", 220, Rarity.RARE, mage.cards.p.PreparedFight.class));
+        cards.add(new SetCardInfo("Prepare // Fight", 220, Rarity.RARE, mage.cards.p.PrepareFight.class));
         cards.add(new SetCardInfo("Protection of the Hekma", 23, Rarity.UNCOMMON, mage.cards.p.ProtectionOfTheHekma.class));
         cards.add(new SetCardInfo("Prowling Serpopard", 180, Rarity.RARE, mage.cards.p.ProwlingSerpopard.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 65, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
@@ -295,6 +298,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Start // Finish", 215, Rarity.UNCOMMON, mage.cards.s.StartFinish.class));
         cards.add(new SetCardInfo("Stinging Shot", 189, Rarity.COMMON, mage.cards.s.StingingShot.class));
         cards.add(new SetCardInfo("Stir the Sands", 110, Rarity.UNCOMMON, mage.cards.s.StirTheSands.class));
+        cards.add(new SetCardInfo("Stone Quarry", 274, Rarity.COMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Sunscorched Desert", 249, Rarity.COMMON, mage.cards.s.SunscorchedDesert.class));
         cards.add(new SetCardInfo("Supernatural Stamina", 111, Rarity.COMMON, mage.cards.s.SupernaturalStamina.class));
         cards.add(new SetCardInfo("Supply Caravan", 30, Rarity.COMMON, mage.cards.s.SupplyCaravan.class));
@@ -325,6 +329,7 @@ public class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Unwavering Initiate", 36, Rarity.COMMON, mage.cards.u.UnwaveringInitiate.class));
         cards.add(new SetCardInfo("Violent Impact", 154, Rarity.COMMON, mage.cards.v.ViolentImpact.class));
         cards.add(new SetCardInfo("Vizier of Deferment", 37, Rarity.UNCOMMON, mage.cards.v.VizierOfDeferment.class));
+        cards.add(new SetCardInfo("Vizier of Many Faces", 74, Rarity.RARE, mage.cards.v.VizierOfManyFaces.class));
         cards.add(new SetCardInfo("Vizier of Remedies", 38, Rarity.UNCOMMON, mage.cards.v.VizierOfRemedies.class));
         cards.add(new SetCardInfo("Vizier of Tumbling Sands", 75, Rarity.UNCOMMON, mage.cards.v.VizierOfTumblingSands.class));
         cards.add(new SetCardInfo("Vizier of the Menagerie", 192, Rarity.MYTHIC, mage.cards.v.VizierOfTheMenagerie.class));

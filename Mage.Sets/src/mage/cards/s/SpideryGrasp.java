@@ -38,6 +38,7 @@ import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  * @author nantuko
@@ -45,13 +46,19 @@ import java.util.UUID;
 public class SpideryGrasp extends CardImpl {
 
     public SpideryGrasp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Untap target creature. It gets +2/+4 and gains reach until end of turn.
         this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 4, Duration.EndOfTurn));
+
+        Effect effect = new BoostTargetEffect(2, 4, Duration.EndOfTurn);
+        effect.setText("It gets +2/+4");
+        this.getSpellAbility().addEffect(effect);
+
+        effect = new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains reach until end of turn");
+        this.getSpellAbility().addEffect(effect);
+
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

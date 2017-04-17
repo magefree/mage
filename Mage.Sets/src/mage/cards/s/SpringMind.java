@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -45,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
 public class SpringMind extends SplitCard {
 
     public SpringMind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.INSTANT}, "{2}{G}", "{4}{U}{U}", false);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.INSTANT}, "{2}{G}", "{4}{U}{U}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Spring
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
@@ -54,7 +55,7 @@ public class SpringMind extends SplitCard {
         // Mind
         // Aftermath
         // Draw two cards.
-        ((CardImpl)(getRightHalfCard())).addAbility(new AftermathAbility());
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility());
         getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 

@@ -20,7 +20,7 @@ public class ScarabFeast extends CardImpl {
 
         // Exile up to three target cards from a single graveyard.
         getSpellAbility().addEffect(new ExileTargetEffect());
-        getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("cards")));
+        getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("cards from a single graveyard")));
 
         // Cycling {B}
         addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));

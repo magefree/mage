@@ -12,6 +12,7 @@
     leasePeriod         - To turn on server side connection failure detection of remoting clients, it is necessary to satisfy two criteria.
                           The first is that the client lease period is set and is a value greater than 0. The value is represented in milliseconds.
                           The client lease period can be set by either the 'clientLeasePeriod' attribute within the Connector configuration or by calling the Connector method
+    socketWriteTimeout  - All write operations will time out if they do not complete within the configured period.
     maxGameThreads      - Number of games that can be started simultanously on the server
     maxSecondsIdle      - Number of seconds after that a game is auto conceded by the player that was idle for such a time
     minUserNameLength   - minmal allowed length of a user name to connect to the server
@@ -40,6 +41,7 @@
             numAcceptThreads="2"
             maxPoolSize="300"
             leasePeriod="5000"
+            socketWriteTimeout="10000"
             maxGameThreads="10"
             maxSecondsIdle="600"
             minUserNameLength="3"
@@ -109,6 +111,7 @@
         <draftCube name="MTGO Legacy Cube January 2016" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeJanuary2016"/>
         <draftCube name="MTGO Legacy Cube September 2016" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeSeptember2016"/>
         <draftCube name="MTGO Legacy Cube January 2017" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeJanuary2017"/>
+        <draftCube name="MTGO Legacy Cube April 2017" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeApril2017"/>
         <draftCube name="MTGO Legendary Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCube"/>
         <draftCube name="MTGO Legendary Cube April 2016" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCubeApril2016"/>
         <draftCube name="MTGO Modern Cube 2017" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.ModernCube2017"/>

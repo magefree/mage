@@ -95,6 +95,7 @@ public class GameEvent implements Serializable {
         DISCARD_CARD,
         DISCARDED_CARD,
         CYCLE_CARD, CYCLED_CARD,
+        PAY_CYCLE_COST, CAN_PAY_CYCLE_COST,
         CLASH, CLASHED,
         DAMAGE_PLAYER,
         /* DAMAGED_PLAYER
@@ -261,6 +262,14 @@ public class GameEvent implements Serializable {
         PHASE_IN, PHASED_IN,
         TURNFACEUP, TURNEDFACEUP,
         TURNFACEDOWN, TURNEDFACEDOWN,
+        /* OPTION_USED
+         targetId    originalId of the ability that triggered the event
+         sourceId    sourceId of the ability that triggered the event
+         playerId    controller of the ability
+         amount      not used for this event
+         flag        not used for this event
+         */
+        OPTION_USED,
         DAMAGE_CREATURE, DAMAGED_CREATURE,
         DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER,
         DESTROY_PERMANENT,
@@ -281,6 +290,7 @@ public class GameEvent implements Serializable {
         FIGHTED_PERMANENT,
         EXPLOITED_CREATURE,
         EVOLVED_CREATURE,
+        EMBALMED_CREATURE,
         ATTACH, ATTACHED,
         STAY_ATTACHED,
         UNATTACH, UNATTACHED,
