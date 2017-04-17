@@ -30,6 +30,7 @@ package mage.cards.o;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
@@ -66,7 +67,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 public class OracleEnVec extends CardImpl {
 
     public OracleEnVec(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);
@@ -249,7 +250,7 @@ class OracleEnVecDestroyEffect extends OneShotEffect {
 
     private final List<UUID> chosenCreatures;
 
-    OracleEnVecDestroyEffect(List<UUID> chosenCreatures) {
+    OracleEnVecDestroyEffect(List<UUID> chosenCreatures) { // need to be changed to MageObjectReference
         super(Outcome.DestroyPermanent);
         this.chosenCreatures = chosenCreatures;
         this.staticText = "destroy each of the chosen creatures that didn't attack";
@@ -267,10 +268,11 @@ class OracleEnVecDestroyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
+        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
         if (watcher != null) {
             for (UUID targetId : chosenCreatures) {
-                if (!watcher.getAttackedThisTurnCreatures().contains(targetId)) {
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent != null && !watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     Effect effect = new DestroyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(targetId));
                     effect.apply(game, source);

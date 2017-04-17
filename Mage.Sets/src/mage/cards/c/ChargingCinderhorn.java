@@ -47,7 +47,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -58,7 +57,7 @@ public class ChargingCinderhorn extends CardImpl {
 
     public ChargingCinderhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        
+
         this.subtype.add("Elemental");
         this.subtype.add("Ox");
         this.power = new MageInt(4);
@@ -70,8 +69,8 @@ public class ChargingCinderhorn extends CardImpl {
         // At the beginning of each player's end step, if no creatures attacked this turn, put a fury counter on Charging Cinderhorn. Then Charging Cinderhorn deals damage equal to the number of fury counters on it to that player.
         ChargingCinderhornDamageTargetEffect effect = new ChargingCinderhornDamageTargetEffect();
         effect.setText("if no creatures attacked this turn, put a fury counter on {this}. Then {this} deals damage equal to the number of fury counters on it to that player");
-        BeginningOfEndStepTriggeredAbility ability =
-                new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, new ChargingCinderhornCondition(), false);
+        BeginningOfEndStepTriggeredAbility ability
+                = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, new ChargingCinderhornCondition(), false);
         this.addAbility(ability, new AttackedThisTurnWatcher());
     }
 
@@ -89,31 +88,27 @@ class ChargingCinderhornCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
+        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
         if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
-            Set<UUID> attackedThisTurnCreatures = watcher.getAttackedThisTurnCreatures();
-            return attackedThisTurnCreatures.isEmpty();
+            return watcher.getAttackedThisTurnCreatures().isEmpty();
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "no creatures attacked this turn";
     }
 
-
 }
 
-class ChargingCinderhornDamageTargetEffect extends OneShotEffect{
-    
-    public ChargingCinderhornDamageTargetEffect()
-    {
+class ChargingCinderhornDamageTargetEffect extends OneShotEffect {
+
+    public ChargingCinderhornDamageTargetEffect() {
         super(Outcome.Damage);
     }
-    
-    public ChargingCinderhornDamageTargetEffect(ChargingCinderhornDamageTargetEffect copy)
-    {
+
+    public ChargingCinderhornDamageTargetEffect(ChargingCinderhornDamageTargetEffect copy) {
         super(copy);
     }
 

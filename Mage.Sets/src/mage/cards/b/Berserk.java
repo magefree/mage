@@ -27,6 +27,8 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -50,8 +52,6 @@ import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -59,7 +59,7 @@ import java.util.UUID;
 public class Berserk extends CardImpl {
 
     public Berserk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Cast Berserk only before the combat damage step. (Zone = all because it can be at least graveyard or hand)
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new BerserkReplacementEffect()), new CombatDamageStepStartedWatcher());
@@ -196,9 +196,9 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                Watcher watcher = game.getState().getWatchers().get("AttackedThisTurn");
+                Watcher watcher = game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
                 if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
-                    if (((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures().contains(permanent.getId())) {
+                    if (((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                         return permanent.destroy(source.getSourceId(), game, false);
                     }
                 }
