@@ -52,6 +52,10 @@
                               <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtPassword" min="-2" pref="125" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnPreviousConfiguration1" min="-2" pref="50" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnPreviousConfiguration2" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="cbDeckType" min="-2" pref="332" max="-2" attributes="1"/>
@@ -126,6 +130,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPreviousConfiguration1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPreviousConfiguration2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -226,6 +232,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPassword">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPreviousConfiguration1">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPreviousConfiguration2">
     </Component>
     <Component class="javax.swing.JLabel" name="lbDeckType">
       <Properties>

@@ -64,6 +64,10 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnSavedConfiguration1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnSavedConfiguration2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnOk" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
@@ -97,7 +101,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblName" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtName" min="-2" pref="124" max="-2" attributes="0"/>
+                                  <Component id="txtName" min="-2" pref="224" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -210,6 +214,8 @@
               <Component id="pnlPlayers" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSavedConfiguration1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSavedConfiguration2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnOk" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -511,7 +517,23 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnOk">
+    <Component class="javax.swing.JButton" name="btnSavedConfiguration1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSavedConfigurationActionPerformed"/>
+      </Events>
+    </Component>
+     <Component class="javax.swing.JButton" name="btnSavedConfiguration2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C2"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSavedConfigurationActionPerformed"/>
+      </Events>
+    </Component>
+     <Component class="javax.swing.JButton" name="btnOk">
       <Properties>
         <Property name="text" type="java.lang.String" value="OK"/>
       </Properties>

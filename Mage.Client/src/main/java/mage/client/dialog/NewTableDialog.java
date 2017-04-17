@@ -123,6 +123,8 @@ public class NewTableDialog extends MageDialog {
         pnlOtherPlayers = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         btnOK = new javax.swing.JButton();
+        btnPreviousConfiguration1 = new javax.swing.JButton();
+        btnPreviousConfiguration2 = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblQuitRatio = new javax.swing.JLabel();
         lblEdhPowerLevel = new javax.swing.JLabel();
@@ -192,6 +194,13 @@ public class NewTableDialog extends MageDialog {
         btnOK.setText("OK");
         btnOK.addActionListener(evt -> btnOKActionPerformed(evt));
 
+        btnPreviousConfiguration1.setText("M1");
+        btnPreviousConfiguration1.setToolTipText("Load saved Match configuration #1");
+        btnPreviousConfiguration1.addActionListener(evt -> btnPreviousConfigurationActionPerformed(evt, 1));
+        btnPreviousConfiguration2.setText("M2");
+        btnPreviousConfiguration2.setToolTipText("Load saved Match configuration #2");
+        btnPreviousConfiguration2.addActionListener(evt -> btnPreviousConfigurationActionPerformed(evt, 2));
+
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
@@ -232,7 +241,11 @@ public class NewTableDialog extends MageDialog {
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(lblPassword)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(btnPreviousConfiguration1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(btnPreviousConfiguration2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -292,6 +305,8 @@ public class NewTableDialog extends MageDialog {
                                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblName)
                                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPreviousConfiguration1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPreviousConfiguration2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblPassword)
                                         .addComponent(lbTimeLimit)
                                         .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -365,6 +380,11 @@ public class NewTableDialog extends MageDialog {
         this.playerId = null;
         this.hideDialog();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnPreviousConfigurationActionPerformed(java.awt.event.ActionEvent evt, int i) {//GEN-FIRST:event_btnPreviousConfigurationActionPerformed
+        currentSettingVersion = i;
+        setGameSettingsFromPrefs(currentSettingVersion);
+    }//GEN-LAST:event_btnPreviousConfigurationActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
@@ -561,11 +581,12 @@ public class NewTableDialog extends MageDialog {
             for (TablePlayerPanel tablePlayerPanel : players) {
                 tablePlayerPanel.init(i++, tablePlayerPanel.getPlayerType());
             }
-            setGameSettingsFromPrefs();
             this.setModal(true);
             setGameOptions();
             this.setLocation(150, 100);
         }
+        currentSettingVersion = 0;            
+        setGameSettingsFromPrefs(currentSettingVersion);
         this.setVisible(true);
     }
 
@@ -590,49 +611,61 @@ public class NewTableDialog extends MageDialog {
     /**
      * set the table settings from java prefs
      */
-    private void setGameSettingsFromPrefs() {
-        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NAME, "Game"));
-        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, ""));
+    int currentSettingVersion = 0;    
+    private void setGameSettingsFromPrefs(int version) {
+        currentSettingVersion = version;
+        String versionStr = "";
+        if (currentSettingVersion == 1) {
+            versionStr = "1";
+            btnPreviousConfiguration1.requestFocus();
+        } else if (currentSettingVersion == 2) {
+            versionStr = "2";
+            btnPreviousConfiguration2.requestFocus();
+        } else {
+            btnPreviousConfiguration2.getParent().requestFocus();
+        }
+        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NAME + versionStr, "Game"));
+        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD + versionStr, ""));
 
-        String playerTypes = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, "Human");
+        String playerTypes = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES + versionStr, "Human");
         prefPlayerTypes.clear();
         for (String pType : playerTypes.split(",")) {
             prefPlayerTypes.add(PlayerType.getByDescription(pType));
         }
-        this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, "2")));
+        this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS + versionStr, "2")));
 
-        String gameTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, "Two Player Duel");
+        String gameTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE + versionStr, "Two Player Duel");
         for (GameTypeView gtv : SessionHandler.getGameTypes()) {
             if (gtv.getName().equals(gameTypeName)) {
                 cbGameType.setSelectedItem(gtv);
                 break;
             }
         }
-        int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT, "1500"));
+        int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT + versionStr, "1500"));
         for (MatchTimeLimit mtl : MatchTimeLimit.values()) {
             if (mtl.getTimeLimit() == timeLimit) {
                 this.cbTimeLimit.setSelectedItem(mtl);
                 break;
             }
         }
-        cbDeckType.setSelectedItem(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE, "Limited"));
-        String deckFile = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, null);
+        cbDeckType.setSelectedItem(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE + versionStr, "Limited"));
+        String deckFile = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE + versionStr, null);
         if (deckFile != null) {
             this.player1Panel.setDeckFile(deckFile);
         }
-        this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, "2")));
-        this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED, "Yes").equals("Yes"));
-        this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RATED, "No").equals("Yes"));
-        this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS, "0")));
+        this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS + versionStr, "2")));
+        this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED + versionStr, "Yes").equals("Yes"));
+        this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RATED + versionStr, "No").equals("Yes"));
+        this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
 
-        int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, "1"));
+        int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE + versionStr, "1"));
         for (RangeOfInfluence roi : RangeOfInfluence.values()) {
             if (roi.getRange() == range) {
                 this.cbRange.setSelectedItem(roi);
                 break;
             }
         }
-        String attackOption = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION, "Attack Multiple Players");
+        String attackOption = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION + versionStr, "Attack Multiple Players");
         for (MultiplayerAttackOption mao : MultiplayerAttackOption.values()) {
             if (mao.toString().equals(attackOption)) {
                 this.cbAttackOption.setSelectedItem(mao);
@@ -659,21 +692,27 @@ public class NewTableDialog extends MageDialog {
      * @param deckFile
      */
     private void saveGameSettingsToPrefs(MatchOptions options, String deckFile) {
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NAME, options.getName());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, options.getPassword());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE, options.getDeckType());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT, Integer.toString(options.getPriorityTime()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, options.getGameType());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, Integer.toString(options.getWinsNeeded()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED, options.isRollbackTurnsAllowed() ? "Yes" : "No");
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RATED, options.isRated() ? "Yes" : "No");
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS, Integer.toString(options.getFreeMulligans()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, deckFile);
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, spnNumPlayers.getValue().toString());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, Integer.toString(options.getRange().getRange()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION, options.getAttackOption().toString());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL, options.getSkillLevel().toString());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO, Integer.toString(options.getQuitRatio()));
+        String versionStr = "";
+        if (currentSettingVersion == 1) {
+            versionStr = "1";
+        } else if (currentSettingVersion == 2) {
+            versionStr = "2";
+        }
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NAME + versionStr, options.getName());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD + versionStr, options.getPassword());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE + versionStr, options.getDeckType());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT + versionStr, Integer.toString(options.getPriorityTime()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE + versionStr, options.getGameType());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS + versionStr, Integer.toString(options.getWinsNeeded()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED + versionStr, options.isRollbackTurnsAllowed() ? "Yes" : "No");
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RATED + versionStr, options.isRated() ? "Yes" : "No");
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS + versionStr, Integer.toString(options.getFreeMulligans()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE + versionStr, deckFile);
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS + versionStr, spnNumPlayers.getValue().toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RANGE + versionStr, Integer.toString(options.getRange().getRange()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION + versionStr, options.getAttackOption().toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL + versionStr, options.getSkillLevel().toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO + versionStr, Integer.toString(options.getQuitRatio()));
         StringBuilder playerTypesString = new StringBuilder();
         for (Object player : players) {
             if (playerTypesString.length() > 0) {
@@ -682,12 +721,14 @@ public class NewTableDialog extends MageDialog {
             TablePlayerPanel tpp = (TablePlayerPanel) player;
             playerTypesString.append(tpp.getPlayerType());
         }
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, playerTypesString.toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES + versionStr, playerTypesString.toString());        
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOK;
+    private javax.swing.JButton btnPreviousConfiguration1;
+    private javax.swing.JButton btnPreviousConfiguration2;
     private javax.swing.JComboBox cbAttackOption;
     private javax.swing.JComboBox cbDeckType;
     private javax.swing.JComboBox cbGameType;
@@ -724,5 +765,4 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables
-
 }
