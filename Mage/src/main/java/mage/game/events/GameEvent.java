@@ -262,6 +262,14 @@ public class GameEvent implements Serializable {
         PHASE_IN, PHASED_IN,
         TURNFACEUP, TURNEDFACEUP,
         TURNFACEDOWN, TURNEDFACEDOWN,
+        /* OPTION_USED
+         targetId    originalId of the ability that triggered the event
+         sourceId    sourceId of the ability that triggered the event
+         playerId    controller of the ability
+         amount      not used for this event
+         flag        not used for this event
+         */
+        OPTION_USED,
         DAMAGE_CREATURE, DAMAGED_CREATURE,
         DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER,
         DESTROY_PERMANENT,
