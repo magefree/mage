@@ -79,13 +79,24 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
                     for (int i = 0; i < 6 && controller.getLibrary().hasCards(); ++i) {
                         top6.add(controller.getLibrary().removeFromTop(game));
                     }
+
+                    // Is the library now empty, thus the rise is on the bottom (for the message to the players)?
+                    boolean isOnBottom = !controller.getLibrary().hasCards();
+
                     // Put this card (if the ability came from an ApproachOfTheSecondSun spell card) on top
-                    controller.moveCardToLibraryWithInfo(spellCard, source.getSourceId(), game, Zone.STACK, true, true);
+                    spellCard.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
 
                     // put the top 6 we took earlier back on top (going in reverse order this time to get them back
                     // on top in the proper order)
                     for (int i = top6.size() - 1; i >= 0; --i) {
                         controller.getLibrary().putOnTop(top6.get(i), game);
+                    }
+
+                    // Inform the players
+                    if (isOnBottom) {
+                        game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " on the bottom of his or her library.");
+                    } else {
+                        game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " into his or her library 6th from the top.");
                     }
                 }
             }

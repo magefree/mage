@@ -60,15 +60,17 @@ public class ManticoreOfTheGauntlet extends CardImpl {
 
         // When Manticore of the Gauntlet enters the battlefield, put a -1/-1 counter on target creature you control. Manticore of the Gauntlet deals 3 damage to target opponent.
         Effect counters = new AddCountersTargetEffect(CounterType.M1M1.createInstance());
+        counters.setText("put a -1/-1 counter on target creature you control");
         counters.setTargetPointer(new FirstTargetPointer());
 
         Effect damage = new DamageTargetEffect(new StaticValue(3), true, "", true);
+        damage.setText("{this} deals 3 damage to target opponent.");
         damage.setTargetPointer(new SecondTargetPointer());
 
         Ability ability = new EntersBattlefieldTriggeredAbility(counters);
-        ability.addTarget(new TargetControlledCreaturePermanent());
-
         ability.addEffect(damage);
+
+        ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetOpponent());
 
         this.addAbility(ability);

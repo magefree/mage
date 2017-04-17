@@ -97,7 +97,7 @@ class BonePickerCostAdjustmentAbility extends SimpleStaticAbility implements Adj
 
     @Override
     public String getRule() {
-        return "If a creature died this turn, {this} costs 3 less to cast.";
+        return "If a creature died this turn, {this} costs {3} less to cast.";
     }
 
     @Override

@@ -49,12 +49,6 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 
 public class RakdosDrake extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other creatures you control");
-    static {
-        filter.add(new AnotherPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     public RakdosDrake (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Drake");

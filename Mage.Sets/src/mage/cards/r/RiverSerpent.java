@@ -98,6 +98,10 @@ class RiverSerpentEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return new CardsInControllerGraveyardCount().calculate(game, source, this) < 5;
+        if (permanent.getId().equals(source.getSourceId())) {
+            return new CardsInControllerGraveyardCount().calculate(game, source, this) < 5;
+        } else {
+            return false;
+        }
     }
 }

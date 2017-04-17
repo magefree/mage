@@ -56,7 +56,8 @@ public class WarfireJavelineer extends CardImpl {
         EntersBattlefieldTriggeredAbility ability =
                 new EntersBattlefieldTriggeredAbility(
                         new DamageTargetEffect(
-                                new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard())));
+                                new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard()))
+                                .setText("it deals X damage to target creature an opponent controls, where X is the number of instant and sorcery cards in your graveyard."));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }
