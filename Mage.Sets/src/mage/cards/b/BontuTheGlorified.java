@@ -68,7 +68,7 @@ public class BontuTheGlorified extends CardImpl {
     }
 
     public BontuTheGlorified(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("God");
         this.power = new MageInt(4);

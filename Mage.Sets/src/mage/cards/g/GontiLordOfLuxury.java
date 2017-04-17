@@ -125,7 +125,6 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
                     card.setFaceDown(true, game);
                     if (controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName())) {
                         card.setFaceDown(true, game);
-                        @SuppressWarnings("unchecked")
                         Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(GontiLordOfLuxury.VALUE_PREFIX + source.getSourceId().toString());
                         if (exileZones == null) {
                             exileZones = new HashSet<>();
