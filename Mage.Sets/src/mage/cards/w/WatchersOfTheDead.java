@@ -100,8 +100,7 @@ class WatchersOfTheDeadEffect extends OneShotEffect {
                     TargetCard target = new TargetCardInYourGraveyard(2, 2, new FilterCard());
                     target.setNotTarget(true);
                     Cards cardsInGraveyard = opponent.getGraveyard();
-
-                    if (cardsInGraveyard.size() > 2) {
+                    if (cardsInGraveyard.size() > 1) {
                         opponent.choose(outcome, cardsInGraveyard, target, game);
                         for (Card cardInGraveyard : cardsInGraveyard.getCards(game)) {
                             if (!target.getTargets().contains(cardInGraveyard.getId())) {
