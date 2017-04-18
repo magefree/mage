@@ -34,6 +34,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SpellAbilityType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -44,7 +45,7 @@ import mage.target.common.TargetEnchantmentPermanent;
 public class WaxWane extends SplitCard {
 
     public WaxWane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}","{W}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}", "{W}", SpellAbilityType.SPLIT);
 
         // Wax
         // Target creature gets +2/+2 until end of turn.

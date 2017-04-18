@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -37,6 +36,8 @@ import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *

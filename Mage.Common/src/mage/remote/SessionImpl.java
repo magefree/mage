@@ -32,8 +32,7 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import javax.swing.JOptionPane;
-
+import javax.swing.*;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -50,6 +49,7 @@ import mage.interfaces.MageClient;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
+import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.utils.CompressUtil;
 import mage.view.*;
@@ -219,34 +219,35 @@ public class SessionImpl implements Session {
     public synchronized boolean connect(final Connection connection) {
         return establishJBossRemotingConnection(connection)
                 && handleRemotingTaskExceptions(new RemotingTask() {
-            @Override
-            public boolean run() throws Throwable {
-                logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
-                boolean registerResult;
-                if (connection.getAdminPassword() == null) {
-                    // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                    registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
-                    if (registerResult) {
-                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
+                    @Override
+                    public boolean run() throws Throwable {
+                        logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
+                        boolean registerResult;
+                        if (connection.getAdminPassword() == null) {
+                            // for backward compatibility. don't remove twice call - first one does nothing but for version checking
+                            registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
+                            if (registerResult) {
+                                server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
+                            }
+                        } else {
+                            registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
+                        }
+                        if (registerResult) {
+                            serverState = server.getServerState();
+                            if (!connection.getUsername().equals("Admin")) {
+                                updateDatabase(connection.isForceDBComparison(), serverState);
+                            }
+                            logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
+                            client.connected(getUserName() + '@' + connection.getHost() + ':' + connection.getPort() + ' ');
+                            return true;
+                        }
+                        disconnect(false);
+                        return false;
                     }
-                } else {
-                    registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
-                }
-                if (registerResult) {
-                    serverState = server.getServerState();
-                    if (!connection.getUsername().equals("Admin")) {
-                        updateDatabase(connection.isForceDBComparison(), serverState);
-                    }
-                    logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
-                    client.connected(getUserName() + '@' + connection.getHost() + ':' + connection.getPort() + ' ');
-                    return true;
-                }
-                disconnect(false);
-                return false;
-            }
-        });
+                });
     }
 
+    @Override
     public Optional<String> getServerHostname() {
         return isConnected() ? Optional.of(connection.getHost()) : Optional.<String>empty();
     }
@@ -304,14 +305,14 @@ public class SessionImpl implements Session {
                  to a value greater than 1, an invocation interrupted by a write timeout can be retried.
                  Note. The write timeout facility applies to writing of both invocations and responses. It applies to push callbacks as well.
                  */
-                metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+                metadata.put(SocketWrapper.WRITE_TIMEOUT, String.valueOf(connection.getSocketWriteTimeout()));
                 metadata.put("generalizeSocketException", "true");
                 server = (MageServer) TransporterClient.createTransporterClient(clientLocator.getLocatorURI(), MageServer.class, metadata);
 
                 // http://docs.jboss.org/jbossremoting/docs/guide/2.5/html_single/#d0e1057
                 Map<String, String> clientMetadata = new HashMap<>();
 
-                clientMetadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+                clientMetadata.put(SocketWrapper.WRITE_TIMEOUT, String.valueOf(connection.getSocketWriteTimeout()));
                 /*  generalizeSocketException
                  *  If set to false, a failed invocation will be retried in the case of
                  *  SocketExceptions. If set to true, a failed invocation will be retried in the case of
@@ -472,7 +473,7 @@ public class SessionImpl implements Session {
 
     /**
      * @param askForReconnect - true = connection was lost because of error and
-     *                        ask the user if he want to try to reconnect
+     * ask the user if he want to try to reconnect
      */
     @Override
     public synchronized void disconnect(boolean askForReconnect) {
@@ -550,7 +551,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public String[] getPlayerTypes() {
+    public PlayerType[] getPlayerTypes() {
         return serverState.getPlayerTypes();
     }
 
@@ -680,7 +681,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
+    public boolean joinTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
                 // Workaround to fix Can't join table problem
@@ -703,7 +704,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
+    public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
                 // Workaround to fix Can't join table problem
@@ -965,7 +966,6 @@ public class SessionImpl implements Session {
         }
         return false;
     }
-
 
     @Override
     public boolean joinGame(UUID gameId) {

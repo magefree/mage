@@ -27,6 +27,10 @@
  */
 package mage.server;
 
+import java.security.SecureRandom;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import javax.management.timer.Timer;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -45,6 +49,8 @@ import mage.interfaces.ActionWithResult;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
+import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.remote.MageVersionException;
 import mage.server.draft.CubeFactory;
@@ -63,18 +69,13 @@ import mage.view.ChatMessage.MessageColor;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
 
-import javax.management.timer.Timer;
-import java.security.SecureRandom;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-
 /**
  * @author BetaSteward_at_googlemail.com, noxx
  */
 public class MageServerImpl implements MageServer {
 
     private static final Logger logger = Logger.getLogger(MageServerImpl.class);
-    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
+    private static final ExecutorService callExecutor = ThreadExecutor.instance.getCallExecutor();
     private static final SecureRandom RANDOM = new SecureRandom();
 
     private final String adminPassword;
@@ -161,7 +162,7 @@ public class MageServerImpl implements MageServer {
     public boolean connectUser(String userName, String password, String sessionId, MageVersion version, String userIdStr) throws MageException {
         try {
             if (version.compareTo(Main.getVersion()) != 0) {
-                logger.info("MageVersionException: userName=" + userName + ", version=" + version);
+                logger.info("MageVersionException: userName=" + userName + ", version=" + version + " sessionId=" + sessionId);
                 throw new MageVersionException(version, Main.getVersion());
             }
             return SessionManager.instance.connectUser(sessionId, userName, password, userIdStr);
@@ -233,8 +234,8 @@ public class MageServerImpl implements MageServer {
                     String maxAiOpponents = ConfigSettings.instance.getMaxAiOpponents();
                     if (maxAiOpponents != null) {
                         int aiPlayers = 0;
-                        for (String playerType : options.getPlayerTypes()) {
-                            if (!playerType.equals("Human")) {
+                        for (PlayerType playerType : options.getPlayerTypes()) {
+                            if (playerType != PlayerType.HUMAN) {
                                 aiPlayers++;
                             }
                         }
@@ -282,7 +283,7 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
+    public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final PlayerType playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
         return executeWithResult("joinTable", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
@@ -309,7 +310,7 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
+    public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final PlayerType playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
         return executeWithResult("joinTournamentTable", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
@@ -989,11 +990,11 @@ public class MageServerImpl implements MageServer {
     public ServerState getServerState() throws MageException {
         try {
             return new ServerState(
-                    GameFactory.getInstance().getGameTypes(),
-                    TournamentFactory.getInstance().getTournamentTypes(),
-                    PlayerFactory.getInstance().getPlayerTypes().toArray(new String[PlayerFactory.getInstance().getPlayerTypes().size()]),
-                    DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[DeckValidatorFactory.getInstance().getDeckTypes().size()]),
-                    CubeFactory.getInstance().getDraftCubes().toArray(new String[CubeFactory.getInstance().getDraftCubes().size()]),
+                    GameFactory.instance.getGameTypes(),
+                    TournamentFactory.instance.getTournamentTypes(),
+                    PlayerFactory.instance.getPlayerTypes().toArray(new PlayerType[PlayerFactory.instance.getPlayerTypes().size()]),
+                    DeckValidatorFactory.instance.getDeckTypes().toArray(new String[DeckValidatorFactory.instance.getDeckTypes().size()]),
+                    CubeFactory.instance.getDraftCubes().toArray(new String[CubeFactory.instance.getDraftCubes().size()]),
                     testMode,
                     Main.getVersion(),
                     CardRepository.instance.getContentVersionConstant(),
@@ -1116,14 +1117,14 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public void toggleActivation(final String sessionId, final String userName) throws MageException {
-        execute("toggleActivation", sessionId, () ->
-                UserManager.instance.getUserByName(userName).ifPresent(user ->
-                {
-                    user.setActive(!user.isActive());
-                    if (!user.isActive() && user.isConnected()) {
-                        SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
-                    }
-                }));
+        execute("toggleActivation", sessionId, ()
+                -> UserManager.instance.getUserByName(userName).ifPresent(user
+                -> {
+            user.setActive(!user.isActive());
+            if (!user.isActive() && user.isConnected()) {
+                SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
+            }
+        }));
     }
 
     @Override
@@ -1156,11 +1157,9 @@ public class MageServerImpl implements MageServer {
     @Override
     public void sendFeedbackMessage(final String sessionId, final String username, final String title, final String type, final String message, final String email) throws MageException {
         if (title != null && message != null) {
-            execute("sendFeedbackMessage", sessionId, () ->
-                    SessionManager.instance.getSession(sessionId).ifPresent(
-                            session -> FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.getHost())
-
-
+            execute("sendFeedbackMessage", sessionId, ()
+                    -> SessionManager.instance.getSession(sessionId).ifPresent(
+                    session -> FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.getHost())
             ));
         }
     }
@@ -1171,9 +1170,9 @@ public class MageServerImpl implements MageServer {
             execute("sendBroadcastMessage", sessionId, () -> {
                 for (User user : UserManager.instance.getUsers()) {
                     if (message.toLowerCase(Locale.ENGLISH).startsWith("warn")) {
-                        user.fireCallback(new ClientCallback("serverMessage", null, new ChatMessage("SERVER", message, null, MessageColor.RED)));
+                        user.fireCallback(new ClientCallback(ClientCallbackMethod.SERVER_MESSAGE, null, new ChatMessage("SERVER", message, null, MessageColor.RED)));
                     } else {
-                        user.fireCallback(new ClientCallback("serverMessage", null, new ChatMessage("SERVER", message, null, MessageColor.BLUE)));
+                        user.fireCallback(new ClientCallback(ClientCallbackMethod.SERVER_MESSAGE, null, new ChatMessage("SERVER", message, null, MessageColor.BLUE)));
                     }
                 }
             }, true);
@@ -1251,6 +1250,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class MyActionWithNullNegativeResult extends ActionWithNullNegativeResult<Object> {
+
         @Override
         public Object execute() throws MageException {
             return CompressUtil.compress(ServerMessagesUtil.instance.getMessages());
@@ -1258,6 +1258,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class ListActionWithNullNegativeResult extends ActionWithNullNegativeResult<List<UserView>> {
+
         @Override
         public List<UserView> execute() throws MageException {
             List<UserView> users = new ArrayList<>();
@@ -1280,6 +1281,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class GameViewActionWithNullNegativeResult extends ActionWithNullNegativeResult<GameView> {
+
         private final String sessionId;
         private final UUID gameId;
         private final UUID playerId;
@@ -1304,6 +1306,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class MyActionWithBooleanResult extends ActionWithBooleanResult {
+
         private final String sessionId;
         private final UUID tableId;
 
@@ -1326,6 +1329,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class DraftPickViewActionWithNullNegativeResult extends ActionWithNullNegativeResult<DraftPickView> {
+
         private final String sessionId;
         private final UUID draftId;
         private final UUID cardPick;
@@ -1351,6 +1355,7 @@ public class MageServerImpl implements MageServer {
     }
 
     private static class MyActionWithTableViewResult extends ActionWithTableViewResult {
+
         private final String sessionId;
         private final MatchOptions options;
         private final UUID roomId;

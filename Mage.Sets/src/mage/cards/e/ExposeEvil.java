@@ -27,13 +27,14 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

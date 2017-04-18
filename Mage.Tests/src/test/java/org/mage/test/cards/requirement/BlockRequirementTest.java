@@ -29,8 +29,6 @@ package org.mage.test.cards.requirement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.permanent.Permanent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -248,86 +246,5 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Memnite", 1);
         assertGraveyardCount(playerB, "Dimensional Infiltrator", 1);
         assertGraveyardCount(playerB, "Llanowar Elves", 1);
-    }
-    
-    /*
-    Reported bug: Nacatl War-pride unable to be blocked ?
-    Basic case: have it be blocked by one creature.
-    */
-    @Test
-    public void testNacatlWarPrideBlockOneCreature() {
-        /*  
-        Nacatl War-Pride {3}{G}{G}{G}
-        Creature - Cat Warrior 3/3        
-        Nacatl War-Pride must be blocked by exactly one creature if able.        
-        Whenever Nacatl War-Pride attacks, create X tokens that are copies of Nacatl War-Pride and that are tapped and attacking, 
-        where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.
-        */
-        addCard(Zone.BATTLEFIELD, playerA, "Nacatl War-Pride");
-        
-        /*
-        Primeval Titan {4}{G}{G}
-        Creature - Giant 6/6
-        Trample. Whenever Primeval Titan enters the battlefield or attacks, you may search your library for up to two land cards, 
-        put them onto the battlefield tapped, then shuffle your library.
-        */
-        addCard(Zone.BATTLEFIELD, playerB, "Primeval Titan");
-        
-        attack(1, playerA, "Nacatl War-Pride");
-        
-        setStopAt(1, PhaseStep.END_COMBAT);
-        execute();
-        
-        assertLife(playerB, 17); // one 3/3 tokens attacking got through still, Nacatl forced to be blocked by Primeval
-        assertGraveyardCount(playerA, "Nacatl War-Pride", 1);
-
-        Permanent primetime = getPermanent("Primeval Titan", playerB);
-        Assert.assertEquals("Damage to Primeval should be 3 not 0", 3, primetime.getDamage());
-    }
-    
-    /*
-    Reported bug: Nacatl War-pride unable to be blocked ?
-    Give Nacatl unblockable and attempt to block it. Mix the two effects "cannot be blocked" and "must be blocked".
-    */
-    @Test
-    public void testNacatlWarPrideCannotBeBlocked() {
-        
-        String nWarPride = "Nacatl War-Pride";
-        String pTitan = "Primeval Titan";
-        String aForm = "Aqueous Form";
-        
-        /*  
-        Nacatl War-Pride {3}{G}{G}{G}
-        Creature - Cat Warrior 3/3        
-        Nacatl War-Pride must be blocked by exactly one creature if able.        
-        Whenever Nacatl War-Pride attacks, create X tokens that are copies of Nacatl War-Pride and that are tapped and attacking, 
-        where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.
-        */
-        addCard(Zone.BATTLEFIELD, playerA, nWarPride);
-        
-        /*        
-        Enchantment - Aura {1}{U}
-        Enchanted creature can't be blocked.
-        Whenever enchanted creature attacks, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
-        */
-        addCard(Zone.HAND, playerA, aForm);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        
-        addCard(Zone.BATTLEFIELD, playerB, pTitan);
-        
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aForm, nWarPride);
-                
-        attack(1, playerA, nWarPride);
-        block(1, playerB, pTitan, nWarPride); // blocking a token with the same name
-        
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
-        
-        assertLife(playerB, 17); // Nacatl dealt damage unblocked
-
-        assertPermanentCount(playerA, nWarPride, 1);
-        assertGraveyardCount(playerA, 0);
-        Permanent primetime = getPermanent(pTitan, playerB);
-        Assert.assertEquals("Damage to Primeval should be 3 not 0", 3, primetime.getDamage()); // blocked a token
     }
 }

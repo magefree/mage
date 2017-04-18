@@ -29,7 +29,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -66,7 +66,7 @@ public class NantukoShaman extends CardImpl {
         // When Nantuko Shaman enters the battlefield, if you control no tapped lands, draw a card.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.EQUAL_TO, 0),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0),
                 "When {this} enters the battlefield, if you control no tapped lands, draw a card");
         this.addAbility(ability);
 

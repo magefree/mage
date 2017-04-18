@@ -12,6 +12,7 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchOptions;
 import mage.player.ai.ComputerPlayer;
+import mage.players.PlayerType;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
@@ -105,7 +106,7 @@ public class LoadTest {
 
             TableView table = session.createTable(roomId, options);
 
-            if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, "Human", 1, deckList,"")) {
+            if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, PlayerType.HUMAN, 1, deckList,"")) {
                 log.error("Error while joining table");
                 Assert.fail("Error while joining table");
                 return;
@@ -119,7 +120,7 @@ public class LoadTest {
             UUID roomId2 = session2.getMainRoomId();
 
             // connect to the table with the same deck
-            if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, "Human", 1, deckList,"")) {
+            if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, PlayerType.HUMAN, 1, deckList,"")) {
                 log.error("Error while joining table");
                 Assert.fail("Error while joining table");
                 return;
@@ -177,7 +178,7 @@ public class LoadTest {
 
         TableView table = session.createTable(roomId, options);
 
-        if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, "Human", 1, deckList,"")) {
+        if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, PlayerType.HUMAN, 1, deckList,"")) {
             log.error("Error while joining table");
             Assert.fail("Error while joining table");
             return true;
@@ -193,7 +194,7 @@ public class LoadTest {
         UUID roomId2 = session2.getMainRoomId();
 
         // connect to the table with the same deck
-        if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, "Human", 1, deckList,"")) {
+        if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, PlayerType.HUMAN, 1, deckList,"")) {
             log.error("Error while joining table");
             Assert.fail("Error while joining table");
             return true;
@@ -266,8 +267,8 @@ public class LoadTest {
     private MatchOptions createGameOptions(GameTypeView gameTypeView, Session session) {
         MatchOptions options = new MatchOptions("Test game", gameTypeView.getName(), false, 2);
 
-        options.getPlayerTypes().add("Human");
-        options.getPlayerTypes().add("Human");
+        options.getPlayerTypes().add(PlayerType.HUMAN);
+        options.getPlayerTypes().add(PlayerType.HUMAN);
 
         options.setDeckType(session.getDeckTypes()[0]);
         options.setLimited(false);

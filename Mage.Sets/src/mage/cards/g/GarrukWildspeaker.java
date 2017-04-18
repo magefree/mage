@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
@@ -44,6 +43,8 @@ import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.BeastToken;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *

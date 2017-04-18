@@ -1,10 +1,9 @@
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 public class Mirrodin extends ExpansionSet {
     private static final Mirrodin instance = new Mirrodin();
@@ -170,6 +169,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 302, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Myr Adapter", 210, Rarity.COMMON, mage.cards.m.MyrAdapter.class));
         cards.add(new SetCardInfo("Myr Enforcer", 211, Rarity.COMMON, mage.cards.m.MyrEnforcer.class));
+        cards.add(new SetCardInfo("Myr Incubator", 212, Rarity.RARE, mage.cards.m.MyrIncubator.class));
         cards.add(new SetCardInfo("Myr Mindservant", 213, Rarity.UNCOMMON, mage.cards.m.MyrMindservant.class));
         cards.add(new SetCardInfo("Myr Retriever", 215, Rarity.UNCOMMON, mage.cards.m.MyrRetriever.class));
         cards.add(new SetCardInfo("Necrogen Mists", 69, Rarity.RARE, mage.cards.n.NecrogenMists.class));

@@ -27,11 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -41,6 +36,10 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -49,6 +48,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.util.RandomUtil;
+
+import java.util.UUID;
 
 /**
  *

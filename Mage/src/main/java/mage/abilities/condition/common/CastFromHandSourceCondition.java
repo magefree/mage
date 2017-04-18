@@ -13,7 +13,9 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author Loki
  */
-public class CastFromHandSourceCondition implements Condition {
+public enum CastFromHandSourceCondition implements Condition {
+
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

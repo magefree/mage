@@ -34,6 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.permanent.token.SaprolingToken;
@@ -52,7 +53,7 @@ public class SupplyDemand extends SplitCard {
     }
 
     public SupplyDemand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{W}","{1}{W}{U}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{W}", "{1}{W}{U}", SpellAbilityType.SPLIT);
 
         // Supply
         // create X 1/1 green Saproling creature tokens.

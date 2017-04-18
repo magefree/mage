@@ -28,27 +28,27 @@
 
 package mage.target.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.constants.AbilityType;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterAbility;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetObject;
 
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 
 
 public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
-        public TargetActivatedOrTriggeredAbility() {
+    public TargetActivatedOrTriggeredAbility() {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
         this.zone = Zone.STACK;
@@ -78,12 +78,9 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        for (StackObject stackObject : game.getStack()) {
-            if (isActivatedOrTriggeredAbility(stackObject)) {
-                return true;
-            }
-        }
-        return false;
+        return game.getStack()
+                .stream()
+                .anyMatch(TargetActivatedOrTriggeredAbility::isActivatedOrTriggeredAbility);
     }
 
     @Override
@@ -93,13 +90,10 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (StackObject stackObject :  game.getStack()) {
-            if (isActivatedOrTriggeredAbility(stackObject)) {
-                possibleTargets.add(stackObject.getStackAbility().getId());
-            }
-        }
-        return possibleTargets;
+        return game.getStack().stream()
+                .filter(TargetActivatedOrTriggeredAbility::isActivatedOrTriggeredAbility)
+                .map(stackObject -> stackObject.getStackAbility().getId())
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -117,9 +111,9 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
             return false;
         }
         if (stackObject instanceof Ability) {
-            Ability ability = (Ability)stackObject;
+            Ability ability = (Ability) stackObject;
             return ability.getAbilityType() == AbilityType.TRIGGERED
-               || ability.getAbilityType() == AbilityType.ACTIVATED;
+                    || ability.getAbilityType() == AbilityType.ACTIVATED;
         }
         return false;
     }

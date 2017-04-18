@@ -27,11 +27,13 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +43,7 @@ public class JasmineBoreal extends CardImpl {
 
     public JasmineBoreal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
 
         this.power = new MageInt(4);

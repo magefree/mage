@@ -27,21 +27,22 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.condition.common.TenOrLessLifeCondition;
+import mage.abilities.condition.common.XorLessLifeCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.cards.a.AuroraOfEmrakul;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.a.AuroraOfEmrakul;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class CryptolithFragment extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, false),
-                new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.EACH_PLAYER),
+                new XorLessLifeCondition(XorLessLifeCondition.CheckType.EACH_PLAYER, 10),
                 "At the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment."));
     }
 

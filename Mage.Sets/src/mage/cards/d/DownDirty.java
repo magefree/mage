@@ -25,28 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
-
-/**
- *
- * @author LevelX2
- */
-
 
 public class DownDirty extends SplitCard {
 
     public DownDirty(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}","{2}{G}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}", "{2}{G}", SpellAbilityType.SPLIT_FUSED);
 
         // Down
         // Target player discards two cards.

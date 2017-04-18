@@ -28,22 +28,14 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGraveyardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -52,7 +44,7 @@ import mage.util.CardUtil;
 public class Ghoultree extends CardImpl {
 
     public Ghoultree(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{G}");
         this.subtype.add("Zombie");
         this.subtype.add("Treefolk");
 
@@ -60,9 +52,7 @@ public class Ghoultree extends CardImpl {
         this.toughness = new MageInt(10);
 
         // Ghoultree costs {1} less to cast for each creature card in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new GhoultreeCostReductionEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(new FilterCreatureCard())));
     }
 
     public Ghoultree(final Ghoultree card) {
@@ -74,40 +64,3 @@ public class Ghoultree extends CardImpl {
         return new Ghoultree(this);
     }
 }
-
-class GhoultreeCostReductionEffect extends CostModificationEffectImpl {
-
-    GhoultreeCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {1} less to cast for each creature card in your graveyard";
-    }
-
-    GhoultreeCostReductionEffect(GhoultreeCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {        
-            int reductionAmount = player.getGraveyard().count(new FilterCreatureCard(), game);            
-            CardUtil.reduceCost(abilityToModify, reductionAmount);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
-            return game.getCard(abilityToModify.getSourceId()) != null;
-        }
-        return false;
-    }
-
-    @Override
-    public GhoultreeCostReductionEffect copy() {
-        return new GhoultreeCostReductionEffect(this);
-    }
-}
-

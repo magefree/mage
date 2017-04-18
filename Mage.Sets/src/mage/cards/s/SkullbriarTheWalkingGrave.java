@@ -57,7 +57,7 @@ public class SkullbriarTheWalkingGrave extends CardImpl {
 
     public SkullbriarTheWalkingGrave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Elemental");
         this.power = new MageInt(1);

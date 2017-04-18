@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,8 +40,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AttachmentAttachedToCardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
@@ -50,6 +49,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,31 +82,6 @@ public class CrownOfTheAges extends CardImpl {
     @Override
     public CrownOfTheAges copy() {
         return new CrownOfTheAges(this);
-    }
-}
-
-class AttachmentAttachedToCardTypePredicate implements Predicate<Permanent> {
-
-    private final CardType cardType;
-
-    public AttachmentAttachedToCardTypePredicate(CardType cardType) {
-        this.cardType = cardType;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        if (input.getAttachedTo() != null) {
-            Permanent attachedTo = game.getPermanent(input.getAttachedTo());
-            if (attachedTo != null && attachedTo.getCardType().contains(cardType)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "AttachmentAttachedToCardType(" + cardType + ')';
     }
 }
 

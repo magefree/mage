@@ -42,6 +42,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
@@ -56,7 +57,7 @@ public class TombOfUrami extends CardImpl {
 
     public TombOfUrami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
 
         // {tap}: Add {B} to your mana pool. Tomb of Urami deals 1 damage to you if you don't control an Ogre.
         Ability ability = new BlackManaAbility();
@@ -121,7 +122,7 @@ class UramiToken extends Token {
         cardType.add(CardType.CREATURE);
         subtype.add("Demon");
         subtype.add("Spirit");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         color.setBlack(true);
         power = new MageInt(5);

@@ -27,9 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -38,8 +35,11 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.watchers.common.ManaSpentToCastWatcher;
+
+import java.util.UUID;
 
 /**
  *

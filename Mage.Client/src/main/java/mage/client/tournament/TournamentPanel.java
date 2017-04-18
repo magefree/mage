@@ -44,13 +44,12 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
-
-import mage.cards.o.Opt;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
@@ -730,7 +729,7 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             this.publish(SessionHandler.getTournament(tournamentId));
-            Thread.sleep(2000);
+            TimeUnit.SECONDS.sleep(2);
         }
         return null;
     }

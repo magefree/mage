@@ -49,7 +49,7 @@ public class SedrisTheTraitorKing extends CardImpl {
 
     public SedrisTheTraitorKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
 

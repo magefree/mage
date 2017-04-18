@@ -27,17 +27,18 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public class RecruiterOfTheGuard extends CardImpl {
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with toughness 2 or less");
     static {
-        filter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, 3));
+        filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public RecruiterOfTheGuard(UUID ownerId, CardSetInfo setInfo) {

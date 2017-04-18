@@ -6,9 +6,11 @@
 package org.mage.card.arcane;
 
 import mage.ObjectColor;
+import mage.cards.ArtRect;
 import mage.cards.FrameStyle;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
+import mage.constants.MageObjectType;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
@@ -18,8 +20,8 @@ import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.RasterFormatException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
@@ -73,10 +75,9 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     private static Font loadFont(String name) {
-        try {
+        try(InputStream in = ModernCardRenderer.class.getResourceAsStream("/cardrender/" + name + ".ttf")) {
             return Font.createFont(
-                    Font.TRUETYPE_FONT,
-                    ModernCardRenderer.class.getResourceAsStream("/cardrender/" + name + ".ttf"));
+                    Font.TRUETYPE_FONT,in);
         } catch (IOException e) {
             LOGGER.info("Failed to load font `" + name + "`, couldn't find resource.");
         } catch (FontFormatException e) {
@@ -311,7 +312,7 @@ public class ModernCardRenderer extends CardRenderer {
         } else if (cardView.getFrameStyle().isFullArt() || (cardView.isToken())) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
         } else {
-            rect = new Rectangle2D.Float(.079f, .11f, .84f, .42f);
+            rect = ArtRect.NORMAL.rect;
         }
         return rect;
     }
@@ -346,45 +347,42 @@ public class ModernCardRenderer extends CardRenderer {
     @Override
     protected void drawArt(Graphics2D g) {
         if (artImage != null && !cardView.isFaceDown()) {
-            Rectangle2D artRect = getArtRect();
-
-            // Perform a process to make sure that the art is scaled uniformly to fill the frame, cutting
-            // off the minimum amount necessary to make it completely fill the frame without "squashing" it.
-            double fullCardImgWidth = artImage.getWidth();
-            double fullCardImgHeight = artImage.getHeight();
-            double artWidth = artRect.getWidth() * fullCardImgWidth;
-            double artHeight = artRect.getHeight() * fullCardImgHeight;
-            double targetWidth = contentWidth - 2;
-            double targetHeight = typeLineY - totalContentInset - boxHeight;
-            double targetAspect = targetWidth / targetHeight;
+            // Invention rendering, art fills the entire frame
             if (useInventionFrame()) {
-                // No adjustment to art
-            } else if (targetAspect * artHeight < artWidth) {
-                // Trim off some width
-                artWidth = targetAspect * artHeight;
-            } else {
-                // Trim off some height
-                artHeight = artWidth / targetAspect;
+                drawArtIntoRect(g,
+                        borderWidth, borderWidth,
+                        cardWidth - 2*borderWidth, cardHeight - 2*borderWidth,
+                        getArtRect(), false);
             }
-            try {
-                BufferedImage subImg
-                        = artImage.getSubimage(
-                                (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
-                                (int) artWidth, (int) artHeight);
-                if (useInventionFrame()) {
-                    g.drawImage(subImg,
-                            borderWidth, borderWidth,
-                            cardWidth - 2 * borderWidth, cardHeight - 2 * borderWidth,
-                            null);
-                } else {
-                    g.drawImage(subImg,
+
+            boolean shouldPreserveAspect = true;
+            Rectangle2D sourceRect = getArtRect();
+
+            if (cardView.getMageObjectType() == MageObjectType.SPELL) {
+                ArtRect rect = cardView.getArtRect();
+                if (rect == ArtRect.SPLIT_FUSED) {
+                    // Special handling for fused, draw the art from both halves stacked on top of one and other
+                    // each filling half of the art rect
+                    drawArtIntoRect(g,
                             totalContentInset + 1, totalContentInset + boxHeight,
-                            (int) targetWidth, (int) targetHeight,
-                            null);
+                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight)/2,
+                            ArtRect.SPLIT_LEFT.rect, useInventionFrame());
+                    drawArtIntoRect(g,
+                            totalContentInset + 1, totalContentInset + boxHeight + (typeLineY - totalContentInset - boxHeight)/2,
+                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight)/2,
+                            ArtRect.SPLIT_RIGHT.rect, useInventionFrame());
+                    return;
+                } else if (rect != ArtRect.NORMAL) {
+                    sourceRect = rect.rect;
+                    shouldPreserveAspect = false;
                 }
-            } catch (RasterFormatException e) {
-                // At very small card sizes we may encounter a problem with rounding error making the rect not fit
             }
+
+            // Normal drawing of art from a source part of the card frame into the rect
+            drawArtIntoRect(g,
+                    totalContentInset + 1, totalContentInset + boxHeight,
+                    contentWidth - 2, typeLineY - totalContentInset - boxHeight,
+                    sourceRect, shouldPreserveAspect);
         }
     }
 
@@ -427,7 +425,7 @@ public class ModernCardRenderer extends CardRenderer {
                 contentWidth - 2, cardHeight - borderWidth * 3 - typeLineY - 1);
 
         // If it's a planeswalker, extend the textbox left border by some
-        if (cardView.getCardTypes().contains(CardType.PLANESWALKER)) {
+        if (cardView.isPlanesWalker()) {
             g.setPaint(borderPaint);
             g.fillRect(
                     totalContentInset, typeLineY + boxHeight,
@@ -478,17 +476,17 @@ public class ModernCardRenderer extends CardRenderer {
         int nameOffset = drawTransformationCircle(g, borderPaint);
 
         // Draw the name line
-        drawNameLine(g,
+        drawNameLine(g, cardView.getDisplayName(), manaCostString,
                 totalContentInset + nameOffset, totalContentInset,
                 contentWidth - nameOffset, boxHeight);
 
         // Draw the type line
-        drawTypeLine(g,
+        drawTypeLine(g, getCardTypeLine(),
                 totalContentInset, typeLineY,
                 contentWidth, boxHeight);
 
         // Draw the textbox rules
-        drawRulesText(g,
+        drawRulesText(g, textboxKeywords, textboxRules,
                 totalContentInset + 2, typeLineY + boxHeight + 2,
                 contentWidth - 4, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3);
 
@@ -497,13 +495,13 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     // Draw the name line
-    protected void drawNameLine(Graphics2D g, int x, int y, int w, int h) {
+    protected void drawNameLine(Graphics2D g, String baseName, String manaCost, int x, int y, int w, int h) {
         // Width of the mana symbols
         int manaCostWidth;
         if (cardView.isAbility()) {
             manaCostWidth = 0;
         } else {
-            manaCostWidth = CardRendererUtils.getManaCostWidth(manaCostString, boxTextHeight);
+            manaCostWidth = CardRendererUtils.getManaCostWidth(manaCost, boxTextHeight);
         }
 
         // Available width for name. Add a little bit of slop so that one character
@@ -519,7 +517,7 @@ public class ModernCardRenderer extends CardRenderer {
                 nameStr = "Morph: " + cardView.getName();
             }
         } else {
-            nameStr = cardView.getName();
+            nameStr = baseName;
         }
         if (!nameStr.isEmpty()) {
             AttributedString str = new AttributedString(nameStr);
@@ -541,12 +539,12 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Draw the mana symbols
         if (!cardView.isAbility() && !cardView.isFaceDown()) {
-            ManaSymbols.draw(g, manaCostString, x + w - manaCostWidth, y + boxTextOffset, boxTextHeight);
+            ManaSymbols.draw(g, manaCost, x + w - manaCostWidth, y + boxTextOffset, boxTextHeight);
         }
     }
 
     // Draw the type line (color indicator, types, and expansion symbol)
-    protected void drawTypeLine(Graphics2D g, int x, int y, int w, int h) {
+    protected void drawTypeLine(Graphics2D g, String baseTypeLine, int x, int y, int w, int h) {
         // Draw expansion symbol
         int expansionSymbolWidth;
         if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_SET_SYMBOL, "false").equals("false")) {
@@ -561,7 +559,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Draw type line text
         int availableWidth = w - expansionSymbolWidth + 1;
-        String types = getCardTypeLine();
+        String types = baseTypeLine;
         g.setFont(boxTextFont);
 
         // Replace "Legendary" in type line if there's not enough space
@@ -583,7 +581,7 @@ public class ModernCardRenderer extends CardRenderer {
             if (breakIndex > 0) {
                 TextLayout layout = measure.getLayout(0, breakIndex);
                 g.setColor(getBoxTextColor());
-                layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);
+                layout.draw(g, x, y + (h - boxTextHeight) / 2 + boxTextHeight - 1);
             }
         }
     }
@@ -603,7 +601,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Is it a creature?
         boolean isVehicle = cardView.getSubTypes().contains("Vehicle");
-        if (cardView.getCardTypes().contains(CardType.CREATURE) || isVehicle) {
+        if (cardView.isCreature() || isVehicle) {
             int x = cardWidth - borderWidth - partWidth;
 
             // Draw PT box
@@ -623,7 +621,7 @@ public class ModernCardRenderer extends CardRenderer {
             // Draw text
             Color textColor;
             if (isVehicle) {
-                boolean isAnimated = !(cardView instanceof PermanentView) || cardView.getCardTypes().contains(CardType.CREATURE);
+                boolean isAnimated = !(cardView instanceof PermanentView) || cardView.isCreature();
                 if (isAnimated) {
                     textColor = Color.white;
                 } else {
@@ -646,7 +644,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Is it a walker? (But don't draw the box if it's a non-permanent view
         // of a walker without a starting loyalty (EG: Arlin Kord's flipped side).
-        if (cardView.getCardTypes().contains(CardType.PLANESWALKER)
+        if (cardView.isPlanesWalker()
                 && (cardView instanceof PermanentView || !cardView.getStartingLoyalty().equals("0"))) {
             // Draw the PW loyalty box
             int w = partWidth;
@@ -760,19 +758,19 @@ public class ModernCardRenderer extends CardRenderer {
         return layout;
     }
 
-    protected void drawRulesText(Graphics2D g, int x, int y, int w, int h) {
+    protected void drawRulesText(Graphics2D g, ArrayList<TextboxRule> keywords, ArrayList<TextboxRule> rules, int x, int y, int w, int h) {
         // Gather all rules to render
-        List<TextboxRule> allRules = new ArrayList<>(textboxRules);
+        List<TextboxRule> allRules = new ArrayList<>(rules);
 
         // Add the keyword rule if there are any keywords
-        if (!textboxKeywords.isEmpty()) {
-            String keywordRulesString = getKeywordRulesString();
+        if (!keywords.isEmpty()) {
+            String keywordRulesString = getKeywordRulesString(keywords);
             TextboxRule keywordsRule = new TextboxRule(keywordRulesString, new ArrayList<>());
             allRules.add(0, keywordsRule);
         }
 
         // Basic mana draw mana symbol in textbox (for basic lands)
-        if (allRules.size() == 1 && (allRules.get(0) instanceof TextboxBasicManaRule) && cardView.getCardTypes().contains(CardType.LAND)) {
+        if (allRules.size() == 1 && (allRules.get(0) instanceof TextboxBasicManaRule) && cardView.isLand()) {
             drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
             return;
         }
@@ -828,11 +826,11 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     // Get the first line of the textbox, the keyword string
-    private String getKeywordRulesString() {
+    private static String getKeywordRulesString(ArrayList<TextboxRule> keywords) {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < textboxKeywords.size(); ++i) {
-            builder.append(textboxKeywords.get(i).text);
-            if (i != textboxKeywords.size() - 1) {
+        for (int i = 0; i < keywords.size(); ++i) {
+            builder.append(keywords.get(i).text);
+            if (i != keywords.size() - 1) {
                 builder.append(", ");
             }
         }

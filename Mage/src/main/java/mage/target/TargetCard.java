@@ -27,9 +27,7 @@
  */
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import mage.MageItem;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.constants.Zone;
@@ -37,6 +35,11 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -200,11 +203,7 @@ public class TargetCard extends TargetObject {
     }
 
     public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (Card card : cards.getCards(filter, game)) {
-            possibleTargets.add(card.getId());
-        }
-        return possibleTargets;
+        return cards.getCards(filter,game).stream().map(MageItem::getId).collect(Collectors.toSet());
     }
 
     @Override

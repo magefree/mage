@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -42,6 +41,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.permanent.token.DragonToken2;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +65,7 @@ public class SkylineDespot extends CardImpl {
         // At the beginning of your upkeep, if you're the monarch, put a 5/5 red Dragon creature token with flying onto the battlefield.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new DragonToken2()),
-                TargetController.YOU, false), MonarchIsSourceControllerCondition.getInstance(),
+                TargetController.YOU, false), MonarchIsSourceControllerCondition.instance,
                 "At the beginning of your upkeep, if you're the monarch, put a 5/5 red Dragon creature token with flying onto the battlefield."));
 
     }

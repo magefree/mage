@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -61,7 +62,7 @@ public class TrialError extends SplitCard {
     }
 
     public TrialError(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}","{U}{B}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}{U}", "{U}{B}", SpellAbilityType.SPLIT);
 
         // Trial
         // Return all creatures blocking or blocked by target creature to their owner's hand.

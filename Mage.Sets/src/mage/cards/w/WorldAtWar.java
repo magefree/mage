@@ -29,6 +29,7 @@ package mage.cards.w;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -52,7 +53,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 public class WorldAtWar extends CardImpl {
 
     public WorldAtWar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.
         this.getSpellAbility().addEffect(new WorldAtWarEffect());
@@ -167,11 +168,11 @@ class UntapAttackingThisTurnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("AttackedThisTurn");
+        Watcher watcher = game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
         if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
-            Set<UUID> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
-            for (UUID uuid : attackedThisTurn) {
-                Permanent permanent = game.getPermanent(uuid);
+            Set<MageObjectReference> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
+            for (MageObjectReference mor : attackedThisTurn) {
+                Permanent permanent = mor.getPermanent(game);
                 if (permanent != null && permanent.isCreature()) {
                     permanent.untap(game);
                 }

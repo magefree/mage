@@ -21,6 +21,7 @@ Dredge|number|
 Double Strike|instance|
 Dredge|number|
 Echo|manaString|
+Embalm|cost, card|
 Enchant|type|
 Entwine|manaString|
 Evoke|card, manaString|

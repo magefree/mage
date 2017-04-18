@@ -35,6 +35,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -123,7 +124,8 @@ class NecromanticSelectionEffect extends OneShotEffect {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    ContinuousEffect effect = new NecromanticSelectionContinuousEffect();
+                    ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
+                    effect.setText("It's a black Zombie in addition to its other colors and types");
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
                 }
@@ -132,57 +134,4 @@ class NecromanticSelectionEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class NecromanticSelectionContinuousEffect extends ContinuousEffectImpl {
-
-    public NecromanticSelectionContinuousEffect() {
-        super(Duration.Custom, Outcome.Neutral);
-        staticText = "It's a black Zombie in addition to its other colors and types";
-    }
-
-    public NecromanticSelectionContinuousEffect(final NecromanticSelectionContinuousEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NecromanticSelectionContinuousEffect copy() {
-        return new NecromanticSelectionContinuousEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
-        if (creature != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        if (!creature.getSubtype(game).contains("Zombie")) {
-                            creature.getSubtype(game).add("Zombie");
-                        }
-                    }
-                    break;
-                case ColorChangingEffects_5:
-                    if (sublayer == SubLayer.NA) {
-                        creature.getColor(game).setBlack(true);
-                    }
-                    break;
-            }
-            return true;
-        } else {
-            this.used = true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
-    }
-
 }

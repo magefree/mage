@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -35,12 +34,15 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +53,7 @@ public class HallowedGround extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("nonsnow land you control");
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Snow")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.SNOW)));
     }
 
     public HallowedGround(UUID ownerId, CardSetInfo setInfo) {

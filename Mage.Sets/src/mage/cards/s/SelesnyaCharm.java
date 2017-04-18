@@ -27,8 +27,7 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -38,12 +37,14 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.permanent.token.KnightToken;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ public class SelesnyaCharm extends CardImpl {
     static private final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
     
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public SelesnyaCharm(UUID ownerId, CardSetInfo setInfo) {

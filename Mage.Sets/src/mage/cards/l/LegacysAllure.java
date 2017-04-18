@@ -27,8 +27,8 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -41,15 +41,15 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.Counter;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class LegacysAllure extends CardImpl {
@@ -57,7 +57,7 @@ public class LegacysAllure extends CardImpl {
     private final UUID originalId;
 
     public LegacysAllure(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
 
         // At the beginning of your upkeep, you may put a treasure counter on Legacy's Allure.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(new Counter("treasure")), TargetController.YOU, true));
@@ -81,7 +81,7 @@ public class LegacysAllure extends CardImpl {
             if (sourcePermanent != null) {
                 int numbCounters = sourcePermanent.getCounters(game).getCount("treasure");
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power less than or equal to the number of treasure counters on " + getLogName());
-                filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, numbCounters + 1));
+                filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, numbCounters + 1));
                 ability.getTargets().clear();
                 ability.getTargets().add(new TargetCreaturePermanent(filter));
             }

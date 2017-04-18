@@ -34,6 +34,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SpellAbilityType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class StandDeliver extends SplitCard {
 
     public StandDeliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}","{2}{U}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}", "{2}{U}", SpellAbilityType.SPLIT);
 
         // Stand
         // Prevent the next 2 damage that would be dealt to target creature this turn.

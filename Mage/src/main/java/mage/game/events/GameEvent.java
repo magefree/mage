@@ -95,6 +95,7 @@ public class GameEvent implements Serializable {
         DISCARD_CARD,
         DISCARDED_CARD,
         CYCLE_CARD, CYCLED_CARD,
+        PAY_CYCLE_COST, CAN_PAY_CYCLE_COST,
         CLASH, CLASHED,
         DAMAGE_PLAYER,
         /* DAMAGED_PLAYER
@@ -166,7 +167,7 @@ public class GameEvent implements Serializable {
          mana        the mana added
          */
         MANA_ADDED,
-        /* MANA_PAYED
+        /* MANA_PAID
          targetId    id if the ability the mana was paid for (not the sourceId)
          sourceId    sourceId of the mana source
          playerId    controller of the ability the mana was paid for
@@ -174,7 +175,7 @@ public class GameEvent implements Serializable {
          flag        indicates a special condition
          data        originalId of the mana producing ability
          */
-        MANA_PAYED,
+        MANA_PAID,
         LOSES, LOST, WINS,
         TARGET, TARGETED,
         /* TARGETS_VALID
@@ -239,6 +240,14 @@ public class GameEvent implements Serializable {
         UNFLIP, UNFLIPPED,
         TRANSFORM, TRANSFORMED,
         BECOMES_MONSTROUS,
+        BECOMES_EXERTED,
+        /* BECOMES_EXERTED
+         targetId    id of the exerted creature
+         sourceId    id of the exerted creature
+         playerId    playerId of the player that controlls the creature
+         amount      not used for this event
+         flag        not used for this event
+         */
         BECOMES_RENOWNED,
         /* BECOMES_MONARCH
          targetId    playerId of the player that becomes the monarch
@@ -253,6 +262,14 @@ public class GameEvent implements Serializable {
         PHASE_IN, PHASED_IN,
         TURNFACEUP, TURNEDFACEUP,
         TURNFACEDOWN, TURNEDFACEDOWN,
+        /* OPTION_USED
+         targetId    originalId of the ability that triggered the event
+         sourceId    sourceId of the ability that triggered the event
+         playerId    controller of the ability
+         amount      not used for this event
+         flag        not used for this event
+         */
+        OPTION_USED,
         DAMAGE_CREATURE, DAMAGED_CREATURE,
         DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER,
         DESTROY_PERMANENT,
@@ -273,6 +290,7 @@ public class GameEvent implements Serializable {
         FIGHTED_PERMANENT,
         EXPLOITED_CREATURE,
         EVOLVED_CREATURE,
+        EMBALMED_CREATURE,
         ATTACH, ATTACHED,
         STAY_ATTACHED,
         UNATTACH, UNATTACHED,
@@ -451,12 +469,19 @@ public class GameEvent implements Serializable {
         return type == EventType.CUSTOM_EVENT && this.customEventType.equals(customEventType);
     }
 
-    public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
-        if (this.appliedEffects == null) {
-            this.appliedEffects = new ArrayList<>();
-        }
+    public void addAppliedEffects(ArrayList<UUID> appliedEffects) {
         if (appliedEffects != null) {
             this.appliedEffects.addAll(appliedEffects);
+        }
+    }
+
+    public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
+        if (appliedEffects != null) {
+            if (this.appliedEffects.isEmpty()) {
+                this.appliedEffects = appliedEffects; // Use object refecence to handle that an replacement effect can only be once applied to an event
+            } else {
+                this.appliedEffects.addAll(appliedEffects);
+            }
         }
     }
 }

@@ -28,6 +28,9 @@
 
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
@@ -38,6 +41,12 @@ import mage.abilities.keyword.TrampleAbility;
  */
 public class WurmToken2 extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("RTR", "MM3"));
+    }
+
     public WurmToken2() {
         super("Wurm", "5/5 green Wurm creature token with trample");
         cardType.add(CardType.CREATURE);
@@ -46,6 +55,5 @@ public class WurmToken2 extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(TrampleAbility.getInstance());
-        setOriginalExpansionSetCode("RTR");
     }
 }

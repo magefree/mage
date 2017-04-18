@@ -12,6 +12,7 @@ import mage.game.GameOptions;
 import mage.game.TwoPlayerDuel;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
+import mage.players.PlayerType;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
@@ -34,7 +35,7 @@ public class PlayGameTest extends MageTestBase {
     public void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0, 20);
 
-        Player computerA = createPlayer("ComputerA", "Computer - minimax hybrid");
+        Player computerA = createPlayer("ComputerA", PlayerType.COMPUTER_MINIMAX_HYBRID);
 //        Player playerA = createPlayer("ComputerA", "Computer - mad");
 //        Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
         Deck deck = generateRandomDeck();
@@ -45,7 +46,7 @@ public class PlayGameTest extends MageTestBase {
         game.addPlayer(computerA, deck);
         game.loadCards(deck.getCards(), computerA.getId());
 
-        Player computerB = createPlayer("ComputerB", "Computer - minimax hybrid");
+        Player computerB = createPlayer("ComputerB", PlayerType.COMPUTER_MINIMAX_HYBRID);
 //        Player playerB = createPlayer("ComputerB", "Computer - mad");
 //        Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
         Deck deck2 = generateRandomDeck();

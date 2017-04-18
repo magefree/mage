@@ -27,9 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -42,6 +39,8 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,15 +88,13 @@ class DesertionEffect extends OneShotEffect {
         if (controller != null) {
             Spell targetSpell = game.getStack().getSpell(targetPointer.getFirst(game, source));
             if (targetSpell != null) {                
-                Set<CardType> cardTypes = new HashSet<>(targetSpell.getCardType());
-                if (!cardTypes.isEmpty()) {
                     //targetPointer.getFirst(game, source)
-                    if (cardTypes.contains(CardType.ARTIFACT) || cardTypes.contains(CardType.CREATURE)) {
+                    if (targetSpell.isArtifact() || targetSpell.isCreature()) {
                         return game.getStack().counter(targetSpell.getId(), source.getSourceId(), game, Zone.BATTLEFIELD, false, ZoneDetail.NONE);
                     } else {
                         return game.getStack().counter(targetSpell.getId(), source.getSourceId(), game);
                     }
-                }
+
             }
         }
         return false;

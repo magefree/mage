@@ -31,13 +31,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-
+import javax.annotation.Nonnull;
 import mage.MageException;
 import mage.players.net.UserData;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
-
-import javax.annotation.Nonnull;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -46,13 +44,12 @@ public enum SessionManager {
     instance;
     private static final Logger logger = Logger.getLogger(SessionManager.class);
 
-
     private final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
     public Optional<Session> getSession(@Nonnull String sessionId) {
         Session session = sessions.get(sessionId);
-        if(session == null){
-            logger.error("Session with sessionId " + sessionId + " is not found");
+        if (session == null) {
+            logger.trace("Session with sessionId " + sessionId + " is not found");
             return Optional.empty();
         }
         if (session.getUserId() != null && UserManager.instance.getUser(session.getUserId()) == null) {
@@ -136,8 +133,10 @@ public enum SessionManager {
                 logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
                 sessions.remove(sessionId);
                 switch (reason) {
-                    case Disconnected: // regular session end
-                        session.kill(reason);
+                    case Disconnected: // regular session end or wrong client version
+                        if (session.getUserId() != null) { // if wrong client version no userId is set
+                            session.kill(reason);
+                        }
                         break;
                     case SessionExpired: // session ends after no reconnect happens in the defined time span
                         session.kill(reason);
@@ -173,7 +172,7 @@ public enum SessionManager {
     public void disconnectUser(String sessionId, String userSessionId) {
         if (isAdmin(sessionId)) {
             getUserFromSession(sessionId).ifPresent(admin -> {
-               Optional<User> u = getUserFromSession(userSessionId);
+                Optional<User> u = getUserFromSession(userSessionId);
                 if (u.isPresent()) {
                     User user = u.get();
                     user.showUserMessage("Admin operation", "Your session was disconnected by Admin.");

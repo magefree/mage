@@ -27,18 +27,19 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.l.LunarchInquisitors;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.l.LunarchInquisitors;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ public class AvacynianMissionaries extends CardImpl {
 
         // At the beginning of your end step, if Avacynian Missionaries is equipped, transform it.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), TargetController.YOU, new EquippedSourceCondition(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), TargetController.YOU, EquippedSourceCondition.instance, false));
 
     }
 

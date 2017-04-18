@@ -28,12 +28,6 @@
 
 package mage.server.tournament;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import mage.cards.Sets;
 import mage.game.draft.DraftCube;
 import mage.game.tournament.Tournament;
@@ -43,23 +37,22 @@ import mage.server.draft.CubeFactory;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;
 
+import java.lang.reflect.Constructor;
+import java.util.*;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentFactory {
-    private static final TournamentFactory INSTANCE = new TournamentFactory();
+public enum TournamentFactory {
+    instance;
     private static final Logger logger = Logger.getLogger(TournamentFactory.class);
 
     private final Map<String, Class<Tournament>> tournaments = new HashMap<>();
     private final Map<String, TournamentType> tournamentTypes = new HashMap<>();
     private final List<TournamentTypeView> tournamentTypeViews = new ArrayList<>();
 
-    public static TournamentFactory getInstance() {
-        return INSTANCE;
-    }
 
-    private TournamentFactory() {}
 
     public Tournament createTournament(String tournamentType, TournamentOptions options) {
 
@@ -81,9 +74,9 @@ public class TournamentFactory {
                     DraftCube draftCube;
 
                     if (tournament.getOptions().getLimitedOptions().getCubeFromDeck() != null) {
-                        draftCube = CubeFactory.getInstance().createDeckDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName(), tournament.getOptions().getLimitedOptions().getCubeFromDeck());
+                        draftCube = CubeFactory.instance.createDeckDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName(), tournament.getOptions().getLimitedOptions().getCubeFromDeck());
                     } else {
-                        draftCube = CubeFactory.getInstance().createDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName());
+                        draftCube = CubeFactory.instance.createDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName());
                     }
                     tournament.getOptions().getLimitedOptions().setDraftCube(draftCube);
                     tournament.setBoosterInfo(tournament.getOptions().getLimitedOptions().getDraftCubeName());

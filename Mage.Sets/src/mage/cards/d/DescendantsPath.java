@@ -27,9 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,13 +35,15 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -102,7 +101,7 @@ class DescendantsPathEffect extends OneShotEffect {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                     boolean found = false;
                     for (Permanent  permanent: game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-                        if (CardUtil.shareSubtypes(card, permanent, game)) {
+                        if (card.shareSubtypes(permanent, game)) {
                             found = true;
                             break;
                         }

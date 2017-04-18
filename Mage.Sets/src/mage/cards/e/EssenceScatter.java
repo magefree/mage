@@ -27,14 +27,14 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.CardType;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
+import mage.filter.common.FilterCreatureSpell;
 
 /**
  *
@@ -42,17 +42,10 @@ import mage.target.TargetSpell;
  */
 public class EssenceScatter extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("creature spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public EssenceScatter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(new FilterCreatureSpell()));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 

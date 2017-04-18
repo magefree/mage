@@ -27,7 +27,7 @@
  */
 package mage.cards.w;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -36,8 +36,6 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -47,6 +45,8 @@ import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.permanent.token.EldraziScionToken;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,8 +59,8 @@ public class WarpingWail extends CardImpl {
 
     static {
         filterCreature.add(Predicates.or(
-                new PowerPredicate(Filter.ComparisonType.LessThan, 2),
-                new ToughnessPredicate(ComparisonType.LessThan, 2)));
+                new PowerPredicate(ComparisonType.FEWER_THAN, 2),
+                new ToughnessPredicate(ComparisonType.FEWER_THAN, 2)));
         filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
     }
 

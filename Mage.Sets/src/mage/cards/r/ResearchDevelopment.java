@@ -33,12 +33,13 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -53,7 +54,7 @@ import mage.target.TargetCard;
 public class ResearchDevelopment extends SplitCard {
 
     public ResearchDevelopment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{U}","{3}{U}{R}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{U}", "{3}{U}{R}", SpellAbilityType.SPLIT);
 
         // Choose up to four cards you own from outside the game and shuffle them into your library.
         getLeftHalfCard().getSpellAbility().addEffect(new ResearchEffect());
@@ -78,7 +79,6 @@ class ResearchEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("card");
 
-
     public ResearchEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose up to four cards you own from outside the game and shuffle them into your library";
@@ -102,7 +102,7 @@ class ResearchEffect extends OneShotEffect {
             int count = 0;
             while (player.chooseUse(Outcome.Benefit, textToAsk.toString(), source, game)) {
                 Cards cards = player.getSideboard();
-                if(cards.isEmpty()) {
+                if (cards.isEmpty()) {
                     game.informPlayer(player, "You have no cards outside the game.");
                     break;
                 }
@@ -170,7 +170,7 @@ class DevelopmentEffect extends OneShotEffect {
                 for (UUID opponentUuid : opponents) {
                     Player opponent = game.getPlayer(opponentUuid);
                     if (opponent != null && opponent.chooseUse(Outcome.Detriment,
-                            "Allow " + player.getLogName() + " to draw a card instead? (" + Integer.toString(i+1) + ')', source, game)) {
+                            "Allow " + player.getLogName() + " to draw a card instead? (" + Integer.toString(i + 1) + ')', source, game)) {
                         game.informPlayers(opponent.getLogName() + " had chosen to let " + player.getLogName() + " draw a card.");
                         player.drawCards(1, game);
                         putToken = false;

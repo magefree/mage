@@ -28,16 +28,18 @@
 
 package mage.game.match;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.result.ResultProtos;
+import mage.players.PlayerType;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -53,7 +55,7 @@ public class MatchOptions implements Serializable {
     protected String gameType;
     protected String deckType;
     protected boolean limited;
-    protected List<String> playerTypes = new ArrayList<>();
+    protected List<PlayerType> playerTypes = new ArrayList<>();
     protected boolean multiPlayer;
     protected int numSeats;
     protected String password;
@@ -154,7 +156,7 @@ public class MatchOptions implements Serializable {
         this.deckType = deckType;
     }
 
-    public List<String> getPlayerTypes() {
+    public List<PlayerType> getPlayerTypes() {
         return playerTypes;
     }
 

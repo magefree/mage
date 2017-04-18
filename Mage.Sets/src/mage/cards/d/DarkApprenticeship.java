@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
@@ -39,6 +38,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
+
+import java.util.UUID;
 
 /**
  *

@@ -94,7 +94,7 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
             }
             sb.append(condition.toString()).append('.');
         } else {
-            sb.append(" [Condition toSting() == null] ");
+            sb.append(" [Condition toString() == null] ");
         }
         return sb.toString() ;
     }

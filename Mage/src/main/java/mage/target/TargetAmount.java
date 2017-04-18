@@ -34,6 +34,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Outcome;
 import mage.game.Game;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -142,12 +143,7 @@ public abstract class TargetAmount extends TargetImpl {
                 t.addTarget(targetId, n, source, game, true);
                 if (t.remainingAmount > 0) {
                     if (targets.size() > 1) {
-                        Set<UUID> newTargets = new HashSet<>();
-                        for (UUID newTarget: targets) {
-                            if (!newTarget.equals(targetId)) {
-                                newTargets.add(newTarget);
-                            }
-                        }
+                        Set<UUID> newTargets = targets.stream().filter(newTarget -> !newTarget.equals(targetId)).collect(Collectors.toSet());
                         addTargets(t, newTargets, options, source, game);
                     }
                 }

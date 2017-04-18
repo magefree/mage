@@ -27,9 +27,6 @@
  */
 package mage.cards.y;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -39,6 +36,9 @@ import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -49,6 +49,8 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.Targets;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX
@@ -57,7 +59,7 @@ public class YoseiTheMorningStar extends CardImpl {
 
     public YoseiTheMorningStar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dragon");
         this.subtype.add("Spirit");
 

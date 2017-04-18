@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -43,6 +42,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *

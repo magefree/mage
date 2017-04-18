@@ -27,10 +27,9 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -42,6 +41,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,12 +69,12 @@ public class DuergarHedgeMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Duergar Hedge-Mage enters the battlefield, if you control two or more Mountains, you may destroy target artifact.
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1), rule1);
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1), rule1);
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
 
         // When Duergar Hedge-Mage enters the battlefield, if you control two or more Plains, you may destroy target enchantment.
-        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2);
+        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 1), rule2);
         ability2.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability2);
 

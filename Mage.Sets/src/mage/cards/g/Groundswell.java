@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
@@ -38,6 +37,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LandfallWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ public class Groundswell extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new BoostTargetEffect(4, 4, Duration.EndOfTurn)),
                 new AddContinuousEffectToGame(new BoostTargetEffect(2, 2, Duration.EndOfTurn)),
-                LandfallCondition.getInstance(),
+                LandfallCondition.instance,
                 "Target creature gets +2/+2 until end of turn. <br><i>Landfall</i> &mdash; If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

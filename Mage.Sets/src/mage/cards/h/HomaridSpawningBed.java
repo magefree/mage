@@ -85,6 +85,6 @@ class CamaridToken extends Token {
         this.getToughness().modifyBaseValue(1);
         this.color.setBlue(true);
         this.getSubtype(null).add("Camarid");
-        this.getCardType().add(CardType.CREATURE);
+        this.addCardType(CardType.CREATURE);
     }
 }

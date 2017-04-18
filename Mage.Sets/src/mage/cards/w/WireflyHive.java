@@ -79,7 +79,7 @@ class WireflyToken extends Token {
         this.getPower().modifyBaseValue(2);
         this.getToughness().modifyBaseValue(2);
         this.getSubtype(null).add("Insect");
-        this.getCardType().add(CardType.ARTIFACT);
-        this.getCardType().add(CardType.CREATURE);
+        this.addCardType(CardType.ARTIFACT);
+        this.addCardType(CardType.CREATURE);
     }
 }

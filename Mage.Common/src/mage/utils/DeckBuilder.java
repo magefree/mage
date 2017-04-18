@@ -1,20 +1,13 @@
 package mage.utils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import mage.Mana;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
-import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.interfaces.rate.RateCallback;
 import mage.util.RandomUtil;
+
+import java.util.*;
 
 /**
  * Builds deck from provided card pool.
@@ -246,13 +239,13 @@ public final class DeckBuilder {
             this.card = card;
 
             int type;
-            if (card.getCardType().contains(CardType.CREATURE)) {
+            if (card.isCreature()) {
                 type = 10;
             } else if (card.getSubtype(null).contains("Equipment")) {
                 type = 8;
             } else if (card.getSubtype(null).contains("Aura")) {
                 type = 5;
-            } else if (card.getCardType().contains(CardType.INSTANT)) {
+            } else if (card.isInstant()) {
                 type = 7;
             } else {
                 type = 6;

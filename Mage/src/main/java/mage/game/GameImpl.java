@@ -27,6 +27,10 @@
  */
 package mage.game;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.MageException;
 import mage.MageObject;
 import mage.abilities.*;
@@ -92,11 +96,6 @@ import mage.watchers.Watchers;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-
 public abstract class GameImpl implements Game, Serializable {
 
     private static final int ROLLBACK_TURNS_MAX = 4;
@@ -118,7 +117,7 @@ public abstract class GameImpl implements Game, Serializable {
         FILTER_FORTIFICATION.add(new CardTypePredicate(CardType.ARTIFACT));
         FILTER_FORTIFICATION.add(new SubtypePredicate("Fortification"));
 
-        FILTER_LEGENDARY.add(new SupertypePredicate("Legendary"));
+        FILTER_LEGENDARY.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
     private transient Object customData;
@@ -503,12 +502,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Ability getAbility(UUID abilityId, UUID sourceId) {
+    public Optional<Ability> getAbility(UUID abilityId, UUID sourceId) {
         MageObject object = getObject(sourceId);
         if (object != null) {
             return object.getAbilities().get(abilityId);
         }
-        return null;
+        return Optional.empty();
     }
 
 //    @Override
@@ -1455,7 +1454,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         if (applier != null) {
-            applier.apply(this, newBluePrint);
+            applier.apply(this, newBluePrint, source, copyToPermanentId);
         }
 
         CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
@@ -1733,7 +1732,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
                 planeswalkers.add(perm);
             }
-            if (perm.getSupertype().contains("World")) {
+            if (perm.isWorld()) {
                 worldEnchantment.add(perm);
             }
             if (FILTER_AURA.match(perm, this)) {
@@ -1931,7 +1930,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (legendary.size() > 1) {  //don't bother checking if less than 2 legends in play
             for (Permanent legend : legendary) {
                 FilterPermanent filterLegendName = new FilterPermanent();
-                filterLegendName.add(new SupertypePredicate("Legendary"));
+                filterLegendName.add(new SupertypePredicate(SuperType.LEGENDARY));
                 filterLegendName.add(new NamePredicate(legend.getName()));
                 filterLegendName.add(new ControllerIdPredicate(legend.getControllerId()));
                 if (getBattlefield().contains(filterLegendName, legend.getControllerId(), this, 2)) {
@@ -2336,10 +2335,10 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
-        Iterator it = gameCards.entrySet().iterator();
+        Iterator<Entry<UUID, Card>> it = gameCards.entrySet().iterator();
 
         while (it.hasNext()) {
-            Entry<UUID, Card> entry = (Entry<UUID, Card>) it.next();
+            Entry<UUID, Card> entry = it.next();
             Card card = entry.getValue();
             if (card.getOwnerId().equals(playerId)) {
                 it.remove();
@@ -2672,8 +2671,8 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public boolean endTurn() {
-        getTurn().endTurn(this, getActivePlayerId());
+    public boolean endTurn(Ability source) {
+        getTurn().endTurn(this, getActivePlayerId(), source);
         return true;
     }
 

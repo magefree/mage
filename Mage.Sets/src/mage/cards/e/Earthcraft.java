@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
@@ -35,6 +34,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -44,6 +44,8 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -56,7 +58,7 @@ public class Earthcraft extends CardImpl {
     static {
         filterCreature.add(Predicates.not(new TappedPredicate()));
         filterLand.add(new CardTypePredicate(CardType.LAND));
-        filterLand.add(new SupertypePredicate("Basic"));
+        filterLand.add(new SupertypePredicate(SuperType.BASIC));
     }
 
     public Earthcraft(UUID ownerId, CardSetInfo setInfo) {

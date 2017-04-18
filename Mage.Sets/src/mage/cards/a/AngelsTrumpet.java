@@ -28,6 +28,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,11 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,11 +51,11 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 public class AngelsTrumpet extends CardImpl {
 
     public AngelsTrumpet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // All creatures have vigilance.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
-        
+
         // At the beginning of each player's end step, tap all untapped creatures that player controls that didn't attack this turn. Angel's Trumpet deals damage to the player equal to the number of creatures tapped this way.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new AngelsTrumpetTapEffect(), TargetController.ANY, false), new AttackedThisTurnWatcher());
     }
@@ -74,21 +71,21 @@ public class AngelsTrumpet extends CardImpl {
 }
 
 class AngelsTrumpetTapEffect extends OneShotEffect {
-    
+
     AngelsTrumpetTapEffect() {
         super(Outcome.Tap);
         this.staticText = "tap all untapped creatures that player controls that didn't attack this turn. Angel's Trumpet deals damage to the player equal to the number of creatures tapped this way";
     }
-    
+
     AngelsTrumpetTapEffect(final AngelsTrumpetTapEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public AngelsTrumpetTapEffect copy() {
         return new AngelsTrumpetTapEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
@@ -100,8 +97,8 @@ class AngelsTrumpetTapEffect extends OneShotEffect {
                     continue;
                 }
                 // Creatures that attacked are safe.
-                AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
-                if (watcher != null && watcher.getAttackedThisTurnCreatures().contains(creature.getId())) {
+                AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
+                if (watcher != null && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(creature, game))) {
                     continue;
                 }
                 // Tap the rest.

@@ -64,7 +64,7 @@ import mage.watchers.Watcher;
 public class SavageSummoning extends CardImpl {
 
     public SavageSummoning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Savage Summoning can't be countered.
         Ability ability = new CantBeCounteredAbility();
@@ -315,7 +315,7 @@ class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(), source, game);
+            creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
         }
         discard();
         return false;

@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -46,10 +45,13 @@ import mage.cards.CardSetInfo;
 import mage.cards.g.GideonBattleForged;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +61,7 @@ public class KytheonHeroOfAkros extends CardImpl {
 
     public KytheonHeroOfAkros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

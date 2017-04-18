@@ -27,15 +27,16 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public class DisdainfulStroke extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or greater");
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public DisdainfulStroke(UUID ownerId, CardSetInfo setInfo) {

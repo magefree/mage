@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.condition.common.SurgedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -40,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,15 +27,15 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.d.DrySpell;
 import mage.cards.f.FeastOfTheUnicorn;
 import mage.cards.m.MesaFalcon;
 import mage.cards.s.SoldeviSage;
 import mage.cards.v.VodalianSoldiers;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *

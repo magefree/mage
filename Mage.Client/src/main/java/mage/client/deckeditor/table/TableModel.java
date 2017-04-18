@@ -27,24 +27,6 @@
  */
 package mage.client.deckeditor.table;
 
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumnModel;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
@@ -55,7 +37,6 @@ import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
-import mage.constants.CardType;
 import mage.constants.EnlargeMode;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -63,6 +44,16 @@ import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Table Model for card list.
@@ -133,22 +124,22 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                     addCard(card, bigCard, gameId);
                 }
                 if (updateCountsCallback != null) {
-                    if (card.getCardTypes().contains(CardType.LAND)) {
+                    if (card.isLand()) {
                         landCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         creatureCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.INSTANT)) {
+                    if (card.isInstant()) {
                         instantCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.SORCERY)) {
+                    if (card.isSorcery()) {
                         sorceryCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.ENCHANTMENT)) {
+                    if (card.isEnchantment()) {
                         enchantmentCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.ARTIFACT)) {
+                    if (card.isArtifact()) {
                         artifactCount++;
                     }
                 }
@@ -260,11 +251,11 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.TABLE);
                 return "<html>" + castingCost + "</html>";
             case 3:
-                return CardHelper.getColor(c);
+                return c.getColorText();
             case 4:
-                return CardHelper.getType(c);
+                return c.getTypeText();
             case 5:
-                return CardHelper.isCreature(c) ? c.getPower() + '/'
+                return c.isCreature() ? c.getPower() + '/'
                         + c.getToughness() : "-";
             case 6:
                 return c.getRarity().toString();

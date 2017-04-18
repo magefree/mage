@@ -25,30 +25,24 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayerAmount;
-
-/**
- *
- * @author LevelX2
- */
-
 
 public class FireIce extends SplitCard {
 
     public FireIce(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}","{1}{U}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}", "{1}{U}", SpellAbilityType.SPLIT);
 
         // Fire
         // Fire deals 2 damage divided as you choose among one or two target creatures and/or players.

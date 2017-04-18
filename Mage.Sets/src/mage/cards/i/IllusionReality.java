@@ -34,6 +34,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SpellAbilityType;
 import mage.target.Target;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetSpellOrPermanent;
@@ -42,11 +43,10 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author LevelX2
  */
-
 public class IllusionReality extends SplitCard {
 
     public IllusionReality(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}","{2}{G}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}", "{2}{G}", SpellAbilityType.SPLIT);
 
         // Illusion
         // Target spell or permanent becomes the color of your choice until end of turn.

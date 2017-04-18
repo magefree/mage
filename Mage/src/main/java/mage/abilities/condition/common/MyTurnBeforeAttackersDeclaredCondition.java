@@ -37,12 +37,8 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class MyTurnBeforeAttackersDeclaredCondition implements Condition {
-    private static final MyTurnBeforeAttackersDeclaredCondition instance = new MyTurnBeforeAttackersDeclaredCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+public enum  MyTurnBeforeAttackersDeclaredCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

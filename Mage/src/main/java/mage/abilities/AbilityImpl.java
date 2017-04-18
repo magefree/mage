@@ -27,6 +27,10 @@
  */
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
@@ -58,11 +62,6 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -287,6 +286,19 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
+        // 117.6. Some mana costs contain no mana symbols. This represents an unpayable cost. An ability can
+        // also have an unpayable cost if its cost is based on the mana cost of an object with no mana cost.
+        // Attempting to cast a spell or activate an ability that has an unpayable cost is a legal action.
+        // However, attempting to pay an unpayable cost is an illegal action.
+        //
+        // We apply this now, *AFTER* the user has made the choice to pay an alternative cost for the
+        // spell. You can also still cast a spell with an unplayable cost by... not paying it's mana cost.
+        //if (getAbilityType() == AbilityType.SPELL && getManaCostsToPay().isEmpty() && !noMana) {
+        //    return false;
+        //}
+        if (getAbilityType() == AbilityType.SPELL && (getManaCostsToPay().isEmpty() && getCosts().isEmpty()) && !noMana) {
+            return false;
+        }
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.
@@ -328,7 +340,7 @@ public abstract class AbilityImpl implements Ability {
                 Outcome outcome = getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome();
                 if (getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game) == false) {
                     if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
-                        game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");
+                        game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets");
                     }
                     return false; // when activation of ability is canceled during target selection
                 }
@@ -489,7 +501,7 @@ public abstract class AbilityImpl implements Ability {
     protected String handleOtherXCosts(Game game, Player controller) {
         StringBuilder announceString = new StringBuilder();
         for (VariableCost variableCost : this.costs.getVariableCosts()) {
-            if (!(variableCost instanceof VariableManaCost)) {
+            if (!(variableCost instanceof VariableManaCost) && !((Cost) variableCost).isPaid()) {
                 int xValue = variableCost.announceXValue(this, game);
                 Cost fixedCost = variableCost.getFixedCostsFromAnnouncedValue(xValue);
                 if (fixedCost != null) {
@@ -506,19 +518,20 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
-     * 601.2b
-     * If a cost that will be paid as the spell is being cast includes Phyrexian mana symbols,
-     * the player announces whether he or she intends to pay 2 life or the corresponding colored mana cost for each of those symbols.
+     * 601.2b If a cost that will be paid as the spell is being cast includes
+     * Phyrexian mana symbols, the player announces whether he or she intends to
+     * pay 2 life or the corresponding colored mana cost for each of those
+     * symbols.
      */
     private void handlePhyrexianManaCosts(Game game, UUID sourceId, Player controller) {
         Iterator<ManaCost> costIterator = manaCostsToPay.iterator();
-        while(costIterator.hasNext()) {
+        while (costIterator.hasNext()) {
             ManaCost cost = costIterator.next();
-            if(cost instanceof PhyrexianManaCost) {
-                PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost)cost;
+            if (cost instanceof PhyrexianManaCost) {
+                PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) cost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
-                if(payLifeCost.canPay(this, sourceId, controller.getId(), game) &&
-                        controller.chooseUse(Outcome.LoseLife,  "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', this, game)) {
+                if (payLifeCost.canPay(this, sourceId, controller.getId(), game)
+                        && controller.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', this, game)) {
                     costIterator.remove();
                     costs.add(payLifeCost);
                 }
@@ -558,7 +571,11 @@ public abstract class AbilityImpl implements Ability {
                     } else {
                         String manaSymbol = null;
                         if (variableManaCost.getFilter().isBlack()) {
-                            manaSymbol = "B";
+                            if (variableManaCost.getFilter().isRed()) {
+                                manaSymbol = "B/R";
+                            } else {
+                                manaSymbol = "B";
+                            }
                         } else if (variableManaCost.getFilter().isRed()) {
                             manaSymbol = "R";
                         } else if (variableManaCost.getFilter().isBlue()) {

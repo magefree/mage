@@ -27,8 +27,8 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -39,12 +39,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +74,7 @@ public class KnollspineInvocation extends CardImpl {
                     DiscardTargetCost discardCost = (DiscardTargetCost) cost;
                     discardCost.getTargets().clear();
                     FilterCard adjustedFilter = filter.copy(); // don't use it directly, it's static!!!!
-                    adjustedFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
+                    adjustedFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
                     discardCost.addTarget(new TargetCardInHand(adjustedFilter));
                     return;
                 }

@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -37,6 +36,8 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *

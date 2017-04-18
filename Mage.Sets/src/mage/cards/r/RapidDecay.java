@@ -28,17 +28,13 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.game.Game;
 import mage.target.common.TargetCardInASingleGraveyard;
 
 /**
@@ -48,12 +44,12 @@ import mage.target.common.TargetCardInASingleGraveyard;
 public class RapidDecay extends CardImpl {
 
     public RapidDecay(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Exile up to three target cards from a single graveyard.
-        this.getSpellAbility().addEffect(new RapidDecayExileEffect());
-        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("up to three target cards from a single graveyard")));
-        
+        this.getSpellAbility().addEffect(new ExileTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("cards from a single graveyard")));
+
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
@@ -65,33 +61,5 @@ public class RapidDecay extends CardImpl {
     @Override
     public RapidDecay copy() {
         return new RapidDecay(this);
-    }
-}
-
-class RapidDecayExileEffect extends OneShotEffect {
-
-    public RapidDecayExileEffect() {
-            super(Outcome.Exile);
-            this.staticText = "Exile up to three target cards from a single graveyard";
-    }
-
-    public RapidDecayExileEffect(final RapidDecayExileEffect effect) {
-            super(effect);
-    }
-
-    @Override
-    public RapidDecayExileEffect copy() {
-            return new RapidDecayExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID targetID : source.getTargets().get(0).getTargets()) {
-            Card card = game.getCard(targetID);
-            if (card != null) {
-                card.moveToExile(null, "", source.getSourceId(), game);
-            }
-        }
-        return true;
     }
 }

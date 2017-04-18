@@ -27,13 +27,13 @@
  */
 package mage.abilities.condition.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.IntCompareCondition;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.UUID;
 
 /**
  * Describes condition when an opponent has lost an amount of life
@@ -42,7 +42,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  */
 public class OpponentLostLifeCondition extends IntCompareCondition {
 
-    public OpponentLostLifeCondition(Condition.ComparisonType type, int value) {
+    public OpponentLostLifeCondition(ComparisonType type, int value) {
         super(type, value);
     }
 
@@ -65,13 +65,13 @@ public class OpponentLostLifeCondition extends IntCompareCondition {
     public String toString() {
         StringBuilder sb = new StringBuilder("if an opponent lost ");
         switch (type) {
-            case GreaterThan:
+            case MORE_THAN:
                 sb.append(value + 1).append(" or more life this turn ");
                 break;
-            case Equal:
+            case EQUAL_TO:
                 sb.append(value).append(" life this turn ");
                 break;
-            case LessThan:
+            case FEWER_THAN:
                 sb.append(" less than ").append(value).append(" life this turn ");
                 break;
         }

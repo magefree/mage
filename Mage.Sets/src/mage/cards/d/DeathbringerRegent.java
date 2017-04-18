@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -43,6 +42,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.watchers.common.CastFromHandWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -87,7 +88,7 @@ class DeathbringerRegentCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return new CastFromHandSourceCondition().apply(game, source)
+        return CastFromHandSourceCondition.instance.apply(game, source)
                 && game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game).size() >= 6;
     }
 }

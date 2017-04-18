@@ -163,9 +163,9 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.setName("");
-                    permanent.getSupertype().clear();
+                    permanent.getSuperType().clear();
                     permanent.getCardType().clear();
-                    permanent.getCardType().add(CardType.CREATURE);
+                    permanent.addCardType(CardType.CREATURE);
                     permanent.getSubtype(game).clear();
                     break;
                 case ColorChangingEffects_5:

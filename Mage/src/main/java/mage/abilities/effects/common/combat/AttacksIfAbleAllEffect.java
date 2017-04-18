@@ -5,6 +5,7 @@
  */
 package mage.abilities.effects.common.combat;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.constants.Duration;
@@ -59,8 +60,8 @@ public class AttacksIfAbleAllEffect extends RequirementEffect {
             if (eachCombat) {
                 return true;
             }
-            AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
-            return watcher != null && !watcher.getAttackedThisTurnCreatures().contains(permanent.getId());
+            AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
+            return watcher != null && !watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game));
         }
         return false;
     }

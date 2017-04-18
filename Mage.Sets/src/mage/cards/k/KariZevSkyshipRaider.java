@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -52,7 +53,7 @@ public class KariZevSkyshipRaider extends CardImpl {
     public KariZevSkyshipRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Pirate");
         this.power = new MageInt(1);
@@ -111,11 +112,11 @@ class RagavanToken extends Token {
     RagavanToken() {
         super("Ragavan", "legendary 2/1 red Monkey creature token named Ragavan");
         this.setOriginalExpansionSetCode("AER");
-        this.getSupertype().add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.getPower().modifyBaseValue(2);
         this.getToughness().modifyBaseValue(1);
         this.color.setRed(true);
         this.getSubtype(null).add("Monkey");
-        this.getCardType().add(CardType.CREATURE);
+        this.addCardType(CardType.CREATURE);
     }
 }

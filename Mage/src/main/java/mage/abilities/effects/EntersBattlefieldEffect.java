@@ -148,6 +148,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
                 if (spell != null) {
                     effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
                 }
+                effect.setValue("appliedEffects", event.getAppliedEffects());
                 effect.apply(game, source);
             }
             // }

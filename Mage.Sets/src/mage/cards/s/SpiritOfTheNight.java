@@ -27,19 +27,20 @@
  */
 package mage.cards.s;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.SourceAttackingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 
 import java.util.UUID;
-import mage.abilities.condition.common.SourceAttackingCondition;
 
 /**
  *
@@ -49,7 +50,7 @@ public class SpiritOfTheNight extends CardImpl {
     
     public SpiritOfTheNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
 
@@ -69,7 +70,7 @@ public class SpiritOfTheNight extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         
         // Spirit of the Night has first strike as long as it's attacking.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.getInstance(), "{this} has first strike as long as it's attacking")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.instance, "{this} has first strike as long as it's attacking")));
     }
 
     public SpiritOfTheNight(final SpiritOfTheNight card) {

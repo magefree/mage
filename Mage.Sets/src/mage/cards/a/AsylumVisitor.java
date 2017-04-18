@@ -27,10 +27,9 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,6 +42,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,7 @@ public class AsylumVisitor extends CardImpl {
 
         // At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.
         Ability ability = new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.ANY, false),
-                new CardsInHandCondition(CountType.EQUAL_TO, 0, null, TargetController.ACTIVE),
+                new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, null, TargetController.ACTIVE),
                 "At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.");
         Effect effect = new LoseLifeSourceControllerEffect(1);
         effect.setText("and you lose 1 life");

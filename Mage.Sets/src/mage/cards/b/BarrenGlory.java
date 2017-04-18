@@ -27,9 +27,7 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
@@ -46,6 +44,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
+import java.util.UUID;
+
 /**
  * @author fireshoes
  */
@@ -55,7 +55,7 @@ public class BarrenGlory extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");
 
         // At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
-        Condition condition = new CardsInHandCondition(CountType.EQUAL_TO, 0);
+        Condition condition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
         TriggeredAbility ability = new BarrenGloryTriggeredAbility();
         this.addAbility(new ConditionalTriggeredAbility(ability,
                 condition,

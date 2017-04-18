@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -58,7 +59,7 @@ public class EyeOfSingularity extends CardImpl {
     public EyeOfSingularity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        this.supertype.add("World");
+        this.addSuperType(SuperType.WORLD);
 
         // When Eye of Singularity enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EyeOfSingularityETBEffect()));
@@ -82,7 +83,7 @@ class EyeOfSingularityETBEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
     }
 
     EyeOfSingularityETBEffect() {
@@ -152,7 +153,7 @@ class EyeOfSingularityTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        if (permanent != null && !permanent.getSupertype().contains("Basic")) {
+        if (permanent != null && !permanent.isBasic()) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;
         }
@@ -170,7 +171,7 @@ class EyeOfSingularityTriggeredEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
     }
 
     EyeOfSingularityTriggeredEffect() {

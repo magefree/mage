@@ -151,12 +151,12 @@ public class BestowAbility extends SpellAbility {
             if (basicObject != null) {
                 basicObject.getSubtype(null).remove("Aura");
                 if (!basicObject.isCreature()) {
-                    basicObject.getCardType().add(CardType.CREATURE);
+                    basicObject.addCardType(CardType.CREATURE);
                 }
             }
             permanent.getSubtype(null).remove("Aura");
             if (!permanent.isCreature()) {
-                permanent.getCardType().add(CardType.CREATURE);
+                permanent.addCardType(CardType.CREATURE);
             }
 
         }

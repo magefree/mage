@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -48,16 +48,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
-/**
- *
- * @author LevelX2
- */
-
-
 public class FleshBlood extends SplitCard {
 
     public FleshBlood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{G}","{R}{G}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{G}", "{R}{G}", SpellAbilityType.SPLIT_FUSED);
 
         // Flesh
         // Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.
@@ -89,7 +83,7 @@ class FleshEffect extends OneShotEffect {
     public FleshEffect() {
         super(Outcome.BoostCreature);
         staticText = "Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled";
-     }
+    }
 
     public FleshEffect(final FleshEffect effect) {
         super(effect);
@@ -124,7 +118,7 @@ class BloodEffect extends OneShotEffect {
     public BloodEffect() {
         super(Outcome.Damage);
         staticText = "Target creature you control deals damage equal to its power to target creature or player";
-     }
+    }
 
     public BloodEffect(final BloodEffect effect) {
         super(effect);

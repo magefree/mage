@@ -27,15 +27,9 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
-
-import mage.abilities.CountType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -43,14 +37,17 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -73,7 +70,7 @@ public class NezumiShortfang extends CardImpl {
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new ConditionalOneShotEffect(
                 new FlipSourceEffect(new StabwhiskerTheOdious()),
-                new CardsInTargetOpponentHandCondition(CountType.FEWER_THAN, 1),
+                new CardsInTargetOpponentHandCondition(ComparisonType.FEWER_THAN, 1),
                 "Then if that player has no cards in hand, flip {this}"));
         this.addAbility(ability);
     }
@@ -92,7 +89,7 @@ class StabwhiskerTheOdious extends Token {
 
     StabwhiskerTheOdious() {
         super("Stabwhisker the Odious", "");
-        supertype.add("Legendary");
+       addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Rat");
@@ -139,19 +136,19 @@ class StabwhiskerLoseLifeEffect extends OneShotEffect {
 class CardsInTargetOpponentHandCondition implements Condition {
 
     private Condition condition;
-    private CountType type;
+    private ComparisonType type;
     private int count;
 
     public CardsInTargetOpponentHandCondition() {
-        this(CountType.EQUAL_TO, 0);
+        this(ComparisonType.EQUAL_TO, 0);
     }
 
-    public CardsInTargetOpponentHandCondition(CountType type, int count) {
+    public CardsInTargetOpponentHandCondition(ComparisonType type, int count) {
         this.type = type;
         this.count = count;
     }
 
-    public CardsInTargetOpponentHandCondition(CountType type, int count, Condition conditionToDecorate) {
+    public CardsInTargetOpponentHandCondition(ComparisonType type, int count, Condition conditionToDecorate) {
         this(type, count);
         this.condition = conditionToDecorate;
     }
@@ -163,7 +160,7 @@ class CardsInTargetOpponentHandCondition implements Condition {
         if (opponent == null) {
             return false;
         }
-        conditionApplies = CountType.compare(opponent.getHand().size(), type, count);
+        conditionApplies = ComparisonType.compare(opponent.getHand().size(), type, count);
 
         //If a decorated condition exists, check it as well and apply them together.
         if (this.condition != null) {

@@ -27,19 +27,20 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.b.BearerOfOverwhelmingTruths;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.b.BearerOfOverwhelmingTruths;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *

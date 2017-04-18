@@ -38,11 +38,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,7 +55,7 @@ public class LazavDimirMastermind extends CardImpl {
 
     public LazavDimirMastermind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{B}{B}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(3);
@@ -113,7 +109,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
                 newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 ApplyToPermanent applier = new LazavDimirMastermindApplier();
-                applier.apply(game, newBluePrint);
+                applier.apply(game, newBluePrint, source, lazavDimirMastermind.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, lazavDimirMastermind.getId());
                 copyEffect.newId();
                 copyEffect.setApplier(applier);
@@ -130,27 +126,27 @@ class LazavDimirMastermindEffect extends OneShotEffect {
 class LazavDimirMastermindApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new LazavDimirMastermindEffect(), true,
                 new FilterCreatureCard("a creature card"),
                 TargetController.OPPONENT, SetTargetPointer.CARD);
         permanent.getAbilities().add(ability);
         permanent.setName("Lazav, Dimir Mastermind");
-        permanent.getSupertype().add("Legendary");
+        permanent.addSuperType(SuperType.LEGENDARY);
         permanent.getAbilities().add(HexproofAbility.getInstance());
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new LazavDimirMastermindEffect(), true,
                 new FilterCreatureCard("a creature card"),
                 TargetController.OPPONENT, SetTargetPointer.CARD);
         mageObject.getAbilities().add(ability);
         mageObject.setName("Lazav, Dimir Mastermind");
-        mageObject.getSupertype().add("Legendary");
+        mageObject.addSuperType(SuperType.LEGENDARY);
         mageObject.getAbilities().add(HexproofAbility.getInstance());
         return true;
     }

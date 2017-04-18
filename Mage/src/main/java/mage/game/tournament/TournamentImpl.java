@@ -38,6 +38,7 @@ import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
 import mage.game.result.ResultProtos.*;
 import mage.players.Player;
+import mage.players.PlayerType;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
@@ -82,7 +83,7 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
-    public void addPlayer(Player player, String playerType) {
+    public void addPlayer(Player player, PlayerType playerType) {
         players.put(player.getId(), new TournamentPlayer(player, playerType));
     }
 

@@ -27,16 +27,17 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public class ElementalBond extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature with power 3 or greater");
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.GreaterThan, 2));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public ElementalBond(UUID ownerId, CardSetInfo setInfo) {

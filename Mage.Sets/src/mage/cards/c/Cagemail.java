@@ -27,10 +27,9 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBlockAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -40,7 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.effects.Effect;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,6 +27,7 @@
  */
 package mage.abilities;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
@@ -43,8 +44,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -94,7 +93,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
     public boolean canActivate(UUID playerId, Game game) {
         if (game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || this.spellCanBeActivatedRegularlyNow(playerId, game)) {
-            if (spellAbilityType == SpellAbilityType.SPLIT) {
+            if (spellAbilityType == SpellAbilityType.SPLIT || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
                 return false;
             }
             // fix for Gitaxian Probe and casting opponent's spells
@@ -110,7 +109,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 }
             }
             // Alternate spell abilities (Flashback, Overload) can't be cast with no mana to pay option
-            if (getSpellAbilityType()== SpellAbilityType.BASE_ALTERNATE) {
+            if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && getSourceId().equals(player.getCastSourceIdWithAlternateMana())) {
                     return false;
@@ -183,27 +182,27 @@ public class SpellAbility extends ActivatedAbilityImpl {
     public int getConvertedXManaCost(Card card) {
         int xMultiplier = 0;
         int amount = 0;
-        if(card == null) {
+        if (card == null) {
             return 0;
         }
 
-        for(ManaCost manaCost : card.getManaCost()) {
-            if(manaCost instanceof VariableManaCost) {
-                xMultiplier = ((VariableManaCost)manaCost).getMultiplier();
+        for (ManaCost manaCost : card.getManaCost()) {
+            if (manaCost instanceof VariableManaCost) {
+                xMultiplier = ((VariableManaCost) manaCost).getMultiplier();
                 break;
             }
         }
 
         boolean hasNonManaXCost = false;
-        for(Cost cost : getCosts()) {
-            if(cost instanceof VariableCost) {
+        for (Cost cost : getCosts()) {
+            if (cost instanceof VariableCost) {
                 hasNonManaXCost = true;
                 amount = ((VariableCost) cost).getAmount();
                 break;
             }
         }
 
-        if(!hasNonManaXCost) {
+        if (!hasNonManaXCost) {
             amount = getManaCostsToPay().getX();
         }
         return amount * xMultiplier;

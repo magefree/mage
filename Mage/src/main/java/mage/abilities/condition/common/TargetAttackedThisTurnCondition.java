@@ -27,6 +27,7 @@
  */
 package mage.abilities.condition.common;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
@@ -42,7 +43,7 @@ public enum TargetAttackedThisTurnCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanentOrLKIBattlefield(source.getTargets().getFirstTarget());
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
-        return watcher.getAttackedThisTurnCreatures().contains(creature.getId());
+        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
+        return watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(creature, game));
     }
 }

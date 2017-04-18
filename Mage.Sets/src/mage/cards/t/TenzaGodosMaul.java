@@ -29,11 +29,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
-
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
@@ -45,14 +40,15 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX
  */
 
@@ -65,20 +61,20 @@ public class TenzaGodosMaul extends CardImpl {
     private static final FilterCreaturePermanent redFilter = new FilterCreaturePermanent("red");
 
     static {
-        legendaryFilter.add(new SupertypePredicate("Legendary"));
+        legendaryFilter.add(new SupertypePredicate(SuperType.LEGENDARY));
         redFilter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public TenzaGodosMaul(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+1.  
-    this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
         // As long as it's legendary, it gets an additional +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostEquippedEffect(2, 2), 
+                new BoostEquippedEffect(2, 2),
                 new AttachedToMatchesFilterCondition(legendaryFilter), rule1)));
         // As long as it's red, it has trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
@@ -96,7 +92,7 @@ public class TenzaGodosMaul extends CardImpl {
     @Override
     public TenzaGodosMaul copy() {
         return new TenzaGodosMaul(this);
-    }        
+    }
 }
 
 

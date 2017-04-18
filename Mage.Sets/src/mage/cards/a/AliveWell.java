@@ -35,6 +35,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.CentaurToken;
@@ -47,7 +48,7 @@ import mage.players.Player;
 public class AliveWell extends SplitCard {
 
     public AliveWell(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}", "{W}", true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}", "{W}", SpellAbilityType.SPLIT_FUSED);
 
         // Alive
         // Create a 3/3 green Centaur creature token.

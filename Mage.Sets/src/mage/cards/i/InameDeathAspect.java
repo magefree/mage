@@ -37,8 +37,9 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,7 +53,7 @@ public class InameDeathAspect extends CardImpl {
 
     public InameDeathAspect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(4);
@@ -72,7 +73,7 @@ public class InameDeathAspect extends CardImpl {
 
 class InameDeathAspectEffect extends SearchEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
+    private static final FilterCard filter = new FilterCard();
 
     static {
         filter.add(new SubtypePredicate("Spirit"));

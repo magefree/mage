@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -41,7 +40,10 @@ import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.watchers.common.CastFromHandWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +53,7 @@ public class PhageTheUntouchable extends CardImpl {
 
     public PhageTheUntouchable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Avatar");
         this.subtype.add("Minion");
 
@@ -61,7 +63,7 @@ public class PhageTheUntouchable extends CardImpl {
         // When Phage the Untouchable enters the battlefield, if you didn't cast it from your hand, you lose the game.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new LoseGameSourceControllerEffect(), false),
-                new InvertCondition(new CastFromHandSourceCondition()),
+                new InvertCondition(CastFromHandSourceCondition.instance),
                 "When {this} enters the battlefield, if you didn't cast it from your hand, you lose the game"
         ), new CastFromHandWatcher());
 

@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -40,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ public class GarrulousSycophant extends CardImpl {
 
         // At the beginning of your end step, if you're the monarch, each opponent loses 1 life and you gain 1 life.
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1),
-                TargetController.YOU, MonarchIsSourceControllerCondition.getInstance(), false);
+                TargetController.YOU, MonarchIsSourceControllerCondition.instance, false);
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
         ability.addEffect(effect);

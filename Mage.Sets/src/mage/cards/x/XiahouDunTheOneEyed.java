@@ -27,7 +27,6 @@
  */
 package mage.cards.x;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,10 +38,13 @@ import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +60,7 @@ public class XiahouDunTheOneEyed extends CardImpl {
 
     public XiahouDunTheOneEyed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(3);
@@ -69,7 +71,7 @@ public class XiahouDunTheOneEyed extends CardImpl {
 
         // Sacrifice Xiahou Dun, the One-Eyed: Return target black card from your graveyard to your hand. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
-                new ReturnFromGraveyardToHandTargetEffect(), new SacrificeSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
+                new ReturnFromGraveyardToHandTargetEffect(), new SacrificeSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

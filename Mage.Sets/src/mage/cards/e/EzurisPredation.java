@@ -27,8 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -43,6 +41,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastToken2;
 import mage.players.Player;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *

@@ -49,12 +49,7 @@ import mage.cards.Card;
 import mage.cards.CardsImpl;
 import mage.cards.FrameStyle;
 import mage.cards.SplitCard;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
-import mage.constants.ZoneDetail;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -258,14 +253,14 @@ public class Spell extends StackObjImpl implements Card {
                         Permanent permanent = game.getPermanent(card.getId());
                         if (permanent != null && permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                            card.getCardType().add(CardType.CREATURE);
+                            card.addCardType(CardType.CREATURE);
                             card.getSubtype(game).remove("Aura");
                         }
                     }
                     return ability.resolve(game);
                 }
                 if (bestow) {
-                    card.getCardType().add(CardType.CREATURE);
+                    card.addCardType(CardType.CREATURE);
                 }
                 return false;
             }
@@ -275,7 +270,7 @@ public class Spell extends StackObjImpl implements Card {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null && permanent instanceof PermanentCard) {
-                        ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
+                        ((PermanentCard) permanent).getCard().addCardType(CardType.CREATURE);
                         ((PermanentCard) permanent).getCard().getSubtype(game).remove("Aura");
                         return true;
                     }
@@ -338,8 +333,8 @@ public class Spell extends StackObjImpl implements Card {
      * determine whether card was kicked or not. E.g. Desolation Angel
      */
     private void updateOptionalCosts(int index) {
-        Ability abilityOrig = spellCards.get(index).getAbilities().get(spellAbilities.get(index).getId());
-        if (abilityOrig != null) {
+        spellCards.get(index).getAbilities().get(spellAbilities.get(index).getId()).ifPresent(abilityOrig
+                -> {
             for (Object object : spellAbilities.get(index).getOptionalCosts()) {
                 Cost cost = (Cost) object;
                 for (Cost costOrig : abilityOrig.getOptionalCosts()) {
@@ -353,7 +348,7 @@ public class Spell extends StackObjImpl implements Card {
                     }
                 }
             }
-        }
+        });
     }
 
     @Override
@@ -499,8 +494,8 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public List<String> getSupertype() {
-        return card.getSupertype();
+    public EnumSet<SuperType> getSuperType() {
+        return card.getSuperType();
     }
 
     public List<SpellAbility> getSpellAbilities() {
@@ -753,24 +748,7 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
-        ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.STACK, Zone.EXILED, appliedEffects);
-        if (!game.replaceEvent(event)) {
-            game.getStack().remove(this);
-            game.rememberLKI(this.getId(), event.getFromZone(), this);
-
-            if (!this.isCopiedSpell()) {
-                if (exileId == null) {
-                    game.getExile().getPermanentExile().add(this.card);
-                } else {
-                    game.getExile().createZone(exileId, name).add(this.card);
-                }
-
-                game.setZone(this.card.getId(), event.getToZone());
-            }
-            game.fireEvent(event);
-            return event.getToZone() == Zone.EXILED;
-        }
-        return false;
+        return this.card.moveToExile(exileId, name, sourceId, game, appliedEffects);
     }
 
     @Override

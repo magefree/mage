@@ -40,6 +40,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -54,13 +55,13 @@ public class MinamoSchoolAtWatersEdge extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("legendary permanent");
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
 
 
     public MinamoSchoolAtWatersEdge (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.addAbility(new BlueManaAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());

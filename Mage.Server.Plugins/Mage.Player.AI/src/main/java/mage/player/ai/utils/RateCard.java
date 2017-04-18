@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.target.Target;
@@ -57,15 +56,15 @@ public final class RateCard {
             return rate;
         }
         int type;
-        if (card.getCardType().contains(CardType.PLANESWALKER)) {
+        if (card.isPlaneswalker()) {
             type = 15;
-        } else if (card.getCardType().contains(CardType.CREATURE)) {
+        } else if (card.isCreature()) {
             type = 10;
         } else if (card.getSubtype(null).contains("Equipment")) {
             type = 8;
         } else if (card.getSubtype(null).contains("Aura")) {
             type = 5;
-        } else if (card.getCardType().contains(CardType.INSTANT)) {
+        } else if (card.isInstant()) {
             type = 7;
         } else {
             type = 6;
@@ -78,8 +77,7 @@ public final class RateCard {
     }
 
     private static int isRemoval(Card card) {
-        if (card.getSubtype(null).contains("Aura") || card.getCardType().contains(CardType.INSTANT)
-                || card.getCardType().contains(CardType.SORCERY)) {
+        if (card.getSubtype(null).contains("Aura") || card.isInstant() || card.isSorcery()) {
 
             for (Ability ability : card.getAbilities()) {
                 for (Effect effect : ability.getEffects()) {

@@ -25,29 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.game.permanent.token.ElephantToken;
 import mage.target.common.TargetCreatureOrPlayer;
-
-/**
- *
- * @author LevelX2
- */
-
 
 public class AssaultBattery extends SplitCard {
 
     public AssaultBattery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}","{3}{G}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}", "{3}{G}", SpellAbilityType.SPLIT);
 
         // Assault
         // Assault deals 2 damage to target creature or player.

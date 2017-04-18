@@ -101,7 +101,7 @@ class HelldozerEffect extends OneShotEffect {
         }
         Permanent landPermanent = (Permanent) game.getLastKnownInformation(landTarget.getId(), Zone.BATTLEFIELD);
         if (landPermanent != null
-                && !landPermanent.getSupertype().contains("Basic")
+                && !landPermanent.isBasic()
                 && helldozer != null) {
             return helldozer.untap(game);
         }

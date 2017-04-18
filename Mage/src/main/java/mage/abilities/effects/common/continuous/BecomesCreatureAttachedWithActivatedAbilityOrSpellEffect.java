@@ -31,11 +31,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -101,10 +97,9 @@ public class BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect extends Co
                     switch (layer) {
                         case TypeChangingEffects_4:
                             if (sublayer == SubLayer.NA) {
-                                for (String superType : token.getSupertype()) {
-                                    if (!permanentAttachedTo.getSupertype().contains(superType)) {
-                                        permanentAttachedTo.getSupertype().add(superType);
-                                    }
+                                for (SuperType superType : token.getSuperType()) {
+                                        permanentAttachedTo.addSuperType(superType);
+
                                 }
                                 // card type
                                 switch (loseType) {
@@ -114,7 +109,7 @@ public class BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect extends Co
                                         break;
                                 }
                                 for (CardType cardType : token.getCardType()) {
-                                    permanentAttachedTo.getCardType().add(cardType);
+                                    permanentAttachedTo.addCardType(cardType);
                                 }
 
                                 // sub type

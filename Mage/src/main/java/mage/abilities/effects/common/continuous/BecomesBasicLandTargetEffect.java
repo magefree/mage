@@ -145,7 +145,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                     case TypeChangingEffects_4:
                         // Attention: Cards like Unstable Frontier that use this class do not give the "Basic" supertype to the target
                         if (!land.isLand()) {
-                            land.getCardType().add(CardType.LAND);
+                            land.addCardType(CardType.LAND);
                         }
                         if (loseOther) {
                             // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects

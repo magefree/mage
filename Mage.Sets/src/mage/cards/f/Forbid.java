@@ -27,8 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
@@ -38,6 +36,8 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *

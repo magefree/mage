@@ -40,6 +40,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -52,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 public class BreakingEntering extends SplitCard {
 
     public BreakingEntering(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{B}","{4}{B}{R}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{B}", "{4}{B}{R}", SpellAbilityType.SPLIT_FUSED);
 
         // Breaking
         // Target player puts the top eight cards of his or her library into his or her graveyard.

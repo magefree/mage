@@ -29,7 +29,6 @@ package mage.cards.d;
 
 import java.util.Set;
 import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -52,7 +51,7 @@ import mage.watchers.common.BlockedThisTurnWatcher;
 public class DuelingGrounds extends CardImpl {
 
     public DuelingGrounds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");
 
         // No more than one creature can attack each turn.
         this.addAbility(
@@ -101,10 +100,10 @@ class NoMoreThanOneCreatureCanAttackEachTurnEffect extends RestrictionEffect {
         if (!game.getCombat().getAttackers().isEmpty()) {
             return false;
         }
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
-        Set<UUID> attackedThisTurnCreatures = watcher.getAttackedThisTurnCreatures();
+        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
+        Set<MageObjectReference> attackedThisTurnCreatures = watcher.getAttackedThisTurnCreatures();
         return attackedThisTurnCreatures.isEmpty()
-                || (attackedThisTurnCreatures.size() == 1 && attackedThisTurnCreatures.contains(attacker.getId()));
+                || (attackedThisTurnCreatures.size() == 1 && attackedThisTurnCreatures.contains(new MageObjectReference(attacker, game)));
     }
 
 }

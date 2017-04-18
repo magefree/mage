@@ -49,7 +49,7 @@ public class CubeFromDeck extends DraftCube {
         
         if (cards != null) {
             for (DeckCardInfo card : cards.getCards()) {
-                cubeCards.add(new CardIdentity(card.getCardName(), ""));
+                cubeCards.add(new CardIdentity(card.getCardName(), card.getSetCode()));
             }
         }
     }

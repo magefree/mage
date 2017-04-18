@@ -27,27 +27,27 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.Filter;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author KholdFuzion
- *
  */
 public class Dandan extends CardImpl {
 
     public Dandan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");
         this.subtype.add("Fish");
 
         this.power = new MageInt(4);
@@ -58,7 +58,7 @@ public class Dandan extends CardImpl {
 
         // When you control no Islands, sacrifice Dandan.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new FilterLandPermanent("Island", "no Islands"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

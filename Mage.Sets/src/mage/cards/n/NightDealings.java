@@ -28,6 +28,7 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -39,7 +40,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -52,13 +52,12 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public class NightDealings extends CardImpl {
 
     public NightDealings(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // Whenever a source you control deals damage to another player, put that many theft counters on Night Dealings.
         this.addAbility((new NightDealingsTriggeredAbility()));
@@ -180,7 +179,7 @@ public class NightDealings extends CardImpl {
             }
 
             FilterNonlandCard filter = new FilterNonlandCard("nonland card with converted mana cost X = " + cmc);
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
             if (player.searchLibrary(target, game)) {

@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -36,13 +35,12 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  *
@@ -99,9 +97,9 @@ class PithingNeedleEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
-        Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
-        if (ability != null && object != null) {
-            if (ability.getAbilityType() != AbilityType.MANA
+        Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+        if (ability.isPresent() && object != null) {
+            if (ability.get().getAbilityType() != AbilityType.MANA
                     && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                 return true;
             }

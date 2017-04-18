@@ -36,7 +36,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.Predicates;
@@ -46,8 +48,6 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author JRHerlehy

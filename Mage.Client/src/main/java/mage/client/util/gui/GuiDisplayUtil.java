@@ -1,30 +1,18 @@
 package mage.client.util.gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GraphicsConfiguration;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import mage.client.MageFrame;
 import mage.client.util.GUISizeHelper;
-import mage.constants.CardType;
-import mage.constants.MageObjectType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.utils.CardUtil;
+import mage.constants.*;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 public final class GuiDisplayUtil {
 
@@ -280,9 +268,9 @@ public final class GuiDisplayUtil {
         buffer.append("</td></tr></table>");
 
         String pt = "";
-        if (CardUtil.isCreature(card)) {
+        if (card.isCreature()) {
             pt = card.getPower() + '/' + card.getToughness();
-        } else if (CardUtil.isPlaneswalker(card)) {
+        } else if (card.isPlanesWalker()) {
             pt = card.getLoyalty();
         }
 
@@ -360,8 +348,8 @@ public final class GuiDisplayUtil {
 
     private static String getTypes(CardView card) {
         String types = "";
-        for (String superType : card.getSuperTypes()) {
-            types += superType + ' ';
+        for (SuperType superType : card.getSuperTypes()) {
+            types += superType.toString() + ' ';
         }
         for (CardType cardType : card.getCardTypes()) {
             types += cardType.toString() + ' ';

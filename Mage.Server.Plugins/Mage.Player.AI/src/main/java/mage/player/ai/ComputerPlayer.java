@@ -27,6 +27,10 @@
  */
 package mage.player.ai;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -76,11 +80,6 @@ import mage.util.RandomUtil;
 import mage.util.TournamentUtil;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  *
@@ -1480,6 +1479,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         switch (ability.getSpellAbilityType()) {
             case SPLIT:
             case SPLIT_FUSED:
+            case SPLIT_AFTERMATH:
                 MageObject object = game.getObject(ability.getSourceId());
                 if (object != null) {
                     LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
@@ -1608,7 +1608,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         int cardNum = 0;
         while (deck.getCards().size() < 23 && sortedCards.size() > cardNum) {
             Card card = sortedCards.get(cardNum);
-            if (!card.getSupertype().contains("Basic")) {
+            if (!card.isBasic()) {
                 deck.getCards().add(card);
                 deck.getSideboard().remove(card);
             }

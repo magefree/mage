@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -38,14 +37,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +53,7 @@ public class GerrardCapashen extends CardImpl {
 
     public GerrardCapashen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(3);
@@ -69,7 +67,7 @@ public class GerrardCapashen extends CardImpl {
 
         // {3}{W}: Tap target creature. Activate this ability only if {this} is attacking.
         Ability ability2 = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(),
-                new ManaCostsImpl("{3}{W}"), new SourceAttackingCondition());
+                new ManaCostsImpl("{3}{W}"), SourceAttackingCondition.instance);
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }

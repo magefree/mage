@@ -35,11 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -113,7 +109,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
                 newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 ApplyToPermanent applier = new DimirDoppelgangerApplier();
-                applier.apply(game, newBluePrint);
+                applier.apply(game, newBluePrint, source, dimirDoppelganger.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, dimirDoppelganger.getId());
                 copyEffect.newId();
                 copyEffect.setApplier(applier);
@@ -130,7 +126,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
 class DimirDoppelgangerApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         permanent.getAbilities().add(ability);
@@ -138,7 +134,7 @@ class DimirDoppelgangerApplier extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         mageObject.getAbilities().add(ability);

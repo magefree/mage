@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -47,6 +47,8 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +84,7 @@ class PutLandOnBattlefieldEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("basic land card");
 
     static {
-        filter.add(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic")));
+        filter.add(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate(SuperType.BASIC)));
     }
 
     private static final String choiceText = "Put a basic land card from your hand onto the battlefield?";
@@ -113,7 +115,6 @@ class PutLandOnBattlefieldEffect extends OneShotEffect {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
-
                 return true;
             }
         }

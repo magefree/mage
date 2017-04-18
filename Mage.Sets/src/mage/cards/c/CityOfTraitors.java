@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
@@ -42,6 +40,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *

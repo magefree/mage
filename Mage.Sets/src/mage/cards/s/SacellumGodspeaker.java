@@ -27,33 +27,32 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public class SacellumGodspeaker extends CardImpl {
-    
+
     public SacellumGodspeaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
 
@@ -77,12 +76,13 @@ public class SacellumGodspeaker extends CardImpl {
 
 class SacellumGodspeakerEffect extends ManaEffect {
 
-    
+
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with power 5 or greater from your hand");
+
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
-    
+
     public SacellumGodspeakerEffect() {
         super();
         staticText = "Reveal any number of creature cards with power 5 or greater from your hand. Add {G} to your mana pool for each card revealed this way";
@@ -99,7 +99,7 @@ class SacellumGodspeakerEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetCardInHand target = new TargetCardInHand(0,Integer.MAX_VALUE, filter);
+        TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
         if (target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game)) {
             Mana mana = Mana.GreenMana(target.getTargets().size());
             checkToFirePossibleEvents(mana, game, source);

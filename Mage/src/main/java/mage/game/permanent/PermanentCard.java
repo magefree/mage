@@ -125,7 +125,7 @@ public class PermanentCard extends PermanentImpl {
         this.subtype.clear();
         this.subtype.addAll(card.getSubtype(game));
         this.supertype.clear();
-        this.supertype.addAll(card.getSupertype());
+        supertype.addAll(card.getSuperType());
         this.expansionSetCode = card.getExpansionSetCode();
         this.rarity = card.getRarity();
         this.cardNumber = card.getCardNumber();

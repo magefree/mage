@@ -27,24 +27,19 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.util.functions.ApplyToPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -128,15 +123,15 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.getManaCost().add(copyFromObject.getManaCost());
         permanent.getCardType().clear();
         for (CardType type : copyFromObject.getCardType()) {
-            permanent.getCardType().add(type);
+            permanent.addCardType(type);
         }
         permanent.getSubtype(game).clear();
         for (String type : copyFromObject.getSubtype(game)) {
             permanent.getSubtype(game).add(type);
         }
-        permanent.getSupertype().clear();
-        for (String type : copyFromObject.getSupertype()) {
-            permanent.getSupertype().add(type);
+        permanent.getSuperType().clear();
+        for (SuperType type : copyFromObject.getSuperType()) {
+            permanent.addSuperType(type);
         }
 
         permanent.removeAllAbilities(source.getSourceId(), game);

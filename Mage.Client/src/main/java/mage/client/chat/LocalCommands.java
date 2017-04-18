@@ -4,6 +4,7 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.util.IgnoreList;
 import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
 import mage.view.ChatMessage;
 
 import java.text.DateFormat;
@@ -58,7 +59,7 @@ public final class LocalCommands {
 
     private static void displayLocalCommandResponse(UUID chatId, String response) {
         final String text = new StringBuilder().append("<font color=yellow>").append(response).append("</font>").toString();
-        ClientCallback chatMessage = new ClientCallback("chatMessage", chatId,
+        ClientCallback chatMessage = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
                 new ChatMessage("", text, timeFormatter.format(new Date()), ChatMessage.MessageColor.BLUE));
         MageFrame.getInstance().processCallback(chatMessage);
     }

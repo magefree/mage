@@ -28,13 +28,14 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class GiveTake extends SplitCard {
 
     public GiveTake(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}","{2}{U}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}", "{2}{U}", SpellAbilityType.SPLIT_FUSED);
 
         // Give
         // Put three +1/+1 counters on target creature.

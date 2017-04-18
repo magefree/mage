@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicates;
@@ -46,15 +46,10 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 
-/**
- *
- * @author LevelX2
- */
-
-
 public class OddsEnds extends SplitCard {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
+
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
@@ -62,7 +57,7 @@ public class OddsEnds extends SplitCard {
     }
 
     public OddsEnds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{R}","{3}{R}{W}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{R}", "{3}{R}{W}", SpellAbilityType.SPLIT);
 
         // Odds
         // Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.

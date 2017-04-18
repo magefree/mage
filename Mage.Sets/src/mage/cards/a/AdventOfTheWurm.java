@@ -28,12 +28,13 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.WurmToken2;
+
+import java.util.UUID;
 
 /**
  *

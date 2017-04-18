@@ -27,8 +27,8 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -42,13 +42,14 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -103,7 +104,7 @@ class AetherVialEffect extends OneShotEffect {
         int count = permanent.getCounters(game).getCount(CounterType.CHARGE);
 
         FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost equal to " + count);
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, count));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, count));
         String choiceText = "Put a " + filter.getMessage() + " from your hand onto the battlefield?";
 
         Player controller = game.getPlayer(source.getControllerId());

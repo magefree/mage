@@ -28,6 +28,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -41,11 +42,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -62,7 +59,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 public class Berserk extends CardImpl {
 
     public Berserk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Cast Berserk only before the combat damage step. (Zone = all because it can be at least graveyard or hand)
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new BerserkReplacementEffect()), new CombatDamageStepStartedWatcher());
@@ -199,9 +196,9 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                Watcher watcher = game.getState().getWatchers().get("AttackedThisTurn");
+                Watcher watcher = game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
                 if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
-                    if (((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures().contains(permanent.getId())) {
+                    if (((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                         return permanent.destroy(source.getSourceId(), game, false);
                     }
                 }

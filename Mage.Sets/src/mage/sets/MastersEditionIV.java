@@ -30,8 +30,8 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.cards.a.AesthirGlider;
 import mage.cards.e.EliteCatWarrior;
-import mage.constants.SetType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *

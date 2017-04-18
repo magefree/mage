@@ -27,31 +27,34 @@
  */
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
-import mage.players.PlayerList;
 
 /**
  * 5/1/2012 	For each despair counter on Descent into Madness, you'll exile a permanent 

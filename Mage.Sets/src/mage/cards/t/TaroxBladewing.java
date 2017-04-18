@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.GrandeurAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
@@ -38,6 +37,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +49,7 @@ public class TaroxBladewing extends CardImpl {
 
     public TaroxBladewing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dragon");
 
         this.power = new MageInt(4);

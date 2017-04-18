@@ -39,14 +39,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
@@ -273,8 +266,8 @@ class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl implement
 
     @Override
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        if (mana.getWhite() == 0 && ManaType.COLORLESS != manaType) {
-            return null;
+        if (mana.getWhite() == 0) {
+            return ManaType.COLORLESS;
         }
         return manaType;
     }

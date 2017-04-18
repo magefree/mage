@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 import mage.counters.CounterType;
@@ -268,8 +269,9 @@ public class Turn implements Serializable {
      *
      * @param game
      * @param activePlayerId
+     * @param source
      */
-    public void endTurn(Game game, UUID activePlayerId) {
+    public void endTurn(Game game, UUID activePlayerId, Ability source) {
         // Ending the turn this way (Time Stop) means the following things happen in order:
 
         setEndTurnRequested(true);
@@ -277,9 +279,9 @@ public class Turn implements Serializable {
         // 1) All spells and abilities on the stack are exiled. This includes Time Stop, though it will continue to resolve.
         // It also includes spells and abilities that can't be countered.
         while (!game.getStack().isEmpty()) {
-            StackObject stackObject = game.getStack().removeLast();
+            StackObject stackObject = game.getStack().peekFirst();
             if (stackObject instanceof Spell) {
-                ((Spell) stackObject).moveToExile(null, "", null, game);
+                ((Spell) stackObject).moveToExile(null, "", source.getSourceId(), game);
             }
         }
         // 2) All attacking and blocking creatures are removed from combat.

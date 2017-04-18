@@ -27,28 +27,24 @@
  */
 package mage.cards.d;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Iterator;
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +54,7 @@ public class DarthVader extends CardImpl {
 
     public DarthVader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Sith");
         this.power = new MageInt(4);

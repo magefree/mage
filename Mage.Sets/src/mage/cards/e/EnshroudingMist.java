@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.condition.common.RenownedTargetCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
@@ -40,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ public class EnshroudingMist extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         OneShotEffect effect2 = new UntapTargetEffect();
         effect2.setText("untap it");
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(effect2, RenownedTargetCondition.getInstance()));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(effect2, RenownedTargetCondition.instance));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }

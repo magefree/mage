@@ -45,18 +45,9 @@ import mage.game.Game;
  * 
  */
 
-public class SuspendedCondition implements Condition {
+public enum SuspendedCondition implements Condition {
 
-    private static SuspendedCondition instance = null;
-
-    private SuspendedCondition() {}
-
-    public static Condition getInstance() {
-        if (instance == null) {
-            instance = new SuspendedCondition();
-        }
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

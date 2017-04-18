@@ -27,7 +27,7 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
@@ -36,12 +36,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public class HearthCharm extends CardImpl {
     static {
         filter1.add(new CardTypePredicate(CardType.ARTIFACT));
         filter2.add(new AttackingPredicate());
-        filter3.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+        filter3.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public HearthCharm(UUID ownerId, CardSetInfo setInfo) {

@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +39,8 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.game.permanent.token.ServoToken;
 import mage.watchers.common.RevoltWatcher;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy

@@ -27,15 +27,14 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicate;
@@ -43,6 +42,8 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +83,7 @@ class HasLowestCMCAmongstNonlandPermanentsPredicate implements Predicate<Permane
     @Override
     public boolean apply(Permanent input, Game game) {
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, input.getConvertedManaCost()));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, input.getConvertedManaCost()));
         return !game.getBattlefield().contains(filter, 1, game);
     }
     

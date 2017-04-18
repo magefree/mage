@@ -27,7 +27,6 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -35,7 +34,10 @@ import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +47,7 @@ public class JeditOjanenOfEfrava extends CardImpl {
 
     public JeditOjanenOfEfrava(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
         this.power = new MageInt(5);
@@ -78,7 +80,7 @@ class CatWarriorToken extends Token {
         this.color.setGreen(true);
         this.getSubtype(null).add("Cat");
         this.getSubtype(null).add("Warrior");
-        this.getCardType().add(CardType.CREATURE);
+        this.addCardType(CardType.CREATURE);
         this.addAbility(new ForestwalkAbility());
     }
 }

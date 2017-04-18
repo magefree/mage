@@ -46,7 +46,7 @@ public interface Effect extends Serializable {
     UUID getId();
     void newId();
     String getText(Mode mode);
-    void setText(String staticText);
+    Effect setText(String staticText);
     boolean apply(Game game, Ability source);
     Outcome getOutcome();
     void setOutcome(Outcome outcome);

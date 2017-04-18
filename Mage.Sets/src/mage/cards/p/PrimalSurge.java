@@ -27,20 +27,19 @@
  */
 package mage.cards.p;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,10 +95,7 @@ class PrimalSurgeEffect extends OneShotEffect {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     card.moveToExile(null, "", source.getSourceId(), game);
-                    Set<CardType> cardType = card.getCardType();
-                    if ((cardType.contains(CardType.ARTIFACT) || cardType.contains(CardType.CREATURE)
-                            || cardType.contains(CardType.ENCHANTMENT) || cardType.contains(CardType.LAND)
-                            || cardType.contains(CardType.PLANESWALKER))
+                    if (card.isPermanent()
                             && player.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
                         card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
 

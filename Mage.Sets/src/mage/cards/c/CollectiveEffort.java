@@ -27,8 +27,8 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapTargetCost;
@@ -41,7 +41,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,6 +56,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -70,7 +71,7 @@ public class CollectiveEffort extends CardImpl {
 
     static {
         filterUntapped.add(Predicates.not(new TappedPredicate()));
-        filterDestroyCreature.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filterDestroyCreature.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public CollectiveEffort(UUID ownerId, CardSetInfo setInfo) {

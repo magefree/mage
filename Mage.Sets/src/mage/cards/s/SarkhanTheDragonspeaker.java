@@ -46,13 +46,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
@@ -124,11 +118,11 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().clear();
-                        permanent.getCardType().add(CardType.CREATURE);
+                        permanent.addCardType(CardType.CREATURE);
                         permanent.getSubtype(game).clear();
                         permanent.getSubtype(game).add("Dragon");
-                        permanent.getSupertype().clear();
-                        permanent.getSupertype().add("Legendary");
+                        permanent.getSuperType().clear();
+                        permanent.addSuperType(SuperType.LEGENDARY);
                     }
                     break;
                 case ColorChangingEffects_5:

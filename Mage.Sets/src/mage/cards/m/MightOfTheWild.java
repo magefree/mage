@@ -27,7 +27,7 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
@@ -37,7 +37,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -45,6 +44,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +57,7 @@ public class MightOfTheWild extends CardImpl {
     private static final FilterPermanent filterMode2 = new FilterPermanent("artifact or enchantment");
 
     static {
-        filterMode1.add(new PowerPredicate(Filter.ComparisonType.LessThan, 4));
+        filterMode1.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
         filterMode2.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 

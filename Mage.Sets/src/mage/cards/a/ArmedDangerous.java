@@ -25,34 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SpellAbilityType;
 import mage.target.common.TargetCreaturePermanent;
-
-/**
- *
- * @author LevelX2
- */
-
 
 public class ArmedDangerous extends SplitCard {
 
     public ArmedDangerous(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}","{3}{G}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}", "{3}{G}", SpellAbilityType.SPLIT_FUSED);
 
         // Armed
         // Target creature gets +1/+1 and gains double strike until end of turn.
-        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(1,1, Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 

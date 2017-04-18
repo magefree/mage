@@ -29,7 +29,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -62,7 +62,7 @@ public class Peppersmoke extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1,-1,Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0),
                 "If you control a Faerie, draw a card"));
     }
 

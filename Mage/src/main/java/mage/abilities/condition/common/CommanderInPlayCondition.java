@@ -27,31 +27,22 @@
  */
 package mage.abilities.condition.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * Checks if the player has its commander in play and controls it
  *
  * @author LevelX2
  */
-public class CommanderInPlayCondition implements Condition {
+public enum CommanderInPlayCondition implements Condition {
 
-    private static CommanderInPlayCondition instance = null;
-
-    private CommanderInPlayCondition() {
-    }
-
-    public static Condition getInstance() {
-        if (instance == null) {
-            instance = new CommanderInPlayCondition();
-        }
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

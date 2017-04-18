@@ -57,7 +57,6 @@ import mage.game.permanent.PermanentImpl;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
 
 /**
  *
@@ -68,7 +67,7 @@ public class KarnLiberated extends CardImpl {
     private UUID exileId = UUID.randomUUID();
 
     public KarnLiberated(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{7}");
         this.subtype.add("Karn");
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 
@@ -121,7 +120,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         for (ExileZone zone : game.getExile().getExileZones()) {
             if (zone.getId().equals(exileId)) {
                 for (Card card : zone.getCards(game)) {
-                    if (!card.getSubtype(game).contains("Aura") && CardUtil.isPermanentCard(card)) {
+                    if (!card.getSubtype(game).contains("Aura") && card.isPermanent()) {
                         cards.add(card);
                     }
                 }
@@ -153,7 +152,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         }
         for (Card card : cards) {
             game.getState().setZone(card.getId(), Zone.EXILED);
-            if (CardUtil.isPermanentCard(card) && !card.getSubtype(game).contains("Aura")) {
+            if (card.isPermanent() && !card.getSubtype(game).contains("Aura")) {
                 game.getExile().add(exileId, sourceObject.getIdName(), card);
             }
         }
@@ -221,13 +220,19 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
                 // since the beginning of the first turn. They can attack and their activated abilities with {T} in the cost can be activated.
                 Cards cards = new CardsImpl(); // needed because putOntoTheBattlefield removes from exile
                 cards.addAll(exile);
-                controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
-                for (Card card : cards.getCards(game)) {
-                    Permanent permanent = game.getPermanent(card.getId());
-                    ((PermanentImpl) permanent).removeSummoningSickness();
+                if (!cards.isEmpty()) {
+                    controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
+                    for (Card card : cards.getCards(game)) {
+                        if (card != null) {
+                            Permanent permanent = game.getPermanent(card.getId());
+                            if (permanent != null) {
+                                ((PermanentImpl) permanent).removeSummoningSickness();
+                            }
+                        }
+                    }
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

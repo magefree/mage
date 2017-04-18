@@ -27,9 +27,8 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.CountType;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
@@ -40,6 +39,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +64,7 @@ public class Biovisionary extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), 
                 TargetController.ANY, 
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 3),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 3),
                 false));
     }
 

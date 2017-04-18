@@ -27,7 +27,7 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -36,17 +36,19 @@ import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.Target;
 import mage.target.TargetSpell;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +61,7 @@ public class TemurCharm extends CardImpl {
     
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
-        filterCantBlock.add(new PowerPredicate(Filter.ComparisonType.LessThan, 4));
+        filterCantBlock.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
     }
     
     public TemurCharm(UUID ownerId, CardSetInfo setInfo) {

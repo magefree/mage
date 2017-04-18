@@ -27,23 +27,22 @@
  */
 package mage.cards.e;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.ReturnToLibrarySpellEffect;
+import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +57,9 @@ public class EverAfter extends CardImpl {
         // to its other colors and types. Put Ever After on the bottom of its owner's library.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
-        this.getSpellAbility().addEffect(new EverAfterEffect());
+        Effect effect = new BecomesBlackZombieAdditionEffect();
+        effect.setText("Each of those creatures is a black Zombie in addition to its other colors and types");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new ReturnToLibrarySpellEffect(false));
     }
 
@@ -70,57 +71,4 @@ public class EverAfter extends CardImpl {
     public EverAfter copy() {
         return new EverAfter(this);
     }
-}
-
-class EverAfterEffect extends ContinuousEffectImpl {
-
-    public EverAfterEffect() {
-        super(Duration.Custom, Outcome.Neutral);
-        staticText = "Each of those creatures is a black Zombie in addition to its other colors and types";
-    }
-
-    public EverAfterEffect(final EverAfterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EverAfterEffect copy() {
-        return new EverAfterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        List<UUID> targets = source.getTargets().get(0).getTargets();
-        for (UUID targetId : targets) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                switch (layer) {
-                    case TypeChangingEffects_4:
-                        if (sublayer == SubLayer.NA) {
-                            card.getSubtype(game).add("Zombie");
-                        }
-                        break;
-                    case ColorChangingEffects_5:
-                        if (sublayer == SubLayer.NA) {
-                            card.getColor(game).setBlack(true);
-                        }
-                        break;
-                }
-            } else {
-                this.used = true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
-    }
-
 }

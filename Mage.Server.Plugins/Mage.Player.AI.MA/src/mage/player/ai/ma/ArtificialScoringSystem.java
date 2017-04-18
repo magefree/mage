@@ -1,6 +1,5 @@
 package mage.player.ai.ma;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.keyword.HasteAbility;
@@ -10,6 +9,8 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author ubeefx, nantuko
@@ -27,7 +28,7 @@ public final class ArtificialScoringSystem {
 
     public static int getCardDefinitionScore(final Game game, final Card card) {
         int value = 3; //TODO: add new rating system card value
-        if (card.getCardType().contains(CardType.LAND)) {
+        if (card.isLand()) {
             int score = (int) ((value / 2.0f) * 50);
             //TODO: check this for "any color" lands
             //TODO: check this for dual and filter lands

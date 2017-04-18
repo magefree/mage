@@ -27,23 +27,6 @@
  */
 package mage.server.game;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.zip.GZIPOutputStream;
 import mage.MageException;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -66,37 +49,35 @@ import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
 import mage.interfaces.Action;
 import mage.players.Player;
-import mage.server.ChatManager;
-import mage.server.Main;
-import mage.server.TableManager;
-import mage.server.User;
-import mage.server.UserManager;
+import mage.server.*;
 import mage.server.util.ConfigSettings;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
 import mage.utils.timer.PriorityTimer;
-import mage.view.AbilityPickerView;
-import mage.view.CardsView;
-import mage.view.ChatMessage;
+import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
-import mage.view.GameView;
-import mage.view.PermanentView;
 import org.apache.log4j.Logger;
+
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.*;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class GameController implements GameCallback {
 
-    private static final ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
+    private static final ExecutorService gameExecutor = ThreadExecutor.instance.getGameExecutor();
     private static final Logger logger = Logger.getLogger(GameController.class);
 
     protected final ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private ScheduledFuture<?> futureTimeout;
-    protected static final ScheduledExecutorService timeoutIdleExecutor = ThreadExecutor.getInstance().getTimeoutIdleExecutor();
+    protected static final ScheduledExecutorService timeoutIdleExecutor = ThreadExecutor.instance.getTimeoutIdleExecutor();
 
     private final ConcurrentHashMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
@@ -388,7 +369,7 @@ public class GameController implements GameCallback {
     private void checkStart() {
         if (allJoined()) {
             joinWaitingExecutor.shutdownNow();
-            ThreadExecutor.getInstance().getCallExecutor().execute(this::startGame);
+            ThreadExecutor.instance.getCallExecutor().execute(this::startGame);
         }
     }
 

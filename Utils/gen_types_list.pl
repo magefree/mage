@@ -37,7 +37,7 @@ while (<DIR_LISTING>)
             $types{$1}++;
             $types_files{$1} .= $file . ",,,";
         }
-        if ($line =~ m/this.supertype.add.*"([^"]*)"/)
+        if ($line =~ m/addSuperType.*"([^"]*)"/)
         {
             $types{$1}++;
             $types_files{$1} .= $file . ",,,";

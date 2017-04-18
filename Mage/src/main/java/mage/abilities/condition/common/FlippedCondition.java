@@ -32,13 +32,9 @@ import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-public class FlippedCondition implements Condition {
+public enum FlippedCondition implements Condition {
 
-    private static FlippedCondition instance = new FlippedCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

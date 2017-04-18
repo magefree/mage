@@ -28,16 +28,17 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.ObjectColor;
-import mage.constants.CardType;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *

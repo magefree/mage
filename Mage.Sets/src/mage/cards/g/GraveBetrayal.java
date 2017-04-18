@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -36,15 +35,11 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,6 +47,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -147,64 +144,13 @@ class GraveBetrayalEffect extends OneShotEffect {
             if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
                 Permanent creature = game.getPermanent(card.getId());
                 creature.addCounters(CounterType.P1P1.createInstance(), source, game);
-                ContinuousEffect effect = new GraveBetrayalContiniousEffect();
+                ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
                 effect.setTargetPointer(new FixedTarget(creature.getId()));
                 game.addEffect(effect, source);
                 return true;
             }
         }
         return false;
-    }
-
-}
-
-class GraveBetrayalContiniousEffect extends ContinuousEffectImpl {
-
-    public GraveBetrayalContiniousEffect() {
-        super(Duration.Custom, Outcome.Neutral);
-        staticText = "That creature is a black Zombie in addition to its other colors and types";
-    }
-
-    public GraveBetrayalContiniousEffect(final GraveBetrayalContiniousEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GraveBetrayalContiniousEffect copy() {
-        return new GraveBetrayalContiniousEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
-        if (creature != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        creature.getSubtype(game).add("Zombie");
-                    }
-                    break;
-                case ColorChangingEffects_5:
-                    if (sublayer == SubLayer.NA) {
-                        creature.getColor(game).setBlack(true);
-                    }
-                    break;
-            }
-            return true;
-        } else {
-            this.used = true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
     }
 
 }

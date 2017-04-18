@@ -38,6 +38,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -54,7 +55,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class LifeDeath extends SplitCard {
 
     public LifeDeath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}","{1}{B}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}", "{1}{B}", SpellAbilityType.SPLIT);
 
         // Life
         // All lands you control become 1/1 creatures until end of turn. They're still lands.

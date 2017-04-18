@@ -55,6 +55,9 @@ public class EndTurnEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Sphinx's Tutelage");
 
         // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. If it's your turn, end the turn.
+        //  (Exile all spells and abilities on the stack, including this card.
+        //   Discard down to your maximum hand size. Damage wears off, and
+        //   "this turn" and "until end of turn" effects end.)
         addCard(Zone.HAND, playerA, "Day's Undoing"); //Sorcery {2}{U}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Day's Undoing");
@@ -67,8 +70,42 @@ public class EndTurnEffectTest extends CardTestPlayerBase {
         assertHandCount(playerA, 7);
         assertHandCount(playerB, 7);
 
-        assertGraveyardCount(playerB, 0); // because the trigegrs of Sphinx's Tutelage cease to exist
+        assertGraveyardCount(playerB, 0); // because the triggers of Sphinx's Tutelage cease to exist
 
     }
 
+    @Test
+    public void testSpellSplitCard() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+
+        // End the turn.
+        //  (Exile all spells and abilities on the stack, including this card.
+        //   Discard down to your maximum hand size. Damage wears off, and
+        //   "this turn" and "until end of turn" effects end.)
+        addCard(Zone.HAND, playerA, "Time Stop"); //Instant {4}{U}{U}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        // Fire
+        // Fire deals 2 damage divided as you choose among one or two target creatures and/or players.
+        // Ice
+        // Tap target permanent. Draw a card.
+        addCard(Zone.HAND, playerB, "Fire // Ice"); // Instant {1}{R} // {1}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Ice", "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Time Stop", NO_TARGET, "Ice");
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertHandCount(playerB, "Fire // Ice", 0);
+        assertExileCount(playerA, "Time Stop", 1);
+        assertExileCount(playerB, "Fire // Ice", 1);
+        assertTapped("Silvercoat Lion", false);
+        assertHandCount(playerA, 0);
+        assertHandCount(playerB, 0);
+
+    }
 }

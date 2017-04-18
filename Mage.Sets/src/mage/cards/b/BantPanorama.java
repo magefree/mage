@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -39,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -47,8 +47,9 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public class BantPanorama extends CardImpl {
@@ -57,7 +58,7 @@ public class BantPanorama extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(Predicates.or(
                 new SubtypePredicate("Forest"),
                 new SubtypePredicate("Plains"),
@@ -65,7 +66,7 @@ public class BantPanorama extends CardImpl {
     }
 
     public BantPanorama(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

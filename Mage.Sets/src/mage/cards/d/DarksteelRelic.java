@@ -27,11 +27,12 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
@@ -40,7 +39,6 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-
 public class DiscardXTargetCost extends VariableCostImpl {
 
     protected FilterCard filter;
@@ -50,9 +48,8 @@ public class DiscardXTargetCost extends VariableCostImpl {
     }
 
     public DiscardXTargetCost(FilterCard filter, boolean additionalCostText) {
-        super(new StringBuilder(filter.getMessage()).append(" to discard").toString());
-        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, discard ":"Discard ")
-                 .append(xText).append(' ').append(filter.getMessage()).toString();
+        super(filter.getMessage() + " to discard");
+        this.text = (additionalCostText ? "As an additional cost to cast {source}, discard " : "Discard ") + xText + ' ' + filter.getMessage();
         this.filter = filter;
     }
 

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -43,6 +42,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.watchers.common.CastFromHandWatcher;
+
+import java.util.UUID;
 
 /**
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
@@ -70,7 +71,7 @@ public class DreadCacodemon extends CardImpl {
         // if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control. 
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(opponentsCreatures, false));
         ability.addEffect(new TapAllEffect(otherCreaturesYouControl));
-        this.addAbility(new ConditionalTriggeredAbility(ability, new CastFromHandSourceCondition(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, CastFromHandSourceCondition.instance,
                 "When {this} enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control."), new CastFromHandWatcher());
     }
 

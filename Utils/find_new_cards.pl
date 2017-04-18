@@ -48,7 +48,6 @@ chomp $cmd;
 my %cn_classes;
 sub read_all_card_names
 {
-    print ("find \"cards.add\" ../Mage.Sets/src/mage/sets/*.java\n");
     print ("find \"add\" ..\\Mage.Sets\\src\\mage\\sets\\*.java\n");
     my $all_cards = `find \"add\" ..\\Mage.Sets\\src\\mage\\sets\\*.java`;
     my @cards = split /\n/, $all_cards;
@@ -122,12 +121,23 @@ if (exists ($new_order{$cmd}))
         $past_line = $line;
     }
 
+    open MTG_CARDS_DATA, "mtg-cards-data.txt";
+    my %all_cards;
+    while (<MTG_CARDS_DATA>)
+    {
+        my $val = $_;
+        $val =~ s/\|/xxxx/;
+        $val =~ s/\|.*//;
+        $val =~ m/^(.*)xxxx(.*)/;
+        $all_cards {$1} = $2;
+    }
+
     print ("Found these new card names!\n");
     foreach $line (sort keys (%new_cards))
     {
         if ($new_cards {$line} > 0)
         {
-            print ($line, "\n");
+            print ($line, " in ", $all_cards {$line}, "\n");
         }
     }
 }

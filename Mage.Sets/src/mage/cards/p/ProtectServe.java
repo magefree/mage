@@ -25,36 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SpellAbilityType;
 import mage.target.common.TargetCreaturePermanent;
-
-/**
- *
- * @author LevelX2
- */
-
 
 public class ProtectServe extends SplitCard {
 
     public ProtectServe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}","{1}{U}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}", "{1}{U}", SpellAbilityType.SPLIT_FUSED);
 
         // Protect
         // Target creature gets +2/+4 until end of turn.
-        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(2,4, Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 4, Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Serve
         // Target creature gets -6/-0 until end of turn.
-        getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-6,0, Duration.EndOfTurn));
+        getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-6, 0, Duration.EndOfTurn));
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }
