@@ -40,6 +40,7 @@ public class DuelCommander extends Commander {
         banned.add("Back to Basics");
         banned.add("Black Lotus");
         banned.add("Channel");
+        banned.add("Chrome Mox");
         banned.add("Dig Through Time");
         banned.add("Entomb");
         banned.add("Fastbond");
@@ -58,6 +59,7 @@ public class DuelCommander extends Commander {
         banned.add("Mana Vault");
         banned.add("Mind Twist");
         banned.add("Mishra’s Workshop");
+        banned.add("Mox Diamond");
         banned.add("Mox Emerald");
         banned.add("Mox Jet");
         banned.add("Mox Pearl");
@@ -80,6 +82,7 @@ public class DuelCommander extends Commander {
         banned.add("Treasure Cruise");
         banned.add("Vampiric Tutor");
 
+        bannedCommander.add("Breya, Etherium Shaper");
         bannedCommander.add("Derevi, Empyrial Tactician");
         bannedCommander.add("Edric, Spymaster of Trest");
         bannedCommander.add("Erayo, Soratami Ascendant");
@@ -87,7 +90,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Oloro, Ageless Ascetic");
         bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Tasigur, the Golden Fang");
-        bannedCommander.add("Yisan, the Wanderer Bard");
+        bannedCommander.add("Vial Smasher the Fierce");
         bannedCommander.add("Zur the Enchanter");
     }
 
