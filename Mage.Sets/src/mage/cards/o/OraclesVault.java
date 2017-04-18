@@ -75,7 +75,7 @@ public class OraclesVault extends CardImpl {
         // {T}: Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost.
         // Activate this ability only if there are three or more brick counters on Oracle's Vault.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new OraclesVaultEffect(), new TapSourceCost(), new SourceHasCounterCondition(CounterType.BRICK, 3, Integer.MAX_VALUE),
+                new OraclesVaultFreeEffect(), new TapSourceCost(), new SourceHasCounterCondition(CounterType.BRICK, 3, Integer.MAX_VALUE),
                 "{T}: Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. "
                         + "Activate this ability only if there are three or more brick counters on {this}"));
     }
@@ -121,6 +121,37 @@ class OraclesVaultEffect extends OneShotEffect {
         return false;
     }
 }
+class OraclesVaultFreeEffect extends OneShotEffect {
+
+    public OraclesVaultFreeEffect() {
+        super(Outcome.Benefit);
+    }
+
+    public OraclesVaultFreeEffect(final OraclesVaultFreeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OraclesVaultFreeEffect copy() {
+        return new OraclesVaultFreeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
+            Library library = controller.getLibrary();
+            Card card = library.removeFromTop(game);
+            if (card != null) {
+                controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName() + " <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
+                game.addEffect(new OraclesVaultPlayForFreeEffect(new MageObjectReference(card, game)), source);
+            }
+            return true;
+        }
+        return false;
+    }
+}
 
 class OraclesVaultPlayEffect extends AsThoughEffectImpl {
 
@@ -129,7 +160,7 @@ class OraclesVaultPlayEffect extends AsThoughEffectImpl {
     public OraclesVaultPlayEffect(MageObjectReference objectReference) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.objectReference = objectReference;
-        staticText = "Until end of turn, you may play that card without paying its mana cost";
+        staticText = "Until end of turn, you may play that card";
     }
 
     public OraclesVaultPlayEffect(final OraclesVaultPlayEffect effect) {
@@ -159,5 +190,43 @@ class OraclesVaultPlayEffect extends AsThoughEffectImpl {
         }
         return false;
     }
+}
+class OraclesVaultPlayForFreeEffect extends AsThoughEffectImpl {
 
+    private final MageObjectReference objectReference;
+
+    public OraclesVaultPlayForFreeEffect(MageObjectReference objectReference) {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        this.objectReference = objectReference;
+        staticText = "Until end of turn, you may play that card without paying its mana cost";
+    }
+
+    public OraclesVaultPlayForFreeEffect(final OraclesVaultPlayForFreeEffect effect) {
+        super(effect);
+        this.objectReference = effect.objectReference;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public OraclesVaultPlayForFreeEffect copy() {
+        return new OraclesVaultPlayForFreeEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectReference.refersTo(objectId, game) && affectedControllerId.equals(source.getControllerId())) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                controller.setCastSourceIdWithAlternateMana(objectId, null, null);
+                return true;
+            } else {
+                discard();
+            }
+        }
+        return false;
+    }
 }
