@@ -48,7 +48,7 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -62,6 +62,7 @@ public class RhonassMonument extends CardImpl {
     static {
         filter.add(Predicates.and(new ColorPredicate(ObjectColor.GREEN), new CardTypePredicate(CardType.CREATURE)));
     }
+
     static {
         filter2.add(new CardTypePredicate(CardType.CREATURE));
     }
@@ -79,7 +80,7 @@ public class RhonassMonument extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText(" and gains trample until end of turn");
         ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
 
