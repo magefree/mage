@@ -95,7 +95,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
                     if (isOnBottom) {
                         game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " on the bottom of his or her library.");
                     } else {
-                        game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " into his or her library 6th from the top.");
+                        game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " into his or her library 7th from the top.");
                     }
                 }
             }
