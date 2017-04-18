@@ -31,6 +31,7 @@ Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
 Commander 2015 Edition|C15|
 Commander 2016 Edition|C16|
+Commander 2017 Edition|C17|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Clash Pack|CLASH|
