@@ -419,6 +419,24 @@ public enum CardRepository {
         }
         return null;
     }
+    
+    public CardInfo findCardWPreferredSet(String name, String expansion, boolean caseInsensitive) {
+        List<CardInfo> cards;
+        if (caseInsensitive) {
+            cards = findCardsCaseInsensitive(name);
+        } else {
+            cards = findCards(name);
+        }
+        if (!cards.isEmpty()) {
+            CardInfo cardToUse = null;
+            for (CardInfo cardinfo : cards) {
+                if (cardinfo.getSetCode() != null && expansion != null && expansion.equalsIgnoreCase(cardinfo.getSetCode())) {
+                    return cardinfo;
+                }
+            }
+        }
+        return findPreferedCoreExpansionCard(name, true);
+    }    
 
     public List<CardInfo> findCards(String name) {
         try {
