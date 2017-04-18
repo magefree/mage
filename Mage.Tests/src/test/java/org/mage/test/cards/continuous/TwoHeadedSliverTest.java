@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static junit.framework.TestCase.assertEquals;
+
 /**
  * @author LevelX2
  */
@@ -26,9 +28,12 @@ public class TwoHeadedSliverTest extends CardTestPlayerBase {
         block(3, playerB, "Silvercoat Lion", "Two-Headed Sliver");
 
         setStopAt(3, PhaseStep.END_TURN);
-        execute();
 
-        assertPermanentCount(playerA, "Two-Headed Sliver", 1);
-        assertLife(playerB, 19);
+        try {
+            execute();
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Two-Headed Sliver is blocked by 1 creature(s). It has to be blocked by 2 or more.", e.getMessage());
+        }
+
     }
 }

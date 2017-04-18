@@ -32,6 +32,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static junit.framework.TestCase.assertEquals;
+
 /**
  *
  * @author LevelX2, icetc
@@ -212,12 +214,12 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         block(1, playerB, "Hill Giant", "Breaker of Armies");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
 
-        // Hill giant is still alive
-        assertPermanentCount(playerB, "Hill Giant", 1);
-        // Player B was unable to block, so goes down to 10 life
-        assertLife(playerB, 8);
+        try {
+            execute();
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Breaker of Armies is blocked by 1 creature(s). It has to be blocked by 2 or more.", e.getMessage());
+        }
     }
     
     /*
