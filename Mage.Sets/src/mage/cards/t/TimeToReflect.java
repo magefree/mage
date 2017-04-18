@@ -45,6 +45,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
@@ -73,7 +74,10 @@ public class TimeToReflect extends CardImpl {
             BlockedOrWasBlockedByAZombieWatcher watcher = (BlockedOrWasBlockedByAZombieWatcher) game.getState().getWatchers().get("BlockedOrWasBlockedByAZombieWatcher");
             if (watcher != null) {
                 for (MageObjectReference mor : watcher.getBlockedThisTurnCreatures()) {
-                    creaturesThatBlockedOrWereBlockedByAZombie.add(new PermanentIdPredicate(mor.getPermanent(game).getId()));
+                    Permanent permanent = mor.getPermanent(game);
+                    if (permanent != null) {
+                        creaturesThatBlockedOrWereBlockedByAZombie.add(new PermanentIdPredicate(permanent.getId()));
+                    }
                 }
             }
             filter.add(Predicates.or(creaturesThatBlockedOrWereBlockedByAZombie));
