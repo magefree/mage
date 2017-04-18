@@ -147,13 +147,12 @@ class CruelRealityEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (cursedPlayer != null
                 && controller != null) {
-            if (cursedPlayer.chooseUse(outcome, "Sacrifice a creature or planeswalker?", source, game)) {
-                FilterControlledPermanent filter = new FilterControlledPermanent();
+                FilterControlledPermanent filter = new FilterControlledPermanent("creature or planeswalker");
                 filter.add(Predicates.or(
                         new CardTypePredicate(CardType.CREATURE),
                         new CardTypePredicate(CardType.PLANESWALKER)));
                 TargetPermanent target = new TargetPermanent(filter);
-                if (cursedPlayer.choose(outcome, target, source.getId(), game)) {
+                if (cursedPlayer.choose(Outcome.Sacrifice, target, source.getId(), game)) {
                     Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());
                     if (objectToBeSacrificed != null) {
                         if (objectToBeSacrificed.sacrifice(source.getId(), game)) {
@@ -161,7 +160,6 @@ class CruelRealityEffect extends OneShotEffect {
                         }
                     }
                 }
-            }
             cursedPlayer.loseLife(5, game, false);
         }
         return false;
