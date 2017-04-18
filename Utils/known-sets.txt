@@ -23,6 +23,7 @@ Commander 2013 Edition|Commander2013|
 Commander 2014 Edition|Commander2014|
 Commander 2015|Commander2015|
 Commander 2016|Commander2016|
+Commander 2017|Commander2017|
 Commander Anthology|CommanderAnthology|
 Commander's Arsenal|CommandersArsenal|
 Conflux|Conflux|
@@ -88,6 +89,7 @@ Hour of Devastation|HourOfDevastation|
 Ice Age|IceAge|
 Innistrad|Innistrad|
 Invasion|Invasion|
+Ixalan|Ixalan|
 Journey into Nyx|JourneyIntoNyx|
 Judge Promo|JudgePromo|
 Judgment|Judgment|
