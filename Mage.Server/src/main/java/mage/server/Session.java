@@ -317,6 +317,10 @@ public class Session {
                 return 1020;
             case "fireshoes":
                 return 1021;
+            case "noxx":
+                return 1000;
+            case "magenoxx":
+                return 1018;
         }
         return 11;
     }
