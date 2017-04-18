@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class ScarabFeast extends CardImpl {
     public ScarabFeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // Exile up to three target cards from a single graveyard.
         getSpellAbility().addEffect(new ExileTargetEffect());
