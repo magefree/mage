@@ -499,8 +499,8 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, memnite);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback"); // Flashback Dread Return
-        addTarget(playerA, yOx + '^' + eVanguard + '^' + memnite); // sac 3 creatures
         addTarget(playerA, bSable); // return to battlefield
+        addTarget(playerA, yOx + '^' + eVanguard + '^' + memnite); // sac 3 creatures
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
