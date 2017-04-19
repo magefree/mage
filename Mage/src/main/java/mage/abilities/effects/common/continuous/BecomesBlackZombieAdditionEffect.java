@@ -58,7 +58,10 @@ public class BecomesBlackZombieAdditionEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
+        if (creature == null) {
+            creature = game.getPermanentEntering(source.getTargets().getFirstTarget());
+        }
         if (creature != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
