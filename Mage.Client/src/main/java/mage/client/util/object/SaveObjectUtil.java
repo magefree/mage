@@ -1,12 +1,9 @@
 package mage.client.util.object;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.UUID;
 
 /**
  * Utility class to save an object on disk.
@@ -53,7 +50,8 @@ public final class SaveObjectUtil {
                     }
                 }
                 String time = now(DATE_PATTERN);
-                File f = new File("income" + File.separator + name + '_' + time + ".save");
+                UUID guid = UUID.randomUUID();
+                File f = new File("income" + File.separator + name + '_' + time + "_" + guid+ ".save");
                 if (!f.exists()) {
                     f.createNewFile();
                 }
