@@ -322,9 +322,6 @@ public class NewTournamentDialog extends MageDialog {
         btnOk.setText("OK");
         btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
 
-        btnOk.setText("OK");
-        btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
-
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
