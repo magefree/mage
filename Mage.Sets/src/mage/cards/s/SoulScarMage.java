@@ -56,7 +56,7 @@ public class SoulScarMage extends CardImpl {
 
     public SoulScarMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
-        
+
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);
@@ -114,8 +114,14 @@ class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        boolean weControlSource = game.getControllerId(event.getSourceId()).equals(source.getControllerId());
-        boolean isNoncombatDamage = !((DamageCreatureEvent)event).isCombatDamage();
-        return weControlSource && isNoncombatDamage;
+        UUID sourceControllerId = game.getControllerId(event.getSourceId());
+        UUID targetControllerId = game.getControllerId(event.getTargetId());
+        UUID controllerId = source.getControllerId();
+        boolean weControlSource = controllerId == sourceControllerId;
+        boolean opponentControlsTarget = game.getOpponents(sourceControllerId).contains(targetControllerId);
+        boolean isNoncombatDamage = !((DamageCreatureEvent) event).isCombatDamage();
+        return weControlSource
+                && isNoncombatDamage
+                && opponentControlsTarget;
     }
 }
