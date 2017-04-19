@@ -28,12 +28,6 @@
 
 package mage.view;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
 import mage.constants.SkillLevel;
 import mage.constants.TableState;
 import mage.game.Game;
@@ -42,6 +36,12 @@ import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.match.MatchPlayer;
 import mage.game.tournament.TournamentPlayer;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -123,7 +123,7 @@ public class TableView implements Serializable {
             StringBuilder addInfo = new StringBuilder();
             if (table.getMatch().getGames().isEmpty()) {
                 addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
-                addInfo.append(" Time: ").append(table.getMatch().getOptions().getMatchTimeLimit().toString());
+                addInfo.append(" Time: ").append(table.getMatch().getOptions().getPriorityTime());
                 if (table.getMatch().getFreeMulligans() > 0) {
                     addInfo.append(" Free Mul.: ").append(table.getMatch().getFreeMulligans());
                 }
