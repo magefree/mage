@@ -1,0 +1,27 @@
+3 [AER:193] Tezzeret's Simulacrum
+4 [AER:192] Pendulum of Patterns
+1 [AER:151] Foundry Assembler
+4 [AER:194] Submerged Boneyard
+2 [AER:191] Tezzeret's Betrayal
+1 [AER:190] Tezzeret, Master of Metal
+1 [AER:42] Reverse Engineer
+1 [AER:167] Ornithopter
+1 [AER:65] Ironclad Revolutionary
+1 [KLD:207] Dukhara Peafowl
+1 [AER:163] Merchant's Dockhand
+1 [AER:144] Barricade Breaker
+2 [AER:143] Augmenting Automaton
+1 [AER:41] Quicksmith Spy
+2 [KLD:74] Dhund Operative
+1 [AER:58] Fen Hauler
+11 [KLD:253] Island
+2 [AER:138] Tezzeret's Touch
+10 [KLD:258] Swamp
+2 [AER:178] Universal Solvent
+2 [AER:156] Implement of Examination
+2 [AER:50] Wind-Kin Raiders
+1 [AER:177] Treasure Keeper
+2 [AER:30] Bastion Inventor
+1 [KLD:80] Essence Extraction
+LAYOUT MAIN:(1,8)(CMC,false,50)|([KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[AER:167],[AER:194],[AER:194],[AER:194],[AER:194],[KLD:258],[KLD:258],[KLD:258],[KLD:258],[KLD:258],[KLD:258],[KLD:258],[KLD:258],[KLD:258],[KLD:258])([AER:143],[AER:143],[AER:163],[AER:178],[AER:178])([KLD:74],[KLD:74],[AER:192],[AER:192],[AER:192],[AER:192])([KLD:80],[AER:156],[AER:156],[AER:193],[AER:193],[AER:193],[AER:138],[AER:138])([KLD:207],[AER:41],[AER:177])([AER:151],[AER:42],[AER:191],[AER:191])([AER:30],[AER:30],[AER:65],[AER:190],[AER:50],[AER:50])([AER:144],[AER:58])
+LAYOUT SIDEBOARD:(0,0)(NONE,false,50)|
