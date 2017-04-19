@@ -117,7 +117,7 @@ class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
         UUID sourceControllerId = game.getControllerId(event.getSourceId());
         UUID targetControllerId = game.getControllerId(event.getTargetId());
         UUID controllerId = source.getControllerId();
-        boolean weControlSource = controllerId == sourceControllerId;
+        boolean weControlSource = controllerId.equals(sourceControllerId);
         boolean opponentControlsTarget = game.getOpponents(sourceControllerId).contains(targetControllerId);
         boolean isNoncombatDamage = !((DamageCreatureEvent) event).isCombatDamage();
         return weControlSource
