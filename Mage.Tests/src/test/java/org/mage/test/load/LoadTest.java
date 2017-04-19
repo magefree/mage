@@ -79,9 +79,9 @@ public class LoadTest {
     private static final int EXECUTION_COUNT = 100;
 
     /**
-     * Determines how many times test will be executed in a row.
+     * Determines how many times test will be executed in parallel.
      */
-    private static final int EXECUTION_COUNT_PLAY_GAME = 1;
+    private static final int EXECUTION_COUNT_CONCURRENT = 30;
 
     @BeforeClass
     public static void init() {
@@ -152,7 +152,7 @@ public class LoadTest {
     public void testSimpleGames() throws Exception {
         final DeckCardLists deckList = createDeck();
 
-        for (int i = 0; i < EXECUTION_COUNT_PLAY_GAME; i++) {
+        for (int i = 0; i < EXECUTION_COUNT_CONCURRENT; i++) {
             final int j = i;
             Thread t = new Thread(() -> {
                 try {
@@ -171,13 +171,16 @@ public class LoadTest {
      * Tests EXECUTION_COUNT_PLAY_GAME simple games played in parallel
      *
      * You have to run Server in test mode (with '-testMode=true' program argument)
+     *
+     * Note: Test is with @Ignore since it is Integration test that shouldn't run on each build
      */
     @Test
+    @Ignore
     public void testSimpleGamesConcurrent() throws Exception {
         final DeckCardLists deckList = createDeck();
 
-        final CyclicBarrier barrier = new CyclicBarrier(EXECUTION_COUNT_PLAY_GAME + 1);
-        for (int i = 0; i < EXECUTION_COUNT_PLAY_GAME; i++) {
+        final CyclicBarrier barrier = new CyclicBarrier(EXECUTION_COUNT_CONCURRENT + 1);
+        for (int i = 0; i < EXECUTION_COUNT_CONCURRENT; i++) {
             final int j = i;
             Thread t = new Thread(() -> {
                 try {
@@ -250,19 +253,6 @@ public class LoadTest {
             Thread.sleep(1000);
         }
         return false;
-    }
-
-    /**
-     * Tests playing the whole game.
-     * Player use cheat to add lands, creatures and other cards.
-     * Then play only lands, one of them plays 1 damage targeting player.
-     *
-     * This results in 40 turns of the game.
-     */
-    @Test
-    @Ignore
-    public void testPlayGame() throws Exception {
-        //TODO: to be implemented
     }
 
     /**
