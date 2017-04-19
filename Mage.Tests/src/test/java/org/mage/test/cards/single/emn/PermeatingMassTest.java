@@ -12,7 +12,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
+ * @author escplan9
  */
 public class PermeatingMassTest extends CardTestPlayerBase {
 
@@ -34,5 +34,39 @@ public class PermeatingMassTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Permeating Mass", 1);
         assertPermanentCount(playerA, "Permeating Mass", 1);
         assertPowerToughness(playerA, "Permeating Mass", 1, 3);
+    }
+    
+    @Test
+    public void damagedCreatureWithVaryingPTbecomesCopyOfPermeatingMass() {
+        /*
+        Permeating Mass {G} 
+        Creature — Spirit - 1/3
+        Whenever Permeating Mass deals combat damage to a creature, that creature becomes a copy of Permeating Mass.
+        */
+        String pMass = "Permeating Mass";
+
+        /*
+         Dungrove Elder {2}{G}
+        Creature — Treefolk
+        Hexproof  * / *
+        Dungrove Elder's power and toughness are each equal to the number of Forests you control.
+        */
+        String dElder = "Dungrove Elder";
+
+        addCard(Zone.BATTLEFIELD, playerA, pMass);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerB, dElder); // 4/4 with the 4 forests
+
+        attack(2, playerB, dElder);
+        block(2, playerA, pMass, dElder);
+        
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+        
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, pMass, 1);
+        assertPermanentCount(playerB, pMass, 1); // dungrove elder becomes copy of permeating mass
+        assertPowerToughness(playerB, "Permeating Mass", 1, 3); // and should have P/T 1/3
     }
 }
