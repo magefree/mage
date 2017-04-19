@@ -1227,6 +1227,7 @@ public class MageServerImpl implements MageServer {
             try {
                 return action.execute();
             } catch (Exception ex) {
+                logger.error(ex, ex);
                 handleException(ex);
             }
         }
