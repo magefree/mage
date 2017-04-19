@@ -28,14 +28,11 @@
 package mage.filter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import mage.cards.Card;
-import mage.cards.SplitCard;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -78,12 +75,7 @@ public class FilterCard extends FilterObject<Card> {
         if (card == null) {
             return false;
         }
-        if (card.isSplitCard()) {
-            return super.match(((SplitCard) card).getLeftHalfCard(), game)
-                    || super.match(((SplitCard) card).getRightHalfCard(), game);
-        } else {
-            return super.match(card, game);
-        }
+        return super.match(card, game);
     }
 
     public boolean match(Card card, UUID playerId, Game game) {

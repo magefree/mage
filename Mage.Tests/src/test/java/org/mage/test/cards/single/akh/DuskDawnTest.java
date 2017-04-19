@@ -65,12 +65,16 @@ public class DuskDawnTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Dusk // Dawn", 0);
     }
 
+    // Fail to cast Dawn (Aftermath part)  from hand
     @Test
     public void testCastDawnFail() {
-        // Fail to cast dawn from hand
+        // Dusk {2}{W}{W}
+        // Destroy all creatures with power 3 or greater.
+        // Dawn {3}{W}{W}
+        // Return all creature cards with power less than or equal to 2 from your graveyard to your hand.
         addCard(Zone.HAND, playerA, "Dusk // Dawn");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Zone.GRAVEYARD, playerA, "Devoted Hero");
+        addCard(Zone.GRAVEYARD, playerA, "Devoted Hero"); // Creature 1/2 {W}
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dawn");
 
         setStopAt(1, PhaseStep.END_TURN);

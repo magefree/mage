@@ -805,9 +805,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count Expected count.
      */
     public void assertHandCount(Player player, String cardName, int count) throws AssertionError {
-        FilterCard filter = new FilterCard();
-        filter.add(new NamePredicate(cardName));
-        int actual = currentGame.getPlayer(player.getId()).getHand().count(filter, player.getId(), currentGame);
+        int actual;
+        if (cardName.contains("//")) { // special logic for cheched split cards, because in game logic of card name filtering is different than for test
+            actual = 0;
+            for (Card card : currentGame.getPlayer(player.getId()).getHand().getCards(currentGame)) {
+                if (card.getName().equals(cardName)) {
+                    actual++;
+                }
+            }
+        } else {
+            FilterCard filter = new FilterCard();
+            filter.add(new NamePredicate(cardName));
+            actual = currentGame.getPlayer(player.getId()).getHand().count(filter, player.getId(), currentGame);
+        }
         Assert.assertEquals("(Hand) Card counts for card " + cardName + " for " + player.getName() + " are not equal ", count, actual);
     }
 
