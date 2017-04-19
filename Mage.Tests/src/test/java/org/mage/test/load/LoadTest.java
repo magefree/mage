@@ -7,6 +7,7 @@ import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.CardScanner;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -20,12 +21,15 @@ import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 /**
  * Intended to test Mage server under different load patterns.
@@ -77,7 +81,12 @@ public class LoadTest {
     /**
      * Determines how many times test will be executed in a row.
      */
-    private static final int EXECUTION_COUNT_PLAY_GAME = 100;
+    private static final int EXECUTION_COUNT_PLAY_GAME = 1;
+
+    @BeforeClass
+    public static void init() {
+        CardScanner.scan();
+    }
 
     /**
      * Tests connecting with two players, creating game and starting it.
@@ -134,11 +143,13 @@ public class LoadTest {
     }
 
     /**
-     * Tests 10 simple games played one after another.
+     * Tests EXECUTION_COUNT_PLAY_GAME simple games played one after another.
+     *
+     * You have to run Server in test mode (with '-testMode=true' program argument)
      */
     @Test
     @Ignore
-    public void testSimpleGame() throws Exception {
+    public void testSimpleGames() throws Exception {
         final DeckCardLists deckList = createDeck();
 
         for (int i = 0; i < EXECUTION_COUNT_PLAY_GAME; i++) {
@@ -148,11 +159,43 @@ public class LoadTest {
                     testSimpleGame0(deckList, j);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    Assert.fail("Test failed due to: " + e.getMessage());
                 }
             });
             t.start();
             t.join();
         }
+    }
+
+    /**
+     * Tests EXECUTION_COUNT_PLAY_GAME simple games played in parallel
+     *
+     * You have to run Server in test mode (with '-testMode=true' program argument)
+     */
+    @Test
+    public void testSimpleGamesConcurrent() throws Exception {
+        final DeckCardLists deckList = createDeck();
+
+        final CyclicBarrier barrier = new CyclicBarrier(EXECUTION_COUNT_PLAY_GAME + 1);
+        for (int i = 0; i < EXECUTION_COUNT_PLAY_GAME; i++) {
+            final int j = i;
+            Thread t = new Thread(() -> {
+                try {
+                    testSimpleGame0(deckList, j);
+                } catch (InterruptedException e) {
+                    log.error(e, e);
+                    Assert.fail("Test failed due to: " + e.getMessage());
+                }
+                try {
+                    barrier.await();
+                } catch (InterruptedException | BrokenBarrierException e) {
+                    log.error(e, e);
+                }
+            });
+            t.start();
+        }
+        barrier.await();
+        log.info("Testing has been finished");
     }
 
     /**
@@ -249,6 +292,7 @@ public class LoadTest {
         DeckCardLists deckList = new DeckCardLists();
         Deck deck = generateRandomDeck();
         for (Card card : deck.getCards()) {
+
             CardInfo cardInfo = CardRepository.instance.findCard(card.getExpansionSetCode(), card.getCardNumber());
             if (cardInfo != null) {
                 deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));

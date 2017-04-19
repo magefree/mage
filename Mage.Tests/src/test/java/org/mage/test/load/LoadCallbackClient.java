@@ -26,14 +26,21 @@ public class LoadCallbackClient implements CallbackClient {
 
     private volatile int controlCount;
 
+    private volatile int overallMessageCount = 0;
+
     private GameView gameView;
 
     @Override
     public void processCallback(ClientCallback callback) {
-        //TODO
         controlCount = 0;
+        overallMessageCount++;
         log.info(callback.getMethod());
+
+        //SaveObjectUtil.saveObject(callback.getData(), callback.getMethod().toString());
+
+
         callback.setData(CompressUtil.decompress(callback.getData()));
+
         switch (callback.getMethod()) {
             case START_GAME: {
                 TableClientMessage message = (TableClientMessage) callback.getData();
@@ -46,7 +53,7 @@ public class LoadCallbackClient implements CallbackClient {
             case GAME_INFORM: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
                 log.info("Inform: " + message.getMessage());
-                gameView = message.getGameView();
+                //gameView = message.getGameView();
                 break;
             }
             case GAME_INIT:
@@ -59,6 +66,7 @@ public class LoadCallbackClient implements CallbackClient {
                         session.sendPlayerUUID(gameId, playerId);
                         break;
                     case "Select a card to discard":
+                        this.gameView = message.getGameView();
                         log.info("hand size: " + gameView.getHand().size());
                         SimpleCardView card = gameView.getHand().values().iterator().next();
                         session.sendPlayerUUID(gameId, card.getId());
@@ -83,8 +91,15 @@ public class LoadCallbackClient implements CallbackClient {
                 }
                 break;
             }
+            case GAME_UPDATE:
+                GameClientMessage message = (GameClientMessage) callback.getData();
+
+                GameView gameView = message.getGameView();
+                log.info("data: " + gameView.getPriorityPlayerName());
+                break;
             case GAME_OVER:
                 log.info("Game over");
+                log.info("Overall message count: " + overallMessageCount);
                 gameOver = true;
                 break;
         }
