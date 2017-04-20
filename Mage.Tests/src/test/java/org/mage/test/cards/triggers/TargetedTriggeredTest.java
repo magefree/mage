@@ -188,10 +188,10 @@ public class TargetedTriggeredTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sStinger);
         addTarget(playerA, gKeeper); // should be countered by Glyph Keeper clause as first ability targetting it
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, cStrength, gKeeper); // should not be countered anymore
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cStrength, gKeeper); // should not be countered anymore
         addTarget(playerA, memnite); // Cartouche of Strength fight
 
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, gKeeper, 1);
