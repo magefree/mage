@@ -117,7 +117,7 @@ public final class Predicates {
      * @return 
      */
     public static <T> Predicate<T> or(Predicate<? super T>... components) {
-        return new OrPredicate<>(defensiveCopy(components));
+        return new OrPredicate<T>(defensiveCopy(components));
     }
 
     /**
