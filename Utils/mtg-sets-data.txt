@@ -93,6 +93,7 @@ Homelands|HML|
 Planechase|HOP|
 Hour of Devastation|HOU|
 Ice Age|ICE|
+Iconic Masters|IMA|
 Invasion|INV|
 Innistrad|ISD|
 Journey into Nyx|JOU|

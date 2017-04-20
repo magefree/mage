@@ -87,6 +87,7 @@ Guru|Guru|
 Homelands|Homelands|
 Hour of Devastation|HourOfDevastation|
 Ice Age|IceAge|
+IconicMasters|IconicMasters|
 Innistrad|Innistrad|
 Invasion|Invasion|
 Ixalan|Ixalan|
