@@ -27,9 +27,10 @@
  */
 package mage.view;
 
-import java.io.Serializable;
 import mage.ConditionalMana;
 import mage.players.ManaPool;
+
+import java.io.Serializable;
 
 /**
  *
@@ -87,4 +88,30 @@ public class ManaPoolView implements Serializable {
         return colorless;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final ManaPoolView that = (ManaPoolView) o;
+
+        if (getRed() != that.getRed()) return false;
+        if (getGreen() != that.getGreen()) return false;
+        if (getBlue() != that.getBlue()) return false;
+        if (getWhite() != that.getWhite()) return false;
+        if (getBlack() != that.getBlack()) return false;
+        return getColorless() == that.getColorless();
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getRed();
+        result = 31 * result + getGreen();
+        result = 31 * result + getBlue();
+        result = 31 * result + getWhite();
+        result = 31 * result + getBlack();
+        result = 31 * result + getColorless();
+        return result;
+    }
 }

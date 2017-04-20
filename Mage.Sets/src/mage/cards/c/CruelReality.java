@@ -161,6 +161,7 @@ class CruelRealityEffect extends OneShotEffect {
                     }
                 }
             cursedPlayer.loseLife(5, game, false);
+            return true;
         }
         return false;
     }

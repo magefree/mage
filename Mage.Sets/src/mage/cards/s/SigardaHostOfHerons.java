@@ -44,6 +44,7 @@ import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 
 import java.util.UUID;
+import mage.game.stack.StackAbility;
 
 /**
  * @author noxx
@@ -51,7 +52,7 @@ import java.util.UUID;
 public class SigardaHostOfHerons extends CardImpl {
 
     public SigardaHostOfHerons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Angel");
 
@@ -112,6 +113,11 @@ class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
             }
             if (object instanceof Card) {
                 if (game.getOpponents(source.getControllerId()).contains(((Card) object).getOwnerId())) {
+                    return true;
+                }
+            }
+            if (object instanceof StackAbility) {
+                if (game.getOpponents(source.getControllerId()).contains(((StackAbility) object).getControllerId())) {
                     return true;
                 }
             }

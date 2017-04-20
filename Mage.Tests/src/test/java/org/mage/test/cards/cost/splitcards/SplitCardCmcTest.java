@@ -28,6 +28,8 @@ public class SplitCardCmcTest extends CardTestPlayerBase {
     public void testSplitCardCmcInHand() {
         // Total CMC of Failure // Comply is 3, so should be exiled by Transgress the Mind.
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        // Devoid
+        // Target player reveals his or her hand. You may choose a card from it with converted mana cost 3 or greater and exile that card.
         addCard(Zone.HAND, playerA, "Transgress the Mind");
         addCard(Zone.HAND, playerB, "Failure // Comply");
 
@@ -42,11 +44,17 @@ public class SplitCardCmcTest extends CardTestPlayerBase {
     public void testSplitCardCmcOnStack() {
         // Counterbalance revealing Wear // Tear counters a spell with converted mana cost 3, but not 1 or 2.
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
-        addCard(Zone.HAND, playerA, "Typhoid Rats");
+        addCard(Zone.HAND, playerA, "Typhoid Rats"); // Creature 1/1 {B}
 
+        // Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell
+        // if it has the same converted mana cost as the revealed card.
         addCard(Zone.BATTLEFIELD, playerB, "Counterbalance");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
+        // Wear {1}{R}
+        // Destroy target artifact.
+        // Tear {W}
+        // Destroy target enchantment.
         addCard(Zone.LIBRARY, playerB, "Wear // Tear"); // CMC now 3
         skipInitShuffling(); // so the set to top card stays at top
 

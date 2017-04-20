@@ -28,65 +28,56 @@
 
 package mage.view;
 
+import mage.cards.Card;
+import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CombatGroupView implements Serializable {
+public class ExileView extends CardsView {
     private static final long serialVersionUID = 1L;
 
-    private final CardsView attackers = new CardsView();
-    private final CardsView blockers = new CardsView();
-    private String defenderName = "";
-    private final UUID defenderId;
+    private final String name;
+    private final UUID id;
 
-    public CombatGroupView(CombatGroup combatGroup, Game game) {
-        Player player = game.getPlayer(combatGroup.getDefenderId());
-        if (player != null) {
-            this.defenderName = player.getName();
-        }
-        else {
-            Permanent perm = game.getPermanent(combatGroup.getDefenderId());
-            if (perm != null) {
-                this.defenderName = perm.getName();
-            }
-        }
-        this.defenderId = combatGroup.getDefenderId();
-        for (UUID id: combatGroup.getAttackers()) {
-            Permanent attacker = game.getPermanent(id);
-            if (attacker != null) {
-                attackers.put(id, new PermanentView(attacker, game.getCard(attacker.getId()),null, game));
-            }
-        }
-        for (UUID id: combatGroup.getBlockerOrder()) {
-            Permanent blocker = game.getPermanent(id);
-            if (blocker != null) {
-                blockers.put(id, new PermanentView(blocker, game.getCard(blocker.getId()), null, game));
-            }
+    public ExileView(ExileZone exileZone, Game game) {
+        this.name = exileZone.getName();
+        this.id = exileZone.getId();
+        for (Card card: exileZone.getCards(game)) {
+            this.put(card.getId(), new CardView(card, game, false));
         }
     }
 
-    public String getDefenderName() {
-        return defenderName;
+    public String getName() {
+        return name;
     }
 
-    public CardsView getAttackers() {
-        return attackers;
+    public UUID getId() {
+        return id;
     }
 
-    public CardsView getBlockers() {
-        return blockers;
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        final ExileView exileView = (ExileView) o;
+
+        if (!getName().equals(exileView.getName())) return false;
+        return getId().equals(exileView.getId());
+
     }
 
-    public UUID getDefenderId() {
-        return defenderId;
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + getId().hashCode();
+        return result;
     }
 }

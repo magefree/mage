@@ -289,6 +289,197 @@ public class CursesTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 2);
         
         assertPowerToughness(playerB, "Silvercoat Lion", 1, 1);
-    }   
-    
+    }
+
+
+
+    @Test
+    public void cruelRealityHasBothCreatureAndPwChoosePw() {
+
+        /*
+        Cruel Reality {5}{B}{B}
+        Enchantment - Aura Curse
+        Enchant player
+        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
+        */
+        String cReality = "Cruel Reality";
+
+        /*
+        Ugin, the Spirit Dragon {8}
+        Planeswalker — Ugin
+        +2: Ugin, the Spirit Dragon deals 3 damage to target creature or player.
+        −X: Exile each permanent with converted mana cost X or less that's one or more colors.
+        −10: You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
+        */
+        String ugin = "Ugin, the Spirit Dragon";
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, ugin);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+        setChoice(playerB, ugin);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, ugin, 1);
+        assertPermanentCount(playerB, memnite, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void cruelRealityHasBothCreatureAndPwChooseCreature() {
+
+        /*
+        Cruel Reality {5}{B}{B}
+        Enchantment - Aura Curse
+        Enchant player
+        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
+        */
+        String cReality = "Cruel Reality";
+
+        /*
+        Ugin, the Spirit Dragon {8}
+        Planeswalker — Ugin
+        +2: Ugin, the Spirit Dragon deals 3 damage to target creature or player.
+        −X: Exile each permanent with converted mana cost X or less that's one or more colors.
+        −10: You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
+        */
+        String ugin = "Ugin, the Spirit Dragon";
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, ugin);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+        setChoice(playerB, memnite);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, memnite, 1);
+        assertPermanentCount(playerB, ugin, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void cruelRealityOnlyHasCreatureNoChoiceMade() {
+
+        /*
+        Cruel Reality {5}{B}{B}
+        Enchantment - Aura Curse
+        Enchant player
+        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
+        */
+        String cReality = "Cruel Reality";
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, memnite, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void cruelRealityOnlyHasPwNoChoiceMade() {
+
+        /*
+        Cruel Reality {5}{B}{B}
+        Enchantment - Aura Curse
+        Enchant player
+        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
+        */
+        String cReality = "Cruel Reality";
+
+        /*
+        Ugin, the Spirit Dragon {8}
+        Planeswalker — Ugin
+        +2: Ugin, the Spirit Dragon deals 3 damage to target creature or player.
+        −X: Exile each permanent with converted mana cost X or less that's one or more colors.
+        −10: You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
+        */
+        String ugin = "Ugin, the Spirit Dragon";
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, ugin);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, ugin, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void cruelRealityOnlyHasCreatureTryToChooseNotToSac() {
+
+        /*
+        Cruel Reality {5}{B}{B}
+        Enchantment - Aura Curse
+        Enchant player
+        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
+        */
+        String cReality = "Cruel Reality";
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+        setChoice(playerB, "No");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, memnite, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void cruelRealityNoCreatureOrPwForcesLifeLoss() {
+
+        /*
+        Cruel Reality {5}{B}{B}
+        Enchantment - Aura Curse
+        Enchant player
+        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
+        */
+        String cReality = "Cruel Reality";
+        String gPrison = "Ghostly Prison"; // {2}{W} enchantment - doesnt matter text for this
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, gPrison);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+        setChoice(playerB, gPrison); // try to set choice to enchantment
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, gPrison, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 15);
+    }
 }

@@ -83,5 +83,38 @@ public class SimpleCardView implements Serializable {
 
     public boolean isGameObject() {
         return gameObject;
-    }    
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final SimpleCardView that = (SimpleCardView) o;
+
+        if (getUsesVariousArt() != that.getUsesVariousArt()) return false;
+        if (isGameObject() != that.isGameObject()) return false;
+        if (!getId().equals(that.getId())) return false;
+        if (!getExpansionSetCode().equals(that.getExpansionSetCode())) return false;
+        if (getTokenSetCode() != null ? !getTokenSetCode().equals(that.getTokenSetCode()) : that
+            .getTokenSetCode() != null)
+            return false;
+        if (getTokenDescriptor() != null ? !getTokenDescriptor().equals(that.getTokenDescriptor()
+        ) : that.getTokenDescriptor() != null)
+            return false;
+        return getCardNumber().equals(that.getCardNumber());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getExpansionSetCode().hashCode();
+        result = 31 * result + (getTokenSetCode() != null ? getTokenSetCode().hashCode() : 0);
+        result = 31 * result + (getTokenDescriptor() != null ? getTokenDescriptor().hashCode() : 0);
+        result = 31 * result + getCardNumber().hashCode();
+        result = 31 * result + (getUsesVariousArt() ? 1 : 0);
+        result = 31 * result + (isGameObject() ? 1 : 0);
+        return result;
+    }
 }

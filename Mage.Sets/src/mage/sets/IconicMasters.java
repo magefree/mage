@@ -26,37 +26,33 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.view;
+package mage.sets;
 
-import java.util.UUID;
-import mage.cards.Card;
-import mage.game.ExileZone;
-import mage.game.Game;
+import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author fireshoes
  */
-public class ExileView extends CardsView {
-    private static final long serialVersionUID = 1L;
+public class IconicMasters extends ExpansionSet {
 
-    private final String name;
-    private final UUID id;
+    private static final IconicMasters instance = new IconicMasters();
 
-    public ExileView(ExileZone exileZone, Game game) {
-        this.name = exileZone.getName();
-        this.id = exileZone.getId();
-        for (Card card: exileZone.getCards(game)) {
-            this.put(card.getId(), new CardView(card, game, false));
-        }
+    public static IconicMasters getInstance() {
+        return instance;
     }
 
-    public String getName() {
-        return name;
-    }
+    private IconicMasters() {
+        super("Iconic Masters", "IMA", ExpansionSet.buildDate(2017, 11, 17), SetType.SUPPLEMENTAL);
+        this.blockName = "Reprint";
+        this.hasBasicLands = false;
+        this.hasBoosters = true;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
 
-    public UUID getId() {
-        return id;
     }
-
 }

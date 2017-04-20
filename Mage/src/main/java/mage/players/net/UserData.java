@@ -263,4 +263,73 @@ public class UserData implements Serializable {
     public static String getDefaultFlagName() {
         return "world.png";
     }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final UserData userData = (UserData) o;
+
+        if (getGroupId() != userData.getGroupId()) return false;
+        if (getAvatarId() != userData.getAvatarId()) return false;
+        if (isShowAbilityPickerForced() != userData.isShowAbilityPickerForced()) return false;
+        if (isAllowRequestShowHandCards() != userData.isAllowRequestShowHandCards()) return false;
+        if (confirmEmptyManaPool != userData.confirmEmptyManaPool) return false;
+        if (askMoveToGraveOrder != userData.askMoveToGraveOrder) return false;
+        if (isManaPoolAutomatic() != userData.isManaPoolAutomatic()) return false;
+        if (isManaPoolAutomaticRestricted() != userData.isManaPoolAutomaticRestricted())
+            return false;
+        if (isPassPriorityCast() != userData.isPassPriorityCast()) return false;
+        if (isPassPriorityActivation() != userData.isPassPriorityActivation()) return false;
+        if (isAutoOrderTrigger() != userData.isAutoOrderTrigger()) return false;
+        if (isUseFirstManaAbility() != userData.isUseFirstManaAbility()) return false;
+        if (getMatchQuitRatio() != userData.getMatchQuitRatio()) return false;
+        if (getTourneyQuitRatio() != userData.getTourneyQuitRatio()) return false;
+        if (getGeneralRating() != userData.getGeneralRating()) return false;
+        if (getConstructedRating() != userData.getConstructedRating()) return false;
+        if (getLimitedRating() != userData.getLimitedRating()) return false;
+        if (getUserSkipPrioritySteps() != null ? !getUserSkipPrioritySteps().equals(userData
+            .getUserSkipPrioritySteps()) : userData.getUserSkipPrioritySteps() != null)
+            return false;
+        if (getFlagName() != null ? !getFlagName().equals(userData.getFlagName()) : userData
+            .getFlagName() != null)
+            return false;
+        if (userIdStr != null ? !userIdStr.equals(userData.userIdStr) : userData.userIdStr != null)
+            return false;
+        if (getMatchHistory() != null ? !getMatchHistory().equals(userData.getMatchHistory()) :
+            userData.getMatchHistory() != null)
+            return false;
+        return getTourneyHistory() != null ? getTourneyHistory().equals(userData
+            .getTourneyHistory()) : userData.getTourneyHistory() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getGroupId();
+        result = 31 * result + getAvatarId();
+        result = 31 * result + (isShowAbilityPickerForced() ? 1 : 0);
+        result = 31 * result + (isAllowRequestShowHandCards() ? 1 : 0);
+        result = 31 * result + (confirmEmptyManaPool ? 1 : 0);
+        result = 31 * result + (getUserSkipPrioritySteps() != null ? getUserSkipPrioritySteps()
+            .hashCode() : 0);
+        result = 31 * result + (getFlagName() != null ? getFlagName().hashCode() : 0);
+        result = 31 * result + (askMoveToGraveOrder ? 1 : 0);
+        result = 31 * result + (isManaPoolAutomatic() ? 1 : 0);
+        result = 31 * result + (isManaPoolAutomaticRestricted() ? 1 : 0);
+        result = 31 * result + (isPassPriorityCast() ? 1 : 0);
+        result = 31 * result + (isPassPriorityActivation() ? 1 : 0);
+        result = 31 * result + (isAutoOrderTrigger() ? 1 : 0);
+        result = 31 * result + (isUseFirstManaAbility() ? 1 : 0);
+        result = 31 * result + (userIdStr != null ? userIdStr.hashCode() : 0);
+        result = 31 * result + (getMatchHistory() != null ? getMatchHistory().hashCode() : 0);
+        result = 31 * result + getMatchQuitRatio();
+        result = 31 * result + (getTourneyHistory() != null ? getTourneyHistory().hashCode() : 0);
+        result = 31 * result + getTourneyQuitRatio();
+        result = 31 * result + getGeneralRating();
+        result = 31 * result + getConstructedRating();
+        result = 31 * result + getLimitedRating();
+        return result;
+    }
 }

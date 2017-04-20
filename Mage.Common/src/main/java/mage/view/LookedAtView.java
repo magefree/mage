@@ -57,4 +57,23 @@ public class LookedAtView implements Serializable {
     public SimpleCardsView getCards() {
         return cards;
     }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final LookedAtView that = (LookedAtView) o;
+
+        if (!getName().equals(that.getName())) return false;
+        return getCards().equals(that.getCards());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName().hashCode();
+        result = 31 * result + getCards().hashCode();
+        return result;
+    }
 }

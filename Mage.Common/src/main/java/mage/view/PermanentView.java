@@ -27,9 +27,6 @@
  */
 package mage.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnFaceUpAbility;
 import mage.cards.Card;
@@ -37,6 +34,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -213,5 +214,56 @@ public class PermanentView extends CardView {
 
     public boolean isManifested() {
         return manifested;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        final PermanentView that = (PermanentView) o;
+
+        if (isTapped() != that.isTapped()) return false;
+        if (isFlipped() != that.isFlipped()) return false;
+        if (isPhasedIn() != that.isPhasedIn()) return false;
+        if (summoningSickness != that.summoningSickness) return false;
+        if (getDamage() != that.getDamage()) return false;
+        if (isCopy() != that.isCopy()) return false;
+        if (isControlled() != that.isControlled()) return false;
+        if (isMorphed() != that.isMorphed()) return false;
+        if (isManifested() != that.isManifested()) return false;
+        if (isAttachedToPermanent() != that.isAttachedToPermanent()) return false;
+        if (getAttachments() != null ? !getAttachments().equals(that.getAttachments()) : that
+            .getAttachments() != null)
+            return false;
+        if (getOriginal() != null ? !getOriginal().equals(that.getOriginal()) : that.getOriginal
+            () != null)
+            return false;
+        if (getNameOwner() != null ? !getNameOwner().equals(that.getNameOwner()) : that
+            .getNameOwner() != null)
+            return false;
+        return isAttachedTo() == that.isAttachedTo();
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (isTapped() ? 1 : 0);
+        result = 31 * result + (isFlipped() ? 1 : 0);
+        result = 31 * result + (isPhasedIn() ? 1 : 0);
+        result = 31 * result + (summoningSickness ? 1 : 0);
+        result = 31 * result + getDamage();
+        result = 31 * result + (getAttachments() != null ? getAttachments().hashCode() : 0);
+        result = 31 * result + (getOriginal() != null ? getOriginal().hashCode() : 0);
+        result = 31 * result + (isCopy() ? 1 : 0);
+        result = 31 * result + (getNameOwner() != null ? getNameOwner().hashCode() : 0);
+        result = 31 * result + (isControlled() ? 1 : 0);
+        result = 31 * result + (isAttachedTo() ? 1 : 0);
+        result = 31 * result + (isMorphed() ? 1 : 0);
+        result = 31 * result + (isManifested() ? 1 : 0);
+        result = 31 * result + (isAttachedToPermanent() ? 1 : 0);
+        return result;
     }
 }

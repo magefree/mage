@@ -120,7 +120,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
                     if (game.getActivePlayerId().equals(permanent.getControllerId())
-                            || (game.getActivePlayerId().equals(onlyIfControlledByPlayer))) { // if effect works only for specific player, all permanents have to be set to handled in that players untap step
+                            && ((onlyIfControlledByPlayer == null) || (game.getActivePlayerId().equals(onlyIfControlledByPlayer)))) { // if effect works only for specific player, all permanents have to be set to handled in that players untap step
                         if (!handledTargetsDuringTurn.containsKey(targetId)) {
                             // it's the untep step of the current controller and the effect was not handled for this target yet, so do it now
                             handledTargetsDuringTurn.put(targetId, false);
@@ -145,8 +145,10 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
                     && getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
-                    handledTargetsDuringTurn.put(event.getTargetId(), true);
-                    return true;
+                    if ((onlyIfControlledByPlayer == null) || game.getActivePlayerId().equals(onlyIfControlledByPlayer)) { // If onlyIfControlledByPlayer is set, then don't apply unless we're currently controlled by the specified player.
+                        handledTargetsDuringTurn.put(event.getTargetId(), true);
+                        return true;
+                    }
                 }
             }
         }
