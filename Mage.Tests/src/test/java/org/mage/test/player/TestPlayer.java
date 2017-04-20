@@ -588,8 +588,8 @@ public class TestPlayer implements Player {
                     }
                 }
             }
-            checkMultipleBlockers(game, blockedCreaturesByCreature);
         }
+        checkMultipleBlockers(game, blockedCreaturesByCreature);
     }
 
     // Checks if a creature can block at least one more creature

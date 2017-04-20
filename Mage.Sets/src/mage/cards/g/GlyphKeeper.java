@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.EmbalmAbility;
 import mage.cards.CardImpl;
@@ -40,7 +41,9 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.TargetStackObject;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
+import mage.watchers.common.NumberOfTimesPermanentTargetedATurnWatcher;
 
 /**
  *
@@ -59,7 +62,7 @@ public class GlyphKeeper extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Glyph Keeper becomes the target of a spell or ability for the first time in a turn, counter that spell or ability.
-        this.addAbility(new GlyphKeeperAbility());
+        this.addAbility(new GlyphKeeperAbility(), new NumberOfTimesPermanentTargetedATurnWatcher());
 
         // Embalm {5}{U}{U}
         this.addAbility(new EmbalmAbility(new ManaCostsImpl("{5}{U}{U}"), this));
@@ -78,15 +81,12 @@ public class GlyphKeeper extends CardImpl {
 
 class GlyphKeeperAbility extends TriggeredAbilityImpl {
 
-    protected int turnUsed;
-
     public GlyphKeeperAbility() {
         super(Zone.BATTLEFIELD, new CounterTargetEffect(), false);
     }
 
     public GlyphKeeperAbility(final GlyphKeeperAbility ability) {
         super(ability);
-        turnUsed = ability.turnUsed;
     }
 
     @Override
@@ -101,13 +101,18 @@ class GlyphKeeperAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getSourceId()) && game.getTurnNum() > turnUsed) {
-            this.getTargets().clear();
-            TargetStackObject target = new TargetStackObject();
-            target.add(event.getSourceId(), game);
-            this.addTarget(target);
-            turnUsed = game.getTurnNum();
-            return true;
+        if (event.getTargetId().equals(this.getSourceId())) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.isCreature()) {
+                NumberOfTimesPermanentTargetedATurnWatcher watcher = (NumberOfTimesPermanentTargetedATurnWatcher) game.getState().getWatchers().get(NumberOfTimesPermanentTargetedATurnWatcher.class.getName());
+                if (watcher != null
+                        && watcher.notMoreThanOnceTargetedThisTurn(permanent, game)) {
+                    for (Effect effect : getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                    }
+                    return true;
+                }
+            }
         }
         return false;
     }

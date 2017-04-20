@@ -34,6 +34,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  *
@@ -136,6 +137,7 @@ public class CanBlockMultipleCreaturesTest extends CardTestPlayerBase {
         // Will fail on purpose - we are trying to block too many creatures!
         try {
             execute();
+            fail("Expected exception not thrown");
         } catch(UnsupportedOperationException e) {
             assertEquals("Hundred-Handed One cannot block Fabled Hero", e.getMessage());
         }
@@ -215,6 +217,7 @@ public class CanBlockMultipleCreaturesTest extends CardTestPlayerBase {
         // Catch the illegal block
         try {
             execute();
+            fail("Expected exception not thrown");
         } catch(UnsupportedOperationException e) {
             assertEquals("Embraal Bruiser is blocked by 1 creature(s). It has to be blocked by 2 or more.", e.getMessage());
         }
