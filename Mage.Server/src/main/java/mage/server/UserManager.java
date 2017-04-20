@@ -27,14 +27,13 @@
  */
 package mage.server;
 
+import java.util.*;
+import java.util.concurrent.*;
 import mage.server.User.UserState;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
-
-import java.util.*;
-import java.util.concurrent.*;
 
 /**
  * manages users - if a user is disconnected and 10 minutes have passed with no
@@ -68,8 +67,7 @@ public enum UserManager {
 
     public Optional<User> getUser(UUID userId) {
         if (!users.containsKey(userId)) {
-            LOGGER.error(String.format("User with id %s could not be found", userId));
-
+            LOGGER.trace(String.format("User with id %s could not be found", userId));
             return Optional.empty();
         } else {
             return Optional.of(users.get(userId));
@@ -82,10 +80,7 @@ public enum UserManager {
         if (u.isPresent()) {
             return u;
         } else {
-
-            LOGGER.error("User with name " + userName + " could not be found");
             return Optional.empty();
-
         }
     }
 
@@ -123,8 +118,8 @@ public enum UserManager {
 
     public void removeUser(final UUID userId, final DisconnectReason reason) {
         if (userId != null) {
-            getUser(userId).ifPresent(user ->
-                    USER_EXECUTOR.execute(
+            getUser(userId).ifPresent(user
+                    -> USER_EXECUTOR.execute(
                             () -> {
                                 try {
                                     LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');

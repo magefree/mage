@@ -28,13 +28,10 @@
 package org.mage.test.player;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -65,15 +62,10 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterAttackingCreature;
-import mage.filter.common.FilterCreatureForCombat;
-import mage.filter.common.FilterCreatureForCombatBlock;
-import mage.filter.common.FilterCreatureOrPlayer;
-import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.filter.predicate.permanent.SummoningSicknessPredicate;
 import mage.game.Game;
 import mage.game.Graveyard;
@@ -179,6 +171,11 @@ public class TestPlayer implements Player {
             return permanents.get(0);
         }
         return null;
+    }
+
+    // Gets all permanents that match the filter
+    protected List<Permanent> findPermanents(FilterPermanent filter, UUID controllerId, Game game) {
+        return game.getBattlefield().getAllActivePermanents(filter, controllerId, game);
     }
 
     private boolean checkExecuteCondition(String[] groups, Game game) {
@@ -289,7 +286,7 @@ public class TestPlayer implements Player {
         int index = 0;
         int targetsSet = 0;
         for (String targetName : targetList) {
-            Mode selectedMode = null;
+            Mode selectedMode;
             if (targetName.startsWith("mode=")) {
                 int modeNr = Integer.parseInt(targetName.substring(5, 6));
                 if (modeNr == 0 || modeNr > (ability.getModes().isEachModeMoreThanOnce() ? ability.getModes().getSelectedModes().size() : ability.getModes().size())) {
@@ -561,25 +558,86 @@ public class TestPlayer implements Player {
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
         UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
+        // Map of Blocker reference -> list of creatures blocked
+        Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature = new HashMap<>();
         for (PlayerAction action : actions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
                 String command = action.getAction();
                 command = command.substring(command.indexOf("block:") + 6);
                 String[] groups = command.split("\\$");
-                FilterCreatureForCombatBlock filterBlocker = new FilterCreatureForCombatBlock();
-                filterBlocker.add(new NamePredicate(groups[0]));
-                filterBlocker.add(Predicates.not(new BlockingPredicate()));
-                Permanent blocker = findPermanent(filterBlocker, computerPlayer.getId(), game);
-                if (blocker != null) {
-                    FilterAttackingCreature filterAttacker = new FilterAttackingCreature();
-                    filterAttacker.add(new NamePredicate(groups[1]));
-                    Permanent attacker = findPermanent(filterAttacker, opponentId, game);
-                    if (attacker != null) {
-                        computerPlayer.declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), game);
+                FilterAttackingCreature filterAttacker = new FilterAttackingCreature();
+                filterAttacker.add(new NamePredicate(groups[1]));
+                Permanent attacker = findPermanent(filterAttacker, opponentId, game);
+                FilterControlledPermanent filterPermanent = new FilterControlledPermanent();
+                filterPermanent.add(new NamePredicate(groups[0]));
+                // Get all possible blockers - those with the same name on the battlefield
+                List<Permanent> possibleBlockers = findPermanents(filterPermanent, computerPlayer.getId(), game);
+                if (!possibleBlockers.isEmpty() && attacker != null) {
+                    boolean blockerFound = false;
+                    for(Permanent blocker: possibleBlockers) {
+                        // See if it can block this creature
+                        if(canBlockAnother(game, blocker, attacker, blockedCreaturesByCreature)) {
+                            computerPlayer.declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), game);
+                            blockerFound = true;
+                            break;
+                        }
+                    }
+                    // If we haven't found a blocker then an illegal block has been made in the test
+                    if(!blockerFound) {
+                        throw new UnsupportedOperationException(groups[0] + " cannot block " + groups[1]);
                     }
                 }
             }
+            checkMultipleBlockers(game, blockedCreaturesByCreature);
         }
+    }
+
+    // Checks if a creature can block at least one more creature
+    private boolean canBlockAnother(Game game, Permanent blocker, Permanent attacker, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+        MageObjectReference blockerRef = new MageObjectReference(blocker, game);
+        // See if we already reference this blocker
+        for(MageObjectReference r: blockedCreaturesByCreature.keySet()) {
+            if(r.equals(blockerRef)) {
+                // Use the existing reference if we do
+                blockerRef = r;
+            }
+        }
+        List<MageObjectReference> blocked = blockedCreaturesByCreature.getOrDefault(blockerRef, new ArrayList<>());
+        int numBlocked = blocked.size();
+        // Can't block any more creatures
+        if(++numBlocked > blocker.getMaxBlocks()) {
+            return false;
+        }
+        // Add the attacker reference to the list of creatures this creature is blocking
+        blocked.add(new MageObjectReference(attacker, game));
+        blockedCreaturesByCreature.put(blockerRef, blocked);
+        return true;
+    }
+
+    // Check for Menace type abilities - if creatures can be blocked by >X or <Y only
+    private void checkMultipleBlockers(Game game, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+        // Stores the total number of blockers for each attacker
+        Map<MageObjectReference, Integer> blockersForAttacker = new HashMap<>();
+        // Calculate the number of blockers each attacker has
+        for(List<MageObjectReference> attackers : blockedCreaturesByCreature.values()) {
+            for(MageObjectReference mr: attackers) {
+                Integer blockers = blockersForAttacker.getOrDefault(mr, 0);
+                blockersForAttacker.put(mr, blockers+1);
+            }
+        }
+        // Check each attacker is blocked by an allowed amount of creatures
+        for(Map.Entry<MageObjectReference, Integer> entry: blockersForAttacker.entrySet()) {
+            Permanent attacker = entry.getKey().getPermanent(game);
+            Integer blockers = entry.getValue();
+            // If getMaxBlockedBy() == 0 it means any number of creatures can block this creature
+            if(attacker.getMaxBlockedBy() != 0 && blockers > attacker.getMaxBlockedBy()) {
+                throw new UnsupportedOperationException(attacker.getName() + " is blocked by " + blockers + " creature(s). It can only be blocked by " + attacker.getMaxBlockedBy() + " or less.");
+            }
+            else if(blockers < attacker.getMinBlockedBy()) {
+                throw new UnsupportedOperationException(attacker.getName() + " is blocked by " + blockers + " creature(s). It has to be blocked by " + attacker.getMinBlockedBy() + " or more.");
+            }
+        }
+        // No errors raised - all the blockers pass the test!
     }
 
     @Override

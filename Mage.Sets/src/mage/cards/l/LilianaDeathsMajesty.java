@@ -28,10 +28,8 @@
 package mage.cards.l;
 
 import java.util.UUID;
-
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
@@ -40,8 +38,6 @@ import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -75,9 +71,11 @@ public class LilianaDeathsMajesty extends CardImpl {
         this.addAbility(ability);
 
         // -3: Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.
-        ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), -3);
+        ability = new LoyaltyAbility(new BecomesBlackZombieAdditionEffect() // because the effect has to be active for triggered effects that e.g. check if the creature entering is a Zombie, the continuous effect needs to be added before the card moving effect is applied
+                .setText(""), -3);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        ability.addEffect(new BecomesBlackZombieAdditionEffect());
+        ability.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
+                .setText("Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types"));
         this.addAbility(ability);
 
         // -7: Destroy all non-Zombie creatures.

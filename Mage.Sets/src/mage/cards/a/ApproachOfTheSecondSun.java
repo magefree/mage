@@ -81,8 +81,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
                     }
 
                     // Is the library now empty, thus the rise is on the bottom (for the message to the players)?
-                    boolean isOnBottom = !controller.getLibrary().hasCards();
-
+                    boolean isOnBottom = controller.getLibrary().size() < 6;
                     // Put this card (if the ability came from an ApproachOfTheSecondSun spell card) on top
                     spellCard.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
 
@@ -96,7 +95,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
                     if (isOnBottom) {
                         game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " on the bottom of his or her library.");
                     } else {
-                        game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " into his or her library 6th from the top.");
+                        game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " into his or her library 7th from the top.");
                     }
                 }
             }
@@ -108,7 +107,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
 
 class ApproachOfTheSecondSunWatcher extends Watcher {
 
-    private Map<UUID, Integer> approachesCast =  new HashMap<>();
+    private Map<UUID, Integer> approachesCast = new HashMap<>();
 
     public ApproachOfTheSecondSunWatcher() {
         super(ApproachOfTheSecondSunWatcher.class.getName(), WatcherScope.GAME);

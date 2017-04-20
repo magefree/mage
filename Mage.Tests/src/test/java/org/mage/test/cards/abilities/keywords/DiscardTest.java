@@ -48,18 +48,17 @@ public class DiscardTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.HAND, playerA, "Tranquil Thicket");
-
         addCard(Zone.BATTLEFIELD, playerB, "Rest in Peace", 1);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling {G} <i>({G},Discard {this}: Draw a card.)</i>");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling {G}"); //cycling ability
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertHandCount(playerA, "Tranquil Thicket", 0);
-        assertExileCount("Tranquil Thicket", 1);
+        assertExileCount("Tranquil Thicket", 1); //exiled by Rest in Peace
+        assertHandCount(playerA, "Tranquil Thicket", 0); //should be exiled
         assertHandCount(playerA, 1); // the card drawn by Cycling
     }
 
