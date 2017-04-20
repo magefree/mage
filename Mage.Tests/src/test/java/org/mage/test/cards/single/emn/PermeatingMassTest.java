@@ -36,6 +36,9 @@ public class PermeatingMassTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Permeating Mass", 1, 3);
     }
     
+    /*
+     * NOTE: As of 04/19/2017 this test is failing due to a bug in code. See issue #3167
+    */
     @Test
     public void damagedCreatureWithVaryingPTbecomesCopyOfPermeatingMass() {
         /*

@@ -14,7 +14,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class LilianaTest extends CardTestPlayerBase {
 
     @Test
-    public void testMe() {
+    public void testCreatureGainsZombieAsAdditionalType() {
         /*
         Binding Mummy {1}{W}
         Creature - Zombie 2/2
