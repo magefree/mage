@@ -27,8 +27,9 @@
  */
 package mage.players.net;
 
-import java.io.Serializable;
 import mage.constants.PhaseStep;
+
+import java.io.Serializable;
 
 /**
  *
@@ -119,5 +120,33 @@ public class SkipPrioritySteps implements Serializable {
                 return true;
         }
     }
-    
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final SkipPrioritySteps that = (SkipPrioritySteps) o;
+
+        if (isUpkeep() != that.isUpkeep()) return false;
+        if (isDraw() != that.isDraw()) return false;
+        if (isMain1() != that.isMain1()) return false;
+        if (isBeforeCombat() != that.isBeforeCombat()) return false;
+        if (isEndOfCombat() != that.isEndOfCombat()) return false;
+        if (isMain2() != that.isMain2()) return false;
+        return isEndOfTurn() == that.isEndOfTurn();
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (isUpkeep() ? 1 : 0);
+        result = 31 * result + (isDraw() ? 1 : 0);
+        result = 31 * result + (isMain1() ? 1 : 0);
+        result = 31 * result + (isBeforeCombat() ? 1 : 0);
+        result = 31 * result + (isEndOfCombat() ? 1 : 0);
+        result = 31 * result + (isMain2() ? 1 : 0);
+        result = 31 * result + (isEndOfTurn() ? 1 : 0);
+        return result;
+    }
 }

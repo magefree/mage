@@ -28,10 +28,11 @@
 
 package mage.view;
 
-import java.util.UUID;
 import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,4 +60,24 @@ public class ExileView extends CardsView {
         return id;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        final ExileView exileView = (ExileView) o;
+
+        if (!getName().equals(exileView.getName())) return false;
+        return getId().equals(exileView.getId());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + getId().hashCode();
+        return result;
+    }
 }

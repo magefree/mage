@@ -88,4 +88,36 @@ public class UserSkipPrioritySteps implements Serializable {
         this.stopOnAllEndPhases = stopOnAllEndPhases;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final UserSkipPrioritySteps that = (UserSkipPrioritySteps) o;
+
+        if (isStopOnDeclareAttackersDuringSkipAction() != that
+            .isStopOnDeclareAttackersDuringSkipAction())
+            return false;
+        if (isStopOnDeclareBlockerIfNoneAvailable() != that.isStopOnDeclareBlockerIfNoneAvailable())
+            return false;
+        if (isStopOnAllMainPhases() != that.isStopOnAllMainPhases()) return false;
+        if (isStopOnAllEndPhases() != that.isStopOnAllEndPhases()) return false;
+        if (getYourTurn() != null ? !getYourTurn().equals(that.getYourTurn()) : that.getYourTurn
+            () != null)
+            return false;
+        return getOpponentTurn() != null ? getOpponentTurn().equals(that.getOpponentTurn()) :
+            that.getOpponentTurn() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getYourTurn() != null ? getYourTurn().hashCode() : 0;
+        result = 31 * result + (getOpponentTurn() != null ? getOpponentTurn().hashCode() : 0);
+        result = 31 * result + (isStopOnDeclareAttackersDuringSkipAction() ? 1 : 0);
+        result = 31 * result + (isStopOnDeclareBlockerIfNoneAvailable() ? 1 : 0);
+        result = 31 * result + (isStopOnAllMainPhases() ? 1 : 0);
+        result = 31 * result + (isStopOnAllEndPhases() ? 1 : 0);
+        return result;
+    }
 }
