@@ -147,7 +147,7 @@ class ExertReplacementEffect extends ReplacementEffectImpl {
                     game.informPlayers(controller.getLogName() + " exerted " + creature.getName());
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_EXERTED, creature.getId(), creature.getId(), creature.getControllerId()));
-                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
+                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("", creature.getControllerId());
                 effect.setTargetPointer(new FixedTarget(creature, game));
                 game.addEffect(effect, source);
             }
