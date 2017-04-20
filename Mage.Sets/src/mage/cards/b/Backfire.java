@@ -61,7 +61,7 @@ public class Backfire extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature deals damage to you, Backfire deals that much damage to that creature's controller.
-        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DamageAttachedControllerEffect(new NumericSetToEffectValues("that much", "damage")), "description", false, true, false, TargetController.YOU));
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DamageAttachedControllerEffect(new NumericSetToEffectValues("that much", "damage")), "enchanted creature", false, true, false, TargetController.YOU));
     }
 
     public Backfire(final Backfire card) {
