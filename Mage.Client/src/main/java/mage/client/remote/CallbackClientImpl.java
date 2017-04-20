@@ -43,6 +43,7 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
+import mage.network.protocol.change.compator.CompareResult;
 import mage.utils.CompressUtil;
 import mage.view.*;
 import mage.view.ChatMessage.MessageType;
@@ -275,7 +276,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case GAME_UPDATE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.updateGame((GameView) callback.getData());
+                            panel.updateGame((CompareResult) callback.getData());
                         }
                         break;
                     }

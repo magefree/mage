@@ -27,61 +27,6 @@
  */
 package mage.client.game;
 
-import java.awt.AWTEvent;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import static java.awt.Component.LEFT_ALIGNMENT;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.Timer;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicSplitPaneDivider;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
 import mage.cards.Card;
 import mage.cards.action.ActionCallback;
 import mage.choices.Choice;
@@ -95,50 +40,44 @@ import mage.client.components.KeyboundButton;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.layout.RelativeLayout;
-import mage.client.dialog.CardInfoWindowDialog;
+import mage.client.dialog.*;
 import mage.client.dialog.CardInfoWindowDialog.ShowType;
-import mage.client.dialog.PickChoiceDialog;
-import mage.client.dialog.PickNumberDialog;
-import mage.client.dialog.PickPileDialog;
-import mage.client.dialog.PreferencesDialog;
-import static mage.client.dialog.PreferencesDialog.*;
-import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.CardsViewUtil;
+import mage.client.util.*;
 import mage.client.util.Event;
-import mage.client.util.GUISizeHelper;
-import mage.client.util.GameManager;
-import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.MageDialogState;
-import mage.constants.Constants;
-import mage.constants.EnlargeMode;
-import mage.constants.PhaseStep;
-import mage.constants.PlayerAction;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_FIRST;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_LAST;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_FIRST;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_LAST;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
-import mage.view.AbilityPickerView;
-import mage.view.CardView;
-import mage.view.CardsView;
-import mage.view.ExileView;
-import mage.view.GameView;
-import mage.view.LookedAtView;
-import mage.view.MatchView;
-import mage.view.PlayerView;
-import mage.view.RevealedView;
-import mage.view.SimpleCardsView;
-import mage.view.UserRequestMessage;
+import mage.network.protocol.change.compator.CompareResult;
+import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.Timer;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.Serializable;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+
+import static mage.client.dialog.PreferencesDialog.*;
+import static mage.constants.PlayerAction.*;
+import static mage.network.protocol.change.ChangeType.*;
 
 /**
  * @author BetaSteward_at_googlemail.com, nantuko8
@@ -692,8 +631,20 @@ public final class GamePanel extends javax.swing.JPanel {
         this.pnlBattlefield.add(bottomPanel, panelC);
     }
 
-    public synchronized void updateGame(GameView game) {
-        updateGame(game, null);
+    public synchronized void updateGame(GameView gameView) {
+        updateGame(gameView, null);
+    }
+
+    public synchronized void updateGame(CompareResult update) {
+        if (update.isEqual()) {
+            throw new IllegalArgumentException("We got update with the same object.");
+        }
+        if (update.containsKey(FULL)) {
+            GameView game = (GameView) update.get(FULL).getData();
+            updateGame(game, null);
+        } else {
+            updateGamePartly(update);
+        }
     }
 
     public synchronized void updateGame(GameView game, Map<String, Serializable> options) {
@@ -865,7 +816,233 @@ public final class GamePanel extends javax.swing.JPanel {
             CombatManager.getInstance().hideCombat(gameId);
         }
 
-        for (PlayerView player : game.getPlayers()) {
+        cleanUpPlayers(game.getPlayers());
+
+        feedbackPanel.disableUndo();
+
+        this.revalidate();
+        this.repaint();
+    }
+
+    private synchronized void updateGamePartly(CompareResult update) {
+        // hands
+        if (playerId == null && update.containsKey(WATCHED_HANDS) && update.get(WATCHED_HANDS) == null) {
+            this.handContainer.setVisible(false);
+        } else {
+           if (update.containsKey(HAND)) {
+               this.handContainer.setVisible(true);
+               handCards.clear();
+               if (update.containsKey(WATCHED_HANDS) && update.get(WATCHED_HANDS) != null) {
+                   Map<String, SimpleCardsView> watchedHands = (Map<String, SimpleCardsView>) update.get(WATCHED_HANDS);
+                   for (Map.Entry<String, SimpleCardsView> hand : watchedHands.entrySet()) {
+                       handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
+                   }
+               }
+               if (playerId != null) {
+                   if (update.containsKey(HAND)) {
+                       final CardsView hand = (CardsView) update.get(HAND).getData();
+                       handCards.put(YOUR_HAND, hand);
+                   }
+
+                   // Mark playable
+                   if (update.containsKey(CAN_PLAY_IN_HAND)) {
+                       final Set<UUID> canPlay = (Set<UUID>) update.get(CAN_PLAY_IN_HAND).getData();
+                       for (CardView card : handCards.get(YOUR_HAND).values()) {
+                           if (canPlay.contains(card.getId())) {
+                               card.setPlayable(true);
+                           }
+                       }
+                   }
+
+                   // Get opponents hand cards if available (only possible for players)
+                   if (update.containsKey(OPPONENT_HANDS)) {
+                       final Map<String, SimpleCardsView> opponentHands = (Map<String, SimpleCardsView>) update.get(OPPONENT_HANDS).getData();
+                       for (Map.Entry<String, SimpleCardsView> hand : opponentHands.entrySet()) {
+                           handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
+                       }
+                   }
+                   if (!handCards.containsKey(chosenHandKey)) {
+                       chosenHandKey = YOUR_HAND;
+                   }
+               } else if (chosenHandKey.isEmpty() && !handCards.isEmpty()) {
+                   chosenHandKey = handCards.keySet().iterator().next();
+               }
+               if (chosenHandKey != null && handCards.containsKey(chosenHandKey)) {
+                   handContainer.loadCards(handCards.get(chosenHandKey), bigCard, gameId);
+               }
+
+               hideAll();
+
+               if (playerId != null) {
+                   // set visible only if we have any other hand visible than ours
+                   btnSwitchHands.setVisible(handCards.size() > 1);
+
+                   if (update.containsKey(OPPONENT_HANDS)) {
+                       final Map<String, SimpleCardsView> opponentHands = (Map<String, SimpleCardsView>) update.get(OPPONENT_HANDS).getData();
+
+                       boolean change = (handCardsOfOpponentAvailable != (opponentHands != null));
+                       if (change) {
+                           handCardsOfOpponentAvailable = !handCardsOfOpponentAvailable;
+                           if (handCardsOfOpponentAvailable) {
+                               MageFrame.getInstance().showMessage("You control other player's turn. \nUse \"Switch Hand\" button to switch between cards in different hands.");
+                           } else {
+                               MageFrame.getInstance().showMessage("You lost control on other player's turn.");
+                           }
+                       }
+                   }
+               } else {
+                   btnSwitchHands.setVisible(!handCards.isEmpty());
+               }
+           }
+        }
+
+        // Phase
+        if (update.containsKey(PHASE)) {
+            this.txtPhase.setText(update.get(PHASE).getData().toString());
+        } else {
+            this.txtPhase.setText("");
+        }
+
+        // Step
+        if (update.containsKey(STEP)) {
+            updatePhases((PhaseStep) update.get(STEP).getData());
+            this.txtStep.setText(update.get(STEP).getData().toString());
+        } else {
+            logger.debug("Step is empty");
+            this.txtStep.setText("");
+        }
+
+        // Shtorm counter
+        if (update.containsKey(SPELLS_CAST_THIS_TURN)) {
+            int spellsCastThisTurn = (Integer) update.get(SPELLS_CAST_THIS_TURN).getData();
+            if (spellsCastThisTurn > 0 && PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, "true").equals("true")) {
+                this.txtSpellsCast.setVisible(true);
+                this.txtSpellsCast.setText(' ' + Integer.toString(spellsCastThisTurn) + ' ');
+            } else {
+                this.txtSpellsCast.setVisible(false);
+            }
+        }
+
+        if (update.containsKey(ACTIVE_PLAYER_NAME)) {
+            this.txtActivePlayer.setText(update.get(ACTIVE_PLAYER_NAME).getData().toString());
+        }
+        if (update.containsKey(PRIORITY_PLAYER_NAME)) {
+            this.txtPriority.setText(update.get(PRIORITY_PLAYER_NAME).getData().toString());
+        }
+        if (update.containsKey(TURN)) {
+            this.txtTurn.setText(Integer.toString((Integer)update.get(TURN).getData()));
+        }
+
+        // Players and their zones
+        if (update.containsKey(PLAYERS)) {
+            final List<PlayerView> playersUpdate = (List<PlayerView>) update.get(PLAYERS).getData();
+            for (PlayerView player : playersUpdate) {
+                if (players.containsKey(player.getPlayerId())) {
+                    players.get(player.getPlayerId()).update(player);
+                    if (player.getPlayerId().equals(playerId)) {
+                        updateSkipButtons(player.isPassedTurn(), player.isPassedUntilEndOfTurn(), player.isPassedUntilNextMain(), player.isPassedAllTurns(), player.isPassedUntilStackResolved(), player.isPassedUntilEndStepBeforeMyTurn());
+
+                    }
+                    // update open or remove closed graveyard windows
+                    graveyards.put(player.getName(), player.getGraveyard());
+                    if (graveyardWindows.containsKey(player.getName())) {
+                        CardInfoWindowDialog cardInfoWindowDialog = graveyardWindows.get(player
+                            .getName());
+                        if (cardInfoWindowDialog.isClosed()) {
+                            graveyardWindows.remove(player.getName());
+                        } else {
+                            cardInfoWindowDialog.loadCards(player.getGraveyard(), bigCard, gameId, false);
+                        }
+                    }
+                    // show top card window
+                    if (player.getTopCard() != null) {
+                        CardsView cardsView = new CardsView();
+                        cardsView.put(player.getTopCard().getId(), player.getTopCard());
+                        handleGameInfoWindow(revealed, ShowType.REVEAL_TOP_LIBRARY, player
+                            .getName() + "'s top library card", cardsView);
+                    }
+                } else if (!players.isEmpty()) {
+                    logger.warn("Couldn't find player.");
+                    logger.warn("   uuid:" + player.getPlayerId());
+                    logger.warn("   players:");
+                    for (PlayAreaPanel p : players.values()) {
+                        logger.warn(String.valueOf(p));
+                    }
+                } else {
+                    // can happen at the game start before player list is initiated
+                }
+            }
+
+            if (!menuNameSet) {
+                StringBuilder sb = new StringBuilder();
+                if (playerId == null) {
+                    sb.append("Watching: ");
+                } else {
+                    sb.append("Playing: ");
+                }
+                boolean first = true;
+                for (PlayerView player : playersUpdate) {
+                    if (first) {
+                        first = false;
+                    } else {
+                        sb.append(" - ");
+                    }
+                    sb.append(player.getName());
+                }
+                menuNameSet = true;
+                gamePane.setTitle(sb.toString());
+            }
+
+            cleanUpPlayers(playersUpdate);
+        }
+
+        // Stack
+        if (update.containsKey(STACK)) {
+            final CardsView stack = (CardsView) update.get(STACK).getData();
+            GameManager.instance.setStackSize(stack.size());
+            displayStack(stack, bigCard, gameId);
+        }
+
+        if (update.containsKey(EXILE)) {
+            final List<ExileView> exileView = (List<ExileView>) update.get(EXILE).getData();
+            for (ExileView exile : exileView) {
+                if (!exiles.containsKey(exile.getId())) {
+                    CardInfoWindowDialog newExile = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
+                    exiles.put(exile.getId(), newExile);
+                    MageFrame.getDesktop().add(newExile, JLayeredPane.MODAL_LAYER);
+                    newExile.show();
+                }
+                exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
+            }
+        }
+
+        if (update.containsKey(REVEALED)) {
+            final List<RevealedView> revealedList = (List<RevealedView>) update.get(REVEALED);
+            showRevealed(revealedList);
+        }
+
+        if (update.containsKey(LOOKED_AT)) {
+            final List<LookedAtView> lookedAtViews = (List<LookedAtView>) update.get(LOOKED_AT);
+            showLookedAt(lookedAtViews);
+        }
+
+        if (update.containsKey(COMBAT)) {
+            final List<CombatGroupView> combat = (List<CombatGroupView>)update.get(COMBAT);
+            if (!combat.isEmpty()) {
+                CombatManager.getInstance().showCombat(combat, gameId);
+            } else {
+                CombatManager.getInstance().hideCombat(gameId);
+            }
+        }
+
+        feedbackPanel.disableUndo();
+
+        this.revalidate();
+        this.repaint();
+    }
+
+    private void cleanUpPlayers(final List<PlayerView> playersUpdate) {
+        for (PlayerView player : playersUpdate) {
             if (player.hasLeft() && !playersWhoLeft.get(player.getPlayerId())) {
                 PlayAreaPanel playerLeftPanel = players.get(player.getPlayerId());
                 playersWhoLeft.put(player.getPlayerId(), true);
@@ -900,11 +1077,6 @@ public final class GamePanel extends javax.swing.JPanel {
                 parent.repaint();
             }
         }
-
-        feedbackPanel.disableUndo();
-
-        this.revalidate();
-        this.repaint();
     }
 
     private static final int BORDER_SIZE = 2;
@@ -958,7 +1130,11 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void displayStack(GameView game, BigCard bigCard, FeedbackPanel feedbackPanel, UUID gameId) {
-        this.stackObjects.loadCards(game.getStack(), bigCard, gameId, true);
+        displayStack(game.getStack(), bigCard, gameId);
+    }
+
+    private void displayStack(CardsView stack, BigCard bigCard, UUID gameId) {
+        this.stackObjects.loadCards(stack, bigCard, gameId, true);
     }
 
     /**
@@ -1081,14 +1257,22 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void showRevealed(GameView game) {
-        for (RevealedView revealView : game.getRevealed()) {
+        showRevealed(game.getRevealed());
+    }
+
+    private void showRevealed(final List<RevealedView> revealedList) {
+        for (RevealedView revealView : revealedList) {
             handleGameInfoWindow(revealed, ShowType.REVEAL, revealView.getName(), revealView.getCards());
         }
         removeClosedCardInfoWindows(revealed);
     }
 
     private void showLookedAt(GameView game) {
-        for (LookedAtView lookedAtView : game.getLookedAt()) {
+        showLookedAt(game.getLookedAt());
+    }
+
+    private void showLookedAt(final List<LookedAtView> lookedAtViews) {
+        for (LookedAtView lookedAtView : lookedAtViews) {
             handleGameInfoWindow(lookedAt, ShowType.LOOKED_AT, lookedAtView.getName(), lookedAtView.getCards());
         }
         removeClosedCardInfoWindows(lookedAt);
