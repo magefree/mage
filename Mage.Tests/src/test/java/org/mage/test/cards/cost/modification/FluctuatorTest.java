@@ -38,6 +38,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class FluctuatorTest extends CardTestPlayerBase {
 
     /**
+     * NOTE: As of 4/19/2017 this test is failing due to a bug in code. See issue #3148
+     * 
      * Fluctuator makes 'Akroma's Vengeance' cyclic cost reduced to {1}
      * Test it with one Plains on battlefield.
      */
@@ -88,8 +90,9 @@ public class FluctuatorTest extends CardTestPlayerBase {
     }
 
     /**
+     * NOTE: As of 4/19/2017 this test is failing due to a bug in code. See issue #3148
+     * 
      * Test 2 Fluctuators reduce cycling cost up to 4.
-     *
      */
     @Test
     public void testTwoFluctuatorsReduceBy4() {
