@@ -27,11 +27,8 @@
  */
 package mage.cards.k;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -47,7 +44,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.Watcher;
+import mage.watchers.common.NumberOfTimesPermanentTargetedATurnWatcher;
 
 /**
  *
@@ -72,7 +69,7 @@ public class KiraGreatGlassSpinner extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(new KiraGreatGlassSpinnerAbility(effect), Duration.WhileOnBattlefield,
                         new FilterCreaturePermanent("creatures"))),
-                new KiraGreatGlassSpinnerWatcher());
+                new NumberOfTimesPermanentTargetedATurnWatcher());
 
     }
 
@@ -111,7 +108,7 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.isCreature()) {
-                KiraGreatGlassSpinnerWatcher watcher = (KiraGreatGlassSpinnerWatcher) game.getState().getWatchers().get(KiraGreatGlassSpinnerWatcher.class.getName());
+                NumberOfTimesPermanentTargetedATurnWatcher watcher = (NumberOfTimesPermanentTargetedATurnWatcher) game.getState().getWatchers().get(NumberOfTimesPermanentTargetedATurnWatcher.class.getName());
                 if (watcher != null && watcher.notMoreThanOnceTargetedThisTurn(permanent, game)) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getSourceId()));
@@ -128,51 +125,4 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
         return "Whenever this creature becomes the target of a spell or ability for the first time in a turn, counter that spell or ability.";
     }
 
-}
-
-class KiraGreatGlassSpinnerWatcher extends Watcher {
-
-    private final Map<MageObjectReference, Integer> creaturesTargeted = new HashMap<>();
-
-    public KiraGreatGlassSpinnerWatcher() {
-        super(KiraGreatGlassSpinnerWatcher.class.getName(), WatcherScope.GAME);
-    }
-
-    public KiraGreatGlassSpinnerWatcher(final KiraGreatGlassSpinnerWatcher watcher) {
-        super(watcher);
-        this.creaturesTargeted.putAll(creaturesTargeted);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGETED) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                MageObjectReference mor = new MageObjectReference(permanent, game);
-                int amount = 0;
-                if (creaturesTargeted.containsKey(mor)) {
-                    amount = creaturesTargeted.get(mor);
-                }
-                creaturesTargeted.put(mor, ++amount);
-            }
-        }
-    }
-
-    public boolean notMoreThanOnceTargetedThisTurn(Permanent creature, Game game) {
-        if (creaturesTargeted.containsKey(new MageObjectReference(creature, game))) {
-            return creaturesTargeted.get(new MageObjectReference(creature, game)) < 2;
-        }
-        return true;
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        creaturesTargeted.clear();
-    }
-
-    @Override
-    public KiraGreatGlassSpinnerWatcher copy() {
-        return new KiraGreatGlassSpinnerWatcher(this);
-    }
 }
