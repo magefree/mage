@@ -73,8 +73,8 @@ public class AnafenzaTest extends CardTestCommanderDuelBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anafenza, the Foremost");
 
         attack(3, playerA, "Anafenza, the Foremost");
-        block(3, playerB, "Runed Servitor", "Anafenza, the Foremost");
-        block(3, playerB, "Runed Servitor", "Anafenza, the Foremost");
+        block(3, playerB, "Runed Servitor:0", "Anafenza, the Foremost");
+        block(3, playerB, "Runed Servitor:1", "Anafenza, the Foremost");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -115,9 +115,9 @@ public class AnafenzaTest extends CardTestCommanderDuelBase {
         playLand(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");
 
         attack(5, playerA, "Acidic Slime");
-        block(5, playerB, "Elemental", "Acidic Slime");
+        block(5, playerB, "Elemental:0", "Acidic Slime");
         attack(5, playerA, "Anafenza, the Foremost");
-        block(5, playerB, "Elemental", "Anafenza, the Foremost");
+        block(5, playerB, "Elemental:1", "Anafenza, the Foremost");
         addTarget(playerB, playerA);
 
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);

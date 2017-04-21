@@ -142,8 +142,8 @@ public class PersistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Torpor Orb", 1);
 
         attack(2, playerB, "Wurmcoil Engine");
-        block(2, playerA, "Kitchen Finks", "Wurmcoil Engine");
-        block(2, playerA, "Kitchen Finks", "Wurmcoil Engine");
+        block(2, playerA, "Kitchen Finks:0", "Wurmcoil Engine");
+        block(2, playerA, "Kitchen Finks:1", "Wurmcoil Engine");
 
         setChoice(playerB, "Creatures entering the battlefield don't cause abilities to trigger");
         setChoice(playerB, "Creatures entering the battlefield don't cause abilities to trigger");

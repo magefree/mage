@@ -231,16 +231,16 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testCantBeBlocked() {
-        addCard(Zone.BATTLEFIELD, playerB, "Blighted Agent");
 
         addCard(Zone.BATTLEFIELD, playerA, "Blighted Agent");
+        addCard(Zone.BATTLEFIELD, playerB, "Blighted Agent");
         addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
         addCard(Zone.BATTLEFIELD, playerA, "Birds of Paradise");
 
-        attack(2, playerB, "Blighted Agent");
-        block(2, playerA, "Blighted Agent", "Blighted Agent");
-        block(2, playerA, "Llanowar Elves", "Blighted Agent");
-        block(2, playerA, "Birds of Paradise", "Blighted Agent");
+        attack(2, playerB, "Blighted Agent:0");
+        block(2, playerA, "Blighted Agent:0", "Blighted Agent:0");
+        block(2, playerA, "Llanowar Elves:0", "Blighted Agent:0");
+        block(2, playerA, "Birds of Paradise:0", "Blighted Agent:0");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -468,8 +468,8 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 2); // 1/1
 
         attack(3, playerA, "Underworld Cerberus");
-        block(3, playerB, "Memnite", "Underworld Cerberus");
-        block(3, playerB, "Memnite", "Underworld Cerberus");
+        block(3, playerB, "Memnite:0", "Underworld Cerberus");
+        block(3, playerB, "Memnite:1", "Underworld Cerberus");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
 
@@ -495,9 +495,9 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         // Blocked by 3 creatures - this is acceptable
         attack(3, playerA, "Underworld Cerberus");
-        block(3, playerB, "Memnite", "Underworld Cerberus");
-        block(3, playerB, "Memnite", "Underworld Cerberus");
-        block(3, playerB, "Memnite", "Underworld Cerberus");
+        block(3, playerB, "Memnite:0", "Underworld Cerberus");
+        block(3, playerB, "Memnite:1", "Underworld Cerberus");
+        block(3, playerB, "Memnite:2", "Underworld Cerberus");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
 
@@ -524,7 +524,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         // Blocked by 10 creatures - this is acceptable as it's >3
         attack(3, playerA, "Underworld Cerberus");
         for(int i = 0; i < 10; i++) {
-            block(3, playerB, "Memnite", "Underworld Cerberus");
+            block(3, playerB, "Memnite:" + i, "Underworld Cerberus");
         }
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);

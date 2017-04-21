@@ -139,7 +139,7 @@ public class CanBlockMultipleCreaturesTest extends CardTestPlayerBase {
             execute();
             fail("Expected exception not thrown");
         } catch(UnsupportedOperationException e) {
-            assertEquals("Hundred-Handed One cannot block Fabled Hero", e.getMessage());
+            assertEquals("Hundred-Handed One cannot block Fabled Hero it is already blocking the maximum amount of creatures.", e.getMessage());
         }
     }
 

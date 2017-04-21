@@ -5,6 +5,13 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ * Mana cost: 1UU
+ * Type: Creature — Shapeshifter
+ * Effect of card: At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
+ * Power/Toughness: 2/2
+ */
+
 public class CryptoplasmTest extends CardTestPlayerBase {
 
     @Test
@@ -100,8 +107,8 @@ public class CryptoplasmTest extends CardTestPlayerBase {
         addTarget(playerB, "Divinity of Pride");
 
         attack(3, playerA, "Divinity of Pride");
-        block(3, playerB, "Divinity of Pride", "Divinity of Pride");
-        block(3, playerB, "Divinity of Pride", "Divinity of Pride");
+        block(3, playerB, "Divinity of Pride:0", "Divinity of Pride");
+        block(3, playerB, "Divinity of Pride:1", "Divinity of Pride");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -114,6 +121,7 @@ public class CryptoplasmTest extends CardTestPlayerBase {
         assertLife(playerB, 16);
         assertLife(playerA, 25);
     }
+
 
     @Test
     public void testTransformMultipleTime() {

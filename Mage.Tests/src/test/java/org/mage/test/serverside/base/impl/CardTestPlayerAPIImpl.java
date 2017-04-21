@@ -3,6 +3,9 @@ package org.mage.test.serverside.base.impl;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -158,12 +161,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         return player;
     }
 
-    /**
-     * Starts testing card by starting current game.
-     *
-     * @throws IllegalStateException In case game wasn't created previously. Use
-     * {@link #load} method to initialize the game.
-     */
     public void execute() throws IllegalStateException {
         if (currentGame == null || activePlayer == null) {
             throw new IllegalStateException("Game is not initialized. Use load method to load a test case and initialize a game.");
@@ -952,7 +949,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Asserts added actions count. Usefull to make sure that all actions were
+     * Asserts added actions count. Useful to make sure that all actions were
      * executed.
      *
      * @param player
@@ -966,38 +963,38 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("message", currentGame.getState().getActivePlayerId(), player.getId());
     }
 
-    public Permanent getPermanent(String cardName) {
+    
+    public Permanent getPermanent(String cardName, UUID controller) {
         Permanent found = null;
+        Pattern indexedName = Pattern.compile("^([\\w| ]+):(\\d+)$"); // Ends with <:number>
+        Matcher indexedMatcher = indexedName.matcher(cardName);
+        int index = 0;
+        int count = 0;
+        if(indexedMatcher.matches()) {
+        	cardName = indexedMatcher.group(1);
+        	index = Integer.valueOf(indexedMatcher.group(2));
+        }
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName)) {
-                found = permanent;
-                break;
+            	if (controller == null || permanent.getControllerId().equals(controller)) {
+	            	found = permanent;
+	            	if(count != index) {
+	            		count++;
+	            	}
+            	}
             }
         }
-
         Assert.assertNotNull("Couldn't find a card with specified name: " + cardName, found);
-
+        Assert.assertEquals("Only " + count + " permanents were found and " + cardName + ":" + index + " was requested", index, count);
         return found;
     }
-
+    
     public Permanent getPermanent(String cardName, Player player) {
         return getPermanent(cardName, player.getId());
     }
-
-    public Permanent getPermanent(String cardName, UUID controller) {
-        Permanent permanent0 = null;
-        int count = 0;
-        for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
-            if (permanent.getControllerId().equals(controller)) {
-                if (permanent.getName().equals(cardName)) {
-                    permanent0 = permanent;
-                    count++;
-                }
-            }
-        }
-        Assert.assertNotNull("Couldn't find a card with specified name: " + cardName, permanent0);
-        Assert.assertEquals("More than one permanent was found: " + cardName + '(' + count + ')', 1, count);
-        return permanent0;
+    
+    public Permanent getPermanent(String cardName) {
+    	return getPermanent(cardName, (UUID)null);
     }
 
     public void playLand(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
@@ -1065,6 +1062,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         castSpell(turnNum, step, player, cardName, targetName, spellOnStack, StackClause.WHILE_ON_STACK);
     }
 
+
     /**
      * Spell will only be cast, if a spell / ability with the given name IS or
      * IS NOT on the stack
@@ -1112,8 +1110,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:" + ability + "$targetPlayer=" + target.getName());
     }
 
-    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName) {
-        player.addAction(turnNum, step, "activate:" + ability + "$target=" + targetName);
+    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String ... targetNames) {
+        player.addAction(turnNum, step, "activate:" + ability + "$target=" + String.join("^", targetNames));
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
@@ -1245,33 +1243,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         gameOptions.skipInitShuffling = true;
     }
 
-    protected ExpectedType getExpectedType(String line) {
-        if (line.startsWith("turn:")) {
-            return ExpectedType.TURN_NUMBER;
-        }
-        if (line.startsWith("result:")) {
-            return ExpectedType.RESULT;
-        }
-        if (line.startsWith("life:")) {
-            return ExpectedType.LIFE;
-        }
-        if (line.startsWith("battlefield:")) {
-            return ExpectedType.BATTLEFIELD;
-        }
-        if (line.startsWith("graveyard:")) {
-            return ExpectedType.GRAVEYARD;
-        }
-        return ExpectedType.UNKNOWN;
-    }
-
-    protected String getStringParam(String line, int index) {
-        String[] params = line.split(":");
-        if (index > params.length - 1) {
-            throw new IllegalArgumentException("Not correct line: " + line);
-        }
-        return params[index];
-    }
-
     protected void checkPermanentPT(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope) {
         if (currentGame == null) {
             throw new IllegalStateException("Current game is null");
@@ -1288,13 +1259,4 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
     }
-
-    protected int getIntParam(String line, int index) {
-        String[] params = line.split(":");
-        if (index > params.length - 1) {
-            throw new IllegalArgumentException("Not correct line: " + line);
-        }
-        return Integer.parseInt(params[index]);
-    }
-
 }
