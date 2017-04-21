@@ -1242,4 +1242,14 @@ public class PlayerStub implements Player {
         return "";
     }
 
+    @Override
+    public boolean hasDrew() {
+        return false;
+    }
+
+    @Override
+    public void drew(Game game) {
+
+    }
+
 }
