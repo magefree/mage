@@ -78,6 +78,7 @@ public class SeekerOfInsight extends CardImpl {
 }
 
 class CastNonCreatureSpellCondition implements Condition {
+
     @Override
     public boolean apply(Game game, Ability source) {
         SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
@@ -97,5 +98,5 @@ class CastNonCreatureSpellCondition implements Condition {
     @Override
     public String toString() {
         return "you've cast a noncreature spell this turn";
-}
+    }
 }
