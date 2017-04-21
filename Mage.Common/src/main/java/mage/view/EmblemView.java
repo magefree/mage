@@ -1,11 +1,10 @@
 package mage.view;
 
-import mage.cards.Card;
-import mage.game.command.Emblem;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import mage.cards.Card;
+import mage.game.command.Emblem;
 
 /**
  * @author noxx
@@ -54,32 +53,5 @@ public class EmblemView implements CommandObjectView, Serializable {
     @Override
     public List<String> getRules() {
         return rules;
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        final EmblemView that = (EmblemView) o;
-
-        if (!getId().equals(that.getId())) return false;
-        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null)
-            return false;
-        if (getExpansionSetCode() != null ? !getExpansionSetCode().equals(that
-            .getExpansionSetCode()) : that.getExpansionSetCode() != null)
-            return false;
-        return getRules() != null ? getRules().equals(that.getRules()) : that.getRules() == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getExpansionSetCode() != null ? getExpansionSetCode().hashCode()
-            : 0);
-        result = 31 * result + (getRules() != null ? getRules().hashCode() : 0);
-        return result;
     }
 }

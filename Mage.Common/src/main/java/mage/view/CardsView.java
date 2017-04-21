@@ -27,6 +27,11 @@
  */
 package mage.view;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -39,8 +44,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
-
-import java.util.*;
 
 /**
  *

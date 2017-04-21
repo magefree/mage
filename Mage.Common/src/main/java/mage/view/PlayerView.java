@@ -27,6 +27,14 @@
  */
 package mage.view;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 import mage.cards.Card;
 import mage.counters.Counters;
 import mage.game.ExileZone;
@@ -38,9 +46,6 @@ import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.net.UserData;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -300,88 +305,4 @@ public class PlayerView implements Serializable {
         return monarch;
     }
 
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        final PlayerView that = (PlayerView) o;
-
-        if (getLife() != that.getLife()) return false;
-        if (getWins() != that.getWins()) return false;
-        if (getWinsNeeded() != that.getWinsNeeded()) return false;
-        if (getDeckHashCode() != that.getDeckHashCode()) return false;
-        if (getLibraryCount() != that.getLibraryCount()) return false;
-        if (getHandCount() != that.getHandCount()) return false;
-        if (isActive() != that.isActive()) return false;
-        if (hasPriority != that.hasPriority) return false;
-        if (isTimerActive() != that.isTimerActive()) return false;
-        if (hasLeft != that.hasLeft) return false;
-        if (getStatesSavedSize() != that.getStatesSavedSize()) return false;
-        if (getPriorityTimeLeft() != that.getPriorityTimeLeft()) return false;
-        if (isPassedTurn() != that.isPassedTurn()) return false;
-        if (isPassedUntilEndOfTurn() != that.isPassedUntilEndOfTurn()) return false;
-        if (isPassedUntilNextMain() != that.isPassedUntilNextMain()) return false;
-        if (isPassedUntilStackResolved() != that.isPassedUntilStackResolved()) return false;
-        if (isPassedAllTurns() != that.isPassedAllTurns()) return false;
-        if (isPassedUntilEndStepBeforeMyTurn() != that.isPassedUntilEndStepBeforeMyTurn())
-            return false;
-        if (isMonarch() != that.isMonarch()) return false;
-        if (!getPlayerId().equals(that.getPlayerId())) return false;
-        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null)
-            return false;
-        if (getCounters() != null ? !getCounters().equals(that.getCounters()) : that.getCounters
-            () != null)
-            return false;
-        if (getManaPool() != null ? !getManaPool().equals(that.getManaPool()) : that.getManaPool
-            () != null)
-            return false;
-        if (!getGraveyard().equals(that.getGraveyard())) return false;
-        if (!getExile().equals(that.getExile())) return false;
-        if (!getBattlefield().equals(that.getBattlefield())) return false;
-        if (getTopCard() != null ? !getTopCard().equals(that.getTopCard()) : that.getTopCard() !=
-            null)
-            return false;
-        if (getUserData() != null ? !getUserData().equals(that.getUserData()) : that.getUserData
-            () != null)
-            return false;
-        if (!commandList.equals(that.commandList)) return false;
-        return getAttachments().equals(that.getAttachments());
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getPlayerId().hashCode();
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + getLife();
-        result = 31 * result + (getCounters() != null ? getCounters().hashCode() : 0);
-        result = 31 * result + getWins();
-        result = 31 * result + getWinsNeeded();
-        result = 31 * result + (int) (getDeckHashCode() ^ (getDeckHashCode() >>> 32));
-        result = 31 * result + getLibraryCount();
-        result = 31 * result + getHandCount();
-        result = 31 * result + (isActive() ? 1 : 0);
-        result = 31 * result + (hasPriority ? 1 : 0);
-        result = 31 * result + (isTimerActive() ? 1 : 0);
-        result = 31 * result + (hasLeft ? 1 : 0);
-        result = 31 * result + (getManaPool() != null ? getManaPool().hashCode() : 0);
-        result = 31 * result + getGraveyard().hashCode();
-        result = 31 * result + getExile().hashCode();
-        result = 31 * result + getBattlefield().hashCode();
-        result = 31 * result + (getTopCard() != null ? getTopCard().hashCode() : 0);
-        result = 31 * result + (getUserData() != null ? getUserData().hashCode() : 0);
-        result = 31 * result + commandList.hashCode();
-        result = 31 * result + getAttachments().hashCode();
-        result = 31 * result + getStatesSavedSize();
-        result = 31 * result + getPriorityTimeLeft();
-        result = 31 * result + (isPassedTurn() ? 1 : 0);
-        result = 31 * result + (isPassedUntilEndOfTurn() ? 1 : 0);
-        result = 31 * result + (isPassedUntilNextMain() ? 1 : 0);
-        result = 31 * result + (isPassedUntilStackResolved() ? 1 : 0);
-        result = 31 * result + (isPassedAllTurns() ? 1 : 0);
-        result = 31 * result + (isPassedUntilEndStepBeforeMyTurn() ? 1 : 0);
-        result = 31 * result + (isMonarch() ? 1 : 0);
-        return result;
-    }
 }

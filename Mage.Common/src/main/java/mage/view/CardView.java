@@ -27,6 +27,7 @@
  */
 package mage.view;
 
+import java.util.*;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -49,8 +50,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1028,181 +1027,5 @@ public class CardView extends SimpleCardView {
 
     public boolean isTribal() {
         return cardTypes.contains(CardType.TRIBAL);
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        final CardView cardView = (CardView) o;
-
-        if (getConvertedManaCost() != cardView.getConvertedManaCost()) return false;
-        if (isAbility() != cardView.isAbility()) return false;
-        if (isToken() != cardView.isToken()) return false;
-        if (getType() != cardView.getType()) return false;
-        if (transformable != cardView.transformable) return false;
-        if (isTransformed() != cardView.isTransformed()) return false;
-        if (isFlipCard() != cardView.isFlipCard()) return false;
-        if (isFaceDown() != cardView.isFaceDown()) return false;
-        if (isSplitCard() != cardView.isSplitCard()) return false;
-        if (isPaid() != cardView.isPaid()) return false;
-        if (isControlledByOwner() != cardView.isControlledByOwner()) return false;
-        if (rotate != cardView.rotate) return false;
-        if (hideInfo != cardView.hideInfo) return false;
-        if (isPlayable() != cardView.isPlayable()) return false;
-        if (isChoosable() != cardView.isChoosable()) return false;
-        if (isSelected() != cardView.isSelected()) return false;
-        if (isCanAttack() != cardView.isCanAttack()) return false;
-        if (getParentId() != null ? !getParentId().equals(cardView.getParentId()) : cardView
-            .getParentId() != null)
-            return false;
-        if (getName() != null ? !getName().equals(cardView.getName()) : cardView.getName() != null)
-            return false;
-        if (getDisplayName() != null ? !getDisplayName().equals(cardView.getDisplayName()) :
-            cardView.getDisplayName() != null)
-            return false;
-        if (getRules() != null ? !getRules().equals(cardView.getRules()) : cardView.getRules() !=
-            null)
-            return false;
-        if (getPower() != null ? !getPower().equals(cardView.getPower()) : cardView.getPower() !=
-            null)
-            return false;
-        if (getToughness() != null ? !getToughness().equals(cardView.getToughness()) : cardView
-            .getToughness() != null)
-            return false;
-        if (getLoyalty() != null ? !getLoyalty().equals(cardView.getLoyalty()) : cardView
-            .getLoyalty() != null)
-            return false;
-        if (getStartingLoyalty() != null ? !getStartingLoyalty().equals(cardView
-            .getStartingLoyalty()) : cardView.getStartingLoyalty() != null)
-            return false;
-        if (getCardTypes() != null ? !getCardTypes().equals(cardView.getCardTypes()) : cardView
-            .getCardTypes() != null)
-            return false;
-        if (getSubTypes() != null ? !getSubTypes().equals(cardView.getSubTypes()) : cardView
-            .getSubTypes() != null)
-            return false;
-        if (getSuperTypes() != null ? !getSuperTypes().equals(cardView.getSuperTypes()) :
-            cardView.getSuperTypes() != null)
-            return false;
-        if (getColor() != null ? !getColor().equals(cardView.getColor()) : cardView.getColor() !=
-            null)
-            return false;
-        if (getFrameColor() != null ? !getFrameColor().equals(cardView.getFrameColor()) :
-            cardView.getFrameColor() != null)
-            return false;
-        if (getFrameStyle() != cardView.getFrameStyle()) return false;
-        if (getManaCost() != null ? !getManaCost().equals(cardView.getManaCost()) : cardView
-            .getManaCost() != null)
-            return false;
-        if (getRarity() != cardView.getRarity()) return false;
-        if (getMageObjectType() != cardView.getMageObjectType()) return false;
-        if (getAbilityType() != cardView.getAbilityType()) return false;
-        if (isAbility() != cardView.isAbility())
-            return false;
-        if (getSecondCardFace() != null ? !getSecondCardFace().equals(cardView.getSecondCardFace
-            ()) : cardView.getSecondCardFace() != null)
-            return false;
-        if (getAlternateName() != null ? !getAlternateName().equals(cardView.getAlternateName())
-            : cardView.getAlternateName() != null)
-            return false;
-        if (getOriginalName() != null ? !getOriginalName().equals(cardView.getOriginalName()) :
-            cardView.getOriginalName() != null)
-            return false;
-        if (getLeftSplitName() != null ? !getLeftSplitName().equals(cardView.getLeftSplitName())
-            : cardView.getLeftSplitName() != null)
-            return false;
-        if (getLeftSplitCosts() != null ? !getLeftSplitCosts().equals(cardView.getLeftSplitCosts
-            ()) : cardView.getLeftSplitCosts() != null)
-            return false;
-        if (getLeftSplitRules() != null ? !getLeftSplitRules().equals(cardView.getLeftSplitRules
-            ()) : cardView.getLeftSplitRules() != null)
-            return false;
-        if (getLeftSplitTypeLine() != null ? !getLeftSplitTypeLine().equals(cardView
-            .getLeftSplitTypeLine()) : cardView.getLeftSplitTypeLine() != null)
-            return false;
-        if (getRightSplitName() != null ? !getRightSplitName().equals(cardView.getRightSplitName
-            ()) : cardView.getRightSplitName() != null)
-            return false;
-        if (getRightSplitCosts() != null ? !getRightSplitCosts().equals(cardView
-            .getRightSplitCosts()) : cardView.getRightSplitCosts() != null)
-            return false;
-        if (getRightSplitRules() != null ? !getRightSplitRules().equals(cardView
-            .getRightSplitRules()) : cardView.getRightSplitRules() != null)
-            return false;
-        if (getRightSplitTypeLine() != null ? !getRightSplitTypeLine().equals(cardView
-            .getRightSplitTypeLine()) : cardView.getRightSplitTypeLine() != null)
-            return false;
-        if (getArtRect() != cardView.getArtRect()) return false;
-        if (getTargets() != null ? !getTargets().equals(cardView.getTargets()) : cardView
-            .getTargets() != null)
-            return false;
-        if (getPairedCard() != null ? !getPairedCard().equals(cardView.getPairedCard()) :
-            cardView.getPairedCard() != null)
-            return false;
-        if (getCounters() != null ? !getCounters().equals(cardView.getCounters()) : cardView
-            .getCounters() != null)
-            return false;
-        return getZone() == cardView.getZone();
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getParentId() != null ? getParentId().hashCode() : 0;
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getDisplayName() != null ? getDisplayName().hashCode() : 0);
-        result = 31 * result + (getRules() != null ? getRules().hashCode() : 0);
-        result = 31 * result + (getPower() != null ? getPower().hashCode() : 0);
-        result = 31 * result + (getToughness() != null ? getToughness().hashCode() : 0);
-        result = 31 * result + (getLoyalty() != null ? getLoyalty().hashCode() : 0);
-        result = 31 * result + (getStartingLoyalty() != null ? getStartingLoyalty().hashCode() : 0);
-        result = 31 * result + (getCardTypes() != null ? getCardTypes().hashCode() : 0);
-        result = 31 * result + (getSubTypes() != null ? getSubTypes().hashCode() : 0);
-        result = 31 * result + (getSuperTypes() != null ? getSuperTypes().hashCode() : 0);
-        result = 31 * result + (getColor() != null ? getColor().hashCode() : 0);
-        result = 31 * result + (getFrameColor() != null ? getFrameColor().hashCode() : 0);
-        result = 31 * result + (getFrameStyle() != null ? getFrameStyle().hashCode() : 0);
-        result = 31 * result + (getManaCost() != null ? getManaCost().hashCode() : 0);
-        result = 31 * result + getConvertedManaCost();
-        result = 31 * result + (getRarity() != null ? getRarity().hashCode() : 0);
-        result = 31 * result + (getMageObjectType() != null ? getMageObjectType().hashCode() : 0);
-        result = 31 * result + (isAbility() ? 1 : 0);
-        result = 31 * result + (getAbilityType() != null ? getAbilityType().hashCode() : 0);
-        result = 31 * result + (isToken() ? 1 : 0);
-        result = 31 * result + (isAbility() ? 1 : 0);
-        result = 31 * result + getType();
-        result = 31 * result + (transformable ? 1 : 0);
-        result = 31 * result + (getSecondCardFace() != null ? getSecondCardFace().hashCode() : 0);
-        result = 31 * result + (isTransformed() ? 1 : 0);
-        result = 31 * result + (isFlipCard() ? 1 : 0);
-        result = 31 * result + (isFaceDown() ? 1 : 0);
-        result = 31 * result + (getAlternateName() != null ? getAlternateName().hashCode() : 0);
-        result = 31 * result + (getOriginalName() != null ? getOriginalName().hashCode() : 0);
-        result = 31 * result + (isSplitCard() ? 1 : 0);
-        result = 31 * result + (getLeftSplitName() != null ? getLeftSplitName().hashCode() : 0);
-        result = 31 * result + (getLeftSplitCosts() != null ? getLeftSplitCosts().hashCode() : 0);
-        result = 31 * result + (getLeftSplitRules() != null ? getLeftSplitRules().hashCode() : 0);
-        result = 31 * result + (getLeftSplitTypeLine() != null ? getLeftSplitTypeLine().hashCode
-            () : 0);
-        result = 31 * result + (getRightSplitName() != null ? getRightSplitName().hashCode() : 0);
-        result = 31 * result + (getRightSplitCosts() != null ? getRightSplitCosts().hashCode() : 0);
-        result = 31 * result + (getRightSplitRules() != null ? getRightSplitRules().hashCode() : 0);
-        result = 31 * result + (getRightSplitTypeLine() != null ? getRightSplitTypeLine().hashCode() : 0);
-        result = 31 * result + (getArtRect() != null ? getArtRect().hashCode() : 0);
-        result = 31 * result + (getTargets() != null ? getTargets().hashCode() : 0);
-        result = 31 * result + (getPairedCard() != null ? getPairedCard().hashCode() : 0);
-        result = 31 * result + (isPaid() ? 1 : 0);
-        result = 31 * result + (getCounters() != null ? getCounters().hashCode() : 0);
-        result = 31 * result + (isControlledByOwner() ? 1 : 0);
-        result = 31 * result + (getZone() != null ? getZone().hashCode() : 0);
-        result = 31 * result + (rotate ? 1 : 0);
-        result = 31 * result + (hideInfo ? 1 : 0);
-        result = 31 * result + (isPlayable() ? 1 : 0);
-        result = 31 * result + (isChoosable() ? 1 : 0);
-        result = 31 * result + (isSelected() ? 1 : 0);
-        result = 31 * result + (isCanAttack() ? 1 : 0);
-        return result;
     }
 }

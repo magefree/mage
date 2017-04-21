@@ -89,27 +89,4 @@ public class CombatGroupView implements Serializable {
     public UUID getDefenderId() {
         return defenderId;
     }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        final CombatGroupView that = (CombatGroupView) o;
-
-        if (!getAttackers().equals(that.getAttackers())) return false;
-        if (!getBlockers().equals(that.getBlockers())) return false;
-        if (!getDefenderName().equals(that.getDefenderName())) return false;
-        return getDefenderId().equals(that.getDefenderId());
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getAttackers().hashCode();
-        result = 31 * result + getBlockers().hashCode();
-        result = 31 * result + getDefenderName().hashCode();
-        result = 31 * result + getDefenderId().hashCode();
-        return result;
-    }
 }
