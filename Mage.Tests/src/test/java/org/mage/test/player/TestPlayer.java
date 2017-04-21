@@ -29,7 +29,6 @@ package org.mage.test.player;
 
 import java.io.Serializable;
 import java.util.*;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Abilities;
@@ -574,16 +573,16 @@ public class TestPlayer implements Player {
                 List<Permanent> possibleBlockers = findPermanents(filterPermanent, computerPlayer.getId(), game);
                 if (!possibleBlockers.isEmpty() && attacker != null) {
                     boolean blockerFound = false;
-                    for(Permanent blocker: possibleBlockers) {
+                    for (Permanent blocker : possibleBlockers) {
                         // See if it can block this creature
-                        if(canBlockAnother(game, blocker, attacker, blockedCreaturesByCreature)) {
+                        if (canBlockAnother(game, blocker, attacker, blockedCreaturesByCreature)) {
                             computerPlayer.declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), game);
                             blockerFound = true;
                             break;
                         }
                     }
                     // If we haven't found a blocker then an illegal block has been made in the test
-                    if(!blockerFound) {
+                    if (!blockerFound) {
                         throw new UnsupportedOperationException(groups[0] + " cannot block " + groups[1]);
                     }
                 }
@@ -596,8 +595,8 @@ public class TestPlayer implements Player {
     private boolean canBlockAnother(Game game, Permanent blocker, Permanent attacker, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
         MageObjectReference blockerRef = new MageObjectReference(blocker, game);
         // See if we already reference this blocker
-        for(MageObjectReference r: blockedCreaturesByCreature.keySet()) {
-            if(r.equals(blockerRef)) {
+        for (MageObjectReference r : blockedCreaturesByCreature.keySet()) {
+            if (r.equals(blockerRef)) {
                 // Use the existing reference if we do
                 blockerRef = r;
             }
@@ -605,7 +604,7 @@ public class TestPlayer implements Player {
         List<MageObjectReference> blocked = blockedCreaturesByCreature.getOrDefault(blockerRef, new ArrayList<>());
         int numBlocked = blocked.size();
         // Can't block any more creatures
-        if(++numBlocked > blocker.getMaxBlocks()) {
+        if (++numBlocked > blocker.getMaxBlocks()) {
             return false;
         }
         // Add the attacker reference to the list of creatures this creature is blocking
@@ -619,21 +618,20 @@ public class TestPlayer implements Player {
         // Stores the total number of blockers for each attacker
         Map<MageObjectReference, Integer> blockersForAttacker = new HashMap<>();
         // Calculate the number of blockers each attacker has
-        for(List<MageObjectReference> attackers : blockedCreaturesByCreature.values()) {
-            for(MageObjectReference mr: attackers) {
+        for (List<MageObjectReference> attackers : blockedCreaturesByCreature.values()) {
+            for (MageObjectReference mr : attackers) {
                 Integer blockers = blockersForAttacker.getOrDefault(mr, 0);
-                blockersForAttacker.put(mr, blockers+1);
+                blockersForAttacker.put(mr, blockers + 1);
             }
         }
         // Check each attacker is blocked by an allowed amount of creatures
-        for(Map.Entry<MageObjectReference, Integer> entry: blockersForAttacker.entrySet()) {
+        for (Map.Entry<MageObjectReference, Integer> entry : blockersForAttacker.entrySet()) {
             Permanent attacker = entry.getKey().getPermanent(game);
             Integer blockers = entry.getValue();
             // If getMaxBlockedBy() == 0 it means any number of creatures can block this creature
-            if(attacker.getMaxBlockedBy() != 0 && blockers > attacker.getMaxBlockedBy()) {
+            if (attacker.getMaxBlockedBy() != 0 && blockers > attacker.getMaxBlockedBy()) {
                 throw new UnsupportedOperationException(attacker.getName() + " is blocked by " + blockers + " creature(s). It can only be blocked by " + attacker.getMaxBlockedBy() + " or less.");
-            }
-            else if(blockers < attacker.getMinBlockedBy()) {
+            } else if (blockers < attacker.getMinBlockedBy()) {
                 throw new UnsupportedOperationException(attacker.getName() + " is blocked by " + blockers + " creature(s). It has to be blocked by " + attacker.getMinBlockedBy() + " or more.");
             }
         }
@@ -1674,6 +1672,16 @@ public class TestPlayer implements Player {
     @Override
     public void lost(Game game) {
         computerPlayer.lost(game);
+    }
+
+    @Override
+    public boolean hasDrew() {
+        return computerPlayer.hasDrew();
+    }
+
+    @Override
+    public void drew(Game game) {
+        computerPlayer.drew(game);
     }
 
     @Override
