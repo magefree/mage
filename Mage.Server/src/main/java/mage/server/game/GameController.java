@@ -545,6 +545,9 @@ public class GameController implements GameCallback {
                     requestPermissionToSeeHandCards(userId, (UUID) data);
                 }
                 break;
+            case VIEW_LIMITED_DECK:
+                viewLimitedDeck(getPlayerId(userId), userId);
+                break;
             default:
                 game.sendPlayerAction(playerAction, getPlayerId(userId), data);
         }
@@ -598,6 +601,23 @@ public class GameController implements GameCallback {
 
             }
 
+        }
+    }
+
+    private void viewLimitedDeck(UUID userIdRequester, UUID origId) {
+        Player viewLimitedDeckPlayer = game.getPlayer(userIdRequester);
+        if (viewLimitedDeckPlayer != null) {
+            if (viewLimitedDeckPlayer.isHuman()) {
+                System.out.println("Origid: " + origId + "  req:" + userIdRequester);
+                for (MatchPlayer p : TableManager.instance.getTable(tableId).getMatch().getPlayers()) {
+                    if (p.getPlayer().getId() == userIdRequester) {
+                        Optional<User> u = UserManager.instance.getUser(origId);
+                        if (u != null && u.isPresent() && p.getDeck() != null) {
+                            u.get().ccViewLimitedDeck(p.getDeck(), tableId, requestsOpen, true);
+                        }
+                    }
+                }
+            }
         }
     }
 
