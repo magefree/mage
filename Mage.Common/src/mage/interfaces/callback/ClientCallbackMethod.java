@@ -13,6 +13,7 @@ public enum ClientCallbackMethod {
     START_DRAFT("startDraft"),
     START_TOURNAMENT("startTournament"),
     SIDEBOARD("sideboard"),
+    VIEW_LIMITED_DECK("viewLimitedDeck"),
     CONSTRUCT("construct"),
     SHOW_USERMESSAGE("showUserMessage"),
     WATCHGAME("watchGame"),
@@ -29,18 +30,18 @@ public enum ClientCallbackMethod {
     GAME_UPDATE("gameUpdate"),
     DRAFT_OVER("draftOver"),
     REPLAY_DONE("replayDone"),
-    USER_REQUEST_DIALOG("userRequestDialog"), 
+    USER_REQUEST_DIALOG("userRequestDialog"),
     REPLAY_UPDATE("replayUpdate"),
     REPLAY_INIT("replayInit"),
     END_GAME_INFO("endGameInfo"),
     GAME_TARGET("gameTarget"),
-    GAME_CHOOSE_ABILITY("gameChooseAbility"), 
+    GAME_CHOOSE_ABILITY("gameChooseAbility"),
     GAME_CHOOSE_PILE("gameChoosePile"),
     GAME_CHOOSE_CHOICE("gameChooseChoice"), GAME_ASK("gameAsk"), GAME_SELECT("gameSelect"), GAME_PLAY_MANA("gamePlayMana"), GAME_PLAY_XMANA("gamePlayXMana"), GAME_GET_AMOUNT("gameSelectAmount"), DRAFT_INIT("draftInit"), DRAFT_INFORM("draftInform"), DRAFT_PICK("draftPick"), DRAFT_UPDATE("draftUpdate");
 
     String value;
 
-    ClientCallbackMethod(String value){
+    ClientCallbackMethod(String value) {
         this.value = value;
     }
 }
