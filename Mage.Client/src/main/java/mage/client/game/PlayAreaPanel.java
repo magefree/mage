@@ -472,6 +472,17 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
+        
+        popupMenu.addSeparator();
+        
+        menuItem = new JMenuItem("<html>View current deck");
+        menuItem.setMnemonic(KeyEvent.VK_V);
+        popupMenu.add(menuItem);
+        
+        // View limited deck
+        menuItem.addActionListener(e -> {
+            SessionHandler.sendPlayerAction(PlayerAction.VIEW_LIMITED_DECK, gameId, null);
+        });
     }
 
     private void addPopupMenuWatcher() {
