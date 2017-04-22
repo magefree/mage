@@ -269,10 +269,6 @@ public class User {
         sideboarding.put(tableId, deck);
     }
 
-    public void ccViewLimitedDeck(final Deck deck, final UUID tableId, final int time, boolean limited) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.VIEW_LIMITED_DECK, tableId, new TableClientMessage(deck, tableId, time, limited)));
-    }
-
     public void ccConstruct(final Deck deck, final UUID tableId, final int time) {
         fireCallback(new ClientCallback(ClientCallbackMethod.CONSTRUCT, tableId, new TableClientMessage(deck, tableId, time)));
     }
