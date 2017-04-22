@@ -58,7 +58,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 51;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 76;
+    private static final long CARD_CONTENT_VERSION = 77;
     private final TreeSet<String> landTypes = new TreeSet<>();
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
@@ -419,7 +419,7 @@ public enum CardRepository {
         }
         return null;
     }
-    
+
     public CardInfo findCardWPreferredSet(String name, String expansion, boolean caseInsensitive) {
         List<CardInfo> cards;
         if (caseInsensitive) {
@@ -436,7 +436,7 @@ public enum CardRepository {
             }
         }
         return findPreferedCoreExpansionCard(name, true);
-    }    
+    }
 
     public List<CardInfo> findCards(String name) {
         try {

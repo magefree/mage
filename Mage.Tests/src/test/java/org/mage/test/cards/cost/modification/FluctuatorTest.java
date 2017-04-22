@@ -38,10 +38,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class FluctuatorTest extends CardTestPlayerBase {
 
     /**
-     * NOTE: As of 4/19/2017 this test is failing due to a bug in code. See issue #3148
-     * 
-     * Fluctuator makes 'Akroma's Vengeance' cyclic cost reduced to {1}
-     * Test it with one Plains on battlefield.
+     * NOTE: As of 4/19/2017 this test is failing due to a bug in code. See
+     * issue #3148
+     *
+     * Fluctuator makes 'Akroma's Vengeance' cyclic cost reduced to {1} Test it
+     * with one Plains on battlefield.
      */
     @Test
     public void testFluctuatorReducedBy2() {
@@ -57,6 +58,7 @@ public class FluctuatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
+        setChoice(playerA, "2"); // reduce 2 generic mana
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -81,6 +83,7 @@ public class FluctuatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Fluctuator");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
+        setChoice(playerA, "2"); // reduce 1 generic mana
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -90,8 +93,9 @@ public class FluctuatorTest extends CardTestPlayerBase {
     }
 
     /**
-     * NOTE: As of 4/19/2017 this test is failing due to a bug in code. See issue #3148
-     * 
+     * NOTE: As of 4/19/2017 this test is failing due to a bug in code. See
+     * issue #3148
+     *
      * Test 2 Fluctuators reduce cycling cost up to 4.
      */
     @Test
@@ -105,6 +109,8 @@ public class FluctuatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Fluctuator", 2); // 2 copies
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
+        setChoice(playerA, "2"); // reduce 2 generic mana
+        setChoice(playerA, "1"); // reduce 1 generic mana
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
