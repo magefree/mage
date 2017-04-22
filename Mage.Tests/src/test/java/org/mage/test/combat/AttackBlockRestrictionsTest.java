@@ -252,15 +252,15 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     public void testCantBeBlockedTormentedSoul() {
         addCard(Zone.BATTLEFIELD, playerB, "Tormented Soul");
 
-        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Flinthoof Boar");
 
-        attack(2, playerB, "Tormented Soul");
-        block(2, playerA, "Tormented Soul", "Memnite");
+        attack(4, playerB, "Tormented Soul");
+        block(4, playerA, "Flinthoof Boar", "Tormented Soul");
 
-        setStopAt(2, PhaseStep.END_TURN);
+        setStopAt(4, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Memnite", 1);
+        assertPermanentCount(playerA, "Flinthoof Boar", 1);
         assertPermanentCount(playerB, "Tormented Soul", 1);
 
         assertLife(playerA, 19);
