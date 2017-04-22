@@ -1034,8 +1034,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (window instanceof DeckEditorPane) {
                 DeckEditorPane deckEditorPane = (DeckEditorPane) window;
                 if (deckEditorPane.getDeckEditorMode() == DeckEditorMode.LIMITED_BUILDING
-                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.SIDEBOARDING
-                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.VIEW_LIMITED_DECK) {
+                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.SIDEBOARDING) {
                     deckEditorPane.removeFrame();
                 }
             }
@@ -1045,7 +1044,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
         String name;
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
+        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
             name = "Deck Editor - " + tableId.toString();
         } else {
             if (deck != null) {
