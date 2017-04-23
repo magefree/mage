@@ -720,6 +720,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Permanent found = getPermanent(cardName);
         Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
     }
+    
+    /**
+     * Assert whether a permanent is not a specified subtype
+     *
+     * @param cardName Name of the permanent that should be checked.
+     * @param subType a subtype to test for
+     */
+    public void assertNotSubtype(String cardName, String subType) throws AssertionError {
+        Permanent found = getPermanent(cardName);
+        if (subType != null) {
+            Assert.assertFalse("(Battlefield) card sub-type equal (" + cardName + ':' + subType + ')', found.getSubtype(currentGame).contains(subType));
+        }
+    }
 
     /**
      * Assert whether a permanent is tapped or not
