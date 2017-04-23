@@ -35,6 +35,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.FlipCoinEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -74,12 +75,13 @@ public class WireflyHive extends CardImpl {
 class WireflyToken extends Token {
 
     WireflyToken() {
-        super("Wirefly", "2/2 colorless Insect artifact creature token named Wirefly");
+        super("Wirefly", "2/2 colorless Insect artifact creature token with flying named Wirefly");
         this.setOriginalExpansionSetCode("DST");
         this.getPower().modifyBaseValue(2);
         this.getToughness().modifyBaseValue(2);
         this.getSubtype(null).add("Insect");
         this.addCardType(CardType.ARTIFACT);
         this.addCardType(CardType.CREATURE);
+        this.addAbility(FlyingAbility.getInstance());
     }
 }
