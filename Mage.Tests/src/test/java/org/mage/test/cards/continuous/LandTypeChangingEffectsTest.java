@@ -82,6 +82,9 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Canopy Vista", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        // Lands you control have "{T}: Add one mana of any color to your mana pool."
+        // {T}: Add one mana of any color to your mana pool.
+        addCard(Zone.HAND, playerB, "Chromatic Lantern");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Chromatic Lantern");
 
