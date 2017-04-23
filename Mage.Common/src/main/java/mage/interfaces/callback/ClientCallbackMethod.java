@@ -13,6 +13,7 @@ public enum ClientCallbackMethod {
     START_DRAFT("startDraft"),
     START_TOURNAMENT("startTournament"),
     SIDEBOARD("sideboard"),
+    VIEW_LIMITED_DECK("viewLimitedDeck"),
     CONSTRUCT("construct"),
     SHOW_USERMESSAGE("showUserMessage"),
     WATCHGAME("watchGame"),

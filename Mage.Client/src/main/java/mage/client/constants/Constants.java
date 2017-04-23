@@ -91,7 +91,8 @@ public final class Constants {
 
         FREE_BUILDING,
         LIMITED_BUILDING,
-        SIDEBOARDING
+        SIDEBOARDING,
+        VIEW_LIMITED_DECK
     }
 
     public enum SortBy {
