@@ -62,7 +62,6 @@ public class Constructed extends DeckValidator {
 
     @Override
     public boolean validate(Deck deck) {
-        logger.debug("DECK validate start: " + name + " deckname: " + deck.getName());
         boolean valid = true;
         //20091005 - 100.2a
         if (deck.getCards().size() < 60) {
@@ -136,8 +135,6 @@ public class Constructed extends DeckValidator {
                 }
             }
         }
-
-        logger.debug("DECK validate end: " + name + " deckname: " + deck.getName() + " invalids:" + invalid.size());
         return valid;
     }
 
