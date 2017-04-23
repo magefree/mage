@@ -233,6 +233,24 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.deckArea.showSideboard(true);
                 this.txtTimeRemaining.setVisible(false);
                 break;
+            case VIEW_LIMITED_DECK:
+                this.btnExit.setVisible(true);
+                this.btnSave.setVisible(true);
+                this.btnAddLand.setVisible(false);
+                this.btnGenDeck.setVisible(false);
+                this.btnImport.setVisible(false);
+                this.btnLoad.setVisible(false);
+                this.btnNew.setVisible(false);                
+                this.btnSubmit.setVisible(false);
+                this.btnSubmitTimer.setVisible(false);
+                this.cardSelector.loadCards(this.bigCard);
+                this.cardSelector.setVisible(false);
+                this.deckArea.setOrientation(/*limitedBuildingOrientation = */true);
+                this.deckArea.showSideboard(true);
+                this.lblDeckName.setVisible(false);
+                this.txtDeckName.setVisible(false);
+                this.txtTimeRemaining.setVisible(false);
+                break;
         }
         init();
         this.deckArea.setDeckEditorMode(mode);

@@ -324,6 +324,13 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+                    case VIEW_LIMITED_DECK: {
+                       TableClientMessage message = (TableClientMessage) callback.getData();
+                       DeckView deckView = message.getDeck();
+                       Deck deck = DeckUtil.construct(deckView);
+                       viewLimitedDeck(deck, message.getTableId(), message.getTime());
+                       break;
+                    }
                     case CONSTRUCT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         DeckView deckView = message.getDeck();
@@ -510,6 +517,10 @@ public class CallbackClientImpl implements CallbackClient {
 
     protected void construct(Deck deck, UUID tableId, int time) {
         frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
+    }
+
+    protected void viewLimitedDeck(Deck deck, UUID tableId, int time) {
+        frame.showDeckEditor(DeckEditorMode.VIEW_LIMITED_DECK, deck, tableId, time);
     }
 
     private void handleException(Exception ex) {
