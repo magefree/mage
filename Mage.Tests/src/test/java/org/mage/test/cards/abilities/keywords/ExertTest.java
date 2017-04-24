@@ -88,4 +88,31 @@ public class ExertTest extends CardTestPlayerBase {
         assertLife(playerB, 24);
         assertTapped(gbInitiate, false); // stolen creature exerted does untap during owner's untap step
     }
+
+    @Test
+    public void combatCelebrantExertedCannotAttackDuringNextCombatPhase() {
+        /*
+        Combat Celebrant 2R
+        Creature - Human Warrior 4/1
+        If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
+        */
+        String cCelebrant = "Combat Celebrant";
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.BATTLEFIELD, playerA, cCelebrant);
+        addCard(Zone.BATTLEFIELD, playerA, memnite);
+
+        attack(1, playerA, cCelebrant);
+        attack(1, playerA, memnite);
+        setChoice(playerA, "Yes"); // exert for extra turn and untap all creatures
+        attack(1, playerA, cCelebrant); // should not be able to attack again due to "if has not been exerted this turn"
+        attack(1, playerA, memnite);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 14); // 4 + 1 + 1 (Celebrant once, Memnite twice)
+        assertTapped(cCelebrant, true);
+        assertTapped(memnite, true);
+    }
 }
