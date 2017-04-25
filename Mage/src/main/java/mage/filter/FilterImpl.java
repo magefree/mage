@@ -65,8 +65,9 @@ public abstract class FilterImpl<E> implements Filter<E> {
     }
 
     @Override
-    public final void add(Predicate predicate) {
+    public final Filter add(Predicate predicate) {
         predicates.add(predicate);
+        return this;
     }
 
     @Override
