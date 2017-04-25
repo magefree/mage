@@ -54,6 +54,7 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.players.PlayerType;
 import mage.remote.Session;
 import mage.view.SeatView;
 import mage.view.TableView;
@@ -451,10 +452,8 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
         int playerCount = 0;
         if (tableView != null) {
             for (SeatView seatView : tableView.getSeats()) {
-                if (seatView.getPlayerId() != null) {
-                    if (seatView.getPlayerType().toString().equals("Human")) {
-                        playerCount++;
-                    }
+                if (seatView.getPlayerId() != null && seatView.getPlayerType() == PlayerType.HUMAN) {
+                    playerCount++;
                 }
             }
         }
