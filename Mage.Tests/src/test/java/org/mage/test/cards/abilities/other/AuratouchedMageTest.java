@@ -29,6 +29,7 @@ package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -46,9 +47,9 @@ public class AuratouchedMageTest extends CardTestPlayerBase {
      * card and put it into your hand. Then shuffle your library.
      *
      */
-    /*
-    @Ignore //If someone knows the way to elegantly handle the test mechanism in regards to no valid targets, please modify.  The test works fine in practice.
-    @Test
+    
+    //If someone knows the way to elegantly handle the test mechanism in regards to no valid targets, please modify.  The test works fine in practice.
+    @Ignore
     public void testAuratouchedMageEffectHasMadeIntoTypeArtifact() {
         //Any Aura card you find must be able to enchant Auratouched Mage as it currently exists, or as it most recently existed on the battlefield if it’s no 
         //longer on the battlefield. If an effect has made the Mage an artifact, for example, you could search for an Aura with “enchant artifact.”
@@ -70,7 +71,7 @@ public class AuratouchedMageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Relic Ward", 1);
 
     }
-     */
+
     @Test
     public void testGainsLegalAura() {
         // Expected result: Brainwash gets placed on Auratouched Mage
@@ -89,8 +90,7 @@ public class AuratouchedMageTest extends CardTestPlayerBase {
 
     }
 
-    /*
-    @Ignore //If someone knows the way to elegantly handle the test mechanism in regards to no valid targets, please modify.  The test works fine in practice.
+     //If someone knows the way to elegantly handle the test mechanism in regards to no valid targets, please modify.  The test works fine in practice.
     @Test
     public void testAuratouchedMageNotOnBattlefield() {
         // Expected result: Auratouched Mage is exiled immediately after entering the battlefield, the legal aura (Brainwash) gets put into controller's hand
@@ -113,5 +113,4 @@ public class AuratouchedMageTest extends CardTestPlayerBase {
         assertLibraryCount(playerA, "Animate Wall", 1);
 
     }
-     */
 }

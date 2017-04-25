@@ -27,10 +27,9 @@
  */
 package mage.filter;
 
+import java.io.Serializable;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
-
-import java.io.Serializable;
 
 /**
  * @param <E>
@@ -45,7 +44,7 @@ public interface Filter<E> extends Serializable {
 
     boolean match(E o, Game game);
 
-    void add(Predicate predicate);
+    Filter<E> add(Predicate predicate);
 
     boolean checkObjectClass(Object object);
 

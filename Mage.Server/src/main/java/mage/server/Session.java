@@ -27,6 +27,11 @@
  */
 package mage.server;
 
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.MageException;
 import mage.constants.Constants;
 import mage.interfaces.callback.ClientCallback;
@@ -43,12 +48,6 @@ import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
-
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -218,8 +217,8 @@ public class Session {
                 if (authorizedUser.lockedUntil.compareTo(Calendar.getInstance().getTime()) > 0) {
                     return "Your profile is deactivated until " + SystemUtil.dateFormat.format(authorizedUser.lockedUntil);
                 } else {
-                    UserManager.instance.createUser(userName, host, authorizedUser).ifPresent(user ->
-                            user.setLockedUntil(null)
+                    UserManager.instance.createUser(userName, host, authorizedUser).ifPresent(user
+                            -> user.setLockedUntil(null)
                     );
 
                 }
@@ -262,7 +261,6 @@ public class Session {
             ChatManager.instance.joinChat(room.get().getChatId(), userId);
             ChatManager.instance.sendReconnectMessage(userId);
         }
-
 
         return null;
 
@@ -337,7 +335,7 @@ public class Session {
                 lockSet = true;
                 logger.debug("SESSION LOCK SET sessionId: " + sessionId);
             } else {
-                logger.error("CAN'T GET LOCK - userId: " + userId + " hold count: " + lock.getHoldCount());
+                logger.warn("CAN'T GET LOCK - userId: " + userId + " hold count: " + lock.getHoldCount());
             }
             Optional<User> _user = UserManager.instance.getUser(userId);
             if (!_user.isPresent()) {
@@ -393,7 +391,7 @@ public class Session {
             call.setMessageId(messageId++);
             callbackHandler.handleCallbackOneway(new Callback(call));
         } catch (HandleCallbackException ex) {
-            ex.printStackTrace();
+            // ex.printStackTrace();
             UserManager.instance.getUser(userId).ifPresent(user -> {
                 logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId);
                 logger.warn(" - method: " + call.getMethod());

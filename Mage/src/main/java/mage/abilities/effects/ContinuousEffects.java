@@ -1218,7 +1218,10 @@ public class ContinuousEffects implements Serializable {
                     }
                 }
             } else {
-                logger.error("Replacement effect without ability: " + entry.getKey().toString());
+                if (!(entry.getKey() instanceof AuraReplacementEffect)
+                        && !(entry.getKey() instanceof PlaneswalkerRedirectionEffect)) {
+                    logger.error("Replacement effect without ability: " + entry.getKey().toString());
+                }
             }
         }
         return texts;

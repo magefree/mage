@@ -97,6 +97,7 @@ public class Legacy extends Constructed {
         banned.add("Rebirth");
         banned.add("Secret Summoning");
         banned.add("Secrets of Paradise");
+        banned.add("Sensei's Divining Top");
         banned.add("Sentinel Dispatch");
         banned.add("Shahrazad");
         banned.add("Skullclamp");

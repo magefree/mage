@@ -60,7 +60,7 @@ public class LayerTests extends CardTestPlayerBase {
 
     }
     
-    @Ignore
+    @Ignore //Works fine in the game.  Test fails, though.
     public void complexExampleFromLayersArticle() {
         /*In play there is a Grizzly Bears which has already been Giant Growthed, 
         a Bog Wraith enchanted by a Lignify, and Figure of Destiny with its 3rd ability activated. 
@@ -79,6 +79,7 @@ public class LayerTests extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Grizzly Bears");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lignify", "Bog Wrath");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R/W}:");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R/W}{R/W}{R/W}:");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R/W}{R/W}{R/W}{R/W}{R/W}{R/W}:");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mirrorweave", "Figure of Destiny");
@@ -92,4 +93,56 @@ public class LayerTests extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Figure of Destiny", 0, 4, Filter.ComparisonScope.All);
 
     }
+    
+    @Test
+    public void testUrborgWithAnimateLandAndOvinize() {
+        // Animate Land: target land is a 3/3 until end of turn and is still a land.
+        // Ovinize: target creature becomes 0/1 and loses all abilities until end of turn.
+        // Urborg, Tomb of Yawgmoth : Each land is a Swamp in addition to its other types.
+        // Expected behavior:  Urborg loses all abilities and becomes a 0/1 creature.
+        addCard(Zone.HAND, playerA, "Animate Land", 1);
+        addCard(Zone.HAND, playerA, "Ovinize", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Urborg, Tomb of Yawgmoth", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Land", "Urborg, Tomb of Yawgmoth");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ovinize", "Urborg, Tomb of Yawgmoth");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertType("Urborg, Tomb of Yawgmoth", CardType.CREATURE, "Swamp");  // Urborg is a creature
+        assertPowerToughness(playerA, "Urborg, Tomb of Yawgmoth", 0, 1); // Urborg is a 0/1 creature
+
+    }
+    
+    @Ignore //This works fine in the game.  Test fails.
+    public void testFromAnArticle() {
+        /*
+        Aiden has a Battlegate Mimic on the battlefield. Nick controls two Wilderness Hypnotists. 
+        Aiden casts a Scourge of the Nobilis, targeting the Mimic; after that resolves Nick activates 
+        one of his Hypnotist's abilities, targeting the Mimic. Aiden attacks with the Mimic, and 
+        casts Inside Out before the damage step. Once Inside Out resolves, Nick activates the ability 
+        of his other Hypnotist. How much damage will the Mimic deal?
+        */
+        addCard(Zone.HAND, playerA, "Scourge of the Nobilis", 1);
+        addCard(Zone.HAND, playerA, "Inside Out", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Battlegate Mimic", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Wilderness Hypnotist", 2);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scourge of the Nobilis", "Battlegate Mimic");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}:", "Battlegate Mimic");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Inside Out", "Battlegate Mimic");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}:", "Battlegate Mimic");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, "Battlegate Mimic", 4, 2);
+
+    }
+    
 }

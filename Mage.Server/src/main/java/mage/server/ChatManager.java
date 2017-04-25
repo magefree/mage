@@ -181,10 +181,13 @@ public enum ChatManager {
             + "<br/>\\me - shows the history of the current player"
             + "<br/>\\list or \\l - Show a list of commands"
             + "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name"
+            + "<br/>\\card Card Name - Print oracle text for card"
             + "<br/>[Card Name] - Show a highlighted card name"
             + "<br/>\\ignore - shows current ignore list on this server."
             + "<br/>\\ignore [username] - add a username to your ignore list on this server."
             + "<br/>\\unignore [username] - remove a username from your ignore list on this server.";
+
+    final Pattern getCardTextPattern = Pattern.compile("^.card *(.*)");
 
     private boolean performUserCommand(User user, String message, UUID chatId, boolean doError) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
@@ -202,6 +205,25 @@ public enum ChatManager {
         }
         if (command.equals("ME")) {
             message += "<br/>" + UserManager.instance.getUserHistory(user.getName());
+            chatSessions.get(chatId).broadcastInfoToUser(user, message);
+            return true;
+        }
+        if (command.startsWith("CARD ")) {
+            Matcher matchPattern = getCardTextPattern.matcher(message.toLowerCase());
+            if (matchPattern.find()) {
+                String cardName = matchPattern.group(1);
+                CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);
+                if (cardInfo != null) {
+                    cardInfo.getRules();
+                    message = "<font color=orange>" + cardInfo.getName() + "</font>: Cost:" + cardInfo.getManaCosts().toString() + ",  Types:" + cardInfo.getTypes().toString() + ", ";
+                    for (String rule : cardInfo.getRules()) {
+                        message = message + rule;
+                    }
+                } else {
+                    message = "Couldn't find: " + cardName;
+
+                }
+            }
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }

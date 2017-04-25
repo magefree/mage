@@ -117,6 +117,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Disembowel", 85, Rarity.COMMON, mage.cards.d.Disembowel.class));
         cards.add(new SetCardInfo("Divebomber Griffin", 14, Rarity.UNCOMMON, mage.cards.d.DivebomberGriffin.class));
         cards.add(new SetCardInfo("Dizzy Spell", 43, Rarity.COMMON, mage.cards.d.DizzySpell.class));
+        cards.add(new SetCardInfo("Dogpile", 120, Rarity.COMMON, mage.cards.d.Dogpile.class));
         cards.add(new SetCardInfo("Doubling Season", 158, Rarity.RARE, mage.cards.d.DoublingSeason.class));
         cards.add(new SetCardInfo("Dowsing Shaman", 159, Rarity.UNCOMMON, mage.cards.d.DowsingShaman.class));
         cards.add(new SetCardInfo("Drake Familiar", 44, Rarity.COMMON, mage.cards.d.DrakeFamiliar.class));
@@ -252,6 +253,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Rolling Spoil", 179, Rarity.UNCOMMON, mage.cards.r.RollingSpoil.class));
         cards.add(new SetCardInfo("Roofstalker Wight", 102, Rarity.COMMON, mage.cards.r.RoofstalkerWight.class));
         cards.add(new SetCardInfo("Root-Kin Ally", 180, Rarity.UNCOMMON, mage.cards.r.RootKinAlly.class));
+        cards.add(new SetCardInfo("Sabertooth Alley Cat", 140, Rarity.COMMON, mage.cards.s.SabertoothAlleyCat.class));
         cards.add(new SetCardInfo("Sacred Foundry", 280, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Sadistic Augermage", 103, Rarity.COMMON, mage.cards.s.SadisticAugermage.class));
         cards.add(new SetCardInfo("Sandsower", 28, Rarity.UNCOMMON, mage.cards.s.Sandsower.class));
@@ -261,6 +263,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Scion of the Wild", 182, Rarity.RARE, mage.cards.s.ScionOfTheWild.class));
         cards.add(new SetCardInfo("Searing Meditation", 226, Rarity.RARE, mage.cards.s.SearingMeditation.class));
         cards.add(new SetCardInfo("Seed Spark", 30, Rarity.UNCOMMON, mage.cards.s.SeedSpark.class));
+        cards.add(new SetCardInfo("Seeds of Strength", 227, Rarity.COMMON, mage.cards.s.SeedsOfStrength.class));
         cards.add(new SetCardInfo("Seismic Spike", 141, Rarity.COMMON, mage.cards.s.SeismicSpike.class));
         cards.add(new SetCardInfo("Selesnya Evangel", 228, Rarity.COMMON, mage.cards.s.SelesnyaEvangel.class));
         cards.add(new SetCardInfo("Selesnya Guildmage", 252, Rarity.UNCOMMON, mage.cards.s.SelesnyaGuildmage.class));

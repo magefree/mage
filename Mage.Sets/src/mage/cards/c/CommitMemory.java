@@ -41,9 +41,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.common.FilterSpellOrPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -59,7 +58,7 @@ public class CommitMemory extends SplitCard {
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or nonland permanent");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.setPermanentFilter(new FilterNonlandPermanent());
     }
 
     public CommitMemory(UUID ownerId, CardSetInfo setInfo) {
