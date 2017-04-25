@@ -202,11 +202,13 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Gatekeeper", 25, Rarity.RARE, mage.cards.l.LoxodonGatekeeper.class));
         cards.add(new SetCardInfo("Loxodon Hierarch", 214, Rarity.RARE, mage.cards.l.LoxodonHierarch.class));
         cards.add(new SetCardInfo("Lurking Informant", 249, Rarity.COMMON, mage.cards.l.LurkingInformant.class));
+        cards.add(new SetCardInfo("Mausoleum Turnkey", 94, Rarity.UNCOMMON, mage.cards.m.MausoleumTurnkey.class));
         cards.add(new SetCardInfo("Mindleech Mass", 215, Rarity.RARE, mage.cards.m.MindleechMass.class));
         cards.add(new SetCardInfo("Mindmoil", 135, Rarity.RARE, mage.cards.m.Mindmoil.class));
         cards.add(new SetCardInfo("Mnemonic Nexus", 59, Rarity.UNCOMMON, mage.cards.m.MnemonicNexus.class));
         cards.add(new SetCardInfo("Moldervine Cloak", 173, Rarity.UNCOMMON, mage.cards.m.MoldervineCloak.class));
         cards.add(new SetCardInfo("Molten Sentry", 136, Rarity.RARE, mage.cards.m.MoltenSentry.class));
+        cards.add(new SetCardInfo("Moonlight Bargain", 95, Rarity.RARE, mage.cards.m.MoonlightBargain.class));
         cards.add(new SetCardInfo("Moroii", 216, Rarity.UNCOMMON, mage.cards.m.Moroii.class));
         cards.add(new SetCardInfo("Mortipede", 96, Rarity.COMMON, mage.cards.m.Mortipede.class));
         cards.add(new SetCardInfo("Mountain", 299, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
@@ -329,6 +331,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Watchwolf", 239, Rarity.UNCOMMON, mage.cards.w.Watchwolf.class));
         cards.add(new SetCardInfo("Watery Grave", 286, Rarity.RARE, mage.cards.w.WateryGrave.class));
         cards.add(new SetCardInfo("Wizened Snitches", 75, Rarity.UNCOMMON, mage.cards.w.WizenedSnitches.class));
+        cards.add(new SetCardInfo("Woebringer Demon", 113, Rarity.RARE, mage.cards.w.WoebringerDemon.class));
         cards.add(new SetCardInfo("Wojek Apothecary", 36, Rarity.UNCOMMON, mage.cards.w.WojekApothecary.class));
         cards.add(new SetCardInfo("Wojek Embermage", 152, Rarity.UNCOMMON, mage.cards.w.WojekEmbermage.class));
         cards.add(new SetCardInfo("Wojek Siren", 37, Rarity.COMMON, mage.cards.w.WojekSiren.class));
