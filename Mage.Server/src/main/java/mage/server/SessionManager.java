@@ -144,8 +144,10 @@ public enum SessionManager {
                     case LostConnection: // user lost connection - session expires countdaoun starts
                         session.userLostConnection();
                         break;
+                    case ConnectingOtherInstance:
+                        break;
                     default:
-                        logger.error("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
+                        logger.trace("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
                 }
             } else {
                 sessions.remove(sessionId);

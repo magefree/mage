@@ -276,7 +276,7 @@ public class Turn implements Serializable {
 
         setEndTurnRequested(true);
 
-        // 1) All spells and abilities on the stack are exiled. This includes Time Stop, though it will continue to resolve.
+        // 1) All spells and abilities on the stack are exiled. This includes (e.g.) Time Stop, though it will continue to resolve.
         // It also includes spells and abilities that can't be countered.
         while (!game.getStack().isEmpty()) {
             StackObject stackObject = game.getStack().peekFirst();
