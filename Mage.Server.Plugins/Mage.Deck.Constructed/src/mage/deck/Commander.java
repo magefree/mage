@@ -27,6 +27,7 @@
  */
 package mage.deck;
 
+import java.util.*;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -40,8 +41,6 @@ import mage.cards.decks.Deck;
 import mage.constants.SetType;
 import mage.filter.FilterMana;
 import mage.util.CardUtil;
-
-import java.util.*;
 
 /**
  *
@@ -71,6 +70,7 @@ public class Commander extends Constructed {
         banned.add("Gifts Ungiven");
         banned.add("Griselbrand");
         banned.add("Karakas");
+        banned.add("Leovold, Emissary of Trest");
         banned.add("Library of Alexandria");
         banned.add("Limited Resources");
         banned.add("Mox Emerald");
@@ -82,7 +82,6 @@ public class Commander extends Constructed {
         banned.add("Panoptic Mirror");
         banned.add("Primeval Titan");
         banned.add("Prophet of Kruphix");
-        banned.add("Protean Hulk");
         banned.add("Recurring Nightmare");
         banned.add("Rofellos, Llanowar Emissary");
         banned.add("Sundering Titan");
