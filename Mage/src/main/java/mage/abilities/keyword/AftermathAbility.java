@@ -105,7 +105,7 @@ class AftermathCastFromGraveyard extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (objectId.equals(source.getSourceId())
-                & affectedControllerId.equals(source.getControllerId())) {
+                && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(source.getSourceId());
             if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 return true;
