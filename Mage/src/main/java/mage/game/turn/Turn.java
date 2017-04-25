@@ -278,10 +278,12 @@ public class Turn implements Serializable {
 
         // 1) All spells and abilities on the stack are exiled. This includes (e.g.) Time Stop, though it will continue to resolve.
         // It also includes spells and abilities that can't be countered.
-        while (!game.getStack().isEmpty()) {
+        while (!game.hasEnded() && !game.getStack().isEmpty()) {
             StackObject stackObject = game.getStack().peekFirst();
             if (stackObject instanceof Spell) {
                 ((Spell) stackObject).moveToExile(null, "", source.getSourceId(), game);
+            } else {
+                game.getStack().remove(stackObject); // stack ability
             }
         }
         // 2) All attacking and blocking creatures are removed from combat.
