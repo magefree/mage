@@ -39,6 +39,7 @@ import java.util.*;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
+
 import mage.cards.decks.Deck;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.ExpansionInfo;
@@ -520,7 +521,7 @@ public class NewTournamentDialog extends MageDialog {
     }//GEN-LAST:event_cbTournamentTypeActionPerformed
 
     private void btnSavedConfigurationActionPerformed(java.awt.event.ActionEvent evt, int setting) {//GEN-FIRST:event_btnSavedConfigurationActionPerformed
-        currentSettingVersion = setting; 
+        currentSettingVersion = setting;
         setTournamentSettingsFromPrefs(currentSettingVersion);
     }//GEN-LAST:event_btnSavedConfigurationActionPerformed
 
@@ -625,7 +626,7 @@ public class NewTournamentDialog extends MageDialog {
                 DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),
                 tOptions.getPassword())) {
             for (TournamentPlayerPanel player : players) {
-                if (!player.getPlayerType().getSelectedItem().toString().equals("Human")) {
+                if (player.getPlayerType().getSelectedItem() != PlayerType.HUMAN) {
                     if (!player.joinTournamentTable(roomId, table.getTableId(), DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()))) {
                         // error message must be send by sever
                         SessionHandler.removeTable(roomId, table.getTableId());
@@ -969,7 +970,8 @@ public class NewTournamentDialog extends MageDialog {
     /**
      * set the tournament settings from java prefs
      */
-    int currentSettingVersion = 0; 
+    int currentSettingVersion = 0;
+
     private void setTournamentSettingsFromPrefs(int version) {
         currentSettingVersion = version;
         String versionStr = "";
