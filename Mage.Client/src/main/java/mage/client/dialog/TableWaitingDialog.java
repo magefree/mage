@@ -437,6 +437,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
                         AudioManager.playPlayerJoinedTable();
                     } else {
                         MageTray.instance.displayMessage("A player left your game.");
+                        AudioManager.playPlayerLeft();
                     }
                     MageTray.instance.blink();
                 }
@@ -450,8 +451,10 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
         int playerCount = 0;
         if (tableView != null) {
             for (SeatView seatView : tableView.getSeats()) {
-                if (seatView.getPlayerId() != null && seatView.getPlayerType().equals("Human")) {
-                    playerCount++;
+                if (seatView.getPlayerId() != null) {
+                    if (seatView.getPlayerType().toString().equals("Human")) {
+                        playerCount++;
+                    }
                 }
             }
         }
