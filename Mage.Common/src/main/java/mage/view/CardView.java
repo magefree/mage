@@ -28,6 +28,8 @@
 package mage.view;
 
 import java.util.*;
+
+import com.sun.xml.internal.ws.util.StringUtils;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -963,22 +965,7 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorText() {
-        if (getColor().getColorCount() == 0) {
-            return "Colorless";
-        } else if (getColor().getColorCount() > 1) {
-            return "Gold";
-        } else if (getColor().isBlack()) {
-            return "Black";
-        } else if (getColor().isBlue()) {
-            return "Blue";
-        } else if (getColor().isWhite()) {
-            return "White";
-        } else if (getColor().isGreen()) {
-            return "Green";
-        } else if (getColor().isRed()) {
-            return "Red";
-        }
-        return "";
+       return StringUtils.capitalize(getColor().getDescription());
     }
 
     public String getTypeText() {
