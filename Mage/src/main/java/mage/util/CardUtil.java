@@ -163,15 +163,7 @@ public final class CardUtil {
         return adjustedCost;
     }
 
-    public static ManaCosts<ManaCost> removeVariableManaCost(ManaCosts<ManaCost> manaCosts) {
-        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
-        for (ManaCost manaCost : manaCosts) {
-            if (!(manaCost instanceof VariableManaCost)) {
-                adjustedCost.add(manaCost);
-            }
-        }
-        return adjustedCost;
-    }
+
 
     public static void reduceCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
         adjustCost(spellAbility, manaCostsToReduce, true);
