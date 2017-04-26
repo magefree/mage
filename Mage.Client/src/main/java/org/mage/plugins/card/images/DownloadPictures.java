@@ -117,7 +117,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         });
         jComboBox1 = new JComboBox();
 
-        cardImageSource = MagicCardsImageSource.getInstance();
+        cardImageSource = MagicCardsImageSource.instance;
 
         jComboBox1.setModel(jComboBox1Model);
         jComboBox1.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -125,28 +125,28 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             JComboBox cb = (JComboBox) e.getSource();
             switch (cb.getSelectedIndex()) {
                 case 0:
-                    cardImageSource = MagicCardsImageSource.getInstance();
+                    cardImageSource = MagicCardsImageSource.instance;
                     break;
                 case 1:
-                    cardImageSource = WizardCardsImageSource.getInstance();
+                    cardImageSource = WizardCardsImageSource.instance;
                     break;
                 case 2:
-                    cardImageSource = MythicspoilerComSource.getInstance();
+                    cardImageSource = MythicspoilerComSource.instance;
                     break;
                 case 3:
-                    cardImageSource = TokensMtgImageSource.getInstance();
+                    cardImageSource = TokensMtgImageSource.instance;
                     break;
                 case 4:
-                    cardImageSource = MtgOnlTokensImageSource.getInstance();
+                    cardImageSource = MtgOnlTokensImageSource.instance;
                     break;
                 case 5:
-                    cardImageSource = AltMtgOnlTokensImageSource.getInstance();
+                    cardImageSource = AltMtgOnlTokensImageSource.instance;
                     break;
                 case 6:
-                    cardImageSource = GrabbagImageSource.getInstance();
+                    cardImageSource = GrabbagImageSource.instance;
                     break;
                 case 7:
-                    cardImageSource = MagidexImageSource.getInstance();
+                    cardImageSource = MagidexImageSource.instance;
                     break;
             }
             updateCardsToDownload();

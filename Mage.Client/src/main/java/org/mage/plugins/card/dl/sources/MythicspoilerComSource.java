@@ -54,27 +54,21 @@ import org.mage.plugins.card.images.CardDownloadData;
  *
  * @author LevelX2
  */
-public class MythicspoilerComSource implements CardImageSource {
+public enum MythicspoilerComSource implements CardImageSource {
 
-    private static CardImageSource instance;
-    private static Map<String, String> setsAliases;
-    private static Map<String, String> cardNameAliases;
-    private static Map<String, Set<String>> cardNameAliasesStart;
+    instance;
+    private Map<String, String> setsAliases;
+    private Map<String, String> cardNameAliases;
+    private Map<String, Set<String>> cardNameAliasesStart;
     private final Map<String, Map<String, String>> sets;
 
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new MythicspoilerComSource();
-        }
-        return instance;
-    }
 
     @Override
     public String getSourceName() {
         return "mythicspoiler.com";
     }
 
-    public MythicspoilerComSource() {
+    MythicspoilerComSource() {
         sets = new LinkedHashMap<>();
         setsAliases = new HashMap<>();
         setsAliases.put("exp", "bfz");
