@@ -1,5 +1,16 @@
 package mage.client.cards;
 
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import javax.swing.*;
 import mage.cards.Card;
 import mage.cards.MageCard;
 import mage.cards.decks.DeckCardInfo;
@@ -20,18 +31,6 @@ import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRenderer;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.*;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Created by StravantUser on 2016-09-20.
@@ -1136,6 +1135,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         if (offsetIntoCol2 < GRID_PADDING) {
             --col2;
         }
+        
+        // avoids a null ref issue but only deals with symptom of problem. not sure how it gets to this state ever. see issue #3197
+        // if (selectionDragStartCards == null) return;
 
         int curY = COUNT_LABEL_HEIGHT;
         for (int rowIndex = 0; rowIndex < cardGrid.size(); ++rowIndex) {

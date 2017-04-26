@@ -115,4 +115,43 @@ public class ExertTest extends CardTestPlayerBase {
         assertTapped(cCelebrant, true);
         assertTapped(memnite, true);
     }
+    
+    /*
+     * Reported bug: Combat Celebrant able to attack again despite being exerted if Always Watching is in play. (Or presumably any Vigilance granting effect)
+     * NOTE: this test is failing at the moment due to bug in code. See issue #3195
+    */
+    @Test
+    public void combatCelebrantExertedCannotAttackDuringNextCombatPhase_InteractionWithAlwaysWatching() {
+        /*
+        Combat Celebrant 2R
+        Creature - Human Warrior 4/1
+        If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
+        */
+        String cCelebrant = "Combat Celebrant";
+        
+        /*
+        Always Watching 1WW
+        Enchantment
+        Non-token creatures you control get +1/+1 and have vigilance. 
+        */
+        String aWatching = "Always Watching";
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.BATTLEFIELD, playerA, aWatching);
+        addCard(Zone.BATTLEFIELD, playerA, cCelebrant);
+        addCard(Zone.BATTLEFIELD, playerA, memnite);
+
+        attack(1, playerA, cCelebrant);
+        attack(1, playerA, memnite);
+        setChoice(playerA, "Yes"); // exert for extra turn and untap all creatures
+        attack(1, playerA, cCelebrant); // should not be able to attack again due to "if has not been exerted this turn"
+        attack(1, playerA, memnite);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTapped(cCelebrant, false);
+        assertTapped(memnite, false);
+        assertLife(playerB, 11); // 5 + 2 + 2 (Celebrant once, Memnite twice with +1/+1 on both)
+    }
 }
