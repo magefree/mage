@@ -28,6 +28,7 @@
 package mage.view;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 import mage.MageObject;
@@ -220,8 +221,8 @@ public class CardView extends SimpleCardView {
      * @param card
      * @param game
      * @param controlled is the card view created for the card controller - used
-     * for morph / face down cards to know which player may see information for
-     * the card
+     *                   for morph / face down cards to know which player may see information for
+     *                   the card
      */
     public CardView(Card card, Game game, boolean controlled) {
         this(card, game, controlled, false, false);
@@ -247,12 +248,12 @@ public class CardView extends SimpleCardView {
     /**
      * @param card
      * @param game
-     * @param controlled is the card view created for the card controller - used
-     * for morph / face down cards to know which player may see information for
-     * the card
+     * @param controlled       is the card view created for the card controller - used
+     *                         for morph / face down cards to know which player may see information for
+     *                         the card
      * @param showFaceDownCard if true and the card is not on the battlefield,
-     * also a face down card is shown in the view, face down cards will be shown
-     * @param storeZone if true the card zone will be set in the zone attribute.
+     *                         also a face down card is shown in the view, face down cards will be shown
+     * @param storeZone        if true the card zone will be set in the zone attribute.
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null, card.getTokenDescriptor());
@@ -965,29 +966,22 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorText() {
-       return StringUtils.capitalize(getColor().getDescription());
+        return StringUtils.capitalize(getColor().getDescription());
     }
 
     public String getTypeText() {
         StringBuilder type = new StringBuilder();
-        for (SuperType superType : getSuperTypes()) {
-            type.append(superType.toString());
-            type.append(' ');
+        if (!getSuperTypes().isEmpty()) {
+            type.append(String.join(" ", getSuperTypes().stream().map(SuperType::toString).collect(Collectors.toList())));
+            type.append(" ");
         }
-        for (CardType cardType : getCardTypes()) {
-            type.append(cardType.toString());
-            type.append(' ');
+        if (!getCardTypes().isEmpty()) {
+            type.append(String.join(" ", getCardTypes().stream().map(CardType::toString).collect(Collectors.toList())));
+            type.append(" ");
         }
         if (!getSubTypes().isEmpty()) {
-            type.append("- ");
-            for (String subType : getSubTypes()) {
-                type.append(subType);
-                type.append(' ');
-            }
-        }
-        if (type.length() > 0) {
-            // remove trailing space
-            type.deleteCharAt(type.length() - 1);
+            type.append(" - ");
+            type.append(String.join(" ", getSubTypes()));
         }
         return type.toString();
     }
