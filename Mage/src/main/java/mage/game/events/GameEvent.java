@@ -176,7 +176,7 @@ public class GameEvent implements Serializable {
          data        originalId of the mana producing ability
          */
         MANA_PAID,
-        LOSES, LOST, WINS,
+        LOSES, LOST, WINS, DRAW_PLAYER,
         TARGET, TARGETED,
         /* TARGETS_VALID
          targetId    id of the spell or id of stack ability the targets were set to

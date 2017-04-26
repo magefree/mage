@@ -82,6 +82,8 @@ public class Vintage extends Constructed {
         restricted.add("Dig Through Time");
         restricted.add("Fastbond");
         restricted.add("Flash");
+        restricted.add("Gitaxian Probe");
+        restricted.add("Gush");
         restricted.add("Imperial Seal");
         restricted.add("Library of Alexandria");
         restricted.add("Lion’s Eye Diamond");

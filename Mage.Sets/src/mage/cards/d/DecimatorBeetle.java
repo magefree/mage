@@ -91,7 +91,7 @@ public class DecimatorBeetle extends CardImpl {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
             UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
             filter.add(new ControllerIdPredicate(defenderId));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
             ability.addTarget(target);
         }
     }
@@ -116,7 +116,8 @@ class DecimatorBeetleEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
+        if (targetCreature != null
+                && targetCreature.getCounters(game).containsKey(CounterType.M1M1)) {
             Effect effect = new RemoveCounterTargetEffect(CounterType.M1M1.createInstance(1));
             effect.setTargetPointer(targetPointer);
             effect.apply(game, source);

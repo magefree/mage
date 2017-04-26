@@ -107,6 +107,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean human;
     protected int life;
     protected boolean wins;
+    protected boolean draws;
     protected boolean loses;
     protected Library library;
     protected Cards sideboard;
@@ -226,6 +227,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.human = player.human;
         this.life = player.life;
         this.wins = player.wins;
+        this.draws = player.draws;
         this.loses = player.loses;
 
         this.library = player.library.copy();
@@ -391,6 +393,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.abilities.clear();
         this.counters.clear();
         this.wins = false;
+        this.draws = false;
         this.loses = false;
         this.left = false;
         // reset is neccessary because in tournament player will be used for each round
@@ -2191,13 +2194,23 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void drew(Game game) {
+        if (!hasLost()) {
+            this.draws = true;
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DRAW_PLAYER, null, null, playerId));
+            game.informPlayers("For " + this.getLogName() + " the game is a draw.");
+            game.gameOver(playerId);
+        }
+    }
+
+    @Override
     public boolean hasLost() {
         return this.loses;
     }
 
     @Override
     public boolean isInGame() {
-        return !hasQuit() && !hasLost() && !hasWon() && !hasLeft();
+        return !hasQuit() && !hasLost() && !hasWon() && !hasDrew() && !hasLeft();
     }
 
     @Override
@@ -2208,6 +2221,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean hasWon() {
         return !this.loses && this.wins;
+    }
+
+    @Override
+    public boolean hasDrew() {
+        return this.draws;
     }
 
     @Override

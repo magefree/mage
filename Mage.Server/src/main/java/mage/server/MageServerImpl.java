@@ -636,7 +636,8 @@ public class MageServerImpl implements MageServer {
                 }
             });
         } else {
-            logger.error("table not found : " + tableId);
+            // this can happen if a game ends and a player quits XMage or a match nearly at the same time as the game ends
+            logger.trace("table not found : " + tableId);
         }
         return true;
     }
@@ -1119,12 +1120,12 @@ public class MageServerImpl implements MageServer {
     public void toggleActivation(final String sessionId, final String userName) throws MageException {
         execute("toggleActivation", sessionId, ()
                 -> UserManager.instance.getUserByName(userName).ifPresent(user
-                -> {
-            user.setActive(!user.isActive());
-            if (!user.isActive() && user.isConnected()) {
-                SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
-            }
-        }));
+                        -> {
+                    user.setActive(!user.isActive());
+                    if (!user.isActive() && user.isConnected()) {
+                        SessionManager.instance.disconnectUser(sessionId, user.getSessionId());
+                    }
+                }));
     }
 
     @Override
@@ -1159,8 +1160,8 @@ public class MageServerImpl implements MageServer {
         if (title != null && message != null) {
             execute("sendFeedbackMessage", sessionId, ()
                     -> SessionManager.instance.getSession(sessionId).ifPresent(
-                    session -> FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.getHost())
-            ));
+                            session -> FeedbackServiceImpl.instance.feedback(username, title, type, message, email, session.getHost())
+                    ));
         }
     }
 

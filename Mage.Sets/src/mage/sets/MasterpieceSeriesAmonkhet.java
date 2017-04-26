@@ -56,6 +56,7 @@ public class MasterpieceSeriesAmonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Attrition", 19, Rarity.SPECIAL, mage.cards.a.Attrition.class));
         cards.add(new SetCardInfo("Austere Command", 1, Rarity.SPECIAL, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Aven Mindcensor", 2, Rarity.SPECIAL, mage.cards.a.AvenMindcensor.class));
+        cards.add(new SetCardInfo("Bontu the Glorified", 20, Rarity.SPECIAL, mage.cards.b.BontuTheGlorified.class));
         cards.add(new SetCardInfo("Chain Lightning", 26, Rarity.SPECIAL, mage.cards.c.ChainLightning.class));
         cards.add(new SetCardInfo("Consecrated Sphinx", 8, Rarity.SPECIAL, mage.cards.c.ConsecratedSphinx.class));
         cards.add(new SetCardInfo("Containment Priest", 3, Rarity.SPECIAL, mage.cards.c.ContainmentPriest.class));
@@ -75,6 +76,7 @@ public class MasterpieceSeriesAmonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Twist", 24, Rarity.SPECIAL, mage.cards.m.MindTwist.class));
         cards.add(new SetCardInfo("Oketra the True", 5, Rarity.SPECIAL, mage.cards.o.OketraTheTrue.class));
         cards.add(new SetCardInfo("Pact of Negation", 16, Rarity.SPECIAL, mage.cards.p.PactOfNegation.class));
+        cards.add(new SetCardInfo("Rhonas the Indomitable", 28, Rarity.SPECIAL, mage.cards.r.RhonasTheIndomitable.class));
         cards.add(new SetCardInfo("Spell Pierce", 17, Rarity.SPECIAL, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Stifle", 18, Rarity.SPECIAL, mage.cards.s.Stifle.class));
         cards.add(new SetCardInfo("Vindicate", 30, Rarity.SPECIAL, mage.cards.v.Vindicate.class));

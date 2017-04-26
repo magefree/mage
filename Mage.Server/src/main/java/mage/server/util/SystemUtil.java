@@ -9,12 +9,14 @@ import mage.players.Player;
 import mage.util.RandomUtil;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import mage.abilities.effects.common.CreateTokenEffect;
 
 /**
  * @author nantuko
@@ -85,6 +87,8 @@ public final class SystemUtil {
                         gameZone = Zone.GRAVEYARD;
                     } else if ("library".equalsIgnoreCase(zone)) {
                         gameZone = Zone.LIBRARY;
+                    } else if ("token".equalsIgnoreCase(zone)) {
+                        gameZone = Zone.BATTLEFIELD;
                     } else {
                         continue; // go parse next line
                     }
@@ -94,6 +98,15 @@ public final class SystemUtil {
 
                     List<CardInfo> cards = CardRepository.instance.findCards(cardName);
                     if (cards.isEmpty()) {
+                        if ("token".equalsIgnoreCase(zone)) {
+                            // eg: token:Human:HippoToken:1
+                            Class<?> c = Class.forName("mage.game.permanent.token." + cardName);
+                            Constructor<?> cons = c.getConstructor();
+                            Object token = cons.newInstance();
+                            if (token != null && token instanceof mage.game.permanent.token.Token) {
+                                ((mage.game.permanent.token.Token) token).putOntoBattlefield(amount, game, null, player.getId(), false, false);
+                            }
+                        }
                         logger.warn("Couldn't find a card: " + cardName);
                         continue;
                     }

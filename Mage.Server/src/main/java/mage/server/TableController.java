@@ -27,6 +27,14 @@
  */
 package mage.server;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -60,15 +68,6 @@ import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
-
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -345,15 +344,14 @@ public class TableController {
 
         Optional<Player> playerOpt = createPlayer(name, seat.getPlayerType(), skill);
         if (!playerOpt.isPresent()) {
-            String message = new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType()).toString();
-            logger.warn(new StringBuilder("User: ").append(user.getName()).append(" => ").append(message).toString());
+            String message = "Could not create player " + name + " of type " + seat.getPlayerType();
+            logger.warn("User: " + user.getName() + " => " + message);
             user.showUserMessage("Join Table", message);
             return false;
         }
         Player player = playerOpt.get();
-        logger.debug("DECK validated: " + table.getValidator().getName() + ' ' + player.getName() + ' ' + deck.getName());
         if (!player.canJoinTable(table)) {
-            user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
+            user.showUserMessage("Join Table", "A " + seat.getPlayerType() + " player can't join this table.");
             return false;
         }
         match.addPlayer(player, deck);

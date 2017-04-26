@@ -108,4 +108,72 @@ public class EndTurnEffectTest extends CardTestPlayerBase {
         assertHandCount(playerB, 0);
 
     }
+
+    /**
+     * Test to remove a Aftermath card from spell
+     */
+    @Test
+    public void testSpellAftermath() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        // Insult Sorcery {2}{R}
+        // Damage can't be prevented this turn. If a source you control would deal damage this turn, it deals double that damage instead.
+        // Injury Sorcery {2}{R}
+        // Aftermath (Cast this spell only from your graveyard. Then exile it.)
+        // Injury deals 2 damage to target creature and 2 damage to target player.
+        addCard(Zone.GRAVEYARD, playerA, "Insult // Injury");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
+        // End the turn.(Exile all spells and abilities on the stack. Discard down to your maximum hand size. Damage wears off, and \"this turn\" and \"until end of turn\" effects end.)
+        // At the beginning of your next end step, you lose the game.
+        addCard(Zone.HAND, playerB, "Glorious End"); //Instant {2}{R}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Injury", "Silvercoat Lion");
+        addTarget(playerA, playerB);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Glorious End", NO_TARGET, "Injury");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertExileCount(playerB, "Glorious End", 1);
+        assertGraveyardCount(playerA, "Insult // Injury", 0);
+        assertExileCount(playerA, "Insult // Injury", 1);
+        assertGraveyardCount(playerB, "Glorious End", 0);
+        assertHandCount(playerA, 0);
+        // TODO Check
+        assertHandCount(playerB, 1); // No idea why playerB has a mountain into hand
+
+    }
+
+    /**
+     * Test to end the turn by an ability
+     */
+    @Test
+    public void testSundialOfTheInfinite() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, "Mountain", 10);
+        // {1}, {T}: End the turn. Activate this ability only during your turn.
+        addCard(Zone.HAND, playerA, "Sundial of the Infinite", 1); // Artifact {2}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        // Destroy target artifact or enchantment.
+        addCard(Zone.HAND, playerB, "Disenchant"); //Instant {1}{W}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sundial of the Infinite");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disenchant", "Sundial of the Infinite");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1},", NO_TARGET, "Disenchant");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertExileCount(playerB, "Disenchant", 1);
+
+        assertPermanentCount(playerA, "Sundial of the Infinite", 1);
+
+        assertHandCount(playerA, 7); // Discard to maximum hand size
+        assertHandCount(playerB, 1); // 1 card drawn at start of 2nd turn
+
+    }
 }

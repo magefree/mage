@@ -32,6 +32,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.SocketException;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -726,6 +727,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             currentConnection.setPassword(password);
             currentConnection.setHost(server);
             currentConnection.setPort(port);
+            String allMAC = "";
+            try {
+                allMAC = currentConnection.getMAC();
+            } catch (SocketException ex) {
+            }
+            currentConnection.setUserIdStr(System.getProperty("user.name") + ":" + System.getProperty("os.name") + ":" + MagePreferences.getUserNames() + ":" + allMAC);
             currentConnection.setProxyType(proxyType);
             currentConnection.setProxyHost(proxyServer);
             currentConnection.setProxyPort(proxyPort);
@@ -1034,7 +1041,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (window instanceof DeckEditorPane) {
                 DeckEditorPane deckEditorPane = (DeckEditorPane) window;
                 if (deckEditorPane.getDeckEditorMode() == DeckEditorMode.LIMITED_BUILDING
-                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.SIDEBOARDING) {
+                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.SIDEBOARDING
+                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.VIEW_LIMITED_DECK) {
                     deckEditorPane.removeFrame();
                 }
             }
@@ -1044,7 +1052,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
         String name;
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
+        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
             name = "Deck Editor - " + tableId.toString();
         } else {
             if (deck != null) {

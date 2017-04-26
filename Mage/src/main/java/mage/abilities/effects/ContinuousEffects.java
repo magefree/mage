@@ -962,7 +962,9 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffect effect : layer) {
             HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, ability, game);
+                if (abilityActive(ability, game)) {
+                    effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, ability, game);
+                }
             }
         }
         for (ContinuousEffect effect : layer) {
@@ -1000,6 +1002,11 @@ public class ContinuousEffects implements Serializable {
                 effect.apply(Layer.RulesEffects, SubLayer.NA, ability, game);
             }
         }
+    }
+
+    private boolean abilityActive(Ability ability, Game game) {
+        MageObject object = game.getObject(ability.getSourceId());
+        return object != null && object.hasAbility(ability.getId(), game);
     }
 
     private void applyLayer(List<ContinuousEffect> activeLayerEffects, Layer currentLayer, Game game) {
@@ -1211,7 +1218,10 @@ public class ContinuousEffects implements Serializable {
                     }
                 }
             } else {
-                logger.error("Replacement effect without ability: " + entry.getKey().toString());
+                if (!(entry.getKey() instanceof AuraReplacementEffect)
+                        && !(entry.getKey() instanceof PlaneswalkerRedirectionEffect)) {
+                    logger.error("Replacement effect without ability: " + entry.getKey().toString());
+                }
             }
         }
         return texts;

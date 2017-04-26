@@ -65,6 +65,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.*;
 import java.util.zip.GZIPOutputStream;
+import mage.game.match.MatchPlayer;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -545,6 +546,9 @@ public class GameController implements GameCallback {
                     requestPermissionToSeeHandCards(userId, (UUID) data);
                 }
                 break;
+            case VIEW_LIMITED_DECK:
+                viewLimitedDeck(getPlayerId(userId), userId);
+                break;
             default:
                 game.sendPlayerAction(playerAction, getPlayerId(userId), data);
         }
@@ -598,6 +602,22 @@ public class GameController implements GameCallback {
 
             }
 
+        }
+    }
+
+    private void viewLimitedDeck(UUID userIdRequester, UUID origId) {
+        Player viewLimitedDeckPlayer = game.getPlayer(userIdRequester);
+        if (viewLimitedDeckPlayer != null) {
+            if (viewLimitedDeckPlayer.isHuman()) {
+                for (MatchPlayer p : TableManager.instance.getTable(tableId).getMatch().getPlayers()) {
+                    if (p.getPlayer().getId() == userIdRequester) {
+                        Optional<User> u = UserManager.instance.getUser(origId);
+                        if (u != null && u.isPresent() && p.getDeck() != null) {
+                            u.get().ccViewLimitedDeck(p.getDeck(), tableId, requestsOpen, true);
+                        }
+                    }
+                }
+            }
         }
     }
 

@@ -31,9 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,20 +40,17 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamageCreatureEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author anonymous
+ * @author Stravant
  */
 public class VizierOfRemedies extends CardImpl {
 
     public VizierOfRemedies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        
+
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);
@@ -80,7 +75,7 @@ class VizierOfRemediesReplacementEffect extends ReplacementEffectImpl {
 
     public VizierOfRemediesReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If one or more -1/-1 counters would be put on a creature you control, that many -1/-1 counters minus one are put on it instead.";
+        staticText = "If one or more -1/-1 counters would be put on a creature you control, that many -1/-1 counters minus one are put on it instead";
     }
 
     public VizierOfRemediesReplacementEffect(final VizierOfRemediesReplacementEffect effect) {
@@ -105,9 +100,13 @@ class VizierOfRemediesReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        boolean weControlTarget = game.getControllerId(event.getTargetId()).equals(source.getControllerId());
-        boolean isM1M1Counters = event.getData().equals(CounterType.M1M1.getName());
-        boolean isOneOrMore = event.getAmount() > 0;
-        return weControlTarget && isM1M1Counters && isOneOrMore;
+        if (source != null && source.getControllerId() != null) {
+            if (source.getControllerId().equals(game.getControllerId(event.getTargetId()))
+                    && event.getData() != null && event.getData().equals(CounterType.M1M1.getName())
+                    && event.getAmount() > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }
