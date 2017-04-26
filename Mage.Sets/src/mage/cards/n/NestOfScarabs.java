@@ -28,7 +28,6 @@
 package mage.cards.n;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.EffectKeyValue;
@@ -70,7 +69,7 @@ public class NestOfScarabs extends CardImpl {
 class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
 
     NestOfScarabsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new BlackInsectToken(), new EffectKeyValue("countersAdded")));
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new NestOfScarabsBlackInsectToken(), new EffectKeyValue("countersAdded")));
     }
 
     NestOfScarabsTriggeredAbility(final NestOfScarabsTriggeredAbility ability) {
@@ -84,9 +83,9 @@ class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean weAreDoingIt = getControllerId().equals(game.getControllerId(event.getSourceId()));
+        boolean weAreDoingIt = getControllerId().equals(game.getControllerId(event.getPlayerId()));
         boolean isM1M1Counters = event.getData().equals(CounterType.M1M1.getName());
-        if (weAreDoingIt && isM1M1Counters) {
+        if (weAreDoingIt && isM1M1Counters && event.getAmount() > 0) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
@@ -110,8 +109,9 @@ class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class BlackInsectToken extends Token {
-    BlackInsectToken() {
+class NestOfScarabsBlackInsectToken extends Token {
+
+    NestOfScarabsBlackInsectToken() {
         super("Insect", "1/1 black Insect token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
