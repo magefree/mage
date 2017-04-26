@@ -104,8 +104,11 @@ public class ExertTest extends CardTestPlayerBase {
 
         attack(1, playerA, cCelebrant);
         attack(1, playerA, memnite);
-        setChoice(playerA, "Yes"); // exert for extra turn and untap all creatures
-        attack(1, playerA, cCelebrant); // should not be able to attack again due to "if has not been exerted this turn"
+        setChoice(playerA, "Yes"); // exert for extra turn
+        attack(1, playerA, cCelebrant);
+        attack(1, playerA, memnite);
+        setChoice(playerA, "Yes"); // try to exert again
+        attack(1, playerA, cCelebrant); // should not be able to enter this 3rd combat phase
         attack(1, playerA, memnite);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -118,7 +121,6 @@ public class ExertTest extends CardTestPlayerBase {
     
     /*
      * Reported bug: Combat Celebrant able to attack again despite being exerted if Always Watching is in play. (Or presumably any Vigilance granting effect)
-     * NOTE: this test is failing at the moment due to bug in code. See issue #3195
     */
     @Test
     public void combatCelebrantExertedCannotAttackDuringNextCombatPhase_InteractionWithAlwaysWatching() {
@@ -143,8 +145,11 @@ public class ExertTest extends CardTestPlayerBase {
 
         attack(1, playerA, cCelebrant);
         attack(1, playerA, memnite);
-        setChoice(playerA, "Yes"); // exert for extra turn and untap all creatures
-        attack(1, playerA, cCelebrant); // should not be able to attack again due to "if has not been exerted this turn"
+        setChoice(playerA, "Yes"); // exert for extra turn
+        attack(1, playerA, cCelebrant);
+        attack(1, playerA, memnite);
+        setChoice(playerA, "Yes"); // try to exert again
+        attack(1, playerA, cCelebrant); // should not be able to enter this 3rd combat phase
         attack(1, playerA, memnite);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -152,6 +157,6 @@ public class ExertTest extends CardTestPlayerBase {
 
         assertTapped(cCelebrant, false);
         assertTapped(memnite, false);
-        assertLife(playerB, 11); // 5 + 2 + 2 (Celebrant once, Memnite twice with +1/+1 on both)
+        assertLife(playerB, 6); // 5 + 2 + 5 + 2 (Celebrant twice, Memnite twice with +1/+1 on both)
     }
 }
