@@ -29,7 +29,6 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -91,7 +90,7 @@ public class NaturalBalance extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                PlayerList players = game.getState().getPlayerList(controller.getId());
+                PlayerList players = game.getState().getPlayersInRange(controller.getId(),game);
                 for (UUID playerId : players) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
