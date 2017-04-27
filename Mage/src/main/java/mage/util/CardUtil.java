@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
@@ -52,36 +53,28 @@ import mage.util.functions.CopyTokenFunction;
  */
 public final class CardUtil {
 
-    private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
-    private static final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
-    private static final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
-    private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
-    private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
+            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
 
     public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{
-        // basic lands subtypes
-        "Mountain", "Forest", "Plains", "Swamp", "Island",
-        // Enchantment subtypes
-        "Aura", "Curse", "Shrine",
-        // Artifact subtypes
-        "Clue", "Equipment", "Fortification", "Contraption", "Vehicle",
-        // Land subtypes
-        "Desert", "Gate", "Lair", "Locus", "Urza's", "Mine", "Power-Plant", "Tower",
-        // Planeswalker subtypes
-        "Ajani", "Arlinn", "Ashiok", "Bolas", "Chandra", "Dack", "Daretti", "Domri", "Dovin", "Elspeth", "Freyalise", "Garruk", "Gideon", "Jace",
-        "Karn", "Kiora", "Koth", "Liliana", "Nahiri", "Nissa", "Narset", "Nixilis", "Ral", "Saheeli", "Sarkhan", "Sorin", "Tamiyo", "Teferi",
-        "Tezzeret", "Tibalt", "Ugin", "Venser", "Vraska", "Xenagos",
-        // Instant sorcery subtypes
-        "Trap", "Arcane"};
+            // basic lands subtypes
+            "Mountain", "Forest", "Plains", "Swamp", "Island",
+            // Enchantment subtypes
+            "Aura", "Curse", "Shrine",
+            // Artifact subtypes
+            "Clue", "Equipment", "Fortification", "Contraption", "Vehicle",
+            // Land subtypes
+            "Desert", "Gate", "Lair", "Locus", "Urza's", "Mine", "Power-Plant", "Tower",
+            // Planeswalker subtypes
+            "Ajani", "Arlinn", "Ashiok", "Bolas", "Chandra", "Dack", "Daretti", "Domri", "Dovin", "Elspeth", "Freyalise", "Garruk", "Gideon", "Jace",
+            "Karn", "Kiora", "Koth", "Liliana", "Nahiri", "Nissa", "Narset", "Nixilis", "Ral", "Saheeli", "Sarkhan", "Sorin", "Tamiyo", "Teferi",
+            "Tezzeret", "Tibalt", "Ugin", "Venser", "Vraska", "Xenagos",
+            // Instant sorcery subtypes
+            "Trap", "Arcane"};
     public static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));
-
-
-
 
 
     /**
@@ -164,7 +157,6 @@ public final class CardUtil {
     }
 
 
-
     public static void reduceCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
         adjustCost(spellAbility, manaCostsToReduce, true);
     }
@@ -185,8 +177,8 @@ public final class CardUtil {
      *
      * @param spellAbility
      * @param manaCostsToReduce costs to reduce
-     * @param convertToGeneric colored mana does reduce generic mana if no
-     * appropriate colored mana is in the costs included
+     * @param convertToGeneric  colored mana does reduce generic mana if no
+     *                          appropriate colored mana is in the costs included
      */
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
@@ -276,8 +268,8 @@ public final class CardUtil {
                 }
             }
 
-            if(mana.getColorless() > 0 && reduceMana.getColorless() > 0) {
-                if(reduceMana.getColorless() > mana.getColorless()) {
+            if (mana.getColorless() > 0 && reduceMana.getColorless() > 0) {
+                if (reduceMana.getColorless() > mana.getColorless()) {
                     reduceMana.setColorless(reduceMana.getColorless() - mana.getColorless());
                     mana.setColorless(0);
                 } else {
@@ -371,7 +363,7 @@ public final class CardUtil {
      *
      * @param number number to convert to text
      * @param forOne if the number is 1, this string will be returnedinstead of
-     * "one".
+     *               "one".
      * @return
      */
     public static String numberToText(int number, String forOne) {
@@ -416,7 +408,7 @@ public final class CardUtil {
     /**
      * Creates and saves a (card + zoneChangeCounter) specific exileId.
      *
-     * @param game the current game
+     * @param game   the current game
      * @param source source ability
      * @return the specific UUID
      */
@@ -451,9 +443,9 @@ public final class CardUtil {
      * be specific to a permanent instance. So they won't match, if a permanent
      * was e.g. exiled and came back immediately.
      *
-     * @param text short value to describe the value
+     * @param text   short value to describe the value
      * @param cardId id of the card
-     * @param game the game
+     * @param game   the game
      * @return
      */
     public static String getCardZoneString(String text, UUID cardId, Game game) {
@@ -513,91 +505,7 @@ public final class CardUtil {
         return "<font color = 'blue'>" + text + "</font>";
     }
 
-    public static boolean convertedManaCostsIsEqual(MageObject object1, MageObject object2) {
-        Set<Integer> cmcObject1 = getCMC(object1);
-        Set<Integer> cmcObject2 = getCMC(object2);
-        for (Integer integer : cmcObject1) {
-            if (cmcObject2.contains(integer)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public static Set<Integer> getCMC(MageObject object) {
-        Set<Integer> cmcObject = new HashSet<>();
-        if (object instanceof Spell) {
-            cmcObject.add(object.getConvertedManaCost());
-        } else if (object instanceof Card) {
-            Card card = (Card) object;
-            cmcObject.add(card.getConvertedManaCost());
-        }
-        return cmcObject;
-    }
-
-    /**
-     * Gets the colors that are in the casting cost but also in the rules text
-     * as far as not included in reminder text.
-     *
-     * @param card
-     * @return
-     */
-    public static FilterMana getColorIdentity(Card card) {
-        FilterMana mana = new FilterMana();
-        mana.setBlack(card.getManaCost().getText().matches(regexBlack));
-        mana.setBlue(card.getManaCost().getText().matches(regexBlue));
-        mana.setGreen(card.getManaCost().getText().matches(regexGreen));
-        mana.setRed(card.getManaCost().getText().matches(regexRed));
-        mana.setWhite(card.getManaCost().getText().matches(regexWhite));
-
-        for (String rule : card.getRules()) {
-            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-            if (!mana.isBlack() && rule.matches(regexBlack)) {
-                mana.setBlack(true);
-            }
-            if (!mana.isBlue() && rule.matches(regexBlue)) {
-                mana.setBlue(true);
-            }
-            if (!mana.isGreen() && rule.matches(regexGreen)) {
-                mana.setGreen(true);
-            }
-            if (!mana.isRed() && rule.matches(regexRed)) {
-                mana.setRed(true);
-            }
-            if (!mana.isWhite() && rule.matches(regexWhite)) {
-                mana.setWhite(true);
-            }
-        }
-        if (card.isTransformable()) {
-            Card secondCard = card.getSecondCardFace();
-            ObjectColor color = secondCard.getColor(null);
-            mana.setBlack(mana.isBlack() || color.isBlack());
-            mana.setGreen(mana.isGreen() || color.isGreen());
-            mana.setRed(mana.isRed() || color.isRed());
-            mana.setBlue(mana.isBlue() || color.isBlue());
-            mana.setWhite(mana.isWhite() || color.isWhite());
-            for (String rule : secondCard.getRules()) {
-                rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-                if (!mana.isBlack() && rule.matches(regexBlack)) {
-                    mana.setBlack(true);
-                }
-                if (!mana.isBlue() && rule.matches(regexBlue)) {
-                    mana.setBlue(true);
-                }
-                if (!mana.isGreen() && rule.matches(regexGreen)) {
-                    mana.setGreen(true);
-                }
-                if (!mana.isRed() && rule.matches(regexRed)) {
-                    mana.setRed(true);
-                }
-                if (!mana.isWhite() && rule.matches(regexWhite)) {
-                    mana.setWhite(true);
-                }
-            }
-        }
-
-        return mana;
-    }
 
     public static boolean isNonCreatureSubtype(String subtype) {
         return NON_CREATURE_SUBTYPES.contains(subtype);
