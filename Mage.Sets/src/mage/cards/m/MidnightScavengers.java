@@ -27,9 +27,9 @@
  */
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
@@ -37,13 +37,12 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  *
@@ -71,7 +70,7 @@ public class MidnightScavengers extends CardImpl {
         this.addAbility(ability);
 
         // <i>(Melds with Graf Rats.)</i>
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("<i>(Melds with Graf Rats.)</i>")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("(Melds with Graf Rats.)")));
     }
 
     public MidnightScavengers(final MidnightScavengers card) {

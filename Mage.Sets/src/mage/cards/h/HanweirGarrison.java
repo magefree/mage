@@ -57,7 +57,7 @@ public class HanweirGarrison extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new RedHumanToken(), 2, true, true), false));
 
         // <i>(Melds with Hanweir Battlements.)</i>
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("<i>(Melds with Hannweir Battlements.)</i>")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("(Melds with Hannweir Battlements.)")));
     }
 
     public HanweirGarrison(final HanweirGarrison card) {

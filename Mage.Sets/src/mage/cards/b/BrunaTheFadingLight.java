@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,8 +47,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  *
@@ -85,7 +84,7 @@ public class BrunaTheFadingLight extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // <i>(Melds with Gisela, the Broken Blade.)</i>
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("<i>(Melds with Gisela, the Broken Blade.)</i>")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("(Melds with Gisela, the Broken Blade.)")));
     }
 
     public BrunaTheFadingLight(final BrunaTheFadingLight card) {
