@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import java.util.*;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -115,7 +114,7 @@ class ApproachOfTheSecondSunWatcher extends Watcher {
 
     public ApproachOfTheSecondSunWatcher(final ApproachOfTheSecondSunWatcher watcher) {
         super(watcher);
-        approachesCast = new HashMap<>(approachesCast);
+        approachesCast = new HashMap<>(watcher.approachesCast);
     }
 
     @Override
@@ -123,19 +122,13 @@ class ApproachOfTheSecondSunWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getSourceId());
             if (spell != null && spell.getName().equals("Approach of the Second Sun")) {
-                int cast = getApproachesCast(event.getPlayerId());
-                approachesCast.put(event.getPlayerId(), cast + 1);
+                approachesCast.put(event.getPlayerId(), getApproachesCast(event.getPlayerId()) + 1);
             }
         }
     }
 
     public int getApproachesCast(UUID player) {
-        Integer cast = approachesCast.get(player);
-        if (cast == null) {
-            return 0;
-        } else {
-            return cast;
-        }
+        return approachesCast.getOrDefault(player, 0);
     }
 
     @Override
