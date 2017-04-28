@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -50,28 +49,25 @@ public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
     private final Map<UUID, Cards> cycledOrDiscardedCardsThisTurn = new HashMap<>();
 
     public CardsCycledOrDiscardedThisTurnWatcher() {
-        super("CardsCycledOrDiscardedThisTurnWatcher", WatcherScope.GAME);
+        super(CardsCycledOrDiscardedThisTurnWatcher.class.getName(), WatcherScope.GAME);
     }
 
     public CardsCycledOrDiscardedThisTurnWatcher(final CardsCycledOrDiscardedThisTurnWatcher watcher) {
         super(watcher);
         for (Entry<UUID, Cards> entry : watcher.cycledOrDiscardedCardsThisTurn.entrySet()) {
-            cycledOrDiscardedCardsThisTurn.put(entry.getKey(), entry.getValue());
+            cycledOrDiscardedCardsThisTurn.put(entry.getKey(), entry.getValue().copy());
         }
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
-            reset();
-        }
         if (event.getType() == GameEvent.EventType.CYCLED_CARD
                 || event.getType() == GameEvent.EventType.DISCARDED_CARD) {
-            UUID playerId = event.getPlayerId();
-            if (playerId != null
-                    && game.getCard(event.getTargetId()) != null) {
+            if (event.getPlayerId() != null) {
                 Card card = game.getCard(event.getTargetId());
-                getCardsCycledOrDiscardedThisTurn(playerId).add(card);
+                if (card != null) {
+                    getCardsCycledOrDiscardedThisTurn(event.getPlayerId()).add(card);
+                }
             }
         }
     }
