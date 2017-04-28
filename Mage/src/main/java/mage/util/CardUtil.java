@@ -61,13 +61,13 @@ public final class CardUtil {
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
+        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
 
-    public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{
+    private static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{
         // basic lands subtypes
         "Mountain", "Forest", "Plains", "Swamp", "Island",
         // Enchantment subtypes
-        "Aura", "Curse", "Shrine",
+        "Aura", "Cartouche", "Curse", "Shrine",
         // Artifact subtypes
         "Clue", "Equipment", "Fortification", "Contraption", "Vehicle",
         // Land subtypes
@@ -78,7 +78,7 @@ public final class CardUtil {
         "Tezzeret", "Tibalt", "Ugin", "Venser", "Vraska", "Xenagos",
         // Instant sorcery subtypes
         "Trap", "Arcane"};
-    public static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));
+    private static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));
 
 
 
