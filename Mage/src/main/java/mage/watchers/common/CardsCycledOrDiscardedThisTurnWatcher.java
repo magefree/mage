@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -41,12 +42,12 @@ import mage.watchers.Watcher;
 
 /**
  * Stores cards that were cycled or discarded by any player this turn.
+ *
  * @author jeffwadsworth
  */
 public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
-    
+
     private final Map<UUID, Cards> cycledOrDiscardedCardsThisTurn = new HashMap<>();
-    Cards cards = new CardsImpl();
 
     public CardsCycledOrDiscardedThisTurnWatcher() {
         super("CardsCycledOrDiscardedThisTurnWatcher", WatcherScope.GAME);
@@ -67,24 +68,22 @@ public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.CYCLED_CARD
                 || event.getType() == GameEvent.EventType.DISCARDED_CARD) {
             UUID playerId = event.getPlayerId();
-            if (playerId != null 
+            if (playerId != null
                     && game.getCard(event.getTargetId()) != null) {
                 Card card = game.getCard(event.getTargetId());
-                cards.add(card);
-                cycledOrDiscardedCardsThisTurn.putIfAbsent(playerId, cards);
+                getCardsCycledOrDiscardedThisTurn(playerId).add(card);
             }
         }
     }
 
-    public  Cards getCardsCycledOrDiscardedThisTurn(UUID playerId) {
-        return cycledOrDiscardedCardsThisTurn.get(playerId);
+    public Cards getCardsCycledOrDiscardedThisTurn(UUID playerId) {
+        return cycledOrDiscardedCardsThisTurn.getOrDefault(playerId, new CardsImpl());
     }
 
     @Override
     public void reset() {
         super.reset();
         cycledOrDiscardedCardsThisTurn.clear();
-        cards.clear();
     }
 
     @Override
