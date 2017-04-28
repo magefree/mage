@@ -58,7 +58,7 @@ public class ArchiveTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent searched his or her library this turn, you may pay {0} rather than pay Archive Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), OpponentSearchesLibCondition.getInstance()), new ArchiveTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), OpponentSearchesLibCondition.instance), new ArchiveTrapWatcher());
 
         // Target opponent puts the top thirteen cards of his or her library into his or her graveyard.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -112,13 +112,9 @@ class ArchiveTrapWatcher extends Watcher {
     }
 }
 
-class OpponentSearchesLibCondition implements Condition {
+enum OpponentSearchesLibCondition implements Condition {
 
-    private static final OpponentSearchesLibCondition instance = new OpponentSearchesLibCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -49,17 +49,16 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author Rafbill
  */
 public class CobraTrap extends CardImpl {
 
     public CobraTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{G}{G}");
         this.subtype.add("Trap");
 
         // If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), CobraTrapCondition.getInstance()), new CobraTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), CobraTrapCondition.instance), new CobraTrapWatcher());
 
         // Create four 1/1 green Snake creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), 4));
@@ -75,13 +74,9 @@ public class CobraTrap extends CardImpl {
     }
 }
 
-class CobraTrapCondition implements Condition {
+enum CobraTrapCondition implements Condition {
 
-    private static final CobraTrapCondition instance = new CobraTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

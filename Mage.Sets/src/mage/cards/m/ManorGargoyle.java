@@ -87,7 +87,7 @@ public class ManorGargoyle extends CardImpl {
         // Manor Gargoyle has indestructible as long as it has defender.
         GainAbilitySourceEffect gainEffect = new GainAbilitySourceEffect(IndestructibleAbility.getInstance());
         gainEffect.setDependedToType(DependencyType.LooseDefenderEffect);
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(gainEffect, HasDefenderCondition.getInstance(), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(gainEffect, HasDefenderCondition.instance, rule);
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
@@ -112,19 +112,9 @@ public class ManorGargoyle extends CardImpl {
     }
 }
 
-class HasDefenderCondition implements Condition {
+enum HasDefenderCondition implements Condition {
 
-    private static HasDefenderCondition INSTANCE;
-
-    private HasDefenderCondition() {
-    }
-
-    public static HasDefenderCondition getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new HasDefenderCondition();
-        }
-        return INSTANCE;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

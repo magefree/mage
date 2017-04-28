@@ -72,7 +72,7 @@ public class QueenMarchesa extends CardImpl {
         // At the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new QueenMarchesaAssassinToken()), TargetController.YOU, false),
-                OpponentIsMonarchCondition.getInstance(),
+                OpponentIsMonarchCondition.instance,
                 "At the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste."));
     }
 
@@ -86,13 +86,9 @@ public class QueenMarchesa extends CardImpl {
     }
 }
 
-class OpponentIsMonarchCondition implements Condition {
+enum OpponentIsMonarchCondition implements Condition {
 
-    private final static OpponentIsMonarchCondition instance = new OpponentIsMonarchCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

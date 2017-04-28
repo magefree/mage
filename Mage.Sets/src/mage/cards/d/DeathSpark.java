@@ -68,7 +68,7 @@ public class DeathSpark extends CardImpl {
                         new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new GenericManaCost(1)),
                         TargetController.YOU,
                         false),
-                new DeathSparkCondition(),
+                DeathSparkCondition.instance,
                 "At the beginning of your upkeep, if {this} is in your graveyard with a creature card directly above it, you may pay {1}. If you do, return {this} to your hand."));
     }
 
@@ -82,13 +82,9 @@ public class DeathSpark extends CardImpl {
     }
 }
 
-class DeathSparkCondition implements Condition {
+enum DeathSparkCondition implements Condition {
 
-    private static final DeathSparkCondition instance = new DeathSparkCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

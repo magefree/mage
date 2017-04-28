@@ -44,17 +44,16 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class BalothCageTrap extends CardImpl {
 
     public BalothCageTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
         this.subtype.add("Trap");
 
         // If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{G}"), BalothCageTrapCondition.getInstance()), new PermanentsEnteredBattlefieldWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{G}"), BalothCageTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
 
         // Create a 4/4 green Beast creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
@@ -70,13 +69,9 @@ public class BalothCageTrap extends CardImpl {
     }
 }
 
-class BalothCageTrapCondition implements Condition {
+enum BalothCageTrapCondition implements Condition {
 
-    private static final BalothCageTrapCondition instance = new BalothCageTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

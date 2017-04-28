@@ -28,6 +28,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -42,7 +43,6 @@ import mage.target.TargetSpell;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
- *
  * @author Rafbill
  */
 public class MindbreakTrap extends CardImpl {
@@ -50,11 +50,11 @@ public class MindbreakTrap extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell to exile");
 
     public MindbreakTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.subtype.add("Trap");
 
         // If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), MindbreakTrapCondition.getInstance()));
+        this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), MindbreakTrapCondition.instance));
 
         // Exile any number of target spells.
         this.getSpellAbility().addTarget(new TargetSpell(0, Integer.MAX_VALUE, filter));
@@ -71,13 +71,9 @@ public class MindbreakTrap extends CardImpl {
     }
 }
 
-class MindbreakTrapCondition implements Condition {
+enum MindbreakTrapCondition implements Condition {
 
-    private static final MindbreakTrapCondition instance = new MindbreakTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

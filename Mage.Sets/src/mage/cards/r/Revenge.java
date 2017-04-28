@@ -59,7 +59,7 @@ public class Revenge extends CardImpl {
         // Target creature you control gets +4/+0 until end of turn before it fights if you lost life this turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new RevengeEffect(),
-                LostLifeCondition.getInstance(),
+                LostLifeCondition.instance,
                 "Target creature you control gets +4/+0 until end of turn before it fights if you lost life this turn"));
 
         // Target creature you control fights target creature an opponent controls.
@@ -85,9 +85,6 @@ enum LostLifeCondition implements Condition {
 
     instance;
 
-    public static Condition getInstance() {
-       return instance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {
