@@ -41,50 +41,45 @@ import mage.watchers.Watcher;
 
 /**
  * Stores cards that were cycled or discarded by any player this turn.
+ *
  * @author jeffwadsworth
  */
 public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
-    
+
     private final Map<UUID, Cards> cycledOrDiscardedCardsThisTurn = new HashMap<>();
-    Cards cards = new CardsImpl();
 
     public CardsCycledOrDiscardedThisTurnWatcher() {
-        super("CardsCycledOrDiscardedThisTurnWatcher", WatcherScope.GAME);
+        super(CardsCycledOrDiscardedThisTurnWatcher.class.getName(), WatcherScope.GAME);
     }
 
     public CardsCycledOrDiscardedThisTurnWatcher(final CardsCycledOrDiscardedThisTurnWatcher watcher) {
         super(watcher);
         for (Entry<UUID, Cards> entry : watcher.cycledOrDiscardedCardsThisTurn.entrySet()) {
-            cycledOrDiscardedCardsThisTurn.put(entry.getKey(), entry.getValue());
+            cycledOrDiscardedCardsThisTurn.put(entry.getKey(), entry.getValue().copy());
         }
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
-            reset();
-        }
         if (event.getType() == GameEvent.EventType.CYCLED_CARD
                 || event.getType() == GameEvent.EventType.DISCARDED_CARD) {
-            UUID playerId = event.getPlayerId();
-            if (playerId != null 
-                    && game.getCard(event.getTargetId()) != null) {
+            if (event.getPlayerId() != null) {
                 Card card = game.getCard(event.getTargetId());
-                cards.add(card);
-                cycledOrDiscardedCardsThisTurn.putIfAbsent(playerId, cards);
+                if (card != null) {
+                    getCardsCycledOrDiscardedThisTurn(event.getPlayerId()).add(card);
+                }
             }
         }
     }
 
-    public  Cards getCardsCycledOrDiscardedThisTurn(UUID playerId) {
-        return cycledOrDiscardedCardsThisTurn.get(playerId);
+    public Cards getCardsCycledOrDiscardedThisTurn(UUID playerId) {
+        return cycledOrDiscardedCardsThisTurn.getOrDefault(playerId, new CardsImpl());
     }
 
     @Override
     public void reset() {
         super.reset();
         cycledOrDiscardedCardsThisTurn.clear();
-        cards.clear();
     }
 
     @Override

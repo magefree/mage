@@ -84,14 +84,13 @@ class ShadowOfTheGraveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        CardsCycledOrDiscardedThisTurnWatcher watcher = (CardsCycledOrDiscardedThisTurnWatcher) game.getState().getWatchers().get("CardsCycledOrDiscardedThisTurnWatcher");
+        CardsCycledOrDiscardedThisTurnWatcher watcher = (CardsCycledOrDiscardedThisTurnWatcher) game.getState()
+                .getWatchers().get(CardsCycledOrDiscardedThisTurnWatcher.class.getName());
         if (controller != null
-                && watcher != null
-                && watcher.getCardsCycledOrDiscardedThisTurn(controller.getId()) != null) {
+                && watcher != null) {
             for (Card card : watcher.getCardsCycledOrDiscardedThisTurn(controller.getId()).getCards(game)) {
-                if (card != null
-                        && game.getState().getZone(card.getId()) == Zone.GRAVEYARD //must come from their graveyard
-                        && card.getOwnerId() == controller.getId()) {  //confirm ownership
+                if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD //must come from their graveyard
+                        && card.getOwnerId().equals(controller.getId())) {  //confirm ownership, but it should not be possible to get not ownwd cards here
                     controller.moveCardToHandWithInfo(card, source.getId(), game, true);
                 }
             }

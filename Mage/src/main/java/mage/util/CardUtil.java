@@ -57,25 +57,24 @@ public final class CardUtil {
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
+        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
 
-    public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{
-            // basic lands subtypes
-            "Mountain", "Forest", "Plains", "Swamp", "Island",
-            // Enchantment subtypes
-            "Aura", "Curse", "Shrine",
-            // Artifact subtypes
-            "Clue", "Equipment", "Fortification", "Contraption", "Vehicle",
-            // Land subtypes
-            "Desert", "Gate", "Lair", "Locus", "Urza's", "Mine", "Power-Plant", "Tower",
-            // Planeswalker subtypes
-            "Ajani", "Arlinn", "Ashiok", "Bolas", "Chandra", "Dack", "Daretti", "Domri", "Dovin", "Elspeth", "Freyalise", "Garruk", "Gideon", "Jace",
-            "Karn", "Kiora", "Koth", "Liliana", "Nahiri", "Nissa", "Narset", "Nixilis", "Ral", "Saheeli", "Sarkhan", "Sorin", "Tamiyo", "Teferi",
-            "Tezzeret", "Tibalt", "Ugin", "Venser", "Vraska", "Xenagos",
-            // Instant sorcery subtypes
-            "Trap", "Arcane"};
-    public static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));
-
+    private static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{
+        // basic lands subtypes
+        "Mountain", "Forest", "Plains", "Swamp", "Island",
+        // Enchantment subtypes
+        "Aura", "Cartouche", "Curse", "Shrine",
+        // Artifact subtypes
+        "Clue", "Equipment", "Fortification", "Contraption", "Vehicle",
+        // Land subtypes
+        "Desert", "Gate", "Lair", "Locus", "Urza's", "Mine", "Power-Plant", "Tower",
+        // Planeswalker subtypes
+        "Ajani", "Arlinn", "Ashiok", "Bolas", "Chandra", "Dack", "Daretti", "Domri", "Dovin", "Elspeth", "Freyalise", "Garruk", "Gideon", "Jace",
+        "Karn", "Kiora", "Koth", "Liliana", "Nahiri", "Nissa", "Narset", "Nixilis", "Ral", "Saheeli", "Sarkhan", "Sorin", "Tamiyo", "Teferi",
+        "Tezzeret", "Tibalt", "Ugin", "Venser", "Vraska", "Xenagos",
+        // Instant sorcery subtypes
+        "Trap", "Arcane"};
+    private static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));
 
     /**
      * Increase spell or ability cost to be paid.

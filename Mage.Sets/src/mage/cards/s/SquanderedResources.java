@@ -30,7 +30,6 @@ package mage.cards.s;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ManaEffect;
@@ -54,6 +53,7 @@ import mage.target.common.TargetControlledPermanent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.mana.SimpleManaAbility;
 
 /**
  *
@@ -67,7 +67,7 @@ public class SquanderedResources extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
 
         // Sacrifice a land: Add to your mana pool one mana of any type the sacrificed land could produce.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public SquanderedResources(final SquanderedResources card) {
