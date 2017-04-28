@@ -29,6 +29,7 @@ package mage.cards.v;
 
 import java.util.HashMap;
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -52,13 +53,12 @@ import mage.players.Player;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author LevelX2
  */
 public class VileRedeemer extends CardImpl {
 
     public VileRedeemer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -136,8 +136,7 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
             if (zEvent.isDiesEvent() && zEvent.getTarget() != null
                     && zEvent.getTarget().isCreature()
                     && !(zEvent.getTarget() instanceof PermanentToken)) {
-                int count = amountOfCreaturesThatDied.containsKey(zEvent.getTarget().getControllerId())
-                        ? amountOfCreaturesThatDied.get(zEvent.getTarget().getControllerId()) : 0;
+                int count = getAmountOfNontokenCreatureDiedThisTurn(zEvent.getTargetId());
                 amountOfCreaturesThatDied.put(zEvent.getTarget().getControllerId(), ++count);
             }
         }

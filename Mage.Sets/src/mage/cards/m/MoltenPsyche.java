@@ -167,10 +167,7 @@ class MoltenPsycheWatcher extends Watcher {
     }
 
     public int getDraws(UUID playerId) {
-        if (draws.containsKey(playerId)) {
-            return draws.get(playerId);
-        }
-        return 0;
+        return draws.getOrDefault(playerId, 0);
     }
 
     @Override

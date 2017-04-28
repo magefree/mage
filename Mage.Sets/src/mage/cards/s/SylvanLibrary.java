@@ -157,17 +157,15 @@ class SylvanLibraryCardsDrawnThisTurnWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
-            if (!cardsDrawnThisTurn.containsKey(event.getPlayerId())) {
-                Set<UUID> cardsDrawn = new LinkedHashSet<>();
-                cardsDrawnThisTurn.put(event.getPlayerId(), cardsDrawn);
-            }
-            Set<UUID> cardsDrawn = cardsDrawnThisTurn.get(event.getPlayerId());
+
+            Set<UUID> cardsDrawn = getCardsDrawnThisTurn(event.getPlayerId());
             cardsDrawn.add(event.getTargetId());
+            cardsDrawnThisTurn.put(event.getPlayerId(), cardsDrawn);
         }
     }
 
     public Set<UUID> getCardsDrawnThisTurn(UUID playerId) {
-        return cardsDrawnThisTurn.get(playerId);
+        return cardsDrawnThisTurn.getOrDefault(playerId, new LinkedHashSet<>());
     }
 
     @Override

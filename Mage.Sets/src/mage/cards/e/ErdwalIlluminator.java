@@ -45,13 +45,12 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class ErdwalIlluminator extends CardImpl {
 
     public ErdwalIlluminator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -126,11 +125,8 @@ class InvestigatedWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.INVESTIGATED) {
-            if (!timesInvestigated.containsKey(event.getPlayerId())) {
-                timesInvestigated.put(event.getPlayerId(), 1);
-            } else {
-                timesInvestigated.put(event.getPlayerId(), timesInvestigated.get(event.getPlayerId()) + 1);
-            }
+            timesInvestigated.put(event.getPlayerId(), getTimesInvestigated(event.getPlayerId()) + 1);
+
         }
     }
 
@@ -141,9 +137,6 @@ class InvestigatedWatcher extends Watcher {
     }
 
     public int getTimesInvestigated(UUID playerId) {
-        if (timesInvestigated.containsKey(playerId)) {
-            return timesInvestigated.get(playerId);
-        }
-        return 0;
+        return timesInvestigated.getOrDefault(playerId, 0);
     }
 }

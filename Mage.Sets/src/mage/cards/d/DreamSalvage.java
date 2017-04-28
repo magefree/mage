@@ -46,13 +46,12 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class DreamSalvage extends CardImpl {
 
     public DreamSalvage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U/B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U/B}");
 
 
         // Draw cards equal to the number of cards target opponent discarded this turn.
@@ -92,23 +91,13 @@ class CardsDiscardedThisTurnWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.DISCARDED_CARD) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                Integer amount = amountOfCardsDiscardedThisTurn.get(playerId);
-                if (amount == null) {
-                    amount = 1;
-                } else {
-                    amount++;
-                }
-                amountOfCardsDiscardedThisTurn.put(playerId, amount);
+                amountOfCardsDiscardedThisTurn.put(playerId, getAmountCardsDiscarded(playerId) + 1);
             }
         }
     }
 
     public int getAmountCardsDiscarded(UUID playerId) {
-        Integer amount = amountOfCardsDiscardedThisTurn.get(playerId);
-        if (amount != null) {
-            return amount;
-        }
-        return 0;
+        return amountOfCardsDiscardedThisTurn.getOrDefault(playerId, 0);
     }
 
     @Override

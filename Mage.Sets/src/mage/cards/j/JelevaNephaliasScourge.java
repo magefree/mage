@@ -205,10 +205,7 @@ class JelevaNephaliasWatcher extends Watcher {
     }
 
     public int getManaSpentToCastLastTime(int zoneChangeCounter) {
-        if (manaSpendToCast.containsKey(zoneChangeCounter)) {
-            return manaSpendToCast.get(zoneChangeCounter);
-        }
-        return 0;
+        return manaSpendToCast.getOrDefault(zoneChangeCounter, 0);
     }
 
     @Override

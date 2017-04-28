@@ -152,10 +152,7 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
     }
 
     public int timesLostLifeThisTurn(UUID playerId) {
-        if (playersLostLife.containsKey(playerId)) {
-            return playersLostLife.get(playerId);
-        }
-        return 0;
+        return playersLostLife.getOrDefault(playerId, 0);
     }
 }
 

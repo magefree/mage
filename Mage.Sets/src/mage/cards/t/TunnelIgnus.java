@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -53,7 +54,7 @@ import mage.watchers.Watcher;
 public class TunnelIgnus extends CardImpl {
 
     public TunnelIgnus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(2);
@@ -98,11 +99,9 @@ class TunnelIgnusWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent.isLand() && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
-                int count = 1;
-                if (counts.containsKey(permanent.getControllerId())) {
-                    count += counts.get(permanent.getControllerId());
-                }
-                counts.put(permanent.getControllerId(), count);
+
+                int count = counts.getOrDefault(permanent.getControllerId(), 0);
+                counts.put(permanent.getControllerId(), count + 1);
             }
         }
     }

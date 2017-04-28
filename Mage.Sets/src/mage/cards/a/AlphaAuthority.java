@@ -47,13 +47,12 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class AlphaAuthority extends CardImpl {
 
     public AlphaAuthority(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         this.subtype.add("Aura");
 
@@ -66,7 +65,7 @@ public class AlphaAuthority extends CardImpl {
 
         // Enchanted creature has hexproof and can't be blocked by more than one creature.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
-        Effect effect = new CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType.AURA,1);
+        Effect effect = new CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType.AURA, 1);
         effect.setText("and can't be blocked by more than one creature");
         ability.addEffect(effect);
         this.addAbility(ability);
@@ -95,7 +94,7 @@ class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectImpl {
         super(duration, Outcome.Benefit);
         this.amount = amount;
         this.attachmentType = attachmentType;
-        staticText = (attachmentType == AttachmentType.AURA ? "Enchanted" : "Equipped") + " creature can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount==1 ?"":"s");
+        staticText = attachmentType.verb() + " creature can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount == 1 ? "" : "s");
     }
 
     public CantBeBlockedByMoreThanOneAttachedEffect(final CantBeBlockedByMoreThanOneAttachedEffect effect) {

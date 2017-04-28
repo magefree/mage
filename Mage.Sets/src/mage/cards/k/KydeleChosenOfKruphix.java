@@ -84,7 +84,7 @@ class CardsDrawnThisTurnDynamicValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         KydeleCardsDrawnThisTurnWatcher watcher = (KydeleCardsDrawnThisTurnWatcher) game.getState().getWatchers().get(KydeleCardsDrawnThisTurnWatcher.class.getName());
-        return watcher.getNumCardsDrawnThisTurn(sourceAbility.getControllerId());
+        return watcher.getCardsDrawnThisTurn(sourceAbility.getControllerId()).size();
     }
 
     @Override
@@ -119,20 +119,14 @@ class KydeleCardsDrawnThisTurnWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
-            if (!cardsDrawnThisTurn.containsKey(event.getPlayerId())) {
-                Set<UUID> cardsDrawn = new LinkedHashSet<>();
-                cardsDrawnThisTurn.put(event.getPlayerId(), cardsDrawn);
-            }
-            Set<UUID> cardsDrawn = cardsDrawnThisTurn.get(event.getPlayerId());
+            Set<UUID> cardsDrawn = getCardsDrawnThisTurn(event.getPlayerId());
             cardsDrawn.add(event.getTargetId());
+            cardsDrawnThisTurn.put(event.getPlayerId(), cardsDrawn);
         }
     }
 
-    public int getNumCardsDrawnThisTurn(UUID playerId) {
-        if (cardsDrawnThisTurn.get(playerId) == null) {
-            return 0;
-        }
-        return cardsDrawnThisTurn.get(playerId).size();
+    public Set<UUID> getCardsDrawnThisTurn(UUID playerId) {
+        return cardsDrawnThisTurn.getOrDefault(playerId, new LinkedHashSet<>());
     }
 
     @Override
