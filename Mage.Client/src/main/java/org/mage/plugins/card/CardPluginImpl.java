@@ -151,7 +151,7 @@ public class CardPluginImpl implements CardPlugin {
         outerLoop:
         //
         for (MagePermanent permanent : permanents) {
-            if (!CardUtil.isLand(permanent) || CardUtil.isCreature(permanent)) {
+            if (!permanent.isLand() || permanent.isCreature()) {
                 continue;
             }
 
@@ -418,11 +418,11 @@ public class CardPluginImpl implements CardPlugin {
         public boolean isType(MagePermanent card) {
             switch (this) {
                 case land:
-                    return CardUtil.isLand(card);
+                    return card.isLand();
                 case creature:
-                    return CardUtil.isCreature(card);
+                    return card.isCreature();
                 case other:
-                    return !CardUtil.isLand(card) && !CardUtil.isCreature(card);
+                    return !card.isLand() && !card.isCreature();
                 case attached:
                     return card.getOriginalPermanent().isAttachedToPermanent();
                 default:

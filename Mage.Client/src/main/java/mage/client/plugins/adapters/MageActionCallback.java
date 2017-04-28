@@ -67,7 +67,6 @@ public class MageActionCallback implements ActionCallback {
     private Popup tooltipPopup;
     private JPopupMenu jPopupMenu;
     private BigCard bigCard;
-    protected static final DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
 
     private CardView tooltipCard;
     private TransferData popupData;
@@ -236,14 +235,14 @@ public class MageActionCallback implements ActionCallback {
             this.startedDragging = false;
             if (maxXOffset < MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
                 transferData.component.requestFocusInWindow();
-                defaultCallback.mouseClicked(e, transferData.gameId, transferData.card);
+                DefaultActionCallback.instance.mouseClicked(transferData.gameId, transferData.card);
                 // Closes popup & enlarged view if a card/Permanent is selected
                 hideTooltipPopup();
             }
             e.consume();
         } else {
             transferData.component.requestFocusInWindow();
-            defaultCallback.mouseClicked(e, transferData.gameId, transferData.card);
+            DefaultActionCallback.instance.mouseClicked(transferData.gameId, transferData.card);
             // Closes popup & enlarged view if a card/Permanent is selected
             hideTooltipPopup();
             e.consume();

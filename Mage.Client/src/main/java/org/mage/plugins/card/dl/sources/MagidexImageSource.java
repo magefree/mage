@@ -36,15 +36,9 @@ import java.net.URI;
  * @author Pete Rossi
  */
 
-public class MagidexImageSource implements CardImageSource {
-    private static CardImageSource instance = new MagidexImageSource();
+public enum  MagidexImageSource implements CardImageSource {
+   instance;
 
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new MagidexImageSource();
-        }
-        return instance;
-    }
     @Override
     public String getSourceName() {
         return "magidex.com";
