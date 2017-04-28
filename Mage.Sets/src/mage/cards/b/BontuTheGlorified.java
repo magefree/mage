@@ -27,14 +27,9 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -46,11 +41,16 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.MenaceAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.watchers.common.CreaturesDiedWatcher;
@@ -61,7 +61,7 @@ import mage.watchers.common.CreaturesDiedWatcher;
  */
 public class BontuTheGlorified extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 
     static {
         filter.add(new AnotherPredicate());
