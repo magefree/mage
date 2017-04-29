@@ -45,7 +45,7 @@ public class CreaturesDiedWatcher extends Watcher {
     private final HashMap<UUID, Integer> amountOfCreaturesThatDiedByController = new HashMap<>();
 
     public CreaturesDiedWatcher() {
-        super("CreaturesDiedWatcher", WatcherScope.GAME);
+        super(CreaturesDiedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CreaturesDiedWatcher(final CreaturesDiedWatcher watcher) {

@@ -49,7 +49,7 @@ public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
     private final Map<UUID, Cards> cycledOrDiscardedCardsThisTurn = new HashMap<>();
 
     public CardsCycledOrDiscardedThisTurnWatcher() {
-        super(CardsCycledOrDiscardedThisTurnWatcher.class.getName(), WatcherScope.GAME);
+        super(CardsCycledOrDiscardedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CardsCycledOrDiscardedThisTurnWatcher(final CardsCycledOrDiscardedThisTurnWatcher watcher) {

@@ -94,7 +94,7 @@ class AvengingArrowTarget extends TargetPermanent {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get("SourceDidDamageWatcher");
+        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get(SourceDidDamageWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID targetId : availablePossibleTargets) {
                 Permanent permanent = game.getPermanent(targetId);

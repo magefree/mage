@@ -107,13 +107,13 @@ class MoltenPsycheEffect extends OneShotEffect {
                 if (player != null) {
                     player.drawCards(cardsToDraw.get(playerId), game);
                     if (MetalcraftCondition.instance.apply(game, source) && !playerId.equals(source.getControllerId())) {
-                        MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get("CardsDrawn");
+                        MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get(MoltenPsycheWatcher.class.getSimpleName());
                         player.damage(watcher.getDraws(playerId), source.getSourceId(), game, false, true);
                     }
                 }
             }
             if (MetalcraftCondition.instance.apply(game, source)) {
-                MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get("CardsDrawn");
+                MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get(MoltenPsycheWatcher.class.getSimpleName());
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     if (game.isOpponent(controller, playerId)) {
                         Player player = game.getPlayer(playerId);
@@ -141,7 +141,7 @@ class MoltenPsycheWatcher extends Watcher {
     private final Map<UUID, Integer> draws = new HashMap<>();
 
     public MoltenPsycheWatcher() {
-        super("CardsDrawn", WatcherScope.GAME);
+        super(MoltenPsycheWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public MoltenPsycheWatcher(final MoltenPsycheWatcher watcher) {

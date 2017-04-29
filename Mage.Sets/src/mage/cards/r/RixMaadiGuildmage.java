@@ -98,7 +98,7 @@ class PlayerLostLifePredicate implements Predicate<Player> {
 
     @Override
     public boolean apply(Player input, Game game) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (watcher != null) {
             return (0 < watcher.getLiveLost(input.getId()));
         }

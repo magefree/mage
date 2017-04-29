@@ -80,7 +80,7 @@ enum WindbriskHeightsAttackersCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerAttackedWatcher watcher = (PlayerAttackedWatcher) game.getState().getWatchers().get("PlayerAttackedWatcher");
+        PlayerAttackedWatcher watcher = (PlayerAttackedWatcher) game.getState().getWatchers().get(PlayerAttackedWatcher.class.getSimpleName());
         return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getControllerId()) >= 3;
     }
 

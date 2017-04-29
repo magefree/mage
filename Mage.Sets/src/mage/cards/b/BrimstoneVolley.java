@@ -38,6 +38,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.Watcher;
+import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -80,7 +81,7 @@ class BrimstoneVolleyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = 3;
-        Watcher watcher = game.getState().getWatchers().get("Morbid");
+        Watcher watcher = game.getState().getWatchers().get(MorbidWatcher.class.getSimpleName());
         if (watcher.conditionMet()) {
               damage = 5;
         }

@@ -24,7 +24,7 @@ public class PermanentsSacrificedWatcher extends Watcher {
     private final HashMap<UUID, List<Permanent>> sacrificedPermanents = new HashMap<>();
 
     public PermanentsSacrificedWatcher() {
-        super(PermanentsSacrificedWatcher.class.getName(), WatcherScope.GAME);
+        super(PermanentsSacrificedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PermanentsSacrificedWatcher(final PermanentsSacrificedWatcher watcher) {

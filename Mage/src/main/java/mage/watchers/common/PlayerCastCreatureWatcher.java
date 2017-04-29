@@ -46,7 +46,7 @@ public class PlayerCastCreatureWatcher extends Watcher {
     final Set<UUID> playerIds = new HashSet<>();
 
     public PlayerCastCreatureWatcher() {
-        super("PlayerCastCreature", WatcherScope.GAME);
+        super(PlayerCastCreatureWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PlayerCastCreatureWatcher(final PlayerCastCreatureWatcher watcher) {

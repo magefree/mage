@@ -19,7 +19,7 @@ public class LandfallWatcher extends Watcher {
     final Set<UUID> playerPlayedLand = new HashSet<>();
 
     public LandfallWatcher() {
-        super("LandPlayed", WatcherScope.GAME);
+        super(LandfallWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public LandfallWatcher(final LandfallWatcher watcher) {

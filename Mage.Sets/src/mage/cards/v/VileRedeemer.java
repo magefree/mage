@@ -103,7 +103,7 @@ class VileRedeemerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            VileRedeemerNonTokenCreaturesDiedWatcher watcher = (VileRedeemerNonTokenCreaturesDiedWatcher) game.getState().getWatchers().get("VileRedeemerNonTokenCreaturesDiedWatcher");
+            VileRedeemerNonTokenCreaturesDiedWatcher watcher = (VileRedeemerNonTokenCreaturesDiedWatcher) game.getState().getWatchers().get(VileRedeemerNonTokenCreaturesDiedWatcher.class.getSimpleName());
             if (watcher != null) {
                 int amount = watcher.getAmountOfNontokenCreatureDiedThisTurn(controller.getId());
                 if (amount > 0) {
@@ -121,7 +121,7 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
     private final HashMap<UUID, Integer> amountOfCreaturesThatDied = new HashMap<>();
 
     public VileRedeemerNonTokenCreaturesDiedWatcher() {
-        super("VileRedeemerNonTokenCreaturesDiedWatcher", WatcherScope.GAME);
+        super(VileRedeemerNonTokenCreaturesDiedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public VileRedeemerNonTokenCreaturesDiedWatcher(final VileRedeemerNonTokenCreaturesDiedWatcher watcher) {
@@ -149,7 +149,7 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
     }
 
     public int getAmountOfNontokenCreatureDiedThisTurn(UUID playerId) {
-        return amountOfCreaturesThatDied.containsKey(playerId) ? amountOfCreaturesThatDied.get(playerId) : 0;
+        return amountOfCreaturesThatDied.getOrDefault(playerId, 0);
     }
 
     @Override

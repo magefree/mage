@@ -93,7 +93,7 @@ class OvermasterEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        OvermasterWatcher watcher = (OvermasterWatcher) game.getState().getWatchers().get("overmasterWatcher", source.getControllerId());
+        OvermasterWatcher watcher = (OvermasterWatcher) game.getState().getWatchers().get(OvermasterWatcher.class.getSimpleName(), source.getControllerId());
             if (watcher != null) {
                 watcher.setReady();
             }
@@ -132,7 +132,7 @@ class OvermasterWatcher extends Watcher {
     protected UUID uncounterableSpell;
 
     OvermasterWatcher() {
-        super("overmasterWatcher", WatcherScope.PLAYER);
+        super(OvermasterWatcher.class.getSimpleName(), WatcherScope.PLAYER);
     }
 
     OvermasterWatcher(final OvermasterWatcher watcher) {

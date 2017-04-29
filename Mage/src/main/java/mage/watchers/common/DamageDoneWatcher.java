@@ -27,7 +27,7 @@ public class DamageDoneWatcher extends Watcher {
     public final Map<MageObjectReference, Integer> damagedObjects;
 
     public DamageDoneWatcher() {
-        super("DamageDone", WatcherScope.GAME);
+        super(DamageDoneWatcher.class.getSimpleName(), WatcherScope.GAME);
         this.damagingObjects = new HashMap<>();
         this.damagedObjects = new HashMap<>();
     }

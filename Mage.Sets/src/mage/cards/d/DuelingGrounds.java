@@ -134,7 +134,7 @@ class NoMoreThanOneCreatureCanBlockEachTurnEffect extends RestrictionEffect {
         if (!game.getCombat().getBlockers().isEmpty()) {
             return false;
         }
-        BlockedThisTurnWatcher watcher = (BlockedThisTurnWatcher) game.getState().getWatchers().get("BlockedThisTurn");
+        BlockedThisTurnWatcher watcher = (BlockedThisTurnWatcher) game.getState().getWatchers().get(BlockedThisTurnWatcher.class.getSimpleName());
         Set<MageObjectReference> blockedThisTurnCreatures = watcher.getBlockedThisTurnCreatures();
         MageObjectReference blockerReference = new MageObjectReference(blocker.getId(), blocker.getZoneChangeCounter(game), game);
         return blockedThisTurnCreatures.isEmpty()

@@ -23,7 +23,7 @@ public class AttackedOrBlockedThisCombatWatcher extends Watcher {
     public final Set<MageObjectReference> blockedThisTurnCreatures = new HashSet<>();
 
     public AttackedOrBlockedThisCombatWatcher() {
-        super(AttackedOrBlockedThisCombatWatcher.class.getName(), WatcherScope.GAME);
+        super(AttackedOrBlockedThisCombatWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public AttackedOrBlockedThisCombatWatcher(final AttackedOrBlockedThisCombatWatcher watcher) {
