@@ -142,6 +142,17 @@ public final class CollectionViewerPanel extends JPanel {
         next.addActionListener(e -> mageBook.next());
         buttonPanel.add(next);
 
+        JLabel label4 = new JLabel("Show cards or tokens:");
+        label3.setAlignmentX(Component.LEFT_ALIGNMENT);
+        label3.setForeground(Color.white);
+        jPanel1.add(label4);
+
+        JCheckBox cardsOrTokens = new JCheckBox("Display Cards");
+        cardsOrTokens.setSelected(true);
+        cardsOrTokens.setToolTipText("Select to show Cards or Tokens(and emblems) for the chosen set");
+        cardsOrTokens.addActionListener(e -> mageBook.cardsOrTokens(cardsOrTokens.isSelected()));
+        jPanel1.add(cardsOrTokens);
+
         formats.addActionListener(e -> {
             if (mageBook != null) {
                 String format = (String)formats.getSelectedItem();

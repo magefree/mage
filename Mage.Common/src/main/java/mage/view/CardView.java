@@ -346,12 +346,12 @@ public class CardView extends SimpleCardView {
         if (card instanceof Permanent) {
             this.mageObjectType = MageObjectType.PERMANENT;
             Permanent permanent = (Permanent) card;
-            this.loyalty = Integer.toString(permanent.getCounters(game).getCount(CounterType.LOYALTY));
-            this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
-            if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
-                controlledByOwner = false;
-            }
             if (game != null && permanent.getCounters(game) != null && !permanent.getCounters(game).isEmpty()) {
+                this.loyalty = Integer.toString(permanent.getCounters(game).getCount(CounterType.LOYALTY));
+                this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
+                if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
+                    controlledByOwner = false;
+                }
                 counters = new ArrayList<>();
                 for (Counter counter : permanent.getCounters(game).values()) {
                     counters.add(new CounterView(counter));
