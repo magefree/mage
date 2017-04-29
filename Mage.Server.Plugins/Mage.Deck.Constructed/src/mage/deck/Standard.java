@@ -24,11 +24,11 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.deck;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
@@ -56,13 +56,18 @@ public class Standard extends Constructed {
             }
         });
         int blocksAdded = 0;
-        for (Iterator<ExpansionSet> iter = sets.iterator(); iter.hasNext() && blocksAdded < 3; ) {
+        int blocksToAdd = 3;
+        for (Iterator<ExpansionSet> iter = sets.iterator(); iter.hasNext() && blocksAdded < blocksToAdd;) {
             ExpansionSet set = iter.next();
             if (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION || set.getSetType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL) {    // Still adding core sets because of Magic Origins
+
                 setCodes.add(set.getCode());
-                if (set.getReleaseDate().before(current.getTime())  // This stops spoiled sets from counting as "new" blocks
+                if (set.getReleaseDate().before(current.getTime()) // This stops spoiled sets from counting as "new" blocks
                         && set.getParentSet() == null
                         && set.getSetType() == SetType.EXPANSION) {
+                    if (blocksAdded == 0 && !isFallBlock(set)) { // if the most current block is a fall block, 4 blocks are added
+                        blocksToAdd++;
+                    }
                     blocksAdded++;
                 }
             }
@@ -71,5 +76,12 @@ public class Standard extends Constructed {
         banned.add("Reflector Mage");
         banned.add("Smuggler's Copter");
         banned.add("Felidar Guardian");
+    }
+
+    private static boolean isFallBlock(ExpansionSet set) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(set.getReleaseDate());
+        // Sets from fall block are normally released in September and January
+        return cal.get(Calendar.MONTH) > 8 || cal.get(Calendar.MONTH) < 2;
     }
 }
