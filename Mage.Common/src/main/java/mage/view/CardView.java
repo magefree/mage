@@ -30,7 +30,6 @@ package mage.view;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -966,7 +965,9 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorText() {
-        return StringUtils.capitalize(getColor().getDescription());
+
+        String color = getColor().getDescription();
+        return color.substring(0,1).toUpperCase() + color.substring(1);
     }
 
     public String getTypeText() {
