@@ -82,7 +82,7 @@ enum InfernoTrapCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        InfernoTrapWatcher watcher = (InfernoTrapWatcher) game.getState().getWatchers().get(InfernoTrapWatcher.class.getName());
+        InfernoTrapWatcher watcher = (InfernoTrapWatcher) game.getState().getWatchers().get(InfernoTrapWatcher.class.getSimpleName());
         if (watcher != null) {
             Set<MageObjectReference> damagingCreatures = watcher.getDamagingCreatures(source.getControllerId());
             return damagingCreatures.size() > 1;
@@ -101,7 +101,7 @@ class InfernoTrapWatcher extends Watcher {
     Map<UUID, Set<MageObjectReference>> playerDamagedByCreature = new HashMap<>();
 
     public InfernoTrapWatcher() {
-        super(InfernoTrapWatcher.class.getName(), WatcherScope.GAME);
+        super(InfernoTrapWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public InfernoTrapWatcher(final InfernoTrapWatcher watcher) {

@@ -161,7 +161,7 @@ class HopeOfGhirapurPlayerLostLifePredicate implements Predicate<Player> {
 
     @Override
     public boolean apply(Player input, Game game) {
-        HopeOfGhirapurCombatDamageWatcher watcher = (HopeOfGhirapurCombatDamageWatcher) game.getState().getWatchers().get(HopeOfGhirapurCombatDamageWatcher.class.getName());
+        HopeOfGhirapurCombatDamageWatcher watcher = (HopeOfGhirapurCombatDamageWatcher) game.getState().getWatchers().get(HopeOfGhirapurCombatDamageWatcher.class.getSimpleName());
         if (watcher != null) {
             return watcher.playerGotCombatDamage(sourceReference, input.getId());
         }
@@ -174,7 +174,7 @@ class HopeOfGhirapurCombatDamageWatcher extends Watcher {
     private final HashMap<MageObjectReference, Set<UUID>> combatDamagedPlayers = new HashMap<>();
 
     public HopeOfGhirapurCombatDamageWatcher() {
-        super(HopeOfGhirapurCombatDamageWatcher.class.getName(), WatcherScope.GAME);
+        super(HopeOfGhirapurCombatDamageWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public HopeOfGhirapurCombatDamageWatcher(final HopeOfGhirapurCombatDamageWatcher watcher) {

@@ -108,7 +108,7 @@ class MeleeDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        MeleeWatcher watcher = (MeleeWatcher) game.getState().getWatchers().get("MeleeWatcher");
+        MeleeWatcher watcher = (MeleeWatcher) game.getState().getWatchers().get(MeleeWatcher.class.getSimpleName());
         if (watcher != null) {
             return watcher.getNumberOfAttackedPlayers(sourceAbility.getControllerId());
         }

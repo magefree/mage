@@ -62,7 +62,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (controller != null && spell != null) {
             ApproachOfTheSecondSunWatcher watcher
-                    = (ApproachOfTheSecondSunWatcher) game.getState().getWatchers().get(ApproachOfTheSecondSunWatcher.class.getName());
+                    = (ApproachOfTheSecondSunWatcher) game.getState().getWatchers().get(ApproachOfTheSecondSunWatcher.class.getSimpleName());
             if (watcher != null && watcher.getApproachesCast(controller.getId()) > 1 && spell.getFromZone() == Zone.HAND) {
                 // Win the game
                 controller.won(game);

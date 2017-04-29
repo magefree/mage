@@ -88,7 +88,7 @@ enum LostLifeCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         UUID player = source.getControllerId();
         if (watcher != null && player != null) {
             return watcher.getLiveLost(player) > 0;

@@ -83,7 +83,7 @@ enum FairgroundsTrumpeterCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FairgroundsTrumpeterWatcher watcher = (FairgroundsTrumpeterWatcher) game.getState().getWatchers().get(FairgroundsTrumpeterWatcher.class.getName());
+        FairgroundsTrumpeterWatcher watcher = (FairgroundsTrumpeterWatcher) game.getState().getWatchers().get(FairgroundsTrumpeterWatcher.class.getSimpleName());
         return watcher != null && watcher.p1p1AddedToPermanent(source.getControllerId());
     }
 
@@ -99,7 +99,7 @@ class FairgroundsTrumpeterWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public FairgroundsTrumpeterWatcher() {
-        super(FairgroundsTrumpeterWatcher.class.getName(), WatcherScope.GAME);
+        super(FairgroundsTrumpeterWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public FairgroundsTrumpeterWatcher(final FairgroundsTrumpeterWatcher watcher) {

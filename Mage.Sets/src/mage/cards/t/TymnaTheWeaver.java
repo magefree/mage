@@ -104,7 +104,7 @@ class TymnaTheWeaverEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            TymnaTheWeaverWatcher watcher = (TymnaTheWeaverWatcher) game.getState().getWatchers().get(TymnaTheWeaverWatcher.class.getName());
+            TymnaTheWeaverWatcher watcher = (TymnaTheWeaverWatcher) game.getState().getWatchers().get(TymnaTheWeaverWatcher.class.getSimpleName());
             if (watcher != null) {
                 int cardsToDraw = watcher.opponentsThatGotCombatDamage(source.getControllerId(), game);
                 Cost cost = new PayLifeCost(cardsToDraw);
@@ -125,7 +125,7 @@ class TymnaTheWeaverWatcher extends Watcher {
     private final HashMap<UUID, Set<UUID>> players = new HashMap<>();
 
     public TymnaTheWeaverWatcher() {
-        super(TymnaTheWeaverWatcher.class.getName(), WatcherScope.GAME);
+        super(TymnaTheWeaverWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public TymnaTheWeaverWatcher(final TymnaTheWeaverWatcher watcher) {

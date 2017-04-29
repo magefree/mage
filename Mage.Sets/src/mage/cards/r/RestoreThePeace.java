@@ -28,6 +28,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
+
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -40,13 +41,12 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.SourceDidDamageWatcher;
 
 /**
- *
  * @author LevelX2
  */
 public class RestoreThePeace extends CardImpl {
 
     public RestoreThePeace(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{U}");
 
 
         // Return each creature that dealt damage this turn to its owner's hand.
@@ -66,33 +66,33 @@ public class RestoreThePeace extends CardImpl {
 }
 
 class RestoreThePeaceEffect extends OneShotEffect {
-    
+
     public RestoreThePeaceEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return each creature that dealt damage this turn to its owner's hand";
     }
-    
+
     public RestoreThePeaceEffect(final RestoreThePeaceEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public RestoreThePeaceEffect copy() {
         return new RestoreThePeaceEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get("SourceDidDamageWatcher");
+        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get(SourceDidDamageWatcher.class.getSimpleName());
         if (watcher != null) {
-            for (UUID permId :watcher.damageSources) {
+            for (UUID permId : watcher.damageSources) {
                 Permanent perm = game.getPermanent(permId);
                 if (perm != null) {
                     perm.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 }
             }
             return true;
-        }        
+        }
         return false;
     }
 }

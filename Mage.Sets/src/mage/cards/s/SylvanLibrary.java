@@ -99,7 +99,7 @@ class SylvanLibraryEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.drawCards(2, game);
-            SylvanLibraryCardsDrawnThisTurnWatcher watcher = (SylvanLibraryCardsDrawnThisTurnWatcher) game.getState().getWatchers().get("SylvanLibraryCardsDrawnThisTurnWatcher");
+            SylvanLibraryCardsDrawnThisTurnWatcher watcher = (SylvanLibraryCardsDrawnThisTurnWatcher) game.getState().getWatchers().get(SylvanLibraryCardsDrawnThisTurnWatcher.class.getSimpleName());
             if (watcher != null) {
                 Cards cards = new CardsImpl();
                 Set<UUID> cardsDrawnThisTurn = watcher.getCardsDrawnThisTurn(controller.getId());
@@ -146,7 +146,7 @@ class SylvanLibraryCardsDrawnThisTurnWatcher extends Watcher {
     private final Map<UUID, Set<UUID>> cardsDrawnThisTurn = new HashMap<>();
 
     public SylvanLibraryCardsDrawnThisTurnWatcher() {
-        super("SylvanLibraryCardsDrawnThisTurnWatcher", WatcherScope.GAME);
+        super(SylvanLibraryCardsDrawnThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public SylvanLibraryCardsDrawnThisTurnWatcher(final SylvanLibraryCardsDrawnThisTurnWatcher watcher) {

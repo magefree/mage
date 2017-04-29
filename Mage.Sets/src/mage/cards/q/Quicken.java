@@ -30,6 +30,7 @@ package mage.cards.q;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -47,14 +48,12 @@ import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author LevelX2
- *
  */
 public class Quicken extends CardImpl {
 
     public Quicken(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // The next sorcery card you cast this turn can be cast as though it had flash.
         this.getSpellAbility().addEffect(new QuickenAsThoughEffect());
@@ -92,7 +91,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get("consumeQuickenWatcher");
+        quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get(QuickenWatcher.class.getSimpleName());
         Card card = game.getCard(source.getSourceId());
         if (quickenWatcher != null && card != null) {
             zoneChangeCounter = card.getZoneChangeCounter(game);
@@ -128,7 +127,7 @@ class QuickenWatcher extends Watcher {
     public List<String> activeQuickenSpells = new ArrayList<>();
 
     public QuickenWatcher() {
-        super("consumeQuickenWatcher", WatcherScope.GAME);
+        super(QuickenWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public QuickenWatcher(final QuickenWatcher watcher) {

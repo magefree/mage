@@ -80,7 +80,7 @@ enum CobraTrapCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CobraTrapWatcher watcher = (CobraTrapWatcher) game.getState().getWatchers().get(CobraTrapWatcher.class.getName());
+        CobraTrapWatcher watcher = (CobraTrapWatcher) game.getState().getWatchers().get(CobraTrapWatcher.class.getSimpleName());
         return watcher != null && watcher.conditionMet(source.getControllerId());
     }
 
@@ -96,7 +96,7 @@ class CobraTrapWatcher extends Watcher {
     Set<UUID> players = new HashSet<>();
 
     public CobraTrapWatcher() {
-        super(CobraTrapWatcher.class.getName(), WatcherScope.GAME);
+        super(CobraTrapWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CobraTrapWatcher(final CobraTrapWatcher watcher) {

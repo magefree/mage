@@ -102,7 +102,7 @@ class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
-            CombatDamageStepStartedWatcher watcher = (CombatDamageStepStartedWatcher) game.getState().getWatchers().get("CombatDamageStepStarted");
+            CombatDamageStepStartedWatcher watcher = (CombatDamageStepStartedWatcher) game.getState().getWatchers().get(CombatDamageStepStartedWatcher.class.getSimpleName());
             return watcher == null || watcher.conditionMet();
         }
         return false;
@@ -122,7 +122,7 @@ class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 class CombatDamageStepStartedWatcher extends Watcher {
 
     public CombatDamageStepStartedWatcher() {
-        super("CombatDamageStepStarted", WatcherScope.GAME);
+        super(CombatDamageStepStartedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CombatDamageStepStartedWatcher(final CombatDamageStepStartedWatcher watcher) {
@@ -196,7 +196,7 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                Watcher watcher = game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
+                Watcher watcher = game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
                 if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
                     if (((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                         return permanent.destroy(source.getSourceId(), game, false);

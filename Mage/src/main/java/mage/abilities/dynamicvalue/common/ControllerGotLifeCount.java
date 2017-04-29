@@ -59,7 +59,7 @@ public class ControllerGotLifeCount implements DynamicValue, MageSingleton {
     }
 
     public int calculate(Game game, UUID controllerId) {
-        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get(PlayerGainedLifeWatcher.class.getName());
+        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get(PlayerGainedLifeWatcher.class.getSimpleName());
         if (watcher != null) {
             return watcher.getLiveGained(controllerId);
         }

@@ -89,7 +89,7 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
     public List<UUID> spells = new ArrayList<>();
 
     public BoseijuWhoSheltersAllWatcher() {
-        super("ManaPaidFromBoseijuWhoSheltersAllWatcher", WatcherScope.GAME);
+        super(BoseijuWhoSheltersAllWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public BoseijuWhoSheltersAllWatcher(final BoseijuWhoSheltersAllWatcher watcher) {
