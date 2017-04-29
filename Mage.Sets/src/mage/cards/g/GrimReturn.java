@@ -76,7 +76,7 @@ public class GrimReturn extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
+        CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get(CardsPutIntoGraveyardWatcher.class.getSimpleName());
         if (watcher != null) {
             FilterCard filter = new FilterCreatureCard(textFilter);
             List<CardIdPredicate> uuidPredicates = new ArrayList<>();

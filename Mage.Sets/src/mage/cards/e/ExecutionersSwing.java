@@ -84,7 +84,7 @@ class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get("SourceDidDamageWatcher");
+        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get(SourceDidDamageWatcher.class.getSimpleName());
         if (watcher != null) {
             if (watcher.damageSources.contains(id)) {
                 return super.canTarget(id, source, game);
@@ -101,7 +101,7 @@ class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent {
         }
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
-        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get("SourceDidDamageWatcher");
+        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get(SourceDidDamageWatcher.class.getSimpleName());
         if (watcher != null) {
             for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (!targets.containsKey(permanent.getId()) && watcher.damageSources.contains(permanent.getId())) {
@@ -121,7 +121,7 @@ class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get("SourceDidDamageWatcher");
+        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get(SourceDidDamageWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID targetId : availablePossibleTargets) {
                 Permanent permanent = game.getPermanent(targetId);

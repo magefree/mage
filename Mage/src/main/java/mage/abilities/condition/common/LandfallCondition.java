@@ -13,7 +13,7 @@ public enum LandfallCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        LandfallWatcher watcher = (LandfallWatcher) game.getState().getWatchers().get("LandPlayed");
+        LandfallWatcher watcher = (LandfallWatcher) game.getState().getWatchers().get(LandfallWatcher.class.getSimpleName());
         return watcher != null && watcher.landPlayed(source.getControllerId());
     }
 }

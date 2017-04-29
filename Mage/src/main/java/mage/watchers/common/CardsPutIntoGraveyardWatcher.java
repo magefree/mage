@@ -55,7 +55,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
     private final Set<MageObjectReference> cardsPutToGraveyardFromBattlefield = new HashSet<>();
 
     public CardsPutIntoGraveyardWatcher() {
-        super("CardsPutIntoGraveyardWatcher", WatcherScope.GAME);
+        super(CardsPutIntoGraveyardWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CardsPutIntoGraveyardWatcher(final CardsPutIntoGraveyardWatcher watcher) {

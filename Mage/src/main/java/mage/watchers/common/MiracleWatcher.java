@@ -55,7 +55,7 @@ public class MiracleWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 
     public MiracleWatcher() {
-        super("MiracleWatcher", WatcherScope.GAME);
+        super(MiracleWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public MiracleWatcher(final MiracleWatcher watcher) {

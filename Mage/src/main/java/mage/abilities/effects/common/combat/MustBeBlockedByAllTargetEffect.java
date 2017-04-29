@@ -59,7 +59,7 @@ public class MustBeBlockedByAllTargetEffect extends RequirementEffect {
         Permanent attackingCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (attackingCreature != null && attackingCreature.isAttacking()) {
             if (source.getAbilityType() != AbilityType.STATIC) {
-                BlockedAttackerWatcher blockedAttackerWatcher = (BlockedAttackerWatcher) game.getState().getWatchers().get("BlockedAttackerWatcher");
+                BlockedAttackerWatcher blockedAttackerWatcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
                 if (blockedAttackerWatcher != null && blockedAttackerWatcher.creatureHasBlockedAttacker(attackingCreature, permanent, game)) {
                     // has already blocked this turn, so no need to do again
                     return false;

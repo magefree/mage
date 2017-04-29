@@ -128,7 +128,7 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
                 card = card.getSecondCardFace();
             }
             if (card.isCreature()) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
-                CreatureWasCastWatcher watcher = (CreatureWasCastWatcher) game.getState().getWatchers().get("CreatureWasCast");
+                CreatureWasCastWatcher watcher = (CreatureWasCastWatcher) game.getState().getWatchers().get(CreatureWasCastWatcher.class.getSimpleName());
                 if (watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId())) {
                     return true;
                 }

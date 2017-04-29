@@ -37,11 +37,12 @@ import java.util.UUID;
 
 /**
  * Must be installed to player for proper Bloodthirst work
+ *
  * @author Loki
  */
 public class BloodthirstWatcher extends Watcher {
     public BloodthirstWatcher(UUID controllerId) {
-        super("DamagedOpponents", WatcherScope.PLAYER);
+        super(BloodthirstWatcher.class.getSimpleName(), WatcherScope.PLAYER);
         this.controllerId = controllerId;
     }
 
@@ -55,7 +56,7 @@ public class BloodthirstWatcher extends Watcher {
             return;
         }
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
             if (game.getPlayer(this.getControllerId()).hasOpponent(damageEvent.getPlayerId(), game)) {
                 condition = true;
             }

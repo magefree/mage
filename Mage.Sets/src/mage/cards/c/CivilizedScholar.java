@@ -83,7 +83,7 @@ public class CivilizedScholar extends CardImpl {
 class HomicidalBruteWatcher extends Watcher {
 
     public HomicidalBruteWatcher() {
-        super("HomicidalBruteAttacked", WatcherScope.CARD);
+        super(HomicidalBruteWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public HomicidalBruteWatcher(final HomicidalBruteWatcher watcher) {

@@ -88,8 +88,8 @@ class ChargingCinderhornCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
-        if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
+        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+        if (watcher != null) {
             return watcher.getAttackedThisTurnCreatures().isEmpty();
         }
         return true;

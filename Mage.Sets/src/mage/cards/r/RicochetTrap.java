@@ -29,6 +29,7 @@ package mage.cards.r;
 
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -45,7 +46,6 @@ import mage.target.TargetSpell;
 import mage.watchers.common.SpellsCastWatcher;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class RicochetTrap extends CardImpl {
@@ -57,11 +57,11 @@ public class RicochetTrap extends CardImpl {
     }
 
     public RicochetTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.subtype.add("Trap");
 
         // If an opponent cast a blue spell this turn, you may pay {R} rather than pay Ricochet Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RicochetTrapCondition.getInstance()));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RicochetTrapCondition.instance));
 
         // Change the target of target spell with a single target.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
@@ -80,17 +80,13 @@ public class RicochetTrap extends CardImpl {
     }
 }
 
-class RicochetTrapCondition implements Condition {
+enum RicochetTrapCondition implements Condition {
 
-    private static final RicochetTrapCondition instance = new RicochetTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
+        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 List<Spell> spells = watcher.getSpellsCastThisTurn(opponentId);

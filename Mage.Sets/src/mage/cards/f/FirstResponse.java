@@ -84,7 +84,7 @@ class FirstResponseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (watcher != null) {
             if (watcher.getLiveLostLastTurn(source.getControllerId()) > 0) {
                 return new CreateTokenEffect(new SoldierToken()).apply(game, source);

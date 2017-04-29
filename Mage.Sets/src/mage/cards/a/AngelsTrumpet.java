@@ -97,7 +97,7 @@ class AngelsTrumpetTapEffect extends OneShotEffect {
                     continue;
                 }
                 // Creatures that attacked are safe.
-                AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getName());
+                AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
                 if (watcher != null && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(creature, game))) {
                     continue;
                 }

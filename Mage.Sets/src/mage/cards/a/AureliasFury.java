@@ -52,28 +52,26 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * GATECRASH FAQ 11.01.2013
- *
+ * <p>
  * You announce the value of X and how the damage will be divided as part of
  * casting Aurelia's Fury. Each chosen target must receive at least 1 damage.
- *
+ * <p>
  * Aurelia's Fury can't deal damage to both a planeswalker and that
  * planeswalker's controller. If damage dealt by Aurelia's Fury is redirected
  * from a player to a planeswalker he or she controls, that player will be able
  * to cast noncreature spells that turn. If you want to stop a player from
  * casting noncreature spells this turn, you can't choose to redirect the
  * damage to a planeswalker he or she controls.
- *
+ * <p>
  * If Aurelia's Fury has multiple targets, and some but not all of them are
  * illegal targets when Aurelia's Fury resolves, Aurelia's Fury will still
  * deal damage to the remaining legal targets according to the original damage
  * division.
- *
+ * <p>
  * If all of the targets are illegal when Aurelia's Fury tries to resolve,
  * it will be countered and none of its effects will happen. No creature or
  * player will be dealt damage.
@@ -83,7 +81,7 @@ import java.util.UUID;
 public class AureliasFury extends CardImpl {
 
     public AureliasFury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{W}");
 
 
         // Aurelia's Fury deals X damage divided as you choose among any number of target creatures and/or players.
@@ -107,39 +105,39 @@ public class AureliasFury extends CardImpl {
 }
 
 class AureliasFuryEffect extends OneShotEffect {
-    
+
     public AureliasFuryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn";
     }
-    
+
     public AureliasFuryEffect(final AureliasFuryEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public AureliasFuryEffect copy() {
         return new AureliasFuryEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        AureliasFuryDamagedByWatcher watcher = (AureliasFuryDamagedByWatcher) game.getState().getWatchers().get("AureliasFuryDamagedByWatcher", source.getSourceId());
+        AureliasFuryDamagedByWatcher watcher = (AureliasFuryDamagedByWatcher) game.getState().getWatchers().get(AureliasFuryDamagedByWatcher.class.getSimpleName(), source.getSourceId());
         if (watcher != null) {
-            for(UUID creatureId : watcher.damagedCreatures) {
+            for (UUID creatureId : watcher.damagedCreatures) {
                 Permanent permanent = game.getPermanent(creatureId);
                 if (permanent != null) {
                     permanent.tap(game);
                 }
             }
-            for(UUID playerId : watcher.damagedPlayers) {
+            for (UUID playerId : watcher.damagedPlayers) {
                 ContinuousEffect effect = new AureliasFuryCantCastEffect();
                 effect.setTargetPointer(new FixedTarget(playerId));
                 game.addEffect(effect, source);
             }
             watcher.reset();
         }
-                
+
         return false;
     }
 }
@@ -178,7 +176,7 @@ class AureliasFuryCantCastEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
@@ -194,11 +192,11 @@ class AureliasFuryCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
 class AureliasFuryDamagedByWatcher extends Watcher {
 
-    public List<UUID> damagedCreatures = new ArrayList<>();
-    public List<UUID> damagedPlayers = new ArrayList<>();
+    public Set<UUID> damagedCreatures = new HashSet<>();
+    public Set<UUID> damagedPlayers = new HashSet<>();
 
     public AureliasFuryDamagedByWatcher() {
-        super("AureliasFuryDamagedByWatcher", WatcherScope.CARD);
+        super(AureliasFuryDamagedByWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public AureliasFuryDamagedByWatcher(final AureliasFuryDamagedByWatcher watcher) {
@@ -217,7 +215,7 @@ class AureliasFuryDamagedByWatcher extends Watcher {
         if (event.getType() == EventType.DAMAGED_CREATURE) {
             MageObject obj = game.getObject(event.getSourceId());
             if (obj instanceof Spell) {
-                if (sourceId.equals(((Spell) obj).getSourceId()) && !damagedCreatures.contains(event.getTargetId())) {
+                if (sourceId.equals(((Spell) obj).getSourceId())) {
                     damagedCreatures.add(event.getTargetId());
                 }
             }
@@ -225,7 +223,7 @@ class AureliasFuryDamagedByWatcher extends Watcher {
         if (event.getType() == EventType.DAMAGED_PLAYER) {
             MageObject obj = game.getObject(event.getSourceId());
             if (obj instanceof Spell) {
-                if (sourceId.equals(((Spell) obj).getSourceId()) && !damagedPlayers.contains(event.getTargetId())) {
+                if (sourceId.equals(((Spell) obj).getSourceId())) {
                     damagedPlayers.add(event.getTargetId());
                 }
             }

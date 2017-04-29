@@ -49,7 +49,7 @@ public enum NoSpellsWereCastLastTurnCondition implements Condition {
             return false;
         }
 
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
         // if any player cast spell, return false
         for (Integer count : watcher.getAmountOfSpellsCastOnPrevTurn().values()) {
             if (count > 0) {

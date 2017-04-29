@@ -29,6 +29,7 @@ package mage.cards.w;
 
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -43,17 +44,16 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class WhiplashTrap extends CardImpl {
 
     public WhiplashTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.subtype.add("Trap");
 
         // If an opponent had two or more creatures enter the battlefield under his or her control this turn, you may pay {U} rather than pay Whiplash Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), WhiplashTrapCondition.getInstance()), new PermanentsEnteredBattlefieldWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), WhiplashTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
 
         // Return two target creatures to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
@@ -71,17 +71,13 @@ public class WhiplashTrap extends CardImpl {
     }
 }
 
-class WhiplashTrapCondition implements Condition {
+enum WhiplashTrapCondition implements Condition {
 
-    private static final WhiplashTrapCondition instance = new WhiplashTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getName());
+        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);

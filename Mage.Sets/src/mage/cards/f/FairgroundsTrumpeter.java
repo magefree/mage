@@ -49,7 +49,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public class FairgroundsTrumpeter extends CardImpl {
@@ -62,9 +61,9 @@ public class FairgroundsTrumpeter extends CardImpl {
 
         // At the beginning of each end step, if a +1/+1 counter was placed on a permanent under your control this turn, put a +1/+1 counter on Fairgrounds Trumpeter.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                TargetController.ANY, false), FairgroundsTrumpeterCondition.getInstance(),
-                "At the beginning of each end step, if a +1/+1 counter was placed on a permanent under your control this turn, put a +1/+1 counter on {this}."),
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                        TargetController.ANY, false), FairgroundsTrumpeterCondition.instance,
+                        "At the beginning of each end step, if a +1/+1 counter was placed on a permanent under your control this turn, put a +1/+1 counter on {this}."),
                 new FairgroundsTrumpeterWatcher());
     }
 
@@ -78,17 +77,13 @@ public class FairgroundsTrumpeter extends CardImpl {
     }
 }
 
-class FairgroundsTrumpeterCondition implements Condition {
+enum FairgroundsTrumpeterCondition implements Condition {
 
-    private static final FairgroundsTrumpeterCondition instance = new FairgroundsTrumpeterCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FairgroundsTrumpeterWatcher watcher = (FairgroundsTrumpeterWatcher) game.getState().getWatchers().get(FairgroundsTrumpeterWatcher.class.getName());
+        FairgroundsTrumpeterWatcher watcher = (FairgroundsTrumpeterWatcher) game.getState().getWatchers().get(FairgroundsTrumpeterWatcher.class.getSimpleName());
         return watcher != null && watcher.p1p1AddedToPermanent(source.getControllerId());
     }
 
@@ -104,7 +99,7 @@ class FairgroundsTrumpeterWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public FairgroundsTrumpeterWatcher() {
-        super(FairgroundsTrumpeterWatcher.class.getName(), WatcherScope.GAME);
+        super(FairgroundsTrumpeterWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public FairgroundsTrumpeterWatcher(final FairgroundsTrumpeterWatcher watcher) {

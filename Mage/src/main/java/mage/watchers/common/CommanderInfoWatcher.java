@@ -54,7 +54,7 @@ public class CommanderInfoWatcher extends Watcher {
     public final boolean checkCommanderDamage;
 
     public CommanderInfoWatcher(UUID commander, boolean checkCommanderDamage) {
-        super("CommanderCombatDamageWatcher", WatcherScope.CARD);
+        super(CommanderInfoWatcher.class.getSimpleName(), WatcherScope.CARD);
         this.sourceId = commander;
         this.checkCommanderDamage = checkCommanderDamage;
     }

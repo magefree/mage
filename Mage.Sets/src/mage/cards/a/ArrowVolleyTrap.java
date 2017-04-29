@@ -47,11 +47,11 @@ import java.util.UUID;
 public class ArrowVolleyTrap extends CardImpl {
 
     public ArrowVolleyTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
         this.subtype.add("Trap");
 
         // If four or more creatures are attacking, you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{W}"), ArrowVolleyTrapCondition.getInstance()));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{W}"), ArrowVolleyTrapCondition.instance));
 
         // Arrow Volley Trap deals 5 damage divided as you choose among any number of target attacking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
@@ -69,13 +69,9 @@ public class ArrowVolleyTrap extends CardImpl {
     }
 }
 
-class ArrowVolleyTrapCondition implements Condition {
+enum ArrowVolleyTrapCondition implements Condition {
 
-    private static final ArrowVolleyTrapCondition instance = new ArrowVolleyTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

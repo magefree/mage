@@ -46,6 +46,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
+import mage.watchers.common.MorbidWatcher;
 
 /**
  *
@@ -105,7 +106,7 @@ class ReaperFromTheAbyssAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Watcher watcher = game.getState().getWatchers().get("Morbid");
+        Watcher watcher = game.getState().getWatchers().get(MorbidWatcher.class.getSimpleName());
         return watcher.conditionMet();
     }
 

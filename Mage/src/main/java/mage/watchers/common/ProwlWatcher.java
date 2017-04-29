@@ -55,7 +55,7 @@ public class ProwlWatcher extends Watcher {
     private final Set<UUID> allSubtypes = new HashSet<>();
 
     public ProwlWatcher() {
-        super("Prowl", WatcherScope.GAME);
+        super(ProwlWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public ProwlWatcher(final ProwlWatcher watcher) {
