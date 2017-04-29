@@ -336,7 +336,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         return new ArrayList<>(cardsToDownload);
     }
 
-    private static ArrayList<CardDownloadData> getTokenCardUrls() throws RuntimeException {
+    public static ArrayList<CardDownloadData> getTokenCardUrls() throws RuntimeException {
         ArrayList<CardDownloadData> list = new ArrayList<>();
         InputStream in = DownloadPictures.class.getClassLoader().getResourceAsStream("card-pictures-tok.txt");
 
