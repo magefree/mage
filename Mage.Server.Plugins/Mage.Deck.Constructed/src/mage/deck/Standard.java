@@ -65,7 +65,7 @@ public class Standard extends Constructed {
                 if (set.getReleaseDate().before(current.getTime()) // This stops spoiled sets from counting as "new" blocks
                         && set.getParentSet() == null
                         && set.getSetType() == SetType.EXPANSION) {
-                    if (blocksAdded == 0 && !isFallBlock(set)) { // if the most current block is a fall block, 4 blocks are added
+                    if (blocksAdded == 0 && !isFallBlock(set)) { // if the most current block is no fall block, 4 blocks are added
                         blocksToAdd++;
                     }
                     blocksAdded++;
