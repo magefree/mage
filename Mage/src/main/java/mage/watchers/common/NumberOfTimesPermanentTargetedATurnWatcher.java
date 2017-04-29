@@ -51,7 +51,7 @@ public class NumberOfTimesPermanentTargetedATurnWatcher extends Watcher {
 
     public NumberOfTimesPermanentTargetedATurnWatcher(final NumberOfTimesPermanentTargetedATurnWatcher watcher) {
         super(watcher);
-        this.permanentsTargeted.putAll(permanentsTargeted);
+        this.permanentsTargeted.putAll(watcher.permanentsTargeted);
     }
 
     @Override
