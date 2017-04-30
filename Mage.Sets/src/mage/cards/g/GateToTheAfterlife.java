@@ -27,9 +27,8 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -59,8 +58,9 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class GateToTheAfterlife extends CardImpl {
@@ -76,7 +76,7 @@ public class GateToTheAfterlife extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a nontoken creature you control dies, you gain 1 life. Then you may draw a card. If you do, discard a card.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filter, false);
+        Ability ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(new GainLifeEffect(1), false, filter, false, true);
         Effect effect = new DrawDiscardControllerEffect(1, 1, true);
         effect.setText("Then you may draw a card. If you do, discard a card");
         ability.addEffect(effect);
