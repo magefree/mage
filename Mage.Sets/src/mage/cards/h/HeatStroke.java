@@ -27,10 +27,7 @@
  */
 package mage.cards.h;
 
-import mage.abilities.Ability;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,7 +37,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
-import mage.game.Game;
 
 import java.util.UUID;
 
