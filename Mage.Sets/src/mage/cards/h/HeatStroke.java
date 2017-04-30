@@ -27,22 +27,18 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
-
-import mage.abilities.Ability;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
-import mage.watchers.common.BlockedThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  * @author dustinroepsch
