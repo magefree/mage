@@ -55,7 +55,6 @@ public class HeatStroke extends CardImpl {
     public HeatStroke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-
         // At end of combat, destroy each creature that blocked or was blocked this turn.
         this.addAbility(
                 new EndOfCombatTriggeredAbility(
