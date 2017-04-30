@@ -86,6 +86,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Fencer's Magemark", 65, Rarity.COMMON, mage.cards.f.FencersMagemark.class));
         cards.add(new SetCardInfo("Feral Animist", 112, Rarity.UNCOMMON, mage.cards.f.FeralAnimist.class));
         cards.add(new SetCardInfo("Frazzle", 25, Rarity.UNCOMMON, mage.cards.f.Frazzle.class));
+        cards.add(new SetCardInfo("Gatherer of Graces", 85, Rarity.UNCOMMON, mage.cards.g.GathererOfGraces.class));
         cards.add(new SetCardInfo("Gelectrode", 113, Rarity.UNCOMMON, mage.cards.g.Gelectrode.class));
         cards.add(new SetCardInfo("Ghor-Clan Bloodscale", 66, Rarity.UNCOMMON, mage.cards.g.GhorClanBloodscale.class));
         cards.add(new SetCardInfo("Ghor-Clan Savage", 86, Rarity.COMMON, mage.cards.g.GhorClanSavage.class));
