@@ -1,0 +1,49 @@
+package mage.cards.k;
+
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
+
+
+/**
+ *
+ * @author ingmargoudt
+ */
+public class KyrenNegotiations extends CardImpl {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
+
+    static {
+        filter.add(Predicates.not(new TappedPredicate()));
+    }
+
+    public KyrenNegotiations(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+
+        // Tap an untapped creature you control: Kyren Negotiations deals 1 damage to target player.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+    }
+
+    public KyrenNegotiations(final KyrenNegotiations card) {
+        super(card);
+    }
+
+    @Override
+    public KyrenNegotiations copy() {
+        return new KyrenNegotiations(this);
+    }
+}
