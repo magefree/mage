@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -37,9 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.GodSireBeastToken;
 
 /**
  *
@@ -47,18 +45,17 @@ import java.util.UUID;
  */
 public class Godsire extends CardImpl {
 
-    public Godsire (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}{G}{W}");
+    public Godsire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}{G}{W}");
         this.subtype.add("Beast");
-
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
         this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GodSireBeastToken()), new TapSourceCost()));
     }
 
-    public Godsire (final Godsire card) {
+    public Godsire(final Godsire card) {
         super(card);
     }
 
@@ -67,17 +64,4 @@ public class Godsire extends CardImpl {
         return new Godsire(this);
     }
 
-}
-
-class BeastToken extends Token {
-    BeastToken() {
-        super("Beast", "8/8 Beast creature token that's red, green, and white");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        color.setWhite(true);
-        color.setRed(true);
-        subtype.add("Beast");
-        power = new MageInt(8);
-        toughness = new MageInt(8);
-    }
 }

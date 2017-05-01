@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -53,6 +52,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
+import mage.game.permanent.token.GoblinSoldierToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -74,8 +74,7 @@ public class RiseOfTheHobgoblins extends CardImpl {
     }
 
     public RiseOfTheHobgoblins(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R/W}{R/W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R/W}{R/W}");
 
         // When Rise of the Hobgoblins enters the battlefield, you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RiseOfTheHobgoblinsEffect()));
@@ -124,19 +123,5 @@ class RiseOfTheHobgoblinsEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class GoblinSoldierToken extends Token {
-
-    GoblinSoldierToken() {
-        super("Goblin Soldier", "1/1 red and white Goblin Soldier creature tokens");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        color.setWhite(true);
-        subtype.add("Goblin");
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

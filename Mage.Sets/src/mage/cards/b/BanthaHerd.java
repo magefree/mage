@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
@@ -38,10 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TuskenRaiderToken;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -96,17 +95,5 @@ class BathaHerdEffect extends OneShotEffect {
             return new CreateTokenEffect(new TuskenRaiderToken(), xValue).apply(game, source);
         }
         return false;
-    }
-}
-
-class TuskenRaiderToken extends Token {
-
-    public TuskenRaiderToken() {
-        super("Tusken Raider", "white Tusken Raider creature token", 1, 1);
-        this.setOriginalExpansionSetCode("SWS");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Tusken");
-        subtype.add("Raider");
     }
 }

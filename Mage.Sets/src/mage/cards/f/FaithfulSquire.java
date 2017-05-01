@@ -63,7 +63,7 @@ public class FaithfulSquire extends CardImpl {
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public FaithfulSquire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

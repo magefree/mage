@@ -42,13 +42,14 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.VampireToken;
 
 /**
  *
  * @author Loki
  */
 public class LordOfLineage extends CardImpl {
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Vampire creatures");
 
     static {
@@ -56,7 +57,7 @@ public class LordOfLineage extends CardImpl {
     }
 
     public LordOfLineage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add("Vampire");
 
         this.color.setBlack(true);
@@ -81,17 +82,5 @@ public class LordOfLineage extends CardImpl {
     @Override
     public LordOfLineage copy() {
         return new LordOfLineage(this);
-    }
-}
-
-class VampireToken extends Token {
-    VampireToken() {
-        super("Vampire", "2/2 black Vampire creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Vampire");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
     }
 }

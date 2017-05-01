@@ -27,6 +27,8 @@
  */
 package mage.cards.j;
 
+
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -48,12 +50,11 @@ import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.HunterToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -100,16 +101,6 @@ public class JabbaTheHutt extends CardImpl {
     }
 }
 
-class HunterToken extends Token {
-
-    public HunterToken() {
-        super("Hunter", "4/4 red Hunter creature token", 4, 4);
-        this.setOriginalExpansionSetCode("SWS");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Hunter");
-    }
-}
 
 class JabbaTheHuttEffect extends OneShotEffect {
 

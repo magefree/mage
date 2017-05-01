@@ -25,8 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
 
+package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,6 +43,10 @@ public class ElementalShamanToken extends Token {
 
     static {
         tokenImageSets.addAll(Arrays.asList("C15", "DD3JVC", "DD2", "LRW"));
+    }
+
+    public ElementalShamanToken() {
+        this("LRW");
     }
 
     public ElementalShamanToken(String setCode) {

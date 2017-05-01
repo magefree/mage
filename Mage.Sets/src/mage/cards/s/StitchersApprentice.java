@@ -28,9 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,10 +37,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.StitchersApprenticeHomunculusToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
@@ -55,14 +55,14 @@ import mage.target.common.TargetControlledPermanent;
 public class StitchersApprentice extends CardImpl {
 
     public StitchersApprentice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Homunculus");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
         // {1}{U}, {tap}: Create a 2/2 blue Homunculus creature token, then sacrifice a creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HomunculusToken()), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new StitchersApprenticeHomunculusToken()), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new StitchersApprenticeEffect());
         this.addAbility(ability);
@@ -108,17 +108,5 @@ class StitchersApprenticeEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class HomunculusToken extends Token {
-
-    public HomunculusToken() {
-        super("Homunculus", "2/2 blue Homunculus creature");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Homunculus");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

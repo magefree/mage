@@ -27,8 +27,8 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
@@ -42,10 +42,8 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TitaniaProtectorOfArgothElementalToken;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  *
@@ -60,7 +58,7 @@ public class TitaniaProtectorOfArgoth extends CardImpl {
     }
 
     public TitaniaProtectorOfArgoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elemental");
 
@@ -85,19 +83,5 @@ public class TitaniaProtectorOfArgoth extends CardImpl {
     @Override
     public TitaniaProtectorOfArgoth copy() {
         return new TitaniaProtectorOfArgoth(this);
-    }
-}
-
-class TitaniaProtectorOfArgothElementalToken extends Token {
-
-    TitaniaProtectorOfArgothElementalToken() {
-        super("Elemental", "5/3 green Elemental creature token");
-        this.setOriginalExpansionSetCode("C14");
-        this.cardType.add(CardType.CREATURE);
-        this.color = ObjectColor.GREEN;
-        this.subtype.add("Elemental");
-
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(3);
     }
 }

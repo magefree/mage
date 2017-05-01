@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -34,7 +35,6 @@ import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -43,10 +43,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ChasmSkulkerSquidToken;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -55,7 +53,7 @@ import java.util.UUID;
 public class ChasmSkulker extends CardImpl {
 
     public ChasmSkulker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add("Squid");
         this.subtype.add("Horror");
 
@@ -110,20 +108,4 @@ class ChasmSkulkerEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class ChasmSkulkerSquidToken extends Token {
-
-    public ChasmSkulkerSquidToken() {
-        super("Squid", "1/1 blue Squid creature token with islandwalk");
-        this.setOriginalExpansionSetCode("M15");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Squid");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        this.addAbility(new IslandwalkAbility());
-    }
-
 }

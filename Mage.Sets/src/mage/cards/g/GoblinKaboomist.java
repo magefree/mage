@@ -27,32 +27,21 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.LandMineToken;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -116,24 +105,4 @@ class GoblinKaboomistFlipCoinEffect extends OneShotEffect {
         return false;
     }
 
-}
-
-class LandMineToken extends Token {
-
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
-
-    static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-    }
-
-    public LandMineToken() {
-        super("Land Mine", "colorless artifact token named Land Mine with \"{R}, Sacrifice this artifact: This artifact deals 2 damage to target attacking creature without flying.\"");
-        this.setOriginalExpansionSetCode("M15");
-        cardType.add(CardType.ARTIFACT);
-
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
-    }
 }

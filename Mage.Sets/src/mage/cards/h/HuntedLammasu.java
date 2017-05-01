@@ -28,8 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,7 +35,8 @@ import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.game.permanent.token.HorrorToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
@@ -47,7 +46,7 @@ import mage.target.common.TargetOpponent;
 public class HuntedLammasu extends CardImpl {
 
     public HuntedLammasu(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add("Lammasu");
 
         this.power = new MageInt(5);
@@ -68,16 +67,5 @@ public class HuntedLammasu extends CardImpl {
     @Override
     public HuntedLammasu copy() {
         return new HuntedLammasu(this);
-    }
-}
-
-class HorrorToken extends Token {
-    HorrorToken() {
-        super("Horror", "4/4 black Horror creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Horror");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
     }
 }

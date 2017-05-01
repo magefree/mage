@@ -39,17 +39,17 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HauntedAngelToken;
 
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class HauntedAngel extends CardImpl {
 
     public HauntedAngel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Angel");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -92,23 +92,11 @@ class HauntedAngelEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID controllerId = source.getControllerId();
         HauntedAngelToken token = new HauntedAngelToken();
-        for(UUID playerId: game.getState().getPlayersInRange(controllerId, game)) {
-            if(!playerId.equals(controllerId)) {
+        for (UUID playerId : game.getState().getPlayersInRange(controllerId, game)) {
+            if (!playerId.equals(controllerId)) {
                 token.putOntoBattlefield(1, game, source.getSourceId(), playerId);
             }
         }
         return true;
-    }
-}
-
-class HauntedAngelToken extends Token {
-    public HauntedAngelToken() {
-        super("Angel", "3/3 black Angel creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Angel");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

@@ -27,17 +27,15 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.CoralBarrierSquidToken;
 
 /**
  *
@@ -46,7 +44,7 @@ import java.util.UUID;
 public class CoralBarrier extends CardImpl {
 
     public CoralBarrier(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add("Wall");
 
         this.power = new MageInt(1);
@@ -56,7 +54,7 @@ public class CoralBarrier extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         // When Coral Barrier enters the battlefield, create a 1/1 blue Squid creature token with islandwalk.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CoralBarrierSquidToken()), false));
-        
+
     }
 
     public CoralBarrier(final CoralBarrier card) {
@@ -67,20 +65,4 @@ public class CoralBarrier extends CardImpl {
     public CoralBarrier copy() {
         return new CoralBarrier(this);
     }
-}
-
-class CoralBarrierSquidToken extends Token {
-
-    public CoralBarrierSquidToken() {
-        super("Squid", "1/1 blue Squid creature token with islandwalk");
-        this.setOriginalExpansionSetCode("M15");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Squid");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        this.addAbility(new IslandwalkAbility());
-    }
-
 }

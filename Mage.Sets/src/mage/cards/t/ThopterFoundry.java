@@ -28,14 +28,12 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,7 +42,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ThopterToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -61,11 +59,7 @@ public class ThopterFoundry extends CardImpl {
     }
 
     public ThopterFoundry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{W/B}{U}");
-
-
-        
-
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{W/B}{U}");
 
         // {1}, Sacrifice a nontoken artifact: Create a 1/1 blue Thopter artifact creature token with flying. You gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterToken()), new GenericManaCost(1));
@@ -81,19 +75,5 @@ public class ThopterFoundry extends CardImpl {
     @Override
     public ThopterFoundry copy() {
         return new ThopterFoundry(this);
-    }
-}
-
-class ThopterToken extends Token {
-
-    ThopterToken() {
-        super("Thopter", "1/1 blue Thopter artifact creature token with flying");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        color.setBlue(true);
-        subtype.add("Thopter");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

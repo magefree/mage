@@ -27,6 +27,7 @@
  */
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,9 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.AnotherSpiritToken;
 
 /**
  * @author Loki
@@ -48,7 +47,7 @@ public class OyobiWhoSplitTheHeavens extends CardImpl {
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public OyobiWhoSplitTheHeavens(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
@@ -67,17 +66,4 @@ public class OyobiWhoSplitTheHeavens extends CardImpl {
     public OyobiWhoSplitTheHeavens copy() {
         return new OyobiWhoSplitTheHeavens(this);
     }
-}
-
-class AnotherSpiritToken extends Token {
-    AnotherSpiritToken() {
-        super("Spirit", "3/3 white Spirit creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Spirit");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
 }

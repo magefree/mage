@@ -28,13 +28,13 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.game.permanent.token.PenumbraKavuToken;
 
 /**
  *
@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
 public class PenumbraKavu extends CardImpl {
 
     public PenumbraKavu(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add("Kavu");
 
         this.power = new MageInt(3);
@@ -58,16 +58,5 @@ public class PenumbraKavu extends CardImpl {
     @Override
     public PenumbraKavu copy() {
         return new PenumbraKavu(this);
-    }
-}
-
-class PenumbraKavuToken extends Token {
-    PenumbraKavuToken() {
-        super("Kavu", "3/3 black Kavu creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Kavu");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
     }
 }

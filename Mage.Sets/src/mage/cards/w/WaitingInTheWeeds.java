@@ -28,7 +28,6 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -40,6 +39,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.permanent.token.WaitingInTheWeedsCatToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -50,8 +50,7 @@ import mage.players.Player;
 public class WaitingInTheWeeds extends CardImpl {
 
     public WaitingInTheWeeds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
 
         // Each player creates a 1/1 green Cat creature token for each untapped Forest he or she controls.
         this.getSpellAbility().addEffect(new WaitingInTheWeedsEffect());
@@ -70,7 +69,7 @@ public class WaitingInTheWeeds extends CardImpl {
 class WaitingInTheWeedsEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("untapped Forest he or she controls");
-    
+
     static {
         filter.add(new SubtypePredicate("Forest"));
         filter.add(Predicates.not(new TappedPredicate()));
@@ -95,24 +94,12 @@ class WaitingInTheWeedsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Token token = new CatToken();
+                Token token = new WaitingInTheWeedsCatToken();
                 int amount = game.getBattlefield().getAllActivePermanents(filter, playerId, game).size();
                 token.putOntoBattlefield(amount, game, source.getSourceId(), playerId);
             }
             return true;
         }
         return false;
-    }
-}
-
-class CatToken extends Token {
-
-    public CatToken() {
-        super("Cat", "1/1 green Cat creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Cat");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

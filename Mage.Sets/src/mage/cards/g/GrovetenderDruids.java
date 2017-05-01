@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
@@ -39,10 +40,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GrovetenderDruidsPlantToken;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -51,7 +50,7 @@ import java.util.UUID;
 public class GrovetenderDruids extends CardImpl {
 
     public GrovetenderDruids(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.subtype.add("Ally");
@@ -92,28 +91,15 @@ class GrovetenderDruidsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if(player != null) {
-            if(player.chooseUse(Outcome.BoostCreature, "Do you want to to pay {1}?", source, game)) {
+        if (player != null) {
+            if (player.chooseUse(Outcome.BoostCreature, "Do you want to to pay {1}?", source, game)) {
                 Cost cost = new ManaCostsImpl("{1}");
-                if(cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     new CreateTokenEffect(new GrovetenderDruidsPlantToken()).apply(game, source);
                 }
                 return true;
             }
         }
         return false;
-    }
-}
-
-class GrovetenderDruidsPlantToken extends Token {
-
-    public GrovetenderDruidsPlantToken() {
-        super("Plant", "1/1 green Plant creature");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Plant");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.setOriginalExpansionSetCode("BFZ");
     }
 }

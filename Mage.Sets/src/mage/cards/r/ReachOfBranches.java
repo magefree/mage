@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
@@ -40,7 +39,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TreefolkShamanToken;
 
 /**
  *
@@ -72,18 +71,5 @@ public class ReachOfBranches extends CardImpl {
     @Override
     public ReachOfBranches copy() {
         return new ReachOfBranches(this);
-    }
-}
-
-class TreefolkShamanToken extends Token {
-
-    TreefolkShamanToken() {
-        super("Treefolk Shaman", "2/5 green Treefolk Shaman creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Treefolk");
-        subtype.add("Shaman");
-        power = new MageInt(2);
-        toughness = new MageInt(5);
     }
 }

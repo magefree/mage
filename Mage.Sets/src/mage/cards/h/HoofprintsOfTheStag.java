@@ -28,7 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
@@ -37,13 +36,12 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WhiteElementalToken;
 
 /**
  *
@@ -52,7 +50,7 @@ import mage.game.permanent.token.Token;
 public class HoofprintsOfTheStag extends CardImpl {
 
     public HoofprintsOfTheStag(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add("Elemental");
 
         // Whenever you draw a card, you may put a hoofprint counter on Hoofprints of the Stag.
@@ -70,19 +68,5 @@ public class HoofprintsOfTheStag extends CardImpl {
     @Override
     public HoofprintsOfTheStag copy() {
         return new HoofprintsOfTheStag(this);
-    }
-}
-
-class WhiteElementalToken extends Token {
-
-    WhiteElementalToken() {
-        super("Elemental", "4/4 white Elemental creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Elemental");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        setTokenType(2);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

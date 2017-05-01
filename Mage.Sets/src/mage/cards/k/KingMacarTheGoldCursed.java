@@ -75,16 +75,3 @@ public class KingMacarTheGoldCursed extends CardImpl {
 }
 
 //
-//class GoldToken extends Token {
-//
-//    public GoldToken() {
-//        super("Gold", "colorless artifact token named Gold. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-//        this.setOriginalExpansionSetCode("BNG");
-//        cardType.add(CardType.ARTIFACT);
-//        subtype.add("Gold");
-//
-//        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost());
-//        ability.addChoice(new ChoiceColor());
-//        this.addAbility(ability);
-//    }
-//}

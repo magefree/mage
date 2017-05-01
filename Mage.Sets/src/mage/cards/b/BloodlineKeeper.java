@@ -27,9 +27,9 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -43,12 +43,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.l.LordOfLineage;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.VampireToken;
 
 /**
  *
@@ -93,16 +92,4 @@ public class BloodlineKeeper extends CardImpl {
         return new BloodlineKeeper(this);
     }
 
-}
-
-class VampireToken extends Token {
-    VampireToken() {
-        super("Vampire", "2/2 black Vampire creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Vampire");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
-    }
 }

@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -43,10 +44,8 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ProsshKoboldToken;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -83,17 +82,5 @@ public class ProsshSkyraiderOfKher extends CardImpl {
     @Override
     public ProsshSkyraiderOfKher copy() {
         return new ProsshSkyraiderOfKher(this);
-    }
-}
-
-class ProsshKoboldToken extends Token {
-
-    public ProsshKoboldToken() {
-        super("Kobolds of Kher Keep", "0/1 red Kobold creature tokens");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Kobold");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
     }
 }

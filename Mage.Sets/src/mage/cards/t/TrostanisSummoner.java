@@ -32,13 +32,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.CentaurToken;
 import mage.game.permanent.token.KnightToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RhinoToken;
 
 /**
  *
@@ -69,19 +68,5 @@ public class TrostanisSummoner extends CardImpl {
     @Override
     public TrostanisSummoner copy() {
         return new TrostanisSummoner(this);
-    }
-}
-
-class RhinoToken extends Token {
-
-    public RhinoToken() {
-        super("Rhino", "4/4 green Rhino creature token with trample");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Rhino");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        addAbility(TrampleAbility.getInstance());
-        setOriginalExpansionSetCode("RTR");
     }
 }

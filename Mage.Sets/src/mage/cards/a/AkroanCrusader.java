@@ -27,16 +27,14 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.AkroanSoldierToken;
 
 /**
  *
@@ -45,7 +43,7 @@ import java.util.UUID;
 public class AkroanCrusader extends CardImpl {
 
     public AkroanCrusader(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -53,7 +51,7 @@ public class AkroanCrusader extends CardImpl {
         this.toughness = new MageInt(1);
 
         // <i>Heroic</i>  Whenever you cast a spell that targets Akroan Crusader, create a 1/1 red Soldier creature token with haste.
-        this.addAbility(new HeroicAbility(new CreateTokenEffect(new SoldierToken())));
+        this.addAbility(new HeroicAbility(new CreateTokenEffect(new AkroanSoldierToken())));
     }
 
     public AkroanCrusader(final AkroanCrusader card) {
@@ -64,20 +62,4 @@ public class AkroanCrusader extends CardImpl {
     public AkroanCrusader copy() {
         return new AkroanCrusader(this);
     }
-}
-
-
-class SoldierToken extends Token {
-
-    public SoldierToken() {
-        super("Soldier", "1/1 red Soldier creature token with haste");
-        setTokenType(3);
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(HasteAbility.getInstance());
-    }
-
 }

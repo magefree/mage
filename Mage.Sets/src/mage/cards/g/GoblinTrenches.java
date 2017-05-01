@@ -27,7 +27,7 @@
  */
 package mage.cards.g;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -39,10 +39,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinTrenchesToken;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -52,10 +50,8 @@ public class GoblinTrenches extends CardImpl {
 
     final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
-        public GoblinTrenches(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{W}");
-
-
+    public GoblinTrenches(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}");
 
         // {2}, Sacrifice a land: Create two 1/1 red and white Goblin Soldier creature tokens.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinTrenchesToken(), 2), new GenericManaCost(2));
@@ -72,18 +68,3 @@ public class GoblinTrenches extends CardImpl {
         return new GoblinTrenches(this);
     }
 }
-
-class GoblinTrenchesToken extends Token {
-    GoblinTrenchesToken() {
-        super("Goblin Soldier", "1/1 red and white Goblin Soldier creature tokens");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        color.setWhite(true);
-        subtype.add("Goblin");
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-}
-
-

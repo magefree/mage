@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ThopterToken;
 
 /**
  *
@@ -47,13 +47,13 @@ import mage.game.permanent.token.Token;
 public class ShardingSphinx extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an artifact creature you control");
-    
-    static{
+
+    static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public ShardingSphinx(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}{U}");
         this.subtype.add("Sphinx");
 
         this.power = new MageInt(4);
@@ -64,7 +64,7 @@ public class ShardingSphinx extends CardImpl {
 
         // Whenever an artifact creature you control deals combat damage to a player, you may create a 1/1 blue Thopter artifact creature token with flying.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                new CreateTokenEffect(new ThopterToken()), 
+                new CreateTokenEffect(new ThopterToken()),
                 filter, true, SetTargetPointer.NONE, true));
 
     }
@@ -76,18 +76,5 @@ public class ShardingSphinx extends CardImpl {
     @Override
     public ShardingSphinx copy() {
         return new ShardingSphinx(this);
-    }
-}
-
-class ThopterToken extends Token {
-    ThopterToken() {
-        super("Thopter", "1/1 blue Thopter artifact creature token with flying");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        color.setBlue(true);
-        subtype.add("Thopter");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

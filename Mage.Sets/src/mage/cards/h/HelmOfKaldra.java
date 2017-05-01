@@ -27,7 +27,7 @@
  */
 package mage.cards.h;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -49,9 +49,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.KaldraToken;
 
 /**
  *
@@ -164,17 +162,5 @@ class HelmOfKaldraEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class KaldraToken extends Token {
-
-    public KaldraToken() {
-        super("Kaldra", "legendary 4/4 colorless Avatar creature token named Kaldra");
-        addSuperType(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Avatar");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
     }
 }

@@ -27,11 +27,11 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -44,10 +44,8 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TeysaEnvoyOfGhostsToken;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,7 +54,7 @@ import java.util.UUID;
 public class TeysaEnvoyOfGhosts extends CardImpl {
 
     public TeysaEnvoyOfGhosts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Advisor");
@@ -125,18 +123,4 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever a creature deals combat damage to you, destroy that creature. Create a 1/1 white and black Spirit creature token with flying.";
     }
 
-}
-
-class TeysaEnvoyOfGhostsToken extends Token {
-
-    TeysaEnvoyOfGhostsToken() {
-        super("Spirit", "1/1 white and black Spirit creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        color.setBlack(true);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
-    }
 }

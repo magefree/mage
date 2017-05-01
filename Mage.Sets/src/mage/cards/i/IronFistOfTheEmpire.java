@@ -35,12 +35,11 @@ import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RoyalGuardToken;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
@@ -69,17 +68,5 @@ public class IronFistOfTheEmpire extends CardImpl {
     @Override
     public IronFistOfTheEmpire copy() {
         return new IronFistOfTheEmpire(this);
-    }
-}
-
-class RoyalGuardToken extends Token {
-
-    public RoyalGuardToken() {
-        super("Royal Guard", "2/2 red Soldier creature token with first strike named Royal Guard", 2, 2);
-        this.setOriginalExpansionSetCode("SWS");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        addAbility(FirstStrikeAbility.getInstance());
-        subtype.add("Soldier");
     }
 }

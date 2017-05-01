@@ -27,7 +27,7 @@
  */
 package mage.cards.g;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.AttackedByCreatureTriggeredAbility;
@@ -39,7 +39,6 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GetEmblemTargetPlayerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,13 +49,11 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GarrukApexPredatorBeastToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -136,24 +133,6 @@ class GarrukApexPredatorEffect3 extends OneShotEffect {
         }
         return false;
     }
-}
-
-class GarrukApexPredatorBeastToken extends Token {
-
-    public GarrukApexPredatorBeastToken() {
-        super("Beast", "3/3 black Beast creature token with deathtouch");
-        setOriginalExpansionSetCode("M15");
-        setTokenType(1);
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Beast");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-
-        abilities.add(DeathtouchAbility.getInstance());
-
-    }
-
 }
 
 /**

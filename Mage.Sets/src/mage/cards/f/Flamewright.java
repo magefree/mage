@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,11 +44,9 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ConstructToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.UUID;
 
 /**
  *
@@ -88,24 +87,5 @@ public class Flamewright extends CardImpl {
     @Override
     public Flamewright copy() {
         return new Flamewright(this);
-    }
-}
-
-class ConstructToken extends Token {
-
-    public ConstructToken() {
-        this("CNS");
-    }
-
-    public ConstructToken(String setCode) {
-        super("Construct", "1/1 colorless Construct artifact creature token with defender");
-        this.setOriginalExpansionSetCode(setCode);
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Construct");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        addAbility(DefenderAbility.getInstance());
     }
 }

@@ -25,19 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TuktukTheReturnedToken;
 
 /**
  *
@@ -45,8 +44,8 @@ import mage.game.permanent.token.Token;
  */
 public class TuktukTheExplorer extends CardImpl {
 
-    public TuktukTheExplorer (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+    public TuktukTheExplorer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Goblin");
 
@@ -56,7 +55,7 @@ public class TuktukTheExplorer extends CardImpl {
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken(expansionSetCode))));
     }
 
-    public TuktukTheExplorer (final TuktukTheExplorer card) {
+    public TuktukTheExplorer(final TuktukTheExplorer card) {
         super(card);
     }
 
@@ -65,18 +64,4 @@ public class TuktukTheExplorer extends CardImpl {
         return new TuktukTheExplorer(this);
     }
 
-}
-
-class TuktukTheReturnedToken extends Token {
-    
-    TuktukTheReturnedToken(String setCode) {
-        super("Tuktuk the Returned", "legendary 5/5 colorless Goblin Golem artifact creature token");
-        setOriginalExpansionSetCode(setCode);
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        addSuperType(SuperType.LEGENDARY);
-        subtype.add("Goblin");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-    }
 }

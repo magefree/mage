@@ -28,16 +28,15 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.MysticGenesisOozeToken;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
 
@@ -48,7 +47,7 @@ import mage.target.TargetSpell;
 public class MysticGenesis extends CardImpl {
 
     public MysticGenesis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}{U}{U}");
 
         // Counter target spell. Create an X/X green Ooze creature token, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -90,18 +89,5 @@ class MysticGenesisEffect extends OneShotEffect {
             return new CreateTokenEffect(new MysticGenesisOozeToken(stackObject.getConvertedManaCost())).apply(game, source);
         }
         return false;
-    }
-}
-
-class MysticGenesisOozeToken extends Token {
-    
-    public MysticGenesisOozeToken(int xValue) {
-        super("Ooze", "X/X green Ooze creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Ooze");
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
-        setOriginalExpansionSetCode("RTR");
     }
 }

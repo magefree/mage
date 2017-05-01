@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,7 +36,6 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -45,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SpawningGroundsBeastToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -56,9 +54,8 @@ import mage.target.common.TargetLandPermanent;
 public class SpawningGrounds extends CardImpl {
 
     public SpawningGrounds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{6}{G}{G}");
         this.subtype.add("Aura");
-
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -81,18 +78,4 @@ public class SpawningGrounds extends CardImpl {
     public SpawningGrounds copy() {
         return new SpawningGrounds(this);
     }
-}
-
-class SpawningGroundsBeastToken extends Token {
-
-    public SpawningGroundsBeastToken() {
-        super("Beast", "5/5 green Beast creature token with trample");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Beast");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        this.addAbility(TrampleAbility.getInstance());
-    }
-
 }

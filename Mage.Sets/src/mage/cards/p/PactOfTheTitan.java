@@ -28,7 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.delayed.PactDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -36,7 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GiantToken;
 
 /**
  *
@@ -45,10 +44,10 @@ import mage.game.permanent.token.Token;
 public class PactOfTheTitan extends CardImpl {
 
     public PactOfTheTitan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{0}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{0}");
 
         this.color.setRed(true);
-        
+
         // Create a 4/4 red Giant creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GiantToken()));
         // At the beginning of your next upkeep, pay {4}{R}. If you don't, you lose the game.
@@ -64,16 +63,3 @@ public class PactOfTheTitan extends CardImpl {
         return new PactOfTheTitan(this);
     }
 }
-
-class GiantToken extends Token {
-
-    public GiantToken() {
-        super("Giant", "4/4 red Giant creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Giant");
-        color.setRed(true);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-    }
-}
-

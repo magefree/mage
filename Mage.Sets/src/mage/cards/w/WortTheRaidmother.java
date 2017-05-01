@@ -27,6 +27,7 @@
  */
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -42,11 +43,9 @@ import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WortTheRaidmotherToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-
-import java.util.UUID;
 
 /**
  *
@@ -55,7 +54,7 @@ import java.util.UUID;
 public class WortTheRaidmother extends CardImpl {
 
     public WortTheRaidmother(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R/G}{R/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R/G}{R/G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
@@ -116,19 +115,5 @@ class WortGainConspireEffect extends ContinuousEffectImpl {
             }
         }
         return true;
-    }
-}
-
-class WortTheRaidmotherToken extends Token {
-
-    public WortTheRaidmotherToken() {
-        super("Goblin Warrior", "1/1 red and green Goblin Warrior creature token");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        color.setGreen(true);
-        subtype.add("Goblin");
-        subtype.add("Warrior");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

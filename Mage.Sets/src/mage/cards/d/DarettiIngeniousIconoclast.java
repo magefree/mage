@@ -27,7 +27,7 @@
  */
 package mage.cards.d;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -37,7 +37,6 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
-import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -48,12 +47,10 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DarettiConstructToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyardOrBattlefield;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -124,24 +121,5 @@ class DarettiIngeniousIconoclastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         return false;
-    }
-}
-
-class DarettiConstructToken extends Token {
-
-    public DarettiConstructToken() {
-        this("CNS");
-    }
-
-    public DarettiConstructToken(String setCode) {
-        super("Construct", "1/1 colorless Construct artifact creature token with defender");
-        this.setOriginalExpansionSetCode(setCode);
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Construct");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        addAbility(DefenderAbility.getInstance());
     }
 }

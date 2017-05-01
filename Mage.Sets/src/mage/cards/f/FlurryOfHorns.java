@@ -27,16 +27,12 @@
  */
 package mage.cards.f;
 
-import mage.MageInt;
-import mage.ObjectColor;
+import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.FlurryOfHornsMinotaurToken;
 
 /**
  *
@@ -45,8 +41,7 @@ import java.util.UUID;
 public class FlurryOfHorns extends CardImpl {
 
     public FlurryOfHorns(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
         // Create two 2/3 red Minotaur creature tokens with haste.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FlurryOfHornsMinotaurToken(), 2));
@@ -59,19 +54,5 @@ public class FlurryOfHorns extends CardImpl {
     @Override
     public FlurryOfHorns copy() {
         return new FlurryOfHorns(this);
-    }
-}
-
-class FlurryOfHornsMinotaurToken extends Token {
-
-    public FlurryOfHornsMinotaurToken() {
-        super("Minotaur", "2/3 red Minotaur creature tokens with haste");
-        this.setOriginalExpansionSetCode("JOU");
-        cardType.add(CardType.CREATURE);
-        color.setColor(ObjectColor.RED);
-        subtype.add("Minotaur");
-        power = new MageInt(2);
-        toughness = new MageInt(3);
-        addAbility(HasteAbility.getInstance());
     }
 }

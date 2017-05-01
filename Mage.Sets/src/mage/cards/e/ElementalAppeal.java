@@ -27,7 +27,7 @@
  */
 package mage.cards.e;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
@@ -35,18 +35,14 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.KickerAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.ElementalAppealElementalToken;
 
 /**
  *
@@ -55,7 +51,7 @@ import java.util.UUID;
 public class ElementalAppeal extends CardImpl {
 
     public ElementalAppeal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");
 
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));
@@ -97,27 +93,13 @@ class ElementalAppealEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        
-        CreateTokenEffect effect = new CreateTokenEffect(new ElementalToken());
-        if(effect.apply(game, source))
-        {
-            effect.exileTokensCreatedAtNextEndStep(game, source);            
+
+        CreateTokenEffect effect = new CreateTokenEffect(new ElementalAppealElementalToken());
+        if (effect.apply(game, source)) {
+            effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;
         }
         return false;
     }
 
-    class ElementalToken extends Token {
-
-        public ElementalToken() {
-            super("Elemental", "7/1 red Elemental creature token with trample and haste");
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            subtype.add("Elemental");
-            power = new MageInt(7);
-            toughness = new MageInt(1);
-            addAbility(TrampleAbility.getInstance());
-            addAbility(HasteAbility.getInstance());
-        }
-    }
 }

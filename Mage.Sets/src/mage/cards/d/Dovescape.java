@@ -27,11 +27,10 @@
  */
 package mage.cards.d;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,10 +40,9 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.permanent.token.DovescapeToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
-
-import java.util.UUID;
 
 /**
  *
@@ -53,13 +51,13 @@ import java.util.UUID;
 public class Dovescape extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
     public Dovescape(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W/U}{W/U}{W/U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W/U}{W/U}{W/U}");
 
         // Whenever a player casts a noncreature spell, counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's converted mana cost.
         this.addAbility(new SpellCastAllTriggeredAbility(new DovescapeEffect(), filter, false, SetTargetPointer.SPELL));
@@ -104,18 +102,5 @@ class DovescapeEffect extends OneShotEffect {
         Token token = new DovescapeToken();
         token.putOntoBattlefield(spellCMC, game, source.getSourceId(), spellControllerID);
         return true;
-    }
-}
-
-class DovescapeToken extends Token {
-    DovescapeToken() {
-        super("Bird", "1/1 white and blue Bird creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        color.setBlue(true);
-        subtype.add("Bird");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

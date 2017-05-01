@@ -27,7 +27,7 @@
  */
 package mage.cards.c;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -37,10 +37,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CurseOfTheSwineBoarToken;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -103,17 +101,5 @@ class CurseOfTheSwineEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-}
-
-class CurseOfTheSwineBoarToken extends Token {
-
-    CurseOfTheSwineBoarToken() {
-        super("Boar", "2/2 green Boar creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Boar");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

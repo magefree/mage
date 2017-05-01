@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -34,16 +35,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.AkoumStonewakerElementalToken;
 
 /**
  *
@@ -92,28 +89,12 @@ class AkoumStonewakerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-                
+
         CreateTokenEffect effect = new CreateTokenEffect(new AkoumStonewakerElementalToken());
-        if(effect.apply(game, source)) {
-            effect.exileTokensCreatedAtNextEndStep(game, source);            
+        if (effect.apply(game, source)) {
+            effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;
         }
         return false;
-    }
-}
-
-class AkoumStonewakerElementalToken extends Token {
-
-    public AkoumStonewakerElementalToken() {
-        super("Elemental", "3/1 red Elemental creature token with trample and haste");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Elemental");
-        power = new MageInt(3);
-        toughness = new MageInt(1);
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
-        this.setOriginalExpansionSetCode("BFZ");
-        this.setTokenType(1);
     }
 }

@@ -61,7 +61,7 @@ public class CunningBandit extends CardImpl {
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public CunningBandit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

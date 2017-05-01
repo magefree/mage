@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CamaridToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -49,18 +49,18 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author fireshoes
  */
 public class HomaridSpawningBed extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a blue creature");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public HomaridSpawningBed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
 
         // {1}{U}{U}, Sacrifice a blue creature: create X 1/1 blue Camarid creature tokens, where X is the sacrificed creature's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CamaridToken(), new SacrificeCostConvertedMana("creature")), 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CamaridToken(), new SacrificeCostConvertedMana("creature")),
                 new ManaCostsImpl("{1}{U}{U}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         this.addAbility(ability);
@@ -73,18 +73,5 @@ public class HomaridSpawningBed extends CardImpl {
     @Override
     public HomaridSpawningBed copy() {
         return new HomaridSpawningBed(this);
-    }
-}
-
-class CamaridToken extends Token {
-
-    CamaridToken() {
-        super("Camarid", "1/1 blue Camarid creature tokens");
-        this.setOriginalExpansionSetCode("FEM");
-        this.getPower().modifyBaseValue(1);
-        this.getToughness().modifyBaseValue(1);
-        this.color.setBlue(true);
-        this.getSubtype(null).add("Camarid");
-        this.addCardType(CardType.CREATURE);
     }
 }

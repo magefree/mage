@@ -27,7 +27,7 @@
  */
 package mage.cards.e;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,7 +37,6 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -46,11 +45,9 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ElementalMasteryElementalToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -59,7 +56,7 @@ import java.util.UUID;
 public class ElementalMastery extends CardImpl {
 
     public ElementalMastery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -106,25 +103,13 @@ class ElementalMasteryEffect extends OneShotEffect {
         if (creatureAttached != null) {
             int power = creatureAttached.getPower().getValue();
             if (power > 0) {
-                CreateTokenEffect effect = new CreateTokenEffect(new ElementalToken(), power);
+                CreateTokenEffect effect = new CreateTokenEffect(new ElementalMasteryElementalToken(), power);
                 effect.apply(game, source);
-                effect.exileTokensCreatedAtNextEndStep(game, source);                
+                effect.exileTokensCreatedAtNextEndStep(game, source);
                 return true;
             }
         }
         return false;
     }
 
-    class ElementalToken extends Token {
-
-        public ElementalToken() {
-            super("Elemental", "1/1 red Elemental creature token with haste");
-            cardType.add(CardType.CREATURE);
-            subtype.add("Elemental");
-            color.setRed(true);
-            power = new MageInt(1);
-            toughness = new MageInt(1);
-            addAbility(HasteAbility.getInstance());
-        }
-    }
 }

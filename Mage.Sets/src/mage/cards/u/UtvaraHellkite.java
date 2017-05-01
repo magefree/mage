@@ -27,6 +27,7 @@
  */
 package mage.cards.u;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,9 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.UtvaraHellkiteDragonToken;
 
 /**
  *
@@ -47,12 +46,13 @@ import java.util.UUID;
 public class UtvaraHellkite extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Dragon you control");
+
     static {
         filter.add(new SubtypePredicate("Dragon"));
     }
 
     public UtvaraHellkite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(6);
@@ -62,7 +62,7 @@ public class UtvaraHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a Dragon you control attacks, create a 6/6 red Dragon creature token with flying.
-        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new UtvaraHellkiteDragonToken()),false, filter));
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new UtvaraHellkiteDragonToken()), false, filter));
     }
 
     public UtvaraHellkite(final UtvaraHellkite card) {
@@ -72,17 +72,5 @@ public class UtvaraHellkite extends CardImpl {
     @Override
     public UtvaraHellkite copy() {
         return new UtvaraHellkite(this);
-    }
-    public static class UtvaraHellkiteDragonToken extends Token {
-
-        private UtvaraHellkiteDragonToken() {
-            super("Dragon", "6/6 red Dragon creature token with flying");
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            subtype.add("Dragon");
-            power = new MageInt(6);
-            toughness = new MageInt(6);
-            addAbility(FlyingAbility.getInstance());
-        }
     }
 }

@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,9 +46,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.RebelToken;
 
 /**
  *
@@ -66,7 +65,7 @@ public class PrincessLeia extends CardImpl {
     }
 
     public PrincessLeia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Rebel");
@@ -92,16 +91,5 @@ public class PrincessLeia extends CardImpl {
     @Override
     public PrincessLeia copy() {
         return new PrincessLeia(this);
-    }
-}
-
-class RebelToken extends Token {
-
-    public RebelToken() {
-        super("Rebel", "1/1 white Rebel creature token", 1, 1);
-        this.setOriginalExpansionSetCode("SWS");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Rebel");
     }
 }

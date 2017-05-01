@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -43,6 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.token.CamaridToken;
 import mage.game.permanent.token.CitizenToken;
 import mage.game.permanent.token.GoblinToken;
 import mage.game.permanent.token.SaprolingToken;
@@ -57,7 +57,7 @@ import mage.players.Player;
 public class SarpadianEmpiresVolVii extends CardImpl {
 
     public SarpadianEmpiresVolVii(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseTokenEffect()));
@@ -97,7 +97,7 @@ class ChooseTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if(sourceObject != null && controller != null) {
+        if (sourceObject != null && controller != null) {
             ChoiceImpl choices = new ChoiceImpl(true);
             choices.setMessage("Choose token type");
             choices.getChoices().add("White Citizen");
@@ -105,7 +105,7 @@ class ChooseTokenEffect extends OneShotEffect {
             choices.getChoices().add("Black Thrull");
             choices.getChoices().add("Red Goblin");
             choices.getChoices().add("Green Saproling");
-            if(controller.choose(Outcome.Neutral, choices, game)) {
+            if (controller.choose(Outcome.Neutral, choices, game)) {
                 game.informPlayers(sourceObject.getLogName() + ": chosen token type is " + choices.getChoice());
                 game.getState().setValue(source.getSourceId().toString() + "_SarpadianEmpiresVolVii", choices.getChoice());
                 return true;
@@ -154,16 +154,5 @@ class CreateSelectedTokenEffect extends OneShotEffect {
         }
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;
-    }
-}
-
-class CamaridToken extends Token {
-    public CamaridToken() {
-        super("Camarid", "1/1 blue Camarid creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Camarid");
-        color.setBlue(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

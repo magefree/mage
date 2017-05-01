@@ -25,19 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.game.permanent.token.RocEggToken;
 
 /**
  *
@@ -48,7 +46,7 @@ public class RocEgg extends CardImpl {
     private static RocEggToken rocEggToken = new RocEggToken();
 
     public RocEgg(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(0);
@@ -67,16 +65,4 @@ public class RocEgg extends CardImpl {
         return new RocEgg(this);
     }
 
-}
-class RocEggToken extends Token {
-
-    public RocEggToken() {
-        super("Bird", "3/3 white Bird creature token with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Bird");
-        color.setWhite(true);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        addAbility(FlyingAbility.getInstance());
-    }
 }

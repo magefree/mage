@@ -28,14 +28,12 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -46,7 +44,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.StoneTrapIdolToken;
 import mage.util.CardUtil;
 
 /**
@@ -56,7 +54,7 @@ import mage.util.CardUtil;
 public class StoneIdolTrap extends CardImpl {
 
     public StoneIdolTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{R}");
         this.subtype.add("Trap");
 
         // Stone Idol Trap costs {1} less to cast for each attacking creature.
@@ -133,26 +131,12 @@ class StoneIdolTrapEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {        
+    public boolean apply(Game game, Ability source) {
         CreateTokenEffect effect = new CreateTokenEffect(new StoneTrapIdolToken());
-        if(effect.apply(game, source))
-        {
+        if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;
         }
         return false;
-    }
-}
-
-class StoneTrapIdolToken extends Token {
-
-    public StoneTrapIdolToken() {
-        super("Construct", "6/12  colorless Construct artifact creature token with trample");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        subtype.add("Construct");
-        power = new MageInt(6);
-        toughness = new MageInt(12);
-        addAbility(TrampleAbility.getInstance());
     }
 }

@@ -25,12 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.l;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,10 +39,11 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ZombieWizardToken;
 import mage.target.TargetPlayer;
 
 /**
@@ -53,19 +51,18 @@ import mage.target.TargetPlayer;
  * @author Loki
  */
 public class LichLordOfUnx extends CardImpl {
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
 
     static {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public LichLordOfUnx (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
+    public LichLordOfUnx(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
 
-
-        
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -78,7 +75,7 @@ public class LichLordOfUnx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LichLordOfUnx (final LichLordOfUnx card) {
+    public LichLordOfUnx(final LichLordOfUnx card) {
         super(card);
     }
 
@@ -87,17 +84,4 @@ public class LichLordOfUnx extends CardImpl {
         return new LichLordOfUnx(this);
     }
 
-}
-
-class ZombieWizardToken extends Token {
-    ZombieWizardToken() {
-        super("Zombie Wizard", "1/1 blue and black Zombie Wizard creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        color.setBlack(true);
-        subtype.add("Zombie");
-        subtype.add("Wizard");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
 }

@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -35,14 +36,11 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.ButterflyToken;
 
 /**
  *
@@ -71,18 +69,5 @@ public class GiantCaterpillar extends CardImpl {
     @Override
     public GiantCaterpillar copy() {
         return new GiantCaterpillar(this);
-    }
-}
-
-class ButterflyToken extends Token {
-
-    public ButterflyToken() {
-        super("Butterfly", "1/1 green Insect creature token with flying named Butterfly");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Insect");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
     }
 }

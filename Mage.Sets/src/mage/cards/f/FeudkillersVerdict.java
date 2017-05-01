@@ -27,7 +27,7 @@
  */
 package mage.cards.f;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,10 +36,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GiantWarriorToken;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,9 +46,8 @@ import java.util.UUID;
 public class FeudkillersVerdict extends CardImpl {
 
     public FeudkillersVerdict(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{4}{W}{W}");
         this.subtype.add("Giant");
-
 
         // You gain 10 life. Then if you have more life than an opponent, create a 5/5 white Giant Warrior creature token.
         this.getSpellAbility().addEffect(new FeudkillersVerdictEffect());
@@ -88,7 +85,7 @@ class FeudkillersVerdictEffect extends OneShotEffect {
         if (controller != null) {
             controller.gainLife(10, game);
             boolean moreLife = false;
-            for (UUID opponentId :game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
                     if (controller.getLife() > opponent.getLife()) {
@@ -104,17 +101,5 @@ class FeudkillersVerdictEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class GiantWarriorToken extends Token {
-    GiantWarriorToken() {
-        super("Giant Warrior", "5/5 white Giant Warrior creature token");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Giant");
-        subtype.add("Warrior");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
     }
 }

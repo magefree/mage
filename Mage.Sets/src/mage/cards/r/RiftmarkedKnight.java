@@ -27,13 +27,13 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlankingAbility;
-import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
@@ -42,11 +42,9 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.events.GameEvent;
+import mage.game.permanent.token.RiftmarkedKnightToken;
 
 /**
  *
@@ -56,7 +54,7 @@ public class RiftmarkedKnight extends CardImpl {
 
     public RiftmarkedKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        
+
         this.subtype.add("Human");
         this.subtype.add("Rebel");
         this.subtype.add("Knight");
@@ -84,9 +82,13 @@ public class RiftmarkedKnight extends CardImpl {
 
 class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
 
-    public RiftmarkedKnightTriggeredAbility() { super(Zone.EXILED, new CreateTokenEffect(new RiftmarkedKnightToken()), false); }
+    public RiftmarkedKnightTriggeredAbility() {
+        super(Zone.EXILED, new CreateTokenEffect(new RiftmarkedKnightToken()), false);
+    }
 
-    public RiftmarkedKnightTriggeredAbility(final RiftmarkedKnightTriggeredAbility ability) { super(ability); }
+    public RiftmarkedKnightTriggeredAbility(final RiftmarkedKnightTriggeredAbility ability) {
+        super(ability);
+    }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
@@ -104,19 +106,7 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public RiftmarkedKnightTriggeredAbility copy() { return new RiftmarkedKnightTriggeredAbility(this); }
-}
-
-class RiftmarkedKnightToken extends Token {
-    public RiftmarkedKnightToken() {
-        super("Knight", "2/2 black Knight creature token with flanking, protection from white, and haste");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Knight");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
-        this.addAbility(new FlankingAbility());
-        this.addAbility(HasteAbility.getInstance());
+    public RiftmarkedKnightTriggeredAbility copy() {
+        return new RiftmarkedKnightTriggeredAbility(this);
     }
 }

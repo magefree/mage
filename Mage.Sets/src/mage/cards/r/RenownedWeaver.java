@@ -29,18 +29,16 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RenownedWeaverSpiderToken;
 
 /**
  *
@@ -70,20 +68,5 @@ public class RenownedWeaver extends CardImpl {
     @Override
     public RenownedWeaver copy() {
         return new RenownedWeaver(this);
-    }
-}
-
-class RenownedWeaverSpiderToken extends Token {
-
-    public RenownedWeaverSpiderToken() {
-        super("Spider", "1/3 green Spider enchantment creature token with reach");
-        this.setOriginalExpansionSetCode("JOU");
-        cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.CREATURE);
-        color.setColor(ObjectColor.GREEN);
-        subtype.add("Spider");
-        power = new MageInt(1);
-        toughness = new MageInt(3);
-        this.addAbility(ReachAbility.getInstance());
     }
 }

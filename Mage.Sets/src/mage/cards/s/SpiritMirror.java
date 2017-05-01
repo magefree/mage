@@ -28,10 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -42,12 +39,13 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ReflectionToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -64,7 +62,6 @@ public class SpiritMirror extends CardImpl {
 
     public SpiritMirror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-
 
         // At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, create a 2/2 white Reflection creature token.
         this.addAbility(new ConditionalTriggeredAbility(
@@ -85,18 +82,5 @@ public class SpiritMirror extends CardImpl {
     @Override
     public SpiritMirror copy() {
         return new SpiritMirror(this);
-    }
-}
-
-class ReflectionToken extends Token {
-
-    public ReflectionToken() {
-        super("Reflection", "2/2 white Reflection creature token");
-        this.setOriginalExpansionSetCode("TMP");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Reflection");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

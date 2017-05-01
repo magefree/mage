@@ -27,6 +27,7 @@
  */
 package mage.cards.q;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -43,9 +44,7 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.QueenMarchesaAssassinToken;
 
 /**
  *
@@ -102,19 +101,5 @@ class OpponentIsMonarchCondition implements Condition {
     @Override
     public String toString() {
         return "an opponent is the monarch";
-    }
-}
-
-class QueenMarchesaAssassinToken extends Token {
-
-    QueenMarchesaAssassinToken() {
-        super("Assassin", "1/1 black Assassin creature tokens with deathtouch and haste");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Assassin");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(DeathtouchAbility.getInstance());
-        addAbility(HasteAbility.getInstance());
     }
 }

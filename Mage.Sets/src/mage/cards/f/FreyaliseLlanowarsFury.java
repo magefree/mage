@@ -27,7 +27,7 @@
  */
 package mage.cards.f;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -36,17 +36,14 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.FreyaliseLlanowarsFuryToken;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -86,23 +83,5 @@ public class FreyaliseLlanowarsFury extends CardImpl {
     @Override
     public FreyaliseLlanowarsFury copy() {
         return new FreyaliseLlanowarsFury(this);
-    }
-}
-
-class FreyaliseLlanowarsFuryToken extends Token {
-
-    FreyaliseLlanowarsFuryToken() {
-        super("Elf Druid", "1/1 green Elf Druid creature token with \"{T}: Add {G} to your mana pool.\"");
-        this.setOriginalExpansionSetCode("C14");
-        this.cardType.add(CardType.CREATURE);
-        this.color = ObjectColor.GREEN;
-        this.subtype.add("Elf");
-        this.subtype.add("Druid");
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {T}: Add {G} to your mana pool.
-        this.addAbility(new GreenManaAbility());
     }
 }

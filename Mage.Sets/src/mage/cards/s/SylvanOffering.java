@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -39,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.ElfToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SylvanOfferingTreefolkToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
@@ -52,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 public class SylvanOffering extends CardImpl {
 
     public SylvanOffering(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");
 
         // Choose an opponent. You and that player each create an X/X green Treefolk creature token.
         this.getSpellAbility().addEffect(new SylvanOfferingEffect1());
@@ -104,20 +103,6 @@ class SylvanOfferingEffect1 extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class SylvanOfferingTreefolkToken extends Token {
-
-    public SylvanOfferingTreefolkToken(int xValue) {
-        super("Treefolk", "X/X green Treefolk creature token");
-        setOriginalExpansionSetCode("C14");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Treefolk");
-        color.setGreen(true);
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
-
     }
 }
 

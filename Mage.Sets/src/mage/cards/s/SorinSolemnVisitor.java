@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,7 +38,6 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +47,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.command.Emblem;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SorinSolemnVisitorVampireToken;
 
 /**
  *
@@ -100,19 +98,5 @@ class SorinSolemnVisitorEmblem extends Emblem {
         this.setName("Emblem Sorin");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new SacrificeEffect(new FilterCreaturePermanent(), 1, "that player"), TargetController.OPPONENT, false, true);
         this.getAbilities().add(ability);
-    }
-}
-
-class SorinSolemnVisitorVampireToken extends Token {
-
-    SorinSolemnVisitorVampireToken() {
-        super("Vampire", "2/2 black Vampire creature token with flying");
-        setOriginalExpansionSetCode("KTK");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Vampire");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
     }
 }

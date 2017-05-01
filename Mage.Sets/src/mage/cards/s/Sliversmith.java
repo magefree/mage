@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SliversmithToken;
 
 /**
  *
@@ -67,18 +67,5 @@ public class Sliversmith extends CardImpl {
     @Override
     public Sliversmith copy() {
         return new Sliversmith(this);
-    }
-}
-
-class SliversmithToken extends Token {
-
-    SliversmithToken() {
-        super("Metallic Sliver", "1/1 colorless Sliver creature token named Metallic Sliver");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        subtype.add("Sliver");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.setOriginalExpansionSetCode("FUT");
     }
 }

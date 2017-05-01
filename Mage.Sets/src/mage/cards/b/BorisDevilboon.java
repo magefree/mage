@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,9 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.MinorDemonToken;
 
 /**
  *
@@ -69,18 +68,5 @@ public class BorisDevilboon extends CardImpl {
     @Override
     public BorisDevilboon copy() {
         return new BorisDevilboon(this);
-    }
-}
-
-class MinorDemonToken extends Token {
-
-    public MinorDemonToken() {
-        super("Minor Demon", "1/1 black and red Demon creature token named Minor Demon");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        color.setRed(true);
-        subtype.add("Demon");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

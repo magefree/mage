@@ -35,12 +35,11 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.LlanowarElvesToken;
 
 /**
  *
@@ -69,21 +68,5 @@ public class LlanowarMentor extends CardImpl {
     @Override
     public LlanowarMentor copy() {
         return new LlanowarMentor(this);
-    }
-}
-
-class LlanowarElvesToken extends Token {
-
-    public LlanowarElvesToken() {
-        super("Llanowar Elves", "1/1 green Elf Druid creature token named Llanowar Elves with \"{T}: Add {G} to your mana pool.\"");
-        this.setOriginalExpansionSetCode("FUT");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Elf");
-        subtype.add("Druid");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        this.addAbility(new GreenManaAbility());
     }
 }

@@ -28,14 +28,14 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.game.permanent.token.WalkerOfTheGroveToken;
 
 /**
  *
@@ -44,14 +44,14 @@ import mage.game.permanent.token.Token;
 public class WalkerOfTheGrove extends CardImpl {
 
     public WalkerOfTheGrove(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
         // When Walker of the Grove leaves the battlefield, create a 4/4 green Elemental creature token.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new WalkerOfTheGroveToken(),1),false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new WalkerOfTheGroveToken(), 1), false));
         // Evoke {4}{G}
         this.addAbility(new EvokeAbility(this, "{4}{G}"));
     }
@@ -63,16 +63,5 @@ public class WalkerOfTheGrove extends CardImpl {
     @Override
     public WalkerOfTheGrove copy() {
         return new WalkerOfTheGrove(this);
-    }
-}
-
-class WalkerOfTheGroveToken extends Token {
-    public WalkerOfTheGroveToken() {
-        super("Elemental", "4/4 green Elemental creature token");
-        cardType.add(CardType.CREATURE);
-        this.subtype.add("Elemental");
-        this.color.setGreen(true);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
     }
 }

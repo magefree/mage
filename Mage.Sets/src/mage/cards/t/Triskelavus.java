@@ -33,10 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -44,8 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.permanent.token.Token;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.game.permanent.token.TriskelaviteToken;
 
 /**
  *
@@ -54,7 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class Triskelavus extends CardImpl {
 
     public Triskelavus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
         this.subtype.add("Construct");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -78,24 +75,5 @@ public class Triskelavus extends CardImpl {
     @Override
     public Triskelavus copy() {
         return new Triskelavus(this);
-    }
-}
-
-class TriskelaviteToken extends Token {
-
-    public TriskelaviteToken() {
-        super("Triskelavite", "1/1 colorless Triskelavite artifact creature token with flying. It has \"Sacrifice this creature: This creature deals 1 damage to target creature or player.\"");
-        this.setOriginalExpansionSetCode("TSP");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Triskelavite");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
-
-        addAbility(FlyingAbility.getInstance());
     }
 }

@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RagavanToken;
 import mage.players.Player;
 
 /**
@@ -104,19 +104,5 @@ class KariZevSkyshipRaiderEffect extends OneShotEffect {
     @Override
     public KariZevSkyshipRaiderEffect copy() {
         return new KariZevSkyshipRaiderEffect(this);
-    }
-}
-
-class RagavanToken extends Token {
-
-    RagavanToken() {
-        super("Ragavan", "legendary 2/1 red Monkey creature token named Ragavan");
-        this.setOriginalExpansionSetCode("AER");
-        this.addSuperType(SuperType.LEGENDARY);
-        this.getPower().modifyBaseValue(2);
-        this.getToughness().modifyBaseValue(1);
-        this.color.setRed(true);
-        this.getSubtype(null).add("Monkey");
-        this.addCardType(CardType.CREATURE);
     }
 }

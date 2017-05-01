@@ -27,7 +27,7 @@
  */
 package mage.cards.t;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,19 +40,16 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TatsumaDragonToken;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -61,7 +58,7 @@ import java.util.UUID;
 public class TatsumasaTheDragonsFang extends CardImpl {
 
     public TatsumasaTheDragonsFang(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Equipment");
 
@@ -159,19 +156,5 @@ class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public String getRule() {
         return "Return {this} to the battlefield under its owner's control when that token dies.";
-    }
-}
-
-class TatsumaDragonToken extends Token {
-
-    public TatsumaDragonToken() {
-        super("Dragon Spirit", "5/5 blue Dragon Spirit creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Dragon");
-        subtype.add("Spirit");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        addAbility(FlyingAbility.getInstance());
     }
 }

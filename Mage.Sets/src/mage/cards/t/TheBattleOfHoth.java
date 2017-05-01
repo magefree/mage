@@ -28,47 +28,32 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
-import mage.game.permanent.token.TrooperToken;
+import mage.game.permanent.token.ATATToken;
 
 /**
  *
  * @author Styxo
  */
 public class TheBattleOfHoth extends CardImpl {
-    
+
     public TheBattleOfHoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{W}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");
 
         // Create X 5/5 white artifact AT-AT creature tokens wiht "When this creature dies, create two 1/1 white Trooper creature tokens."
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ATATToken(), new ManacostVariableValue()));
     }
-    
+
     public TheBattleOfHoth(final TheBattleOfHoth card) {
         super(card);
     }
-    
+
     @Override
     public TheBattleOfHoth copy() {
         return new TheBattleOfHoth(this);
-    }
-}
-
-class ATATToken extends Token {
-    
-    public ATATToken() {
-        super("AT-AT", "5/5 white artifact AT-AT creature tokens with \"When this creature dies, create two 1/1 white Trooper creature tokens.\"", 5, 5);
-        this.setOriginalExpansionSetCode("SWS");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        color.setWhite(true);
-        addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TrooperToken(), 2)));
-        subtype.add("AT-AT");
     }
 }

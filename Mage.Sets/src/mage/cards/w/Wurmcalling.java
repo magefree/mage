@@ -28,7 +28,6 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.BuybackAbility;
@@ -37,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WurmCallingWurmToken;
 
 /**
  *
@@ -46,7 +45,7 @@ import mage.game.permanent.token.Token;
 public class Wurmcalling extends CardImpl {
 
     public Wurmcalling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");
 
         // Buyback {2}{G}
         this.addAbility(new BuybackAbility("{2}{G}"));
@@ -78,7 +77,7 @@ class WurmcallingEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int count = source.getManaCostsToPay().getX();
-        WurmToken token = new WurmToken();
+        WurmCallingWurmToken token = new WurmCallingWurmToken();
         token.getPower().modifyBaseValue(count);
         token.getToughness().modifyBaseValue(count);
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
@@ -88,16 +87,5 @@ class WurmcallingEffect extends OneShotEffect {
     @Override
     public WurmcallingEffect copy() {
         return new WurmcallingEffect(this);
-    }
-}
-
-class WurmToken extends Token {
-    public WurmToken() {
-        super("Wurm", "X/X green Wurm creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Wurm");
-        power = new MageInt(0);
-        toughness = new MageInt(0);
     }
 }
