@@ -33,6 +33,8 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostImpl;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -113,7 +115,7 @@ class TariffEffect extends OneShotEffect {
         Permanent creatureToPayFor = chooseOnePermanent(game, player, creatures);
 
         if (creatureToPayFor != null) {
-            ManaCost manaCost = CardUtil.removeVariableManaCost(creatureToPayFor.getManaCost());
+            ManaCosts manaCost = ManaCosts.removeVariableManaCost(creatureToPayFor.getManaCost());
             String message = new StringBuilder("Pay ").append(manaCost.getText()).append(" (otherwise sacrifice ")
                     .append(creatureToPayFor.getName()).append(")?").toString();
             if (player.chooseUse(Outcome.Benefit, message, source, game)) {

@@ -49,13 +49,12 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public class OathOfLiliana extends CardImpl {
 
     public OathOfLiliana(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         addSuperType(SuperType.LEGENDARY);
 
         // When Oath of Liliana enters the battlefield, each opponent sacrifices a creature.
@@ -64,7 +63,7 @@ public class OathOfLiliana extends CardImpl {
         // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(new ZombieToken()),
-                TargetController.ANY, false), OathOfLilianaCondition.getInstance(),
+                TargetController.ANY, false), OathOfLilianaCondition.instance,
                 "At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, "
                         + "create a 2/2 black Zombie creature token."), new OathOfLilianaWatcher());
     }
@@ -79,17 +78,13 @@ public class OathOfLiliana extends CardImpl {
     }
 }
 
-class OathOfLilianaCondition implements Condition {
+enum OathOfLilianaCondition implements Condition {
 
-    private static final OathOfLilianaCondition instance = new OathOfLilianaCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        OathOfLilianaWatcher watcher = (OathOfLilianaWatcher) game.getState().getWatchers().get("OathOfLilianaWatcher");
+        OathOfLilianaWatcher watcher = (OathOfLilianaWatcher) game.getState().getWatchers().get(OathOfLilianaWatcher.class.getSimpleName());
         return watcher != null && watcher.enteredPlaneswalkerForPlayer(source.getControllerId());
     }
 
@@ -105,7 +100,7 @@ class OathOfLilianaWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public OathOfLilianaWatcher() {
-        super("OathOfLilianaWatcher", WatcherScope.GAME);
+        super(OathOfLilianaWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public OathOfLilianaWatcher(final OathOfLilianaWatcher watcher) {

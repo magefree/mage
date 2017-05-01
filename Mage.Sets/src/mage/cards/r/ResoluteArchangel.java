@@ -58,7 +58,7 @@ public class ResoluteArchangel extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Resolute Angel enters the battlefield, if your life total is lower than your starting life total, it becomes equal to your starting life total.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new ResoluteArchangelEffect(), ControllerLifeLowerThanStrtingLife.getInstance(),
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new ResoluteArchangelEffect(), ControllerLifeLowerThanStrtingLife.instance,
                 "if your life total is lower than your starting life total, it becomes equal to your starting life total")));
     }
 
@@ -99,13 +99,9 @@ class ResoluteArchangelEffect extends OneShotEffect {
     }
 }
 
-class ControllerLifeLowerThanStrtingLife implements Condition {
+enum ControllerLifeLowerThanStrtingLife implements Condition {
 
-    private static final ControllerLifeLowerThanStrtingLife instance = new ControllerLifeLowerThanStrtingLife();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+ instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

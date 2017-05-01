@@ -77,7 +77,7 @@ class AetherfluxReservoirDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
         return watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(sourceAbility.getControllerId());
     }
 

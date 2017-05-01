@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -61,7 +62,7 @@ public class SuturedGhoul extends CardImpl {
     private static final String staticText2 = "Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness";
 
     public SuturedGhoul(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(0);
@@ -73,7 +74,7 @@ public class SuturedGhoul extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new SuturedGhoulEffect(), staticText));
 
         // Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-        BoostSourceEffect effect = new BoostSourceEffect(new SuturedGhoulPowerCount(), new SuturedGhoulToughnessCount(), Duration.WhileOnBattlefield);
+        BoostSourceEffect effect = new BoostSourceEffect(SuturedGhoulPowerCount.instance, SuturedGhoulToughnessCount.instance, Duration.WhileOnBattlefield);
         effect.setText(staticText2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
@@ -137,16 +138,9 @@ class SuturedGhoulEffect extends OneShotEffect {
     }
 }
 
-class SuturedGhoulPowerCount implements DynamicValue {
+enum SuturedGhoulPowerCount implements DynamicValue {
 
-    private static SuturedGhoulPowerCount instance;
-
-    public static SuturedGhoulPowerCount getInstance() {
-        if (instance == null) {
-            instance = new SuturedGhoulPowerCount();
-        }
-        return instance;
-    }
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -165,7 +159,7 @@ class SuturedGhoulPowerCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return getInstance();
+        return instance;
     }
 
     @Override
@@ -179,16 +173,9 @@ class SuturedGhoulPowerCount implements DynamicValue {
     }
 }
 
-class SuturedGhoulToughnessCount implements DynamicValue {
+enum SuturedGhoulToughnessCount implements DynamicValue {
 
-    private static SuturedGhoulToughnessCount instance;
-
-    public static SuturedGhoulToughnessCount getInstance() {
-        if (instance == null) {
-            instance = new SuturedGhoulToughnessCount();
-        }
-        return instance;
-    }
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -207,7 +194,7 @@ class SuturedGhoulToughnessCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return getInstance();
+        return instance;
     }
 
     @Override

@@ -120,6 +120,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Guided Strike", 132, Rarity.COMMON, mage.cards.g.GuidedStrike.class));
         cards.add(new SetCardInfo("Harvest Wurm", 72, Rarity.COMMON, mage.cards.h.HarvestWurm.class));
         cards.add(new SetCardInfo("Haunting Misery", 13, Rarity.COMMON, mage.cards.h.HauntingMisery.class));
+        cards.add(new SetCardInfo("Heat Stroke", 107, Rarity.RARE, mage.cards.h.HeatStroke.class));
         cards.add(new SetCardInfo("Heavy Ballista", 133, Rarity.COMMON, mage.cards.h.HeavyBallista.class));
         cards.add(new SetCardInfo("Hidden Horror", 14, Rarity.UNCOMMON, mage.cards.h.HiddenHorror.class));
         cards.add(new SetCardInfo("Hurloon Shaman", 108, Rarity.UNCOMMON, mage.cards.h.HurloonShaman.class));

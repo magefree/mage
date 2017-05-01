@@ -83,7 +83,7 @@ class FleshAllergyWatcher extends Watcher {
     public int creaturesDiedThisTurn = 0;
 
     public FleshAllergyWatcher() {
-        super("CreaturesDied", WatcherScope.GAME);
+        super(FleshAllergyWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public FleshAllergyWatcher(final FleshAllergyWatcher watcher) {
@@ -131,7 +131,7 @@ class FleshAllergyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FleshAllergyWatcher watcher = (FleshAllergyWatcher) game.getState().getWatchers().get("CreaturesDied");
+        FleshAllergyWatcher watcher = (FleshAllergyWatcher) game.getState().getWatchers().get(FleshAllergyWatcher.class.getSimpleName());
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (permanent != null && watcher != null) {
             Player player = game.getPlayer(permanent.getControllerId());

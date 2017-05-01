@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -40,11 +41,20 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
 
 public interface Card extends MageObject {
+
+
+    final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
+    final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
+    final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
+    final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
+    final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
+
 
     UUID getOwnerId();
 
@@ -176,6 +186,67 @@ public interface Card extends MageObject {
      */
     Card getMainCard();
 
+    /**
+     * Gets the colors that are in the casting cost but also in the rules text
+     * as far as not included in reminder text.
+     *
+     * @return
+     */
+    default FilterMana getColorIdentity() {
+        FilterMana mana = new FilterMana();
+        mana.setBlack(getManaCost().getText().matches(regexBlack));
+        mana.setBlue(getManaCost().getText().matches(regexBlue));
+        mana.setGreen(getManaCost().getText().matches(regexGreen));
+        mana.setRed(getManaCost().getText().matches(regexRed));
+        mana.setWhite(getManaCost().getText().matches(regexWhite));
 
+        for (String rule : getRules()) {
+            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+            if (!mana.isBlack() && rule.matches(regexBlack)) {
+                mana.setBlack(true);
+            }
+            if (!mana.isBlue() && rule.matches(regexBlue)) {
+                mana.setBlue(true);
+            }
+            if (!mana.isGreen() && rule.matches(regexGreen)) {
+                mana.setGreen(true);
+            }
+            if (!mana.isRed() && rule.matches(regexRed)) {
+                mana.setRed(true);
+            }
+            if (!mana.isWhite() && rule.matches(regexWhite)) {
+                mana.setWhite(true);
+            }
+        }
+        if (isTransformable()) {
+            Card secondCard = getSecondCardFace();
+            ObjectColor color = secondCard.getColor(null);
+            mana.setBlack(mana.isBlack() || color.isBlack());
+            mana.setGreen(mana.isGreen() || color.isGreen());
+            mana.setRed(mana.isRed() || color.isRed());
+            mana.setBlue(mana.isBlue() || color.isBlue());
+            mana.setWhite(mana.isWhite() || color.isWhite());
+            for (String rule : secondCard.getRules()) {
+                rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+                if (!mana.isBlack() && rule.matches(regexBlack)) {
+                    mana.setBlack(true);
+                }
+                if (!mana.isBlue() && rule.matches(regexBlue)) {
+                    mana.setBlue(true);
+                }
+                if (!mana.isGreen() && rule.matches(regexGreen)) {
+                    mana.setGreen(true);
+                }
+                if (!mana.isRed() && rule.matches(regexRed)) {
+                    mana.setRed(true);
+                }
+                if (!mana.isWhite() && rule.matches(regexWhite)) {
+                    mana.setWhite(true);
+                }
+            }
+        }
+
+        return mana;
+    }
 
 }

@@ -34,6 +34,7 @@ import java.awt.GridBagLayout;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -141,6 +142,17 @@ public final class CollectionViewerPanel extends JPanel {
         JButton next = new JButton("Next");
         next.addActionListener(e -> mageBook.next());
         buttonPanel.add(next);
+
+        JLabel label4 = new JLabel("Show cards or tokens:");
+        label3.setAlignmentX(Component.LEFT_ALIGNMENT);
+        label3.setForeground(Color.white);
+        // spjspj - put back in after reorg of tokens -- jPanel1.add(label4);
+
+        JCheckBox cardsOrTokens = new JCheckBox("Display Cards");
+        cardsOrTokens.setSelected(true);
+        cardsOrTokens.setToolTipText("Select to show Cards or Tokens(and emblems) for the chosen set");
+        cardsOrTokens.addActionListener(e -> mageBook.cardsOrTokens(cardsOrTokens.isSelected()));
+        // spjspj - put back in after reorg of tokens -- jPanel1.add(cardsOrTokens);
 
         formats.addActionListener(e -> {
             if (mageBook != null) {

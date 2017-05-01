@@ -57,7 +57,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public class RasputinDreamweaver extends CardImpl {
@@ -83,9 +82,9 @@ public class RasputinDreamweaver extends CardImpl {
         // At the beginning of your upkeep, if Rasputin started the turn untapped, put a dream counter on it.
         this.addAbility(
                 new ConditionalTriggeredAbility(
-                    new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance()), TargetController.YOU, false),
-                    new RasputinDreamweaverStartedUntappedCondition(),
-                    "At the beginning of your upkeep, if {this} started the turn untapped, put a dream counter on it."),
+                        new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance()), TargetController.YOU, false),
+                        RasputinDreamweaverStartedUntappedCondition.instance,
+                        "At the beginning of your upkeep, if {this} started the turn untapped, put a dream counter on it."),
                 new RasputinDreamweaverStartedUntappedWatcher());
 
         // Rasputin can't have more than seven dream counters on it.
@@ -102,17 +101,13 @@ public class RasputinDreamweaver extends CardImpl {
     }
 }
 
-class RasputinDreamweaverStartedUntappedCondition implements Condition {
+enum RasputinDreamweaverStartedUntappedCondition implements Condition {
 
-    private static final RasputinDreamweaverStartedUntappedCondition instance = new RasputinDreamweaverStartedUntappedCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        RasputinDreamweaverStartedUntappedWatcher watcher = (RasputinDreamweaverStartedUntappedWatcher) game.getState().getWatchers().get(RasputinDreamweaverStartedUntappedWatcher.class.getName());
+        RasputinDreamweaverStartedUntappedWatcher watcher = (RasputinDreamweaverStartedUntappedWatcher) game.getState().getWatchers().get(RasputinDreamweaverStartedUntappedWatcher.class.getSimpleName());
         if (watcher != null) {
             return watcher.startedUntapped(source.getSourceId());
         }
@@ -128,6 +123,7 @@ class RasputinDreamweaverStartedUntappedCondition implements Condition {
 class RasputinDreamweaverStartedUntappedWatcher extends Watcher {
 
     private static final FilterPermanent filter = new FilterPermanent("Untapped permanents");
+
     static {
         filter.add(Predicates.not(new TappedPredicate()));
     }
@@ -135,7 +131,7 @@ class RasputinDreamweaverStartedUntappedWatcher extends Watcher {
     private final Set<UUID> startedUntapped = new HashSet<>(0);
 
     RasputinDreamweaverStartedUntappedWatcher() {
-        super(RasputinDreamweaverStartedUntappedWatcher.class.getName(), WatcherScope.GAME);
+        super(RasputinDreamweaverStartedUntappedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     RasputinDreamweaverStartedUntappedWatcher(final RasputinDreamweaverStartedUntappedWatcher watcher) {

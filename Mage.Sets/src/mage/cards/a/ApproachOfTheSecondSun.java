@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import java.util.*;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -63,7 +62,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (controller != null && spell != null) {
             ApproachOfTheSecondSunWatcher watcher
-                    = (ApproachOfTheSecondSunWatcher) game.getState().getWatchers().get(ApproachOfTheSecondSunWatcher.class.getName());
+                    = (ApproachOfTheSecondSunWatcher) game.getState().getWatchers().get(ApproachOfTheSecondSunWatcher.class.getSimpleName());
             if (watcher != null && watcher.getApproachesCast(controller.getId()) > 1 && spell.getFromZone() == Zone.HAND) {
                 // Win the game
                 controller.won(game);
@@ -110,12 +109,12 @@ class ApproachOfTheSecondSunWatcher extends Watcher {
     private Map<UUID, Integer> approachesCast = new HashMap<>();
 
     public ApproachOfTheSecondSunWatcher() {
-        super(ApproachOfTheSecondSunWatcher.class.getName(), WatcherScope.GAME);
+        super(ApproachOfTheSecondSunWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public ApproachOfTheSecondSunWatcher(final ApproachOfTheSecondSunWatcher watcher) {
         super(watcher);
-        approachesCast = new HashMap<>(approachesCast);
+        approachesCast = new HashMap<>(watcher.approachesCast);
     }
 
     @Override
@@ -123,19 +122,13 @@ class ApproachOfTheSecondSunWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getSourceId());
             if (spell != null && spell.getName().equals("Approach of the Second Sun")) {
-                int cast = getApproachesCast(event.getPlayerId());
-                approachesCast.put(event.getPlayerId(), cast + 1);
+                approachesCast.put(event.getPlayerId(), getApproachesCast(event.getPlayerId()) + 1);
             }
         }
     }
 
     public int getApproachesCast(UUID player) {
-        Integer cast = approachesCast.get(player);
-        if (cast == null) {
-            return 0;
-        } else {
-            return cast;
-        }
+        return approachesCast.getOrDefault(player, 0);
     }
 
     @Override

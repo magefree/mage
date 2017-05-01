@@ -69,7 +69,7 @@ public class NotOfThisWorld extends CardImpl {
                 new TargetStackObjectTargetingControlledPermanent());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         // Not of This World costs {7} less to cast if it targets a spell or ability that targets a creature you control with power 7 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(7, NotOfThisWorldCondition.getInstance())));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(7, NotOfThisWorldCondition.instance)));
     }
 
     public NotOfThisWorld(final NotOfThisWorld card) {
@@ -165,8 +165,8 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
 
 }
 
-class NotOfThisWorldCondition implements Condition {
-
+enum NotOfThisWorldCondition implements Condition {
+    instance;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control with power 7 or greater");
 
     static {
@@ -174,11 +174,7 @@ class NotOfThisWorldCondition implements Condition {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    private static final NotOfThisWorldCondition instance = new NotOfThisWorldCondition();
 
-    public static Condition getInstance() {
-        return instance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {

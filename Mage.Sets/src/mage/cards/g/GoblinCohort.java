@@ -95,7 +95,7 @@ class GoblinCohortEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            PlayerCastCreatureWatcher watcher = (PlayerCastCreatureWatcher) game.getState().getWatchers().get("PlayerCastCreature");
+            PlayerCastCreatureWatcher watcher = (PlayerCastCreatureWatcher) game.getState().getWatchers().get(PlayerCastCreatureWatcher.class.getSimpleName());
             if (watcher != null && !watcher.playerDidCastCreatureThisTurn(source.getControllerId())) {
                 return true;
             }

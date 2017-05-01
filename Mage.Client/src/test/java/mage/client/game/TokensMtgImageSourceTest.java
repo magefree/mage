@@ -16,7 +16,7 @@ public class TokensMtgImageSourceTest {
 
     @Test
     public void generateTokenUrlTest() throws Exception {
-        CardImageSource imageSource = TokensMtgImageSource.getInstance();
+        CardImageSource imageSource = TokensMtgImageSource.instance;
 
         String url = imageSource.generateTokenUrl(new CardDownloadData("Thopter", "ORI", "0", false, 1, "ORI", ""));
         Assert.assertEquals("http://tokens.mtg.onl/tokens/ORI_010-Thopter.jpg", url);

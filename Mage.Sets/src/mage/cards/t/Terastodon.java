@@ -106,10 +106,7 @@ class TerastodonEffect extends OneShotEffect {
             if (permanent != null) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
                     if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
-                        int numberPermanents = 0;
-                        if (destroyedPermanents.containsKey(permanent.getControllerId())) {
-                            numberPermanents = destroyedPermanents.get(permanent.getControllerId());
-                        }
+                        int numberPermanents = destroyedPermanents.getOrDefault(permanent.getControllerId(), 0);
                         destroyedPermanents.put(permanent.getControllerId(), numberPermanents + 1);
                     }
                 }

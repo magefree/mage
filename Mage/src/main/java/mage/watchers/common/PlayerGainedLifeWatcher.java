@@ -47,7 +47,7 @@ public class PlayerGainedLifeWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfLifeGainedThisTurn = new HashMap<>();
 
     public PlayerGainedLifeWatcher() {
-        super(PlayerGainedLifeWatcher.class.getName(), WatcherScope.GAME);
+        super(PlayerGainedLifeWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PlayerGainedLifeWatcher(final PlayerGainedLifeWatcher watcher) {

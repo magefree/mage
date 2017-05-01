@@ -89,7 +89,7 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
     public List<UUID> spells = new ArrayList<>();
 
     public BoseijuWhoSheltersAllWatcher() {
-        super("ManaPaidFromBoseijuWhoSheltersAllWatcher", WatcherScope.GAME);
+        super(BoseijuWhoSheltersAllWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public BoseijuWhoSheltersAllWatcher(final BoseijuWhoSheltersAllWatcher watcher) {
@@ -158,7 +158,7 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        BoseijuWhoSheltersAllWatcher watcher = (BoseijuWhoSheltersAllWatcher) game.getState().getWatchers().get("ManaPaidFromBoseijuWhoSheltersAllWatcher");
+        BoseijuWhoSheltersAllWatcher watcher = (BoseijuWhoSheltersAllWatcher) game.getState().getWatchers().get(BoseijuWhoSheltersAllWatcher.class.getSimpleName());
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && watcher.spells.contains(spell.getId())) {
             if (filter.match(spell.getCard(), game)) {

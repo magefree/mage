@@ -44,22 +44,15 @@ import java.util.Map;
  *
  * @author Quercitron
  */
-public class TokensMtgImageSource implements CardImageSource {
+public enum TokensMtgImageSource implements CardImageSource {
 
+   instance;
     private static final Logger logger = Logger.getLogger(TokensMtgImageSource.class);
 
-    private static CardImageSource instance = new TokensMtgImageSource();
 
     private List<TokenData> tokensData;
 
     private final Object tokensDataSync = new Object();
-
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new TokensMtgImageSource();
-        }
-        return instance;
-    }
 
     @Override
     public String getSourceName() {

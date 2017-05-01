@@ -54,7 +54,7 @@ public class RuneflareTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RuneflareTrapCondition.getInstance()), new CardsAmountDrawnThisTurnWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RuneflareTrapCondition.instance), new CardsAmountDrawnThisTurnWatcher());
 
         // Runeflare Trap deals damage to target player equal to the number of cards in that player's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new TargetPlayerCardsInHandCount()));
@@ -100,18 +100,14 @@ class TargetPlayerCardsInHandCount implements DynamicValue {
     }
 }
 
-class RuneflareTrapCondition implements Condition {
+enum RuneflareTrapCondition implements Condition {
 
-    private static final RuneflareTrapCondition instance = new RuneflareTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+ instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         CardsAmountDrawnThisTurnWatcher watcher =
-                (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.BASIC_KEY);
+                (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.class.getSimpleName());
         return watcher != null && watcher.opponentDrewXOrMoreCards(source.getControllerId(), 3, game);
     }
 

@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+import mage.players.Player;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
 /**
@@ -46,7 +47,7 @@ public class OpponentsLostLifeCount implements DynamicValue {
     }
 
     public int calculate(Game game, UUID controllerId) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (watcher != null) {
             int amountLifeLost = 0;
             for (UUID opponentId : game.getOpponents(controllerId)) {

@@ -49,13 +49,12 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GiltspireAvenger extends CardImpl {
 
     public GiltspireAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -97,7 +96,7 @@ class GiltspireAvengerTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",source.getControllerId());
+        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), source.getControllerId());
         if (watcher != null && watcher.hasSourceDoneDamage(id, game)) {
             return super.canTarget(id, source, game);
         }
@@ -108,10 +107,10 @@ class GiltspireAvengerTarget extends TargetPermanent {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", sourceControllerId);
+        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), sourceControllerId);
         for (UUID targetId : availablePossibleTargets) {
             Permanent permanent = game.getPermanent(targetId);
-            if(permanent != null && watcher != null && watcher.hasSourceDoneDamage(targetId, game)){
+            if (permanent != null && watcher != null && watcher.hasSourceDoneDamage(targetId, game)) {
                 possibleTargets.add(targetId);
             }
         }
@@ -126,15 +125,15 @@ class GiltspireAvengerTarget extends TargetPermanent {
         }
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
-        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", sourceControllerId);
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
+        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), sourceControllerId);
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
                     && watcher != null && watcher.hasSourceDoneDamage(permanent.getId(), game)) {
-                        count++;
-                        if (count >= remainingTargets) {
-                            return true;
-                        }
+                count++;
+                if (count >= remainingTargets) {
+                    return true;
                 }
+            }
         }
         return false;
     }

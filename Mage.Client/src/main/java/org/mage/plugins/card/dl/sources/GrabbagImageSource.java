@@ -37,18 +37,11 @@ import org.mage.plugins.card.images.CardDownloadData;
  *
  * @author spjspj
  */
-public class GrabbagImageSource implements CardImageSource {
+public enum  GrabbagImageSource implements CardImageSource {
 
+    instance;
     private static final Logger logger = Logger.getLogger(GrabbagImageSource.class);
-    private static CardImageSource instance = new GrabbagImageSource();
     private static int maxTimes = 0;
-
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new GrabbagImageSource();
-        }
-        return instance;
-    }
 
     @Override
     public String getSourceName() {

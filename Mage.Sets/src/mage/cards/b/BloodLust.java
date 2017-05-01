@@ -50,7 +50,6 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class BloodLust extends CardImpl {
@@ -62,12 +61,12 @@ public class BloodLust extends CardImpl {
     }
 
     public BloodLust(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // If target creature has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(4, -4, Duration.EndOfTurn),
-                new BoostTargetEffect(new StaticValue(4), new SignInversionDynamicValue(new TargetPermanentToughnessMinus1Value()), Duration.WhileOnBattlefield),
+                new BoostTargetEffect(new StaticValue(4), new SignInversionDynamicValue(TargetPermanentToughnessMinus1Value.instance), Duration.WhileOnBattlefield),
                 new TargetMatchesFilterCondition(filter),
                 "If target creature has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -104,13 +103,9 @@ class TargetMatchesFilterCondition implements Condition {
     }
 }
 
-class TargetPermanentToughnessMinus1Value implements DynamicValue {
+enum TargetPermanentToughnessMinus1Value implements DynamicValue {
 
-    private static final TargetPermanentToughnessMinus1Value instance = new TargetPermanentToughnessMinus1Value();
-
-    public static TargetPermanentToughnessMinus1Value getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -123,7 +118,7 @@ class TargetPermanentToughnessMinus1Value implements DynamicValue {
 
     @Override
     public TargetPermanentToughnessMinus1Value copy() {
-        return new TargetPermanentToughnessMinus1Value();
+        return instance;
     }
 
     @Override

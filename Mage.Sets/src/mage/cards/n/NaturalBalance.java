@@ -27,6 +27,8 @@
  */
 package mage.cards.n;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -35,12 +37,10 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -90,32 +90,43 @@ public class NaturalBalance extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                PlayerList players = game.getState().getPlayersInRange(controller.getId(),game);
+                PlayerList players = game.getState().getPlayersInRange(controller.getId(), game);
                 for (UUID playerId : players) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         int landCount = game.getBattlefield().countAll(new FilterControlledLandPermanent(), player.getId(), game);
                         if (landCount > 5) {
-                            //Sacrifice lands till you have 5
+                            // chooses five lands he or she controls and sacrifices the rest
                             TargetControlledPermanent target = new TargetControlledPermanent(5, 5, new FilterControlledLandPermanent("lands to keep"), true);
                             if (target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), game)) {
-                                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getSourceId(), game)) {
-                                    if (permanent != null && !target.getTargets().contains(permanent.getId())) {
+                                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game)) {
+                                    if (!target.getTargets().contains(permanent.getId())) {
                                         permanent.sacrifice(source.getId(), game);
                                     }
                                 }
                             }
-                        } else if (landCount < 5) {
-                            //Play basic lands till you have 5
-                            FilterLandPermanent filter = new FilterLandPermanent();
-                            filter.add(new ControllerPredicate(TargetController.YOU));
-                            int amount = 5 - landCount;
+                        }
+                    }
+                }
+                List<Player> toShuffle = new ArrayList<>();
+                for (UUID playerId : players) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        int landCount = game.getBattlefield().countAll(new FilterControlledLandPermanent(), player.getId(), game);
+                        int amount = 5 - landCount;
+                        if (landCount < 5 && player.chooseUse(outcome, "Search your library for up to " + amount + " basic land cards and put them onto the battlefield?", source, game)) {
+                            // Select lands and put them onto battlefield
                             TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterBasicLandCard());
                             if (player.searchLibrary(target, game)) {
-                                player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+                                player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game);
                             }
-                            player.shuffleLibrary(source, game);
+                            toShuffle.add(player);
                         }
+                    }
+                }
+                for (Player player : toShuffle) {
+                    if (player.isInGame()) {
+                        player.shuffleLibrary(source, game);
                     }
                 }
                 return true;

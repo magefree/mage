@@ -90,7 +90,7 @@ class SiftThroughSandsCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SiftThroughSandsWatcher watcher = (SiftThroughSandsWatcher) game.getState().getWatchers().get("SiftThroughSandsWatcher", source.getControllerId());
+        SiftThroughSandsWatcher watcher = (SiftThroughSandsWatcher) game.getState().getWatchers().get(SiftThroughSandsWatcher.class.getSimpleName(), source.getControllerId());
         if (watcher != null) {
             return watcher.conditionMet();
         }
@@ -104,7 +104,7 @@ class SiftThroughSandsWatcher extends Watcher {
     boolean castReachThroughMists = false;
 
     public SiftThroughSandsWatcher() {
-        super("SiftThroughSandsWatcher", WatcherScope.PLAYER);
+        super(SiftThroughSandsWatcher.class.getSimpleName(), WatcherScope.PLAYER);
     }
 
     public SiftThroughSandsWatcher(final SiftThroughSandsWatcher watcher) {

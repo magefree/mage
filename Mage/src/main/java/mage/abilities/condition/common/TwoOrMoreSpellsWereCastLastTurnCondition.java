@@ -41,7 +41,7 @@ public enum TwoOrMoreSpellsWereCastLastTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
         // if any player cast more than two spells, return true
         for (Integer count : watcher.getAmountOfSpellsCastOnPrevTurn().values()) {
             if (count >= 2) {

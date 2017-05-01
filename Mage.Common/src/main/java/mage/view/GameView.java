@@ -197,7 +197,7 @@ public class GameView implements Serializable {
             this.special = false;
         }
 
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
         if (watcher != null) {
             spellsCastCurrentTurn = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn();
         } else {

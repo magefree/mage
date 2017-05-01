@@ -28,6 +28,7 @@
 package mage.view;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -64,7 +65,7 @@ public class CardView extends SimpleCardView {
     protected List<String> rules;
     protected String power;
     protected String toughness;
-    protected String loyalty;
+    protected String loyalty = "";
     protected String startingLoyalty;
     protected EnumSet<CardType> cardTypes;
     protected List<String> subTypes;
@@ -344,12 +345,12 @@ public class CardView extends SimpleCardView {
         if (card instanceof Permanent) {
             this.mageObjectType = MageObjectType.PERMANENT;
             Permanent permanent = (Permanent) card;
-            this.loyalty = Integer.toString(permanent.getCounters(game).getCount(CounterType.LOYALTY));
-            this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
-            if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
-                controlledByOwner = false;
-            }
             if (game != null && permanent.getCounters(game) != null && !permanent.getCounters(game).isEmpty()) {
+                this.loyalty = Integer.toString(permanent.getCounters(game).getCount(CounterType.LOYALTY));
+                this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
+                if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
+                    controlledByOwner = false;
+                }
                 counters = new ArrayList<>();
                 for (Counter counter : permanent.getCounters(game).values()) {
                     counters.add(new CounterView(counter));
@@ -963,44 +964,24 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorText() {
-        if (getColor().getColorCount() == 0) {
-            return "Colorless";
-        } else if (getColor().getColorCount() > 1) {
-            return "Gold";
-        } else if (getColor().isBlack()) {
-            return "Black";
-        } else if (getColor().isBlue()) {
-            return "Blue";
-        } else if (getColor().isWhite()) {
-            return "White";
-        } else if (getColor().isGreen()) {
-            return "Green";
-        } else if (getColor().isRed()) {
-            return "Red";
-        }
-        return "";
+
+        String color = getColor().getDescription();
+        return color.substring(0, 1).toUpperCase() + color.substring(1);
     }
 
     public String getTypeText() {
         StringBuilder type = new StringBuilder();
-        for (SuperType superType : getSuperTypes()) {
-            type.append(superType.toString());
-            type.append(' ');
+        if (!getSuperTypes().isEmpty()) {
+            type.append(String.join(" ", getSuperTypes().stream().map(SuperType::toString).collect(Collectors.toList())));
+            type.append(" ");
         }
-        for (CardType cardType : getCardTypes()) {
-            type.append(cardType.toString());
-            type.append(' ');
+        if (!getCardTypes().isEmpty()) {
+            type.append(String.join(" ", getCardTypes().stream().map(CardType::toString).collect(Collectors.toList())));
+            type.append(" ");
         }
         if (!getSubTypes().isEmpty()) {
-            type.append("- ");
-            for (String subType : getSubTypes()) {
-                type.append(subType);
-                type.append(' ');
-            }
-        }
-        if (type.length() > 0) {
-            // remove trailing space
-            type.deleteCharAt(type.length() - 1);
+            type.append(" - ");
+            type.append(String.join(" ", getSubTypes()));
         }
         return type.toString();
     }

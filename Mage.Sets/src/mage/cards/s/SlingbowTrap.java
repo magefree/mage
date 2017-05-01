@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -44,7 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetAttackingCreature;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class SlingbowTrap extends CardImpl {
@@ -56,11 +56,11 @@ public class SlingbowTrap extends CardImpl {
     }
 
     public SlingbowTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.subtype.add("Trap");
 
         // If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), SlingbowTrapCondition.getInstance()));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), SlingbowTrapCondition.instance));
 
         // Destroy target attacking creature with flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -77,13 +77,9 @@ public class SlingbowTrap extends CardImpl {
     }
 }
 
-class SlingbowTrapCondition implements Condition {
+enum SlingbowTrapCondition implements Condition {
 
-    private static final SlingbowTrapCondition instance = new SlingbowTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

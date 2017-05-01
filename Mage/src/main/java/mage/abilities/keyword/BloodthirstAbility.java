@@ -69,7 +69,7 @@ class BloodthirstEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get("DamagedOpponents", source.getControllerId());
+            BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get(BloodthirstWatcher.class.getSimpleName(), source.getControllerId());
             if (watcher != null && watcher.conditionMet()) {
                 Permanent permanent = game.getPermanentEntering(source.getSourceId());
                 if (permanent != null) {

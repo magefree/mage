@@ -150,7 +150,7 @@ public class Commander extends Constructed {
                     invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
                     valid = false;
                 }
-                FilterMana commanderColor = CardUtil.getColorIdentity(commander);
+                FilterMana commanderColor = commander.getColorIdentity();
                 if (commanderColor.isWhite()) {
                     colorIdentity.setWhite(true);
                 }
@@ -194,7 +194,7 @@ public class Commander extends Constructed {
     }
 
     public boolean cardHasValidColor(FilterMana commander, Card card) {
-        FilterMana cardColor = CardUtil.getColorIdentity(card);
+        FilterMana cardColor = card.getColorIdentity();
         return !(cardColor.isBlack() && !commander.isBlack()
                 || cardColor.isBlue() && !commander.isBlue()
                 || cardColor.isGreen() && !commander.isGreen()
@@ -654,7 +654,7 @@ public class Commander extends Constructed {
                 color = color.union(commander.getColor(null));
             }
             
-            FilterMana commanderColor = CardUtil.getColorIdentity(commander);
+            FilterMana commanderColor = commander.getColorIdentity();
             if (commanderColor.isWhite()) {
                 color.setWhite(true);
             }

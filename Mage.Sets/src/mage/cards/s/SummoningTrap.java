@@ -65,7 +65,7 @@ public class SummoningTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SummoningTrapCondition.getInstance()), new SummoningTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SummoningTrapCondition.instance), new SummoningTrapWatcher());
 
         // Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new SummoningTrapEffect());
@@ -81,17 +81,13 @@ public class SummoningTrap extends CardImpl {
     }
 }
 
-class SummoningTrapCondition implements Condition {
+enum SummoningTrapCondition implements Condition {
 
-    private static final SummoningTrapCondition instance = new SummoningTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SummoningTrapWatcher watcher = (SummoningTrapWatcher) game.getState().getWatchers().get("CreatureSpellCountered");
+        SummoningTrapWatcher watcher = (SummoningTrapWatcher) game.getState().getWatchers().get(SummoningTrapWatcher.class.getSimpleName());
         return watcher != null && watcher.creatureSpellOfPlayerWasCountered(source.getControllerId());
     }
 
@@ -106,7 +102,7 @@ class SummoningTrapWatcher extends Watcher {
     Set<UUID> players = new HashSet<>();
 
     public SummoningTrapWatcher() {
-        super("CreatureSpellCountered", WatcherScope.GAME);
+        super(SummoningTrapWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public SummoningTrapWatcher(final SummoningTrapWatcher watcher) {

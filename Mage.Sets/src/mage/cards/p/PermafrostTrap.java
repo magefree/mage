@@ -54,7 +54,7 @@ public class PermafrostTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), PermafrostTrapCondition.getInstance()), new PermanentsEnteredBattlefieldWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), PermafrostTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
 
         // Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
         this.getSpellAbility().addEffect(new TapTargetEffect());
@@ -72,17 +72,13 @@ public class PermafrostTrap extends CardImpl {
     }
 }
 
-class PermafrostTrapCondition implements Condition {
+enum PermafrostTrapCondition implements Condition {
 
-    private static final PermafrostTrapCondition instance = new PermafrostTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getName());
+        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);

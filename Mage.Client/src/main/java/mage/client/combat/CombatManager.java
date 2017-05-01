@@ -19,20 +19,14 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class CombatManager {
+public enum CombatManager {
 
-    private static CombatManager combatManager;
 
+    instance;
     private final Map<UUID, Integer> combatAttackers = new HashMap<>();
     private final Map<UUID, Integer> combatBlockers = new HashMap<>();
     private int globalBlockersCount; // we need global counter as there are several combat groups
 
-    public static CombatManager getInstance() {
-        if (combatManager == null) {
-            combatManager = new CombatManager();
-        }
-        return combatManager;
-    }
 
     private Point parentPoint;
 

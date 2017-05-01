@@ -29,6 +29,7 @@ package mage.cards.r;
 
 import java.util.List;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -52,17 +53,16 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.SpellsCastWatcher;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class RefractionTrap extends CardImpl {
 
     public RefractionTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.subtype.add("Trap");
 
         // If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay Refraction Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}"), RefractionTrapCondition.getInstance()), new SpellsCastWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}"), RefractionTrapCondition.instance), new SpellsCastWatcher());
 
         // Prevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, Refraction Trap deals that much damage to target creature or player.
         this.getSpellAbility().addEffect(new RefractionTrapPreventDamageEffect(Duration.EndOfTurn, 3));
@@ -79,17 +79,12 @@ public class RefractionTrap extends CardImpl {
     }
 }
 
-class RefractionTrapCondition implements Condition {
-
-    private static final RefractionTrapCondition instance = new RefractionTrapCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+enum RefractionTrapCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
+        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 List<Spell> spells = watcher.getSpellsCastThisTurn(opponentId);

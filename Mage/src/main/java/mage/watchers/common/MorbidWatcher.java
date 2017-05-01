@@ -44,7 +44,7 @@ import mage.watchers.Watcher;
 public class MorbidWatcher extends Watcher {
 
     public MorbidWatcher() {
-        super("Morbid", WatcherScope.GAME);
+        super(MorbidWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public MorbidWatcher(final MorbidWatcher watcher) {

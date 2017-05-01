@@ -62,8 +62,8 @@ public class PermanentView extends CardView {
     private final boolean attachedToPermanent;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
-        super(permanent, game, permanent.getControllerId().equals(createdForPlayerId));
-        this.controlled = permanent.getControllerId().equals(createdForPlayerId);
+        super(permanent, game, (permanent.getControllerId() == null) ? false : permanent.getControllerId().equals(createdForPlayerId));
+        this.controlled = (permanent.getControllerId() == null) ? false : permanent.getControllerId().equals(createdForPlayerId);
         this.rules = permanent.getRules(game);
         this.tapped = permanent.isTapped();
         this.flipped = permanent.isFlipped();
@@ -106,7 +106,7 @@ public class PermanentView extends CardView {
                 }
             }
         }
-        if (!permanent.getOwnerId().equals(permanent.getControllerId())) {
+        if (permanent.getOwnerId() != null && !permanent.getOwnerId().equals(permanent.getControllerId())) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {
                 this.nameOwner = owner.getName();

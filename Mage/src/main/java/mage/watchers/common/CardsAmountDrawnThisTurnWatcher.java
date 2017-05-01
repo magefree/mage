@@ -44,12 +44,11 @@ import java.util.UUID;
  */
 public class CardsAmountDrawnThisTurnWatcher extends Watcher {
 
-    public final static String BASIC_KEY = "CardsAmountDrawnThisTurnWatcher";
 
     private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 
     public CardsAmountDrawnThisTurnWatcher() {
-        super(BASIC_KEY, WatcherScope.GAME);
+        super(CardsAmountDrawnThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CardsAmountDrawnThisTurnWatcher(final CardsAmountDrawnThisTurnWatcher watcher) {

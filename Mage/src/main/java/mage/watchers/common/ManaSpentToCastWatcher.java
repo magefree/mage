@@ -46,7 +46,7 @@ public class ManaSpentToCastWatcher extends Watcher {
     Mana payment = null;
 
     public ManaSpentToCastWatcher() {
-        super("ManaSpentToCast", WatcherScope.CARD);
+        super(ManaSpentToCastWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public ManaSpentToCastWatcher(final ManaSpentToCastWatcher watcher) {

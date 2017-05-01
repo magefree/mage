@@ -25,68 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.f;
+package mage.cards.h;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.common.EndOfCombatTriggeredAbility;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
-import mage.game.permanent.token.BeastToken;
-import mage.watchers.common.CreaturesDiedWatcher;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.BlockedPredicate;
+import mage.filter.predicate.permanent.BlockingPredicate;
 
 import java.util.UUID;
 
 /**
- *
- * @author North
+ * @author dustinroepsch
  */
-public class FreshMeat extends CardImpl {
+public class HeatStroke extends CardImpl {
+    private static final FilterPermanent filter = new FilterCreaturePermanent();
 
-    public FreshMeat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
-
-        // Create a 3/3 green Beast creature token for each creature put into your graveyard from the battlefield this turn.
-        this.getSpellAbility().addWatcher(new CreaturesDiedWatcher());
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken(), new FreshMeatDynamicValue()));
+    static {
+        filter.add(Predicates.or(
+                new BlockedPredicate(), new BlockingPredicate()
+        ));
     }
 
-    public FreshMeat(final FreshMeat card) {
+    public HeatStroke(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+
+        // At end of combat, destroy each creature that blocked or was blocked this turn.
+        this.addAbility(
+                new EndOfCombatTriggeredAbility(
+                        new DestroyAllEffect(filter).setText("destroy each creature that blocked or was blocked this turn."),
+                        false
+                )
+        );
+    }
+
+    public HeatStroke(final HeatStroke card) {
         super(card);
     }
 
     @Override
-    public FreshMeat copy() {
-        return new FreshMeat(this);
+    public HeatStroke copy() {
+        return new HeatStroke(this);
     }
 }
 
-class FreshMeatDynamicValue implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get(CreaturesDiedWatcher.class.getSimpleName());
-        if (watcher != null) {
-            return watcher.getAmountOfCreaturesDiesThisTurn(sourceAbility.getControllerId());
-        }
-        return 0;
-    }
-
-    @Override
-    public FreshMeatDynamicValue copy() {
-        return new FreshMeatDynamicValue();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "creature put into your graveyard from the battlefield this turn";
-    }
-}

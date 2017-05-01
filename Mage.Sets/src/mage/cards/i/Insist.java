@@ -28,6 +28,7 @@
 package mage.cards.i;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -45,18 +46,17 @@ import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author fireshoes
  */
 public class Insist extends CardImpl {
 
     public Insist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // The next creature spell you cast this turn can't be countered by spells or abilities.
         this.getSpellAbility().addEffect(new InsistEffect());
         this.getSpellAbility().addWatcher(new InsistWatcher());
-        
+
         // Draw a card.
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("<br><br>Draw a card");
@@ -74,7 +74,7 @@ public class Insist extends CardImpl {
 }
 
 class InsistEffect extends ContinuousRuleModifyingEffectImpl {
-    
+
     InsistEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "The next creature spell you cast this turn can't be countered by spells or abilities";
@@ -92,10 +92,10 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        InsistWatcher watcher = (InsistWatcher) game.getState().getWatchers().get("insistWatcher", source.getControllerId());
-            if (watcher != null) {
-                watcher.setReady();
-            }
+        InsistWatcher watcher = (InsistWatcher) game.getState().getWatchers().get(InsistWatcher.class.getSimpleName(), source.getControllerId());
+        if (watcher != null) {
+            watcher.setReady();
+        }
     }
 
     @Override
@@ -111,16 +111,16 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
         }
         return null;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.COUNTER;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        InsistWatcher watcher = (InsistWatcher) game.getState().getWatchers().get("insistWatcher", source.getControllerId());
+        InsistWatcher watcher = (InsistWatcher) game.getState().getWatchers().get(InsistWatcher.class.getSimpleName(), source.getControllerId());
         return spell != null && watcher != null && watcher.isUncounterable(spell.getId());
     }
 }
@@ -131,7 +131,7 @@ class InsistWatcher extends Watcher {
     protected UUID uncounterableSpell;
 
     InsistWatcher() {
-        super("insistWatcher", WatcherScope.PLAYER);
+        super(InsistWatcher.class.getSimpleName(), WatcherScope.PLAYER);
     }
 
     InsistWatcher(final InsistWatcher watcher) {
@@ -160,7 +160,7 @@ class InsistWatcher extends Watcher {
     public boolean isUncounterable(UUID spellId) {
         return spellId.equals(uncounterableSpell);
     }
-    
+
     public void setReady() {
         ready = true;
     }
