@@ -27,29 +27,32 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public class TriumphOfTheHordes extends CardImpl {
 
+    private FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
+
     public TriumphOfTheHordes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
 
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(InfectAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filterCreaturePermanent));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(InfectAbility.getInstance(), Duration.EndOfTurn, filterCreaturePermanent));
     }
 
     public TriumphOfTheHordes(final TriumphOfTheHordes card) {
