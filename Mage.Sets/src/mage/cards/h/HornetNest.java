@@ -33,16 +33,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HornetNestInsectToken;
 import mage.players.Player;
 
 /**
@@ -52,7 +50,7 @@ import mage.players.Player;
 public class HornetNest extends CardImpl {
 
     public HornetNest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Insect");
 
         this.power = new MageInt(0);
@@ -100,21 +98,5 @@ class HornetNestDealDamageEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class HornetNestInsectToken extends Token {
-
-    public HornetNestInsectToken() {
-        super("Insect", "1/1 green Insect creature tokens with flying and deathtouch");
-        setOriginalExpansionSetCode("M15");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Insect");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(DeathtouchAbility.getInstance());
     }
 }

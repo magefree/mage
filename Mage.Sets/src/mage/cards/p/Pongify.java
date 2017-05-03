@@ -28,8 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -39,7 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PongifyApeToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,8 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Pongify extends CardImpl {
 
     public Pongify(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Ape creature token.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
@@ -92,25 +89,11 @@ class PongifyEffect extends OneShotEffect {
             if (permanent != null) {
                 UUID controllerId = permanent.getControllerId();
                 if (controllerId != null) {
-                    new ApeToken().putOntoBattlefield(1, game, source.getSourceId(), controllerId);
+                    new PongifyApeToken().putOntoBattlefield(1, game, source.getSourceId(), controllerId);
                     return true;
                 }
             }
         }
         return false;
     }
-}
-
-class ApeToken extends Token {
-
-    public ApeToken() {
-        super("Ape", "3/3 green Ape");
-        this.setOriginalExpansionSetCode("PLC");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Ape");
-        color.setGreen(true);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-    }
-
 }

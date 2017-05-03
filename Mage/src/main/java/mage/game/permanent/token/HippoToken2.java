@@ -45,7 +45,7 @@ public class HippoToken2 extends Token {
         super("Hippo", "3/3 green Hippo creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Centaur");
+        subtype.add("Hippo");
         power = new MageInt(3);
         toughness = new MageInt(3);
     }

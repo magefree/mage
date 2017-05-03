@@ -28,7 +28,6 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -51,7 +50,7 @@ import mage.game.command.Emblem;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KioraKrakenToken;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
@@ -167,18 +166,5 @@ class KioraEmblem extends Emblem {
         this.setName("Emblem Kiora");
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new CreateTokenEffect(new KioraKrakenToken()), TargetController.YOU, null, false);
         this.getAbilities().add(ability);
-    }
-}
-
-class KioraKrakenToken extends Token {
-
-    public KioraKrakenToken() {
-        super("Kraken", "9/9 blue Kraken creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Kraken");
-        power = new MageInt(9);
-        toughness = new MageInt(9);
-        this.setOriginalExpansionSetCode("BNG");
     }
 }

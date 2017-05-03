@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KelpToken;
 
 /**
  *
@@ -70,21 +70,5 @@ public class WallOfKelp extends CardImpl {
     @Override
     public WallOfKelp copy() {
         return new WallOfKelp(this);
-    }
-}
-
-class KelpToken extends Token {
-
-    public KelpToken() {
-        super("Kelp", "0/1 blue Plant Wall creature token with defender named Kelp");
-        this.setOriginalExpansionSetCode("MIR");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Plant");
-        subtype.add("Wall");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
-
-        this.addAbility(DefenderAbility.getInstance());
     }
 }

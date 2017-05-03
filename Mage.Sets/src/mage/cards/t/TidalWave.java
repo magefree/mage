@@ -28,12 +28,10 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,6 +39,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TidalWaveWallToken;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -50,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
 public class TidalWave extends CardImpl {
 
     public TidalWave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Create a 5/5 blue Wall creature token with defender. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new TidalWaveEffect());
@@ -84,7 +83,7 @@ class TidalWaveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new WallToken();
+        Token token = new TidalWaveWallToken();
         if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
             for (UUID tokenId : token.getLastAddedTokenIds()) {
                 Permanent tokenPermanent = game.getPermanent(tokenId);
@@ -97,18 +96,5 @@ class TidalWaveEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class WallToken extends Token {
-
-    WallToken() {
-        super("Wall", "5/5 blue Wall creature token with defender");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Wall");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        this.addAbility(DefenderAbility.getInstance());
     }
 }

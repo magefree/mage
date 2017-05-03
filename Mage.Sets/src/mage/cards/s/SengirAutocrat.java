@@ -40,23 +40,23 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SerfToken;
 
 /**
  *
  * @author Quercitron
  */
 public class SengirAutocrat extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Serf tokens");
 
     static {
         filter.add(new SubtypePredicate("Serf"));
         filter.add(new TokenPredicate());
     }
-    
+
     public SengirAutocrat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Human");
 
         this.power = new MageInt(2);
@@ -77,16 +77,5 @@ public class SengirAutocrat extends CardImpl {
     @Override
     public SengirAutocrat copy() {
         return new SengirAutocrat(this);
-    }
-}
-
-class SerfToken extends Token {
-    public SerfToken() {
-        super("Serf", "0/1 black Serf creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Serf");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
     }
 }

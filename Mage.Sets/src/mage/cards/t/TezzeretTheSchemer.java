@@ -32,19 +32,15 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
-import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -53,7 +49,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.command.Emblem;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.EtheriumCellToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -107,19 +103,5 @@ class TezzeretTheSchemerEmblem extends Emblem {
         ability.addEffect(effect);
         ability.addTarget(new TargetPermanent(new FilterControlledArtifactPermanent()));
         this.getAbilities().add(ability);
-    }
-}
-
-class EtheriumCellToken extends Token {
-
-    public EtheriumCellToken() {
-        super("Etherium Cell", "colorless artifact token named Etherium Cell which has \"{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-        this.setOriginalExpansionSetCode("AER");
-        cardType.add(CardType.ARTIFACT);
-
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-
-        this.addAbility(ability);
     }
 }

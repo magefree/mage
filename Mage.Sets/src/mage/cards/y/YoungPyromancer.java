@@ -27,6 +27,7 @@
  */
 package mage.cards.y;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,10 +37,7 @@ import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
-import mage.util.RandomUtil;
-
-import java.util.UUID;
+import mage.game.permanent.token.YoungPyromancerElementalToken;
 
 /**
  *
@@ -56,7 +54,7 @@ public class YoungPyromancer extends CardImpl {
     }
 
     public YoungPyromancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
@@ -64,7 +62,7 @@ public class YoungPyromancer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ElementalToken()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new YoungPyromancerElementalToken()), filter, false));
 
     }
 
@@ -77,21 +75,4 @@ public class YoungPyromancer extends CardImpl {
         return new YoungPyromancer(this);
     }
 
-    static class ElementalToken extends Token {
-
-        public ElementalToken() {
-            super("Elemental", "1/1 red Elemental creature");
-            if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M14")) {
-                setTokenType(RandomUtil.nextInt(2) + 1);
-            }
-            if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
-                setTokenType(1);
-            }
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            subtype.add("Elemental");
-            power = new MageInt(1);
-            toughness = new MageInt(1);
-        }
-    }
 }

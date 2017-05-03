@@ -35,7 +35,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PenumbraWurmToken;
 
 /**
  *
@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
 public class PenumbraWurm extends CardImpl {
 
     public PenumbraWurm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(6);
@@ -64,18 +64,5 @@ public class PenumbraWurm extends CardImpl {
     @Override
     public PenumbraWurm copy() {
         return new PenumbraWurm(this);
-    }
-}
-
-class PenumbraWurmToken extends Token {
-    PenumbraWurmToken() {
-        super("Wurm", "6/6 black Wurm creature token with trample");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Wurm");
-        power = new MageInt(6);
-        toughness = new MageInt(6);
-
-        this.addAbility(TrampleAbility.getInstance());
     }
 }

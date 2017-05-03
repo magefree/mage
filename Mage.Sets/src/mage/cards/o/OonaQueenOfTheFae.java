@@ -44,7 +44,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.OonaQueenFaerieToken;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
 public class OonaQueenOfTheFae extends CardImpl {
 
     public OonaQueenOfTheFae(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U/B}{U/B}{U/B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U/B}{U/B}{U/B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
@@ -109,7 +109,7 @@ class OonaQueenOfTheFaeEffect extends OneShotEffect {
         if (choice.getColor() != null) {
             int cardsWithColor = 0;
             int cardsToExile = Math.min(opponent.getLibrary().size(), source.getManaCostsToPay().getX());
-            for(int i = 0; i < cardsToExile; i++) {
+            for (int i = 0; i < cardsToExile; i++) {
                 Card card = opponent.getLibrary().removeFromTop(game);
                 if (card != null) {
                     if (card.getColor(game).contains(choice.getColor())) {
@@ -121,23 +121,9 @@ class OonaQueenOfTheFaeEffect extends OneShotEffect {
             if (cardsWithColor > 0) {
                 new CreateTokenEffect(new OonaQueenFaerieToken(), cardsWithColor).apply(game, source);
             }
-            game.informPlayers(new StringBuilder("Oona: ").append(cardsWithColor).append(" Token").append(cardsWithColor != 1?"s":"").append(" created").toString());
+            game.informPlayers(new StringBuilder("Oona: ").append(cardsWithColor).append(" Token").append(cardsWithColor != 1 ? "s" : "").append(" created").toString());
             return true;
         }
         return false;
-    }
-}
-
-class OonaQueenFaerieToken extends Token {
-    OonaQueenFaerieToken() {
-        super("Faerie Rogue", "1/1 blue and black Faerie Rogue creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        color.setBlack(true);
-        subtype.add("Faerie");
-        subtype.add("Rogue");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

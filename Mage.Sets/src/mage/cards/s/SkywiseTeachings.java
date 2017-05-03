@@ -28,19 +28,17 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SkywiseTeachingsToken;
 
 /**
  *
@@ -55,7 +53,7 @@ public class SkywiseTeachings extends CardImpl {
     }
 
     public SkywiseTeachings(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Whenever you cast a noncreature spell, you may pay {1}{U}. If you do, create a 2/2 blue Djinn Monk creature token with flying.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new SkywiseTeachingsToken()), new ManaCostsImpl("{1}{U}")), filter, false));
@@ -69,19 +67,5 @@ public class SkywiseTeachings extends CardImpl {
     @Override
     public SkywiseTeachings copy() {
         return new SkywiseTeachings(this);
-    }
-}
-
-class SkywiseTeachingsToken extends Token {
-
-    SkywiseTeachingsToken() {
-        super("Djinn Monk", "2/2 blue Djinn Monk creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        this.subtype.add("Djinn");
-        this.subtype.add("Monk");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

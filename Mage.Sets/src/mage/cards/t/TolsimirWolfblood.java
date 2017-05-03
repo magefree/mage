@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,9 +41,7 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.VojaToken;
 
 /**
  *
@@ -84,20 +83,5 @@ public class TolsimirWolfblood extends CardImpl {
     @Override
     public TolsimirWolfblood copy() {
         return new TolsimirWolfblood(this);
-    }
-}
-
-class VojaToken extends Token {
-
-    public VojaToken() {
-        super("Voja", "legendary 2/2 green and white Wolf creature token named Voja");
-        this.cardType.add(CardType.CREATURE);
-        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add("Wolf");
-
-        this.color.setGreen(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
     }
 }

@@ -29,19 +29,18 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.OphiomancerSnakeToken;
 
 /**
  *
@@ -72,18 +71,4 @@ public class Ophiomancer extends CardImpl {
     public Ophiomancer copy() {
         return new Ophiomancer(this);
     }
-}
-
-class OphiomancerSnakeToken extends Token {
-
-    public OphiomancerSnakeToken() {
-        super("Snake", "1/1 black Snake creature token with deathtouch");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Snake");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(DeathtouchAbility.getInstance());
-    }
-
 }

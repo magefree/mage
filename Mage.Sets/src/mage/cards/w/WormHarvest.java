@@ -28,7 +28,6 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.RetraceAbility;
@@ -36,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterLandCard;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WormHarvestToken;
 
 /**
  *
@@ -45,7 +44,7 @@ import mage.game.permanent.token.Token;
 public class WormHarvest extends CardImpl {
 
     public WormHarvest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B/G}{B/G}{B/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B/G}{B/G}{B/G}");
 
         // Create a 1/1 black and green Worm creature token for each land card in your graveyard.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(new FilterLandCard());
@@ -62,17 +61,5 @@ public class WormHarvest extends CardImpl {
     @Override
     public WormHarvest copy() {
         return new WormHarvest(this);
-    }
-}
-
-class WormHarvestToken extends Token {
-    WormHarvestToken() {
-        super("Worm", "1/1 black and green Worm creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        color.setGreen(true);
-        subtype.add("Worm");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

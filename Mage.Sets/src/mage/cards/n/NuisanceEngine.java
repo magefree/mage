@@ -28,9 +28,6 @@
 package mage.cards.n;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,8 +35,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PestToken;
 
 /**
  * @author Loki
@@ -47,7 +45,7 @@ import mage.game.permanent.token.Token;
 public class NuisanceEngine extends CardImpl {
 
     public NuisanceEngine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PestToken(), 1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -61,16 +59,4 @@ public class NuisanceEngine extends CardImpl {
     public NuisanceEngine copy() {
         return new NuisanceEngine(this);
     }
-}
-
-class PestToken extends Token {
-    public PestToken() {
-        super("Pest", "0/1 colorless Pest artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Pest");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
-    }
-
 }

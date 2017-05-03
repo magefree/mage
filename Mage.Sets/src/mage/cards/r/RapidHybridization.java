@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -38,7 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RapidHybridizationToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class RapidHybridization extends CardImpl {
 
     public RapidHybridization(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -90,24 +89,6 @@ class RapidHybridizationEffect extends OneShotEffect {
             token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
         }
         return true;
-    }
-
-}
-
-class RapidHybridizationToken extends Token {
-
-    public RapidHybridizationToken() {
-        super("Frog Lizard", "3/3 green Frog Lizard creature token");
-        this.setOriginalExpansionSetCode("GTC");
-        cardType.add(CardType.CREATURE);
-
-        color.setGreen(true);
-
-        subtype.add("Frog");
-        subtype.add("Lizard");
-
-        power = new MageInt(3);
-        toughness = new MageInt(3);
     }
 
 }

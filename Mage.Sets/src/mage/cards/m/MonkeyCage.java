@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -43,7 +42,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ApeToken;
 
 /**
  *
@@ -52,11 +51,11 @@ import mage.game.permanent.token.Token;
 public class MonkeyCage extends CardImpl {
 
     public MonkeyCage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // When a creature enters the battlefield, sacrifice Monkey Cage and create X 2/2 green Ape creature tokens, where X is that creature's converted mana cost.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(),
-            new FilterCreaturePermanent("a creature"), false, SetTargetPointer.PERMANENT, "");
+                new FilterCreaturePermanent("a creature"), false, SetTargetPointer.PERMANENT, "");
         ability.addEffect(new MonkeyCageEffect());
         this.addAbility(ability);
     }
@@ -88,22 +87,11 @@ class MonkeyCageEffect extends OneShotEffect {
     }
 
     public boolean apply(Game game, Ability source) {
-         Permanent creature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-         if(creature != null) {
-             int cmc = creature.getConvertedManaCost();
-             return new CreateTokenEffect(new ApeToken(), cmc).apply(game, source);
-         }
-         return false;
-    }
-}
-
-class ApeToken extends Token {
-    ApeToken() {
-        super("Ape", "2/2 green Ape creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Ape");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
+        Permanent creature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        if (creature != null) {
+            int cmc = creature.getConvertedManaCost();
+            return new CreateTokenEffect(new ApeToken(), cmc).apply(game, source);
+        }
+        return false;
     }
 }

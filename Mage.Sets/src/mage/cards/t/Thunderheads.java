@@ -28,19 +28,16 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WeirdToken;
 
 /**
  *
@@ -49,7 +46,7 @@ import mage.game.permanent.token.Token;
 public class Thunderheads extends CardImpl {
 
     public Thunderheads(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Replicate {2}{U}
         this.addAbility(new ReplicateAbility(this, "{2}{U}"));
@@ -91,19 +88,5 @@ class ThunderheadsEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class WeirdToken extends Token {
-
-    WeirdToken() {
-        super("Weird", "3/3 blue Weird create token with defender and flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Weird");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

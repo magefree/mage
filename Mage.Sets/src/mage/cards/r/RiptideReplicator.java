@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -48,6 +47,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.permanent.token.RiptideReplicatorToken;
 import mage.game.permanent.token.Token;
 
 /**
@@ -57,7 +57,7 @@ import mage.game.permanent.token.Token;
 public class RiptideReplicator extends CardImpl {
 
     public RiptideReplicator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{X}{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{X}{4}");
 
         // As Riptide Replicator enters the battlefield, choose a color and a creature type.
         Ability ability = new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
@@ -108,21 +108,5 @@ class RiptideReplicatorEffect extends OneShotEffect {
         int x = (new CountersSourceCount(CounterType.CHARGE)).calculate(game, source, this);
         Token token = new RiptideReplicatorToken(color, type, x);
         return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-    }
-}
-
-class RiptideReplicatorToken extends Token {
-
-    RiptideReplicatorToken(ObjectColor color, String type, int x) {
-        super(type, "X/X creature token of the chosen color and type");
-        cardType.add(CardType.CREATURE);
-        if (color != null) {
-            this.color.setColor(color);
-        }
-        if (type != null) {
-            subtype.add(type);
-        }
-        power = new MageInt(x);
-        toughness = new MageInt(x);
     }
 }

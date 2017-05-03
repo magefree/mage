@@ -28,15 +28,14 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.MageInt;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.IllusionToken;
 import mage.target.TargetSpell;
 
 /**
@@ -52,8 +51,7 @@ public class SummonersBane extends CardImpl {
     }
 
     public SummonersBane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
@@ -67,18 +65,5 @@ public class SummonersBane extends CardImpl {
     @Override
     public SummonersBane copy() {
         return new SummonersBane(this);
-    }
-}
-
-class IllusionToken extends Token {
-
-    public IllusionToken() {
-        super("Illusion", "2/2 blue Illusion creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-
-        subtype.add("Illusion");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

@@ -28,7 +28,6 @@
 package mage.cards.z;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ZendikarsRoilElementalToken;
 
 /**
  *
@@ -45,7 +44,7 @@ import mage.game.permanent.token.Token;
 public class ZendikarsRoil extends CardImpl {
 
     public ZendikarsRoil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
 
         // Whenever a land enters the battlefield under your control, create a 2/2 green Elemental creature token.
         Effect effect = new CreateTokenEffect(new ZendikarsRoilElementalToken());
@@ -60,18 +59,4 @@ public class ZendikarsRoil extends CardImpl {
     public ZendikarsRoil copy() {
         return new ZendikarsRoil(this);
     }
-}
-
-class ZendikarsRoilElementalToken extends Token {
-
-    public ZendikarsRoilElementalToken() {
-        super("Elemental", "2/2 green Elemental creature token");
-        cardType.add(CardType.CREATURE);
-        setOriginalExpansionSetCode("ORI");
-        subtype.add("Elemental");
-        color.setGreen(true);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-    }
-
 }

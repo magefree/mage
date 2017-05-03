@@ -25,13 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -41,9 +37,10 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SpawningPitToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -52,15 +49,15 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SpawningPit extends CardImpl {
 
-    public SpawningPit (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+    public SpawningPit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpawningPitToken()), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2)));
         this.addAbility(ability);
     }
 
-    public SpawningPit (final SpawningPit card) {
+    public SpawningPit(final SpawningPit card) {
         super(card);
     }
 
@@ -70,15 +67,3 @@ public class SpawningPit extends CardImpl {
     }
 
 }
-
-class SpawningPitToken extends Token {
-    public SpawningPitToken() {
-        super("Spawn", "2/2 colorless Spawn artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        this.subtype.add("Spawn");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-    }
-}
-

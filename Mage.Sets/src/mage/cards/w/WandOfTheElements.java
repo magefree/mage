@@ -25,25 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.w;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WandOfTheElementsFirstToken;
+import mage.game.permanent.token.WandOfTheElementsSecondToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -60,7 +57,7 @@ public class WandOfTheElements extends CardImpl {
     }
 
     public WandOfTheElements(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WandOfTheElementsFirstToken()), new TapSourceCost());
         firstAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(islandFilter)));
         this.addAbility(firstAbility);
@@ -79,28 +76,3 @@ public class WandOfTheElements extends CardImpl {
         return new WandOfTheElements(this);
     }
 }
-
-class WandOfTheElementsFirstToken extends Token {
-    public WandOfTheElementsFirstToken() {
-        super("Elemental", "2/2 blue Elemental creature token with flying");
-        cardType.add(CardType.CREATURE);
-        this.subtype.add("Elemental");
-        this.color.setBlue(true);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
-    }
-}
-
-
-class WandOfTheElementsSecondToken extends Token {
-    public WandOfTheElementsSecondToken() {
-        super("Elemental", "3/3 red Elemental creature token");
-        cardType.add(CardType.CREATURE);
-        this.subtype.add("Elemental");
-        this.color.setRed(true);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-    }
-}
-

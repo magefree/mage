@@ -47,6 +47,10 @@ public class ElementalToken extends Token {
         tokenImageSets.addAll(Arrays.asList("OGW", "CON", "DIS"));
     }
 
+    public ElementalToken() {
+        this ("OGW", 0);
+    }
+
     public ElementalToken(String setCode, int tokenType) {
         super("Elemental", "3/1 red Elemental creature token");
         availableImageSetCodes = tokenImageSets;

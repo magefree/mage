@@ -28,7 +28,6 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -54,7 +53,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.OctopusToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCreaturePermanent;
@@ -241,18 +240,5 @@ class KioraFightEffect extends OneShotEffect {
     @Override
     public KioraFightEffect copy() {
         return new KioraFightEffect(this);
-    }
-}
-
-class OctopusToken extends Token {
-
-    public OctopusToken() {
-        super("Octopus", "8/8 blue Octopus creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Octopus");
-        power = new MageInt(8);
-        toughness = new MageInt(8);
-        this.setOriginalExpansionSetCode("BFZ");
     }
 }

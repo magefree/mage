@@ -29,7 +29,6 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -38,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RedHumanToken;
 
 /**
  *
@@ -47,7 +46,7 @@ import mage.game.permanent.token.Token;
 public class HanweirGarrison extends CardImpl {
 
     public HanweirGarrison(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);
@@ -67,18 +66,5 @@ public class HanweirGarrison extends CardImpl {
     @Override
     public HanweirGarrison copy() {
         return new HanweirGarrison(this);
-    }
-}
-
-class RedHumanToken extends Token {
-
-    public RedHumanToken() {
-        super("Human", "1/1 red Human creature token");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Human");
-
-        this.color = ObjectColor.RED;
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
     }
 }

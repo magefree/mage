@@ -27,10 +27,9 @@
  */
 package mage.cards.g;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,10 +37,9 @@ import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.permanent.token.SpiritBlueToken;
 import mage.game.permanent.token.Token;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,8 +54,7 @@ public class GeistSnatch extends CardImpl {
     }
 
     public GeistSnatch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
         // Counter target creature spell. Create a 1/1 blue Spirit creature token with flying.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
@@ -97,19 +94,4 @@ class GeistSnatchCounterTargetEffect extends OneShotEffect {
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;
     }
-}
-
-class SpiritBlueToken extends Token {
-
-    public SpiritBlueToken() {
-        super("Spirit", "1/1 blue Spirit creature token with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Spirit");
-        color.setBlue(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        setTokenType(2);
-        addAbility(FlyingAbility.getInstance());
-    }
-
 }

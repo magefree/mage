@@ -27,17 +27,14 @@
  */
 package mage.cards.b;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BeckonApparitionToken;
 import mage.target.common.TargetCardInGraveyard;
-
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -45,8 +42,7 @@ import java.util.UUID;
 public class BeckonApparition extends CardImpl {
 
     public BeckonApparition(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W/B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W/B}");
 
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
@@ -60,20 +56,5 @@ public class BeckonApparition extends CardImpl {
     @Override
     public BeckonApparition copy() {
         return new BeckonApparition(this);
-    }
-}
-
-
-class BeckonApparitionToken extends Token {
-    BeckonApparitionToken() {
-        super("Spirit", "1/1 white and black Spirit creature token with flying");
-        this.setOriginalExpansionSetCode("GTC");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        color.setBlack(true);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

@@ -28,18 +28,15 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
-import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.game.permanent.token.HuntedCentaurToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
@@ -50,7 +47,7 @@ import mage.target.common.TargetOpponent;
 public class HuntedHorror extends CardImpl {
 
     public HuntedHorror(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(7);
@@ -58,7 +55,7 @@ public class HuntedHorror extends CardImpl {
 
         this.addAbility(TrampleAbility.getInstance());
         // When Hunted Horror enters the battlefield, create two 3/3 green Centaur creature tokens with protection from black under target opponent's control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new CentaurToken(), 2), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new HuntedCentaurToken(), 2), false);
         Target target = new TargetOpponent();
         ability.addTarget(target);
         this.addAbility(ability);
@@ -73,16 +70,3 @@ public class HuntedHorror extends CardImpl {
         return new HuntedHorror(this);
     }
 }
-
-class CentaurToken extends Token {
-    CentaurToken() {
-        super("Centaur", "3/3 green Centaur creature tokens with protection from black");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Centaur");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
-    }
-}
-

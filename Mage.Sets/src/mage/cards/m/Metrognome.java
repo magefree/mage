@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiscardedByOpponentTriggerAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GnomeToken;
 
 /**
  *
@@ -66,17 +65,5 @@ public class Metrognome extends CardImpl {
     @Override
     public Metrognome copy() {
         return new Metrognome(this);
-    }
-}
-
-class GnomeToken extends Token {
-
-    public GnomeToken() {
-        super("Gnome", "1/1 colorless Gnome artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Gnome");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

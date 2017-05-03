@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -35,12 +36,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.token.Token;
+import mage.game.events.GameEvent;
+import mage.game.permanent.token.EldraziToken;
 import mage.game.stack.Spell;
-
-import java.util.UUID;
 
 /**
  *
@@ -49,7 +48,7 @@ import java.util.UUID;
 public class DesolationTwin extends CardImpl {
 
     public DesolationTwin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
@@ -97,16 +96,5 @@ class DesolationTwinOnCastAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "When you cast {this}, " + super.getRule();
-    }
-}
-
-class EldraziToken extends Token {
-
-    public EldraziToken() {
-        super("Eldrazi", "10/10 colorless Eldrazi creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Eldrazi");
-        power = new MageInt(10);
-        toughness = new MageInt(10);
     }
 }

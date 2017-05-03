@@ -37,7 +37,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,7 +44,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WoodToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -86,20 +85,5 @@ public class JunglePatrol extends CardImpl {
     @Override
     public JunglePatrol copy() {
         return new JunglePatrol(this);
-    }
-}
-
-class WoodToken extends Token {
-
-    public WoodToken() {
-        super("Wood", "0/1 green Wall creature token with defender named Wood");
-        this.setOriginalExpansionSetCode("MIR");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Wall");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
-
-        this.addAbility(DefenderAbility.getInstance());
     }
 }

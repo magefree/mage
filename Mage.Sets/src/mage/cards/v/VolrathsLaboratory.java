@@ -28,7 +28,6 @@
 package mage.cards.v;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -46,6 +45,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.VolrathsLaboratoryToken;
 
 /**
  *
@@ -54,7 +54,7 @@ import mage.game.permanent.token.Token;
 public class VolrathsLaboratory extends CardImpl {
 
     public VolrathsLaboratory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // As Volrath's Laboratory enters the battlefield, choose a color and a creature type.
         Ability ability = new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
@@ -101,21 +101,5 @@ class VolrathsLaboratoryEffect extends OneShotEffect {
         String type = (String) game.getState().getValue(source.getSourceId() + "_type");
         Token token = new VolrathsLaboratoryToken(color, type);
         return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-    }
-}
-
-class VolrathsLaboratoryToken extends Token {
-
-    VolrathsLaboratoryToken(ObjectColor color, String type) {
-        super(type, "2/2 creature token of the chosen color and type");
-        cardType.add(CardType.CREATURE);
-        if (color != null) {
-            this.color.setColor(color);
-        }
-        if (type != null) {
-            subtype.add(type);
-        }
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

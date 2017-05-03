@@ -28,10 +28,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,6 +38,7 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.permanent.token.SwanSongBirdToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
@@ -51,15 +50,15 @@ import mage.target.TargetSpell;
 public class SwanSong extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("enchantment, instant or sorcery spell");
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ENCHANTMENT),
-                                 new CardTypePredicate(CardType.INSTANT),
-                                 new CardTypePredicate(CardType.SORCERY)));
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public SwanSong(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Counter target enchantment, instant or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying.
         this.getSpellAbility().addEffect(new SwanSongEffect());
@@ -106,20 +105,5 @@ class SwanSongEffect extends OneShotEffect {
             }
         }
         return countered;
-    }
-}
-
-class SwanSongBirdToken extends Token {
-    SwanSongBirdToken() {
-        super("Bird", "2/2 blue Bird creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Bird");
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
-            setTokenType(2);
-        }
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

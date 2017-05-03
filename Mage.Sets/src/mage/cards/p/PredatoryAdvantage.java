@@ -28,21 +28,20 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.TargetController;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.LizardToken;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
@@ -53,10 +52,7 @@ import mage.watchers.Watcher;
 public class PredatoryAdvantage extends CardImpl {
 
     public PredatoryAdvantage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{G}");
-
-
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{G}");
 
         // At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, create a 2/2 green Lizard creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LizardToken()), TargetController.OPPONENT, new DidNotCastCreatureCondition(), false), new CastCreatureWatcher());
@@ -118,17 +114,5 @@ class CastCreatureWatcher extends Watcher {
     @Override
     public CastCreatureWatcher copy() {
         return new CastCreatureWatcher(this);
-    }
-}
-
-class LizardToken extends Token {
-
-    public LizardToken() {
-        super("Lizard", "2/2 green Lizard creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Lizard");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

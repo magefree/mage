@@ -41,6 +41,7 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.game.permanent.token.HumanClericToken;
 
 /**
  *

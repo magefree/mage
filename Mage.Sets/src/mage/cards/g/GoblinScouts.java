@@ -27,15 +27,12 @@
  */
 package mage.cards.g;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.GoblinScoutsToken;
 
 /**
  *
@@ -44,7 +41,7 @@ import java.util.UUID;
 public class GoblinScouts extends CardImpl {
 
     public GoblinScouts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Create three 1/1 red Goblin Scout creature tokens with mountainwalk.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinScoutsToken(), 3));
@@ -57,20 +54,5 @@ public class GoblinScouts extends CardImpl {
     @Override
     public GoblinScouts copy() {
         return new GoblinScouts(this);
-    }
-}
-
-class GoblinScoutsToken extends Token {
-
-    public GoblinScoutsToken() {
-        super("Goblin Scout", "1/1 red Goblin Scout creature tokens with mountainwalk");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Goblin");
-        subtype.add("Scout");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        this.addAbility(new MountainwalkAbility());
     }
 }

@@ -29,20 +29,17 @@ package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RedHumanToken;
 import mage.target.targetpointer.FixedTargets;
 
 /**
@@ -52,7 +49,7 @@ import mage.target.targetpointer.FixedTargets;
 public class ThatcherRevolt extends CardImpl {
 
     public ThatcherRevolt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Create three 1/1 red Human creature tokens with haste. Sacrifice those tokens at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThatcherRevoltEffect());
@@ -99,20 +96,5 @@ class ThatcherRevoltEffect extends OneShotEffect {
         sacrificeEffect.setTargetPointer(new FixedTargets(toSacrifice, game));
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
         return true;
-    }
-}
-
-class RedHumanToken extends Token {
-
-    public RedHumanToken() {
-        super("Human", "1/1 red Human creature token with haste");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Human");
-
-        this.color = ObjectColor.RED;
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(HasteAbility.getInstance());
     }
 }

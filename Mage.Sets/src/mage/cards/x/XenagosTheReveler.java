@@ -30,14 +30,12 @@ package mage.cards.x;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -52,7 +50,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.XenagosSatyrToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 
@@ -63,7 +61,7 @@ import mage.target.TargetCard;
 public class XenagosTheReveler extends CardImpl {
 
     public XenagosTheReveler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
         this.subtype.add("Xenagos");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -141,22 +139,6 @@ class XenagosManaEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class XenagosSatyrToken extends Token {
-
-    public XenagosSatyrToken() {
-        super("Satyr", "2/2 red and green Satyr creature token with haste");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        color.setGreen(true);
-        subtype.add("Satyr");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-
-        this.addAbility(HasteAbility.getInstance());
-    }
-
 }
 
 class XenagosExileEffect extends OneShotEffect {

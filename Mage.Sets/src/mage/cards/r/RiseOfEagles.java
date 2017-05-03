@@ -28,15 +28,12 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RiseOfEaglesBirdToken;
 
 /**
  *
@@ -45,8 +42,7 @@ import mage.game.permanent.token.Token;
 public class RiseOfEagles extends CardImpl {
 
     public RiseOfEagles(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
         // Create two 2/2 blue Bird enchantment creature tokens with flying. Scry 1.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RiseOfEaglesBirdToken(), 2));
@@ -60,21 +56,5 @@ public class RiseOfEagles extends CardImpl {
     @Override
     public RiseOfEagles copy() {
         return new RiseOfEagles(this);
-    }
-}
-
-class RiseOfEaglesBirdToken extends Token {
-
-    public RiseOfEaglesBirdToken() {
-        super("Bird", "2/2 blue Bird enchantment creature tokens with flying");
-        this.setOriginalExpansionSetCode("BNG");
-        this.setTokenType(2);
-        cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.CREATURE);
-        color.setColor(ObjectColor.BLUE);
-        subtype.add("Bird");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
     }
 }

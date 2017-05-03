@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
@@ -36,7 +37,6 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
-import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -47,9 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.RebelStarshipToken;
 
 /**
  *
@@ -64,7 +62,7 @@ public class AdmiralAckbar extends CardImpl {
     }
 
     public AdmiralAckbar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Calamari");
         this.subtype.add("Rebel");
@@ -88,20 +86,6 @@ public class AdmiralAckbar extends CardImpl {
     @Override
     public AdmiralAckbar copy() {
         return new AdmiralAckbar(this);
-    }
-}
-
-class RebelStarshipToken extends Token {
-
-    public RebelStarshipToken() {
-        super("B-Wing", "2/3 blue Rebel Starship artifact creature tokens with spaceflight name B-Wing", 2, 3);
-        this.setOriginalExpansionSetCode("SWS");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        abilities.add(SpaceflightAbility.getInstance());
-        color.setBlue(true);
-        subtype.add("Rebel");
-        subtype.add("Starship");
     }
 }
 
@@ -132,6 +116,6 @@ class AdmiralAckbarTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever two or more Starship creatures you control attack, draw a card" ;
+        return "Whenever two or more Starship creatures you control attack, draw a card";
     }
 }

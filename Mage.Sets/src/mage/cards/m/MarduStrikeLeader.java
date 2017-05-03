@@ -35,7 +35,7 @@ import mage.abilities.keyword.DashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.MarduStrikeLeaderWarriorToken;
 
 /**
  *
@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
 public class MarduStrikeLeader extends CardImpl {
 
     public MarduStrikeLeader(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);
@@ -65,17 +65,4 @@ public class MarduStrikeLeader extends CardImpl {
     public MarduStrikeLeader copy() {
         return new MarduStrikeLeader(this);
     }
-}
-
-class MarduStrikeLeaderWarriorToken extends Token {
-
-    public MarduStrikeLeaderWarriorToken() {
-        super("Warrior", "2/1 black Warrior creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Warrior");
-        power = new MageInt(2);
-        toughness = new MageInt(1);
-    }
-
 }

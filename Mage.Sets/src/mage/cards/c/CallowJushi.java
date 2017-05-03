@@ -61,7 +61,7 @@ public class CallowJushi extends CardImpl {
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public CallowJushi(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

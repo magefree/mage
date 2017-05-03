@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,9 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.ArchitectOfTheUntamedBeastToken;
 
 /**
  *
@@ -49,7 +48,7 @@ import java.util.UUID;
 public class ArchitectOfTheUntamed extends CardImpl {
 
     public ArchitectOfTheUntamed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Artificer");
         this.subtype.add("Druid");
@@ -62,7 +61,7 @@ public class ArchitectOfTheUntamed extends CardImpl {
         // Pay {E}{E}{E}{E}{E}{E}{E}{E}: Create a 6/6 colorless Beast artifact creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ArchitectOfTheUntamedBeastToken(), 1), new PayEnergyCost(8)));
     }
-    
+
     public ArchitectOfTheUntamed(final ArchitectOfTheUntamed card) {
         super(card);
     }
@@ -70,17 +69,5 @@ public class ArchitectOfTheUntamed extends CardImpl {
     @Override
     public ArchitectOfTheUntamed copy() {
         return new ArchitectOfTheUntamed(this);
-    }
-}
-
-class ArchitectOfTheUntamedBeastToken extends Token {
-
-    ArchitectOfTheUntamedBeastToken() {
-        super("Beast", "6/6 colorless Beast artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Beast");
-        power = new MageInt(6);
-        toughness = new MageInt(6);
     }
 }

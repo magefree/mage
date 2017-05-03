@@ -36,7 +36,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,7 +43,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RakdosGuildmageGoblinToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class RakdosGuildmage extends CardImpl {
 
     public RakdosGuildmage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}{B/R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B/R}{B/R}");
         this.subtype.add("Zombie");
         this.subtype.add("Shaman");
         this.power = new MageInt(2);
@@ -101,24 +100,10 @@ class RakdosGuildmageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         CreateTokenEffect effect = new CreateTokenEffect(new RakdosGuildmageGoblinToken());
-        if (effect.apply(game, source))
-        {
+        if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;
         }
         return false;
-    }
-}
-
-class RakdosGuildmageGoblinToken extends Token {
-
-    RakdosGuildmageGoblinToken() {
-        super("Goblin", "2/1 red Goblin creature token with haste");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Goblin");
-        power = new MageInt(2);
-        toughness = new MageInt(1);
-        this.addAbility(HasteAbility.getInstance());
     }
 }

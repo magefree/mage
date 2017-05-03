@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PincherToken;
 
 /**
  *
@@ -48,12 +47,12 @@ import mage.game.permanent.token.Token;
 public class SummoningStation extends CardImpl {
 
     public SummoningStation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}");
 
         // {tap}: Create a 2/2 colorless Pincher creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,new CreateTokenEffect(new PincherToken()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PincherToken()), new TapSourceCost()));
         // Whenever an artifact is put into a graveyard from the battlefield, you may untap Summoning Station.
-        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new UntapSourceEffect(),true, new FilterArtifactPermanent(), false));
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new UntapSourceEffect(), true, new FilterArtifactPermanent(), false));
     }
 
     public SummoningStation(final SummoningStation card) {
@@ -64,18 +63,4 @@ public class SummoningStation extends CardImpl {
     public SummoningStation copy() {
         return new SummoningStation(this);
     }
-}
-
-class PincherToken extends Token {
-
-    public PincherToken() {
-        super("Pincher", "2/2 colorless Pincher creature token");
-        setOriginalExpansionSetCode("5ND");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Pincher");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        
-    }
-
 }

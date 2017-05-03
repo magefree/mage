@@ -28,7 +28,6 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
@@ -40,13 +39,13 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.cards.o.OrmendahlProfanePrince;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.o.OrmendahlProfanePrince;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HumanClericToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -56,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
 public class WestvaleAbbey extends CardImpl {
 
     public WestvaleAbbey(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         this.transformable = true;
         this.secondSideCardClazz = OrmendahlProfanePrince.class;
@@ -86,18 +85,5 @@ public class WestvaleAbbey extends CardImpl {
     @Override
     public WestvaleAbbey copy() {
         return new WestvaleAbbey(this);
-    }
-}
-class HumanClericToken extends Token {
-
-    public HumanClericToken() {
-        super("Human Cleric", "1/1 white and black Human Cleric creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Cleric");
-        color.setWhite(true);
-        color.setBlack(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

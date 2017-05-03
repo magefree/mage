@@ -27,7 +27,7 @@
  */
 package mage.cards.d;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -37,8 +37,6 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -48,9 +46,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.MaritLageToken;
 
 /**
  *
@@ -139,23 +135,4 @@ class DarkDepthsAbility extends StateTriggeredAbility {
         return "When {this} has no ice counters on it, sacrifice it. If you do, create a legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage.";
     }
 
-}
-
-class MaritLageToken extends Token {
-
-    public MaritLageToken() {
-        super("Marit Lage", "legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage");
-        this.setOriginalExpansionSetCode("CSP");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Avatar");
-        addSuperType(SuperType.LEGENDARY);
-
-        color.setBlack(true);
-        power = new MageInt(20);
-        toughness = new MageInt(20);
-
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(IndestructibleAbility.getInstance());
-
-    }
 }

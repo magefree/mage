@@ -28,7 +28,6 @@
 package mage.cards.n;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.EffectKeyValue;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -40,7 +39,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.NestOfScarabsBlackInsectToken;
 
 /**
  *
@@ -106,17 +105,5 @@ class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever you put one or more -1/-1 counters on a creature, create that many 1/1 black Insect tokens.";
-    }
-}
-
-class NestOfScarabsBlackInsectToken extends Token {
-
-    NestOfScarabsBlackInsectToken() {
-        super("Insect", "1/1 black Insect token");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Insect");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

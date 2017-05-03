@@ -28,14 +28,12 @@
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.OrderedMigrationBirdToken;
 
 /**
  *
@@ -48,7 +46,7 @@ public class OrderedMigration extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{U}");
 
         // Domain - Create a 1/1 blue Bird creature token with flying for each basic land type among lands you control.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), new DomainValue()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new OrderedMigrationBirdToken(), new DomainValue()));
     }
 
     public OrderedMigration(final OrderedMigration card) {
@@ -63,15 +61,3 @@ public class OrderedMigration extends CardImpl {
 
 // TODO: There is a player rewards token for this (http://magiccards.info/extra/token/player-rewards-2001/bird.html),
 // but player rewards tokens are not downloaded...
-class BirdToken extends Token {
-
-    public BirdToken() {
-        super("Bird", "1/1 blue Bird creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Bird");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
-    }
-}

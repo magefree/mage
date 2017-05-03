@@ -28,15 +28,14 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.permanent.token.TemptWithVengeanceElementalToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -105,19 +104,5 @@ class TemptWithVengeanceEffect extends OneShotEffect {
         }
 
         return false;
-    }
-}
-
-class TemptWithVengeanceElementalToken extends Token {
-
-    public TemptWithVengeanceElementalToken() {
-        super("Elemental", "1/1 red Elemental creature tokens with haste");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
-
-        color.setRed(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(HasteAbility.getInstance());
     }
 }

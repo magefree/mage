@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HydraBroodmasterToken;
 import mage.players.Player;
 
 /**
@@ -49,7 +49,7 @@ import mage.players.Player;
 public class HydraBroodmaster extends CardImpl {
 
     public HydraBroodmaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.subtype.add("Hydra");
 
         this.power = new MageInt(7);
@@ -58,7 +58,7 @@ public class HydraBroodmaster extends CardImpl {
         // {X}{X}{G}: Monstrosity X
         this.addAbility(new MonstrosityAbility("{X}{X}{G}", Integer.MAX_VALUE));
         // When Hydra Broodmaster becomes monstrous, create X X/X green Hydra creature tokens.
-        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new HydraBroodmasterEffect()));        
+        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new HydraBroodmasterEffect()));
     }
 
     public HydraBroodmaster(final HydraBroodmaster card) {
@@ -72,42 +72,28 @@ public class HydraBroodmaster extends CardImpl {
 }
 
 class HydraBroodmasterEffect extends OneShotEffect {
-    
+
     public HydraBroodmasterEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create X X/X green Hydra creature tokens";
     }
-    
+
     public HydraBroodmasterEffect(final HydraBroodmasterEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public HydraBroodmasterEffect copy() {
         return new HydraBroodmasterEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int xValue = ((BecomesMonstrousSourceTriggeredAbility) source).getMonstrosityValue();
-            return new CreateTokenEffect(new HydraBroodmasterToken(xValue, xValue), xValue).apply(game, source);            
+            return new CreateTokenEffect(new HydraBroodmasterToken(xValue, xValue), xValue).apply(game, source);
         }
         return false;
     }
-}
-
-class HydraBroodmasterToken extends Token {
-
-    public HydraBroodmasterToken(int power, int toughness) {
-        super("Hydra", "green Hydra creature token");
-        this.setOriginalExpansionSetCode("JOU");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Hydra");
-        this.power = new MageInt(power);
-        this.toughness = new MageInt(toughness);
-    }
-
 }

@@ -27,22 +27,15 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.DragonToken;
 
 /**
  *
@@ -51,7 +44,7 @@ import java.util.UUID;
 public class DragonEgg extends CardImpl {
 
     public DragonEgg(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(0);
@@ -74,19 +67,4 @@ public class DragonEgg extends CardImpl {
         return new DragonEgg(this);
     }
 
-    class DragonToken extends Token {
-
-        DragonToken() {
-            super("Dragon", "2/2 red Dragon creature token with flying that has \"{R}: This creature gets +1/+0 until end of turn");
-            this.setOriginalExpansionSetCode("M14");
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            subtype.add("Dragon");
-            power = new MageInt(2);
-            toughness = new MageInt(2);
-            addAbility(FlyingAbility.getInstance());
-            addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-
-        }
-    }
 }

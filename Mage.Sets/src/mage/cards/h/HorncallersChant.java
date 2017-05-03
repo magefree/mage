@@ -28,14 +28,12 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PopulateEffect;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.game.permanent.token.RhinoToken;
 
 /**
  *
@@ -44,8 +42,7 @@ import mage.game.permanent.token.Token;
 public class HorncallersChant extends CardImpl {
 
     public HorncallersChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{G}");
 
         // Create a 4/4 green Rhino creature token with trample, then populate.
         // (Create a token that's a copy of a creature token you control.)
@@ -60,18 +57,5 @@ public class HorncallersChant extends CardImpl {
     @Override
     public HorncallersChant copy() {
         return new HorncallersChant(this);
-    }
-}
-
-class RhinoToken extends Token {
-
-    public RhinoToken() {
-        super("Rhino", "4/4 green Rhino creature token with trample");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Rhino");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        addAbility(TrampleAbility.getInstance());
     }
 }

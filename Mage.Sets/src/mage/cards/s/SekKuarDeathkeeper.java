@@ -27,10 +27,10 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,9 +41,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.SekKuarDeathkeeperGravebornToken;
 
 /**
  *
@@ -52,6 +50,7 @@ import java.util.UUID;
 public class SekKuarDeathkeeper extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature you control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new AnotherPredicate());
@@ -59,7 +58,7 @@ public class SekKuarDeathkeeper extends CardImpl {
     }
 
     public SekKuarDeathkeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Orc");
         this.subtype.add("Shaman");
@@ -68,7 +67,7 @@ public class SekKuarDeathkeeper extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another nontoken creature you control dies, create a 3/1 black and red Graveborn creature token with haste.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SekKuarDeathkeeperGravebornToken()),false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SekKuarDeathkeeperGravebornToken()), false, filter));
     }
 
     public SekKuarDeathkeeper(final SekKuarDeathkeeper card) {
@@ -78,19 +77,5 @@ public class SekKuarDeathkeeper extends CardImpl {
     @Override
     public SekKuarDeathkeeper copy() {
         return new SekKuarDeathkeeper(this);
-    }
-}
-
-class SekKuarDeathkeeperGravebornToken extends Token {
-
-    public SekKuarDeathkeeperGravebornToken() {
-        super("Graveborn", "3/1 black and red Graveborn creature token with haste");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        color.setRed(true);
-        subtype.add("Graveborn");
-        power = new MageInt(3);
-        toughness = new MageInt(1);
-        this.addAbility(HasteAbility.getInstance());
     }
 }

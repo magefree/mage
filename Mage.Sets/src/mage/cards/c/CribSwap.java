@@ -27,7 +27,7 @@
  */
 package mage.cards.c;
 
-import mage.MageInt;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -38,11 +38,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CribSwapShapeshifterWhiteToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -51,7 +49,7 @@ import java.util.UUID;
 public class CribSwap extends CardImpl {
 
     public CribSwap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{W}");
         this.subtype.add("Shapeshifter");
 
         // Changeling
@@ -100,18 +98,5 @@ class CribSwapEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class CribSwapShapeshifterWhiteToken extends Token {
-
-    public CribSwapShapeshifterWhiteToken() {
-        super("Shapeshifter", "1/1 colorless Shapeshifter creature token with changeling");
-        this.setOriginalExpansionSetCode("LRW");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Shapeshifter");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(ChangelingAbility.getInstance());
     }
 }

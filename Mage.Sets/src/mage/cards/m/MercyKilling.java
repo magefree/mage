@@ -28,19 +28,17 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.effects.OneShotEffect;
-import mage.game.Game;
-import mage.abilities.Ability;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.game.permanent.token.Token;
-import mage.MageInt;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.token.MercyKillingToken;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author duncant
@@ -48,8 +46,8 @@ import mage.MageInt;
 public class MercyKilling extends CardImpl {
 
     public MercyKilling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G/W}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G/W}");
+
         // Target creature's controller sacrifices it, then creates X 1/1 green and white Elf Warrior creature tokens, where X is that creature's power.
         this.getSpellAbility().addEffect(new SacrificeTargetEffect("Target creature's controller sacrifices it"));
         this.getSpellAbility().addEffect(new MercyKillingTokenEffect());
@@ -92,18 +90,4 @@ class MercyKillingTokenEffect extends OneShotEffect {
         return false;
     }
 
-}
-
-class MercyKillingToken extends Token {
-
-    public MercyKillingToken() {
-        super("Elf Warrior", "1/1 green and white Elf Warrior creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        color.setWhite(true);
-        subtype.add("Elf");
-        subtype.add("Warrior");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
 }

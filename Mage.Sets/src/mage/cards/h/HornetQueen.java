@@ -31,12 +31,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HornetQueenInsectToken;
 
 /**
  *
@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
 public class HornetQueen extends CardImpl {
 
     public HornetQueen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");
         this.subtype.add("Insect");
 
         this.power = new MageInt(2);
@@ -66,19 +66,5 @@ public class HornetQueen extends CardImpl {
     @Override
     public HornetQueen copy() {
         return new HornetQueen(this);
-    }
-}
-class HornetQueenInsectToken extends Token {
-
-    public HornetQueenInsectToken() {
-        super("Insect", "1/1 green Insect creature token with flying and deathtouch");
-        setOriginalExpansionSetCode("M15");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Insect");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
-        addAbility(DeathtouchAbility.getInstance());        
     }
 }

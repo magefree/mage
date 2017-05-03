@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -47,9 +48,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
+import mage.game.permanent.token.BaruFistOfKrosaToken;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  *
@@ -118,17 +118,5 @@ class BaruFistOfKrosaEffect extends OneShotEffect {
         Token token = new BaruFistOfKrosaToken(xValue);
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;
-    }
-}
-
-class BaruFistOfKrosaToken extends Token {
-
-    BaruFistOfKrosaToken(int xValue) {
-        super("Wurm", "X/X green Wurm creature token, where X is the number of lands you control");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Wurm");
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
     }
 }

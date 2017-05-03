@@ -28,7 +28,6 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,7 +37,6 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -46,7 +44,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.LeafdrakeRoostDrakeToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -57,9 +55,8 @@ import mage.target.common.TargetLandPermanent;
 public class LeafdrakeRoost extends CardImpl {
 
     public LeafdrakeRoost(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}");
         this.subtype.add("Aura");
-
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -84,19 +81,4 @@ public class LeafdrakeRoost extends CardImpl {
     public LeafdrakeRoost copy() {
         return new LeafdrakeRoost(this);
     }
-}
-
-class LeafdrakeRoostDrakeToken extends Token {
-
-    public LeafdrakeRoostDrakeToken() {
-        super("Drake", "2/2 green and blue Drake creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        color.setBlue(true);
-        subtype.add("Drake");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
 }

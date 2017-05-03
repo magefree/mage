@@ -28,17 +28,12 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackYouOrPlaneswalkerAllEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -49,7 +44,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.LightningRagerToken;
 import mage.players.Player;
 
 /**
@@ -111,22 +106,5 @@ class RiteOfTheRagingStormEffect extends OneShotEffect {
     @Override
     public RiteOfTheRagingStormEffect copy() {
         return new RiteOfTheRagingStormEffect(this);
-    }
-}
-
-class LightningRagerToken extends Token {
-
-    LightningRagerToken() {
-        super("Lightning Rager", "5/1 red Elemental creature token named Lightning Rager."
-                + "It has trample, haste, and \"At the beginning of the end step, sacrifice this creature.\"");
-        this.setOriginalExpansionSetCode("C15");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Elemental");
-        power = new MageInt(5);
-        toughness = new MageInt(1);
-        addAbility(TrampleAbility.getInstance());
-        addAbility(HasteAbility.getInstance());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
     }
 }

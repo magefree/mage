@@ -28,13 +28,13 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.game.permanent.token.PenumbraBobcatToken;
 
 /**
  *
@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
 public class PenumbraBobcat extends CardImpl {
 
     public PenumbraBobcat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Cat");
 
         this.power = new MageInt(2);
@@ -58,16 +58,5 @@ public class PenumbraBobcat extends CardImpl {
     @Override
     public PenumbraBobcat copy() {
         return new PenumbraBobcat(this);
-    }
-}
-
-class PenumbraBobcatToken extends Token {
-    PenumbraBobcatToken() {
-        super("Cat", "2/1 black Cat creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Cat");
-        power = new MageInt(2);
-        toughness = new MageInt(1);
     }
 }

@@ -28,7 +28,6 @@
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EntwineAbility;
@@ -36,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.InsectToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.OneDozenEyesBeastToken;
 
 /**
  *
@@ -45,8 +44,7 @@ import mage.game.permanent.token.Token;
 public class OneDozenEyes extends CardImpl {
 
     public OneDozenEyes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{G}");
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);
@@ -55,7 +53,7 @@ public class OneDozenEyes extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new OneDozenEyesBeastToken()));
         // or create five 1/1 green Insect creature tokens.
         Mode mode = new Mode();
-        mode.getEffects().add(new CreateTokenEffect(new InsectToken(),5));
+        mode.getEffects().add(new CreateTokenEffect(new InsectToken(), 5));
         this.getSpellAbility().addMode(mode);
         // Entwine {G}{G}{G}
         this.addAbility(new EntwineAbility("{G}{G}{G}"));
@@ -69,17 +67,4 @@ public class OneDozenEyes extends CardImpl {
     public OneDozenEyes copy() {
         return new OneDozenEyes(this);
     }
-}
-
-class OneDozenEyesBeastToken extends Token {
-
-    public OneDozenEyesBeastToken() {
-        super("Beast", "5/5 green Beast creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Beast");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-    }
-
 }

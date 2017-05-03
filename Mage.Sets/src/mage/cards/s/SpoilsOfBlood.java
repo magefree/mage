@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -40,10 +39,10 @@ import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SpoilsOfBloodHorrorToken;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
@@ -54,8 +53,7 @@ import mage.watchers.Watcher;
 public class SpoilsOfBlood extends CardImpl {
 
     public SpoilsOfBlood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Create an X/X black Horror creature token, where X is the number of creatures that died this turn.
         this.getSpellAbility().addEffect(new SpoilsOfBloodEffect());
@@ -103,7 +101,6 @@ class SpoilsOfBloodEffect extends OneShotEffect {
 
 }
 
-
 class CreaturesDiedThisTurnWatcher extends Watcher {
 
     public int creaturesDiedThisTurn = 0;
@@ -123,7 +120,7 @@ class CreaturesDiedThisTurnWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (mageObject != null && mageObject.isCreature()) {
                 creaturesDiedThisTurn++;
@@ -137,17 +134,4 @@ class CreaturesDiedThisTurnWatcher extends Watcher {
         creaturesDiedThisTurn = 0;
     }
 
-}
-
-class SpoilsOfBloodHorrorToken extends Token {
-    
-    public SpoilsOfBloodHorrorToken(int xValue) {
-        super("Horror", "X/X black Horror creature token");
-        setOriginalExpansionSetCode("C14");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Horror");
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
-    }
 }

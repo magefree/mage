@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -35,16 +36,13 @@ import mage.abilities.condition.common.LastTimeCounterRemovedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.VanishingSacrificeAbility;
 import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.game.permanent.token.Token;
-
-import java.util.UUID;
+import mage.game.permanent.token.DeadlyGrubToken;
 
 /**
  *
@@ -53,7 +51,7 @@ import java.util.UUID;
 public class DeadlyGrub extends CardImpl {
 
     public DeadlyGrub(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Insect");
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
@@ -66,7 +64,7 @@ public class DeadlyGrub extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
         // When Deadly Grub dies, if it had no time counters on it, create a 6/1 green Insect creature token with shroud.
         this.addAbility(new ConditionalTriggeredAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DeadlyGrubToken(), 1)),
-            LastTimeCounterRemovedCondition.instance, "When {this} dies, if it had no time counters on it, create a 6/1 green Insect creature token with shroud."));
+                LastTimeCounterRemovedCondition.instance, "When {this} dies, if it had no time counters on it, create a 6/1 green Insect creature token with shroud."));
     }
 
     public DeadlyGrub(final DeadlyGrub card) {
@@ -76,17 +74,5 @@ public class DeadlyGrub extends CardImpl {
     @Override
     public DeadlyGrub copy() {
         return new DeadlyGrub(this);
-    }
-}
-
-class DeadlyGrubToken extends Token {
-    DeadlyGrubToken() {
-        super("Insect", "6/1 green Insect creature token with shroud");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Insect");
-        power = new MageInt(6);
-        toughness = new MageInt(1);
-        this.addAbility(ShroudAbility.getInstance());
     }
 }
