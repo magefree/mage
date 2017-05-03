@@ -140,7 +140,7 @@ class AlhammarretsArchiveReplacementEffect extends ReplacementEffectImpl {
         if (event.getPlayerId().equals(source.getControllerId())) {
             if (game.getActivePlayerId().equals(event.getPlayerId())
                     && game.getPhase().getStep().getType() == PhaseStep.DRAW) {
-                CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
+                CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get(CardsDrawnDuringDrawStepWatcher.class.getSimpleName());
                 if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
                     return true;
                 }

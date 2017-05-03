@@ -61,7 +61,7 @@ public class TapestryOfTheAges extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new DrawCardSourceControllerEffect(1), 
                 new ManaCostsImpl<>("{2}"), 
-                PlayerCastNonCreatureSpellCondition.getInstance());
+                PlayerCastNonCreatureSpellCondition.instance);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, new PlayerCastNonCreatureSpellWatcher());                       
 
@@ -80,13 +80,9 @@ public class TapestryOfTheAges extends CardImpl {
 enum PlayerCastNonCreatureSpellCondition implements Condition {
     instance;
 
-    public static Condition getInstance() {
-        return instance;
-    }
-
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerCastNonCreatureSpellWatcher watcher = (PlayerCastNonCreatureSpellWatcher) game.getState().getWatchers().get("PlayerCastNonCreatureSpell");
+        PlayerCastNonCreatureSpellWatcher watcher = (PlayerCastNonCreatureSpellWatcher) game.getState().getWatchers().get(PlayerCastNonCreatureSpellWatcher.class.getSimpleName());
         return watcher != null && watcher.playerDidCastNonCreatureSpellThisTurn(source.getControllerId());
     }
     
@@ -101,7 +97,7 @@ class PlayerCastNonCreatureSpellWatcher extends Watcher {
     Set<UUID> playerIds = new HashSet<>();
 
     public PlayerCastNonCreatureSpellWatcher() {
-        super("PlayerCastNonCreatureSpell", WatcherScope.GAME);
+        super(PlayerCastNonCreatureSpellWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PlayerCastNonCreatureSpellWatcher(final PlayerCastNonCreatureSpellWatcher watcher) {

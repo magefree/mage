@@ -83,7 +83,7 @@ class WoundReflectionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (controller != null && watcher != null) {
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent =  game.getPlayer(playerId);

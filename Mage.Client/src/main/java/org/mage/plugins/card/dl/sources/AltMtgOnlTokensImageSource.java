@@ -37,18 +37,11 @@ import java.util.HashMap;
  *
  * @author spjspj
  */
-public class AltMtgOnlTokensImageSource implements CardImageSource {
+public enum AltMtgOnlTokensImageSource implements CardImageSource {
 
+    instance;
     private static final Logger logger = Logger.getLogger(AltMtgOnlTokensImageSource.class);
-    private static CardImageSource instance = new AltMtgOnlTokensImageSource();
     private static int maxTimes = 0;
-
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new AltMtgOnlTokensImageSource();
-        }
-        return instance;
-    }
 
     @Override
     public String getSourceName() {

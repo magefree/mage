@@ -64,7 +64,7 @@ public class VengefulFirebrand extends CardImpl {
         // Vengeful Firebrand has haste as long as a Warrior card is in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield),
-                VengefulFirebrandCondition.getInstance(),
+                VengefulFirebrandCondition.instance,
                 "{this} has haste as long as a Warrior card is in your graveyard")));
         
         // {R}: Vengeful Firebrand gets +1/+0 until end of turn.
@@ -88,10 +88,6 @@ enum VengefulFirebrandCondition implements Condition {
 
     static {
         filter.add(new SubtypePredicate("Warrior"));
-    }
-
-    public static Condition getInstance() {
-        return instance;
     }
 
     @Override

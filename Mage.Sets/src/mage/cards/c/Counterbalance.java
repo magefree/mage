@@ -99,7 +99,7 @@ class CounterbalanceEffect extends OneShotEffect {
                     CardsImpl cards = new CardsImpl();
                     cards.add(topcard);
                     controller.revealCards(sourcePermanent.getName(), cards, game);
-                    if (CardUtil.convertedManaCostsIsEqual(topcard, spell)) {
+                    if (topcard.getConvertedManaCost() == spell.getConvertedManaCost()) {
                         return game.getStack().counter(spell.getId(), source.getSourceId(), game);
                     }
                 }

@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -49,7 +50,7 @@ public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
     private final Map<UUID, Cards> cycledOrDiscardedCardsThisTurn = new HashMap<>();
 
     public CardsCycledOrDiscardedThisTurnWatcher() {
-        super(CardsCycledOrDiscardedThisTurnWatcher.class.getName(), WatcherScope.GAME);
+        super(CardsCycledOrDiscardedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CardsCycledOrDiscardedThisTurnWatcher(final CardsCycledOrDiscardedThisTurnWatcher watcher) {
@@ -61,12 +62,14 @@ public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.CYCLED_CARD
+        if (event.getType() == GameEvent.EventType.PAY_CYCLE_COST
                 || event.getType() == GameEvent.EventType.DISCARDED_CARD) {
             if (event.getPlayerId() != null) {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    getCardsCycledOrDiscardedThisTurn(event.getPlayerId()).add(card);
+                    Cards c = getCardsCycledOrDiscardedThisTurn(event.getPlayerId());
+                    c.add(card);
+                    cycledOrDiscardedCardsThisTurn.put(event.getPlayerId(), c);
                 }
             }
         }

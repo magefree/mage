@@ -140,13 +140,8 @@ public final class ImageHelper {
      * @return
      */
     public static Image getImageFromResources(String path) {
-        InputStream stream;
-        stream = UI.class.getResourceAsStream(path);
-        if (stream == null) {
-            throw new IllegalArgumentException("Couldn't find image in resources: " + path);
-        }
 
-        try {
+        try(InputStream stream = UI.class.getResourceAsStream(path)) {
             ImageIO.setUseCache(false);
             BufferedImage image = ImageIO.read(stream);
             return image;

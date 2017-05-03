@@ -56,7 +56,6 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class ConduitOfRuin extends CardImpl {
@@ -71,7 +70,7 @@ public class ConduitOfRuin extends CardImpl {
     }
 
     public ConduitOfRuin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -102,7 +101,7 @@ class ConduitOfRuinWatcher extends Watcher {
     int spellCount = 0;
 
     public ConduitOfRuinWatcher() {
-        super("FirstCreatureSpellCastThisTurn", WatcherScope.GAME);
+        super(ConduitOfRuinWatcher.class.getSimpleName(), WatcherScope.GAME);
         playerCreatureSpells = new HashMap<>();
     }
 
@@ -117,20 +116,13 @@ class ConduitOfRuinWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell != null && spell.isCreature()) {
-                if (playerCreatureSpells.containsKey(event.getPlayerId())) {
-                    playerCreatureSpells.put(event.getPlayerId(), playerCreatureSpells.get(event.getPlayerId()) + 1);
-                } else {
-                    playerCreatureSpells.put(event.getPlayerId(), 1);
-                }
+                playerCreatureSpells.put(event.getPlayerId(), creatureSpellsCastThisTurn(event.getPlayerId()) + 1);
             }
         }
     }
 
     public int creatureSpellsCastThisTurn(UUID playerId) {
-        if (playerCreatureSpells.containsKey(playerId)) {
-            return playerCreatureSpells.get(playerId);
-        }
-        return 0;
+        return playerCreatureSpells.getOrDefault(playerId, 0);
     }
 
     @Override
@@ -151,7 +143,7 @@ class FirstCastCreatureSpellPredicate implements ObjectPlayerPredicate<ObjectPla
     public boolean apply(ObjectPlayer<Controllable> input, Game game) {
         if (input.getObject() instanceof Spell
                 && ((Spell) input.getObject()).isCreature()) {
-            ConduitOfRuinWatcher watcher = (ConduitOfRuinWatcher) game.getState().getWatchers().get("FirstCreatureSpellCastThisTurn");
+            ConduitOfRuinWatcher watcher = (ConduitOfRuinWatcher) game.getState().getWatchers().get(ConduitOfRuinWatcher.class.getSimpleName());
             return watcher != null && watcher.creatureSpellsCastThisTurn(input.getPlayerId()) == 0;
         }
         return false;

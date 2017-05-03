@@ -27,7 +27,7 @@ public class SpellsCastWatcher extends Watcher {
     private final HashMap<UUID, List<Spell>> spellsCast = new HashMap<>();
 
     public SpellsCastWatcher() {
-        super(SpellsCastWatcher.class.getName(), WatcherScope.GAME);
+        super(SpellsCastWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public SpellsCastWatcher(final SpellsCastWatcher watcher) {

@@ -101,7 +101,7 @@ class FlashEffect extends OneShotEffect {
             if (card != null) {
                 card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
                 
-                ManaCosts<ManaCost> reducedCost = CardUtil.removeVariableManaCost(CardUtil.reduceCost(card.getManaCost(), 2));
+                ManaCosts<ManaCost> reducedCost = ManaCosts.removeVariableManaCost(CardUtil.reduceCost(card.getManaCost(), 2));
                 StringBuilder sb = new StringBuilder("Pay ").append(reducedCost.getText()).append('?');
                 if (player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                     reducedCost.clearPaid();

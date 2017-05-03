@@ -102,7 +102,7 @@ class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent archmage = game.getPermanent(super.getSourceId());
         CardsAmountDrawnThisTurnWatcher watcher =
-                (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.BASIC_KEY);
+                (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.class.getSimpleName());
         return archmage != null && watcher != null && watcher.getAmountCardsDrawn(this.getControllerId()) >= 2;
     }
 

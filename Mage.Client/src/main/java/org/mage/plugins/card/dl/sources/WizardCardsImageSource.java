@@ -42,6 +42,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
@@ -53,29 +54,22 @@ import org.jsoup.select.Elements;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
- *
  * @author North
  */
-public class WizardCardsImageSource implements CardImageSource {
+public enum WizardCardsImageSource implements CardImageSource {
 
-    private static CardImageSource instance;
-    private static Map<String, String> setsAliases;
-    private static Map<String, String> languageAliases;
+    instance;
+    private Map<String, String> setsAliases;
+    private Map<String, String> languageAliases;
     private final Map<String, Map<String, String>> sets;
 
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new WizardCardsImageSource();
-        }
-        return instance;
-    }
 
     @Override
     public String getSourceName() {
         return "WOTC Gatherer";
     }
 
-    public WizardCardsImageSource() {
+    WizardCardsImageSource() {
         sets = new HashMap<>();
         setsAliases = new HashMap<>();
         setsAliases.put("2ED", "Unlimited Edition");

@@ -860,9 +860,9 @@ public final class GamePanel extends javax.swing.JPanel {
         showRevealed(game);
         showLookedAt(game);
         if (!game.getCombat().isEmpty()) {
-            CombatManager.getInstance().showCombat(game.getCombat(), gameId);
+            CombatManager.instance.showCombat(game.getCombat(), gameId);
         } else {
-            CombatManager.getInstance().hideCombat(gameId);
+            CombatManager.instance.hideCombat(gameId);
         }
 
         for (PlayerView player : game.getPlayers()) {

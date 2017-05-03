@@ -80,7 +80,7 @@ class LudevicNecroAlchemistCondition implements Condition {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         UUID player = game.getActivePlayerId();
         PlayerList playerList = game.getState().getPlayerList().copy();
         Player currentPlayer = null;

@@ -19,7 +19,7 @@ public class CastFromHandWatcher extends Watcher {
     private Step step;
 
     public CastFromHandWatcher() {
-        super(CastFromHandWatcher.class.getName(), WatcherScope.GAME);
+        super(CastFromHandWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CastFromHandWatcher(final CastFromHandWatcher watcher) {

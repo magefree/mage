@@ -82,7 +82,7 @@ class CastBlueSpellThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
+        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
         if (watcher != null) {
             for (Spell spell : watcher.getSpellsCastThisTurn(source.getControllerId())) {
                 if (!spell.getSourceId().equals(source.getSourceId()) && spell.getColor(game).isBlue()) {

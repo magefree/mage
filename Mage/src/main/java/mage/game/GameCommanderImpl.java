@@ -183,7 +183,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     protected boolean checkStateBasedActions() {
         for (Player player : getPlayers().values()) {
             for (UUID commanderId : player.getCommandersIds()) {
-                CommanderInfoWatcher damageWatcher = (CommanderInfoWatcher) getState().getWatchers().get("CommanderCombatDamageWatcher", commanderId);
+                CommanderInfoWatcher damageWatcher = (CommanderInfoWatcher) getState().getWatchers().get(CommanderInfoWatcher.class.getSimpleName(), commanderId);
                 if (damageWatcher == null) {
                     continue;
                 }

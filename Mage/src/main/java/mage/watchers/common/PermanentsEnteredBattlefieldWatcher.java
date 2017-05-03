@@ -25,7 +25,7 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
     private final HashMap<UUID, List<Permanent>> enteringBattlefieldLastTurn = new HashMap<>();
 
     public PermanentsEnteredBattlefieldWatcher() {
-        super(PermanentsEnteredBattlefieldWatcher.class.getName(), WatcherScope.GAME);
+        super(PermanentsEnteredBattlefieldWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PermanentsEnteredBattlefieldWatcher(final PermanentsEnteredBattlefieldWatcher watcher) {

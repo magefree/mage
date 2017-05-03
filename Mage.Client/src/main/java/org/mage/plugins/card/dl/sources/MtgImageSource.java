@@ -39,16 +39,9 @@ import org.mage.plugins.card.images.CardDownloadData;
  * @author LevelX2
  */
 
-public class MtgImageSource implements CardImageSource {
+public enum  MtgImageSource implements CardImageSource {
 
-    private static CardImageSource instance = new MtgImageSource();
-    
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new MtgImageSource();
-        }
-        return instance;
-    }
+   instance;
 
     @Override
     public String getSourceName() {

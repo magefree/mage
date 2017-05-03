@@ -21,25 +21,6 @@ public final class CardUtil {
     private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
     private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
-
-
-
-    public static boolean isCreature(MagePermanent card) {
-        return is(card.getOriginal(), CardType.CREATURE);
-    }
-
-    public static boolean isPlaneswalker(MagePermanent card) {
-        return is(card.getOriginal(), CardType.PLANESWALKER);
-    }
-
-    public static boolean isLand(MagePermanent card) {
-        return is(card.getOriginal(), CardType.LAND);
-    }
-
-    public static boolean is(CardView card, CardType type) {
-        return card.getCardTypes().contains(type);
-    }
-
     public static int getColorIdentitySortValue(List<String> manaCost, ObjectColor originalColor, List<String> rules) {
         ObjectColor color = new ObjectColor(originalColor);
         for (String rule : rules) {

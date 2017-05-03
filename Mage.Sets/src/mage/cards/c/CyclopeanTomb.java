@@ -179,7 +179,7 @@ class CyclopeanTombEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObjectReference mor = new MageObjectReference(source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game);
-        CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getName());
+        CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getSimpleName());
         if (controller != null && watcher != null) {
 
             Set<MageObjectReference> landRef = watcher.landMiredByCyclopeanTombInstance(mor, game);
@@ -221,7 +221,7 @@ class CyclopeanTombCounterWatcher extends Watcher {
     public HashMap<MageObjectReference, Set<MageObjectReference>> counterData = new HashMap<>();
 
     public CyclopeanTombCounterWatcher() {
-        super(CyclopeanTombCounterWatcher.class.getName(), WatcherScope.GAME);
+        super(CyclopeanTombCounterWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CyclopeanTombCounterWatcher(final CyclopeanTombCounterWatcher watcher) {

@@ -181,12 +181,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                             }
                         }
                     } else {
-                        for (CardView cv : view) {
-                            if (cv.getId().equals(entry.getKey())) {
-                                view.remove(cv);
-                                break;
-                            }
-                        }
+                        view.removeIf(cardView -> cardView.getId().equals(entry.getKey()));
                     }
                 }
             }
@@ -296,12 +291,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     public void removeCard(UUID cardId) {
         cards.remove(cardId);
-        for (CardView cv : view) {
-            if (cv.getId().equals(cardId)) {
-                view.remove(cv);
-                break;
-            }
-        }
+        view.removeIf(cardView -> cardView.getId().equals(cardId));
     }
 
     @Override

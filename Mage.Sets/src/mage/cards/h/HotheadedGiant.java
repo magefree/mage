@@ -87,7 +87,7 @@ class CastRedSpellThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        HotHeadedGiantWatcher watcher = (HotHeadedGiantWatcher) game.getState().getWatchers().get("HotHeadedGiantWatcher", source.getControllerId());
+        HotHeadedGiantWatcher watcher = (HotHeadedGiantWatcher) game.getState().getWatchers().get(HotHeadedGiantWatcher.class.getSimpleName(), source.getControllerId());
         if (watcher != null) {
             return watcher.conditionMet();
         }
@@ -106,7 +106,7 @@ class HotHeadedGiantWatcher extends Watcher {
     private UUID cardId;
 
     public HotHeadedGiantWatcher(UUID cardId) {
-        super("HotHeadedGiantWatcher", WatcherScope.PLAYER);
+        super(HotHeadedGiantWatcher.class.getSimpleName(), WatcherScope.PLAYER);
         this.cardId = cardId;
     }
 

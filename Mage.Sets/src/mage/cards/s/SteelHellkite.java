@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -54,7 +55,7 @@ import mage.watchers.common.PlayerDamagedBySourceWatcher;
 public class SteelHellkite extends CardImpl {
 
     public SteelHellkite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(5);
@@ -97,9 +98,9 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = source.getManaCostsToPay().getX();
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
             if (permanent.getConvertedManaCost() == xValue) {
-                PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", permanent.getControllerId());
+                PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), permanent.getControllerId());
                 if (watcher != null && watcher.hasSourceDoneDamage(source.getSourceId(), game)) {
                     permanent.destroy(source.getSourceId(), game, false);
                 }

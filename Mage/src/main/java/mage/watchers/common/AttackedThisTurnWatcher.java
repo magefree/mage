@@ -43,7 +43,7 @@ public class AttackedThisTurnWatcher extends Watcher {
     public final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
 
     public AttackedThisTurnWatcher() {
-        super(AttackedThisTurnWatcher.class.getName(), WatcherScope.GAME);
+        super(AttackedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public AttackedThisTurnWatcher(final AttackedThisTurnWatcher watcher) {

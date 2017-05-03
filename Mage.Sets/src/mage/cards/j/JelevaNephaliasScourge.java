@@ -109,7 +109,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null && sourceCard != null) {
-            JelevaNephaliasWatcher watcher = (JelevaNephaliasWatcher) game.getState().getWatchers().get("ManaPaidToCastJelevaNephalias", source.getSourceId());
+            JelevaNephaliasWatcher watcher = (JelevaNephaliasWatcher) game.getState().getWatchers().get(JelevaNephaliasWatcher.class.getSimpleName(), source.getSourceId());
             if (watcher != null) {
                 int xValue = watcher.getManaSpentToCastLastTime(sourceCard.getZoneChangeCounter(game) - 1);
                 if (xValue > 0) {
@@ -176,7 +176,7 @@ class JelevaNephaliasWatcher extends Watcher {
     private final Map<Integer, Integer> manaSpendToCast = new HashMap<>(); // cast
 
     public JelevaNephaliasWatcher() {
-        super("ManaPaidToCastJelevaNephalias", WatcherScope.CARD);
+        super(JelevaNephaliasWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public JelevaNephaliasWatcher(final JelevaNephaliasWatcher watcher) {
@@ -205,10 +205,7 @@ class JelevaNephaliasWatcher extends Watcher {
     }
 
     public int getManaSpentToCastLastTime(int zoneChangeCounter) {
-        if (manaSpendToCast.containsKey(zoneChangeCounter)) {
-            return manaSpendToCast.get(zoneChangeCounter);
-        }
-        return 0;
+        return manaSpendToCast.getOrDefault(zoneChangeCounter, 0);
     }
 
     @Override

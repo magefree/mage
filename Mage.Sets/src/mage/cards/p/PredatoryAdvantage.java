@@ -78,7 +78,7 @@ class DidNotCastCreatureCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
-            Watcher watcher = game.getState().getWatchers().get("CastCreature", source.getSourceId());
+            Watcher watcher = game.getState().getWatchers().get(CastCreatureWatcher.class.getSimpleName(), source.getSourceId());
             if (watcher != null && !watcher.conditionMet()) {
                 return true;
             }
@@ -96,7 +96,7 @@ class DidNotCastCreatureCondition implements Condition {
 class CastCreatureWatcher extends Watcher {
 
     public CastCreatureWatcher() {
-        super("CastCreature", WatcherScope.CARD);
+        super(CastCreatureWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public CastCreatureWatcher(final CastCreatureWatcher watcher) {

@@ -117,7 +117,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             Player player = game.getPlayer(controllerId);
-            ProwlWatcher prowlWatcher = (ProwlWatcher) game.getState().getWatchers().get("Prowl");
+            ProwlWatcher prowlWatcher = (ProwlWatcher) game.getState().getWatchers().get(ProwlWatcher.class.getSimpleName());
             Card card = game.getCard(ability.getSourceId());
             if (player == null || prowlWatcher == null || card == null) {
                 throw new IllegalArgumentException("Params can't be null");

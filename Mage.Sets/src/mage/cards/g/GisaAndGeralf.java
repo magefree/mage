@@ -143,7 +143,7 @@ class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
             if (affectedControllerId.equals(source.getControllerId())) {
-                GisaAndGeralfWatcher watcher = (GisaAndGeralfWatcher) game.getState().getWatchers().get("GisaAndGeralfWatcher", source.getSourceId());
+                GisaAndGeralfWatcher watcher = (GisaAndGeralfWatcher) game.getState().getWatchers().get(GisaAndGeralfWatcher.class.getSimpleName(), source.getSourceId());
                 return !watcher.isAbilityUsed();
             }
         }

@@ -164,4 +164,20 @@ public class CyclingTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Akroma's Vengeance", 1);
         assertHandCount(playerA, 7);
     }
+
+
+    @Test
+    public void cycleShadowOfTheGrave(){
+        addCard(Zone.HAND, playerA, "Darkwatch Elves", 1 );
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 20);
+        addCard(Zone.HAND, playerA, "Shadow of the Grave", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shadow of the Grave");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertGraveyardCount(playerA, "Darkwatch Elves", 0);
+        assertHandCount(playerA, "Darkwatch Elves", 1);
+    }
 }

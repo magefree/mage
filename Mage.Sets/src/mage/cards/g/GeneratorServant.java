@@ -90,7 +90,7 @@ class GeneratorServantWatcher extends Watcher {
     public List<UUID> creatures = new ArrayList<>();
 
     public GeneratorServantWatcher() {
-        super("GeneratorServantWatcher", WatcherScope.CARD);
+        super(GeneratorServantWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public GeneratorServantWatcher(final GeneratorServantWatcher watcher) {
@@ -141,7 +141,7 @@ class GeneratorServantHasteEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        GeneratorServantWatcher watcher = (GeneratorServantWatcher) game.getState().getWatchers().get("GeneratorServantWatcher", source.getSourceId());
+        GeneratorServantWatcher watcher = (GeneratorServantWatcher) game.getState().getWatchers().get(GeneratorServantWatcher.class.getSimpleName(), source.getSourceId());
         if (watcher != null) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
                 if (watcher.creatures.contains(perm.getId())) {

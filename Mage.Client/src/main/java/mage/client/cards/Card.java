@@ -68,7 +68,6 @@ import static mage.client.constants.Constants.*;
 @SuppressWarnings("serial")
 public class Card extends MagePermanent implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
-    protected static final DefaultActionCallback callback = DefaultActionCallback.getInstance();
 
     protected Point p;
     protected final CardDimensions dimension;
@@ -367,7 +366,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     @Override
     public void mousePressed(MouseEvent e) {
         requestFocusInWindow();
-        callback.mouseClicked(e, gameId, card);
+        DefaultActionCallback.instance.mouseClicked(gameId, card);
     }
 
     @Override

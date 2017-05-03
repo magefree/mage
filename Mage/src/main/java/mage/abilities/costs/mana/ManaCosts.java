@@ -61,4 +61,16 @@ public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
     @Override
     ManaCosts<T> copy();
 
+
+    static ManaCosts<ManaCost> removeVariableManaCost(ManaCosts<ManaCost> m) {
+        ManaCosts<ManaCost> manaCosts = new ManaCostsImpl<>();
+        for(ManaCost manaCost : m){
+            if(!(manaCost instanceof VariableManaCost)){
+                manaCosts.add(manaCost);
+
+            }
+        }
+        return manaCosts;
+    }
+
 }

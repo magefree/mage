@@ -525,16 +525,12 @@
 |Generate|TOK:M13|Wurm||
 
 |Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|
-|Generate|TOK:AVR|Angel|1|
-|Generate|TOK:AVR|Angel|2|
-|Generate|TOK:AVR|Angel|3|
+|Generate|TOK:AVR|Angel||
+|Generate|TOK:AVR|Demon||
 |Generate|TOK:AVR|Human|1|
 |Generate|TOK:AVR|Human|2|
 |Generate|TOK:AVR|Spirit|1|
 |Generate|TOK:AVR|Spirit|2|
-|Generate|TOK:AVR|Demon|1|
-|Generate|TOK:AVR|Demon|2|
-|Generate|TOK:AVR|Demon|3|
 |Generate|TOK:AVR|Zombie||
 
 |Generate|EMBLEM:DDI|Venser, the Sojourner||Emblem Venser|

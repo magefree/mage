@@ -74,7 +74,7 @@ class SpiritOfTheLabyrinthWatcher extends Watcher {
     private final HashSet<UUID> playersThatDrewCard;
     
     public SpiritOfTheLabyrinthWatcher() {
-        super("DrewCard", WatcherScope.GAME);
+        super(SpiritOfTheLabyrinthWatcher.class.getSimpleName(), WatcherScope.GAME);
         this.playersThatDrewCard = new HashSet<>();
     }
 
@@ -137,7 +137,7 @@ class SpiritOfTheLabyrinthEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        SpiritOfTheLabyrinthWatcher watcher = (SpiritOfTheLabyrinthWatcher) game.getState().getWatchers().get("DrewCard");
+        SpiritOfTheLabyrinthWatcher watcher = (SpiritOfTheLabyrinthWatcher) game.getState().getWatchers().get(SpiritOfTheLabyrinthWatcher.class.getSimpleName());
         if (watcher != null && watcher.hasPlayerDrewCardThisTurn(event.getPlayerId())) {
             return true;
         }

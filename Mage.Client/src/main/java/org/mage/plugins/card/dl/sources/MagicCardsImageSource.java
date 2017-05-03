@@ -10,10 +10,9 @@ import org.mage.plugins.card.utils.CardImageUtils;
  *
  * @author North
  */
-public class MagicCardsImageSource implements CardImageSource {
+public enum MagicCardsImageSource implements CardImageSource {
 
-    private static CardImageSource instance = new MagicCardsImageSource();
-
+    instance;
     private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
             put("10E", "tenth-edition");
@@ -146,12 +145,6 @@ public class MagicCardsImageSource implements CardImageSource {
         return "magiccards.info";
     }
 
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new MagicCardsImageSource();
-        }
-        return instance;
-    }
     
     @Override
     public String getNextHttpImageUrl() {
