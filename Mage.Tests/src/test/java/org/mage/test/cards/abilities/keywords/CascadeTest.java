@@ -202,7 +202,7 @@ public class CascadeTest extends CardTestPlayerBase {
     }
 
     /**
-     * Cascade dont work with split cards.
+     * Cascade work with split cards, cmc = total of halfs.
      *
      * For example: Ardent Plea + Breaking/Entering
      */
@@ -231,9 +231,9 @@ public class CascadeTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Ardent Plea", 1);
-        assertGraveyardCount(playerA, "Breaking // Entering", 1);
+        assertGraveyardCount(playerA, "Breaking // Entering", 0);
 
-        assertGraveyardCount(playerB, 8);
+        assertGraveyardCount(playerB, 0);
 
     }
 
