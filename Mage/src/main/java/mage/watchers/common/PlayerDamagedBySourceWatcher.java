@@ -47,7 +47,7 @@ public class PlayerDamagedBySourceWatcher extends Watcher {
     private final Set<String> damageSourceIds = new HashSet<>();
 
     public PlayerDamagedBySourceWatcher(UUID playerId) {
-        super(PlayerLostLifeWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(PlayerDamagedBySourceWatcher.class.getSimpleName(), WatcherScope.PLAYER);
         setControllerId(playerId);
     }
 
