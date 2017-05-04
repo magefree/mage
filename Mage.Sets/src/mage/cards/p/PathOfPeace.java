@@ -51,9 +51,7 @@ public class PathOfPeace extends CardImpl {
 
         // Destroy target creature. Its owner gains 4 life.
         this.getSpellAbility().addEffect(new PathOfPeaceEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-    
-        
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());  
     }
 
     public PathOfPeace(final PathOfPeace card) {
