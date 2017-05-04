@@ -169,6 +169,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Meng Huo, Barbarian King", 128, Rarity.RARE, mage.cards.m.MengHuoBarbarianKing.class));
         cards.add(new SetCardInfo("Meng Huo's Horde", 129, Rarity.COMMON, mage.cards.m.MengHuosHorde.class));
         cards.add(new SetCardInfo("Mind Twist", 72, Rarity.RARE, mage.cards.m.MindTwist.class));
+        cards.add(new SetCardInfo("Misfortune's Gain", 21, Rarity.COMMON, mage.cards.m.MisfortunesGain.class));
         cards.add(new SetCardInfo("Mountain", 225, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 226, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 227, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
