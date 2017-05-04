@@ -156,6 +156,7 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Ogre Berserker", 111, Rarity.COMMON, mage.cards.o.OgreBerserker.class));
         cards.add(new SetCardInfo("Ogre Taskmaster", 112, Rarity.UNCOMMON, mage.cards.o.OgreTaskmaster.class));
         cards.add(new SetCardInfo("Ogre Warrior", 113, Rarity.COMMON, mage.cards.o.OgreWarrior.class));
+        cards.add(new SetCardInfo("Path of Peace", 138, Rarity.COMMON, mage.cards.p.PathOfPeace.class));
         cards.add(new SetCardInfo("Plains", 160, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 161, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 162, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
