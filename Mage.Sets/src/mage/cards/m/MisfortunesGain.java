@@ -33,8 +33,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
 import mage.constants.Outcome;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,10 +47,9 @@ public class MisfortunesGain extends CardImpl {
 
     public MisfortunesGain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        
 
         // Destroy target creature. Its owner gains 4 life.
-		this.getSpellAbility().addEffect(new PathOfPeaceEffect());
+        this.getSpellAbility().addEffect(new MisfortunesGainEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -65,30 +64,32 @@ public class MisfortunesGain extends CardImpl {
 }
 
 class MisfortunesGainEffect extends OneShotEffect {
-    
+
     public MisfortunesGainEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target creature. Its owner gains 4 life.";
+        this.staticText = "Destroy target creature. Its owner gains 4 life";
     }
-    
+
     public MisfortunesGainEffect(final MisfortunesGainEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public MisfortunesGainEffect copy() {
         return new MisfortunesGainEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent target = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && target != null) {
             target.destroy(source.getSourceId(), game, false);
-            Player player = game.getPlayer(target.getOwnerId());
-            player.gainLife(4, game);
-            return true;   
+            Player owner = game.getPlayer(target.getOwnerId());
+            if (owner != null) {
+                owner.gainLife(4, game);
+            }
+            return true;
         }
         return false;
     }
