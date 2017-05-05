@@ -97,6 +97,9 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
     }
 
     /**
+     * NOTE: As of 05/05/2017 this test is failing due to a bug in code.
+     * See issue #3251
+     *
      * I took control of a Gitrog Monster, while the Gitrog Monster's owner
      * controlled a Dryad Arbor and cast Toxic Deluge for 6.
      */
