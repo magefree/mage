@@ -11,7 +11,7 @@
 *       of conditions and the following disclaimer in the documentation and/or other materials
 *       provided with the distribution.
 *
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com AS IS AND ANY EXPRESS OR IMPLIED
+* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
 * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
 * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
 * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
@@ -25,27 +25,33 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
+
 import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
  * @author spjspj
  */
-public class AngelTombToken extends Token {
+public class DragonEggDragonToken extends Token {
 
-    public AngelTombToken() {
-        super("", "3/3 white Angel artifact creature with flying");
-        cardType.add(CardType.ARTIFACT);
+    public DragonEggDragonToken() {
+        super("Dragon", "2/2 red Dragon creature token with flying that has \"{R}: This creature gets +1/+0 until end of turn");
+        this.setOriginalExpansionSetCode("M14");
         cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-
-        subtype.add("Angel");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
+        color.setRed(true);
+        subtype.add("Dragon");
+        power = new MageInt(2);
+        toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
+        addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+
     }
 }

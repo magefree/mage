@@ -11,7 +11,7 @@
 *       of conditions and the following disclaimer in the documentation and/or other materials
 *       provided with the distribution.
 *
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com AS IS AND ANY EXPRESS OR IMPLIED
+* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
 * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
 * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
 * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
@@ -25,20 +25,23 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.permanent.token;
+
 import mage.MageInt;
+import mage.constants.CardType;
 
 /**
  *
  * @author spjspj
  */
-public class OmnibianFrogToken extends Token {
+public class BreedingPitThrullToken extends Token {
 
-    public OmnibianFrogToken() {
-        super("", "3/3 Frog");
-        this.subtype.add("Frog");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+    public BreedingPitThrullToken() {
+        super("Thrull", "0/1 black Thrull creature token");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Thrull");
+        color.setBlack(true);
+        power = new MageInt(0);
+        toughness = new MageInt(1);
     }
 }

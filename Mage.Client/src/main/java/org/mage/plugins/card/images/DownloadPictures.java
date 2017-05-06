@@ -362,22 +362,30 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         if (params.length > 5 && params[5] != null && !params[5].isEmpty()) {
                             fileName = params[5].trim();
                         }
+                        String tokenClassName = "";
+                        if (params.length > 7 && params[6] != null && !params[6].isEmpty()) {
+                            tokenClassName = params[6].trim();
+                        }
 
                         if (params[1].toLowerCase().equals("generate") && params[2].startsWith("TOK:")) {
                             String set = params[2].substring(4);
                             CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true);
+                            card.setTokenClassName(tokenClassName);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM:")) {
                             String set = params[2].substring(7);
                             CardDownloadData card = new CardDownloadData("Emblem " + params[3], set, "0", false, type, "", "", true, fileName);
+                            card.setTokenClassName(tokenClassName);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM-:")) {
                             String set = params[2].substring(8);
                             CardDownloadData card = new CardDownloadData(params[3] + " Emblem", set, "0", false, type, "", "", true, fileName);
+                            card.setTokenClassName(tokenClassName);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM!:")) {
                             String set = params[2].substring(8);
                             CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true, fileName);
+                            card.setTokenClassName(tokenClassName);
                             list.add(card);
                         }
                     } else {

@@ -11,7 +11,7 @@
 *       of conditions and the following disclaimer in the documentation and/or other materials
 *       provided with the distribution.
 *
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com AS IS AND ANY EXPRESS OR IMPLIED
+* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
 * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
 * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
 * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
@@ -25,22 +25,29 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
+
 import mage.MageInt;
+import mage.abilities.effects.common.DevourEffect;
+import mage.abilities.keyword.DevourAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
 
 /**
  *
  * @author spjspj
  */
-public class KamahlFistOfKrosaLandToken extends Token {
+public class DragonBroodmotherDragonToken extends Token {
 
-    public KamahlFistOfKrosaLandToken() {
-        super("", "1/1 creature");
-        this.cardType.add(CardType.CREATURE);
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public DragonBroodmotherDragonToken() {
+        super("Dragon", "1/1 red and green Dragon creature token with flying and devour 2");
+        cardType.add(CardType.CREATURE);
+        color.setGreen(true);
+        color.setRed(true);
+        subtype.add("Dragon");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        addAbility(FlyingAbility.getInstance());
+        addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour2));
     }
 }
