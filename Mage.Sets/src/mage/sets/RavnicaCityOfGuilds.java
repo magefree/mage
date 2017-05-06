@@ -247,12 +247,14 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Privileged Position", 251, Rarity.RARE, mage.cards.p.PrivilegedPosition.class));
         cards.add(new SetCardInfo("Psychic Drain", 220, Rarity.UNCOMMON, mage.cards.p.PsychicDrain.class));
         cards.add(new SetCardInfo("Putrefy", 221, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
+        cards.add(new SetCardInfo("Quickchange", 62, Rarity.COMMON, mage.cards.q.Quickchange.class));
         cards.add(new SetCardInfo("Rain of Embers", 138, Rarity.COMMON, mage.cards.r.RainOfEmbers.class));
         cards.add(new SetCardInfo("Rally the Righteous", 222, Rarity.COMMON, mage.cards.r.RallyTheRighteous.class));
         cards.add(new SetCardInfo("Razia's Purification", 224, Rarity.RARE, mage.cards.r.RaziasPurification.class));
         cards.add(new SetCardInfo("Razia, Boros Archangel", 223, Rarity.RARE, mage.cards.r.RaziaBorosArchangel.class));
         cards.add(new SetCardInfo("Recollect", 178, Rarity.UNCOMMON, mage.cards.r.Recollect.class));
         cards.add(new SetCardInfo("Remand", 63, Rarity.UNCOMMON, mage.cards.r.Remand.class));
+        cards.add(new SetCardInfo("Reroute", 139, Rarity.UNCOMMON, mage.cards.r.Reroute.class));
         cards.add(new SetCardInfo("Ribbons of Night", 101, Rarity.UNCOMMON, mage.cards.r.RibbonsOfNight.class));
         cards.add(new SetCardInfo("Rolling Spoil", 179, Rarity.UNCOMMON, mage.cards.r.RollingSpoil.class));
         cards.add(new SetCardInfo("Roofstalker Wight", 102, Rarity.COMMON, mage.cards.r.RoofstalkerWight.class));
@@ -344,5 +346,6 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Wojek Embermage", 152, Rarity.UNCOMMON, mage.cards.w.WojekEmbermage.class));
         cards.add(new SetCardInfo("Wojek Siren", 37, Rarity.COMMON, mage.cards.w.WojekSiren.class));
         cards.add(new SetCardInfo("Woodwraith Strangler", 241, Rarity.COMMON, mage.cards.w.WoodwraithStrangler.class));
+        cards.add(new SetCardInfo("Zephyr Spirit", 76, Rarity.COMMON, mage.cards.z.ZephyrSpirit.class));
     }
 }

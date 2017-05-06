@@ -43,6 +43,10 @@ public class FilterAbility extends FilterImpl<Ability> {
         super("");
     }
 
+    public FilterAbility(String name) {
+        super(name);
+    }
+
     public FilterAbility(FilterAbility filter) {
         super(filter);
     }
