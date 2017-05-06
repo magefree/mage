@@ -27,10 +27,12 @@ public final class CardImageUtils {
      */
     public static String generateTokenImagePath(CardDownloadData card) {
         if (card.isToken()) {
-            if (pathCache.containsKey(card)) {
-                return pathCache.get(card);
-            }
             String filePath = getTokenImagePath(card);
+            if (pathCache.containsKey(card)) {
+                if (filePath.equals(pathCache.get(card))) {
+                    return pathCache.get(card);                    
+                }                
+            }
             TFile file = new TFile(filePath);
 
             if (!file.exists() && card.getTokenSetCode() != null) {

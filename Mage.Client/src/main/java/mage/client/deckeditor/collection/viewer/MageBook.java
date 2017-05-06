@@ -306,6 +306,7 @@ public class MageBook extends JComponent {
         }
         PermanentToken newToken = new PermanentToken(token, null, token.getOriginalExpansionSetCode(), null);
         PermanentView theToken = new PermanentView(newToken, null, null, null);
+        theToken.setInViewerOnly(true);
         final MageCard cardImg = Plugins.instance.getMagePermanent(theToken, bigCard, cardDimension, gameId, true);
         cardImg.setBounds(rectangle);
         jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
@@ -339,6 +340,9 @@ public class MageBook extends JComponent {
                     String className = token.getName();
                     className = className.replaceAll("[^a-zA-Z0-9]", "");
                     className = className + "Token";
+                    if (token.getTokenClassName() != null && token.getTokenClassName().length() > 0) {
+                        className = token.getTokenClassName();
+                    }
                     Class<?> c = Class.forName("mage.game.permanent.token." + className);
                     Constructor<?> cons = c.getConstructor();
                     Object newToken = cons.newInstance();
@@ -346,19 +350,19 @@ public class MageBook extends JComponent {
                         tokens.add((Token) newToken);
                     }
                 } catch (ClassNotFoundException ex) {
-                    java.util.logging.Logger.getLogger(MageBook.class.getName()).log(Level.SEVERE, null, ex);
+                    // Swallow exception
                 } catch (NoSuchMethodException ex) {
-                    java.util.logging.Logger.getLogger(MageBook.class.getName()).log(Level.SEVERE, null, ex);
+                    // Swallow exception
                 } catch (SecurityException ex) {
-                    java.util.logging.Logger.getLogger(MageBook.class.getName()).log(Level.SEVERE, null, ex);
+                    // Swallow exception
                 } catch (InstantiationException ex) {
-                    java.util.logging.Logger.getLogger(MageBook.class.getName()).log(Level.SEVERE, null, ex);
+                    // Swallow exception
                 } catch (IllegalAccessException ex) {
-                    java.util.logging.Logger.getLogger(MageBook.class.getName()).log(Level.SEVERE, null, ex);
+                    // Swallow exception
                 } catch (IllegalArgumentException ex) {
-                    java.util.logging.Logger.getLogger(MageBook.class.getName()).log(Level.SEVERE, null, ex);
+                    // Swallow exception
                 } catch (InvocationTargetException ex) {
-                    java.util.logging.Logger.getLogger(MageBook.class.getName()).log(Level.SEVERE, null, ex);
+                    // Swallow exception
                 }
             }
         }

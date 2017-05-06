@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.permanent.token.ThrullToken;
+import mage.game.permanent.token.BreedingPitThrullToken;
 
 /**
  *
@@ -53,7 +53,7 @@ public class BreedingPit extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}")), TargetController.YOU, false));
 
         // At the beginning of your end step, create a 0/1 black Thrull creature token.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new ThrullToken()), false));
+        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new BreedingPitThrullToken()), false));
     }
 
     public BreedingPit(final BreedingPit card) {
