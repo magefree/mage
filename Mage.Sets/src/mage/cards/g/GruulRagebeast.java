@@ -39,7 +39,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -63,14 +62,11 @@ public class GruulRagebeast extends CardImpl {
     }
 
     public GruulRagebeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
-
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new CardIdPredicate(this.getId()));
 
         // Whenever Gruul Ragebeast or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
         Ability ability = new GruulRagebeastTriggeredAbility();

@@ -33,15 +33,12 @@ import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class RoilElemental extends CardImpl {
 
     public RoilElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(3);
@@ -59,15 +56,11 @@ public class RoilElemental extends CardImpl {
 
         String rule = "you may gain control of target creature for as long as you control Roil Elemental";
 
-        FilterPermanent filter = new FilterPermanent();
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new CardIdPredicate(this.getId()));
-
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
         // Landfall - Whenever a land enters the battlefield under your control, you may gain control of target creature for as long as you control Roil Elemental.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom), new PermanentsOnTheBattlefieldCondition(filter), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom), new SourceOnBattlefieldControlUnchangedCondition(), rule);
         Ability ability = new LandfallAbility(Zone.BATTLEFIELD, effect, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
