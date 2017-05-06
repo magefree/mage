@@ -35,7 +35,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.DragonToken;
+import mage.game.permanent.token.DragonEggDragonToken;
 
 /**
  *
@@ -54,7 +54,7 @@ public class DragonEgg extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // When Dragon Egg dies, create a 2/2 red Dragon creature token with flying. It has "{R}: This creature gets +1/+0 until end of turn".
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DragonToken()), false));
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DragonEggDragonToken()), false));
 
     }
 

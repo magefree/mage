@@ -79,7 +79,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     protected UUID gameId;
     private TransferData data = new TransferData();
 
-    private final boolean isPermanent;
+    private boolean isPermanent;
     private boolean hasSickness;
     private String zone;
 
@@ -102,7 +102,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         this.gameId = gameId;
 
         // Gather info about the card
-        this.isPermanent = this.gameCard instanceof PermanentView;
+        this.isPermanent = this.gameCard instanceof PermanentView && !this.gameCard.inViewerOnly();
         if (isPermanent) {
             this.hasSickness = ((PermanentView) this.gameCard).hasSummoningSickness();
         }
@@ -201,6 +201,10 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         } else {
             updateArtImage();
         }
+    }
+    
+    public void setIsPermanent(boolean isPermanent) {
+        this.isPermanent = isPermanent;
     }
 
     public void cleanUp() {

@@ -125,6 +125,7 @@ public class CardView extends SimpleCardView {
     protected boolean isChoosable;
     protected boolean selected;
     protected boolean canAttack;
+    protected boolean inViewerOnly;
 
     public CardView(Card card) {
         this(card, null, false);
@@ -213,6 +214,7 @@ public class CardView extends SimpleCardView {
         this.isChoosable = cardView.isChoosable;
         this.selected = cardView.selected;
         this.canAttack = cardView.canAttack;
+        this.inViewerOnly = cardView.inViewerOnly;
     }
 
     /**
@@ -1008,5 +1010,13 @@ public class CardView extends SimpleCardView {
 
     public boolean isTribal() {
         return cardTypes.contains(CardType.TRIBAL);
+    }
+    
+    public void setInViewerOnly(boolean inViewerOnly) {
+        this.inViewerOnly = inViewerOnly;
+    }
+    
+    public boolean inViewerOnly() {
+        return inViewerOnly;
     }
 }
