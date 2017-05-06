@@ -9,21 +9,25 @@ import mage.game.permanent.Permanent;
 
 public class CountersSourceCount implements DynamicValue {
 
-    private final CounterType counter;
+    private final String counterName;
 
     public CountersSourceCount(CounterType counter) {
-        this.counter = counter;
+        this.counterName = counter.getName();
+    }
+
+    public CountersSourceCount(String counterName) {
+        this.counterName = counterName;
     }
 
     public CountersSourceCount(final CountersSourceCount countersCount) {
-        this.counter = countersCount.counter;
+        this.counterName = countersCount.counterName;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
         if (permanent != null) {
-            return permanent.getCounters(game).getCount(counter);
+            return permanent.getCounters(game).getCount(counterName);
         }
         return 0;
     }
@@ -40,6 +44,6 @@ public class CountersSourceCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return counter.getName() + " counter on {this}";
+        return counterName + " counter on {this}";
     }
 }

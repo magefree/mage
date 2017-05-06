@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -46,8 +47,6 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author Loki
@@ -65,17 +64,19 @@ public class TiborAndLumia extends CardImpl {
     }
 
     public TiborAndLumia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+
+        // Whenever you cast a blue spell, target creature gains flying until end of turn.
         Ability firstAbility = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filterBlue, false);
         firstAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(firstAbility);
+        // Whenever you cast a red spell, Tibor and Lumia deals 1 damage to each creature without flying.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DamageAllEffect(1, filter), filterRed, false));
 
     }

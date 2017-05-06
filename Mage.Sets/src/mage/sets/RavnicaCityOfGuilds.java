@@ -65,6 +65,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Blockbuster", 115, Rarity.UNCOMMON, mage.cards.b.Blockbuster.class));
         cards.add(new SetCardInfo("Blood Funnel", 77, Rarity.RARE, mage.cards.b.BloodFunnel.class));
         cards.add(new SetCardInfo("Bloodbond March", 192, Rarity.RARE, mage.cards.b.BloodbondMarch.class));
+        cards.add(new SetCardInfo("Bloodletter Quill", 254, Rarity.RARE, mage.cards.b.BloodletterQuill.class));
         cards.add(new SetCardInfo("Boros Fury-Shield", 5, Rarity.COMMON, mage.cards.b.BorosFuryShield.class));
         cards.add(new SetCardInfo("Boros Garrison", 275, Rarity.COMMON, mage.cards.b.BorosGarrison.class));
         cards.add(new SetCardInfo("Boros Guildmage", 242, Rarity.UNCOMMON, mage.cards.b.BorosGuildmage.class));
@@ -84,6 +85,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Char", 117, Rarity.RARE, mage.cards.c.Char.class));
         cards.add(new SetCardInfo("Chord of Calling", 156, Rarity.RARE, mage.cards.c.ChordOfCalling.class));
         cards.add(new SetCardInfo("Chorus of the Conclave", 195, Rarity.RARE, mage.cards.c.ChorusOfTheConclave.class));
+        cards.add(new SetCardInfo("Circu, Dimir Lobotomist", 196, Rarity.RARE, mage.cards.c.CircuDimirLobotomist.class));
         cards.add(new SetCardInfo("Civic Wayfinder", 157, Rarity.COMMON, mage.cards.c.CivicWayfinder.class));
         cards.add(new SetCardInfo("Cleansing Beam", 118, Rarity.UNCOMMON, mage.cards.c.CleansingBeam.class));
         cards.add(new SetCardInfo("Clinging Darkness", 80, Rarity.COMMON, mage.cards.c.ClingingDarkness.class));
@@ -140,6 +142,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Fists of Ironwood", 164, Rarity.COMMON, mage.cards.f.FistsOfIronwood.class));
         cards.add(new SetCardInfo("Flame Fusillade", 123, Rarity.RARE, mage.cards.f.FlameFusillade.class));
         cards.add(new SetCardInfo("Flame-Kin Zealot", 206, Rarity.UNCOMMON, mage.cards.f.FlameKinZealot.class));
+        cards.add(new SetCardInfo("Flash Conscription", 124, Rarity.UNCOMMON, mage.cards.f.FlashConscription.class));
         cards.add(new SetCardInfo("Flickerform", 18, Rarity.RARE, mage.cards.f.Flickerform.class));
         cards.add(new SetCardInfo("Flight of Fancy", 49, Rarity.COMMON, mage.cards.f.FlightOfFancy.class));
         cards.add(new SetCardInfo("Flow of Ideas", 50, Rarity.UNCOMMON, mage.cards.f.FlowOfIdeas.class));
@@ -152,6 +155,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Galvanic Arc", 126, Rarity.COMMON, mage.cards.g.GalvanicArc.class));
         cards.add(new SetCardInfo("Gate Hound", 19, Rarity.COMMON, mage.cards.g.GateHound.class));
         cards.add(new SetCardInfo("Gather Courage", 165, Rarity.COMMON, mage.cards.g.GatherCourage.class));
+        cards.add(new SetCardInfo("Ghosts of the Innocent", 20, Rarity.RARE, mage.cards.g.GhostsOfTheInnocent.class));
         cards.add(new SetCardInfo("Glare of Subdual", 207, Rarity.RARE, mage.cards.g.GlareOfSubdual.class));
         cards.add(new SetCardInfo("Glass Golem", 261, Rarity.UNCOMMON, mage.cards.g.GlassGolem.class));
         cards.add(new SetCardInfo("Gleancrawler", 247, Rarity.RARE, mage.cards.g.Gleancrawler.class));
@@ -315,6 +319,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Transluminant", 186, Rarity.COMMON, mage.cards.t.Transluminant.class));
         cards.add(new SetCardInfo("Tunnel Vision", 72, Rarity.RARE, mage.cards.t.TunnelVision.class));
         cards.add(new SetCardInfo("Twilight Drover", 33, Rarity.RARE, mage.cards.t.TwilightDrover.class));
+        cards.add(new SetCardInfo("Twisted Justice", 237, Rarity.UNCOMMON, mage.cards.t.TwistedJustice.class));
         cards.add(new SetCardInfo("Undercity Shade", 110, Rarity.UNCOMMON, mage.cards.u.UndercityShade.class));
         cards.add(new SetCardInfo("Ursapine", 188, Rarity.RARE, mage.cards.u.Ursapine.class));
         cards.add(new SetCardInfo("Vedalken Dismisser", 73, Rarity.COMMON, mage.cards.v.VedalkenDismisser.class));
