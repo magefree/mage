@@ -37,7 +37,7 @@ import mage.MageInt;
 public class MysticGenesisOozeToken extends Token {
 
     public MysticGenesisOozeToken() {
-        this(1);
+        this(0);
     }
     public MysticGenesisOozeToken(int xValue) {
         super("Ooze", "X/X green Ooze creature token");
