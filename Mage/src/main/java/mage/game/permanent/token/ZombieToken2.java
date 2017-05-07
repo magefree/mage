@@ -37,7 +37,7 @@ import mage.constants.CardType;
 public class ZombieToken2 extends Token {
 
     public ZombieToken2() {
-        super("", "");
+        this(0, 0);
     }
 
     public ZombieToken2(int zPower, int zToughness) {
