@@ -123,8 +123,8 @@
 |Generate|TOK:9ED|Bird|||RukhEggBirdToken|
 |Generate|TOK:9ED|Saproling|||SaprolingToken|
 |Generate|TOK:AER|Etherium Cell||
-|Generate|TOK:AER|Ragavan||
 |Generate|TOK:AER|Gremlin||
+|Generate|TOK:AER|Ragavan||
 |Generate|TOK:AKH|Angel of Sanctions||
 |Generate|TOK:AKH|Anointer Priest||
 |Generate|TOK:AKH|Aven Initiate||
@@ -204,7 +204,6 @@
 |Generate|TOK:BFZ|Eldrazi|||EldraziToken|
 |Generate|TOK:BFZ|Elemental|1||OmnathElementalToken|
 |Generate|TOK:BFZ|Elemental|2||SparkElementalToken|
-|Generate|TOK:BFZ|Elemental|||WallOfResurgenceToken|
 |Generate|TOK:BFZ|Knight Ally|||KnightAllyToken|
 |Generate|TOK:BFZ|Kor Ally|||KorAllyToken|
 |Generate|TOK:BFZ|Octopus|||OctopusToken|
@@ -616,8 +615,8 @@
 |Generate|TOK:JUD|Spirit|||SpiritWhiteToken|
 |Generate|TOK:JUD|Wurm|||WurmToken|
 |Generate|TOK:KLD|Beast|||ArchitectOfTheUntamedBeastToken|
-|Generate|TOK:KLD|Construct|2||MetallurgicSummoningsConstructToken|
 |Generate|TOK:KLD|Construct|1||OviyaPashiriSageLifecrafterToken|
+|Generate|TOK:KLD|Construct|2||MetallurgicSummoningsConstructToken|
 |Generate|TOK:KLD|Servo|1||ServoToken|
 |Generate|TOK:KLD|Servo|2||ServoToken|
 |Generate|TOK:KLD|Servo|3||ServoToken|
@@ -859,18 +858,14 @@
 |Generate|TOK:ODY|Wurm|||WurmToken|
 |Generate|TOK:ODY|Zombie|||ZombieToken|
 |Generate|TOK:OGW|Angel|||LinvalaAngelToken|
-|Generate|TOK:OGW|Eldrazi Scion|1|
-|Generate|TOK:OGW|Eldrazi Scion|2|
-|Generate|TOK:OGW|Eldrazi Scion|3|
-|Generate|TOK:OGW|Eldrazi Scion|4|
-|Generate|TOK:OGW|Eldrazi Scion|5|
-|Generate|TOK:OGW|Eldrazi Scion|6|
-|Generate|TOK:OGW|Eldrazi Scion|||EldraziScionToken|
-|Generate|TOK:OGW|Elemental|1|
-|Generate|TOK:OGW|Elemental|2|
-|Generate|TOK:OGW|Elemental|||SeedGuardianToken|
-|Generate|TOK:OGW|Elemental|||SparkElementalToken|
-|Generate|TOK:OGW|Elemental|||WallOfResurgenceToken|
+|Generate|TOK:OGW|Eldrazi Scion|1||EldraziScionToken|
+|Generate|TOK:OGW|Eldrazi Scion|2||EldraziScionToken|
+|Generate|TOK:OGW|Eldrazi Scion|3||EldraziScionToken|
+|Generate|TOK:OGW|Eldrazi Scion|4||EldraziScionToken|
+|Generate|TOK:OGW|Eldrazi Scion|5||EldraziScionToken|
+|Generate|TOK:OGW|Eldrazi Scion|6||EldraziScionToken|
+|Generate|TOK:OGW|Elemental|1||SeedGuardianToken|
+|Generate|TOK:OGW|Elemental|2||SparkElementalToken|
 |Generate|TOK:OGW|Knight Ally|||KnightAllyToken|
 |Generate|TOK:OGW|Kor Ally|||KorAllyToken|
 |Generate|TOK:OGW|Octopus|||OctopusToken|
@@ -983,18 +978,17 @@
 |Generate|TOK:SHM|Spirit|||SpiritWhiteToken|
 |Generate|TOK:SHM|Wolf|||WolfToken|
 |Generate|TOK:SOI|Angel|||AngelToken|
-|Generate|TOK:SOI|Clue|1|
-|Generate|TOK:SOI|Clue|2|
-|Generate|TOK:SOI|Clue|3|
-|Generate|TOK:SOI|Clue|4|
-|Generate|TOK:SOI|Clue|5|
-|Generate|TOK:SOI|Clue|6|
-|Generate|TOK:SOI|Clue|||ClueArtifactToken|
+|Generate|TOK:SOI|Clue|1||ClueArtifactToken|
+|Generate|TOK:SOI|Clue|2||ClueArtifactToken|
+|Generate|TOK:SOI|Clue|3||ClueArtifactToken|
+|Generate|TOK:SOI|Clue|4||ClueArtifactToken|
+|Generate|TOK:SOI|Clue|5||ClueArtifactToken|
+|Generate|TOK:SOI|Clue|6||ClueArtifactToken|
 |Generate|TOK:SOI|Devil|||DevilToken|
 |Generate|TOK:SOI|Human Cleric|||HumanClericToken|
 |Generate|TOK:SOI|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:SOI|Insect|||InsectToken|
-|Generate|TOK:SOI|Ooze|||InexorableBlobToken|
+|Generate|TOK:SOI|Ooze|||InexorableBlobOozeToken|
 |Generate|TOK:SOI|Spirit|||SpiritWhiteToken|
 |Generate|TOK:SOI|Vampire Knight|||VampireKnightToken|
 |Generate|TOK:SOI|Wolf|||WolfToken|
