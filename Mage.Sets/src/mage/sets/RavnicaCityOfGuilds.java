@@ -82,6 +82,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Carven Caryatid", 155, Rarity.UNCOMMON, mage.cards.c.CarvenCaryatid.class));
         cards.add(new SetCardInfo("Centaur Safeguard", 244, Rarity.COMMON, mage.cards.c.CentaurSafeguard.class));
         cards.add(new SetCardInfo("Cerulean Sphinx", 39, Rarity.RARE, mage.cards.c.CeruleanSphinx.class));
+        cards.add(new SetCardInfo("Chant of Vitu-Ghazi", 7, Rarity.UNCOMMON, mage.cards.c.ChantOfVituGhazi.class));
         cards.add(new SetCardInfo("Char", 117, Rarity.RARE, mage.cards.c.Char.class));
         cards.add(new SetCardInfo("Chord of Calling", 156, Rarity.RARE, mage.cards.c.ChordOfCalling.class));
         cards.add(new SetCardInfo("Chorus of the Conclave", 195, Rarity.RARE, mage.cards.c.ChorusOfTheConclave.class));
@@ -191,6 +192,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Incite Hysteria", 132, Rarity.COMMON, mage.cards.i.InciteHysteria.class));
         cards.add(new SetCardInfo("Induce Paranoia", 56, Rarity.COMMON, mage.cards.i.InduceParanoia.class));
         cards.add(new SetCardInfo("Infectious Host", 91, Rarity.COMMON, mage.cards.i.InfectiousHost.class));
+        cards.add(new SetCardInfo("Instill Furor", 134, Rarity.UNCOMMON, mage.cards.i.InstillFuror.class));
         cards.add(new SetCardInfo("Island", 291, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 292, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 293, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
@@ -348,6 +350,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Wojek Apothecary", 36, Rarity.UNCOMMON, mage.cards.w.WojekApothecary.class));
         cards.add(new SetCardInfo("Wojek Embermage", 152, Rarity.UNCOMMON, mage.cards.w.WojekEmbermage.class));
         cards.add(new SetCardInfo("Wojek Siren", 37, Rarity.COMMON, mage.cards.w.WojekSiren.class));
+        cards.add(new SetCardInfo("Woodwraith Corrupter", 240, Rarity.RARE, mage.cards.w.WoodwraithCorrupter.class));
         cards.add(new SetCardInfo("Woodwraith Strangler", 241, Rarity.COMMON, mage.cards.w.WoodwraithStrangler.class));
         cards.add(new SetCardInfo("Zephyr Spirit", 76, Rarity.COMMON, mage.cards.z.ZephyrSpirit.class));
     }
