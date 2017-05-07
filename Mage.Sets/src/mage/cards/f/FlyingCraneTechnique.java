@@ -27,6 +27,7 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -36,9 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -47,16 +46,14 @@ import java.util.UUID;
 public class FlyingCraneTechnique extends CardImpl {
 
     public FlyingCraneTechnique(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{R}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{R}{W}");
 
         // Untap all creatures you control.  They gain flying and double strike until end of turn.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(filter));
-        Effect effect = new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter);
+        this.getSpellAbility().addEffect(new UntapAllControllerEffect(FILTER_PERMANENT_CREATURES));
+        Effect effect = new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES);
         effect.setText("They gain flying");
         this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
+        effect = new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES);
         effect.setText("and double strike until end of turn");
         this.getSpellAbility().addEffect(effect);
     }

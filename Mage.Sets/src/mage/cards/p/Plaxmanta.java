@@ -40,7 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
@@ -50,18 +50,18 @@ import mage.watchers.common.ManaSpentToCastWatcher;
 public class Plaxmanta extends CardImpl {
 
     public Plaxmanta(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Beast");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        
+
         // When Plaxmanta enters the battlefield, creatures you control gain shroud until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures"))));
-        
+                new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES)));
+
         // When Plaxmanta enters the battlefield, sacrifice it unless {G} was spent to cast it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.G)), false), new ManaSpentToCastWatcher());
     }

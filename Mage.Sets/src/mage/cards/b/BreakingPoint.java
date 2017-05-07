@@ -27,20 +27,19 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -49,7 +48,7 @@ import java.util.UUID;
 public class BreakingPoint extends CardImpl {
 
     public BreakingPoint(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         // Any player may have Breaking Point deal 6 damage to him or her. If no one does, destroy all creatures. Creatures destroyed this way can't be regenerated.
         this.getSpellAbility().addEffect(new BreakingPointDestroyEffect());
@@ -105,7 +104,7 @@ class BreakingPointDestroyEffect extends OneShotEffect {
                 }
             }
             if (destroyCreatures) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent("creatures"), source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(FILTER_PERMANENT_CREATURES, source.getControllerId(), source.getSourceId(), game)) {
                     permanent.destroy(source.getSourceId(), game, true);
                 }
             }

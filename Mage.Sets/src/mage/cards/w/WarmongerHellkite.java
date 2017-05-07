@@ -41,8 +41,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -51,7 +51,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class WarmongerHellkite extends CardImpl {
 
     public WarmongerHellkite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(5);
@@ -61,7 +61,7 @@ public class WarmongerHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // All creatures attack each combat if able.
-        Effect effect = new AttacksIfAbleAllEffect(new FilterCreaturePermanent("creatures"), Duration.WhileOnBattlefield, true);
+        Effect effect = new AttacksIfAbleAllEffect(FILTER_PERMANENT_CREATURES, Duration.WhileOnBattlefield, true);
         effect.setText("All creatures attack each combat if able");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

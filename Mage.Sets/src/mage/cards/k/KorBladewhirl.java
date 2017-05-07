@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class KorBladewhirl extends CardImpl {
 
     public KorBladewhirl(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add("Kor");
         this.subtype.add("Soldier");
         this.subtype.add("Ally");
@@ -54,7 +54,7 @@ public class KorBladewhirl extends CardImpl {
 
         // <i>Rally</i> — Whenever Kor Bladewhirl or another Ally enters the battlefield under your control, creatures you control gain first strike until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures")), false));
+                new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), false));
     }
 
     public KorBladewhirl(final KorBladewhirl card) {

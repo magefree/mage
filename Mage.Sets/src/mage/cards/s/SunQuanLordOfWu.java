@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class SunQuanLordOfWu extends CardImpl {
 
     public SunQuanLordOfWu(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Soldier");
@@ -56,8 +56,8 @@ public class SunQuanLordOfWu extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Creatures you control have horsemanship.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HorsemanshipAbility.getInstance(), 
-                Duration.WhileOnBattlefield, new FilterCreaturePermanent("creatures"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HorsemanshipAbility.getInstance(),
+                Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES)));
     }
 
     public SunQuanLordOfWu(final SunQuanLordOfWu card) {

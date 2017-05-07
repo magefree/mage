@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -35,13 +36,11 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.*;
 
 /**
  *
@@ -56,7 +55,7 @@ public class DivergentTransformations extends CardImpl {
         this.addAbility(new UndauntedAbility());
         // Exile two target creatures. For each of those creatures, its controller reveals cards from the top of his or her library until he or she reveals a creature card, puts that card onto the battlefield, then shuffles the rest into his or her library.
         this.getSpellAbility().addEffect(new DivergentTransformationsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, new FilterCreaturePermanent("creatures"), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, FILTER_PERMANENT_CREATURES, false));
 
     }
 

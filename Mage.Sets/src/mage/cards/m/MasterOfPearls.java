@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class MasterOfPearls extends CardImpl {
 
     public MasterOfPearls(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Monk");
 
@@ -56,7 +56,7 @@ public class MasterOfPearls extends CardImpl {
         // Morph {3}{W}{W}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{W}{W}")));
         // When Master of Pearls is turned face up, creatures you control get +2/+2 until end of turn.
-        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(2,2, Duration.EndOfTurn, new FilterCreaturePermanent("creatures"))));
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(2, 2, Duration.EndOfTurn, FILTER_PERMANENT_CREATURES)));
     }
 
     public MasterOfPearls(final MasterOfPearls card) {

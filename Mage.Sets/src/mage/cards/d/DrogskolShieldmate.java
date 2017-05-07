@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -35,9 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -46,7 +45,7 @@ import java.util.UUID;
 public class DrogskolShieldmate extends CardImpl {
 
     public DrogskolShieldmate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Spirit");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);
@@ -57,7 +56,7 @@ public class DrogskolShieldmate extends CardImpl {
 
         // When Drogskol Shieldmate enters the battlefield, other creatures you control get +0/+1 until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new BoostControlledEffect(0, 1, Duration.EndOfTurn, new FilterCreaturePermanent("creatures"), true), false));
+                new BoostControlledEffect(0, 1, Duration.EndOfTurn, FILTER_PERMANENT_CREATURES, true), false));
     }
 
     public DrogskolShieldmate(final DrogskolShieldmate card) {

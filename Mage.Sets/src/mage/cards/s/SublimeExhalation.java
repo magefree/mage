@@ -33,7 +33,7 @@ import mage.abilities.keyword.UndauntedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -48,7 +48,7 @@ public class SublimeExhalation extends CardImpl {
         this.addAbility(new UndauntedAbility());
 
         // Destroy all creatures.
-        getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent("creatures")));
+        getSpellAbility().addEffect(new DestroyAllEffect(FILTER_PERMANENT_CREATURES));
     }
 
     public SublimeExhalation(final SublimeExhalation card) {

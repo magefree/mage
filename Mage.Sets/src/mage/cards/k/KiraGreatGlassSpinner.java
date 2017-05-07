@@ -38,7 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -53,7 +53,7 @@ import mage.watchers.common.NumberOfTimesPermanentTargetedATurnWatcher;
 public class KiraGreatGlassSpinner extends CardImpl {
 
     public KiraGreatGlassSpinner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add("Spirit");
         addSuperType(SuperType.LEGENDARY);
 
@@ -68,7 +68,7 @@ public class KiraGreatGlassSpinner extends CardImpl {
         effect.setText("counter that spell or ability");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(new KiraGreatGlassSpinnerAbility(effect), Duration.WhileOnBattlefield,
-                        new FilterCreaturePermanent("creatures"))),
+                        FILTER_PERMANENT_CREATURES)),
                 new NumberOfTimesPermanentTargetedATurnWatcher());
 
     }

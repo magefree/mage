@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -34,14 +35,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,8 +55,7 @@ public class AetherBurst extends CardImpl {
     }
 
     public AetherBurst(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast Aether Burst.
         this.getSpellAbility().addEffect(new DynamicReturnToHandTargetEffect());
@@ -78,7 +76,7 @@ public class AetherBurst extends CardImpl {
                     }
                 }
             }
-            ((DynamicTargetCreaturePermanent)target).setMaxNumberOfTargets(amount + 1);
+            ((DynamicTargetCreaturePermanent) target).setMaxNumberOfTargets(amount + 1);
         }
     }
 
@@ -94,16 +92,15 @@ public class AetherBurst extends CardImpl {
 
 class DynamicTargetCreaturePermanent extends TargetPermanent {
 
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creatures");
-
     public DynamicTargetCreaturePermanent() {
-        super(filterCreature);
+        super(FILTER_PERMANENT_CREATURES);
     }
 
     public DynamicTargetCreaturePermanent(final DynamicTargetCreaturePermanent target) {
         super(target);
     }
 
+    @Override
     public void setMaxNumberOfTargets(int maxNumberOfTargets) {
         this.maxNumberOfTargets = maxNumberOfTargets;
     }
@@ -139,4 +136,3 @@ class DynamicReturnToHandTargetEffect extends ReturnToHandTargetEffect {
     }
 
 }
-
