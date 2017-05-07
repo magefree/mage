@@ -175,6 +175,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Grayscaled Gharial", 52, Rarity.COMMON, mage.cards.g.GrayscaledGharial.class));
         cards.add(new SetCardInfo("Greater Forgeling", 129, Rarity.UNCOMMON, mage.cards.g.GreaterForgeling.class));
         cards.add(new SetCardInfo("Greater Mossdog", 169, Rarity.COMMON, mage.cards.g.GreaterMossdog.class));
+        cards.add(new SetCardInfo("Grifter's Blade", 263, Rarity.UNCOMMON, mage.cards.g.GriftersBlade.class));
         cards.add(new SetCardInfo("Grozoth", 53, Rarity.RARE, mage.cards.g.Grozoth.class));
         cards.add(new SetCardInfo("Guardian of Vitu-Ghazi", 212, Rarity.COMMON, mage.cards.g.GuardianOfVituGhazi.class));
         cards.add(new SetCardInfo("Halcyon Glaze", 54, Rarity.UNCOMMON, mage.cards.h.HalcyonGlaze.class));
@@ -207,6 +208,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Gatekeeper", 25, Rarity.RARE, mage.cards.l.LoxodonGatekeeper.class));
         cards.add(new SetCardInfo("Loxodon Hierarch", 214, Rarity.RARE, mage.cards.l.LoxodonHierarch.class));
         cards.add(new SetCardInfo("Lurking Informant", 249, Rarity.COMMON, mage.cards.l.LurkingInformant.class));
+        cards.add(new SetCardInfo("Mark of Eviction", 58, Rarity.UNCOMMON, mage.cards.m.MarkOfEviction.class));
         cards.add(new SetCardInfo("Mausoleum Turnkey", 94, Rarity.UNCOMMON, mage.cards.m.MausoleumTurnkey.class));
         cards.add(new SetCardInfo("Mindleech Mass", 215, Rarity.RARE, mage.cards.m.MindleechMass.class));
         cards.add(new SetCardInfo("Mindmoil", 135, Rarity.RARE, mage.cards.m.Mindmoil.class));
@@ -227,6 +229,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Nightguard Patrol", 26, Rarity.COMMON, mage.cards.n.NightguardPatrol.class));
         cards.add(new SetCardInfo("Nightmare Void", 100, Rarity.UNCOMMON, mage.cards.n.NightmareVoid.class));
         cards.add(new SetCardInfo("Nullmage Shepherd", 174, Rarity.UNCOMMON, mage.cards.n.NullmageShepherd.class));
+        cards.add(new SetCardInfo("Nullstone Gargoyle", 266, Rarity.RARE, mage.cards.n.NullstoneGargoyle.class));
         cards.add(new SetCardInfo("Oathsworn Giant", 27, Rarity.UNCOMMON, mage.cards.o.OathswornGiant.class));
         cards.add(new SetCardInfo("Ordruun Commando", 137, Rarity.COMMON, mage.cards.o.OrdruunCommando.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 279, Rarity.RARE, mage.cards.o.OvergrownTomb.class));

@@ -12,6 +12,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -25,6 +26,7 @@ import mage.watchers.Watcher;
 public class SpellsCastWatcher extends Watcher {
 
     private final HashMap<UUID, List<Spell>> spellsCast = new HashMap<>();
+    private int nonCreatureSpells;
 
     public SpellsCastWatcher() {
         super(SpellsCastWatcher.class.getSimpleName(), WatcherScope.GAME);
@@ -59,6 +61,9 @@ public class SpellsCastWatcher extends Watcher {
                     spells = spellsCast.get(spell.getControllerId());
                 }
                 spells.add(spell.copy()); // copy needed because attributes like color could be changed later
+                if (StaticFilters.FILTER_SPELL_NON_CREATURE.match(spell, game)) {
+                    nonCreatureSpells++;
+                }
             }
         }
     }
@@ -66,10 +71,15 @@ public class SpellsCastWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
+        nonCreatureSpells = 0;
         spellsCast.clear();
     }
 
     public List<Spell> getSpellsCastThisTurn(UUID playerId) {
         return spellsCast.get(playerId);
+    }
+
+    public int getNumberOfNonCreatureSpells() {
+        return nonCreatureSpells;
     }
 }
