@@ -134,6 +134,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Skysweeper", 162, Rarity.COMMON, mage.cards.e.ElvishSkysweeper.class));
         cards.add(new SetCardInfo("Empty the Catacombs", 86, Rarity.RARE, mage.cards.e.EmptyTheCatacombs.class));
         cards.add(new SetCardInfo("Ethereal Usher", 47, Rarity.UNCOMMON, mage.cards.e.EtherealUsher.class));
+        cards.add(new SetCardInfo("Excruciator", 121, Rarity.RARE, mage.cards.e.Excruciator.class));
         cards.add(new SetCardInfo("Eye of the Storm", 48, Rarity.RARE, mage.cards.e.EyeOfTheStorm.class));
         cards.add(new SetCardInfo("Faith's Fetters", 16, Rarity.COMMON, mage.cards.f.FaithsFetters.class));
         cards.add(new SetCardInfo("Farseek", 163, Rarity.COMMON, mage.cards.f.Farseek.class));
@@ -156,6 +157,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Galvanic Arc", 126, Rarity.COMMON, mage.cards.g.GalvanicArc.class));
         cards.add(new SetCardInfo("Gate Hound", 19, Rarity.COMMON, mage.cards.g.GateHound.class));
         cards.add(new SetCardInfo("Gather Courage", 165, Rarity.COMMON, mage.cards.g.GatherCourage.class));
+        cards.add(new SetCardInfo("Gaze of the Gorgon", 246, Rarity.COMMON, mage.cards.g.GazeOfTheGorgon.class));
         cards.add(new SetCardInfo("Ghosts of the Innocent", 20, Rarity.RARE, mage.cards.g.GhostsOfTheInnocent.class));
         cards.add(new SetCardInfo("Glare of Subdual", 207, Rarity.RARE, mage.cards.g.GlareOfSubdual.class));
         cards.add(new SetCardInfo("Glass Golem", 261, Rarity.UNCOMMON, mage.cards.g.GlassGolem.class));
@@ -190,6 +192,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Hunted Phantasm", 55, Rarity.RARE, mage.cards.h.HuntedPhantasm.class));
         cards.add(new SetCardInfo("Hunted Troll", 170, Rarity.RARE, mage.cards.h.HuntedTroll.class));
         cards.add(new SetCardInfo("Incite Hysteria", 132, Rarity.COMMON, mage.cards.i.InciteHysteria.class));
+        cards.add(new SetCardInfo("Indentured Oaf", 133, Rarity.UNCOMMON, mage.cards.i.IndenturedOaf.class));
         cards.add(new SetCardInfo("Induce Paranoia", 56, Rarity.COMMON, mage.cards.i.InduceParanoia.class));
         cards.add(new SetCardInfo("Infectious Host", 91, Rarity.COMMON, mage.cards.i.InfectiousHost.class));
         cards.add(new SetCardInfo("Instill Furor", 134, Rarity.UNCOMMON, mage.cards.i.InstillFuror.class));
