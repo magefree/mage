@@ -347,6 +347,8 @@ public class MageBook extends JComponent {
                     Constructor<?> cons = c.getConstructor();
                     Object newToken = cons.newInstance();
                     if (newToken != null && newToken instanceof mage.game.permanent.token.Token) {
+                        ((Token) newToken).setExpansionSetCodeForImage(set);
+                        ((Token) newToken).setOriginalExpansionSetCode(set);
                         tokens.add((Token) newToken);
                     }
                 } catch (ClassNotFoundException ex) {

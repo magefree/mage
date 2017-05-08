@@ -37,7 +37,7 @@ import mage.MageInt;
 public class DinOfTheFireherdToken extends Token {
 
     public DinOfTheFireherdToken() {
-        super("", "5/5 black and red Elemental creature");
+        super("Elemental", "5/5 black and red Elemental creature");
         cardType.add(CardType.CREATURE);
         subtype.add("Elemental");
         color.setBlack(true);

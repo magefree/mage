@@ -37,6 +37,9 @@ import mage.abilities.keyword.DeathtouchAbility;
  */
 public class Wurm1Token extends Token {
 
+    public Wurm1Token() {
+        this("MBS");
+    }
     public Wurm1Token(String setCode) {
         super("Wurm", "3/3 colorless Wurm artifact creature token with deathtouch");
         setOriginalExpansionSetCode(setCode);
