@@ -547,7 +547,7 @@
 |Generate|TOK:FUT|Wurm|||WurmCallingWurmToken|
 |Generate|TOK:FUT|Zombie Goblin|||FesteringGoblinToken|
 |Generate|TOK:FUT|Zombie|||ZombieToken|
-|Generate|TOK:FUT|faerie|||CloudSpriteToken|
+|Generate|TOK:FUT|Faerie|||CloudSpriteToken|
 |Generate|TOK:GPT|Bat|||BatToken|
 |Generate|TOK:GPT|Pegasus|||PegasusToken|
 |Generate|TOK:GPT|Sand|||DuneBroodNephilimToken|
@@ -601,7 +601,6 @@
 |Generate|TOK:JOU|Sphinx|||HourOfNeedSphinxToken|
 |Generate|TOK:JOU|Spider|||RenownedWeaverSpiderToken|
 |Generate|TOK:JOU|Zombie||RitualOfTheReturnedZombieToken|
-|Generate|TOK:JOU|artifact|||LandMineToken|
 |Generate|TOK:JUD|Bear|||BearToken|
 |Generate|TOK:JUD|Bird|||BirdToken|
 |Generate|TOK:JUD|Elemental Cat|||ElementalCatToken|
@@ -894,7 +893,7 @@
 |Generate|TOK:RAV|Saproling|||SaprolingToken|
 |Generate|TOK:RAV|Spirit|||SpiritWhiteToken|
 |Generate|TOK:RAV|Wolf|||VojaToken|
-|Generate|TOK:RAV|faerie|||FaerieToken|
+|Generate|TOK:RAV|Faerie|||FaerieToken|
 |Generate|TOK:ROE|Dragon|||DragonToken2|
 |Generate|TOK:ROE|Eldrazi Spawn|1||EldraziSpawnToken|
 |Generate|TOK:ROE|Eldrazi Spawn|2||EldraziSpawnToken|
