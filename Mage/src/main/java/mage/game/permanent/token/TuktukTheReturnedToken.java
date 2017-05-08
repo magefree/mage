@@ -38,7 +38,7 @@ import mage.constants.SuperType;
 public class TuktukTheReturnedToken extends Token {
 
     public TuktukTheReturnedToken() {
-        this("ZEN");
+        this("ROE");
     }
     
     public TuktukTheReturnedToken(String setCode) {
