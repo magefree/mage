@@ -70,6 +70,9 @@ public final class MagePreferences {
                 if (key.matches(".*userName$")) {
                     userIds.append(',').append(prefs().get(key, null));
                 }
+                if (key.matches(".*DeckPath.*")) {
+                    userIds.append(',').append(prefs().get(key, null));
+                }
             }
         } catch (BackingStoreException ex) {
         }
