@@ -242,7 +242,7 @@
 |Generate|TOK:C13|Thopter|||ThopterToken|
 |Generate|TOK:C13|Thrull|||ThrullToken|
 |Generate|TOK:C13|Zombie|||ZombieToken|
-|Generate|TOK:C13|faerie|||CloudSpriteToken|
+|Generate|TOK:C13|Faerie|||CloudSpriteToken|
 |Generate|TOK:C14|Angel|||AngelToken|
 |Generate|TOK:C14|Ape|||PongifyApeToken|
 |Generate|TOK:C14|Beast|1||BeastToken|
@@ -272,7 +272,6 @@
 |Generate|TOK:C14|Spirit|||SpiritWhiteToken|
 |Generate|TOK:C14|Stoneforged Blade||
 |Generate|TOK:C14|Treefolk|||SylvanOfferingTreefolkToken|
-|Generate|TOK:C14|Tuktuk the Returned||
 |Generate|TOK:C14|Whale|||ReefWormWhaleToken|
 |Generate|TOK:C14|Wolf|||WolfToken|
 |Generate|TOK:C14|Wurm|1||Wurm1Token|
@@ -304,7 +303,7 @@
 |Generate|TOK:C15|Spirit|2||TeysaEnvoyOfGhostsToken|
 |Generate|TOK:C15|Wolf|||WolfToken|
 |Generate|TOK:C15|Zombie|||ZombieToken|
-|Generate|TOK:C15|artifact|||LandMineToken|
+|Generate|TOK:C15|Land Mine|||LandMineToken|
 |Generate|TOK:C16|Beast||
 |Generate|TOK:C16|Bird|1|
 |Generate|TOK:C16|Bird|2|
@@ -561,7 +560,6 @@
 |Generate|TOK:GTC|Frog Lizard|||RapidHybridizationToken|
 |Generate|TOK:GTC|Horror|||NightwingHorrorToken|
 |Generate|TOK:GTC|Knight|||KnightWatch|
-|Generate|TOK:GTC|Ooze||
 |Generate|TOK:GTC|Ooze|||MysticGenesisOozeToken|
 |Generate|TOK:GTC|Rat|||RatToken|
 |Generate|TOK:GTC|Soldier|1||SoldierToken|
@@ -643,8 +641,6 @@
 |Generate|TOK:LRW|Avatar|||AvatarToken|
 |Generate|TOK:LRW|Beast|||BeastToken|
 |Generate|TOK:LRW|Elemental Shaman|||ElementalShamanToken|
-|Generate|TOK:LRW|Elemental|1|
-|Generate|TOK:LRW|Elemental|2|
 |Generate|TOK:LRW|Elemental|||WalkerOfTheGroveToken|
 |Generate|TOK:LRW|Elemental|||WhiteElementalToken|
 |Generate|TOK:LRW|Elf Warrior|||ElfToken|
@@ -677,8 +673,6 @@
 |Generate|TOK:M13|Cat|||CatToken|
 |Generate|TOK:M13|Drake|||DrakeToken|
 |Generate|TOK:M13|Goat|||GoatToken|
-|Generate|TOK:M13|Goblin|1|
-|Generate|TOK:M13|Goblin|2|
 |Generate|TOK:M13|Goblin|||GoblinToken|
 |Generate|TOK:M13|Hellion|1||HellionHasteToken|
 |Generate|TOK:M13|Hellion|2||HellionToken|
@@ -686,7 +680,6 @@
 |Generate|TOK:M13|Soldier|||SoldierToken|
 |Generate|TOK:M13|Wurm|||WurmToken|
 |Generate|TOK:M13|Zombie|||ZombieToken|
-|Generate|TOK:M13|artifact|||LandMineToken|
 |Generate|TOK:M14|Angel|||AngelToken|
 |Generate|TOK:M14|Beast|||BeastToken|
 |Generate|TOK:M14|Cat|||CatToken|
@@ -914,22 +907,16 @@
 |Generate|TOK:ROE|Ooze|||MysticGenesisOozeToken|
 |Generate|TOK:RTR|Assassin|||AssassinToken|
 |Generate|TOK:RTR|Bird|||BirdToken|
-|Generate|TOK:RTR|Centaur|1|
-|Generate|TOK:RTR|Centaur|2|
 |Generate|TOK:RTR|Centaur|||CentaurToken|
 |Generate|TOK:RTR|Dragon|||UtvaraHellkiteDragonToken|
 |Generate|TOK:RTR|Elemental||
 |Generate|TOK:RTR|Goblin|||GoblinToken|
-|Generate|TOK:RTR|Knight|1|
-|Generate|TOK:RTR|Knight|2|
 |Generate|TOK:RTR|Knight|||KnightToken|
-|Generate|TOK:RTR|Ooze||
 |Generate|TOK:RTR|Ooze|||MysticGenesisOozeToken|
 |Generate|TOK:RTR|Rhino|||RhinoToken|
 |Generate|TOK:RTR|Saproling|||SaprolingToken|
 |Generate|TOK:RTR|Soldier|||SoldierToken|
 |Generate|TOK:RTR|Wurm|||WurmToken2|
-|Generate|TOK:RTR|Wurm|||WurmToken3|
 |Generate|TOK:SCG|Angel|||AngelToken|
 |Generate|TOK:SCG|Beast|||BeastToken2|
 |Generate|TOK:SCG|Dragon|||DragonToken2|
@@ -973,8 +960,8 @@
 |Generate|TOK:SOM|Cat|||CatToken|
 |Generate|TOK:SOM|Goblin|||GoblinToken|
 |Generate|TOK:SOM|Golem|||GolemToken|
-|Generate|TOK:SOM|Insect|||InsectInfectToken|
-|Generate|TOK:SOM|Insect|||InsectToken|
+|Generate|TOK:SOM|Insect|1||InsectToken|
+|Generate|TOK:SOM|Insect|2||InsectInfectToken|
 |Generate|TOK:SOM|Myr|||MyrToken|
 |Generate|TOK:SOM|Soldier|||SoldierToken|
 |Generate|TOK:SOM|Wolf|||WolfToken|
@@ -990,16 +977,12 @@
 |Generate|TOK:THS|Boar|||CurseOfTheSwineBoarToken|
 |Generate|TOK:THS|Cleric|||HeliodGodOfTheSunToken|
 |Generate|TOK:THS|Elemental|||MasterOfWavesElementalToken|
-|Generate|TOK:THS|Golem|1|
-|Generate|TOK:THS|Golem|2|
 |Generate|TOK:THS|Golem|||HammerOfPurphorosGolemToken|
 |Generate|TOK:THS|Harpy|||AbhorrentOverlordHarpyToken|
 |Generate|TOK:THS|Satyr|||XenagosSatyrToken|
-|Generate|TOK:THS|Soldier|1|
-|Generate|TOK:THS|Soldier|2|
-|Generate|TOK:THS|Soldier|3|
 |Generate|TOK:THS|Soldier|||AkroanSoldierToken|
-|Generate|TOK:THS|Soldier|||SoldierToken|
+|Generate|TOK:THS|Soldier|1||SoldierToken|
+|Generate|TOK:THS|Soldier|2||SoldierToken|
 |Generate|TOK:TMP|Beast|||CarnivoreToken|
 |Generate|TOK:TMP|Hound|||HoundToken|
 |Generate|TOK:TMP|Pegasus|||PegasusToken|
