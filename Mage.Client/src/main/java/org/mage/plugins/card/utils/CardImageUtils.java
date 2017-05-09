@@ -30,8 +30,8 @@ public final class CardImageUtils {
             String filePath = getTokenImagePath(card);
             if (pathCache.containsKey(card)) {
                 if (filePath.equals(pathCache.get(card))) {
-                    return pathCache.get(card);                    
-                }                
+                    return pathCache.get(card);
+                }
             }
             TFile file = new TFile(filePath);
 
@@ -192,8 +192,8 @@ public final class CardImageUtils {
     }
 
     public static String generateTokenDescriptorImagePath(CardDownloadData card) {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String imagesPath = Objects.equals(useDefault, "true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        // String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        // String imagesPath = Objects.equals(useDefault, "true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
 
         String straightImageFile = getTokenDescriptorImagePath(card);
         TFile file = new TFile(straightImageFile);

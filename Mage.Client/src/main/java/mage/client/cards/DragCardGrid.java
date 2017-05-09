@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -23,7 +22,6 @@ import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.*;
-import mage.client.util.Event;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.util.RandomUtil;
@@ -354,7 +352,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         clearCardEventListeners();
     }
 
-    public void addCardEventListener(Listener<Event> listener) {
+    public void addCardEventListener(Listener<mage.client.util.Event> listener) {
         eventSource.addListener(listener);
     }
 
@@ -396,9 +394,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     public DeckCardLayout getCardLayout() {
         // 2D Array to put entries into
-        List<List<List<DeckCardInfo>>> info = new ArrayList<>();
+        java.util.List<java.util.List<java.util.List<DeckCardInfo>>> info = new ArrayList<>();
         for (ArrayList<ArrayList<CardView>> gridRow : cardGrid) {
-            List<List<DeckCardInfo>> row = new ArrayList<>();
+            java.util.List<java.util.List<DeckCardInfo>> row = new ArrayList<>();
             info.add(row);
             for (ArrayList<CardView> stack : gridRow) {
                 row.add(stack.stream()
@@ -565,7 +563,6 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     JButton selectByButton;
     JButton analyseButton;
     JButton blingButton;
-
 
     // Popup for toolbar
     final JPopupMenu filterPopup;
@@ -978,7 +975,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         analyseButton.addActionListener(evt -> analyseDeck());
 
-        // Bling button - aka Add in a premium 'JR', 'MBP', 'CS' etc card 
+        // Bling button - aka Add in a premium 'JR', 'MBP', 'CS' etc card
         blingButton.setToolTipText("Bling your deck! Select the original and added cards by selecting 'Multiples' in the selection options");
 
         blingButton.addActionListener(evt -> blingDeck());
@@ -1135,10 +1132,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         if (offsetIntoCol2 < GRID_PADDING) {
             --col2;
         }
-        
+
         // avoids a null ref issue but only deals with symptom of problem. not sure how it gets to this state ever. see issue #3197
         // if (selectionDragStartCards == null) return;
-
         int curY = COUNT_LABEL_HEIGHT;
         for (int rowIndex = 0; rowIndex < cardGrid.size(); ++rowIndex) {
             int stackStartIndex;
@@ -1165,7 +1161,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     boolean inBoundsY = (i >= stackStartIndex && i <= stackEndIndex);
                     boolean lastCard = (i == stack.size() - 1);
                     boolean inSeletionDrag = inBoundsX && (inBoundsY || (lastCard && (y2 >= stackBottomBegin && y1 <= stackBottomEnd)));
-                    if (inSeletionDrag || selectionDragStartCards.contains(card)) {
+                    if (inSeletionDrag || selectionDragStartCards != null && selectionDragStartCards.contains(card)) {
                         if (!card.isSelected()) {
                             card.setSelected(true);
                             view.update(card);
@@ -1493,7 +1489,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         cardCriteria.setCodes(sets);
                         cardCriteria.name(card.getName());
 
-                        List<CardInfo> cardPool = CardRepository.instance.findCards(cardCriteria);
+                        java.util.List<CardInfo> cardPool = CardRepository.instance.findCards(cardCriteria);
 
                         if (!cardPool.isEmpty()) {
                             Card acard = cardPool.get(RandomUtil.nextInt(cardPool.size())).getMockCard();
@@ -1606,11 +1602,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Now go through the layout and use it to build the cardGrid
             cardGrid = new ArrayList<>();
             maxStackSize = new ArrayList<>();
-            for (List<List<DeckCardInfo>> row : layout.getCards()) {
+            for (java.util.List<java.util.List<DeckCardInfo>> row : layout.getCards()) {
                 ArrayList<ArrayList<CardView>> gridRow = new ArrayList<>();
                 int thisMaxStackSize = 0;
                 cardGrid.add(gridRow);
-                for (List<DeckCardInfo> stack : row) {
+                for (java.util.List<DeckCardInfo> stack : row) {
                     ArrayList<CardView> gridStack = new ArrayList<>();
                     gridRow.add(gridStack);
                     for (DeckCardInfo info : stack) {
