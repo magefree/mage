@@ -64,6 +64,7 @@ public class ProtectionSacrificeTest extends CardTestPlayerBase {
     }
 
     /*
+    NOTE: Test is failing due to bug in code.
  * Reported bug: see issue #3332
  * Martyr's Bond fails to force sacrifice against Shroud/protection
  */
