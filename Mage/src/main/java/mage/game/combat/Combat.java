@@ -940,11 +940,11 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     Set<UUID> blockedSet = mustBeBlockedByAtLeastOne.get(blockedAttackerId);
                                     Set<UUID> toBlockSet = mustBeBlockedByAtLeastOne.get(toBeBlockedCreatureId);
                                     if (toBlockSet == null) {
-                                        // This should never happen. 
+                                        // This should never happen.
                                         return null;
                                     } else if (toBlockSet.containsAll(blockedSet)) {
-                                        // the creature already blocks alone a creature that has to be blocked by at least one 
-                                        // and has more possible blockers, so this is ok 
+                                        // the creature already blocks alone a creature that has to be blocked by at least one
+                                        // and has more possible blockers, so this is ok
                                         return null;
                                     }
 
@@ -1154,19 +1154,16 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (!blockingGroups.containsKey(blockerId)) {
                 CombatGroup newGroup = new CombatGroup(playerId, false, playerId);
                 newGroup.blockers.add(blockerId);
-                // add all blocked attackers
-                for (CombatGroup group : groups) {
-                    if (group.getBlockers().contains(blockerId)) {
-                        // take into account banding
-                        for (UUID attacker : group.attackers) {
-                            newGroup.attackers.add(attacker);
-                        }
+                blockingGroups.put(blockerId, newGroup);
+            }
+            // add all blocked attackers
+            for (CombatGroup group : groups) {
+                if (group.getBlockers().contains(blockerId)) {
+                    // take into account banding
+                    for (UUID attacker : group.attackers) {
+                        blockingGroups.get(blockerId).attackers.add(attacker);
                     }
                 }
-                blockingGroups.put(blockerId, newGroup);
-            } else {
-                //TODO: handle banding
-                blockingGroups.get(blockerId).attackers.add(attackerId);
             }
         }
     }

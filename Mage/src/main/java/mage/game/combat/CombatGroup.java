@@ -222,41 +222,44 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     private void singleBlockerDamage(boolean first, Game game) {
-        //TODO:  handle banding
         Permanent blocker = game.getPermanent(blockers.get(0));
         Permanent attacker = game.getPermanent(attackers.get(0));
+        int blockerDamage = 0;
         if (blocker != null && attacker != null) {
-            int blockerDamage = getDamageValueFromPermanent(blocker, game); // must be set before attacker damage marking because of effects like Test of Faith
-            if (blocked && canDamage(attacker, first)) {
-                int damage = getDamageValueFromPermanent(attacker, game);
-                if (hasTrample(attacker)) {
-                    int lethalDamage;
-                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
-                        lethalDamage = 1;
-                    } else {
-                        lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
-                    }
-                    if (lethalDamage >= damage) {
-                        blocker.markDamage(damage, attacker.getId(), game, true, true);
-                    } else {
-                        Player player = game.getPlayer(attacker.getControllerId());
-                        int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
-                        blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
-                        damage -= damageAssigned;
-                        if (damage > 0) {
-                            defenderDamage(attacker, damage, game);
+            for(UUID attackerId : attackers){
+                attacker = game.getPermanent(attackerId);
+                blockerDamage = getDamageValueFromPermanent(blocker, game); // must be set before attacker damage marking because of effects like Test of Faith
+                if (blocked && canDamage(attacker, first)) {
+                    int damage = getDamageValueFromPermanent(attacker, game);
+                    if (hasTrample(attacker)) {
+                        int lethalDamage;
+                        if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+                            lethalDamage = 1;
+                        } else {
+                            lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
                         }
+                        if (lethalDamage >= damage) {
+                            blocker.markDamage(damage, attacker.getId(), game, true, true);
+                        } else {
+                            Player player = game.getPlayer(attacker.getControllerId());
+                            int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
+                            blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
+                            damage -= damageAssigned;
+                            if (damage > 0) {
+                                defenderDamage(attacker, damage, game);
+                            }
+                        }
+                    } else {
+                        blocker.markDamage(damage, attacker.getId(), game, true, true);
                     }
-                } else {
-                    blocker.markDamage(damage, attacker.getId(), game, true, true);
                 }
-            }
+            } //end of for
             if (canDamage(blocker, first)) {
                 if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
                     attacker.markDamage(blockerDamage, blocker.getId(), game, true, true);
                 }
             }
-        }
+        }   
     }
 
     private void multiBlockerDamage(boolean first, Game game) {
