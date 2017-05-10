@@ -59,11 +59,14 @@ public class ManaVault extends CardImpl {
         // Mana Vault doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
         // At the beginning of your upkeep, you may pay {4}. If you do, untap Mana Vault.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+        this.addAbility(new ConditionalTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(new UntapSourceEffect(), new GenericManaCost(4), "Pay {4} to untap {this}?"),
                 TargetController.YOU,
-                false));
+                false),
+                SourceTappedCondition.getInstance(),
+                "At the beginning of your upkeep, if {this} is tapped, you may pay {4} to untap it."));
         // At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfDrawTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(1), TargetController.YOU, false),
