@@ -27,6 +27,7 @@
  */
 package org.mage.test.combat;
 
+import mage.abilities.keyword.HexproofAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -93,6 +94,39 @@ public class AttackPlaneswalkerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Kiora, the Crashing Wave", 1);
         assertPermanentCount(playerB, "Giant Tortoise", 1);
         assertCounterCount("Kiora, the Crashing Wave", CounterType.LOYALTY, 1);
+    }
+
+    /*
+     * Reported bug: see issue #3328
+     * Players unable to attack Planeswalker with Privileged Position on battlefield.
+     */
+    @Test
+    public void testAttackPlaneswalkerWithHexproofPrivilegedPosition() {
+
+        /*
+         Privileged Position {2}{G/W}{G/W}{G/W}
+        Enchantment
+        Other permanents you control have hexproof.
+         */
+        String pPosition = "Privileged Position";
+        String sorin = "Sorin, Solemn Visitor"; // planeswalker {2}{W}{B} 4 loyalty
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.BATTLEFIELD, playerB, pPosition);
+        addCard(Zone.BATTLEFIELD, playerB, sorin);
+        addCard(Zone.BATTLEFIELD, playerA, memnite);
+
+        attack(3, playerA, memnite, sorin);
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, pPosition, 1);
+        assertPermanentCount(playerB, sorin, 1);
+        assertTapped(memnite, true);
+        assertLife(playerB, 20);
+        assertCounterCount(sorin, CounterType.LOYALTY, 3);
+        assertAbility(playerB, sorin, HexproofAbility.getInstance(), true);
     }
 
     /**
