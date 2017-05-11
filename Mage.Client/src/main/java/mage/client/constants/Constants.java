@@ -102,7 +102,8 @@ public final class Constants {
         COLOR_IDENTITY("Color Identity"),
         NAME("Name"),
         RARITY("Rarity"),
-        UNSORTED("Unsorted");
+        UNSORTED("Unsorted"),
+        EDH_POWER_LEVEL("EDH Power Level");
 
         private final String text;
 

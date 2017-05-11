@@ -40,7 +40,6 @@ import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.constants.SetType;
 import mage.filter.FilterMana;
-import mage.util.CardUtil;
 
 /**
  *
@@ -237,6 +236,8 @@ public class Commander extends Constructed {
             boolean drawCards = false;
             boolean evoke = false;
             boolean extraTurns = false;
+            boolean flash = false;
+            boolean flashback = false;
             boolean flicker = false;
             boolean gainControl = false;
             boolean hexproof = false;
@@ -294,6 +295,8 @@ public class Commander extends Constructed {
                 exileAll |= s.contains("exile") && s.contains(" all ");
                 extraTurns |= s.contains("extra turn");
                 flicker |= s.contains("exile") && s.contains("return") && s.contains("to the battlefield under");
+                flash |= s.contains("flash");
+                flashback |= s.contains("flashback");
                 gainControl |= s.contains("gain control");
                 hexproof |= s.contains("hexproof");
                 infect |= s.contains("infect");
@@ -304,7 +307,7 @@ public class Commander extends Constructed {
                 overload |= s.contains("overload");
                 persist |= s.contains("persist");
                 preventDamage |= s.contains("prevent") && s.contains("all") && s.contains("damage");
-                proliferate |= s.contains("proliferate");                
+                proliferate |= s.contains("proliferate");
                 protection |= s.contains("protection");
                 putUnderYourControl |= s.contains("put") && s.contains("under your control");
                 retrace |= s.contains("retrace");
@@ -373,6 +376,12 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (exileAll) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (flash) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (flashback) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (flicker) {
@@ -506,10 +515,6 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
 
-            if (card.isLand()) {
-                thisMaxPower = 0;
-            }
-
             String cn = card.getName().toLowerCase();
             if (cn.equals("ancient tomb")
                     || cn.equals("anafenza, the foremost")
@@ -593,7 +598,7 @@ public class Commander extends Constructed {
 
             // Parts of infinite combos
             if (cn.equals("animate artifact") || cn.equals("animar, soul of element")
-                    || cn.equals("archaeomancer")                    
+                    || cn.equals("archaeomancer")
                     || cn.equals("ashnod's altar") || cn.equals("azami, lady of scrolls")
                     || cn.equals("aura flux")
                     || cn.equals("basalt monolith") || cn.equals("brago, king eternal")
@@ -608,6 +613,7 @@ public class Commander extends Constructed {
                     || cn.equals("earthcraft") || cn.equals("erratic portal")
                     || cn.equals("enter the infinite") || cn.equals("omniscience")
                     || cn.equals("exquisite blood") || cn.equals("future sight")
+                    || cn.equals("genesis chamber")
                     || cn.equals("ghave, guru of spores")
                     || cn.equals("grave pact")
                     || cn.equals("grave titan") || cn.equals("great whale")
@@ -663,7 +669,7 @@ public class Commander extends Constructed {
             } else {
                 color = color.union(commander.getColor(null));
             }
-            
+
             FilterMana commanderColor = commander.getColorIdentity();
             if (commanderColor.isWhite()) {
                 color.setWhite(true);

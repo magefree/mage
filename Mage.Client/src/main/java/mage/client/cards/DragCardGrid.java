@@ -422,7 +422,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         CMC("Converted Mana Cost", new CardViewCostComparator()),
         COLOR("Color", new CardViewColorComparator()),
         COLOR_IDENTITY("Color Identity", new CardViewColorIdentityComparator()),
-        RARITY("Rarity", new CardViewRarityComparator());
+        RARITY("Rarity", new CardViewRarityComparator()),
+        EDH_POWER_LEVEL("EDH Power Level", new CardViewEDHPowerLevelComparator());
 
         Sort(String text, Comparator<CardView> comparator) {
             this.comparator = comparator;
