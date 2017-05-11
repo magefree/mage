@@ -161,7 +161,7 @@ class MartyrsBondEffect extends OneShotEffect {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null && !playerId.equals(controller.getId())) {
-                        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
+                        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
                         if (target.canChoose(playerId, game)) {
                             player.chooseTarget(Outcome.Sacrifice, target, source, game);
                             perms.add(target.getFirstTarget());
