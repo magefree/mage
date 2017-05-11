@@ -424,7 +424,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         CMC("Converted Mana Cost", new CardViewCostComparator()),
         COLOR("Color", new CardViewColorComparator()),
         COLOR_IDENTITY("Color Identity", new CardViewColorIdentityComparator()),
-        RARITY("Rarity", new CardViewRarityComparator());
+        RARITY("Rarity", new CardViewRarityComparator()),
+        EDH_POWER_LEVEL("EDH Power Level", new CardViewEDHPowerLevelComparator());
 
         Sort(String text, Comparator<CardView> comparator) {
             this.comparator = comparator;
@@ -565,7 +566,6 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     JButton selectByButton;
     JButton analyseButton;
     JButton blingButton;
-
 
     // Popup for toolbar
     final JPopupMenu filterPopup;
@@ -1135,10 +1135,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         if (offsetIntoCol2 < GRID_PADDING) {
             --col2;
         }
-        
+
         // avoids a null ref issue but only deals with symptom of problem. not sure how it gets to this state ever. see issue #3197
         // if (selectionDragStartCards == null) return;
-
         int curY = COUNT_LABEL_HEIGHT;
         for (int rowIndex = 0; rowIndex < cardGrid.size(); ++rowIndex) {
             int stackStartIndex;
