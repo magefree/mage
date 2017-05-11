@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -90,7 +91,7 @@ public class ExertTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void combatCelebrantExertedCannotAttackDuringNextCombatPhase() {
+    public void combatCelebrantExertedCannotExertAgainDuringNextCombatPhase() {
         /*
         Combat Celebrant 2R
         Creature - Human Warrior 4/1
@@ -120,10 +121,10 @@ public class ExertTest extends CardTestPlayerBase {
     }
     
     /*
-     * Reported bug: Combat Celebrant able to attack again despite being exerted if Always Watching is in play. (Or presumably any Vigilance granting effect)
+     * Reported bug: Combat Celebrant able to exert again despite being exerted already if Always Watching is in play. (Or presumably any Vigilance granting effect)
     */
     @Test
-    public void combatCelebrantExertedCannotAttackDuringNextCombatPhase_InteractionWithAlwaysWatching() {
+    public void combatCelebrantExertedCannotExertDuringNextCombatPhase_InteractionWithAlwaysWatching() {
         /*
         Combat Celebrant 2R
         Creature - Human Warrior 4/1
@@ -158,5 +159,45 @@ public class ExertTest extends CardTestPlayerBase {
         assertTapped(cCelebrant, false);
         assertTapped(memnite, false);
         assertLife(playerB, 6); // 5 + 2 + 5 + 2 (Celebrant twice, Memnite twice with +1/+1 on both)
+    }
+    
+    /*
+     * Reported bug: Combat Celebrant able to attack again despite being exerted already if Arlinn Kord granted him vigilance.
+    */
+    @Test
+    public void combatCelebrantExertedCannotAttackDuringNextCombatPhase_InteractionWithArlinnKord() {
+        /*
+        Combat Celebrant 2R
+        Creature - Human Warrior 4/1
+        If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
+        */
+        String cCelebrant = "Combat Celebrant";
+        
+        /*
+        Arlinn Kord {2}{R}{G}
+       Planeswalker — Arlinn 3 loyalty
+       +1: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.
+       0: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
+        */
+        String aKord = "Arlinn Kord";
+
+        addCard(Zone.BATTLEFIELD, playerA, aKord);
+        addCard(Zone.BATTLEFIELD, playerA, cCelebrant);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:"); // grant +2/+2 vig and haste to celebrant
+        addTarget(playerA, cCelebrant);
+        attack(1, playerA, cCelebrant);
+        setChoice(playerA, "Yes"); // exert for extra turn
+        attack(1, playerA, cCelebrant);
+        setChoice(playerA, "Yes"); // try to exert again
+        attack(1, playerA, cCelebrant); // should not be able to enter this 3rd combat phase
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTapped(cCelebrant, false);
+        assertCounterCount(aKord, CounterType.LOYALTY, 4);
+        assertLife(playerB, 8); // 6 + 6 = 12 damage from Celebrant attacking twice
+        assertPowerToughness(playerA, cCelebrant, 6, 3);
     }
 }
