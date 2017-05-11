@@ -11,6 +11,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class CursesTest extends CardTestPlayerBase {
 
+    /*
+    Cruel Reality {5}{B}{B}
+    Enchantment - Aura Curse
+    Enchant player
+    At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
+    */
+    private String cReality = "Cruel Reality";
+
     @Test
     public void testCurseOfBloodletting() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
@@ -296,21 +304,6 @@ public class CursesTest extends CardTestPlayerBase {
     @Test
     public void cruelRealityHasBothCreatureAndPwChoosePw() {
 
-        /*
-        Cruel Reality {5}{B}{B}
-        Enchantment - Aura Curse
-        Enchant player
-        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
-        */
-        String cReality = "Cruel Reality";
-
-        /*
-        Ugin, the Spirit Dragon {8}
-        Planeswalker — Ugin
-        +2: Ugin, the Spirit Dragon deals 3 damage to target creature or player.
-        −X: Exile each permanent with converted mana cost X or less that's one or more colors.
-        −10: You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
-        */
         String ugin = "Ugin, the Spirit Dragon";
         String memnite = "Memnite"; // {0} 1/1
 
@@ -334,21 +327,6 @@ public class CursesTest extends CardTestPlayerBase {
     @Test
     public void cruelRealityHasBothCreatureAndPwChooseCreature() {
 
-        /*
-        Cruel Reality {5}{B}{B}
-        Enchantment - Aura Curse
-        Enchant player
-        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
-        */
-        String cReality = "Cruel Reality";
-
-        /*
-        Ugin, the Spirit Dragon {8}
-        Planeswalker — Ugin
-        +2: Ugin, the Spirit Dragon deals 3 damage to target creature or player.
-        −X: Exile each permanent with converted mana cost X or less that's one or more colors.
-        −10: You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
-        */
         String ugin = "Ugin, the Spirit Dragon";
         String memnite = "Memnite"; // {0} 1/1
 
@@ -372,13 +350,6 @@ public class CursesTest extends CardTestPlayerBase {
     @Test
     public void cruelRealityOnlyHasCreatureNoChoiceMade() {
 
-        /*
-        Cruel Reality {5}{B}{B}
-        Enchantment - Aura Curse
-        Enchant player
-        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
-        */
-        String cReality = "Cruel Reality";
         String memnite = "Memnite"; // {0} 1/1
 
         addCard(Zone.HAND, playerA, cReality);
@@ -398,21 +369,6 @@ public class CursesTest extends CardTestPlayerBase {
     @Test
     public void cruelRealityOnlyHasPwNoChoiceMade() {
 
-        /*
-        Cruel Reality {5}{B}{B}
-        Enchantment - Aura Curse
-        Enchant player
-        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
-        */
-        String cReality = "Cruel Reality";
-
-        /*
-        Ugin, the Spirit Dragon {8}
-        Planeswalker — Ugin
-        +2: Ugin, the Spirit Dragon deals 3 damage to target creature or player.
-        −X: Exile each permanent with converted mana cost X or less that's one or more colors.
-        −10: You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
-        */
         String ugin = "Ugin, the Spirit Dragon";
 
         addCard(Zone.HAND, playerA, cReality);
@@ -432,13 +388,6 @@ public class CursesTest extends CardTestPlayerBase {
     @Test
     public void cruelRealityOnlyHasCreatureTryToChooseNotToSac() {
 
-        /*
-        Cruel Reality {5}{B}{B}
-        Enchantment - Aura Curse
-        Enchant player
-        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
-        */
-        String cReality = "Cruel Reality";
         String memnite = "Memnite"; // {0} 1/1
 
         addCard(Zone.HAND, playerA, cReality);
@@ -459,13 +408,6 @@ public class CursesTest extends CardTestPlayerBase {
     @Test
     public void cruelRealityNoCreatureOrPwForcesLifeLoss() {
 
-        /*
-        Cruel Reality {5}{B}{B}
-        Enchantment - Aura Curse
-        Enchant player
-        At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
-        */
-        String cReality = "Cruel Reality";
         String gPrison = "Ghostly Prison"; // {2}{W} enchantment - doesnt matter text for this
 
         addCard(Zone.HAND, playerA, cReality);
@@ -481,5 +423,43 @@ public class CursesTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, gPrison, 1);
         assertPermanentCount(playerA, cReality, 1);
         assertLife(playerB, 15);
+    }
+
+    /*
+     * Reported bug issue #3326 (NOTE test is failing due to bug in code)
+     * When {Witchbane Orb} triggers when entering the field and there IS a curse attached to you, an error message (I sadly skipped) appears and your turn is reset.
+        This happened to me in a 4-player Commander game with {Curse of the Shallow Graves} on the field.
+     */
+    @Test
+    public void witchbaneOrbDestroysCursesOnETB() {
+        /*
+        Witchbane Orb {4}
+        Artifact
+        When Witchbane Orb enters the battlefield, destroy all Curses attached to you.
+        You have hexproof.
+         */
+        String wOrb = "Witchbane Orb";
+
+        /*
+        Curse of Shallow Graves {2}{B}
+        Enchantment — Aura Curse
+        Enchant player
+        Whenever a player attacks enchanted player with one or more creatures, that attacking player may create a tapped 2/2 black Zombie creature token.
+         */
+        String curseSG = "Curse of Shallow Graves";
+
+        addCard(Zone.HAND, playerA, curseSG);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerB, wOrb);
+        addCard(Zone.BATTLEFIELD, playerB, "Wastes", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, curseSG, playerB);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, wOrb);
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, wOrb, 1);
+        assertGraveyardCount(playerA, curseSG, 1);
     }
 }
