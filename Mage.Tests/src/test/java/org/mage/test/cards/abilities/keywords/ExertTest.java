@@ -165,7 +165,7 @@ public class ExertTest extends CardTestPlayerBase {
      * Reported bug: Combat Celebrant able to attack again despite being exerted already if Arlinn Kord granted him vigilance.
     */
     @Test
-    public void combatCelebrantExertedCannotAttackDuringNextCombatPhase_InteractionWithArlinnKord() {
+    public void combatCelebrantExertedCannotExertAgainDuringNextCombatPhase_InteractionWithArlinnKord() {
         /*
         Combat Celebrant 2R
         Creature - Human Warrior 4/1
