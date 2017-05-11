@@ -593,11 +593,14 @@ public class Commander extends Constructed {
 
             // Parts of infinite combos
             if (cn.equals("animate artifact") || cn.equals("animar, soul of element")
-                    || cn.equals("archaeomancer")
+                    || cn.equals("archaeomancer")                    
                     || cn.equals("ashnod's altar") || cn.equals("azami, lady of scrolls")
+                    || cn.equals("aura flux")
                     || cn.equals("basalt monolith") || cn.equals("brago, king eternal")
                     || cn.equals("candelabra of tawnos") || cn.equals("cephalid aristocrat")
                     || cn.equals("cephalid illusionist") || cn.equals("changeling berserker")
+                    || cn.equals("consecrated sphinx")
+                    || cn.equals("cyclonic rift")
                     || cn.equals("the chain veil")
                     || cn.equals("cinderhaze wretch") || cn.equals("cryptic gateway")
                     || cn.equals("deadeye navigator") || cn.equals("derevi, empyrial tactician")
@@ -606,9 +609,12 @@ public class Commander extends Constructed {
                     || cn.equals("enter the infinite") || cn.equals("omniscience")
                     || cn.equals("exquisite blood") || cn.equals("future sight")
                     || cn.equals("ghave, guru of spores")
+                    || cn.equals("grave pact")
                     || cn.equals("grave titan") || cn.equals("great whale")
                     || cn.equals("grim monolith") || cn.equals("gush")
                     || cn.equals("hellkite charger") || cn.equals("intruder alarm")
+                    || cn.equals("hermit druid")
+                    || cn.equals("humility")
                     || cn.equals("iona, shield of emeria")
                     || cn.equals("karn, silver golem") || cn.equals("kiki-jiki, mirror breaker")
                     || cn.equals("krark-clan ironworks") || cn.equals("krenko, mob boss")
@@ -621,14 +627,18 @@ public class Commander extends Constructed {
                     || cn.equals("minion reflector") || cn.equals("mycosynth lattice")
                     || cn.equals("myr turbine") || cn.equals("narset, enlightened master")
                     || cn.equals("nekusar, the mindrazer") || cn.equals("norin the wary")
+                    || cn.equals("notion thief")
                     || cn.equals("opalescence") || cn.equals("ornithopter")
                     || cn.equals("paradox engine")
+                    || cn.equals("purphoros, god of the forge")
                     || cn.equals("peregrine drake") || cn.equals("palinchron")
                     || cn.equals("planar portal") || cn.equals("power artifact")
                     || cn.equals("rings of brighthearth") || cn.equals("rite of replication")
                     || cn.equals("sanguine bond") || cn.equals("sensei's divining top")
                     || cn.equals("splinter twin") || cn.equals("stony silence")
+                    || cn.equals("sunder")
                     || cn.equals("storm cauldron") || cn.equals("teferi's puzzle box")
+                    || cn.equals("tangle wire")
                     || cn.equals("teferi, mage of zhalfir") || cn.equals("teferi, mage of zhalfir")
                     || cn.equals("tezzeret the seeker") || cn.equals("time stretch")
                     || cn.equals("time warp") || cn.equals("training grounds")
@@ -638,7 +648,7 @@ public class Commander extends Constructed {
                     || cn.equals("workhorse") || cn.equals("worldgorger dragon")
                     || cn.equals("worthy cause") || cn.equals("yawgmoth's will")
                     || cn.equals("zealous conscripts")) {
-                thisMaxPower = Math.max(thisMaxPower, 7);
+                thisMaxPower = Math.max(thisMaxPower, 12);
                 numberInfinitePieces++;
             }
             edhPowerLevel += thisMaxPower;
@@ -722,7 +732,7 @@ public class Commander extends Constructed {
             edhPowerLevel += thisMaxPower;
         }
 
-        edhPowerLevel += numberInfinitePieces * 10;
+        edhPowerLevel += numberInfinitePieces * 12;
         edhPowerLevel = (int) Math.round(edhPowerLevel / 4.5);
         if (edhPowerLevel > 100) {
             edhPowerLevel = 100;
