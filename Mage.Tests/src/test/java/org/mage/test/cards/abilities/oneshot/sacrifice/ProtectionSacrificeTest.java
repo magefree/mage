@@ -99,7 +99,6 @@ public class ProtectionSacrificeTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, sTribeElder, 1);
         assertPermanentCount(playerA, mBond,1);
         assertPermanentCount(playerB, wCloak, 1);
-        assertAbility(playerB, sbDragon, ShroudAbility.getInstance(), true);
         assertPermanentCount(playerB, sbDragon, 0);
         assertGraveyardCount(playerB, sbDragon, 1);
     }
