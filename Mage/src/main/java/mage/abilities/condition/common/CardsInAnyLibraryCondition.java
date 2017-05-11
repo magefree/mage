@@ -50,17 +50,19 @@ public class CardsInAnyLibraryCondition implements Condition {
 
     @Override
     public final boolean apply(Game game, Ability source) {
+
+        boolean libraryWith20OrFewerCards = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    return ComparisonType.compare(player.getLibrary().size(), type, value);
-
+                if (player != null && ComparisonType.compare(player.getLibrary().size(), type, value)) {
+                    libraryWith20OrFewerCards = true;
+                    break;
                 }
             }
         }
-        return false;
+        return libraryWith20OrFewerCards;
     }
 
     @Override
