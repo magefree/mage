@@ -29,6 +29,8 @@ package mage.watchers.common;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -36,12 +38,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author LevelX2
  */
 public class CreaturesDiedWatcher extends Watcher {
 
-    private int amountOfCreaturesThatDied;
     private final HashMap<UUID, Integer> amountOfCreaturesThatDiedByController = new HashMap<>();
 
     public CreaturesDiedWatcher() {
@@ -50,7 +50,6 @@ public class CreaturesDiedWatcher extends Watcher {
 
     public CreaturesDiedWatcher(final CreaturesDiedWatcher watcher) {
         super(watcher);
-        this.amountOfCreaturesThatDied = watcher.amountOfCreaturesThatDied;
         this.amountOfCreaturesThatDiedByController.putAll(watcher.amountOfCreaturesThatDiedByController);
     }
 
@@ -61,11 +60,7 @@ public class CreaturesDiedWatcher extends Watcher {
             if (zEvent.isDiesEvent()
                     && zEvent.getTarget() != null
                     && zEvent.getTarget().isCreature()) {
-                amountOfCreaturesThatDied++;
-                int amount = 0;
-                if (amountOfCreaturesThatDiedByController.containsKey(zEvent.getTarget().getControllerId())) {
-                    amount = amountOfCreaturesThatDiedByController.get(zEvent.getTarget().getControllerId());
-                }
+                int amount = getAmountOfCreaturesDiesThisTurn(zEvent.getTarget().getControllerId());
                 amountOfCreaturesThatDiedByController.put(zEvent.getTarget().getControllerId(), amount + 1);
             }
         }
@@ -73,13 +68,9 @@ public class CreaturesDiedWatcher extends Watcher {
 
     @Override
     public void reset() {
-        amountOfCreaturesThatDied = 0;
         amountOfCreaturesThatDiedByController.clear();
     }
 
-    public int getAmountOfCreaturesDiesThisTurn() {
-        return amountOfCreaturesThatDied;
-    }
 
     public int getAmountOfCreaturesDiesThisTurn(UUID playerId) {
         return amountOfCreaturesThatDiedByController.getOrDefault(playerId, 0);
@@ -90,4 +81,7 @@ public class CreaturesDiedWatcher extends Watcher {
         return new CreaturesDiedWatcher(this);
     }
 
+    public int getAmountOfCreaturesDiesThisTurn() {
+        return amountOfCreaturesThatDiedByController.values().stream().mapToInt(x -> x).sum();
+    }
 }
