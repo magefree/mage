@@ -53,11 +53,10 @@ public class WouldDieExileInsteadTest extends CardTestPlayerBase {
     }
 
     /*
-     * Incendiary Flow only exiles if a creature dealt damage by it would die.
-     * With Soul-Scar Mage it would die from the -1/-1 counters, not the damage by Incendiary Flow.
+     * Incendiary Flow though worded slightly differently than Magma Spray, still would exile the creature from damage dealt to it
      */
     @Test
-    public void incendiaryFlow_SoulScarMageEffect_ShouldNotExile() {
+    public void incendiaryFlow_SoulScarMageEffect_ShouldExile() {
 
         /*
         Soul-Scar Mage {R}
@@ -90,7 +89,7 @@ public class WouldDieExileInsteadTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, iFlow, 1);
         assertPermanentCount(playerB, hGiant, 0);
         assertPowerToughness(playerA, ssMage, 2, 3); // prowess triggered
-        assertExileCount(playerB, hGiant, 0);
-        assertGraveyardCount(playerB, hGiant, 1);
+        assertGraveyardCount(playerB, hGiant, 0);
+        assertExileCount(playerB, hGiant, 1);
     }
 }
