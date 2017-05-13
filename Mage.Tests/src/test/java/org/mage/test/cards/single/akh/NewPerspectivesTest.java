@@ -11,14 +11,16 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class NewPerspectivesTest extends CardTestPlayerBase {
 
     /*
-     New Perspectives {5}{U}
-    Enchantment
-    When New Perspectives enters the battlefield, draw three cards.
-    As long as you have seven or more cards in hand, you may pay 0 rather than pay cycling costs.
+      New Perspectives {5}{U}
+      Enchantment
+      When New Perspectives enters the battlefield, draw three cards.
+      As long as you have seven or more cards in hand, you may pay 0 rather than pay cycling costs.
      */
     private String nPerspectives = "New Perspectives";
 
-    // just a basic test for free cycling!
+    /**
+     * just a basic test for free cycling!
+     */
     @Test
     public void newPerspectives_7Cards_FreeCycling() {
 
@@ -41,7 +43,9 @@ public class NewPerspectivesTest extends CardTestPlayerBase {
         assertHandCount(playerA, 7); // 4 + 3 (new perspectives ETB) (+ 1 - 1) (cycling)
     }
 
-    // fewer than 7 cards in hand, no free cycle!
+    /**
+     * Fewer than 7 cards in hand, no free cycle!
+     */
     @Test
     public void newPerspectives_LessThan7Cards_CyclingNotFree() {
 
@@ -92,9 +96,9 @@ public class NewPerspectivesTest extends CardTestPlayerBase {
     }
 
     /*
- * Reported bug for #3323: NOTE test failing due to bug in code (game freezes after casting 2nd new perspectives)
- * If you cast a second copy of New Perspective while the first one is still in play, the client will freeze.
- */
+     * Reported bug for #3323: NOTE test failing due to bug in code (game freezes after casting 2nd new perspectives)
+     * If you cast a second copy of New Perspective while the first one is still in play, the client will freeze.
+     */
     @Test
     public void newPerspectives_PlayingSecondOneWithMoreThan7CardsOnCast() {
 
@@ -103,7 +107,7 @@ public class NewPerspectivesTest extends CardTestPlayerBase {
         removeAllCardsFromHand(playerA);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         addCard(Zone.HAND, playerA, nPerspectives, 2);
-        addCard(Zone.HAND, playerA, "Mountain", 3);
+        //this made test buggy: addCard(Zone.HAND, playerA, "Mountain", 3);
         addCard(Zone.HAND, playerA, fJet);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, nPerspectives);
@@ -114,8 +118,10 @@ public class NewPerspectivesTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
 
+        assertGraveyardCount(playerA, nPerspectives, 0); // check it wasn't discarded
         assertPermanentCount(playerA, nPerspectives, 2);
         assertGraveyardCount(playerA, fJet, 1);
-        assertHandCount(playerA, 11); // 1 (flame jet cycled) + 3 Mountains in hand + 3 (new perspectives ETB) + 1 (draw step) + 3 (2nd perspectives etb)
+        //assertHandCount(playerA, 11); // 1 (flame jet cycled) + 3 Mountains in hand + 3 (new perspectives ETB) + 1 (draw step) + 3 (2nd perspectives etb)
+        assertHandCount(playerA, 8); // 1 (flame jet cycled) + 3 (new perspectives ETB) + 1 (draw step) + 3 (2nd perspectives etb)
     }
 }
