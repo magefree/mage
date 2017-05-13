@@ -961,7 +961,7 @@ public class GameController implements GameCallback {
         }
     }
 
-    private synchronized void setupTimeout(final UUID playerId) {
+    private void setupTimeout(final UUID playerId) {
         if (!useTimeout) {
             return;
         }
@@ -973,9 +973,12 @@ public class GameController implements GameCallback {
         );
     }
 
-    private synchronized void cancelTimeout() {
+    private void cancelTimeout() {
+        logger.debug("cancelTimeout");
         if (futureTimeout != null) {
-            futureTimeout.cancel(false);
+            synchronized (futureTimeout) {
+                futureTimeout.cancel(false);
+            }
         }
     }
 
