@@ -96,7 +96,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.isCreature() && permanent.getSubtype(game).contains("Beast")
+        if (permanent.isCreature() && permanent.hasSubtype("Beast", game)
                 && permanent.getControllerId().equals(this.controllerId)) {
             Effect effect = this.getEffects().get(0);
             effect.setValue("damageSource", event.getTargetId());

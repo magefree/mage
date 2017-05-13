@@ -124,7 +124,7 @@ class EssenceFluxEffect extends OneShotEffect {
                 controller.moveCards(cardsToBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
                 for (UUID cardId : cardsToBattlefield) {
                     Permanent permanent = game.getPermanent(cardId);
-                    if (permanent != null && permanent.getSubtype(game).contains("Spirit")) {
+                    if (permanent != null && permanent.hasSubtype("Spirit", game)) {
                         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
                         effect.setTargetPointer(new FixedTarget(permanent, game));
                         return effect.apply(game, source);

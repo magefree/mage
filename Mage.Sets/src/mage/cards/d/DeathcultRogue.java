@@ -91,7 +91,7 @@ class DeathcultRogueRestrictionEffect extends RestrictionEffect  {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getSubtype(game).contains("Rogue")) {
+        if (blocker.hasSubtype("Rogue", game)) {
             return true;
         }
         return false;

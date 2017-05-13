@@ -101,7 +101,7 @@ class DismissIntoDreamEffect extends ContinuousEffectImpl {
                     object.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), source.getSourceId(), game);
                     break;
                 case TypeChangingEffects_4:
-                    if (!object.getSubtype(game).contains("Illusion")) {
+                    if (!object.hasSubtype("Illusion", game)) {
                         object.getSubtype(game).add("Illusion");
                     }
                     break;

@@ -145,10 +145,8 @@ class NissaSageAnimistMinusSevenEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 switch (layer) {
                     case TypeChangingEffects_4:
-                        if (!permanent.isCreature()) {
                             permanent.addCardType(CardType.CREATURE);
-                        }
-                        if (!permanent.getSubtype(game).contains("Elemental")) {
+                        if (!permanent.hasSubtype("Elemental", game)) {
                             permanent.getSubtype(game).add("Elemental");
                         }
                         break;
