@@ -77,8 +77,8 @@ class BurntOfferingEffect extends OneShotEffect {
         
     public BurntOfferingEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "Add X mana in any combination of {R} and/or {B} to your mana pool,"
-                + " where X is the sacrificed creature's casting cost";
+        this.staticText = "Add X mana in any combination of {B} and/or {R} to your mana pool,"
+                + " where X is the sacrificed creature's converted mana cost";
     }
     
     public BurntOfferingEffect(final BurntOfferingEffect effect) {
