@@ -29,25 +29,21 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInHandCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalReplacementEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
+import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.CostEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -60,14 +56,10 @@ public class NewPerspectives extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");
 
         // When New Perspectives enters the battlefield, draw three cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(3), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(3)));
 
         // As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs.
-        Condition condition = new CardsInHandCondition(ComparisonType.MORE_THAN, 6);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalReplacementEffect(
-                        new PerspectivesReplaceCylcingCosts(), condition));
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NewPerspectivesCostModificationEffect()));
     }
 
     public NewPerspectives(final NewPerspectives card) {
@@ -80,48 +72,42 @@ public class NewPerspectives extends CardImpl {
     }
 }
 
-class PerspectivesReplaceCylcingCosts extends ReplacementEffectImpl {
+class NewPerspectivesCostModificationEffect extends CostModificationEffectImpl {
 
-    public PerspectivesReplaceCylcingCosts() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs";
+    NewPerspectivesCostModificationEffect() {
+        super(Duration.Custom, Outcome.Benefit, CostModificationType.SET_COST);
+        this.staticText = "As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs";
     }
 
-    public PerspectivesReplaceCylcingCosts(final PerspectivesReplaceCylcingCosts effect) {
+    NewPerspectivesCostModificationEffect(final NewPerspectivesCostModificationEffect effect) {
         super(effect);
     }
 
     @Override
-    public PerspectivesReplaceCylcingCosts copy() {
-        return new PerspectivesReplaceCylcingCosts(this);
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        Player controller = game.getPlayer(abilityToModify.getControllerId());
+        return controller != null
+                && controller.getId().equals(source.getControllerId())
+                && abilityToModify instanceof CyclingAbility
+                && controller.getHand().size() >= 7;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.CAN_PAY_CYCLE_COST) {
-            ((CostEvent) event).setCost(new ManaCostsImpl<>("{0}"));
-            return false;
-        }
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.chooseUse(outcome, "Pay {0} rather than normal cycling costs?", source, game)) {
-            ((CostEvent) event).setCost(new ManaCostsImpl<>("{0}"));
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        Player controller = game.getPlayer(abilityToModify.getControllerId());
+        if (controller != null) {
+            if ((abilityToModify instanceof ActivatedAbility && ((ActivatedAbility) abilityToModify).isCheckPlayableMode()) || controller.chooseUse(Outcome.PlayForFree, "Pay {0} to cycle?", source, game)) {
+                abilityToModify.getCosts().clear();
+                abilityToModify.getManaCostsToPay().clear();
+                abilityToModify.getCosts().add(new DiscardSourceCost());
+            }
+            return true;
         }
         return false;
     }
 
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PAY_CYCLE_COST || event.getType() == EventType.CAN_PAY_CYCLE_COST;
+    public NewPerspectivesCostModificationEffect copy() {
+        return new NewPerspectivesCostModificationEffect(this);
     }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId());
-    }
-
 }

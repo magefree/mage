@@ -27,21 +27,14 @@
  */
 package mage.abilities.keyword;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.CyclingCost;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.game.events.CostEvent;
-import mage.game.events.GameEvent;
-import mage.target.Targets;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -54,14 +47,14 @@ public class CyclingAbility extends ActivatedAbilityImpl {
     private final String text;
 
     public CyclingAbility(Cost cost) {
-        super(Zone.HAND, new DrawCardSourceControllerEffect(1), new CyclingCost(cost));
+        super(Zone.HAND, new DrawCardSourceControllerEffect(1), cost);
         this.addCost(new DiscardSourceCost());
         this.cost = cost;
         this.text = "Cycling";
     }
 
     public CyclingAbility(Cost cost, FilterCard filter, String text) {
-        super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new CyclingCost(cost));
+        super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), cost);
         this.addCost(new DiscardSourceCost());
         this.cost = cost;
         this.text = text;
