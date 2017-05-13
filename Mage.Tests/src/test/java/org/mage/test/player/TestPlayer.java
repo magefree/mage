@@ -32,6 +32,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import mage.MageException;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Abilities;
@@ -157,6 +158,10 @@ public class TestPlayer implements Player {
         actions.add(new PlayerAction(turnNum, step, action));
     }
 
+    public List<PlayerAction> getActions() {
+        return actions;
+    }
+
     /**
      * @param maxCallsWithoutAction max number of priority passes a player may
      *                              have for this test (default = 100)
@@ -205,11 +210,11 @@ public class TestPlayer implements Player {
         List<Permanent> allPermanents = game.getBattlefield().getAllActivePermanents(filter, controllerID, game);
         if (allPermanents.isEmpty()) {
             if (failOnNotFound)
-                throw new UnsupportedOperationException("No permanents found called " + filteredName + " that match the filter criteria \"" + filter.getMessage() + "\"");
+                throw new AssertionError("No permanents found called " + filteredName + " that match the filter criteria \"" + filter.getMessage() + "\"");
             return null;
         } else if (allPermanents.size() - 1 < index) {
             if (failOnNotFound)
-                throw new UnsupportedOperationException("Cannot find " + filteredName + ":" + index + " that match the filter criteria \"" + filter.getMessage() + "\"" + ".\n Only " + allPermanents.size() + " called " + filteredName + " found for this controller(zero indexed).");
+                throw new AssertionError("Cannot find " + filteredName + ":" + index + " that match the filter criteria \"" + filter.getMessage() + "\"" + ".\n Only " + allPermanents.size() + " called " + filteredName + " found for this controller(zero indexed).");
             return null;
         }
         return allPermanents.get(index);
@@ -543,12 +548,44 @@ public class TestPlayer implements Player {
         return false;
     }
 
+    private void checkLegalMovesThisAttack(Game game) {
+        // Check actions for next turn are going to be valid
+        int turnNum = game.getTurnNum();
+        // Loop through all game players and check if they are allowed to attack/block this turn
+        for (UUID playerID : game.getPlayers().keySet()) {
+            Player player = game.getPlayer(playerID);
+            // Has to be a TestPlayer to get a list of actions
+            if (player instanceof TestPlayer) {
+                // Check each player trying to attack or block on this turn
+                for (PlayerAction playerAction : ((TestPlayer) player).getActions()) {
+                    String action = playerAction.getAction();
+                    boolean currentPlayersTurn = playerID.equals(getId());
+                    String playerName = player.getName();
+                    int actionTurnNum = playerAction.getTurnNum();
+                    // If the action is performed on this turn...
+                    if (turnNum == actionTurnNum) {
+                        // Attacking and it's not their turn is illegal
+                        if (action.startsWith("attack:") && !currentPlayersTurn) {
+                            throw new UnsupportedOperationException(playerName + " can't attack on turn " + turnNum + " as it is not their turn");
+                        }
+                        // Blocking and it is their turn is illegal
+                        if (action.startsWith("block:") && currentPlayersTurn) {
+                            throw new UnsupportedOperationException(playerName + " can't block on turn " + turnNum + " as it is their turn");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
+        // Check if attackers and blocks are legal this turn
+        checkLegalMovesThisAttack(game);
+        // Loop through players and validate can attack/block this turn
         UUID defenderId = null;
         for (PlayerAction action : actions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
-
                 String command = action.getAction();
                 command = command.substring(command.indexOf("attack:") + 7);
                 String[] groups = command.split("\\$");
@@ -580,11 +617,15 @@ public class TestPlayer implements Player {
                         }
                     }
                 }
-                FilterCreatureForCombat filter = new FilterCreatureForCombat();
-                filter.add(Predicates.not(new AttackingPredicate()));
-                filter.add(Predicates.not(new SummoningSicknessPredicate()));
+                // First check to see if this controller actually owns the creature
+                FilterControlledPermanent firstFilter = new FilterControlledPermanent();
+                findPermanent(firstFilter, groups[0], computerPlayer.getId(), game);
+                // Second check to filter creature for combat - less strict to workaround issue in #3038
+                FilterCreatureForCombat secondFilter = new FilterCreatureForCombat();
+                secondFilter.add(Predicates.not(new AttackingPredicate()));
+                secondFilter.add(Predicates.not(new SummoningSicknessPredicate()));
                 // TODO: Cannot enforce legal attackers multiple times per combat. See issue #3038
-                Permanent attacker = findPermanent(filter, groups[0], computerPlayer.getId(), game, false);
+                Permanent attacker = findPermanent(secondFilter, groups[0], computerPlayer.getId(), game, false);
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
                     computerPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
                 }
@@ -595,6 +636,12 @@ public class TestPlayer implements Player {
 
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
+
+        if(game.getActivePlayerId().equals(defendingPlayerId)) {
+            String playerName = game.getPlayer(defendingPlayerId).getName();
+            throw new UnsupportedOperationException(playerName + " can't block as it's their turn");
+        }
+
         UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
         // Map of Blocker reference -> list of creatures blocked
         Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature = new HashMap<>();
