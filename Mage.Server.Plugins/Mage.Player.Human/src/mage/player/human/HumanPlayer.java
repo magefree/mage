@@ -244,6 +244,7 @@ public class HumanPlayer extends PlayerImpl {
 
         while (!abort) {
             game.fireChooseChoiceEvent(playerId, replacementEffectChoice);
+            updateGameStatePriority("chooseEffect", game);
             waitForResponse(game);
             logger.debug("Choose effect: " + response.getString());
             if (response.getString() != null) {
