@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package org.mage.test.token;
+package org.mage.test.cards.abilities.activated;
 
 import mage.constants.ManaType;
 import mage.constants.PhaseStep;
@@ -38,7 +38,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-public class ActivatedAbilityTest extends CardTestPlayerBase {
+public class TokenActivatedAbilityTest extends CardTestPlayerBase {
 
     /**
      * Check that activated ability of created token works

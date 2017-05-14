@@ -178,8 +178,8 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rite of the Raging Storm");
 
-        attack(2, playerB, "Lightning Rager"); // Can't attack
-        attack(2, playerA, "Lightning Rager"); // Can't attack
+        attack(2, playerB, "Lightning Rager:0"); // Can't attack
+        attack(2, playerB, "Lightning Rager:1"); // Can't attack
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
