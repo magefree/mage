@@ -120,6 +120,10 @@ public class TestPlayer implements Player {
 
     private String[] groupsForTargetHandling = null;
 
+    // Tracks the initial turns (turn 0s) both players are given at the start of the game.
+    // Before actual turns start. Needed for checking attacker/blocker legality in the tests
+    private static int initialTurns = 0;
+
     public TestPlayer(ComputerPlayer computerPlayer) {
         this.computerPlayer = computerPlayer;
         AIPlayer = false;
@@ -170,6 +174,10 @@ public class TestPlayer implements Player {
         this.maxCallsWithoutAction = maxCallsWithoutAction;
     }
 
+    public void setInitialTurns(int turns) {
+        initialTurns = turns;
+    }
+
 
     private Permanent findPermanent(FilterPermanent filter, String name, UUID controllerID, Game game) {
         return findPermanent(filter, name, controllerID, game, true);
@@ -214,7 +222,7 @@ public class TestPlayer implements Player {
             return null;
         } else if (allPermanents.size() - 1 < index) {
             if (failOnNotFound)
-                throw new AssertionError("Cannot find " + filteredName + ":" + index + " that match the filter criteria \"" + filter.getMessage() + "\"" + ".\n Only " + allPermanents.size() + " called " + filteredName + " found for this controller(zero indexed).");
+                throw new AssertionError("Cannot find " + filteredName + ":" + index + " that match the filter criteria \"" + filter.getMessage() + "\"" + ".\nOnly " + allPermanents.size() + " called " + filteredName + " found for this controller(zero indexed).");
             return null;
         }
         return allPermanents.get(index);
@@ -548,7 +556,15 @@ public class TestPlayer implements Player {
         return false;
     }
 
-    private void checkLegalMovesThisAttack(Game game) {
+    /*
+    *  Iterates through each player on the current turn and asserts if they can attack or block legally this turn
+    */
+    private void checkLegalMovesThisTurn(Game game) {
+        // Each player is given priority before actual turns start for e.g. leylines and pre-game initialisation
+        if(initialTurns < game.getPlayers().size()) {
+            initialTurns++;
+            return;
+        }
         // Check actions for next turn are going to be valid
         int turnNum = game.getTurnNum();
         // Loop through all game players and check if they are allowed to attack/block this turn
@@ -580,8 +596,6 @@ public class TestPlayer implements Player {
 
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
-        // Check if attackers and blocks are legal this turn
-        checkLegalMovesThisAttack(game);
         // Loop through players and validate can attack/block this turn
         UUID defenderId = null;
         for (PlayerAction action : actions) {
@@ -636,11 +650,6 @@ public class TestPlayer implements Player {
 
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
-
-        if(game.getActivePlayerId().equals(defendingPlayerId)) {
-            String playerName = game.getPlayer(defendingPlayerId).getName();
-            throw new UnsupportedOperationException(playerName + " can't block as it's their turn");
-        }
 
         UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
         // Map of Blocker reference -> list of creatures blocked
@@ -1215,11 +1224,13 @@ public class TestPlayer implements Player {
 
     @Override
     public void init(Game game) {
+        initialTurns = 0;
         computerPlayer.init(game);
     }
 
     @Override
     public void init(Game game, boolean testMode) {
+        initialTurns = 0;
         computerPlayer.init(game, testMode);
     }
 
@@ -1240,6 +1251,7 @@ public class TestPlayer implements Player {
 
     @Override
     public void beginTurn(Game game) {
+        checkLegalMovesThisTurn(game);
         computerPlayer.beginTurn(game);
     }
 
@@ -2296,3 +2308,4 @@ public class TestPlayer implements Player {
     }
 
 }
+

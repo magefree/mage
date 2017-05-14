@@ -121,7 +121,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         currentGame = createNewGameAndPlayers();
 
         activePlayer = playerA;
-
         stopOnTurn = 2;
         stopAtStep = PhaseStep.UNTAP;
 
@@ -132,9 +131,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             getHandCards(testPlayer).clear();
             getBattlefieldCards(testPlayer).clear();
             getGraveCards(testPlayer).clear();
+            // Reset the turn counter for tests
+            ((TestPlayer) player).setInitialTurns(0);
         }
 
         gameOptions = new GameOptions();
+
     }
 
     abstract protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException;
