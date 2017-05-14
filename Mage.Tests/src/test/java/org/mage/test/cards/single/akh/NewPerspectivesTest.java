@@ -35,6 +35,7 @@ public class NewPerspectivesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, newPerspectives);
         activateAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "Cycling");
+        setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
@@ -58,6 +59,7 @@ public class NewPerspectivesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, newPerspectives);
         activateAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "Cycling");
+        setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
@@ -85,6 +87,7 @@ public class NewPerspectivesTest extends CardTestPlayerBase {
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, newPerspectives);
 
         activateAbility(3, PhaseStep.BEGIN_COMBAT, playerA, "Cycling");
+        setChoice(playerA, "Yes");
 
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
@@ -113,6 +116,7 @@ public class NewPerspectivesTest extends CardTestPlayerBase {
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, newPerspectives);
 
         activateAbility(3, PhaseStep.BEGIN_COMBAT, playerA, "Cycling");
+        setChoice(playerA, "Yes");
 
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
