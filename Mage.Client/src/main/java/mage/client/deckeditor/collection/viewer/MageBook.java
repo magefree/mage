@@ -63,8 +63,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
+import mage.client.util.CardsViewUtil;
+import mage.game.command.Emblem;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
+import mage.view.EmblemView;
 import mage.view.PermanentView;
 import org.mage.plugins.card.images.CardDownloadData;
 import static org.mage.plugins.card.images.DownloadPictures.getTokenCardUrls;
@@ -216,7 +219,8 @@ public class MageBook extends JComponent {
         if (showCardsOrTokens) {
             showCards();
         } else {
-            showTokens();
+            int numTokens = showTokens();
+            showEmblems(numTokens);
         }
     }
 
@@ -249,13 +253,13 @@ public class MageBook extends JComponent {
         jLayeredPane.repaint();
     }
 
-    public void showTokens() {
+    public int showTokens() {
         jLayeredPane.removeAll();
         addLeftRightPageButtons();
 
         List<Token> tokens = getTokens(currentPage, currentSet);
         int size = tokens.size();
-        
+
         if (tokens != null && tokens.size() > 0) {
             Rectangle rectangle = new Rectangle();
             rectangle.translate(OFFSET_X, OFFSET_Y);
@@ -274,6 +278,53 @@ public class MageBook extends JComponent {
                 Token token = tokens.get(i);
                 addToken(token, bigCard, null, rectangle);
                 rectangle = CardPosition.translatePosition(i - conf.CARDS_PER_PAGE / 2, rectangle, conf);
+            }
+
+            jLayeredPane.repaint();
+        }
+        
+        return tokens.size();
+    }
+
+    public void showEmblems(int numTokens) {
+        List<Emblem> emblems = getEmblems(currentPage, currentSet, numTokens);
+        int size = emblems.size();
+        System.out.println ("Size of origins in " + currentSet + " = " + emblems.size());
+
+        if (emblems != null && emblems.size() > 0) {
+            Rectangle rectangle = new Rectangle();
+            rectangle.translate(OFFSET_X, OFFSET_Y);
+            // calculate the x offset of the second (right) page
+            int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
+                    - (cardDimensions.frameWidth + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
+
+            // Already have numTokens tokens presented. Appending the emblems to the end of these.            
+            numTokens = numTokens % conf.CARDS_PER_PAGE;
+            if (numTokens < conf.CARDS_PER_PAGE / 2) {
+                for (int z = 0; z < numTokens && z < conf.CARDS_PER_PAGE / 2; z++) {
+                    rectangle = CardPosition.translatePosition(z, rectangle, conf);
+                }
+            } else {
+                rectangle.setLocation(second_page_x, OFFSET_Y);            
+                for (int z = 0; z < numTokens - conf.CARDS_PER_PAGE / 2; z++) {
+                    rectangle = CardPosition.translatePosition(z, rectangle, conf);
+                }
+            }
+            
+            int lastI = 0;
+            for (int i = 0; i < size && i + numTokens < conf.CARDS_PER_PAGE / 2; i++) {
+                Emblem emblem = emblems.get(i);
+                addEmblem(emblem, bigCard, null, rectangle);
+                rectangle = CardPosition.translatePosition(i + numTokens, rectangle, conf);
+                lastI++;
+            }
+
+            if (size + numTokens > conf.CARDS_PER_PAGE / 2) {
+                for (int i = lastI; i < size && i + numTokens < conf.CARDS_PER_PAGE; i++) {
+                    Emblem emblem = emblems.get(i);
+                    addEmblem(emblem, bigCard, null, rectangle);
+                    rectangle = CardPosition.translatePosition(i + numTokens - conf.CARDS_PER_PAGE / 2, rectangle, conf);
+                }
             }
 
             jLayeredPane.repaint();
@@ -314,6 +365,11 @@ public class MageBook extends JComponent {
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.frameWidth, cardDimensions.frameHeight);
     }
 
+    private void addEmblem(Emblem emblem, BigCard bigCard, UUID gameId, Rectangle rectangle) {
+        CardView cardView = new CardView(new EmblemView(emblem));
+        addCard(cardView, bigCard, gameId, rectangle);
+    }
+
     private List<CardInfo> getCards(int page, String set) {
         CardCriteria criteria = new CardCriteria();
         criteria.setCodes(set);
@@ -333,17 +389,22 @@ public class MageBook extends JComponent {
     private List<Token> getTokens(int page, String set) {
         ArrayList<CardDownloadData> allTokens = getTokenCardUrls();
         ArrayList<Token> tokens = new ArrayList<>();
-        
+
         for (CardDownloadData token : allTokens) {
             if (token.getSet().equals(set)) {
                 try {
                     String className = token.getName();
                     className = className.replaceAll("[^a-zA-Z0-9]", "");
-                    className = className + "Token";
+                    className = "mage.game.permanent.token." + className + "Token";
                     if (token.getTokenClassName() != null && token.getTokenClassName().length() > 0) {
-                        className = token.getTokenClassName();
+                        if (token.getTokenClassName().toLowerCase().matches(".*token.*")) {
+                            className = token.getTokenClassName();
+                            className = "mage.game.permanent.token." + className;
+                        } else if (token.getTokenClassName().toLowerCase().matches(".*emblem.*")) {
+                            continue;
+                        }
                     }
-                    Class<?> c = Class.forName("mage.game.permanent.token." + className);
+                    Class<?> c = Class.forName(className);
                     Constructor<?> cons = c.getConstructor();
                     Object newToken = cons.newInstance();
                     if (newToken != null && newToken instanceof mage.game.permanent.token.Token) {
@@ -377,6 +438,62 @@ public class MageBook extends JComponent {
             pageRight.setVisible(true);
         }
         return tokens.subList(start, end);
+    }
+
+    private List<Emblem> getEmblems(int page, String set, int numTokens) {
+        ArrayList<CardDownloadData> allEmblems = getTokenCardUrls();
+        ArrayList<Emblem> emblems = new ArrayList<>();
+
+        for (CardDownloadData emblem : allEmblems) {
+            if (emblem.getSet().equals(set)) {
+                try {
+                    String className = emblem.getName();
+                    if (emblem.getTokenClassName() != null && emblem.getTokenClassName().length() > 0) {
+                        if (emblem.getTokenClassName().toLowerCase().matches(".*emblem.*")) {
+                            className = emblem.getTokenClassName();
+                            className = "mage.game.command.emblems." + className;
+                        }
+                    } else {
+                        continue;
+                    }
+                    Class<?> c = Class.forName(className);
+                    Constructor<?> cons = c.getConstructor();
+                    Object newEmblem = cons.newInstance();
+                    if (newEmblem != null && newEmblem instanceof mage.game.command.Emblem) {
+                        ((Emblem) newEmblem).setExpansionSetCodeForImage(set);
+                        
+                        emblems.add((Emblem) newEmblem);
+                    }
+                } catch (ClassNotFoundException ex) {
+                    // Swallow exception
+                } catch (NoSuchMethodException ex) {
+                    // Swallow exception
+                } catch (SecurityException ex) {
+                    // Swallow exception
+                } catch (InstantiationException ex) {
+                    // Swallow exception
+                } catch (IllegalAccessException ex) {
+                    // Swallow exception
+                } catch (IllegalArgumentException ex) {
+                    // Swallow exception
+                } catch (InvocationTargetException ex) {
+                    // Swallow exception
+                }
+            }
+        }
+        int start = 0;
+        int end = emblems.size();
+        
+        if ((page + 1) * conf.CARDS_PER_PAGE < numTokens + emblems.size()) { 
+            end = (page + 1) * conf.CARDS_PER_PAGE - numTokens;
+            pageRight.setVisible(true);
+        }
+        
+        if (emblems.size() > conf.CARDS_PER_PAGE) {
+            pageLeft.setVisible(true);
+            pageRight.setVisible(true);
+        }
+        return emblems.subList(start, end);
     }
 
     private ImagePanel getImagePanel(String filename, ImagePanelStyle type) {

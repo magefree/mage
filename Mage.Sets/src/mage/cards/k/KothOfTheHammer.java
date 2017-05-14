@@ -33,12 +33,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -47,19 +42,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
+import mage.game.command.emblems.KothOfTheHammerEmblem;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.command.Emblem;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -116,57 +104,4 @@ class KothOfTheHammerToken extends Token {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
     }
-}
-
-class KothOfTheHammerEmblem extends Emblem {
-
-    // "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
-    public KothOfTheHammerEmblem() {
-        this.setName("Emblem Koth");
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new KothOfTheHammerThirdEffect()));
-    }
-}
-
-class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
-
-    public KothOfTheHammerThirdEffect() {
-        super(Duration.EndOfGame, Outcome.AddAbility);
-        staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to target creature or player.'\"";
-    }
-
-    public KothOfTheHammerThirdEffect(final KothOfTheHammerThirdEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case AbilityAddingRemovingEffects_6:
-                if (sublayer == SubLayer.NA) {
-                    for (Permanent permanent : game.getBattlefield().getActivePermanents(KothOfTheHammer.filterCount, source.getControllerId(), source.getSourceId(), game)) {
-                        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-                        ability.addTarget(new TargetCreatureOrPlayer());
-                        permanent.addAbility(ability, source.getSourceId(), game);
-                    }
-                }
-                break;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public KothOfTheHammerThirdEffect copy() {
-        return new KothOfTheHammerThirdEffect(this);
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6;
-    }
-
 }

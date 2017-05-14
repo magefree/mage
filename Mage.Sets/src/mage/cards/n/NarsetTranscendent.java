@@ -33,9 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -52,7 +50,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.command.Emblem;
+import mage.game.command.emblems.NarsetTranscendentEmblem;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -218,64 +216,5 @@ class NarsetTranscendentGainReboundEffect extends ContinuousEffectImpl {
             Ability ability = new ReboundAbility();
             game.getState().addOtherAbility(card, ability);
         }
-    }
-}
-
-class NarsetTranscendentEmblem extends Emblem {
-    // "Your opponents can't cast noncreature spells.
-
-    public NarsetTranscendentEmblem() {
-
-        this.setName("Emblem Narset");
-
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new NarsetTranscendentCantCastEffect()));
-    }
-}
-
-class NarsetTranscendentCantCastEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public NarsetTranscendentCantCastEffect() {
-        super(Duration.EndOfGame, Outcome.Benefit);
-        staticText = "Your opponents can't cast noncreature spells";
-    }
-
-    public NarsetTranscendentCantCastEffect(final NarsetTranscendentCantCastEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NarsetTranscendentCantCastEffect copy() {
-        return new NarsetTranscendentCantCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
-        if (mageObject != null) {
-            return "You can't cast can't cast noncreature spells (it is prevented by emblem of " + mageObject.getLogName() + ')';
-        }
-        return null;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null && !card.isCreature()) {
-                return true;
-            }
-        }
-        return false;
     }
 }

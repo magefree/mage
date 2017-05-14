@@ -30,30 +30,23 @@ package mage.cards.l;
 import mage.abilities.Ability;
 import mage.constants.ComparisonType;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.game.command.emblems.LilianaDefiantNecromancerEmblem;
 import mage.game.Game;
-import mage.game.command.Emblem;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -117,47 +110,5 @@ public class LilianaDefiantNecromancer extends CardImpl {
     @Override
     public LilianaDefiantNecromancer copy() {
         return new LilianaDefiantNecromancer(this);
-    }
-}
-
-class LilianaDefiantNecromancerEmblem extends Emblem {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
-
-    //  You get an emblem with "Whenever a creature you control dies, return it to the battlefield under your control at the beginning of the next end step."
-    public LilianaDefiantNecromancerEmblem() {
-        this.setName("Emblem Liliana");
-        Ability ability = new DiesCreatureTriggeredAbility(Zone.COMMAND, new LilianaDefiantNecromancerEmblemEffect(), false, filter, true);
-        this.getAbilities().add(ability);
-    }
-}
-
-class LilianaDefiantNecromancerEmblemEffect extends OneShotEffect {
-
-    LilianaDefiantNecromancerEmblemEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "return it to the battlefield under your control at the beginning of the next end step";
-    }
-
-    LilianaDefiantNecromancerEmblemEffect(final LilianaDefiantNecromancerEmblemEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LilianaDefiantNecromancerEmblemEffect copy() {
-        return new LilianaDefiantNecromancerEmblemEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-            effect.setText("return that card to the battlefield at the beginning of the next end step");
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.COMMAND, effect, TargetController.ANY), source);
-            return true;
-        }
-        return false;
     }
 }

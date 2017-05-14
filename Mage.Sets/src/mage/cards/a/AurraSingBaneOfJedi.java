@@ -29,7 +29,6 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -37,22 +36,17 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemTargetPlayerEffect;
 import mage.abilities.effects.common.SetPlayerLifeAllEffect;
-import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.game.command.emblems.AurraSingBaneOfJediEmblem;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -153,20 +147,5 @@ class SacrificeAllEffect extends OneShotEffect {
     @Override
     public SacrificeAllEffect copy() {
         return new SacrificeAllEffect(this);
-    }
-}
-
-class AurraSingBaneOfJediEmblem extends Emblem {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a nontoken creature you control");
-
-    static {
-        filter.add(Predicates.not(new TokenPredicate()));
-    }
-
-    //  Whenever a nontoken creature you control leave the battlefied, discard a card."
-    public AurraSingBaneOfJediEmblem() {
-        this.setName("Emblem Aurra Sing, Bane of Jedi");
-        getAbilities().add(new LeavesBattlefieldAllTriggeredAbility(Zone.COMMAND, new DiscardControllerEffect(1), filter, false));
     }
 }

@@ -31,14 +31,12 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -48,16 +46,14 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
-import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
+import mage.game.command.emblems.JaceTelepathUnboundEmblem;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -200,18 +196,5 @@ class JaceTelepathUnboundReplacementEffect extends ReplacementEffectImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getToZone() == Zone.GRAVEYARD
                 && zEvent.getTargetId().equals(this.cardId);
-    }
-}
-
-class JaceTelepathUnboundEmblem extends Emblem {
-
-    //  You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".
-    public JaceTelepathUnboundEmblem() {
-        this.setName("Emblem Jace");
-        Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(5);
-        effect.setText("target opponent puts the top five cards of his or her library into his or her graveyard");
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, new FilterSpell("a spell"), false, false);
-        ability.addTarget(new TargetOpponent());
-        getAbilities().add(ability);
     }
 }

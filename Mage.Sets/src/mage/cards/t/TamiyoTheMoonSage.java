@@ -31,29 +31,19 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
-import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.game.command.Emblem;
+import mage.game.command.emblems.TamiyoTheMoonSageEmblem;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
@@ -129,15 +119,3 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
  * Emblem with "You have no maximum hand size" and "Whenever a card is put into
  * your graveyard from anywhere, you may return it to your hand."
  */
-class TamiyoTheMoonSageEmblem extends Emblem {
-
-    public TamiyoTheMoonSageEmblem() {
-        this.setName("Emblem Tamiyo");
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, HandSizeModification.SET));
-        this.getAbilities().add(ability);
-        Effect effect = new ReturnToHandTargetEffect();
-        effect.setText("return it to your hand");
-        this.getAbilities().add(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
-                Zone.COMMAND, effect, true, new FilterCard("a card"), TargetController.YOU, SetTargetPointer.CARD));
-    }
-}

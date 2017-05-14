@@ -27,27 +27,23 @@
  */
 package mage.cards.g;
 
-import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.command.Emblem;
-import mage.game.permanent.token.Token;
-
+import mage.game.command.emblems.GideonAllyOfZendikarEmblem;
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.IndestructibleAbility;
+import mage.game.permanent.token.KnightAllyToken;
+import mage.game.permanent.token.Token;
 
 /**
  *
@@ -85,17 +81,6 @@ public class GideonAllyOfZendikar extends CardImpl {
     }
 }
 
-class GideonAllyOfZendikarEmblem extends Emblem {
-
-    public GideonAllyOfZendikarEmblem() {
-        this.setName("Emblem Gideon");
-        BoostControlledEffect effect = new BoostControlledEffect(1, 1, Duration.EndOfGame);
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
-        this.getAbilities().add(ability);
-        this.setExpansionSetCodeForImage("BFZ");
-    }
-}
-
 class GideonAllyOfZendikarToken extends Token {
 
     public GideonAllyOfZendikarToken() {
@@ -108,18 +93,5 @@ class GideonAllyOfZendikarToken extends Token {
         toughness = new MageInt(5);
 
         addAbility(IndestructibleAbility.getInstance());
-    }
-}
-
-class KnightAllyToken extends Token {
-
-    public KnightAllyToken() {
-        super("Knight Ally", "2/2 white Knight Ally creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Knight");
-        subtype.add("Ally");
-        color.setWhite(true);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

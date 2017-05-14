@@ -53,6 +53,7 @@ import mage.game.permanent.token.EtheriumCellToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import mage.game.command.emblems.TezzeretTheSchemerEmblem;
 /**
  * @author JRHerlehy
  */
@@ -90,18 +91,3 @@ public class TezzeretTheSchemer extends CardImpl {
     }
 }
 
-class TezzeretTheSchemerEmblem extends Emblem {
-
-    public TezzeretTheSchemerEmblem() {
-        this.setName("Emblem Tezzeret");
-
-        Effect effect = new AddCardTypeTargetEffect(CardType.CREATURE, Duration.EndOfGame);
-        effect.setText("target artifact you control becomes an artifact creature");
-        Ability ability = new BeginningOfCombatTriggeredAbility(Zone.COMMAND, effect, TargetController.YOU, false, true);
-        effect = new SetPowerToughnessTargetEffect(5, 5, Duration.EndOfGame);
-        effect.setText("with base power and toughness 5/5");
-        ability.addEffect(effect);
-        ability.addTarget(new TargetPermanent(new FilterControlledArtifactPermanent()));
-        this.getAbilities().add(ability);
-    }
-}
