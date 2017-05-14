@@ -28,12 +28,11 @@
 package mage.cards.g;
 
 import java.util.UUID;
-
 import mage.MageInt;
+
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -47,8 +46,8 @@ import mage.constants.*;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
+import mage.game.command.emblems.GideonOfTheTrialsEmblem;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
@@ -119,8 +118,8 @@ class GideonOfTheTrialsCantLoseEffect extends ContinuousRuleModifyingEffectImpl 
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ((event.getType() == GameEvent.EventType.WINS && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) ||
-                (event.getType() == GameEvent.EventType.LOSES && event.getPlayerId().equals(source.getControllerId()))) {
+        if ((event.getType() == GameEvent.EventType.WINS && game.getOpponents(source.getControllerId()).contains(event.getPlayerId()))
+                || (event.getType() == GameEvent.EventType.LOSES && event.getPlayerId().equals(source.getControllerId()))) {
             if (game.getBattlefield().contains(filter, source.getControllerId(), 1, game)) {
                 return true;
             }
@@ -134,15 +133,8 @@ class GideonOfTheTrialsCantLoseEffect extends ContinuousRuleModifyingEffectImpl 
     }
 }
 
-class GideonOfTheTrialsEmblem extends Emblem {
-    public GideonOfTheTrialsEmblem() {
-        this.setName("Emblem - Gideon of the Trials");
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GideonOfTheTrialsCantLoseEffect());
-        this.getAbilities().add(ability);
-    }
-}
-
 class GideonOfTheTrialsToken extends Token {
+
     public GideonOfTheTrialsToken() {
         super("", "a 4/4 Human Soldier creature with indestructible");
         cardType.add(CardType.CREATURE);
