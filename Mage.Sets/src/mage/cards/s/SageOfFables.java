@@ -102,7 +102,7 @@ class SageOfFablesReplacementEffect extends ReplacementEffectImpl {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         return creature != null && creature.getControllerId().equals(source.getControllerId())
                 && creature.isCreature()
-                && creature.getSubtype(game).contains("Wizard")
+                && creature.hasSubtype("Wizard", game)
                 && !event.getTargetId().equals(source.getSourceId());
     }
 

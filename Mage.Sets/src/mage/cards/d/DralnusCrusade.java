@@ -79,7 +79,7 @@ class DralnusCrusadeEffect extends ContinuousEffectImpl {
         for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, source.getControllerId(), source.getSourceId(), game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (!permanent.getSubtype(game).contains("Zombie")) {
+                    if (!permanent.hasSubtype("Zombie", game)) {
                         permanent.getSubtype(game).add("Zombie");
                     }
                     break;

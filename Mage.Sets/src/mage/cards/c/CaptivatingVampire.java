@@ -119,7 +119,7 @@ class CaptivatingVampireEffect extends ContinuousEffectImpl {
                     break;
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!permanent.getSubtype(game).contains("Vampire")) {
+                        if (!permanent.hasSubtype("Vampire", game)) {
                             permanent.getSubtype(game).add("Vampire");
                         }
                     }

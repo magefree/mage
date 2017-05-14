@@ -102,7 +102,7 @@ class VizierOfManyFacesApplyToPermanent extends ApplyToPermanent {
                     for (MageObjectReference mor : watcher.getEmbalmedThisTurnCards()) {
                         if (mor.getSourceId().equals(originalCardId) && game.getState().getZoneChangeCounter(originalCardId) == mor.getZoneChangeCounter()) {
                             permanent.getManaCost().clear();
-                            if (!permanent.getSubtype(game).contains("Zombie")) {
+                            if (!permanent.hasSubtype("Zombie", game)) {
                                 permanent.getSubtype(game).add("Zombie");
                             }
                             permanent.getColor(game).setColor(ObjectColor.WHITE);

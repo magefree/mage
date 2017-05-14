@@ -112,13 +112,13 @@ class VenomTriggeredAbility extends TriggeredAbilityImpl {
             Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
             if (enchantedCreature != null) {
                 if (blocker != null && !Objects.equals(blocker, enchantedCreature)
-                        && !blocker.getSubtype(game).contains("Wall")
+                        && !blocker.hasSubtype("Wall", game)
                         && Objects.equals(blocked, enchantedCreature)) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId()));
                     return true;
                 }
                 if (blocker != null && Objects.equals(blocker, enchantedCreature)
-                        && !blocked.getSubtype(game).contains("Wall")) {
+                        && !blocked.hasSubtype("Wall", game)) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(blocked.getId()));
                     return true;
                 }
