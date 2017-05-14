@@ -31,28 +31,22 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.command.Emblem;
+import mage.game.command.emblems.ObiWanKenobiEmblem;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Styxo
+ * @author Styxo import mage.game.command.emblems.ObiWanKenobiEmblem;
  */
 public class ObiWanKenobi extends CardImpl {
 
@@ -89,25 +83,5 @@ public class ObiWanKenobi extends CardImpl {
     @Override
     public ObiWanKenobi copy() {
         return new ObiWanKenobi(this);
-    }
-}
-
-class ObiWanKenobiEmblem extends Emblem {
-
-    // Creatures you control get +1/+1 and have vigilance, first strike, and lifelink
-    public ObiWanKenobiEmblem() {
-        this.setName("Emblem Obi-Wan Kenobi");
-        this.setExpansionSetCodeForImage("SWS");
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(1, 1, Duration.EndOfGame));
-        Effect effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfGame);
-        effect.setText("and have vigilance");
-        ability.addEffect(effect);
-        effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        effect.setText(", first strike");
-        ability.addEffect(effect);
-        effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield);
-        effect.setText("and lifelink.");
-        ability.addEffect(effect);
-        getAbilities().add(ability);
     }
 }

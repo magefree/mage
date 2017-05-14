@@ -27,32 +27,23 @@
  */
 package mage.cards.a;
 
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.command.Emblem;
 import mage.target.common.TargetCreatureOrPlayer;
 
+import mage.game.command.emblems.ArlinnEmbracedByTheMoonEmblem;
 import java.util.UUID;
 
 /**
@@ -99,25 +90,5 @@ public class ArlinnEmbracedByTheMoon extends CardImpl {
     @Override
     public ArlinnEmbracedByTheMoon copy() {
         return new ArlinnEmbracedByTheMoon(this);
-    }
-}
-
-class ArlinnEmbracedByTheMoonEmblem extends Emblem {
-
-    // "Creatures you control have haste and '{T}: This creature deals damage equal to its power to target creature or player.'"
-    public ArlinnEmbracedByTheMoonEmblem() {
-        this.setName("Emblem Arlinn");
-        FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");
-        GainAbilityControlledEffect effect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfGame, filter);
-        effect.setText("Creatures you control have haste");
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
-        Effect effect2 = new DamageTargetEffect(new SourcePermanentPowerCount());
-        effect2.setText("This creature deals damage equal to its power to target creature or player");
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new TapSourceCost());
-        ability2.addTarget(new TargetCreatureOrPlayer());
-        effect = new GainAbilityControlledEffect(ability2, Duration.EndOfGame, filter);
-        effect.setText("and '{T}: This creature deals damage equal to its power to target creature or player");
-        ability.addEffect(effect);
-        this.getAbilities().add(ability);
     }
 }

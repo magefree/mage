@@ -35,25 +35,22 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.continuous.CastFromHandWithoutPayingManaCostEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.command.Emblem;
+import mage.game.command.emblems.TamiyoFieldResearcherEmblem;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -81,7 +78,7 @@ public class TamiyoFieldResearcher extends CardImpl {
 
         // +1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
         Ability ability = new LoyaltyAbility(new TamiyoFieldResearcherEffect1(), 1);
-        ability.addTarget(new TargetCreaturePermanent(0, 2, FILTER_PERMANENT_CREATURES, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("creatures"), false));
         this.addAbility(ability);
 
         // -2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
@@ -186,16 +183,5 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
     @Override
     public String getRule() {
         return "Until your next turn, whenever either of those creatures deals combat damage, you draw a card.";
-    }
-}
-
-class TamiyoFieldResearcherEmblem extends Emblem {
-    // You may cast nonland cards from your hand without paying their mana costs.
-
-    public TamiyoFieldResearcherEmblem() {
-
-        this.setName("Emblem Tamiyo");
-
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new CastFromHandWithoutPayingManaCostEffect()));
     }
 }

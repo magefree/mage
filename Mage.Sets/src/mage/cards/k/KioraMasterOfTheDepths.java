@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -44,15 +43,14 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
-import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
+import mage.game.command.emblems.KioraMasterOfTheDepthsEmblem;
 import mage.game.permanent.token.OctopusToken;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -194,51 +192,5 @@ class KioraRevealEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class KioraMasterOfTheDepthsEmblem extends Emblem {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
-
-    public KioraMasterOfTheDepthsEmblem() {
-        this.setName("Emblem Kiora");
-
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.COMMAND,
-                new KioraFightEffect(), filter, true, SetTargetPointer.PERMANENT,
-                "Whenever a creature enters the battlefield under your control, you may have it fight target creature.");
-        ability.addTarget(new TargetCreaturePermanent());
-        this.getAbilities().add(ability);
-        this.setExpansionSetCodeForImage("BFZ");
-    }
-}
-
-class KioraFightEffect extends OneShotEffect {
-
-    KioraFightEffect() {
-        super(Outcome.Damage);
-    }
-
-    KioraFightEffect(final KioraFightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent triggeredCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        if (triggeredCreature != null
-                && target != null
-                && triggeredCreature.isCreature()
-                && target.isCreature()) {
-            triggeredCreature.fight(target, source, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public KioraFightEffect copy() {
-        return new KioraFightEffect(this);
     }
 }

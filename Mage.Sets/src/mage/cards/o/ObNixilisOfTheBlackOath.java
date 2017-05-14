@@ -32,28 +32,18 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.command.Emblem;
 import mage.game.permanent.token.DemonToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.game.command.emblems.ObNixilisOfTheBlackOathEmblem;
 
 /**
  *
@@ -126,21 +116,4 @@ class ObNixilisOfTheBlackOathEffect1 extends OneShotEffect {
         return new ObNixilisOfTheBlackOathEffect1(this);
     }
 
-}
-
-class ObNixilisOfTheBlackOathEmblem extends Emblem {
-
-    // You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."
-    public ObNixilisOfTheBlackOathEmblem() {
-        this.setName("Emblem Nixilis");
-        DynamicValue xValue = new SacrificeCostCreaturesPower();
-        Effect effect = new GainLifeEffect(xValue);
-        effect.setText("You gain X life");
-        Ability ability = new SimpleActivatedAbility(Zone.COMMAND, effect, new ManaCostsImpl("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        effect = new DrawCardSourceControllerEffect(xValue);
-        effect.setText("and draw X cards, where X is the sacrificed creature's power");
-        ability.addEffect(effect);
-        this.getAbilities().add(ability);
-    }
 }

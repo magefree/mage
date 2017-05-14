@@ -30,10 +30,8 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -43,15 +41,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.game.command.emblems.DovinBaanEmblem;
 import mage.game.Game;
-import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-
 import java.util.UUID;
 
 /**
@@ -124,36 +118,5 @@ class DovinBaanCantActivateAbilitiesEffect extends ContinuousRuleModifyingEffect
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getSourceId().equals(this.getTargetPointer().getFirst(game, source));
-    }
-}
-
-class DovinBaanEmblem extends Emblem {
-
-    DovinBaanEmblem() {
-        this.setName("Emblem Dovin");
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new DovinBaanCantUntapEffect());
-        this.getAbilities().add(ability);
-    }
-}
-
-class DovinBaanCantUntapEffect extends RestrictionUntapNotMoreThanEffect {
-
-    DovinBaanCantUntapEffect() {
-        super(Duration.WhileOnBattlefield, 2, new FilterControlledPermanent());
-        staticText = "Your opponents can't untap more than two permanents during their untap steps.";
-    }
-
-    DovinBaanCantUntapEffect(final DovinBaanCantUntapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Player player, Ability source, Game game) {
-        return game.getOpponents(source.getControllerId()).contains(player.getId());
-    }
-
-    @Override
-    public DovinBaanCantUntapEffect copy() {
-        return new DovinBaanCantUntapEffect(this);
     }
 }

@@ -29,19 +29,15 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.command.Emblem;
+import mage.game.command.emblems.ChandraRoaringFlameEmblem;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -125,20 +121,5 @@ class ChandraRoaringFlameEmblemEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-/**
- * Emblem with "At the beginning of your upkeep, this emblem deals 3 damage to
- * you."
- */
-class ChandraRoaringFlameEmblem extends Emblem {
-
-    public ChandraRoaringFlameEmblem() {
-        setName("Emblem Chandra");
-        setExpansionSetCodeForImage("ORI");
-        Effect effect = new DamageTargetEffect(3);
-        effect.setText("this emblem deals 3 damage to you");
-        this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, effect, TargetController.YOU, false, true));
     }
 }

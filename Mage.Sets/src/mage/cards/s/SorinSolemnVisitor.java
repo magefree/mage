@@ -28,25 +28,20 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.game.command.emblems.SorinSolemnVisitorEmblem;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.command.Emblem;
 import mage.game.permanent.token.SorinSolemnVisitorVampireToken;
 
 /**
@@ -85,18 +80,5 @@ public class SorinSolemnVisitor extends CardImpl {
     @Override
     public SorinSolemnVisitor copy() {
         return new SorinSolemnVisitor(this);
-    }
-}
-
-/**
- * Emblem: "At the beginning of each opponent's upkeep, that player sacrifices a
- * creature."
- */
-class SorinSolemnVisitorEmblem extends Emblem {
-
-    public SorinSolemnVisitorEmblem() {
-        this.setName("Emblem Sorin");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new SacrificeEffect(new FilterCreaturePermanent(), 1, "that player"), TargetController.OPPONENT, false, true);
-        this.getAbilities().add(ability);
     }
 }
