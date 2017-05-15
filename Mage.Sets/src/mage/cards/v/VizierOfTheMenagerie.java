@@ -103,7 +103,7 @@ class VizierOfTheMenagerieTopCardRevealedEffect extends ContinuousEffectImpl {
             if (topCard != null) {
                 MageObject vizierOfTheMenagerie = source.getSourceObject(game);
                 if (vizierOfTheMenagerie != null) {
-                    controller.lookAtCards("Top card of " + vizierOfTheMenagerie.getLogName() + " controller's library", topCard, game);
+                    controller.lookAtCards("Top card of " + vizierOfTheMenagerie.getIdName() + " controller's library", topCard, game);
                 }
             }
         }
@@ -149,8 +149,9 @@ class VizierOfTheMenagerieTopCardCastEffect extends AsThoughEffectImpl {
                     if (vizierOfTheMenagerie != null
                             && topCard != null) {
                         if (topCard == card
-                                && topCard.isCreature()) {
-                            return controller.cast(topCard.getSpellAbility(), game, false);
+                                && topCard.isCreature()
+                                && game.canPlaySorcery(controller.getId())) {
+                            return true;
                         }
                     }
                 }
