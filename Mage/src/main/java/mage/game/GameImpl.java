@@ -176,6 +176,7 @@ public abstract class GameImpl implements Game, Serializable {
     private final int startLife;
     protected PlayerList playerList;
 
+    private int infiniteLoopCounter; // used to check if the game is in an infinite loop
     // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
@@ -1233,7 +1234,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
         int errorContinueCounter = 0;
-        int infiniteLoopCounter = 0;
+        infiniteLoopCounter = 0;
         int bookmark = 0;
         clearAllBookmarks();
         try {
@@ -1287,13 +1288,7 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                         if (allPassed()) {
                             if (!state.getStack().isEmpty()) {
-                                if (getStack().size() < 4) {
-                                    infiniteLoopCounter++;
-                                    if (infiniteLoopCounter > 15) {
-                                        isInfiniteLoop();
-                                        infiniteLoopCounter = 0;
-                                    }
-                                }
+                                checkInfiniteLoop();
                                 //20091005 - 115.4
                                 resolve();
                                 applyEffects();
@@ -1359,28 +1354,42 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
-    protected void isInfiniteLoop() {
-        StackObject stackObject = getStack().getFirst();
-        if (stackObject != null) {
-            Player controller = getPlayer(stackObject.getControllerId());
-            if (controller != null) {
-                for (UUID playerId : getState().getPlayersInRange(controller.getId(), this)) {
-                    Player player = getPlayer(playerId);
-                    if (!player.chooseUse(Outcome.Detriment, "Draw game because of infinite looping?", null, this)) {
-                        informPlayers(controller.getLogName() + " has NOT confirmed that the game is a draw because of infinite looping.");
-                        return;
-                    }
-                    informPlayers(controller.getLogName() + " has confirmed that the game is a draw because of infinite looping.");
-                }
-                for (UUID playerId : getState().getPlayersInRange(controller.getId(), this)) {
-                    Player player = getPlayer(playerId);
-                    if (player != null) {
-                        player.drew(this);
+    /**
+     * This checks if the stack gets filled iterated, without ever getting empty
+     * If the defined number of iterations is reached, the players in range of
+     * the stackObject get asked to confirm a draw. If they do, all confirming
+     * players get set to a draw.
+     *
+     * Possible to improve: check that always the same set of stackObjects are
+     * again aand again on the stack
+     */
+    protected void checkInfiniteLoop() {
+        if (getStack().size() < 4) { // to prevent that this also pops up, if e.g. 20 triggers resolve at once
+            infiniteLoopCounter++;
+            if (infiniteLoopCounter > 15) {
+                StackObject stackObject = getStack().getFirst();
+                if (stackObject != null) {
+                    Player controller = getPlayer(stackObject.getControllerId());
+                    if (controller != null) {
+                        for (UUID playerId : getState().getPlayersInRange(controller.getId(), this)) {
+                            Player player = getPlayer(playerId);
+                            if (!player.chooseUse(Outcome.Detriment, "Draw game because of infinite looping?", null, this)) {
+                                informPlayers(controller.getLogName() + " has NOT confirmed that the game is a draw because of infinite looping.");
+                                infiniteLoopCounter = 0;
+                                return;
+                            }
+                            informPlayers(controller.getLogName() + " has confirmed that the game is a draw because of infinite looping.");
+                        }
+                        for (UUID playerId : getState().getPlayersInRange(controller.getId(), this)) {
+                            Player player = getPlayer(playerId);
+                            if (player != null) {
+                                player.drew(this);
+                            }
+                        }
                     }
                 }
             }
         }
-
     }
 
     protected boolean allPassed() {
