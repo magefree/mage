@@ -221,6 +221,7 @@ public class Commander extends Constructed {
             boolean buyback = false;
             boolean cascade = false;
             boolean cantBe = false;
+            boolean cantUntap = false;
             boolean copy = false;
             boolean costLessEach = false;
             boolean createToken = false;
@@ -270,12 +271,14 @@ public class Commander extends Constructed {
             boolean whenCounterThatSpell = false;
             boolean xCost = false;
             boolean youControlTarget = false;
+            boolean yourOpponentsControl = false;
 
             for (String str : card.getRules()) {
                 String s = str.toLowerCase();
                 annihilator |= s.contains("annihilator");
                 anyNumberOfTarget |= s.contains("any number");
                 buyback |= s.contains("buyback");
+                cantUntap |= s.contains("can't untap") || s.contains("don't untap");
                 cantBe |= s.contains("can't be");
                 cascade |= s.contains("cascade");
                 copy |= s.contains("copy");
@@ -327,6 +330,7 @@ public class Commander extends Constructed {
                 whenCounterThatSpell |= s.contains("when") && s.contains("counter that spell");
                 wheneverEnters |= s.contains("when") && s.contains("another") && s.contains("enters");
                 youControlTarget |= s.contains("you control target");
+                yourOpponentsControl |= s.contains("your opponents control");
             }
 
             for (ManaCost cost : card.getManaCost()) {
@@ -352,6 +356,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 6);
             }
             if (annihilator) {
+                thisMaxPower = Math.max(thisMaxPower, 5);
+            }
+            if (cantUntap) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
             }
             if (costLessEach) {
@@ -411,6 +418,9 @@ public class Commander extends Constructed {
             if (returnFromYourGY) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
+            if (sacrifice) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
+            }
             if (skip) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
@@ -430,6 +440,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (youControlTarget) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (yourOpponentsControl) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (anyNumberOfTarget) {
@@ -472,9 +485,6 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (sliver) {
-                thisMaxPower = Math.max(thisMaxPower, 2);
-            }
-            if (sacrifice) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (untapTarget) {

@@ -45,6 +45,7 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
         boolean buyback = false;
         boolean cascade = false;
         boolean cantBe = false;
+        boolean cantUntap = false;
         boolean copy = false;
         boolean costLessEach = false;
         boolean createToken = false;
@@ -94,6 +95,7 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
         boolean whenCounterThatSpell = false;
         boolean xCost = false;
         boolean youControlTarget = false;
+        boolean yourOpponentsControl = false;
 
         for (String str : card.getRules()) {
             String s = str.toLowerCase();
@@ -101,6 +103,7 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
             anyNumberOfTarget |= s.contains("any number");
             buyback |= s.contains("buyback");
             cantBe |= s.contains("can't be");
+            cantUntap |= s.contains("can't untap");
             cascade |= s.contains("cascade");
             copy |= s.contains("copy");
             costLessEach |= s.contains("cost") || s.contains("less") || s.contains("each");
@@ -151,6 +154,7 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
             whenCounterThatSpell |= s.contains("when") && s.contains("counter that spell");
             wheneverEnters |= s.contains("when") && s.contains("another") && s.contains("enters");
             youControlTarget |= s.contains("you control target");
+            yourOpponentsControl |= s.contains("your opponents control");
         }
 
         if (extraTurns) {
@@ -163,6 +167,9 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
             thisMaxPower = Math.max(thisMaxPower, 6);
         }
         if (annihilator) {
+            thisMaxPower = Math.max(thisMaxPower, 5);
+        }
+        if (cantUntap) {
             thisMaxPower = Math.max(thisMaxPower, 5);
         }
         if (costLessEach) {
@@ -222,6 +229,9 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
         if (returnFromYourGY) {
             thisMaxPower = Math.max(thisMaxPower, 4);
         }
+        if (sacrifice) {
+            thisMaxPower = Math.max(thisMaxPower, 4);
+        }
         if (skip) {
             thisMaxPower = Math.max(thisMaxPower, 4);
         }
@@ -241,6 +251,9 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
             thisMaxPower = Math.max(thisMaxPower, 4);
         }
         if (youControlTarget) {
+            thisMaxPower = Math.max(thisMaxPower, 4);
+        }
+        if (yourOpponentsControl) {
             thisMaxPower = Math.max(thisMaxPower, 4);
         }
         if (anyNumberOfTarget) {
@@ -283,9 +296,6 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
             thisMaxPower = Math.max(thisMaxPower, 2);
         }
         if (sliver) {
-            thisMaxPower = Math.max(thisMaxPower, 2);
-        }
-        if (sacrifice) {
             thisMaxPower = Math.max(thisMaxPower, 2);
         }
         if (untapTarget) {
