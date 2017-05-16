@@ -36,6 +36,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 
@@ -53,7 +54,7 @@ public class SlipstreamEel extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Slipstream Eel can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
         
         // Cycling {1}{U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));

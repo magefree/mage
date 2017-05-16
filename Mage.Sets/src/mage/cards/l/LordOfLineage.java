@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,7 +54,7 @@ public class LordOfLineage extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Vampire creatures");
 
     static {
-        filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 
     public LordOfLineage(UUID ownerId, CardSetInfo setInfo) {

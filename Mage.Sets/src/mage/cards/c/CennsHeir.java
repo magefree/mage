@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -50,7 +51,7 @@ public class CennsHeir extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Kithkin");
 
     static {
-        filter.add(new SubtypePredicate("Kithkin"));
+        filter.add(new SubtypePredicate(SubType.KITHKIN));
         filter.add(new AnotherPredicate());
     }
 

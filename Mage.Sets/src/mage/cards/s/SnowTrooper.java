@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -55,7 +56,7 @@ public class SnowTrooper extends CardImpl {
         // Trooper creatures you control have firststrike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield,
-                        new FilterCreaturePermanent("Trooper", "Trooper creatures"), false)));
+                        new FilterCreaturePermanent(SubType.TROOPER, "Trooper creatures"), false)));
     }
 
     public SnowTrooper(final SnowTrooper card) {

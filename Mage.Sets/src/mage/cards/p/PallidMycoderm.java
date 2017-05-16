@@ -29,10 +29,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -62,8 +59,8 @@ public class PallidMycoderm extends CardImpl {
     private static final FilterControlledCreaturePermanent filterSaproling = new FilterControlledCreaturePermanent("a Saproling");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.or(new SubtypePredicate("Fungus"), new SubtypePredicate("Saproling")));
-        filterSaproling.add(new SubtypePredicate("Saproling"));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.FUNGUS), new SubtypePredicate(SubType.SAPROLING)));
+        filterSaproling.add(new SubtypePredicate(SubType.SAPROLING));
     }
 
     public PallidMycoderm(UUID ownerId, CardSetInfo setInfo) {

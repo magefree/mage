@@ -37,6 +37,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -93,7 +94,7 @@ class PainwrackerOniEffect extends SacrificeControllerEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getBattlefield().countAll(new FilterCreaturePermanent("Ogre", "Ogre"), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().countAll(new FilterCreaturePermanent(SubType.OGRE, "Ogre"), source.getControllerId(), game) < 1) {
             return super.apply(game, source);
         }
         return true;

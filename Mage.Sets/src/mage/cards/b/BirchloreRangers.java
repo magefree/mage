@@ -35,6 +35,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,7 +54,7 @@ public class BirchloreRangers extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public BirchloreRangers(UUID ownerId, CardSetInfo setInfo) {

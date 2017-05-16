@@ -39,10 +39,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -61,7 +58,7 @@ public class MausoleumWanderer extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Spirit"));
+        filter.add(new SubtypePredicate(SubType.SPIRIT));
     }
 
     public MausoleumWanderer(UUID ownerId, CardSetInfo setInfo) {

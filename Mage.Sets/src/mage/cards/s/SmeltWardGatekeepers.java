@@ -30,10 +30,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.constants.ComparisonType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -63,7 +60,7 @@ public class SmeltWardGatekeepers extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("creature an opponent controls");
     static {
-        filter.add(new SubtypePredicate("Gate"));
+        filter.add(new SubtypePredicate(SubType.GATE));
         targetFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

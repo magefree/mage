@@ -36,10 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -56,7 +53,7 @@ public class OrcishCaptain extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Orc creature");
 
     static {
-        filter.add(new SubtypePredicate("Orc"));
+        filter.add(new SubtypePredicate(SubType.ORC));
     }
 
     public OrcishCaptain(UUID ownerId, CardSetInfo setInfo) {

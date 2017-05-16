@@ -30,16 +30,13 @@ package mage.cards.u;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
+import mage.constants.*;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +54,7 @@ public class UbulSarGatekeepers extends CardImpl {
     private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.add(new SubtypePredicate("Gate"));
+        filter.add(new SubtypePredicate(SubType.GATE));
         targetFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

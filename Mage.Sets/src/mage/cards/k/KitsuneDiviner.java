@@ -37,6 +37,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ public class KitsuneDiviner extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Spirit");
 
     static {
-        filter.add(new SubtypePredicate("Spirit"));
+        filter.add(new SubtypePredicate(SubType.SPIRIT));
     }
 
     public KitsuneDiviner (UUID ownerId, CardSetInfo setInfo) {

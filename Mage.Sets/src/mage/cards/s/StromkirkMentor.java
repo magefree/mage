@@ -35,6 +35,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ public class StromkirkMentor extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 
     public StromkirkMentor(UUID ownerId, CardSetInfo setInfo) {

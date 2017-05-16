@@ -53,7 +53,7 @@ public class CommanderCody extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TokenPredicate()));
-        filter.add(new SubtypePredicate("Trooper"));
+        filter.add(new SubtypePredicate(SubType.TROOPER));
     }
 
     public CommanderCody(UUID ownerId, CardSetInfo setInfo) {

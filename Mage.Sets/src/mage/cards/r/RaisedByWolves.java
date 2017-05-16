@@ -39,10 +39,7 @@ import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.WolfToken;
@@ -58,7 +55,7 @@ public class RaisedByWolves extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Wolf you control");
 
     static {
-        filter.add(new SubtypePredicate("Wolf"));
+        filter.add(new SubtypePredicate(SubType.WOLF));
     }
 
     public RaisedByWolves(UUID ownerId, CardSetInfo setInfo) {

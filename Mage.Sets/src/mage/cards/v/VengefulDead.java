@@ -34,6 +34,7 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -46,7 +47,7 @@ public class VengefulDead extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Zombie");
     
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public VengefulDead(UUID ownerId, CardSetInfo setInfo) {

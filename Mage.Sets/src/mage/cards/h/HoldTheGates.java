@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -55,7 +56,7 @@ public class HoldTheGates extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Gate"));
+        filter.add(new SubtypePredicate(SubType.GATE));
     }
 
     public HoldTheGates(UUID ownerId, CardSetInfo setInfo) {

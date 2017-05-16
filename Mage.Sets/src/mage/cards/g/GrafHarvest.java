@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -58,7 +59,7 @@ public class GrafHarvest extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public GrafHarvest(UUID ownerId, CardSetInfo setInfo) {

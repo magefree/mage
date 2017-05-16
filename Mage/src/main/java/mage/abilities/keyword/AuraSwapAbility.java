@@ -33,6 +33,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -88,7 +89,7 @@ class AuraSwapEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterCard filterCardToCheck = new FilterCard();
-        filterCardToCheck.add(new SubtypePredicate("Aura"));
+        filterCardToCheck.add(new SubtypePredicate(SubType.AURA));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent auraSourcePermanent = game.getPermanent(source.getSourceId());

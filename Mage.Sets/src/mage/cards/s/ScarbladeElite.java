@@ -38,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,7 +54,7 @@ public class ScarbladeElite extends CardImpl {
     private static final FilterCard filter = new FilterCard("Assassin card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate("Assassin"));
+        filter.add(new SubtypePredicate(SubType.ASSASSIN));
     }
 
     public ScarbladeElite(UUID ownerId, CardSetInfo setInfo) {

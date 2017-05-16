@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,7 +54,7 @@ public class MoggRaider extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public MoggRaider(UUID ownerId, CardSetInfo setInfo) {

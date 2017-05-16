@@ -6,6 +6,7 @@
 package mage.filter;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactCreaturePermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -37,8 +38,8 @@ public final class StaticFilters {
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE = new FilterCreaturePermanent();
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURES = new FilterCreaturePermanent("creatures");
-    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_GOBLINS = new FilterCreaturePermanent("Goblin", "Goblin creatures");
-    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_SLIVERS = new FilterCreaturePermanent("Sliver", "Sliver creatures");
+    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_GOBLINS = new FilterCreaturePermanent(SubType.GOBLIN, "Goblin creatures");
+    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_SLIVERS = new FilterCreaturePermanent(SubType.SLIVER, "Sliver creatures");
 
     public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");
     public static final FilterSpell FILTER_SPELL_NON_CREATURE

@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +57,7 @@ public class AuriokWindwalker extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
 
     static {
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public AuriokWindwalker(UUID ownerId, CardSetInfo setInfo) {

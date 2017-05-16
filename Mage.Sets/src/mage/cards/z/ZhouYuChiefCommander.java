@@ -33,6 +33,7 @@ import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPer
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
@@ -54,7 +55,7 @@ public class ZhouYuChiefCommander extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Zhou Yu, Chief Commander can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
     public ZhouYuChiefCommander(final ZhouYuChiefCommander card) {

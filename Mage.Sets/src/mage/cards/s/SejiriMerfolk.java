@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -54,7 +55,7 @@ public class SejiriMerfolk extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
 
     static {
-        filter.add(new SubtypePredicate("Plains"));
+        filter.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public SejiriMerfolk(UUID ownerId, CardSetInfo setInfo) {

@@ -29,6 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -53,7 +54,7 @@ public class SkirsdagFlayer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public SkirsdagFlayer(UUID ownerId, CardSetInfo setInfo) {

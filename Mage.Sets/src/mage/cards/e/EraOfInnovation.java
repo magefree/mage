@@ -40,6 +40,7 @@ import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -58,7 +59,7 @@ public class EraOfInnovation extends CardImpl {
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new SubtypePredicate("Artificer")));
+                new SubtypePredicate(SubType.ARTIFICER)));
     }
 
     public EraOfInnovation(UUID ownerId, CardSetInfo setInfo) {

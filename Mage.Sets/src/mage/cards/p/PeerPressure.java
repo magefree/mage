@@ -41,6 +41,7 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -94,7 +95,7 @@ class PeerPressureEffect extends OneShotEffect {
         if (controller != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose creature type");
-            choice.setChoices(CardRepository.instance.getCreatureTypes());
+            choice.setChoices(SubType.getCreatureTypes());
             while (!controller.choose(Outcome.GainControl, choice, game)) {
                 if (!controller.canRespond()) {
                     return false;
@@ -107,7 +108,7 @@ class PeerPressureEffect extends OneShotEffect {
             UUID playerWithMost = null;
             int maxControlled = 0;
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                FilterPermanent filter = new FilterCreaturePermanent(chosenType, chosenType);
+                FilterPermanent filter = new FilterCreaturePermanent(SubType.byDescription(chosenType), chosenType);
                 filter.add(new ControllerIdPredicate(playerId));
                 int controlled = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
                 if (controlled > maxControlled) {
@@ -118,7 +119,7 @@ class PeerPressureEffect extends OneShotEffect {
                 }
             }
             if (playerWithMost != null && playerWithMost.equals(controller.getId())) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(chosenType, chosenType), controller.getId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(SubType.byDescription(chosenType), chosenType), controller.getId(), source.getSourceId(), game)) {
                     ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
                     effect.setTargetPointer(new FixedTarget(permanent.getId()));
                     game.addEffect(effect, source);

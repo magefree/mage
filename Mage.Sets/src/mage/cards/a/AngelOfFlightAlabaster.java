@@ -8,6 +8,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -20,7 +21,7 @@ public class AngelOfFlightAlabaster extends CardImpl {
     private static final FilterCard filter = new FilterCard("Spirit card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate("Spirit"));
+        filter.add(new SubtypePredicate(SubType.SPIRIT));
     }
 
     public AngelOfFlightAlabaster(UUID ownerId, CardSetInfo setInfo) {

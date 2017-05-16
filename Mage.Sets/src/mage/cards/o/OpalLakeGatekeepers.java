@@ -39,6 +39,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -52,7 +53,7 @@ public class OpalLakeGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     static {
-        filter.add(new SubtypePredicate("Gate"));
+        filter.add(new SubtypePredicate(SubType.GATE));
     }
 
     public OpalLakeGatekeepers (UUID ownerId, CardSetInfo setInfo) {

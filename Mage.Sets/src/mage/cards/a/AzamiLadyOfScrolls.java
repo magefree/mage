@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -54,7 +55,7 @@ public class AzamiLadyOfScrolls extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Wizard"));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
     }
 
     public AzamiLadyOfScrolls(UUID ownerId, CardSetInfo setInfo) {

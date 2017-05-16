@@ -34,6 +34,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -49,9 +50,9 @@ public class EliteInquisitor extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("Vampires, from Werewolves, and from Zombies");
 
     static {filter.add(Predicates.or(
-            new SubtypePredicate("Vampire"),
-            new SubtypePredicate("Werewolf"),
-            new SubtypePredicate("Zombie")
+            new SubtypePredicate(SubType.VAMPIRE),
+            new SubtypePredicate(SubType.WEREWOLF),
+            new SubtypePredicate(SubType.ZOMBIE)
             ));
     }
 

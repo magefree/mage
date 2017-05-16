@@ -33,6 +33,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class ElvishVanguard extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another Elf");
 
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
         filter.add(new AnotherPredicate());
     }
 

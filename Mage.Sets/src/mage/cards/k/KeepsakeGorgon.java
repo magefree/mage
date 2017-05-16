@@ -37,6 +37,7 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,7 +54,7 @@ public class KeepsakeGorgon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Gorgon creature an opponent controls");
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Gorgon")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.GORGON)));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

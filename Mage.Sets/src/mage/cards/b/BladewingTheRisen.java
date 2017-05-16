@@ -37,10 +37,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -58,8 +55,8 @@ public class BladewingTheRisen extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon creatures");
     private static final FilterPermanentCard filterCard = new FilterPermanentCard("Dragon permanent card from your graveyard");
     static {
-        filter.add(new SubtypePredicate("Dragon"));
-        filterCard.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filterCard.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     public BladewingTheRisen(UUID ownerId, CardSetInfo setInfo) {

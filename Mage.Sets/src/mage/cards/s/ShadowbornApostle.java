@@ -39,6 +39,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -56,7 +57,7 @@ public class ShadowbornApostle extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("a Demon creature");
     private static final FilterControlledCreaturePermanent filterApostle = new FilterControlledCreaturePermanent("six creatures named Shadowborn Apostle");
     static {
-        filter.add(new SubtypePredicate("Demon"));
+        filter.add(new SubtypePredicate(SubType.DEMON));
         filterApostle.add(new NamePredicate("Shadowborn Apostle"));
     }
 

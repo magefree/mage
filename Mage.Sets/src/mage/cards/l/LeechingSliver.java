@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class LeechingSliver extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public LeechingSliver(UUID ownerId, CardSetInfo setInfo) {

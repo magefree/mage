@@ -35,6 +35,7 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -50,7 +51,7 @@ public class HythoniaTheCruel extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Gorgon creatures");
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Gorgon")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.GORGON)));
     }
 
     public HythoniaTheCruel(UUID ownerId, CardSetInfo setInfo) {

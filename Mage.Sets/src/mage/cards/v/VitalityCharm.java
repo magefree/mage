@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.InsectToken;
@@ -54,7 +55,7 @@ public class VitalityCharm extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Beast");
 
     static {
-        filter.add(new SubtypePredicate("Beast"));
+        filter.add(new SubtypePredicate(SubType.BEAST));
     }
 
     public VitalityCharm(UUID ownerId, CardSetInfo setInfo) {

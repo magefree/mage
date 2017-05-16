@@ -55,7 +55,7 @@ public class CateranBrute extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Mercenary permanent card with converted mana cost 2 or less");
 
     static {
-        filter.add(new SubtypePredicate("Mercenary"));
+        filter.add(new SubtypePredicate());
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
     }
 

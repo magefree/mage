@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -52,7 +53,7 @@ public class KrenkoMobBoss extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("the number of Goblins you control");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public KrenkoMobBoss(UUID ownerId, CardSetInfo setInfo) {

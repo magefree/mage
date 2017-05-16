@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
+import mage.constants.*;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -37,9 +37,6 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -60,7 +57,7 @@ public class SpellstutterSprite extends CardImpl {
     public static final FilterPermanent filter = new FilterPermanent("number of Faeries you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Faerie"));
+        filter.add(new SubtypePredicate(SubType.FAERIE));
     }
 
     public SpellstutterSprite(UUID ownerId, CardSetInfo setInfo) {
