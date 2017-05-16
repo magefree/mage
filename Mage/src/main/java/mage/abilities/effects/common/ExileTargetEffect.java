@@ -58,8 +58,13 @@ public class ExileTargetEffect extends OneShotEffect {
     protected boolean multitargetHandling;
 
     public ExileTargetEffect(String effectText) {
+        this(effectText, false);
+    }
+
+    public ExileTargetEffect(String effectText, boolean multitargetHandling) {
         this();
         this.staticText = effectText;
+        this.multitargetHandling = multitargetHandling;
     }
 
     public ExileTargetEffect() {
@@ -100,7 +105,9 @@ public class ExileTargetEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> toExile = new LinkedHashSet<>();
-            if (multitargetHandling && source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) { // Decimate
+            if (multitargetHandling
+                    && targetPointer instanceof FirstTargetPointer
+                    && (source.getTargets().size() > 1 || (source.getTargets().size() > 0 && source.getTargets().get(0).getTargets().size() > 1))) {
                 for (Target target : source.getTargets()) {
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(targetId);
@@ -115,6 +122,11 @@ public class ExileTargetEffect extends OneShotEffect {
                                 Zone currentZone = game.getState().getZone(card.getId());
                                 if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == currentZone)) {
                                     toExile.add(card);
+                                }
+                            } else {
+                                StackObject stackObject = game.getStack().getStackObject(targetId);
+                                if (stackObject instanceof Spell) {
+                                    toExile.add((Spell) stackObject);
                                 }
                             }
                         }

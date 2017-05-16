@@ -58,7 +58,7 @@ public class MindbreakTrap extends CardImpl {
 
         // Exile any number of target spells.
         this.getSpellAbility().addTarget(new TargetSpell(0, Integer.MAX_VALUE, filter));
-        this.getSpellAbility().addEffect(new ExileTargetEffect("Exile any number of target spells"));
+        this.getSpellAbility().addEffect(new ExileTargetEffect("Exile any number of target spells", true));
     }
 
     public MindbreakTrap(final MindbreakTrap card) {
