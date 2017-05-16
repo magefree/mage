@@ -7,6 +7,7 @@ package org.mage.test.game.ends;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -74,6 +75,47 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         Assert.assertTrue("Game has ended.", currentGame.hasEnded());
 
         Assert.assertTrue("Both players had 0 life, game has be de a draw.", currentGame.isADraw());
+
+    }
+
+    /**
+     * So here I made a simple infinite loop with Stuffy Doll and Pariah's
+     * Shield, which should make the game a draw. But instead, it just keeps
+     * going...
+     */
+    @Test
+    public void GameDrawByInfiniteLoop() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+
+        // All damage that would be dealt to you is dealt to equipped creature instead.
+        // Equip {3}
+        addCard(Zone.BATTLEFIELD, playerA, "Pariah's Shield", 1); // Artifact Equipment {5}
+
+        // As Stuffy Doll enters the battlefield, choose a player.
+        // Stuffy Doll is indestructible.
+        // Whenever Stuffy Doll is dealt damage, it deals that much damage to the chosen player.
+        // {T}: Stuffy Doll deals 1 damage to itself.
+        addCard(Zone.HAND, playerA, "Stuffy Doll", 1); // Artifact Creature {5} 0/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stuffy Doll");
+        setChoice(playerA, "PlayerA");
+        setChoice(playerA, "PlayerA");
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Stuffy Doll");
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}");
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Stuffy Doll", 1);
+        Permanent shield = getPermanent("Pariah's Shield");
+        Assert.assertTrue("Pariah's Shield is attached", shield.getAttachedTo() != null);
+
+        Assert.assertFalse("Player A has not won.", playerA.hasWon());
+        Assert.assertFalse("Player B has not won.", playerB.hasWon());
+
+        Assert.assertTrue("Game has ended.", currentGame.hasEnded());
+
+        Assert.assertTrue("Inifinite loop detected, game has be de a draw.", currentGame.isADraw());
 
     }
 

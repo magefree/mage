@@ -1233,6 +1233,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
         int errorContinueCounter = 0;
+        int infiniteLoopCounter = 0;
         int bookmark = 0;
         clearAllBookmarks();
         try {
@@ -1286,6 +1287,13 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                         if (allPassed()) {
                             if (!state.getStack().isEmpty()) {
+                                if (getStack().size() < 4) {
+                                    infiniteLoopCounter++;
+                                    if (infiniteLoopCounter > 15) {
+                                        isInfiniteLoop();
+                                        infiniteLoopCounter = 0;
+                                    }
+                                }
                                 //20091005 - 115.4
                                 resolve();
                                 applyEffects();
@@ -1294,6 +1302,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 resetShortLivingLKI();
                                 break;
                             } else {
+                                infiniteLoopCounter = 0;
                                 resetLKI();
                                 return;
                             }
@@ -1348,6 +1357,30 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
+    }
+
+    protected void isInfiniteLoop() {
+        StackObject stackObject = getStack().getFirst();
+        if (stackObject != null) {
+            Player controller = getPlayer(stackObject.getControllerId());
+            if (controller != null) {
+                for (UUID playerId : getState().getPlayersInRange(controller.getId(), this)) {
+                    Player player = getPlayer(playerId);
+                    if (!player.chooseUse(Outcome.Detriment, "Draw game because of infinite looping?", null, this)) {
+                        informPlayers(controller.getLogName() + " has NOT confirmed that the game is a draw because of infinite looping.");
+                        return;
+                    }
+                    informPlayers(controller.getLogName() + " has confirmed that the game is a draw because of infinite looping.");
+                }
+                for (UUID playerId : getState().getPlayersInRange(controller.getId(), this)) {
+                    Player player = getPlayer(playerId);
+                    if (player != null) {
+                        player.drew(this);
+                    }
+                }
+            }
+        }
+
     }
 
     protected boolean allPassed() {
