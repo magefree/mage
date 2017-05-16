@@ -54,7 +54,6 @@ public class MindbreakTrapTest extends CardTestPlayerBase {
     @Test
     public void mindBreakTrap_Exile_All_Spells() {
 
-        removeAllCardsFromHand(playerA);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
 
