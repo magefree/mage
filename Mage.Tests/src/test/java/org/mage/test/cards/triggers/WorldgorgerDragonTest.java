@@ -114,6 +114,13 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Geyser", playerB, 22);
         setChoice(playerA, "X=20");
 
+        // not an infinite loop resulting in a draw
+        for (int i = 0; i < 6; ++i)
+        {
+            setChoice(playerA, "No");
+            setChoice(playerB, "No");
+        }
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
