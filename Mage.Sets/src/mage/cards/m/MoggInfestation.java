@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,7 +51,7 @@ import mage.target.TargetPlayer;
 public class MoggInfestation extends CardImpl {
 
     public MoggInfestation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Destroy all creatures target player controls. For each creature that died this way, create two 1/1 red Goblin creature tokens under that player's control.
         getSpellAbility().addTarget(new TargetPlayer());
@@ -90,9 +91,11 @@ class MoggInfestationEffect extends OneShotEffect {
         if (controller != null && getTargetPointer().getFirst(game, source) != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), getTargetPointer().getFirst(game, source), game)) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
-                    Effect effect = new CreateTokenTargetEffect(new GoblinToken(), 2);
-                    effect.setTargetPointer(getTargetPointer());
-                    effect.apply(game, source);
+                    if (game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) { // If a commander is replaced to command zone, the creature does not die
+                        Effect effect = new CreateTokenTargetEffect(new GoblinToken(), 2);
+                        effect.setTargetPointer(getTargetPointer());
+                        effect.apply(game, source);
+                    }
                 }
             }
             return true;
