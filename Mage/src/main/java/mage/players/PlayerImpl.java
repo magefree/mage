@@ -3411,9 +3411,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (basicCard != null) {
                         card = basicCard;
                     }
+                } else if (card instanceof Spell) {
+                    final Spell spell = (Spell) card;
+                    if (spell.isCopiedSpell()) {
+                        // Copied spell, only remove from stack
+                        game.getStack().remove(spell);
+                    }
                 }
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
                         + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' ' : "") + "to the exile zone");
+
             }
             result = true;
         }
