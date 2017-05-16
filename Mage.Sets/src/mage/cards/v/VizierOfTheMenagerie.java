@@ -150,7 +150,8 @@ class VizierOfTheMenagerieTopCardCastEffect extends AsThoughEffectImpl {
                             && topCard != null) {
                         if (topCard == card
                                 && topCard.isCreature()
-                                && game.canPlaySorcery(controller.getId())) {
+                                && topCard.getSpellAbility() != null
+                                && topCard.getSpellAbility().spellCanBeActivatedRegularlyNow(controller.getId(), game)) {
                             return true;
                         }
                     }
