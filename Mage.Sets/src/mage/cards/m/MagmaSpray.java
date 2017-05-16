@@ -28,15 +28,19 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
+import mage.MageObjectReference;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.replacement.DiesReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -45,17 +49,11 @@ import mage.watchers.common.DamagedByWatcher;
 public class MagmaSpray extends CardImpl {
 
     public MagmaSpray(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
-
-        // Magma Spray deals 2 damage to target creature.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
+        // Magma Spray deals 2 damage to target creature. If that creature would die this turn, exile it instead.
+        this.getSpellAbility().addEffect(new MagmaSprayEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        // If that creature would die this turn, exile it instead.
-        Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
-        effect.setText("If that creature would die this turn, exile it instead");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }
 
     public MagmaSpray(final MagmaSpray card) {
@@ -65,5 +63,36 @@ public class MagmaSpray extends CardImpl {
     @Override
     public MagmaSpray copy() {
         return new MagmaSpray(this);
+    }
+}
+
+class MagmaSprayEffect extends OneShotEffect {
+
+    public MagmaSprayEffect() {
+        super(Outcome.Damage);
+        this.staticText = "{this} deals 2 damage to target creature. If that creature would die this turn, exile it instead";
+    }
+
+    public MagmaSprayEffect(final MagmaSprayEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MagmaSprayEffect copy() {
+        return new MagmaSprayEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (targetCreature != null) {
+                game.addEffect(new DiesReplacementEffect(new MageObjectReference(targetCreature, game), Duration.EndOfTurn), source);
+                targetCreature.damage(2, source.getSourceId(), game, false, true);
+            }
+            return true;
+        }
+        return false;
     }
 }
