@@ -29,10 +29,8 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
-import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,9 +42,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.DamagedByWatcher;
 
 import java.util.UUID;
+import mage.MageObjectReference;
+import mage.abilities.effects.common.replacement.DiesReplacementEffect;
 
 /**
  *
@@ -55,17 +54,12 @@ import java.util.UUID;
 public class BurnFromWithin extends CardImpl {
 
     public BurnFromWithin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
         // Burn from Within deals X damage to target creature or player. If a creature is dealt damage this way, it loses indestructible until end of turn.
+        // If that creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new BurnFromWithinEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-
-        // If that creature would die this turn, exile it instead.
-        Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
-        effect.setText("If that creature would die this turn, exile it instead");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
 
     }
 
@@ -83,7 +77,7 @@ class BurnFromWithinEffect extends OneShotEffect {
 
     public BurnFromWithinEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} deals X damage to target creature or player. If a creature is dealt damage this way, it loses indestructible until end of turn";
+        this.staticText = "{this} deals X damage to target creature or player. If a creature is dealt damage this way, it loses indestructible until end of turn. If that creature would die this turn, exile it instead";
     }
 
     public BurnFromWithinEffect(final BurnFromWithinEffect effect) {
@@ -102,6 +96,7 @@ class BurnFromWithinEffect extends OneShotEffect {
             Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
             int amount = source.getManaCostsToPay().getX();
             if (creature != null) {
+                game.addEffect(new DiesReplacementEffect(new MageObjectReference(creature, game), Duration.EndOfTurn), source);
                 int damageDealt = creature.damage(amount, source.getSourceId(), game, false, true);
                 if (damageDealt > 0) {
                     ContinuousEffect effect = new LoseAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);

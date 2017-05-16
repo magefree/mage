@@ -82,7 +82,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // with Kicker
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
