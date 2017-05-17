@@ -55,10 +55,10 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  */
 public class LuminarchAscension extends CardImpl {
 
-    private String rule = "At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension. (Damage causes loss of life.)";
+    private String rule = "At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on {this}. (Damage causes loss of life.)";
 
     public LuminarchAscension(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension.
         this.addAbility(new ConditionalTriggeredAbility(new LuminarchAscensionTriggeredAbility(), YouLostNoLifeThisTurnCondition.instance, rule));
@@ -140,7 +140,6 @@ class SourceHasCountersCost extends CostImpl {
 }
 
 enum YouLostNoLifeThisTurnCondition implements Condition {
-
 
     instance;
 

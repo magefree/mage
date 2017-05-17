@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -23,7 +22,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.*;
 import mage.game.command.CommandObject;
-import mage.game.match.MatchType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
@@ -717,7 +715,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Permanent found = getPermanent(cardName);
         Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
     }
-    
+
     /**
      * Assert whether a permanent is not a specified subtype
      *
@@ -963,41 +961,38 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("message", currentGame.getState().getActivePlayerId(), player.getId());
     }
 
-    
     public Permanent getPermanent(String cardName, UUID controller) {
         Permanent found = null;
         Pattern indexedName = Pattern.compile("^([\\w| ]+):(\\d+)$"); // Ends with <:number>
         Matcher indexedMatcher = indexedName.matcher(cardName);
         int index = 0;
         int count = 0;
-        if(indexedMatcher.matches()) {
-        	cardName = indexedMatcher.group(1);
-        	index = Integer.valueOf(indexedMatcher.group(2));
+        if (indexedMatcher.matches()) {
+            cardName = indexedMatcher.group(1);
+            index = Integer.valueOf(indexedMatcher.group(2));
         }
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName)) {
-            	if (controller == null || permanent.getControllerId().equals(controller)) {
-	            	found = permanent;
-	            	if(count != index) {
-	            		count++;
-	            	}
-            	}
+                if (controller == null || permanent.getControllerId().equals(controller)) {
+                    found = permanent;
+                    if (count != index) {
+                        count++;
+                    }
+                }
             }
         }
         Assert.assertNotNull("Couldn't find a card with specified name: " + cardName, found);
         Assert.assertEquals("Only " + count + " permanents were found and " + cardName + ":" + index + " was requested", index, count);
         return found;
     }
-    
+
     public Permanent getPermanent(String cardName, Player player) {
         return getPermanent(cardName, player.getId());
     }
-    
+
     public Permanent getPermanent(String cardName) {
-    	return getPermanent(cardName, (UUID)null);
+        return getPermanent(cardName, (UUID) null);
     }
-
-
 
     public void playLand(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
         player.addAction(turnNum, step, "activate:Play " + cardName);
@@ -1026,6 +1021,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void rollbackTurns(int turnNum, PhaseStep step, TestPlayer player, int turns) {
         player.addAction(turnNum, step, "playerAction:Rollback" + "$turns=" + turns);
+    }
+
+    /**
+     * The player concedes at the given turn and phase
+     *
+     * @param turnNum
+     * @param step
+     * @param player
+     */
+    public void concede(int turnNum, PhaseStep step, TestPlayer player) {
+        player.addAction(turnNum, step, "playerAction:Concede");
     }
 
     /**
@@ -1063,7 +1069,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack) {
         castSpell(turnNum, step, player, cardName, targetName, spellOnStack, StackClause.WHILE_ON_STACK);
     }
-
 
     /**
      * Spell will only be cast, if a spell / ability with the given name IS or
@@ -1112,7 +1117,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:" + ability + "$targetPlayer=" + target.getName());
     }
 
-    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String ... targetNames) {
+    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String... targetNames) {
         player.addAction(turnNum, step, "activate:" + ability + "$target=" + String.join("^", targetNames));
     }
 

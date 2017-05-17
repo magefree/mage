@@ -36,6 +36,7 @@ import mage.counters.CounterType;
 import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
@@ -43,7 +44,7 @@ import org.mage.test.serverside.base.CardTestMultiPlayerBase;
  *
  * @author LevelX2
  */
-public class PlayerLeftGameTest extends CardTestMultiPlayerBase {
+public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
@@ -229,4 +230,40 @@ public class PlayerLeftGameTest extends CardTestMultiPlayerBase {
 
     }
 
+    /**
+     * I've encountered a case today where someone conceded on their turn. The
+     * remaining phases were went through as normal, but my Luminarch Ascension
+     * did not trigger during the end step.
+     */
+    // Player order: A -> D -> C -> B
+    @Test
+    public void TestTurnEndTrigger() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        // At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension.
+        // {1}{W}: Create a 4/4 white Angel creature token with flying. Activate this ability only if Luminarch Ascension has four or more quest counters on it..
+        addCard(Zone.HAND, playerA, "Luminarch Ascension"); // Enchantment {1}{W}
+
+        addCard(Zone.HAND, playerC, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerC, "Mountain", 1);
+
+        addCard(Zone.HAND, playerD, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerD, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Luminarch Ascension");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Silvercoat Lion");
+        castSpell(2, PhaseStep.BEGIN_COMBAT, playerC, "Lightning Bolt", playerD);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Luminarch Ascension", 1);
+        assertGraveyardCount(playerC, "Lightning Bolt", 1);
+
+        assertLife(playerD, -1);
+        Assert.assertFalse("Player D is no longer in the game", playerD.isInGame());
+
+        assertCounterCount(playerA, "Luminarch Ascension", CounterType.QUEST, 1); // 1 from turn 2
+
+    }
 }

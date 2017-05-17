@@ -31,8 +31,6 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import mage.MageException;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Abilities;
@@ -168,7 +166,7 @@ public class TestPlayer implements Player {
 
     /**
      * @param maxCallsWithoutAction max number of priority passes a player may
-     *                              have for this test (default = 100)
+     * have for this test (default = 100)
      */
     public void setMaxCallsWithoutAction(int maxCallsWithoutAction) {
         this.maxCallsWithoutAction = maxCallsWithoutAction;
@@ -178,32 +176,38 @@ public class TestPlayer implements Player {
         initialTurns = turns;
     }
 
-
     private Permanent findPermanent(FilterPermanent filter, String name, UUID controllerID, Game game) {
         return findPermanent(filter, name, controllerID, game, true);
     }
 
     /**
-     * Finds a permanent based on a general filter an their name and possible index.
+     * Finds a permanent based on a general filter an their name and possible
+     * index.
      *
-     * An index is permitted after the permanent's name to denote their index on the battlefield
-     * Either use name="<permanent>" which will get the first permanent with that name on the battlefield
-     * that meets the filter criteria or name="<permanent>:<index>" to get the named permanent with that index on
-     * the battlefield.
+     * An index is permitted after the permanent's name to denote their index on
+     * the battlefield Either use name="<permanent>" which will get the first
+     * permanent with that name on the battlefield that meets the filter
+     * criteria or name="<permanent>:<index>" to get the named permanent with
+     * that index on the battlefield.
      *
-     * Permanents are zero indexed in the order they entered the battlefield for each controller:
+     * Permanents are zero indexed in the order they entered the battlefield for
+     * each controller:
      *
-     * findPermanent(new AttackingCreatureFilter(), "Human", <controllerID>, <game>)
-     * Will find the first "Human" creature that entered the battlefield under this controller and is attacking.
+     * findPermanent(new AttackingCreatureFilter(), "Human", <controllerID>,
+     * <game>) Will find the first "Human" creature that entered the battlefield
+     * under this controller and is attacking.
      *
-     * findPermanent(new FilterControllerPermanent(), "Fabled Hero:3", <controllerID>, <game>)
-     * Will find the 4th permanent named "Fabled Hero" that entered the battlefield under this controller
+     * findPermanent(new FilterControllerPermanent(), "Fabled Hero:3",
+     * <controllerID>, <game>) Will find the 4th permanent named "Fabled Hero"
+     * that entered the battlefield under this controller
      *
-     * An exception will be thrown if no permanents match the criteria or the index is larger than the number
-     * of permanents found with that name.
+     * An exception will be thrown if no permanents match the criteria or the
+     * index is larger than the number of permanents found with that name.
      *
-     * failOnNotFound boolean controls if this function returns null for a permanent not found on the battlefield. Currently
-     * used only as a workaround for attackers  in selectAttackers() being able to attack multiple times each combat. See issue #3038
+     * failOnNotFound boolean controls if this function returns null for a
+     * permanent not found on the battlefield. Currently used only as a
+     * workaround for attackers in selectAttackers() being able to attack
+     * multiple times each combat. See issue #3038
      */
     private Permanent findPermanent(FilterPermanent filter, String name, UUID controllerID, Game game, boolean failOnNotFound) {
         String filteredName = name;
@@ -217,12 +221,14 @@ public class TestPlayer implements Player {
         filter.add(new NamePredicate(filteredName));
         List<Permanent> allPermanents = game.getBattlefield().getAllActivePermanents(filter, controllerID, game);
         if (allPermanents.isEmpty()) {
-            if (failOnNotFound)
+            if (failOnNotFound) {
                 throw new AssertionError("No permanents found called " + filteredName + " that match the filter criteria \"" + filter.getMessage() + "\"");
+            }
             return null;
         } else if (allPermanents.size() - 1 < index) {
-            if (failOnNotFound)
+            if (failOnNotFound) {
                 throw new AssertionError("Cannot find " + filteredName + ":" + index + " that match the filter criteria \"" + filter.getMessage() + "\"" + ".\nOnly " + allPermanents.size() + " called " + filteredName + " found for this controller(zero indexed).");
+            }
             return null;
         }
         return allPermanents.get(index);
@@ -535,6 +541,10 @@ public class TestPlayer implements Player {
                                 return true;
                             }
                         }
+                        if (groups[0].equals("Concede")) {
+                            game.concede(getId());
+                            actions.remove(action);
+                        }
                     }
                 }
             }
@@ -558,10 +568,10 @@ public class TestPlayer implements Player {
 
     /*
     *  Iterates through each player on the current turn and asserts if they can attack or block legally this turn
-    */
+     */
     private void checkLegalMovesThisTurn(Game game) {
         // Each player is given priority before actual turns start for e.g. leylines and pre-game initialisation
-        if(initialTurns < game.getPlayers().size()) {
+        if (initialTurns < game.getPlayers().size()) {
             initialTurns++;
             return;
         }
@@ -646,7 +656,6 @@ public class TestPlayer implements Player {
             }
         }
     }
-
 
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
@@ -1079,7 +1088,6 @@ public class TestPlayer implements Player {
         }
         return computerPlayer.chooseTarget(outcome, target, source, game);
     }
-
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
@@ -2308,4 +2316,3 @@ public class TestPlayer implements Player {
     }
 
 }
-
