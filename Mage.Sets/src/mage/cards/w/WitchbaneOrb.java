@@ -27,6 +27,7 @@
  */
 package mage.cards.w;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -50,7 +51,7 @@ import mage.players.Player;
 public class WitchbaneOrb extends CardImpl {
 
     public WitchbaneOrb(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // When Witchbane Orb enters the battlefield, destroy all Curses attached to you.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new WitchbaneOrbEffect()));
@@ -83,13 +84,17 @@ class WitchbaneOrbEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (UUID attachmentId: player.getAttachments()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ArrayList<Permanent> toDestroy = new ArrayList<>();
+            for (UUID attachmentId : controller.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
                 if (attachment != null && attachment.getSubtype(game).contains("Curse")) {
-                    attachment.destroy(source.getSourceId(), game, false);
+                    toDestroy.add(attachment);
                 }
+            }
+            for (Permanent curse : toDestroy) {
+                curse.destroy(source.getSourceId(), game, false);
             }
             return true;
         }
