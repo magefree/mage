@@ -94,14 +94,16 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
      * @return
      */
     @Override
-    public boolean definesMana() {
-        return !netMana.isEmpty();
+    public boolean definesMana(Game game) {
+        return !getNetMana(game).isEmpty();
     }
 
     /**
-     * Is it allowed to undo the mana creation.
-     * It's e.g. not allowed if some game revealing information is related (like reveal the top card of the library)
-     * @return 
+     * Is it allowed to undo the mana creation. It's e.g. not allowed if some
+     * game revealing information is related (like reveal the top card of the
+     * library)
+     *
+     * @return
      */
     public boolean isUndoPossible() {
         return undoPossible;

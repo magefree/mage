@@ -73,7 +73,7 @@ public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
     }
 
     @Override
-    public boolean definesMana() {
+    public boolean definesMana(Game game) {
         return true;
     }
 
@@ -169,7 +169,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         for (Permanent land : lands) {
             Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
             for (ActivatedManaAbilityImpl ability : mana) {
-                if (!ability.equals(source) && ability.definesMana()) {
+                if (!ability.equals(source) && ability.definesMana(game)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         types.add(netMana);
                     }

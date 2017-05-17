@@ -212,7 +212,7 @@ class ReflectingPoolEffect extends ManaEffect {
             Abilities<Ability> manaAbilities = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
             for (Ability basicAbility : manaAbilities) {
                 ManaAbility ability = (ManaAbility) basicAbility;
-                if (!ability.equals(source) && ability.definesMana()) {
+                if (!ability.equals(source) && ability.definesMana(game)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         types.add(netMana);
                         if (netMana.getAny() > 0) {

@@ -78,7 +78,7 @@ public class ConditionalAnyColorManaAbility extends ActivatedManaAbilityImpl {
     }
 
     @Override
-    public boolean definesMana() {
+    public boolean definesMana(Game game) {
         return true;
     }
 
