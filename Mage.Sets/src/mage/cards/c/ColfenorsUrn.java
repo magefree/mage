@@ -27,17 +27,18 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -48,8 +49,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  *
@@ -67,7 +66,7 @@ public class ColfenorsUrn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a creature with toughness 4 or greater is put into your graveyard from the battlefield, you may exile it.
-        this.addAbility(new DiesCreatureTriggeredAbility(new ExileTargetForSourceEffect(), true, filter, true));
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new ExileTargetForSourceEffect(), true, filter, true, true));
 
         // At the beginning of the end step, if three or more cards have been exiled with Colfenor's Urn, sacrifice it. If you do, return those cards to the battlefield under their owner's control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ColfenorsUrnEffect(), TargetController.ANY, new ColfenorsUrnCondition(), false));
