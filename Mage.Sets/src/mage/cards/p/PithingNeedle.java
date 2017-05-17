@@ -27,6 +27,8 @@
  */
 package mage.cards.p;
 
+import java.util.Optional;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -39,9 +41,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-import java.util.Optional;
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth, nox
@@ -49,7 +48,7 @@ import java.util.UUID;
 public class PithingNeedle extends CardImpl {
 
     public PithingNeedle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // As Pithing Needle enters the battlefield, name a card.
         this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL)));
@@ -99,7 +98,8 @@ class PithingNeedleEffect extends ContinuousRuleModifyingEffectImpl {
         MageObject object = game.getObject(event.getSourceId());
         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
         if (ability.isPresent() && object != null) {
-            if (ability.get().getAbilityType() != AbilityType.MANA
+            if (game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId()) // controller in range
+                    && ability.get().getAbilityType() != AbilityType.MANA
                     && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                 return true;
             }

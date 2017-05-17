@@ -36,6 +36,7 @@ import mage.counters.CounterType;
 import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
@@ -297,5 +298,76 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         Assert.assertFalse("Player D is no longer in the game", playerD.isInGame());
 
         assertCounterCount(playerA, "Luminarch Ascension", CounterType.QUEST, 1); // 1 from turn 2
+    }
+
+    /**
+     * Pithing Needle keeps the named card's abilities disabled even after the
+     * player controlling the Needle loses the game.
+     *
+     * I saw it happen during a Commander game. A player cast Pithing Needle
+     * targeting my Proteus Staff. After I killed him, I still couldn't activate
+     * the Staff.
+     */
+    @Test
+    public void TestPithingNeedle() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        // As Pithing Needle enters the battlefield, name a card.
+        // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
+        addCard(Zone.HAND, playerA, "Pithing Needle"); // Artifact {1}
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.LIBRARY, playerA, "Pillarfield Ox", 1);
+
+        addCard(Zone.BATTLEFIELD, playerD, "Island", 3);
+        // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the
+        // top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield and the
+        // rest on the bottom of his or her library in any order. Activate this ability only any time you could cast a sorcery.
+        addCard(Zone.BATTLEFIELD, playerD, "Proteus Staff", 1);
+
+        addCard(Zone.BATTLEFIELD, playerD, "Eager Cadet", 1);
+        addCard(Zone.LIBRARY, playerD, "Storm Crow", 2);
+
+        addCard(Zone.BATTLEFIELD, playerC, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerC, "Proteus Staff", 1);
+        addCard(Zone.BATTLEFIELD, playerC, "Wall of Air", 1);
+        addCard(Zone.LIBRARY, playerC, "Wind Drake", 2);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Proteus Staff", 1);
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pithing Needle");
+        setChoice(playerA, "Proteus Staff");
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerD, "{2}{U}", "Silvercoat Lion"); // not allowed
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerC, "{2}{U}", "Eager Cadet"); // allowed because Needle out of range
+        concede(3, PhaseStep.POSTCOMBAT_MAIN, playerA);
+
+        activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{U}", "Wall of Air"); // allowed because Needle lost game
+
+        setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, 0);
+
+        assertLife(playerA, 2);
+        Assert.assertFalse("Player A is no longer in the game", playerA.isInGame());
+
+        Permanent staffPlayerD = getPermanent("Proteus Staff", playerD);
+        Assert.assertFalse("Staff of player D could not be used", staffPlayerD.isTapped());
+
+        assertPermanentCount(playerD, "Eager Cadet", 0);
+        assertPermanentCount(playerD, "Storm Crow", 1);
+
+        Permanent staffPlayerC = getPermanent("Proteus Staff", playerC);
+        Assert.assertTrue("Staff of player C could be used", staffPlayerC.isTapped());
+
+        assertPermanentCount(playerC, "Wall of Air", 0);
+        assertPermanentCount(playerC, "Wind Drake", 1);
+
+        Permanent staffPlayerB = getPermanent("Proteus Staff", playerB);
+        Assert.assertTrue("Staff of player B could be used", staffPlayerB.isTapped());
+
     }
 }
