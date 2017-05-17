@@ -1,13 +1,5 @@
 package mage.server.util;
 
-import mage.cards.Card;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.RandomUtil;
-
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
@@ -16,7 +8,13 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.Card;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  * @author nantuko
@@ -73,7 +71,7 @@ public final class SystemUtil {
 
                     Optional<Player> playerOptional = findPlayer(game, nickname);
                     if (!playerOptional.isPresent()) {
-                        logger.warn("Was skipped: " + line);
+                        logger.warn("Was skipped because no player with that name: " + line);
                         continue;
                     }
                     Player player = playerOptional.get();
@@ -181,8 +179,8 @@ public final class SystemUtil {
     /**
      * Get a diff between two dates
      *
-     * @param date1    the oldest date
-     * @param date2    the newest date
+     * @param date1 the oldest date
+     * @param date2 the newest date
      * @param timeUnit the unit in which you want the diff
      * @return the diff value, in the provided unit
      */
