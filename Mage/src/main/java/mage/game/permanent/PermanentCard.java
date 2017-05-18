@@ -116,7 +116,7 @@ public class PermanentCard extends PermanentImpl {
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
         this.color = card.getColor(null).copy();
-        this.frameColor = card.getFrameColor(null).copy();
+        this.frameColor = card.getFrameColor(game).copy();
         this.frameStyle = card.getFrameStyle();
         this.manaCost = card.getManaCost().copy();
         if (card instanceof PermanentCard) {

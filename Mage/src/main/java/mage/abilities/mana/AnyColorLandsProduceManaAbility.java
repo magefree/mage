@@ -29,8 +29,6 @@ package mage.abilities.mana;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -163,7 +161,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
     }
 
     private Mana getManaTypes(Game game, Ability source) {
-        Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "needed to identify endless loop causing cards: {0}", source.getSourceObject(game).getName());
+        // Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "needed to identify endless loop causing cards: {0}", source.getSourceObject(game).getName());
         List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         Mana types = new Mana();
         for (Permanent land : lands) {

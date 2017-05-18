@@ -126,7 +126,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 2 red mana", "{R}{R}{R}", options.get(0).toString());
+        Assert.assertEquals("Player should be able to create 3 red mana", "{R}{R}{R}", options.get(0).toString());
 
     }
 
