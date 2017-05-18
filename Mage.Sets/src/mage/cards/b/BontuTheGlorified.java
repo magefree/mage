@@ -137,7 +137,7 @@ class BontuTheGlorifiedRestrictionEffect extends RestrictionEffect {
             CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get(CreaturesDiedWatcher.class.getSimpleName());
             if (controller != null
                     && watcher != null) {
-                return (watcher.getAmountOfCreaturesDiesThisTurn(controller.getId()) == 0);
+                return (watcher.getAmountOfCreaturesDiedThisTurnByController(controller.getId()) == 0);
             }
             return true;
         }  // do not apply to other creatures.

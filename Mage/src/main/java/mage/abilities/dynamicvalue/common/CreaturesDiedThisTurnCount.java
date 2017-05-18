@@ -42,7 +42,7 @@ public class CreaturesDiedThisTurnCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get(CreaturesDiedWatcher.class.getSimpleName());
         if (watcher != null) {
-            return watcher.getAmountOfCreaturesDiesThisTurn();
+            return watcher.getAmountOfCreaturesDiedThisTurn();
         }
         return 0;
     }
