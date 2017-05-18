@@ -34,6 +34,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -57,7 +58,7 @@ public class GatecreeperVine extends CardImpl {
                 Predicates.and(
                          new CardTypePredicate(CardType.LAND),
                          new SupertypePredicate(SuperType.BASIC)),
-                new SubtypePredicate("Gate")));
+                new SubtypePredicate(SubType.GATE)));
     }
 
     public GatecreeperVine(UUID ownerId, CardSetInfo setInfo) {

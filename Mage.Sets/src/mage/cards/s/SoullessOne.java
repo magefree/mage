@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -80,8 +81,8 @@ class SoullessOneDynamicCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         FilterPermanent zombiesBattlefield = new FilterPermanent("Zombies on the battlefield");
         FilterCard zombiesInGraveyard = new FilterCard("Zombie cards in all graveyards");
-        zombiesBattlefield.add(new SubtypePredicate("Zombie"));
-        zombiesInGraveyard.add(new SubtypePredicate("Zombie"));
+        zombiesBattlefield.add(new SubtypePredicate(SubType.ZOMBIE));
+        zombiesInGraveyard.add(new SubtypePredicate(SubType.ZOMBIE));
         
         int count = game.getBattlefield().count(zombiesBattlefield, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
         for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {

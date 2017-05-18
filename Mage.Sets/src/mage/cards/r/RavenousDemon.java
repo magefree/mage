@@ -38,6 +38,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.a.ArchdemonOfGreed;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ public class RavenousDemon extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public RavenousDemon(UUID ownerId, CardSetInfo setInfo) {

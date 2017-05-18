@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,7 +49,7 @@ public class EmrakulsInfluence extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("Eldrazi creature spell with converted mana cost 7 or greater");
 
     static {
-        filterSpell.add(new SubtypePredicate("Eldrazi"));
+        filterSpell.add(new SubtypePredicate( SubType.ELDRAZI));
         filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }
 

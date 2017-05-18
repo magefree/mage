@@ -35,6 +35,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +51,9 @@ public class SlayerOfTheWicked extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Vampire"),
-                new SubtypePredicate("Werewolf"),
-                new SubtypePredicate("Zombie")));
+                new SubtypePredicate(SubType.VAMPIRE),
+                new SubtypePredicate(SubType.WEREWOLF),
+                new SubtypePredicate(SubType.WEREWOLF)));
     }
 
     public SlayerOfTheWicked(UUID ownerId, CardSetInfo setInfo) {

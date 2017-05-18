@@ -29,6 +29,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -50,7 +51,7 @@ public class IndebtedSamurai extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Samurai you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Samurai"));
+        filter.add(new SubtypePredicate(SubType.SAMURAI));
     }
 
     public IndebtedSamurai(UUID ownerId, CardSetInfo setInfo) {

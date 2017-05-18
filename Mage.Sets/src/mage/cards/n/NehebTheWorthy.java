@@ -30,7 +30,7 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
+import mage.constants.*;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -42,11 +42,6 @@ import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -60,7 +55,7 @@ public class NehebTheWorthy extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaurs");
 
     static {
-        filter.add(new SubtypePredicate("Minotaur"));
+        filter.add(new SubtypePredicate(SubType.MINOTAUR));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

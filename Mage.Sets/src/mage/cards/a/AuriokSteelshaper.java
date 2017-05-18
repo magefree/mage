@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -56,8 +57,8 @@ public class AuriokSteelshaper extends CardImpl {
 
     static {
         soldiersOrKnights.add(Predicates.or(
-                new SubtypePredicate("Soldier"),
-                new SubtypePredicate("Knight")
+                new SubtypePredicate(SubType.SOLDIER),
+                new SubtypePredicate(SubType.KNIGHT)
         ));
     }
 

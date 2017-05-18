@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,8 +57,8 @@ public class FigureOfDestiny extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent();
     static {
-        filter2.add(new SubtypePredicate("Spirit"));
-        filter3.add(new SubtypePredicate("Warrior"));
+        filter2.add(new SubtypePredicate(SubType.SPIRIT));
+        filter3.add(new SubtypePredicate(SubType.WARRIOR));
     }
 
     public FigureOfDestiny(UUID ownerId, CardSetInfo setInfo) {

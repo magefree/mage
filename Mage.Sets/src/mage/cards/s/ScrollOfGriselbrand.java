@@ -40,6 +40,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,7 +54,7 @@ public class ScrollOfGriselbrand extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Demon"));
+        filter.add(new SubtypePredicate(SubType.DEMON));
     }
 
     public ScrollOfGriselbrand(UUID ownerId, CardSetInfo setInfo) {

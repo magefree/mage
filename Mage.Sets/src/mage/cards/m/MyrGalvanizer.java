@@ -30,9 +30,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,7 +41,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -57,7 +54,7 @@ public class MyrGalvanizer extends CardImpl {
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr creatures");
 
     static {
-        filter.add(new SubtypePredicate("Myr"));
+        filter.add(new SubtypePredicate(SubType.MYR));
     }
 
     public MyrGalvanizer (UUID ownerId, CardSetInfo setInfo) {

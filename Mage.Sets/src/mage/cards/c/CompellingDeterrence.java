@@ -33,6 +33,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -91,7 +92,7 @@ class CompellingDeterrenceEffect extends OneShotEffect {
         if (controller != null && player != null) {
             player.moveCards(target, Zone.HAND, source, game);
             FilterPermanent FILTER = new FilterPermanent();
-            FILTER.add(new SubtypePredicate("Zombie"));
+            FILTER.add(new SubtypePredicate(SubType.ZOMBIE));
             if (game.getState().getBattlefield().countAll(FILTER, controller.getId(), game) > 0) {
                 player.discard(1, false, source, game);
             }

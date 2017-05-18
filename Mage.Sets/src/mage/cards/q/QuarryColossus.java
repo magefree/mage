@@ -41,6 +41,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -100,7 +101,7 @@ class QuarryColossusReturnLibraryEffect extends OneShotEffect {
         if (permanent != null && controller != null) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {
-                int plains = game.getBattlefield().countAll(new FilterPermanent("Plains", "Plains you control"), source.getControllerId(), game);
+                int plains = game.getBattlefield().countAll(new FilterPermanent(SubType.PLAINS, "Plains you control"), source.getControllerId(), game);
                 int xValue = Math.min(plains, owner.getLibrary().size());
                 Cards cards = new CardsImpl();
                 Deque<UUID> cardIds = new LinkedList<>();

@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,8 +58,8 @@ public class AurochsHerd extends CardImpl {
     private static final FilterAttackingCreature filter2 = new FilterAttackingCreature("other attacking Aurochs");
 
     static {
-        filter1.add(new SubtypePredicate("Aurochs"));
-        filter2.add(new SubtypePredicate("Aurochs"));
+        filter1.add(new SubtypePredicate(SubType.AUROCHS));
+        filter2.add(new SubtypePredicate(SubType.AUROCHS));
         filter2.add(new AnotherPredicate());
     }
 

@@ -38,10 +38,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,11 +54,11 @@ import java.util.UUID;
  */
 public class AmbushCommander extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf", "an Elf");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.ELF, "an Elf");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Forests you control");
 
     static {
-        filter2.add(new SubtypePredicate("Forest"));
+        filter2.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public AmbushCommander(UUID ownerId, CardSetInfo setInfo) {

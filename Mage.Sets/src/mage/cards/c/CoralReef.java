@@ -41,6 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -65,7 +66,7 @@ public class CoralReef extends CardImpl {
     private static final FilterControlledCreaturePermanent untappedBlueCreatureFilter = new FilterControlledCreaturePermanent("an untapped blue creature you control");
     
     static {
-        islandFilter.add(new SubtypePredicate("Island"));
+        islandFilter.add(new SubtypePredicate(SubType.ISLAND));
         untappedBlueCreatureFilter.add(Predicates.not(new TappedPredicate()));
         untappedBlueCreatureFilter.add(new ColorPredicate(ObjectColor.BLUE));
     }

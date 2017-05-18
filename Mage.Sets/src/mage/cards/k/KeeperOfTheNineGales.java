@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,7 +57,7 @@ public class KeeperOfTheNineGales extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Bird"));
+        filter.add(new SubtypePredicate(SubType.BIRD));
     }
 
     public KeeperOfTheNineGales(UUID ownerId, CardSetInfo setInfo) {

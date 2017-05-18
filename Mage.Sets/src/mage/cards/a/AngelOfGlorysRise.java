@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -83,8 +84,8 @@ class AngelOfGlorysRiseEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filterZombie = new FilterCreaturePermanent();
 
     static {
-        filterZombie.add(new SubtypePredicate("Zombie"));
-        filterHuman.add(new SubtypePredicate("Human"));
+        filterZombie.add(new SubtypePredicate(SubType.ZOMBIE));
+        filterHuman.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public AngelOfGlorysRiseEffect() {

@@ -37,6 +37,7 @@ import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,8 +52,8 @@ public class Submerge extends CardImpl {
     private static final FilterPermanent filterIsland = new FilterPermanent();
 
     static {
-        filterForest.add(new SubtypePredicate(("Forest")));
-        filterIsland.add(new SubtypePredicate(("Island")));
+        filterForest.add(new SubtypePredicate((SubType.FOREST)));
+        filterIsland.add(new SubtypePredicate((SubType.ISLAND)));
     }
     
     public Submerge(UUID ownerId, CardSetInfo setInfo) {

@@ -51,7 +51,7 @@ public class ArmamentMaster extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Kor creatures you control");
 
     static {
-        filter.add(new SubtypePredicate("Kor"));
+        filter.add(new SubtypePredicate(SubType.KOR));
     }
 
     public ArmamentMaster(UUID ownerId, CardSetInfo setInfo) {
@@ -80,7 +80,7 @@ class ArmamentMasterEffect extends ContinuousEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Kor creatures you control");
 
     static {
-        filter.add(new SubtypePredicate("Kor"));
+        filter.add(new SubtypePredicate(SubType.KOR));
     }
 
     public ArmamentMasterEffect() {

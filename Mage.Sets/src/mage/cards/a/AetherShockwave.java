@@ -32,6 +32,7 @@ import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,8 +48,8 @@ public class AetherShockwave extends CardImpl {
     private static final FilterCreaturePermanent filterSpirit = new FilterCreaturePermanent("Spirits");
     private static final FilterCreaturePermanent filterNonSpirit = new FilterCreaturePermanent("non-Spirit creatures");
     static {
-        filterSpirit.add(new SubtypePredicate("Spirit"));
-        filterNonSpirit.add(Predicates.not(new SubtypePredicate("Spirit")));
+        filterSpirit.add(new SubtypePredicate(SubType.SPIRIT));
+        filterNonSpirit.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
     }
 
     public AetherShockwave(UUID ownerId, CardSetInfo setInfo) {

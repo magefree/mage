@@ -99,7 +99,7 @@ class GideonOfTheTrialsCantLoseEffect extends ContinuousRuleModifyingEffectImpl 
     private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("a Gideon planeswalker");
 
     static {
-        filter.add(new SubtypePredicate("Gideon"));
+        filter.add(new SubtypePredicate(SubType.GIDEON));
     }
 
     public GideonOfTheTrialsCantLoseEffect() {

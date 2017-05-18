@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -88,7 +89,7 @@ class EmrakulsEvangelCost extends CostImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(Predicates.not(new SubtypePredicate("Eldrazi")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.ELDRAZI)));
     }
 
     private int numSacrificed = 1; // always sacrifices self at least

@@ -33,6 +33,7 @@ import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
@@ -45,7 +46,7 @@ public class Sideswipe extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Arcane spell");
     static {
-        filter.add(new SubtypePredicate("Arcane"));
+        filter.add(new SubtypePredicate(SubType.ARCANE));
     }
 
     public Sideswipe(UUID ownerId, CardSetInfo setInfo) {

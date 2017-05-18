@@ -27,12 +27,14 @@
  */
 package mage.cards.p;
 
+import java.util.EnumSet;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 
 /**
  *
@@ -45,7 +47,7 @@ public class PollutedDelta extends CardImpl {
         this.frameColor = new ObjectColor("UB");
 
         // {tap}, Pay 1 life, Sacrifice Polluted Delta: Search your library for an Island or Swamp card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(new String[]{"Island", "Swamp"}));
+        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.ISLAND, SubType.SWAMP)));
     }
 
     public PollutedDelta(final PollutedDelta card) {

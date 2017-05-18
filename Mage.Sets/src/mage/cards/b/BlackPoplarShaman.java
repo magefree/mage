@@ -35,6 +35,7 @@ import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ public class BlackPoplarShaman extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Treefolk");
 
     static {
-        filter.add(new SubtypePredicate("Treefolk"));
+        filter.add(new SubtypePredicate(SubType.TREEFOLK));
     }
 
     public BlackPoplarShaman(UUID ownerId, CardSetInfo setInfo) {

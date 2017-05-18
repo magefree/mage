@@ -72,7 +72,7 @@ public class DragonTempest extends CardImpl {
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DragonTempestDamageEffect(),
-                new FilterCreaturePermanent("Dragon", "a Dragon"),
+                new FilterCreaturePermanent(SubType.DRAGON, "a Dragon"),
                 false,
                 SetTargetPointer.PERMANENT,
                 ""
@@ -97,7 +97,7 @@ class DragonTempestDamageEffect extends OneShotEffect {
     private static final FilterControlledPermanent dragonFilter = new FilterControlledPermanent();
 
     static {
-        dragonFilter.add(new SubtypePredicate("Dragon"));
+        dragonFilter.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     public DragonTempestDamageEffect() {

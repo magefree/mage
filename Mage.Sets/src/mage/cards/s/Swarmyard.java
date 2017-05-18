@@ -36,6 +36,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -52,10 +53,10 @@ public class Swarmyard extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-            new SubtypePredicate("Insect"),
-            new SubtypePredicate("Rat"),
-            new SubtypePredicate("Spider"),
-            new SubtypePredicate("Squirrel")
+            new SubtypePredicate(SubType.INSECT),
+            new SubtypePredicate(SubType.RAT),
+            new SubtypePredicate(SubType.SPIDER),
+            new SubtypePredicate(SubType.SQUIRREL)
         ));
     }
 

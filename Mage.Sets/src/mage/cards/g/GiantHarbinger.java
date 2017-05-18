@@ -33,6 +33,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -47,7 +48,7 @@ public class GiantHarbinger extends CardImpl {
     
     public static final FilterCard filter = new FilterCard("Giant card");
     static {
-        filter.add(new SubtypePredicate("Giant"));
+        filter.add(new SubtypePredicate(SubType.GIANT));
     }
 
     public GiantHarbinger(UUID ownerId, CardSetInfo setInfo) {

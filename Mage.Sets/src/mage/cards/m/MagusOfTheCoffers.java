@@ -38,6 +38,7 @@ import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,7 +51,7 @@ public class MagusOfTheCoffers extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamp you control");
 
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public MagusOfTheCoffers(UUID ownerId, CardSetInfo setInfo) {

@@ -59,7 +59,7 @@ public class GiltLeafArchdruid extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("a Druid spell");
 
     static {
-        filterSpell.add(new SubtypePredicate("Druid"));
+        filterSpell.add(new SubtypePredicate(SubType.DRUID));
     }
 
     public GiltLeafArchdruid(UUID ownerId, CardSetInfo setInfo) {
@@ -74,7 +74,7 @@ public class GiltLeafArchdruid extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filterSpell, true));
 
         // Tap seven untapped Druids you control: Gain control of all lands target player controls.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlAllLandsEffect(Duration.EndOfGame), new TapTargetCost(new TargetControlledCreaturePermanent(7, 7, new FilterControlledCreaturePermanent("Druid", "Druids you control"), true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlAllLandsEffect(Duration.EndOfGame), new TapTargetCost(new TargetControlledCreaturePermanent(7, 7, new FilterControlledCreaturePermanent(SubType.DRUID, "Druids you control"), true)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

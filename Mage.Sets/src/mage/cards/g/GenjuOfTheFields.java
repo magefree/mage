@@ -55,7 +55,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActiv
  */
 public class GenjuOfTheFields extends CardImpl {
 
-    private static final FilterLandPermanent FILTER = new FilterLandPermanent("Plains", "Plains");
+    private static final FilterLandPermanent FILTER = new FilterLandPermanent(SubType.PLAINS, "Plains");
 
     public GenjuOfTheFields(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

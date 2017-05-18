@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,7 +53,7 @@ public class AlphaKavu extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kavu creature");
 
     static {
-        filter.add(new SubtypePredicate("Kavu"));
+        filter.add(new SubtypePredicate(SubType.KAVU));
     }
 
     public AlphaKavu(UUID ownerId, CardSetInfo setInfo) {

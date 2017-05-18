@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -52,7 +53,7 @@ public class CracklingPerimeter extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Gate you control");
 
     static {
-        filter.add(new SubtypePredicate("Gate"));
+        filter.add(new SubtypePredicate(SubType.GATE));
         filter.add(Predicates.not(new TappedPredicate()));
     }
 

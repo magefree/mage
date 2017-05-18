@@ -30,6 +30,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,7 +50,7 @@ public class TreefolkSeedlings extends CardImpl {
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
     static {
-        filterLands.add(new SubtypePredicate("Forest"));
+        filterLands.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public TreefolkSeedlings(UUID ownerId, CardSetInfo setInfo) {

@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.constants.ComparisonType;
+import mage.constants.*;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -38,9 +38,6 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.token.ZombieToken;
 
@@ -59,7 +56,7 @@ public class Sarcomancy extends CardImpl {
         // At the beginning of your upkeep, if there are no Zombies on the battlefield, Sarcomancy deals 1 damage to you.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(1), TargetController.YOU, false),
-                new PermanentsOnTheBattlefieldCondition(new FilterPermanent("Zombie", "Zombies"), ComparisonType.EQUAL_TO, 0, false),
+                new PermanentsOnTheBattlefieldCondition(new FilterPermanent(SubType.ZOMBIE, "Zombies"), ComparisonType.EQUAL_TO, 0, false),
                 "At the beginning of your upkeep, if there are no Zombies on the battlefield, {this} deals 1 damage to you."));        
     }
 

@@ -65,7 +65,7 @@ public class EquestrianSkill extends CardImpl {
         // As long as enchanted creature is a Human, it has trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield),
-                new EnchantedCreatureSubtypeCondition("Human"),
+                new EnchantedCreatureSubtypeCondition(SubType.HUMAN),
                 "As long as enchanted creature is a Human, it has trample"
         )));
     }

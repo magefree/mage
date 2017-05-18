@@ -41,6 +41,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -98,7 +99,7 @@ class HarshMercyEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 Choice typeChoice = new ChoiceImpl(true);
                 typeChoice.setMessage("Choose a creature type");
-                typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
+                typeChoice.setChoices(SubType.getCreatureTypes(false));
                 while (!player.choose(Outcome.DestroyPermanent, typeChoice, game)) {
                     if (!player.canRespond()) {
                         continue PlayerIteration;
@@ -113,7 +114,7 @@ class HarshMercyEffect extends OneShotEffect {
 
             FilterPermanent filter = new FilterCreaturePermanent("creatures");
             for (String type : chosenTypes) {
-                filter.add(Predicates.not(new SubtypePredicate(type)));
+                filter.add(Predicates.not(new SubtypePredicate(SubType.byDescription(type))));
             }
 
             return new DestroyAllEffect(filter, true).apply(game, source);

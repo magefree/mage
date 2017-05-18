@@ -36,6 +36,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
@@ -48,7 +49,7 @@ public class SecludedGlen extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Faerie from your hand");
     static {
-        filter.add(new SubtypePredicate("Faerie"));
+        filter.add(new SubtypePredicate(SubType.FAERIE));
     }
 
     public SecludedGlen(UUID ownerId, CardSetInfo setInfo) {

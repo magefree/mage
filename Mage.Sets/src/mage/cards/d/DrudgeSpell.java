@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -57,7 +58,7 @@ public class DrudgeSpell extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Skeleton tokens");
 
     static {
-        filter.add(new SubtypePredicate("Skeleton"));
+        filter.add(new SubtypePredicate(SubType.SKELETON));
         filter.add(new TokenPredicate());
     }
 

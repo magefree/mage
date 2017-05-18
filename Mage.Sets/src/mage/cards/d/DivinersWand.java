@@ -58,7 +58,7 @@ public class DivinersWand extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Wizard creature");
     static {
-        filter.add(new SubtypePredicate("Wizard"));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
     }
 
     public DivinersWand(UUID ownerId, CardSetInfo setInfo) {

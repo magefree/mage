@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
@@ -57,7 +58,7 @@ public class SagesReverie extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("aura you control that's attached to a creature");
     static {
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
         filter.add(new SagesReveriePredicate());
     }
 

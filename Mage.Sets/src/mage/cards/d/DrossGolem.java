@@ -33,6 +33,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ public class DrossGolem extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Affinity for Swamps
-        this.addAbility(new AffinityForLandTypeAbility("Swamp", "Swamps"));
+        this.addAbility(new AffinityForLandTypeAbility(SubType.SWAMP, "Swamps"));
         
         // Fear
         this.addAbility(FearAbility.getInstance());

@@ -30,6 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -54,7 +55,7 @@ public class MishrasFactory extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Assembly-Worker creature");
 
     static {
-        filter.add(new SubtypePredicate("Assembly-Worker"));
+        filter.add(new SubtypePredicate(SubType.ASSEMBLY_WORKER));
     }
 
     public MishrasFactory(UUID ownerId, CardSetInfo setInfo) {

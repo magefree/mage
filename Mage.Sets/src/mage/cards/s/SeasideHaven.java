@@ -38,6 +38,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,7 +53,7 @@ public class SeasideHaven extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Bird");
 
     static{
-        filter.add(new SubtypePredicate("Bird"));
+        filter.add(new SubtypePredicate(SubType.BIRD));
     }
 
     public SeasideHaven(UUID ownerId, CardSetInfo setInfo) {

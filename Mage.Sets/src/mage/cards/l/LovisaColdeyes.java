@@ -52,7 +52,7 @@ public class LovisaColdeyes extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that's a Barbarian, a Warrior, or a Berserker");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.BARBARION), new SubtypePredicate(SubType.WARRIOR), new SubtypePredicate(SubType.BERSERKER)));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.BARBARIAN), new SubtypePredicate(SubType.WARRIOR), new SubtypePredicate(SubType.BERSERKER)));
     }
 
     public LovisaColdeyes(UUID ownerId, CardSetInfo setInfo) {

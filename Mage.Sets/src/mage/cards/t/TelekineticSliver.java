@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
@@ -49,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class TelekineticSliver extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("Sliver", "All Slivers");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
     public TelekineticSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

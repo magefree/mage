@@ -40,6 +40,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,7 +55,7 @@ public class SulfurFalls extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Island"), new SubtypePredicate("Mountain")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.ISLAND), new SubtypePredicate(SubType.MOUNTAIN)));
     }
 
     public SulfurFalls(UUID ownerId, CardSetInfo setInfo) {

@@ -30,6 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -51,7 +52,7 @@ public class SerpentOfTheEndlessSea extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands you control");
 
     static {
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     public SerpentOfTheEndlessSea(UUID ownerId, CardSetInfo setInfo) {
@@ -64,7 +65,7 @@ public class SerpentOfTheEndlessSea extends CardImpl {
         // Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         // Serpent of the Endless Sea can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
     public SerpentOfTheEndlessSea(final SerpentOfTheEndlessSea card) {

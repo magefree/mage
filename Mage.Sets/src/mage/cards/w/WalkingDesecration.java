@@ -42,10 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -97,7 +94,7 @@ class WalkingDesecrationEffect extends OneShotEffect {
         if (player != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
+            typeChoice.setChoices(SubType.getCreatureTypes(false));
             while (!player.choose(outcome, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;
@@ -107,7 +104,7 @@ class WalkingDesecrationEffect extends OneShotEffect {
                 game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
             }
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new SubtypePredicate(typeChoice.getChoice()));
+            filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             RequirementEffect effect = new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn);
             game.addEffect(effect, source);
             return true;

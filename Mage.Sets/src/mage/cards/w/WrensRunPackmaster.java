@@ -39,10 +39,7 @@ import mage.abilities.keyword.ChampionAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -69,7 +66,7 @@ public class WrensRunPackmaster extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Champion an Elf
-        this.addAbility(new ChampionAbility(this, "Elf", false));
+        this.addAbility(new ChampionAbility(this, SubType.ELF, false));
         
         // {2}{G}: Create a 2/2 green Wolf creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken("LRW")), new ManaCostsImpl<>("{2}{G}")));

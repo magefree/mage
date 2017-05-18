@@ -69,7 +69,7 @@ public class GhostflameSliver extends CardImpl {
 
 class GhostflameSliverEffect extends ContinuousEffectImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("Sliver", "All Slivers");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
     private static ObjectColor colorless = new ObjectColor();
 

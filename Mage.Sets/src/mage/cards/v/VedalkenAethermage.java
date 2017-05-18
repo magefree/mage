@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,8 +54,8 @@ public class VedalkenAethermage extends CardImpl {
     private static final FilterCard filter2 = new FilterCard("Wizard");
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
-        filter2.add(new SubtypePredicate("Wizard"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter2.add(new SubtypePredicate(SubType.WIZARD));
     }
     
     public VedalkenAethermage(UUID ownerId, CardSetInfo setInfo) {

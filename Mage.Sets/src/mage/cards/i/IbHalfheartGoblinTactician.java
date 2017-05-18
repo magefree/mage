@@ -62,8 +62,8 @@ public class IbHalfheartGoblinTactician extends CardImpl {
     private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent("another Goblin you control");
 
     static {
-        filter.add(new SubtypePredicate("Mountain"));
-        filterGoblin.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filterGoblin.add(new SubtypePredicate(SubType.GOBLIN));
         filterGoblin.add(new AnotherPredicate());
         filterGoblin.add(new ControllerPredicate(TargetController.YOU));
     }

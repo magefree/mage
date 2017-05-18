@@ -49,7 +49,7 @@ public class MaraudingKnight extends CardImpl {
 
     private static final FilterLandPermanent plainsFilter = new FilterLandPermanent("Plains your opponent controls");
     static {
-      plainsFilter.add(new SubtypePredicate("Plains"));
+      plainsFilter.add(new SubtypePredicate(SubType.PLAINS));
       plainsFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

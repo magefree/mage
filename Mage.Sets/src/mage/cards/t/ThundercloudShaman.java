@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -52,8 +53,8 @@ public class ThundercloudShaman extends CardImpl {
     private static final FilterCreaturePermanent filterNonGiants = new FilterCreaturePermanent("non-Giant creature");
     static {
         filterGiants.add(new ControllerPredicate(TargetController.YOU));
-        filterGiants.add(new SubtypePredicate("Giant"));
-        filterNonGiants.add(Predicates.not(new SubtypePredicate("Giant")));
+        filterGiants.add(new SubtypePredicate(SubType.GIANT));
+        filterNonGiants.add(Predicates.not(new SubtypePredicate(SubType.GIANT)));
     }
 
     public ThundercloudShaman(UUID ownerId, CardSetInfo setInfo) {

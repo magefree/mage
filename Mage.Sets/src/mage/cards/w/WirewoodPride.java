@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,7 +48,7 @@ public class WirewoodPride extends CardImpl {
 
     private static final FilterCreaturePermanent elfCount = new FilterCreaturePermanent("Elves");
     static {
-        elfCount.add(new SubtypePredicate("Elf"));
+        elfCount.add(new SubtypePredicate(SubType.ELF));
     }
     
     public WirewoodPride(UUID ownerId, CardSetInfo setInfo) {

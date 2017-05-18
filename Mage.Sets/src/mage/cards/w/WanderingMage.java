@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,8 +63,8 @@ public class WanderingMage extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Cleric"),
-                new SubtypePredicate("Wizard")));
+                new SubtypePredicate(SubType.CLERIC),
+                new SubtypePredicate(SubType.WIZARD)));
     }
 
     public WanderingMage(UUID ownerId, CardSetInfo setInfo) {

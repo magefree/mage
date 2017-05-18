@@ -38,6 +38,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -52,7 +53,7 @@ public class SkirkVolcanist extends CardImpl {
     private static final FilterControlledLandPermanent filterSacrifice = new FilterControlledLandPermanent("two Mountains");
 
     static {
-        filterSacrifice.add(new SubtypePredicate("Mountain"));
+        filterSacrifice.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public SkirkVolcanist(UUID ownerId, CardSetInfo setInfo) {

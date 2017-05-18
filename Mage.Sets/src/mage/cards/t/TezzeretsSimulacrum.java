@@ -38,6 +38,7 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -58,7 +59,7 @@ public class TezzeretsSimulacrum extends CardImpl {
 
         // {T}: Target opponent loses 1 life. If you control a Tezzeret planeswalker, that player loses 3 life instead.
         FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent();
-        filter.add(new SubtypePredicate("Tezzeret"));
+        filter.add(new SubtypePredicate(SubType.TEZZERET));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ConditionalOneShotEffect(new LoseLifeTargetEffect(3), new LoseLifeTargetEffect(1),
                         new PermanentsOnTheBattlefieldCondition(filter),

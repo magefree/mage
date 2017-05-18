@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,11 +51,11 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class SedgeSliver extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SLIVER, "All Sliver creatures");
 
-    private static final FilterPermanent filterSlivers = new FilterPermanent("Sliver", "All Slivers");
+    private static final FilterPermanent filterSlivers = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
-    private static final FilterPermanent filterSwamp = new FilterPermanent("Swamp", "Swamp");
+    private static final FilterPermanent filterSwamp = new FilterPermanent(SubType.SWAMP, "Swamp");
 
     public SedgeSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

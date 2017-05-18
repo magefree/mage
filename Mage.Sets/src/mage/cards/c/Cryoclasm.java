@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class Cryoclasm extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains or Island");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Plains"), new SubtypePredicate("Island")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.PLAINS), new SubtypePredicate(SubType.ISLAND)));
     }
 
     public Cryoclasm(UUID ownerId, CardSetInfo setInfo) {

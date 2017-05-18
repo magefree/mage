@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -61,7 +62,7 @@ public class DarkSupplicant extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clerics you control");
 
     static {
-        filter.add(new SubtypePredicate("Cleric"));
+        filter.add(new SubtypePredicate(SubType.CLERIC));
     }
 
     public DarkSupplicant(UUID ownerId, CardSetInfo setInfo) {

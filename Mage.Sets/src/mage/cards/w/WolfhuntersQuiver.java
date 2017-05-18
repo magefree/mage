@@ -29,10 +29,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -57,7 +54,7 @@ public class WolfhuntersQuiver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf creature");
 
     static {
-        filter.add(new SubtypePredicate("Werewolf"));
+        filter.add(new SubtypePredicate(SubType.WEREWOLF));
     }
 
     public WolfhuntersQuiver(UUID ownerId, CardSetInfo setInfo) {

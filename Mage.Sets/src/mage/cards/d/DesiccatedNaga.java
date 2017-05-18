@@ -40,6 +40,7 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,7 +55,7 @@ public class DesiccatedNaga extends CardImpl {
     private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("you control a Liliana planeswalker");
 
     static {
-        filter.add(new SubtypePredicate("Liliana"));
+        filter.add(new SubtypePredicate(SubType.LILIANA));
     }
 
     public DesiccatedNaga(UUID ownerId, CardSetInfo setInfo) {

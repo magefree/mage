@@ -83,7 +83,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
     private String subTypeNames(Set<SubType> subTypes) {
         StringBuilder sb = new StringBuilder();
         for (SubType subType: subTypes) {
-            sb.append(subType).append(" or ");
+            sb.append(subType.getDescription()).append(" or ");
         }
         return sb.substring(0, sb.length() - 4);
     }

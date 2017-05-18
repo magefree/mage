@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -52,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class StarlitSanctum extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Cleric", "a Cleric creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.CLERIC, "a Cleric creature");
 
     public StarlitSanctum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

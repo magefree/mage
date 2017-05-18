@@ -39,6 +39,7 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -54,7 +55,7 @@ public class PuppetConjurer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Homunculus");
 
     static {
-        filter.add(new SubtypePredicate("Homunculus"));
+        filter.add(new SubtypePredicate(SubType.HOMUNCULUS));
     }
 
     public PuppetConjurer(UUID ownerId, CardSetInfo setInfo) {

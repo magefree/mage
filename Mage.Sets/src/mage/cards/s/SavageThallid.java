@@ -40,6 +40,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -59,13 +60,13 @@ public class SavageThallid extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Fungus");
     
     static {
-        filter.add(new SubtypePredicate("Fungus"));
+        filter.add(new SubtypePredicate(SubType.FUNGUS));
     }
 
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Saproling");
     
     static {
-        filter2.add(new SubtypePredicate("Saproling"));
+        filter2.add(new SubtypePredicate(SubType.SAPROLING));
     }
     
     public SavageThallid(UUID ownerId, CardSetInfo setInfo) {

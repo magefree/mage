@@ -30,6 +30,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -56,8 +57,8 @@ public class KrosanVerge extends CardImpl {
     private static final FilterCard filterPlains = new FilterCard("a Plains");
 
     static {
-        filterForest.add(new SubtypePredicate("Forest"));
-        filterPlains.add(new SubtypePredicate("Plains"));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public KrosanVerge(UUID ownerId, CardSetInfo setInfo) {

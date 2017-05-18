@@ -5,6 +5,7 @@ public enum SubTypeSet {
     SpellType,
     BasicLandType,
     NonBasicLandType,
-    EchanemtType,
-    ArtifactType
+    EnchantmentType,
+    ArtifactType,
+    PlaneswalkerType
 }
