@@ -44,6 +44,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ReflectionToken;
 import mage.target.TargetPermanent;
@@ -56,8 +57,7 @@ public class SpiritMirror extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Reflection");
 
     static {
-        filter.add(new NamePredicate("Reflection"));
-        filter.add(new TokenPredicate());
+        filter.add(new SubtypePredicate("Reflection"));
     }
 
     public SpiritMirror(UUID ownerId, CardSetInfo setInfo) {
