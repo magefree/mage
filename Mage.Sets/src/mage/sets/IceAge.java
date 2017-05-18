@@ -125,6 +125,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Fyndhorn Elder", 131, Rarity.UNCOMMON, mage.cards.f.FyndhornElder.class));
         cards.add(new SetCardInfo("Fyndhorn Elves", 132, Rarity.COMMON, mage.cards.f.FyndhornElves.class));
         cards.add(new SetCardInfo("Game of Chaos", 186, Rarity.RARE, mage.cards.g.GameOfChaos.class));
+        cards.add(new SetCardInfo("Gangrenous Zombies", 15, Rarity.COMMON, mage.cards.g.GangrenousZombies.class));
         cards.add(new SetCardInfo("Giant Growth", 134, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Glacial Chasm", 331, Rarity.UNCOMMON, mage.cards.g.GlacialChasm.class));
         cards.add(new SetCardInfo("Glacial Crevasses", 187, Rarity.RARE, mage.cards.g.GlacialCrevasses.class));

@@ -27,21 +27,15 @@
  */
 package mage.cards.a;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import java.util.UUID;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -50,11 +44,14 @@ import java.util.UUID;
 public class AetherFlash extends CardImpl {
 
     public AetherFlash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
 
         // Whenever a creature enters the battlefield, Aether Flash deals 2 damage to it.
-        this.addAbility(new AetherFlashTriggeredAbility());
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD,
+                new DamageTargetEffect(2).setText("{this} deals 2 damage to it"),
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
+                false, SetTargetPointer.PERMANENT, null));
     }
 
     public AetherFlash(final AetherFlash card) {
@@ -66,47 +63,3 @@ public class AetherFlash extends CardImpl {
         return new AetherFlash(this);
     }
 }
-
-class AetherFlashTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public AetherFlashTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
-    }
-
-    public AetherFlashTriggeredAbility(AetherFlashTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        UUID targetId = event.getTargetId();
-        Permanent permanent = game.getPermanent(targetId);
-        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-            if (getTargets().isEmpty()) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(targetId));
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature enters the battlefield, Aether Flash deals 2 damage to it";
-    }
-
-    @Override
-    public AetherFlashTriggeredAbility copy() {
-        return new AetherFlashTriggeredAbility(this);
-    }
-}
-

@@ -121,6 +121,7 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Krosan Drover", 122, Rarity.COMMON, mage.cards.k.KrosanDrover.class));
         cards.add(new SetCardInfo("Krosan Warchief", 123, Rarity.UNCOMMON, mage.cards.k.KrosanWarchief.class));
         cards.add(new SetCardInfo("Kurgadon", 124, Rarity.UNCOMMON, mage.cards.k.Kurgadon.class));
+        cards.add(new SetCardInfo("Lethal Vapors", 68, Rarity.RARE, mage.cards.l.LethalVapors.class));
         cards.add(new SetCardInfo("Long-Term Plans", 38, Rarity.UNCOMMON, mage.cards.l.LongTermPlans.class));
         cards.add(new SetCardInfo("Mercurial Kite", 39, Rarity.COMMON, mage.cards.m.MercurialKite.class));
         cards.add(new SetCardInfo("Metamorphose", 40, Rarity.UNCOMMON, mage.cards.m.Metamorphose.class));
