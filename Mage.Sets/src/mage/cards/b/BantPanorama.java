@@ -36,10 +36,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -60,9 +57,9 @@ public class BantPanorama extends CardImpl {
         filter.add(new CardTypePredicate(CardType.LAND));
         filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(Predicates.or(
-                new SubtypePredicate("Forest"),
-                new SubtypePredicate("Plains"),
-                new SubtypePredicate("Island")));
+                new SubtypePredicate(SubType.FOREST),
+                new SubtypePredicate(SubType.PLAINS),
+                new SubtypePredicate(SubType.ISLAND)));
     }
 
     public BantPanorama(UUID ownerId, CardSetInfo setInfo) {

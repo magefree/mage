@@ -30,6 +30,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -51,7 +52,7 @@ public class LoamLion extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public LoamLion(UUID ownerId, CardSetInfo setInfo) {

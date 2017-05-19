@@ -36,6 +36,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -49,7 +50,7 @@ public class StrongarmThug extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary card");
 
     static {
-        filter.add(new SubtypePredicate("Mercenary"));
+        filter.add(new SubtypePredicate(SubType.MERCENARY));
     }
 
     public StrongarmThug(UUID ownerId, CardSetInfo setInfo) {

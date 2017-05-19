@@ -41,6 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,7 +61,7 @@ public class ShadowbornDemon extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Demon creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Demon")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.DEMON)));
     }
 
     public ShadowbornDemon(UUID ownerId, CardSetInfo setInfo) {

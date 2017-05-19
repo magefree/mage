@@ -1,6 +1,7 @@
 package org.mage.test.multiplayer;
 
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -35,7 +36,7 @@ public class SimpleGameTest extends CardTestMultiPlayerBase {
         assertLife(playerD, 20);
 
         FilterPermanent filterPermanent = new FilterLandPermanent();
-        filterPermanent.add(new SubtypePredicate("Forest"));
+        filterPermanent.add(new SubtypePredicate(SubType.FOREST));
         List<Permanent> forestCards = currentGame.getBattlefield().getAllActivePermanents(filterPermanent, currentGame);
         Assert.assertEquals(4, forestCards.size());
     }

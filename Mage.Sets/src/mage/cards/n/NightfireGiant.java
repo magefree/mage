@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostSourceWhileControlsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,7 +53,7 @@ public class NightfireGiant extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a Mountain");
 
     static {
-        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
 
     }
 

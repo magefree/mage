@@ -90,7 +90,7 @@ class ImmerwolfEffect extends ContinuousRuleModifyingEffectImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.WEREWOLF));
-        filter.add(Predicates.not(new SubtypePredicate("Human")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
     }
 
     public ImmerwolfEffect() {

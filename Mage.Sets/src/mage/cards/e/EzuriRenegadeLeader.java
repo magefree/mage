@@ -37,10 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -60,9 +57,9 @@ public class EzuriRenegadeLeader extends CardImpl {
     private static final FilterControlledCreaturePermanent notEzuri = new FilterControlledCreaturePermanent();
 
     static {
-        elfFilter.add(new SubtypePredicate("Elf"));
+        elfFilter.add(new SubtypePredicate(SubType.ELF));
 
-        notEzuri.add(new SubtypePredicate("Elf"));
+        notEzuri.add(new SubtypePredicate(SubType.ELF));
         notEzuri.add(Predicates.not(new NamePredicate("Ezuri, Renegade Leader")));
     }
 

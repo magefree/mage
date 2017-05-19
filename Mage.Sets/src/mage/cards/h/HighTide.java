@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -75,7 +76,7 @@ class HighTideTriggeredAbility extends DelayedTriggeredManaAbility {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Island");
 
     static {
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     public HighTideTriggeredAbility() {

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -54,7 +55,7 @@ public class SpectralShepherd extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Spirit"));
+        filter.add(new SubtypePredicate(SubType.SPIRIT));
     }
 
     public SpectralShepherd(UUID ownerId, CardSetInfo setInfo) {

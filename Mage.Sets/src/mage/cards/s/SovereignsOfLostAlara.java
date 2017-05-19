@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -136,7 +137,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
         Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (you != null && attackingCreature != null) {
             FilterCard filter = new FilterCard("aura that could enchant the lone attacking creature");
-            filter.add(new SubtypePredicate("Aura"));
+            filter.add(new SubtypePredicate(SubType.AURA));
             filter.add(new AuraCardCanAttachToPermanentId(attackingCreature.getId()));
             if (you.chooseUse(Outcome.Benefit, "Do you want to search your library?", source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(filter);

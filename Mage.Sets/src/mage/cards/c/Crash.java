@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -54,7 +55,7 @@ public class Crash extends CardImpl {
 
     static {
         effectFilter.add(new CardTypePredicate(CardType.ARTIFACT));
-        alternativeCostFilter.add(new SubtypePredicate("Mountain"));
+        alternativeCostFilter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public Crash(UUID ownerId, CardSetInfo setInfo) {

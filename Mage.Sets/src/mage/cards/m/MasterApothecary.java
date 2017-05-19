@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -54,7 +55,7 @@ public class MasterApothecary extends CardImpl {
     public static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped Cleric you control");
     
     static {
-        filter.add(new SubtypePredicate("Cleric"));
+        filter.add(new SubtypePredicate(SubType.CLERIC));
         filter.add(Predicates.not(new TappedPredicate()));
     }
 

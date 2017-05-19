@@ -36,6 +36,7 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,7 +55,7 @@ public class KozileksReturn extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an Eldrazi creature spell with converted mana cost 7 or greater");
 
     static {
-        filter.add(new SubtypePredicate("Eldrazi"));
+        filter.add(new SubtypePredicate(SubType.ELDRAZI));
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }

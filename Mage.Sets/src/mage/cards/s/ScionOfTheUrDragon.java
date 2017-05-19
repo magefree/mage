@@ -84,7 +84,7 @@ class ScionOfTheUrDragonEffect extends SearchEffect {
     private static final FilterCard filter = new FilterPermanentCard("Dragon permanent card");
 
     static {
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     public ScionOfTheUrDragonEffect() {

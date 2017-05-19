@@ -31,6 +31,7 @@ import java.util.UUID;
 
 import mage.constants.ComparisonType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -51,7 +52,7 @@ public class TaintedIsle extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("you control a swamp");
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public TaintedIsle(UUID ownerId, CardSetInfo setInfo) {

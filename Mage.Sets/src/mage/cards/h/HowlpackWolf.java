@@ -76,7 +76,7 @@ class HowlpackWolfRestrictionEffect extends RestrictionEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Wolf or Werewolf");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Wolf"), new SubtypePredicate(SubType.WEREWOLF)));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.WOLF), new SubtypePredicate(SubType.WEREWOLF)));
         filter.add(new AnotherPredicate());
     }
 

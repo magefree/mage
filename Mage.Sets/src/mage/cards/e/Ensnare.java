@@ -35,6 +35,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -48,7 +50,7 @@ public class Ensnare extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Islands");
 
     static {
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     public Ensnare(UUID ownerId, CardSetInfo setInfo) {

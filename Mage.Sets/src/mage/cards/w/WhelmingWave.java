@@ -33,6 +33,7 @@ import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,10 +48,10 @@ public class WhelmingWave extends CardImpl {
     static {
         filter.add(Predicates.not(
                 Predicates.or(
-                        new SubtypePredicate("Kraken"),
-                        new SubtypePredicate("Leviathan"),
-                        new SubtypePredicate("Octopus"),
-                        new SubtypePredicate("Serpent"))));
+                        new SubtypePredicate(SubType.KRAKEN),
+                        new SubtypePredicate(SubType.LEVIATHAN),
+                        new SubtypePredicate(SubType.OCTOPUS),
+                        new SubtypePredicate(SubType.SERPENT))));
     }
     
     public WhelmingWave(UUID ownerId, CardSetInfo setInfo) {

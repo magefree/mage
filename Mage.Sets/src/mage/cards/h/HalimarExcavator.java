@@ -30,6 +30,7 @@ package mage.cards.h;
 import java.util.UUID;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -52,7 +53,7 @@ public class HalimarExcavator extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Allies you control");
 
     static {
-        filter.add(new SubtypePredicate("Ally"));
+        filter.add(new SubtypePredicate(SubType.ALLY));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

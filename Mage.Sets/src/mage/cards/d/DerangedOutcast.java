@@ -36,6 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
@@ -53,7 +54,7 @@ public class DerangedOutcast extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Human");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public DerangedOutcast(UUID ownerId, CardSetInfo setInfo) {

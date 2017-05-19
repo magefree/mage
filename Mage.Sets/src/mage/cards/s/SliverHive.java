@@ -46,6 +46,7 @@ import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
@@ -66,8 +67,8 @@ public class SliverHive extends CardImpl {
     }
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
-        filterSpell.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filterSpell.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public SliverHive(UUID ownerId, CardSetInfo setInfo) {

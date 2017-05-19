@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
@@ -130,7 +131,7 @@ class TawnossCoffinEffect extends OneShotEffect {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
     }
 
     public TawnossCoffinEffect() {
@@ -196,7 +197,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
 
     static {
         filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAura.add(new SubtypePredicate("Aura"));
+        filterAura.add(new SubtypePredicate(SubType.AURA));
     }
 
     public TawnossCoffinReturnEffect() {

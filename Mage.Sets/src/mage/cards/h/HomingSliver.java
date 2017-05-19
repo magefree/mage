@@ -38,12 +38,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -59,7 +54,7 @@ public class HomingSliver extends CardImpl {
     private static final FilterCard filter = new FilterCard("Sliver card");
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public HomingSliver(UUID ownerId, CardSetInfo setInfo) {
@@ -90,7 +85,7 @@ class HomingSliverEffect extends ContinuousEffectImpl {
     private static final FilterCard filter = new FilterCard("Sliver card");
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public HomingSliverEffect() {

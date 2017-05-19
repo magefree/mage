@@ -35,6 +35,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -79,7 +80,7 @@ class SlaveringNullsTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public SlaveringNullsTriggeredAbility() {

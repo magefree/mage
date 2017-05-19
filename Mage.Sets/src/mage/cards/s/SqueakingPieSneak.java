@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
@@ -48,7 +49,7 @@ public class SqueakingPieSneak extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Goblin card from your hand");
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public SqueakingPieSneak(UUID ownerId, CardSetInfo setInfo) {

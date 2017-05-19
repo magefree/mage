@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -49,7 +50,7 @@ public class FaerieHarbinger extends CardImpl {
     
     public static final FilterCard filter = new FilterCard("Faerie card");
     static {
-        filter.add(new SubtypePredicate("Faerie"));
+        filter.add(new SubtypePredicate(SubType.FAERIE));
     }
 
     public FaerieHarbinger(UUID ownerId, CardSetInfo setInfo) {

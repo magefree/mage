@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.command.emblems.KothOfTheHammerEmblem;
@@ -56,11 +57,11 @@ import mage.target.common.TargetLandPermanent;
  */
 public class KothOfTheHammer extends CardImpl {
 
-    static final FilterLandPermanent filter = new FilterLandPermanent("Mountain", "Mountain");
+    static final FilterLandPermanent filter = new FilterLandPermanent(SubType.MOUNTAIN, "Mountain");
     static final FilterLandPermanent filterCount = new FilterLandPermanent("Mountain you control");
 
     static {
-        filterCount.add(new SubtypePredicate("Mountain"));
+        filterCount.add(new SubtypePredicate(SubType.MOUNTAIN));
         filterCount.add(new ControllerPredicate(TargetController.YOU));
     }
 

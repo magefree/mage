@@ -40,6 +40,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
@@ -63,7 +64,7 @@ public class RathiAssassin extends CardImpl {
     private static final FilterCreaturePermanent destroyFilter = new FilterCreaturePermanent("tapped nonblack creature");
 
     static {
-        filter.add(new SubtypePredicate("Mercenary"));
+        filter.add(new SubtypePredicate(SubType.MERCENARY));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
         destroyFilter.add(new TappedPredicate());
         destroyFilter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));

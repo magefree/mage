@@ -38,6 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,8 +58,8 @@ public class GwyllionHedgeMage extends CardImpl {
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("Swamps");
 
     static {
-        filter.add(new SubtypePredicate("Plains"));
-        filter2.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.PLAINS));
+        filter2.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     private static final String rule1 = "When {this} enters the battlefield, if you control two or more Plains, you may create a 1/1 white Kithkin Soldier creature token.";

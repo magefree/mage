@@ -40,6 +40,7 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -60,7 +61,7 @@ public class DragonlordsPrerogative extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Dragon card from your hand");
 
     static {
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     public DragonlordsPrerogative(UUID ownerId, CardSetInfo setInfo) {
@@ -107,7 +108,7 @@ class DragonlordsPrerogativeCondition implements Condition {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Dragon");
 
     static {
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     @Override

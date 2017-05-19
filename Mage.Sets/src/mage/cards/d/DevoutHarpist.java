@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
@@ -54,7 +55,7 @@ public class DevoutHarpist extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to a creature");
     static
     {
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
         filter.add(new DevoutHarpistPredicate());
     }
     public DevoutHarpist(UUID ownerId, CardSetInfo setInfo) {
