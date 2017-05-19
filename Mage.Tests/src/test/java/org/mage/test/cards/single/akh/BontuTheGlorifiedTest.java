@@ -7,10 +7,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class BontuTheGlorifiedTest extends CardTestPlayerBase {
 
+    //Menace
+    //Indestructible
+    //Bontu the Glorified can't attack or block unless a creature died under your control this turn.
+    //{1}{B}, Sacrifice another creature: Scry 1.  Each opponent loses 1 life and you gain 1 life.
     String bontu = "Bontu the Glorified";
     String swamp = "Swamp";
     String grizzly = "Grizzly Bears";
-
 
     @Test
     public void testBontuNotAttack() {
