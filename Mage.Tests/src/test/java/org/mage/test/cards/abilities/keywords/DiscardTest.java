@@ -97,4 +97,38 @@ public class DiscardTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 2);
 
     }
+
+    /**
+     * "When using the enchantment "Liliana's Caress" in a vs. human match, it
+     * seems to count cards that read "you choose a card, enemy discards them"
+     * as the choosing playing making the discard. This means that any spell
+     * that lets you pick what your opponent discards doesn't trigger the Caress
+     * like it should."
+     */
+    @Test
+    public void testLilianasCaress() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        // Whenever an opponent discards a card, that player loses 2 life.
+        addCard(Zone.HAND, playerA, "Liliana's Caress", 1); // ENCHANTMENT {1}{B}
+        // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
+        addCard(Zone.HAND, playerA, "Coercion", 1); // SORCERY {2}{B}
+
+        addCard(Zone.HAND, playerB, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Liliana's Caress");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Coercion", playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Liliana's Caress", 1);
+
+        assertGraveyardCount(playerA, "Coercion", 1);
+        assertGraveyardCount(playerB, "Island", 1);
+        assertHandCount(playerB, "Island", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 18);
+
+    }
 }
