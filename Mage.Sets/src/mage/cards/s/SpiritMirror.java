@@ -43,7 +43,6 @@ import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ReflectionToken;
@@ -54,9 +53,12 @@ import mage.target.TargetPermanent;
  */
 public class SpiritMirror extends CardImpl {
 
+    private static final FilterPermanent filterToken = new FilterPermanent("Reflection", "Reflection token");
     private static final FilterPermanent filter = new FilterPermanent("Reflection");
 
     static {
+        filterToken.add(new SubtypePredicate("Reflection"));
+        filterToken.add(new TokenPredicate());
         filter.add(new SubtypePredicate("Reflection"));
     }
 
@@ -66,7 +68,7 @@ public class SpiritMirror extends CardImpl {
         // At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, create a 2/2 white Reflection creature token.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new ReflectionToken()), TargetController.YOU, false),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0, false),
+                new PermanentsOnTheBattlefieldCondition(filterToken, ComparisonType.EQUAL_TO, 0, false),
                 "At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, create a 2/2 white Reflection creature token"));
 
         // {0}: Destroy target Reflection.
