@@ -727,7 +727,23 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-
+        if (target.getOriginalTarget() instanceof TargetActivatedAbility) {
+            List<StackObject> stackObjects = new ArrayList<>();
+            for (UUID uuid : ((TargetActivatedAbility) target).possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
+                StackObject stackObject = game.getStack().getStackObject(uuid);
+                if (stackObject != null) {
+                    stackObjects.add(stackObject);
+                }
+            }
+            while (!target.isChosen() && !stackObjects.isEmpty()) {
+                StackObject pick = stackObjects.get(0);
+                if (pick != null) {
+                    target.addTarget(pick.getId(), source, game);
+                    stackObjects.remove(0);
+                }
+            }
+            return target.isChosen();
+        }
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
     }
 
