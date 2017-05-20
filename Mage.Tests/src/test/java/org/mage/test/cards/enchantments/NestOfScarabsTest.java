@@ -86,7 +86,7 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         
-        assertPermanentCount(playerA, nestScarabs, 1);        
+        assertPermanentCount(playerA, nestScarabs, 1);
         assertHandCount(playerA, blackZenith, 0);
         assertLibraryCount(playerA, blackZenith, 1); // shuffles back into library
         assertGraveyardCount(playerA, fugitive, 1);
