@@ -42,6 +42,7 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -102,7 +103,7 @@ class PacksDisdainEffect extends OneShotEffect {
                 }
             }
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-            filter.add(new SubtypePredicate(typeChoice.getChoice()));
+            filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             DynamicValue negativePermanentsCount = new PermanentsOnBattlefieldCount(filter, -1);
             ContinuousEffect effect = new BoostTargetEffect(negativePermanentsCount, negativePermanentsCount, Duration.EndOfTurn, true);
             effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
