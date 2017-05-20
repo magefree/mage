@@ -56,7 +56,7 @@ public class PrimevalTitan extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Primeval Titan enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterLandCard("land cards")), true, Outcome.PutLandInPlay)));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterLandCard("land cards")), true, Outcome.PutLandInPlay), true));
     }
 
     public PrimevalTitan(final PrimevalTitan card) {
