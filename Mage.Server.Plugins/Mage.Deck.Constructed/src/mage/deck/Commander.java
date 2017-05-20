@@ -272,6 +272,7 @@ public class Commander extends Constructed {
             boolean xCost = false;
             boolean youControlTarget = false;
             boolean yourOpponentsControl = false;
+            boolean whenYouCast = false;
 
             for (String str : card.getRules()) {
                 String s = str.toLowerCase();
@@ -331,6 +332,7 @@ public class Commander extends Constructed {
                 wheneverEnters |= s.contains("when") && s.contains("another") && s.contains("enters");
                 youControlTarget |= s.contains("you control target");
                 yourOpponentsControl |= s.contains("your opponents control");
+                whenYouCast |= s.contains("when you cast") || s.contains("whenever you cast");
             }
 
             for (ManaCost cost : card.getManaCost()) {
@@ -443,6 +445,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (yourOpponentsControl) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (whenYouCast) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (anyNumberOfTarget) {
@@ -749,16 +754,16 @@ public class Commander extends Constructed {
         }
 
         edhPowerLevel += numberInfinitePieces * 12;
-        edhPowerLevel = (int) Math.round(edhPowerLevel / 4.5);
-        if (edhPowerLevel > 100) {
-            edhPowerLevel = 100;
+        edhPowerLevel = (int) Math.round(edhPowerLevel / 10);
+        if (edhPowerLevel >= 100) {
+            edhPowerLevel = 99;
         }
         if (color != null) {
             edhPowerLevel += (color.isWhite() ? 10000000 : 0);
-            edhPowerLevel += (color.isBlue()  ?  1000000 : 0);
-            edhPowerLevel += (color.isBlack() ?   100000 : 0);
-            edhPowerLevel += (color.isRed()   ?    10000 : 0);
-            edhPowerLevel += (color.isGreen() ?     1000 : 0);            
+            edhPowerLevel += (color.isBlue() ? 1000000 : 0);
+            edhPowerLevel += (color.isBlack() ? 100000 : 0);
+            edhPowerLevel += (color.isRed() ? 10000 : 0);
+            edhPowerLevel += (color.isGreen() ? 1000 : 0);
         }
         return edhPowerLevel;
     }
