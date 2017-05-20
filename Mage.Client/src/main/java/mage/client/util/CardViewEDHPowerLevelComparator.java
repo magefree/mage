@@ -96,6 +96,7 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
         boolean xCost = false;
         boolean youControlTarget = false;
         boolean yourOpponentsControl = false;
+        boolean whenYouCast = false;
 
         for (String str : card.getRules()) {
             String s = str.toLowerCase();
@@ -103,7 +104,7 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
             anyNumberOfTarget |= s.contains("any number");
             buyback |= s.contains("buyback");
             cantBe |= s.contains("can't be");
-            cantUntap |= s.contains("can't untap");
+            cantUntap |= s.contains("can't untap") || s.contains("don't untap");
             cascade |= s.contains("cascade");
             copy |= s.contains("copy");
             costLessEach |= s.contains("cost") || s.contains("less") || s.contains("each");
@@ -155,6 +156,7 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
             wheneverEnters |= s.contains("when") && s.contains("another") && s.contains("enters");
             youControlTarget |= s.contains("you control target");
             yourOpponentsControl |= s.contains("your opponents control");
+            whenYouCast |= s.contains("when you cast") || s.contains("whenever you cast");
         }
 
         if (extraTurns) {
@@ -254,6 +256,9 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
             thisMaxPower = Math.max(thisMaxPower, 4);
         }
         if (yourOpponentsControl) {
+            thisMaxPower = Math.max(thisMaxPower, 4);
+        }
+        if (whenYouCast) {
             thisMaxPower = Math.max(thisMaxPower, 4);
         }
         if (anyNumberOfTarget) {

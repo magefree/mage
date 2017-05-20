@@ -154,6 +154,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Illusions of Grandeur", 79, Rarity.RARE, mage.cards.i.IllusionsOfGrandeur.class));
         cards.add(new SetCardInfo("Imposing Visage", 193, Rarity.COMMON, mage.cards.i.ImposingVisage.class));
         cards.add(new SetCardInfo("Incinerate", 194, Rarity.COMMON, mage.cards.i.Incinerate.class));
+        cards.add(new SetCardInfo("Infernal Darkness", 23, Rarity.RARE, mage.cards.i.InfernalDarkness.class));
         cards.add(new SetCardInfo("Infuse", 80, Rarity.COMMON, mage.cards.i.Infuse.class));
         cards.add(new SetCardInfo("Island", 334, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
