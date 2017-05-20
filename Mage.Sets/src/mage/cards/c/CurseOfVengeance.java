@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -49,8 +49,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  * @author spjspj
@@ -158,7 +156,7 @@ class CurseOfVengeancePlayerLosesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When enchanted player loses the game, you gain X life and draw X cards, where X is the number of spite counters on Curse of Vengeance";
+        return "When enchanted player loses the game, you gain X life and draw X cards, where X is the number of spite counters on {this}";
     }
 }
 
@@ -181,13 +179,13 @@ class CurseOfVengeanceDrawLifeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
-
-        if (sourceObject != null) {
+        Permanent sourceObject = (Permanent) game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourceObject != null && controller != null) {
             if (sourceObject.getCounters(game).containsKey(CounterType.SPITE)) {
                 controller.drawCards(sourceObject.getCounters(game).getCount(CounterType.SPITE), game);
                 controller.gainLife(sourceObject.getCounters(game).getCount(CounterType.SPITE), game);
             }
+            return true;
         }
         return false;
     }

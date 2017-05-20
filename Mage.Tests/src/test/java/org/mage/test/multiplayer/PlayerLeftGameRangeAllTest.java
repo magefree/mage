@@ -266,4 +266,45 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         assertCounterCount(playerA, "Luminarch Ascension", CounterType.QUEST, 1); // 1 from turn 2
 
     }
+
+    /**
+     * "When playing in a multiplayer match against humans, the aura curse
+     * "Curse of Vengeance" is supposed to award cards and life to its caster
+     * when the victim of the spell loses the game. It seems to erroneously
+     * award those cards to the victim of the curse, who, by that point, is
+     * already dead, making the spell almost totally useless."
+     */
+    @Test
+    public void TestCurseOfVengeance() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        // Whenever enchanted player casts a spell, put a spite counter on Curse of Vengeance.
+        // When enchanted player loses the game, you gain X life and draw X cards, where X is the number of spite counters on Curse of Vengeance.
+        addCard(Zone.HAND, playerA, "Curse of Vengeance"); // Enchantment {B}
+
+        addCard(Zone.HAND, playerC, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerC, "Mountain", 1);
+
+        addCard(Zone.HAND, playerD, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerD, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Vengeance", playerD);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Silvercoat Lion");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Silvercoat Lion");
+
+        castSpell(2, PhaseStep.BEGIN_COMBAT, playerC, "Lightning Bolt", playerD);
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerC, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Curse of Vengeance", 1);
+
+        assertLife(playerD, -1);
+        Assert.assertFalse("Player D is no longer in the game", playerD.isInGame());
+
+        assertHandCount(playerA, 3);
+        assertLife(playerA, 4);
+
+    }
 }
