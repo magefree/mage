@@ -33,6 +33,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttachedToPredicate;
@@ -91,7 +92,7 @@ public class Disarm extends CardImpl {
 
                 FilterPermanent equipmentFilter = new FilterPermanent();
                 equipmentFilter.add(new AttachedToPredicate(creatureFilter));
-                equipmentFilter.add(new SubtypePredicate("Equipment"));
+                equipmentFilter.add(new SubtypePredicate(SubType.EQUIPMENT));
 
                 for (Permanent equipment : game.getBattlefield().getAllActivePermanents(equipmentFilter, game)) {
                     creature.removeAttachment(equipment.getId(), game);

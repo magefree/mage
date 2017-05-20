@@ -60,7 +60,7 @@ public class MayorOfAvabruck extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creatures");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public MayorOfAvabruck(UUID ownerId, CardSetInfo setInfo) {

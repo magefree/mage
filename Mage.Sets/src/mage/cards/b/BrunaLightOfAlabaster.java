@@ -109,7 +109,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
         filterAura.add(new SubtypePredicate(SubType.AURA));
         filterAura.add(new AuraPermanentCanAttachToPermanentId(bruna));
         filterAuraCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAuraCard.add(new SubtypePredicate("Aura"));
+        filterAuraCard.add(new SubtypePredicate(SubType.AURA));
         filterAuraCard.add(new AuraCardCanAttachToPermanentId(bruna));
         
         if (player == null) {

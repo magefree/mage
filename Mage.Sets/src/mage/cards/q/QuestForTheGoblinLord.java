@@ -36,10 +36,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -59,7 +56,7 @@ public class QuestForTheGoblinLord extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        goblinFilter.add(new SubtypePredicate("Goblin"));
+        goblinFilter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public QuestForTheGoblinLord(UUID ownerId, CardSetInfo setInfo) {

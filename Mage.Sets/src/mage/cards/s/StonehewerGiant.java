@@ -30,6 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -107,7 +108,7 @@ class StonehewerGiantEffect extends OneShotEffect {
         }
 
         FilterCard filter = new FilterCard("Equipment");
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);

@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,7 +53,7 @@ public class StromkirkNoble extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Humans");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public StromkirkNoble(UUID ownerId, CardSetInfo setInfo) {

@@ -40,10 +40,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -61,7 +58,7 @@ public class FirecatBlitz extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Mountains");
 
     static {
-        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public FirecatBlitz(UUID ownerId, CardSetInfo setInfo) {

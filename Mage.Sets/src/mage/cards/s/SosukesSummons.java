@@ -29,6 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -50,7 +51,7 @@ public class SosukesSummons extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken Snake");
 
     static {
-            filter.add(new SubtypePredicate("Snake"));
+            filter.add(new SubtypePredicate(SubType.SNAKE));
             filter.add(Predicates.not(new TokenPredicate()));
     }
 

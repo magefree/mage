@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
@@ -46,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
 public class Thwart extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Islands");
     static{
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
     public Thwart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

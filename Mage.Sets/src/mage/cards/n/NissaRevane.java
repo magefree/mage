@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -56,7 +57,7 @@ public class NissaRevane extends CardImpl {
 
     static {
         nissasChosenFilter.add(new NamePredicate("Nissa's Chosen"));
-        elfFilter.add(new SubtypePredicate("Elf"));
+        elfFilter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public NissaRevane(UUID ownerId, CardSetInfo setInfo) {
@@ -89,7 +90,7 @@ class NissaRevaneGainLifeEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public NissaRevaneGainLifeEffect() {

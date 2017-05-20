@@ -54,7 +54,7 @@ public class WrensRunPackmaster extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Wolf");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Wolf"));
+        filter.add(new SubtypePredicate(SubType.WALL));
     }
 
     public WrensRunPackmaster(UUID ownerId, CardSetInfo setInfo) {

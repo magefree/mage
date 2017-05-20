@@ -40,6 +40,7 @@ import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,7 +56,7 @@ public class LichLordOfUnx extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public LichLordOfUnx(UUID ownerId, CardSetInfo setInfo) {

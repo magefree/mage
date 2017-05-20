@@ -53,7 +53,7 @@ public class HanSolo extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Starship you control");
 
     static {
-        filter.add(new SubtypePredicate("Starship"));
+        filter.add(new SubtypePredicate(SubType.STARSHIP));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

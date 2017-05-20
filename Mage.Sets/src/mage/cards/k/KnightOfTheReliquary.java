@@ -28,10 +28,8 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -62,7 +60,7 @@ public class KnightOfTheReliquary extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("Forest or Plains");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Forest"), new SubtypePredicate("Plains")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST), new SubtypePredicate(SubType.PLAINS)));
     }
 
     public KnightOfTheReliquary(UUID ownerId, CardSetInfo setInfo) {

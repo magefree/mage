@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class WingedSliver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All sliver creatures");
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public WingedSliver(UUID ownerId, CardSetInfo setInfo) {

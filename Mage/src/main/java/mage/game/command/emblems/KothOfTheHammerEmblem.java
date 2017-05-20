@@ -33,13 +33,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.Duration;
-import mage.constants.Layer;
+import mage.constants.*;
+
 import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -66,7 +63,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
     static final FilterLandPermanent mountains = new FilterLandPermanent("Mountain you control");
 
     static {
-        mountains.add(new SubtypePredicate("Mountain"));
+        mountains.add(new SubtypePredicate(SubType.MOUNTAIN));
         mountains.add(new ControllerPredicate(TargetController.YOU));
     }
 

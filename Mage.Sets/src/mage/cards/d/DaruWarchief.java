@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,8 +53,8 @@ public class DaruWarchief extends CardImpl {
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-        filter.add(new SubtypePredicate("Soldier"));
-        filterCreatures.add(new SubtypePredicate("Soldier"));
+        filter.add(new SubtypePredicate(SubType.SOLDIER));
+        filterCreatures.add(new SubtypePredicate(SubType.SOLDIER));
     }
 
     public DaruWarchief(UUID ownerId, CardSetInfo setInfo) {

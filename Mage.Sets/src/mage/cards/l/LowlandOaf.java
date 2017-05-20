@@ -42,11 +42,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -64,7 +60,7 @@ public class LowlandOaf extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creature you control");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

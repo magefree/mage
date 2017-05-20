@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,7 +55,7 @@ public class OmnathLocusOfRage extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elemental you control");
 
     static {
-        filter.add(new SubtypePredicate("Elemental"));
+        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

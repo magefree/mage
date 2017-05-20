@@ -35,10 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,8 +53,8 @@ public class NemataGroveGuardian extends CardImpl {
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("Saproling");
 
     static {
-        filter.add(new SubtypePredicate("Saproling"));
-        filter1.add(new SubtypePredicate("Saproling"));
+        filter.add(new SubtypePredicate(SubType.SAPROLING));
+        filter1.add(new SubtypePredicate(SubType.SAPROLING));
     }
 
     public NemataGroveGuardian(UUID ownerId, CardSetInfo setInfo) {

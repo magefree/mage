@@ -32,10 +32,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -48,7 +45,7 @@ public class RootCage extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Mercenaries");
 
     static {
-        filter.add(new SubtypePredicate("Mercenary"));
+        filter.add(new SubtypePredicate(SubType.MERCENARY));
     }
 
     public RootCage(UUID ownerId, CardSetInfo setInfo) {

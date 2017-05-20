@@ -37,10 +37,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
@@ -59,8 +56,8 @@ public class KarametraGodOfHarvests extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Forest"),
-                new SubtypePredicate("Plains")));
+                new SubtypePredicate(SubType.FOREST),
+                new SubtypePredicate(SubType.PLAINS)));
     }
 
     public KarametraGodOfHarvests(UUID ownerId, CardSetInfo setInfo) {

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -54,7 +55,7 @@ public class SummonTheSchool extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Merfolk"));
+        filter.add(new SubtypePredicate(SubType.MERFOLK));
     }
 
     public SummonTheSchool(UUID ownerId, CardSetInfo setInfo) {

@@ -33,6 +33,7 @@ import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.InsectToken;
@@ -48,7 +49,7 @@ public class BeaconOfCreation extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public BeaconOfCreation(UUID ownerId, CardSetInfo setInfo) {

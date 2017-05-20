@@ -29,10 +29,8 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -55,7 +53,7 @@ public class PuresteelPaladin extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent("Equipment");
 
     static {
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public PuresteelPaladin(UUID ownerId, CardSetInfo setInfo) {

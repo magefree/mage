@@ -35,6 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -52,7 +53,7 @@ public class ThunderOfHooves extends CardImpl {
 
     static {
         filterNotFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-        filterBeasts.add(new SubtypePredicate("Beast"));
+        filterBeasts.add(new SubtypePredicate(SubType.BEAST));
     }
 
     public ThunderOfHooves(UUID ownerId, CardSetInfo setInfo) {

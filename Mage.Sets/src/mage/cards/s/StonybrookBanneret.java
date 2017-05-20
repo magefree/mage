@@ -29,6 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -50,8 +51,8 @@ public class StonybrookBanneret extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Merfolk"),
-                new SubtypePredicate("Wizard")));
+                new SubtypePredicate(SubType.MERFOLK),
+                new SubtypePredicate(SubType.WIZARD)));
     }
 
     public StonybrookBanneret(UUID ownerId, CardSetInfo setInfo) {

@@ -38,10 +38,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -56,7 +53,7 @@ public class GangrenousZombies extends CardImpl {
 
     static {
         filter.add(new SupertypePredicate(SuperType.SNOW));
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public GangrenousZombies(UUID ownerId, CardSetInfo setInfo) {

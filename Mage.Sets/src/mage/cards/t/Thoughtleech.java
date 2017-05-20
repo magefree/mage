@@ -33,6 +33,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,7 +49,7 @@ public class Thoughtleech extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("an Island an opponent controls");
 
     static {
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

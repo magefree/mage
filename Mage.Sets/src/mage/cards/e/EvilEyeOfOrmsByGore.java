@@ -34,10 +34,7 @@ import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,8 +52,8 @@ public class EvilEyeOfOrmsByGore extends CardImpl {
     private static final FilterCreaturePermanent cantBeBlockedByFilter = new FilterCreaturePermanent("except by Walls");
 
     static {
-        cantBeBlockedByFilter.add(Predicates.not(new SubtypePredicate("Wall")));
-        cantAttackFilter.add(Predicates.not((new SubtypePredicate("Eye"))));
+        cantBeBlockedByFilter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
+        cantAttackFilter.add(Predicates.not((new SubtypePredicate(SubType.EYE))));
         cantAttackFilter.add(new ControllerPredicate(TargetController.YOU));
     }
 

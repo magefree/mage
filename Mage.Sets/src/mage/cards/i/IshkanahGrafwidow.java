@@ -41,6 +41,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -59,7 +60,7 @@ public class IshkanahGrafwidow extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Spider you control");
 
     static {
-        filter.add(new SubtypePredicate("Spider"));
+        filter.add(new SubtypePredicate(SubType.SPIDER));
     }
 
     public IshkanahGrafwidow(UUID ownerId, CardSetInfo setInfo) {

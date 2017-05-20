@@ -29,6 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,7 +48,7 @@ public class StinkdrinkerDaredevil extends CardImpl {
     private static final FilterCard filter = new FilterCard("Giant spells");
 
     static {
-        filter.add(new SubtypePredicate("Giant"));
+        filter.add(new SubtypePredicate(SubType.GIANT));
     }
 
     public StinkdrinkerDaredevil(UUID ownerId, CardSetInfo setInfo) {

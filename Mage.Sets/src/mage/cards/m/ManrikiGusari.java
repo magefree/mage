@@ -54,7 +54,7 @@ public class ManrikiGusari extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
 
     static {
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public ManrikiGusari(UUID ownerId, CardSetInfo setInfo) {

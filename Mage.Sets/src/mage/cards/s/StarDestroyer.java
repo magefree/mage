@@ -39,6 +39,7 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,7 +61,7 @@ public class StarDestroyer extends CardImpl {
 
     static {
         filter1.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter3.getCreatureFilter().add(Predicates.not(new SubtypePredicate("Starship")));
+        filter3.getCreatureFilter().add(Predicates.not(new SubtypePredicate(SubType.STARSHIP)));
     }
 
     public StarDestroyer(UUID ownerId, CardSetInfo setInfo) {

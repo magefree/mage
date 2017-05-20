@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -105,7 +106,7 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl {
         Permanent p = game.getPermanent(event.getSourceId());
         if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
             FilterPermanent filter = new FilterPermanent("Equipment that player controls");
-            filter.add(new SubtypePredicate("Equipment"));
+            filter.add(new SubtypePredicate(SubType.EQUIPMENT));
             filter.add(new ControllerIdPredicate(event.getPlayerId()));
             filter.setMessage("creature controlled by " + game.getPlayer(event.getTargetId()).getLogName());
 

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,8 +53,8 @@ public class MiseryCharm extends CardImpl {
     private static final FilterCard filter2 = new FilterCard("Cleric card from your graveyard");
 
     static {
-        filter1.add(new SubtypePredicate("Cleric"));
-        filter2.add(new SubtypePredicate("Cleric"));
+        filter1.add(new SubtypePredicate(SubType.CLERIC));
+        filter2.add(new SubtypePredicate(SubType.CLERIC));
     }
 
     public MiseryCharm(UUID ownerId, CardSetInfo setInfo) {

@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,7 +51,7 @@ public class BerserkMurlodont extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Beast");
 
     static {
-        filter.add(new SubtypePredicate("Beast"));
+        filter.add(new SubtypePredicate(SubType.BEAST));
     }
 
     public BerserkMurlodont(UUID ownerId, CardSetInfo setInfo) {

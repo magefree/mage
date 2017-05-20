@@ -54,7 +54,7 @@ public class SliverOverlord extends CardImpl {
     private static final FilterCard filter = new FilterCard("Sliver card");
     
     static{
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public SliverOverlord(UUID ownerId, CardSetInfo setInfo) {

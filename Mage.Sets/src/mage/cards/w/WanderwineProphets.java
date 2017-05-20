@@ -51,7 +51,7 @@ public class WanderwineProphets extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk");
 
     static {
-        filter.add(new SubtypePredicate("Merfolk"));
+        filter.add(new SubtypePredicate(SubType.MERFOLK));
     }
 
     public WanderwineProphets(UUID ownerId, CardSetInfo setInfo) {

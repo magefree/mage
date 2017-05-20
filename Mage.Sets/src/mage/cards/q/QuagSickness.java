@@ -29,11 +29,8 @@
 package mage.cards.q;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
@@ -56,7 +53,7 @@ public class QuagSickness extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

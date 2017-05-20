@@ -60,7 +60,7 @@ public class FiendOfTheShadows extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Human");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public FiendOfTheShadows(UUID ownerId, CardSetInfo setInfo) {

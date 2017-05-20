@@ -33,6 +33,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,7 +49,7 @@ public class ElvishHandservant extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("Giant");
 
     static {
-        filter.add(new SubtypePredicate("Giant"));
+        filter.add(new SubtypePredicate(SubType.GIANT));
     }
 
     public ElvishHandservant(UUID ownerId, CardSetInfo setInfo) {

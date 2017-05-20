@@ -44,9 +44,6 @@ public class SubtypePredicate implements Predicate<MageObject> {
         this.subtype = subtype;
     }
 
-    public SubtypePredicate(String subtype){
-        this.subtype = SubType.byDescription(subtype);
-    }
 
     @Override
     public boolean apply(MageObject input, Game game) {

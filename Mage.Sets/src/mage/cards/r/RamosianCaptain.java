@@ -39,6 +39,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -56,7 +57,7 @@ public class RamosianCaptain extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 4 or less");
 
     static {
-        filter.add(new SubtypePredicate("Rebel"));
+        filter.add(new SubtypePredicate(SubType.REBEL));
 	filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 

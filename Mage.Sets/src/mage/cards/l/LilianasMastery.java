@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,7 +51,7 @@ public class LilianasMastery extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public LilianasMastery(UUID ownerId, CardSetInfo setInfo) {

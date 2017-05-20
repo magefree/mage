@@ -108,7 +108,7 @@ class BludgeonBrawlAddSubtypeEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         FilterArtifactPermanent filter = new FilterArtifactPermanent("noncreature, non-Equipment artifact");
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(Predicates.not(new SubtypePredicate("Equipment")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.EQUIPMENT)));
 
         Cards affectedPermanents = new CardsImpl();
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);

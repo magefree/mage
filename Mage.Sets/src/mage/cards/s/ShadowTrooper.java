@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class ShadowTrooper extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Trooper creatures");
 
     static {
-        filter.add(new SubtypePredicate("Trooper"));
+        filter.add(new SubtypePredicate(SubType.TROOPER));
     }
 
     public ShadowTrooper(UUID ownerId, CardSetInfo setInfo) {

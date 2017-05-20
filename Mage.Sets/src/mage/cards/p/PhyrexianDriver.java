@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +48,7 @@ public class PhyrexianDriver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Mercenary creatures");
 
     static {
-        filter.add(new SubtypePredicate("Mercenary"));
+        filter.add(new SubtypePredicate(SubType.MERCENARY));
     }
 
     public PhyrexianDriver(UUID ownerId, CardSetInfo setInfo) {

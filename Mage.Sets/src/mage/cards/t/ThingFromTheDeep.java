@@ -36,6 +36,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -49,7 +50,7 @@ public class ThingFromTheDeep extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an Island");
     
     static{
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     public ThingFromTheDeep(UUID ownerId, CardSetInfo setInfo) {

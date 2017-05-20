@@ -38,10 +38,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +53,7 @@ public class ThallidDevourer extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
     static {
-        filter.add(new SubtypePredicate("Saproling"));
+        filter.add(new SubtypePredicate(SubType.SAPROLING));
     }
 
     public ThallidDevourer(UUID ownerId, CardSetInfo setInfo) {

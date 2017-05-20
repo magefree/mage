@@ -68,7 +68,7 @@ public class DarkIntimations extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.PLANESWALKER));
-        filter.add(new SubtypePredicate("Bolas"));
+        filter.add(new SubtypePredicate(SubType.BOLAS));
     }
 
     public DarkIntimations(UUID ownerId, CardSetInfo setInfo) {

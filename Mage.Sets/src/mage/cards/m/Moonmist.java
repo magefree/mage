@@ -53,7 +53,7 @@ public class Moonmist extends CardImpl {
 
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.WEREWOLF)));
-        filter.add(Predicates.not(new SubtypePredicate("Wolf")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.WOLF)));
     }
 
     public Moonmist(UUID ownerId, CardSetInfo setInfo) {
@@ -80,7 +80,7 @@ class MoonmistEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("humans");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public MoonmistEffect() {

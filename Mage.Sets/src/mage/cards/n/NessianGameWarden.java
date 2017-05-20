@@ -40,6 +40,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -81,7 +82,7 @@ class NessianGameWardenEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("forests you control");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public NessianGameWardenEffect() {

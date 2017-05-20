@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,7 +51,7 @@ public class IroncladSlayer extends CardImpl {
     private final static FilterCard filter = new FilterCard("Aura or Equipment card from your graveyard");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Aura"), new SubtypePredicate("Equipment")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.AURA), new SubtypePredicate(SubType.EQUIPMENT)));
     }
 
     public IroncladSlayer(UUID ownerId, CardSetInfo setInfo) {

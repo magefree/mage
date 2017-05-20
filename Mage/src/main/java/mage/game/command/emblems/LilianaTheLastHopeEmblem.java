@@ -32,6 +32,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -59,7 +60,7 @@ class LilianaZombiesCount implements DynamicValue {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     @Override

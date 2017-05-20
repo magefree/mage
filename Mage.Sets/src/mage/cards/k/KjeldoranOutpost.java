@@ -40,6 +40,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,7 +56,7 @@ public class KjeldoranOutpost extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Plains");
 
     static {
-        filter.add(new SubtypePredicate("Plains"));
+        filter.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public KjeldoranOutpost(UUID ownerId, CardSetInfo setInfo) {

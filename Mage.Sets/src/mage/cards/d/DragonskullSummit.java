@@ -40,6 +40,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,7 +56,7 @@ public class DragonskullSummit extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Swamp"), new SubtypePredicate("Mountain")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.SWAMP), new SubtypePredicate(SubType.MOUNTAIN)));
     }
 
     public DragonskullSummit(UUID ownerId, CardSetInfo setInfo) {

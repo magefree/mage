@@ -86,7 +86,7 @@ class GisaAndGeralfContinuousEffect extends ContinuousEffectImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Zombie creature card");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     GisaAndGeralfContinuousEffect() {

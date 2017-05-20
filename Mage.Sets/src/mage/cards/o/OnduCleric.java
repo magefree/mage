@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,7 +51,7 @@ public class OnduCleric extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
 
     static {
-        filter.add(new SubtypePredicate("Ally"));
+        filter.add(new SubtypePredicate(SubType.ALLY));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

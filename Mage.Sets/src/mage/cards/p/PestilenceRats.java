@@ -30,6 +30,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,7 +50,7 @@ public class PestilenceRats extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Rats on the battlefield");
     static{
-        filter.add(new SubtypePredicate("Rat"));
+        filter.add(new SubtypePredicate(SubType.RAT));
         filter.add(new AnotherCardPredicate());
     }
 

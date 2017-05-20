@@ -41,10 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.HumanSoldierToken;
@@ -61,7 +58,7 @@ public class SigardaHeronsGrace extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Humans you control");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public SigardaHeronsGrace(UUID ownerId, CardSetInfo setInfo) {

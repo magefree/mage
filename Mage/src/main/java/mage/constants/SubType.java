@@ -249,6 +249,7 @@ public enum SubType {
     SHAPESHIFTER("Shapeshifter", SubTypeSet.CreatureType, false),
     SHEEP("Sheep", SubTypeSet.CreatureType, false),
     SIREN("Siren", SubTypeSet.CreatureType, false),
+    SITH("Sith", SubTypeSet.CreatureType, false),
     SKELETON("Skeleton", SubTypeSet.CreatureType, false),
     SLITH("Slith", SubTypeSet.CreatureType, false),
     SLIVER("Sliver", SubTypeSet.CreatureType, false),
@@ -307,6 +308,7 @@ public enum SubType {
     ZUBERA("Zubera", SubTypeSet.CreatureType, false),
 
     AJANI("Ajani", SubTypeSet.PlaneswalkerType, false),
+    BOLAS("Bolas", SubTypeSet.PlaneswalkerType, false),
     CHANDRA("Chandra", SubTypeSet.PlaneswalkerType, false),
     GIDEON("Gideon", SubTypeSet.PlaneswalkerType, false),
     JACE("Jace", SubTypeSet.PlaneswalkerType, false),

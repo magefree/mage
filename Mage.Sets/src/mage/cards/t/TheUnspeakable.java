@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,7 +53,7 @@ public class TheUnspeakable extends CardImpl {
     private static final FilterCard filter = new FilterCard("Arcane card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate("Arcane"));
+        filter.add(new SubtypePredicate(SubType.ARCANE));
     }
 
     public TheUnspeakable(UUID ownerId, CardSetInfo setInfo) {

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -51,7 +52,7 @@ public class FungalBloom extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Fungus");
 
     static {
-        filter.add(new SubtypePredicate("Fungus"));
+        filter.add(new SubtypePredicate(SubType.FUNGUS));
     }
 
     public FungalBloom(UUID ownerId, CardSetInfo setInfo) {
