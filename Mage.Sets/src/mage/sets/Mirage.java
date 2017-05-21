@@ -195,6 +195,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Mtenda Griffin", 232, Rarity.UNCOMMON, mage.cards.m.MtendaGriffin.class));
         cards.add(new SetCardInfo("Mtenda Herder", 233, Rarity.COMMON, mage.cards.m.MtendaHerder.class));
         cards.add(new SetCardInfo("Mystical Tutor", 80, Rarity.UNCOMMON, mage.cards.m.MysticalTutor.class));
+        cards.add(new SetCardInfo("Natural Balance", 129, Rarity.RARE, mage.cards.n.NaturalBalance.class));
         cards.add(new SetCardInfo("Nettletooth Djinn", 130, Rarity.UNCOMMON, mage.cards.n.NettletoothDjinn.class));
         cards.add(new SetCardInfo("Nocturnal Raid", 30, Rarity.UNCOMMON, mage.cards.n.NocturnalRaid.class));
         cards.add(new SetCardInfo("Pacifism", 236, Rarity.COMMON, mage.cards.p.Pacifism.class));
