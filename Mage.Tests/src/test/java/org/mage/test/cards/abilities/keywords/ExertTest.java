@@ -1,5 +1,9 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -7,10 +11,152 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author escplan9
  */
 public class ExertTest extends CardTestPlayerBase {
+
+    @Test
+    public void exertGustWalker() {
+
+        String gWalker = "Gust Walker";
+
+
+        addCard(Zone.BATTLEFIELD, playerA, gWalker);
+        attack(1, playerA, gWalker);
+        setChoice(playerA, "Yes");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+
+        execute();
+
+        assertAbility(playerA, gWalker, FlyingAbility.getInstance(), true);
+        assertPowerToughness(playerA, gWalker, 3, 3);
+    }
+
+    @Test
+    public void exertHoodedBrawler() {
+
+        String brawler = "Hooded Brawler";
+
+
+        addCard(Zone.BATTLEFIELD, playerA, brawler);
+        attack(1, playerA, brawler);
+        setChoice(playerA, "Yes");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, brawler, 5, 4);
+    }
+
+
+    @Test
+    public void exertBitterbladeWarrior() {
+
+        String warrior = "Bitterblade Warrior";
+
+
+        addCard(Zone.BATTLEFIELD, playerA, warrior);
+        attack(1, playerA, warrior);
+        setChoice(playerA, "Yes");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertAbility(playerA, warrior, DeathtouchAbility.getInstance(), true);
+        assertPowerToughness(playerA, warrior, 3, 2);
+    }
+
+    @Test
+    public void exertRhetCropSpearmaster() {
+
+        String spearmaster = "Rhet-Crop Spearmaster";
+
+
+        addCard(Zone.BATTLEFIELD, playerA, spearmaster);
+        attack(1, playerA, spearmaster);
+        setChoice(playerA, "Yes");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertAbility(playerA, spearmaster, FirstStrikeAbility.getInstance(), true);
+        assertPowerToughness(playerA, spearmaster, 4, 1);
+    }
+
+    @Test
+    public void exertTahCropElite(){
+        String elite = "Tah-Crop Elite";
+        addCard(Zone.BATTLEFIELD, playerA, elite);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+        attack(1, playerA, elite);
+        setChoice(playerA, "Yes");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertPowerToughness(playerA, "Grizzly Bears", 3, 3);
+        assertPowerToughness(playerA, elite, 3, 3);
+        assertPowerToughness(playerB, "Grizzly Bears", 2, 2);
+    }
+
+    @Test
+    public void exertEmberhornMinotaur(){
+        String minotaur = "Emberhorn Minotaur";
+
+        addCard(Zone.BATTLEFIELD, playerA, minotaur);
+        attack(1, playerA, minotaur);
+        setChoice(playerA, "Yes");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertAbility(playerA, minotaur, new MenaceAbility(), true);
+        assertPowerToughness(playerA, minotaur, 5, 4);
+    }
+
+    @Test
+    public void exertNefcropEntangler(){
+        String entangler = "Nef-Crop Entangler";
+
+        addCard(Zone.BATTLEFIELD, playerA, entangler);
+        attack(1, playerA, entangler);
+        setChoice(playerA, "Yes");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, entangler, 3, 3);
+    }
+
+    @Test
+    public void exertTrueheartTwins(){
+        String twins = "Trueheart Twins";
+        addCard(Zone.BATTLEFIELD, playerA, twins);
+        addCard(Zone.BATTLEFIELD, playerA, "Hyena Pack");
+        addCard(Zone.BATTLEFIELD, playerB, "Dune Beetle");
+        attack(1, playerA, twins);
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertPowerToughness(playerA, twins, 5, 4);
+        assertPowerToughness(playerA, "Hyena Pack", 4, 4);
+        assertPowerToughness(playerB, "Dune Beetle", 1, 4);
+
+    }
+
+    @Test
+    public void exertOtherCreatureTrueheartTwins(){
+        String twins = "Trueheart Twins";
+        String gWalker = "Gust Walker";
+
+
+        addCard(Zone.BATTLEFIELD, playerA, gWalker);
+        addCard(Zone.BATTLEFIELD, playerA, twins);
+        attack(1, playerA, gWalker);
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertPowerToughness(playerA, twins, 5, 4);
+        assertPowerToughness(playerA, gWalker, 4, 3);
+
+
+    }
 
     @Test
     public void exertUsedDoesNotUntapNextUntapStep() {
@@ -21,19 +167,19 @@ public class ExertTest extends CardTestPlayerBase {
         You may exert Glory-Bound Intiate as it attacks. When you do, it gets +1/+3 and gains lifelink until end of turn. 
         */
         String gbInitiate = "Glory-Bound Initiate";
-        
+
         addCard(Zone.BATTLEFIELD, playerA, gbInitiate);
         attack(1, playerA, gbInitiate);
         setChoice(playerA, "Yes");
-        
+
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        
+
         assertTapped(gbInitiate, true); // does not untap due to exert
         assertLife(playerA, 24); // exerted 4/4 lifelink
         assertLife(playerB, 16);
     }
-    
+
     @Test
     public void exertNotUsedRegularAttack() {
         
@@ -43,19 +189,19 @@ public class ExertTest extends CardTestPlayerBase {
         You may exert Glory-Bound Intiate as it attacks. When you do, it gets +1/+3 and gains lifelink until end of turn. 
         */
         String gbInitiate = "Glory-Bound Initiate";
-        
+
         addCard(Zone.BATTLEFIELD, playerA, gbInitiate);
         attack(1, playerA, gbInitiate);
         setChoice(playerA, "No");
-        
+
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        
+
         assertTapped(gbInitiate, false); // untaps as normal
         assertLife(playerA, 20);
         assertLife(playerB, 17);
     }
-    
+
     /*
     "If you gain control of another player's creature until end of turn and exert it, it will untap during that player's untap step."
     See issue #3183
@@ -70,20 +216,20 @@ public class ExertTest extends CardTestPlayerBase {
         */
         String gbInitiate = "Glory-Bound Initiate";
         String aTreason = "Act of Treason"; // {2}{R} sorcery gain control target creature, untap, gains haste until end of turn
-        
+
         addCard(Zone.HAND, playerA, gbInitiate);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.HAND, playerB, aTreason);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, gbInitiate);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, aTreason, gbInitiate);
         attack(2, playerB, gbInitiate);
         setChoice(playerB, "Yes");
-        
+
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        
+
         assertGraveyardCount(playerB, aTreason, 1);
         assertLife(playerA, 16);
         assertLife(playerB, 24);
@@ -119,7 +265,7 @@ public class ExertTest extends CardTestPlayerBase {
         assertTapped(cCelebrant, true);
         assertTapped(memnite, true);
     }
-    
+
     /*
      * Reported bug: Combat Celebrant able to exert again despite being exerted already if Always Watching is in play. (Or presumably any Vigilance granting effect)
     */
@@ -160,7 +306,7 @@ public class ExertTest extends CardTestPlayerBase {
         assertTapped(memnite, false);
         assertLife(playerB, 6); // 5 + 2 + 5 + 2 (Celebrant twice, Memnite twice with +1/+1 on both)
     }
-    
+
     /*
      * Reported bug: Combat Celebrant able to attack again despite being exerted already if Arlinn Kord granted him vigilance.
     */
