@@ -73,7 +73,7 @@ public class TargetActivatedAbility extends TargetObject {
         }
         StackObject stackObject = game.getStack().getStackObject(id);
         return stackObject != null && stackObject.getStackAbility() != null && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
-                && filter.match(((ActivatedAbility) stackObject), game);
+                && filter.match(((ActivatedAbility) stackObject.getStackAbility()), game);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class TargetActivatedAbility extends TargetObject {
         for (StackObject stackObject : game.getStack()) {
             if (stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
                     && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())
-                    && filter.match(((ActivatedAbility) stackObject), game)) {
+                    && filter.match(((StackAbility) stackObject), game)) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }
         }

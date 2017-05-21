@@ -54,7 +54,7 @@ public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifying
                 return true;
             }
         }
-        return false; // casr not prevented by this effect
+        return false; // cast not prevented by this effect
     }
 
     @Override
