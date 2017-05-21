@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class SpiritMirror extends CardImpl {
 
-    private static final FilterPermanent filterToken = new FilterPermanent("Reflection", "Reflection token");
+    private static final FilterPermanent filterToken = new FilterPermanent(SubType.REFLECTION, "Reflection token");
     private static final FilterPermanent filter = new FilterPermanent("Reflection");
 
     static {
