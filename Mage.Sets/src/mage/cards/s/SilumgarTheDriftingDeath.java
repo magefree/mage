@@ -55,7 +55,7 @@ public class SilumgarTheDriftingDeath extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon you control");
 
     static {
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

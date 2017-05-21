@@ -34,6 +34,7 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -48,7 +49,7 @@ public class CourageousOutrider extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Human card");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public CourageousOutrider(UUID ownerId, CardSetInfo setInfo) {

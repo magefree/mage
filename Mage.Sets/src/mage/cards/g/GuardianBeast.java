@@ -39,10 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -69,7 +66,7 @@ public class GuardianBeast extends CardImpl {
 
     static {
         filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAura.add(new SubtypePredicate("Aura"));
+        filterAura.add(new SubtypePredicate(SubType.AURA));
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 

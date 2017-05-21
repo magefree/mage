@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -51,8 +52,8 @@ public class Massacre extends CardImpl {
     private static final FilterPermanent filterSwamp = new FilterPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(("Plains")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
+        filterPlains.add(new SubtypePredicate((SubType.PLAINS)));
+        filterSwamp.add(new SubtypePredicate((SubType.SWAMP)));
     }
 
     public Massacre(UUID ownerId, CardSetInfo setInfo) {

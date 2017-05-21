@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,8 +54,8 @@ public class MasterTrinketeer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Servo and Thopter creatures");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Servo"),
-                new SubtypePredicate("Thopter")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.SERVO),
+                new SubtypePredicate(SubType.THOPTER)));
     }
 
     public MasterTrinketeer(UUID ownerId, CardSetInfo setInfo) {

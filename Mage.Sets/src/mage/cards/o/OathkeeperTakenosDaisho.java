@@ -56,7 +56,7 @@ public class OathkeeperTakenosDaisho extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("it's a Samurai card");
     static {
-        filter.add(new SubtypePredicate("Samurai"));
+        filter.add(new SubtypePredicate(SubType.SAMURAI));
     }
 
     public OathkeeperTakenosDaisho(UUID ownerId, CardSetInfo setInfo) {

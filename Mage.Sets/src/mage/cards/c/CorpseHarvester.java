@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -113,7 +114,7 @@ class CorpseHarvesterEffect extends OneShotEffect {
 
     private void searchCard(Player player, Ability source, Game game, Cards cards, String subtype) {
         FilterCard filter = new FilterCard(subtype);
-        filter.add(new SubtypePredicate(subtype));
+        filter.add(new SubtypePredicate(SubType.byDescription(subtype)));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().remove(target.getFirstTarget(), game);

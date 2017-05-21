@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -51,7 +52,7 @@ public class ElvenRiders extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls and/or creatures with flying");
 
     static {
-        filter.add(Predicates.not(Predicates.or(new SubtypePredicate("Wall"), new AbilityPredicate(FlyingAbility.class))));
+        filter.add(Predicates.not(Predicates.or(new SubtypePredicate(SubType.WALL), new AbilityPredicate(FlyingAbility.class))));
     }
 
     public ElvenRiders(UUID ownerId, CardSetInfo setInfo) {

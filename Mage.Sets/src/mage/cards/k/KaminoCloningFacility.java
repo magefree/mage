@@ -39,6 +39,7 @@ import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,7 +54,7 @@ public class KaminoCloningFacility extends CardImpl {
     private static final FilterSpell FILTER = new FilterSpell("a Trooper spell");
 
     static {
-        FILTER.add(new SubtypePredicate("Trooper"));
+        FILTER.add(new SubtypePredicate(SubType.TROOPER));
     }
 
     public KaminoCloningFacility(UUID ownerId, CardSetInfo setInfo) {

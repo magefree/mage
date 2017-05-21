@@ -42,6 +42,7 @@ import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +58,7 @@ public class WalkerOfSecretWays extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("Ninja you control");
     static {
-        filterCreature.add((new SubtypePredicate("Ninja")));
+        filterCreature.add((new SubtypePredicate(SubType.NINJA)));
     }
 
     public WalkerOfSecretWays(UUID ownerId, CardSetInfo setInfo) {

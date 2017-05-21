@@ -33,6 +33,7 @@ import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,7 +49,7 @@ public class Didgeridoo extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("a Minotaur permanent card");
 
     static {
-        filter.add(new SubtypePredicate("Minotaur"));
+        filter.add(new SubtypePredicate(SubType.MINOTAUR));
     }
 
     public Didgeridoo(UUID ownerId, CardSetInfo setInfo) {

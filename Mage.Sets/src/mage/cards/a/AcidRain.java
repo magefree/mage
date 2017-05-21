@@ -31,6 +31,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -44,7 +45,7 @@ public class AcidRain extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Forests");
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public AcidRain(UUID ownerId, CardSetInfo setInfo) {

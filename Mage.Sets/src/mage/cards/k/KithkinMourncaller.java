@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,7 +48,7 @@ public class KithkinMourncaller extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("an attacking Kithkin or Elf");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Kithkin"), new SubtypePredicate("Elf")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.KITHKIN), new SubtypePredicate(SubType.ELF)));
     }
 
     public KithkinMourncaller(UUID ownerId, CardSetInfo setInfo) {

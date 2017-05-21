@@ -36,10 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -85,8 +82,8 @@ class UnbreathingHordeEffect1 extends OneShotEffect {
     private static final FilterCreatureCard filter2 = new FilterCreatureCard();
 
     static {
-        filter1.add(new SubtypePredicate("Zombie"));
-        filter2.add(new SubtypePredicate("Zombie"));
+        filter1.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter2.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public UnbreathingHordeEffect1() {

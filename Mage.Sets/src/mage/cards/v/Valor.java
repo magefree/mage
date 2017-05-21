@@ -39,6 +39,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,7 +58,7 @@ public class Valor extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(new SubtypePredicate("Plains"));
+        filter.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public Valor(UUID ownerId, CardSetInfo setInfo) {

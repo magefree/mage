@@ -40,6 +40,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,7 +55,7 @@ public class ScrybRanger extends CardImpl {
 
     private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent("Forest");
     static {
-        filterForest.add(new SubtypePredicate("Forest"));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public ScrybRanger(UUID ownerId, CardSetInfo setInfo) {

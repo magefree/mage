@@ -36,6 +36,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -52,7 +53,7 @@ public class AvacynianPriest extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Human")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
     }
 
     public AvacynianPriest(UUID ownerId, CardSetInfo setInfo) {

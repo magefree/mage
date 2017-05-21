@@ -36,10 +36,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +54,7 @@ public class Immerwolf extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wolf and Werewolf creatures");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Wolf"), new SubtypePredicate("Werewolf")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.WOLF), new SubtypePredicate(SubType.WEREWOLF)));
     }
 
     public Immerwolf(UUID ownerId, CardSetInfo setInfo) {
@@ -92,8 +89,8 @@ class ImmerwolfEffect extends ContinuousRuleModifyingEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate("Werewolf"));
-        filter.add(Predicates.not(new SubtypePredicate("Human")));
+        filter.add(new SubtypePredicate(SubType.WEREWOLF));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
     }
 
     public ImmerwolfEffect() {

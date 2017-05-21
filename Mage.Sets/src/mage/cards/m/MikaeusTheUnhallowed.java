@@ -37,10 +37,7 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -60,7 +57,7 @@ public class MikaeusTheUnhallowed extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Human")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
     }
 
     public MikaeusTheUnhallowed(UUID ownerId, CardSetInfo setInfo) {

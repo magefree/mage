@@ -40,6 +40,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,7 +55,7 @@ public class MyrMatrix extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr");
 
        static {
-           filter.add(new SubtypePredicate("Myr"));
+           filter.add(new SubtypePredicate(SubType.MYR));
        }
 
         public MyrMatrix (UUID ownerId, CardSetInfo setInfo) {

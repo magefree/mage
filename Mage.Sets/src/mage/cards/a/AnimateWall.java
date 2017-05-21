@@ -53,7 +53,7 @@ public class AnimateWall extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall");
     
     static {
-        filter.add(new SubtypePredicate("Wall"));
+        filter.add(new SubtypePredicate(SubType.WALL));
     }
     
     public AnimateWall(UUID ownerId, CardSetInfo setInfo) {

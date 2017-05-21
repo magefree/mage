@@ -32,6 +32,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -46,7 +47,7 @@ public class AirborneAid extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Bird on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate("Bird"));
+        filter.add(new SubtypePredicate(SubType.BIRD));
     }
 
     public AirborneAid(UUID ownerId, CardSetInfo setInfo) {

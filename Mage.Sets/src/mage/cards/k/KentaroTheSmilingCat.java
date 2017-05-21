@@ -85,7 +85,7 @@ class KentaroTheSmilingCatCastingEffect extends ContinuousEffectImpl {
 	private static final FilterCard filterSamurai = new FilterCard();
 	
 	static {
-		filterSamurai.add(new SubtypePredicate("Samurai"));
+		filterSamurai.add(new SubtypePredicate(SubType.SAMURAI));
 	}
 	
     static final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(

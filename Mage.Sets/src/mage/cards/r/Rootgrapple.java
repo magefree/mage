@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,7 +55,7 @@ public class Rootgrapple extends CardImpl {
 
     static {
         filterNoncreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filterTreefolk.add(new SubtypePredicate("Treefolk"));
+        filterTreefolk.add(new SubtypePredicate(SubType.TREEFOLK));
     }
 
     public Rootgrapple(UUID ownerId, CardSetInfo setInfo) {

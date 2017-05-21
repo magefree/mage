@@ -41,6 +41,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -112,7 +113,7 @@ class ThievingSpriteEffect extends OneShotEffect {
         }
 
         FilterControlledPermanent filter = new FilterControlledPermanent();
-        filter.add(new SubtypePredicate("Faerie"));
+        filter.add(new SubtypePredicate(SubType.FAERIE));
         int numberOfFaeries = game.getBattlefield().countAll(filter, controller.getId(), game);
 
         Cards revealedCards = new CardsImpl();

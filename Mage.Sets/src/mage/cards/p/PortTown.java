@@ -36,6 +36,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,8 +51,8 @@ public class PortTown extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Plains or Island card from your hand");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Plains"),
-                new SubtypePredicate("Island")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.ISLAND),
+                new SubtypePredicate(SubType.ISLAND)));
     }
 
     public PortTown(UUID ownerId, CardSetInfo setInfo) {

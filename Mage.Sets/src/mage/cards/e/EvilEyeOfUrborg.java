@@ -34,10 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,7 +51,7 @@ public class EvilEyeOfUrborg extends CardImpl {
     private static final FilterCreaturePermanent cantAttackFilter = new FilterCreaturePermanent("Non-Eye creatures you control");
 
     static {
-        cantAttackFilter.add(Predicates.not((new SubtypePredicate("Eye"))));
+        cantAttackFilter.add(Predicates.not((new SubtypePredicate(SubType.EYE))));
         cantAttackFilter.add(new ControllerPredicate(TargetController.YOU));
     }
 

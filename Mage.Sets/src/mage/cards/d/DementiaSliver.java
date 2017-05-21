@@ -38,10 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -59,7 +56,7 @@ public class DementiaSliver extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("All Slivers");
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public DementiaSliver(UUID ownerId, CardSetInfo setInfo) {

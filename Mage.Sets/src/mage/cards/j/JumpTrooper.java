@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -54,7 +55,7 @@ public class JumpTrooper extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Trooper creatures");
 
     static {
-        filter.add(new SubtypePredicate("Trooper"));
+        filter.add(new SubtypePredicate(SubType.TROOPER));
     }
 
     public JumpTrooper(UUID ownerId, CardSetInfo setInfo) {
@@ -84,7 +85,7 @@ class JumpTrooperTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Trooper creature you control");
 
     static {
-        filter.add(new SubtypePredicate("Trooper"));
+        filter.add(new SubtypePredicate(SubType.TROOPER));
     }
 
     public JumpTrooperTriggeredAbility(Effect effect) {

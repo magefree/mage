@@ -42,10 +42,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -64,7 +61,7 @@ public class CaribouRange extends CardImpl {
 
     static {
         filter.add(new TokenPredicate());
-        filter.add(new SubtypePredicate("Caribou"));
+        filter.add(new SubtypePredicate(SubType.CARIBOU));
     }
 
     public CaribouRange(UUID ownerId, CardSetInfo setInfo) {

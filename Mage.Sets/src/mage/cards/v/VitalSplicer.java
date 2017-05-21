@@ -29,6 +29,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -57,7 +58,7 @@ public class VitalSplicer extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new SubtypePredicate("Golem"));
+        filter.add(new SubtypePredicate(SubType.GOLEM));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

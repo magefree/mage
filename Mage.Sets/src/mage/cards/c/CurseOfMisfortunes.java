@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -98,7 +99,7 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterCard filter = new FilterCard("Curse card that doesn't have the same name as a Curse attached to enchanted player");
-        filter.add(new SubtypePredicate("Curse"));
+        filter.add(new SubtypePredicate(SubType.CURSE));
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Player targetPlayer = game.getPlayer(enchantment.getAttachedTo());

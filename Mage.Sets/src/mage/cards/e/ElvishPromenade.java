@@ -32,6 +32,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElfToken;
@@ -47,7 +48,7 @@ public class ElvishPromenade extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
 
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public ElvishPromenade(UUID ownerId, CardSetInfo setInfo) {

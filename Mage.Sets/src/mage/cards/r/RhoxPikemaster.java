@@ -31,6 +31,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -50,7 +51,7 @@ public class RhoxPikemaster extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-        filter.add(new SubtypePredicate("Soldier"));
+        filter.add(new SubtypePredicate(SubType.SOLDIER));
     }
 
     public RhoxPikemaster(UUID ownerId, CardSetInfo setInfo) {

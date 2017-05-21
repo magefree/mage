@@ -33,6 +33,7 @@ import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -50,7 +51,7 @@ public class AnowonTheRuinSage extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Vampire creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Vampire")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.VAMPIRE)));
     }
 
     public AnowonTheRuinSage(UUID ownerId, CardSetInfo setInfo) {

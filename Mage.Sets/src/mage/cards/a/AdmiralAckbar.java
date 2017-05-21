@@ -39,10 +39,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -58,7 +55,7 @@ public class AdmiralAckbar extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Starship creatures");
 
     static {
-        filter.add(new SubtypePredicate("Starship"));
+        filter.add(new SubtypePredicate(SubType.STARSHIP));
     }
 
     public AdmiralAckbar(UUID ownerId, CardSetInfo setInfo) {

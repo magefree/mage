@@ -50,7 +50,7 @@ public class Invisibility extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Wall")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
     }
 
     public Invisibility(UUID ownerId, CardSetInfo setInfo) {

@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -57,9 +58,9 @@ public class StoneforgeAcolyte extends CardImpl {
     private static final FilterCard filterEquipment = new FilterCard("an Equipment card");
 
     static {
-        filterAlly.add(new SubtypePredicate("Ally"));
+        filterAlly.add(new SubtypePredicate(SubType.ALLY));
         filterAlly.add(Predicates.not(new TappedPredicate()));
-        filterEquipment.add(new SubtypePredicate("Equipment"));
+        filterEquipment.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public StoneforgeAcolyte(UUID ownerId, CardSetInfo setInfo) {

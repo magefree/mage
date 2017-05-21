@@ -35,6 +35,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,8 +52,8 @@ public class ChokedEstuary extends CardImpl {
     private static final FilterCard filter = new FilterCard("an Island or Swamp card from your hand");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Island"),
-                new SubtypePredicate("Swamp")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.ISLAND),
+                new SubtypePredicate(SubType.SWAMP)));
     }
 
     public ChokedEstuary(UUID ownerId, CardSetInfo setInfo) {

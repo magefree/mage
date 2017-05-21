@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,7 +58,7 @@ public class VeteranCathar extends CardImpl {
 
         // {3}{W}: Target Human gains double strike until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{3}{W}"));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("Human", "Human")));
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.HUMAN, "Human")));
         this.addAbility(ability);
 
     }

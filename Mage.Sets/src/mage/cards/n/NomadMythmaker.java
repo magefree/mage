@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,7 +61,7 @@ public class NomadMythmaker extends CardImpl {
 
     static {
         FILTER.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        FILTER.add(new SubtypePredicate("Aura"));
+        FILTER.add(new SubtypePredicate(SubType.AURA));
     }
 
     public NomadMythmaker(UUID ownerId, CardSetInfo setInfo) {

@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -62,7 +63,7 @@ public class MazesEnd extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("Gate card");
     static {
-        filterCard.add(new SubtypePredicate("Gate"));
+        filterCard.add(new SubtypePredicate(SubType.GATE));
     }
 
     public MazesEnd(UUID ownerId, CardSetInfo setInfo) {

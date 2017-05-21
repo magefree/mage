@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -52,8 +53,8 @@ public class KingSuleiman extends CardImpl {
 
     static {
         filter.add( Predicates.or(
-                new SubtypePredicate("Djinn"),
-                new SubtypePredicate("Efreet")));
+                new SubtypePredicate(SubType.DJINN),
+                new SubtypePredicate(SubType.EFREET)));
     }
 
     public KingSuleiman(UUID ownerId, CardSetInfo setInfo) {

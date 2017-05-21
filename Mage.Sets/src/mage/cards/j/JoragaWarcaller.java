@@ -58,7 +58,7 @@ public class JoragaWarcaller extends CardImpl {
     
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
         filter.add(new AnotherPredicate());
     }
 

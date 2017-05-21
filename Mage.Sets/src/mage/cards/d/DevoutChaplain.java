@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -56,7 +57,7 @@ public class DevoutChaplain extends CardImpl {
 
     static {
         humanFilter.add(Predicates.not(new TappedPredicate()));
-        humanFilter.add(new SubtypePredicate("Human"));
+        humanFilter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public DevoutChaplain(UUID ownerId, CardSetInfo setInfo) {

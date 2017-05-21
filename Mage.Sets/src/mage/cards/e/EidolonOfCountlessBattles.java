@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -57,7 +58,7 @@ public class EidolonOfCountlessBattles extends CardImpl {
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.CREATURE),
-                new SubtypePredicate("Aura")));
+                new SubtypePredicate(SubType.AURA)));
     }
     
     public EidolonOfCountlessBattles(UUID ownerId, CardSetInfo setInfo) {

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -63,7 +64,7 @@ public class MistbindClique extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Champion a Faerie
-        this.addAbility(new ChampionAbility(this, "Faerie", false));
+        this.addAbility(new ChampionAbility(this, SubType.FAERIE, false));
         // When a Faerie is championed with Mistbind Clique, tap all lands target player controls.
         this.addAbility(new MistbindCliqueAbility());
 

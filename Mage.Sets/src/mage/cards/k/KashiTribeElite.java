@@ -37,10 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -57,7 +54,7 @@ public class KashiTribeElite extends CardImpl {
 
     static {
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));
-        filter.add(new SubtypePredicate("Snake"));
+        filter.add(new SubtypePredicate(SubType.SNAKE));
     }
 
     public KashiTribeElite(UUID ownerId, CardSetInfo setInfo) {

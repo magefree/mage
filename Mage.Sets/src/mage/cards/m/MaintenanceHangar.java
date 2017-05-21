@@ -40,13 +40,7 @@ import mage.abilities.keyword.RepairAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -62,7 +56,7 @@ public class MaintenanceHangar extends CardImpl {
     private static final FilterCreaturePermanent filterPermanent = new FilterCreaturePermanent("Starship creatures");
 
     static {
-        filterPermanent.add(new SubtypePredicate("Starship"));
+        filterPermanent.add(new SubtypePredicate(SubType.STARSHIP));
     }
 
     public MaintenanceHangar(UUID ownerId, CardSetInfo setInfo) {
@@ -125,7 +119,7 @@ class MaintenanceHangarEffect extends ContinuousEffectImpl {
     private static final FilterCreatureCard filterCard = new FilterCreatureCard("Starship creatures");
 
     static {
-        filterCard.add(new SubtypePredicate("Starship"));
+        filterCard.add(new SubtypePredicate(SubType.STARSHIP));
     }
 
     public MaintenanceHangarEffect() {

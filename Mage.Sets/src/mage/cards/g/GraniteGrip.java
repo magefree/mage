@@ -52,7 +52,7 @@ public class GraniteGrip extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
 
     static {
-        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

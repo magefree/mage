@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class LordOfTheAccursed extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie", "Zombie creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie creatures");
 
     public LordOfTheAccursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

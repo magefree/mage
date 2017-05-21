@@ -39,10 +39,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -61,7 +58,7 @@ public class GeneralTazri extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("an Ally creature card");
 
     static {
-        filter.add(new SubtypePredicate("Ally"));
+        filter.add(new SubtypePredicate(SubType.ALLY));
     }
 
     public GeneralTazri(UUID ownerId, CardSetInfo setInfo) {
@@ -79,7 +76,7 @@ public class GeneralTazri extends CardImpl {
         DynamicValue xValue = new GeneralTazriColorCount();
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent("Ally", "Ally creatures"), false),
+                new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent(SubType.ALLY, "Ally creatures"), false),
                 new ManaCostsImpl("{W}{U}{B}{R}{G}")));
 
     }
@@ -99,7 +96,7 @@ class GeneralTazriColorCount implements DynamicValue {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate(("Ally")));
+        filter.add(new SubtypePredicate((SubType.ALLY)));
     }
 
     @Override

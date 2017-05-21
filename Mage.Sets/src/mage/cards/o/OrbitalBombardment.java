@@ -32,6 +32,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -45,7 +46,7 @@ public class OrbitalBombardment extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Starship creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Starship")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.STARSHIP)));
     }
 
     public OrbitalBombardment(UUID ownerId, CardSetInfo setInfo) {

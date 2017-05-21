@@ -39,6 +39,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
@@ -52,7 +53,7 @@ public class MurmuringBosk extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Treefolk card from your hand");
 
     static {
-        filter.add(new SubtypePredicate("Treefolk"));
+        filter.add(new SubtypePredicate(SubType.TREEFOLK));
     }
 
     public MurmuringBosk(UUID ownerId, CardSetInfo setInfo) {

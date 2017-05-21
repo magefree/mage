@@ -30,6 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -51,7 +52,7 @@ public class MasterSplicer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Golem creatures");
 
     static {
-        filter.add(new SubtypePredicate("Golem"));
+        filter.add(new SubtypePredicate(SubType.GOLEM));
     }
 
     public MasterSplicer(UUID ownerId, CardSetInfo setInfo) {

@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,7 +52,7 @@ public class FungusSliver extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public FungusSliver(UUID ownerId, CardSetInfo setInfo) {

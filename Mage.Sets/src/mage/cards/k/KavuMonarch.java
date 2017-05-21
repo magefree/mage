@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,8 +55,8 @@ public class KavuMonarch extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another Kavu");
 
     static {
-        filter1.add(new SubtypePredicate("Kavu"));
-        filter2.add(new SubtypePredicate("Kavu"));
+        filter1.add(new SubtypePredicate(SubType.KAVU));
+        filter2.add(new SubtypePredicate(SubType.KAVU));
         filter2.add(new AnotherPredicate());
     }
 

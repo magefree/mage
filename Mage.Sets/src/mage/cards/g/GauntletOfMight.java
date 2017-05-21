@@ -55,7 +55,7 @@ public class GauntletOfMight extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filterMountain.add(new SubtypePredicate("Mountain"));
+        filterMountain.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
     
     public GauntletOfMight(UUID ownerId, CardSetInfo setInfo) {

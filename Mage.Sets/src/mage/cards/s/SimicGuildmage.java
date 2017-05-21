@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
@@ -67,7 +68,7 @@ public class SimicGuildmage extends CardImpl {
     private static final FilterEnchantmentPermanent auraFilter = new FilterEnchantmentPermanent("Aura");
 
     static {
-        auraFilter.add(new SubtypePredicate("Aura"));
+        auraFilter.add(new SubtypePredicate(SubType.AURA));
     }
 
     public SimicGuildmage(UUID ownerId, CardSetInfo setInfo) {

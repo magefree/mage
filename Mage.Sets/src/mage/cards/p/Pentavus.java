@@ -40,6 +40,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
@@ -56,7 +57,7 @@ public class Pentavus extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Pentavite");
 
     static {
-        filter.add(new SubtypePredicate("Pentavite"));
+        filter.add(new SubtypePredicate(SubType.PENTAVITE));
     }
 
     public Pentavus(UUID ownerId, CardSetInfo setInfo) {

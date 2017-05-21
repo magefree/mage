@@ -35,6 +35,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -50,7 +51,7 @@ public class Ratcatcher extends CardImpl {
     private static final FilterCard filter = new FilterCard("Rat card");
     
     static {
-        filter.add(new SubtypePredicate("Rat"));
+        filter.add(new SubtypePredicate(SubType.RAT));
     }
 
     public Ratcatcher(UUID ownerId, CardSetInfo setInfo) {

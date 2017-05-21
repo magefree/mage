@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -52,7 +53,7 @@ public class GoblinPyromancer extends CardImpl {
     private static final FilterPermanent filterPermanent = new FilterPermanent("Goblins");
 
     static {
-        filterPermanent.add(new SubtypePredicate("Goblin"));
+        filterPermanent.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public GoblinPyromancer(UUID ownerId, CardSetInfo setInfo) {

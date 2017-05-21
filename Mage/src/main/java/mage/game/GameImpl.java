@@ -109,13 +109,13 @@ public abstract class GameImpl implements Game, Serializable {
 
     static {
         FILTER_AURA.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        FILTER_AURA.add(new SubtypePredicate("Aura"));
+        FILTER_AURA.add(new SubtypePredicate(SubType.AURA));
 
         FILTER_EQUIPMENT.add(new CardTypePredicate(CardType.ARTIFACT));
-        FILTER_EQUIPMENT.add(new SubtypePredicate("Equipment"));
+        FILTER_EQUIPMENT.add(new SubtypePredicate(SubType.EQUIPMENT));
 
         FILTER_FORTIFICATION.add(new CardTypePredicate(CardType.ARTIFACT));
-        FILTER_FORTIFICATION.add(new SubtypePredicate("Fortification"));
+        FILTER_FORTIFICATION.add(new SubtypePredicate(SubType.FORTIFICATION));
 
         FILTER_LEGENDARY.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
@@ -1945,7 +1945,7 @@ public abstract class GameImpl implements Game, Serializable {
             for (Permanent planeswalker : planeswalkers) {
                 for (String planeswalkertype : planeswalker.getSubtype(this)) {
                     FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
-                    filterPlaneswalker.add(new SubtypePredicate(planeswalkertype));
+                    filterPlaneswalker.add(new SubtypePredicate(SubType.byDescription(planeswalkertype)));
                     filterPlaneswalker.add(new ControllerIdPredicate(planeswalker.getControllerId()));
                     if (getBattlefield().contains(filterPlaneswalker, planeswalker.getControllerId(), this, 2)) {
                         Player controller = this.getPlayer(planeswalker.getControllerId());

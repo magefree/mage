@@ -28,12 +28,14 @@
 
 package mage.cards.s;
 
+import java.util.EnumSet;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +46,7 @@ public class ScaldingTarn extends CardImpl {
     public ScaldingTarn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.frameColor = new ObjectColor("UR");
-        this.addAbility(new FetchLandActivatedAbility(new String[] {"Island", "Mountain"}));
+        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.ISLAND, SubType.MOUNTAIN)));
     }
 
     public ScaldingTarn(final ScaldingTarn card) {

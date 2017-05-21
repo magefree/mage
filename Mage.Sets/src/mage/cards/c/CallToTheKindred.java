@@ -37,6 +37,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicate;
@@ -124,7 +125,7 @@ class CallToTheKindredEffect extends OneShotEffect {
             StringBuilder sb = new StringBuilder("creature card with at least one subtype from: ");
             ArrayList<Predicate<MageObject>> subtypes = new ArrayList<>();
             for (String subtype : creature.getSubtype(game)) {
-                subtypes.add(new SubtypePredicate(subtype));
+                subtypes.add(new SubtypePredicate(SubType.byDescription(subtype)));
                 sb.append(subtype).append(", ");
             }
             filter.add(Predicates.or(subtypes));

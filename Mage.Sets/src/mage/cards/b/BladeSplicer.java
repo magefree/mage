@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,7 +56,7 @@ public class BladeSplicer extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new SubtypePredicate("Golem"));
+        filter.add(new SubtypePredicate(SubType.GOLEM));
     }
 
     public BladeSplicer (UUID ownerId, CardSetInfo setInfo) {

@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,11 +62,11 @@ public class NoxiousGhoul extends CardImpl {
 
         filter.add(Predicates.or(
                 new CardIdPredicate(this.getId()),
-                new SubtypePredicate("Zombie")));
+                new SubtypePredicate(SubType.ZOMBIE)));
 
         filter2.add(new CardTypePredicate(CardType.CREATURE));
         filter2.add(Predicates.not(
-                new SubtypePredicate("Zombie")));
+                new SubtypePredicate(SubType.ZOMBIE)));
 
         final String rule = "Whenever {this} or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.";
 

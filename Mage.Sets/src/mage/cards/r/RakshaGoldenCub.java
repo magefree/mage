@@ -55,7 +55,7 @@ public class RakshaGoldenCub extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Cat creatures you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Cat"));
+        filter.add(new SubtypePredicate(SubType.CAT));
     }
     
     public RakshaGoldenCub(UUID ownerId, CardSetInfo setInfo) {

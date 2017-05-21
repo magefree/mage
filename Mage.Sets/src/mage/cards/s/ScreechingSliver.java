@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPlayer;
@@ -48,7 +49,7 @@ import mage.target.TargetPlayer;
  */
 public class ScreechingSliver extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Sliver", "All Slivers");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
     public ScreechingSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

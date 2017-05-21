@@ -34,6 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,8 +50,8 @@ public class Broodwarden extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Eldrazi Spawn creatures");
 
     static {
-        filter.add(new SubtypePredicate("Eldrazi"));
-        filter.add(new SubtypePredicate("Spawn"));
+        filter.add(new SubtypePredicate(SubType.ELDRAZI));
+        filter.add(new SubtypePredicate(SubType.SPAWN));
     }
 
     public Broodwarden(UUID ownerId, CardSetInfo setInfo) {

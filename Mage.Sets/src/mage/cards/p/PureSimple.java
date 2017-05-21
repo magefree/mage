@@ -34,6 +34,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -50,7 +51,7 @@ public class PureSimple extends SplitCard {
     private static final FilterPermanent filterMulticolor = new FilterPermanent("multicolor permanent");
 
     static {
-        filterDestroy.add(Predicates.or(new SubtypePredicate("Aura"), new SubtypePredicate("Equipment")));
+        filterDestroy.add(Predicates.or(new SubtypePredicate(SubType.AURA), new SubtypePredicate(SubType.EQUIPMENT)));
         filterMulticolor.add(new MulticoloredPredicate());
     }
 

@@ -38,6 +38,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -59,7 +60,7 @@ public class EyeOfUgin extends CardImpl {
     static {
         filter.add(new ColorlessPredicate());
         filterSpells.add(new ColorlessPredicate());
-        filterSpells.add(new SubtypePredicate("Eldrazi"));
+        filterSpells.add(new SubtypePredicate(SubType.ELDRAZI));
     }
 
     public EyeOfUgin(UUID ownerId, CardSetInfo setInfo) {

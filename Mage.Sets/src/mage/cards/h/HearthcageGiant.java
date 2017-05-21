@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,8 +58,8 @@ public class HearthcageGiant extends CardImpl {
     private static final FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant");
 
     static {
-        filterElemental.add(new SubtypePredicate("Elemental"));
-        filterGiant.add(new SubtypePredicate("Giant"));
+        filterElemental.add(new SubtypePredicate(SubType.ELEMENTAL));
+        filterGiant.add(new SubtypePredicate(SubType.GIANT));
     }
 
     public HearthcageGiant(UUID ownerId, CardSetInfo setInfo) {

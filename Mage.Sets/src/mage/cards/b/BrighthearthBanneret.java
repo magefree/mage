@@ -35,6 +35,7 @@ import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -52,8 +53,8 @@ public class BrighthearthBanneret extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Elemental"),
-                new SubtypePredicate("Warrior")));
+                new SubtypePredicate(SubType.ELEMENTAL),
+                new SubtypePredicate(SubType.WARRIOR)));
     }
 
     public BrighthearthBanneret(UUID ownerId, CardSetInfo setInfo) {

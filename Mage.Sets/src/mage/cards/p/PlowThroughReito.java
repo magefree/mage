@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,7 +51,7 @@ public class PlowThroughReito extends CardImpl {
 
 
         // Sweep - Return any number of Plains you control to their owner's hand. Target creature gets +1/+1 until end of turn for each Plains returned this way.
-        this.getSpellAbility().addEffect(new SweepEffect("Plains"));
+        this.getSpellAbility().addEffect(new SweepEffect(SubType.PLAINS));
         DynamicValue sweepValue = new SweepNumber("Plains", true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(sweepValue, sweepValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

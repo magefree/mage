@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -57,7 +58,7 @@ public class BaronSengir extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target Vampire");
 
     static {
-        filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
         filter.add(new AnotherPredicate());
     }
 

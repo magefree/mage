@@ -40,10 +40,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -115,7 +112,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
             StringBuilder sb = new StringBuilder("creature that shares a creature type with the formerly attached creature: ");
             ArrayList<Predicate<MageObject>> subtypes = new ArrayList<>();
             for (String subtype : lastStateCreature.getSubtype(game)) {
-                subtypes.add(new SubtypePredicate(subtype));
+                subtypes.add(new SubtypePredicate(SubType.byDescription(subtype)));
                 sb.append(subtype).append(", ");
             }
             FILTER.add(Predicates.or(subtypes));

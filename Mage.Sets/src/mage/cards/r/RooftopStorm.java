@@ -72,7 +72,7 @@ class RooftopStormRuleEffect extends ContinuousEffectImpl {
     private static final FilterCard filter = new FilterCard("Zombie creature spells");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 

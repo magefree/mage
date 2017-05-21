@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetLandPermanent;
@@ -47,7 +48,7 @@ public class PeakEruption extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
     static{
-        filter.add(new SubtypePredicate(("Mountain")));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public PeakEruption(UUID ownerId, CardSetInfo setInfo) {

@@ -32,7 +32,9 @@ import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
+import java.util.EnumSet;
 import java.util.UUID;
 
 /**
@@ -46,7 +48,7 @@ public class BloodstainedMire extends CardImpl {
         this.frameColor = new ObjectColor("RB");
 
         // {tap}, Pay 1 life, Sacrifice Bloodstained Mire: Search your library for a Swamp or Mountain card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(new String[]{"Swamp", "Mountain"}));
+        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.SWAMP,SubType.MOUNTAIN)));
     }
 
     public BloodstainedMire(final BloodstainedMire card) {

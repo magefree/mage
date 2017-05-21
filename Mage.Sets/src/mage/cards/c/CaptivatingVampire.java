@@ -59,8 +59,8 @@ public class CaptivatingVampire extends CardImpl {
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampires you control");
 
     static {
-        filter1.add(new SubtypePredicate("Vampire"));
-        filter2.add(new SubtypePredicate("Vampire"));
+        filter1.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter2.add(new SubtypePredicate(SubType.VAMPIRE));
         filter2.add(Predicates.not(new TappedPredicate()));
     }
 

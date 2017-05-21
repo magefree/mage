@@ -60,7 +60,7 @@ public class KarrthusTyrantOfJund extends CardImpl {
     
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     public KarrthusTyrantOfJund(UUID ownerId, CardSetInfo setInfo) {
@@ -113,7 +113,7 @@ class KarrthusEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterPermanent filter = new FilterPermanent();
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
         List<Permanent> dragons = game.getBattlefield().getAllActivePermanents(filter, game);
         for (Permanent dragon : dragons) {
             ContinuousEffect effect = new KarrthusControlEffect(source.getControllerId());

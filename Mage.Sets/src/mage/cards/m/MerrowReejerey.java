@@ -28,10 +28,8 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -57,9 +55,9 @@ public class MerrowReejerey extends CardImpl {
     private static final FilterSpell filter2 = new FilterSpell("Merfolk spell");
 
     static {
-        filter1.add(new SubtypePredicate("Merfolk"));
+        filter1.add(new SubtypePredicate(SubType.MERFOLK));
         filter1.add(new ControllerPredicate(TargetController.YOU));
-        filter2.add(new SubtypePredicate("Merfolk"));
+        filter2.add(new SubtypePredicate(SubType.MERFOLK));
     }
 
     public MerrowReejerey(UUID ownerId, CardSetInfo setInfo) {

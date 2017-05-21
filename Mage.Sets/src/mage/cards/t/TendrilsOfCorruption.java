@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,7 +48,7 @@ public class TendrilsOfCorruption extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamp you control");
 
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public TendrilsOfCorruption(UUID ownerId, CardSetInfo setInfo) {

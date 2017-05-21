@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -74,7 +75,7 @@ class KarmaDamageTargetEffect extends OneShotEffect{
     
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("Swamps");
     static{
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
     }
     
     public KarmaDamageTargetEffect()

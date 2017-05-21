@@ -54,7 +54,7 @@ public class BloodlordOfVaasgoth extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 
     public BloodlordOfVaasgoth(UUID ownerId, CardSetInfo setInfo) {

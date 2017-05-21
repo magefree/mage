@@ -37,6 +37,7 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,8 +51,8 @@ public class RushwoodLegate extends CardImpl {
     private static final FilterPermanent filterForest = new FilterPermanent();
 
     static {
-        filterForest.add(new SubtypePredicate(("Forest")));
-        filterIsland.add(new SubtypePredicate(("Island")));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterIsland.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     public RushwoodLegate(UUID ownerId, CardSetInfo setInfo) {

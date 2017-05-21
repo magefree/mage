@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -87,7 +88,7 @@ enum VengefulFirebrandCondition implements Condition {
     private static final FilterCard filter = new FilterCard("Warrior");
 
     static {
-        filter.add(new SubtypePredicate("Warrior"));
+        filter.add(new SubtypePredicate(SubType.WARRIOR));
     }
 
     @Override

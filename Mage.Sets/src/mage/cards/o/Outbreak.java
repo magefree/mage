@@ -42,6 +42,7 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,11 +55,11 @@ import mage.target.common.TargetCardInHand;
  * @author fireshoes
  */
 public class Outbreak extends CardImpl {
-    
+
     private static final FilterCard filterLand = new FilterCard("a Swamp card");
-    
+
     static {
-        filterLand.add(new SubtypePredicate("Swamp"));
+        filterLand.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public Outbreak(UUID ownerId, CardSetInfo setInfo) {
@@ -66,7 +67,7 @@ public class Outbreak extends CardImpl {
 
         // You may discard a Swamp card rather than pay Outbreak's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new DiscardTargetCost(new TargetCardInHand(filterLand))));
-        
+
         // Choose a creature type. All creatures of that type get -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new OutbreakEffect());
     }
@@ -98,7 +99,7 @@ class OutbreakEffect extends OneShotEffect {
         if (player != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
+            typeChoice.setChoices(SubType.getCreatureTypes(false));
             while (!player.choose(outcome, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;
@@ -108,7 +109,7 @@ class OutbreakEffect extends OneShotEffect {
                 game.informPlayers(player.getLogName() + " has chosen " + typeChoice.getChoice());
             }
             FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
-            filter.add(new SubtypePredicate(typeChoice.getChoice()));
+            filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             ContinuousEffect effect = new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false);
             game.addEffect(effect, source);
         }

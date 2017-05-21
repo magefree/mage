@@ -28,12 +28,14 @@
 
 package mage.cards.m;
 
+import java.util.EnumSet;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 
 /**
  *
@@ -44,7 +46,7 @@ public class MistyRainforest extends CardImpl {
     public MistyRainforest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.frameColor = new ObjectColor("UG");
-        this.addAbility(new FetchLandActivatedAbility(new String[] {"Forest", "Island"}));
+        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.FOREST, SubType.ISLAND)));
     }
 
     public MistyRainforest(final MistyRainforest card) {

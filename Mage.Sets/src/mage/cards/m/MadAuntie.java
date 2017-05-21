@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,7 +56,7 @@ public class MadAuntie extends CardImpl {
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("another target Goblin");
 
     static {
-        filter1.add(new SubtypePredicate("Goblin"));
+        filter1.add(new SubtypePredicate(SubType.GOBLIN));
         filter1.add(new AnotherPredicate());
     }
 

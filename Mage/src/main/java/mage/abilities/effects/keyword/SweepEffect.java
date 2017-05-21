@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -47,12 +48,12 @@ import mage.util.CardUtil;
  */
 public class SweepEffect extends OneShotEffect {
 
-    private final String sweepSubtype;
+    private final SubType sweepSubtype;
 
-    public SweepEffect(String sweepSubtype) {
+    public SweepEffect(SubType sweepSubtype) {
         super(Outcome.Benefit);
         this.sweepSubtype = sweepSubtype;
-        this.staticText = "<i>Sweep</i> - Return any number of " + sweepSubtype + (sweepSubtype.endsWith("s") ? "" : "s") + " you control to their owner's hand";
+        this.staticText = "<i>Sweep</i> - Return any number of " + sweepSubtype + (sweepSubtype.getDescription().endsWith("s") ? "" : "s") + " you control to their owner's hand";
     }
 
     public SweepEffect(final SweepEffect effect) {

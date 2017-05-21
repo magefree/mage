@@ -38,6 +38,7 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -56,7 +57,7 @@ public class FromBeyond extends CardImpl {
     private static final FilterCard filter = new FilterCard("Eldrazi card");
 
     static {
-        filter.add(new SubtypePredicate("Eldrazi"));
+        filter.add(new SubtypePredicate(SubType.ELDRAZI));
     }
 
     public FromBeyond(UUID ownerId, CardSetInfo setInfo) {

@@ -38,10 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.AttachmentAttachedToCardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -92,7 +89,7 @@ class AutumnTailKitsuneSage extends Token {
 
     static {
         filter.add(new AttachmentAttachedToCardTypePredicate(CardType.CREATURE));
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
     }
 
     AutumnTailKitsuneSage() {

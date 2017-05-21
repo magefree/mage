@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
@@ -54,11 +55,11 @@ public class PerilousForays extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Plains"),
-                new SubtypePredicate("Island"),
-                new SubtypePredicate("Swamp"),
-                new SubtypePredicate("Forest"),
-                new SubtypePredicate("Mountain")));
+                new SubtypePredicate(SubType.PLAINS),
+                new SubtypePredicate(SubType.ISLAND),
+                new SubtypePredicate(SubType.SWAMP),
+                new SubtypePredicate(SubType.FOREST),
+                new SubtypePredicate(SubType.MOUNTAIN)));
     }
 
     public PerilousForays(UUID ownerId, CardSetInfo setInfo) {

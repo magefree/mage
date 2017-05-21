@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -61,7 +62,7 @@ public class GallowsAtWillowHill extends CardImpl {
 
     static {
         humanFilter.add(Predicates.not(new TappedPredicate()));
-        humanFilter.add(new SubtypePredicate("Human"));
+        humanFilter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public GallowsAtWillowHill(UUID ownerId, CardSetInfo setInfo) {

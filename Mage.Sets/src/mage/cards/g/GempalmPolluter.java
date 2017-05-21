@@ -38,6 +38,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -53,7 +54,7 @@ public class GempalmPolluter extends CardImpl {
     static final private FilterPermanent filter = new FilterPermanent("Zombie");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public GempalmPolluter(UUID ownerId, CardSetInfo setInfo) {

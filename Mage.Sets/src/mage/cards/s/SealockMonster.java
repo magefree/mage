@@ -38,12 +38,7 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -64,7 +59,7 @@ public class SealockMonster extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Sealock Monster can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
         // {5}{U}{U}: Monstrosity 3.</i>
         this.addAbility(new MonstrosityAbility("{5}{U}{U}",3));
         // When Sealock Monster becomes monstrous, target land becomes an island in addition to its other types.

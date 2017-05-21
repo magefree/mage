@@ -65,7 +65,7 @@ public class QuicksilverFountain extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new QuicksilverFountainEffect(), TargetController.ANY, false, true));
 
         // At the beginning of each end step, if all lands on the battlefield are Islands, remove all flood counters from them.
-        Condition condition = new AllLandsAreSubtypeCondition("Island");
+        Condition condition = new AllLandsAreSubtypeCondition(SubType.ISLAND);
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new QuicksilverFountainEffect2(), TargetController.ANY, condition, false));
 
     }
@@ -85,7 +85,7 @@ class QuicksilverFountainEffect extends OneShotEffect {
     static final private FilterControlledLandPermanent filterNonIslandLand = new FilterControlledLandPermanent("non-Island land");
 
     static {
-        filterNonIslandLand.add(Predicates.not(new SubtypePredicate("Island")));
+        filterNonIslandLand.add(Predicates.not(new SubtypePredicate(SubType.ISLAND)));
     }
 
     public QuicksilverFountainEffect() {
@@ -148,9 +148,9 @@ class QuicksilverFountainEffect2 extends OneShotEffect {
 
 class AllLandsAreSubtypeCondition implements Condition {
 
-    private final String subtype;
+    private final SubType subtype;
 
-    public AllLandsAreSubtypeCondition(String subtype) {
+    public AllLandsAreSubtypeCondition(SubType subtype) {
         this.subtype = subtype;
     }
 

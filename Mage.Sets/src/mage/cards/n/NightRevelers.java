@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 
@@ -47,7 +48,7 @@ import java.util.UUID;
  */
 public class NightRevelers extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Human", "Human");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.HUMAN, "Human");
 
     public NightRevelers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

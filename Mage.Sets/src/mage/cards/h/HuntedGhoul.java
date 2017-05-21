@@ -34,6 +34,7 @@ import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -49,7 +50,7 @@ public class HuntedGhoul extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Hunted Ghoul can't block Humans.
-        this.addAbility(new SimpleEvasionAbility(new CantBlockCreaturesSourceEffect(new FilterCreaturePermanent("Human", "Humans"))));
+        this.addAbility(new SimpleEvasionAbility(new CantBlockCreaturesSourceEffect(new FilterCreaturePermanent(SubType.HUMAN, "Humans"))));
     }
 
     public HuntedGhoul(final HuntedGhoul card) {

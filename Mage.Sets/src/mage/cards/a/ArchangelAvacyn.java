@@ -61,7 +61,7 @@ public class ArchangelAvacyn extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a non-Angel creature you control");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Angel")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.ANGEL)));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

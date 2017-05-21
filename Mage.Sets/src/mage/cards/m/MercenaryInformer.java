@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
@@ -62,7 +63,7 @@ public class MercenaryInformer extends CardImpl {
     static {
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
         filterMercenary.add(Predicates.not(new TokenPredicate()));
-        filterMercenary.add(new SubtypePredicate("Mercenary"));
+        filterMercenary.add(new SubtypePredicate(SubType.MERCENARY));
     }
 
     public MercenaryInformer(UUID ownerId, CardSetInfo setInfo) {

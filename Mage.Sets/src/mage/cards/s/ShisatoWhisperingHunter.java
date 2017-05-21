@@ -35,6 +35,7 @@ import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -52,7 +53,7 @@ public class ShisatoWhisperingHunter extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Snake");
 
     static {
-        filter.add(new SubtypePredicate("Snake"));
+        filter.add(new SubtypePredicate(SubType.SNAKE));
     }
 
     public ShisatoWhisperingHunter(UUID ownerId, CardSetInfo setInfo) {

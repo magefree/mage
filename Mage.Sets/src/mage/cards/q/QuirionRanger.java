@@ -29,6 +29,7 @@ package mage.cards.q;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -51,7 +52,7 @@ public class QuirionRanger extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public QuirionRanger(UUID ownerId, CardSetInfo setInfo) {

@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -67,7 +68,7 @@ public class ClutchOfUndeath extends CardImpl {
                 new ConditionalContinuousEffect(
                         new BoostEnchantedEffect(3, 3),
                         new BoostEnchantedEffect(-3, -3),
-                        new EnchantedCreatureSubtypeCondition("Zombie"),
+                        new EnchantedCreatureSubtypeCondition(SubType.ZOMBIE),
                         "Enchanted creature gets +3/+3 as long as it's a Zombie. Otherwise, it gets -3/-3.")
                 )
         );

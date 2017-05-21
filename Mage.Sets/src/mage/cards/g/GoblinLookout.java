@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
@@ -54,7 +55,7 @@ public class GoblinLookout extends CardImpl {
     private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("a Goblin");
 
     static {
-        filterPermanent.add(new SubtypePredicate("Goblin"));
+        filterPermanent.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public GoblinLookout(UUID ownerId, CardSetInfo setInfo) {

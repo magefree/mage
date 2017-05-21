@@ -41,6 +41,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -56,8 +57,8 @@ public class NimbusMaze extends CardImpl {
     private static final FilterControlledPermanent controlPlains = new FilterControlledPermanent("you control a Plains");
 
     static {
-        controlIsland.add(new SubtypePredicate("Island"));
-        controlPlains.add(new SubtypePredicate("Plains"));
+        controlIsland.add(new SubtypePredicate(SubType.ISLAND));
+        controlPlains.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public NimbusMaze(UUID ownerId, CardSetInfo setInfo) {

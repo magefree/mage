@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,7 +54,7 @@ public class KariZevsExpertise extends CardImpl {
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
-                new SubtypePredicate("Vehicle")));
+                new SubtypePredicate(SubType.VEHICLE)));
     }
 
     public KariZevsExpertise(UUID ownerId, CardSetInfo setInfo) {

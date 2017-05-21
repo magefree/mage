@@ -35,6 +35,7 @@ import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -61,11 +62,11 @@ public class CoalitionVictory extends CardImpl {
     public static final FilterControlledCreaturePermanent filterGreen = new FilterControlledCreaturePermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate("Plains"));
-        filterIsland.add(new SubtypePredicate("Island"));
-        filterSwamp.add(new SubtypePredicate("Swamp"));
-        filterMountain.add(new SubtypePredicate("Mountain"));
-        filterForest.add(new SubtypePredicate("Forest"));
+        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
+        filterIsland.add(new SubtypePredicate(SubType.ISLAND));
+        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterMountain.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));

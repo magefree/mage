@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -51,8 +52,8 @@ public class SaprazzanLegate extends CardImpl {
     private static final FilterPermanent filterIsland = new FilterPermanent();
 
     static {
-        filterMountain.add(new SubtypePredicate(("Mountain")));
-        filterIsland.add(new SubtypePredicate(("Island")));
+        filterMountain.add(new SubtypePredicate((SubType.MOUNTAIN)));
+        filterIsland.add(new SubtypePredicate((SubType.ISLAND)));
     }
 
     public SaprazzanLegate(UUID ownerId, CardSetInfo setInfo) {

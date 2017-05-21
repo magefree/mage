@@ -33,6 +33,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.WolfToken;
@@ -46,7 +47,7 @@ public class HowlOfTheNightPack extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("for each Forest you control");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public HowlOfTheNightPack(UUID ownerId, CardSetInfo setInfo) {

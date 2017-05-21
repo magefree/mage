@@ -32,6 +32,7 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,7 +50,7 @@ public class Nullify extends CardImpl {
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.CREATURE),
-                new SubtypePredicate("Aura")));
+                new SubtypePredicate(SubType.AURA)));
     }
     
     public Nullify(UUID ownerId, CardSetInfo setInfo) {

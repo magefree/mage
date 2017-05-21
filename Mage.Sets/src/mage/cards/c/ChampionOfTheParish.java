@@ -33,6 +33,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -49,7 +50,7 @@ public class ChampionOfTheParish extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
         filter.add(new AnotherPredicate());
     }
 

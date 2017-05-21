@@ -34,10 +34,7 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -54,7 +51,7 @@ public class OrchardWarden extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Treefolk creature");
     
     static {
-        filter.add(new SubtypePredicate("Treefolk"));
+        filter.add(new SubtypePredicate(SubType.TREEFOLK));
         filter.add(new AnotherPredicate());
     }
     

@@ -32,6 +32,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,7 +48,7 @@ public class CruxOfFate extends CardImpl {
     private static final FilterCreaturePermanent filterNonDragon = new FilterCreaturePermanent("non-Dragon creatures");
 
     static {
-        filterNonDragon.add(Predicates.not(new SubtypePredicate("Dragon")));
+        filterNonDragon.add(Predicates.not(new SubtypePredicate(SubType.DRAGON)));
     }
 
     public CruxOfFate(UUID ownerId, CardSetInfo setInfo) {
@@ -55,7 +56,7 @@ public class CruxOfFate extends CardImpl {
 
         // Choose one -
         // * Destroy all Dragon creatures.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent("Dragon", "Dragon creatures")));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent(SubType.DRAGON, "Dragon creatures")));
         // * Destroy all non-Dragon creatures.
         Mode mode = new Mode();
         mode.getEffects().add(new DestroyAllEffect(new FilterCreaturePermanent(filterNonDragon)));

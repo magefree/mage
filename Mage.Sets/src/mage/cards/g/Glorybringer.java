@@ -38,6 +38,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -54,7 +55,7 @@ public class Glorybringer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Dragon creature an opponent controls");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Dragon")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.DRAGON)));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

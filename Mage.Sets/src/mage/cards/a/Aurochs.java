@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -52,7 +53,7 @@ public class Aurochs extends CardImpl {
     private static final FilterAttackingCreature filter1 = new FilterAttackingCreature("other attacking Aurochs");
 
     static {
-        filter1.add(new SubtypePredicate("Aurochs"));
+        filter1.add(new SubtypePredicate(SubType.AUROCHS));
         filter1.add(new AnotherPredicate());
     }
 

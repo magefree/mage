@@ -38,10 +38,7 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -55,7 +52,7 @@ public class MidnightEntourage extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Aetherborn you control");
 
     static {
-        filter.add(new SubtypePredicate("Aetherborn"));
+        filter.add(new SubtypePredicate(SubType.AETHERBORN));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

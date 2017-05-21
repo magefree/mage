@@ -40,10 +40,7 @@ import mage.abilities.effects.common.DestroyTargetAtBeginningOfNextEndStepEffect
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -63,7 +60,7 @@ public class NettlingImp extends CardImpl {
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Wall")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
 	filter.add(new ControlledFromStartOfControllerTurnPredicate());
         filter.add(new ControllerPredicate(TargetController.ACTIVE));
         filter.setMessage("non-Wall creature the active player has controlled continuously since the beginning of the turn.");

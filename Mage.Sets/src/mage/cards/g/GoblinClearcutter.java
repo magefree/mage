@@ -40,6 +40,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -59,7 +60,7 @@ public class GoblinClearcutter extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
     
     static    {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
     
     public GoblinClearcutter(UUID ownerId, CardSetInfo setInfo) {

@@ -54,7 +54,7 @@ public class SlumberingTora extends CardImpl {
     private static final FilterCard filter = new FilterCard("Spirit or Arcane card");
     
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Spirit"),new SubtypePredicate("Arcane")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.SPIRIT),new SubtypePredicate(SubType.ARCANE)));
     }    
 
     public SlumberingTora(UUID ownerId, CardSetInfo setInfo) {

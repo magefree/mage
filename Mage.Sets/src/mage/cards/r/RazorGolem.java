@@ -34,6 +34,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -49,7 +50,7 @@ public class RazorGolem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Affinity for Plains
-        this.addAbility(new AffinityForLandTypeAbility("Plains", "Plains"));
+        this.addAbility(new AffinityForLandTypeAbility(SubType.PLAINS, "Plains"));
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());

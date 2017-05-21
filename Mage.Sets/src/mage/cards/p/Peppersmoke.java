@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,7 +51,7 @@ public class Peppersmoke extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("If you control a Faerie,");
     static {
-        filter.add(new SubtypePredicate("Faerie"));
+        filter.add(new SubtypePredicate(SubType.FAERIE));
     }
 
     public Peppersmoke(UUID ownerId, CardSetInfo setInfo) {

@@ -44,10 +44,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -67,7 +64,7 @@ public class IncandescentSoulstoke extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elemental creatures");
 
     static {
-        filter.add(new SubtypePredicate("Elemental"));
+        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
     }
 
     public IncandescentSoulstoke(UUID ownerId, CardSetInfo setInfo) {
@@ -121,7 +118,7 @@ class IncandescentSoulstokeEffect extends OneShotEffect {
         if (controller != null) {
             if (controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
                 FilterCard filter = new FilterCreatureCard();
-                filter.add(new SubtypePredicate(("Elemental")));
+                filter.add(new SubtypePredicate((SubType.ELEMENTAL)));
                 TargetCardInHand target = new TargetCardInHand(filter);
                 if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());

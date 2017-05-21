@@ -36,6 +36,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -74,7 +75,7 @@ class HubrisReturnEffect extends OneShotEffect {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
     }
 
     public HubrisReturnEffect() {

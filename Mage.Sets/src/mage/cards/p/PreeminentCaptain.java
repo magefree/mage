@@ -30,6 +30,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -81,7 +82,7 @@ class PreeminentCaptainEffect extends OneShotEffect {
     private static final FilterCreatureCard filter = new FilterCreatureCard("a soldier creature card");
 
     static {
-        filter.add(new SubtypePredicate("Soldier"));
+        filter.add(new SubtypePredicate(SubType.SOLDIER));
     }
 
     public PreeminentCaptainEffect() {

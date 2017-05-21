@@ -40,6 +40,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -58,8 +59,8 @@ public class BrunaTheFadingLight extends CardImpl {
 
     static {
         filter.add(Predicates.and(new CardTypePredicate(CardType.CREATURE),
-                (Predicates.or(new SubtypePredicate("Human"),
-                    (new SubtypePredicate("Angel"))))));
+                (Predicates.or(new SubtypePredicate(SubType.HUMAN),
+                    (new SubtypePredicate(SubType.ANGEL))))));
     }
 
     public BrunaTheFadingLight(UUID ownerId, CardSetInfo setInfo) {

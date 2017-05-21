@@ -37,10 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -156,10 +153,10 @@ class QuestForUlasTempleEffect2 extends OneShotEffect {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Kraken"),
-                new SubtypePredicate("Leviathan"),
-                new SubtypePredicate("Octopus"),
-                new SubtypePredicate("Serpent")));
+                new SubtypePredicate(SubType.KRAKEN),
+                new SubtypePredicate(SubType.LEVIATHAN),
+                new SubtypePredicate(SubType.OCTOPUS),
+                new SubtypePredicate(SubType.SERPENT)));
     }
 
     QuestForUlasTempleEffect2() {

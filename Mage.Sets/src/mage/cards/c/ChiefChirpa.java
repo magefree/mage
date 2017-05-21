@@ -38,6 +38,7 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
@@ -65,7 +66,7 @@ public class ChiefChirpa extends CardImpl {
         diedFilter.add(new ColorPredicate(ObjectColor.GREEN));
         diedFilter.add(new ControllerPredicate(TargetController.YOU));
 
-        ewokFilter.add(new SubtypePredicate("Ewok"));
+        ewokFilter.add(new SubtypePredicate(SubType.EWOK));
         ewokFilter.add(new AnotherPredicate());
     }
 

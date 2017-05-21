@@ -34,6 +34,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class WizenedCenn extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kithkin creatures");
 
     static {
-        filter.add(new SubtypePredicate("Kithkin"));
+        filter.add(new SubtypePredicate(SubType.KITHKIN));
     }
 
     public WizenedCenn(UUID ownerId, CardSetInfo setInfo) {

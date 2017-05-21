@@ -38,10 +38,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -58,7 +55,7 @@ public class PrincessLeia extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Rebel creature you control");
 
     static {
-        SubtypePredicate rebel = new SubtypePredicate("Rebel");
+        SubtypePredicate rebel = new SubtypePredicate(SubType.REBEL);
         filter1.add(new AnotherPredicate());
         filter1.add(rebel);
         filter2.add(rebel);

@@ -38,10 +38,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -57,9 +54,9 @@ public class SpiritMirror extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Reflection");
 
     static {
-        filterToken.add(new SubtypePredicate("Reflection"));
+        filterToken.add(new SubtypePredicate(SubType.REFLECTION));
         filterToken.add(new TokenPredicate());
-        filter.add(new SubtypePredicate("Reflection"));
+        filter.add(new SubtypePredicate(SubType.REFLECTION));
     }
 
     public SpiritMirror(UUID ownerId, CardSetInfo setInfo) {

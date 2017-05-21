@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -103,7 +104,7 @@ class QuestForTheHolyRelicEffect extends OneShotEffect {
         }
 
         FilterCard filter = new FilterCard("Equipment");
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (controller.searchLibrary(target, game)) {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);

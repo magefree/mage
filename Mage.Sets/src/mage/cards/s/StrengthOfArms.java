@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.HumanSoldierToken;
@@ -51,7 +52,7 @@ public class StrengthOfArms extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("If you control an Equipment,");
     static {
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public StrengthOfArms(UUID ownerId, CardSetInfo setInfo) {

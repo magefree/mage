@@ -34,6 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -71,7 +72,7 @@ class WaitingInTheWeedsEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("untapped Forest he or she controls");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
         filter.add(Predicates.not(new TappedPredicate()));
     }
 

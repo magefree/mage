@@ -34,6 +34,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class VampiricFury extends CardImpl {
     private static final FilterCreaturePermanent vampires = new FilterCreaturePermanent("Vampire creatures");
 
     static {
-        vampires.add(new SubtypePredicate("Vampire"));
+        vampires.add(new SubtypePredicate(SubType.VAMPIRE));
         vampires.add(new ControllerPredicate(TargetController.YOU));
     }
 

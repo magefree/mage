@@ -83,7 +83,7 @@ class PutBasicForestOnBattlefieldEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate(SuperType.BASIC)));
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     private static final String choiceText = "Put a basic Forest card from your hand onto the battlefield?";

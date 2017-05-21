@@ -30,6 +30,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,8 +50,8 @@ public class WildNacatl extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent("Plains");
 
     static {
-        filter1.add(new SubtypePredicate("Mountain"));
-        filter2.add(new SubtypePredicate("Plains"));
+        filter1.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter2.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public WildNacatl(UUID ownerId, CardSetInfo setInfo) {

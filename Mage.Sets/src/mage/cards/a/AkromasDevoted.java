@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -55,7 +56,7 @@ public class AkromasDevoted extends CardImpl {
 
         // Cleric creatures have vigilance.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(VigilanceAbility.getInstance(),
-            Duration.WhileOnBattlefield, new FilterCreaturePermanent("Cleric", "Cleric creatures"))));
+            Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.CLERIC, "Cleric creatures"))));
     }
 
     public AkromasDevoted(final AkromasDevoted card) {

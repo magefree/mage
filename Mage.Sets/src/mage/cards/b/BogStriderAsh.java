@@ -36,6 +36,7 @@ import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,7 +51,7 @@ public class BogStriderAsh extends CardImpl {
 	private static final FilterSpell filter = new FilterSpell("a Goblin spell");
 	
 	static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 	
     public BogStriderAsh(UUID ownerId, CardSetInfo setInfo) {

@@ -35,6 +35,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
@@ -49,7 +50,7 @@ public class GiltLeafPalace extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Elf from your hand");
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public GiltLeafPalace(UUID ownerId, CardSetInfo setInfo) {

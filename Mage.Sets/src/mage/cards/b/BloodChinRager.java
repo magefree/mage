@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -47,7 +48,7 @@ import java.util.UUID;
  */
 public class BloodChinRager extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Warrior","Warrior creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WARRIOR,"Warrior creatures you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

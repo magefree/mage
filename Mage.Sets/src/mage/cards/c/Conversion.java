@@ -54,7 +54,7 @@ import java.util.stream.Collectors;
  */
 public class Conversion extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain", "Mountains");
+    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.MOUNTAIN, "Mountains");
 
     public Conversion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");

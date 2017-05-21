@@ -34,6 +34,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandPermanent;
@@ -78,7 +79,7 @@ class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl {
     static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
 
     static {
-        filter.add(new SubtypePredicate("Plains"));
+        filter.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public EmeriaTheSkyRuinTriggeredAbility() {

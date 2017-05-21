@@ -53,7 +53,7 @@ public class ImperiousPerfect extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public ImperiousPerfect(UUID ownerId, CardSetInfo setInfo) {

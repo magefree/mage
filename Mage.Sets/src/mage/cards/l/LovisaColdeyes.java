@@ -36,10 +36,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,7 +52,7 @@ public class LovisaColdeyes extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that's a Barbarian, a Warrior, or a Berserker");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Barbarian"), new SubtypePredicate("Warrior"), new SubtypePredicate("Berserker")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.BARBARIAN), new SubtypePredicate(SubType.WARRIOR), new SubtypePredicate(SubType.BERSERKER)));
     }
 
     public LovisaColdeyes(UUID ownerId, CardSetInfo setInfo) {

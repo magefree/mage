@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,7 +53,7 @@ public class WaxingMoon extends CardImpl {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf you control");
 
     static {
-        filter.add(new SubtypePredicate("Werewolf"));
+        filter.add(new SubtypePredicate(SubType.WEREWOLF));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

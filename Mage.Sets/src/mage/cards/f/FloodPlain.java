@@ -32,7 +32,9 @@ import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
+import java.util.EnumSet;
 import java.util.UUID;
 
 /**
@@ -47,7 +49,7 @@ public class FloodPlain extends CardImpl {
         // Flood Plain enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}, Sacrifice Flood Plain: Search your library for a Plains or Island card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(false, new String[]{"Plains", "Island"}));
+        this.addAbility(new FetchLandActivatedAbility(false, EnumSet.of(SubType.PLAINS, SubType.ISLAND)));
     }
 
     public FloodPlain(final FloodPlain card) {

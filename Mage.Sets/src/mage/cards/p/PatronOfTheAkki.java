@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -55,7 +56,7 @@ public class PatronOfTheAkki extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Goblin offering (You may cast this card any time you could cast an instant by sacrificing a Goblin and paying the difference in mana costs between this and the sacrificed Goblin. Mana cost includes color.)
-        this.addAbility(new OfferingAbility("Goblin"));
+        this.addAbility(new OfferingAbility(SubType.GOBLIN));
 
         // Whenever Patron of the Akki attacks, creatures you control get +2/+0 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(2, 0, Duration.EndOfTurn, new FilterCreaturePermanent(), false), false));

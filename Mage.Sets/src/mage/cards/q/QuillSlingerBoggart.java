@@ -35,6 +35,7 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -48,7 +49,7 @@ public class QuillSlingerBoggart extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a Kithkin spell");
 
     static {
-        filter.add(new SubtypePredicate("Kithkin"));
+        filter.add(new SubtypePredicate(SubType.KITHKIN));
     }
 
     public QuillSlingerBoggart(UUID ownerId, CardSetInfo setInfo) {

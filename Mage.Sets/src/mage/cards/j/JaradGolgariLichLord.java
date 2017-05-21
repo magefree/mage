@@ -41,10 +41,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -67,8 +64,8 @@ public class JaradGolgariLichLord extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filterSwamp.add(new SubtypePredicate("Swamp"));
-        filterForest.add(new SubtypePredicate("Forest"));
+        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public JaradGolgariLichLord(UUID ownerId, CardSetInfo setInfo) {

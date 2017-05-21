@@ -71,7 +71,7 @@ public class CyclopeanTomb extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Swamp")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.SWAMP)));
     }
 
     public CyclopeanTomb(UUID ownerId, CardSetInfo setInfo) {

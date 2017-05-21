@@ -55,7 +55,7 @@ public class CaughtInTheBrights extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Vehicle"));
+        filter.add(new SubtypePredicate(SubType.VEHICLE));
     }
 
     public CaughtInTheBrights(UUID ownerId, CardSetInfo setInfo) {

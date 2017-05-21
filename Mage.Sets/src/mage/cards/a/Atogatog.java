@@ -53,7 +53,7 @@ public class Atogatog extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Atog"));
+        filter.add(new SubtypePredicate(SubType.ATOG));
     }
 
     public Atogatog(UUID ownerId, CardSetInfo setInfo) {
@@ -68,7 +68,7 @@ public class Atogatog extends CardImpl {
         // Sacrifice an Atog creature: Atogatog gets +X/+X until end of turn, where X is the sacrificed creature's power.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(xValue, xValue,Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("Atog", "an Atog creature"), false))));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent(SubType.ATOG, "an Atog creature"), false))));
         
     }
 

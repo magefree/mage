@@ -36,6 +36,7 @@ import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPer
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 
@@ -54,11 +55,11 @@ public class BogSerpent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Bog Serpent can't attack unless defending player controls a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Swamp", "a Swamp"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.SWAMP, "a Swamp"))));
 
         // When you control no Swamps, sacrifice Bog Serpent.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Swamp", "no Swamps"), ComparisonType.EQUAL_TO, 0,
+                new FilterLandPermanent(SubType.SWAMP, "no Swamps"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

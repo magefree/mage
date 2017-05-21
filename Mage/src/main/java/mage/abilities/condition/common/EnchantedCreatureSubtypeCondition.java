@@ -29,6 +29,7 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -43,7 +44,7 @@ public class EnchantedCreatureSubtypeCondition implements Condition {
 
     private final FilterPermanent filter = new FilterCreaturePermanent();
 
-    public EnchantedCreatureSubtypeCondition(String string) {
+    public EnchantedCreatureSubtypeCondition(SubType string) {
         filter.add(new SubtypePredicate(string));
     }
 

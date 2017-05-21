@@ -34,10 +34,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -95,7 +92,7 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(event.getTargetId());
         if (controller != null) {
-            int numberOfClericsControlled = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("Cleric", "Clerics")).calculate(game, source, this);
+            int numberOfClericsControlled = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent(SubType.CLERIC, "Clerics")).calculate(game, source, this);
             int toPrevent = Math.min(numberOfClericsControlled, event.getAmount());
             if (toPrevent > 0 && controller.chooseUse(Outcome.PreventDamage, "Prevent " + toPrevent + " damage to " + targetPlayer.getName() + '?', source, game)) {
                 GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, targetPlayer.getId(), source.getSourceId(), source.getControllerId(), toPrevent, false);

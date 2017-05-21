@@ -68,8 +68,8 @@ public class ChainerDementiaMaster extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Nightmare creatures");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Nightmares");
     static {
-        filterCreature.add(new SubtypePredicate("Nightmare"));
-        filterPermanent.add(new SubtypePredicate("Nightmare"));
+        filterCreature.add(new SubtypePredicate(SubType.NIGHTMARE));
+        filterPermanent.add(new SubtypePredicate(SubType.NIGHTMARE));
     }
 
     public ChainerDementiaMaster(UUID ownerId, CardSetInfo setInfo) {

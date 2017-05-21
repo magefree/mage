@@ -29,6 +29,7 @@ package mage.cards.i;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -81,7 +82,7 @@ public class ImmaculateMagistrate extends CardImpl {
 class ImmaculateMagistrateEffect extends OneShotEffect {
     static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf");
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
     public ImmaculateMagistrateEffect() {
         super(Outcome.BoostCreature);

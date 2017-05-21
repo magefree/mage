@@ -38,10 +38,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -85,8 +82,8 @@ class QasaliAmbusherAbility extends ActivatedAbilityImpl {
     private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate("Plains"));
-        filterForest.add(new SubtypePredicate("Forest"));
+        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public QasaliAmbusherAbility() {

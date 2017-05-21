@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.GoblinToken;
@@ -48,7 +49,7 @@ import java.util.UUID;
  */
 public class GoblinWarrens extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin", "Goblins");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.GOBLIN, "Goblins");
     
     public GoblinWarrens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

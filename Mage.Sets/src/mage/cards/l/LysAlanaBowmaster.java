@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -53,7 +54,7 @@ public class LysAlanaBowmaster extends CardImpl {
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
 
     static {
-        filterElf.add(new SubtypePredicate("Elf"));
+        filterElf.add(new SubtypePredicate(SubType.ELF));
         filterFlying.add(new AbilityPredicate(FlyingAbility.class));
     }
 

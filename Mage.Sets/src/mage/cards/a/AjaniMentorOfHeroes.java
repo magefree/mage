@@ -36,6 +36,7 @@ import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -61,7 +62,7 @@ public class AjaniMentorOfHeroes extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filterCard.add(Predicates.or(
-                new SubtypePredicate("Aura"),
+                new SubtypePredicate(SubType.AURA),
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.PLANESWALKER)));
     }

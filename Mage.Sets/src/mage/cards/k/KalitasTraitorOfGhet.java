@@ -65,8 +65,8 @@ public class KalitasTraitorOfGhet extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(Predicates.or(new SubtypePredicate("Vampire"),
-                (new SubtypePredicate("Zombie"))));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.VAMPIRE),
+                (new SubtypePredicate(SubType.ZOMBIE))));
     }
 
     public KalitasTraitorOfGhet(UUID ownerId, CardSetInfo setInfo) {

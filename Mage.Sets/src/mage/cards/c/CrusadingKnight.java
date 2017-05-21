@@ -35,10 +35,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -53,7 +50,7 @@ public class CrusadingKnight extends CardImpl {
 
     private static final FilterLandPermanent swampFilter = new FilterLandPermanent("Swamp your opponent controls");
     static {
-      swampFilter.add(new SubtypePredicate("Swamp"));
+      swampFilter.add(new SubtypePredicate(SubType.SWAMP));
       swampFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

@@ -37,10 +37,7 @@ import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,7 +56,7 @@ public class CennsTactician extends CardImpl {
     private static final FilterCreaturePermanent filterSoldier = new FilterCreaturePermanent("Soldier creature");
     private static final FilterControlledCreaturePermanent filterCounter = new FilterControlledCreaturePermanent("Each creature you control with a +1/+1 counter on it");
     static {
-        filterSoldier.add(new SubtypePredicate("Soldier"));
+        filterSoldier.add(new SubtypePredicate(SubType.SOLDIER));
         filterCounter.add(new CounterPredicate(CounterType.P1P1));
     }
 

@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.f.FinalIteration;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
@@ -105,7 +106,7 @@ class DocentOfPerfectionEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("Wizards");
 
     static {
-        filter.add(new SubtypePredicate("Wizard"));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

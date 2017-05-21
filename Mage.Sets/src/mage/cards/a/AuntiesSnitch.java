@@ -35,6 +35,7 @@ import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -86,7 +87,7 @@ class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin or Rogue you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.or(new SubtypePredicate("Goblin"), new SubtypePredicate("Rogue")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.GOBLIN), new SubtypePredicate(SubType.ROGUE)));
     }
 
     public AuntiesSnitchTriggeredAbility() {

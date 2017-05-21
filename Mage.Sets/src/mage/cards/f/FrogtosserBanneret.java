@@ -34,6 +34,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -51,8 +52,8 @@ public class FrogtosserBanneret extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Goblin"),
-                new SubtypePredicate("Rogue")));
+                new SubtypePredicate(SubType.GOBLIN),
+                new SubtypePredicate(SubType.ROGUE)));
     }
 
     public FrogtosserBanneret(UUID ownerId, CardSetInfo setInfo) {

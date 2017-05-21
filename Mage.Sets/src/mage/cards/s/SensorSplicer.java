@@ -30,6 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -54,7 +55,7 @@ public class SensorSplicer extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new SubtypePredicate("Golem"));
+        filter.add(new SubtypePredicate(SubType.GOLEM));
     }
 
     public SensorSplicer(UUID ownerId, CardSetInfo setInfo) {

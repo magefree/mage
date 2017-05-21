@@ -61,7 +61,7 @@ public class BaruFistOfKrosa extends CardImpl {
     private static final FilterCreaturePermanent greenCreatureFilter = new FilterCreaturePermanent("green creatures you control");
 
     static {
-        forestFilter.add(new SubtypePredicate("Forest"));
+        forestFilter.add(new SubtypePredicate(SubType.FOREST));
         greenCreatureFilter.add(new ControllerPredicate(TargetController.YOU));
         greenCreatureFilter.add(new ColorPredicate(ObjectColor.GREEN));
     }

@@ -37,6 +37,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +57,7 @@ public class DiamondKaleidoscope extends CardImpl {
 
     static {
         filter.add(new TokenPredicate());
-        filter.add(new SubtypePredicate("Prism"));
+        filter.add(new SubtypePredicate(SubType.PRISM));
     }
 
     public DiamondKaleidoscope(UUID ownerId, CardSetInfo setInfo) {

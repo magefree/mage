@@ -38,10 +38,7 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -96,7 +93,7 @@ class UlrichUncontestedAlphaAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Werewolf creature you don't control");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Werewolf")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.WEREWOLF)));
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 

@@ -165,7 +165,7 @@ class KaronaFalseGodEffect extends OneShotEffect {
             if (!typeChosen.isEmpty()) {
                 game.informPlayers(controller.getLogName() + " has chosen " + typeChosen);
                 FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                filter.add(new SubtypePredicate(typeChosen));
+                filter.add(new SubtypePredicate(SubType.byDescription(typeChosen)));
                 game.addEffect(new BoostAllEffect(3, 3, Duration.EndOfTurn, filter, false), source);
             }
             return true;

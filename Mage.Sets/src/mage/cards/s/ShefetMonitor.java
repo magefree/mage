@@ -36,6 +36,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -57,7 +58,7 @@ public class ShefetMonitor extends CardImpl {
                 Predicates.and(
                          new CardTypePredicate(CardType.LAND),
                          new SupertypePredicate(SuperType.BASIC)),
-                new SubtypePredicate("Desert")));
+                new SubtypePredicate(SubType.DESERT)));
     }
 
     public ShefetMonitor(UUID ownerId, CardSetInfo setInfo) {

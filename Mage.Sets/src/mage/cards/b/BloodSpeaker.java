@@ -38,6 +38,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -56,8 +57,8 @@ public class BloodSpeaker extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new  FilterControlledCreaturePermanent("a Demon under your control");
     private static final FilterCard filterCard = new  FilterCard("Demon card");
     static {
-        filter.add(new SubtypePredicate("Demon"));
-        filterCard.add(new SubtypePredicate("Demon"));
+        filter.add(new SubtypePredicate(SubType.DEMON));
+        filterCard.add(new SubtypePredicate(SubType.DEMON));
     }
 
     public BloodSpeaker (UUID ownerId, CardSetInfo setInfo) {
