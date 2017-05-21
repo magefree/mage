@@ -87,6 +87,8 @@ public final class SystemUtil {
                         gameZone = Zone.LIBRARY;
                     } else if ("token".equalsIgnoreCase(zone)) {
                         gameZone = Zone.BATTLEFIELD;
+                    } else if ("emblem".equalsIgnoreCase(zone)) {
+                        gameZone = Zone.COMMAND;
                     } else {
                         continue; // go parse next line
                     }
@@ -103,6 +105,17 @@ public final class SystemUtil {
                             Object token = cons.newInstance();
                             if (token != null && token instanceof mage.game.permanent.token.Token) {
                                 ((mage.game.permanent.token.Token) token).putOntoBattlefield(amount, game, null, player.getId(), false, false);
+                                continue;
+                            }
+                        } else if ("emblem".equalsIgnoreCase(zone)) {
+                            // eg: emblem:Human:ElspethSunsChampionEmblem:1
+                            Class<?> c = Class.forName("mage.game.command.emblems." + cardName);
+                            Constructor<?> cons = c.getConstructor();
+                            Object emblem = cons.newInstance();
+                            if (emblem != null && emblem instanceof mage.game.command.Emblem) {
+                                ((mage.game.command.Emblem) emblem).setControllerId(player.getId());
+                                game.addEmblem((mage.game.command.Emblem) emblem, null, player.getId());
+                                continue;
                             }
                         }
                         logger.warn("Couldn't find a card: " + cardName);
