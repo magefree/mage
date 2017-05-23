@@ -71,7 +71,7 @@ public class UlvenwaldHydra extends CardImpl {
 
         // When Ulvenwald Hydra enters the battlefield, you may search your library for a land card, put it onto the battlefield tapped, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay), true));
     }
 
     public UlvenwaldHydra(final UlvenwaldHydra card) {
