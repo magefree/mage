@@ -33,6 +33,9 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -146,7 +149,7 @@ class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
             if (card != null) {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
-                    player.setCastSourceIdWithAlternateMana(objectId, null, null);
+                    player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
                     return true;
                 }
             }
