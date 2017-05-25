@@ -140,7 +140,7 @@ class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl {
             Card card = game.getCard(sourceId);
             if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
                 Player player = game.getPlayer(affectedControllerId);
-                player.setCastSourceIdWithAlternateMana(sourceId, null, null);
+                player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
                 return true;
             }
         }
