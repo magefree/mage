@@ -58,7 +58,7 @@ public class DuelCommander extends Commander {
         banned.add("Mana Drain");
         banned.add("Mana Vault");
         banned.add("Mind Twist");
-        banned.add("Mishra’s Workshop");
+        banned.add("Mishra's Workshop");
         banned.add("Mox Diamond");
         banned.add("Mox Emerald");
         banned.add("Mox Jet");

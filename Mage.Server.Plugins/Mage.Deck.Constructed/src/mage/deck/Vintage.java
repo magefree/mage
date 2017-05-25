@@ -86,14 +86,14 @@ public class Vintage extends Constructed {
         restricted.add("Gush");
         restricted.add("Imperial Seal");
         restricted.add("Library of Alexandria");
-        restricted.add("Lion’s Eye Diamond");
+        restricted.add("Lion's Eye Diamond");
         restricted.add("Lodestone Golem");
         restricted.add("Lotus Petal");
         restricted.add("Mana Crypt");
         restricted.add("Mana Vault");
         restricted.add("Memory Jar");
         restricted.add("Merchant Scroll");
-        restricted.add("Mind’s Desire");
+        restricted.add("Mind's Desire");
         restricted.add("Mox Emerald");
         restricted.add("Mox Jet");
         restricted.add("Mox Pearl");
@@ -114,8 +114,8 @@ public class Vintage extends Constructed {
         restricted.add("Vampiric Tutor");
         restricted.add("Wheel of Fortune");
         restricted.add("Windfall");
-        restricted.add("Yawgmoth’s Bargain");
-        restricted.add("Yawgmoth’s Will");
+        restricted.add("Yawgmoth's Bargain");
+        restricted.add("Yawgmoth's Will");
 
     }
 }
