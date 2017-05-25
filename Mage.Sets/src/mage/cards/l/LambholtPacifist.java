@@ -27,9 +27,9 @@
  */
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,15 +41,14 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -89,7 +88,7 @@ public class LambholtPacifist extends CardImpl {
 
 class LambholtPacifistEffect extends RestrictionEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature with power 4 or greater");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature with power 4 or greater");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
