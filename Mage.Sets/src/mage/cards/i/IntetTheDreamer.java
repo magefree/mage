@@ -162,7 +162,7 @@ class IntetTheDreamerCastEffect extends AsThoughEffectImpl {
                                 return controller.chooseUse(outcome, "Play " + card.getIdName() + '?', source, game);
                             }
                         } else {
-                            controller.setCastSourceIdWithAlternateMana(objectId, null, null);
+                            controller.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
                             return true;
                         }
                     }
