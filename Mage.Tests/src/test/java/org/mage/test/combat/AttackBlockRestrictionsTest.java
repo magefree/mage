@@ -5,11 +5,10 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * Test restrictions for choosing attackers and blockers.
@@ -543,7 +542,4 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
     }
-
-
-
 }
