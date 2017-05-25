@@ -18,9 +18,12 @@ public class KaerveksSpite extends CardImpl {
 
     public KaerveksSpite(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.INSTANT}, "{B}{B}{B}");
+
+        //As an additional cost to cast Kaervek's Spite, sacrifice all permanents you control and discard your hand.
         this.getSpellAbility().addCost(new SacrificeAllCost(permanentsYouControl));
         this.getSpellAbility().addCost(new DiscardHandCost());
 
+        //Target player loses 5 life.
         Effect effect = new LoseLifeTargetEffect(5);
         this.getSpellAbility().addEffect(effect);
     }

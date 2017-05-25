@@ -24,9 +24,12 @@ public class ViashivanDragon extends CardImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
 
+        //Flying
         addAbility(FlyingAbility.getInstance());
 
+        //{R}: Viashivan Dragon gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        //{G}: Viashivan Dragon gets +/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G)));
 
     }
