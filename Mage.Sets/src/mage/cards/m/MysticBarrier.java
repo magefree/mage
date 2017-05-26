@@ -57,8 +57,8 @@ import mage.players.PlayerList;
  */
 public class MysticBarrier extends CardImpl {
 
-    public static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
-    public static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
+    static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
+    static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
 
     public MysticBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
@@ -117,8 +117,8 @@ class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
 
 class MysticBarrierChooseEffect extends OneShotEffect {
 
-    public static final String[] SET_VALUES = new String[] { MysticBarrier.ALLOW_ATTACKING_LEFT, MysticBarrier.ALLOW_ATTACKING_RIGHT };
-    public static final Set<String> CHOICES = new HashSet<>(Arrays.asList(SET_VALUES));
+    static final String[] SET_VALUES = new String[] { MysticBarrier.ALLOW_ATTACKING_LEFT, MysticBarrier.ALLOW_ATTACKING_RIGHT };
+    static final Set<String> CHOICES = new HashSet<>(Arrays.asList(SET_VALUES));
     final static Choice DIRECTION_CHOICE = new ChoiceImpl(true);
     static {
         DIRECTION_CHOICE.setChoices(CHOICES);

@@ -60,7 +60,7 @@ import java.util.UUID;
  */
 public class MagneticMountain extends CardImpl {
     
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures");
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures");
     
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));

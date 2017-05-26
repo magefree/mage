@@ -32,7 +32,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public class Stronghold extends ExpansionSet {
@@ -99,6 +98,7 @@ public class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Grave Pact", 10, Rarity.RARE, mage.cards.g.GravePact.class));
         cards.add(new SetCardInfo("Hammerhead Shark", 32, Rarity.COMMON, mage.cards.h.HammerheadShark.class));
         cards.add(new SetCardInfo("Heartstone", 128, Rarity.UNCOMMON, mage.cards.h.Heartstone.class));
+        cards.add(new SetCardInfo("Heat of Battle", 88, Rarity.UNCOMMON, mage.cards.h.HeatOfBattle.class));
         cards.add(new SetCardInfo("Hermit Druid", 58, Rarity.RARE, mage.cards.h.HermitDruid.class));
         cards.add(new SetCardInfo("Hesitation", 33, Rarity.UNCOMMON, mage.cards.h.Hesitation.class));
         cards.add(new SetCardInfo("Hibernation Sliver", 140, Rarity.UNCOMMON, mage.cards.h.HibernationSliver.class));

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Relearn extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
+    static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
     
     static {
         filter.add(Predicates.or(

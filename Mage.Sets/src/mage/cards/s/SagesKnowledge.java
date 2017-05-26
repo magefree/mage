@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SagesKnowledge extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("sorcery card from your graveyard");
+    static final FilterCard filter = new FilterCard("sorcery card from your graveyard");
 
     static {
         filter.add(new CardTypePredicate(CardType.SORCERY));

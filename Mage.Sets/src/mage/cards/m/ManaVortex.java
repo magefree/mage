@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class ManaVortex extends CardImpl {
     
-    public static final FilterLandPermanent filter = new FilterLandPermanent();
+    static final FilterLandPermanent filter = new FilterLandPermanent();
 
     public ManaVortex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");

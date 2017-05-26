@@ -45,7 +45,7 @@ import java.util.UUID;
  */
 public class CommanderEesha extends CardImpl {
     
-    public static final FilterCard filter = new FilterCard("creatures");
+    static final FilterCard filter = new FilterCard("creatures");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

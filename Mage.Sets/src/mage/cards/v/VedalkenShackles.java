@@ -91,7 +91,7 @@ public class VedalkenShackles extends CardImpl {
 
 class PowerIslandPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
 
-    public static final FilterLandPermanent filter = new FilterLandPermanent("Island");
+    static final FilterLandPermanent filter = new FilterLandPermanent("Island");
     static {
         filter.add(new SubtypePredicate(SubType.ISLAND));
     }

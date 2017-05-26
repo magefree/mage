@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class KithkinHarbinger extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("Kithkin card");
+    static final FilterCard filter = new FilterCard("Kithkin card");
 
     static {
         filter.add(new SubtypePredicate(SubType.KITHKIN));

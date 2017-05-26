@@ -50,7 +50,7 @@ import java.util.UUID;
  */
 public class ConsumeSpirit extends CardImpl {
 
-    public static final FilterMana filterBlack = new FilterMana();
+    static final FilterMana filterBlack = new FilterMana();
 
     static {
         filterBlack.setBlack(true);

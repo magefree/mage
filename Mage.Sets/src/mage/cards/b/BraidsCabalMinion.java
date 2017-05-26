@@ -48,7 +48,7 @@ import java.util.UUID;
  */
 public class BraidsCabalMinion extends CardImpl {
 
-    public static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
+    static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),

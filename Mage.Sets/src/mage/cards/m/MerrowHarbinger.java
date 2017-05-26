@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class MerrowHarbinger extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("Merfolk card");
+    static final FilterCard filter = new FilterCard("Merfolk card");
 
     static {
         filter.add(new SubtypePredicate(SubType.MERFOLK   ));
