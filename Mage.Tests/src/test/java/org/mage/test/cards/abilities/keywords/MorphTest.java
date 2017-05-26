@@ -616,9 +616,9 @@ public class MorphTest extends CardTestPlayerBase {
     }
 
     /**
-     * Linvala, Keep of Silence is preventing morph creatures from turning face up.
-     * Turning face up is a special ability not an active ability.
-     * This should not be prevented by the loss of active abilities.
+     * Linvala, Keep of Silence is preventing morph creatures from turning face
+     * up. Turning face up is a special ability not an active ability. This
+     * should not be prevented by the loss of active abilities.
      */
     @Test
     public void testTurnFaceUpWithLinvala() {
@@ -736,5 +736,46 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Reflector Mage", 1);
         assertPermanentCount(playerA, "Rattleclaw Mystic", 1);
         assertHandCount(playerA, "Rattleclaw Mystic", 0); // should have been replayed faceup
+    }
+
+    /**
+     * The well-known combo with Vesuvan Shapeshifter and Brine Elemental does
+     * not work correctly. When Vesuvan Shapeshifter turns face up and becomes a
+     * copy of the targeted creature, it should still be in the state of
+     * "turning face up", thus triggering the ability of the Brine Elemental.
+     */
+    @Test
+    public void testVesuvanShapeshifter() {
+
+        // Morph {5}{U}{U}
+        // When Brine Elemental is turned face up, each opponent skips his or her next untap step.
+        addCard(Zone.HAND, playerA, "Brine Elemental"); // Creature {4}{U}{U} 5/4
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+
+        // As Vesuvan Shapeshifter enters the battlefield or is turned face up, you may choose another creature on the battlefield.
+        // If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
+        // and gains "At the beginning of your upkeep, you may turn this creature face down."
+        // Morph {1}{U} (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
+        addCard(Zone.HAND, playerB, "Vesuvan Shapeshifter"); // Creature 0/0
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brine Elemental");
+        setChoice(playerA, "No"); // cast it normally
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Vesuvan Shapeshifter");
+        setChoice(playerB, "Yes");
+        setChoice(playerB, "Brine Elemental");
+
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{1}{U}: Turn this face-down permanent");
+
+        setStopAt(2, PhaseStep.END_TURN);
+
+        execute();
+
+        assertPermanentCount(playerA, "Brine Elemental", 1);
+
+        assertPermanentCount(playerB, "Brine Elemental", 1);
+
+        Assert.assertTrue("Skip next turn has to be added to TurnMods", currentGame.getState().getTurnMods().size() == 1);
     }
 }
