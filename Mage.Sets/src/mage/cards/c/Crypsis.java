@@ -49,7 +49,7 @@ import java.util.UUID;
  */
 public class Crypsis extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("creatures your opponents control");
+    static final FilterCard filter = new FilterCard("creatures your opponents control");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

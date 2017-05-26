@@ -112,7 +112,7 @@ class CombatDamageToCreatureWatcher extends Watcher {
     // which objects dealt combat damage to creature during the turn
     public final Set<MageObjectReference> dealtCombatDamageToCreature;
 
-    public final static String BASIC_KEY = "CombatDamageToCreatureWatcher";
+    final static String BASIC_KEY = "CombatDamageToCreatureWatcher";
 
     public CombatDamageToCreatureWatcher() {
         super(BASIC_KEY, WatcherScope.GAME);

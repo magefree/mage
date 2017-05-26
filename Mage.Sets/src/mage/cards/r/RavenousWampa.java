@@ -61,7 +61,7 @@ public class RavenousWampa extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public static final String RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX = "TOU_SAC_CRE";
+    static final String RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX = "TOU_SAC_CRE";
 
     public RavenousWampa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R/W}{R/W}");

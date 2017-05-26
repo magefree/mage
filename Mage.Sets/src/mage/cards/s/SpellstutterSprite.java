@@ -54,7 +54,7 @@ import java.util.UUID;
  */
 public class SpellstutterSprite extends CardImpl {
     
-    public static final FilterPermanent filter = new FilterPermanent("number of Faeries you control");
+    static final FilterPermanent filter = new FilterPermanent("number of Faeries you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate(SubType.FAERIE));

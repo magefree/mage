@@ -43,18 +43,18 @@ import mage.target.common.TargetCardInLibrary;
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public class FaerieHarbinger extends CardImpl {
-    
-    public static final FilterCard filter = new FilterCard("Faerie card");
+
+    static final FilterCard filter = new FilterCard("Faerie card");
+
     static {
         filter.add(new SubtypePredicate(SubType.FAERIE));
     }
 
     public FaerieHarbinger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);

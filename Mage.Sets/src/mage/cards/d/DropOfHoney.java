@@ -56,7 +56,7 @@ import java.util.UUID;
  */
 public class DropOfHoney extends CardImpl {
 
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     
     public DropOfHoney(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

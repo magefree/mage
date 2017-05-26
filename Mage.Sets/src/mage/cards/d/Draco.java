@@ -107,7 +107,7 @@ class DracoCostReductionEffect extends CostModificationEffectImpl {
 
 class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
 
-    public static final int MAX_DOMAIN_VALUE = 10;
+    static final int MAX_DOMAIN_VALUE = 10;
 
     public DracoSacrificeUnlessPaysEffect () {
         super(Outcome.Sacrifice);

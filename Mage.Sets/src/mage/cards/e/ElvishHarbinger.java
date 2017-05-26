@@ -48,7 +48,7 @@ import java.util.UUID;
  */
 public class ElvishHarbinger extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("Elf card");
+    static final FilterCard filter = new FilterCard("Elf card");
     static {
         filter.add(new SubtypePredicate(SubType.ELEMENTAL));
     }

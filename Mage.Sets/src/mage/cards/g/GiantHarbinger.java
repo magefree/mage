@@ -46,7 +46,7 @@ import java.util.UUID;
  */
 public class GiantHarbinger extends CardImpl {
     
-    public static final FilterCard filter = new FilterCard("Giant card");
+    static final FilterCard filter = new FilterCard("Giant card");
     static {
         filter.add(new SubtypePredicate(SubType.GIANT));
     }

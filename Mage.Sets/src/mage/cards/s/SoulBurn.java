@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SoulBurn extends CardImpl {
 
-    public static final FilterMana filterBlackOrRed = new FilterMana();
+    static final FilterMana filterBlackOrRed = new FilterMana();
 
     static {
         filterBlackOrRed.setBlack(true);

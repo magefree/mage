@@ -80,7 +80,7 @@ public class AbolisherOfBloodlines extends CardImpl {
 
 class AbolisherOfBloodlinesAbility extends TriggeredAbilityImpl {
 
-    public static final String RULE_TEXT = "When this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures";
+    static final String RULE_TEXT = "When this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures";
 
     public AbolisherOfBloodlinesAbility() {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterCreaturePermanent(), 3, "Target opponent"), false);

@@ -49,7 +49,7 @@ import java.util.UUID;
  */
 public class Cantivore extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("enchantment cards");
+    static final FilterCard filter = new FilterCard("enchantment cards");
     
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

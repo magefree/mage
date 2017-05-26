@@ -56,7 +56,7 @@ import java.util.UUID;
  */
 public class PorphyryNodes extends CardImpl {
     
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     
     public PorphyryNodes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

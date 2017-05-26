@@ -51,7 +51,7 @@ import java.util.UUID;
  */
 public class CryptRats extends CardImpl {
 
-    public static final FilterMana filterBlack = new FilterMana();
+    static final FilterMana filterBlack = new FilterMana();
 
     static {
         filterBlack.setBlack(true);
