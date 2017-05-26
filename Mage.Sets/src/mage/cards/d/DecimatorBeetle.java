@@ -75,7 +75,7 @@ public class DecimatorBeetle extends CardImpl {
         ability2.addTarget(new TargetControlledCreaturePermanent());
         ability2.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
         this.addAbility(ability2);
-        this.originalId = ability2.getId();
+        this.originalId = ability2.getOriginalId();
     }
 
     public DecimatorBeetle(final DecimatorBeetle card) {
