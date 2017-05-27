@@ -65,7 +65,7 @@ public class CryptRats extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}: Crypt Rats deals X damage to each creature and each player. Spend only black mana on X.
-        Effect effect = new DamageEverythingEffect(new ManacostVariableValue(), new FilterPermanent());
+        Effect effect = new DamageEverythingEffect(new ManacostVariableValue());
         effect.setText("{this} deals X damage to each creature and each player. Spend only black mana on X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect,new ManaCostsImpl("{X}"));
         VariableCost variableCost = ability.getManaCostsToPay().getVariableCosts().get(0);
