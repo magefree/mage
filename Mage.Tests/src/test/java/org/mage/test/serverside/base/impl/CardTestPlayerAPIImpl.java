@@ -1,10 +1,5 @@
 package org.mage.test.serverside.base.impl;
 
-import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -20,7 +15,10 @@ import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.*;
+import mage.game.ExileZone;
+import mage.game.Game;
+import mage.game.GameException;
+import mage.game.GameOptions;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -30,6 +28,12 @@ import org.junit.Before;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.MageTestPlayerBase;
+
+import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * API for test initialization and asserting the test results.
@@ -235,8 +239,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Add a card to specified zone of specified player.
      *
      * @param gameZone {@link mage.constants.Zone} to add cards to.
-     * @param player {@link Player} to add cards for. Use either playerA or
-     * playerB.
+     * @param player   {@link Player} to add cards for. Use either playerA or
+     *                 playerB.
      * @param cardName Card name in string format.
      */
     @Override
@@ -248,10 +252,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Add any amount of cards to specified zone of specified player.
      *
      * @param gameZone {@link mage.constants.Zone} to add cards to.
-     * @param player {@link Player} to add cards for. Use either playerA or
-     * playerB.
+     * @param player   {@link Player} to add cards for. Use either playerA or
+     *                 playerB.
      * @param cardName Card name in string format.
-     * @param count Amount of cards to be added.
+     * @param count    Amount of cards to be added.
      */
     @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
@@ -262,13 +266,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Add any amount of cards to specified zone of specified player.
      *
      * @param gameZone {@link mage.constants.Zone} to add cards to.
-     * @param player {@link Player} to add cards for. Use either playerA or
-     * playerB.
+     * @param player   {@link Player} to add cards for. Use either playerA or
+     *                 playerB.
      * @param cardName Card name in string format.
-     * @param count Amount of cards to be added.
-     * @param tapped In case gameZone is Battlefield, determines whether
-     * permanent should be tapped. In case gameZone is other than Battlefield,
-     * {@link IllegalArgumentException} is thrown
+     * @param count    Amount of cards to be added.
+     * @param tapped   In case gameZone is Battlefield, determines whether
+     *                 permanent should be tapped. In case gameZone is other than Battlefield,
+     *                 {@link IllegalArgumentException} is thrown
      */
     @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
@@ -326,7 +330,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Set player's initial life count.
      *
      * @param player {@link Player} to set life count for.
-     * @param life Life count to set.
+     * @param life   Life count to set.
      */
     @Override
     public void setLife(TestPlayer player, int life) {
@@ -403,7 +407,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert player's life count after test execution.
      *
      * @param player {@link Player} to get life for comparison.
-     * @param life Expected player's life to compare with.
+     * @param life   Expected player's life to compare with.
      */
     @Override
     public void assertLife(Player player, int life) throws AssertionError {
@@ -420,14 +424,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * params 3b. all: there is at least one creature with the cardName with the
      * different p\t params
      *
-     * @param player {@link Player} to get creatures for comparison.
-     * @param cardName Card name to compare with.
-     * @param power Expected power to compare with.
+     * @param player    {@link Player} to get creatures for comparison.
+     * @param cardName  Card name to compare with.
+     * @param power     Expected power to compare with.
      * @param toughness Expected toughness to compare with.
-     * @param scope {@link mage.filter.Filter.ComparisonScope} Use ANY, if you
-     * want "at least one creature with given name should have specified p\t"
-     * Use ALL, if you want "all creature with gived name should have specified
-     * p\t"
+     * @param scope     {@link mage.filter.Filter.ComparisonScope} Use ANY, if you
+     *                  want "at least one creature with given name should have specified p\t"
+     *                  Use ALL, if you want "all creature with gived name should have specified
+     *                  p\t"
      */
     @Override
     public void assertPowerToughness(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope)
@@ -438,6 +442,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int foundToughness = 0;
         int found = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
+
             if (permanent.getName().equals(cardName) && permanent.getControllerId().equals(player.getId())) {
                 count++;
                 if (scope == Filter.ComparisonScope.All) {
@@ -511,13 +516,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     *
      * @param player
      * @param cardName
      * @param ability
-     * @param flag true if creature should contain ability, false if it should
-     * NOT contain it instead
-     * @param count number of permanents with that ability
+     * @param flag     true if creature should contain ability, false if it should
+     *                 NOT contain it instead
+     * @param count    number of permanents with that ability
      * @throws AssertionError
      */
     public void assertAbility(Player player, String cardName, Ability ability, boolean flag, int count) throws AssertionError {
@@ -549,7 +553,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert permanent count under player's control.
      *
      * @param player {@link Player} which permanents should be counted.
-     * @param count Expected count.
+     * @param count  Expected count.
      */
     @Override
     public void assertPermanentCount(Player player, int count) throws AssertionError {
@@ -565,9 +569,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert permanent count under player's control.
      *
-     * @param player {@link Player} which permanents should be counted.
+     * @param player   {@link Player} which permanents should be counted.
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     @Override
     public void assertPermanentCount(Player player, String cardName, int count) throws AssertionError {
@@ -615,8 +619,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert counter count on a permanent
      *
      * @param cardName Name of the cards that should be counted.
-     * @param type Type of the counter that should be counted.
-     * @param count Expected count.
+     * @param type     Type of the counter that should be counted.
+     * @param count    Expected count.
      */
     public void assertCounterCount(String cardName, CounterType type, int count) throws AssertionError {
         this.assertCounterCount(null, cardName, type, count);
@@ -638,8 +642,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert counter count on a card in exile
      *
      * @param cardName Name of the cards that should be counted.
-     * @param type Type of the counter that should be counted.
-     * @param count Expected count.
+     * @param type     Type of the counter that should be counted.
+     * @param count    Expected count.
      */
     public void assertCounterOnExiledCardCount(String cardName, CounterType type, int count) throws AssertionError {
         Card found = null;
@@ -661,8 +665,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert counter count on a player
      *
      * @param player The player whos counters should be counted.
-     * @param type Type of the counter that should be counted.
-     * @param count Expected count.
+     * @param type   Type of the counter that should be counted.
+     * @param count  Expected count.
      */
     public void assertCounterCount(Player player, CounterType type, int count) throws AssertionError {
         Assert.assertEquals("(Battlefield) Counter counts are not equal (" + player.getName() + ':' + type + ')', count, player.getCounters().getCount(type));
@@ -672,8 +676,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert whether a permanent is a specified type or not
      *
      * @param cardName Name of the permanent that should be checked.
-     * @param type A type to test for
-     * @param flag true if creature should have type, false if it should not
+     * @param type     A type to test for
+     * @param flag     true if creature should have type, false if it should not
      */
     public void assertType(String cardName, CardType type, boolean flag) throws AssertionError {
         Permanent found = null;
@@ -694,8 +698,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert whether a permanent is a specified type
      *
      * @param cardName Name of the permanent that should be checked.
-     * @param type A type to test for
-     * @param subType a subtype to test for
+     * @param type     A type to test for
+     * @param subType  a subtype to test for
      */
     public void assertType(String cardName, CardType type, String subType) throws AssertionError {
         Permanent found = getPermanent(cardName);
@@ -709,7 +713,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert whether a permanent is not a specified type
      *
      * @param cardName Name of the permanent that should be checked.
-     * @param type A type to test for
+     * @param type     A type to test for
      */
     public void assertNotType(String cardName, CardType type) throws AssertionError {
         Permanent found = getPermanent(cardName);
@@ -720,7 +724,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert whether a permanent is not a specified subtype
      *
      * @param cardName Name of the permanent that should be checked.
-     * @param subType a subtype to test for
+     * @param subType  a subtype to test for
      */
     public void assertNotSubtype(String cardName, String subType) throws AssertionError {
         Permanent found = getPermanent(cardName);
@@ -733,7 +737,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert whether a permanent is tapped or not
      *
      * @param cardName Name of the permanent that should be checked.
-     * @param tapped Whether the permanent is tapped or not
+     * @param tapped   Whether the permanent is tapped or not
      */
     public void assertTapped(String cardName, boolean tapped) throws AssertionError {
         Permanent found = null;
@@ -757,8 +761,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert whether X permanents of the same name are tapped or not.
      *
      * @param cardName Name of the permanent that should be checked.
-     * @param tapped Whether the permanent is tapped or not
-     * @param count The amount of this permanents that should be tapped
+     * @param tapped   Whether the permanent is tapped or not
+     * @param count    The amount of this permanents that should be tapped
      */
     public void assertTappedCount(String cardName, boolean tapped, int count) throws AssertionError {
         int tappedAmount = 0;
@@ -778,7 +782,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert whether a permanent is attacking or not
      *
-     * @param cardName Name of the permanent that should be checked.
+     * @param cardName  Name of the permanent that should be checked.
      * @param attacking Whether the permanent is attacking or not
      */
     public void assertAttacking(String cardName, boolean attacking) throws AssertionError {
@@ -798,7 +802,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert card count in player's hand.
      *
      * @param player {@link Player} who's hand should be counted.
-     * @param count Expected count.
+     * @param count  Expected count.
      */
     public void assertHandCount(Player player, int count) throws AssertionError {
         int actual = currentGame.getPlayer(player.getId()).getHand().size();
@@ -808,9 +812,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert card count in player's hand.
      *
-     * @param player {@link Player} who's hand should be counted.
+     * @param player   {@link Player} who's hand should be counted.
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     public void assertHandCount(Player player, String cardName, int count) throws AssertionError {
         int actual;
@@ -833,7 +837,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert card count in player's graveyard.
      *
      * @param player {@link Player} who's graveyard should be counted.
-     * @param count Expected count.
+     * @param count  Expected count.
      */
     public void assertGraveyardCount(Player player, int count) throws AssertionError {
         int actual = currentGame.getPlayer(player.getId()).getGraveyard().size();
@@ -844,7 +848,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert card count in exile.
      *
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     public void assertExileCount(String cardName, int count) throws AssertionError {
         int actualCount = 0;
@@ -881,9 +885,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert card count in player's exile.
      *
-     * @param owner {@link Player} who's exile should be counted.
+     * @param owner    {@link Player} who's exile should be counted.
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     public void assertExileCount(Player owner, String cardName, int count) throws AssertionError {
         int actualCount = 0;
@@ -900,9 +904,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert card count in player's graveyard.
      *
-     * @param player {@link Player} who's graveyard should be counted.
+     * @param player   {@link Player} who's graveyard should be counted.
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     public void assertGraveyardCount(Player player, String cardName, int count) throws AssertionError {
         int actualCount = 0;
@@ -919,7 +923,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert library card count.
      *
      * @param player {@link Player} who's library should be counted.
-     * @param count Expected count.
+     * @param count  Expected count.
      */
     public void assertLibraryCount(Player player, int count) throws AssertionError {
 
@@ -931,9 +935,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert specific card count in player's library.
      *
-     * @param player {@link Player} who's library should be counted.
+     * @param player   {@link Player} who's library should be counted.
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     public void assertLibraryCount(Player player, String cardName, int count) throws AssertionError {
         int actualCount = 0;
@@ -1035,13 +1039,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     *
      * @param turnNum
      * @param step
      * @param player
      * @param cardName
      * @param targetName for modes you can add "mode=3" before target name,
-     * multiple targets can be seperated by ^
+     *                   multiple targets can be seperated by ^
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName);
@@ -1062,8 +1065,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param step
      * @param player
      * @param cardName
-     * @param targetName for modal spells add the mode to the name e.g.
-     * "mode=2SilvercoatLion^mode3=PillarfieldOx"
+     * @param targetName   for modal spells add the mode to the name e.g.
+     *                     "mode=2SilvercoatLion^mode3=PillarfieldOx"
      * @param spellOnStack
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack) {
@@ -1126,13 +1129,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     *
      * @param turnNum
      * @param step
      * @param player
      * @param ability
-     * @param targetName if not target has to be defined use the constant
-     * NO_TARGET
+     * @param targetName   if not target has to be defined use the constant
+     *                     NO_TARGET
      * @param spellOnStack
      * @param clause
      */
@@ -1195,10 +1197,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player
      * @param choice starting with "1" for mode 1, "2" for mode 2 and so on (to
-     * set multiple modes call the command multiple times). If a spell mode can
-     * be used only once like Demonic Pact, the value has to be set to the
-     * number of the remaining modes (e.g. if only 2 are left the number need to
-     * be 1 or 2).
+     *               set multiple modes call the command multiple times). If a spell mode can
+     *               be used only once like Demonic Pact, the value has to be set to the
+     *               number of the remaining modes (e.g. if only 2 are left the number need to
+     *               be 1 or 2).
      */
     public void setModeChoice(TestPlayer player, String choice) {
         player.addModeChoice(choice);
@@ -1209,12 +1211,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player
      * @param target you can add multiple targets by separating them by the "^"
-     * character e.g. "creatureName1^creatureName2" you can qualify the target
-     * additional by setcode e.g. "creatureName-M15" you can add [no copy] to
-     * the end of the target name to prohibit targets that are copied you can
-     * add [only copy] to the end of the target name to allow only targets that
-     * are copies. For modal spells use a prefix with the mode number:
-     * mode=1Lightning Bolt^mode=2Silvercoat Lion
+     *               character e.g. "creatureName1^creatureName2" you can qualify the target
+     *               additional by setcode e.g. "creatureName-M15" you can add [no copy] to
+     *               the end of the target name to prohibit targets that are copied you can
+     *               add [only copy] to the end of the target name to allow only targets that
+     *               are copies. For modal spells use a prefix with the mode number:
+     *               mode=1Lightning Bolt^mode=2Silvercoat Lion
      */
     public void addTarget(TestPlayer player, String target) {
         player.addTarget(target);
@@ -1264,6 +1266,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 Assert.assertEquals("Toughness is not the same", toughness, permanent.getToughness().getValue());
                 break;
             }
+        }
+    }
+
+    public void assertDamageReceived(Player player, String cardName, int amount) {
+        Permanent p = getPermanent(cardName, player.getId());
+        if (p != null) {
+            Assert.assertEquals(p.getDamage(), amount);
         }
     }
 }
