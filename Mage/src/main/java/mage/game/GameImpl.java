@@ -981,6 +981,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         getState().setChoosingPlayerId(null);
+        state.getWatchers().reset(); // watcher objects from cards are reused during match so reset all card watchers already added
         Watchers watchers = state.getWatchers();
         // add default watchers
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
