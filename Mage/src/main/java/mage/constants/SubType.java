@@ -97,7 +97,7 @@ public enum SubType {
     DRONE("Drone", SubTypeSet.CreatureType, false),
     DRUID("Druid", SubTypeSet.CreatureType, false),
     DROID("Droid", SubTypeSet.CreatureType, true),
-    DRYAD("Dryad", SubTypeSet.CreatureType, true),
+    DRYAD("Dryad", SubTypeSet.CreatureType, false),
     DWARF("Dwarf", SubTypeSet.CreatureType, false),
 
     EFREET("Efreet", SubTypeSet.CreatureType, false),
@@ -152,20 +152,20 @@ public enum SubType {
     INSECT("Insect", SubTypeSet.CreatureType, false),
 
     JEDI("Jedi", SubTypeSet.CreatureType, true),
-    JELLYFISH("Jellyfish", SubTypeSet.CreatureType, true),
-    JUGGERNAUT("Juggernaut", SubTypeSet.CreatureType, true),
+    JELLYFISH("Jellyfish", SubTypeSet.CreatureType, false),
+    JUGGERNAUT("Juggernaut", SubTypeSet.CreatureType, false),
 
-    KAVU("Kavu", SubTypeSet.CreatureType, true),
-    KIRIN("Kirin", SubTypeSet.CreatureType, true),
+    KAVU("Kavu", SubTypeSet.CreatureType, false),
+    KIRIN("Kirin", SubTypeSet.CreatureType, false),
     KITHKIN("Kithkin", SubTypeSet.CreatureType, false),
     KNIGHT("Knight", SubTypeSet.CreatureType, false),
     KOBOLD("Kobold", SubTypeSet.CreatureType, false),
     KOR("Kor", SubTypeSet.CreatureType, false),
     KRAKEN("Kraken", SubTypeSet.CreatureType, false),
 
-    LAMIA("Lamia", SubTypeSet.CreatureType, true),
-    LAMMASU("Lammasu", SubTypeSet.CreatureType, true),
-    LEECH("Leech", SubTypeSet.CreatureType, true),
+    LAMIA("Lamia", SubTypeSet.CreatureType, false),
+    LAMMASU("Lammasu", SubTypeSet.CreatureType, false),
+    LEECH("Leech", SubTypeSet.CreatureType, false),
     LEVIATHAN("Leviathan", SubTypeSet.CreatureType, false),
     LHURGOYF("Lhurgoyf", SubTypeSet.CreatureType, false),
     LICID("Licid", SubTypeSet.CreatureType, false),
@@ -378,6 +378,10 @@ public enum SubType {
 
     public static Set<String> getBasicLands(boolean customSet) {
         return Arrays.stream(values()).filter(s -> s.customSet == customSet).filter(p -> p.getSubTypeSet() == SubTypeSet.BasicLandType).map(SubType::getDescription).collect(Collectors.toSet());
+    }
+
+    public static Set<String> getLandTypes(boolean customSet){
+        return Arrays.stream(values()).filter(s->s.customSet==customSet).filter(p->p.getSubTypeSet() == SubTypeSet.BasicLandType || p.getSubTypeSet() == SubTypeSet.NonBasicLandType).map(SubType::getDescription).collect(Collectors.toSet());
     }
 }
 
