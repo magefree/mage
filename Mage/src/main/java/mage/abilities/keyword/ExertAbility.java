@@ -69,14 +69,14 @@ public class ExertAbility extends SimpleStaticAbility {
                 : "You may exert {this}") + " as it attacks. ";
         if (ability != null) {
             this.addSubAbility(ability);
-            ruleText += ("When you do,");
-            ability.getEffects().stream().forEach((effect) -> {
+            ruleText += "When you do,";
+            ability.getEffects().forEach(effect -> {
                 ruleText += " " + effect.getText(ability.getModes().getMode());
             });
             ruleText += ". ";
             ability.setRuleVisible(false);
         }
-        ruleText += "<i>(An exterted creature can't untap during your next untap step)</i>";
+        ruleText += "<i>(An exerted creature can't untap during your next untap step)</i>";
         if (exertOnlyOncePerTurn) {
             getWatchers().add(new ExertedThisTurnWatcher());
         }
@@ -142,7 +142,7 @@ class ExertReplacementEffect extends ReplacementEffectImpl {
                 }
             }
             if (controller.chooseUse(outcome, "Exert " + creature.getLogName() + '?',
-                    "An exterted creature can't untap during your next untap step.", "Yes", "No", source, game)) {
+                    "An exerted creature can't untap during your next untap step.", "Yes", "No", source, game)) {
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " exerted " + creature.getName());
                 }
