@@ -34,7 +34,7 @@ public class SuqAtaFirewalker extends CardImpl {
         color.setBlue(true);
 
 
-        // Suq'Ata Firewalker can't be the target of black spells or abilities from black sources.
+        // Suq'Ata Firewalker can't be the target of red spells or abilities from red sources.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedSourceEffect(filterRed, Duration.WhileOnBattlefield)));
 
         //{T}: Suq'Ata Firewalker deals 1 damage to target creature or player.

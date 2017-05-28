@@ -30,6 +30,8 @@ package mage.abilities.effects;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
@@ -83,7 +85,6 @@ public class ContinuousEffects implements Serializable {
     // note all effect/abilities that were only added temporary
     private final Map<ContinuousEffect, Set<Ability>> temporaryEffects = new HashMap<>();
 
-    private final ContinuousEffectSorter sorter = new ContinuousEffectSorter();
 
     public ContinuousEffects() {
         applyCounters = new ApplyCountersEffect();
@@ -211,7 +212,7 @@ public class ContinuousEffects implements Serializable {
 
         updateTimestamps(layerEffects);
 
-        layerEffects.sort(sorter);
+        Collections.sort(layerEffects, Comparator.comparingLong(ContinuousEffect::getOrder));
         return layerEffects;
     }
 
@@ -240,13 +241,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     private List<ContinuousEffect> filterLayeredEffects(List<ContinuousEffect> effects, Layer layer) {
-        List<ContinuousEffect> layerEffects = new ArrayList<>();
-        for (ContinuousEffect effect : effects) {
-            if (effect.hasLayer(layer)) {
-                layerEffects.add(effect);
-            }
-        }
-        return layerEffects;
+        return effects.stream().filter(effect->effect.hasLayer(layer)).collect(Collectors.toList());
     }
 
     public HashMap<RequirementEffect, HashSet<Ability>> getApplicableRequirementEffects(Permanent permanent, Game game) {
@@ -554,7 +549,7 @@ public class ContinuousEffects implements Serializable {
     /**
      * Filters out asThough effects that are not active.
      *
-     * @param AsThoughEffectType type
+     * @param type type
      * @param game
      * @return
      */
@@ -1264,13 +1259,5 @@ public class ContinuousEffects implements Serializable {
             }
         }
         return controllerFound;
-    }
-}
-
-class ContinuousEffectSorter implements Comparator<ContinuousEffect>, Serializable {
-
-    @Override
-    public int compare(ContinuousEffect one, ContinuousEffect two) {
-        return Long.compare(one.getOrder(), two.getOrder());
     }
 }
