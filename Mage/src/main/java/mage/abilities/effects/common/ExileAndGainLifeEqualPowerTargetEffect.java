@@ -37,20 +37,20 @@ import mage.players.Player;
 /**
  * @author JRHerlehy
  */
-public class SwordsToPlowsharesEffect extends OneShotEffect {
+public class ExileAndGainLifeEqualPowerTargetEffect extends OneShotEffect {
 
-    public SwordsToPlowsharesEffect() {
+    public ExileAndGainLifeEqualPowerTargetEffect() {
         super(Outcome.GainLife);
         staticText = "Exile target creature. Its controller gains life equal to its power";
     }
 
-    public SwordsToPlowsharesEffect(final SwordsToPlowsharesEffect effect) {
+    public ExileAndGainLifeEqualPowerTargetEffect(final ExileAndGainLifeEqualPowerTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public SwordsToPlowsharesEffect copy() {
-        return new SwordsToPlowsharesEffect(this);
+    public ExileAndGainLifeEqualPowerTargetEffect copy() {
+        return new ExileAndGainLifeEqualPowerTargetEffect(this);
     }
 
     @Override
@@ -61,6 +61,7 @@ public class SwordsToPlowsharesEffect extends OneShotEffect {
             if (player != null) {
                 int creaturePower = permanent.getPower().getValue();
                 permanent.moveToExile(null, null, source.getSourceId(), game);
+                game.applyEffects();
                 player.gainLife(creaturePower, game);
             }
             return true;
