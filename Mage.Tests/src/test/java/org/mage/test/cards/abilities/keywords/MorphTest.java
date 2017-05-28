@@ -764,9 +764,9 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Vesuvan Shapeshifter");
         setChoice(playerB, "Yes");
-        setChoice(playerB, "Brine Elemental");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{1}{U}: Turn this face-down permanent");
+        setChoice(playerB, "Brine Elemental");
 
         setStopAt(2, PhaseStep.END_TURN);
 

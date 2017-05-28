@@ -78,7 +78,7 @@ public class VesuvanShapeshifter extends CardImpl {
         ability.setWorksFaceDown(true);
         this.addAbility(ability);
 
-        // As Vesuvan Shapeshifter etbs, may choose another creature. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
+        // As Vesuvan Shapeshifter etbs, you may choose another creature. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
         Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new VesuvanShapeShifterFaceUpApplier());
         effect.setText(effectText);
         ability = new EntersBattlefieldAbility(effect, true);
@@ -108,6 +108,7 @@ class VesuvanShapeShifterFaceUpApplier extends ApplyToPermanent {
         Effect effect = new VesuvanShapeshifterFaceDownEffect();
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
         permanent.getAbilities().add(ability);
+        // Why is this needed?
         permanent.addAbility(new MorphAbility(permanent, new ManaCostsImpl("{1}{U}")), permanent.getId(), game);
         return true;
     }
@@ -153,6 +154,7 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
                 if (copyFromCreature != null) {
                     game.copyPermanent(Duration.Custom, copyFromCreature, copyToCreature.getId(), source, new VesuvanShapeShifterFaceUpApplier());
                     source.getTargets().clear();
+                    game.applyEffects(); // needed to get effects ready if copy happens in replacment and the copied abilities react of the same event (e.g. turn face up)
                     return true;
                 }
             }
