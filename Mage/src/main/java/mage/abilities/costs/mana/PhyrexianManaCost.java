@@ -27,13 +27,8 @@
  */
 package mage.abilities.costs.mana;
 
-import java.util.UUID;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
 import mage.constants.ColoredManaSymbol;
-import mage.game.Game;
-import mage.players.ManaPool;
 
 /**
  *
@@ -63,7 +58,6 @@ public class PhyrexianManaCost extends ColoredManaCost {
     public ColoredManaCost getUnpaid() {
         return new ColoredManaCost(this);
     }
-
 
     @Override
     public PhyrexianManaCost copy() {

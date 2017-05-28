@@ -27,16 +27,10 @@
  */
 package mage.abilities.effects;
 
-import java.util.Iterator;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -93,7 +87,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
         this.manaCosts = manaCosts;
     }
 
-    public PayCostToAttackBlockEffectImpl(PayCostToAttackBlockEffectImpl effect) {
+    public PayCostToAttackBlockEffectImpl(final PayCostToAttackBlockEffectImpl effect) {
         super(effect);
         if (effect.cost != null) {
             this.cost = effect.cost.copy();
@@ -125,11 +119,11 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ManaCosts attackBlockManaTax = getManaCostToPay(event, source, game);
         if (attackBlockManaTax != null) {
-            return handleManaCosts(attackBlockManaTax, event, source, game);
+            return handleManaCosts(attackBlockManaTax.copy(), event, source, game);
         }
         Cost attackBlockOtherTax = getOtherCostToPay(event, source, game);
         if (attackBlockOtherTax != null) {
-            return handleOtherCosts(attackBlockOtherTax, event, source, game);
+            return handleOtherCosts(attackBlockOtherTax.copy(), event, source, game);
         }
         return false;
     }
@@ -146,9 +140,6 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             attackBlockManaTax.clearPaid();
             if (attackBlockManaTax.canPay(source, source.getSourceId(), player.getId(), game)
                     && player.chooseUse(Outcome.Neutral, chooseText, source, game)) {
-                
-                handlePhyrexianManaCosts(getManaCostToPay(event, source, game), player, source, game);
-                
                 if (attackBlockManaTax instanceof ManaCostsImpl) {
                     if (attackBlockManaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                         return false;
@@ -159,30 +150,6 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
         }
         return false;
     }
-
-    private void handlePhyrexianManaCosts(ManaCosts<ManaCost> manaCosts, Player player, Ability source, Game game) {
-                
-        if (manaCosts == null) return; // nothing to be done without any mana costs. prevents NRE from occurring here
-        
-        Iterator<ManaCost> manaCostIterator = manaCosts.iterator();
-        Costs<PayLifeCost> costs = new CostsImpl<>();
-
-        while(manaCostIterator.hasNext()) {
-            ManaCost manaCost = manaCostIterator.next();
-            if(manaCost instanceof PhyrexianManaCost) {
-                PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost)manaCost;
-                PayLifeCost payLifeCost = new PayLifeCost(2);
-                if(payLifeCost.canPay(source, source.getSourceId(), player.getId(), game) &&
-                        player.chooseUse(Outcome.LoseLife,  "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', source, game)) {
-                    manaCostIterator.remove();
-                    costs.add(payLifeCost);
-                }
-            }
-        }
-
-        costs.pay(source, game, source.getSourceId(), player.getId(), false, null);
-    }
-
 
     private boolean handleOtherCosts(Cost attackBlockOtherTax, GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
