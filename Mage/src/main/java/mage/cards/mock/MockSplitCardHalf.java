@@ -37,6 +37,8 @@ import mage.cards.repository.CardInfo;
  */
 public class MockSplitCardHalf extends MockCard implements SplitCardHalf {
 
+    SplitCard splitCardParent;
+
     public MockSplitCardHalf(CardInfo card) {
         super(card);
     }
@@ -52,12 +54,12 @@ public class MockSplitCardHalf extends MockCard implements SplitCardHalf {
 
     @Override
     public void setParentCard(SplitCard card) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.splitCardParent = card;
     }
 
     @Override
     public SplitCard getParentCard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return splitCardParent;
     }
 
 }
