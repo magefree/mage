@@ -605,6 +605,7 @@ public class TableController {
             table.initGame();
             GameOptions gameOptions = new GameOptions();
             gameOptions.rollbackTurnsAllowed = match.getOptions().isRollbackTurnsAllowed();
+            gameOptions.bannedUsers = match.getOptions().getBannedUsers();
             match.getGame().setGameOptions(gameOptions);
             GameManager.instance.createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId, gameOptions);
             String creator = null;

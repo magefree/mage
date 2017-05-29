@@ -1,7 +1,10 @@
 package mage.game;
 
-import java.io.Serializable;
 import mage.constants.PhaseStep;
+
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * Game options for Mage game. Mainly used in tests to configure
@@ -42,4 +45,10 @@ public class GameOptions implements Serializable {
      * If true, players can rollback turn if all players agree
      */
     public boolean rollbackTurnsAllowed = true;
+
+    /**
+     * Names of users banned from participating in the game
+     */
+    public Set<String> bannedUsers = Collections.emptySet();
+
 }

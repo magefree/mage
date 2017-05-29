@@ -879,14 +879,23 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void watchGame(final UUID gameId, final String sessionId) throws MageException {
-        execute("watchGame", sessionId, () -> {
-            Optional<Session> session = SessionManager.instance.getSession(sessionId);
-            if (!session.isPresent()) {
-                logger.error("Session not found : " + sessionId);
-            } else {
-                UUID userId = session.get().getUserId();
-                GameManager.instance.watchGame(gameId, userId);
+    public boolean watchGame(final UUID gameId, final String sessionId) throws MageException {
+        return executeWithResult("watchGame", sessionId, new ActionWithResult<Boolean>() {
+            @Override
+            public Boolean execute() throws MageException {
+                Optional<Session> session = SessionManager.instance.getSession(sessionId);
+                if (!session.isPresent()) {
+                    logger.error("Session not found : " + sessionId);
+                    return false;
+                } else {
+                    UUID userId = session.get().getUserId();
+                    return GameManager.instance.watchGame(gameId, userId);
+                }
+            }
+
+            @Override
+            public Boolean negativeResult() {
+                return false;
             }
         });
     }

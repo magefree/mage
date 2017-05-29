@@ -1016,8 +1016,7 @@ public class SessionImpl implements Session {
     public boolean watchGame(UUID gameId) {
         try {
             if (isConnected()) {
-                server.watchGame(gameId, sessionId);
-                return true;
+                return server.watchGame(gameId, sessionId);
             }
         } catch (MageException ex) {
             handleMageException(ex);

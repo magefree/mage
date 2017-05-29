@@ -391,14 +391,22 @@ public class GameController implements GameCallback {
         return true;
     }
 
-    public void watch(UUID userId) {
+    public boolean watch(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
             // You can't watch a game if you already a player in it
-            return;
+            return false;
         }
         if (watchers.containsKey(userId)) {
             // You can't watch a game if you already watch it
-            return;
+            return false;
+        }
+        if (!isAllowedToWatch(userId)) {
+            // Dont want people on our ignore list to stalk us
+            UserManager.instance.getUser(userId).ifPresent(user -> {
+                user.showUserMessage("Not allowed", "You are banned from watching this game");
+                ChatManager.instance.broadcast(chatId, user.getName(), " tried to join, but is banned", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
+            });
+            return false;
         }
         UserManager.instance.getUser(userId).ifPresent(user -> {
             GameSessionWatcher gameWatcher = new GameSessionWatcher(userId, game, false);
@@ -407,6 +415,7 @@ public class GameController implements GameCallback {
             user.addGameWatchInfo(game.getId());
             ChatManager.instance.broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
         });
+        return true;
     }
 
     public void stopWatching(UUID userId) {
@@ -1011,4 +1020,13 @@ public class GameController implements GameCallback {
         }
         return sb.append(']').toString();
     }
+
+    public boolean isAllowedToWatch(UUID userId) {
+        Optional<User> user = UserManager.instance.getUser(userId);
+        if (user.isPresent()) {
+            return !gameOptions.bannedUsers.contains(user.get().getName());
+        }
+        return false;
+    }
+
 }
