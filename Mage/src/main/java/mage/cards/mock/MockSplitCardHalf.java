@@ -37,7 +37,7 @@ import mage.cards.repository.CardInfo;
  */
 public class MockSplitCardHalf extends MockCard implements SplitCardHalf {
 
-    SplitCard splitCardParent;
+    private SplitCard splitCardParent;
 
     public MockSplitCardHalf(CardInfo card) {
         super(card);
