@@ -76,7 +76,7 @@ public class ExertAbility extends SimpleStaticAbility {
             ruleText += ". ";
             ability.setRuleVisible(false);
         }
-        ruleText += "<i>(An exerted creature won't untap during your next untap step)</i>";
+        ruleText += "<i>(An exerted creature won't untap during your next untap step.)</i>";
         if (exertOnlyOncePerTurn) {
             getWatchers().add(new ExertedThisTurnWatcher());
         }

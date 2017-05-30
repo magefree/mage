@@ -72,7 +72,7 @@ public class GiftOfParadise extends CardImpl {
         // Enchanted land has "{T}: Add two mana of any one color to your mana pool."
         Ability gainedAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
-        effect.setText("Enchanted land has \"{T}: Add two mana of any color to your mana pool.\"");
+        effect.setText("Enchanted land has \"{T}: Add two mana of any one color to your mana pool.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
