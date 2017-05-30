@@ -189,6 +189,7 @@ MTGO Vanguard|VGO|
 Visions|VIS|
 Vintage Masters|VMA|
 Welcome Deck 2016|W16|
+Welcome Deck 2017|W17|
 World Magic Cup Qualifier|WMCQ|
 Weatherlight|WTH|
 Worldwake|WWK|
