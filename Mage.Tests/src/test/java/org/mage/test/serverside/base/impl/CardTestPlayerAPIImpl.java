@@ -22,6 +22,7 @@ import mage.game.GameOptions;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.players.ManaPool;
 import mage.players.Player;
 import org.junit.Assert;
 import org.junit.Before;
@@ -831,6 +832,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             actual = currentGame.getPlayer(player.getId()).getHand().count(filter, player.getId(), currentGame);
         }
         Assert.assertEquals("(Hand) Card counts for card " + cardName + " for " + player.getName() + " are not equal ", count, actual);
+    }
+
+
+    public void assertManaPool(Player player){
+        ManaPool manaPool = currentGame.getPlayer(player.getId()).getManaPool();
     }
 
     /**
