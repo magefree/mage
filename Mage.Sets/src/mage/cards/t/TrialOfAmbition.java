@@ -58,7 +58,7 @@ public class TrialOfAmbition extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // When Trial of Ambition enters the battlefield, target opponent sacrifices a creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target opponent"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, "target opponent"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
