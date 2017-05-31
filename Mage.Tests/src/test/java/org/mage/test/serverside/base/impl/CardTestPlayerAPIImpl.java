@@ -1,5 +1,6 @@
 package org.mage.test.serverside.base.impl;
 
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -22,6 +23,7 @@ import mage.game.GameOptions;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.players.ManaPool;
 import mage.players.Player;
 import org.junit.Assert;
 import org.junit.Before;
@@ -831,6 +833,31 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             actual = currentGame.getPlayer(player.getId()).getHand().count(filter, player.getId(), currentGame);
         }
         Assert.assertEquals("(Hand) Card counts for card " + cardName + " for " + player.getName() + " are not equal ", count, actual);
+    }
+
+
+    public void assertManaPool(Player player, String color, int amount){
+        ManaPool manaPool = currentGame.getPlayer(player.getId()).getManaPool();
+        switch (color){
+            case "colorless":
+                Assert.assertEquals(manaPool.getColorless() + manaPool.getConditionalMana().stream().mapToInt(Mana::getColorless).sum(), amount);
+                break;
+            case "red":
+                Assert.assertEquals(manaPool.getRed() + manaPool.getConditionalMana().stream().mapToInt(Mana::getRed).sum(), amount);
+                break;
+            case "blue":
+                Assert.assertEquals(manaPool.getBlue() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlue).sum(), amount);
+                break;
+            case "white":
+                Assert.assertEquals(manaPool.getWhite() + manaPool.getConditionalMana().stream().mapToInt(Mana::getWhite).sum(), amount);
+                break;
+            case "green":
+                Assert.assertEquals(manaPool.getGreen() + manaPool.getConditionalMana().stream().mapToInt(Mana::getGreen).sum(), amount);
+                break;
+            case "black":
+                Assert.assertEquals(manaPool.getBlack() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlack).sum(), amount);
+                break;
+        }
     }
 
     /**
