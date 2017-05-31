@@ -1,5 +1,6 @@
 package org.mage.test.cards.mana;
 
+import mage.abilities.costs.mana.ColorlessManaCost;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -8,15 +9,21 @@ import org.mage.test.serverside.base.impl.CardTestAPIImpl;
 
 public class DoublingCubeTest extends CardTestPlayerBase {
 
+    // {3}, {T}: Double the amount of each type of mana in your mana pool.
     String cube = "Doubling Cube";
+    // {T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
     String temple = "Eldrazi Temple";
+    // Mana pools don't empty as steps and phases end.
+    String upwelling = "Upwelling";
 
+    //issue 3443
     @Test
     public void DoublingCubeEldraziTemple() {
 
         addCard(Zone.BATTLEFIELD, playerA, temple);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, cube);
+        addCard(Zone.BATTLEFIELD, playerA, upwelling);
 
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool");
@@ -28,7 +35,7 @@ public class DoublingCubeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertManaPool(playerA);
+        assertManaPool(playerA, "colorless", 4);
 
 
     }
