@@ -8,10 +8,7 @@ import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
-import mage.constants.CardType;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -836,25 +833,25 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
 
-    public void assertManaPool(Player player, String color, int amount){
+    public void assertManaPool(Player player, ManaType color, int amount){
         ManaPool manaPool = currentGame.getPlayer(player.getId()).getManaPool();
         switch (color){
-            case "colorless":
+            case COLORLESS:
                 Assert.assertEquals(manaPool.getColorless() + manaPool.getConditionalMana().stream().mapToInt(Mana::getColorless).sum(), amount);
                 break;
-            case "red":
+            case RED:
                 Assert.assertEquals(manaPool.getRed() + manaPool.getConditionalMana().stream().mapToInt(Mana::getRed).sum(), amount);
                 break;
-            case "blue":
+            case BLUE:
                 Assert.assertEquals(manaPool.getBlue() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlue).sum(), amount);
                 break;
-            case "white":
+            case WHITE:
                 Assert.assertEquals(manaPool.getWhite() + manaPool.getConditionalMana().stream().mapToInt(Mana::getWhite).sum(), amount);
                 break;
-            case "green":
+            case GREEN:
                 Assert.assertEquals(manaPool.getGreen() + manaPool.getConditionalMana().stream().mapToInt(Mana::getGreen).sum(), amount);
                 break;
-            case "black":
+            case BLACK:
                 Assert.assertEquals(manaPool.getBlack() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlack).sum(), amount);
                 break;
         }
