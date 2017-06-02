@@ -1,6 +1,7 @@
 package org.mage.test.cards.mana;
 
 import mage.abilities.costs.mana.ColorlessManaCost;
+import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -35,7 +36,7 @@ public class DoublingCubeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertManaPool(playerA, "colorless", 4);
+        assertManaPool(playerA, ManaType.COLORLESS, 4);
 
 
     }
