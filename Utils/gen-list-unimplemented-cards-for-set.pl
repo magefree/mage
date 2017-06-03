@@ -112,7 +112,7 @@ close CARD;
 print ("Unimplemented cards are here: " . lc($sets{$setName}) ."_unimplemented.txt\n");
 
 open ISSUE_TRACKER, "> " . lc($sets{$setName}) ."_issue_tracker.txt";
-print ISSUE_TRACKER "# Cards in set:\n- [x] [Example Card Name] (example URL here)\n";
+print ISSUE_TRACKER "# Cards in set:\n";
 
 
 my $cn;
@@ -125,7 +125,7 @@ foreach $cn (sort keys (%cardNames))
     }
     my $cn2 = $cn;
     $cn2 =~ s/ /+/g;
-    print ISSUE_TRACKER "- $x_or_not [$cn] (https://www.google.com.au/search?q=$cn2+MTG&tbm=isch)\n";
+    print ISSUE_TRACKER "- $x_or_not [$cn](https://www.google.com.au/search?q=$cn2+MTG&tbm=isch)\n";
 }
 close ISSUE_TRACKER;
 print ("Tracking Issue text for a new Github issue (similar to https://github.com/magefree/mage/issues/2215): " . lc($sets{$setName}) ."_issue_tracker.txt\n");
