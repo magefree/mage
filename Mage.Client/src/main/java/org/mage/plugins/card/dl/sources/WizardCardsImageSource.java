@@ -42,7 +42,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
-
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
@@ -247,6 +246,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("VIS", "Visions");
         setsAliases.put("VMA", "Vintage Masters");
         setsAliases.put("W16", "Welcome Deck 2016");
+        setsAliases.put("W17", "Welcome Deck 2017");
         setsAliases.put("WMCQ", "World Magic Cup Qualifier");
         setsAliases.put("WTH", "Weatherlight");
         setsAliases.put("WWK", "Worldwake");
