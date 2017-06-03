@@ -117,11 +117,12 @@ public enum GameManager {
         }
     }
 
-    public void watchGame(UUID gameId, UUID userId) {
+    public boolean watchGame(UUID gameId, UUID userId) {
         GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {
-            gameController.watch(userId);
+            return gameController.watch(userId);
         }
+        return false;
     }
 
     public void stopWatching(UUID gameId, UUID userId) {

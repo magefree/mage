@@ -305,10 +305,11 @@ public final class GamePanel extends javax.swing.JPanel {
         this.players.clear();
         this.playersWhoLeft.clear();
 
-        jLayeredPane.remove(abilityPicker);
+        if (jLayeredPane!= null) {
+            jLayeredPane.remove(abilityPicker);
+            jLayeredPane.remove(DialogManager.getManager(gameId));
+        }
         this.abilityPicker.cleanUp();
-
-        jLayeredPane.remove(DialogManager.getManager(gameId));
         DialogManager.removeGame(gameId);
 
         if (pickNumber != null) {
