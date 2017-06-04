@@ -48,14 +48,14 @@ public class CyclingAbility extends ActivatedAbilityImpl {
 
     public CyclingAbility(Cost cost) {
         super(Zone.HAND, new DrawCardSourceControllerEffect(1), cost);
-        this.addCost(new DiscardSourceCost());
+        this.addCost(new DiscardSourceCost(false));
         this.cost = cost;
         this.text = "Cycling";
     }
 
     public CyclingAbility(Cost cost, FilterCard filter, String text) {
         super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), cost);
-        this.addCost(new DiscardSourceCost());
+        this.addCost(new DiscardSourceCost(false));
         this.cost = cost;
         this.text = text;
     }
