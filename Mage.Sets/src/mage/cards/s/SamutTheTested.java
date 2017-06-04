@@ -69,7 +69,7 @@ public class SamutTheTested extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlayerAmount(2));
         this.addAbility(ability);
 
-        // Search your library or up to two creature and/or planeswalkercards, put them onto the battlefield, then shuffle your library.
+        // -7: Search your library or up to two creature and/or planeswalkercards, put them onto the battlefield, then shuffle your library.
         FilterCard filterCard = new FilterCard("creature or planeswalker card");
         filterCard.add(Predicates.or(
             new CardTypePredicate(CardType.CREATURE),
