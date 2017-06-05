@@ -30,9 +30,11 @@ package mage.sets;
 import java.util.ArrayList;
 import java.util.List;
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+
 import mage.constants.SetType;
 
 /**
@@ -61,6 +63,9 @@ public class HourOfDevastation extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.ratioBoosterSpecialLand = 144;
+      
+        cards.add(new SetCardInfo("Nicol Bolas, God-Pharoh", 140, Rarity.MYTHIC, mage.cards.n.NicolBolasGodPharoh.class));
+
     }
 
     @Override
