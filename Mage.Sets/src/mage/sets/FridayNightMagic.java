@@ -117,6 +117,7 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Fact or Fiction", 61, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Fanatic of Xenagos", 173, Rarity.UNCOMMON, mage.cards.f.FanaticOfXenagos.class));
         cards.add(new SetCardInfo("Farseek", 154, Rarity.COMMON, mage.cards.f.Farseek.class));
+        cards.add(new SetCardInfo("Fatal Push", 208, Rarity.SPECIAL, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Fiery Temper", 198, Rarity.UNCOMMON, mage.cards.f.FieryTemper.class));
         cards.add(new SetCardInfo("Fireblast", 18, Rarity.COMMON, mage.cards.f.Fireblast.class));
         cards.add(new SetCardInfo("Firebolt", 80, Rarity.UNCOMMON, mage.cards.f.Firebolt.class));
@@ -193,7 +194,9 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Reanimate", 53, Rarity.UNCOMMON, mage.cards.r.Reanimate.class));
         cards.add(new SetCardInfo("Reliquary Tower", 153, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Remand", 92, Rarity.UNCOMMON, mage.cards.r.Remand.class));
+        cards.add(new SetCardInfo("Renegade Rallier", 207, Rarity.SPECIAL, mage.cards.r.RenegadeRallier.class));
         cards.add(new SetCardInfo("Resurrection", 97, Rarity.UNCOMMON, mage.cards.r.Resurrection.class));
+        cards.add(new SetCardInfo("Reverse Engineer", 206, Rarity.SPECIAL, mage.cards.r.ReverseEngineer.class));
         cards.add(new SetCardInfo("Rhox War Monk", 133, Rarity.UNCOMMON, mage.cards.r.RhoxWarMonk.class));
         cards.add(new SetCardInfo("Rift Bolt", 125, Rarity.COMMON, mage.cards.r.RiftBolt.class));
         cards.add(new SetCardInfo("Rise from the Tides", 197, Rarity.UNCOMMON, mage.cards.r.RiseFromTheTides.class));
