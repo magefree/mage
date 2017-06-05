@@ -27,7 +27,12 @@
  */
 package mage.sets;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.SetType;
 
 /**
@@ -42,6 +47,8 @@ public class HourOfDevastation extends ExpansionSet {
         return instance;
     }
 
+    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
+
     private HourOfDevastation() {
         super("Hour of Devastation", "HOU", ExpansionSet.buildDate(2017, 7, 14), SetType.EXPANSION);
         this.blockName = "Amonkhet";
@@ -53,6 +60,19 @@ public class HourOfDevastation extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.ratioBoosterSpecialLand = 144;
     }
 
+    @Override
+    public List<CardInfo> getSpecialLand() {
+        if (savedSpecialLand.isEmpty()) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes("MPS-AKH");
+            criteria.minCardNumber(31);
+            criteria.maxCardNumber(54);
+            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+        }
+
+        return new ArrayList<>(savedSpecialLand);
+    }
 }
