@@ -154,7 +154,6 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
     }
     
     /*
-    * NOTE: test is failing due to bug in code. See issue #3402
     Reported bug: Nest of Scarabs not triggering off infect damage dealt by creatures such as Blight Mamba
      */
     @Test
@@ -178,5 +177,31 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, wOmens, -1, 3); // 0/4 with -1/-1 counter
         assertCounterCount(playerB, wOmens, CounterType.M1M1, 1);
         assertPermanentCount(playerA, "Insect", 1);
+    }
+    
+    /*
+    
+    Reported bug: Nest of Scarabs not triggering off wither damage dealt by creatures such as Sickle Ripper
+     */
+    @Test
+    public void scarab_witherDamageTriggers() {
+        
+        String sickleRipper = "Sickle Ripper"; // {1}{B} 2/1 Creature - Elemental Warrior, Wither
+        String wOmens = "Wall of Omens"; // {1}{W} 0/4 defender ETB: draw a card
+
+        addCard(Zone.BATTLEFIELD, playerA, nestScarabs);
+        addCard(Zone.BATTLEFIELD, playerA, sickleRipper);
+        addCard(Zone.BATTLEFIELD, playerB, wOmens);
+
+        attack(3, playerA, sickleRipper);
+        block(3, playerB, wOmens, sickleRipper);
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerB, 20);
+        assertPowerToughness(playerB, wOmens, -2, 2); // 0/4 with two -1/-1 counters
+        assertCounterCount(playerB, wOmens, CounterType.M1M1, 2);
+        assertPermanentCount(playerA, "Insect", 2);
     }
 }
