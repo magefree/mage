@@ -27,6 +27,8 @@
  */
 package mage.game.tournament;
 
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.constants.TournamentPlayerState;
@@ -37,13 +39,15 @@ import mage.game.events.TableEvent.EventType;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
 import mage.game.result.ResultProtos.*;
+import mage.game.result.ResultProtos.MatchPlayerProto;
+import mage.game.result.ResultProtos.MatchProto;
+import mage.game.result.ResultProtos.MatchQuitStatus;
+import mage.game.result.ResultProtos.TourneyProto;
+import mage.game.result.ResultProtos.TourneyRoundProto;
 import mage.players.Player;
 import mage.players.PlayerType;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
-
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
@@ -168,10 +172,11 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
-    public void updateDeck(UUID playerId, Deck deck) {
+    public boolean updateDeck(UUID playerId, Deck deck) {
         if (players.containsKey(playerId)) {
-            players.get(playerId).updateDeck(deck);
+            return players.get(playerId).updateDeck(deck);
         }
+        return false;
     }
 
     protected Round createRoundRandom() {
@@ -246,12 +251,12 @@ public abstract class TournamentImpl implements Tournament {
         }
         updateResults();
     }
-    
+
     protected void playMultiplayerRound(MultiplayerRound round) {
         playMultiPlayerMatch(round);
-        
+
         updateResults(); // show points from byes
-    }    
+    }
 
     protected List<TournamentPlayer> getActivePlayers() {
         List<TournamentPlayer> activePlayers = new ArrayList<>();
@@ -442,7 +447,7 @@ public abstract class TournamentImpl implements Tournament {
         options.getMatchOptions().getPlayerTypes().add(pair.getPlayer2().getPlayerType());
         tableEventSource.fireTableEvent(EventType.START_MATCH, pair, options.getMatchOptions());
     }
-    
+
     public void playMultiPlayerMatch(MultiplayerRound round) {
         tableEventSource.fireTableEvent(EventType.START_MULTIPLAYER_MATCH, round, options.getMatchOptions());
     }
@@ -588,10 +593,10 @@ public abstract class TournamentImpl implements Tournament {
 
     private MatchPlayerProto matchToProto(Match match, TournamentPlayer player) {
         MatchPlayer matchPlayer = match.getPlayer(player.getPlayer().getId());
-        MatchQuitStatus quit = !matchPlayer.hasQuit() ? MatchQuitStatus.NO_MATCH_QUIT :
-                matchPlayer.getPlayer().hasIdleTimeout() ? MatchQuitStatus.IDLE_TIMEOUT :
-                matchPlayer.getPlayer().hasTimerTimeout() ? MatchQuitStatus.TIMER_TIMEOUT :
-                MatchQuitStatus.QUIT;
+        MatchQuitStatus quit = !matchPlayer.hasQuit() ? MatchQuitStatus.NO_MATCH_QUIT
+                : matchPlayer.getPlayer().hasIdleTimeout() ? MatchQuitStatus.IDLE_TIMEOUT
+                : matchPlayer.getPlayer().hasTimerTimeout() ? MatchQuitStatus.TIMER_TIMEOUT
+                : MatchQuitStatus.QUIT;
         return MatchPlayerProto.newBuilder()
                 .setName(player.getPlayer().getName())
                 .setHuman(player.getPlayer().isHuman())
