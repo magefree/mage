@@ -331,6 +331,23 @@
 |Generate|TOK:CHK|Snake|||SnakeToken|
 |Generate|TOK:CHK|Spirit|||SpiritToken|
 |Generate|TOK:CHR|Snake|||SerpentGeneratorSnakeToken|
+|Generate|TOK:CMA|Beast|1||BeastToken|
+|Generate|TOK:CMA|Beast|2||BeastToken2|
+|Generate|TOK:CMA|Dragon|||DragonToken2|
+|Generate|TOK:CMA|Drake|||LeafdrakeRoostDrakeToken|
+|Generate|TOK:CMA|Elemental|||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:CMA|Elephant|||ElephantToken|
+|Generate|TOK:C14|Elf Druid|||FreyaliseLlanowarsFuryToken|
+|Generate|TOK:C14|Elf Druid|||LlanowarElvesToken|
+|Generate|TOK:CMA|Elf Warrior||
+|Generate|TOK:CMA|Gargoyle|||GargoyleToken|
+|Generate|TOK:CMA|Kithkin Soldier|||KithkinToken|
+|Generate|TOK:CMA|Knight|||KnightToken|
+|Generate|TOK:CMA|Saproling|||SaprolingToken|
+|Generate|TOK:CMA|Spirit|||SpiritWhiteToken|
+|Generate|TOK:CMA|Treefolk|||SylvanOfferingTreefolkToken|
+|Generate|TOK:CMA|Wolf|||WolfToken|
+|Generate|TOK:CMA|Zombie|||ZombieToken|
 |Generate|TOK:CMD|Beast|||BeastToken2|
 |Generate|TOK:CMD|Beast|||BeastToken|
 |Generate|TOK:CMD|Dragon|||DragonToken2|
@@ -479,6 +496,11 @@
 |Generate|TOK:DTK|Warrior|||WarriorToken|
 |Generate|TOK:DTK|Zombie Horror|||CorpseweftZombieToken|
 |Generate|TOK:DTK|Zombie|||ZombieToken|
+|Generate|TOK:E01|Beast|1||BeastToken|
+|Generate|TOK:E01|Beast|2||BeastToken2|
+|Generate|TOK:E01|Soldier|||SoldierToken|
+|Generate|TOK:E01|Spirit|||SpiritWhiteToken|
+|Generate|TOK:E01|Zombie|||ZombieToken|
 |Generate|TOK:EMA|Assembly-Worker|||AssemblyWorkerToken|
 |Generate|TOK:EMA|Beast|||CarnivoreToken|
 |Generate|TOK:EMA|Carnivore||

@@ -28,6 +28,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -44,8 +45,21 @@ public class ArchenemyNicolBolas extends ExpansionSet {
     }
 
     private ArchenemyNicolBolas() {
-        super("Archenemy: Nicol Bolas", "ANB", ExpansionSet.buildDate(2017, 6, 16), SetType.SUPPLEMENTAL);
+        super("Archenemy: Nicol Bolas", "E01", ExpansionSet.buildDate(2017, 6, 16), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        cards.add(new SetCardInfo("Aegis Angel", 1, Rarity.RARE, mage.cards.a.AegisAngel.class));
+        cards.add(new SetCardInfo("Aerial Responder", 2, Rarity.UNCOMMON, mage.cards.a.AerialResponder.class));
+        cards.add(new SetCardInfo("Anointer of Champions", 3, Rarity.UNCOMMON, mage.cards.a.AnointerOfChampions.class));
+        cards.add(new SetCardInfo("Chandra, Pyromaster", 42, Rarity.MYTHIC, mage.cards.c.ChandraPyromaster.class));
+        cards.add(new SetCardInfo("Doomed Traveler", 4, Rarity.COMMON, mage.cards.d.DoomedTraveler.class));
+        cards.add(new SetCardInfo("Excoriate", 5, Rarity.COMMON, mage.cards.e.Excoriate.class));
+        cards.add(new SetCardInfo("Expedition Raptor", 6, Rarity.COMMON, mage.cards.e.ExpeditionRaptor.class));
+        cards.add(new SetCardInfo("Fencing Ace", 7, Rarity.UNCOMMON, mage.cards.f.FencingAce.class));
+        cards.add(new SetCardInfo("Fiendslayer Paladin", 8, Rarity.RARE, mage.cards.f.FiendslayerPaladin.class));
+        cards.add(new SetCardInfo("Flickerwisp", 9, Rarity.UNCOMMON, mage.cards.f.Flickerwisp.class));
+        cards.add(new SetCardInfo("Gideon Jura", 10, Rarity.MYTHIC, mage.cards.g.GideonJura.class));
+        cards.add(new SetCardInfo("Nicol Bolas, Planeswalker", 85, Rarity.MYTHIC, mage.cards.n.NicolBolasPlaneswalker.class));
+        cards.add(new SetCardInfo("Nissa, Worldwaker", 68, Rarity.MYTHIC, mage.cards.n.NissaWorldwaker.class));
     }
 
 }

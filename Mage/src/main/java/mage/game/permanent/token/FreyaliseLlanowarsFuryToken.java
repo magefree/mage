@@ -27,6 +27,9 @@
  */
 
 package mage.game.permanent.token;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -38,9 +41,24 @@ import mage.abilities.mana.GreenManaAbility;
  */
 public class FreyaliseLlanowarsFuryToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("C14", "CMA"));
+    }
+
     public FreyaliseLlanowarsFuryToken() {
+        this(null, 0);
+    }
+
+    public FreyaliseLlanowarsFuryToken(String setCode) {
+        this(setCode, 0);
+    }
+
+    public FreyaliseLlanowarsFuryToken(String setCode, int tokenType) {
         super("Elf Druid", "1/1 green Elf Druid creature token with \"{T}: Add {G} to your mana pool.\"");
-        this.setOriginalExpansionSetCode("C14");
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
         this.cardType.add(CardType.CREATURE);
         this.color = ObjectColor.GREEN;
         this.subtype.add("Elf");
