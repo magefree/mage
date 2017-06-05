@@ -119,4 +119,34 @@ public class GameIsADrawTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Check that a simple triggered ability does not trigger the infinite loop
+     * request to players
+     */
+    @Test
+    public void GameDrawByInfiniteLoopNot() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 43);
+
+        // Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
+        addCard(Zone.BATTLEFIELD, playerA, "Angelic Chorus", 1); // Enchantment {5}
+
+        // Create X 4/4 white Angel creature tokens with flying.
+        // Miracle (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
+        addCard(Zone.HAND, playerA, "Entreat the Angels", 1); // Sorcery {X}{X}{W}{W}{W}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Entreat the Angels");
+
+        setChoice(playerA, "X=20");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Angel", 20);
+        Assert.assertFalse("Game should not have ended.", currentGame.hasEnded());
+        assertLife(playerA, 100);
+
+        Assert.assertFalse("No inifinite loop detected, game has be no draw.", currentGame.isADraw());
+
+    }
+
 }
