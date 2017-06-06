@@ -28,7 +28,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -36,16 +35,25 @@ import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class DiscardSourceCost extends CostImpl {
 
+    private boolean nameCard = true;
+
     public DiscardSourceCost() {}
+
+    public DiscardSourceCost(boolean nameCard){
+        this.nameCard = nameCard;
+    }
 
     public DiscardSourceCost(DiscardSourceCost cost) {
         super(cost);
+        nameCard = cost.nameCard;
     }
 
     @Override
@@ -67,7 +75,12 @@ public class DiscardSourceCost extends CostImpl {
 
     @Override
     public String getText() {
-        return "Discard {this}";
+        if(nameCard) {
+            return "Discard {this}";
+        }
+        else{
+            return "Discard this card";
+        }
     }
 
     @Override
