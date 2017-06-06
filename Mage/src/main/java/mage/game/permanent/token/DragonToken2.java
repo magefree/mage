@@ -43,7 +43,7 @@ public class DragonToken2 extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("WWK", "10E", "BFZ", "C15", "CN2"));
+        tokenImageSets.addAll(Arrays.asList("WWK", "10E", "BFZ", "C15", "CN2", "CMA"));
     }
 
     public DragonToken2() {

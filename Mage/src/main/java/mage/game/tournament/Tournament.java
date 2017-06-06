@@ -27,6 +27,10 @@
  */
 package mage.game.tournament;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.game.draft.Draft;
@@ -36,11 +40,6 @@ import mage.game.events.TableEvent;
 import mage.game.result.ResultProtos.TourneyProto;
 import mage.players.Player;
 import mage.players.PlayerType;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -76,7 +75,7 @@ public interface Tournament {
 
     void submitDeck(UUID playerId, Deck deck);
 
-    void updateDeck(UUID playerId, Deck deck);
+    boolean updateDeck(UUID playerId, Deck deck);
 
     void autoSubmit(UUID playerId, Deck deck);
 

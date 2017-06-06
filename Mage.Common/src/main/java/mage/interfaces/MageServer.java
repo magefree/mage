@@ -137,7 +137,7 @@ public interface MageServer {
 
     void joinGame(UUID gameId, String sessionId) throws MageException;
 
-    void watchGame(UUID gameId, String sessionId) throws MageException;
+    boolean watchGame(UUID gameId, String sessionId) throws MageException;
 
     void stopWatching(UUID gameId, String sessionId) throws MageException;
 

@@ -24,14 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server.tournament;
 
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.view.TournamentView;
@@ -74,8 +72,8 @@ public enum TournamentManager {
         controllers.get(tournamentId).submitDeck(playerId, deck);
     }
 
-    public void updateDeck(UUID tournamentId, UUID playerId, Deck deck) {
-        controllers.get(tournamentId).updateDeck(playerId, deck);
+    public boolean updateDeck(UUID tournamentId, UUID playerId, Deck deck) {
+        return controllers.get(tournamentId).updateDeck(playerId, deck);
     }
 
     public TournamentView getTournamentView(UUID tournamentId) {
@@ -87,12 +85,11 @@ public enum TournamentManager {
     }
 
     public Optional<UUID> getChatId(UUID tournamentId) {
-        if(controllers.containsKey(tournamentId)) {
+        if (controllers.containsKey(tournamentId)) {
             return Optional.of(controllers.get(tournamentId).getChatId());
         }
         return Optional.empty();
     }
-
 
     public void removeTournament(UUID tournamentId) {
         TournamentController tournamentController = controllers.get(tournamentId);

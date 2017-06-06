@@ -48,6 +48,7 @@ public class Deck implements Serializable {
     private DeckCardLayout cardsLayout;
     private DeckCardLayout sideboardLayout;
     private long deckHashCode = 0;
+    private long deckCompleteHashCode = 0;
 
     public static Deck load(DeckCardLists deckCardLists) throws GameException {
         return Deck.load(deckCardLists, false);
@@ -56,10 +57,10 @@ public class Deck implements Serializable {
     public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors) throws GameException {
         return Deck.load(deckCardLists, ignoreErrors, true);
     }
-    
+
     public static Deck append(Deck deckToAppend, Deck currentDeck) throws GameException {
         List<String> deckCardNames = new ArrayList<>();
-        
+
         for (Card card : deckToAppend.getCards()) {
             if (card != null) {
                 currentDeck.cards.add(card);
@@ -72,7 +73,7 @@ public class Deck implements Serializable {
                 currentDeck.sideboard.add(card);
                 deckCardNames.add(card.getName());
             }
-        }        
+        }
         Collections.sort(deckCardNames);
         Collections.sort(sbCardNames);
         String deckString = deckCardNames.toString() + sbCardNames.toString();
@@ -90,11 +91,13 @@ public class Deck implements Serializable {
         for (DeckCardInfo deckCardInfo : deckCardLists.getCards()) {
             Card card = createCard(deckCardInfo, mockCards);
             if (card != null) {
-                if (totalCards < 1000) {
-                    deck.cards.add(card);
-                    deckCardNames.add(card.getName());
-                    totalCards++;
+                if (totalCards > 1000) {
+                    break;
                 }
+                deck.cards.add(card);
+                deckCardNames.add(card.getName());
+                totalCards++;
+
             } else if (!ignoreErrors) {
                 throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
             }
@@ -103,11 +106,12 @@ public class Deck implements Serializable {
         for (DeckCardInfo deckCardInfo : deckCardLists.getSideboard()) {
             Card card = createCard(deckCardInfo, mockCards);
             if (card != null) {
-                if (totalCards < 1000) {
-                    deck.sideboard.add(card);
-                    sbCardNames.add(card.getName());
-                    totalCards++;
+                if (totalCards > 1000) {
+                    break;
                 }
+                deck.sideboard.add(card);
+                sbCardNames.add(card.getName());
+                totalCards++;
             } else if (!ignoreErrors) {
                 throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
             }
@@ -116,6 +120,15 @@ public class Deck implements Serializable {
         Collections.sort(sbCardNames);
         String deckString = deckCardNames.toString() + sbCardNames.toString();
         deck.setDeckHashCode(DeckUtil.fixedHash(deckString));
+        if (sbCardNames.isEmpty()) {
+            deck.setDeckCompleteHashCode(deck.getDeckHashCode());
+        } else {
+            List<String> deckAllCardNames = new ArrayList<>();
+            deckAllCardNames.addAll(deckCardNames);
+            deckAllCardNames.addAll(sbCardNames);
+            Collections.sort(deckAllCardNames);
+            deck.setDeckCompleteHashCode(DeckUtil.fixedHash(deckAllCardNames.toString()));
+        }
         return deck;
     }
 
@@ -204,6 +217,14 @@ public class Deck implements Serializable {
 
     public void setDeckHashCode(long deckHashCode) {
         this.deckHashCode = deckHashCode;
+    }
+
+    public long getDeckCompleteHashCode() {
+        return deckCompleteHashCode;
+    }
+
+    public void setDeckCompleteHashCode(long deckHashCode) {
+        this.deckCompleteHashCode = deckHashCode;
     }
 
     public void clearLayouts() {

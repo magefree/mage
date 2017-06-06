@@ -98,6 +98,7 @@ public class MatchPlayer implements Serializable {
         if (this.deck != null) {
             // preserver deck name, important for Tiny Leaders format
             deck.setName(this.getDeck().getName());
+            // preserve the original deck hash code before sideboarding to give no information if cards were swapped
             deck.setDeckHashCode(this.getDeck().getDeckHashCode());
         }
         this.deck = deck;
