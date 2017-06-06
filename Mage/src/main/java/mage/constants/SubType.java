@@ -331,6 +331,7 @@ public enum SubType {
     NIXILIS("Nixilis", SubTypeSet.PlaneswalkerType,false),
     RAL("Ral", SubTypeSet.PlaneswalkerType, false),
     SAHEELI("Saheeli", SubTypeSet.PlaneswalkerType, false),
+    SAMUT("Samut", SubTypeSet.PlaneswalkerType, false),
     SARKHAN("Sarkhan", SubTypeSet.PlaneswalkerType, false),
     SORIN("Sorin", SubTypeSet.PlaneswalkerType, false),
     TAMIYO("Tamiyo", SubTypeSet.PlaneswalkerType, false),
