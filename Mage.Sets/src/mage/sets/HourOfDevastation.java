@@ -54,7 +54,7 @@ public class HourOfDevastation extends ExpansionSet {
         super("Hour of Devastation", "HOU", ExpansionSet.buildDate(2017, 7, 14), SetType.EXPANSION);
         this.blockName = "Amonkhet";
         this.parentSet = Amonkhet.getInstance();
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
@@ -62,8 +62,8 @@ public class HourOfDevastation extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.ratioBoosterSpecialLand = 144;
-        
-        cards.add(new SetCardInfo("Samut, the Tested", 144, Rarity.MYTHIC, mage.cards.s.SamutTheTested.class));      
+
+        cards.add(new SetCardInfo("Samut, the Tested", 144, Rarity.MYTHIC, mage.cards.s.SamutTheTested.class));
         cards.add(new SetCardInfo("Nicol Bolas, God-Pharoh", 140, Rarity.MYTHIC, mage.cards.n.NicolBolasGodPharoh.class));
 
     }
