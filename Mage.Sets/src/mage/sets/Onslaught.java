@@ -163,6 +163,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Information Dealer", 88, Rarity.COMMON, mage.cards.i.InformationDealer.class));
         cards.add(new SetCardInfo("Inspirit", 41, Rarity.UNCOMMON, mage.cards.i.Inspirit.class));
         cards.add(new SetCardInfo("Insurrection", 213, Rarity.RARE, mage.cards.i.Insurrection.class));
+        cards.add(new SetCardInfo("Invigorating Boon", 267, Rarity.UNCOMMON, mage.cards.i.InvigoratingBoon.class));
         cards.add(new SetCardInfo("Ironfist Crusher", 42, Rarity.UNCOMMON, mage.cards.i.IronfistCrusher.class));
         cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 336, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));

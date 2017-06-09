@@ -63,8 +63,8 @@ public class HourOfDevastation extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.ratioBoosterSpecialLand = 144;
 
-        cards.add(new SetCardInfo("Samut, the Tested", 144, Rarity.MYTHIC, mage.cards.s.SamutTheTested.class));
         cards.add(new SetCardInfo("Nicol Bolas, God-Pharoh", 140, Rarity.MYTHIC, mage.cards.n.NicolBolasGodPharoh.class));
+        cards.add(new SetCardInfo("Samut, the Tested", 144, Rarity.MYTHIC, mage.cards.s.SamutTheTested.class));
 
     }
 
