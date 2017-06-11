@@ -131,11 +131,12 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 && countBattlefield > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from the battlefield?", source, game)) {
             Target targetAura = new TargetPermanent(filterAura);
+            targetAura.setNotTarget(true);
             if (controller.choose(Outcome.Benefit, targetAura, source.getSourceId(), game)) {
                 Permanent aura = game.getPermanent(targetAura.getFirstTarget());
                 if (aura != null) {
                     Target target = aura.getSpellAbility().getTargets().get(0);
-                    if (target != null && target.canTarget(source.getSourceId(), source, game)) {
+                    if (target != null) {
                         fromBattlefield.add(aura);
                         filterAura.add(Predicates.not(new CardIdPredicate(aura.getId())));
                     }
@@ -153,7 +154,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
                     Target target = aura.getSpellAbility().getTargets().get(0);
-                    if (target != null && target.canTarget(source.getSourceId(), source, game)) {
+                    if (target != null) {
                         fromHandGraveyard.add(aura);
                         filterAuraCard.add(Predicates.not(new CardIdPredicate(aura.getId())));
                     }
@@ -171,7 +172,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
                     Target target = aura.getSpellAbility().getTargets().get(0);
-                    if (target != null && target.canTarget(source.getSourceId(), source, game)) {
+                    if (target != null) {
                         fromHandGraveyard.add(aura);
                         filterAuraCard.add(Predicates.not(new CardIdPredicate(aura.getId())));
                     }
