@@ -347,15 +347,17 @@ public class CardView extends SimpleCardView {
         if (card instanceof Permanent) {
             this.mageObjectType = MageObjectType.PERMANENT;
             Permanent permanent = (Permanent) card;
-            if (game != null && permanent.getCounters(game) != null && !permanent.getCounters(game).isEmpty()) {
-                this.loyalty = Integer.toString(permanent.getCounters(game).getCount(CounterType.LOYALTY));
-                this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
+            if (game != null) {
+                if (permanent.getCounters(game) != null && !permanent.getCounters(game).isEmpty()) {
+                    this.loyalty = Integer.toString(permanent.getCounters(game).getCount(CounterType.LOYALTY));
+                    this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
+                    counters = new ArrayList<>();
+                    for (Counter counter : permanent.getCounters(game).values()) {
+                        counters.add(new CounterView(counter));
+                    }
+                }
                 if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
                     controlledByOwner = false;
-                }
-                counters = new ArrayList<>();
-                for (Counter counter : permanent.getCounters(game).values()) {
-                    counters.add(new CounterView(counter));
                 }
             }
         } else {
@@ -1011,11 +1013,11 @@ public class CardView extends SimpleCardView {
     public boolean isTribal() {
         return cardTypes.contains(CardType.TRIBAL);
     }
-    
+
     public void setInViewerOnly(boolean inViewerOnly) {
         this.inViewerOnly = inViewerOnly;
     }
-    
+
     public boolean inViewerOnly() {
         return inViewerOnly;
     }
