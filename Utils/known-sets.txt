@@ -28,9 +28,11 @@ Commander Anthology|CommanderAnthology|
 Commander's Arsenal|CommandersArsenal|
 Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
+Core 2019|Core2019|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
+Dominaria|Dominaria|
 Dragon's Maze|DragonsMaze|
 Dragons of Tarkir|DragonsOfTarkir|
 Duel Decks: Ajani vs. Nicol Bolas|AjaniVsNicolBolas|
@@ -49,6 +51,7 @@ Duel Decks: Izzet vs. Golgari|IzzetVsGolgari|
 Duel Decks: Jace vs. Chandra|JaceVsChandra|
 Duel Decks: Jace vs. Vraska|JaceVsVraska|
 Duel Decks: Knights vs. Dragons|KnightsVsDragons|
+Duel Decks: Merfolk vs Goblins|MerfolkVsGoblins|
 Duel Decks: Mind vs. Might|MindVsMight|
 Duel Decks: Nissa vs. Ob Nixilis|NissaVsObNixilis|
 Duel Decks: Phyrexia vs. the Coalition|PhyrexiaVsTheCoalition|
@@ -63,6 +66,7 @@ Eternal Masters|EternalMasters|
 European Land Program|EuropeanLandProgram|
 Eventide|Eventide|
 Exodus|Exodus|
+Explorers of Ixalan|ExplorersOfIxalan|
 Fallen Empires|FallenEmpires|
 Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
@@ -77,6 +81,7 @@ From the Vault: Legends|FTVLegends|
 From the Vault: Lore|FTVLore|
 From the Vault: Realms|FTVRealms|
 From the Vault: Relics|FTVRelics|
+From the Vault: Transform|FTVTransform|
 From the Vault: Twenty|FTVTwenty|
 Future Sight|FutureSight|
 Game Day|GameDay|
@@ -118,6 +123,7 @@ Masters Edition|MastersEdition|
 Masters Edition II|MastersEditionII|
 Masters Edition III|MastersEditionIII|
 Masters Edition IV|MastersEditionIV|
+Masters 25|Masters25|
 Media Inserts|MediaInserts|
 Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
@@ -150,6 +156,7 @@ Ravnica: City of Guilds|RavnicaCityOfGuilds|
 Return to Ravnica|ReturnToRavnica|
 Revised Edition|RevisedEdition|
 Rise of the Eldrazi|RiseOfTheEldrazi|
+Rivals of Ixalan|RivalsOfIxalan|
 Saviors of Kamigawa|SaviorsOfKamigawa|
 Scars of Mirrodin|ScarsOfMirrodin|
 Scourge|Scourge|
@@ -174,6 +181,7 @@ Ugin's Fate|UginsFate|
 Unglued|Unglued|
 Unhinged|Unhinged|
 Unlimited Edition|UnlimitedEdition|
+Unstable|Unstable|
 Urza's Destiny|UrzasDestiny|
 Urza's Legacy|UrzasLegacy|
 Urza's Saga|UrzasSaga|
