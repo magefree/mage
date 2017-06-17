@@ -110,7 +110,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             "mtg.onl",
             "alternative.mtg.onl",
             "GrabBag",
-            "magidex.com"
+            "magidex.com",
+            "scryfall.com",
         //"mtgathering.ru HQ",
         //"mtgathering.ru MQ",
         //"mtgathering.ru LQ",
@@ -147,6 +148,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     break;
                 case 7:
                     cardImageSource = MagidexImageSource.instance;
+                    break;
+                case 8:
+                    cardImageSource = ScryfallImageSource.instance;
                     break;
             }
             updateCardsToDownload();
