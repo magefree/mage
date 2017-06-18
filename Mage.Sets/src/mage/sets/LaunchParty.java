@@ -77,6 +77,7 @@ public class LaunchParty extends ExpansionSet {
         cards.add(new SetCardInfo("Oracle's Vault", 39, Rarity.RARE, mage.cards.o.OraclesVault.class));
         cards.add(new SetCardInfo("Phyrexian Metamorph", 14, Rarity.RARE, mage.cards.p.PhyrexianMetamorph.class));
         cards.add(new SetCardInfo("Quicksmith Rebel", 38, Rarity.RARE, mage.cards.q.QuicksmithRebel.class));
+        cards.add(new SetCardInfo("Ramunap Excavator", 40, Rarity.RARE, mage.cards.r.RamunapExcavator.class));
         cards.add(new SetCardInfo("Restoration Angel", 18, Rarity.RARE, mage.cards.r.RestorationAngel.class));
         cards.add(new SetCardInfo("Saheeli's Artistry", 37, Rarity.RARE, mage.cards.s.SaheelisArtistry.class));
         cards.add(new SetCardInfo("Sandsteppe Mastodon", 29, Rarity.RARE, mage.cards.s.SandsteppeMastodon.class));

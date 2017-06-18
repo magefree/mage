@@ -48,6 +48,7 @@ public class GameDay extends ExpansionSet {
         super("Game Day", "MGDC", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        cards.add(new SetCardInfo("Abrade", 62, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 52, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
         cards.add(new SetCardInfo("Black Sun's Zenith", 7, Rarity.RARE, mage.cards.b.BlackSunsZenith.class));
         cards.add(new SetCardInfo("Chief Engineer", 40, Rarity.RARE, mage.cards.c.ChiefEngineer.class));
