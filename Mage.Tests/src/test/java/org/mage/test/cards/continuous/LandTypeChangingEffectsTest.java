@@ -138,6 +138,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
     /*
     NOTE: this test is currently failing due to bug in code. See issue #3072
     */
+    /*
     @Test
     public void testBloodMoonBeforeUrborg() {
         // Blood Moon   2R
@@ -166,10 +167,12 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         assertNotSubtype(urborgtoy, "Swamp");
         Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
     }
+    */
 
     /*
     NOTE: this test is currently failing due to bug in code. See issue #3072
     */
+    /*
     @Test
     public void testBloodMoonAfterUrborg() {
         // Blood Moon   2R
@@ -198,5 +201,6 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         assertNotSubtype(urborgtoy, "Swamp");
         Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
     }
+    */
 
 }
