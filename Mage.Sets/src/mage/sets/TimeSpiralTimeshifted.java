@@ -27,11 +27,11 @@
  */
 package mage.sets;
 
+import mage.cards.ExpansionSet;
 import mage.cards.i.IcatianJavelineers;
 import mage.cards.s.SwampMosquito;
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.constants.Rarity;
  */
 public class TimeSpiralTimeshifted extends ExpansionSet {
 
-    private static final TimeSpiralTimeshifted fINSTANCE = new TimeSpiralTimeshifted();
+    private static final TimeSpiralTimeshifted instance = new TimeSpiralTimeshifted();
 
     public static TimeSpiralTimeshifted getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private TimeSpiralTimeshifted() {
@@ -105,6 +105,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Merieke Ri Berit", 95, Rarity.SPECIAL, mage.cards.m.MeriekeRiBerit.class));
         cards.add(new SetCardInfo("Mindless Automaton", 111, Rarity.SPECIAL, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Mirari", 112, Rarity.SPECIAL, mage.cards.m.Mirari.class));
+        cards.add(new SetCardInfo("Mistform Ultimus", 26, Rarity.SPECIAL, mage.cards.m.MistformUltimus.class));
         cards.add(new SetCardInfo("Moorish Cavalry", 11, Rarity.COMMON, mage.cards.m.MoorishCavalry.class));
         cards.add(new SetCardInfo("Mystic Enforcer", 96, Rarity.SPECIAL, mage.cards.m.MysticEnforcer.class));
         cards.add(new SetCardInfo("Mystic Snake", 97, Rarity.COMMON, mage.cards.m.MysticSnake.class));

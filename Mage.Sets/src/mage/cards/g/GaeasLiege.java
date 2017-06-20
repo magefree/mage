@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -53,6 +53,8 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +65,7 @@ public class GaeasLiege extends CardImpl {
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
     static {
-        filterLands.add(new SubtypePredicate("Forest"));
+        filterLands.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public GaeasLiege(UUID ownerId, CardSetInfo setInfo) {
@@ -77,7 +79,7 @@ public class GaeasLiege extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinuousEffect(
                 new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame),
                 new SetPowerToughnessSourceEffect(new DefendersForestCount(), Duration.EndOfCombat),
-                new InvertCondition(SourceAttackingCondition.getInstance()),
+                new InvertCondition(SourceAttackingCondition.instance),
                 "As long as {this} isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as {this} is attacking, its power and toughness are each equal to the number of Forests defending player controls.")));
         // {tap}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.WhileOnBattlefield, "Forest"), new TapSourceCost());
@@ -110,7 +112,7 @@ class DefendersForestCount implements DynamicValue {
                 }
                 
                 FilterLandPermanent filter = new FilterLandPermanent("forest");
-                filter.add(new SubtypePredicate("Forest"));
+                filter.add(new SubtypePredicate(SubType.FOREST));
                 return game.getBattlefield().countAll(filter, defenderId, game);
 
             }

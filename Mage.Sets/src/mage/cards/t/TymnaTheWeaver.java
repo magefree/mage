@@ -41,10 +41,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -61,7 +58,7 @@ public class TymnaTheWeaver extends CardImpl {
     public TymnaTheWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
 
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);
@@ -107,7 +104,7 @@ class TymnaTheWeaverEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            TymnaTheWeaverWatcher watcher = (TymnaTheWeaverWatcher) game.getState().getWatchers().get(TymnaTheWeaverWatcher.class.getName());
+            TymnaTheWeaverWatcher watcher = (TymnaTheWeaverWatcher) game.getState().getWatchers().get(TymnaTheWeaverWatcher.class.getSimpleName());
             if (watcher != null) {
                 int cardsToDraw = watcher.opponentsThatGotCombatDamage(source.getControllerId(), game);
                 Cost cost = new PayLifeCost(cardsToDraw);
@@ -128,7 +125,7 @@ class TymnaTheWeaverWatcher extends Watcher {
     private final HashMap<UUID, Set<UUID>> players = new HashMap<>();
 
     public TymnaTheWeaverWatcher() {
-        super(TymnaTheWeaverWatcher.class.getName(), WatcherScope.GAME);
+        super(TymnaTheWeaverWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public TymnaTheWeaverWatcher(final TymnaTheWeaverWatcher watcher) {

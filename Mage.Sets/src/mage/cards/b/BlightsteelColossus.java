@@ -28,9 +28,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.effects.common.RevealAndShuffleIntoLibrarySourceEffect;
@@ -39,6 +36,9 @@ import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  * @author Loki

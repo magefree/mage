@@ -44,7 +44,7 @@ public class DragonToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("DTK", "MMA", "ALA"));
+        tokenImageSets.addAll(Arrays.asList("DTK", "MMA", "ALA", "MM3"));
     }
 
     public DragonToken() {

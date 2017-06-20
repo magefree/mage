@@ -27,10 +27,8 @@
  */
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -38,16 +36,8 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -61,14 +51,21 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class ChandraPyromaster extends CardImpl {
 
     public ChandraPyromaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -206,14 +203,12 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null && controller.getLibrary().size() > 0) {
+        if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
             Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
             if (card != null) {
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName() + " <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
-                ContinuousEffect effect = new ChandraPyromasterCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
-                game.addEffect(effect, source);
+                game.addEffect(new ChandraPyromasterPlayEffect(new MageObjectReference(card, game)), source);
             }
             return true;
         }
@@ -221,15 +216,19 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
     }
 }
 
-class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl {
+class ChandraPyromasterPlayEffect extends AsThoughEffectImpl {
 
-    public ChandraPyromasterCastFromExileEffect() {
+    private final MageObjectReference objectReference;
+
+    public ChandraPyromasterPlayEffect(MageObjectReference objectReference) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may play the card from exile this turn";
+        this.objectReference = objectReference;
+        staticText = "you may play that card until end of turn";
     }
 
-    public ChandraPyromasterCastFromExileEffect(final ChandraPyromasterCastFromExileEffect effect) {
+    public ChandraPyromasterPlayEffect(final ChandraPyromasterPlayEffect effect) {
         super(effect);
+        this.objectReference = effect.objectReference;
     }
 
     @Override
@@ -238,14 +237,19 @@ class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public ChandraPyromasterCastFromExileEffect copy() {
-        return new ChandraPyromasterCastFromExileEffect(this);
+    public ChandraPyromasterPlayEffect copy() {
+        return new ChandraPyromasterPlayEffect(this);
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (targetPointer.getTargets(game, source).contains(sourceId)) {
-            return game.getState().getZone(sourceId).equals(Zone.EXILED);
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectReference.refersTo(objectId, game) && affectedControllerId.equals(source.getControllerId())) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                return true;
+            } else {
+                discard();
+            }
         }
         return false;
     }
@@ -284,15 +288,15 @@ class ChandraPyromasterEffect3 extends OneShotEffect {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 1 of " + card.getName(), source, game)) {
-                        Card copy1 = card.copy();
+                        Card copy1 = game.copyCard(card, source, source.getControllerId());
                         controller.cast(copy1.getSpellAbility(), game, true);
                     }
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 2 of " + card.getName(), source, game)) {
-                        Card copy2 = card.copy();
+                        Card copy2 = game.copyCard(card, source, source.getControllerId());
                         controller.cast(copy2.getSpellAbility(), game, true);
                     }
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 3 of " + card.getName(), source, game)) {
-                        Card copy3 = card.copy();
+                        Card copy3 = game.copyCard(card, source, source.getControllerId());
                         controller.cast(copy3.getSpellAbility(), game, true);
                     }
                     return true;

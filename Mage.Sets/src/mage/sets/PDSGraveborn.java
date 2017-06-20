@@ -28,20 +28,20 @@
 
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class PDSGraveborn extends ExpansionSet {
-    private static final PDSGraveborn fINSTANCE = new PDSGraveborn();
+    private static final PDSGraveborn instance = new PDSGraveborn();
 
     public static PDSGraveborn getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PDSGraveborn() {

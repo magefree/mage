@@ -33,7 +33,7 @@ import java.util.Date;
  *
  * @author LevelX2
  */
-public class DateFormat {
+public final class DateFormat {
 
     /**
      * calculates the duration between two dates and returns a string in the format hhh:mm:ss

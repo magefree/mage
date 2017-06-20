@@ -34,7 +34,7 @@ public class JSONParser {
 
     private CachePolicy cachePolicy = CachePolicy.CACHE_ONE_LEVEL_ONLY;
 
-    private Map<String, Object> cache = new HashMap<String, Object>();
+    private Map<String, Object> cache = new HashMap<>();
 
     public void parseJSON(String jsonString) throws JSONValidationException {
         parseJSON(jsonString, true);
@@ -83,7 +83,7 @@ public class JSONParser {
         String currentPath = "";
         for (int i = 0; i < params.length - 1; i++) {
             String param = params[i];
-            if (cachePolicy.equals(CachePolicy.CACHE_ALL_LEVELS)) {
+            if (cachePolicy == CachePolicy.CACHE_ALL_LEVELS) {
                 if (!currentPath.isEmpty()) {
                     currentPath += ".";
                 }
@@ -123,7 +123,7 @@ public class JSONParser {
                 }
 
             }
-            if (cachePolicy.equals(CachePolicy.CACHE_ALL_LEVELS)) {
+            if (cachePolicy == CachePolicy.CACHE_ALL_LEVELS) {
                 saveToCache(currentPath, json);
             }
         }

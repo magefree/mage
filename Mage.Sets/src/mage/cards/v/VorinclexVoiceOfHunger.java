@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
@@ -39,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
@@ -46,6 +46,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class VorinclexVoiceOfHunger extends CardImpl {
 
     public VorinclexVoiceOfHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Praetor");
 
         this.power = new MageInt(7);
@@ -106,7 +108,7 @@ class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+            if (permanent != null && permanent.isLand()) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
                 return true;
             }

@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -38,15 +37,13 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +98,7 @@ class BattlefieldScroungerCost extends CostImpl {
             if (targets.choose(Outcome.Removal, controllerId, sourceId, game)) {
                 for (UUID targetId: targets.get(0).getTargets()) {
                     Card card = game.getCard(targetId);
-                    if (card == null || !game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
+                    if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
                         return false;
                     }
                     paid |= controller.moveCardToLibraryWithInfo(card, sourceId, game, Zone.GRAVEYARD, false, true);

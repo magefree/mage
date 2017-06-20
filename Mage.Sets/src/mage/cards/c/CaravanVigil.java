@@ -27,16 +27,11 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -44,6 +39,8 @@ import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +93,7 @@ class CaravanVigilEffect extends OneShotEffect {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
                     Cards cards = new CardsImpl(card);
-                    if (MorbidCondition.getInstance().apply(game, source)
+                    if (MorbidCondition.instance.apply(game, source)
                             && controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to put the card onto the battlefield instead?", source, game)) {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     } else {

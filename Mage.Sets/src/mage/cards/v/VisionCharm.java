@@ -27,7 +27,9 @@
  */
 package mage.cards.v;
 
+import java.util.Iterator;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -43,11 +45,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceBasicLandType;
 import mage.choices.ChoiceLandType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -64,8 +62,7 @@ import mage.target.common.TargetArtifactPermanent;
 public class VisionCharm extends CardImpl {
 
     public VisionCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Choose one - Target player puts the top four cards of his or her library into his or her graveyard;
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
@@ -94,10 +91,11 @@ public class VisionCharm extends CardImpl {
 }
 
 class VisionCharmEffect extends ContinuousEffectImpl {
+
     private String targetLandType;
     private String targetBasicLandType;
 
-     public VisionCharmEffect() {
+    public VisionCharmEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
         staticText = "Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.";
     }
@@ -113,49 +111,61 @@ class VisionCharmEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null) {
+        if (controller != null) {
             Choice choice = new ChoiceLandType();
             controller.choose(outcome, choice, game);
             targetLandType = choice.getChoice();
-
             choice = new ChoiceBasicLandType();
             controller.choose(outcome, choice, game);
             targetBasicLandType = choice.getChoice();
-        }
-        else {
+        } else {
             this.discard();
+        }
+        FilterPermanent filter = new FilterLandPermanent();
+        filter.add(new SubtypePredicate(SubType.byDescription(targetLandType)));
+        if (this.affectedObjectsSet) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                affectedObjectList.add(new MageObjectReference(permanent, game));
+            }
         }
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        FilterPermanent filter = new FilterLandPermanent();
-        filter.add(new SubtypePredicate(targetLandType));
-        for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            //Remove all existing subtypes and replace them with the selected Basic Land Type
-            land.getSubtype(game).removeAll(land.getSubtype(game));
-            land.getSubtype(game).add(targetBasicLandType);
-
-            /* Remove the existing abilities and replace them with the ability
-               of the chosen basic land */
-            land.removeAllAbilities(source.getId(), game);
-            switch(targetBasicLandType) {
-                case "Swamp":
-                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-                    break;
-                case "Mountain":
-                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                    break;
-                case "Forest":
-                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                    break;
-                case "Island":
-                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                    break;
-                case "Plains":
-                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
-                    break;
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+            Permanent land = it.next().getPermanent(game);
+            if (land != null) {
+                switch (layer) {
+                    case TypeChangingEffects_4:
+                        land.getSubtype(game).clear();
+                        land.getSubtype(game).add(targetBasicLandType);
+                        break;
+                    case AbilityAddingRemovingEffects_6:
+                        if (sublayer == SubLayer.NA) {
+                            land.getAbilities().clear();
+                            switch (targetBasicLandType) {
+                                case "Swamp":
+                                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Mountain":
+                                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Forest":
+                                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Island":
+                                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Plains":
+                                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                                    break;
+                            }
+                        }
+                }
+            } else {
+                it.remove();
             }
         }
         return true;

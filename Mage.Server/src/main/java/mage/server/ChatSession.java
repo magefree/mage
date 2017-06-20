@@ -28,6 +28,7 @@
 package mage.server;
 
 import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -61,14 +62,14 @@ public class ChatSession {
     }
 
     public void join(UUID userId) {
-       UserManager.getInstance().getUser(userId).ifPresent(user-> {
-           if (!clients.containsKey(userId)) {
-               String userName = user.getName();
-               clients.put(userId, userName);
-               broadcast(null, userName + " has joined (" + user.getClientVersion() + ')', MessageColor.BLUE, true, MessageType.STATUS, null);
-               logger.trace(userName + " joined chat " + chatId);
-           }
-       });
+        UserManager.instance.getUser(userId).ifPresent(user -> {
+            if (!clients.containsKey(userId)) {
+                String userName = user.getName();
+                clients.put(userId, userName);
+                broadcast(null, userName + " has joined (" + user.getClientVersion() + ')', MessageColor.BLUE, true, MessageType.STATUS, null);
+                logger.trace(userName + " joined chat " + chatId);
+            }
+        });
     }
 
     public void kill(UUID userId, DisconnectReason reason) {
@@ -84,30 +85,9 @@ public class ChatSession {
                     clients.remove(userId);
                     logger.debug(userName + '(' + reason.toString() + ')' + " removed from chatId " + chatId);
                 }
-                String message;
-                switch (reason) {
-                    case Disconnected:
-                        message = " has left XMage";
-                        break;
-                    case LostConnection:
-                        message = " has lost connection";
-                        break;
-                    case SessionExpired:
-                        message = " session expired";
-                        break;
-                    case AdminDisconnect:
-                        message = " was disconnected by the Admin";
-                        break;
-                    case ConnectingOtherInstance:
-                        message = " reconnected and replaced still active old session";
-                        break;
-                    case CleaningUp:
-                        message = null;
-                        break;
-                    default:
-                        message = " left (" + reason.toString() + ')';
-                }
-                if (message != null) {
+                String message = reason.getMessage();
+
+                if (!message.isEmpty()) {
                     broadcast(null, userName + message, MessageColor.BLUE, true, MessageType.STATUS, null);
                 }
             }
@@ -118,7 +98,7 @@ public class ChatSession {
 
     public boolean broadcastInfoToUser(User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
-            toUser.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(null, message, timeFormatter.format(new Date()), MessageColor.BLUE, MessageType.USER_INFO, null)));
+            toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, new ChatMessage(null, message, timeFormatter.format(new Date()), MessageColor.BLUE, MessageType.USER_INFO, null)));
             return true;
         }
         return false;
@@ -126,11 +106,11 @@ public class ChatSession {
 
     public boolean broadcastWhisperToUser(User fromUser, User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
-            toUser.fireCallback(new ClientCallback("chatMessage", chatId,
-                    new ChatMessage(new StringBuilder("Whisper from ").append(fromUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, SoundToPlay.PlayerWhispered)));
+            toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
+                    new ChatMessage(fromUser.getName(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER_FROM, SoundToPlay.PlayerWhispered)));
             if (clients.containsKey(fromUser.getId())) {
-                fromUser.fireCallback(new ClientCallback("chatMessage", chatId,
-                        new ChatMessage(new StringBuilder("Whisper to ").append(toUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, null)));
+                fromUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
+                        new ChatMessage(toUser.getName(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER_TO, null)));
                 return true;
             }
         }
@@ -139,24 +119,20 @@ public class ChatSession {
 
     public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         if (!message.isEmpty()) {
-            HashSet<UUID> clientsToRemove = null;
-            ClientCallback clientCallback = new ClientCallback("chatMessage", chatId, new ChatMessage(userName, message, (withTime ? timeFormatter.format(new Date()) : ""), color, messageType, soundToPlay));
+            HashSet<UUID> clientsToRemove = new HashSet<>();
+            ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, new ChatMessage(userName, message, (withTime ? timeFormatter.format(new Date()) : ""), color, messageType, soundToPlay));
             for (UUID userId : clients.keySet()) {
-                Optional<User> user = UserManager.getInstance().getUser(userId);
+                Optional<User> user = UserManager.instance.getUser(userId);
                 if (user.isPresent()) {
                     user.get().fireCallback(clientCallback);
                 } else {
-                    if (clientsToRemove == null) {
-                        clientsToRemove = new HashSet<>();
-                    }
                     clientsToRemove.add(userId);
                 }
             }
-            if (clientsToRemove != null) {
-                for (UUID userIdToRemove : clientsToRemove) {
-                    clients.remove(userIdToRemove);
-                }
+            for (UUID userIdToRemove : clientsToRemove) {
+                clients.remove(userIdToRemove);
             }
+
         }
     }
 

@@ -27,17 +27,19 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +50,7 @@ public class BarbarianOutcast extends CardImpl {
     private static final FilterControlledLandPermanent filterControlledLand = new FilterControlledLandPermanent("a Swamp");
 
     static {
-        filterControlledLand.add(new SubtypePredicate("Swamp"));
+        filterControlledLand.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public BarbarianOutcast(UUID ownerId, CardSetInfo setInfo) {
@@ -61,7 +63,7 @@ public class BarbarianOutcast extends CardImpl {
 
         // When you control no Swamps, sacrifice Barbarian Outcast.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Swamp", "no Swamps"), Filter.ComparisonType.Equal, 0,
+                new FilterLandPermanent(SubType.SWAMP, "no Swamps"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

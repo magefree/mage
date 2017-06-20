@@ -1,11 +1,14 @@
 package mage.client.preference;
 
-import java.util.prefs.BackingStoreException;
-import java.util.prefs.Preferences;
+import com.google.common.collect.Sets;
 import mage.client.MageFrame;
 
+import java.util.Set;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
+
 // TODO: Move all preference related logic from MageFrame and PreferencesDialog to this class.
-public class MagePreferences {
+public final class MagePreferences {
 
     private static final String KEY_SERVER_ADDRESS = "serverAddress";
     private static final String KEY_SERVER_PORT = "serverPort";
@@ -13,6 +16,8 @@ public class MagePreferences {
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_AUTO_CONNECT = "autoConnect";
+
+    private static final String NODE_KEY_IGNORE_LIST = "ignoreListString";
 
     private static Preferences prefs() {
         // TODO: Move MageFrame.prefs to this class.
@@ -65,6 +70,9 @@ public class MagePreferences {
                 if (key.matches(".*userName$")) {
                     userIds.append(',').append(prefs().get(key, null));
                 }
+                if (key.matches(".*DeckPath.*")) {
+                    userIds.append(',').append(prefs().get(key, null));
+                }
             }
         } catch (BackingStoreException ex) {
         }
@@ -98,4 +106,36 @@ public class MagePreferences {
     public static void setAutoConnect(boolean autoConnect) {
         prefs().putBoolean(KEY_AUTO_CONNECT, autoConnect);
     }
+
+    public static void addIgnoredUser(String serverAddress, String username) {
+        ignoreListNode(serverAddress).putBoolean(username, true);
+    }
+
+    public static boolean removeIgnoredUser(String serverAddress, String username) {
+        Preferences ignoreList = ignoreListNode(serverAddress);
+        boolean exists = ignoreList.getBoolean(username, false);
+        if (exists) {
+            ignoreList.remove(username);
+        }
+
+        return exists;
+    }
+
+    public static Set<String> ignoreList(String serverAddress) {
+        try {
+            return Sets.newHashSet(ignoreListNode(serverAddress).keys());
+        } catch (BackingStoreException e) {
+            e.printStackTrace();
+        }
+        return Sets.newHashSet();
+    }
+
+    public static void clearIgnoreList(String serverAddress) throws BackingStoreException {
+        ignoreListNode(serverAddress).clear();
+    }
+
+    private static Preferences ignoreListNode(String serverAddress) {
+        return prefs().node(NODE_KEY_IGNORE_LIST).node(serverAddress);
+    }
+
 }

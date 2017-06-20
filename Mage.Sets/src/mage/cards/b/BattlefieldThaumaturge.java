@@ -27,24 +27,17 @@
  */
 package mage.cards.b;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.HeroicAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,6 +46,10 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.Target;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -107,7 +104,7 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
         for (Target target: abilityToModify.getTargets()) {
             for (UUID uuid: target.getTargets()) {
                 Permanent permanent = game.getPermanent(uuid); 
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+                if (permanent != null && permanent.isCreature()) {
                     creaturesTargeted.add(permanent.getId());
                 }
             }

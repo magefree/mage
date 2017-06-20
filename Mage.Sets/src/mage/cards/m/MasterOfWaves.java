@@ -39,12 +39,10 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.MasterOfWavesElementalToken;
 import mage.game.permanent.token.Token;
 
 /**
@@ -55,7 +53,7 @@ public class MasterOfWaves extends CardImpl {
 
     private static final FilterCreaturePermanent filterBoost = new FilterCreaturePermanent("Elemental creatures");
     static {
-        filterBoost.add(new SubtypePredicate("Elemental"));
+        filterBoost.add(new SubtypePredicate(SubType.ELEMENTAL));
     }
 
     public MasterOfWaves(UUID ownerId, CardSetInfo setInfo) {
@@ -85,19 +83,5 @@ public class MasterOfWaves extends CardImpl {
     @Override
     public MasterOfWaves copy() {
         return new MasterOfWaves(this);
-    }
-}
-
-class MasterOfWavesElementalToken extends Token {
-
-    public MasterOfWavesElementalToken() {
-        super("Elemental", "1/0 blue Elemental creature");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Elemental");
-
-        this.color.setBlue(true);
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(0);
     }
 }

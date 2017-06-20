@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,9 +39,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +55,7 @@ public class CloudreachCavalry extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
 
     static {
-        filter.add(new SubtypePredicate("Bird"));
+        filter.add(new SubtypePredicate(SubType.BIRD));
     }
 
     public CloudreachCavalry(UUID ownerId, CardSetInfo setInfo) {

@@ -21,9 +21,9 @@ import java.util.*;
  *
  * @author noxx
  */
-public class CombatUtil {
+public final class CombatUtil {
 
-    private static final List<Permanent> emptyList = new ArrayList<Permanent>();
+    private static final List<Permanent> emptyList = new ArrayList<>();
 
     private static final Logger log = Logger.getLogger(CombatUtil.class);
 
@@ -32,8 +32,8 @@ public class CombatUtil {
 
     public static List<Permanent> canKillOpponent(Game game, List<Permanent> attackersList, List<Permanent> blockersList,
                                                   Player defender) {
-        List<Permanent> blockableAttackers = new ArrayList<Permanent>(blockersList);
-        List<Permanent> unblockableAttackers = new ArrayList<Permanent>();
+        List<Permanent> blockableAttackers = new ArrayList<>(blockersList);
+        List<Permanent> unblockableAttackers = new ArrayList<>();
         for (Permanent attacker : attackersList) {
             if (!canBeBlocked(game, attacker, blockersList)) {
                 unblockableAttackers.add(attacker);
@@ -44,7 +44,7 @@ public class CombatUtil {
         sortByPower(blockableAttackers, true);
 
         // imagine that most powerful will be blocked as 1-vs-1
-        List<Permanent> attackersThatWontBeBlocked = new ArrayList<Permanent>(blockableAttackers);
+        List<Permanent> attackersThatWontBeBlocked = new ArrayList<>(blockableAttackers);
         for (int i = 0; (i < blockersList.size() && i < blockableAttackers.size()); i++) {
             attackersThatWontBeBlocked.remove(blockableAttackers.get(i));
         }
@@ -147,7 +147,7 @@ public class CombatUtil {
      * @return true if attacker can be blocked by any blocker
      */
     public static List<Permanent> getPossibleBlockers(Game game, Permanent attacker, List<Permanent> blockersList) {
-        List<Permanent> canBlock = new ArrayList<Permanent>();
+        List<Permanent> canBlock = new ArrayList<>();
         for (Permanent blocker : blockersList) {
             if (blocker.canBlock(attacker.getId(), game)) {
                 canBlock.add(blocker);
@@ -184,7 +184,7 @@ public class CombatUtil {
     }
 
     private static List<Permanent> getBlockersThatWillSurvive(Game game, UUID attackerId, UUID defenderId, Permanent attacker, List<Permanent> possibleBlockers) {
-        List<Permanent> blockers = new ArrayList<Permanent>();
+        List<Permanent> blockers = new ArrayList<>();
         for (Permanent blocker : possibleBlockers) {
             SurviveInfo info = willItSurvive(game, attackerId, defenderId, attacker, blocker);
             //if (info.isAttackerDied() && !info.isBlockerDied()) {
@@ -321,7 +321,7 @@ public class CombatUtil {
     }
     
     private static List<Permanent> getBlockersThatWillSurvive2(Game game, UUID attackerId, UUID defenderId, Permanent attacker, List<Permanent> possibleBlockers) {
-        List<Permanent> blockers = new ArrayList<Permanent>();
+        List<Permanent> blockers = new ArrayList<>();
         for (Permanent blocker : possibleBlockers) {
             SurviveInfo info = willItSurvive2(game, attackerId, defenderId, attacker, blocker);
             //if (info.isAttackerDied() && !info.isBlockerDied()) {

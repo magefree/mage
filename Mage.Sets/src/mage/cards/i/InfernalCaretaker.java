@@ -37,6 +37,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBySubtypeCard;
 
@@ -46,7 +47,7 @@ import mage.filter.common.FilterBySubtypeCard;
  */
 public class InfernalCaretaker extends CardImpl {
 
-    private static FilterCard zombieCard = new FilterBySubtypeCard("Zombie");
+    private static FilterCard zombieCard = new FilterBySubtypeCard(SubType.ZOMBIE);
     
     public InfernalCaretaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

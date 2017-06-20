@@ -35,6 +35,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -52,7 +53,7 @@ public class WoodlandGuidance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
 
         // Clash with an opponent. If you win, untap all Forest you control
-        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new UntapAllLandsControllerEffect(new FilterLandPermanent("Forest", "Forests"))));
+        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new UntapAllLandsControllerEffect(new FilterLandPermanent(SubType.FOREST, "Forests"))));
 
         // Remove WoodlandGuidance from the game 
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());

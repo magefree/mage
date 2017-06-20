@@ -28,7 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -45,15 +44,12 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KaldraToken;
 
 /**
  *
@@ -61,9 +57,9 @@ import mage.game.permanent.token.Token;
  */
 public class HelmOfKaldra extends CardImpl {
 
-    public static final FilterControlledArtifactPermanent filterHelm = new FilterControlledArtifactPermanent();
-    public static final FilterControlledArtifactPermanent filterShield = new FilterControlledArtifactPermanent();
-    public static final FilterControlledArtifactPermanent filterSword = new FilterControlledArtifactPermanent();
+    static final FilterControlledArtifactPermanent filterHelm = new FilterControlledArtifactPermanent();
+    static final FilterControlledArtifactPermanent filterShield = new FilterControlledArtifactPermanent();
+    static final FilterControlledArtifactPermanent filterSword = new FilterControlledArtifactPermanent();
 
     static {
         filterHelm.add(new NamePredicate("Helm of Kaldra"));
@@ -73,7 +69,7 @@ public class HelmOfKaldra extends CardImpl {
 
     public HelmOfKaldra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Equipment");
 
         // Equipped creature has first strike, trample, and haste.
@@ -166,17 +162,5 @@ class HelmOfKaldraEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class KaldraToken extends Token {
-
-    public KaldraToken() {
-        super("Kaldra", "legendary 4/4 colorless Avatar creature token named Kaldra");
-        supertype.add("Legendary");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Avatar");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
     }
 }

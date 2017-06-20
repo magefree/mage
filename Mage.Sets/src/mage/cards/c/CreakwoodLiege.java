@@ -42,7 +42,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CreakwoodLiegeToken;
 
 /**
  *
@@ -58,11 +58,9 @@ public class CreakwoodLiege extends CardImpl {
         filterGreenCreature.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-
     public CreakwoodLiege(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/G}{B/G}{B/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B/G}{B/G}{B/G}");
         this.subtype.add("Horror");
-
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -84,16 +82,3 @@ public class CreakwoodLiege extends CardImpl {
         return new CreakwoodLiege(this);
     }
 }
-
-class CreakwoodLiegeToken extends Token {
-    CreakwoodLiegeToken() {
-        super("Worm", "1/1 black and green Worm creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        color.setGreen(true);
-        subtype.add("Worm");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-}
-

@@ -27,14 +27,13 @@
  */
 package mage.server;
 
+import java.util.*;
+import java.util.concurrent.*;
 import mage.server.User.UserState;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
-
-import java.util.*;
-import java.util.concurrent.*;
 
 /**
  * manages users - if a user is disconnected and 10 minutes have passed with no
@@ -42,53 +41,47 @@ import java.util.concurrent.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UserManager {
+public enum UserManager {
+    instance;
 
-    protected static final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private static final Logger LOGGER = Logger.getLogger(UserManager.class);
 
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<String, User> usersByName = new ConcurrentHashMap<>();
 
-    private static final ExecutorService USER_EXECUTOR = ThreadExecutor.getInstance().getCallExecutor();
+    private static final ExecutorService USER_EXECUTOR = ThreadExecutor.instance.getCallExecutor();
 
-    private static final UserManager INSTANCE = new UserManager();
-
-    public static UserManager getInstance() {
-        return INSTANCE;
-    }
-
-    private UserManager() {
+    UserManager() {
         expireExecutor.scheduleAtFixedRate(this::checkExpired, 60, 60, TimeUnit.SECONDS);
     }
 
-    public User createUser(String userName, String host, AuthorizedUser authorizedUser) {
-        if (getUserByName(userName) != null) {
-            return null; //user already exists
+    public Optional<User> createUser(String userName, String host, AuthorizedUser authorizedUser) {
+        if (getUserByName(userName).isPresent()) {
+            return Optional.empty(); //user already exists
         }
         User user = new User(userName, host, authorizedUser);
         users.put(user.getId(), user);
-        usersByName.put(userName, user);
-        return user;
+        return Optional.of(user);
     }
 
     public Optional<User> getUser(UUID userId) {
-        if (users.get(userId) == null) {
-            LOGGER.error(String.format("User with id %s could not be found", userId));
+        if (!users.containsKey(userId)) {
+            LOGGER.trace(String.format("User with id %s could not be found", userId));
             return Optional.empty();
         } else {
             return Optional.of(users.get(userId));
         }
-      /*  if (userId != null) {
-            return users.get(userId);
-        }
-        return null;
-        */
     }
 
-    public User getUserByName(String userName) {
-        return usersByName.get(userName);
+    public Optional<User> getUserByName(String userName) {
+        Optional<User> u = users.values().stream().filter(user -> user.getName().equals(userName))
+                .findFirst();
+        if (u.isPresent()) {
+            return u;
+        } else {
+            return Optional.empty();
+        }
     }
 
     public Collection<User> getUsers() {
@@ -108,12 +101,9 @@ public class UserManager {
 
     public void disconnect(UUID userId, DisconnectReason reason) {
         if (userId != null) {
-            User user = users.get(userId);
-            if (user != null) {
-                user.setSessionId(""); // Session will be set again with new id if user reconnects
-            }
-            ChatManager.getInstance().removeUser(userId, reason);
+            getUser(userId).ifPresent(user -> user.setSessionId(""));// Session will be set again with new id if user reconnects
         }
+        ChatManager.instance.removeUser(userId, reason);
     }
 
     public boolean isAdmin(UUID userId) {
@@ -128,25 +118,21 @@ public class UserManager {
 
     public void removeUser(final UUID userId, final DisconnectReason reason) {
         if (userId != null) {
-            final User user = users.get(userId);
-            if (user != null) {
-                USER_EXECUTOR.execute(
-                        () -> {
-                            try {
-                                LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
-                                user.remove(reason);
-                                LOGGER.debug("USER REMOVE END - " + user.getName());
-                            } catch (Exception ex) {
-                                handleException(ex);
-                            } finally {
-                                users.remove(userId);
-                                usersByName.remove(user.getName());
+            getUser(userId).ifPresent(user
+                    -> USER_EXECUTOR.execute(
+                            () -> {
+                                try {
+                                    LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
+                                    user.remove(reason);
+                                    LOGGER.debug("USER REMOVE END - " + user.getName());
+                                } catch (Exception ex) {
+                                    handleException(ex);
+                                } finally {
+                                    users.remove(userId);
+                                }
                             }
-                        }
-                );
-            } else {
-                LOGGER.warn("Trying to remove userId: " + userId + " - but it does not exist.");
-            }
+                    ));
+
         }
     }
 
@@ -170,7 +156,7 @@ public class UserManager {
         calendar.add(Calendar.MINUTE, -3);
         List<User> usersToCheck = new ArrayList<>(users.values());
         for (User user : usersToCheck) {
-            if (!user.getUserState().equals(UserState.Expired) && user.isExpired(calendar.getTime())) {
+            if (user.getUserState() != UserState.Expired && user.isExpired(calendar.getTime())) {
                 removeUser(user.getId(), DisconnectReason.SessionExpired);
             }
         }
@@ -188,9 +174,9 @@ public class UserManager {
     }
 
     public String getUserHistory(String userName) {
-        User user = getUserByName(userName);
-        if (user != null) {
-            return "History of user " + userName + " - " + user.getUserData().getHistory();
+        Optional<User> user = getUserByName(userName);
+        if (user.isPresent()) {
+            return "History of user " + userName + " - " + user.get().getUserData().getHistory();
         }
 
         UserStats userStats = UserStatsRepository.instance.getUser(userName);
@@ -204,10 +190,7 @@ public class UserManager {
     public void updateUserHistory() {
         USER_EXECUTOR.execute(() -> {
             for (String updatedUser : UserStatsRepository.instance.updateUserStats()) {
-                User user = getUserByName(updatedUser);
-                if (user != null) {
-                    user.resetUserStats();
-                }
+                getUserByName(updatedUser).ifPresent(User::resetUserStats);
             }
         });
     }

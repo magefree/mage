@@ -89,7 +89,7 @@ class MolderBeastTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getFromZone() == Zone.BATTLEFIELD
                 && zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTarget().getCardType().contains(CardType.ARTIFACT);
+                && zEvent.getTarget().isArtifact();
     }
 
     @Override

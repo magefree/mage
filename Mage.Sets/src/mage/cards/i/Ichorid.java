@@ -27,7 +27,6 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -51,6 +50,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -92,7 +93,11 @@ class IchoridTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
 
     public IchoridTriggerdAbility(FilterCard filter){
         super(Zone.GRAVEYARD, 
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(filter))),
+                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                        new ExileFromGraveCost(
+                                new TargetCardInYourGraveyard(1, 1, filter, true)
+                        )
+                ),
                 TargetController.YOU, false);
     }
 

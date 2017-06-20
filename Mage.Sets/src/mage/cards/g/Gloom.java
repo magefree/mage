@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -36,16 +35,13 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,11 +94,11 @@ class GloomCostIncreaseEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {        
         boolean isWhiteEnchantment = false;
-        boolean isActivated = abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED);
+        boolean isActivated = abilityToModify.getAbilityType() == AbilityType.ACTIVATED;
         if (isActivated) {            
             MageObject permanent = game.getPermanent(abilityToModify.getSourceId());
             if (permanent != null) {
-                isWhiteEnchantment = permanent.getCardType().contains(CardType.ENCHANTMENT) && permanent.getColor(game).isWhite();
+                isWhiteEnchantment = permanent.isEnchantment() && permanent.getColor(game).isWhite();
             }
         }
         return isActivated && isWhiteEnchantment;

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -42,6 +41,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +89,7 @@ class DarkDabblingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (SpellMasteryCondition.getInstance().apply(game, source)) {
+        if (SpellMasteryCondition.instance.apply(game, source)) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 if (!permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
                     RegenerateTargetEffect regenEffect = new RegenerateTargetEffect();

@@ -27,18 +27,10 @@
  */
 package mage.cards.e;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -49,6 +41,11 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 import mage.util.GameLog;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -145,7 +142,7 @@ class EpiphanyAtTheDrownyardEffect extends OneShotEffect {
                 pile2Zone = Zone.GRAVEYARD;
             }
 
-            StringBuilder sb = new StringBuilder(sourceObject.getLogName() + ": Pile 1, going to ").append(pile1Zone.equals(Zone.HAND) ? "Hand" : "Graveyard").append(": ");
+            StringBuilder sb = new StringBuilder(sourceObject.getLogName() + ": Pile 1, going to ").append(pile1Zone == Zone.HAND ? "Hand" : "Graveyard").append(": ");
             int i = 0;
             for (UUID cardUuid : pile1CardsIds) {
                 i++;
@@ -160,7 +157,7 @@ class EpiphanyAtTheDrownyardEffect extends OneShotEffect {
             }
             game.informPlayers(sb.toString());
 
-            sb = new StringBuilder(sourceObject.getLogName() + ": Pile 2, going to ").append(pile2Zone.equals(Zone.HAND) ? "Hand" : "Graveyard").append(':');
+            sb = new StringBuilder(sourceObject.getLogName() + ": Pile 2, going to ").append(pile2Zone == Zone.HAND ? "Hand" : "Graveyard").append(':');
             i = 0;
             for (UUID cardUuid : pile2CardsIds) {
                 Card card = game.getCard(cardUuid);

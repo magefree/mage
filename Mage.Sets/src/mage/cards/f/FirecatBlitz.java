@@ -28,7 +28,6 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -39,18 +38,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ElementalCatToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -63,7 +58,7 @@ public class FirecatBlitz extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Mountains");
 
     static {
-        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public FirecatBlitz(UUID ownerId, CardSetInfo setInfo) {
@@ -128,19 +123,5 @@ class FirecatBlitzEffect extends OneShotEffect {
         }
 
         return false;
-    }
-}
-
-class ElementalCatToken extends Token {
-
-    public ElementalCatToken() {
-        super("Elemental Cat", "1/1 red Elemental Cat creature token");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Elemental");
-        subtype.add("Cat");
-        addAbility(HasteAbility.getInstance());
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

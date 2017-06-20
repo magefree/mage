@@ -24,7 +24,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TournamentUtil {
+public final class TournamentUtil {
     
     /**
      * Tries to calculate the most appropiate sets to add basic lands for cards of a deck

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -38,12 +37,15 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.PrismToken;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class DiamondKaleidoscope extends CardImpl {
 
     static {
         filter.add(new TokenPredicate());
-        filter.add(new SubtypePredicate("Prism"));
+        filter.add(new SubtypePredicate(SubType.PRISM));
     }
 
     public DiamondKaleidoscope(UUID ownerId, CardSetInfo setInfo) {

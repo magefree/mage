@@ -27,9 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -42,14 +39,15 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +63,7 @@ public class OliviaMobilizedForWar extends CardImpl {
 
     public OliviaMobilizedForWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Vampire");
         this.subtype.add("Knight");
         this.power = new MageInt(3);
@@ -82,7 +80,7 @@ public class OliviaMobilizedForWar extends CardImpl {
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText(", it gains haste until end of turn,");
         doIfCostPaid.addEffect(effect);
-        effect = new BecomesCreatureTypeTargetEffect(Duration.WhileOnBattlefield, new ArrayList<>(Arrays.asList("Vampire")), false);
+        effect = new BecomesCreatureTypeTargetEffect(Duration.WhileOnBattlefield, new ArrayList<>(Collections.singletonList("Vampire")), false);
         effect.setText("and it becomes a Vampire in addition to its other types");
         doIfCostPaid.addEffect(effect);
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, doIfCostPaid, filter, false, SetTargetPointer.PERMANENT, null));

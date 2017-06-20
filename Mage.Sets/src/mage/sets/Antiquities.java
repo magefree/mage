@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Antiquities extends ExpansionSet {
 
-    private static final Antiquities fINSTANCE = new Antiquities();
+    private static final Antiquities instance = new Antiquities();
 
     public static Antiquities getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Antiquities() {

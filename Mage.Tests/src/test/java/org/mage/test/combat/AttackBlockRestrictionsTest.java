@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -38,7 +40,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      * Frost
      */
     @Test
-    public void testWallofWrost() {
+    public void testWallofFrost() {
         // Whenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step.
         addCard(Zone.BATTLEFIELD, playerA, "Wall of Frost"); // 0/7
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
@@ -228,16 +230,16 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testCantBeBlocked() {
-        addCard(Zone.BATTLEFIELD, playerB, "Blighted Agent");
 
         addCard(Zone.BATTLEFIELD, playerA, "Blighted Agent");
+        addCard(Zone.BATTLEFIELD, playerB, "Blighted Agent");
         addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
         addCard(Zone.BATTLEFIELD, playerA, "Birds of Paradise");
 
-        attack(2, playerB, "Blighted Agent");
-        block(2, playerA, "Blighted Agent", "Blighted Agent");
-        block(2, playerA, "Llanowar Elves", "Blighted Agent");
-        block(2, playerA, "Birds of Paradise", "Blighted Agent");
+        attack(2, playerB, "Blighted Agent:0");
+        block(2, playerA, "Blighted Agent:0", "Blighted Agent:0");
+        block(2, playerA, "Llanowar Elves:0", "Blighted Agent:0");
+        block(2, playerA, "Birds of Paradise:0", "Blighted Agent:0");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -249,15 +251,15 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     public void testCantBeBlockedTormentedSoul() {
         addCard(Zone.BATTLEFIELD, playerB, "Tormented Soul");
 
-        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Flinthoof Boar");
 
-        attack(2, playerB, "Tormented Soul");
-        block(2, playerA, "Tormented Soul", "Memnite");
+        attack(4, playerB, "Tormented Soul");
+        block(4, playerA, "Flinthoof Boar", "Tormented Soul");
 
-        setStopAt(2, PhaseStep.END_TURN);
+        setStopAt(4, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Memnite", 1);
+        assertPermanentCount(playerA, "Flinthoof Boar", 1);
         assertPermanentCount(playerB, "Tormented Soul", 1);
 
         assertLife(playerA, 19);
@@ -332,4 +334,212 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Storm Crow", 0);
     }
 
+    /*
+     * Mogg Flunkies cannot attack alone. Cards like Goblin Assault force all goblins to attack each turn.
+     * Mogg Flunkies should not be able to attack.
+    */
+    @Test
+    public void testMustAttackButCannotAttackAlone()
+    {
+        /* Mogg Flunkies {1}{R} 3/3
+         Creature — Goblin
+            Mogg Flunkies can't attack or block alone.
+        */
+        String flunkies = "Mogg Flunkies";
+
+        /* Goblin Assault {2}{R}
+         * Enchantment
+            At the beginning of your upkeep, create a 1/1 red Goblin creature token with haste.
+            Goblin creatures attack each turn if able.
+        */
+        String gAssault = "Goblin Assault";
+
+        addCard(Zone.BATTLEFIELD, playerA, flunkies);
+        addCard(Zone.BATTLEFIELD, playerB, gAssault);
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTapped(flunkies, false);
+        assertLife(playerB, 20);
+    }
+
+    /*
+    Reported bug: Tromokratis is unable to be blocked.
+    */
+    @Test
+    public void tromokratisBlockedByAll() {
+        /*
+        Tromokratis {5}{U}{U}
+        Legendary Creature — Kraken 8/8
+        Tromokratis has hexproof unless it's attacking or blocking.
+        Tromokratis can't be blocked unless all creatures defending player controls block it. (If any creature that player controls doesn't block this creature, it can't be blocked.)
+        */
+        String tromokratis = "Tromokratis";
+        String gBears = "Grizzly Bears"; // {1}{G} 2/2
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.BATTLEFIELD, playerA, tromokratis);
+        addCard(Zone.BATTLEFIELD, playerB, gBears);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+
+        attack(1, playerA, tromokratis);
+        block(1, playerB, gBears, tromokratis);
+        block(1, playerB, memnite, tromokratis);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerB, gBears, 1);
+        assertGraveyardCount(playerB, memnite, 1);
+        assertTapped(tromokratis, true);
+    }
+
+    /*
+    Reported bug: Tromokratis is unable to be blocked.
+    */
+    @Test
+    public void tromokratisNotBlockedByAll() {
+        /*
+        Tromokratis {5}{U}{U}
+        Legendary Creature — Kraken 8/8
+        Tromokratis has hexproof unless it's attacking or blocking.
+        Tromokratis can't be blocked unless all creatures defending player controls block it. (If any creature that player controls doesn't block this creature, it can't be blocked.)
+        */
+        String tromokratis = "Tromokratis";
+        String gBears = "Grizzly Bears"; // {1}{G} 2/2
+        String memnite = "Memnite"; // {0} 1/1
+        String hGiant = "Hill Giant"; // {3}{R} 3/3
+
+        addCard(Zone.BATTLEFIELD, playerA, tromokratis);
+        addCard(Zone.BATTLEFIELD, playerB, gBears);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+        addCard(Zone.BATTLEFIELD, playerB, hGiant);
+
+        attack(2, playerB, hGiant); // forces a creature to be tapped so unable to block Tromokratis, which means it cannot be blocked at all
+        attack(3, playerA, tromokratis);
+        block(3, playerB, gBears, tromokratis);
+        block(3, playerB, memnite, tromokratis);
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 12); // Hill Giant could not block it, so no other creature could block Tromokratis either
+        assertPermanentCount(playerB, gBears, 1);
+        assertPermanentCount(playerB, memnite, 1);
+        assertTapped(tromokratis, true);
+        assertTapped(hGiant, true);
+    }
+
+    @Test
+    public void underworldCerberusBlockedByOneTest() {
+    	/* Underworld Cerberus {3}{B}{3} 6/6
+    	*  Underworld Cerberus can't be blocked except by three or more creatures.
+    	*  Cards in graveyards can't be the targets of spells or abilities.
+    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
+    	*/
+        addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite"); // 1/1
+
+        attack(3, playerA, "Underworld Cerberus");
+        block(3, playerB, "Memnite", "Underworld Cerberus");
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch(UnsupportedOperationException e) {
+            assertEquals("Underworld Cerberus is blocked by 1 creature(s). It has to be blocked by 3 or more.", e.getMessage());
+        }
+
+    }
+
+    @Test
+    public void underworldCerberusBlockedByTwoTest() {
+    	/* Underworld Cerberus {3}{B}{3} 6/6
+    	*  Underworld Cerberus can't be blocked except by three or more creatures.
+    	*  Cards in graveyards can't be the targets of spells or abilities.
+    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
+    	*/
+        addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 2); // 1/1
+
+        attack(3, playerA, "Underworld Cerberus");
+        block(3, playerB, "Memnite:0", "Underworld Cerberus");
+        block(3, playerB, "Memnite:1", "Underworld Cerberus");
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch(UnsupportedOperationException e) {
+            assertEquals("Underworld Cerberus is blocked by 2 creature(s). It has to be blocked by 3 or more.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void underworldCerberusBlockedByThreeTest() {
+
+    	/* Underworld Cerberus {3}{B}{3} 6/6
+    	*  Underworld Cerberus can't be blocked except by three or more creatures.
+    	*  Cards in graveyards can't be the targets of spells or abilities.
+    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
+    	*/
+        addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 3); // 1/1
+
+
+        // Blocked by 3 creatures - this is acceptable
+        attack(3, playerA, "Underworld Cerberus");
+        block(3, playerB, "Memnite:0", "Underworld Cerberus");
+        block(3, playerB, "Memnite:1", "Underworld Cerberus");
+        block(3, playerB, "Memnite:2", "Underworld Cerberus");
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+
+        execute();
+
+        assertPermanentCount(playerA, "Underworld Cerberus", 1);
+        assertPermanentCount(playerB, "Memnite", 0);
+        assertGraveyardCount(playerB, "Memnite", 3);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void underworldCerberusBlockedByTenTest() {
+    	/* Underworld Cerberus {3}{B}{3} 6/6
+    	*  Underworld Cerberus can't be blocked except by three or more creatures.
+    	*  Cards in graveyards can't be the targets of spells or abilities.
+    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
+    	*/
+        addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 10); // 1/1
+
+        // Blocked by 10 creatures - this is acceptable as it's >3
+        attack(3, playerA, "Underworld Cerberus");
+        for(int i = 0; i < 10; i++) {
+            block(3, playerB, "Memnite:" + i, "Underworld Cerberus");
+        }
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+
+        execute();
+
+        assertPermanentCount(playerA, "Underworld Cerberus", 0);
+        assertPermanentCount(playerB, "Memnite", 4);
+        // Actually exiled when it dies
+        assertGraveyardCount(playerA, "Underworld Cerberus", 0);
+        assertExileCount(playerA, "Underworld Cerberus", 1);
+        // Cards are returned to their owner's hand when Underworld Cerberus dies
+        assertGraveyardCount(playerB, "Memnite", 0);
+        assertHandCount(playerB, "Memnite", 6);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+    }
 }

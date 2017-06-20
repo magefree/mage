@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MonstrousCondition;
@@ -40,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,7 @@ public class BullRancor extends CardImpl {
         // As long as Bull Rancor is monstrous, creatures you control have menace.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                MonstrousCondition.getInstance(),
+                MonstrousCondition.instance,
                 "As long as Bull Rancor is monstrous, creatures you control have menace")
         ));
     }

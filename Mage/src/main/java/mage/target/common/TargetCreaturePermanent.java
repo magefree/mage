@@ -24,10 +24,10 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.target.common;
 
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
@@ -38,7 +38,7 @@ import mage.target.TargetPermanent;
 public class TargetCreaturePermanent extends TargetPermanent {
 
     public TargetCreaturePermanent() {
-        this(1, 1, new FilterCreaturePermanent(), false);
+        this(1, 1, FILTER_PERMANENT_CREATURE, false);
     }
 
     public TargetCreaturePermanent(FilterCreaturePermanent filter) {

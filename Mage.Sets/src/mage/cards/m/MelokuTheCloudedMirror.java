@@ -25,12 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,9 +37,12 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.MelokuTheCloudedMirrorToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -53,8 +53,8 @@ public class MelokuTheCloudedMirror extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 
     public MelokuTheCloudedMirror(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");
 
@@ -62,7 +62,7 @@ public class MelokuTheCloudedMirror extends CardImpl {
         this.toughness = new MageInt(4);
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // {1}, Return a land you control to its owner's hand: Create a 1/1 blue Illusion creature token with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new MelokuTheCloudedMirrorToken(), 1), new GenericManaCost(1));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
@@ -78,16 +78,4 @@ public class MelokuTheCloudedMirror extends CardImpl {
         return new MelokuTheCloudedMirror(this);
     }
 
-}
-
-class MelokuTheCloudedMirrorToken extends Token {
-    MelokuTheCloudedMirrorToken() {
-        super("Illusion", "1/1 blue Illusion creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Illusion");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
-    }
 }

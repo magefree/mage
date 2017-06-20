@@ -29,6 +29,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
@@ -48,7 +49,7 @@ public class VigilanteJustice extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human");
 
     static {
-            filter.add(new SubtypePredicate("Human"));
+            filter.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public VigilanteJustice(UUID ownerId, CardSetInfo setInfo) {

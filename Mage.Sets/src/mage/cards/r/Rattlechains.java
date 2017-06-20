@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,8 +58,8 @@ public class Rattlechains extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("Spirit spells");
 
     static {
-        filter.add(new SubtypePredicate("Spirit"));
-        filterCard.add(new SubtypePredicate("Spirit"));
+        filter.add(new SubtypePredicate(SubType.SPIRIT));
+        filterCard.add(new SubtypePredicate(SubType.SPIRIT));
     }
 
     public Rattlechains(UUID ownerId, CardSetInfo setInfo) {

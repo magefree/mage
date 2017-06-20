@@ -27,24 +27,16 @@
  */
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.UndauntedAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -63,7 +55,7 @@ public class DivergentTransformations extends CardImpl {
         this.addAbility(new UndauntedAbility());
         // Exile two target creatures. For each of those creatures, its controller reveals cards from the top of his or her library until he or she reveals a creature card, puts that card onto the battlefield, then shuffles the rest into his or her library.
         this.getSpellAbility().addEffect(new DivergentTransformationsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, new FilterCreaturePermanent("creatures"), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, FILTER_PERMANENT_CREATURES, false));
 
     }
 
@@ -112,16 +104,16 @@ class DivergentTransformationsEffect extends OneShotEffect {
             for (UUID playerId : controllerList) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (player.getLibrary().size() > 0) {
+                    if (player.getLibrary().hasCards()) {
                         Cards cards = new CardsImpl();
                         Card card = player.getLibrary().removeFromTop(game);
                         cards.add(card);
-                        while (!card.getCardType().contains(CardType.CREATURE) && player.getLibrary().size() > 0) {
+                        while (!card.isCreature() && player.getLibrary().hasCards()) {
                             card = player.getLibrary().removeFromTop(game);
                             cards.add(card);
                         }
 
-                        if (card.getCardType().contains(CardType.CREATURE)) {
+                        if (card.isCreature()) {
                             card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                         }
 

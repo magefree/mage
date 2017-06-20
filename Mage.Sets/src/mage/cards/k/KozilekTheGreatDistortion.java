@@ -27,11 +27,9 @@
  */
 package mage.cards.k;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.Cost;
@@ -46,8 +44,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -58,6 +56,10 @@ import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -66,7 +68,7 @@ public class KozilekTheGreatDistortion extends CardImpl {
 
     public KozilekTheGreatDistortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{C}{C}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Eldrazi");
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);
@@ -74,7 +76,7 @@ public class KozilekTheGreatDistortion extends CardImpl {
         // When you cast Kozilek, the Great Distortion, if you have fewer than seven cards in hand, draw cards equal to the difference.
         this.addAbility(new ConditionalTriggeredAbility(
                 new CastSourceTriggeredAbility(new KozilekDrawEffect(), false),
-                new CardsInHandCondition(CardsInHandCondition.CountType.FEWER_THAN, 7),
+                new CardsInHandCondition(ComparisonType.FEWER_THAN, 7),
                 "When you cast {this}, if you have fewer than seven cards in hand, draw cards equal to the difference."));
         // Menace
         this.addAbility(new MenaceAbility());
@@ -143,7 +145,7 @@ class KozilekDiscardCost extends CostImpl {
             return false;
         }
         FilterCard filter = new FilterCard("card with converted mana cost of " + targetSpell.getConvertedManaCost());
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, targetSpell.getConvertedManaCost()));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, targetSpell.getConvertedManaCost()));
         TargetCardInHand target = new TargetCardInHand(filter);
         this.getTargets().clear();
         this.getTargets().add(target);

@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -37,6 +36,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public class CalculatedDismissal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
         // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, scry 2.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), SpellMasteryCondition.getInstance(),
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), SpellMasteryCondition.instance,
                 "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, scry 2"));
     }
 

@@ -106,14 +106,14 @@ class MoltenPsycheEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     player.drawCards(cardsToDraw.get(playerId), game);
-                    if (MetalcraftCondition.getInstance().apply(game, source) && !playerId.equals(source.getControllerId())) {
-                        MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get("CardsDrawn");
+                    if (MetalcraftCondition.instance.apply(game, source) && !playerId.equals(source.getControllerId())) {
+                        MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get(MoltenPsycheWatcher.class.getSimpleName());
                         player.damage(watcher.getDraws(playerId), source.getSourceId(), game, false, true);
                     }
                 }
             }
-            if (MetalcraftCondition.getInstance().apply(game, source)) {
-                MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get("CardsDrawn");
+            if (MetalcraftCondition.instance.apply(game, source)) {
+                MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get(MoltenPsycheWatcher.class.getSimpleName());
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     if (game.isOpponent(controller, playerId)) {
                         Player player = game.getPlayer(playerId);
@@ -141,7 +141,7 @@ class MoltenPsycheWatcher extends Watcher {
     private final Map<UUID, Integer> draws = new HashMap<>();
 
     public MoltenPsycheWatcher() {
-        super("CardsDrawn", WatcherScope.GAME);
+        super(MoltenPsycheWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public MoltenPsycheWatcher(final MoltenPsycheWatcher watcher) {
@@ -167,10 +167,7 @@ class MoltenPsycheWatcher extends Watcher {
     }
 
     public int getDraws(UUID playerId) {
-        if (draws.containsKey(playerId)) {
-            return draws.get(playerId);
-        }
-        return 0;
+        return draws.getOrDefault(playerId, 0);
     }
 
     @Override

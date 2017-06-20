@@ -28,13 +28,13 @@
 
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.d.DrySpell;
 import mage.cards.e.EliteCatWarrior;
 import mage.cards.w.WarriorsCharge;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -43,14 +43,14 @@ import mage.cards.CardGraphicInfo;
 
 public class Portal extends ExpansionSet {
 
-    private static final Portal fINSTANCE = new Portal();
+    private static final Portal instance = new Portal();
 
     /**
      *
      * @return
      */
     public static Portal getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Portal() {
@@ -190,6 +190,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Omen", 63, Rarity.COMMON, mage.cards.o.Omen.class));
         cards.add(new SetCardInfo("Owl Familiar", 64, Rarity.COMMON, mage.cards.o.OwlFamiliar.class));
         cards.add(new SetCardInfo("Panther Warriors", 106, Rarity.COMMON, mage.cards.p.PantherWarriors.class));
+        cards.add(new SetCardInfo("Path of Peace", 183, Rarity.COMMON, mage.cards.p.PathOfPeace.class));
         cards.add(new SetCardInfo("Personal Tutor", 65, Rarity.UNCOMMON, mage.cards.p.PersonalTutor.class));
         cards.add(new SetCardInfo("Phantom Warrior", 66, Rarity.RARE, mage.cards.p.PhantomWarrior.class));
         cards.add(new SetCardInfo("Pillaging Horde", 147, Rarity.RARE, mage.cards.p.PillagingHorde.class));

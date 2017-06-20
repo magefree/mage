@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -38,6 +37,8 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.token.BeastToken;
 import mage.watchers.common.CreaturesDiedWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,9 +68,9 @@ class FreshMeatDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get("CreaturesDiedWatcher");
+        CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get(CreaturesDiedWatcher.class.getSimpleName());
         if (watcher != null) {
-            return watcher.getAmountOfCreaturesDiesThisTurn(sourceAbility.getControllerId());
+            return watcher.getAmountOfCreaturesDiedThisTurnByController(sourceAbility.getControllerId());
         }
         return 0;
     }

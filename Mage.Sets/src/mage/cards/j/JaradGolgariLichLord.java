@@ -27,9 +27,6 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,8 +41,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -53,6 +49,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,13 +64,13 @@ public class JaradGolgariLichLord extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filterSwamp.add(new SubtypePredicate("Swamp"));
-        filterForest.add(new SubtypePredicate("Forest"));
+        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public JaradGolgariLichLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Elf");
 

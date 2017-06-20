@@ -74,7 +74,7 @@ public class ShamanOfForgottenWays extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new ShamanOfForgottenWaysEffect(), 
                 new ManaCostsImpl("{9}{G}{G}"), 
-                FormidableCondition.getInstance());
+                FormidableCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.setAbilityWord(AbilityWord.FORMIDABLE);        
         this.addAbility(ability);
@@ -117,7 +117,7 @@ class ShamanOfForgottenWaysManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = source.getSourceObject(game);
-        return object != null && (object instanceof Spell) && object.getCardType().contains(CardType.CREATURE);
+        return object != null && (object instanceof Spell) && object.isCreature();
     }
 }
 

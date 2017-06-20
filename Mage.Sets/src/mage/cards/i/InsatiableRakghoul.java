@@ -87,7 +87,7 @@ class InsatiableRakghoulEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            NonArtifactCreaturesDiedWatcher watcher = (NonArtifactCreaturesDiedWatcher) game.getState().getWatchers().get("NonArtifactCreaturesDiedWatcher");
+            NonArtifactCreaturesDiedWatcher watcher = (NonArtifactCreaturesDiedWatcher) game.getState().getWatchers().get(NonArtifactCreaturesDiedWatcher.class.getSimpleName());
             if (watcher != null && watcher.conditionMet()) {
                 Permanent permanent = game.getPermanentEntering(source.getSourceId());
                 if (permanent != null) {
@@ -108,7 +108,7 @@ class InsatiableRakghoulEffect extends OneShotEffect {
 class NonArtifactCreaturesDiedWatcher extends Watcher {
 
     public NonArtifactCreaturesDiedWatcher() {
-        super("NonArtifactCreaturesDiedWatcher", WatcherScope.GAME);
+        super(NonArtifactCreaturesDiedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public NonArtifactCreaturesDiedWatcher(final NonArtifactCreaturesDiedWatcher watcher) {
@@ -120,8 +120,8 @@ class NonArtifactCreaturesDiedWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.isDiesEvent() && zEvent.getTarget() != null
-                    && zEvent.getTarget().getCardType().contains(CardType.CREATURE)
-                    && !zEvent.getTarget().getCardType().contains(CardType.ARTIFACT)) {
+                    && zEvent.getTarget().isCreature()
+                    && !zEvent.getTarget().isArtifact()) {
                 condition = true;
             }
         }

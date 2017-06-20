@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +42,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,14 +99,14 @@ class DakraMysticEffect extends OneShotEffect {
         if (controller != null) {
             for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && player.getLibrary().size() > 0) {
+                if (player != null && player.getLibrary().hasCards()) {
                     player.revealCards(player.getLogName(), new CardsImpl(player.getLibrary().getFromTop(game)), game);
                 }
             }
             if (controller.chooseUse(outcome, "Put revealed cards into graveyard?", source, game)) {
                 for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);                    
-                    if (player != null && player.getLibrary().size() > 0) {
+                    if (player != null && player.getLibrary().hasCards()) {
                         player.moveCards(player.getLibrary().getFromTop(game), Zone.GRAVEYARD, source, game);
                     }
                 }                

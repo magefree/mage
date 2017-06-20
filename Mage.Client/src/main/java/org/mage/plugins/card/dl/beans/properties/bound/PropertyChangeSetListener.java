@@ -7,11 +7,11 @@
 package org.mage.plugins.card.dl.beans.properties.bound;
 
 
-import java.beans.PropertyChangeEvent;
-import java.util.Set;
-
 import org.mage.plugins.card.dl.beans.PropertyChangeSupport;
 import org.mage.plugins.card.dl.beans.collections.ListenableCollections.SetListener;
+
+import java.beans.PropertyChangeEvent;
+import java.util.Set;
 
 
 /**
@@ -35,11 +35,11 @@ public class PropertyChangeSetListener<E> implements SetListener<E> {
     }
 
     public void add(E newValue) {
-        s.firePropertyChange(new SetAddEvent<E>(s.getSourceBean(), propertyName, set, newValue));
+        s.firePropertyChange(new SetAddEvent<>(s.getSourceBean(), propertyName, set, newValue));
     }
 
     public void remove(E oldValue) {
-        s.firePropertyChange(new SetRemoveEvent<E>(s.getSourceBean(), propertyName, set, oldValue));
+        s.firePropertyChange(new SetRemoveEvent<>(s.getSourceBean(), propertyName, set, oldValue));
     }
 
     public static abstract class SetEvent<E> extends PropertyChangeEvent {

@@ -39,14 +39,14 @@ import mage.constants.Zone;
  */
 public class PhasingAbility extends StaticAbility implements MageSingleton {
 
-    private static final PhasingAbility fINSTANCE =  new PhasingAbility();
+    private static final PhasingAbility instance =  new PhasingAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static PhasingAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PhasingAbility() {
@@ -60,7 +60,7 @@ public class PhasingAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public PhasingAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

@@ -27,15 +27,10 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -45,6 +40,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -87,7 +84,7 @@ class CerebralEruptionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (player != null && sourceObject != null && player.getLibrary().size() > 0) {
+        if (player != null && sourceObject != null && player.getLibrary().hasCards()) {
             Card card = player.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             player.revealCards(sourceObject.getIdName(), cards, game);
@@ -97,7 +94,7 @@ class CerebralEruptionEffect extends OneShotEffect {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                 perm.damage(damage, source.getSourceId(), game, false, true);
             }
-            if (card.getCardType().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
                 if (spellCard != null) {
                     player.moveCards(spellCard, Zone.HAND, source, game);

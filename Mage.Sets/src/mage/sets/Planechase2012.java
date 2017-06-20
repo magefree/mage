@@ -28,10 +28,10 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Planechase2012 extends ExpansionSet {
 
-    private static final Planechase2012 fINSTANCE = new Planechase2012();
+    private static final Planechase2012 instance = new Planechase2012();
 
     public static Planechase2012 getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Planechase2012() {

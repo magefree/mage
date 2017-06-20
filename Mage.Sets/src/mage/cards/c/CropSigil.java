@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
@@ -44,6 +43,8 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ public class CropSigil extends CardImpl {
         // <i>Delirium</i> &mdash; {2}{G}, Sacrifice Crop Sigil: Return up to one target creature card and up to one target land card from your graveyard to your hand.
         // Activate this ability only if there are four or more card types among cards in your graveyard.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(true), new ManaCostsImpl<>("{2}{G}"),
-                DeliriumCondition.getInstance(),
+                DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; {2}{G}, Sacrifice {this}: Return up to one target creature card and up to one target land card from your graveyard to your hand. "
                 + "Activate this ability only if there are four or more card types among cards in your graveyard");
         ability.addCost(new SacrificeSourceCost());

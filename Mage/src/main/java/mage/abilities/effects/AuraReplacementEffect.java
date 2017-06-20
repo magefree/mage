@@ -28,6 +28,7 @@
 package mage.abilities.effects;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -55,10 +56,10 @@ import mage.target.common.TargetCardInGraveyard;
  * was not cast (so from Zone != Hand), this effect gets the target to whitch to
  * attach it and adds the Aura the the battlefield and attachs it to the target.
  * The "attachTo:" value in game state has to be set therefore.
- *
+ * <p>
  * If no "attachTo:" value is defined, the controlling player has to chose the
  * aura target.
- *
+ * <p>
  * This effect is automatically added to ContinuousEffects at the start of a
  * game
  *
@@ -128,7 +129,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             if (spellAbility.getTargets().isEmpty()) {
                 for (Ability ability : card.getAbilities(game)) {
                     if ((ability instanceof SpellAbility)
-                            && SpellAbilityType.BASE_ALTERNATE.equals(((SpellAbility) ability).getSpellAbilityType())
+                            && SpellAbilityType.BASE_ALTERNATE == ((SpellAbility) ability).getSpellAbilityType()
                             && !ability.getTargets().isEmpty()) {
                         spellAbility = (SpellAbility) ability;
                         break;
@@ -204,15 +205,15 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent) event).getToZone().equals(Zone.BATTLEFIELD)
-                && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.STACK))) {
+        if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
+                && (((ZoneChangeEvent) event).getFromZone() != Zone.STACK)) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && (card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura", game)
+            if (card != null && (card.isEnchantment() && card.hasSubtype("Aura", game)
                     || // in case of transformable enchantments
                     (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null
-                    && card.getSecondCardFace() != null
-                    && card.getSecondCardFace().getCardType().contains(CardType.ENCHANTMENT)
-                    && card.getSecondCardFace().hasSubtype("Aura", game)))) {
+                            && card.getSecondCardFace() != null
+                            && card.getSecondCardFace().isEnchantment()
+                            && card.getSecondCardFace().hasSubtype("Aura", game)))) {
                 return true;
             }
         }

@@ -30,18 +30,13 @@ package mage.abilities.effects.common.continuous;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
 /**
- *
- * @author jeff
+ * @author jeffwadsworth
  */
 public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
@@ -86,12 +81,9 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (!token.getSupertype().isEmpty()) {
-                                for (String t : token.getSupertype()) {
-                                    if (!permanent.getSupertype().contains(t)) {
-                                        permanent.getSupertype().add(t);
-                                    }
-                                }
+                            for (SuperType t : token.getSuperType()) {
+                                permanent.addSuperType(t);
+
                             }
                             // card type
                             switch (loseType) {
@@ -100,13 +92,10 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                     permanent.getCardType().clear();
                                     break;
                             }
-                            if (!token.getCardType().isEmpty()) {
-                                for (CardType t : token.getCardType()) {
-                                    if (!permanent.getCardType().contains(t)) {
-                                        permanent.getCardType().add(t);
-                                    }
-                                }
+                            for (CardType t : token.getCardType()) {
+                                permanent.addCardType(t);
                             }
+
                             // sub type
                             switch (loseType) {
                                 case ALL:
@@ -115,18 +104,17 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                     permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
                                     break;
                             }
-                            if (!token.getSubtype(game).isEmpty()) {
-                                for (String t : token.getSubtype(game)) {
-                                    if (!permanent.getSubtype(game).contains(t)) {
-                                        permanent.getSubtype(game).add(t);
-                                    }
+                            for (String t : token.getSubtype(game)) {
+                                if (!permanent.getSubtype(game).contains(t)) {
+                                    permanent.getSubtype(game).add(t);
                                 }
                             }
+
                         }
                         break;
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
-                            if (loseType.equals(LoseType.ALL)) {
+                            if (loseType == LoseType.ALL) {
                                 permanent.getColor(game).setBlack(false);
                                 permanent.getColor(game).setGreen(false);
                                 permanent.getColor(game).setBlue(false);
@@ -148,11 +136,10 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                     permanent.removeAllAbilities(source.getSourceId(), game);
                                     break;
                             }
-                            if (!token.getAbilities().isEmpty()) {
-                                for (Ability ability : token.getAbilities()) {
-                                    permanent.addAbility(ability, source.getSourceId(), game);
-                                }
+                            for (Ability ability : token.getAbilities()) {
+                                permanent.addAbility(ability, source.getSourceId(), game);
                             }
+
                         }
                         break;
                     case PTChangingEffects_7:
@@ -175,7 +162,10 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7
+                || layer == Layer.AbilityAddingRemovingEffects_6
+                || layer == Layer.ColorChangingEffects_5
+                || layer == Layer.TypeChangingEffects_4;
     }
 
 }

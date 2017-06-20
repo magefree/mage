@@ -30,9 +30,9 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -70,7 +70,7 @@ public class KavuRunner extends CardImpl {
         // Kavu Runner has haste as long as no opponent controls a white or blue creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
             new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(),
-            Duration.WhileOnBattlefield), new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0, false)),
+            Duration.WhileOnBattlefield), new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, false)),
             "{this} has haste as long as no opponent controls a white or blue creature")));
     }
 

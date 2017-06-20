@@ -74,7 +74,7 @@ public abstract class DraftCube {
     private static final Logger logger = Logger.getLogger(DraftCube.class);
 
     private final String name;
-    private final int boosterSize = 15;
+    private static final int boosterSize = 15;
 
     protected List<CardIdentity> cubeCards = new ArrayList<>();
     protected List<CardIdentity> leftCubeCards = new ArrayList<>();
@@ -107,11 +107,7 @@ public abstract class DraftCube {
                 if (!cardId.getName().isEmpty()) {
                     CardInfo cardInfo = null;
                     if (!cardId.getExtension().isEmpty()) {
-                        CardCriteria criteria = new CardCriteria().name(cardId.getName()).setCodes(cardId.extension);
-                        List<CardInfo> cardList = CardRepository.instance.findCards(criteria);
-                        if (cardList != null && !cardList.isEmpty()) {
-                            cardInfo = cardList.get(0);
-                        }
+                        cardInfo = CardRepository.instance.findCardWPreferredSet(cardId.getName(), cardId.getExtension(), false);
                     } else {
                         cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardId.getName(), false);
                     }

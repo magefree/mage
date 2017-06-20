@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,15 +34,19 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.m.MarkovsServant;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.m.MarkovsServant;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +57,7 @@ public class ChosenOfMarkov extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 
     public ChosenOfMarkov(UUID ownerId, CardSetInfo setInfo) {

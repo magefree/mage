@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,7 +52,7 @@ public class SunriseSovereign extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Giant");
 
     static {
-        filter.add(new SubtypePredicate("Giant"));
+        filter.add(new SubtypePredicate(SubType.GIANT));
     }
 
     public SunriseSovereign(UUID ownerId, CardSetInfo setInfo) {

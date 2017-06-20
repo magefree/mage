@@ -28,7 +28,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorAllEffect;
 import mage.cards.CardImpl;
@@ -37,6 +36,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *

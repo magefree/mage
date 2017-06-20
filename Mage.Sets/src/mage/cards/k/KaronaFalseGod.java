@@ -43,11 +43,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -63,7 +59,7 @@ public class KaronaFalseGod extends CardImpl {
 
     public KaronaFalseGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}{R}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Avatar");
 
         this.power = new MageInt(5);
@@ -169,7 +165,7 @@ class KaronaFalseGodEffect extends OneShotEffect {
             if (!typeChosen.isEmpty()) {
                 game.informPlayers(controller.getLogName() + " has chosen " + typeChosen);
                 FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                filter.add(new SubtypePredicate(typeChosen));
+                filter.add(new SubtypePredicate(SubType.byDescription(typeChosen)));
                 game.addEffect(new BoostAllEffect(3, 3, Duration.EndOfTurn, filter, false), source);
             }
             return true;

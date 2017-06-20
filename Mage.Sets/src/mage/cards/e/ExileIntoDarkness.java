@@ -27,8 +27,8 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -39,10 +39,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +54,7 @@ public class ExileIntoDarkness extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public ExileIntoDarkness(UUID ownerId, CardSetInfo setInfo) {
@@ -70,7 +71,7 @@ public class ExileIntoDarkness extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
                     new ReturnSourceFromGraveyardToHandEffect(),
                     TargetController.YOU, true),
-                new MoreCardsInHandThanOpponentsCondition(),
+                MoreCardsInHandThanOpponentsCondition.instance,
                 "At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return {this} from your graveyard to your hand.");
         this.addAbility(ability);
     }

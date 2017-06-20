@@ -49,7 +49,7 @@ public class ScourTheLaboratory extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
         // <i>Delirium</i> &mdash; Scour the Laboratory costs {2} less to cast if there are four or more card types among cards in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(2, DeliriumCondition.getInstance()));
+        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(2, DeliriumCondition.instance));
         ability.setRuleAtTheTop(true);
         ability.setAbilityWord(AbilityWord.DELIRIUM);
         this.addAbility(ability);

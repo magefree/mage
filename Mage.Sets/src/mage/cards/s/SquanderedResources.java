@@ -27,13 +27,9 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ManaEffect;
@@ -44,6 +40,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -52,6 +49,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import mage.abilities.mana.SimpleManaAbility;
 
 /**
  *
@@ -65,7 +67,7 @@ public class SquanderedResources extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
 
         // Sacrifice a land: Add to your mana pool one mana of any type the sacrificed land could produce.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public SquanderedResources(final SquanderedResources card) {
@@ -83,7 +85,7 @@ class SquanderedResourcesEffect extends ManaEffect {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
     }
 
     public SquanderedResourcesEffect() {
@@ -199,7 +201,7 @@ class SquanderedResourcesEffect extends ManaEffect {
                 if (land != null) {
                     Abilities<ActivatedManaAbilityImpl> manaAbilities = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
                     for (ActivatedManaAbilityImpl ability : manaAbilities) {
-                        if (!ability.equals(source) && ability.definesMana()) {
+                        if (!ability.equals(source) && ability.definesMana(game)) {
                             for (Mana netMana : ability.getNetMana(game)) {
                                 types.add(netMana);
                             }

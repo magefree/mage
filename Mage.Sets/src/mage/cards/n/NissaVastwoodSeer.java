@@ -27,25 +27,28 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
+import mage.abilities.Gender;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
-import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect.Gender;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,13 +58,13 @@ public class NissaVastwoodSeer extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("basic Forest card");
     static {
-        filter.add(new SupertypePredicate("Basic"));
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public NissaVastwoodSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
@@ -76,8 +79,8 @@ public class NissaVastwoodSeer extends CardImpl {
         // Whenever a land enters the battlefield under your control, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalTriggeredAbility(
-                new EntersBattlefieldControlledTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.FEMAL), new FilterLandPermanent()), 
-                new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), CountType.MORE_THAN, 6, true), 
+                new EntersBattlefieldControlledTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.FEMALE), new FilterLandPermanent()),
+                new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), ComparisonType.MORE_THAN, 6, true),
                 "Whenever a land enters the battlefield under your control, if you control seven or more lands, exile {this}, then return her to the battlefield transformed under her owner's control."));
     }
 

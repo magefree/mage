@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +38,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,7 @@ public class EntourageOfTrest extends CardImpl {
 
         // Entourage of Trest can block an additional creature each combat as long as you're the monarch.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new CanBlockAdditionalCreatureEffect(1), MonarchIsSourceControllerCondition.getInstance(),
+                new CanBlockAdditionalCreatureEffect(1), MonarchIsSourceControllerCondition.instance,
                 "{this} can block an additional creature each combat as long as you're the monarch")));
     }
 

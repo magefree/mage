@@ -27,9 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -49,6 +46,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +83,7 @@ public class OngoingInvestigation extends CardImpl {
 class OngoingInvestigationTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean madeDamage = false;
-    private Set<UUID> damagedPlayers = new HashSet<UUID>();
+    private Set<UUID> damagedPlayers = new HashSet<>();
 
     public OngoingInvestigationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InvestigateEffect(), false);
@@ -91,7 +92,7 @@ class OngoingInvestigationTriggeredAbility extends TriggeredAbilityImpl {
     public OngoingInvestigationTriggeredAbility(final OngoingInvestigationTriggeredAbility ability) {
         super(ability);
         this.madeDamage = ability.madeDamage;
-        this.damagedPlayers = new HashSet<UUID>();
+        this.damagedPlayers = new HashSet<>();
         this.damagedPlayers.addAll(ability.damagedPlayers);
     }
 
@@ -115,9 +116,9 @@ class OngoingInvestigationTriggeredAbility extends TriggeredAbilityImpl {
                 damagedPlayers.add(event.getPlayerId());
             }
         }
-        if (event.getType().equals(EventType.COMBAT_DAMAGE_STEP_POST)) {
+        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_POST) {
             if (madeDamage) {
-                Set<UUID> damagedPlayersCopy = new HashSet<UUID>();
+                Set<UUID> damagedPlayersCopy = new HashSet<>();
                 damagedPlayersCopy.addAll(damagedPlayers);
                 for(Effect effect: this.getEffects()) {
                     effect.setValue("damagedPlayers", damagedPlayersCopy);

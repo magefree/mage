@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,6 +44,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+
+import java.util.UUID;
 
 /**
  *
@@ -123,8 +124,8 @@ class FiendslayerPaladinEffect extends ContinuousRuleModifyingEffectImpl {
         if (targetCard != null && stackObject != null && targetCard.getId().equals(source.getSourceId())) {
             if (stackObject.getColor(game).isBlack() || stackObject.getColor(game).isRed()) {
                 if (!stackObject.getControllerId().equals(source.getControllerId())
-                        && stackObject.getCardType().contains(CardType.INSTANT)
-                        || stackObject.getCardType().contains(CardType.SORCERY)) {
+                        && stackObject.isInstant()
+                        || stackObject.isSorcery()) {
                     return true;
                 }
             }

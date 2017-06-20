@@ -28,6 +28,7 @@
 package mage.cards.j;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -50,18 +51,17 @@ import mage.players.Player;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author MarcoMarin
  */
 public class JandorsRing extends CardImpl {
 
     public JandorsRing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         Watcher watcher = new JandorsRingWatcher();
         // {2}, {tap}, Discard the last card you drew this turn: Draw a card.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DiscardAndDrawEffect(), new ManaCostsImpl("{2}"), new WatchedCardInHandCondition(), "Last drawn card still in hand?");
-        ability.addCost(new TapSourceCost());                
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DiscardAndDrawEffect(), new ManaCostsImpl("{2}"), WatchedCardInHandCondition.instance, "Last drawn card still in hand?");
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability, watcher);
     }
 
@@ -75,31 +75,31 @@ public class JandorsRing extends CardImpl {
     }
 }
 
-class DiscardAndDrawEffect extends OneShotEffect{
-    
-    
+class DiscardAndDrawEffect extends OneShotEffect {
+
+
     public DiscardAndDrawEffect() {
         super(Outcome.Discard);
     }
-    
+
     public DiscardAndDrawEffect(final DiscardAndDrawEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DiscardAndDrawEffect copy() {
         return new DiscardAndDrawEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        JandorsRingWatcher watcher = (JandorsRingWatcher) game.getState().getWatchers().get("JandorsRingWatcher");        
-        
+        JandorsRingWatcher watcher = (JandorsRingWatcher) game.getState().getWatchers().get(JandorsRingWatcher.class.getSimpleName());
+
         FilterCard filter = new FilterCard(game.getCard(watcher.lastDrawnCard).getName());
         filter.add(new CardIdPredicate(watcher.lastDrawnCard));
         DiscardCardYouChooseTargetEffect effect = new DiscardCardYouChooseTargetEffect(filter, TargetController.YOU);
-        
-        if (effect.apply(game, source)){//Conditional was already checked, card should be in hand, but if for some weird reason it fails, the card won't be drawn, although the cost will already be paid            
+
+        if (effect.apply(game, source)) {//Conditional was already checked, card should be in hand, but if for some weird reason it fails, the card won't be drawn, although the cost will already be paid
             Player controller = game.getPlayer(source.getControllerId());
             controller.drawCards(1, game);
             return true;
@@ -114,21 +114,21 @@ class JandorsRingWatcher extends Watcher {
     UUID lastDrawnCard;
 
     public JandorsRingWatcher() {
-        super("JandorsRingWatcher", WatcherScope.PLAYER);
+        super(JandorsRingWatcher.class.getSimpleName(), WatcherScope.PLAYER);
         this.lastDrawnCard = null;
     }
 
     public JandorsRingWatcher(final JandorsRingWatcher watcher) {
-        super(watcher);        
+        super(watcher);
         this.lastDrawnCard = watcher.lastDrawnCard;
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD) {            
+        if (event.getType() == GameEvent.EventType.DREW_CARD) {
             lastDrawnCard = event.getTargetId();
         }
-        if (event.getType() == GameEvent.EventType.CLEANUP_STEP_POST) {            
+        if (event.getType() == GameEvent.EventType.CLEANUP_STEP_POST) {
             lastDrawnCard = null;
         }
     }
@@ -145,19 +145,15 @@ class JandorsRingWatcher extends Watcher {
     }
 }
 
-class WatchedCardInHandCondition implements Condition {
+enum WatchedCardInHandCondition implements Condition {
 
-    private static final WatchedCardInHandCondition fInstance = new WatchedCardInHandCondition();
+    instance;
 
-    public static WatchedCardInHandCondition getInstance() {
-        return fInstance;
-    }
-    
     @Override
     public boolean apply(Game game, Ability source) {
-        JandorsRingWatcher watcher = (JandorsRingWatcher) game.getState().getWatchers().get("JandorsRingWatcher");        
-        
-        return watcher.lastDrawnCard!=null && game.getPlayer(source.getControllerId()).getHand().contains(watcher.lastDrawnCard);
+        JandorsRingWatcher watcher = (JandorsRingWatcher) game.getState().getWatchers().get(JandorsRingWatcher.class.getSimpleName());
+
+        return watcher.lastDrawnCard != null && game.getPlayer(source.getControllerId()).getHand().contains(watcher.lastDrawnCard);
     }
 
     @Override
@@ -165,5 +161,5 @@ class WatchedCardInHandCondition implements Condition {
         return "if last drawn card is still in hand";
     }
 
-    
+
 }

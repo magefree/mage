@@ -48,7 +48,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
                 }
             }
             if (source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId())
-                    && game.getState().getZone(source.getSourceId()).equals(Zone.BATTLEFIELD)) {
+                    && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
                 sourcePermanent.sacrifice(source.getSourceId(), game);
             }
             return true;

@@ -27,8 +27,8 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -52,6 +52,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -73,7 +75,7 @@ public class ErebossTitan extends CardImpl {
         // Erebos's Titan has indestructible as long as no opponent controls a creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                        new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 0, false),
+                        new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0, false),
                         "As long as your opponents control no creatures, {this} has indestructible")));
 
         // Whenever a creature leaves an opponent's graveyard, you may discard a card. If you do, return Erebos's Titan from your graveyard to your hand.
@@ -114,11 +116,11 @@ class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone().equals(Zone.GRAVEYARD)) {
+        if (zEvent.getFromZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(zEvent.getTargetId());
             Player controller = game.getPlayer(getControllerId());
             return card != null
-                    && card.getCardType().contains(CardType.CREATURE)
+                    && card.isCreature()
                     && controller != null
                     && controller.hasOpponent(card.getOwnerId(), game);
         }

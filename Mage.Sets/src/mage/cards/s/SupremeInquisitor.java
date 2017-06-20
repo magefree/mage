@@ -40,6 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -61,7 +62,7 @@ public class SupremeInquisitor extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Wizards you control");
 
     static {
-        filter.add(new SubtypePredicate("Wizard"));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
         filter.add(Predicates.not(new TappedPredicate()));
     }
 

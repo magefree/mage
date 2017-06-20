@@ -27,12 +27,13 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class GutShot extends CardImpl {
 
     public GutShot(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R/P}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

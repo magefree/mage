@@ -27,17 +27,17 @@
  */
 package mage.abilities.costs.mana;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
 import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.ManaPool;
@@ -51,7 +51,7 @@ import mage.util.ManaUtil;
  */
 public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements ManaCosts<T> {
 
-    protected UUID id;
+    protected final UUID id;
     protected String text = null;
 
     private static Map<String, ManaCosts> costs = new HashMap<>();
@@ -161,12 +161,37 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public boolean payOrRollback(Ability ability, Game game, UUID sourceId, UUID payingPlayerId) {
         int bookmark = game.bookmarkState();
+        handlePhyrexianManaCosts(payingPlayerId, ability, game);
         if (pay(ability, game, sourceId, payingPlayerId, false, null)) {
             game.removeBookmark(bookmark);
             return true;
         }
         game.restoreState(bookmark, ability.getRule());
         return false;
+    }
+
+    private void handlePhyrexianManaCosts(UUID payingPlayerId, Ability source, Game game) {
+        Player player = game.getPlayer(payingPlayerId);
+        if (this == null || player == null) {
+            return; // nothing to be done without any mana costs. prevents NRE from occurring here
+        }
+        Iterator<T> manaCostIterator = this.iterator();
+        Costs<PayLifeCost> tempCosts = new CostsImpl<>();
+
+        while (manaCostIterator.hasNext()) {
+            ManaCost manaCost = manaCostIterator.next();
+            if (manaCost instanceof PhyrexianManaCost) {
+                PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) manaCost;
+                PayLifeCost payLifeCost = new PayLifeCost(2);
+                if (payLifeCost.canPay(source, source.getSourceId(), player.getId(), game)
+                        && player.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', source, game)) {
+                    manaCostIterator.remove();
+                    tempCosts.add(payLifeCost);
+                }
+            }
+        }
+
+        tempCosts.pay(source, game, source.getSourceId(), player.getId(), false, null);
     }
 
     @Override
@@ -234,7 +259,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof ColorlessManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -243,7 +268,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof ColoredManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -252,7 +277,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof HybridManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -268,7 +293,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                         || ((cost.containsColor(ColoredManaSymbol.G)) && pool.getGreen() > 0)
                         || ((cost.containsColor(ColoredManaSymbol.U)) && pool.getBlue() > 0)) {
                     cost.assignPayment(game, ability, pool, costToPay);
-                    if (pool.count() == 0) {
+                    if (pool.isEmpty()) {
                         return;
                     }
                 }
@@ -278,7 +303,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof MonoHybridManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -287,7 +312,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof SnowManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -296,7 +321,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof GenericManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
-                if (pool.count() == 0) {
+                if (pool.isEmpty()) {
                     return;
                 }
             }
@@ -323,7 +348,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             if (mana == null || mana.isEmpty()) {
                 return;
             }
-            String[] symbols = mana.split("^\\{|\\}\\{|\\}$");
+            String[] symbols = mana.split("^\\{|}\\{|}$");
             int modifierForX = 0;
             for (String symbol : symbols) {
                 if (!symbol.isEmpty()) {
@@ -360,6 +385,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     private boolean isNumeric(String symbol) {
+
         try {
             Integer.parseInt(symbol);
             return true;

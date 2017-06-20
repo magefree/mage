@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -42,6 +41,8 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +97,7 @@ class BloodSeekerTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent) event;
             Card card = zEvent.getTarget();
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && card.isCreature()) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }

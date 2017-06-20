@@ -28,10 +28,10 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class TenthEdition extends ExpansionSet {
 
-    private static final TenthEdition fINSTANCE = new TenthEdition();
+    private static final TenthEdition instance = new TenthEdition();
 
     public static TenthEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private TenthEdition() {

@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class MagicOrigins extends ExpansionSet {
 
-    private static final MagicOrigins fINSTANCE = new MagicOrigins();
+    private static final MagicOrigins instance = new MagicOrigins();
 
     public static MagicOrigins getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MagicOrigins() {

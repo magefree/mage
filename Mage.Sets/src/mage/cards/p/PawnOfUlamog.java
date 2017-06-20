@@ -101,7 +101,7 @@ class PawnOfUlamogTriggeredAbility extends TriggeredAbilityImpl {
                 if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD
                         && permanent.getControllerId().equals(this.controllerId)
                         && (targetId.equals(this.getSourceId())
-                            || (permanent.getCardType().contains(CardType.CREATURE)
+                            || (permanent.isCreature()
                                 && !targetId.equals(this.getSourceId())
                                 && !(permanent instanceof PermanentToken)))) {
                     return true;

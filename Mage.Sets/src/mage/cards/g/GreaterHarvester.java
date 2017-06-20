@@ -5,7 +5,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -25,13 +24,15 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author wanderer120
  */
 public class GreaterHarvester extends CardImpl {
 
-    public static final FilterPermanent filter = new FilterPermanent("a permanent");
+    static final FilterPermanent filter = new FilterPermanent("a permanent");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
@@ -82,7 +83,7 @@ class GreaterHarvesterAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return EventType.DAMAGED_PLAYER.equals(event.getType());
+        return EventType.DAMAGED_PLAYER == event.getType();
     }
 
     

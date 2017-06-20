@@ -79,9 +79,9 @@ class PyromancersGauntletReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER);
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGE_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER;
     }
     
     @Override
@@ -89,13 +89,13 @@ class PyromancersGauntletReplacementEffect extends ReplacementEffectImpl {
         MageObject object = game.getObject(event.getSourceId());
         if (object != null && object instanceof Spell) {
             if (((Spell) object).getControllerId().equals(source.getControllerId())
-                    && (object.getCardType().contains(CardType.INSTANT)
-                     || object.getCardType().contains(CardType.SORCERY))){
+                    && (object.isInstant()
+                     || object.isSorcery())){
                 return true;
             }
         }
         Permanent permanent = game.getBattlefield().getPermanent(event.getSourceId());
-        if(permanent != null && permanent.getCardType().contains(CardType.PLANESWALKER)){
+        if(permanent != null && permanent.isPlaneswalker()){
             return true;
         }
         return false;

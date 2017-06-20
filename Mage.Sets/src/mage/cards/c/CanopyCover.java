@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -38,18 +37,15 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -59,7 +55,7 @@ public class CanopyCover extends CardImpl {
     private static final FilterObject filter = new FilterStackObject("spells or abilities your opponents control");
 
     public CanopyCover(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -70,7 +66,7 @@ public class CanopyCover extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't be blocked except by creatures with flying or reach. (!this is a static ability of the enchantment)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OrchardSpiritEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanopyCoverEffect()));
 
         // Enchanted creature can't be the target of spells or abilities your opponents control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedAttachedEffect(filter, Duration.WhileOnBattlefield, AttachmentType.AURA, TargetController.OPPONENT)));
@@ -86,14 +82,14 @@ public class CanopyCover extends CardImpl {
     }
 }
 
-class OrchardSpiritEffect extends RestrictionEffect {
+class CanopyCoverEffect extends RestrictionEffect {
 
-    public OrchardSpiritEffect() {
+    public CanopyCoverEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't be blocked except by creatures with flying or reach";
     }
 
-    public OrchardSpiritEffect(final OrchardSpiritEffect effect) {
+    public CanopyCoverEffect(final CanopyCoverEffect effect) {
         super(effect);
     }
 
@@ -102,7 +98,7 @@ class OrchardSpiritEffect extends RestrictionEffect {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-            if (permanent.getId().equals(equipped.getId())) {
+            if (equipped != null && permanent.getId().equals(equipped.getId())) {
                 return true;
             }
         }
@@ -115,7 +111,7 @@ class OrchardSpiritEffect extends RestrictionEffect {
     }
 
     @Override
-    public OrchardSpiritEffect copy() {
-        return new OrchardSpiritEffect(this);
+    public CanopyCoverEffect copy() {
+        return new CanopyCoverEffect(this);
     }
 }

@@ -35,6 +35,7 @@ import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -46,10 +47,10 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class MerrowHarbinger extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("Merfolk card");
+    static final FilterCard filter = new FilterCard("Merfolk card");
 
     static {
-        filter.add(new SubtypePredicate("Merfolk"));
+        filter.add(new SubtypePredicate(SubType.MERFOLK   ));
     }
 
     public MerrowHarbinger(UUID ownerId, CardSetInfo setInfo) {

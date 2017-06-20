@@ -50,6 +50,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -64,7 +65,7 @@ public class TorrentialGearhulk extends CardImpl {
     }
 
     public TorrentialGearhulk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}{U}");
         this.subtype.add("Construct");
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
@@ -111,7 +112,7 @@ class TorrentialGearhulkEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-            if (card != null) {
+            if (card != null && card.getSpellAbility() != null) {
                 if (controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
                     if (controller.cast(card.getSpellAbility(), game, true)) {
                         ContinuousEffect effect = new TorrentialGearhulkReplacementEffect(card.getId());
@@ -119,6 +120,9 @@ class TorrentialGearhulkEffect extends OneShotEffect {
                         game.addEffect(effect, source);
                     }
                 }
+            } else {
+                Logger.getLogger(TorrentialGearhulkEffect.class).error("Torrential Gearhulk - Instant card without spellAbility : " + card.getName());
+                return false;
             }
             return true;
         }

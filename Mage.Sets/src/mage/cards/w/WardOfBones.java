@@ -116,23 +116,23 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
             if (card == null || opponent == null) {
                 return false;
             }
-            if (card.getCardType().contains(CardType.CREATURE)
+            if (card.isCreature()
                     && game.getBattlefield().countAll(new FilterCreaturePermanent(), opponent.getId(), game) 
                         > game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 return true;
             }
-            if (card.getCardType().contains(CardType.ARTIFACT)
+            if (card.isArtifact()
                     && game.getBattlefield().countAll(new FilterArtifactPermanent(), opponent.getId(), game) 
                         > game.getBattlefield().countAll(new FilterArtifactPermanent(), source.getControllerId(), game)) {
                 return true;
             }
-            if (card.getCardType().contains(CardType.ENCHANTMENT)
+            if (card.isEnchantment()
                     && game.getBattlefield().countAll(new FilterEnchantmentPermanent(), opponent.getId(), game) 
                         > game.getBattlefield().countAll(new FilterEnchantmentPermanent(), source.getControllerId(), game)) {
                 return true;
             }
             final int yourLands = game.getBattlefield().countAll(new FilterLandPermanent(), source.getControllerId(), game);
-            if (card.getCardType().contains(CardType.LAND)
+            if (card.isLand()
                     && game.getBattlefield().countAll(new FilterLandPermanent(), opponent.getId(), game) > yourLands) {
                 return true;
             }

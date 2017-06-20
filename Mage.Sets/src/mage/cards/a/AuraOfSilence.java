@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,15 +37,13 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +95,7 @@ class AuraOfSilenceCostModificationEffect extends CostModificationEffectImpl {
         if (abilityToModify instanceof SpellAbility) {
             if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
                 Card card = game.getCard(abilityToModify.getSourceId());
-                if (card != null && (card.getCardType().contains(CardType.ARTIFACT) || card.getCardType().contains(CardType.ENCHANTMENT))) {
+                if (card != null && (card.isArtifact() || card.isEnchantment())) {
                     return true;
                 }
             }

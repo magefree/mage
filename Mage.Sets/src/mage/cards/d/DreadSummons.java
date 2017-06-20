@@ -27,8 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -41,6 +39,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +94,7 @@ class DreadSummonsEffect extends OneShotEffect {
                     if (player != null) {
                         Set<Card> movedCards = player.moveCardsToGraveyardWithInfo(player.getLibrary().getTopCards(game, numberOfCards), source, game, Zone.LIBRARY);
                         for (Card card : movedCards) {
-                            if (card.getCardType().contains(CardType.CREATURE)) {
+                            if (card.isCreature()) {
                                 numberOfCreatureCards++;
                             }
                         }

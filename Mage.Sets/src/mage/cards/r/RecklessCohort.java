@@ -29,6 +29,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
@@ -36,9 +37,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -53,7 +51,7 @@ public class RecklessCohort extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Ally"));
+        filter.add(new SubtypePredicate(SubType.ALLY));
     }
 
     public RecklessCohort(UUID ownerId, CardSetInfo setInfo) {
@@ -67,7 +65,7 @@ public class RecklessCohort extends CardImpl {
         // Reckless Cohort attacks each combat if able unless you control another Ally.
         Effect effect = new ConditionalRequirementEffect(
                 new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 1));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 1));
         effect.setText("{this} attacks each combat if able unless you control another Ally");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

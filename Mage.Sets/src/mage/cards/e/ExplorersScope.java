@@ -27,23 +27,20 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +98,7 @@ class ExplorersScopeEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             cards.add(card);
             controller.lookAtCards(sourceObject.getIdName(), cards, game);
-            if (card.getCardType().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 String message = "Put " + card.getLogName() + " onto the battlefield tapped?";
                 if (controller.chooseUse(Outcome.PutLandInPlay, message, source, game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);

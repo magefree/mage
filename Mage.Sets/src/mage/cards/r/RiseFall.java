@@ -32,12 +32,13 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -54,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class RiseFall extends SplitCard {
 
     public RiseFall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{B}","{B}{R}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{B}", "{B}{R}", SpellAbilityType.SPLIT);
 
         // Rise
         // Return target creature card from a graveyard and target creature on the battlefield to their owners' hands.
@@ -149,7 +150,7 @@ class FallEffect extends OneShotEffect {
                     }
                     targetPlayer.revealCards(sourceObject.getIdName(), cards, game);
                     for (Card cardToDiscard : cards.getCards(game)) {
-                        if (!cardToDiscard.getCardType().contains(CardType.LAND)) {
+                        if (!cardToDiscard.isLand()) {
                             targetPlayer.discard(cardToDiscard, source, game);
                         }
                     }

@@ -27,11 +27,11 @@
  */
 package mage.cards.f;
 
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,7 +49,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 
 /**
  * @author nantuko
@@ -58,7 +58,7 @@ public class FullMoonsRise extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf creatures");
 
     static {
-        filter.add(new SubtypePredicate("Werewolf"));
+        filter.add(new SubtypePredicate(SubType.WEREWOLF));
     }
 
     public FullMoonsRise(UUID ownerId, CardSetInfo setInfo) {

@@ -61,7 +61,7 @@ public class LatchkeyFaerie extends CardImpl {
 
         // When Latchkey Faerie enters the battlefield, if its prowl cost was paid, draw a card.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, ProwlCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, ProwlCondition.instance,
                 "When {this} enters the battlefield, if its prowl cost was paid, draw a card."));
 
     }

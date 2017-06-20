@@ -27,13 +27,13 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -42,6 +42,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +77,7 @@ class CultOfTheWaxingMoonAbility extends TriggeredAbilityImpl {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Human")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
     }
 
     public CultOfTheWaxingMoonAbility() {

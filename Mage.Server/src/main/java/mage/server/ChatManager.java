@@ -27,6 +27,10 @@
  */
 package mage.server;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.server.exceptions.UserNotFoundException;
@@ -36,27 +40,14 @@ import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ChatManager {
+public enum ChatManager {
 
+    instance;
     private static final Logger logger = Logger.getLogger(ChatManager.class);
     private static final HashMap<String, String> userMessages = new HashMap<>();
-
-    private static final ChatManager INSTANCE = new ChatManager();
-
-    public static ChatManager getInstance() {
-        return INSTANCE;
-    }
-
-    private ChatManager() {
-    }
 
     private final ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<>();
 
@@ -113,24 +104,29 @@ public class ChatManager {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
             if (message.startsWith("\\") || message.startsWith("/")) {
-                User user = UserManager.getInstance().getUserByName(userName);
-                if (user != null) {
-                    if (!performUserCommand(user, message, chatId, false)) {
-                        performUserCommand(user, message, chatId, true);
+                Optional<User> user = UserManager.instance.getUserByName(userName);
+                if (user.isPresent()) {
+                    if (!performUserCommand(user.get(), message, chatId, false)) {
+                        performUserCommand(user.get(), message, chatId, true);
                     }
                     return;
                 }
             }
 
-            if (messageType != MessageType.GAME) {
-                User user = UserManager.getInstance().getUserByName(userName);
-                if (message != null && userName != null && !userName.isEmpty()) {
+            if (messageType != MessageType.GAME && !userName.isEmpty()) {
+                Optional<User> u = UserManager.instance.getUserByName(userName);
+                if (u.isPresent()) {
 
+                    User user = u.get();
                     if (message.equals(userMessages.get(userName))) {
                         // prevent identical messages
                         String informUser = "Your message appears to be identical to your last message";
                         chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
                         return;
+                    }
+
+                    if (message.length() > 500) {
+                        message = message.replaceFirst("^(.{500}).*", "$1 (rest of message truncated)");
                     }
 
                     String messageToCheck = message;
@@ -160,10 +156,8 @@ public class ChatManager {
                     }
 
                     userMessages.put(userName, message);
-                }
 
-                if (messageType == MessageType.TALK) {
-                    if (user != null) {
+                    if (messageType == MessageType.TALK) {
                         if (user.getChatLockedUntil() != null) {
                             if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) > 0) {
                                 chatSessions.get(chatId).broadcastInfoToUser(user, "Your chat is muted until " + SystemUtil.dateFormat.format(user.getChatLockedUntil()));
@@ -172,9 +166,10 @@ public class ChatManager {
                                 user.setChatLockedUntil(null);
                             }
                         }
-                    }
-                }
 
+                    }
+
+                }
             }
             chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
         }
@@ -186,7 +181,13 @@ public class ChatManager {
             + "<br/>\\me - shows the history of the current player"
             + "<br/>\\list or \\l - Show a list of commands"
             + "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name"
-            + "<br/>[Card Name] - Show a highlighted card name";
+            + "<br/>\\card Card Name - Print oracle text for card"
+            + "<br/>[Card Name] - Show a highlighted card name"
+            + "<br/>\\ignore - shows current ignore list on this server."
+            + "<br/>\\ignore [username] - add a username to your ignore list on this server."
+            + "<br/>\\unignore [username] - remove a username from your ignore list on this server.";
+
+    final Pattern getCardTextPattern = Pattern.compile("^.card *(.*)");
 
     private boolean performUserCommand(User user, String message, UUID chatId, boolean doError) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
@@ -198,12 +199,31 @@ public class ChatManager {
         }
 
         if (command.startsWith("H ") || command.startsWith("HISTORY ")) {
-            message += "<br/>" + UserManager.getInstance().getUserHistory(message.substring(command.startsWith("H ") ? 3 : 9));
+            message += "<br/>" + UserManager.instance.getUserHistory(message.substring(command.startsWith("H ") ? 3 : 9));
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
         if (command.equals("ME")) {
-            message += "<br/>" + UserManager.getInstance().getUserHistory(user.getName());
+            message += "<br/>" + UserManager.instance.getUserHistory(user.getName());
+            chatSessions.get(chatId).broadcastInfoToUser(user, message);
+            return true;
+        }
+        if (command.startsWith("CARD ")) {
+            Matcher matchPattern = getCardTextPattern.matcher(message.toLowerCase());
+            if (matchPattern.find()) {
+                String cardName = matchPattern.group(1);
+                CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);
+                if (cardInfo != null) {
+                    cardInfo.getRules();
+                    message = "<font color=orange>" + cardInfo.getName() + "</font>: Cost:" + cardInfo.getManaCosts().toString() + ",  Types:" + cardInfo.getTypes().toString() + ", ";
+                    for (String rule : cardInfo.getRules()) {
+                        message = message + rule;
+                    }
+                } else {
+                    message = "Couldn't find: " + cardName;
+
+                }
+            }
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
@@ -213,9 +233,9 @@ public class ChatManager {
             if (first > 1) {
                 String userToName = rest.substring(0, first);
                 rest = rest.substring(first + 1).trim();
-                User userTo = UserManager.getInstance().getUserByName(userToName);
-                if (userTo != null) {
-                    if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest)) {
+                Optional<User> userTo = UserManager.instance.getUserByName(userToName);
+                if (userTo.isPresent()) {
+                    if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo.get(), rest)) {
                         message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
                         chatSessions.get(chatId).broadcastInfoToUser(user, message);
                     }
@@ -244,7 +264,7 @@ public class ChatManager {
      * @param color
      */
     public void broadcast(UUID userId, String message, MessageColor color) throws UserNotFoundException {
-        UserManager.getInstance().getUser(userId).ifPresent(user-> {
+        UserManager.instance.getUser(userId).ifPresent(user -> {
             chatSessions.values()
                     .stream()
                     .filter(chat -> chat.hasUser(userId))
@@ -254,11 +274,11 @@ public class ChatManager {
     }
 
     public void sendReconnectMessage(UUID userId) {
-        UserManager.getInstance().getUser(userId).ifPresent(user ->
-                chatSessions.values()
-                        .stream()
-                        .filter(chat -> chat.hasUser(userId))
-                        .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS, null)));
+        UserManager.instance.getUser(userId).ifPresent(user
+                -> chatSessions.values()
+                .stream()
+                .filter(chat -> chat.hasUser(userId))
+                .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS, null)));
 
     }
 
@@ -274,6 +294,4 @@ public class ChatManager {
         return new ArrayList<>(chatSessions.values());
     }
 
-
 }
-

@@ -28,7 +28,6 @@
 
 package mage.abilities.mana;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
@@ -37,13 +36,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
  */
 public class ActivateOncePerTurnManaAbility extends ActivatedManaAbilityImpl {
 
-    class ActivationInfo {
+    static class ActivationInfo {
         
         public int turnNum;
         public int activationCounter;

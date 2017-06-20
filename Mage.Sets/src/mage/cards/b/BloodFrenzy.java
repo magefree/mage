@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -35,15 +34,12 @@ import mage.abilities.effects.common.DestroyTargetAtBeginningOfNextEndStepEffect
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetAttackingOrBlockingCreature;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,17 +89,17 @@ class BloodFrenzyCastRestriction extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.CAST_SPELL);
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if(event.getSourceId().equals(source.getSourceId())) {
-            if(game.getPhase().getType().equals(TurnPhase.COMBAT)
+            if(game.getPhase().getType() == TurnPhase.COMBAT
                 // There cannot be a legal target before declare attackers,
                 // so in practice it is limited to these two steps.
-                && (game.getStep().getType().equals(PhaseStep.DECLARE_ATTACKERS)
-                || game.getStep().getType().equals(PhaseStep.DECLARE_BLOCKERS))) {
+                && (game.getStep().getType() == PhaseStep.DECLARE_ATTACKERS
+                || game.getStep().getType() == PhaseStep.DECLARE_BLOCKERS)) {
                 return false;
             }
             return true;

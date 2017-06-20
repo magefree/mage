@@ -40,6 +40,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +57,7 @@ public class SiegeGangCommander extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public SiegeGangCommander(UUID ownerId, CardSetInfo setInfo) {

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,12 +38,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +56,7 @@ public class AshlingThePilgrim extends CardImpl {
 
     public AshlingThePilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
 
@@ -79,7 +81,7 @@ public class AshlingThePilgrim extends CardImpl {
 
 class AshlingThePilgrimEffect extends OneShotEffect {
 
-    class ActivationInfo {
+    static class ActivationInfo {
         public int zoneChangeCounter;
         public int turn;
         public int activations;

@@ -28,10 +28,10 @@
 
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -40,10 +40,10 @@ import mage.cards.CardGraphicInfo;
 
 public class KhansOfTarkir extends ExpansionSet {
 
-    private static final KhansOfTarkir fINSTANCE = new KhansOfTarkir();
+    private static final KhansOfTarkir instance = new KhansOfTarkir();
 
     public static KhansOfTarkir getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private KhansOfTarkir() {

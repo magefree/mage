@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,6 +43,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -97,8 +98,8 @@ class GoldnightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.DAMAGE_CREATURE) ||
-                event.getType().equals(EventType.DAMAGE_PLAYER);
+        return event.getType() == EventType.DAMAGE_CREATURE ||
+                event.getType() == EventType.DAMAGE_PLAYER;
     }
 
 

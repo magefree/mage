@@ -36,6 +36,7 @@ import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,7 +55,7 @@ public class HorrorOfHorrors extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("black creature");
 
     static {
-        filter1.add(new SubtypePredicate("Swamp"));
+        filter1.add(new SubtypePredicate(SubType.SWAMP));
         filter2.add(new ColorPredicate(ObjectColor.BLACK));
     }
 

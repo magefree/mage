@@ -37,7 +37,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.MageObject;
-import mage.cards.Card;
 import mage.constants.Zone;
 import mage.designations.Designation;
 import mage.game.Game;
@@ -95,7 +94,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
             if (event == null || !game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
                 if (object != null) {
                     boolean controllerSet = false;
-                    if (!ability.getZone().equals(Zone.COMMAND) && event != null
+                    if (ability.getZone() != Zone.COMMAND && event != null
                             && event.getTargetId() != null // && event.getTargetId().equals(ability.getSourceId())
                             && ability.isLeavesTheBattlefieldTrigger()
                             //                            && ((event.getType().equals(EventType.ZONE_CHANGE)
@@ -119,8 +118,6 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                         } else if (object instanceof Spell) {
                             // needed so that cast triggered abilities have to correct controller (e.g. Ulamog, the Infinite Gyre).
                             ability.setControllerId(((Spell) object).getControllerId());
-                        } else if (object instanceof Card) {
-                            ability.setControllerId(((Card) object).getOwnerId());
                         }
                     }
                 }

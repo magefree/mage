@@ -47,7 +47,7 @@ public class ShatteringSpree extends CardImpl {
         // Replicate {R}
         this.addAbility(new ReplicateAbility(this, "{R}"));
         // Destroy target artifact.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(false));
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 

@@ -38,6 +38,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterBySubtypeCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -60,7 +61,7 @@ public class ImperialHellkite extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{6}{R}{R}")));
         
         // When Imperial Hellkite is turned face up, you may search your library for a Dragon card, reveal it, and put it into your hand. If you do, shuffle your library.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterBySubtypeCard("Dragon")), true, true);
+        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterBySubtypeCard(SubType.DRAGON)), true, true);
         effect.setText("you may search your library for a Dragon card, reveal it, and put it into your hand. If you do, shuffle your library");
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(effect));
     }

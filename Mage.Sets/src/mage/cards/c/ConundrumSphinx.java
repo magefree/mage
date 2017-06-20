@@ -28,25 +28,22 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -92,7 +89,7 @@ class ConundrumSphinxEffect extends OneShotEffect {
         Choice cardChoice = new ChoiceImpl();
         cardChoice.setChoices(CardRepository.instance.getNames());
         for (Player player: game.getPlayers().values()) {
-            if(player.getLibrary().size() > 0){
+            if(player.getLibrary().hasCards()){
                 cardChoice.clearChoice();
                 while (!player.choose(Outcome.DrawCard, cardChoice, game)  && player.canRespond()) {
                     if (!player.canRespond()) {

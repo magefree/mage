@@ -27,8 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -41,15 +39,15 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +57,7 @@ public class TheGitrogMonster extends CardImpl {
 
     public TheGitrogMonster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Frog");
         this.subtype.add("Horror");
         this.power = new MageInt(6);
@@ -110,11 +108,11 @@ class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
             for (Card card : zEvent.getCards()) {
                 if (card != null) {                    
                     UUID cardOwnerId = card.getOwnerId();
-                    List<CardType> cardType = card.getCardType();
+                    Set<CardType> cardType = card.getCardType();
                     if (cardOwnerId != null
                             && card.getOwnerId().equals(getControllerId())
                             && cardType != null
-                            && cardType.contains(CardType.LAND)) {
+                            && card.isLand()) {
                         return true;
                     }
                 }

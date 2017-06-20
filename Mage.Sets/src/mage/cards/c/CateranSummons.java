@@ -28,15 +28,17 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +49,7 @@ public class CateranSummons extends CardImpl {
     private static final FilterCard filter = new FilterCreatureCard("Mercenary card");
 
     static {
-        filter.add(new SubtypePredicate("Mercenary"));
+        filter.add(new SubtypePredicate(SubType.MERCENARY));
     }
 
     public CateranSummons(UUID ownerId, CardSetInfo setInfo) {

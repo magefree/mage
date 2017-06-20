@@ -28,6 +28,7 @@
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
+import mage.constants.SuperType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
@@ -37,15 +38,15 @@ import mage.game.Game;
  */
 public class SupertypePredicate implements Predicate<MageObject> {
 
-    private final String supertype;
+    private final SuperType supertype;
 
-    public SupertypePredicate(String supertype) {
+    public SupertypePredicate(SuperType supertype) {
         this.supertype = supertype;
     }
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        return input.getSupertype().contains(supertype);
+        return input.getSuperType().contains(supertype);
     }
 
     @Override

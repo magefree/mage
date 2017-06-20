@@ -30,25 +30,17 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGraveyardEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -57,14 +49,14 @@ import mage.util.CardUtil;
 public class BedlamReveler extends CardImpl {
 
     public BedlamReveler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
         this.subtype.add("Devil");
         this.subtype.add("Horror");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         // Bedlam Reveler costs {1} less to cast for each instant or sorcery card in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new BedlamRevelerCostReductionEffect());
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(new FilterInstantOrSorceryCard()));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
@@ -86,41 +78,5 @@ public class BedlamReveler extends CardImpl {
     @Override
     public BedlamReveler copy() {
         return new BedlamReveler(this);
-    }
-}
-
-class BedlamRevelerCostReductionEffect extends CostModificationEffectImpl {
-
-    BedlamRevelerCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {1} less to cast for each instant or sorcery card in your graveyard";
-    }
-
-    BedlamRevelerCostReductionEffect(BedlamRevelerCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int reductionAmount = player.getGraveyard().count(new FilterInstantOrSorceryCard(), game);
-            CardUtil.reduceCost(abilityToModify, reductionAmount);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
-            return game.getCard(abilityToModify.getSourceId()) != null;
-        }
-        return false;
-    }
-
-    @Override
-    public BedlamRevelerCostReductionEffect copy() {
-        return new BedlamRevelerCostReductionEffect(this);
     }
 }

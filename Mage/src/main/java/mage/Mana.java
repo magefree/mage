@@ -846,19 +846,19 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * in {@link ColoredManaSymbol}.
      */
     public int getColor(final ColoredManaSymbol color) {
-        if (color.equals(ColoredManaSymbol.G)) {
+        if (color == ColoredManaSymbol.G) {
             return green;
         }
-        if (color.equals(ColoredManaSymbol.R)) {
+        if (color == ColoredManaSymbol.R) {
             return red;
         }
-        if (color.equals(ColoredManaSymbol.B)) {
+        if (color == ColoredManaSymbol.B) {
             return black;
         }
-        if (color.equals(ColoredManaSymbol.U)) {
+        if (color == ColoredManaSymbol.U) {
             return blue;
         }
-        if (color.equals(ColoredManaSymbol.W)) {
+        if (color == ColoredManaSymbol.W) {
             return white;
         }
         return 0;

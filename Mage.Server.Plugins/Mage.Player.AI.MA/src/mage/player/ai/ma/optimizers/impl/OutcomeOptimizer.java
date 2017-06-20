@@ -23,7 +23,7 @@ public class OutcomeOptimizer extends BaseTreeOptimizer {
     public void filter(Game game, List<Ability> actions) {
         for (Ability ability : actions) {
             for (Effect effect: ability.getEffects()) {
-                if (effect.getOutcome().equals(Outcome.AIDontUseIt)) {
+                if (effect.getOutcome() == Outcome.AIDontUseIt) {
                     removeAbility(ability);
                     break;
                 }

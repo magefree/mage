@@ -35,7 +35,8 @@ import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.constants.SuperType;
+import mage.game.permanent.token.CatWarriorToken;
 
 /**
  *
@@ -44,8 +45,8 @@ import mage.game.permanent.token.Token;
 public class JeditOjanenOfEfrava extends CardImpl {
 
     public JeditOjanenOfEfrava(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
         this.power = new MageInt(5);
@@ -53,7 +54,7 @@ public class JeditOjanenOfEfrava extends CardImpl {
 
         // Forestwalk
         this.addAbility(new ForestwalkAbility());
-        
+
         // Whenever Jedit Ojanen of Efrava attacks or blocks, create a 2/2 green Cat Warrior creature token with forestwalk.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateTokenEffect(new CatWarriorToken()), false));
     }
@@ -65,20 +66,5 @@ public class JeditOjanenOfEfrava extends CardImpl {
     @Override
     public JeditOjanenOfEfrava copy() {
         return new JeditOjanenOfEfrava(this);
-    }
-}
-
-class CatWarriorToken extends Token {
-
-    CatWarriorToken() {
-        super("Cat Warrior", "2/2 green Cat Warrior creature token with forestwalk");
-        this.setOriginalExpansionSetCode("PLC");
-        this.getPower().modifyBaseValue(2);
-        this.getToughness().modifyBaseValue(2);
-        this.color.setGreen(true);
-        this.getSubtype(null).add("Cat");
-        this.getSubtype(null).add("Warrior");
-        this.getCardType().add(CardType.CREATURE);
-        this.addAbility(new ForestwalkAbility());
     }
 }

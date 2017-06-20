@@ -35,11 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
@@ -59,8 +55,8 @@ public class SigardasAid extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("Aura and Equipment spells");
 
     static {
-        filter.add(new SubtypePredicate("Equipment"));
-        filterCard.add(Predicates.or(new SubtypePredicate("Aura"), new SubtypePredicate("Equipment")));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filterCard.add(Predicates.or(new SubtypePredicate(SubType.AURA), new SubtypePredicate(SubType.EQUIPMENT)));
     }
 
     public SigardasAid(UUID ownerId, CardSetInfo setInfo) {

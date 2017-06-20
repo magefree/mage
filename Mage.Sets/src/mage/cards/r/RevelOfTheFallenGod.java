@@ -28,14 +28,11 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RevelOfTheFallenGodSatyrToken;
 
 /**
  *
@@ -44,8 +41,7 @@ import mage.game.permanent.token.Token;
 public class RevelOfTheFallenGod extends CardImpl {
 
     public RevelOfTheFallenGod(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{G}{G}");
 
         // Create four 2/2 red and green Satyr creature tokens with haste.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RevelOfTheFallenGodSatyrToken(), 4));
@@ -59,20 +55,5 @@ public class RevelOfTheFallenGod extends CardImpl {
     @Override
     public RevelOfTheFallenGod copy() {
         return new RevelOfTheFallenGod(this);
-    }
-}
-
-class RevelOfTheFallenGodSatyrToken extends Token {
-
-    public RevelOfTheFallenGodSatyrToken() {
-        super("Satyr", "2/2 red and green Satyr creature tokens with haste");
-        this.setOriginalExpansionSetCode("THS");
-        cardType.add(CardType.CREATURE);
-        color.setColor(ObjectColor.RED);
-        color.setColor(ObjectColor.GREEN);
-        subtype.add("Satyr");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(HasteAbility.getInstance());
     }
 }

@@ -27,21 +27,21 @@
  */
 package mage.cards.r;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.SourceIsSpellCondition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.Card;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  *
@@ -50,10 +50,10 @@ import java.util.UUID;
 public class RooftopStorm extends CardImpl {
 
     public RooftopStorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");
 
         // You may pay {0} rather than pay the mana cost for Zombie creature spells you cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RooftopStormCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RooftopStormRuleEffect()));
 
     }
 
@@ -67,51 +67,49 @@ public class RooftopStorm extends CardImpl {
     }
 }
 
+class RooftopStormRuleEffect extends ContinuousEffectImpl {
 
-//TODO : change to alternativCost
-class RooftopStormCostReductionEffect extends CostModificationEffectImpl {
+    private static final FilterCard filter = new FilterCard("Zombie creature spells");
 
-    private static final String effectText = "You may pay {0} rather than pay the mana cost for Zombie creature spells you cast";
-
-    RooftopStormCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = effectText;
+    static {
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    RooftopStormCostReductionEffect(RooftopStormCostReductionEffect effect) {
+    static AlternativeCostSourceAbility alternativeCastingCostAbility
+            = new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SourceIsSpellCondition.instance, null, filter, true);
+
+    public RooftopStormRuleEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "You may pay {0} rather than pay the mana cost for Zombie creature spells you cast";
+    }
+
+    public RooftopStormRuleEffect(final RooftopStormRuleEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, 2);
-        return true;
+    public RooftopStormRuleEffect copy() {
+        return new RooftopStormRuleEffect(this);
     }
 
     @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
-            Ability spell = abilityToModify;
-            if (spell.getControllerId().equals(source.getControllerId())) {
-                Card sourceCard = game.getCard(spell.getSourceId());
-                if (sourceCard != null && sourceCard.hasSubtype("Zombie", game)) {
-                    Player player = game.getPlayer(spell.getControllerId());
-                    if (player != null && 
-                            (CardUtil.isCheckPlayableMode(spell) || player.chooseUse(Outcome.Benefit, "Pay {0} rather than pay the mana cost for Zombie creature", source, game))) {
-                        spell.getManaCostsToPay().clear();
-                        spell.getManaCostsToPay().addAll(new ManaCostsImpl<>("{0}"));
-                        return true;
-                    }
-                }
-            }
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+            return true;
         }
         return false;
     }
 
     @Override
-    public RooftopStormCostReductionEffect copy() {
-        return new RooftopStormCostReductionEffect(this);
+    public boolean apply(Game game, Ability source) {
+        return false;
     }
 
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
+    }
 }

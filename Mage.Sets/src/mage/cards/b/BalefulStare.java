@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -37,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -44,6 +44,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -76,7 +78,7 @@ class BalefulStareEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("Mountain or red card");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Mountain"),
+        filter.add(Predicates.or(new SubtypePredicate(SubType.MOUNTAIN),
             new ColorPredicate(ObjectColor.RED)));
     }
 

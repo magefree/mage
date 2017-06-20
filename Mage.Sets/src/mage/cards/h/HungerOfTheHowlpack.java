@@ -53,7 +53,7 @@ public class HungerOfTheHowlpack extends CardImpl {
                 new ConditionalOneShotEffect(
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)),
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                        MorbidCondition.getInstance(),
+                        MorbidCondition.instance,
                         "Put a +1/+1 counter on target creature. Morbid - Put three +1/+1 counters on that creature instead if a creature died this turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

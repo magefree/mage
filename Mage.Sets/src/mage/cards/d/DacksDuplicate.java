@@ -30,6 +30,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
@@ -50,7 +51,7 @@ import mage.util.functions.ApplyToPermanent;
 public class DacksDuplicate extends CardImpl {
 
     public DacksDuplicate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);
@@ -75,7 +76,7 @@ public class DacksDuplicate extends CardImpl {
 class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         /**
          * 29/05/2014	The ability of Dack’s Duplicate doesn’t target the
          * creature.
@@ -86,7 +87,7 @@ class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         mageObject.getAbilities().add(new DethroneAbility());
         mageObject.getAbilities().add(HasteAbility.getInstance());
         return true;

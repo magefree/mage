@@ -90,7 +90,7 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
         if (card != null) {
-            LastSpellCastWatcher watcher = (LastSpellCastWatcher) game.getState().getWatchers().get(LastSpellCastWatcher.class.getName());
+            LastSpellCastWatcher watcher = (LastSpellCastWatcher) game.getState().getWatchers().get(LastSpellCastWatcher.class.getSimpleName());
             if (watcher != null 
                     && watcher.lastSpellCast != null) {
                 return card.getColor(game).contains(watcher.lastSpellCast.getColor(game));
@@ -115,7 +115,7 @@ class LastSpellCastWatcher extends Watcher {
     Spell lastSpellCast = null;
 
     public LastSpellCastWatcher() {
-        super(LastSpellCastWatcher.class.getName(), WatcherScope.GAME);
+        super(LastSpellCastWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public LastSpellCastWatcher(final LastSpellCastWatcher watcher) {
@@ -130,7 +130,7 @@ class LastSpellCastWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (EventType.SPELL_CAST.equals(event.getType())) {
+        if (event.getType() == EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell == null) {
                 MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.STACK);

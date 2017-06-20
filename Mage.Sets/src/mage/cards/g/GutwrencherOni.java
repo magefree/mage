@@ -27,10 +27,8 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -38,10 +36,14 @@ import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +54,7 @@ public class GutwrencherOni extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("Ogre");
 
     static {
-        filter.add(new SubtypePredicate("Ogre"));
+        filter.add(new SubtypePredicate(SubType.OGRE));
     }
 
     public GutwrencherOni(UUID ownerId, CardSetInfo setInfo) {
@@ -69,7 +71,7 @@ public class GutwrencherOni extends CardImpl {
         // At the beginning of your upkeep, discard a card if you don't control an Ogre.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
                 new DiscardControllerEffect(1),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 0),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0),
                 "discard a card if you don't control an Ogre"), TargetController.YOU, false));
 
     }

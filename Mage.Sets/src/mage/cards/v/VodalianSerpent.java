@@ -38,6 +38,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
@@ -58,10 +59,10 @@ public class VodalianSerpent extends CardImpl {
         // Kicker {2}
         this.addAbility(new KickerAbility("{2}"));
         // Vodalian Serpent can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island", "an Island"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
         // If Vodalian Serpent was kicked, it enters the battlefield with four +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)),
-            KickedCondition.getInstance(), "If {this} was kicked, it enters the battlefield with four +1/+1 counters on it.", ""));
+            KickedCondition.instance, "If {this} was kicked, it enters the battlefield with four +1/+1 counters on it.", ""));
     }
 
     public VodalianSerpent(final VodalianSerpent card) {

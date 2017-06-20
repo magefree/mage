@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -45,6 +45,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +95,7 @@ class AcademyResearchersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterCard filterCardInHand = new FilterCard();
-        filterCardInHand.add(new SubtypePredicate("Aura"));
+        filterCardInHand.add(new SubtypePredicate(SubType.AURA));
         Player controller = game.getPlayer(source.getControllerId());
         Permanent academyResearchers = game.getPermanent(source.getSourceId());
         if (controller != null && academyResearchers != null) {

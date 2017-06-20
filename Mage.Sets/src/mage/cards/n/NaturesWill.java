@@ -27,10 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -46,6 +42,11 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -74,7 +75,7 @@ public class NaturesWill extends CardImpl {
 class NaturesWillTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean madeDamge = false;
-    private Set<UUID> damagedPlayers = new HashSet<UUID>();
+    private Set<UUID> damagedPlayers = new HashSet<>();
 
     public NaturesWillTriggeredAbility() {
         super(Zone.BATTLEFIELD, new NaturesWillEffect(), false);
@@ -83,7 +84,7 @@ class NaturesWillTriggeredAbility extends TriggeredAbilityImpl {
     public NaturesWillTriggeredAbility(final NaturesWillTriggeredAbility ability) {
         super(ability);
         this.madeDamge = ability.madeDamge;
-        this.damagedPlayers = new HashSet<UUID>();
+        this.damagedPlayers = new HashSet<>();
         this.damagedPlayers.addAll(ability.damagedPlayers);
     }
 
@@ -107,9 +108,9 @@ class NaturesWillTriggeredAbility extends TriggeredAbilityImpl {
                 damagedPlayers.add(event.getPlayerId());
             }
         }
-        if (event.getType().equals(EventType.COMBAT_DAMAGE_STEP_POST)) {
+        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_POST) {
             if (madeDamge) {
-                Set<UUID> damagedPlayersCopy = new HashSet<UUID>();
+                Set<UUID> damagedPlayersCopy = new HashSet<>();
                 damagedPlayersCopy.addAll(damagedPlayers);
                 for(Effect effect: this.getEffects()) {
                     effect.setValue("damagedPlayers", damagedPlayersCopy);

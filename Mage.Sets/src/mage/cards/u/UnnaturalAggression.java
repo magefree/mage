@@ -29,27 +29,19 @@ package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -64,7 +56,7 @@ public class UnnaturalAggression extends CardImpl {
     }
 
     public UnnaturalAggression(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Devoid
         Ability ability = new DevoidAbility(this.color);
@@ -75,7 +67,10 @@ public class UnnaturalAggression extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         // If the creature an opponent controls would die this turn, exile it instead.
-        this.getSpellAbility().addEffect(new DealtDamageToOpponentsCreatureDiesEffect(Duration.EndOfTurn));
+        Effect effect = new ExileTargetIfDiesEffect();
+        effect.setText("If the creature an opponent controls would die this turn, exile it instead");
+        effect.setTargetPointer(new SecondTargetPointer());
+        this.getSpellAbility().addEffect(effect);
     }
 
     public UnnaturalAggression(final UnnaturalAggression card) {
@@ -86,59 +81,4 @@ public class UnnaturalAggression extends CardImpl {
     public UnnaturalAggression copy() {
         return new UnnaturalAggression(this);
     }
-}
-
-class DealtDamageToOpponentsCreatureDiesEffect extends ReplacementEffectImpl {
-
-    public DealtDamageToOpponentsCreatureDiesEffect(Duration duration) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        staticText = "If the creature an opponent controls would die this turn, exile it instead";
-    }
-
-    public DealtDamageToOpponentsCreatureDiesEffect(final DealtDamageToOpponentsCreatureDiesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DealtDamageToOpponentsCreatureDiesEffect copy() {
-        return new DealtDamageToOpponentsCreatureDiesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        Permanent opponentCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (opponentCreature != null) {
-            this.setTargetPointer(new FixedTarget(opponentCreature, game));
-        } else {
-            discard();
-        }
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && permanent != null) {
-            return controller.moveCards(permanent, Zone.EXILED, source, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zce = (ZoneChangeEvent) event;
-        return zce.isDiesEvent() && zce.getTargetId().equals(getTargetPointer().getFirst(game, source));
-    }
-
 }

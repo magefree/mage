@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -47,10 +44,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,6 +55,10 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.UUID;
+
 /**
  *
  * @author emerald000
@@ -70,13 +68,13 @@ public class ChainerDementiaMaster extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Nightmare creatures");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Nightmares");
     static {
-        filterCreature.add(new SubtypePredicate("Nightmare"));
-        filterPermanent.add(new SubtypePredicate("Nightmare"));
+        filterCreature.add(new SubtypePredicate(SubType.NIGHTMARE));
+        filterPermanent.add(new SubtypePredicate(SubType.NIGHTMARE));
     }
 
     public ChainerDementiaMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Minion");
         this.power = new MageInt(3);
@@ -132,7 +130,7 @@ class ChainerDementiaMasterEffect extends OneShotEffect {
                 ContinuousEffectImpl effect = new BecomesColorTargetEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield);
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
-                effect = new BecomesCreatureTypeTargetEffect(Duration.WhileOnBattlefield, new ArrayList<>(Arrays.asList("Nightmare")), false);
+                effect = new BecomesCreatureTypeTargetEffect(Duration.WhileOnBattlefield, new ArrayList<>(Collections.singletonList("Nightmare")), false);
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
             }

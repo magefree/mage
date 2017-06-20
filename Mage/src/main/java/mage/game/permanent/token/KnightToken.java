@@ -16,7 +16,7 @@ public class KnightToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ORI", "RTR", "C15"));
+        tokenImageSets.addAll(Arrays.asList("ORI", "RTR", "C15", "CMA"));
     }
 
     public KnightToken() {

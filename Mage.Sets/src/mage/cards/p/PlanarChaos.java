@@ -28,6 +28,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
@@ -38,9 +39,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -50,11 +53,11 @@ import mage.players.Player;
 public class PlanarChaos extends CardImpl {
 
     public PlanarChaos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // At the beginning of your upkeep, flip a coin. If you lose the flip, sacrifice Planar Chaos.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PlanarChaosUpkeepEffect(), TargetController.YOU, false));
-        
+
         // Whenever a player casts a spell, that player flips a coin. If he or she loses the flip, counter that spell.
         this.addAbility(new SpellCastAllTriggeredAbility(new PlanarChaosCastAllEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
     }
@@ -119,12 +122,20 @@ class PlanarChaosCastAllEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (!controller.flipCoin(game)) {
-                game.informPlayers("Planar Chaos: Spell countered");
-                return game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+        if (spell == null) {
+            spell = (Spell) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK);
+        }
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && spell != null) {
+            Player caster = game.getPlayer(spell.getControllerId());
+            if (caster != null) {
+                if (!caster.flipCoin(game)) {
+                    game.informPlayers(sourceObject.getLogName() + ": " + spell.getLogName() + " countered");
+                    game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
+                }
             }
+            return true;
         }
         return false;
     }

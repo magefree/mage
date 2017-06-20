@@ -40,13 +40,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RhysTheRedeemedToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -57,8 +58,8 @@ import mage.target.targetpointer.FixedTarget;
 public class RhysTheRedeemed extends CardImpl {
 
     public RhysTheRedeemed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G/W}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 
@@ -124,19 +125,5 @@ class RhysTheRedeemedEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class RhysTheRedeemedToken extends Token {
-
-    public RhysTheRedeemedToken() {
-        super("Elf Warrior", "1/1 green and white Elf Warrior creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        color.setWhite(true);
-        subtype.add("Elf");
-        subtype.add("Warrior");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

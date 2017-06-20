@@ -28,14 +28,16 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -52,7 +54,7 @@ public class SarkhansRage extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageControllerEffect(2),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent("Dragon","you control no Dragons"), CountType.EQUAL_TO, 0)
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(SubType.DRAGON,"you control no Dragons"), ComparisonType.EQUAL_TO, 0)
         ));
 
     }

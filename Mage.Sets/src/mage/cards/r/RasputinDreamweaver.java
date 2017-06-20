@@ -27,9 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -45,11 +42,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -59,8 +52,11 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public class RasputinDreamweaver extends CardImpl {
@@ -68,7 +64,7 @@ public class RasputinDreamweaver extends CardImpl {
     public RasputinDreamweaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{U}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(4);
@@ -86,9 +82,9 @@ public class RasputinDreamweaver extends CardImpl {
         // At the beginning of your upkeep, if Rasputin started the turn untapped, put a dream counter on it.
         this.addAbility(
                 new ConditionalTriggeredAbility(
-                    new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance()), TargetController.YOU, false),
-                    new RasputinDreamweaverStartedUntappedCondition(),
-                    "At the beginning of your upkeep, if {this} started the turn untapped, put a dream counter on it."),
+                        new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance()), TargetController.YOU, false),
+                        RasputinDreamweaverStartedUntappedCondition.instance,
+                        "At the beginning of your upkeep, if {this} started the turn untapped, put a dream counter on it."),
                 new RasputinDreamweaverStartedUntappedWatcher());
 
         // Rasputin can't have more than seven dream counters on it.
@@ -105,17 +101,13 @@ public class RasputinDreamweaver extends CardImpl {
     }
 }
 
-class RasputinDreamweaverStartedUntappedCondition implements Condition {
+enum RasputinDreamweaverStartedUntappedCondition implements Condition {
 
-    private static final RasputinDreamweaverStartedUntappedCondition fInstance = new RasputinDreamweaverStartedUntappedCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        RasputinDreamweaverStartedUntappedWatcher watcher = (RasputinDreamweaverStartedUntappedWatcher) game.getState().getWatchers().get(RasputinDreamweaverStartedUntappedWatcher.class.getName());
+        RasputinDreamweaverStartedUntappedWatcher watcher = (RasputinDreamweaverStartedUntappedWatcher) game.getState().getWatchers().get(RasputinDreamweaverStartedUntappedWatcher.class.getSimpleName());
         if (watcher != null) {
             return watcher.startedUntapped(source.getSourceId());
         }
@@ -131,6 +123,7 @@ class RasputinDreamweaverStartedUntappedCondition implements Condition {
 class RasputinDreamweaverStartedUntappedWatcher extends Watcher {
 
     private static final FilterPermanent filter = new FilterPermanent("Untapped permanents");
+
     static {
         filter.add(Predicates.not(new TappedPredicate()));
     }
@@ -138,7 +131,7 @@ class RasputinDreamweaverStartedUntappedWatcher extends Watcher {
     private final Set<UUID> startedUntapped = new HashSet<>(0);
 
     RasputinDreamweaverStartedUntappedWatcher() {
-        super(RasputinDreamweaverStartedUntappedWatcher.class.getName(), WatcherScope.GAME);
+        super(RasputinDreamweaverStartedUntappedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     RasputinDreamweaverStartedUntappedWatcher(final RasputinDreamweaverStartedUntappedWatcher watcher) {

@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -40,12 +39,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +60,7 @@ public class GoblinSoothsayer extends CardImpl {
     
     static    {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter2.add(new SubtypePredicate("Goblin"));
+        filter2.add(new SubtypePredicate(SubType.GOBLIN));
     }
     
     public GoblinSoothsayer(UUID ownerId, CardSetInfo setInfo) {

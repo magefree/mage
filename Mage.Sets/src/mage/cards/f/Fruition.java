@@ -27,14 +27,16 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +47,7 @@ public class Fruition extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("for each Forest on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public Fruition(UUID ownerId, CardSetInfo setInfo) {

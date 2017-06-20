@@ -55,13 +55,13 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  */
 public class LuminarchAscension extends CardImpl {
 
-    private String rule = "At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension. (Damage causes loss of life.)";
+    private String rule = "At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on {this}. (Damage causes loss of life.)";
 
     public LuminarchAscension(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension.
-        this.addAbility(new ConditionalTriggeredAbility(new LuminarchAscensionTriggeredAbility(), YouLostNoLifeThisTurnCondition.getInstance(), rule));
+        this.addAbility(new ConditionalTriggeredAbility(new LuminarchAscensionTriggeredAbility(), YouLostNoLifeThisTurnCondition.instance, rule));
 
         // {1}{W}: Create a 4/4 white Angel creature token with flying. Activate this ability only if Luminarch Ascension has four or more quest counters on it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), new ManaCostsImpl("{1}{W}"));
@@ -139,17 +139,13 @@ class SourceHasCountersCost extends CostImpl {
     }
 }
 
-class YouLostNoLifeThisTurnCondition implements Condition {
+enum YouLostNoLifeThisTurnCondition implements Condition {
 
-    private static final YouLostNoLifeThisTurnCondition fInstance = new YouLostNoLifeThisTurnCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (watcher != null) {
             return (watcher.getLiveLost(source.getControllerId()) == 0);
         }

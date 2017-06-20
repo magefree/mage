@@ -27,17 +27,19 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,9 +53,9 @@ public class ConsumingBonfire extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(Predicates.not(new SubtypePredicate("Elemental")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.ELEMENTAL)));
         filter2.add(new CardTypePredicate(CardType.CREATURE));
-        filter2.add(new SubtypePredicate("Treefolk"));              
+        filter2.add(new SubtypePredicate(SubType.TREEFOLK));
     }
 
     public ConsumingBonfire(UUID ownerId, CardSetInfo setInfo) {

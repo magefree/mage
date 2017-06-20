@@ -27,23 +27,19 @@
  */
 package mage.cards.u;
 
-import java.util.Set;
 import java.util.UUID;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.watchers.common.CardsPutIntoGraveyardWatcher;
+import mage.watchers.common.CreaturesDiedWatcher;
 
 /**
  *
@@ -52,10 +48,10 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 public class UrborgJustice extends CardImpl {
 
     public UrborgJustice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");
 
         // Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn.
-        this.getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());
+        this.getSpellAbility().addWatcher(new CreaturesDiedWatcher());
         SacrificeEffect sacrificeEffect = new SacrificeEffect(new FilterCreaturePermanent(), new UrborgJusticeDynamicValue(), "");
         sacrificeEffect.setText("Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn");
 
@@ -92,21 +88,10 @@ class UrborgJusticeDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
-
-        int count = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null && watcher != null) {
-            Set<MageObjectReference> cardsInGraveyard = watcher.getCardsPutToGraveyardFromBattlefield();
-            for (MageObjectReference mor : cardsInGraveyard) {
-                if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
-                    Card card = game.getCard(mor.getSourceId());
-                    if (card != null && card.getOwnerId().equals(sourceAbility.getControllerId()) && card.getCardType().contains(CardType.CREATURE)) {
-                        count++;
-                    }
-                }
-            }
+        CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get(CreaturesDiedWatcher.class.getSimpleName());
+        if (watcher != null) {
+            return watcher.getAmountOfCreaturesDiedThisTurnByOwner(sourceAbility.getControllerId());
         }
-        return count;
+        return 0;
     }
 }

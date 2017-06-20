@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -36,6 +35,7 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -47,6 +47,8 @@ import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -55,7 +57,7 @@ public class Mirari extends CardImpl {
 
     public Mirari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // Whenever you cast an instant or sorcery spell, you may pay {3}. If you do, copy that spell. You may choose new targets for the copy.
         this.addAbility(new MirariTriggeredAbility());
@@ -118,7 +120,7 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
     private boolean isControlledInstantOrSorcery(Spell spell) {
         return spell != null
                 && (spell.getControllerId().equals(this.getControllerId()))
-                && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
+                && (spell.isInstant() || spell.isSorcery());
     }
 
     @Override

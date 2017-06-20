@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -47,6 +46,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +74,7 @@ public class AngelOfDeliverance extends CardImpl {
         // exile target creature an opponent controls.
         Ability ability = new ConditionalTriggeredAbility(
                 new AngelOfDeliveranceDealsDamageTriggeredAbility(),
-                new DeliriumCondition(),
+                DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; Whenever {this} deals damage, if there are four or more card types among cards in your graveyard, exile target creature an opponent controls"
         );
         ability.addTarget(new TargetCreaturePermanent(filter));

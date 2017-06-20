@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -50,6 +50,8 @@ import mage.game.permanent.token.EldraziHorrorToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -87,7 +89,7 @@ class EmrakulsEvangelCost extends CostImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(Predicates.not(new SubtypePredicate("Eldrazi")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.ELDRAZI)));
     }
 
     private int numSacrificed = 1; // always sacrifices self at least

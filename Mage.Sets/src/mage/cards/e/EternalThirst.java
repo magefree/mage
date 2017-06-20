@@ -39,11 +39,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -78,7 +74,7 @@ public class EternalThirst extends CardImpl {
         effect.setText("Enchanted creature has lifelink");
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         // and "Whenever a creature an opponent controls dies, put a +1/+1 counter on this creature."
-        effect = new GainAbilityAttachedEffect(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, filter), AttachmentType.AURA);
+        effect = new GainAbilityAttachedEffect(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter), AttachmentType.AURA);
         ability.addEffect(effect);
         effect.setText("and \"Whenever a creature an opponent controls dies, put a +1/+1 counter on this creature.\"");
         this.addAbility(ability);

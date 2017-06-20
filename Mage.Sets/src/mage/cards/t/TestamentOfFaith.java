@@ -112,11 +112,11 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
                         if (!token.getCardType().isEmpty()) {
                             for (CardType t : token.getCardType()) {
                                 if (!permanent.getCardType().contains(t)) {
-                                    permanent.getCardType().add(t);
+                                    permanent.addCardType(t);
                                 }
                             }
                         }
-                        if ("".equals(type) || type == null) {
+                        if (type != null && type.isEmpty() || type == null) {
                             permanent.getSubtype(game).clear();
                         }
                         if (!token.getSubtype(game).isEmpty()) {
@@ -150,7 +150,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
             }
             return true;
         } else {
-            if (duration.equals(Duration.Custom)) {
+            if (duration == Duration.Custom) {
                 this.discard();
             }
         }

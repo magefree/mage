@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -38,6 +37,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -86,7 +87,7 @@ class EchoingCalmEffect extends OneShotEffect {
             permanent.destroy(source.getSourceId(), game, false);
             if (!permanent.getName().isEmpty()) { // in case of face down enchantment creature
                 for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                    if (!perm.getId().equals(permanent.getId()) && perm.getName().equals(permanent.getName()) && perm.getCardType().contains(CardType.ENCHANTMENT)) {
+                    if (!perm.getId().equals(permanent.getId()) && perm.getName().equals(permanent.getName()) && perm.isEnchantment()) {
                         perm.destroy(source.getSourceId(), game, false);
                     }
                 }

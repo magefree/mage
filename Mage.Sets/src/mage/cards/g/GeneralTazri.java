@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -40,15 +39,15 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,12 +58,12 @@ public class GeneralTazri extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("an Ally creature card");
 
     static {
-        filter.add(new SubtypePredicate("Ally"));
+        filter.add(new SubtypePredicate(SubType.ALLY));
     }
 
     public GeneralTazri(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Ally");
         this.power = new MageInt(3);
@@ -77,7 +76,7 @@ public class GeneralTazri extends CardImpl {
         DynamicValue xValue = new GeneralTazriColorCount();
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent("Ally", "Ally creatures"), false),
+                new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent(SubType.ALLY, "Ally creatures"), false),
                 new ManaCostsImpl("{W}{U}{B}{R}{G}")));
 
     }
@@ -97,7 +96,7 @@ class GeneralTazriColorCount implements DynamicValue {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate(("Ally")));
+        filter.add(new SubtypePredicate((SubType.ALLY)));
     }
 
     @Override

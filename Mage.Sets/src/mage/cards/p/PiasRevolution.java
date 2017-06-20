@@ -103,7 +103,7 @@ class PiasRevolutionReturnEffect extends OneShotEffect {
                             "Have Pia's Revolution deal 3 damage to you to prevent that " + permanent.getIdName() + " returns to " + controller.getName() + "'s hand?",
                             source, game)) {
                         opponent.damage(3, source.getSourceId(), game, false, true);
-                    } else if (game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
+                    } else if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                         controller.moveCards(game.getCard(permanentId), Zone.HAND, source, game);
                     }
                 }
@@ -144,7 +144,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
                 for (Effect effect : this.getEffects()) {

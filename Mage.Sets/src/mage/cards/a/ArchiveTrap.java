@@ -27,9 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -46,6 +43,10 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -57,7 +58,7 @@ public class ArchiveTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent searched his or her library this turn, you may pay {0} rather than pay Archive Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), OpponentSearchesLibCondition.getInstance()), new ArchiveTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), OpponentSearchesLibCondition.instance), new ArchiveTrapWatcher());
 
         // Target opponent puts the top thirteen cards of his or her library into his or her graveyard.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -79,7 +80,7 @@ class ArchiveTrapWatcher extends Watcher {
     Set<UUID> playerIds = new HashSet<>();
 
     public ArchiveTrapWatcher() {
-        super("LibrarySearched", WatcherScope.GAME);
+        super(ArchiveTrapWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {
@@ -111,17 +112,13 @@ class ArchiveTrapWatcher extends Watcher {
     }
 }
 
-class OpponentSearchesLibCondition implements Condition {
+enum OpponentSearchesLibCondition implements Condition {
 
-    private static final OpponentSearchesLibCondition fInstance = new OpponentSearchesLibCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ArchiveTrapWatcher watcher = (ArchiveTrapWatcher) game.getState().getWatchers().get("LibrarySearched");
+        ArchiveTrapWatcher watcher = (ArchiveTrapWatcher) game.getState().getWatchers().get(ArchiveTrapWatcher.class.getSimpleName());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && watcher != null) {
             for (UUID playerId : watcher.getPlayersSearchedLibrary()) {

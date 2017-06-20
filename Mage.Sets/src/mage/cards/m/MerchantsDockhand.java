@@ -138,7 +138,7 @@ class MerchantsDockhandEffect extends OneShotEffect {
 
 class TapXTargetCost extends VariableCostImpl {
 
-    public final static FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifacts you control");
+    final static FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifacts you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

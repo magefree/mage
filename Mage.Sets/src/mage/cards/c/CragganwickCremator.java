@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +39,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +96,7 @@ class CragganwickCrematorEffect extends OneShotEffect {
         if (controller != null) {
             Card discardedCard = controller.discardOne(true, source, game);
             if (discardedCard != null
-                    && discardedCard.getCardType().contains(CardType.CREATURE)) {
+                    && discardedCard.isCreature()) {
                 Player targetedPlayer = game.getPlayer(source.getFirstTarget());
                 if (targetedPlayer != null) {
                     int damage = discardedCard.getPower().getValue();

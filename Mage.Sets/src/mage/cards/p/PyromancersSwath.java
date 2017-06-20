@@ -94,7 +94,7 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {        
         if (source.getControllerId().equals(game.getControllerId(event.getSourceId()))) {
             MageObject object = game.getObject(event.getSourceId());
-            return object != null && (object.getCardType().contains(CardType.INSTANT) || object.getCardType().contains(CardType.SORCERY));
+            return object != null && (object.isInstant() || object.isSorcery());
         }
         return false;
     }

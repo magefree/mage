@@ -1,53 +1,16 @@
 package mage.client.cards;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import mage.cards.Card;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import mage.cards.MageCard;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
@@ -58,16 +21,9 @@ import mage.client.MageFrame;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.CardViewCardTypeComparator;
-import mage.client.util.CardViewColorComparator;
-import mage.client.util.CardViewColorIdentityComparator;
-import mage.client.util.CardViewCostComparator;
-import mage.client.util.CardViewNameComparator;
-import mage.client.util.CardViewRarityComparator;
-import mage.client.util.Event;
-import mage.client.util.GUISizeHelper;
-import mage.client.util.Listener;
+import mage.client.util.*;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.util.RandomUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -396,7 +352,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         clearCardEventListeners();
     }
 
-    public void addCardEventListener(Listener<Event> listener) {
+    public void addCardEventListener(Listener<mage.client.util.Event> listener) {
         eventSource.addListener(listener);
     }
 
@@ -438,9 +394,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     public DeckCardLayout getCardLayout() {
         // 2D Array to put entries into
-        List<List<List<DeckCardInfo>>> info = new ArrayList<>();
+        java.util.List<java.util.List<java.util.List<DeckCardInfo>>> info = new ArrayList<>();
         for (ArrayList<ArrayList<CardView>> gridRow : cardGrid) {
-            List<List<DeckCardInfo>> row = new ArrayList<>();
+            java.util.List<java.util.List<DeckCardInfo>> row = new ArrayList<>();
             info.add(row);
             for (ArrayList<CardView> stack : gridRow) {
                 row.add(stack.stream()
@@ -466,7 +422,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         CMC("Converted Mana Cost", new CardViewCostComparator()),
         COLOR("Color", new CardViewColorComparator()),
         COLOR_IDENTITY("Color Identity", new CardViewColorIdentityComparator()),
-        RARITY("Rarity", new CardViewRarityComparator());
+        RARITY("Rarity", new CardViewRarityComparator()),
+        EDH_POWER_LEVEL("EDH Power Level", new CardViewEDHPowerLevelComparator());
 
         Sort(String text, Comparator<CardView> comparator) {
             this.comparator = comparator;
@@ -511,50 +468,50 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     private final CardTypeCounter creatureCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.getCardTypes().contains(CardType.CREATURE);
+            return card.isCreature();
         }
     };
     private final CardTypeCounter landCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.getCardTypes().contains(CardType.LAND);
+            return card.isLand();
         }
     };
 
     private final CardTypeCounter artifactCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.getCardTypes().contains(CardType.ARTIFACT);
+            return card.isArtifact();
         }
     };
     private final CardTypeCounter enchantmentCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.getCardTypes().contains(CardType.ENCHANTMENT);
+            return card.isEnchantment();
         }
     };
     private final CardTypeCounter instantCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.getCardTypes().contains(CardType.INSTANT);
+            return card.isInstant();
         }
     };
     private final CardTypeCounter sorceryCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.getCardTypes().contains(CardType.SORCERY);
+            return card.isSorcery();
         }
     };
     private final CardTypeCounter planeswalkerCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.getCardTypes().contains(CardType.PLANESWALKER);
+            return card.isPlanesWalker();
         }
     };
     private final CardTypeCounter tribalCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.getCardTypes().contains(CardType.TRIBAL);
+            return card.isTribal();
         }
     };
 
@@ -607,7 +564,6 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     JButton selectByButton;
     JButton analyseButton;
     JButton blingButton;
-
 
     // Popup for toolbar
     final JPopupMenu filterPopup;
@@ -1020,7 +976,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         analyseButton.addActionListener(evt -> analyseDeck());
 
-        // Bling button - aka Add in a premium 'JR', 'MBP', 'CS' etc card 
+        // Bling button - aka Add in a premium 'JR', 'MBP', 'CS' etc card
         blingButton.setToolTipText("Bling your deck! Select the original and added cards by selecting 'Multiples' in the selection options");
 
         blingButton.addActionListener(evt -> blingDeck());
@@ -1178,6 +1134,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             --col2;
         }
 
+        // avoids a null ref issue but only deals with symptom of problem. not sure how it gets to this state ever. see issue #3197
+        // if (selectionDragStartCards == null) return;
         int curY = COUNT_LABEL_HEIGHT;
         for (int rowIndex = 0; rowIndex < cardGrid.size(); ++rowIndex) {
             int stackStartIndex;
@@ -1204,7 +1162,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     boolean inBoundsY = (i >= stackStartIndex && i <= stackEndIndex);
                     boolean lastCard = (i == stack.size() - 1);
                     boolean inSeletionDrag = inBoundsX && (inBoundsY || (lastCard && (y2 >= stackBottomBegin && y1 <= stackBottomEnd)));
-                    if (inSeletionDrag || selectionDragStartCards.contains(card)) {
+                    if (inSeletionDrag || selectionDragStartCards != null && selectionDragStartCards.contains(card)) {
                         if (!card.isSelected()) {
                             card.setSelected(true);
                             view.update(card);
@@ -1312,8 +1270,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         }
                         // Sub & Super Types
                         if (!s) {
-                            for (String str : card.getSuperTypes()) {
-                                s |= str.toLowerCase().contains(searchStr);
+                            for (SuperType str : card.getSuperTypes()) {
+                                s |= str.toString().toLowerCase().contains(searchStr);
                             }
                             for (String str : card.getSubTypes()) {
                                 s |= str.toLowerCase().contains(searchStr);
@@ -1388,8 +1346,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         t += ' ' + type.toString();
                     }
                     // Sub & Super Types
-                    for (String str : card.getSuperTypes()) {
-                        t += ' ' + str.toLowerCase();
+                    for (SuperType type : card.getSuperTypes()) {
+                        t += ' ' + type.toString().toLowerCase();
                     }
                     for (String str : card.getSubTypes()) {
                         t += ' ' + str.toLowerCase();
@@ -1523,7 +1481,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         for (ArrayList<ArrayList<CardView>> gridRow : cardGrid) {
             for (ArrayList<CardView> stack : gridRow) {
                 for (CardView card : stack) {
-                    if (card.getSuperTypes().contains("Basic")) {
+                    if (card.getSuperTypes().contains(SuperType.BASIC)) {
                         continue;
                     }
 
@@ -1532,7 +1490,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         cardCriteria.setCodes(sets);
                         cardCriteria.name(card.getName());
 
-                        List<CardInfo> cardPool = CardRepository.instance.findCards(cardCriteria);
+                        java.util.List<CardInfo> cardPool = CardRepository.instance.findCards(cardCriteria);
 
                         if (!cardPool.isEmpty()) {
                             Card acard = cardPool.get(RandomUtil.nextInt(cardPool.size())).getMockCard();
@@ -1645,11 +1603,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Now go through the layout and use it to build the cardGrid
             cardGrid = new ArrayList<>();
             maxStackSize = new ArrayList<>();
-            for (List<List<DeckCardInfo>> row : layout.getCards()) {
+            for (java.util.List<java.util.List<DeckCardInfo>> row : layout.getCards()) {
                 ArrayList<ArrayList<CardView>> gridRow = new ArrayList<>();
                 int thisMaxStackSize = 0;
                 cardGrid.add(gridRow);
-                for (List<DeckCardInfo> stack : row) {
+                for (java.util.List<DeckCardInfo> stack : row) {
                     ArrayList<CardView> gridStack = new ArrayList<>();
                     gridRow.add(gridStack);
                     for (DeckCardInfo info : stack) {
@@ -1767,7 +1725,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         updateCounts();
 
         // Create the card view
-        final MageCard cardPanel = Plugins.getInstance().getMageCard(card, lastBigCard, new Dimension(getCardWidth(), getCardHeight()), null, true, true);
+        final MageCard cardPanel = Plugins.instance.getMageCard(card, lastBigCard, new Dimension(getCardWidth(), getCardHeight()), null, true, true);
         cardPanel.update(card);
         cardPanel.setTextOffset(0);
 
@@ -1896,7 +1854,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
         // What row to add it to?
         ArrayList<ArrayList<CardView>> targetRow;
-        if (separateCreatures && !newCard.getCardTypes().contains(CardType.CREATURE)) {
+        if (separateCreatures && !newCard.isCreature()) {
             // Ensure row 2 exists
             if (cardGrid.size() < 2) {
                 cardGrid.add(1, new ArrayList<>());

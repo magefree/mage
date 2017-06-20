@@ -27,20 +27,21 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +67,7 @@ public class AuraBarbs extends CardImpl {
         return new AuraBarbs(this);
     }
 
-    private class AuraBarbsEffect extends OneShotEffect {
+    private static class AuraBarbsEffect extends OneShotEffect {
 
     public AuraBarbsEffect() {
             super(Outcome.Detriment);
@@ -91,11 +92,11 @@ public class AuraBarbs extends CardImpl {
                 }
             }
 
-            filterEnchantments.add(new SubtypePredicate("Aura"));
+            filterEnchantments.add(new SubtypePredicate(SubType.AURA));
             for (Permanent auraEnchantment : game.getBattlefield().getActivePermanents(filterEnchantments, source.getControllerId(), source.getSourceId(), game)) {
                 if (auraEnchantment.getAttachedTo() != null) {
                     Permanent attachedToCreature = game.getPermanent(auraEnchantment.getAttachedTo());
-                    if (attachedToCreature != null && attachedToCreature.getCardType().contains(CardType.CREATURE)) {
+                    if (attachedToCreature != null && attachedToCreature.isCreature()) {
                         attachedToCreature.damage(2, auraEnchantment.getId(), game, false, true);
                         game.informPlayers("2 damage assigned to " + attachedToCreature.getName() + " from " + auraEnchantment.getName());
                     }

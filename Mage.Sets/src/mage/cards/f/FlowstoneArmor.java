@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
@@ -43,6 +42,8 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -56,7 +57,7 @@ public class FlowstoneArmor extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {3}, {tap}: Target creature gets +1/-1 for as long as Flowstone Armor remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostTargetEffect(1, -1, Duration.Custom), SourceTappedCondition.getInstance(),
+            new BoostTargetEffect(1, -1, Duration.Custom), SourceTappedCondition.instance,
             "target creature gets +1/-1 for as long as {this} remains tapped"), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

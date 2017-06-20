@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -37,10 +36,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,8 +54,8 @@ public class CorruptedRoots extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Forest"),
-                new SubtypePredicate("Plains")));
+                new SubtypePredicate(SubType.FOREST),
+                new SubtypePredicate(SubType.PLAINS)));
     }
 
     public CorruptedRoots(UUID ownerId, CardSetInfo setInfo) {

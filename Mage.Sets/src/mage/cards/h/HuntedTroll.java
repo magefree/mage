@@ -28,8 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,12 +35,12 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.FaerieToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
@@ -53,7 +51,7 @@ import mage.target.common.TargetOpponent;
 public class HuntedTroll extends CardImpl {
 
     public HuntedTroll(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add("Troll");
         this.subtype.add("Warrior");
 
@@ -76,17 +74,5 @@ public class HuntedTroll extends CardImpl {
     @Override
     public HuntedTroll copy() {
         return new HuntedTroll(this);
-    }
-}
-
-class FaerieToken extends Token {
-    FaerieToken() {
-        super("Faerie", "1/1 blue Faerie creature tokens with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Faerie");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

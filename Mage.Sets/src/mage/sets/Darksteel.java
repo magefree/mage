@@ -1,16 +1,15 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 public class Darksteel extends ExpansionSet {
 
-    private static final Darksteel fINSTANCE = new Darksteel();
+    private static final Darksteel instance = new Darksteel();
 
     public static Darksteel getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     public Darksteel() {
@@ -59,6 +58,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Darksteel Reactor", 114, Rarity.RARE, mage.cards.d.DarksteelReactor.class));
         cards.add(new SetCardInfo("Death Cloud", 40, Rarity.RARE, mage.cards.d.DeathCloud.class));
         cards.add(new SetCardInfo("Demon's Horn", 116, Rarity.UNCOMMON, mage.cards.d.DemonsHorn.class));
+        cards.add(new SetCardInfo("Dismantle", 57, Rarity.UNCOMMON, mage.cards.d.Dismantle.class));
         cards.add(new SetCardInfo("Dragon's Claw", 117, Rarity.UNCOMMON, mage.cards.d.DragonsClaw.class));
         cards.add(new SetCardInfo("Drill-Skimmer", 118, Rarity.COMMON, mage.cards.d.DrillSkimmer.class));
         cards.add(new SetCardInfo("Drooling Ogre", 58, Rarity.COMMON, mage.cards.d.DroolingOgre.class));
@@ -96,6 +96,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Leonin Shikari", 6, Rarity.RARE, mage.cards.l.LeoninShikari.class));
         cards.add(new SetCardInfo("Lich's Tomb", 128, Rarity.RARE, mage.cards.l.LichsTomb.class));
         cards.add(new SetCardInfo("Loxodon Mystic", 7, Rarity.COMMON, mage.cards.l.LoxodonMystic.class));
+        cards.add(new SetCardInfo("Machinate", 24, Rarity.COMMON, mage.cards.m.Machinate.class));
         cards.add(new SetCardInfo("Magnetic Flux", 25, Rarity.COMMON, mage.cards.m.MagneticFlux.class));
         cards.add(new SetCardInfo("Memnarch", 129, Rarity.RARE, mage.cards.m.Memnarch.class));
         cards.add(new SetCardInfo("Mephitic Ooze", 47, Rarity.RARE, mage.cards.m.MephiticOoze.class));

@@ -75,7 +75,7 @@ public class CommanderColorIdentityManaAbility extends ActivatedManaAbilityImpl 
                 for (UUID commanderId : controller.getCommandersIds()) {
                     Card commander = game.getCard(commanderId);
                     if (commander != null) {
-                        FilterMana commanderMana = CardUtil.getColorIdentity(commander);
+                        FilterMana commanderMana = commander.getColorIdentity();
                         if (commanderMana.isBlack()) {
                             netMana.add(new Mana(ColoredManaSymbol.B));
                         }
@@ -99,7 +99,7 @@ public class CommanderColorIdentityManaAbility extends ActivatedManaAbilityImpl 
     }
 
     @Override
-    public boolean definesMana() {
+    public boolean definesMana(Game game) {
         return true;
     }
 
@@ -130,7 +130,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
             for (UUID commanderId : controller.getCommandersIds()) {
                 Card commander = game.getCard(commanderId);
                 if (commander != null) {
-                    FilterMana commanderMana = CardUtil.getColorIdentity(commander);
+                    FilterMana commanderMana = commander.getColorIdentity();
                     if (commanderMana.isWhite()) {
                         choice.getChoices().add("White");
                     }

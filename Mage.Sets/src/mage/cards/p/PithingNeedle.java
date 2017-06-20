@@ -27,6 +27,7 @@
  */
 package mage.cards.p;
 
+import java.util.Optional;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -36,11 +37,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -51,7 +48,7 @@ import mage.game.events.GameEvent;
 public class PithingNeedle extends CardImpl {
 
     public PithingNeedle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // As Pithing Needle enters the battlefield, name a card.
         this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL)));
@@ -99,9 +96,10 @@ class PithingNeedleEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
-        Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
-        if (ability != null && object != null) {
-            if (!ability.getAbilityType().equals(AbilityType.MANA)
+        Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+        if (ability.isPresent() && object != null) {
+            if (game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId()) // controller in range
+                    && ability.get().getAbilityType() != AbilityType.MANA
                     && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                 return true;
             }

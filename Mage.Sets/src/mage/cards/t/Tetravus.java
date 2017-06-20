@@ -49,7 +49,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TetraviteToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -88,21 +88,6 @@ public class Tetravus extends CardImpl {
     }
 }
 
-class TetraviteToken extends Token {
-
-    public TetraviteToken() {
-        super("Tetravite", "1/1 colorless Tetravite artifact creature token");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        subtype.add("Tetravite");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new CantBeEnchantedAbility());
-    }
-}
-
 class CantBeEnchantedAbility extends StaticAbility {
 
     public CantBeEnchantedAbility() {
@@ -119,7 +104,7 @@ class CantBeEnchantedAbility extends StaticAbility {
     }
 
     public boolean canTarget(MageObject source, Game game) {
-        if (source.getCardType().contains(CardType.ENCHANTMENT)
+        if (source.isEnchantment()
                 && source.hasSubtype("Aura", game)) {
             return false;
         }

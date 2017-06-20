@@ -35,8 +35,10 @@ import java.util.regex.Pattern;
 import mage.MageException;
 import mage.constants.Constants;
 import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
+import mage.server.game.GamesRoom;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.SystemUtil;
@@ -48,7 +50,6 @@ import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Session {
@@ -76,7 +77,7 @@ public class Session {
     }
 
     public String registerUser(String userName, String password, String email) throws MageException {
-        if (!ConfigSettings.getInstance().isAuthenticationActivated()) {
+        if (!ConfigSettings.instance.isAuthenticationActivated()) {
             String returnMessage = "Registration is disabled by the server config";
             sendErrorMessageToClient(returnMessage);
             return returnMessage;
@@ -106,7 +107,7 @@ public class Session {
 
             boolean success;
             String subject = "XMage Registration Completed";
-            if (!ConfigSettings.getInstance().getMailUser().isEmpty()) {
+            if (!ConfigSettings.instance.getMailUser().isEmpty()) {
                 success = MailClient.sendMessage(email, subject, text);
             } else {
                 success = MailgunClient.sendMessage(email, subject, text);
@@ -129,18 +130,18 @@ public class Session {
         }
     }
 
-    static private String validateUserName(String userName) {
+    private static String validateUserName(String userName) {
         if (userName.equals("Admin")) {
             return "User name Admin already in use";
         }
-        ConfigSettings config = ConfigSettings.getInstance();
+        ConfigSettings config = ConfigSettings.instance;
         if (userName.length() < config.getMinUserNameLength()) {
             return "User name may not be shorter than " + config.getMinUserNameLength() + " characters";
         }
         if (userName.length() > config.getMaxUserNameLength()) {
             return "User name may not be longer than " + config.getMaxUserNameLength() + " characters";
         }
-        Pattern invalidUserNamePattern = Pattern.compile(ConfigSettings.getInstance().getInvalidUserNamePattern(), Pattern.CASE_INSENSITIVE);
+        Pattern invalidUserNamePattern = Pattern.compile(ConfigSettings.instance.getInvalidUserNamePattern(), Pattern.CASE_INSENSITIVE);
         Matcher m = invalidUserNamePattern.matcher(userName);
         if (m.find()) {
             return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
@@ -152,8 +153,8 @@ public class Session {
         return null;
     }
 
-    static private String validatePassword(String password, String userName) {
-        ConfigSettings config = ConfigSettings.getInstance();
+    private static String validatePassword(String password, String userName) {
+        ConfigSettings config = ConfigSettings.instance;
         if (password.length() < config.getMinPasswordLength()) {
             return "Password may not be shorter than " + config.getMinPasswordLength() + " characters";
         }
@@ -171,7 +172,11 @@ public class Session {
         return null;
     }
 
-    static private String validateEmail(String email) {
+    private static String validateEmail(String email) {
+
+        if (email == null || email.isEmpty()) {
+            return "Email address cannot be blank";
+        }
         AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByEmail(email);
         if (authorizedUser != null) {
             return "Email address '" + email + "' is associated with another user";
@@ -194,7 +199,7 @@ public class Session {
     public String connectUserHandling(String userName, String password) throws MageException {
         this.isAdmin = false;
         AuthorizedUser authorizedUser = null;
-        if (ConfigSettings.getInstance().isAuthenticationActivated()) {
+        if (ConfigSettings.instance.isAuthenticationActivated()) {
             authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
             String errorMsg = "Wrong username or password. In case you haven't, please register your account first.";
             if (authorizedUser == null) {
@@ -212,65 +217,72 @@ public class Session {
                 if (authorizedUser.lockedUntil.compareTo(Calendar.getInstance().getTime()) > 0) {
                     return "Your profile is deactivated until " + SystemUtil.dateFormat.format(authorizedUser.lockedUntil);
                 } else {
-                    User user = UserManager.getInstance().createUser(userName, host, authorizedUser);
-                    if (user != null && authorizedUser.lockedUntil != null) {
-                        user.setLockedUntil(null);
-                    }
+                    UserManager.instance.createUser(userName, host, authorizedUser).ifPresent(user
+                            -> user.setLockedUntil(null)
+                    );
+
                 }
             }
         }
-        User user = UserManager.getInstance().createUser(userName, host, authorizedUser);
+        Optional<User> selectUser = UserManager.instance.createUser(userName, host, authorizedUser);
         boolean reconnect = false;
-        if (user == null) {  // user already exists
-            user = UserManager.getInstance().getUserByName(userName);
-            // If authentication is not activated, check the identity using IP address.
-            if (ConfigSettings.getInstance().isAuthenticationActivated() || user.getHost().equals(host)) {
-                user.updateLastActivity(null);  // minimizes possible expiration
-                this.userId = user.getId();
-                if (user.getSessionId().isEmpty()) {
-                    logger.info("Reconnecting session for " + userName);
-                    reconnect = true;
+        if (!selectUser.isPresent()) {  // user already exists
+            selectUser = UserManager.instance.getUserByName(userName);
+            if (selectUser.isPresent()) {
+                User user = selectUser.get();
+                // If authentication is not activated, check the identity using IP address.
+                if (ConfigSettings.instance.isAuthenticationActivated() || user.getHost().equals(host)) {
+                    user.updateLastActivity(null);  // minimizes possible expiration
+                    this.userId = user.getId();
+                    if (user.getSessionId().isEmpty()) {
+                        logger.info("Reconnecting session for " + userName);
+                        reconnect = true;
+                    } else {
+                        //disconnect previous session
+                        logger.info("Disconnecting another user instance: " + userName);
+                        SessionManager.instance.disconnect(user.getSessionId(), DisconnectReason.ConnectingOtherInstance);
+                    }
                 } else {
-                    //disconnect previous session
-                    logger.info("Disconnecting another user instance: " + userName);
-                    SessionManager.getInstance().disconnect(user.getSessionId(), DisconnectReason.ConnectingOtherInstance);
+                    return "User name " + userName + " already in use (or your IP address changed)";
                 }
-            } else {
-                return "User name " + userName + " already in use (or your IP address changed)";
             }
         }
-        if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
+        User user = selectUser.get();
+        if (!UserManager.instance.connectToSession(sessionId, user.getId())) {
             return "Error connecting " + userName;
         }
         this.userId = user.getId();
         if (reconnect) { // must be connected to receive the message
-            UUID chatId = GamesRoomManager.getInstance().getRoom(GamesRoomManager.getInstance().getMainRoomId()).getChatId();
-            if (chatId != null) {
-                ChatManager.getInstance().joinChat(chatId, userId);
+            Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(GamesRoomManager.instance.getMainRoomId());
+            if (!room.isPresent()) {
+                logger.error("main room not found");
+                return null;
             }
-            ChatManager.getInstance().sendReconnectMessage(userId);
+            ChatManager.instance.joinChat(room.get().getChatId(), userId);
+            ChatManager.instance.sendReconnectMessage(userId);
         }
+
         return null;
+
     }
 
     public void connectAdmin() {
         this.isAdmin = true;
-        User user = UserManager.getInstance().createUser("Admin", host, null);
-        if (user == null) {
-            user = UserManager.getInstance().getUserByName("Admin");
-        }
+        User user = UserManager.instance.createUser("Admin", host, null).orElse(
+                UserManager.instance.getUserByName("Admin").get());
+
         UserData adminUserData = UserData.getDefaultUserDataView();
         adminUserData.setGroupId(UserGroup.ADMIN.getGroupId());
         user.setUserData(adminUserData);
-        if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
+        if (!UserManager.instance.connectToSession(sessionId, user.getId())) {
             logger.info("Error connecting Admin!");
         }
         this.userId = user.getId();
     }
 
     public boolean setUserData(String userName, UserData userData, String clientVersion, String userIdStr) {
-        User user = UserManager.getInstance().getUserByName(userName);
-        if (user != null) {
+        Optional<User> _user = UserManager.instance.getUserByName(userName);
+        _user.ifPresent(user -> {
             if (clientVersion != null) {
                 user.setClientVersion(clientVersion);
             }
@@ -287,9 +299,8 @@ public class Session {
             if (user.getUserData().getAvatarId() == 11) {
                 user.getUserData().setAvatarId(updateAvatar(user.getName()));
             }
-            return true;
-        }
-        return false;
+        });
+        return _user.isPresent();
     }
 
     private int updateAvatar(String userName) {
@@ -304,6 +315,10 @@ public class Session {
                 return 1020;
             case "fireshoes":
                 return 1021;
+            case "noxx":
+                return 1000;
+            case "magenoxx":
+                return 1018;
         }
         return 11;
     }
@@ -320,14 +335,14 @@ public class Session {
                 lockSet = true;
                 logger.debug("SESSION LOCK SET sessionId: " + sessionId);
             } else {
-                logger.error("CAN'T GET LOCK - userId: " + userId + " hold count: " + lock.getHoldCount());
+                logger.warn("CAN'T GET LOCK - userId: " + userId + " hold count: " + lock.getHoldCount());
             }
-            Optional<User> _user = UserManager.getInstance().getUser(userId);
+            Optional<User> _user = UserManager.instance.getUser(userId);
             if (!_user.isPresent()) {
                 return; //user was already disconnected by other thread
             }
             User user = _user.get();
-            if(!user.isConnected()){
+            if (!user.isConnected()) {
                 return;
             }
             if (!user.getSessionId().equals(sessionId)) {
@@ -336,7 +351,7 @@ public class Session {
                 return;
             }
             // logger.info("LOST CONNECTION - " + user.getName() + " id: " + userId);
-            UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);
+            UserManager.instance.disconnect(userId, DisconnectReason.LostConnection);
 
         } catch (InterruptedException ex) {
             logger.error("SESSION LOCK lost connection - userId: " + userId, ex);
@@ -358,7 +373,7 @@ public class Session {
             } else {
                 logger.error("SESSION LOCK - kill: userId " + userId);
             }
-            UserManager.getInstance().removeUser(userId, reason);
+            UserManager.instance.removeUser(userId, reason);
         } catch (InterruptedException ex) {
             logger.error("SESSION LOCK - kill: userId " + userId, ex);
         } finally {
@@ -376,8 +391,8 @@ public class Session {
             call.setMessageId(messageId++);
             callbackHandler.handleCallbackOneway(new Callback(call));
         } catch (HandleCallbackException ex) {
-            ex.printStackTrace();
-            UserManager.getInstance().getUser(userId).ifPresent(user-> {
+            // ex.printStackTrace();
+            UserManager.instance.getUser(userId).ifPresent(user -> {
                 logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId);
                 logger.warn(" - method: " + call.getMethod());
                 logger.warn(" - cause: " + getBasicCause(ex).toString());
@@ -411,14 +426,14 @@ public class Session {
         List<String> messageData = new LinkedList<>();
         messageData.add("Error while connecting to server");
         messageData.add(message);
-        fireCallback(new ClientCallback("showUserMessage", null, messageData));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
     }
 
     public void sendInfoMessageToClient(String message) {
         List<String> messageData = new LinkedList<>();
         messageData.add("Information about connecting to the server");
         messageData.add(message);
-        fireCallback(new ClientCallback("showUserMessage", null, messageData));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
     }
 
     public static Throwable getBasicCause(Throwable cause) {

@@ -27,14 +27,15 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.permanent.token.HumanToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class GatherTheTownsfolk extends CardImpl {
         // Create two 1/1 white Human creature tokens.
         // Fateful hour - If you have 5 or less life, create five of those tokens instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new HumanToken(), 5), new CreateTokenEffect(new HumanToken(), 2),
-                FatefulHourCondition.getInstance(), "Create two 1/1 white Human creature tokens. If you have 5 or less life, create five of those tokens instead"));
+                FatefulHourCondition.instance, "Create two 1/1 white Human creature tokens. If you have 5 or less life, create five of those tokens instead"));
     }
 
     public GatherTheTownsfolk(final GatherTheTownsfolk card) {

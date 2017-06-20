@@ -28,8 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,11 +38,13 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HomunculusToken;
 
 /**
  *
@@ -53,12 +53,13 @@ import mage.game.permanent.token.Token;
 public class PuppetConjurer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Homunculus");
+
     static {
-        filter.add(new SubtypePredicate("Homunculus"));
+        filter.add(new SubtypePredicate(SubType.HOMUNCULUS));
     }
-    
+
     public PuppetConjurer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
@@ -72,7 +73,7 @@ public class PuppetConjurer extends CardImpl {
         // At the beginning of your upkeep, sacrifice a Homunculus.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), TargetController.ANY, false));
     }
-    
+
     public PuppetConjurer(final PuppetConjurer card) {
         super(card);
     }
@@ -81,18 +82,4 @@ public class PuppetConjurer extends CardImpl {
     public PuppetConjurer copy() {
         return new PuppetConjurer(this);
     }
-}
-
-class HomunculusToken extends Token {
-
-    public HomunculusToken() {
-        super("Homunculus", "0/1 blue Homunculus artifact creature token");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        color.setBlue(true);
-        subtype.add("Homunculus");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
-    }
-
 }

@@ -36,37 +36,33 @@ package mage.client;
 import java.awt.AWTEvent;
 import java.awt.KeyboardFocusManager;
 import java.beans.PropertyVetoException;
+import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class MagePane extends javax.swing.JInternalFrame {
+public abstract class MagePane extends javax.swing.JLayeredPane {
+    private String title = "no title set";
 
     /**
      * Creates new form MagePane
      */
     public MagePane() {
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
-        hideTitle();
-    }
-
-    private void hideTitle() {
-        if (ui instanceof BasicInternalFrameUI) {
-            ((BasicInternalFrameUI) ui).setNorthPane(null);
-        }
     }
 
     public void changeGUISize() {
 
     }
 
-    @Override
-    public void updateUI() {
-        super.updateUI();
-        hideTitle();
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void hideFrame() {
@@ -75,11 +71,6 @@ public abstract class MagePane extends javax.swing.JInternalFrame {
 
     public void removeFrame() {
         KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-
-        }
         MageFrame.deactivate(this);
         MageFrame.getDesktop().remove(this);
     }
@@ -106,18 +97,6 @@ public abstract class MagePane extends javax.swing.JInternalFrame {
 
         setBorder(null);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 476, Short.MAX_VALUE)
-        );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

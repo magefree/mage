@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,6 +44,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,12 +92,12 @@ class BloodfireEnforcersCondition implements Condition {
         Player player = game.getPlayer(source.getControllerId());
         if  (player != null) {
             for(Card card : player.getGraveyard().getCards(game)) {
-                if (card.getCardType().contains(CardType.INSTANT)) {
+                if (card.isInstant()) {
                     if (sorceryFound) {
                         return true;
                     }
                     instantFound = true;                    
-                } else if (card.getCardType().contains(CardType.SORCERY)) {
+                } else if (card.isSorcery()) {
                     if (instantFound) {
                         return true;
                     }

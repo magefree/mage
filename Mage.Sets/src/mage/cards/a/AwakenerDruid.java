@@ -28,9 +28,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -38,13 +35,14 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Layer;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class AwakenerDruid extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest", "Forest");
+    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.FOREST, "Forest");
 
     public AwakenerDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

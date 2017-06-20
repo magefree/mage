@@ -27,16 +27,18 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,8 +49,8 @@ public class EmrakulsInfluence extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("Eldrazi creature spell with converted mana cost 7 or greater");
 
     static {
-        filterSpell.add(new SubtypePredicate("Eldrazi"));
-        filterSpell.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 6));
+        filterSpell.add(new SubtypePredicate( SubType.ELDRAZI));
+        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public EmrakulsInfluence(UUID ownerId, CardSetInfo setInfo) {

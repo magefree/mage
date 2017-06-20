@@ -42,11 +42,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -66,7 +62,7 @@ public class HopeOfGhirapur extends CardImpl {
     public HopeOfGhirapur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
 
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Thopter");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -147,7 +143,7 @@ class HopeOfGhirapurCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && player.getId().equals(event.getPlayerId())) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && !card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && !card.isCreature()) {
                 return true;
             }
         }
@@ -165,7 +161,7 @@ class HopeOfGhirapurPlayerLostLifePredicate implements Predicate<Player> {
 
     @Override
     public boolean apply(Player input, Game game) {
-        HopeOfGhirapurCombatDamageWatcher watcher = (HopeOfGhirapurCombatDamageWatcher) game.getState().getWatchers().get(HopeOfGhirapurCombatDamageWatcher.class.getName());
+        HopeOfGhirapurCombatDamageWatcher watcher = (HopeOfGhirapurCombatDamageWatcher) game.getState().getWatchers().get(HopeOfGhirapurCombatDamageWatcher.class.getSimpleName());
         if (watcher != null) {
             return watcher.playerGotCombatDamage(sourceReference, input.getId());
         }
@@ -178,7 +174,7 @@ class HopeOfGhirapurCombatDamageWatcher extends Watcher {
     private final HashMap<MageObjectReference, Set<UUID>> combatDamagedPlayers = new HashMap<>();
 
     public HopeOfGhirapurCombatDamageWatcher() {
-        super(HopeOfGhirapurCombatDamageWatcher.class.getName(), WatcherScope.GAME);
+        super(HopeOfGhirapurCombatDamageWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public HopeOfGhirapurCombatDamageWatcher(final HopeOfGhirapurCombatDamageWatcher watcher) {

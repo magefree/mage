@@ -95,4 +95,62 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "The Gitrog Monster", 0);
         assertPermanentCount(playerB, "Planar Outburst", 0);
     }
+
+    /**
+     * NOTE: As of 05/05/2017 this test is failing due to a bug in code. See
+     * issue #3251
+     *
+     * I took control of a Gitrog Monster, while the Gitrog Monster's owner
+     * controlled a Dryad Arbor and cast Toxic Deluge for 6.
+     */
+    @Test
+    public void controlChange() {
+        // Deathtouch
+        // At the beginning of your upkeep, sacrifice The Gitrog Monster unless you sacrifice a land.
+        // You may play an additional land on each of your turns.
+        // Whenever one or more land cards are put into your graveyard from anywhere, draw a card.
+        addCard(Zone.HAND, playerA, "The Gitrog Monster", 1); // Creature 6/6 {3}{B}{G}
+        // As an additional cost to cast Toxic Deluge, pay X life.
+        // All creatures get -X/-X until end of turn.
+        addCard(Zone.HAND, playerA, "Toxic Deluge", 1); // Sorcery {2}{B}
+        // (Dryad Arbor isn't a spell, it's affected by summoning sickness, and it has "{T}: Add {G} to your mana pool.")
+        addCard(Zone.HAND, playerA, "Dryad Arbor", 1); // Land Creature 1/1
+        addCard(Zone.HAND, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        // Rags Sorcery {2}{B}{B}
+        // All creatures get -2/-2 until end of turn.
+        // Riches Sorcery {5}{U}{U}
+        // Each opponent chooses a creature he or she controls. You gain control of each of those creatures.
+        addCard(Zone.GRAVEYARD, playerB, "Rags // Riches", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 7);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Gitrog Monster");
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Dryad Arbor");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Riches");
+        setChoice(playerA, "The Gitrog Monster");
+
+        // As an additional cost to cast Toxic Deluge, pay X life.
+        // All creatures get -X/-X until end of turn.
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Toxic Deluge");
+        setChoice(playerA, "X=6");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertExileCount(playerB, "Rags // Riches", 1);
+
+        assertGraveyardCount(playerA, "Toxic Deluge", 1);
+        assertLife(playerA, 14);
+
+        assertGraveyardCount(playerA, "The Gitrog Monster", 1);
+        assertGraveyardCount(playerA, "Dryad Arbor", 1);
+
+        assertHandCount(playerB, 1); // 1 drawn in draw step of turn 2
+        assertHandCount(playerA, 1); // 1 drawn in draw step of turn 3 - no card from Gitrog
+
+    }
 }

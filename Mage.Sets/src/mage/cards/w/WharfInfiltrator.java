@@ -108,7 +108,7 @@ class WharfInfiltratorDiscardAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Card card = game.getCard(event.getTargetId());
-        if (getControllerId().equals(event.getPlayerId()) && card != null && card.getCardType().contains(CardType.CREATURE)) {
+        if (getControllerId().equals(event.getPlayerId()) && card != null && card.isCreature()) {
             return true;
         }
         return false;

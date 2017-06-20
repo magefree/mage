@@ -55,7 +55,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
     private final Set<MageObjectReference> cardsPutToGraveyardFromBattlefield = new HashSet<>();
 
     public CardsPutIntoGraveyardWatcher() {
-        super("CardsPutIntoGraveyardWatcher", WatcherScope.GAME);
+        super(CardsPutIntoGraveyardWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CardsPutIntoGraveyardWatcher(final CardsPutIntoGraveyardWatcher watcher) {
@@ -74,13 +74,9 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             UUID playerId = event.getPlayerId();
             if (playerId != null && game.getCard(event.getTargetId()) != null) {
-                Integer amount = amountOfCardsThisTurn.get(playerId);
-                if (amount == null) {
-                    amount = 1;
-                } else {
-                    ++amount;
-                }
-                amountOfCardsThisTurn.put(playerId, amount);
+                amountOfCardsThisTurn.putIfAbsent(playerId, 0);
+                amountOfCardsThisTurn.compute(playerId, (k, amount) -> amount += 1);
+
                 if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                     cardsPutToGraveyardFromBattlefield.add(new MageObjectReference(event.getTargetId(), game));
                 }
@@ -89,11 +85,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
     }
 
     public int getAmountCardsPutToGraveyard(UUID playerId) {
-        Integer amount = amountOfCardsThisTurn.get(playerId);
-        if (amount != null) {
-            return amount;
-        }
-        return 0;
+        return amountOfCardsThisTurn.getOrDefault(playerId, 0);
     }
 
     public Set<MageObjectReference> getCardsPutToGraveyardFromBattlefield() {

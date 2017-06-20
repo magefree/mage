@@ -35,17 +35,13 @@ import mage.watchers.common.RevoltWatcher;
 /**
  * @author emerald000
  */
-public class RevoltCondition implements Condition {
+public enum RevoltCondition implements Condition {
 
-    private static final RevoltCondition fInstance = new RevoltCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        RevoltWatcher watcher = (RevoltWatcher) game.getState().getWatchers().get(RevoltWatcher.class.getName());
+        RevoltWatcher watcher = (RevoltWatcher) game.getState().getWatchers().get(RevoltWatcher.class.getSimpleName());
         return watcher != null && watcher.revoltActive(source.getControllerId());
     }
 

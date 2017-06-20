@@ -30,6 +30,7 @@ package mage.cards.q;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -47,14 +48,12 @@ import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author LevelX2
- *
  */
 public class Quicken extends CardImpl {
 
     public Quicken(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // The next sorcery card you cast this turn can be cast as though it had flash.
         this.getSpellAbility().addEffect(new QuickenAsThoughEffect());
@@ -92,7 +91,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get("consumeQuickenWatcher");
+        quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get(QuickenWatcher.class.getSimpleName());
         Card card = game.getCard(source.getSourceId());
         if (quickenWatcher != null && card != null) {
             zoneChangeCounter = card.getZoneChangeCounter(game);
@@ -114,7 +113,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (quickenWatcher.isQuickenSpellActive(affectedControllerId, source.getSourceId(), zoneChangeCounter)) {
             Card card = game.getCard(sourceId);
-            if (card != null && card.getCardType().contains(CardType.SORCERY) && source.getControllerId().equals(affectedControllerId)) {
+            if (card != null && card.isSorcery() && source.getControllerId().equals(affectedControllerId)) {
                 return true;
             }
         }
@@ -128,7 +127,7 @@ class QuickenWatcher extends Watcher {
     public List<String> activeQuickenSpells = new ArrayList<>();
 
     public QuickenWatcher() {
-        super("consumeQuickenWatcher", WatcherScope.GAME);
+        super(QuickenWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public QuickenWatcher(final QuickenWatcher watcher) {
@@ -145,7 +144,7 @@ class QuickenWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             if (!activeQuickenSpells.isEmpty() && event.getPlayerId().equals(getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && spell.getCardType().contains(CardType.SORCERY)) {
+                if (spell != null && spell.isSorcery()) {
                     activeQuickenSpells.clear();
                 }
             }

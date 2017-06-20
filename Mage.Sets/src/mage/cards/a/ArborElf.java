@@ -28,9 +28,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,8 +35,13 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ArborElf extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest", "Forest");
+    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.FOREST, "Forest");
 
     public ArborElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

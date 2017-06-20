@@ -16,19 +16,15 @@ import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
  *
  * @author LevelX2
  */
-public class AttackedOrBlockedThisCombatSourceCondition implements Condition {
+public enum AttackedOrBlockedThisCombatSourceCondition implements Condition {
 
-    private static final AttackedOrBlockedThisCombatSourceCondition fInstance = new AttackedOrBlockedThisCombatSourceCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourceObject != null) {
-            AttackedOrBlockedThisCombatWatcher watcher = (AttackedOrBlockedThisCombatWatcher) game.getState().getWatchers().get(AttackedOrBlockedThisCombatWatcher.class.getName());
+            AttackedOrBlockedThisCombatWatcher watcher = (AttackedOrBlockedThisCombatWatcher) game.getState().getWatchers().get(AttackedOrBlockedThisCombatWatcher.class.getSimpleName());
             if (watcher != null) {
                 for (MageObjectReference mor : watcher.getAttackedThisTurnCreatures()) {
                     if (mor.refersTo(sourceObject, game)) {

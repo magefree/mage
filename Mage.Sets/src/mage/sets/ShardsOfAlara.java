@@ -28,10 +28,10 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class ShardsOfAlara extends ExpansionSet {
 
-    private static final ShardsOfAlara fINSTANCE = new ShardsOfAlara();
+    private static final ShardsOfAlara instance = new ShardsOfAlara();
 
     public static ShardsOfAlara getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ShardsOfAlara() {

@@ -71,7 +71,7 @@ public class OranRiefRecluse extends CardImpl {
         // When Oran-Rief Recluse enters the battlefield, if it was kicked, destroy target creature with flying.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target creature with flying."));
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, destroy target creature with flying."));
     }
 
     public OranRiefRecluse(final OranRiefRecluse card) {

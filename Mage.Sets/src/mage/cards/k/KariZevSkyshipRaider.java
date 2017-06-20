@@ -31,20 +31,18 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RagavanToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -55,7 +53,7 @@ public class KariZevSkyshipRaider extends CardImpl {
     public KariZevSkyshipRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Pirate");
         this.power = new MageInt(1);
@@ -94,17 +92,10 @@ class KariZevSkyshipRaiderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        RagavanToken token = new RagavanToken();
+        CreateTokenEffect effect = new CreateTokenEffect(new RagavanToken(), 1, true, true);
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true)) {
-            for (UUID tokenId : token.getLastAddedTokenIds()) {
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                    game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
-                }
-            }
+        if (controller != null && effect.apply(game, source)) {
+            effect.exileTokensCreatedAtEndOfCombat(game, source);
             return true;
         }
         return false;
@@ -113,19 +104,5 @@ class KariZevSkyshipRaiderEffect extends OneShotEffect {
     @Override
     public KariZevSkyshipRaiderEffect copy() {
         return new KariZevSkyshipRaiderEffect(this);
-    }
-}
-
-class RagavanToken extends Token {
-
-    RagavanToken() {
-        super("Ragavan", "legendary 2/1 red Monkey creature token named Ragavan");
-        this.setOriginalExpansionSetCode("AER");
-        this.getSupertype().add("Legendary");
-        this.getPower().modifyBaseValue(2);
-        this.getToughness().modifyBaseValue(1);
-        this.color.setRed(true);
-        this.getSubtype(null).add("Monkey");
-        this.getCardType().add(CardType.CREATURE);
     }
 }

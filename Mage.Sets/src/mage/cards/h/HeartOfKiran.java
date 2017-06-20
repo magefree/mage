@@ -32,16 +32,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
 import mage.abilities.keyword.CrewAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 import mage.game.Game;
@@ -51,7 +49,6 @@ import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 
 /**
  * @author JRHerlehy
@@ -61,7 +58,7 @@ public class HeartOfKiran extends CardImpl {
     public HeartOfKiran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Vehicle");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

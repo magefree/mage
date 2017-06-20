@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,10 +58,10 @@ public class SunspearShikari extends CardImpl {
 
         // As long as Sunspear Shikari is equipped, it has first strike and lifelink.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), 
-                EquippedSourceCondition.getInstance(), "As long as {this} is equipped, it has first strike");
+                EquippedSourceCondition.instance, "As long as {this} is equipped, it has first strike");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()), 
-                EquippedSourceCondition.getInstance(), "and lifelink");
+                EquippedSourceCondition.instance, "and lifelink");
         ability.addEffect(effect2);
         this.addAbility(ability);
     }

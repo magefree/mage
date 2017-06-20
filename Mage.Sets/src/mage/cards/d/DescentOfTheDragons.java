@@ -27,8 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -42,14 +40,16 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class DescentOfTheDragons extends CardImpl {
 
     public DescentOfTheDragons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
 
         // Destroy any number of target creatures.  For each creature destroyed this way, its controller creates a 4/4 red Dragon creature token with flying.
         this.getSpellAbility().addEffect(new DescentOfTheDragonsEffect());
@@ -87,25 +87,22 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            HashMap<UUID, Integer> playersWithTargets = new HashMap<UUID, Integer>();
+            HashMap<UUID, Integer> playersWithTargets = new HashMap<>();
             for (Target target : source.getTargets()) {
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
                     if (permanent != null) {
                         UUID controllerOfTargetId = permanent.getControllerId();
                         if (permanent.destroy(source.getSourceId(), game, false)) {
-                            if(playersWithTargets.containsKey(controllerOfTargetId)) {
-                                playersWithTargets.put(controllerOfTargetId, playersWithTargets.get(controllerOfTargetId) + 1);
-                            }
-                            else {
-                                playersWithTargets.put(controllerOfTargetId, 1);
-                            }
+                            int count = playersWithTargets.getOrDefault(controllerOfTargetId, 0);
+                            playersWithTargets.put(controllerOfTargetId, count + 1);
+
                         }
                     }
                 }
             }
             DragonToken dragonToken = new DragonToken();
-            for(UUID playerId : playersWithTargets.keySet()) {
+            for (UUID playerId : playersWithTargets.keySet()) {
                 dragonToken.putOntoBattlefield(playersWithTargets.get(playerId), game, source.getSourceId(), playerId);
             }
             return true;

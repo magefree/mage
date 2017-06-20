@@ -33,6 +33,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class MwonvuliAcidMoss extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
         
         FilterLandCard filterForest = new FilterLandCard();
-        filterForest.add(new SubtypePredicate("Forest"));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
         
         // Destroy target land. Search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

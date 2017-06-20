@@ -119,7 +119,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
                 && zEvent.getToZone() == Zone.GRAVEYARD
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
                 && !(permanent instanceof PermanentToken)
-                && permanent.getCardType().contains(CardType.CREATURE)) {
+                && permanent.isCreature()) {
 
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
             return true;
@@ -158,7 +158,7 @@ class NimDeathmantleEffect extends OneShotEffect {
                     if (target != null) {
                         Card card = game.getCard(target);
                         // check if it's still in graveyard
-                        if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                                 Permanent permanent = game.getPermanent(card.getId());
                                 if (permanent != null) {

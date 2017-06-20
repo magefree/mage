@@ -27,17 +27,19 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +49,7 @@ public class GoldmeadowStalwart extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Kithkin card from your hand");
     static {
-        filter.add(new SubtypePredicate("Kithkin"));
+        filter.add(new SubtypePredicate(SubType.KITHKIN));
     }
 
     public GoldmeadowStalwart(UUID ownerId, CardSetInfo setInfo) {

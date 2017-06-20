@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -57,8 +58,8 @@ public class LysAlanaScarblade extends CardImpl {
     private static final FilterCard filter2 = new FilterCard("an Elf card");
 
     static {
-        filter1.add(new SubtypePredicate("Elf"));
-        filter2.add(new SubtypePredicate("Elf"));
+        filter1.add(new SubtypePredicate(SubType.ELF));
+        filter2.add(new SubtypePredicate(SubType.ELF));
     }
 
     public LysAlanaScarblade(UUID ownerId, CardSetInfo setInfo) {

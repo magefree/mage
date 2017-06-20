@@ -29,6 +29,7 @@
 package mage.cards.l;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -48,13 +49,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LeylineOfTheVoid extends CardImpl {
 
     public LeylineOfTheVoid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
@@ -93,30 +93,29 @@ class LeylineOfTheVoidEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (((ZoneChangeEvent)event).getFromZone().equals(Zone.BATTLEFIELD)) {
-                Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+                Permanent permanent = ((ZoneChangeEvent) event).getTarget();
                 if (permanent != null) {
                     return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 }
-            }
-            else {
+            } else {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent)event).getFromZone(), true);
+                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true);
                 }
             }
         }
         return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ZONE_CHANGE;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
+        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) {
                 return true;

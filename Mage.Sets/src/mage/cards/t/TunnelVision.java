@@ -104,7 +104,7 @@ class TunnelVisionEffect extends OneShotEffect {
         // if named card found, put all revealed cards in grave and put named card on top of library
         // if named card not found, shuffle library
         boolean namedCardFound = false;
-        while (targetPlayer.getLibrary().size() > 0) {
+        while (targetPlayer.getLibrary().hasCards()) {
             Card card = targetPlayer.getLibrary().removeFromTop(game);
             if (card != null) {
                 cardsToReveal.add(card);

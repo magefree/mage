@@ -57,7 +57,8 @@ public class ChatPanelSeparated extends ChatPanelBasic {
     public void receiveMessage(String username, String message, String time, ChatMessage.MessageType messageType, ChatMessage.MessageColor color) {
         switch (messageType) {
             case TALK:
-            case WHISPER:
+            case WHISPER_TO:
+            case WHISPER_FROM:
             case USER_INFO:
                 super.receiveMessage(username, message, time, messageType, color);
                 return;
@@ -87,10 +88,10 @@ public class ChatPanelSeparated extends ChatPanelBasic {
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
         }
-        if (color.equals(ChatMessage.MessageColor.ORANGE)) {
+        if (color == ChatMessage.MessageColor.ORANGE) {
             textColor = "Orange";
         }
-        if (color.equals(ChatMessage.MessageColor.YELLOW)) {
+        if (color == ChatMessage.MessageColor.YELLOW) {
             textColor = "Yellow";
         }
         if (username != null && !username.isEmpty()) {

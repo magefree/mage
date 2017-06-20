@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,10 +42,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +59,7 @@ public class GhosthelmCourier extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizard creature");
 
     static {
-        filter.add(new SubtypePredicate("Wizard"));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
     }
 
     public GhosthelmCourier(UUID ownerId, CardSetInfo setInfo) {
@@ -71,10 +73,10 @@ public class GhosthelmCourier extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}{U}, {tap}: Target Wizard creature gets +2/+2 and has shroud for as long as Ghosthelm Courier remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.getInstance(),
+            new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.instance,
             "target Wizard creature gets +2/+2"), new ManaCostsImpl("{2}{U}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(ShroudAbility.getInstance(),
-            Duration.Custom), SourceTappedCondition.getInstance(),"and has shroud for as long as {this} remains tapped"));
+            Duration.Custom), SourceTappedCondition.instance,"and has shroud for as long as {this} remains tapped"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

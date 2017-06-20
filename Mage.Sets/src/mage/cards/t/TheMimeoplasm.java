@@ -34,17 +34,12 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -57,8 +52,8 @@ import mage.target.common.TargetCardInGraveyard;
 public class TheMimeoplasm extends CardImpl {
 
     public TheMimeoplasm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}{B}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{B}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Ooze");
 
         this.power = new MageInt(0);
@@ -101,10 +96,12 @@ class TheMimeoplasmEffect extends OneShotEffect {
             if (new CardsInAllGraveyardsCount(new FilterCreatureCard()).calculate(game, source, this) >= 2) {
                 if (controller.chooseUse(Outcome.Benefit, "Do you want to exile two creature cards from graveyards?", source, game)) {
                     TargetCardInGraveyard targetCopy = new TargetCardInGraveyard(new FilterCreatureCard("creature card to become a copy of"));
-                    TargetCardInGraveyard targetCounters = new TargetCardInGraveyard(new FilterCreatureCard("creature card to determine amount of additional +1/+1 counters"));
                     if (controller.choose(Outcome.Copy, targetCopy, source.getSourceId(), game)) {
                         Card cardToCopy = game.getCard(targetCopy.getFirstTarget());
                         if (cardToCopy != null) {
+                            FilterCreatureCard filter = new FilterCreatureCard("creature card to determine amount of additional +1/+1 counters");
+                            filter.add(Predicates.not(new CardIdPredicate(cardToCopy.getId())));
+                            TargetCardInGraveyard targetCounters = new TargetCardInGraveyard(filter);
                             if (controller.choose(Outcome.Copy, targetCounters, source.getSourceId(), game)) {
                                 Card cardForCounters = game.getCard(targetCounters.getFirstTarget());
                                 if (cardForCounters != null) {

@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.AwakenAbility;
@@ -40,6 +39,8 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +92,7 @@ class EncirclingFissurePreventEffect extends PreventionEffectImpl {
             if (damageEvent.isCombatDamage()) {
                 Permanent permanent = game.getPermanent(damageEvent.getSourceId());
                 if (permanent != null
-                        && permanent.getCardType().contains(CardType.CREATURE)
+                        && permanent.isCreature()
                         && permanent.getControllerId().equals(getTargetPointer().getFirst(game, source))) {
                     return true;
                 }

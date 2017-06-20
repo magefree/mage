@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -44,6 +43,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +71,7 @@ public class Chronozoa extends CardImpl {
         Effect effect = new PutTokenOntoBattlefieldCopySourceEffect(2);
         effect.setText("create two tokens that are copies of it");
         this.addAbility(new ConditionalTriggeredAbility(new DiesCreatureTriggeredAbility(effect, false),
-                new LastTimeCounterRemovedCondition(),
+                LastTimeCounterRemovedCondition.instance,
                 "When {this} dies, if it had no time counters on it, create two tokens that are copies of it."));
     }
 

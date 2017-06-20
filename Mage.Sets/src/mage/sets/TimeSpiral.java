@@ -1,20 +1,21 @@
 package mage.sets;
 
-import java.util.List;
 import mage.cards.Card;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-import mage.cards.CardGraphicInfo;
+
+import java.util.List;
 
 public class TimeSpiral extends ExpansionSet {
 
-    private static final TimeSpiral fINSTANCE = new TimeSpiral();
+    private static final TimeSpiral instance = new TimeSpiral();
 
     public static TimeSpiral getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private TimeSpiral() {

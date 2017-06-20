@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -43,6 +42,8 @@ import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,11 +90,11 @@ class CellarDoorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null && player.getLibrary().size() > 0) {
+        if (player != null && player.getLibrary().hasCards()) {
             Card card = player.getLibrary().removeFromBottom(game);
             if (card != null) {
                 player.moveCards(card, Zone.GRAVEYARD, source, game);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     ZombieToken token = new ZombieToken();
                     token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
                 }

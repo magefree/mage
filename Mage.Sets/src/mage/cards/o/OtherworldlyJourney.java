@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class OtherworldlyJourney extends CardImpl {
 
     public OtherworldlyJourney(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.subtype.add("Arcane");
 
         // Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
@@ -169,7 +169,7 @@ class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.ENTERS_THE_BATTLEFIELD.equals(event.getType());
+        return EventType.ENTERS_THE_BATTLEFIELD == event.getType();
     }
 
     @Override
@@ -184,7 +184,7 @@ class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
             discard(); // use only once
         }
         return false;

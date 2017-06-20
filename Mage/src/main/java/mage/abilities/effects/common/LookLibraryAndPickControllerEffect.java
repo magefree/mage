@@ -190,7 +190,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 if (player.choose(Outcome.DrawCard, cards, target, game)) {
                     Cards pickedCards = new CardsImpl(target.getTargets());
                     cards.removeAll(pickedCards);
-                    if (targetPickedCards.equals(Zone.LIBRARY) && !putOnTopSelected) {
+                    if (targetPickedCards == Zone.LIBRARY && !putOnTopSelected) {
                         player.putCardsOnBottomOfLibrary(pickedCards, game, source, true);
                     } else {
                         player.moveCards(pickedCards.getCards(game), targetPickedCards, source, game);
@@ -263,7 +263,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             if (revealPickedCards) {
                 sb.append(". You may reveal ");
                 sb.append(filter.getMessage()).append(" from among them and put it into your ");
-            } else if (targetPickedCards.equals(Zone.BATTLEFIELD)) {
+            } else if (targetPickedCards == Zone.BATTLEFIELD) {
                 sb.append(". You ");
                 if (optional) {
                     sb.append("may ");

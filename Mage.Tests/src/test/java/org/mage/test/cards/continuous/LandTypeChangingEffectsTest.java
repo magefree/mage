@@ -32,6 +32,7 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -128,7 +129,74 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         assertCounterCount("Forbidding Watchtower", CounterType.FLOOD, 1);
         assertType("Forbidding Watchtower", CardType.LAND, "Island");
         assertPowerToughness(playerB, "Forbidding Watchtower", 1, 5);
+    }
+    
+    String urborgtoy = "Urborg, Tomb of Yawgmoth";
+    String bloodmoon = "Blood Moon";
+    String canopyvista = "Canopy Vista";
 
+    /*
+    NOTE: this test is currently failing due to bug in code. See issue #3072
+    */
+    @Test
+    public void testBloodMoonBeforeUrborg() {
+        // Blood Moon   2R
+        // Enchantment
+        // Nonbasic lands are Mountains
+        addCard(Zone.HAND, playerA, bloodmoon);
+        // Each land is a Swamp in addition to its other land types.
+        addCard(Zone.HAND, playerA, urborgtoy);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        addCard(Zone.BATTLEFIELD, playerB, canopyvista, 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bloodmoon);
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, urborgtoy);
+        
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, bloodmoon, 1);
+        assertPermanentCount(playerA, urborgtoy, 1);
+        assertType(canopyvista, CardType.LAND, "Mountain");
+        assertNotSubtype(canopyvista, "Island");
+        assertNotSubtype(canopyvista, "Swamp");
+        assertType(urborgtoy, CardType.LAND, "Mountain");
+        assertNotSubtype(urborgtoy, "Swamp");
+        Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
+    }
+
+    /*
+    NOTE: this test is currently failing due to bug in code. See issue #3072
+    */
+    @Test
+    public void testBloodMoonAfterUrborg() {
+        // Blood Moon   2R
+        // Enchantment
+        // Nonbasic lands are Mountains
+        addCard(Zone.HAND, playerA, bloodmoon);
+        // Each land is a Swamp in addition to its other land types.
+        addCard(Zone.HAND, playerA, urborgtoy);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        addCard(Zone.BATTLEFIELD, playerB, canopyvista, 1);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, urborgtoy);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, bloodmoon);
+        
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, bloodmoon, 1);
+        assertPermanentCount(playerA, urborgtoy, 1);
+        assertType(canopyvista, CardType.LAND, "Mountain");
+        assertNotSubtype(canopyvista, "Island");
+        assertNotSubtype(canopyvista, "Swamp");
+        assertType(urborgtoy, CardType.LAND, "Mountain");
+        assertNotSubtype(urborgtoy, "Swamp");
+        Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
     }
 
 }

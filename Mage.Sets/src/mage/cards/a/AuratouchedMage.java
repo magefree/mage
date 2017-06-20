@@ -27,18 +27,14 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,6 +43,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -94,7 +92,7 @@ class AuratouchedMageEffect extends OneShotEffect {
         Permanent auratouchedMage = game.getPermanentOrLKIBattlefield(source.getSourceId()); //must be LKI to resolve
         if (controller != null && auratouchedMage != null) {
             FilterCard filter = new FilterCard("aura that could enchant " + auratouchedMage.getName());
-            filter.add(new SubtypePredicate("Aura"));
+            filter.add(new SubtypePredicate(SubType.AURA));
             filter.add(new AuraCardCanAttachToLKIPermanentId(auratouchedMage.getId()));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             target.setNotTarget(true);

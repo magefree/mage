@@ -88,7 +88,7 @@ public class MimicVatTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
 
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
-        addCard(Zone.HAND, playerA, "Phyrexian Metamorph", 1);// Creature {3}{UP}
+        addCard(Zone.HAND, playerA, "Phyrexian Metamorph", 1);// Creature {3}{U/P}
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 

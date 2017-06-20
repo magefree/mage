@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -51,7 +52,7 @@ public class StrengthOfNight extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public StrengthOfNight(UUID ownerId, CardSetInfo setInfo) {
@@ -62,7 +63,7 @@ public class StrengthOfNight extends CardImpl {
         // Creatures you control get +1/+1 until end of turn. If Strength of Night was kicked, Zombie creatures you control get an additional +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         ContinuousEffect effect = new BoostControlledEffect(2, 2, Duration.EndOfTurn, filter);
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(effect, new LockedInCondition(KickedCondition.getInstance()),
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(effect, new LockedInCondition(KickedCondition.instance),
             "If {this} was kicked, Zombie creatures you control get an additional +2/+2 until end of turn."));
     }
 

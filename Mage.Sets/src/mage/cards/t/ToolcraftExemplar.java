@@ -30,10 +30,10 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -64,7 +64,7 @@ public class ToolcraftExemplar extends CardImpl {
         // If you control at least 3 artifacts, it also gains first strike until end of turn.
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
-                new LockedInCondition(new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), CountType.MORE_THAN, 2)), null);
+                new LockedInCondition(new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.MORE_THAN, 2)), null);
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(new BoostSourceEffect(2, 1, Duration.EndOfTurn), TargetController.YOU, false),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()),

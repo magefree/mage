@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,19 +43,20 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class GroundSeal extends CardImpl {
 
     public GroundSeal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
 
         // When Ground Seal enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
-        
+
         // Cards in graveyards can't be the targets of spells or abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GroundSealEffect()));
     }
@@ -96,10 +96,10 @@ class GroundSealEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.TARGET) {
             Card targetCard = game.getCard(event.getTargetId());
-            StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
+            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
             if (targetCard != null && stackObject != null) {
                 Zone zone = game.getState().getZone(targetCard.getId());
-                if (zone != null && zone.equals(Zone.GRAVEYARD)) {
+                if (zone != null && zone == Zone.GRAVEYARD) {
                     return true;
                 }
             }

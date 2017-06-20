@@ -27,16 +27,18 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +49,7 @@ public class FaerieTrickery extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("non-Faerie spell");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Faerie")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.FAERIE)));
     }
 
     public FaerieTrickery(UUID ownerId, CardSetInfo setInfo) {

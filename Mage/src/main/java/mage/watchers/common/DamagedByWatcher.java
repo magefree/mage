@@ -30,6 +30,7 @@ package mage.watchers.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.constants.WatcherScope;
@@ -40,7 +41,6 @@ import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DamagedByWatcher extends Watcher {
@@ -54,7 +54,7 @@ public class DamagedByWatcher extends Watcher {
     }
 
     public DamagedByWatcher(boolean watchPlaneswalkers) {
-        super("DamagedByWatcher", WatcherScope.CARD);
+        super(DamagedByWatcher.class.getSimpleName(), WatcherScope.CARD);
         this.watchPlaneswalkers = watchPlaneswalkers;
     }
 
@@ -72,12 +72,11 @@ public class DamagedByWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         boolean eventHasAppropriateType = (event.getType() == EventType.DAMAGED_CREATURE) ||
-                                          (watchPlaneswalkers && event.getType() == EventType.DAMAGED_PLANESWALKER);
+                (watchPlaneswalkers && event.getType() == EventType.DAMAGED_PLANESWALKER);
         if (eventHasAppropriateType && sourceId.equals(event.getSourceId())) {
             MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
-            if (!damagedBySource.contains(mor)) {
-                damagedBySource.add(mor);
-            }
+            damagedBySource.add(mor);
+
         }
     }
 

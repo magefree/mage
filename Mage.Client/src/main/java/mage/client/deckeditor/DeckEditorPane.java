@@ -53,11 +53,10 @@ public class DeckEditorPane extends MagePane {
      * Creates new form TablesPane
      */
     public DeckEditorPane() {
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         boolean initialized = false;
-        if (Plugins.getInstance().isThemePluginLoaded()) {
+        if (Plugins.instance.isThemePluginLoaded()) {
             Map<String, JComponent> uiMap = new HashMap<>();
-            JComponent container = Plugins.getInstance().updateTablePanel(uiMap);
+            JComponent container = Plugins.instance.updateTablePanel(uiMap);
             if (container != null) {
                 deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
                 initComponents(container);
@@ -81,6 +80,8 @@ public class DeckEditorPane extends MagePane {
     public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
         if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
             this.setTitle("Deck Editor - " + tableId.toString());
+        } else if (mode == DeckEditorMode.VIEW_LIMITED_DECK) {
+            this.setTitle("Deck Editor - Current Deck");
         } else if (deck != null) {
             this.setTitle("Deck Editor - " + deck.getName());
         } else {
@@ -105,8 +106,8 @@ public class DeckEditorPane extends MagePane {
 
         deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(deckEditorPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
@@ -115,14 +116,12 @@ public class DeckEditorPane extends MagePane {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(deckEditorPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void initComponents(Component container) {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
@@ -132,7 +131,7 @@ public class DeckEditorPane extends MagePane {
                 .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
         );
 
-        pack();
+
     }
 
     public DeckEditorPanel getPanel() {

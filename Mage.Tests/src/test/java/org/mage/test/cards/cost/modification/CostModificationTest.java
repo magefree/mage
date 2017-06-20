@@ -57,7 +57,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         // Look at target player's hand.
         // Draw a card.
-        addCard(Zone.HAND, playerB, "Gitaxian Probe"); // Sorcery {UP}
+        addCard(Zone.HAND, playerB, "Gitaxian Probe"); // Sorcery {U/P}
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Gitaxian Probe", playerA);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -114,7 +114,7 @@ public class CostModificationTest extends CardTestPlayerBase {
     }
 
     /*
-     I had Goblin Electromancer, but somehow Pyretic Ritual wasn't cheaper howeverDesperate Ritual was.
+     I had Goblin Electromancer, but somehow Pyretic Ritual wasn't cheaper however Desperate Ritual was.
      */
     @Test
     public void testCostReductionForPyreticRitual() {
@@ -139,5 +139,45 @@ public class CostModificationTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Pyretic Ritual", 1);
         assertGraveyardCount(playerA, "Fated Conflagration", 1);
         assertGraveyardCount(playerB, "Carnivorous Moss-Beast", 1);
+    }
+    
+    /*
+    * Reported bug: Grand Arbiter Augustin IV makes moth spells you cast and your opponent cast {1} more. Should only affect opponent's spells costs.
+    */
+    @Test
+    public void testArbiterIncreasingCostBothPlayers() {
+        
+        String gArbiter = "Grand Arbiter Augustin IV";
+        String divination = "Divination";
+        String doomBlade = "Doom Blade";
+                
+        /*
+        Grand Arbiter Augustin IV {2}{W}{U} 
+            2/3 Legendary Creature - Human Advisor
+            White spells you cast cost 1 less to cast.
+            Blue spells you cast cost 1 less to cast.
+            Spells your opponents cast cost 1 more to cast.
+        */
+        addCard(Zone.BATTLEFIELD, playerA, gArbiter);
+        addCard(Zone.HAND, playerA, divination); // {2}{U} Sorcery: draw two cards
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        
+        addCard(Zone.HAND, playerB, doomBlade);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2); // {1}{B} Instant: destroy target non-black creature
+        
+        // Divination should only cost {1}{U} now with the cost reduction in place for your blue spells.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, divination);
+        
+        // Doom Blade cast by the opponent should cost {2}{B} now with the cost increase in effect for opponent spells.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, doomBlade, gArbiter);
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertGraveyardCount(playerA, divination, 1);
+        assertHandCount(playerA, 2);
+        assertTappedCount("Island", true, 2);
+        assertPermanentCount(playerA, gArbiter, 1);
+        assertHandCount(playerB, doomBlade, 1);
     }
 }

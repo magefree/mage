@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -37,12 +36,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.token.SpiderToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +55,7 @@ public class Arachnogenesis extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Spider creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Spider")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.SPIDER)));
     }
 
     public Arachnogenesis(UUID ownerId, CardSetInfo setInfo) {

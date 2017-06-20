@@ -29,18 +29,17 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:01
  */
 public class Guildpact extends ExpansionSet {
-    private static final Guildpact fINSTANCE = new Guildpact();
+    private static final Guildpact instance = new Guildpact();
 
     public static Guildpact getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Guildpact() {
@@ -87,6 +86,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Fencer's Magemark", 65, Rarity.COMMON, mage.cards.f.FencersMagemark.class));
         cards.add(new SetCardInfo("Feral Animist", 112, Rarity.UNCOMMON, mage.cards.f.FeralAnimist.class));
         cards.add(new SetCardInfo("Frazzle", 25, Rarity.UNCOMMON, mage.cards.f.Frazzle.class));
+        cards.add(new SetCardInfo("Gatherer of Graces", 85, Rarity.UNCOMMON, mage.cards.g.GathererOfGraces.class));
         cards.add(new SetCardInfo("Gelectrode", 113, Rarity.UNCOMMON, mage.cards.g.Gelectrode.class));
         cards.add(new SetCardInfo("Ghor-Clan Bloodscale", 66, Rarity.UNCOMMON, mage.cards.g.GhorClanBloodscale.class));
         cards.add(new SetCardInfo("Ghor-Clan Savage", 86, Rarity.COMMON, mage.cards.g.GhorClanSavage.class));
@@ -141,6 +141,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Pontiff", 124, Rarity.RARE, mage.cards.o.OrzhovPontiff.class));
         cards.add(new SetCardInfo("Orzhov Signet", 155, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Ostiary Thrull", 55, Rarity.COMMON, mage.cards.o.OstiaryThrull.class));
+        cards.add(new SetCardInfo("Parallectric Feedback", 71, Rarity.RARE, mage.cards.p.ParallectricFeedback.class));
         cards.add(new SetCardInfo("Petrahydrox", 148, Rarity.COMMON, mage.cards.p.Petrahydrox.class));
         cards.add(new SetCardInfo("Pillory of the Sleepless", 125, Rarity.COMMON, mage.cards.p.PilloryOfTheSleepless.class));
         cards.add(new SetCardInfo("Plagued Rusalka", 56, Rarity.UNCOMMON, mage.cards.p.PlaguedRusalka.class));

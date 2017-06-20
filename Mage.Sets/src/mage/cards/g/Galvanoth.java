@@ -27,30 +27,26 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public class Galvanoth extends CardImpl {
 
     public Galvanoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(3);
@@ -84,12 +80,12 @@ class GalvanothEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLibrary().size() > 0) {
+        if (controller != null && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             controller.lookAtCards("Galvanoth", cards, game);
 
-            if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
+            if (card.isInstant() || card.isSorcery()) {
                 StringBuilder message = new StringBuilder("Cast ").append(card.getName()).append(" without paying its mana cost?");
                 if (controller.chooseUse(Outcome.PlayForFree, message.toString(), source, game)) {
                     controller.getLibrary().removeFromTop(game);

@@ -27,7 +27,6 @@
  */
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -36,14 +35,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,7 +68,7 @@ public class YixlidJailer extends CardImpl {
         return new YixlidJailer(this);
     }
 
-    class YixlidJailerEffect extends ContinuousEffectImpl {
+    static class YixlidJailerEffect extends ContinuousEffectImpl {
 
         YixlidJailerEffect() {
             super(Duration.WhileOnBattlefield, Outcome.LoseAbility);

@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,10 +35,13 @@ import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +59,7 @@ public class GoblinChirurgeon extends CardImpl {
         // Sacrifice a Goblin: Regenerate target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new RegenerateTargetEffect(),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("Goblin","a Goblin"))));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent(SubType.GOBLIN,"a Goblin"))));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

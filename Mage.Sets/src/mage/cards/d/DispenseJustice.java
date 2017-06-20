@@ -28,18 +28,19 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,7 +85,7 @@ class DispenseJusticeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if ( MetalcraftCondition.getInstance().apply(game, source) ) {
+        if ( MetalcraftCondition.instance.apply(game, source) ) {
             return new SacrificeEffect(filter, 2, effectText).apply(game, source);
         }
         else {

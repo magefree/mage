@@ -1,21 +1,20 @@
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
 import mage.cards.FrameStyle;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author magenoxx
  */
 public class Unhinged extends ExpansionSet {
-    private static final Unhinged fINSTANCE = new Unhinged();
+    private static final Unhinged instance = new Unhinged();
 
     public static Unhinged getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Unhinged() {

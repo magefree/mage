@@ -5,7 +5,9 @@
  */
 package mage.util.functions;
 
+import java.util.UUID;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -22,7 +24,7 @@ public class AddSubtypeApplier extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         if (!permanent.getSubtype(game).contains(subtype)) {
             permanent.getSubtype(game).add(subtype);
         }
@@ -30,7 +32,7 @@ public class AddSubtypeApplier extends ApplyToPermanent {
     }
 
     @Override
-    public Boolean apply(Game game, MageObject mageObject) {
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         if (!mageObject.getSubtype(game).contains(subtype)) {
             mageObject.getSubtype(game).add(subtype);
         }

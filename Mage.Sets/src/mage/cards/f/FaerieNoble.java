@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,9 +39,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +55,7 @@ public class FaerieNoble extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Faerie creatures");
 
     static {
-        filter.add(new SubtypePredicate("Faerie"));
+        filter.add(new SubtypePredicate(SubType.FAERIE));
     }
 
     public FaerieNoble(UUID ownerId, CardSetInfo setInfo) {

@@ -41,7 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WingmateRocToken;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
@@ -51,7 +51,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
 public class WingmateRoc extends CardImpl {
 
     public WingmateRoc(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(3);
@@ -61,7 +61,7 @@ public class WingmateRoc extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // <em>Raid</em> - When Wingmate Roc enters the battlefield, if you attacked with a creature this turn, create a 3/4 white Bird creature token with flying.
-        this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WingmateRocToken())), RaidCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WingmateRocToken())), RaidCondition.instance,
                 "<i>Raid</i> -  When {this} enters the battlefield, if you attacked with a creature this turn, create a 3/4 white Bird creature token with flying."),
                 new PlayerAttackedWatcher());
 
@@ -78,18 +78,5 @@ public class WingmateRoc extends CardImpl {
     @Override
     public WingmateRoc copy() {
         return new WingmateRoc(this);
-    }
-}
-
-class WingmateRocToken extends Token {
-
-    WingmateRocToken() {
-        super("Bird", "3/4 white Bird creature token with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Bird");
-        color.setWhite(true);
-        power = new MageInt(3);
-        toughness = new MageInt(4);
-        addAbility(FlyingAbility.getInstance());
     }
 }

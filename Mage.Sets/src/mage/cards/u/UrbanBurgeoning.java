@@ -106,7 +106,7 @@ class UrbanBurgeoningUntapEffect extends ContinuousEffectImpl {
         if (applied == null) {
             applied = Boolean.FALSE;
         }
-        if (!applied && layer.equals(Layer.RulesEffects)) {
+        if (!applied && layer == Layer.RulesEffects) {
             if (!game.getActivePlayerId().equals(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
                 Permanent land = game.getPermanent(source.getSourceId());
@@ -118,7 +118,7 @@ class UrbanBurgeoningUntapEffect extends ContinuousEffectImpl {
                     land.untap(game);
                 }
             }
-        } else if (applied && layer.equals(Layer.RulesEffects)) {
+        } else if (applied && layer == Layer.RulesEffects) {
             if (game.getStep().getType() == PhaseStep.END_TURN) {
                 game.getState().setValue(source.getSourceId() + "applied", false);
             }

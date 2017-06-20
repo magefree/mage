@@ -28,6 +28,7 @@
 package mage.cards.i;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -58,7 +59,7 @@ public class IllusionistsGambit extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         // Cast Illusionist's Gambit only during the declare blockers step on an opponent's turn.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS, OnOpponentsTurnCondition.getInstance()));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS, OnOpponentsTurnCondition.instance));
 
         // Remove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or a planeswalker you control that combat.
         this.getSpellAbility().addEffect(new IllusionistsGambitRemoveFromCombatEffect());
@@ -146,8 +147,8 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getTurn().getStepType().equals(PhaseStep.END_COMBAT)) {
-            if (!game.getTurn().getPhase().equals(phase)) {
+        if (game.getTurn().getStepType() == PhaseStep.END_COMBAT) {
+            if (!Objects.equals(game.getTurn().getPhase(), phase)) {
                 return true;
             }
         }
@@ -190,8 +191,8 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getTurn().getStepType().equals(PhaseStep.END_COMBAT)) {
-            if (!game.getTurn().getPhase().equals(phase)) {
+        if (game.getTurn().getStepType() == PhaseStep.END_COMBAT) {
+            if (!Objects.equals(game.getTurn().getPhase(), phase)) {
                 return true;
             }
         }
@@ -206,7 +207,7 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
         // planeswalker
         Permanent permanent = game.getPermanent(defenderId);
         if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                && permanent.getCardType().contains(CardType.PLANESWALKER)) {
+                && permanent.isPlaneswalker()) {
             return false;
         }
         return true;

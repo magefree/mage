@@ -27,7 +27,7 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -37,11 +37,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetCreaturePermanentAmount;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class AbzanCharm extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature with power 3 or greater");
 
     static {
-        FILTER.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
+        FILTER.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public AbzanCharm(UUID ownerId, CardSetInfo setInfo) {

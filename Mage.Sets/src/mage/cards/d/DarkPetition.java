@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -38,6 +37,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +54,7 @@ public class DarkPetition extends CardImpl {
 
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B} to your mana pool.
         Effect effect = new ConditionalOneShotEffect(new AddManaToManaPoolSourceControllerEffect(Mana.BlackMana(3)),
-                SpellMasteryCondition.getInstance(), "<br><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B} to your mana pool");
+                SpellMasteryCondition.instance, "<br><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B} to your mana pool");
         this.getSpellAbility().addEffect(effect);
 
     }

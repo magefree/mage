@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PatagiaViperSnakeToken;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
@@ -48,7 +48,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
 public class PatagiaViper extends CardImpl {
 
     public PatagiaViper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add("Snake");
 
         this.power = new MageInt(2);
@@ -56,10 +56,10 @@ public class PatagiaViper extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Patagia Viper enters the battlefield, create two 1/1 green and blue Snake creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PatagiaViperSnakeToken(), 2), false));
-        
+
         // When Patagia Viper enters the battlefield, sacrifice it unless {U} was spent to cast it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false), new ManaSpentToCastWatcher());
     }
@@ -72,18 +72,4 @@ public class PatagiaViper extends CardImpl {
     public PatagiaViper copy() {
         return new PatagiaViper(this);
     }
-}
-
-class PatagiaViperSnakeToken extends Token {
-
-    PatagiaViperSnakeToken() {
-        super("Snake", "1/1 green and blue Snake creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        color.setBlue(true);
-        subtype.add("Snake");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-
 }

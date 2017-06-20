@@ -27,16 +27,16 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.constants.CardType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.ObjectPlayer;
@@ -50,6 +50,8 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.TargetAddress;
 
+import java.util.UUID;
+
 /**
  * @author duncant
  */
@@ -60,7 +62,7 @@ public class AuraGraft extends CardImpl {
 
         // Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
         FilterPermanent filter = new FilterPermanent("Aura that's attached to a permanent");
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
         filter.add(new AttachedToPermanentPredicate());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 

@@ -95,7 +95,7 @@ class VengevineAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(controllerId)) {
-            Watcher watcher = game.getState().getWatchers().get("CreatureCast", controllerId);
+            Watcher watcher = game.getState().getWatchers().get(VengevineWatcher.class.getSimpleName(), controllerId);
             if (watcher != null && watcher.conditionMet()) {
                 return true;
             }
@@ -116,7 +116,7 @@ class VengevineWatcher extends Watcher {
     int creatureSpellCount = 0;
 
     public VengevineWatcher() {
-        super("CreatureCast", WatcherScope.PLAYER);
+        super(VengevineWatcher.class.getSimpleName(), WatcherScope.PLAYER);
     }
 
     public VengevineWatcher(final VengevineWatcher watcher) {
@@ -134,7 +134,7 @@ class VengevineWatcher extends Watcher {
         condition = false;
         if (event.getType() == EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
+            if (spell != null && spell.isCreature()) {
                 creatureSpellCount++;
                 if (creatureSpellCount == 2)
                     condition = true;

@@ -28,7 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,10 +41,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HammerOfPurphorosGolemToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -55,13 +55,13 @@ import mage.target.common.TargetControlledPermanent;
 public class HammerOfPurphoros extends CardImpl {
 
     public HammerOfPurphoros(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.ARTIFACT},"{1}{R}{R}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{1}{R}{R}");
+        addSuperType(SuperType.LEGENDARY);
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
-        
+
         // {2}{R}, {tap}, Sacrifice a land: Create a 3/3 colorless Golem enchantment artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HammerOfPurphorosGolemToken()), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new TapSourceCost());
@@ -76,18 +76,5 @@ public class HammerOfPurphoros extends CardImpl {
     @Override
     public HammerOfPurphoros copy() {
         return new HammerOfPurphoros(this);
-    }
-}
-class HammerOfPurphorosGolemToken extends Token {
-
-    public HammerOfPurphorosGolemToken() {
-        super("Golem", "3/3 colorless Golem enchantment artifact creature token");
-        setOriginalExpansionSetCode("THS");
-        cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Golem");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
     }
 }

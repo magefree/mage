@@ -27,9 +27,9 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -37,13 +37,11 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterSpiritOrArcaneCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -52,8 +50,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class SkyfireKirin extends CardImpl {
@@ -61,8 +60,8 @@ public class SkyfireKirin extends CardImpl {
     private final UUID originalId;
 
     public SkyfireKirin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Kirin");
         this.subtype.add("Spirit");
 
@@ -86,6 +85,7 @@ public class SkyfireKirin extends CardImpl {
                 int cmc = spell.getConvertedManaCost();
                 ability.getTargets().clear();
                 FilterPermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with converted mana costs of ").append(cmc).toString());
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
                 Target target = new TargetPermanent(filter);
                 ability.addTarget(target);
             }

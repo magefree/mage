@@ -61,7 +61,7 @@ public class PhyrexianMetamorph extends CardImpl {
     }
 
     public PhyrexianMetamorph(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{UP}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U/P}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);
@@ -69,21 +69,21 @@ public class PhyrexianMetamorph extends CardImpl {
 
         ApplyToPermanent phyrexianMetamorphApplier = new ApplyToPermanent() {
             @Override
-            public Boolean apply(Game game, Permanent permanent) {
-                return apply(game, (MageObject) permanent);
+            public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+                return apply(game, (MageObject) permanent, source, copyToObjectId);
             }
 
             @Override
-            public Boolean apply(Game game, MageObject mageObject) {
-                if (!mageObject.getCardType().contains(CardType.ARTIFACT)) {
-                    mageObject.getCardType().add(CardType.ARTIFACT);
+            public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+                if (!mageObject.isArtifact()) {
+                    mageObject.addCardType(CardType.ARTIFACT);
                 }
                 return true;
             }
 
         };
 
-        // {UP} ( can be paid with either {U} or 2 life.)
+        // {U/P} ( can be paid with either {U} or 2 life.)
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
         Effect effect = new CopyPermanentEffect(filter, phyrexianMetamorphApplier);
         effect.setText("You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types");

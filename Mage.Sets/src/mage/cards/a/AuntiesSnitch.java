@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.CantBlockAbility;
@@ -36,6 +35,7 @@ import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -47,6 +47,8 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -85,7 +87,7 @@ class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin or Rogue you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.or(new SubtypePredicate("Goblin"), new SubtypePredicate("Rogue")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.GOBLIN), new SubtypePredicate(SubType.ROGUE)));
     }
 
     public AuntiesSnitchTriggeredAbility() {

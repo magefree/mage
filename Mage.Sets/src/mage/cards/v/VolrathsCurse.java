@@ -63,7 +63,7 @@ import static mage.cards.v.VolrathsCurse.keyString;
  */
 public class VolrathsCurse extends CardImpl {
 
-    public static final String keyString = "_ignoreEffectForTurn";
+    static final String keyString = "_ignoreEffectForTurn";
 
     public VolrathsCurse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

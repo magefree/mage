@@ -27,12 +27,13 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.mana.AnyColorLandsProduceManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *

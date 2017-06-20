@@ -30,9 +30,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -62,7 +60,7 @@ public class SmeltWardGatekeepers extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("creature an opponent controls");
     static {
-        filter.add(new SubtypePredicate("Gate"));
+        filter.add(new SubtypePredicate(SubType.GATE));
         targetFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
@@ -77,7 +75,7 @@ public class SmeltWardGatekeepers extends CardImpl {
         // When Smelt-Ward Gatekeepers enters the battlefield, if you control two or more Gates, gain control of target creature an opponent controls until end of turn. Untap that creature. That creature gains haste until end of turn.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn)),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 1),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1),
                 "When {this} enters the battlefield, if you control two or more Gates, gain control of target creature an opponent controls until end of turn. Untap that creature. That creature gains haste until end of turn.");
         ability.addEffect(new UntapTargetEffect());
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));

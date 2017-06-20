@@ -1,16 +1,16 @@
 /*
  *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.tournament;
 
 import java.util.Set;
@@ -34,6 +33,7 @@ import mage.constants.TournamentPlayerState;
 import mage.game.result.ResultProtos.TourneyPlayerProto;
 import mage.game.result.ResultProtos.TourneyQuitStatus;
 import mage.players.Player;
+import mage.players.PlayerType;
 import mage.util.TournamentUtil;
 
 /**
@@ -43,7 +43,7 @@ import mage.util.TournamentUtil;
 public class TournamentPlayer {
 
     protected int points;
-    protected String playerType;
+    protected PlayerType playerType;
     protected TournamentPlayerState state;
     protected String stateInfo;
     protected String disconnectInfo;
@@ -57,7 +57,7 @@ public class TournamentPlayer {
     protected TourneyQuitStatus quitStatus = TourneyQuitStatus.NO_TOURNEY_QUIT;
     protected TournamentPlayer replacedTournamentPlayer;
 
-    public TournamentPlayer(Player player, String playerType) {
+    public TournamentPlayer(Player player, PlayerType playerType) {
         this.player = player;
         this.playerType = playerType;
         this.state = TournamentPlayerState.JOINED;
@@ -70,7 +70,7 @@ public class TournamentPlayer {
         return player;
     }
 
-    public String getPlayerType() {
+    public PlayerType getPlayerType() {
         return playerType;
     }
 
@@ -115,8 +115,14 @@ public class TournamentPlayer {
         this.setState(TournamentPlayerState.WAITING);
     }
 
-    public void updateDeck(Deck deck) {
+    public boolean updateDeck(Deck deck) {
+        // Check if the cards included in the deck are the same as in the original deck
+        boolean validDeck = (getDeck().getDeckCompleteHashCode() == deck.getDeckCompleteHashCode());
+        if (validDeck == false) {
+            deck.getCards().clear(); // Clear the deck so the player cheating looses the game
+        }
         this.deck = deck;
+        return validDeck;
     }
 
     public Deck generateDeck() {
@@ -135,15 +141,13 @@ public class TournamentPlayer {
         deck.getCards().addAll(TournamentUtil.getLands("Swamp", landsPerType, landSets));
         deck.getCards().addAll(TournamentUtil.getLands("Forest", landsPerType, landSets));
         deck.getCards().addAll(TournamentUtil.getLands("Island", landsPerType, landSets));
-        
+
         this.doneConstructing = true;
         this.setState(TournamentPlayerState.WAITING);
-        
+
         return deck;
     }
 
-
-    
     public boolean isDoneConstructing() {
         return this.doneConstructing;
     }
@@ -199,7 +203,7 @@ public class TournamentPlayer {
 
     /**
      * Free resources no longer needed if tournament has ended
-     * 
+     *
      */
     public void CleanUpOnTournamentEnd() {
         this.deck = null;
@@ -214,7 +218,7 @@ public class TournamentPlayer {
             this.setState(TournamentPlayerState.FINISHED);
         }
     }
-    
+
     public boolean isInTournament() {
         return !(this.getState() == TournamentPlayerState.CANCELED)
                 && !(this.getState() == TournamentPlayerState.ELIMINATED)
@@ -232,9 +236,8 @@ public class TournamentPlayer {
     public TourneyPlayerProto toProto() {
         return TourneyPlayerProto.newBuilder()
                 .setName(this.player.getName())
-                .setPlayerType(this.playerType)
+                .setPlayerType(this.playerType.toString())
                 .setQuit(this.quitStatus)
                 .build();
     }
 }
-

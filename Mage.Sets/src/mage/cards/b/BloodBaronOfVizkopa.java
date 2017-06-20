@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -38,15 +37,12 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 public class BloodBaronOfVizkopa extends CardImpl {
 
@@ -140,7 +136,7 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return (layer.equals(Layer.AbilityAddingRemovingEffects_6) || layer.equals(layer.PTChangingEffects_7));
+        return (layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7);
 
     }
 

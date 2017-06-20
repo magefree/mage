@@ -39,12 +39,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.OgreToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -55,8 +56,8 @@ import mage.target.targetpointer.FixedTarget;
 public class KazuulTyrantOfTheCliffs extends CardImpl {
 
     public KazuulTyrantOfTheCliffs(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
 
@@ -145,17 +146,5 @@ class KazuulTyrantOfTheCliffsEffect extends OneShotEffect {
     @Override
     public KazuulTyrantOfTheCliffsEffect copy() {
         return new KazuulTyrantOfTheCliffsEffect(this);
-    }
-}
-
-class OgreToken extends Token {
-
-    OgreToken() {
-        super("Ogre", "3/3 red Ogre creature");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Ogre");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
     }
 }

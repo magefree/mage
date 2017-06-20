@@ -93,7 +93,7 @@ class OpalPalaceWatcher extends Watcher {
     private final String originalId;
 
     public OpalPalaceWatcher(String originalId) {
-        super("ManaPaidFromOpalPalaceWatcher", WatcherScope.CARD);
+        super(OpalPalaceWatcher.class.getSimpleName(), WatcherScope.CARD);
         this.originalId = originalId;
     }
 
@@ -110,7 +110,7 @@ class OpalPalaceWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.MANA_PAYED) {
+        if (event.getType() == GameEvent.EventType.MANA_PAID) {
             if (event.getData() != null && event.getData().equals(originalId)) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null) {
@@ -156,7 +156,7 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        OpalPalaceWatcher watcher = (OpalPalaceWatcher) game.getState().getWatchers().get("ManaPaidFromOpalPalaceWatcher", source.getSourceId());
+        OpalPalaceWatcher watcher = (OpalPalaceWatcher) game.getState().getWatchers().get(OpalPalaceWatcher.class.getSimpleName(), source.getSourceId());
         return watcher != null
                 && watcher.commanderId.contains(event.getTargetId());
     }

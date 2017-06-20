@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 
@@ -62,7 +63,7 @@ public class HibernationSliver extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new PayLifeCost(2));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
-                        new FilterPermanent("Sliver", "All Slivers"), "All Slivers have \"Pay 2 life: Return this permanent to its owner's hand")));
+                        new FilterPermanent(SubType.SLIVER, "All Slivers"), "All Slivers have \"Pay 2 life: Return this permanent to its owner's hand")));
     }
 
     public HibernationSliver(final HibernationSliver card) {

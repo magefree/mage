@@ -38,17 +38,12 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WortTheRaidmotherToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
@@ -59,8 +54,8 @@ import mage.game.stack.StackObject;
 public class WortTheRaidmother extends CardImpl {
 
     public WortTheRaidmother(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R/G}{R/G}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R/G}{R/G}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
         this.power = new MageInt(3);
@@ -120,19 +115,5 @@ class WortGainConspireEffect extends ContinuousEffectImpl {
             }
         }
         return true;
-    }
-}
-
-class WortTheRaidmotherToken extends Token {
-
-    public WortTheRaidmotherToken() {
-        super("Goblin Warrior", "1/1 red and green Goblin Warrior creature token");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        color.setGreen(true);
-        subtype.add("Goblin");
-        subtype.add("Warrior");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

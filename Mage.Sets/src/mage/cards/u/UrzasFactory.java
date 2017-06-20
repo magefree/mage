@@ -28,9 +28,6 @@
 package mage.cards.u;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,8 +36,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.AssemblyWorkerToken;
 
 /**
  *
@@ -49,7 +47,7 @@ import mage.game.permanent.token.Token;
 public class UrzasFactory extends CardImpl {
 
     public UrzasFactory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.subtype.add("Urza's");
 
         // {tap}: Add {C} to your mana pool.
@@ -67,16 +65,5 @@ public class UrzasFactory extends CardImpl {
     @Override
     public UrzasFactory copy() {
         return new UrzasFactory(this);
-    }
-}
-
-class AssemblyWorkerToken extends Token {
-    AssemblyWorkerToken() {
-        super("Assembly-Worker", "2/2 colorless Assembly-Worker artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Assembly-Worker");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

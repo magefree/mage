@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -36,35 +35,37 @@ import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public class CoalitionVictory extends CardImpl {
-    
-    public static final FilterControlledLandPermanent filterPlains = new FilterControlledLandPermanent();
-    public static final FilterControlledLandPermanent filterIsland = new FilterControlledLandPermanent();
-    public static final FilterControlledLandPermanent filterSwamp = new FilterControlledLandPermanent();
-    public static final FilterControlledLandPermanent filterMountain = new FilterControlledLandPermanent();
-    public static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent();
-    public static final FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent();
-    public static final FilterControlledCreaturePermanent filterBlue = new FilterControlledCreaturePermanent();
-    public static final FilterControlledCreaturePermanent filterBlack = new FilterControlledCreaturePermanent();
-    public static final FilterControlledCreaturePermanent filterRed = new FilterControlledCreaturePermanent();
-    public static final FilterControlledCreaturePermanent filterGreen = new FilterControlledCreaturePermanent();
+
+    static final FilterControlledLandPermanent filterPlains = new FilterControlledLandPermanent();
+    static final FilterControlledLandPermanent filterIsland = new FilterControlledLandPermanent();
+    static final FilterControlledLandPermanent filterSwamp = new FilterControlledLandPermanent();
+    static final FilterControlledLandPermanent filterMountain = new FilterControlledLandPermanent();
+    static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent();
+    static final FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent();
+    static final FilterControlledCreaturePermanent filterBlue = new FilterControlledCreaturePermanent();
+    static final FilterControlledCreaturePermanent filterBlack = new FilterControlledCreaturePermanent();
+    static final FilterControlledCreaturePermanent filterRed = new FilterControlledCreaturePermanent();
+    static final FilterControlledCreaturePermanent filterGreen = new FilterControlledCreaturePermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate("Plains"));
-        filterIsland.add(new SubtypePredicate("Island"));
-        filterSwamp.add(new SubtypePredicate("Swamp"));
-        filterMountain.add(new SubtypePredicate("Mountain"));
-        filterForest.add(new SubtypePredicate("Forest"));
+        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
+        filterIsland.add(new SubtypePredicate(SubType.ISLAND));
+        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterMountain.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
@@ -73,7 +74,7 @@ public class CoalitionVictory extends CardImpl {
     }
 
     public CoalitionVictory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{U}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{U}{B}{R}{G}");
 
         // You win the game if you control a land of each basic land type and a creature of each color.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new WinGameSourceControllerEffect(),

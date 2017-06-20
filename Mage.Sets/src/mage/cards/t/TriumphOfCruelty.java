@@ -57,7 +57,7 @@ public class TriumphOfCruelty extends CardImpl {
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1), TargetController.YOU, false);
         Target target =  new TargetOpponent();
         ability.addTarget(target);
-        this.addAbility(new ConditionalTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.getInstance(), ruleText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.instance, ruleText));
     }
 
     public TriumphOfCruelty(final TriumphOfCruelty card) {

@@ -48,6 +48,7 @@ public class Unburden extends CardImpl {
         // Target player discards two cards.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());
+        
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }

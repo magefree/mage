@@ -28,7 +28,6 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -43,7 +42,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CorpseweftZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -104,18 +103,5 @@ class CorpseweftEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class CorpseweftZombieToken extends Token {
-
-    public CorpseweftZombieToken(int power, int toughness) {
-        super("Zombie Horror", "X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Zombie");
-        subtype.add("Horror");
-        color.setBlack(true);
-        this.power = new MageInt(power);
-        this.toughness = new MageInt(toughness);
     }
 }

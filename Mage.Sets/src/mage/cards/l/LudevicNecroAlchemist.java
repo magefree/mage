@@ -27,8 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -37,14 +35,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +53,7 @@ public class LudevicNecroAlchemist extends CardImpl {
     public LudevicNecroAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);
@@ -82,7 +80,7 @@ class LudevicNecroAlchemistCondition implements Condition {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         UUID player = game.getActivePlayerId();
         PlayerList playerList = game.getState().getPlayerList().copy();
         Player currentPlayer = null;

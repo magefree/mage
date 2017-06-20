@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -39,6 +38,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -86,7 +87,7 @@ class CatastropheEffect extends OneShotEffect {
         if (controller != null) {
             if (controller.chooseUse(outcome, "Destroy all lands? (otherwise all creatures are destroyed)", source, game)) {
                 for (Permanent permanent:  game.getBattlefield().getActivePermanents(new FilterLandPermanent(), controller.getId(), source.getSourceId(), game)) {
-                    permanent.destroy(source.getSourceId(), game, permanent.getCardType().contains(CardType.CREATURE));
+                    permanent.destroy(source.getSourceId(), game, permanent.isCreature());
                 }
             } else {
                 for (Permanent permanent:  game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), source.getSourceId(), game)) {

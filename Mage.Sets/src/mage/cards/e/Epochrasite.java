@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -50,6 +49,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CastFromHandWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -66,7 +67,7 @@ public class Epochrasite extends CardImpl {
         // Epochrasite enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(
                     new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
-                    new InvertCondition(new CastFromHandSourceCondition()),
+                    new InvertCondition(CastFromHandSourceCondition.instance),
                     "{this} enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand",""), 
                 new CastFromHandWatcher());
 
@@ -105,7 +106,7 @@ class EpochrasiteEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (controller != null && card != null) {
-            if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+            if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                 UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
                 controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
                 card.addCounters(CounterType.TIME.createInstance(3), source, game);

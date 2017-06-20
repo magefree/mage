@@ -42,7 +42,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements SourceEffect {
@@ -113,14 +112,10 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         if (losePreviousTypes) {
                             permanent.getCardType().clear();
                         }
-                        if (!token.getCardType().isEmpty()) {
-                            for (CardType t : token.getCardType()) {
-                                if (!permanent.getCardType().contains(t)) {
-                                    permanent.getCardType().add(t);
-                                }
-                            }
+                        for (CardType t : token.getCardType()) {
+                            permanent.addCardType(t);
                         }
-                        if ("".equals(type) || type == null && permanent.getCardType().contains(CardType.LAND)) {
+                        if (type != null && type.isEmpty() || type == null && permanent.isLand()) {
                             permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
                         }
                         if (!token.getSubtype(game).isEmpty()) {
@@ -137,11 +132,10 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                     break;
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        if (!token.getAbilities().isEmpty()) {
-                            for (Ability ability : token.getAbilities()) {
-                                permanent.addAbility(ability, source.getSourceId(), game);
-                            }
+                        for (Ability ability : token.getAbilities()) {
+                            permanent.addAbility(ability, source.getSourceId(), game);
                         }
+
                     }
                     break;
                 case PTChangingEffects_7:
@@ -160,7 +154,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                     }
             }
             return true;
-        } else if (duration.equals(Duration.Custom)) {
+        } else if (duration == Duration.Custom) {
             this.discard();
         }
         return false;

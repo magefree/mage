@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -37,6 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
 public class HideSeek extends SplitCard {
 
     public HideSeek(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}","{W}{B}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{W}", "{W}{B}", SpellAbilityType.SPLIT);
 
         // Hide
         // Put target artifact or enchantment on the bottom of its owner's library.
@@ -97,7 +97,7 @@ class SeekEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && opponent != null) {
-            if (opponent.getLibrary().size() > 0) {
+            if (opponent.getLibrary().hasCards()) {
                 TargetCardInLibrary target = new TargetCardInLibrary();
                 if (player.searchLibrary(target, game, opponent.getId())) {
                     UUID targetId = target.getFirstTarget();

@@ -34,6 +34,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.constants.Duration;
@@ -41,9 +42,8 @@ import mage.game.Game;
 import org.apache.log4j.Logger;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
  * @param <T>
+ * @author BetaSteward_at_googlemail.com
  */
 public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList<T> {
 
@@ -74,7 +74,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     }
 
     public void removeEndOfTurnEffects() {
-        for (Iterator<T> i = this.iterator(); i.hasNext();) {
+        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
             if (entry.getDuration() == Duration.EndOfTurn) {
                 i.remove();
@@ -84,7 +84,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     }
 
     public void removeEndOfCombatEffects() {
-        for (Iterator<T> i = this.iterator(); i.hasNext();) {
+        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
             if (entry.getDuration() == Duration.EndOfCombat) {
                 i.remove();
@@ -94,7 +94,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     }
 
     public void removeInactiveEffects(Game game) {
-        for (Iterator<T> i = this.iterator(); i.hasNext();) {
+        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
             if (isInactive(entry, game)) {
                 i.remove();
@@ -169,7 +169,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     }
 
     public HashSet<Ability> getAbility(UUID effectId) {
-        return effectAbilityMap.get(effectId);
+        return effectAbilityMap.getOrDefault(effectId, new HashSet<>());
     }
 
     public void removeEffects(UUID effectIdToRemove, Set<Ability> abilitiesToRemove) {
@@ -178,7 +178,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             abilities.removeAll(abilitiesToRemove);
         }
         if (abilities == null || abilities.isEmpty()) {
-            for (Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
+            for (Iterator<T> iterator = this.iterator(); iterator.hasNext(); ) {
                 ContinuousEffect effect = iterator.next();
                 if (effect.getId().equals(effectIdToRemove)) {
                     iterator.remove();

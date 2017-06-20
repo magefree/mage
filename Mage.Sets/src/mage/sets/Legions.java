@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Legions extends ExpansionSet {
 
-    private static final Legions fINSTANCE = new Legions();
+    private static final Legions instance = new Legions();
 
     public static Legions getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Legions() {
@@ -127,6 +127,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Magma Sliver", 107, Rarity.RARE, mage.cards.m.MagmaSliver.class));
         cards.add(new SetCardInfo("Merchant of Secrets", 44, Rarity.COMMON, mage.cards.m.MerchantOfSecrets.class));
         cards.add(new SetCardInfo("Mistform Sliver", 46, Rarity.COMMON, mage.cards.m.MistformSliver.class));
+        cards.add(new SetCardInfo("Mistform Ultimus", 47, Rarity.RARE, mage.cards.m.MistformUltimus.class));
         cards.add(new SetCardInfo("Nantuko Vigilante", 132, Rarity.COMMON, mage.cards.n.NantukoVigilante.class));
         cards.add(new SetCardInfo("Needleshot Gourna", 133, Rarity.COMMON, mage.cards.n.NeedleshotGourna.class));
         cards.add(new SetCardInfo("Noxious Ghoul", 77, Rarity.UNCOMMON, mage.cards.n.NoxiousGhoul.class));

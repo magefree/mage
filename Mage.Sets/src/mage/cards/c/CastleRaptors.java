@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
@@ -40,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ public class CastleRaptors extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // As long as Castle Raptors is untapped, it gets +0/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostSourceEffect(0, 2, Duration.WhileOnBattlefield), new InvertCondition(new SourceTappedCondition()),
+            new BoostSourceEffect(0, 2, Duration.WhileOnBattlefield), new InvertCondition(SourceTappedCondition.instance),
             "As long as {this} is untapped, it gets +0/+2.")));
     }
 

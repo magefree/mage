@@ -27,22 +27,18 @@
  */
 package mage.cards.u;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +67,7 @@ public class UncheckedGrowth extends CardImpl {
         return new UncheckedGrowth(this);
     }
     
-    private class UncheckedGrowthTrampleEffect extends ContinuousEffectImpl {
+    private static class UncheckedGrowthTrampleEffect extends ContinuousEffectImpl {
 
         public UncheckedGrowthTrampleEffect() {
             super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

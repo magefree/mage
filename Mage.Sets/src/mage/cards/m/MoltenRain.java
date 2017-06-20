@@ -87,7 +87,7 @@ class MoltenRainEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        if (permanent != null && !permanent.getSupertype().contains("Basic")) {
+        if (permanent != null && !permanent.isBasic()) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 player.damage(2, source.getSourceId(), game, false, true);

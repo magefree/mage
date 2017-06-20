@@ -27,10 +27,10 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.Gender;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.SourceDealtDamageCondition;
@@ -38,16 +38,18 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
-import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect.Gender;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +65,7 @@ public class ChandraFireOfKaladesh extends CardImpl {
 
     public ChandraFireOfKaladesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.power = new MageInt(2);
@@ -78,7 +80,7 @@ public class ChandraFireOfKaladesh extends CardImpl {
         // {T}: Chandra, Fire of Kaladesh deals 1 damage to target player. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.        
         this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addEffect(new ConditionalOneShotEffect(new ExileAndReturnTransformedSourceEffect(Gender.FEMAL), new SourceDealtDamageCondition(3)));
+        ability.addEffect(new ConditionalOneShotEffect(new ExileAndReturnTransformedSourceEffect(Gender.FEMALE), new SourceDealtDamageCondition(3)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

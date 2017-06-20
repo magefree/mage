@@ -27,8 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -37,9 +35,12 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public class ArcticMerfolk extends CardImpl {
         // If Arctic Merfolk was kicked, it enters the battlefield with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                KickedCondition.getInstance(),"If Arctic Merfolk was kicked, it enters the battlefield with a +1/+1 counter on it.",""));
+                KickedCondition.instance,"If Arctic Merfolk was kicked, it enters the battlefield with a +1/+1 counter on it.",""));
     }
 
     public ArcticMerfolk(final ArcticMerfolk card) {

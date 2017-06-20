@@ -46,7 +46,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author North
  */
 public class ViridianBetrayers extends CardImpl {
@@ -54,7 +53,7 @@ public class ViridianBetrayers extends CardImpl {
     private static final String rule = "{this} has infect as long as an opponent is poisoned.";
 
     public ViridianBetrayers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 
@@ -63,7 +62,7 @@ public class ViridianBetrayers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Viridian Betrayers has infect as long as an opponent is poisoned.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(InfectAbility.getInstance()), PoisonedCondition.getInstance(), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(InfectAbility.getInstance()), PoisonedCondition.instance, rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
@@ -77,13 +76,9 @@ public class ViridianBetrayers extends CardImpl {
     }
 }
 
-class PoisonedCondition implements Condition {
+enum PoisonedCondition implements Condition {
 
-    private static PoisonedCondition fInstance = new PoisonedCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

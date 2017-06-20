@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -41,6 +40,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +97,7 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getToZone().match(Zone.BATTLEFIELD)) {
             Card card = game.getCard(event.getTargetId());
-            if (card.getCardType().contains(CardType.CREATURE)) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
+            if (card.isCreature()) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
                     return true;

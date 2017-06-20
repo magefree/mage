@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +63,7 @@ public class SiegeBehemoth extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilityControlledEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.WhileOnBattlefield),
-                        SourceAttackingCondition.getInstance(),
+                        SourceAttackingCondition.instance,
                         "As long as {this} is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked"
                 )));
     }

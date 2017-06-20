@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -38,11 +37,14 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -85,7 +87,7 @@ class ExtinctionEffect extends OneShotEffect {
         if (player != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
+            typeChoice.setChoices(SubType.getCreatureTypes(false));
             while (!player.choose(outcome, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;
@@ -95,7 +97,7 @@ class ExtinctionEffect extends OneShotEffect {
                 game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
             }
             FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
-            filterCreaturePermanent.add(new SubtypePredicate(typeChoice.getChoice()));
+            filterCreaturePermanent.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
                 creature.destroy(source.getSourceId(), game, true);
             }

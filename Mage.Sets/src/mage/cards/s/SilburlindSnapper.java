@@ -94,12 +94,12 @@ class SilburlindSnapperEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
+            SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
             if (watcher != null) {
                 List<Spell> spellsCast = watcher.getSpellsCastThisTurn(source.getControllerId());
                 if (spellsCast != null) {
                     for (Spell spell : spellsCast) {
-                        if (!spell.getCardType().contains(CardType.CREATURE)) {
+                        if (!spell.isCreature()) {
                             return false;
                         }
                     }

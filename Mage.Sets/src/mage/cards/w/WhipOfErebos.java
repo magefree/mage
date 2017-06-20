@@ -46,10 +46,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -68,7 +65,7 @@ public class WhipOfErebos extends CardImpl {
 
     public WhipOfErebos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.ARTIFACT},"{2}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // Creatures you control have lifelink.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
@@ -168,8 +165,8 @@ class WhipOfErebosReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getFirstTarget())
-                && ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)
-                && !((ZoneChangeEvent) event).getToZone().equals(Zone.EXILED)) {
+                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
             return true;
         }
         return false;

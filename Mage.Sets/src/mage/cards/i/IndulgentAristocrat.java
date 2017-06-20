@@ -38,6 +38,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -54,7 +55,7 @@ public class IndulgentAristocrat extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Vampire you control");
 
     static {
-        filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 
     public IndulgentAristocrat(UUID ownerId, CardSetInfo setInfo) {

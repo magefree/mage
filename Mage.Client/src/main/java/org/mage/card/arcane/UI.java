@@ -46,7 +46,7 @@ import javax.swing.text.html.ImageView;
 /**
  * UI utility functions.
  */
-public class UI {
+public final class UI {
     private static final ConcurrentMap<URI, Image> imageCache = new ConcurrentHashMap<>();
 
     public static JToggleButton getToggleButton () {
@@ -148,7 +148,6 @@ public class UI {
     }
 
     public static String getDisplayManaCost (String manaCost) {
-        manaCost = manaCost.replace("/", "");
         // A pipe in the cost means "process left of the pipe as the card color, but display right of the pipe as the cost".
         int pipePosition = manaCost.indexOf("{|}");
         if (pipePosition != -1) {

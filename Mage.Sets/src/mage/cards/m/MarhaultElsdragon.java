@@ -33,6 +33,7 @@ import mage.abilities.keyword.RampageAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 
 /**
  *
@@ -42,7 +43,7 @@ public class MarhaultElsdragon extends CardImpl {
 
     public MarhaultElsdragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
         this.power = new MageInt(4);

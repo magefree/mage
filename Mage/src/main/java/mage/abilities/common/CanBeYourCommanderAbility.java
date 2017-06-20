@@ -40,14 +40,14 @@ import mage.constants.Zone;
 
 public class CanBeYourCommanderAbility extends StaticAbility implements MageSingleton {
 
-    private static final CanBeYourCommanderAbility fINSTANCE =  new CanBeYourCommanderAbility();
+    private static final CanBeYourCommanderAbility instance =  new CanBeYourCommanderAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static CanBeYourCommanderAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private CanBeYourCommanderAbility() {
@@ -56,7 +56,7 @@ public class CanBeYourCommanderAbility extends StaticAbility implements MageSing
 
     @Override
     public CanBeYourCommanderAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

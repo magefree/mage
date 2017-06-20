@@ -28,10 +28,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -56,9 +54,9 @@ public class ScionOfOona extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Faeries");
 
     static {
-        filter.add(new SubtypePredicate("Faerie"));
+        filter.add(new SubtypePredicate(SubType.FAERIE));
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filterCreature.add(new SubtypePredicate("Faerie"));
+        filterCreature.add(new SubtypePredicate(SubType.FAERIE));
         filterCreature.add(new ControllerPredicate(TargetController.YOU));
     }
 

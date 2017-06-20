@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,6 +45,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,10 +71,10 @@ public class ColossusOfAkros extends CardImpl {
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
-                MonstrousCondition.getInstance(),
+                MonstrousCondition.instance,
                 "As long as {this} is monstrous, it has trample"));
         Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
-                MonstrousCondition.getInstance());
+                MonstrousCondition.instance);
         effect.setText("and can attack as though it didn't have defender");
         ability.addEffect(effect);
         this.addAbility(ability);

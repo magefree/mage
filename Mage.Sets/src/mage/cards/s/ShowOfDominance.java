@@ -27,8 +27,8 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -41,7 +41,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -51,6 +50,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -109,7 +110,7 @@ class ShowOfDominanceEffect extends OneShotEffect {
             if (highestPower != Integer.MIN_VALUE) {
                 if (selectedCreature == null) {
                     FilterPermanent filter = new FilterCreaturePermanent("creature with power " + highestPower);
-                    filter.add(new PowerPredicate(Filter.ComparisonType.Equal, highestPower));
+                    filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, highestPower));
                     Target target = new TargetPermanent(1, 1, filter, true);
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         selectedCreature = game.getPermanent(target.getFirstTarget());

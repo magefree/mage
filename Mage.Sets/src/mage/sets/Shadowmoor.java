@@ -27,11 +27,11 @@
  */
 package mage.sets;
 
-import mage.cards.t.Torture;
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.cards.t.Torture;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Shadowmoor extends ExpansionSet {
 
-    private static final Shadowmoor fINSTANCE = new Shadowmoor();
+    private static final Shadowmoor instance = new Shadowmoor();
 
     public static Shadowmoor getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Shadowmoor() {

@@ -27,23 +27,20 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -110,7 +107,7 @@ class GrindstoneEffect extends OneShotEffect {
                 cards.addAll(targetPlayer.getLibrary().getTopCards(game, 2));
                 if (!cards.isEmpty()) {
                     Card card1 = targetPlayer.getLibrary().removeFromTop(game);
-                    if (targetPlayer.getLibrary().size() > 0) {
+                    if (targetPlayer.getLibrary().hasCards()) {
                         colorShared = card1.getColor(game).shares(targetPlayer.getLibrary().removeFromTop(game).getColor(game));
                     }
                 }

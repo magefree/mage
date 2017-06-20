@@ -50,10 +50,10 @@ import mage.counters.CounterType;
  */
 public class HelixPinnacle extends CardImpl {
 
-    final String rule = "if there are 100 or more tower counters on Helix Pinnacle, you win the game";
+    static final String rule = "if there are 100 or more tower counters on Helix Pinnacle, you win the game";
 
     public HelixPinnacle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
@@ -66,7 +66,7 @@ public class HelixPinnacle extends CardImpl {
         // At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), TargetController.YOU, false),
-                new SourceHasCounterCondition(CounterType.TOWER, 100),
+                new SourceHasCounterCondition(CounterType.TOWER, 100, Integer.MAX_VALUE),
                 rule));
 
     }

@@ -90,7 +90,7 @@ class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent)event).isDiesEvent()) {
             Card card = game.getCard(event.getTargetId());
             Player controller = game.getPlayer(getControllerId());
-            if (controller != null && card != null && card.getCardType().contains(CardType.ARTIFACT)
+            if (controller != null && card != null && card.isArtifact()
                     && controller.hasOpponent(card.getOwnerId(), game)) {
                 return true;
             }

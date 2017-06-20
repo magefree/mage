@@ -87,7 +87,7 @@ class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.getCardType().contains(CardType.CREATURE)
+        if (permanent.isCreature()
                 && permanent.getControllerId().equals(this.controllerId)) {
             Effect effect = this.getEffects().get(0);
             effect.setValue("damageSource", event.getTargetId());

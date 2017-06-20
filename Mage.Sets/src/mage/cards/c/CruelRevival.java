@@ -27,15 +27,14 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -46,6 +45,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,8 +59,8 @@ public class CruelRevival extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(Predicates.not(new SubtypePredicate("Zombie")));
-        filter2.add(new SubtypePredicate("Zombie"));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
+        filter2.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public CruelRevival(UUID ownerId, CardSetInfo setInfo) {

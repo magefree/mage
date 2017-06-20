@@ -27,8 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -37,9 +35,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -47,6 +43,9 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -87,11 +86,11 @@ public class DroidFactory extends CardImpl {
             FilterCard filter = new FilterCard("basic Plains, Island or Swamp");
             filter.add(new CardTypePredicate(CardType.LAND));
             ArrayList<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
-            subtypePredicates.add(new SubtypePredicate("Swamp"));
-            subtypePredicates.add(new SubtypePredicate("Plains"));
-            subtypePredicates.add(new SubtypePredicate("Island"));
+            subtypePredicates.add(new SubtypePredicate(SubType.SWAMP));
+            subtypePredicates.add(new SubtypePredicate(SubType.PLAINS));
+            subtypePredicates.add(new SubtypePredicate(SubType.ISLAND));
             filter.add(Predicates.or(subtypePredicates));
-            filter.add(new SupertypePredicate("Basic"));
+            filter.add(new SupertypePredicate(SuperType.BASIC));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
         }

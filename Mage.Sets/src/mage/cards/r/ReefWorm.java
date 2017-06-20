@@ -34,7 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ReefWormFishToken;
 
 /**
  *
@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
 public class ReefWorm extends CardImpl {
 
     public ReefWorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add("Worm");
 
         this.power = new MageInt(0);
@@ -60,48 +60,5 @@ public class ReefWorm extends CardImpl {
     @Override
     public ReefWorm copy() {
         return new ReefWorm(this);
-    }
-}
-
-class ReefWormFishToken extends Token {
-
-    ReefWormFishToken() {
-        super("Fish", "3/3 blue Fish creature token with \"When this creature dies, create a 6/6 blue Whale creature token with \"When this creature dies, create a 9/9 blue Kraken creature token.\"\"");
-        setOriginalExpansionSetCode("C14");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Fish");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-
-        addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ReefWormWhaleToken())));
-    }
-}
-
-class ReefWormWhaleToken extends Token {
-
-    ReefWormWhaleToken() {
-        super("Whale", "6/6 blue Whale creature token with \"When this creature dies, create a 9/9 blue Kraken creature token.\"");
-        setOriginalExpansionSetCode("C14");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Whale");
-        power = new MageInt(6);
-        toughness = new MageInt(6);
-
-        addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ReefWormKrakenToken())));
-    }
-}
-
-class ReefWormKrakenToken extends Token {
-
-    ReefWormKrakenToken() {
-        super("Kraken", "9/9 blue Kraken creature token");
-        setOriginalExpansionSetCode("C14");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Kraken");
-        power = new MageInt(9);
-        toughness = new MageInt(9);
     }
 }

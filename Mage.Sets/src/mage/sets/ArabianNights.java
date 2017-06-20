@@ -27,6 +27,7 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.a.ArmyOfAllah;
 import mage.cards.f.FishliverOil;
@@ -35,9 +36,8 @@ import mage.cards.o.Oubliette;
 import mage.cards.p.Piety;
 import mage.cards.r.RukhEgg;
 import mage.cards.s.StoneThrowingDevils;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -45,10 +45,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class ArabianNights extends ExpansionSet {
 
-    private static final ArabianNights fINSTANCE = new ArabianNights();
+    private static final ArabianNights instance = new ArabianNights();
 
     public static ArabianNights getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ArabianNights() {

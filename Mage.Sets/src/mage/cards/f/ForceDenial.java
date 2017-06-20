@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -41,6 +40,8 @@ import mage.constants.CardType;
 import mage.target.TargetSpell;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author Styxo
@@ -53,13 +54,13 @@ public class ForceDenial extends CardImpl {
         // Counter target  spell unless its controller pays {1}.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterUnlessPaysEffect(new GenericManaCost(1)),
-                new InvertCondition(HateCondition.getInstance()),
+                new InvertCondition(HateCondition.instance),
                 "Counter target spell unless its controller pays {1}."));
 
         // <i>Hate</i> &mdash; If an opponent lost life from a source other then combat damage this turn, counter that spell instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterTargetEffect(),
-                HateCondition.getInstance(),
+                HateCondition.instance,
                 "<br><i>Hate</i> - If an opponent lost life from a source other than combat damage this turn, counter that spell instead."));
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addWatcher(new LifeLossOtherFromCombatWatcher());

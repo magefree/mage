@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -39,6 +38,8 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ public class BogDown extends CardImpl {
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
         // Target player discards two cards. If Bog Down was kicked, that player discards three cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DiscardTargetEffect(3),
-            new DiscardTargetEffect(2), KickedCondition.getInstance(),
+            new DiscardTargetEffect(2), KickedCondition.instance,
             "Target player discards two cards. If {this} was kicked, that player discards three cards instead."));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

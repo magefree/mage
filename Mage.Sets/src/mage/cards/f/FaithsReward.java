@@ -27,12 +27,15 @@
  */
 package mage.cards.f;
 
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -79,7 +82,7 @@ class FaithsRewardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FaithsRewardWatcher watcher = (FaithsRewardWatcher) game.getState().getWatchers().get("FaithsRewardWatcher");
+        FaithsRewardWatcher watcher = (FaithsRewardWatcher) game.getState().getWatchers().get(FaithsRewardWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID id : watcher.cards) {
                 Card c = game.getCard(id);
@@ -99,10 +102,10 @@ class FaithsRewardEffect extends OneShotEffect {
 }
 
 class FaithsRewardWatcher extends Watcher {
-    ArrayList<UUID> cards = new ArrayList<UUID>();
+    ArrayList<UUID> cards = new ArrayList<>();
 
     public FaithsRewardWatcher() {
-        super("FaithsRewardWatcher", WatcherScope.GAME);
+        super(FaithsRewardWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public FaithsRewardWatcher(final FaithsRewardWatcher watcher) {

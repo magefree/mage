@@ -54,7 +54,7 @@ public class NectarFaerie extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Faerie or Elf");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Faerie"),new SubtypePredicate("Elf")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.FAERIE),new SubtypePredicate(SubType.ELF)));
     }
 
     public NectarFaerie(UUID ownerId, CardSetInfo setInfo) {

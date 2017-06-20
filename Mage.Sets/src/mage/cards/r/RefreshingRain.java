@@ -37,6 +37,7 @@ import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -51,8 +52,8 @@ public class RefreshingRain extends CardImpl {
     private static final FilterPermanent filterSwamp = new FilterPermanent();
 
     static {
-        filterForest.add(new SubtypePredicate(("Forest")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public RefreshingRain(UUID ownerId, CardSetInfo setInfo) {

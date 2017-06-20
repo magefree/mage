@@ -28,32 +28,21 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.command.Emblem;
+import mage.game.command.emblems.LilianaOfTheDarkRealmsEmblem;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -68,7 +57,7 @@ public class LilianaOfTheDarkRealms extends CardImpl {
     private static final FilterLandCard filter = new FilterLandCard("Swamp card");
 
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public LilianaOfTheDarkRealms(UUID ownerId, CardSetInfo setInfo) {
@@ -122,7 +111,7 @@ class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl {
         super.init(source, game);
 
         FilterLandPermanent filter = new FilterLandPermanent("Swamps");
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
         filter.add(new ControllerPredicate(TargetController.YOU));
         this.amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
 
@@ -143,21 +132,5 @@ class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl {
             return true;
         }
         return false;
-    }
-}
-
-class LilianaOfTheDarkRealmsEmblem extends Emblem {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamps");
-
-    static {
-        filter.add(new SubtypePredicate("Swamp"));
-    }
-
-    public LilianaOfTheDarkRealmsEmblem() {
-        this.setName("Emblem Liliana");
-        SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(4), new TapSourceCost());
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GainAbilityControlledEffect(manaAbility, Duration.WhileOnBattlefield, filter));
-        this.getAbilities().add(ability);
     }
 }

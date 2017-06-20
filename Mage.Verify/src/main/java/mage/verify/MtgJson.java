@@ -15,10 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
 
-public class MtgJson {
+public final class MtgJson {
     private MtgJson() {}
 
-    private static class CardHolder {
+    private static final class CardHolder {
         private static final Map<String, JsonCard> cards;
         static {
             try {
@@ -30,7 +30,7 @@ public class MtgJson {
         }
     }
 
-    private static class SetHolder {
+    private static final class SetHolder {
         private static final Map<String, JsonSet> sets;
         static {
             try {

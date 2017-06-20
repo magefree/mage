@@ -101,7 +101,7 @@ class LifecraftAwakeningEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) game.getPermanent(source.getTargets().getFirstTarget());
-        if (!permanent.getCardType().contains(CardType.CREATURE) && !permanent.getSubtype(game).contains("Vehicle")) {
+        if (!permanent.isCreature() && !permanent.getSubtype(game).contains("Vehicle")) {
             ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new LifecraftAwakeningToken(), false, true, Duration.Custom);
             continuousEffect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(continuousEffect, source);

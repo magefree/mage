@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -40,6 +39,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -100,7 +101,7 @@ class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
             }
             return (permanent != null
                     && !event.getTargetId().equals(this.getSourceId())
-                    && permanent.getCardType().contains(CardType.CREATURE)
+                    && permanent.isCreature()
                     && permanent.getControllerId().equals(this.getControllerId()));
         }
         return false;

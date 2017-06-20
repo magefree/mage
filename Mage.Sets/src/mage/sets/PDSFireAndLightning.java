@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class PDSFireAndLightning extends ExpansionSet {
 
-    private static final PDSFireAndLightning fINSTANCE = new PDSFireAndLightning();
+    private static final PDSFireAndLightning instance = new PDSFireAndLightning();
 
     public static PDSFireAndLightning getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PDSFireAndLightning() {

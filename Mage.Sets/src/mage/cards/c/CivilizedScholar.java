@@ -27,17 +27,16 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.h.HomicidalBrute;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.h.HomicidalBrute;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
@@ -47,6 +46,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -82,7 +83,7 @@ public class CivilizedScholar extends CardImpl {
 class HomicidalBruteWatcher extends Watcher {
 
     public HomicidalBruteWatcher() {
-        super("HomicidalBruteAttacked", WatcherScope.CARD);
+        super(HomicidalBruteWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public HomicidalBruteWatcher(final HomicidalBruteWatcher watcher) {
@@ -127,7 +128,7 @@ class CivilizedScholarEffect extends OneShotEffect {
         if (player != null) {
             player.drawCards(1, game);
             Card card = player.discardOne(false, source, game);
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && card.isCreature()) {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     permanent.untap(game);

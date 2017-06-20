@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
@@ -56,7 +57,7 @@ public class SavaenElves extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to a land");
     
     static {
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
         filter.add(new SavaenElvesPredicate());
     }
 
@@ -91,7 +92,7 @@ class SavaenElvesPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permane
         Permanent attachment = input.getObject();
         if (attachment != null) {
             Permanent permanent = game.getPermanent(attachment.getAttachedTo());
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+            if (permanent != null && permanent.isLand()) {
                 return true;
             }
         }

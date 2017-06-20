@@ -37,7 +37,7 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ForlornPseudammaZombieToken;
 
 /**
  *
@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
 public class ForlornPseudamma extends CardImpl {
 
     public ForlornPseudamma(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(2);
@@ -65,19 +65,5 @@ public class ForlornPseudamma extends CardImpl {
     @Override
     public ForlornPseudamma copy() {
         return new ForlornPseudamma(this);
-    }
-}
-
-class ForlornPseudammaZombieToken extends Token {
-
-    public ForlornPseudammaZombieToken() {
-        super("Zombie", "2/2 black Zombie enchantment creature token");
-        cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Zombie");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.setOriginalExpansionSetCode("BNG");
     }
 }

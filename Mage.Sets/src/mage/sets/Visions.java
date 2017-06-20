@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Visions extends ExpansionSet {
 
-    private static final Visions fINSTANCE = new Visions();
+    private static final Visions instance = new Visions();
 
     public static Visions getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Visions() {
@@ -60,6 +60,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Betrayal", 26, Rarity.COMMON, mage.cards.b.Betrayal.class));
         cards.add(new SetCardInfo("Blanket of Night", 2, Rarity.UNCOMMON, mage.cards.b.BlanketOfNight.class));
         cards.add(new SetCardInfo("Breezekeeper", 27, Rarity.COMMON, mage.cards.b.Breezekeeper.class));
+        cards.add(new SetCardInfo("Bull Elephant", 51, Rarity.COMMON, mage.cards.b.BullElephant.class));
         cards.add(new SetCardInfo("Chronatog", 28, Rarity.RARE, mage.cards.c.Chronatog.class));
         cards.add(new SetCardInfo("City of Solitude", 52, Rarity.RARE, mage.cards.c.CityOfSolitude.class));
         cards.add(new SetCardInfo("Cloud Elemental", 29, Rarity.COMMON, mage.cards.c.CloudElemental.class));
@@ -68,6 +69,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Creeping Mold", 53, Rarity.UNCOMMON, mage.cards.c.CreepingMold.class));
         cards.add(new SetCardInfo("Crypt Rats", 5, Rarity.COMMON, mage.cards.c.CryptRats.class));
         cards.add(new SetCardInfo("Daraja Griffin", 102, Rarity.UNCOMMON, mage.cards.d.DarajaGriffin.class));
+        cards.add(new SetCardInfo("Death Watch", 7, Rarity.COMMON, mage.cards.d.DeathWatch.class));
         cards.add(new SetCardInfo("Desertion", 30, Rarity.RARE, mage.cards.d.Desertion.class));
         cards.add(new SetCardInfo("Diamond Kaleidoscope", 143, Rarity.RARE, mage.cards.d.DiamondKaleidoscope.class));
         cards.add(new SetCardInfo("Dormant Volcano", 161, Rarity.UNCOMMON, mage.cards.d.DormantVolcano.class));
@@ -101,6 +103,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiration", 35, Rarity.COMMON, mage.cards.i.Inspiration.class));
         cards.add(new SetCardInfo("Jamuraan Lion", 110, Rarity.COMMON, mage.cards.j.JamuraanLion.class));
         cards.add(new SetCardInfo("Jungle Basin", 164, Rarity.UNCOMMON, mage.cards.j.JungleBasin.class));
+        cards.add(new SetCardInfo("Kaervek's Spite", 13, Rarity.RARE, mage.cards.k.KaerveksSpite.class));
         cards.add(new SetCardInfo("Karoo", 165, Rarity.UNCOMMON, mage.cards.k.Karoo.class));
         cards.add(new SetCardInfo("Keeper of Kookus", 85, Rarity.COMMON, mage.cards.k.KeeperOfKookus.class));
         cards.add(new SetCardInfo("King Cheetah", 60, Rarity.COMMON, mage.cards.k.KingCheetah.class));
@@ -149,6 +152,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Sun Clasp", 121, Rarity.COMMON, mage.cards.s.SunClasp.class));
         cards.add(new SetCardInfo("Suq'Ata Assassin", 19, Rarity.UNCOMMON, mage.cards.s.SuqAtaAssassin.class));
         cards.add(new SetCardInfo("Suq'Ata Lancer", 96, Rarity.COMMON, mage.cards.s.SuqAtaLancer.class));
+        cards.add(new SetCardInfo("Suq'Ata Firewalker", 94, Rarity.UNCOMMON, mage.cards.s.SuqAtaFirewalker.class));
         cards.add(new SetCardInfo("Talruum Champion", 97, Rarity.COMMON, mage.cards.t.TalruumChampion.class));
         cards.add(new SetCardInfo("Talruum Piper", 98, Rarity.UNCOMMON, mage.cards.t.TalruumPiper.class));
         cards.add(new SetCardInfo("Tar Pit Warrior", 20, Rarity.COMMON, mage.cards.t.TarPitWarrior.class));
@@ -166,12 +170,14 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Vampiric Tutor", 22, Rarity.RARE, mage.cards.v.VampiricTutor.class));
         cards.add(new SetCardInfo("Vanishing", 48, Rarity.COMMON, mage.cards.v.Vanishing.class));
         cards.add(new SetCardInfo("Viashino Sandstalker", 100, Rarity.UNCOMMON, mage.cards.v.ViashinoSandstalker.class));
+        cards.add(new SetCardInfo("Viashivan Dragon", 140, Rarity.RARE, mage.cards.v.ViashivanDragon.class));
         cards.add(new SetCardInfo("Vision Charm", 49, Rarity.COMMON, mage.cards.v.VisionCharm.class));
         cards.add(new SetCardInfo("Wake of Vultures", 24, Rarity.COMMON, mage.cards.w.WakeOfVultures.class));
         cards.add(new SetCardInfo("Wand of Denial", 159, Rarity.RARE, mage.cards.w.WandOfDenial.class));
         cards.add(new SetCardInfo("Warrior's Honor", 124, Rarity.COMMON, mage.cards.w.WarriorsHonor.class));
         cards.add(new SetCardInfo("Warthog", 74, Rarity.COMMON, mage.cards.w.Warthog.class));
         cards.add(new SetCardInfo("Waterspout Djinn", 50, Rarity.UNCOMMON, mage.cards.w.WaterspoutDjinn.class));
+        cards.add(new SetCardInfo("Wicked Reward", 25, Rarity.COMMON, mage.cards.w.WickedReward.class));
         cards.add(new SetCardInfo("Zhalfirin Crusader", 125, Rarity.RARE, mage.cards.z.ZhalfirinCrusader.class));
     }
 }

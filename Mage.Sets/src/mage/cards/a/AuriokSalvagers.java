@@ -27,20 +27,21 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public class AuriokSalvagers extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost 1 or less from your graveyard");
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
     
     public AuriokSalvagers(UUID ownerId, CardSetInfo setInfo) {

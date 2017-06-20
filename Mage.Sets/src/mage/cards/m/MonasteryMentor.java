@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.MonasteryMentorToken;
 
 /**
  *
@@ -73,18 +73,5 @@ public class MonasteryMentor extends CardImpl {
     @Override
     public MonasteryMentor copy() {
         return new MonasteryMentor(this);
-    }
-}
-
-class MonasteryMentorToken extends Token {
-
-    MonasteryMentorToken() {
-        super("Monk", "1/1 white Monk creature token with prowess");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Monk");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(new ProwessAbility());
     }
 }

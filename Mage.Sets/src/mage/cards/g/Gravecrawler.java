@@ -27,8 +27,6 @@
  */
 package mage.cards.g;
 
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
@@ -37,9 +35,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -82,7 +78,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("zombie");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public GravecrawlerPlayEffect() {

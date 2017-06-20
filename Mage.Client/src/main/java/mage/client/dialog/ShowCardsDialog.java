@@ -109,7 +109,7 @@ public class ShowCardsDialog extends MageDialog {
                 java.util.List<UUID> choosableCards = (java.util.List<UUID>) options.get("choosable");
                 cardArea.markCards(choosableCards);
             }
-            if (options.containsKey("queryType") && QueryType.PICK_ABILITY.equals(options.get("queryType"))) {
+            if (options.containsKey("queryType") && options.get("queryType") == QueryType.PICK_ABILITY) {
                 cardArea.setPopupMenu(popupMenu);
             }
         }
@@ -134,7 +134,7 @@ public class ShowCardsDialog extends MageDialog {
                 int width = ShowCardsDialog.this.getWidth();
                 int height = ShowCardsDialog.this.getHeight();
                 if (width > 0 && height > 0) {
-                    Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+                    Point centered = SettingsManager.instance.getComponentPosition(width, height);
                     ShowCardsDialog.this.setLocation(centered.x, centered.y);
                     positioned = true;
                     GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, ShowCardsDialog.this);

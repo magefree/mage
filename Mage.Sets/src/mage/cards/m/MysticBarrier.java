@@ -57,8 +57,8 @@ import mage.players.PlayerList;
  */
 public class MysticBarrier extends CardImpl {
 
-    public static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
-    public static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
+    static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
+    static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
 
     public MysticBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
@@ -97,12 +97,12 @@ class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD) || event.getType().equals(EventType.UPKEEP_STEP_PRE);
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD || event.getType() == EventType.UPKEEP_STEP_PRE;
     }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD)) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             return event.getTargetId().equals(this.getSourceId());
         } else {
             return event.getPlayerId().equals(this.getControllerId());
@@ -117,8 +117,8 @@ class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
 
 class MysticBarrierChooseEffect extends OneShotEffect {
 
-    public static final String[] SET_VALUES = new String[] { MysticBarrier.ALLOW_ATTACKING_LEFT, MysticBarrier.ALLOW_ATTACKING_RIGHT };
-    public static final Set<String> CHOICES = new HashSet<>(Arrays.asList(SET_VALUES));
+    static final String[] SET_VALUES = new String[] { MysticBarrier.ALLOW_ATTACKING_LEFT, MysticBarrier.ALLOW_ATTACKING_RIGHT };
+    static final Set<String> CHOICES = new HashSet<>(Arrays.asList(SET_VALUES));
     final static Choice DIRECTION_CHOICE = new ChoiceImpl(true);
     static {
         DIRECTION_CHOICE.setChoices(CHOICES);
@@ -196,7 +196,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
                         }
                         if (defender != null) {
                             PlayerList playerList = game.getState().getPlayerList(event.getPlayerId());
-                            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_LEFT)) {
+                            if (allowedDirection == MysticBarrier.ALLOW_ATTACKING_LEFT) {
                                 if (!playerList.getNext().equals(defender.getId())) {
                                     // the defender is not the player to the left
                                     Player attacker = game.getPlayer(event.getPlayerId());
@@ -206,7 +206,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
                                     return true;
                                 }
                             }
-                            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_RIGHT)) {
+                            if (allowedDirection == MysticBarrier.ALLOW_ATTACKING_RIGHT) {
                                 if (!playerList.getPrevious().equals(defender.getId())) {
                                     // the defender is not the player to the right
                                     Player attacker = game.getPlayer(event.getPlayerId());

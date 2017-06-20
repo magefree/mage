@@ -25,30 +25,24 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
 import mage.target.common.TargetAttackingCreature;
 
-/**
- *
- * @author LevelX2
- */
-
-
 public class OrderChaos extends SplitCard {
 
     public OrderChaos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}","{2}{R}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}", "{2}{R}", SpellAbilityType.SPLIT);
 
         // Order
         // Exile target attacking creature.

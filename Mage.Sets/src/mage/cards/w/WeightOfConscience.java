@@ -27,10 +27,6 @@
  */
 package mage.cards.w;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,10 +37,7 @@ import mage.abilities.effects.common.combat.CantAttackAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -55,6 +48,11 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -145,7 +143,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, game)) {
                     for (String subtype : permanent.getSubtype(game)) {
                         if (!CardUtil.isNonCreatureSubtype(subtype)) {
-                            if (game.getBattlefield().contains(new FilterControlledCreaturePermanent(subtype, subtype), sourceControllerId, game, 2)) {
+                            if (game.getBattlefield().contains(new FilterControlledCreaturePermanent(SubType.byDescription(subtype), subtype), sourceControllerId, game, 2)) {
                                 possibleTargets.add(permanent.getId());
                             }
                         }
@@ -158,7 +156,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
                 Permanent firstTargetCreature = game.getPermanent(firstTargetId);
                 if (firstTargetCreature != null) {
                     for (Permanent permanent : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, game)) {
-                        if (!permanent.getId().equals(firstTargetId) && CardUtil.shareSubtypes(firstTargetCreature, permanent, game)) {
+                        if (!permanent.getId().equals(firstTargetId) && firstTargetCreature.shareSubtypes(permanent, game)) {
                             possibleTargets.add(permanent.getId());
                         }
                     }
@@ -172,7 +170,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         for (Permanent permanent1 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, game)) {
             for (Permanent permanent2 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, game)) {
-                if (!Objects.equals(permanent1, permanent2) && CardUtil.shareSubtypes(permanent1, permanent2, game)) {
+                if (!Objects.equals(permanent1, permanent2) && permanent1.shareSubtypes(permanent2, game)) {
                     return true;
                 }
             }
@@ -189,7 +187,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
                     for (Permanent permanent : game.getBattlefield().getActivePermanents(filterUntapped, source.getControllerId(), game)) {
                         for (String subtype : permanent.getSubtype(game)) {
                             if (!CardUtil.isNonCreatureSubtype(subtype)) {
-                                if (game.getBattlefield().contains(new FilterControlledCreaturePermanent(subtype, subtype), source.getControllerId(), game, 2)) {
+                                if (game.getBattlefield().contains(new FilterControlledCreaturePermanent(SubType.byDescription(subtype), subtype), source.getControllerId(), game, 2)) {
                                     return true;
                                 }
                             }
@@ -198,7 +196,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
                 }
                 else {
                     Permanent firstTarget = game.getPermanent(this.getTargets().get(0));
-                    if (firstTarget != null && CardUtil.shareSubtypes(firstTarget, targetPermanent, game)) {
+                    if (firstTarget != null && firstTarget.shareSubtypes(targetPermanent, game)) {
                         return true;
                     }
                 }

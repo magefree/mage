@@ -38,6 +38,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
@@ -102,7 +103,7 @@ class SylvanPrimordialEffect extends OneShotEffect {
 
     private static final FilterLandCard filterForest = new FilterLandCard("Forest");
     static{
-        filterForest.add(new SubtypePredicate("Forest"));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public SylvanPrimordialEffect() {

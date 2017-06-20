@@ -29,6 +29,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -46,12 +47,12 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class ErgRaiders extends CardImpl {
 
     public ErgRaiders(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);
@@ -59,7 +60,7 @@ public class ErgRaiders extends CardImpl {
 
         // At the beginning of your end step, if Erg Raiders didn't attack this turn, Erg Raiders deals 2 damage to you unless it came under your control this turn.
         TriggeredAbility ability = new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(new DamageControllerEffect(2), TargetController.YOU, false),
-            new ErgRaidersCondition(), "At the beginning of your end step, if {this} didn't attack this turn, {this} deals 2 damage to you unless it came under your control this turn.");
+                new ErgRaidersCondition(), "At the beginning of your end step, if {this} didn't attack this turn, {this} deals 2 damage to you unless it came under your control this turn.");
         ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);
     }
@@ -79,8 +80,8 @@ class ErgRaidersCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent raiders = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
+        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
         // wasControlledFromStartOfControllerTurn should be checked during resolution I guess, but shouldn't be relevant
-        return raiders.wasControlledFromStartOfControllerTurn() && !watcher.getAttackedThisTurnCreatures().contains(raiders.getId());
+        return raiders.wasControlledFromStartOfControllerTurn() && !watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(raiders, game));
     }
 }

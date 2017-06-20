@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
 
 public class SuperSeries extends ExpansionSet {
 
-    private static final SuperSeries fINSTANCE = new SuperSeries();
+    private static final SuperSeries instance = new SuperSeries();
 
     public static SuperSeries getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private SuperSeries() {

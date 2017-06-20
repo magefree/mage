@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -18,10 +17,12 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 public class GraveScrabbler extends CardImpl {
 
     public GraveScrabbler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(2);
@@ -34,7 +35,7 @@ public class GraveScrabbler extends CardImpl {
         //you may return target creature card from a graveyard to its owner's hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
-        this.addAbility(new ConditionalTriggeredAbility(ability, MadnessPaidCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, MadnessPaidCondition.instance,
                 "When {this} enters the battlefield, if its madness cost was paid, you may return target creature card from a graveyard to its owner's hand."));
     }
 
@@ -49,19 +50,8 @@ public class GraveScrabbler extends CardImpl {
 
 }
 
-class MadnessPaidCondition implements Condition {
-
-    private static MadnessPaidCondition fInstance = null;
-
-    private MadnessPaidCondition() {
-    }
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new MadnessPaidCondition();
-        }
-        return fInstance;
-    }
+enum MadnessPaidCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

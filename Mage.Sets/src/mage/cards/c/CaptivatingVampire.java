@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,12 +36,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -52,6 +46,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,8 +59,8 @@ public class CaptivatingVampire extends CardImpl {
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampires you control");
 
     static {
-        filter1.add(new SubtypePredicate("Vampire"));
-        filter2.add(new SubtypePredicate("Vampire"));
+        filter1.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter2.add(new SubtypePredicate(SubType.VAMPIRE));
         filter2.add(Predicates.not(new TappedPredicate()));
     }
 
@@ -123,7 +119,7 @@ class CaptivatingVampireEffect extends ContinuousEffectImpl {
                     break;
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!permanent.getSubtype(game).contains("Vampire")) {
+                        if (!permanent.hasSubtype("Vampire", game)) {
                             permanent.getSubtype(game).add("Vampire");
                         }
                     }

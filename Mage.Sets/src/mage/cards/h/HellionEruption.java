@@ -27,20 +27,18 @@
  */
 package mage.cards.h;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.MageInt;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-
-import java.util.List;
-import java.util.UUID;
+import mage.game.permanent.token.HellionToken;
 
 /**
  *
@@ -49,8 +47,7 @@ import java.util.UUID;
 public class HellionEruption extends CardImpl {
 
     public HellionEruption(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}");
 
         // Sacrifice all creatures you control, then create that many 4/4 red Hellion creature tokens.
         this.getSpellAbility().addEffect(new HellionEruptionEffect());
@@ -92,15 +89,4 @@ class HellionEruptionEffect extends OneShotEffect {
         return true;
     }
 
-    class HellionToken extends Token {
-
-        HellionToken() {
-            super("Hellion", "4/4 red Hellion creature token");
-            this.cardType.add(CardType.CREATURE);
-            this.color.setRed(true);
-            this.subtype.add("Hellion");
-            this.power = new MageInt(4);
-            this.toughness = new MageInt(4);
-        }
-    }
 }

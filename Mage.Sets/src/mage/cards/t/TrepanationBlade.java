@@ -110,11 +110,11 @@ class TrepanationBladeDiscardEffect extends OneShotEffect {
 
             CardsImpl cards = new CardsImpl();
             boolean landFound = false;
-            while (player.getLibrary().size() > 0 && !landFound) {
+            while (player.getLibrary().hasCards() && !landFound) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
-                    if (card.getCardType().contains(CardType.LAND)) {
+                    if (card.isLand()) {
                         landFound = true;
                     }
                 }

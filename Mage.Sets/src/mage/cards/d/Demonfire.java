@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.HellbentCondition;
@@ -46,6 +45,8 @@ import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author JotaPeRL
@@ -58,7 +59,7 @@ public class Demonfire extends CardImpl {
         // Demonfire deals X damage to target creature or player.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(new ManacostVariableValue()),
-                new InvertCondition(HellbentCondition.getInstance()),
+                new InvertCondition(HellbentCondition.instance),
                 "{this} deals X damage to target creature or player"));
 
         // If a creature dealt damage this way would die this turn, exile it instead.
@@ -68,14 +69,14 @@ public class Demonfire extends CardImpl {
         // Hellbent - If you have no cards in hand, Demonfire can't be countered by spells or abilities and the damage can't be prevented.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(new ManacostVariableValue(), false),
-                HellbentCondition.getInstance(),
+                HellbentCondition.instance,
                 "<br/><i>Hellbent</i> - If you have no cards in hand, {this} can't be countered by spells or abilities and the damage can't be prevented."));
         // can't be countered
         Effect effect = new CantBeCounteredSourceEffect();
         effect.setText("");
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new ConditionalContinuousRuleModifyingEffect(
                 (CantBeCounteredSourceEffect) effect,
-                HellbentCondition.getInstance())));
+                HellbentCondition.instance)));
 
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }

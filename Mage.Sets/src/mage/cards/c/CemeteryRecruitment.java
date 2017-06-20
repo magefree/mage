@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -40,6 +39,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +89,7 @@ class CemeteryRecruitmentEffect extends OneShotEffect {
             Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
                 if (controller.moveCards(card, Zone.HAND, source, game)
-                        && card.getSubtype(game).contains("Zombie")) {
+                        && card.hasSubtype("Zombie", game)) {
                     controller.drawCards(1, game);
                 }
             }

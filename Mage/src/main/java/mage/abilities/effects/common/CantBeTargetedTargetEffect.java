@@ -84,7 +84,7 @@ public class CantBeTargetedTargetEffect extends ContinuousRuleModifyingEffectImp
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {
-            if (targetController.equals(TargetController.OPPONENT)
+            if (targetController == TargetController.OPPONENT
                     && !game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
                 return false;
             }
@@ -115,7 +115,7 @@ public class CantBeTargetedTargetEffect extends ContinuousRuleModifyingEffectImp
         sb.append(filterSource.getMessage());
         if (!duration.toString().isEmpty()) {
             sb.append(' ');
-            if (duration.equals(Duration.EndOfTurn)) {
+            if (duration == Duration.EndOfTurn) {
                 sb.append("this turn");
             } else {
                 sb.append(duration.toString());

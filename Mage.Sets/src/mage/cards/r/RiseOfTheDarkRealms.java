@@ -85,7 +85,7 @@ class RiseOfTheDarkRealmsEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     for (Card card : player.getGraveyard().getCards(game)) {
-                        if (card.getCardType().contains(CardType.CREATURE)) {
+                        if (card.isCreature()) {
                             creatureCards.add(card);
                         }
                     }

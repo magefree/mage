@@ -27,27 +27,21 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
-import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.command.Emblem;
+import mage.game.command.emblems.ElspethSunsChampionEmblem;
 import mage.game.permanent.token.SoldierToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +52,7 @@ public class ElspethSunsChampion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 4 or greater");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public ElspethSunsChampion(UUID ownerId, CardSetInfo setInfo) {
@@ -82,19 +76,5 @@ public class ElspethSunsChampion extends CardImpl {
     @Override
     public ElspethSunsChampion copy() {
         return new ElspethSunsChampion(this);
-    }
-}
-
-// -7: You get an emblem with "Creatures you control get +2/+2 and have flying."
-class ElspethSunsChampionEmblem extends Emblem {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
-
-    public ElspethSunsChampionEmblem() {
-        this.setName("Emblem Elspeth");
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(2, 2, Duration.EndOfGame, filter, false));
-        ability.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfGame, filter));
-        this.getAbilities().add(ability);
-
     }
 }

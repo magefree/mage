@@ -28,6 +28,7 @@
 package mage.cards.n;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -42,7 +43,6 @@ import mage.target.TargetPlayer;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
- *
  * @author LevelX2
  */
 public class NeedlebiteTrap extends CardImpl {
@@ -52,7 +52,7 @@ public class NeedlebiteTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent gained life this turn, you may pay {B} rather than pay Needlebite Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}"), NeedlebiteTrapCondition.getInstance()), new PlayerGainedLifeWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}"), NeedlebiteTrapCondition.instance), new PlayerGainedLifeWatcher());
 
         // Target player loses 5 life and you gain 5 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
@@ -70,17 +70,13 @@ public class NeedlebiteTrap extends CardImpl {
     }
 }
 
-class NeedlebiteTrapCondition implements Condition {
+enum NeedlebiteTrapCondition implements Condition {
 
-    private static final NeedlebiteTrapCondition fInstance = new NeedlebiteTrapCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get(PlayerGainedLifeWatcher.class.getName());
+        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get(PlayerGainedLifeWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 if (watcher.getLiveGained(opponentId) > 0) {

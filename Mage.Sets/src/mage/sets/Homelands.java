@@ -27,6 +27,7 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.a.AbbeyMatron;
 import mage.cards.a.AlibansTower;
@@ -40,9 +41,8 @@ import mage.cards.r.ReefPirates;
 import mage.cards.s.SengirBats;
 import mage.cards.t.Torture;
 import mage.cards.w.WillowFaerie;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -50,10 +50,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Homelands extends ExpansionSet {
 
-    private static final Homelands fINSTANCE = new Homelands();
+    private static final Homelands instance = new Homelands();
 
     public static Homelands getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Homelands() {
@@ -95,7 +95,6 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Chandler", 88, Rarity.COMMON, mage.cards.c.Chandler.class));
         cards.add(new SetCardInfo("Clockwork Gnomes", 127, Rarity.COMMON, mage.cards.c.ClockworkGnomes.class));
         cards.add(new SetCardInfo("Coral Reef", 29, Rarity.COMMON, mage.cards.c.CoralReef.class));
-        cards.add(new SetCardInfo("Dark Maze", 31, Rarity.COMMON, mage.cards.d.DarkMaze.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Dark Maze", 31, Rarity.COMMON, mage.cards.d.DarkMaze.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Death Speakers", 109, Rarity.UNCOMMON, mage.cards.d.DeathSpeakers.class));
         cards.add(new SetCardInfo("Didgeridoo", 130, Rarity.RARE, mage.cards.d.Didgeridoo.class));

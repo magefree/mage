@@ -28,12 +28,12 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  *
@@ -42,11 +42,11 @@ import mage.cards.CardSetInfo;
 public class TolariaWest extends CardImpl {
 
     public TolariaWest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Tolaria West enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {U} to your mana pool.
+        // {T}: Add {U} to your mana pool.
         this.addAbility(new BlueManaAbility());
         // Transmute {1}{U}{U}
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));

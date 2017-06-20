@@ -27,20 +27,15 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -48,6 +43,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -114,7 +111,7 @@ class ProteanHulkEffect extends OneShotEffect {
                 int librarySearchLimit = event.getAmount();
 
                 FilterCard filter = new FilterCreatureCard("number of creature cards with total converted mana cost 6 or less (6 CMC left)");
-                filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, manaCostLeftToFetch + 1));
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, manaCostLeftToFetch + 1));
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
                 target.setCardLimit(librarySearchLimit);
 
@@ -133,7 +130,7 @@ class ProteanHulkEffect extends OneShotEffect {
                     }
                     manaCostLeftToFetch -= card.getConvertedManaCost();
                     filter = new FilterCreatureCard("number of creature cards with total converted mana cost 6 or less (" + manaCostLeftToFetch + " CMC left)");
-                    filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, manaCostLeftToFetch + 1));
+                    filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, manaCostLeftToFetch + 1));
                     target = new TargetCardInLibrary(0, 1, filter);
                     target.setCardLimit(librarySearchLimit);
                 }

@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
@@ -37,15 +36,15 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,14 +56,14 @@ public class OjutaiSoulOfWinter extends CardImpl {
     private static final FilterPermanent filterNonlandPermanent = new FilterNonlandPermanent("nonland permanent an opponent controls");
 
     static {
-        filterDragon.add(new SubtypePredicate("Dragon"));
+        filterDragon.add(new SubtypePredicate(SubType.DRAGON));
         filterDragon.add(new ControllerPredicate(TargetController.YOU));
         filterNonlandPermanent.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public OjutaiSoulOfWinter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dragon");
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

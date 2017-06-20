@@ -65,7 +65,7 @@ public class WoodlandSleuth extends CardImpl {
 
         // Morbid - When Woodland Sleuth enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new WoodlandSleuthEffect());
-        this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.getInstance(), staticText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.instance, staticText));
     }
 
     public WoodlandSleuth(final WoodlandSleuth card) {

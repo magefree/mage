@@ -174,10 +174,10 @@ public class TinyLeaders extends Constructed {
                 }
                 return false;
             }
-            if ((commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary"))
-                    || (commander.getCardType().contains(CardType.PLANESWALKER) && commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if ((commander.isCreature() && commander.isLegendary())
+                    || (commander.isPlaneswalker() && commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
                 if (!bannedCommander.contains(commander.getName())) {
-                    FilterMana color = CardUtil.getColorIdentity(commander);
+                    FilterMana color = commander.getColorIdentity();
                     for (Card card : deck.getCards()) {
                         if (!isCardFormatValid(card, commander, color)) {
                             valid = false;
@@ -249,7 +249,7 @@ public class TinyLeaders extends Constructed {
      * @return True if card has a valid color identity
      */
     public boolean cardHasValideColor(FilterMana commander, Card card) {
-        FilterMana cardColor = CardUtil.getColorIdentity(card);
+        FilterMana cardColor = card.getColorIdentity();
         return !(cardColor.isBlack() && !commander.isBlack()
                 || cardColor.isBlue() && !commander.isBlue()
                 || cardColor.isGreen() && !commander.isGreen()

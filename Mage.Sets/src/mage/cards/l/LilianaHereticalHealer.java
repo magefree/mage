@@ -27,8 +27,8 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Gender;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
@@ -37,6 +37,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -44,6 +45,8 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -61,7 +64,7 @@ public class LilianaHereticalHealer extends CardImpl {
 
     public LilianaHereticalHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);
@@ -75,7 +78,7 @@ public class LilianaHereticalHealer extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, create a 2/2 black Zombie creature token.
-        this.addAbility(new DiesCreatureTriggeredAbility(new ExileAndReturnTransformedSourceEffect(ExileAndReturnTransformedSourceEffect.Gender.FEMAL,
+        this.addAbility(new DiesCreatureTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.FEMALE,
                 new CreateTokenEffect(new ZombieToken())), false, filter));
     }
 

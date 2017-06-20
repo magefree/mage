@@ -28,6 +28,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -48,7 +49,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class PathOfBravery extends CardImpl {
@@ -58,13 +58,14 @@ public class PathOfBravery extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
-    final String rule = "As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1";
+
+    static final String rule = "As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1";
 
     public PathOfBravery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new LifeCondition(), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true), LifeCondition.instance, rule)));
 
         // Whenever one or more creatures you control attack, you gain life equal to the number of attacking creatures.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new PathOfBraveryEffect(), 1));
@@ -81,13 +82,9 @@ public class PathOfBravery extends CardImpl {
     }
 }
 
-class LifeCondition implements Condition {
+enum LifeCondition implements Condition {
 
-    private static LifeCondition fInstance = new LifeCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

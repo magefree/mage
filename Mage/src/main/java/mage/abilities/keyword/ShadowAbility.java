@@ -15,14 +15,14 @@ import mage.game.permanent.Permanent;
  * @author Loki
  */
 public class ShadowAbility extends EvasionAbility implements MageSingleton {
-    private static final ShadowAbility fINSTANCE =  new ShadowAbility();
+    private static final ShadowAbility instance =  new ShadowAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static ShadowAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ShadowAbility() {
@@ -36,7 +36,7 @@ public class ShadowAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public ShadowAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

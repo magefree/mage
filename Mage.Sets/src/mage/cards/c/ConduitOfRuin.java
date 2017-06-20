@@ -27,10 +27,8 @@
  */
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
@@ -41,7 +39,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
@@ -54,8 +51,11 @@ import mage.game.stack.Spell;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class ConduitOfRuin extends CardImpl {
@@ -65,12 +65,12 @@ public class ConduitOfRuin extends CardImpl {
 
     static {
         filter.add(new ColorlessPredicate());
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 6));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
         filterCost.add(new FirstCastCreatureSpellPredicate());
     }
 
     public ConduitOfRuin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -101,7 +101,7 @@ class ConduitOfRuinWatcher extends Watcher {
     int spellCount = 0;
 
     public ConduitOfRuinWatcher() {
-        super("FirstCreatureSpellCastThisTurn", WatcherScope.GAME);
+        super(ConduitOfRuinWatcher.class.getSimpleName(), WatcherScope.GAME);
         playerCreatureSpells = new HashMap<>();
     }
 
@@ -115,21 +115,14 @@ class ConduitOfRuinWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
-                if (playerCreatureSpells.containsKey(event.getPlayerId())) {
-                    playerCreatureSpells.put(event.getPlayerId(), playerCreatureSpells.get(event.getPlayerId()) + 1);
-                } else {
-                    playerCreatureSpells.put(event.getPlayerId(), 1);
-                }
+            if (spell != null && spell.isCreature()) {
+                playerCreatureSpells.put(event.getPlayerId(), creatureSpellsCastThisTurn(event.getPlayerId()) + 1);
             }
         }
     }
 
     public int creatureSpellsCastThisTurn(UUID playerId) {
-        if (playerCreatureSpells.containsKey(playerId)) {
-            return playerCreatureSpells.get(playerId);
-        }
-        return 0;
+        return playerCreatureSpells.getOrDefault(playerId, 0);
     }
 
     @Override
@@ -149,8 +142,8 @@ class FirstCastCreatureSpellPredicate implements ObjectPlayerPredicate<ObjectPla
     @Override
     public boolean apply(ObjectPlayer<Controllable> input, Game game) {
         if (input.getObject() instanceof Spell
-                && ((Spell) input.getObject()).getCardType().contains(CardType.CREATURE)) {
-            ConduitOfRuinWatcher watcher = (ConduitOfRuinWatcher) game.getState().getWatchers().get("FirstCreatureSpellCastThisTurn");
+                && ((Spell) input.getObject()).isCreature()) {
+            ConduitOfRuinWatcher watcher = (ConduitOfRuinWatcher) game.getState().getWatchers().get(ConduitOfRuinWatcher.class.getSimpleName());
             return watcher != null && watcher.creatureSpellsCastThisTurn(input.getPlayerId()) == 0;
         }
         return false;

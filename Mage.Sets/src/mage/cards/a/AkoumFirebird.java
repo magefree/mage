@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
@@ -44,6 +43,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +89,7 @@ class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
         this(Zone.GRAVEYARD, effect, optional);
     }
 
-    public AkoumFirebirdLandfallAbility (Zone zone, Effect effect, Boolean optional ) {
+    public AkoumFirebirdLandfallAbility (Zone zone, Effect effect, boolean optional ) {
         super(zone, effect, optional);
     }
 
@@ -104,7 +105,7 @@ class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId);
+        return permanent != null && permanent.isLand() && permanent.getControllerId().equals(this.controllerId);
     }
 
     @Override

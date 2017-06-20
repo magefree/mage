@@ -140,14 +140,15 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
             if (prevented > 0) {
                 UUID redirectTo = source.getTargets().get(1).getFirstTarget();
                 Permanent permanent = game.getPermanent(redirectTo);
+                MageObject sourceObject = game.getObject(source.getFirstTarget());
                 if (permanent != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + permanent.getName() + " instead");
+                    game.informPlayers(sourceObject.getIdName() + "deals " + prevented + " to " + permanent.getName() + " instead");
                     // keep the original source id as it is redirecting
                     permanent.damage(prevented, event.getSourceId(), game, ((DamageEvent) event).isCombatDamage(), ((DamageEvent) event).isPreventable(), event.getAppliedEffects());
                 }
                 Player player = game.getPlayer(redirectTo);
                 if (player != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + player.getLogName() + " instead");
+                    game.informPlayers(sourceObject.getIdName() + "deals " + prevented + " to " + player.getLogName() + " instead");
                     // keep the original source id as it is redirecting
                     player.damage(prevented, event.getSourceId(), game, ((DamageEvent) event).isCombatDamage(), ((DamageEvent) event).isPreventable(), event.getAppliedEffects());
                 }
@@ -160,21 +161,24 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
 
-            // check source
-            MageObject object = game.getObject(event.getSourceId());
-            if (object == null) {
+            // get source of the damage event
+            MageObject sourceObject = game.getObject(event.getSourceId());
+            // get the chosen damage source
+            MageObject chosenSourceObject = game.getObject(source.getFirstTarget());
+            // does the source of the damage exist?
+            if (sourceObject == null) {
                 game.informPlayers("Couldn't find source of damage");
                 return false;
             }
-
-            if (!object.getId().equals(source.getFirstTarget())) {
+            // do the 2 objects match?
+            if (sourceObject.getId() != chosenSourceObject.getId()) {
                 return false;
             }
 
             // check target
             //   check creature first
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.isCreature()) {
                 if (permanent.getControllerId().equals(source.getControllerId())) {
                     // it's your creature
                     return true;

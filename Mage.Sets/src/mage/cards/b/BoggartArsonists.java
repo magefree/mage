@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,11 +37,14 @@ import mage.abilities.keyword.PlainswalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,8 +56,8 @@ public class BoggartArsonists extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Scarecrow"),
-                new SubtypePredicate("Plains")));
+                new SubtypePredicate(SubType.SCARECROW),
+                new SubtypePredicate(SubType.PLAINS)));
     }
 
     public BoggartArsonists(UUID ownerId, CardSetInfo setInfo) {

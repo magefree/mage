@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -42,6 +41,8 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class FallingTimber extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if(ability.getOriginalId().equals(originalId)) {
-             ability.addTarget(new TargetCreaturePermanent(KickedCondition.getInstance().apply(game, ability) ? 2 : 1));
+             ability.addTarget(new TargetCreaturePermanent(KickedCondition.instance.apply(game, ability) ? 2 : 1));
         }
     }
 

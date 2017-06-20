@@ -27,10 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,12 +37,15 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,15 +57,15 @@ public class EzuriRenegadeLeader extends CardImpl {
     private static final FilterControlledCreaturePermanent notEzuri = new FilterControlledCreaturePermanent();
 
     static {
-        elfFilter.add(new SubtypePredicate("Elf"));
+        elfFilter.add(new SubtypePredicate(SubType.ELF));
 
-        notEzuri.add(new SubtypePredicate("Elf"));
+        notEzuri.add(new SubtypePredicate(SubType.ELF));
         notEzuri.add(Predicates.not(new NamePredicate("Ezuri, Renegade Leader")));
     }
 
     public EzuriRenegadeLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 

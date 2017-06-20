@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
@@ -55,7 +56,7 @@ public class OpalineSliver extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("All Slivers");
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public OpalineSliver(UUID ownerId, CardSetInfo setInfo) {

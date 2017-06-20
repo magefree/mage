@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,14 +38,7 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffec
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -56,6 +48,8 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -64,7 +58,7 @@ public class GisaAndGeralf extends CardImpl {
 
     public GisaAndGeralf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(4);
@@ -92,7 +86,7 @@ class GisaAndGeralfContinuousEffect extends ContinuousEffectImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Zombie creature card");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     GisaAndGeralfContinuousEffect() {
@@ -149,7 +143,7 @@ class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
             if (affectedControllerId.equals(source.getControllerId())) {
-                GisaAndGeralfWatcher watcher = (GisaAndGeralfWatcher) game.getState().getWatchers().get("GisaAndGeralfWatcher", source.getSourceId());
+                GisaAndGeralfWatcher watcher = (GisaAndGeralfWatcher) game.getState().getWatchers().get(GisaAndGeralfWatcher.class.getSimpleName(), source.getSourceId());
                 return !watcher.isAbilityUsed();
             }
         }
@@ -174,7 +168,7 @@ class GisaAndGeralfWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
          if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell.getCardType().contains(CardType.CREATURE) && spell.getSubtype(game).contains("Zombie")) {
+            if (spell.isCreature() && spell.hasSubtype("Zombie", game)) {
                abilityUsed = true;
             }
         }

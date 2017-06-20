@@ -42,7 +42,7 @@ public class BeastToken2 extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ZEN", "C14", "DDD", "C15", "DD3GVL"));
+        tokenImageSets.addAll(Arrays.asList("ZEN", "C14", "DDD", "C15", "DD3GVL", "MM3", "CMA", "E01"));
     }
 
     public BeastToken2() {
@@ -76,7 +76,7 @@ public class BeastToken2 extends Token {
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("C14") || getOriginalExpansionSetCode().equals("DDD") || getOriginalExpansionSetCode().equals("DD3GVL")) {
+        if (getOriginalExpansionSetCode().equals("C14") || getOriginalExpansionSetCode().equals("DDD") || getOriginalExpansionSetCode().equals("DD3GVL") || getOriginalExpansionSetCode().equals("MM3")) {
             this.setTokenType(2);
         }
     }

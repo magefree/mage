@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -47,6 +46,8 @@ import mage.constants.PhaseStep;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ public class FiremaneAngel extends CardImpl {
         // At the beginning of your upkeep, if Firemane Angel is in your graveyard or on the battlefield, you may gain 1 life.
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.ALL, new GainLifeEffect(1), TargetController.YOU, true),
-                SourceOnBattelfieldOrGraveyardCondition.getInstance(),
+                SourceOnBattlefieldOrGraveyardCondition.instance,
                 "At the beginning of your upkeep, if {this} is in your graveyard or on the battlefield, you may gain 1 life");
         this.addAbility(ability);
         // {6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
@@ -86,18 +87,14 @@ public class FiremaneAngel extends CardImpl {
     }
 }
 
-class SourceOnBattelfieldOrGraveyardCondition implements Condition {
+enum SourceOnBattlefieldOrGraveyardCondition implements Condition {
 
-    private static final SourceOnBattelfieldOrGraveyardCondition fInstance = new SourceOnBattelfieldOrGraveyardCondition();
-
-    public static SourceOnBattelfieldOrGraveyardCondition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return (game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)
-                || game.getState().getZone(source.getSourceId()).equals(Zone.BATTLEFIELD));
+        return game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
+                || game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD;
     }
 
     @Override

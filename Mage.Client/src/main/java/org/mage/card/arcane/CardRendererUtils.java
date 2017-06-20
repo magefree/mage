@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  *
  * Various static utilities for use in the card renderer
  */
-public class CardRendererUtils {
+public final class CardRendererUtils {
 
     /**
      * Convert an abstract image, whose underlying implementation may or may not
@@ -57,7 +57,7 @@ public class CardRendererUtils {
 
     // Draw a rounded box with a 2-pixel border
     // Used on various card parts.
-    public static void drawRoundedBox(Graphics2D g, int x, int y, int w, int h, int bevel, Paint border, Color fill) {
+    public static void drawRoundedBox(Graphics2D g, int x, int y, int w, int h, int bevel, Paint border, Paint fill) {
         g.setColor(new Color(0, 0, 0, 150));
         g.drawOval(x - 1, y - 1, bevel * 2, h);
         g.setPaint(border);
@@ -67,7 +67,7 @@ public class CardRendererUtils {
         g.drawOval(x + 1 + w - bevel * 2, y + 1, bevel * 2 - 3, h - 3);
         g.drawRect(x + bevel, y, w - 2 * bevel, h - 1);
         g.drawRect(x + 1 + bevel, y + 1, w - 2 * bevel - 2, h - 3);
-        g.setColor(fill);
+        g.setPaint(fill);
         g.fillOval(x + 2, y + 2, bevel * 2 - 4, h - 4);
         g.fillOval(x + 2 + w - bevel * 2, y + 2, bevel * 2 - 4, h - 4);
         g.fillRect(x + bevel, y + 2, w - 2 * bevel, h - 4);

@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -36,9 +35,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,8 +51,8 @@ public class BattlewandOak extends CardImpl {
     private static final FilterPermanent filterForest = new FilterPermanent("a Forest");
     private static final FilterSpell filterTreefolk = new FilterSpell("a Treefolk spell");
     static {
-        filterForest.add(new SubtypePredicate("Forest"));
-        filterTreefolk.add(new SubtypePredicate("Treefolk"));
+        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterTreefolk.add(new SubtypePredicate(SubType.TREEFOLK));
     }
 
     public BattlewandOak(UUID ownerId, CardSetInfo setInfo) {

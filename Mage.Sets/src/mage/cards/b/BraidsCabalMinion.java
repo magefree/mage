@@ -27,18 +27,20 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +48,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class BraidsCabalMinion extends CardImpl {
 
-    public static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
+    static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
@@ -56,7 +58,7 @@ public class BraidsCabalMinion extends CardImpl {
 
     public BraidsCabalMinion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Minion");
 

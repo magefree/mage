@@ -102,18 +102,18 @@ class HelmOfObedienceEffect extends OneShotEffect {
             if(max != 0){
                 int numberOfCard = 0;
 
-                while(targetOpponent.getLibrary().size() > 0) {
+                while(targetOpponent.getLibrary().hasCards()) {
                     Card card = targetOpponent.getLibrary().removeFromTop(game);
                     if (card != null){
                         if (targetOpponent.moveCards(card, Zone.GRAVEYARD, source, game)) {
-                            if(card.getCardType().contains(CardType.CREATURE)){
+                            if(card.isCreature()){
                                 // If a creature card is put into that graveyard this way, sacrifice Helm of Obedience
                                 // and put that card onto the battlefield under your control.
                                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                                 if (sourcePermanent != null) {
                                     sourcePermanent.sacrifice(source.getSourceId(), game);
                                 }
-                                if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                                if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                                     card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
                                 }
                                 break;

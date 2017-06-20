@@ -28,11 +28,9 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,6 +38,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.HourOfNeedSphinxToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,8 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class HourOfNeed extends CardImpl {
 
     public HourOfNeed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Strive — Hour of Need costs {1}{U} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{U}"));
@@ -91,7 +89,7 @@ class HourOfNeedExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID creatureId: getTargetPointer().getTargets(game, source)) {
+            for (UUID creatureId : getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanent(creatureId);
                 if (creature != null) {
                     controller.moveCardToExileWithInfo(creature, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
@@ -102,19 +100,5 @@ class HourOfNeedExileEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class HourOfNeedSphinxToken extends Token {
-
-    public HourOfNeedSphinxToken() {
-        super("Sphinx", "4/4 blue Sphinx creature token with flying");
-        this.setOriginalExpansionSetCode("JOU");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Sphinx");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        addAbility(FlyingAbility.getInstance());
     }
 }

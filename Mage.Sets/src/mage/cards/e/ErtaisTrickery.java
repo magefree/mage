@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -37,6 +36,8 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,7 +82,7 @@ class ErtaisTrickeryEffect extends CounterTargetEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell targetSpell = game.getStack().getSpell(source.getFirstTarget());
-        if(targetSpell != null && KickedCondition.getInstance().apply(game, targetSpell.getSpellAbility())) {
+        if(targetSpell != null && KickedCondition.instance.apply(game, targetSpell.getSpellAbility())) {
             return super.apply(game, source);
         }
         return false;

@@ -27,7 +27,7 @@
  */
 package mage.cards.p;
 
-import java.util.List;
+import java.util.EnumSet;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -129,12 +129,19 @@ class PossibilityStormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        boolean noLongerOnStack = false; // spell was exiled already by another effect, for example NivMagus Elemental
+        if (spell == null) {
+            spell = ((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK));
+            noLongerOnStack = true;
+        }
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && spell != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
-            if (spellController != null
-                    && spellController.moveCardsToExile(spell, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
-                if (spellController.getLibrary().size() > 0) {
+            if (spellController != null) {
+                if (!noLongerOnStack) {
+                    spellController.moveCardsToExile(spell, source, game, true, source.getSourceId(), sourceObject.getIdName());
+                }
+                if (spellController.getLibrary().hasCards()) {
                     Library library = spellController.getLibrary();
                     Card card;
                     do {
@@ -142,10 +149,10 @@ class PossibilityStormEffect extends OneShotEffect {
                         if (card != null) {
                             spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
                         }
-                    } while (library.size() > 0 && card != null && !sharesType(card, spell.getCardType()));
+                    } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType()));
 
                     if (card != null && sharesType(card, spell.getCardType())
-                            && !card.getCardType().contains(CardType.LAND)
+                            && !card.isLand()
                             && card.getSpellAbility().canChooseTarget(game)) {
                         if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
                             spellController.cast(card.getSpellAbility(), game, true);
@@ -164,7 +171,7 @@ class PossibilityStormEffect extends OneShotEffect {
         return false;
     }
 
-    private boolean sharesType(Card card, List<CardType> cardTypes) {
+    private boolean sharesType(Card card, EnumSet<CardType> cardTypes) {
         for (CardType type : card.getCardType()) {
             if (cardTypes.contains(type)) {
                 return true;

@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -44,13 +43,15 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
  */
 public class EldraziAggressor extends CardImpl {
 
-    private final String rule = "{this} has haste as long as you control another colorless creature";
+    private static final String rule = "{this} has haste as long as you control another colorless creature";
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another colorless creature");
 
     static {

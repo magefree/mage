@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.GrandeurAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,14 +39,14 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,13 +57,13 @@ public class KorlashHeirToBlackblade extends CardImpl {
     private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("Swamps you control");
     private static final FilterCard filterCard = new FilterLandCard("Swamp cards");
     static {
-        filterPermanent.add(new SubtypePredicate("Swamp"));
-        filterCard.add(new SubtypePredicate("Swamp"));
+        filterPermanent.add(new SubtypePredicate(SubType.SWAMP));
+        filterCard.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public KorlashHeirToBlackblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
 

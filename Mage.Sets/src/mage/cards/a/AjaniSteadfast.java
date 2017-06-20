@@ -27,13 +27,9 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -46,17 +42,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.command.Emblem;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.game.command.emblems.AjaniSteadfastEmblem;
 import mage.target.common.TargetCreaturePermanent;
+import java.util.UUID;
 
 /**
  *
@@ -111,63 +104,5 @@ public class AjaniSteadfast extends CardImpl {
     @Override
     public AjaniSteadfast copy() {
         return new AjaniSteadfast(this);
-    }
-}
-
-class AjaniSteadfastEmblem extends Emblem {
-
-    public AjaniSteadfastEmblem() {
-        setName("Emblem Ajani");
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new AjaniSteadfastPreventEffect()));
-        this.setExpansionSetCodeForImage("M15");
-    }
-}
-
-class AjaniSteadfastPreventEffect extends PreventionEffectImpl {
-
-    public AjaniSteadfastPreventEffect() {
-        super(Duration.EndOfGame);
-        this.staticText = "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage";
-        consumable = false;
-    }
-
-    public AjaniSteadfastPreventEffect(AjaniSteadfastPreventEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        int damage = event.getAmount();
-        if (damage > 1) {
-            amountToPrevent = damage - 1;
-            preventDamageAction(event, source, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
-                && event.getTargetId().equals(source.getControllerId())) {
-            return super.applies(event, source, game);
-        }
-
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER)) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
-                return super.applies(event, source, game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public AjaniSteadfastPreventEffect copy() {
-        return new AjaniSteadfastPreventEffect(this);
     }
 }

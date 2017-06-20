@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -47,6 +47,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.EldraziScionToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,8 +60,8 @@ public class DrownerOfHope extends CardImpl {
 
     static {
         FILTER.add(Predicates.and(
-                new SubtypePredicate("Eldrazi"),
-                new SubtypePredicate("Scion")));
+                new SubtypePredicate(SubType.ELDRAZI),
+                new SubtypePredicate(SubType.SCION)));
     }
 
     public DrownerOfHope(UUID ownerId, CardSetInfo setInfo) {

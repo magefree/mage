@@ -27,6 +27,12 @@
  */
 package mage.server;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.util.*;
+import javax.management.MBeanServer;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.repository.CardScanner;
@@ -59,18 +65,10 @@ import org.jboss.remoting.transporter.TransporterClient;
 import org.jboss.remoting.transporter.TransporterServer;
 import org.w3c.dom.Element;
 
-import javax.management.MBeanServer;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.util.*;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Main {
+public final class Main {
 
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
@@ -107,7 +105,7 @@ public class Main {
             }
         }
 
-        if (ConfigSettings.getInstance().isAuthenticationActivated()) {
+        if (ConfigSettings.instance.isAuthenticationActivated()) {
             logger.info("Check authorized user DB version ...");
             if (!AuthorizedUserRepository.instance.checkAlterAndMigrateAuthorizedUser()) {
                 logger.fatal("Failed to start server.");
@@ -162,33 +160,33 @@ public class Main {
         UserStatsRepository.instance.updateUserStats();
         logger.info("Done.");
         deleteSavedGames();
-        ConfigSettings config = ConfigSettings.getInstance();
+        ConfigSettings config = ConfigSettings.instance;
         for (GamePlugin plugin : config.getGameTypes()) {
-            GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
+            GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }
         for (GamePlugin plugin : config.getTournamentTypes()) {
-            TournamentFactory.getInstance().addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
+            TournamentFactory.instance.addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getPlayerTypes()) {
-            PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));
+            PlayerFactory.instance.addPlayerType(plugin.getName(), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getDraftCubes()) {
-            CubeFactory.getInstance().addDraftCube(plugin.getName(), loadPlugin(plugin));
+            CubeFactory.instance.addDraftCube(plugin.getName(), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getDeckTypes()) {
-            DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
+            DeckValidatorFactory.instance.addDeckType(plugin.getName(), loadPlugin(plugin));
         }
 
         for (ExtensionPackage pkg : extensions) {
             Map<String, Class> draftCubes = pkg.getDraftCubes();
             for (String name : draftCubes.keySet()) {
                 logger.info("Loading extension: [" + name + "] " + draftCubes.get(name).toString());
-                CubeFactory.getInstance().addDraftCube(name, draftCubes.get(name));
+                CubeFactory.instance.addDraftCube(name, draftCubes.get(name));
             }
             Map<String, Class> deckTypes = pkg.getDeckTypes();
             for (String name : deckTypes.keySet()) {
                 logger.info("Loading extension: [" + name + "] " + deckTypes.get(name));
-                DeckValidatorFactory.getInstance().addDeckType(name, deckTypes.get(name));
+                DeckValidatorFactory.instance.addDeckType(name, deckTypes.get(name));
             }
         }
 
@@ -203,6 +201,7 @@ public class Main {
         logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "true" : "false"));
         logger.info("Config - backlog size    : " + config.getBacklogSize());
         logger.info("Config - lease period    : " + config.getLeasePeriod());
+        logger.info("Config - sock wrt timeout: " + config.getSocketWriteTimeout());
         logger.info("Config - max pool size   : " + config.getMaxPoolSize());
         logger.info("Config - num accp.threads: " + config.getNumAcceptThreads());
         logger.info("Config - second.bind port: " + config.getSecondaryBindPort());
@@ -240,12 +239,12 @@ public class Main {
     }
 
     static void initStatistics() {
-        ServerMessagesUtil.getInstance().setStartDate(System.currentTimeMillis());
+        ServerMessagesUtil.instance.setStartDate(System.currentTimeMillis());
     }
 
     static boolean isAlreadyRunning(InvokerLocator serverLocator) {
         Map<String, String> metadata = new HashMap<>();
-        metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+        metadata.put(SocketWrapper.WRITE_TIMEOUT, String.valueOf(ConfigSettings.instance.getSocketWriteTimeout()));
         metadata.put("generalizeSocketException", "true");
         try {
             MageServer testServer = (MageServer) TransporterClient.createTransporterClient(serverLocator.getLocatorURI(), MageServer.class, metadata);
@@ -263,26 +262,29 @@ public class Main {
 
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
-            Session session = SessionManager.getInstance().getSession(client.getSessionId());
-            if (session != null) {
-
+            String sessionId = client.getSessionId();
+            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+            if (!session.isPresent()) {
+                logger.trace("Session not found : " + sessionId);
+            } else {
+                UUID userId = session.get().getUserId();
                 StringBuilder sessionInfo = new StringBuilder();
-                Optional<User> user = UserManager.getInstance().getUser(session.getUserId());
+                Optional<User> user = UserManager.instance.getUser(userId);
                 if (user.isPresent()) {
                     sessionInfo.append(user.get().getName()).append(" [").append(user.get().getGameInfo()).append(']');
                 } else {
                     sessionInfo.append("[user missing] ");
                 }
-                sessionInfo.append(" at ").append(session.getHost()).append(" sessionId: ").append(session.getId());
+                sessionInfo.append(" at ").append(session.get().getHost()).append(" sessionId: ").append(session.get().getId());
                 if (throwable instanceof ClientDisconnectedException) {
                     // Seems like the random diconnects from public server land here and should not be handled as explicit disconnects
                     // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
-                    //SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.Disconnected);
-                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
+                    //SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.Disconnected);
+                    SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("CLIENT DISCONNECTED - " + sessionInfo);
                     logger.debug("Stack Trace", throwable);
                 } else {
-                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
+                    SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("LOST CONNECTION - " + sessionInfo);
                     if (logger.isDebugEnabled()) {
                         if (throwable == null) {
@@ -305,7 +307,7 @@ public class Main {
         public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler serverInvocationHandler) throws Exception {
             super(locator, target, subsystem);
             connector.addInvocationHandler("callback", serverInvocationHandler);
-            connector.setLeasePeriod(ConfigSettings.getInstance().getLeasePeriod());
+            connector.setLeasePeriod(ConfigSettings.instance.getLeasePeriod());
             connector.addConnectionListener(new ClientConnectionListener());
         }
 
@@ -343,9 +345,9 @@ public class Main {
 
         @Override
         public void setInvoker(ServerInvoker invoker) {
-            ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.getInstance().getSecondaryBindPort());
-            ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.getInstance().getBacklogSize());
-            ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.getInstance().getNumAcceptThreads());
+            ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.instance.getSecondaryBindPort());
+            ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.instance.getBacklogSize());
+            ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.instance.getNumAcceptThreads());
         }
 
         @Override
@@ -354,7 +356,7 @@ public class Main {
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             try {
                 String sessionId = handler.getClientSessionId();
-                SessionManager.getInstance().createSession(sessionId, callbackHandler);
+                SessionManager.instance.createSession(sessionId, callbackHandler);
             } catch (Throwable ex) {
                 logger.fatal("", ex);
             }
@@ -372,7 +374,12 @@ public class Main {
             } else {
                 host = "localhost";
             }
-            SessionManager.getInstance().getSession(sessionId).setHost(host);
+            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+            if (!session.isPresent()) {
+                logger.error("Session not found : " + sessionId);
+            } else {
+                session.get().setHost(host);
+            }
             return null;
         }
 
@@ -380,7 +387,7 @@ public class Main {
         public void removeListener(InvokerCallbackHandler callbackHandler) {
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             String sessionId = handler.getClientSessionId();
-            SessionManager.getInstance().disconnect(sessionId, DisconnectReason.Disconnected);
+            SessionManager.instance.disconnect(sessionId, DisconnectReason.Disconnected);
         }
 
     }

@@ -28,7 +28,7 @@ import javax.mail.internet.MimeMessage;
 import mage.server.util.ConfigSettings;
 import org.apache.log4j.Logger;
 
-public class GmailClient {
+public final class GmailClient {
 
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -80,8 +80,8 @@ public class GmailClient {
             Message message = new Message();
             message.setRaw(Base64.encodeBase64URLSafeString(baos.toByteArray()));
 
-            gmail.users().messages().send(ConfigSettings.getInstance().getGoogleAccount()
-                    + (ConfigSettings.getInstance().getGoogleAccount().endsWith("@gmail.com") ? "" : "@gmail.com"), message).execute();
+            gmail.users().messages().send(ConfigSettings.instance.getGoogleAccount()
+                    + (ConfigSettings.instance.getGoogleAccount().endsWith("@gmail.com") ? "" : "@gmail.com"), message).execute();
             return true;
         } catch (MessagingException | IOException ex) {
             logger.error("Error sending message", ex);

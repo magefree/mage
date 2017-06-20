@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
+import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 
 /**
@@ -45,7 +46,7 @@ public class NetherVoid extends CardImpl {
 
     public NetherVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
-        this.supertype.add("World");
+        addSuperType(SuperType.WORLD);
 
         // Whenever a player casts a spell, counter it unless that player pays {3}.
         this.addAbility(new SpellCastAllTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));

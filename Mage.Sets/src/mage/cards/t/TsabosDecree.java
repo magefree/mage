@@ -41,6 +41,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -92,7 +93,7 @@ class TsabosDecreeEffect extends OneShotEffect {
         if (player != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
+            typeChoice.setChoices(SubType.getCreatureTypes(false));
             while (!player.choose(outcome, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;
@@ -103,7 +104,7 @@ class TsabosDecreeEffect extends OneShotEffect {
             }
             targetPlayer.revealCards("hand of " + targetPlayer.getName(), targetPlayer.getHand(), game);
             FilterCard filterCard = new FilterCard();
-            filterCard.add(new SubtypePredicate(typeChoice.getChoice()));
+            filterCard.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             List<Card> toDiscard = new ArrayList<>();
             for (Card card : targetPlayer.getHand().getCards(game)) {
                 if(filterCard.match(card, game)) {
@@ -114,7 +115,7 @@ class TsabosDecreeEffect extends OneShotEffect {
                     targetPlayer.discard(card, source, game);
                 }
             FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
-            filterCreaturePermanent.add(new SubtypePredicate(typeChoice.getChoice()));
+            filterCreaturePermanent.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
                 if (creature.getControllerId().equals(targetPlayer.getId())) {
                         creature.destroy(source.getSourceId(), game, true);

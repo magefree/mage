@@ -150,13 +150,13 @@ public class BestowAbility extends SpellAbility {
             MageObject basicObject = permanent.getBasicMageObject(game);
             if (basicObject != null) {
                 basicObject.getSubtype(null).remove("Aura");
-                if (!basicObject.getCardType().contains(CardType.CREATURE)) {
-                    basicObject.getCardType().add(CardType.CREATURE);
+                if (!basicObject.isCreature()) {
+                    basicObject.addCardType(CardType.CREATURE);
                 }
             }
             permanent.getSubtype(null).remove("Aura");
-            if (!permanent.getCardType().contains(CardType.CREATURE)) {
-                permanent.getCardType().add(CardType.CREATURE);
+            if (!permanent.isCreature()) {
+                permanent.addCardType(CardType.CREATURE);
             }
 
         }
@@ -175,7 +175,7 @@ class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.ENTERS_THE_BATTLEFIELD_SELF.equals(event.getType());
+        return EventType.ENTERS_THE_BATTLEFIELD_SELF == event.getType();
     }
 
     @Override

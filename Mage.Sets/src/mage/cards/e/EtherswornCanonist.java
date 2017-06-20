@@ -27,9 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -38,15 +35,15 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -81,7 +78,7 @@ class EtherswornCanonistWatcher extends Watcher {
     private Set<UUID> castNonartifactSpell = new HashSet<>();
 
     public EtherswornCanonistWatcher() {
-        super(EtherswornCanonistWatcher.class.getName(), WatcherScope.GAME);
+        super(EtherswornCanonistWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public EtherswornCanonistWatcher(final EtherswornCanonistWatcher watcher) {
@@ -99,7 +96,7 @@ class EtherswornCanonistWatcher extends Watcher {
                     spell = (Spell) mageObject;
                 }
             }
-            if (spell != null && !spell.getCardType().contains(CardType.ARTIFACT)) {
+            if (spell != null && !spell.isArtifact()) {
                 castNonartifactSpell.add(event.getPlayerId());
             }
         }
@@ -145,8 +142,8 @@ class EtherswornCanonistReplacementEffect extends ContinuousRuleModifyingEffectI
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        if (card != null && !card.getCardType().contains(CardType.ARTIFACT)) {
-            EtherswornCanonistWatcher watcher = (EtherswornCanonistWatcher) game.getState().getWatchers().get(EtherswornCanonistWatcher.class.getName());
+        if (card != null && !card.isArtifact()) {
+            EtherswornCanonistWatcher watcher = (EtherswornCanonistWatcher) game.getState().getWatchers().get(EtherswornCanonistWatcher.class.getSimpleName());
             return watcher != null && watcher.castNonArtifactSpell(event.getPlayerId());
         }
         return false;

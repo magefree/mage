@@ -31,21 +31,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.constants.*;
 import mage.game.Game;
+import mage.game.permanent.token.SpyMasterGoblinToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -106,26 +98,5 @@ class SpyMasterGoblinCreateTokenEffect extends OneShotEffect {
         }
 
         return true;
-    }
-}
-
-class SpyMasterGoblinToken extends Token {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
-    SpyMasterGoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token with \"Creatures you control attack each combat if able.\"");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Goblin");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        Effect effect = new AttacksIfAbleAllEffect(filter, Duration.WhileOnBattlefield, true);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 }

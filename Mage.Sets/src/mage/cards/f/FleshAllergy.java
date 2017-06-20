@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -48,6 +47,8 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +83,7 @@ class FleshAllergyWatcher extends Watcher {
     public int creaturesDiedThisTurn = 0;
 
     public FleshAllergyWatcher() {
-        super("CreaturesDied", WatcherScope.GAME);
+        super(FleshAllergyWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public FleshAllergyWatcher(final FleshAllergyWatcher watcher) {
@@ -98,7 +99,7 @@ class FleshAllergyWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && card.isCreature()) {
                 creaturesDiedThisTurn++;
             }
         }
@@ -130,7 +131,7 @@ class FleshAllergyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FleshAllergyWatcher watcher = (FleshAllergyWatcher) game.getState().getWatchers().get("CreaturesDied");
+        FleshAllergyWatcher watcher = (FleshAllergyWatcher) game.getState().getWatchers().get(FleshAllergyWatcher.class.getSimpleName());
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (permanent != null && watcher != null) {
             Player player = game.getPlayer(permanent.getControllerId());

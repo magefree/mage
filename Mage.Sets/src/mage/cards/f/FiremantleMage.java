@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class FiremantleMage extends CardImpl {
 
     public FiremantleMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.subtype.add("Ally");
@@ -54,7 +54,7 @@ public class FiremantleMage extends CardImpl {
 
         // <i>Rally</i> — Whenver Firemantle Mage or another Ally enters the battlefield under your control, creatures you control gain menace until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures")), false));
+                new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), false));
     }
 
     public FiremantleMage(final FiremantleMage card) {

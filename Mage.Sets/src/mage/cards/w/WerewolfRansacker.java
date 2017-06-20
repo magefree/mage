@@ -74,7 +74,7 @@ public class WerewolfRansacker extends CardImpl {
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
     public WerewolfRansacker(final WerewolfRansacker card) {
@@ -89,7 +89,7 @@ public class WerewolfRansacker extends CardImpl {
 
 class WerewolfRansackerAbility extends TriggeredAbilityImpl {
 
-    public static final String RULE_TEXT = "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller";
+    static final String RULE_TEXT = "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller";
 
     public WerewolfRansackerAbility() {
         super(Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);

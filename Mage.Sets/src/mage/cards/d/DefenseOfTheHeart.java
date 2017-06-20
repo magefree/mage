@@ -27,10 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.Set;
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,10 +36,17 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -72,7 +75,7 @@ public class DefenseOfTheHeart extends CardImpl {
         return new DefenseOfTheHeart(this);
     }
     
-    class DefenseOfTheHeartCondition implements Condition {
+    static class DefenseOfTheHeartCondition implements Condition {
 
         @Override
         public boolean apply(Game game, Ability source) {

@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageEverythingEffect;
@@ -38,6 +37,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ public class CanopySurge extends CardImpl {
         this.addAbility(new KickerAbility("{2}"));
         // Canopy Surge deals 1 damage to each creature with flying and each player. If Canopy Surge was kicked, it deals 4 damage to each creature with flying and each player instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageEverythingEffect(4, filter),
-            new DamageEverythingEffect(1, filter), KickedCondition.getInstance(),
+            new DamageEverythingEffect(1, filter), KickedCondition.instance,
             "{this} deals 1 damage to each creature with flying and each player. If {this} was kicked, it deals 4 damage to each creature with flying and each player instead."));
     }
 

@@ -27,9 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.TapTargetCost;
@@ -39,6 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,6 +47,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +60,7 @@ public class BloodTribute extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 
     public BloodTribute(UUID ownerId, CardSetInfo setInfo) {
@@ -74,7 +76,7 @@ public class BloodTribute extends CardImpl {
         // If Blood Tribute was kicked, you gain life equal to the life lost this way.
         Effect effect = new ConditionalOneShotEffect(
                 new BloodTributeGainLifeEffect(),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "If {this} was kicked, you gain life equal to the life lost this way");
         this.getSpellAbility().addEffect(effect);
     }

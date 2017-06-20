@@ -30,6 +30,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -54,7 +55,7 @@ public class KnightCaptainOfEos extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Soldier");
 
     static {
-        filter.add(new SubtypePredicate("Soldier"));
+        filter.add(new SubtypePredicate(SubType.SOLDIER));
     }
 
     public KnightCaptainOfEos(UUID ownerId, CardSetInfo setInfo) {

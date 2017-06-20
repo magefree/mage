@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -40,6 +39,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.RevoltWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -90,7 +91,7 @@ class FatalPushEffect extends OneShotEffect {
             Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {
                 int cmc = targetCreature.getConvertedManaCost();
-                if (cmc <= 2 || (RevoltCondition.getInstance().apply(game, source) && cmc <= 4)) {
+                if (cmc <= 2 || (RevoltCondition.instance.apply(game, source) && cmc <= 4)) {
                     targetCreature.destroy(source.getSourceId(), game, false);
                 }
             }

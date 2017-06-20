@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,9 +35,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GoblinRogueToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +51,7 @@ public class BoggartMob extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin you control");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public BoggartMob(UUID ownerId, CardSetInfo setInfo) {
@@ -60,7 +62,7 @@ public class BoggartMob extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Champion a Goblin
-        this.addAbility(new ChampionAbility(this, "Goblin", false));
+        this.addAbility(new ChampionAbility(this, SubType.GOBLIN, false));
 
         // Whenever a Goblin you control deals combat damage to a player, you may create a 1/1 black Goblin Rogue creature token.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(

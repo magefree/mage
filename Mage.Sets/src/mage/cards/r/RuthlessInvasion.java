@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
 public class RuthlessInvasion extends CardImpl {
 
     public RuthlessInvasion (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R/P}");
 
         this.getSpellAbility().addEffect(new RuthlessInvasionEffect());
     }
@@ -74,7 +74,7 @@ class RuthlessInvasionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (!permanent.getCardType().contains(CardType.ARTIFACT)) {
+        if (!permanent.isArtifact()) {
             return true;
         }
         return false;

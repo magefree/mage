@@ -28,6 +28,7 @@
 
 package mage.server.game;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.DeckCardLists;
@@ -41,14 +42,8 @@ import mage.view.GameView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameManager {
-    private static final GameManager INSTANCE = new GameManager();
-
-    public static GameManager getInstance() {
-        return INSTANCE;
-    }
-
-    private GameManager() {}
+public enum GameManager {
+    instance;
 
     private final ConcurrentHashMap<UUID, GameController> gameControllers = new ConcurrentHashMap<>();
 
@@ -65,12 +60,12 @@ public class GameManager {
         }
     }
 
-    public UUID getChatId(UUID gameId) {
+    public Optional<UUID> getChatId(UUID gameId) {
         GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {
-            return gameController.getChatId();
+            return Optional.of(gameController.getChatId());
         }
-        return null;
+        return Optional.empty();
     }
 
     public void sendPlayerUUID(UUID gameId, UUID userId, UUID data) {
@@ -122,11 +117,12 @@ public class GameManager {
         }
     }
 
-    public void watchGame(UUID gameId, UUID userId) {
+    public boolean watchGame(UUID gameId, UUID userId) {
         GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {
-            gameController.watch(userId);
+            return gameController.watch(userId);
         }
+        return false;
     }
 
     public void stopWatching(UUID gameId, UUID userId) {

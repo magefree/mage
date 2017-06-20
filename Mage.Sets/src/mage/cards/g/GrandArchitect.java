@@ -27,12 +27,7 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.ConditionalMana;
-import mage.MageInt;
-import mage.MageObject;
-import mage.Mana;
-import mage.ObjectColor;
+import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,12 +40,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -61,6 +51,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -172,7 +164,7 @@ class GrandArchitectManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object != null && object.getCardType().contains(CardType.ARTIFACT)) {
+        if (object != null && object.isArtifact()) {
             return true;
         }
         return false;

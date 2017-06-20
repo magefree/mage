@@ -28,15 +28,16 @@
 package mage.cards.t;
 
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.RippleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 
 /**
  * @author klayhamn
@@ -45,7 +46,7 @@ public class ThrummingStone extends CardImpl {
 
     public ThrummingStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // spells you cast have Ripple 4
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new RippleAbility(4), new FilterSpell("spells"))));

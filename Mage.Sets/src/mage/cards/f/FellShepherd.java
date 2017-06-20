@@ -27,9 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,11 +39,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -56,6 +49,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -98,10 +95,10 @@ public class FellShepherd extends CardImpl {
 
 class FellShepherdWatcher extends Watcher {
 
-    private Set<UUID> creatureIds = new HashSet<UUID>();
+    private Set<UUID> creatureIds = new HashSet<>();
 
     public FellShepherdWatcher() {
-        super("YourCreaturesPutToGraveFromBattlefield", WatcherScope.PLAYER);
+        super(FellShepherdWatcher.class.getSimpleName(), WatcherScope.PLAYER);
         condition = true;
     }
 
@@ -123,7 +120,7 @@ class FellShepherdWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && ((Card)card).getOwnerId().equals(this.controllerId) && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && ((Card)card).getOwnerId().equals(this.controllerId) && card.isCreature()) {
                 creatureIds.add(card.getId());
             }
         }
@@ -154,11 +151,11 @@ class FellShepherdEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FellShepherdWatcher watcher = (FellShepherdWatcher) game.getState().getWatchers().get("YourCreaturesPutToGraveFromBattlefield", source.getControllerId());
+        FellShepherdWatcher watcher = (FellShepherdWatcher) game.getState().getWatchers().get(FellShepherdWatcher.class.getSimpleName(), source.getControllerId());
         if (watcher != null) {
             StringBuilder sb = new StringBuilder();
             for (UUID creatureId : watcher.getCreaturesIds()) {
-                if (game.getState().getZone(creatureId).equals(Zone.GRAVEYARD)) {
+                if (game.getState().getZone(creatureId) == Zone.GRAVEYARD) {
                     Card card = game.getCard(creatureId);
                     if (card != null) {
                         card.moveToZone(Zone.HAND, source.getSourceId(), game, false);

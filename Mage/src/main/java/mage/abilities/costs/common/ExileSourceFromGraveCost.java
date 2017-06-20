@@ -55,7 +55,7 @@ public class ExileSourceFromGraveCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             Card card = game.getCard(sourceId);
-            if (card != null && game.getState().getZone(sourceId).equals(Zone.GRAVEYARD)) {
+            if (card != null && game.getState().getZone(sourceId) == Zone.GRAVEYARD) {
                 controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.GRAVEYARD, true);
                 // 117.11. The actions performed when paying a cost may be modified by effects.
                 // Even if they are, meaning the actions that are performed don't match the actions
@@ -70,7 +70,7 @@ public class ExileSourceFromGraveCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null && game.getState().getZone(sourceId).equals(Zone.GRAVEYARD)) {
+        if (card != null && game.getState().getZone(sourceId) == Zone.GRAVEYARD) {
             return true;
         }
         return false;

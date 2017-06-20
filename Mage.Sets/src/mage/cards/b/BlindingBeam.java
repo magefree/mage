@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -49,6 +48,8 @@ import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -153,13 +154,13 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.UNTAP);
+        return event.getType() == EventType.UNTAP;
     }
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // prevent untap event of creatures of target player
-        if (game.getTurn().getStepType().equals(PhaseStep.UNTAP)) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getControllerId().equals(targetPlayerId) && filter.match(permanent, game)) {
                 return true;

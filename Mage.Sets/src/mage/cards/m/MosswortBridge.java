@@ -61,7 +61,7 @@ public class MosswortBridge extends CardImpl {
 
         // {G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new HideawayPlayEffect(), new ManaCostsImpl("{G}"), MosswortBridgeTotalPowerCondition.getInstance());
+                Zone.BATTLEFIELD, new HideawayPlayEffect(), new ManaCostsImpl("{G}"), MosswortBridgeTotalPowerCondition.instance);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -76,14 +76,11 @@ public class MosswortBridge extends CardImpl {
     }
 }
 
-class MosswortBridgeTotalPowerCondition implements Condition {
+enum MosswortBridgeTotalPowerCondition implements Condition {
 
-    private static MosswortBridgeTotalPowerCondition fInstance = new MosswortBridgeTotalPowerCondition();
+    instance;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public static Condition getInstance() {
-        return fInstance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {

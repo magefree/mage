@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Chronicles extends ExpansionSet {
 
-    private static final Chronicles fINSTANCE = new Chronicles();
+    private static final Chronicles instance = new Chronicles();
 
     public static Chronicles getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Chronicles() {
@@ -143,6 +143,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Tower", 105, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Vaevictis Asmadi", 124, Rarity.RARE, mage.cards.v.VaevictisAsmadi.class));
         cards.add(new SetCardInfo("Wall of Heat", 55, Rarity.COMMON, mage.cards.w.WallOfHeat.class));
+        cards.add(new SetCardInfo("Wall of Opposition", 56, Rarity.UNCOMMON, mage.cards.w.WallOfOpposition.class));
         cards.add(new SetCardInfo("Wall of Wonder", 28, Rarity.UNCOMMON, mage.cards.w.WallOfWonder.class));
         cards.add(new SetCardInfo("Witch Hunter", 70, Rarity.UNCOMMON, mage.cards.w.WitchHunter.class));
         cards.add(new SetCardInfo("Xira Arien", 125, Rarity.RARE, mage.cards.x.XiraArien.class));

@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
@@ -43,6 +42,8 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -56,7 +57,7 @@ public class Endoskeleton extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}, {tap}: Target creature gets +0/+3 for as long as Endoskeleton remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostTargetEffect(0, 3, Duration.Custom), SourceTappedCondition.getInstance(),
+            new BoostTargetEffect(0, 3, Duration.Custom), SourceTappedCondition.instance,
             "target creature gets +0/+3 for as long as {this} remains tapped"), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -36,9 +35,13 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,12 +51,12 @@ public class HythoniaTheCruel extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Gorgon creatures");
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Gorgon")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.GORGON)));
     }
 
     public HythoniaTheCruel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Gorgon");
 
         this.power = new MageInt(4);

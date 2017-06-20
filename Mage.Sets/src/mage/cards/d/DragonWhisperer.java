@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -45,6 +44,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.DragonToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,7 +75,7 @@ public class DragonWhisperer extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new CreateTokenEffect(new DragonToken()), 
                 new ManaCostsImpl("{4}{R}{R}"), 
-                FormidableCondition.getInstance());
+                FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);        
         this.addAbility(ability);
     }

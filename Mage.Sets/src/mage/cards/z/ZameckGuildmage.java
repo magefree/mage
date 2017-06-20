@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class ZameckGuildmage extends CardImpl {
 
     public ZameckGuildmage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
         this.subtype.add("Elf");
         this.subtype.add("Wizard");
 
@@ -94,13 +94,13 @@ class ZameckGuildmageEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.ENTERS_THE_BATTLEFIELD);
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE);
+        return permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.isCreature();
     }
 
     @Override
@@ -112,7 +112,7 @@ class ZameckGuildmageEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
-            target.addCounters(CounterType.P1P1.createInstance(), source, game);
+            target.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
         }
         return false;
     }

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,9 +43,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +58,7 @@ public class AnyaMercilessAngel extends CardImpl {
 
     public AnyaMercilessAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Angel");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -73,7 +75,7 @@ public class AnyaMercilessAngel extends CardImpl {
         // As long as an opponent's life total is less than half his or her starting life total, Anya has indestructible.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                        AnyaMercilessAngelCondition.getInstance(),
+                        AnyaMercilessAngelCondition.instance,
                         "As long as an opponent's life total is less than half his or her starting life total, {this} has indestructible")));
     }
 
@@ -121,16 +123,9 @@ class AnyaMercilessAngelDynamicValue implements DynamicValue {
     }
 }
 
-class AnyaMercilessAngelCondition implements Condition {
+enum AnyaMercilessAngelCondition implements Condition {
 
-    private static final AnyaMercilessAngelCondition fInstance = new AnyaMercilessAngelCondition();
-
-    public static AnyaMercilessAngelCondition getInstance() {
-        return fInstance;
-    }
-
-    private AnyaMercilessAngelCondition() {}
-
+    instance;
     @Override
     public boolean apply(Game game, Ability source) {
         return new AnyaMercilessAngelDynamicValue().calculate(game, source, null) > 0;

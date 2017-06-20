@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -76,7 +77,7 @@ class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
     
     static {
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
     
     private final DynamicValue dynamicValue = new PermanentsOnBattlefieldCount(filter);

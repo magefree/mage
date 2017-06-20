@@ -1,21 +1,20 @@
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
 import mage.cards.FrameStyle;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author lopho
  */
 public class Unglued extends ExpansionSet {
-    private static final Unglued fINSTANCE = new Unglued();
+    private static final Unglued instance = new Unglued();
 
     public static Unglued getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Unglued() {

@@ -2,31 +2,13 @@ package org.mage.card.arcane;
 
 import com.google.common.base.Function;
 import com.google.common.collect.MapMaker;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.UUID;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import mage.cards.action.ActionCallback;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ImageCaches;
 import mage.client.util.ImageHelper;
 import mage.components.ImagePanel;
+import mage.components.ImagePanelStyle;
 import mage.constants.AbilityType;
-import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -34,10 +16,19 @@ import mage.view.StackAbilityView;
 import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
-import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.UUID;
+
+import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 
 /**
  * Class for drawing the mage card object by using a form based JComponent approach
@@ -84,7 +75,7 @@ public class CardPanelComponentImpl extends CardPanel {
 
     private final static Map<Key, BufferedImage> IMAGE_CACHE;
 
-    class Key {
+    static class Key {
 
         final int width;
         final int height;
@@ -214,16 +205,16 @@ public class CardPanelComponentImpl extends CardPanel {
         
         // Ability icon
         if (newGameCard.isAbility()) {
-            if (AbilityType.TRIGGERED.equals(newGameCard.getAbilityType())) {
-                setTypeIcon(ImageManagerImpl.getInstance().getTriggeredAbilityImage(), "Triggered Ability");
-            } else if (AbilityType.ACTIVATED.equals(newGameCard.getAbilityType())) {
-                setTypeIcon(ImageManagerImpl.getInstance().getActivatedAbilityImage(), "Activated Ability");
+            if (newGameCard.getAbilityType() == AbilityType.TRIGGERED) {
+                setTypeIcon(ImageManagerImpl.instance.getTriggeredAbilityImage(), "Triggered Ability");
+            } else if (newGameCard.getAbilityType() == AbilityType.ACTIVATED) {
+                setTypeIcon(ImageManagerImpl.instance.getActivatedAbilityImage(), "Activated Ability");
             }
         }
         
         // Token icon
         if (this.gameCard.isToken()) {
-            setTypeIcon(ImageManagerImpl.getInstance().getTokenIconImage(), "Token Permanent");
+            setTypeIcon(ImageManagerImpl.instance.getTokenIconImage(), "Token Permanent");
         }
 
         displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_CARD_NAMES, "true").equals("true");
@@ -240,9 +231,9 @@ public class CardPanelComponentImpl extends CardPanel {
 
         // PT Text
         ptText = new GlowText();
-        if (CardUtil.isCreature(gameCard)) {
+        if (gameCard.isCreature()) {
             ptText.setText(gameCard.getPower() + '/' + gameCard.getToughness());
-        } else if (CardUtil.isPlaneswalker(gameCard)) {
+        } else if (gameCard.isPlanesWalker()) {
             ptText.setText(gameCard.getLoyalty());
         }
 //        ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
@@ -251,8 +242,8 @@ public class CardPanelComponentImpl extends CardPanel {
         add(ptText);
 
         // Sickness overlay
-        BufferedImage sickness = ImageManagerImpl.getInstance().getSicknessImage();
-        overlayPanel = new ImagePanel(sickness, ImagePanel.SCALED);
+        BufferedImage sickness = ImageManagerImpl.instance.getSicknessImage();
+        overlayPanel = new ImagePanel(sickness, ImagePanelStyle.SCALED);
         overlayPanel.setOpaque(false);
         add(overlayPanel);
 
@@ -341,7 +332,7 @@ public class CardPanelComponentImpl extends CardPanel {
 
         g2d.drawImage(
                 IMAGE_CACHE.get(
-                        new Key(getWidth(), getHeight(), getCardWidth(), getCardHeight(), getCardXOffset(), getCardYOffset(), 
+                        new Key(getWidth(), getHeight(), getCardWidth(), getCardHeight(), getCardXOffset(), getCardYOffset(),
                                 hasImage, isSelected(), isChoosable(), gameCard.isPlayable(), gameCard.isCanAttack())), 
                 0, 0, null);
         g2d.dispose();       
@@ -432,7 +423,7 @@ public class CardPanelComponentImpl extends CardPanel {
         imagePanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
         imagePanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
 
-        if (hasSickness() && CardUtil.isCreature(gameCard) && isPermanent()) {
+        if (hasSickness() && gameCard.isCreature() && isPermanent()) {
             overlayPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
             overlayPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
         } else {
@@ -579,11 +570,11 @@ public class CardPanelComponentImpl extends CardPanel {
         super.update(card);
 
         // Update card text
-        if (CardUtil.isCreature(card) && CardUtil.isPlaneswalker(card)) {
+        if (card.isCreature() && card.isPlanesWalker()) {
             ptText.setText(card.getPower() + '/' + card.getToughness() + " (" + card.getLoyalty() + ')');
-        } else if (CardUtil.isCreature(card)) {
+        } else if (card.isCreature()) {
             ptText.setText(card.getPower() + '/' + card.getToughness());
-        } else if (CardUtil.isPlaneswalker(card)) {
+        } else if (card.isPlanesWalker()) {
             ptText.setText(card.getLoyalty());
         } else {
             ptText.setText("");
@@ -591,7 +582,7 @@ public class CardPanelComponentImpl extends CardPanel {
         setText(card);
 
         // Summoning Sickness overlay
-        if (hasSickness() && CardUtil.isCreature(gameCard) && isPermanent()) {
+        if (hasSickness() && card.isCreature() && isPermanent()) {
             overlayPanel.setVisible(true);
         } else {
             overlayPanel.setVisible(false);
@@ -628,21 +619,21 @@ public class CardPanelComponentImpl extends CardPanel {
                     case "+1/+1":
                         if (counterView.getCount() != plusCounter) {
                             plusCounter = counterView.getCount();
-                            plusCounterLabel.setIcon(getCounterImageWithAmount(plusCounter, ImageManagerImpl.getInstance().getCounterImageGreen(), getCardWidth()));
+                            plusCounterLabel.setIcon(getCounterImageWithAmount(plusCounter, ImageManagerImpl.instance.getCounterImageGreen(), getCardWidth()));
                         }
                         plusCounterLabel.setVisible(true);
                         break;
                     case "-1/-1":
                         if (counterView.getCount() != minusCounter) {
                             minusCounter = counterView.getCount();
-                            minusCounterLabel.setIcon(getCounterImageWithAmount(minusCounter, ImageManagerImpl.getInstance().getCounterImageRed(), getCardWidth()));
+                            minusCounterLabel.setIcon(getCounterImageWithAmount(minusCounter, ImageManagerImpl.instance.getCounterImageRed(), getCardWidth()));
                         }
                         minusCounterLabel.setVisible(true);
                         break;
                     case "loyalty":
                         if (counterView.getCount() != loyaltyCounter) {
                             loyaltyCounter = counterView.getCount();
-                            loyaltyCounterLabel.setIcon(getCounterImageWithAmount(loyaltyCounter, ImageManagerImpl.getInstance().getCounterImageViolet(), getCardWidth()));
+                            loyaltyCounterLabel.setIcon(getCounterImageWithAmount(loyaltyCounter, ImageManagerImpl.instance.getCounterImageViolet(), getCardWidth()));
                         }
                         loyaltyCounterLabel.setVisible(true);
                         break;
@@ -651,7 +642,7 @@ public class CardPanelComponentImpl extends CardPanel {
                             name = counterView.getName();
                             otherCounter = counterView.getCount();
                             otherCounterLabel.setToolTipText(name);
-                            otherCounterLabel.setIcon(getCounterImageWithAmount(otherCounter, ImageManagerImpl.getInstance().getCounterImageGrey(), getCardWidth()));
+                            otherCounterLabel.setIcon(getCounterImageWithAmount(otherCounter, ImageManagerImpl.instance.getCounterImageGrey(), getCardWidth()));
                             otherCounterLabel.setVisible(true);
                         }
                 }

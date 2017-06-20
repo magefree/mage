@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
@@ -36,10 +35,13 @@ import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -51,7 +53,7 @@ public class DiregrafEscort extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("Zombies");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public DiregrafEscort(UUID ownerId, CardSetInfo setInfo) {

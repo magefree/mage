@@ -27,13 +27,11 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.IntCompareCondition;
+import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -43,9 +41,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.i.ItThatRidesAsOne;
 import mage.constants.CardType;
-import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,7 +73,7 @@ public class LoneRider extends CardImpl {
         // At the beginning of the end step, if you gained 3 or more life this turn, transform Lone Rider.
         this.addAbility(new TransformAbility());
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new TransformSourceEffect(true));
-        this.addAbility(new ConditionalTriggeredAbility(triggered, new YouGainedLifeCondition(Condition.ComparisonType.GreaterThan, 2), ruleText), new PlayerGainedLifeWatcher());
+        this.addAbility(new ConditionalTriggeredAbility(triggered, new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2), ruleText), new PlayerGainedLifeWatcher());
     }
 
     public LoneRider(final LoneRider card) {
@@ -84,27 +83,5 @@ public class LoneRider extends CardImpl {
     @Override
     public LoneRider copy() {
         return new LoneRider(this);
-    }
-}
-
-class YouGainedLifeCondition extends IntCompareCondition {
-
-    public YouGainedLifeCondition(Condition.ComparisonType type, int value) {
-        super(type, value);
-    }
-
-    @Override
-    protected int getInputValue(Game game, Ability source) {
-        int gainedLife = 0;
-        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get(PlayerGainedLifeWatcher.class.getName());
-        if (watcher != null) {
-            gainedLife = watcher.getLiveGained(source.getControllerId());
-        }
-        return gainedLife;
-    }
-
-    @Override
-    public String toString() {
-        return "if you gained 3 or more life this turn ";
     }
 }

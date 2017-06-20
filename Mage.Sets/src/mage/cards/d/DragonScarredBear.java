@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -39,6 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ public class DragonScarredBear extends CardImpl {
             Zone.BATTLEFIELD,
             new RegenerateSourceEffect(),
             new ManaCostsImpl("{1}{G}"),
-            FormidableCondition.getInstance());
+            FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);
     }

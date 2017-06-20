@@ -45,7 +45,7 @@ public class LifeLossOtherFromCombatWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public LifeLossOtherFromCombatWatcher() {
-        super(LifeLossOtherFromCombatWatcher.class.getName(), WatcherScope.GAME);
+        super(LifeLossOtherFromCombatWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public LifeLossOtherFromCombatWatcher(final LifeLossOtherFromCombatWatcher watcher) {
@@ -66,7 +66,7 @@ public class LifeLossOtherFromCombatWatcher extends Watcher {
     public boolean opponentLostLifeOtherFromCombat(UUID playerId, Game game) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
-            if (players.stream().anyMatch((damagedPlayerId) -> (player.hasOpponent(damagedPlayerId, game)))) {
+            if (players.stream().anyMatch(damagedPlayerId -> player.hasOpponent(damagedPlayerId, game))) {
                 return true;
             }
         }

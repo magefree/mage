@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -42,6 +41,8 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,9 +97,9 @@ class FrozenAetherTapEffect extends ReplacementEffectImpl {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
             if (permanent != null
-                    && (permanent.getCardType().contains(CardType.CREATURE)
-                    || permanent.getCardType().contains(CardType.LAND)
-                    || permanent.getCardType().contains(CardType.ARTIFACT))) {
+                    && (permanent.isCreature()
+                    || permanent.isLand()
+                    || permanent.isArtifact())) {
                 return true;
             }
         }

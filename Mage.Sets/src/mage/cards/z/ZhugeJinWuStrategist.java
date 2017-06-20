@@ -27,7 +27,6 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -38,8 +37,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +51,7 @@ public class ZhugeJinWuStrategist extends CardImpl {
 
     public ZhugeJinWuStrategist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Advisor");
         
@@ -58,7 +60,7 @@ public class ZhugeJinWuStrategist extends CardImpl {
 
         // {tap}: Target creature can't be blocked this turn. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
-                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
+                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

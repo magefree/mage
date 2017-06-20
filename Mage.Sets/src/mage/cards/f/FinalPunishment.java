@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -38,6 +37,8 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.watchers.common.AmountOfDamageAPlayerReceivedThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +72,7 @@ class FinalPunishmentAmount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
         AmountOfDamageAPlayerReceivedThisTurnWatcher watcher
-            = (AmountOfDamageAPlayerReceivedThisTurnWatcher) game.getState().getWatchers().get("AmountOfDamageReceivedThisTurn");
+            = (AmountOfDamageAPlayerReceivedThisTurnWatcher) game.getState().getWatchers().get(AmountOfDamageAPlayerReceivedThisTurnWatcher.class.getSimpleName());
         if(watcher != null) {
             return watcher.getAmountOfDamageReceivedThisTurn(source.getFirstTarget());
         }

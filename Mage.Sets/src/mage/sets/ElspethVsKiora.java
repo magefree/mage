@@ -27,21 +27,21 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.i.IcatianJavelineers;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class ElspethVsKiora extends ExpansionSet {
-    private static final ElspethVsKiora fINSTANCE = new ElspethVsKiora();
+    private static final ElspethVsKiora instance = new ElspethVsKiora();
 
     public static ElspethVsKiora getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ElspethVsKiora() {

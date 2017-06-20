@@ -33,7 +33,7 @@ import mage.abilities.keyword.UndauntedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,7 +49,7 @@ public class CurtainsCall extends CardImpl {
         this.addAbility(new UndauntedAbility());
         // Destroy two target creatures.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, new FilterCreaturePermanent("creatures"), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, FILTER_PERMANENT_CREATURES, false));
     }
 
     public CurtainsCall(final CurtainsCall card) {

@@ -30,7 +30,6 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -41,7 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CloudSpriteToken;
 
 /**
  *
@@ -72,21 +71,5 @@ public class Cloudseeder extends CardImpl {
     @Override
     public Cloudseeder copy() {
         return new Cloudseeder(this);
-    }
-}
-
-class CloudSpriteToken extends Token {
-
-    public CloudSpriteToken() {
-        super("Cloud Sprite", "1/1 blue faerie creature token named Cloud Sprite with flying and \"Cloud Sprite can block only creatures with flying.\"");
-        this.setOriginalExpansionSetCode("FUT");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Faerie");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 }

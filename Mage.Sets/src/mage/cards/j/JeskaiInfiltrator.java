@@ -118,7 +118,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                 controller.moveCardToExileWithInfo(sourcePermanent, sourcePermanent.getId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 cardsToManifest.add(sourceCard);
             }
-            if (sourcePermanent != null && controller.getLibrary().size() > 0) {
+            if (sourcePermanent != null && controller.getLibrary().hasCards()) {
                 Card cardFromLibrary = controller.getLibrary().removeFromTop(game);
                 controller.moveCardToExileWithInfo(cardFromLibrary, sourcePermanent.getId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                 cardsToManifest.add(cardFromLibrary);
@@ -129,7 +129,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
             newSource.setWorksFaceDown(true);
             for (Card card : cardsToManifest) {
                 ManaCosts manaCosts = null;
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     manaCosts = card.getSpellAbility().getManaCosts();
                     if (manaCosts == null) {
                         manaCosts = new ManaCostsImpl("{0}");

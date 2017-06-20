@@ -1,16 +1,9 @@
 package org.mage.card.arcane;
 
 import com.google.common.collect.MapMaker;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Map;
-import java.util.UUID;
 import mage.cards.action.ActionCallback;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -18,9 +11,16 @@ import mage.view.StackAbilityView;
 import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
-import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Map;
+import java.util.UUID;
+
+import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 
 public class CardPanelRenderImpl extends CardPanel {
 
@@ -66,7 +66,7 @@ public class CardPanelRenderImpl extends CardPanel {
         if (a.getRarity() == null || b.getRarity() == null) {
             return false;
         }
-        if (!a.getRarity().equals(b.getRarity())) {
+        if (a.getRarity() != b.getRarity()) {
             return false;
         }
         if (a.getCardNumber() != null && !a.getCardNumber().equals(b.getCardNumber())) {
@@ -114,7 +114,7 @@ public class CardPanelRenderImpl extends CardPanel {
         return true;
     }
 
-    class ImageKey {
+    static class ImageKey {
 
         final BufferedImage artImage;
         final int width;
@@ -158,7 +158,7 @@ public class CardPanelRenderImpl extends CardPanel {
             for (CardType type : this.view.getCardTypes()) {
                 sb.append((char) type.ordinal());
             }
-            for (String s : this.view.getSuperTypes()) {
+            for (SuperType s : this.view.getSuperTypes()) {
                 sb.append(s);
             }
             for (String s : this.view.getSubTypes()) {
@@ -217,11 +217,15 @@ public class CardPanelRenderImpl extends CardPanel {
         }
     }
 
+
     // Map of generated images
     private final static Map<ImageKey, BufferedImage> IMAGE_CACHE = new MapMaker().softValues().makeMap();
 
     // The art image for the card, loaded in from the disk
     private BufferedImage artImage;
+
+    // Factory to generate card appropriate views
+    private CardRendererFactory cardRendererFactory = new CardRendererFactory();
 
     // The rendered card image, with or without the art image loaded yet
     // = null while invalid
@@ -233,7 +237,7 @@ public class CardPanelRenderImpl extends CardPanel {
         super(newGameCard, gameId, loadImage, callback, foil, dimension);
 
         // Renderer
-        cardRenderer = new ModernCardRenderer(gameCard, isTransformed());
+        cardRenderer = cardRendererFactory.create(gameCard, isTransformed());
 
         // Draw the parts
         initialDraw();
@@ -258,8 +262,8 @@ public class CardPanelRenderImpl extends CardPanel {
             // Try to get card image from cache based on our card characteristics
             ImageKey key
                     = new ImageKey(gameCard, artImage,
-                            getCardWidth(), getCardHeight(),
-                            isChoosable(), isSelected());
+                    getCardWidth(), getCardHeight(),
+                    isChoosable(), isSelected());
             cardImage = IMAGE_CACHE.computeIfAbsent(key, k -> renderCard());
 
             // No cached copy exists? Render one and cache it
@@ -268,6 +272,10 @@ public class CardPanelRenderImpl extends CardPanel {
         // And draw the image we now have
         g.drawImage(cardImage, getCardXOffset(), getCardYOffset(), null);
     }
+
+    /**
+     * Create an appropriate card renderer for the
+     */
 
     /**
      * Render the card to a new BufferedImage at it's current dimensions
@@ -359,7 +367,7 @@ public class CardPanelRenderImpl extends CardPanel {
 
         // Update renderer
         cardImage = null;
-        cardRenderer = new ModernCardRenderer(gameCard, isTransformed());
+        cardRenderer = cardRendererFactory.create(gameCard, isTransformed());
         cardRenderer.setArtImage(artImage);
 
         // Repaint

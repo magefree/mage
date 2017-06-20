@@ -172,7 +172,7 @@ class ReincarnationDelayedEffect extends OneShotEffect {
                 if (targetCreature.canChoose(source.getSourceId(), controller.getId(), game)
                         && controller.chooseTarget(outcome, targetCreature, source, game)) {
                     Card card = game.getCard(targetCreature.getFirstTarget());
-                    if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                    if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                         return card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), player.getId());
                     }
                 }

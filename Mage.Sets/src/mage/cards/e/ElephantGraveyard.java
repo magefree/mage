@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -36,9 +35,12 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +48,7 @@ import mage.target.TargetPermanent;
  */
 public class ElephantGraveyard extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("Elephant", "Elephant");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ELEPHANT, "Elephant");
 
     public ElephantGraveyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,6 +41,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * http://www.wizards.com/magic/magazine/article.aspx?x=mtg/faq/rtr
@@ -109,7 +110,7 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
             if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                    && permanent.getCardType().contains(CardType.CREATURE)) {
+                    && permanent.isCreature()) {
                 return true;
             }
         }

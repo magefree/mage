@@ -34,6 +34,7 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.c.CivilizedScholar;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -98,7 +99,7 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.controllerId)) {
-            Watcher watcher = game.getState().getWatchers().get("HomicidalBruteAttacked", sourceId);
+            Watcher watcher = game.getState().getWatchers().get("HomicidalBruteWatcher", sourceId);
             if (watcher == null || !watcher.conditionMet()) {
                 return true;
             }

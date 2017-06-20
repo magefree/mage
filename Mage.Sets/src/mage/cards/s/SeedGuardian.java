@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SeedGuardianToken;
 import mage.players.Player;
 
 /**
@@ -50,7 +50,7 @@ import mage.players.Player;
 public class SeedGuardian extends CardImpl {
 
     public SeedGuardian(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add("Elemental");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
@@ -95,20 +95,5 @@ class SeedGuardianEffect extends OneShotEffect {
             return new CreateTokenEffect(new SeedGuardianToken(creaturesInGraveyard)).apply(game, source);
         }
         return false;
-    }
-}
-
-class SeedGuardianToken extends Token {
-
-    public SeedGuardianToken(int xValue) {
-        super("Elemental", "X/X green Elemental creature token");
-        setTokenType(2);
-        setOriginalExpansionSetCode("OGW");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Elemental");
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
-
     }
 }

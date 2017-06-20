@@ -27,24 +27,27 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
+import mage.constants.ComparisonType;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DestroySourceEffect;
 import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,9 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class ArachnusWeb extends CardImpl {
 
     public ArachnusWeb(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.subtype.add("Aura");
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -67,7 +69,11 @@ public class ArachnusWeb extends CardImpl {
         // Enchanted creature can't attack or block, and its activated abilities can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
         // At the beginning of the end step, if enchanted creature's power is 4 or greater, destroy Arachnus Web.
-        this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new ArachnusWebEffect2()));
+        FilterPermanent filter = new FilterPermanent("if enchanted creature's power is 4 or greater");
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
+                new DestroySourceEffect(), TargetController.ANY,
+                new AttachedToMatchesFilterCondition(filter), false));
     }
 
     public ArachnusWeb(final ArachnusWeb card) {
@@ -77,35 +83,5 @@ public class ArachnusWeb extends CardImpl {
     @Override
     public ArachnusWeb copy() {
         return new ArachnusWeb(this);
-    }
-}
-
-class ArachnusWebEffect2 extends OneShotEffect {
-
-    public ArachnusWebEffect2() {
-        super(Outcome.Benefit);
-        staticText = "if enchanted creature's power is 4 or greater, destroy {this}";
-    }
-
-    public ArachnusWebEffect2(final ArachnusWebEffect2 effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArachnusWebEffect2 copy() {
-        return new ArachnusWebEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null && permanent.getPower().getValue() >= 4) {
-                enchantment.destroy(source.getSourceId(), game, false);
-                return true;
-            }
-        }
-        return false;
     }
 }

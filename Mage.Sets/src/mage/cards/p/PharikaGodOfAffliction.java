@@ -37,18 +37,14 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PharikaSnakeToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
@@ -60,8 +56,8 @@ import mage.target.common.TargetCardInGraveyard;
 public class PharikaGodOfAffliction extends CardImpl {
 
     public PharikaGodOfAffliction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{B}{G}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{G}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("God");
 
         this.power = new MageInt(5);
@@ -108,7 +104,7 @@ class PharikaExileEffect extends OneShotEffect {
         if (controller != null) {
             Card targetCard = game.getCard(source.getFirstTarget());
             if (targetCard != null) {
-                if (game.getState().getZone(source.getFirstTarget()).equals(Zone.GRAVEYARD)) {
+                if (game.getState().getZone(source.getFirstTarget()) == Zone.GRAVEYARD) {
                     controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                 }
                 Player tokenController = game.getPlayer(targetCard.getOwnerId());
@@ -125,18 +121,4 @@ class PharikaExileEffect extends OneShotEffect {
         return new PharikaExileEffect(this);
     }
 
-}
-
-class PharikaSnakeToken extends Token {
-
-    public PharikaSnakeToken() {
-        super("Snake", "1/1 black and green Snake enchantment creature token with deathtouch", 1, 1);
-        this.setOriginalExpansionSetCode("JOU");
-        cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Snake");
-        color.setBlack(true);
-        color.setGreen(true);
-        this.addAbility(DeathtouchAbility.getInstance());
-    }
 }

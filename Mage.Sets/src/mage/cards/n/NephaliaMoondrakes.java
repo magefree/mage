@@ -42,7 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,9 +50,9 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class NephaliaMoondrakes extends CardImpl {
-    
+
     public NephaliaMoondrakes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add("Drake");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -66,7 +66,7 @@ public class NephaliaMoondrakes extends CardImpl {
         this.addAbility(ability);
 
         // {4}{U}{U}, Exile Nephalia Moondrakes from your graveyard: Creatures you control gain flying until end of turn.
-        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures")), new ManaCostsImpl("{4}{U}{U}"));
+        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), new ManaCostsImpl("{4}{U}{U}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);
     }

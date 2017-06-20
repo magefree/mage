@@ -28,7 +28,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.effects.common.BasicManaEffect;
@@ -37,6 +36,7 @@ import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -44,6 +44,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -78,7 +80,7 @@ class CryptGhastTriggeredAbility extends TriggeredManaAbility {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Swamp");
     static {
-            filter.add(new SubtypePredicate("Swamp"));
+            filter.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public CryptGhastTriggeredAbility() {

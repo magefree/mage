@@ -35,7 +35,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PenumbraSpiderToken;
 
 /**
  *
@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
 public class PenumbraSpider extends CardImpl {
 
     public PenumbraSpider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add("Spider");
 
         this.power = new MageInt(2);
@@ -53,7 +53,7 @@ public class PenumbraSpider extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // When Penumbra Spider dies, create a 2/4 black Spider creature token with reach.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiderToken()), false));
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraSpiderToken()), false));
     }
 
     public PenumbraSpider(final PenumbraSpider card) {
@@ -63,18 +63,5 @@ public class PenumbraSpider extends CardImpl {
     @Override
     public PenumbraSpider copy() {
         return new PenumbraSpider(this);
-    }
-}
-
-class SpiderToken extends Token {
-
-    public SpiderToken() {
-        super("Spider", "2/4 black Spider creature token with reach");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Spider");
-        power = new MageInt(2);
-        toughness = new MageInt(4);
-        addAbility(ReachAbility.getInstance());
     }
 }

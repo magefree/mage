@@ -73,7 +73,7 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
         if (!this.used && super.applies(event, source, game)) {
             MageObject mageObject = game.getObject(event.getSourceId());
             if (mageObject != null
-                    && (mageObject.getCardType().contains(CardType.INSTANT) || mageObject.getCardType().contains(CardType.SORCERY))) {
+                    && (mageObject.isInstant() || mageObject.isSorcery())) {
                 for (Target target : source.getTargets()) {
                     if (target instanceof TargetSpell) {
                         if (((TargetSpell) target).getSourceIds().contains(event.getSourceId())) {

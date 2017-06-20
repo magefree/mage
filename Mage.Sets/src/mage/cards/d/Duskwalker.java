@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -41,6 +40,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public class Duskwalker extends CardImpl {
         
         // If Duskwalker was kicked, it enters the battlefield with two +1/+1 counters on it and with fear.
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it and with fear.", "");
         ability.addEffect(new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);

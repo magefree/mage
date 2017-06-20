@@ -120,11 +120,11 @@ class WookieeMysticWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.MANA_PAYED) {
+        if (event.getType() == GameEvent.EventType.MANA_PAID) {
             MageObject target = game.getObject(event.getTargetId());
             if (event.getSourceId() != null
                     && event.getSourceId().equals(this.getSourceId())
-                    && target != null && target.getCardType().contains(CardType.CREATURE)
+                    && target != null && target.isCreature()
                     && event.getFlag()) {
                 if (target instanceof Spell) {
                     this.creatures.add(((Spell) target).getCard().getId());

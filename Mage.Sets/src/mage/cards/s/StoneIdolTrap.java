@@ -28,29 +28,23 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-import mage.target.targetpointer.FixedTarget;
+import mage.game.permanent.token.StoneTrapIdolToken;
 import mage.util.CardUtil;
 
 /**
@@ -60,7 +54,7 @@ import mage.util.CardUtil;
 public class StoneIdolTrap extends CardImpl {
 
     public StoneIdolTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{R}");
         this.subtype.add("Trap");
 
         // Stone Idol Trap costs {1} less to cast for each attacking creature.
@@ -138,29 +132,11 @@ class StoneIdolTrapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StoneTrapIdolToken token = new StoneTrapIdolToken();
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-        for (UUID tokenId : token.getLastAddedTokenIds()) {
-            Permanent tokenPermanent = game.getPermanent(tokenId);
-            if (tokenPermanent != null) {
-                ExileTargetEffect exileEffect = new ExileTargetEffect();
-                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.ALL, exileEffect, TargetController.YOU), source);
-            }
+        CreateTokenEffect effect = new CreateTokenEffect(new StoneTrapIdolToken());
+        if (effect.apply(game, source)) {
+            effect.exileTokensCreatedAtNextEndStep(game, source);
+            return true;
         }
-        return true;
-    }
-}
-
-class StoneTrapIdolToken extends Token {
-
-    public StoneTrapIdolToken() {
-        super("Construct", "6/12  colorless Construct artifact creature token with trample");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        subtype.add("Construct");
-        power = new MageInt(6);
-        toughness = new MageInt(12);
-        addAbility(TrampleAbility.getInstance());
+        return false;
     }
 }

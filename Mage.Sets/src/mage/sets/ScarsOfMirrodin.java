@@ -28,11 +28,10 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
-
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -40,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class ScarsOfMirrodin extends ExpansionSet {
 
-    private static final ScarsOfMirrodin fINSTANCE = new ScarsOfMirrodin();
+    private static final ScarsOfMirrodin instance = new ScarsOfMirrodin();
 
     public static ScarsOfMirrodin getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ScarsOfMirrodin() {

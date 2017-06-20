@@ -30,9 +30,9 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
@@ -72,7 +72,7 @@ public class MoonringIsland extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new LookLibraryTopCardTargetPlayerEffect(),
                 new ManaCostsImpl("{U}"),
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

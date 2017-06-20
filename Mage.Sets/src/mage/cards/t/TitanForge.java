@@ -25,13 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.t;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -41,9 +37,10 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TitanForgeGolemToken;
 
 /**
  *
@@ -51,8 +48,8 @@ import mage.game.permanent.token.Token;
  */
 public class TitanForge extends CardImpl {
 
-    public TitanForge (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+    public TitanForge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -63,7 +60,7 @@ public class TitanForge extends CardImpl {
 
     }
 
-    public TitanForge (final TitanForge card) {
+    public TitanForge(final TitanForge card) {
         super(card);
     }
 
@@ -72,15 +69,4 @@ public class TitanForge extends CardImpl {
         return new TitanForge(this);
     }
 
-}
-
-class TitanForgeGolemToken extends Token {
-    TitanForgeGolemToken() {
-        super("Golem", "9/9 colorless Golem artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Golem");
-        power = new MageInt(9);
-        toughness = new MageInt(9);
-    }
 }

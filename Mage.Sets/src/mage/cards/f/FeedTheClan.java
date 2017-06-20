@@ -27,13 +27,14 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class FeedTheClan extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(10),
                 new GainLifeEffect(5),
-                FerociousCondition.getInstance(),
+                FerociousCondition.instance,
                 "You gain 5 life. <br><i>Ferocious</i> &mdash; You gain 10 life instead if you control a creature with power 4 or greater"));
 
     }

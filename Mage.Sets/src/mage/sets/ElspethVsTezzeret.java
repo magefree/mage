@@ -1,16 +1,15 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
-
 public class ElspethVsTezzeret extends ExpansionSet {
-    private static final ElspethVsTezzeret fINSTANCE = new ElspethVsTezzeret();
+    private static final ElspethVsTezzeret instance = new ElspethVsTezzeret();
 
     public static ElspethVsTezzeret getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ElspethVsTezzeret() {

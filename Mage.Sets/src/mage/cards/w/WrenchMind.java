@@ -91,7 +91,7 @@ class WrenchMindEffect extends OneShotEffect {
             Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 targetPlayer.discard(card, source, game);
-                if (!card.getCardType().contains(CardType.ARTIFACT) && !targetPlayer.getHand().isEmpty()) {
+                if (!card.isArtifact() && !targetPlayer.getHand().isEmpty()) {
                     targetPlayer.discard(1, source, game);
                 }
                 return true;

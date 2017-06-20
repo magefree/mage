@@ -27,15 +27,8 @@
  */
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -43,22 +36,11 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.command.Emblem;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.players.Player;
-import mage.target.Target;
+import mage.constants.*;
+import mage.game.command.emblems.DackFaydenEmblem;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetArtifactPermanent;
+import java.util.UUID;
 
 /**
  *
@@ -101,114 +83,5 @@ public class DackFayden extends CardImpl {
     @Override
     public DackFayden copy() {
         return new DackFayden(this);
-    }
-}
-
-class DackFaydenEmblem extends Emblem {
-
-    DackFaydenEmblem() {
-        this.setName("Emblem Dack");
-        this.getAbilities().add(new DackFaydenEmblemTriggeredAbility());
-    }
-}
-
-class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
-
-    DackFaydenEmblemTriggeredAbility() {
-        super(Zone.COMMAND, new DackFaydenEmblemEffect(), false);
-    }
-
-    DackFaydenEmblemTriggeredAbility(final DackFaydenEmblemTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DackFaydenEmblemTriggeredAbility copy() {
-        return new DackFaydenEmblemTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        boolean returnValue = false;
-        List<UUID> targettedPermanents = new ArrayList<>(0);
-        Player player = game.getPlayer(this.getControllerId());
-        if (player != null) {
-            if (event.getPlayerId().equals(this.getControllerId())) {
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null) {
-                    SpellAbility spellAbility = spell.getSpellAbility();
-                    for (Target target : spellAbility.getTargets()) {
-                        if (!target.isNotTarget()) {
-                            for (UUID targetId : target.getTargets()) {
-                                if (game.getBattlefield().containsPermanent(targetId)) {
-                                    returnValue = true;
-                                    targettedPermanents.add(targetId);
-                                }
-                            }
-                        }
-                    }
-                    for (Effect effect : spellAbility.getEffects()) {
-                        for (UUID targetId : effect.getTargetPointer().getTargets(game, spellAbility)) {
-                            if (game.getBattlefield().containsPermanent(targetId)) {
-                                returnValue = true;
-                                targettedPermanents.add(targetId);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        for (Effect effect : this.getEffects()) {
-            if (effect instanceof DackFaydenEmblemEffect) {
-                DackFaydenEmblemEffect dackEffect = (DackFaydenEmblemEffect) effect;
-                dackEffect.setPermanents(targettedPermanents);
-            }
-        }
-        return returnValue;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a spell that targets one or more permanents, gain control of those permanents.";
-    }
-}
-
-class DackFaydenEmblemEffect extends ContinuousEffectImpl {
-
-    protected List<UUID> permanents;
-
-    DackFaydenEmblemEffect() {
-        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.staticText = "gain control of those permanents";
-    }
-
-    DackFaydenEmblemEffect(final DackFaydenEmblemEffect effect) {
-        super(effect);
-        this.permanents = effect.permanents;
-    }
-
-    @Override
-    public DackFaydenEmblemEffect copy() {
-        return new DackFaydenEmblemEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID permanentId : this.permanents) {
-            Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null) {
-                permanent.changeControllerId(source.getControllerId(), game);
-            }
-        }
-        return true;
-    }
-
-    public void setPermanents(List<UUID> targettedPermanents) {
-        this.permanents = new ArrayList<>(targettedPermanents);
     }
 }

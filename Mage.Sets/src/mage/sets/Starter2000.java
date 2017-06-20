@@ -28,10 +28,10 @@
 
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -40,14 +40,14 @@ import mage.cards.CardGraphicInfo;
 
 public class Starter2000 extends ExpansionSet {
 
-    private static final Starter2000 fINSTANCE = new Starter2000();
+    private static final Starter2000 instance = new Starter2000();
 
     /**
      *
      * @return
      */
     public static Starter2000 getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Starter2000() {

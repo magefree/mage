@@ -28,13 +28,13 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.game.permanent.token.BoarToken;
 
 /**
  *
@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
 public class BrindleShoat extends CardImpl {
 
     public BrindleShoat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Boar");
 
         this.power = new MageInt(1);
@@ -60,16 +60,5 @@ public class BrindleShoat extends CardImpl {
     @Override
     public BrindleShoat copy() {
         return new BrindleShoat(this);
-    }
-}
-
-class BoarToken extends Token {
-    BoarToken() {
-        super("Boar", "3/3 green Boar creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Boar");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
     }
 }

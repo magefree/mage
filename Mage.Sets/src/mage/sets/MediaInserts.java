@@ -35,10 +35,10 @@ import mage.constants.SetType;
 
 public class MediaInserts extends ExpansionSet {
 
-    private static final MediaInserts fINSTANCE = new MediaInserts();
+    private static final MediaInserts instance = new MediaInserts();
 
     public static MediaInserts getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MediaInserts() {
@@ -55,6 +55,7 @@ public class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Ankle Shanker", 93, Rarity.RARE, mage.cards.a.AnkleShanker.class));
         cards.add(new SetCardInfo("Arashin Sovereign", 112, Rarity.SPECIAL, mage.cards.a.ArashinSovereign.class));
         cards.add(new SetCardInfo("Archfiend of Depravity", 109, Rarity.SPECIAL, mage.cards.a.ArchfiendOfDepravity.class));
+        cards.add(new SetCardInfo("Archfiend of Ifnir", 165, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
         cards.add(new SetCardInfo("Arena", 1, Rarity.SPECIAL, mage.cards.a.Arena.class));
         cards.add(new SetCardInfo("Arrest", 53, Rarity.COMMON, mage.cards.a.Arrest.class));
         cards.add(new SetCardInfo("Assembled Alphas", 160, Rarity.RARE, mage.cards.a.AssembledAlphas.class));

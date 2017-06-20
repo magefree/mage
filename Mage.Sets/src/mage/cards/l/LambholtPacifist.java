@@ -41,11 +41,11 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -73,7 +73,7 @@ public class LambholtPacifist extends CardImpl {
         // At the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Pacifist.
         this.addAbility(new TransformAbility());
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.NO_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new ConditionalTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
     public LambholtPacifist(final LambholtPacifist card) {
@@ -88,10 +88,10 @@ public class LambholtPacifist extends CardImpl {
 
 class LambholtPacifistEffect extends RestrictionEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature with power 4 or greater");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature with power 4 or greater");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public LambholtPacifistEffect() {

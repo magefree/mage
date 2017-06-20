@@ -27,8 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,31 +37,26 @@ import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-/**
- *
- * @author ImperatorPrime
+import java.util.UUID;
 
+/**
+ * @author ImperatorPrime
  */
 public class VolrathsShapeshifter extends CardImpl {
 
     public VolrathsShapeshifter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
         // As long as the top card of your graveyard is a creature card, Volrath's Shapeshifter has the full text of that card and has the text "{2}: Discard a card."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VolrathsShapeshifterEffect()));
-        
+
         // {2}: Discard a card.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl("{2}")));
     }
@@ -79,29 +72,29 @@ public class VolrathsShapeshifter extends CardImpl {
 }
 
 class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
-	
-	public VolrathsShapeshifterEffect() {
+
+    public VolrathsShapeshifterEffect() {
         super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.BecomeCreature);
-	}
-	
+    }
+
     public VolrathsShapeshifterEffect(final VolrathsShapeshifterEffect effect) {
         super(effect);
     }
-	
-	@Override
-	public VolrathsShapeshifterEffect copy() {
-		return new VolrathsShapeshifterEffect(this);
-	}
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Card card = game.getPlayer(source.getControllerId()).getGraveyard().getTopCard(game);
+    @Override
+    public VolrathsShapeshifterEffect copy() {
+        return new VolrathsShapeshifterEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = game.getPlayer(source.getControllerId()).getGraveyard().getTopCard(game);
         Permanent permanent = game.getPermanent(source.getSourceId());
-        
-        if (card == null || permanent == null || !card.getCardType().contains(CardType.CREATURE)) {
+
+        if (card == null || permanent == null || !card.isCreature()) {
             return false;
         }
-        
+
         permanent.getPower().setValue(card.getPower().getValue());
         permanent.getToughness().setValue(card.getToughness().getValue());
         permanent.getColor(game).setColor(card.getColor(game));
@@ -109,33 +102,30 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
         permanent.getManaCost().add(card.getManaCost());
         permanent.getCardType().clear();
         permanent.setName(card.getName());
-        
+
         for (CardType type : card.getCardType()) {
-            if (!permanent.getCardType().contains(type)) {
-                permanent.getCardType().add(type);
-            }
+            permanent.addCardType(type);
         }
-        
+
         permanent.getSubtype(game).clear();
         for (String type : card.getSubtype(game)) {
             if (!permanent.getSubtype(game).contains(type)) {
                 permanent.getSubtype(game).add(type);
             }
         }
-        
-        permanent.getSupertype().clear();
-        for (String type : card.getSupertype()) {
-            if (!permanent.getSupertype().contains(type)) {
-                permanent.getSupertype().add(type);
-            }
+
+        permanent.getSuperType().clear();
+        for (SuperType type : card.getSuperType()) {
+                permanent.addSuperType(type);
+
         }
-        
+
         for (Ability ability : card.getAbilities()) {
             if (!permanent.getAbilities().contains(ability)) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
         }
-        
+
         return true;
-	}
+    }
 }

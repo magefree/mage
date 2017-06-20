@@ -39,10 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -60,7 +57,7 @@ public class MaskedGorgon extends CardImpl {
 
     static {
         filter1.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
-        filter2.add(new SubtypePredicate("Gorgon"));
+        filter2.add(new SubtypePredicate(SubType.GORGON));
     }
 
     public MaskedGorgon(UUID ownerId, CardSetInfo setInfo) {

@@ -29,8 +29,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.constants.Rarity;
 
 public class ConspiracyTakeTheCrown extends ExpansionSet {
 
-    private static final ConspiracyTakeTheCrown fINSTANCE = new ConspiracyTakeTheCrown();
+    private static final ConspiracyTakeTheCrown instance = new ConspiracyTakeTheCrown();
 
     public static ConspiracyTakeTheCrown getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ConspiracyTakeTheCrown() {
@@ -163,6 +163,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Lieutenants of the Guard", 16, Rarity.COMMON, mage.cards.l.LieutenantsOfTheGuard.class));
         cards.add(new SetCardInfo("Manaplasm", 186, Rarity.UNCOMMON, mage.cards.m.Manaplasm.class));
         cards.add(new SetCardInfo("Marchesa's Decree", 44, Rarity.UNCOMMON, mage.cards.m.MarchesasDecree.class));
+        cards.add(new SetCardInfo("Mausoleum Turnkey", 142, Rarity.UNCOMMON, mage.cards.m.MausoleumTurnkey.class));
         cards.add(new SetCardInfo("Menagerie Liberator", 67, Rarity.COMMON, mage.cards.m.MenagerieLiberator.class));
         cards.add(new SetCardInfo("Merfolk Looter", 114, Rarity.UNCOMMON, mage.cards.m.MerfolkLooter.class));
         cards.add(new SetCardInfo("Merfolk Skyscout", 115, Rarity.UNCOMMON, mage.cards.m.MerfolkSkyscout.class));

@@ -29,6 +29,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -47,7 +48,7 @@ public class LandbindRitual extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains you control");
 
     static {
-        filter.add(new SubtypePredicate("Plains"));
+        filter.add(new SubtypePredicate(SubType.PLAINS));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

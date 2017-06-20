@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,6 +45,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.watchers.common.CreatureWasCastWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -126,8 +127,8 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
             if (entersTransformed instanceof Boolean && (Boolean) entersTransformed && card.getSecondCardFace() != null) {
                 card = card.getSecondCardFace();
             }
-            if (card.getCardType().contains(CardType.CREATURE)) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
-                CreatureWasCastWatcher watcher = (CreatureWasCastWatcher) game.getState().getWatchers().get("CreatureWasCast");
+            if (card.isCreature()) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
+                CreatureWasCastWatcher watcher = (CreatureWasCastWatcher) game.getState().getWatchers().get(CreatureWasCastWatcher.class.getSimpleName());
                 if (watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId())) {
                     return true;
                 }

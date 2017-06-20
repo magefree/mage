@@ -27,10 +27,12 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,11 +42,9 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
 import mage.players.Player;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageEverythingEffect;
+
+import java.util.UUID;
 
 
 
@@ -93,14 +93,12 @@ class CycloneEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         int total = permanent.getCounters(game).getCount(CounterType.WIND);
-        
-        String greens = "";
-        
+        StringBuilder greens = new StringBuilder(total);
         for (int i=0; i < total; i++){
-            greens+="{G}";
+            greens.append("{G}");
         }
                   
-        if(this.choice(game, source, player, new ManaCostsImpl(greens))){
+        if(this.choice(game, source, player, new ManaCostsImpl(greens.toString()))){
             DamageEverythingEffect dmg = new DamageEverythingEffect(total);
             dmg.apply(game, source);
         } else {            

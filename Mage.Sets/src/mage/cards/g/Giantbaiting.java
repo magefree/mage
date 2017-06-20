@@ -28,21 +28,16 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ConspireAbility;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-import mage.target.targetpointer.FixedTarget;
+import mage.game.permanent.token.GiantBaitingGiantWarriorToken;
 
 /**
  *
@@ -51,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
 public class Giantbaiting extends CardImpl {
 
     public Giantbaiting(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R/G}");
 
         // Create a 4/4 red and green Giant Warrior creature token with haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GiantbaitingEffect());
@@ -89,33 +84,11 @@ class GiantbaitingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new GiantWarriorToken();
-        if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
-            for (UUID tokenId : token.getLastAddedTokenIds()) {
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-                }
-            }
+        CreateTokenEffect effect = new CreateTokenEffect(new GiantBaitingGiantWarriorToken());
+        if (effect.apply(game, source)) {
+            effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;
         }
         return false;
-    }
-}
-
-class GiantWarriorToken extends Token {
-
-    GiantWarriorToken() {
-        super("Giant Warrior", "4/4 red and green Giant Warrior creature token with haste");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        color.setGreen(true);
-        subtype.add("Giant");
-        subtype.add("Warrior");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        this.addAbility(HasteAbility.getInstance());
     }
 }

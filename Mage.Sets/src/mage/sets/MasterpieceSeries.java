@@ -39,14 +39,15 @@ import mage.constants.SetType;
  */
 public class MasterpieceSeries extends ExpansionSet {
 
-    private static final MasterpieceSeries fINSTANCE = new MasterpieceSeries();
+    private static final MasterpieceSeries instance = new MasterpieceSeries();
 
     public static MasterpieceSeries getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MasterpieceSeries() {
         super("Masterpiece Series", "MPS", ExpansionSet.buildDate(2016, 9, 30), SetType.PROMOTIONAL);
+        this.blockName = "Masterpiece Series";
         this.hasBoosters = false;
         this.hasBasicLands = false;
         CardGraphicInfo cardGraphicInfo = new CardGraphicInfo(FrameStyle.KLD_INVENTION, false);

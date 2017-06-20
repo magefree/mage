@@ -12,7 +12,6 @@ import mage.watchers.Watcher;
 
 /**
  * @author jeffwadsworth
-*
  */
 public class FirstSpellCastThisTurnWatcher extends Watcher {
 
@@ -20,13 +19,13 @@ public class FirstSpellCastThisTurnWatcher extends Watcher {
     private final Map<UUID, UUID> playerFirstCastSpell = new HashMap<>();
 
     public FirstSpellCastThisTurnWatcher() {
-        super("FirstSpellCastThisTurn", WatcherScope.GAME);
+        super(FirstSpellCastThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public FirstSpellCastThisTurnWatcher(final FirstSpellCastThisTurnWatcher watcher) {
         super(watcher);
         playerFirstSpellCast.putAll(watcher.playerFirstSpellCast);
-        playerFirstCastSpell.putAll(watcher.playerFirstSpellCast);
+        playerFirstCastSpell.putAll(watcher.playerFirstCastSpell);
     }
 
     @Override
@@ -36,9 +35,9 @@ public class FirstSpellCastThisTurnWatcher extends Watcher {
             case CAST_SPELL:
                 Spell spell = (Spell) game.getObject(event.getTargetId());
                 if (spell != null && !playerFirstSpellCast.containsKey(spell.getControllerId())) {
-                    if (event.getType().equals(EventType.SPELL_CAST)) {
+                    if (event.getType() == EventType.SPELL_CAST) {
                         playerFirstSpellCast.put(spell.getControllerId(), spell.getId());
-                    } else if (event.getType().equals(EventType.CAST_SPELL)) {
+                    } else if (event.getType() == EventType.CAST_SPELL) {
                         playerFirstCastSpell.put(spell.getControllerId(), spell.getId());
                     }
                 }
@@ -58,10 +57,6 @@ public class FirstSpellCastThisTurnWatcher extends Watcher {
     }
 
     public UUID getIdOfFirstCastSpell(UUID playerId) {
-        if (playerFirstSpellCast.get(playerId) == null) {
-            return playerFirstCastSpell.get(playerId);
-        } else {
-            return playerFirstSpellCast.get(playerId);
-        }
+        return playerFirstSpellCast.getOrDefault(playerId, playerFirstCastSpell.get(playerId));
     }
 }

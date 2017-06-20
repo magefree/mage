@@ -28,15 +28,16 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public class Dispatch extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ExileTargetEffect(), MetalcraftCondition.getInstance(), "Metalcraft - If you control three or more artifacts, exile that creature"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ExileTargetEffect(), MetalcraftCondition.instance, "Metalcraft - If you control three or more artifacts, exile that creature"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

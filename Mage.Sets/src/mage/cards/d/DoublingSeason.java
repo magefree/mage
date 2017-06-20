@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.CreateTwiceThatManyTokensEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -51,7 +52,8 @@ public class DoublingSeason extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DoublingSeasonTokenEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreateTwiceThatManyTokensEffect()));
+ 
         // If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DoublingSeasonCounterEffect()));
 
@@ -65,40 +67,6 @@ public class DoublingSeason extends CardImpl {
     public DoublingSeason copy() {
         return new DoublingSeason(this);
     }
-}
-
-class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
-
-    public DoublingSeasonTokenEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Copy);
-        staticText = "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead";
-    }
-
-    public DoublingSeasonTokenEffect(final DoublingSeasonTokenEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DoublingSeasonTokenEffect copy() {
-        return new DoublingSeasonTokenEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.CREATE_TOKEN);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId());
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
-        return false;
-    }
-
 }
 
 class DoublingSeasonCounterEffect extends ReplacementEffectImpl {

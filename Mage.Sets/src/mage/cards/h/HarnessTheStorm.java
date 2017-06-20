@@ -86,7 +86,7 @@ class HarnessTheStormTriggeredAbility extends SpellCastControllerTriggeredAbilit
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getName());
+            CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getSimpleName());
             if (watcher != null && watcher.spellWasCastFromHand(event.getSourceId())) {
                 Spell spell = game.getState().getStack().getSpell(event.getSourceId());
                 if (spell != null) {

@@ -40,11 +40,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.BatToken;
 import mage.target.common.TargetControlledCreaturePermanent;
+import org.omg.CORBA.BAD_TYPECODE;
 
 /**
  *
@@ -55,7 +57,7 @@ public class SkeletalVampire extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Bat");
 
     static {
-        filter.add(new SubtypePredicate("Bat"));
+        filter.add(new SubtypePredicate(SubType.BAT));
     }
 
     public SkeletalVampire(UUID ownerId, CardSetInfo setInfo) {

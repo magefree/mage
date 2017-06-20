@@ -35,6 +35,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
@@ -56,7 +57,7 @@ public class ValakutTheMoltenPinnacle extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public ValakutTheMoltenPinnacle(UUID ownerId, CardSetInfo setInfo) {
@@ -105,7 +106,7 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.getControllerId())) {
+        if (permanent != null && permanent.isLand() && permanent.getControllerId().equals(this.getControllerId())) {
             if (permanent.hasSubtype("Mountain", game)) {
                 return true;
             }

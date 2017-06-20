@@ -27,17 +27,15 @@
  */
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -50,7 +48,7 @@ import mage.target.TargetSpell;
 public class Desertion extends CardImpl {
 
     public Desertion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
 
         // Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.
         this.getSpellAbility().addEffect(new DesertionEffect());
@@ -71,7 +69,7 @@ class DesertionEffect extends OneShotEffect {
 
     public DesertionEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.";
+        this.staticText = "Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard";
     }
 
     public DesertionEffect(final DesertionEffect effect) {
@@ -87,20 +85,18 @@ class DesertionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Spell targetSpell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-            if (targetSpell != null) {                
-                Set<CardType> cardTypes = new HashSet<>(targetSpell.getCardType());
-                if (!cardTypes.isEmpty()) {
-                    //targetPointer.getFirst(game, source)
-                    if (cardTypes.contains(CardType.ARTIFACT) || cardTypes.contains(CardType.CREATURE)) {
-                        return game.getStack().counter(targetSpell.getId(), source.getSourceId(), game, Zone.BATTLEFIELD, false, ZoneDetail.NONE);
-                    } else {
-                        return game.getStack().counter(targetSpell.getId(), source.getSourceId(), game);
+            Spell targetSpell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+            if (targetSpell != null) {
+                if (game.getStack().counter(targetSpell.getId(), source.getSourceId(), game)) {
+                    game.applyEffects();
+                    if (targetSpell.isArtifact() || targetSpell.isCreature()) {
+                        Card card = game.getCard(targetSpell.getSourceId());
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }
                 }
             }
+            return true;
         }
         return false;
     }
-
 }

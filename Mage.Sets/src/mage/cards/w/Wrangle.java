@@ -27,7 +27,7 @@
  */
 package mage.cards.w;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -37,10 +37,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public class Wrangle extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or less");
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.LessThan, 5));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public Wrangle(UUID ownerId, CardSetInfo setInfo) {

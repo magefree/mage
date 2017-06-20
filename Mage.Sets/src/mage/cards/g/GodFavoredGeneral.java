@@ -36,7 +36,7 @@ import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GodFavoredGeneralSoldierToken;
 
 /**
  *
@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
 public class GodFavoredGeneral extends CardImpl {
 
     public GodFavoredGeneral(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -53,7 +53,7 @@ public class GodFavoredGeneral extends CardImpl {
         this.toughness = new MageInt(1);
 
         // <i>Inspired</i> - Whenever God-Favored General becomes untapped, you may pay {2}{W}. If you do, create two 1/1 white Soldier enchantment creature tokens.
-        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new SoldierToken(), 2), new ManaCostsImpl("{2}{W}"))));
+        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new GodFavoredGeneralSoldierToken(), 2), new ManaCostsImpl("{2}{W}"))));
     }
 
     public GodFavoredGeneral(final GodFavoredGeneral card) {
@@ -64,20 +64,4 @@ public class GodFavoredGeneral extends CardImpl {
     public GodFavoredGeneral copy() {
         return new GodFavoredGeneral(this);
     }
-}
-
-class SoldierToken extends Token {
-
-    public SoldierToken() {
-        super("Soldier", "1/1 white Soldier enchantment creature token");
-        cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.setOriginalExpansionSetCode("BNG");
-    }
-
 }

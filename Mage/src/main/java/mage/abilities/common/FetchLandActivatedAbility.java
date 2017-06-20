@@ -29,6 +29,8 @@
 package mage.abilities.common;
 
 import java.util.ArrayList;
+import java.util.Set;
+
 import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.PayLifeCost;
@@ -37,6 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -51,11 +54,11 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
 
-    public FetchLandActivatedAbility(String[] subtypes) {
+    public FetchLandActivatedAbility(Set<SubType> subtypes) {
         this(true, subtypes);
     }
 
-    public FetchLandActivatedAbility(boolean withDamage, String[] subtypes) {
+    public FetchLandActivatedAbility(boolean withDamage, Set<SubType> subtypes) {
         super(Zone.BATTLEFIELD, null);
         addCost(new TapSourceCost());
         if (withDamage) {
@@ -65,7 +68,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
         FilterCard filter = new FilterCard(subTypeNames(subtypes));
         filter.add(new CardTypePredicate(CardType.LAND));
         ArrayList<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
-        for (String subtype : subtypes) {
+        for (SubType subtype : subtypes) {
             subtypePredicates.add(new SubtypePredicate(subtype));
         }
         filter.add(Predicates.or(subtypePredicates));
@@ -77,10 +80,10 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
         super(ability);
     }
 
-    private String subTypeNames(String[] subTypes) {
+    private String subTypeNames(Set<SubType> subTypes) {
         StringBuilder sb = new StringBuilder();
-        for (String subType: subTypes) {
-            sb.append(subType).append(" or ");
+        for (SubType subType: subTypes) {
+            sb.append(subType.getDescription()).append(" or ");
         }
         return sb.substring(0, sb.length() - 4);
     }

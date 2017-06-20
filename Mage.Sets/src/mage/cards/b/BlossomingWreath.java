@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -37,6 +36,8 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public class BlossomingWreath extends CardImpl {
         return new BlossomingWreath(this);
     }
 
-    class BlossomingWreathEffect extends OneShotEffect {
+    static class BlossomingWreathEffect extends OneShotEffect {
 
         public BlossomingWreathEffect() {
             super(Outcome.GainLife);

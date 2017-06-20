@@ -35,12 +35,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -103,9 +98,8 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (!permanent.getSupertype().contains("Legendary")) {
-                permanent.getSupertype().add("Legendary");
-            }
+                permanent.addSuperType(SuperType.LEGENDARY);
+
         }
         return true;
     }

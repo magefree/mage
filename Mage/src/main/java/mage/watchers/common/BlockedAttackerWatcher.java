@@ -47,7 +47,7 @@ public class BlockedAttackerWatcher extends Watcher {
     public final HashMap<MageObjectReference, Set<MageObjectReference>> blockData = new HashMap<>();
 
     public BlockedAttackerWatcher() {
-        super("BlockedAttackerWatcher", WatcherScope.GAME);
+        super(BlockedAttackerWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public BlockedAttackerWatcher(final BlockedAttackerWatcher watcher) {

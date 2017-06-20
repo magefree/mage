@@ -39,6 +39,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -91,14 +92,14 @@ class RoarOfTheCrowdEffect extends OneShotEffect {
         if (player != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
+            typeChoice.setChoices(SubType.getCreatureTypes(false));
             while (!player.choose(Outcome.LoseLife, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;
                 }
             }
             FilterControlledPermanent filter = new FilterControlledPermanent();
-            filter.add(new SubtypePredicate(typeChoice.getChoice()));
+            filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             return new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)).apply(game, source);
         }
         return false;

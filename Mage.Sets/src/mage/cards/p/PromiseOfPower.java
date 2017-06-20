@@ -28,7 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
@@ -37,13 +36,12 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.EntwineAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PromiseOfPowerDemonToken;
 import mage.players.Player;
 
 /**
@@ -53,15 +51,14 @@ import mage.players.Player;
 public class PromiseOfPower extends CardImpl {
 
     public PromiseOfPower(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}{B}");
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(1);
-        
+
         // - You draw five cards and you lose 5 life.
-        Effect effect =  new DrawCardSourceControllerEffect(5);
+        Effect effect = new DrawCardSourceControllerEffect(5);
         effect.setText("You draw five cards");
         this.getSpellAbility().addEffect(effect);
         effect = new LoseLifeSourceControllerEffect(5);
@@ -112,19 +109,4 @@ class PromiseOfPowerEffect extends OneShotEffect {
         return new PromiseOfPowerEffect(this);
     }
 
-}
-class PromiseOfPowerDemonToken extends Token {
-
-    public PromiseOfPowerDemonToken(int xValue) {
-        super("Demon", "X/X black Demon creature token with flying");
-        setOriginalExpansionSetCode("C14");
-        setTokenType(2);
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Demon");
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
-
-        addAbility(FlyingAbility.getInstance());
-    }
 }

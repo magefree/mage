@@ -28,12 +28,12 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
 import mage.cards.FrameStyle;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -41,10 +41,10 @@ import mage.cards.FrameStyle;
  */
 public class Zendikar extends ExpansionSet {
 
-    private static final Zendikar fINSTANCE = new Zendikar();
+    private static final Zendikar instance = new Zendikar();
 
     public static Zendikar getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Zendikar() {

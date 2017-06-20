@@ -27,16 +27,23 @@
  */
 package mage.abilities;
 
+import java.util.UUID;
 import mage.MageObject;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.keyword.FlashAbility;
+import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.SpellAbilityType;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -86,7 +93,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
     public boolean canActivate(UUID playerId, Game game) {
         if (game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || this.spellCanBeActivatedRegularlyNow(playerId, game)) {
-            if (spellAbilityType == SpellAbilityType.SPLIT) {
+            if (spellAbilityType == SpellAbilityType.SPLIT || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
                 return false;
             }
             // fix for Gitaxian Probe and casting opponent's spells
@@ -102,14 +109,14 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 }
             }
             // Alternate spell abilities (Flashback, Overload) can't be cast with no mana to pay option
-            if (getSpellAbilityType()== SpellAbilityType.BASE_ALTERNATE) {
+            if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && getSourceId().equals(player.getCastSourceIdWithAlternateMana())) {
                     return false;
                 }
             }
             if (costs.canPay(this, sourceId, controllerId, game)) {
-                if (getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+                if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
                         return (splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
@@ -172,17 +179,32 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return cardName;
     }
 
-    public int getConvertedXManaCost() {
+    public int getConvertedXManaCost(Card card) {
         int xMultiplier = 0;
-        for (String symbolString : getManaCosts().getSymbols()) {
-            int index = symbolString.indexOf("{X}");
-            while (index != -1) {
-                xMultiplier++;
-                symbolString = symbolString.substring(index + 3);
-                index = symbolString.indexOf("{X}");
+        int amount = 0;
+        if (card == null) {
+            return 0;
+        }
+
+        for (ManaCost manaCost : card.getManaCost()) {
+            if (manaCost instanceof VariableManaCost) {
+                xMultiplier = ((VariableManaCost) manaCost).getMultiplier();
+                break;
             }
         }
-        return getManaCostsToPay().getX() * xMultiplier;
 
+        boolean hasNonManaXCost = false;
+        for (Cost cost : getCosts()) {
+            if (cost instanceof VariableCost) {
+                hasNonManaXCost = true;
+                amount = ((VariableCost) cost).getAmount();
+                break;
+            }
+        }
+
+        if (!hasNonManaXCost) {
+            amount = getManaCostsToPay().getX();
+        }
+        return amount * xMultiplier;
     }
 }

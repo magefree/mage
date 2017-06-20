@@ -32,13 +32,15 @@ import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.EquippedPredicate;
 
 /**
@@ -47,10 +49,11 @@ import mage.filter.predicate.permanent.EquippedPredicate;
  */
 public class StoneHavenOutfitter extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("equipped creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("equipped creatures you control");
 
     static {
         filter.add(new EquippedPredicate());
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public StoneHavenOutfitter(UUID ownerId, CardSetInfo setInfo) {
@@ -62,7 +65,7 @@ public class StoneHavenOutfitter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Equipped creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
         // Whenever an equipped creature you control dies, draw a card.
         this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter));

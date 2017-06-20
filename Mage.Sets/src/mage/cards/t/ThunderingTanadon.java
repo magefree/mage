@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 public class ThunderingTanadon extends CardImpl {
 
     public ThunderingTanadon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{GP}{GP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{G/P}{G/P}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(5);

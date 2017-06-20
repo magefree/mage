@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.Optional;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -49,7 +50,7 @@ import mage.target.TargetPlayer;
 public class Abeyance extends CardImpl {
 
     public Abeyance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Until end of turn, target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.
         this.getSpellAbility().addEffect(new AbeyanceEffect());
@@ -101,16 +102,16 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getFirstTarget())) {
+        if (source.getFirstTarget() != null && source.getFirstTarget().equals(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-                if (object.getCardType().contains(CardType.INSTANT) || object.getCardType().contains(CardType.SORCERY)) {
+                if (object.isInstant() || object.isSorcery()) {
                     return true;
                 }
             }
             if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-                Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                if (ability != null && !(ability instanceof ActivatedManaAbilityImpl)) {
+                Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+                if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
                     return true;
                 }
             }

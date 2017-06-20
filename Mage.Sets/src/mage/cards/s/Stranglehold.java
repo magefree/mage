@@ -102,7 +102,7 @@ class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectI
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.SEARCH_LIBRARY.equals(event.getType());
+        return EventType.SEARCH_LIBRARY == event.getType();
     }
 
     @Override
@@ -145,7 +145,7 @@ class StrangleholdSkipExtraTurnsEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.EXTRA_TURN);
+        return event.getType() == EventType.EXTRA_TURN;
     }
 
     @Override

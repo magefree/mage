@@ -45,14 +45,14 @@ import java.io.ObjectStreamException;
  */
 public class FearAbility extends EvasionAbility implements MageSingleton {
 
-    private static final FearAbility fINSTANCE =  new FearAbility();
+    private static final FearAbility instance =  new FearAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static FearAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FearAbility() {
@@ -66,7 +66,7 @@ public class FearAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public FearAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }
@@ -91,7 +91,7 @@ class FearEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getCardType().contains(CardType.ARTIFACT) || blocker.getColor(game).isBlack()) {
+        if (blocker.isArtifact() || blocker.getColor(game).isBlack()) {
             return true;
         }
         return false;

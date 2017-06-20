@@ -27,7 +27,7 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
+import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
@@ -41,6 +41,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -92,7 +94,16 @@ class DoublingCubeEffect extends ManaEffect {
         int greenMana = pool.getGreen();
         int redMana = pool.getRed();
         int colorlessMana = pool.getColorless();
-        Mana mana = new Mana(redMana, greenMana, blueMana, whiteMana, blackMana, colorlessMana, 0, 0);
+
+        for(ConditionalMana conditionalMana : pool.getConditionalMana()){
+            blackMana += conditionalMana.getBlack();
+            whiteMana += conditionalMana.getWhite();
+            blueMana += conditionalMana.getBlue();
+            greenMana += conditionalMana.getGreen();
+            redMana += conditionalMana.getRed();
+            colorlessMana += conditionalMana.getColorless();
+        }
+        Mana mana = new Mana(redMana, greenMana, blueMana, whiteMana, blackMana, 0, 0, colorlessMana);
         checkToFirePossibleEvents(mana, game, source);
         pool.addMana(mana, game, source);
         return true;

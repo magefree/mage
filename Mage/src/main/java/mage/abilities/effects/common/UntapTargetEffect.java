@@ -75,7 +75,7 @@ public class UntapTargetEffect extends OneShotEffect {
         Target target = mode.getTargets().get(0);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("Untap ");
+        sb.append("untap ");
         if (target.getNumberOfTargets() == 0) {
             sb.append("up to ");
         }

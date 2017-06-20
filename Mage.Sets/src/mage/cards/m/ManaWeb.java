@@ -90,7 +90,7 @@ class ManaWebTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
 
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+            if (permanent != null && permanent.isLand()) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
                 return true;
             }

@@ -30,21 +30,16 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.VoiceOfResurgenceToken;
 import mage.game.stack.Spell;
 
 /**
@@ -54,7 +49,7 @@ import mage.game.stack.Spell;
 public class VoiceOfResurgence extends CardImpl {
 
     public VoiceOfResurgence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(2);
@@ -105,7 +100,7 @@ class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
         // Voice of Resurgence Dies
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && getSourceId().equals(event.getTargetId())) {
             ZoneChangeEvent zce = (ZoneChangeEvent) event;
-            return zce.getFromZone().equals(Zone.BATTLEFIELD) && zce.getToZone().equals(Zone.GRAVEYARD);
+            return zce.getFromZone() == Zone.BATTLEFIELD && zce.getToZone() == Zone.GRAVEYARD;
         }
         return false;
     }
@@ -118,23 +113,5 @@ class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public VoiceOfResurgenceTriggeredAbility copy() {
         return new VoiceOfResurgenceTriggeredAbility(this);
-    }
-}
-
-class VoiceOfResurgenceToken extends Token {
-
-    public VoiceOfResurgenceToken() {
-        super("Elemental", "X/X green and white Elemental creature with with \"This creature's power and toughness are each equal to the number of creatures you control.");
-        setOriginalExpansionSetCode("DGM");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        color.setWhite(true);
-        subtype.add("Elemental");
-
-        power = new MageInt(0);
-        toughness = new MageInt(0);
-
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(
-                new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), Duration.EndOfGame)));
     }
 }

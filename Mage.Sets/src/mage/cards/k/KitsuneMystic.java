@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -39,11 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.mageobject.AttachmentAttachedToCardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,6 +48,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -90,12 +89,12 @@ class AutumnTailKitsuneSage extends Token {
 
     static {
         filter.add(new AttachmentAttachedToCardTypePredicate(CardType.CREATURE));
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
     }
 
     AutumnTailKitsuneSage() {
         super("Autumn-Tail, Kitsune Sage", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Fox");
@@ -108,31 +107,6 @@ class AutumnTailKitsuneSage extends Token {
         ability.addTarget(new TargetPermanent(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-    }
-}
-
-class AttachmentAttachedToCardTypePredicate implements Predicate<Permanent> {
-
-    private final CardType cardType;
-
-    public AttachmentAttachedToCardTypePredicate(CardType cardType) {
-        this.cardType = cardType;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        if (input.getAttachedTo() != null) {
-            Permanent attachedTo = game.getPermanent(input.getAttachedTo());
-            if (attachedTo != null && attachedTo.getCardType().contains(cardType)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "AttachmentAttachedToCardType(" + cardType + ')';
     }
 }
 

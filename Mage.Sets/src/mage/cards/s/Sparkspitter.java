@@ -30,21 +30,16 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SparkElementalToken;
 
 /**
  *
@@ -53,7 +48,7 @@ import mage.game.permanent.token.Token;
 public class Sparkspitter extends CardImpl {
 
     public Sparkspitter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(1);
@@ -73,22 +68,5 @@ public class Sparkspitter extends CardImpl {
     @Override
     public Sparkspitter copy() {
         return new Sparkspitter(this);
-    }
-}
-
-class SparkElementalToken extends Token {
-
-    public SparkElementalToken() {
-        super("Spark Elemental", "3/1 red Elemental creature token named Spark Elemental with trample, haste, and \"At the beginning of the end step, sacrifice Spark Elemental.\"");
-        this.setOriginalExpansionSetCode("FUT");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Elemental");
-        power = new MageInt(3);
-        toughness = new MageInt(1);
-
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
     }
 }

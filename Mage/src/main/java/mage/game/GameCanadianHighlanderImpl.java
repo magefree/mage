@@ -27,16 +27,13 @@
  */
 package mage.game;
 
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+
+import java.util.*;
 
 public abstract class GameCanadianHighlanderImpl extends GameImpl {
 
@@ -58,59 +55,61 @@ public abstract class GameCanadianHighlanderImpl extends GameImpl {
     }
 
     private String getNextMulligan(String mulligan) {
-        if (mulligan.equals("7")) {
-            return "6a";
-        } else if (mulligan.equals("6a")) {
-            return "6b";
-        } else if (mulligan.equals("6b")) {
-            return "5a";
-        } else if (mulligan.equals("5a")) {
-            return "5b";
-        } else if (mulligan.equals("5b")) {
-            return "4a";
-        } else if (mulligan.equals("4a")) {
-            return "4b";
-        } else if (mulligan.equals("4b")) {
-            return "3a";
-        } else if (mulligan.equals("3a")) {
-            return "3b";
-        } else if (mulligan.equals("3b")) {
-            return "2a";
-        } else if (mulligan.equals("2a")) {
-            return "2b";
-        } else if (mulligan.equals("2b")) {
-            return "1a";
-        } else if (mulligan.equals("1a")) {
-            return "1b";
+        switch (mulligan) {
+            case "7":
+                return "6a";
+            case "6a":
+                return "6b";
+            case "6b":
+                return "5a";
+            case "5a":
+                return "5b";
+            case "5b":
+                return "4a";
+            case "4a":
+                return "4b";
+            case "4b":
+                return "3a";
+            case "3a":
+                return "3b";
+            case "3b":
+                return "2a";
+            case "2a":
+                return "2b";
+            case "2b":
+                return "1a";
+            case "1a":
+                return "1b";
         }
         return "0";
     }
 
     private int getNextMulliganNum(String mulligan) {
-        if (mulligan.equals("7")) {
-            return 6;
-        } else if (mulligan.equals("6a")) {
-            return 6;
-        } else if (mulligan.equals("6b")) {
-            return 5;
-        } else if (mulligan.equals("5a")) {
-            return 5;
-        } else if (mulligan.equals("5b")) {
-            return 4;
-        } else if (mulligan.equals("4a")) {
-            return 4;
-        } else if (mulligan.equals("4b")) {
-            return 3;
-        } else if (mulligan.equals("3a")) {
-            return 3;
-        } else if (mulligan.equals("3b")) {
-            return 2;
-        } else if (mulligan.equals("2a")) {
-            return 2;
-        } else if (mulligan.equals("2b")) {
-            return 1;
-        } else if (mulligan.equals("1a")) {
-            return 1;
+        switch (mulligan) {
+            case "7":
+                return 6;
+            case "6a":
+                return 6;
+            case "6b":
+                return 5;
+            case "5a":
+                return 5;
+            case "5b":
+                return 4;
+            case "4a":
+                return 4;
+            case "4b":
+                return 3;
+            case "3a":
+                return 3;
+            case "3b":
+                return 2;
+            case "2a":
+                return 2;
+            case "2b":
+                return 1;
+            case "1a":
+                return 1;
         }
         return 0;
     }

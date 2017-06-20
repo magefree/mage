@@ -27,12 +27,11 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.effects.common.DestroyAttachedToEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,6 +43,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +63,7 @@ public class FatalMutation extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // When enchanted creature is turned face up, destroy it. It can't be regenerated.
-        this.addAbility(new FatalMutationAbility(new DestroyAttachedEffect("it", true)));
+        this.addAbility(new FatalMutationAbility(new DestroyAttachedToEffect("it", true)));
     }
 
     public FatalMutation(final FatalMutation card) {

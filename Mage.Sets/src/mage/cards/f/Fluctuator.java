@@ -27,9 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -39,15 +36,14 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -102,7 +98,7 @@ class FluctuatorEffect extends CostModificationEffectImpl {
             }
             if (reduceMax > 0) {
                 int reduce = 0;
-                if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)
+                if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
                         && ((ActivatedAbility) abilityToModify).isCheckPlayableMode()) {
                     reduce = reduceMax;
                 } else {

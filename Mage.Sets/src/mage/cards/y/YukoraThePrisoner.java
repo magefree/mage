@@ -27,8 +27,6 @@
  */
 package mage.cards.y;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -37,11 +35,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -52,12 +55,12 @@ public class YukoraThePrisoner extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Ogre creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Ogre")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.OGRE)));
     }
 
     public YukoraThePrisoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
 
@@ -84,7 +87,7 @@ class YukoraThePrisonerEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Ogre creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Ogre")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.OGRE)));
     }
 
     public YukoraThePrisonerEffect() {

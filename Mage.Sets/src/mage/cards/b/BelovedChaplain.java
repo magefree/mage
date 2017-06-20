@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -36,13 +35,15 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
+import java.util.UUID;
+
 /**
  *
  * @author cbt33, BetaSteward (Black Knight)
  */
 public class BelovedChaplain extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("creatures");
+    static final FilterCard filter = new FilterCard("creatures");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  */
 public class Thunderblust extends CardImpl {
 
-    private final String rule = "{this} has trample as long as it has a -1/-1 counter on it";
+    private static final String rule = "{this} has trample as long as it has a -1/-1 counter on it";
 
     public Thunderblust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");

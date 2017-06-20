@@ -27,15 +27,16 @@
  */
 package mage.cards.w;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +65,7 @@ public class WarleadersHelix extends CardImpl {
     
     @Override
     public List<String> getRules() {
-        List<String> rules = new ArrayList<String>();
+        List<String> rules = new ArrayList<>();
         rules.add("Warleader's Helix deals 4 damage to target creature or player and you gain 4 life.");
         return rules;
     }

@@ -39,8 +39,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.LinvalaAngelToken;
 
 /**
  *
@@ -49,20 +50,20 @@ import mage.game.permanent.token.Token;
 public class LinvalaThePreserver extends CardImpl {
 
     public LinvalaThePreserver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Angel");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Linvala, the Preserver enters the battlefield, if an opponent has more life than you, you gain 5 life.
-        this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5), false), 
-                new OpponentHasMoreLifeCondition(),
+        this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5), false),
+                OpponentHasMoreLifeCondition.instance,
                 "When {this} enters the battlefield, if an opponent has more life than you, you gain 5 life."));
-        
+
         // When Linvala enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying.
         this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new LinvalaAngelToken()), false),
                 new OpponentControlsMoreCondition(new FilterCreaturePermanent()),
@@ -76,19 +77,5 @@ public class LinvalaThePreserver extends CardImpl {
     @Override
     public LinvalaThePreserver copy() {
         return new LinvalaThePreserver(this);
-    }
-}
-
-class LinvalaAngelToken extends Token {
-
-    public LinvalaAngelToken() {
-        super("Angel", "3/3 white Angel creature token with flying");
-        setOriginalExpansionSetCode("OGW");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Angel");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        addAbility(FlyingAbility.getInstance());
     }
 }

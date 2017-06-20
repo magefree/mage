@@ -27,25 +27,19 @@
  */
 package mage.cards.n;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -54,14 +48,16 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public class NightDealings extends CardImpl {
 
     public NightDealings(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // Whenever a source you control deals damage to another player, put that many theft counters on Night Dealings.
         this.addAbility((new NightDealingsTriggeredAbility()));
@@ -122,7 +118,7 @@ public class NightDealings extends CardImpl {
         }
     }
 
-    private class NightDealingsEffect extends OneShotEffect {
+    private static class NightDealingsEffect extends OneShotEffect {
 
         public NightDealingsEffect() {
             super(Outcome.Damage);
@@ -152,7 +148,7 @@ public class NightDealings extends CardImpl {
         }
     }
 
-    private class NightDealingsSearchEffect extends OneShotEffect {
+    private static class NightDealingsSearchEffect extends OneShotEffect {
 
         public NightDealingsSearchEffect() {
             super(Outcome.DrawCard);
@@ -183,7 +179,7 @@ public class NightDealings extends CardImpl {
             }
 
             FilterNonlandCard filter = new FilterNonlandCard("nonland card with converted mana cost X = " + cmc);
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
             if (player.searchLibrary(target, game)) {

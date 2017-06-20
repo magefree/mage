@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,6 +48,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author anonymous
@@ -57,7 +59,7 @@ public class ArchdemonOfGreed extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human");
 
     static {
-        filter.add(new SubtypePredicate("Human"));
+        filter.add(new SubtypePredicate(SubType.HUMAN));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
@@ -87,7 +89,7 @@ public class ArchdemonOfGreed extends CardImpl {
         return new ArchdemonOfGreed(this);
     }
 
-    class ArchdemonOfGreedEffect extends OneShotEffect {
+    static class ArchdemonOfGreedEffect extends OneShotEffect {
 
         public ArchdemonOfGreedEffect() {
             super(Outcome.Damage);

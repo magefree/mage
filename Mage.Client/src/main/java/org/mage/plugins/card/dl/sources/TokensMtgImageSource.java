@@ -44,22 +44,15 @@ import java.util.Map;
  *
  * @author Quercitron
  */
-public class TokensMtgImageSource implements CardImageSource {
+public enum TokensMtgImageSource implements CardImageSource {
 
+   instance;
     private static final Logger logger = Logger.getLogger(TokensMtgImageSource.class);
 
-    private static CardImageSource instance = new TokensMtgImageSource();
 
     private List<TokenData> tokensData;
 
     private final Object tokensDataSync = new Object();
-
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new TokensMtgImageSource();
-        }
-        return instance;
-    }
 
     @Override
     public String getSourceName() {
@@ -67,7 +60,7 @@ public class TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
-    public Float getAverageSize() {
+    public float getAverageSize() {
         return 26.7f;
     }
 
@@ -265,7 +258,7 @@ public class TokensMtgImageSource implements CardImageSource {
         return newTokensData;
     }
 
-    final class TokenData {
+    static final class TokenData {
 
         final private String name;
         final private String number;
@@ -291,12 +284,12 @@ public class TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
-    public Integer getTotalImages() {
+    public int getTotalImages() {
         return -1;
     }
 
     @Override
-    public Boolean isTokenSource() {
+    public boolean isTokenSource() {
         return true;
     }
 

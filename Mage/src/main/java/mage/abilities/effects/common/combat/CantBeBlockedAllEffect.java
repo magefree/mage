@@ -47,7 +47,7 @@ public class CantBeBlockedAllEffect extends RestrictionEffect {
         this.filter = filter;
 
         this.staticText = filter.getMessage() + " can't be blocked";
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             this.staticText += " this turn";
         }
     }

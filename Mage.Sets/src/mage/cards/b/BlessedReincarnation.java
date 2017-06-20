@@ -27,17 +27,11 @@
  */
 package mage.cards.b;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -49,6 +43,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -114,16 +111,16 @@ class BlessedReincarnationEffect extends OneShotEffect {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 Library library = player.getLibrary();
-                if (library.size() > 0) {
+                if (library.hasCards()) {
                     Cards cards = new CardsImpl();
                     Card card = library.removeFromTop(game);
                     cards.add(card);
-                    while (!card.getCardType().contains(CardType.CREATURE) && library.size() > 0) {
+                    while (!card.isCreature() && library.hasCards()) {
                         card = library.removeFromTop(game);
                         cards.add(card);
                     }
 
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                     }
 

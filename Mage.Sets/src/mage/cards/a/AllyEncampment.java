@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -40,11 +39,14 @@ import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class AllyEncampment extends CardImpl {
     private static final FilterSpell FILTER = new FilterSpell("an Ally spell");
 
     static {
-        FILTER.add(new SubtypePredicate("Ally"));
+        FILTER.add(new SubtypePredicate(SubType.ALLY));
     }
 
     public AllyEncampment(UUID ownerId, CardSetInfo setInfo) {
@@ -71,7 +73,7 @@ public class AllyEncampment extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("Ally", "Ally you control")));
+        ability.addTarget(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent(SubType.ALLY, "Ally you control")));
         this.addAbility(ability);
     }
 

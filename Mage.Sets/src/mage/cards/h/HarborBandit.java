@@ -30,6 +30,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -54,7 +55,7 @@ public class HarborBandit extends CardImpl {
     private static final String rule = "{this} gets +1/+1 as long as you control an Island";
     
     static {
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     public HarborBandit(UUID ownerId, CardSetInfo setInfo) {

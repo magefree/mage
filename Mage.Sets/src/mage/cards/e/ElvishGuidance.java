@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -39,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -46,6 +46,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,7 +83,7 @@ public class ElvishGuidance extends CardImpl {
 class ElvishGuidanceTriggeredAbility extends TriggeredManaAbility {
 
     public ElvishGuidanceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DynamicManaEffect(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("Elf", "Elf"))));
+        super(Zone.BATTLEFIELD, new DynamicManaEffect(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(new FilterCreaturePermanent(SubType.ELF, "Elf"))));
     }
 
     public ElvishGuidanceTriggeredAbility(final ElvishGuidanceTriggeredAbility ability) {

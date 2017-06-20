@@ -34,13 +34,14 @@
 
 package mage.client.table;
 
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
 import mage.client.MageFrame;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.util.Config;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -150,18 +151,10 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         lblPlayerDeck.setText("Deck:");
 
         btnPlayerDeck.setText("...");
-        btnPlayerDeck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlayerDeckActionPerformed(evt);
-            }
-        });
+        btnPlayerDeck.addActionListener(evt -> btnPlayerDeckActionPerformed(evt));
 
         btnGenerate.setText("Generate");
-        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerateActionPerformed(evt);
-            }
-        });
+        btnGenerate.addActionListener(evt -> btnGenerateActionPerformed(evt));
 
         lblLevel.setText("Skill:");
 

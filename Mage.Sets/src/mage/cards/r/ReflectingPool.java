@@ -206,13 +206,17 @@ class ReflectingPoolEffect extends ManaEffect {
     }
 
     private Mana getManaTypes(Game game, Ability source) {
-        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         Mana types = new Mana();
+        if (game == null || game.getPhase() == null) {
+            return types;
+        }
+        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         for (Permanent land : lands) {
             Abilities<Ability> manaAbilities = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
             for (Ability basicAbility : manaAbilities) {
                 ManaAbility ability = (ManaAbility) basicAbility;
-                if (!ability.equals(source) && ability.definesMana()) {
+                if (!(ability instanceof ReflectingPoolManaAbility) // can't get types from own ability class
+                        && ability.definesMana(game)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         types.add(netMana);
                         if (netMana.getAny() > 0) {

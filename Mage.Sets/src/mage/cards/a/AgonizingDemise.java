@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -42,6 +41,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class AgonizingDemise extends CardImpl {
         //If Agonizing Demise was kicked, it deals damage equal to that creature's power to the creature's controller.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetControllerEffect(new TargetPermanentPowerCount()),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "If {this} was kicked, it deals damage equal to that creature's power to the creature's controller."));
         
     }

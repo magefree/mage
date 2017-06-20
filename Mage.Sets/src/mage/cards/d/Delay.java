@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -46,6 +45,8 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +97,7 @@ class DelayEffect extends OneShotEffect {
             Effect effect = new CounterTargetWithReplacementEffect(Zone.EXILED);
             effect.setTargetPointer(targetPointer);
             Card card = game.getCard(spell.getSourceId());
-            if (card != null && effect.apply(game, source) && Zone.EXILED.equals(game.getState().getZone(card.getId()))) {
+            if (card != null && effect.apply(game, source) && game.getState().getZone(card.getId()) == Zone.EXILED) {
                 boolean hasSuspend = card.getAbilities().containsClass(SuspendAbility.class);
                 UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
                 if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getLogName(), source.getSourceId(), game, Zone.HAND, true)) {

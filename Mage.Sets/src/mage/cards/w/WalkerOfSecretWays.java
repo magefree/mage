@@ -42,6 +42,7 @@ import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +58,7 @@ public class WalkerOfSecretWays extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("Ninja you control");
     static {
-        filterCreature.add((new SubtypePredicate("Ninja")));
+        filterCreature.add((new SubtypePredicate(SubType.NINJA)));
     }
 
     public WalkerOfSecretWays(UUID ownerId, CardSetInfo setInfo) {
@@ -75,7 +76,7 @@ public class WalkerOfSecretWays extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new WalkerOfSecretWaysEffect(), true, true));
 
         // {1}{U}: Return target Ninja you control to its owner's hand. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"), MyTurnCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"), MyTurnCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent(1,1, filterCreature, false));
         this.addAbility(ability);
 

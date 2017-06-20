@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -37,6 +36,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterBasicLandCard;
@@ -47,6 +47,8 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Styxo
@@ -55,7 +57,7 @@ public class Bossk extends CardImpl {
 
     public Bossk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Trandoshan");
         this.subtype.add("Hunter");
         this.power = new MageInt(3);
@@ -105,7 +107,7 @@ class BosskTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.getControllerId())) {
+        if (permanent != null && permanent.isLand() && permanent.getControllerId().equals(this.getControllerId())) {
             return true;
         }
         return false;

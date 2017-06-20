@@ -51,7 +51,7 @@ public class MightOfOldKrosa extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(4,4, Duration.EndOfTurn),
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn),
-                new LockedInCondition(MyMainPhaseCondition.getInstance()),
+                new LockedInCondition(MyMainPhaseCondition.instance),
                 "Target creature gets +2/+2 until end of turn. If you cast this spell during your main phase, that creature gets +4/+4 until end of turn instead"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

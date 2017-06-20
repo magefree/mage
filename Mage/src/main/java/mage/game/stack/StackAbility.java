@@ -27,9 +27,8 @@
  */
 package mage.game.stack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -50,13 +49,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
-import mage.constants.AbilityType;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.EffectType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.constants.ZoneDetail;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -72,7 +65,7 @@ import mage.watchers.Watcher;
  */
 public class StackAbility extends StackObjImpl implements Ability {
 
-    private static List<CardType> emptyCardType = new ArrayList<>();
+    private static EnumSet<CardType> emptyCardType = EnumSet.noneOf(CardType.class);
     private static List<String> emptyString = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
@@ -160,7 +153,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public List<CardType> getCardType() {
+    public EnumSet<CardType> getCardType() {
         return emptyCardType;
     }
 
@@ -175,8 +168,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public List<String> getSupertype() {
-        return emptyString;
+    public EnumSet<SuperType> getSuperType() {
+        return EnumSet.noneOf(SuperType.class);
     }
 
     @Override

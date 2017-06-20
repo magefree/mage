@@ -102,4 +102,50 @@ public class ChangelingTest extends CardTestPlayerBase {
         Assert.assertTrue("Prophet of Kruphix has to have the 'Pay 2 life: Return this permanent to its owner's hand.' ability, but has not.", abilityFound);
 
     }
+
+    /**
+     * NOTE: As of 05/06/2017 this test is failing due to a bug in code.
+     * See issue #3316
+     *
+     * Kaseto, Orochi Archmage do not give Chameleon Colossus +2/+2 , even though Chameleon Colossus should have the "snake" type
+     */
+    @Test
+    public void kasetoOrochiArchmageSnakeTest() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        /* Kaseto, Orochi Archmage {1}{G}{U} - 2/2
+         * Legendary Creature — Snake Wizard
+         * {G}{U}: Target creature can't be blocked this turn. If that creature is a Snake, it gets +2/+2 until end of turn.
+         */
+        addCard(Zone.BATTLEFIELD, playerA, "Kaseto, Orochi Archmage");
+        /*
+         * Chameleon Colossus {2}{G}{G} - 4/4
+         * Changeling (This card is every creature type.)
+         * Protection from black
+         * {2}{G}{G}: Chameleon Colossus gets +X/+X until end of turn, where X is its power.
+         */
+        addCard(Zone.BATTLEFIELD, playerA, "Chameleon Colossus");
+
+        /* Nessian Asp {4}{G} - 4/5
+        *  Creature — Snake
+        *  Reach
+        *  {6}{G}: Monstrosity 4. (If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)
+        */
+        addCard(Zone.BATTLEFIELD, playerA, "Nessian Asp");
+
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}: Target creature can't be blocked this turn. If that creature is a Snake, it gets +2/+2 until end of turn", "Chameleon Colossus");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}: Target creature can't be blocked this turn. If that creature is a Snake, it gets +2/+2 until end of turn", "Nessian Asp");
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        // Check the actual snake creature - was 4/5 but +2/+2 from Kaseto's ability
+        assertPowerToughness(playerA, "Nessian Asp", 6, 7);
+
+        // Check the changeling - Was a 4/4 but +2/+2 from Kaseto's ability
+        assertPowerToughness(playerA, "Chameleon Colossus", 6, 6);
+
+    }
 }

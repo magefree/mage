@@ -38,7 +38,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -47,7 +46,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BalduvianToken;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
@@ -58,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
 public class BalduvianDead extends CardImpl {
 
     public BalduvianDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -111,19 +110,5 @@ class BalduvianDeadEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-}
-
-class BalduvianToken extends Token {
-
-    public BalduvianToken() {
-        super("Graveborn", "3/1 black and red Graveborn creature token with haste");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        color.setRed(true);
-        power = new MageInt(3);
-        toughness = new MageInt(1);
-        subtype.add("Graveborn");
-        addAbility(HasteAbility.getInstance());
     }
 }

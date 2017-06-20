@@ -27,18 +27,19 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public class GazeOfGranite extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each nonland permanent with converted mana cost X or less");
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public GazeOfGranite(UUID ownerId, CardSetInfo setInfo) {
@@ -88,7 +89,7 @@ class GazeOfGraniteEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (!permanent.getCardType().contains(CardType.LAND) && permanent.getConvertedManaCost() <= source.getManaCostsToPay().getX()) {
+            if (!permanent.isLand() && permanent.getConvertedManaCost() <= source.getManaCostsToPay().getX()) {
                 permanent.destroy(source.getSourceId(), game, false);
             }
         }

@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,18 +35,14 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +53,7 @@ public class MagusOfTheMoon extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
     }
 
     public MagusOfTheMoon(UUID ownerId, CardSetInfo setInfo) {
@@ -82,7 +77,7 @@ public class MagusOfTheMoon extends CardImpl {
         return new MagusOfTheMoon(this);
     }
 
-    class MagusOfTheMoonEffect extends ContinuousEffectImpl {
+    static class MagusOfTheMoonEffect extends ContinuousEffectImpl {
 
         MagusOfTheMoonEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Detriment);

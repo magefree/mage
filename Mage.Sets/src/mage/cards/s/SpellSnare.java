@@ -27,15 +27,16 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
+import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public class SpellSnare extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 2");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 2));
     }
 
     public SpellSnare(UUID ownerId, CardSetInfo setInfo) {

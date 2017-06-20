@@ -71,7 +71,7 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.ENCHANTMENT)) {
+            if (permanent != null && permanent.isEnchantment()) {
                 return true;
             }
         }

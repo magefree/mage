@@ -1,20 +1,5 @@
 package org.mage.plugins.card;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.Rectangle;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLayeredPane;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.client.dialog.PreferencesDialog;
@@ -30,10 +15,7 @@ import net.xeoh.plugins.base.annotations.events.Init;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
-import org.mage.card.arcane.Animation;
-import org.mage.card.arcane.CardPanel;
-import org.mage.card.arcane.CardPanelComponentImpl;
-import org.mage.card.arcane.ManaSymbols;
+import org.mage.card.arcane.*;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
@@ -43,7 +25,15 @@ import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
-import org.mage.card.arcane.CardPanelRenderImpl;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * {@link CardPlugin} implementation.
@@ -68,12 +58,12 @@ public class CardPluginImpl implements CardPlugin {
     private static final float STACK_SPACING_Y = 0.10f;
     private static final float ATTACHMENT_SPACING_Y = 0.13f;
 
-    private final int landStackMax = 5;
+    private static final int landStackMax = 5;
     // private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
     private int cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();
     private int cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();
 
-    private final boolean stackVertical = false;
+    private static final boolean stackVertical = false;
 
     private int playAreaWidth, playAreaHeight;
     private int cardWidth, cardHeight;
@@ -108,14 +98,14 @@ public class CardPluginImpl implements CardPlugin {
         cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();
         cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();
     }
-    
+
     /**
-     * Temporary card rendering shim. Split card rendering isn't implemented yet, so
-     * use old component based rendering for the split cards.
+     * Temporary card rendering shim. Split card rendering isn't implemented
+     * yet, so use old component based rendering for the split cards.
      */
     private CardPanel makePanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback, boolean isFoil, Dimension dimension) {
         String fallback = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false");
-        if (view.isSplitCard() || fallback.equals("true")) {
+        if (fallback.equals("true")) {
             return new CardPanelComponentImpl(view, gameId, loadImage, callback, isFoil, dimension);
         } else {
             return new CardPanelRenderImpl(view, gameId, loadImage, callback, isFoil, dimension);
@@ -125,7 +115,7 @@ public class CardPluginImpl implements CardPlugin {
     @Override
     public MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
         CardPanel cardPanel = makePanel(permanent, gameId, loadImage, callback, false, dimension);
-        boolean implemented = !permanent.getRarity().equals(Rarity.NA);
+        boolean implemented = permanent.getRarity() != Rarity.NA;
         cardPanel.setShowCastingCost(implemented);
         return cardPanel;
     }
@@ -133,7 +123,7 @@ public class CardPluginImpl implements CardPlugin {
     @Override
     public MagePermanent getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
         CardPanel cardPanel = makePanel(cardView, gameId, loadImage, callback, false, dimension);
-        boolean implemented = cardView.getRarity() != null && !cardView.getRarity().equals(Rarity.NA);
+        boolean implemented = cardView.getRarity() != null && cardView.getRarity() != Rarity.NA;
         cardPanel.setShowCastingCost(implemented);
         return cardPanel;
     }
@@ -161,7 +151,7 @@ public class CardPluginImpl implements CardPlugin {
         outerLoop:
         //
         for (MagePermanent permanent : permanents) {
-            if (!CardUtil.isLand(permanent) || CardUtil.isCreature(permanent)) {
+            if (!permanent.isLand() || permanent.isCreature()) {
                 continue;
             }
 
@@ -428,11 +418,11 @@ public class CardPluginImpl implements CardPlugin {
         public boolean isType(MagePermanent card) {
             switch (this) {
                 case land:
-                    return CardUtil.isLand(card);
+                    return card.isLand();
                 case creature:
-                    return CardUtil.isCreature(card);
+                    return card.isCreature();
                 case other:
-                    return !CardUtil.isLand(card) && !CardUtil.isCreature(card);
+                    return !card.isLand() && !card.isCreature();
                 case attached:
                     return card.getOriginalPermanent().isAttachedToPermanent();
                 default:
@@ -460,7 +450,7 @@ public class CardPluginImpl implements CardPlugin {
                     continue;
                 }
                 // all attached permanents are grouped separately later
-                if (!type.equals(RowType.attached) && RowType.attached.isType(permanent)) {
+                if (type != RowType.attached && RowType.attached.isType(permanent)) {
                     continue;
                 }
                 Stack stack = new Stack();
@@ -584,7 +574,7 @@ public class CardPluginImpl implements CardPlugin {
             Animation.showCard(card, count > 0 ? count : 1);
             try {
                 while ((card).getAlpha() + 0.05f < 1) {
-                    Thread.sleep(30);
+                    TimeUnit.MILLISECONDS.sleep(30);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -598,7 +588,7 @@ public class CardPluginImpl implements CardPlugin {
             Animation.hideCard(card, count > 0 ? count : 1);
             try {
                 while ((card).getAlpha() - 0.05f > 0) {
-                    Thread.sleep(30);
+                    TimeUnit.MILLISECONDS.sleep(30);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

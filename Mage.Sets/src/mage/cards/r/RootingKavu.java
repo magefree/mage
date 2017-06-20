@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -43,6 +42,8 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +70,7 @@ public class RootingKavu extends CardImpl {
         return new RootingKavu(this);
     }
 
-    class RootingKavuEffect extends OneShotEffect {
+    static class RootingKavuEffect extends OneShotEffect {
 
         public RootingKavuEffect() {
             super(Outcome.Benefit);

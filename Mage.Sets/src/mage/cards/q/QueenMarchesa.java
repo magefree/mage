@@ -41,9 +41,10 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.QueenMarchesaAssassinToken;
 
 /**
  *
@@ -54,7 +55,7 @@ public class QueenMarchesa extends CardImpl {
     public QueenMarchesa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{B}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Assassin");
         this.power = new MageInt(3);
@@ -70,7 +71,7 @@ public class QueenMarchesa extends CardImpl {
         // At the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new QueenMarchesaAssassinToken()), TargetController.YOU, false),
-                OpponentIsMonarchCondition.getInstance(),
+                OpponentIsMonarchCondition.instance,
                 "At the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste."));
     }
 
@@ -84,13 +85,9 @@ public class QueenMarchesa extends CardImpl {
     }
 }
 
-class OpponentIsMonarchCondition implements Condition {
+enum OpponentIsMonarchCondition implements Condition {
 
-    private final static OpponentIsMonarchCondition fInstance = new OpponentIsMonarchCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -100,19 +97,5 @@ class OpponentIsMonarchCondition implements Condition {
     @Override
     public String toString() {
         return "an opponent is the monarch";
-    }
-}
-
-class QueenMarchesaAssassinToken extends Token {
-
-    QueenMarchesaAssassinToken() {
-        super("Assassin", "1/1 black Assassin creature tokens with deathtouch and haste");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Assassin");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(DeathtouchAbility.getInstance());
-        addAbility(HasteAbility.getInstance());
     }
 }

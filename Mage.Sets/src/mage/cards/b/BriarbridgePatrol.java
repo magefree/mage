@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -46,14 +44,16 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.PermanentsSacrificedWatcher;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class BriarbridgePatrol extends CardImpl {
 
     public BriarbridgePatrol(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);
@@ -63,7 +63,7 @@ public class BriarbridgePatrol extends CardImpl {
         this.addAbility(new DealsDamageToOneOrMoreCreaturesTriggeredAbility(new InvestigateEffect(), false, false, false));
         // At the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(new FilterCreatureCard("a creature card")), TargetController.ANY,
-                BriarbridgePatrolCondition.getInstance(), true), new PermanentsSacrificedWatcher());
+                BriarbridgePatrolCondition.instance, true), new PermanentsSacrificedWatcher());
 
     }
 
@@ -77,17 +77,13 @@ public class BriarbridgePatrol extends CardImpl {
     }
 }
 
-class BriarbridgePatrolCondition implements Condition {
+enum BriarbridgePatrolCondition implements Condition {
 
-    private static final BriarbridgePatrolCondition fInstance = new BriarbridgePatrolCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PermanentsSacrificedWatcher watcher = (PermanentsSacrificedWatcher) game.getState().getWatchers().get(PermanentsSacrificedWatcher.class.getName());
+        PermanentsSacrificedWatcher watcher = (PermanentsSacrificedWatcher) game.getState().getWatchers().get(PermanentsSacrificedWatcher.class.getSimpleName());
         if (watcher != null) {
             List<Permanent> sacrificedPermanents = watcher.getThisTurnSacrificedPermanents(source.getControllerId());
             if (sacrificedPermanents != null && !sacrificedPermanents.isEmpty()) {
@@ -108,4 +104,4 @@ class BriarbridgePatrolCondition implements Condition {
         return "if you sacrificed three or more Clues this turn";
     }
 
-}
+    }

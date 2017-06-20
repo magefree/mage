@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -54,6 +54,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -64,7 +66,7 @@ public class CoralReef extends CardImpl {
     private static final FilterControlledCreaturePermanent untappedBlueCreatureFilter = new FilterControlledCreaturePermanent("an untapped blue creature you control");
     
     static {
-        islandFilter.add(new SubtypePredicate("Island"));
+        islandFilter.add(new SubtypePredicate(SubType.ISLAND));
         untappedBlueCreatureFilter.add(Predicates.not(new TappedPredicate()));
         untappedBlueCreatureFilter.add(new ColorPredicate(ObjectColor.BLUE));
     }

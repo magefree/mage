@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -50,7 +51,7 @@ import mage.players.Player;
 public class Hellfire extends CardImpl {
 
     public Hellfire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}{B}");
 
         // Destroy all nonblack creatures. Hellfire deals X plus 3 damage to you, where X is the number of creatures that died this way.
         this.getSpellAbility().addEffect(new HellfireEffect());
@@ -89,8 +90,9 @@ class HellfireEffect extends OneShotEffect {
             int destroyedCreature = 0;
             FilterCreaturePermanent filter = new FilterCreaturePermanent("all nonblack creatures");
             filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-            for(Permanent creature: game.getState().getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
-                if (creature.destroy(source.getSourceId(), game, false)) {
+            for (Permanent creature : game.getState().getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
+                if (creature.destroy(source.getSourceId(), game, false)
+                        && game.getState().getZone(creature.getId()).equals(Zone.GRAVEYARD)) { // If a commander is replaced to command zone, the creature does not die) {
                     destroyedCreature++;
                 }
             }

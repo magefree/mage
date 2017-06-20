@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
@@ -37,20 +36,18 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
+import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect;
 
 /**
  *
@@ -58,7 +55,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class GenjuOfTheFields extends CardImpl {
 
-    private static final FilterLandPermanent FILTER = new FilterLandPermanent("Plains", "Plains");
+    private static final FilterLandPermanent FILTER = new FilterLandPermanent(SubType.PLAINS, "Plains");
 
     public GenjuOfTheFields(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
@@ -72,7 +69,7 @@ public class GenjuOfTheFields extends CardImpl {
         this.addAbility(ability);
 
         // {2}: Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature with "Whenever this creature deals damage, its controller gains that much life." It's still a land.
-        Effect effect = new BecomesCreatureAttachedEffect(new SpiritToken(),
+        Effect effect = new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(),
                 "Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature", Duration.EndOfTurn);
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         effect = new GainAbilityAttachedEffect(new DealsDamageGainLifeSourceTriggeredAbility(), AttachmentType.AURA, Duration.EndOfTurn);
@@ -94,7 +91,7 @@ public class GenjuOfTheFields extends CardImpl {
         return new GenjuOfTheFields(this);
     }
 
-    private class SpiritToken extends Token {
+    private static class SpiritToken extends Token {
 
         SpiritToken() {
             super("Spirit", "2/5 white Spirit creature");

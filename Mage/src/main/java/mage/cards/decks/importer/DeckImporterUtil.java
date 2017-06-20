@@ -33,7 +33,7 @@ import mage.cards.decks.DeckCardLists;
  *
  * @author North
  */
-public class DeckImporterUtil {
+public final class DeckImporterUtil {
 
     public static DeckImporter getDeckImporter(String file) {
         if (file.toLowerCase().endsWith("dec")) {

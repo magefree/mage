@@ -35,13 +35,9 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class MonarchIsSourceControllerCondition implements Condition {
+public enum MonarchIsSourceControllerCondition implements Condition {
 
-    private final static MonarchIsSourceControllerCondition fInstance = new MonarchIsSourceControllerCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

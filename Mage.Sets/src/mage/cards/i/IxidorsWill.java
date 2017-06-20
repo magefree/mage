@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetSpell;
 
@@ -44,7 +45,7 @@ import mage.target.TargetSpell;
  */
 public class IxidorsWill extends CardImpl {
 
-    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("Wizard", "Wizard");
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent(SubType.WIZARD, "Wizard");
 
     public IxidorsWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

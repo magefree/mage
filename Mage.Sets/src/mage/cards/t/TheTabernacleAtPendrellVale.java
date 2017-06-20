@@ -53,7 +53,7 @@ public class TheTabernacleAtPendrellVale extends CardImpl {
 
     public TheTabernacleAtPendrellVale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // All creatures have "At the beginning of your upkeep, destroy this creature unless you pay {1}."
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroySourceUnlessPaysEffect(new ManaCostsImpl("{1}")), TargetController.YOU, false);

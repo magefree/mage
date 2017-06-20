@@ -27,11 +27,11 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -39,6 +39,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.TargetsPermanentPredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +51,7 @@ public class AvoidFate extends CardImpl {
     private final static FilterSpell filter = new FilterSpell("instant or Aura spell that targets a permanent you control");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new SubtypePredicate("Aura")));
+        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new SubtypePredicate(SubType.AURA)));
         filter.add(new TargetsPermanentPredicate(new FilterControlledPermanent()));
     }
 

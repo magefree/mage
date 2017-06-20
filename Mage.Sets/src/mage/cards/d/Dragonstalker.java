@@ -27,14 +27,16 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +54,7 @@ public class Dragonstalker extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from Dragons
-        this.addAbility(new ProtectionAbility(new FilterPermanent("Dragon", "Dragons")));
+        this.addAbility(new ProtectionAbility(new FilterPermanent(SubType.DRAGON, "Dragons")));
     }
 
     public Dragonstalker(final Dragonstalker card) {

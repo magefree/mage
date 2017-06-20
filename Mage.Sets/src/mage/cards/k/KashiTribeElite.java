@@ -27,9 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
@@ -40,11 +37,12 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,8 +53,8 @@ public class KashiTribeElite extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Legendary Snakes");
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
-        filter.add(new SubtypePredicate("Snake"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(new SubtypePredicate(SubType.SNAKE));
     }
 
     public KashiTribeElite(UUID ownerId, CardSetInfo setInfo) {

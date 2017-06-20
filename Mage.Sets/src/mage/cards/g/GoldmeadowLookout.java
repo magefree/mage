@@ -35,13 +35,11 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.permanent.token.GoldmeadowHarrierToken;
 
 /**
  *
@@ -70,24 +68,5 @@ public class GoldmeadowLookout extends CardImpl {
     @Override
     public GoldmeadowLookout copy() {
         return new GoldmeadowLookout(this);
-    }
-}
-
-class GoldmeadowHarrierToken extends Token {
-
-    public GoldmeadowHarrierToken() {
-        super("Goldmeadow Harrier", "1/1 white Kithkin Soldier creature token named Goldmeadow Harrier with \"{W}, {T}: Tap target creature.\"");
-        this.setOriginalExpansionSetCode("FUT");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Kithkin");
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
     }
 }

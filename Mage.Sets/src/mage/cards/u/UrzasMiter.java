@@ -84,7 +84,7 @@ class UrzasMiterDoIfCostPaid extends DoIfCostPaid {
   
     @Override
     public boolean apply(Game game, Ability source) {
-        UrzasMiterWatcher watcher = (UrzasMiterWatcher) game.getState().getWatchers().get("UrzasMiterWatcher");        
+        UrzasMiterWatcher watcher = (UrzasMiterWatcher) game.getState().getWatchers().get(UrzasMiterWatcher.class.getSimpleName());
         if(!watcher.cards.contains(source.getFirstTarget()))
             return super.apply(game, source);
         
@@ -98,7 +98,7 @@ class UrzasMiterWatcher extends Watcher {
     ArrayList<UUID> cards;
 
     public UrzasMiterWatcher() {
-        super("UrzasMiterWatcher", WatcherScope.PLAYER);
+        super(UrzasMiterWatcher.class.getSimpleName(), WatcherScope.PLAYER);
         this.cards = new ArrayList<>();
     }
 

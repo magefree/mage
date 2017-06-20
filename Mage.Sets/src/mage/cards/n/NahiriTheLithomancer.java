@@ -32,23 +32,15 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -56,6 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KorSoldierToken;
+import mage.game.permanent.token.NahiriTheLithomancerEquipmentToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
@@ -105,7 +98,7 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Equipment you control");
 
     static {
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     NahiriTheLithomancerFirstAbilityEffect() {
@@ -161,7 +154,7 @@ class NahiriTheLithomancerSecondAbilityEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("an Equipment");
 
     static {
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     NahiriTheLithomancerSecondAbilityEffect() {
@@ -200,22 +193,5 @@ class NahiriTheLithomancerSecondAbilityEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class NahiriTheLithomancerEquipmentToken extends Token {
-
-    NahiriTheLithomancerEquipmentToken() {
-        super("Stoneforged Blade", "colorless Equipment artifact token named Stoneforged Blade with indestructible, \"Equipped creature gets +5/+5 and has double strike,\" and equip {0}");
-        cardType.add(CardType.ARTIFACT);
-        subtype.add("Equipment");
-
-        this.addAbility(IndestructibleAbility.getInstance());
-
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5, 5));
-        ability.addEffect(new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield, "and has double strike"));
-        this.addAbility(ability);
-
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(0)));
     }
 }

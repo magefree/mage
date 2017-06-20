@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -47,6 +46,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.BearToken;
 import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -85,7 +86,7 @@ class CallerOfTheClawWatcher extends Watcher {
     private int creaturesCount = 0;
 
     public CallerOfTheClawWatcher() {
-        super(CallerOfTheClawWatcher.class.getName(), WatcherScope.PLAYER);
+        super(CallerOfTheClawWatcher.class.getSimpleName(), WatcherScope.PLAYER);
         condition = true;
     }
 
@@ -107,7 +108,7 @@ class CallerOfTheClawWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             Permanent card = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card.getOwnerId().equals(this.controllerId) && card.getCardType().contains(CardType.CREATURE) && !(card instanceof PermanentToken)) {
+            if (card != null && card.getOwnerId().equals(this.controllerId) && card.isCreature() && !(card instanceof PermanentToken)) {
                 creaturesCount++;
             }
         }
@@ -139,7 +140,7 @@ class CallerOfTheClawDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CallerOfTheClawWatcher watcher = (CallerOfTheClawWatcher) game.getState().getWatchers().get(CallerOfTheClawWatcher.class.getName(), sourceAbility.getControllerId());
+        CallerOfTheClawWatcher watcher = (CallerOfTheClawWatcher) game.getState().getWatchers().get(CallerOfTheClawWatcher.class.getSimpleName(), sourceAbility.getControllerId());
         if (watcher != null) {
             return watcher.getCreaturesCount();
         }

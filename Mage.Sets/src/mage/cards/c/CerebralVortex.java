@@ -27,10 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
@@ -45,6 +41,11 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 /**
  *
@@ -92,7 +93,7 @@ class CerebralVortexEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
-            CerebralVortexWatcher watcher = (CerebralVortexWatcher) game.getState().getWatchers().get("CerebralVortexWatcher");
+            CerebralVortexWatcher watcher = (CerebralVortexWatcher) game.getState().getWatchers().get(CerebralVortexWatcher.class.getSimpleName());
             if (watcher != null) {
                 targetPlayer.damage(watcher.getDraws(targetPlayer.getId()), source.getSourceId(), game, false, true);
                 return true;
@@ -107,7 +108,7 @@ class CerebralVortexWatcher extends Watcher {
     private final Map<UUID, Integer> draws = new HashMap<>();
 
     CerebralVortexWatcher() {
-        super("CerebralVortexWatcher", WatcherScope.GAME);
+        super(CerebralVortexWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     CerebralVortexWatcher(final CerebralVortexWatcher watcher) {
@@ -135,10 +136,7 @@ class CerebralVortexWatcher extends Watcher {
     }
 
     public int getDraws(UUID playerId) {
-        if (draws.containsKey(playerId)) {
-            return draws.get(playerId);
-        }
-        return 0;
+        return draws.getOrDefault(playerId, 0);
     }
 
     @Override

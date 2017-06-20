@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
@@ -40,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.watchers.common.PlayerAttackedWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +64,7 @@ public class BloodsoakedChampion extends CardImpl {
                 Zone.GRAVEYARD, 
                 new ReturnSourceFromGraveyardToBattlefieldEffect(), 
                 new ManaCostsImpl<>("{1}{B}"), 
-                RaidCondition.getInstance(), 
+                RaidCondition.instance,
                 "<i>Raid</i> - {1}{B}: Return {this} from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn");
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

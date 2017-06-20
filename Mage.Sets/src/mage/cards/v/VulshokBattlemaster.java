@@ -27,7 +27,6 @@
  */
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,10 +36,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +72,7 @@ public class VulshokBattlemaster extends CardImpl {
         return new VulshokBattlemaster(this);
     }
 
-    class VulshokBattlemasterEffect extends OneShotEffect {
+    static class VulshokBattlemasterEffect extends OneShotEffect {
 
         public VulshokBattlemasterEffect() {
             super(Outcome.Benefit);
@@ -91,7 +93,7 @@ public class VulshokBattlemaster extends CardImpl {
             Permanent battlemaster = game.getPermanent(source.getSourceId());
             if (battlemaster != null) {
                 FilterPermanent filter = new FilterPermanent();
-                filter.add(new SubtypePredicate("Equipment"));
+                filter.add(new SubtypePredicate(SubType.EQUIPMENT));
                 for (Permanent equipment : game.getBattlefield().getAllActivePermanents(filter, game)) {
                     if (equipment != null) {
                         //If an Equipment can’t equip Vulshok Battlemaster, it isn’t attached to the Battlemaster, and it doesn’t become unattached (if it’s attached to a creature). (http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=48125)

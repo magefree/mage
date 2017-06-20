@@ -28,6 +28,7 @@
 package mage.abilities.condition;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.game.Game;
 
 /**
@@ -36,10 +37,10 @@ import mage.game.Game;
  */
 public abstract class IntCompareCondition implements Condition {
 
-    protected final Condition.ComparisonType type;
+    protected final ComparisonType type;
     protected final int value;
 
-    public IntCompareCondition(Condition.ComparisonType type, int value) {
+    public IntCompareCondition(ComparisonType type, int value) {
         this.type = type;
         this.value = value;
     }
@@ -49,24 +50,7 @@ public abstract class IntCompareCondition implements Condition {
     @Override
     public final boolean apply(Game game, Ability source) {
         int inputValue = getInputValue(game, source);
-        switch (type) {
-            case Equal:
-                if (inputValue != value) {
-                    return false;
-                }
-                break;
-            case GreaterThan:
-                if (inputValue <= value) {
-                    return false;
-                }
-                break;
-            case LessThan:
-                if (inputValue >= value) {
-                    return false;
-                }
-                break;
-        }
-        return true;
+        return ComparisonType.compare(inputValue , type, value);
     }
 
     @Override

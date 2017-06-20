@@ -29,6 +29,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -51,7 +52,7 @@ public class WirewoodSymbiote extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf");
 
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public WirewoodSymbiote(UUID ownerId, CardSetInfo setInfo) {

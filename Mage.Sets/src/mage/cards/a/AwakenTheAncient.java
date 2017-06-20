@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,14 +36,13 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class AwakenTheAncient extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain", "Mountain");
+    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.MOUNTAIN, "Mountain");
 
     public AwakenTheAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}{R}");
@@ -81,7 +79,7 @@ public class AwakenTheAncient extends CardImpl {
         return new AwakenTheAncient(this);
     }
 
-    private class GiantToken extends Token {
+    private static class GiantToken extends Token {
 
         GiantToken() {
             super("Giant", "7/7 red Giant creature with haste");

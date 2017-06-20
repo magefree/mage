@@ -20,7 +20,7 @@ import mage.target.TargetCard;
 /**
  * Created by samuelsandeen on 9/6/16.
  */
-public class ZonesHandler {
+public final class ZonesHandler {
 
     public static boolean cast(ZoneChangeInfo info, Game game) {
         if (maybeRemoveFromSourceZone(info, game)) {
@@ -283,7 +283,7 @@ public class ZonesHandler {
 
     private static Card takeAttributesFromSpell(Card card, ZoneChangeEvent event, Game game) {
         card = card.copy();
-        if (Zone.STACK.equals(event.getFromZone())) {
+        if (Zone.STACK == event.getFromZone()) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && !spell.isFaceDown(game)) {
                 if (!card.getColor(game).equals(spell.getColor(game))) {

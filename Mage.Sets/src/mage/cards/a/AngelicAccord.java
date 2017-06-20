@@ -27,20 +27,19 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.IntCompareCondition;
+import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
 import mage.watchers.common.PlayerGainedLifeWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +52,7 @@ public class AngelicAccord extends CardImpl {
 
         // At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), TargetController.ANY,
-                new YouGainedLifeCondition(Condition.ComparisonType.GreaterThan, 3), false), new PlayerGainedLifeWatcher());
+                new YouGainedLifeCondition(ComparisonType.MORE_THAN, 3), false), new PlayerGainedLifeWatcher());
     }
 
     public AngelicAccord(final AngelicAccord card) {
@@ -63,27 +62,5 @@ public class AngelicAccord extends CardImpl {
     @Override
     public AngelicAccord copy() {
         return new AngelicAccord(this);
-    }
-}
-
-class YouGainedLifeCondition extends IntCompareCondition {
-
-    public YouGainedLifeCondition(Condition.ComparisonType type, int value) {
-        super(type, value);
-    }
-
-    @Override
-    protected int getInputValue(Game game, Ability source) {
-        int gainedLife = 0;
-        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get(PlayerGainedLifeWatcher.class.getName());
-        if (watcher != null) {
-            gainedLife = watcher.getLiveGained(source.getControllerId());
-        }
-        return gainedLife;
-    }
-
-    @Override
-    public String toString() {
-        return "if you gained 4 or more life this turn ";
     }
 }

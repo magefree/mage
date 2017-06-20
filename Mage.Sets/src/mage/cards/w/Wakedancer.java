@@ -58,7 +58,7 @@ public class Wakedancer extends CardImpl {
 
         // Morbid - When Wakedancer enters the battlefield, if a creature died this turn, create a 2/2 black Zombie creature token.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken()));
-        this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.getInstance(), staticText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.instance, staticText));
     }
 
     public Wakedancer(final Wakedancer card) {

@@ -5,9 +5,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.cards.SplitCardHalf;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 
 /**
  *
@@ -20,7 +22,7 @@ public class MockSplitCard extends SplitCard {
                 card.getTypes().toArray(new CardType[0]),
                 join(card.getManaCosts()),
                 "",
-                join(card.getRules()).contains("Fuse"));
+                getSpellAbilityType(card));
         this.expansionSetCode = card.getSetCode();
         this.power = mageIntFromString(card.getPower());
         this.toughness = mageIntFromString(card.getToughness());
@@ -51,11 +53,13 @@ public class MockSplitCard extends SplitCard {
         CardInfo leftHalf = CardRepository.instance.findCard(getLeftHalfName(card));
         if (leftHalf != null) {
             this.leftHalfCard = new MockSplitCardHalf(leftHalf);
+            ((SplitCardHalf)this.leftHalfCard).setParentCard(this);
         }
 
         CardInfo rightHalf = CardRepository.instance.findCard(getRightHalfName(card));
         if (rightHalf != null) {
             this.rightHalfCard = new MockSplitCardHalf(rightHalf);
+            ((SplitCardHalf)this.rightHalfCard).setParentCard(this);
         }
     }
 
@@ -75,6 +79,16 @@ public class MockSplitCard extends SplitCard {
         } catch (NumberFormatException e) {
             return new MageInt(0, value);
         }
+    }
+
+    private static SpellAbilityType getSpellAbilityType(CardInfo cardInfo) {
+        if (cardInfo.isSplitFuseCard()) {
+            return SpellAbilityType.SPLIT_FUSED;
+        }
+        if (cardInfo.isSplitAftermathCard()) {
+            return SpellAbilityType.SPLIT_AFTERMATH;
+        }
+        return SpellAbilityType.SPLIT;
     }
 
     private static String join(List<String> strings) {

@@ -89,7 +89,7 @@ public class CantBlockTargetEffect extends RestrictionEffect {
         }
 
         sb.append(" can't block");
-        if (Duration.EndOfTurn.equals(this.duration)) {
+        if (this.duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         }
 

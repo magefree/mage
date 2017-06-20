@@ -27,9 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -37,9 +34,14 @@ import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,12 +53,12 @@ public class ShisatoWhisperingHunter extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Snake");
 
     static {
-        filter.add(new SubtypePredicate("Snake"));
+        filter.add(new SubtypePredicate(SubType.SNAKE));
     }
 
     public ShisatoWhisperingHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Snake");
         this.subtype.add("Warrior");
 

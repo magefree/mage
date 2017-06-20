@@ -28,8 +28,6 @@
  */
 package mage.cards.c;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -43,6 +41,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.token.InsectToken;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -95,12 +96,12 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
                 for (Card card : zEvent.getCards()) {
                     if (card != null) {
                         UUID cardOwnerId = card.getOwnerId();
-                        List<CardType> cardType = card.getCardType();
+                        Set<CardType> cardType = card.getCardType();
 
                         if (cardOwnerId != null
                                 && card.getOwnerId().equals(getControllerId())
                                 && cardType != null
-                                && card.getCardType().contains(CardType.LAND)) {
+                                && card.isLand()) {
                             game.getState().setValue("usedOnTurn" + getControllerId() + getOriginalId(), game.getTurnNum());
                             return true;
                         }

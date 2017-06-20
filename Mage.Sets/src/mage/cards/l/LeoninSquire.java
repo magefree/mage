@@ -27,18 +27,19 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public class LeoninSquire extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("target artifact card with converted mana cost 1 or less from your graveyard");
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
     
     public LeoninSquire(UUID ownerId, CardSetInfo setInfo) {

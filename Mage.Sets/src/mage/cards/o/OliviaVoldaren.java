@@ -63,12 +63,12 @@ public class OliviaVoldaren extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        vampireFilter.add(new SubtypePredicate("Vampire"));
+        vampireFilter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 
     public OliviaVoldaren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Vampire");
 
         this.power = new MageInt(3);

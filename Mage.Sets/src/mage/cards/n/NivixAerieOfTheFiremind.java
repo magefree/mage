@@ -98,11 +98,11 @@ class NivixAerieOfTheFiremindEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Library library = controller.getLibrary();
-            if (library.size() > 0) {
+            if (library.hasCards()) {
                 Card card = library.removeFromTop(game);
                 if (card != null
                         && controller.moveCardsToExile(card, source, game, true, source.getSourceId(), "Nivix, Aerie of the Firemind")
-                        && (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY))) {
+                        && (card.isInstant() || card.isSorcery())) {
                     ContinuousEffect effect = new NivixAerieOfTheFiremindCanCastEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
@@ -140,6 +140,6 @@ class NivixAerieOfTheFiremindCanCastEffect extends AsThoughEffectImpl {
         return this.getTargetPointer().getFirst(game, source) != null
                 && this.getTargetPointer().getFirst(game, source).equals(sourceId)
                 && source.getControllerId().equals(affectedControllerId)
-                && game.getState().getZone(sourceId).equals(Zone.EXILED);
+                && game.getState().getZone(sourceId) == Zone.EXILED;
     }
 }

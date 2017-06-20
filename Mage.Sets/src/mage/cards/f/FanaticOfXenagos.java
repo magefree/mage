@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -42,6 +41,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +65,7 @@ public class FanaticOfXenagos extends CardImpl {
         // When Fanatic of Xenagos enters the battlefield, if its tribute wasn't paid, it gets +1/+1 and gains haste until end of turn.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn));
         ability.addEffect( new GainAbilitySourceEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn)));
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, it gets +1/+1 and gains haste until end of turn."));
     }
 

@@ -27,9 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FatefulHourCondition;
@@ -37,8 +34,11 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +57,7 @@ public class GavonyIronwright extends CardImpl {
 
         // Fateful hour - As long as you have 5 or less life, other creatures you control get +1/+4.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostControlledEffect(1, 4, Duration.WhileOnBattlefield, false),
-                FatefulHourCondition.getInstance(), "As long as you have 5 or less life, other creatures you control get +1/+4")));
+                FatefulHourCondition.instance, "As long as you have 5 or less life, other creatures you control get +1/+4")));
     }
 
     public GavonyIronwright(final GavonyIronwright card) {

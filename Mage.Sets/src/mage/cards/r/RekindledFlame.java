@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class RekindledFlame extends CardImpl {
     
-    final String rule = "if an opponent has no cards in hand, you may return Rekindled Flame from your graveyard to your hand";
+    static final String rule = "if an opponent has no cards in hand, you may return Rekindled Flame from your graveyard to your hand";
 
     public RekindledFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");

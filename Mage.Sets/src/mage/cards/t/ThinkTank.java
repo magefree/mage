@@ -87,7 +87,7 @@ class ThinkTankLookLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.getLibrary().size() > 0) {
+            if (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
                     CardsImpl cards = new CardsImpl();

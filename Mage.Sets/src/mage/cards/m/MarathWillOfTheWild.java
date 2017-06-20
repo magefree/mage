@@ -49,10 +49,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.MarathWillOfTheWildElementalToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -65,8 +67,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class MarathWillOfTheWild extends CardImpl {
 
     public MarathWillOfTheWild(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elemental");
         this.subtype.add("Beast");
 
@@ -97,7 +99,7 @@ public class MarathWillOfTheWild extends CardImpl {
         ability.addMode(mode);
 
         // X can't be 0.
-        for (VariableCost cost: ability.getManaCosts().getVariableCosts()) {
+        for (VariableCost cost : ability.getManaCosts().getVariableCosts()) {
             if (cost instanceof VariableManaCost) {
                 ((VariableManaCost) cost).setMinX(1);
                 break;
@@ -113,7 +115,7 @@ public class MarathWillOfTheWild extends CardImpl {
             if (sourcePermanent != null) {
                 int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
                 if (amount > 0) {
-                    for (VariableCost cost: ability.getManaCostsToPay().getVariableCosts()) {
+                    for (VariableCost cost : ability.getManaCostsToPay().getVariableCosts()) {
                         if (cost instanceof VariableManaCost) {
                             ((VariableManaCost) cost).setMaxX(amount);
                             break;
@@ -133,7 +135,6 @@ public class MarathWillOfTheWild extends CardImpl {
         return new MarathWillOfTheWild(this);
     }
 }
-
 
 class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
 
@@ -163,17 +164,6 @@ class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class MarathWillOfTheWildElementalToken extends Token {
-    public MarathWillOfTheWildElementalToken() {
-        super("Elemental", "X/X green Elemental creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
-        color.setGreen(true);
-        power = new MageInt(0);
-        toughness = new MageInt(0);
     }
 }
 

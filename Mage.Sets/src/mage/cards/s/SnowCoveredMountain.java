@@ -32,6 +32,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 
 /**
  *
@@ -41,8 +42,8 @@ public class SnowCoveredMountain extends CardImpl {
 
     public SnowCoveredMountain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.supertype.add("Basic");
-        this.supertype.add("Snow");
+        this.addSuperType(SuperType.BASIC);
+        this.addSuperType(SuperType.SNOW);
         this.subtype.add("Mountain");
 
         // R

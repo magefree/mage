@@ -3,7 +3,7 @@ package mage.client.util.stats;
 /**
  * @author noxx
  */
-public class MemoryUsageStatUtil {
+public final class MemoryUsageStatUtil {
 
     private MemoryUsageStatUtil() {}
 

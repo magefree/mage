@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -36,6 +35,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class BatheInBacta extends CardImpl {
         // You gain 6 life. If you lost life from a source other than combat damage this turn, you gain 9 life instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(6), new GainLifeEffect(9),
-                new InvertCondition(HateCondition.getInstance()),
+                new InvertCondition(HateCondition.instance),
                 "You gain 6 life. If you lost life from a source other than combat damage this turn, you gain 9 life instead"));
         this.getSpellAbility().addWatcher(new LifeLossOtherFromCombatWatcher());
     }

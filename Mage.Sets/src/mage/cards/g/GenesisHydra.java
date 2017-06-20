@@ -27,24 +27,19 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
@@ -53,6 +48,8 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -122,7 +119,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
 
         FilterCard filter = new FilterPermanentCard("a nonland permanent card with converted mana cost " + count + " or less to put onto the battlefield");
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, count + 1));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, count + 1));
         TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
         target1.setRequired(false);
         if (cards.count(filter, controller.getId(), source.getSourceId(), game) > 0) {

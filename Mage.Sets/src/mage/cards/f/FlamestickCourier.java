@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,10 +42,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +59,7 @@ public class FlamestickCourier extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creature");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public FlamestickCourier(UUID ownerId, CardSetInfo setInfo) {
@@ -70,10 +72,10 @@ public class FlamestickCourier extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}{R}, {tap}: Target Goblin creature gets +2/+2 and has haste for as long as Flamestick Courier remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.getInstance(),
+            new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.instance,
             "target Goblin creature gets +2/+2"), new ManaCostsImpl("{2}{R}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(),
-            Duration.Custom), SourceTappedCondition.getInstance(),"and has haste for as long as {this} remains tapped"));
+            Duration.Custom), SourceTappedCondition.instance,"and has haste for as long as {this} remains tapped"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

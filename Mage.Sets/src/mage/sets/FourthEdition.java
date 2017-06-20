@@ -27,12 +27,12 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.n.NafsAsp;
 import mage.cards.p.Piety;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -40,10 +40,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class FourthEdition extends ExpansionSet {
 
-    private static final FourthEdition fINSTANCE = new FourthEdition();
+    private static final FourthEdition instance = new FourthEdition();
 
     public static FourthEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FourthEdition() {
@@ -72,6 +72,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ashes to Ashes", 3, Rarity.UNCOMMON, mage.cards.a.AshesToAshes.class));
         cards.add(new SetCardInfo("Ashnod's Battle Gear", 314, Rarity.UNCOMMON, mage.cards.a.AshnodsBattleGear.class));
         cards.add(new SetCardInfo("Aspect of Wolf", 117, Rarity.RARE, mage.cards.a.AspectOfWolf.class));
+        cards.add(new SetCardInfo("Backfire", 62, Rarity.UNCOMMON, mage.cards.b.Backfire.class));
         cards.add(new SetCardInfo("Bad Moon", 4, Rarity.RARE, mage.cards.b.BadMoon.class));
         cards.add(new SetCardInfo("Balance", 256, Rarity.RARE, mage.cards.b.Balance.class));
         cards.add(new SetCardInfo("Ball Lightning", 194, Rarity.RARE, mage.cards.b.BallLightning.class));

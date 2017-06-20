@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.effects.common.DestroyAttachedToEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -62,7 +62,7 @@ public class YokeOfTheDamned extends CardImpl {
         this.addAbility(ability);
 
         // When a creature dies, destroy enchanted creature.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DestroyAttachedEffect("enchanted creature"), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DestroyAttachedToEffect("enchanted creature"), false, filter));
 
     }
 

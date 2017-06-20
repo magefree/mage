@@ -31,6 +31,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -46,15 +47,23 @@ import mage.target.TargetObject;
  */
 public class TargetActivatedAbility extends TargetObject {
 
+    protected final FilterAbility filter;
+
     public TargetActivatedAbility() {
+        this(new FilterAbility());
+    }
+
+    public TargetActivatedAbility(FilterAbility filter) {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
         this.zone = Zone.STACK;
         this.targetName = "activated ability";
+        this.filter = filter;
     }
 
     public TargetActivatedAbility(final TargetActivatedAbility target) {
         super(target);
+        this.filter = target.filter.copy();
     }
 
     @Override
@@ -63,7 +72,8 @@ public class TargetActivatedAbility extends TargetObject {
             return false;
         }
         StackObject stackObject = game.getStack().getStackObject(id);
-        return stackObject != null && stackObject.getStackAbility() != null && stackObject.getStackAbility().getAbilityType().equals(AbilityType.ACTIVATED);
+        return stackObject != null && stackObject.getStackAbility() != null && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
+                && filter.match(((ActivatedAbility) stackObject.getStackAbility()), game);
     }
 
     @Override
@@ -73,13 +83,13 @@ public class TargetActivatedAbility extends TargetObject {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        for (StackObject stackObject :  game.getStack()) {
-            if (stackObject.getStackAbility() != null 
-                    && stackObject.getStackAbility().getAbilityType().equals(AbilityType.ACTIVATED)
+        for (StackObject stackObject : game.getStack()) {
+            if (stackObject.getStackAbility() != null
+                    && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
                     && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())) {
-                    return true;
-                }
+                return true;
             }
+        }
         return false;
     }
 
@@ -92,7 +102,9 @@ public class TargetActivatedAbility extends TargetObject {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject.getStackAbility().getAbilityType().equals(AbilityType.ACTIVATED) && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())) {
+            if (stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
+                    && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())
+                    && filter.match(((StackAbility) stackObject), game)) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }
         }
@@ -108,7 +120,7 @@ public class TargetActivatedAbility extends TargetObject {
     public Filter<Ability> getFilter() {
         return new FilterAbility();
     }
-    
+
     @Override
     public String getTargetedName(Game game) {
         StringBuilder sb = new StringBuilder("activated ability (");

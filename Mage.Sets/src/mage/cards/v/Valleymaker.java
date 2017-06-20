@@ -40,6 +40,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,8 +57,8 @@ public class Valleymaker extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Mountain");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("a Forest");
     static {
-        filter.add(new SubtypePredicate("Mountain"));
-        filter2.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter2.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public Valleymaker(UUID ownerId, CardSetInfo setInfo) {

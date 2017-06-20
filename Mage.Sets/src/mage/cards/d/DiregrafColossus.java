@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -38,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
@@ -46,6 +46,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +58,7 @@ public class DiregrafColossus extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a Zombie spell");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public DiregrafColossus(UUID ownerId, CardSetInfo setInfo) {
@@ -89,7 +91,7 @@ class DiregrafColossusEffect extends OneShotEffect {
     private static final FilterCreatureCard filter = new FilterCreatureCard();
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public DiregrafColossusEffect() {

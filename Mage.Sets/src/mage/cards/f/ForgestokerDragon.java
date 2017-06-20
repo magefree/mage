@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -43,6 +42,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public class ForgestokerDragon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{R}: Forgestoker Dragon deals 1 damage to target creature. That creature can't block this combat. Activate this ability only if Forgestoker Dragon is attacking.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"), new SourceAttackingCondition());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"), SourceAttackingCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         Effect effect = new CantBlockTargetEffect(Duration.EndOfCombat);
         effect.setText("That creature can't block this combat");

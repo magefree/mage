@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -35,9 +34,10 @@ import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.k.KrallenhordeWantons;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.k.KrallenhordeWantons;
+import mage.constants.CardType;
 import mage.constants.TargetController;
 
 import java.util.UUID;
@@ -61,7 +61,7 @@ public class GrizzledOutcasts extends CardImpl {
         // At the beginning of each upkeep, if no spells were cast last turn, transform Grizzled Outcasts.
         this.addAbility(new TransformAbility());
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.NO_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new ConditionalTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
     public GrizzledOutcasts(final GrizzledOutcasts card) {

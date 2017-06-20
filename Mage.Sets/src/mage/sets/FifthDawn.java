@@ -27,9 +27,9 @@
  */
 package mage.sets;
 
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class FifthDawn extends ExpansionSet {
 
-    private static final FifthDawn fINSTANCE = new FifthDawn();
+    private static final FifthDawn instance = new FifthDawn();
 
     public static FifthDawn getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FifthDawn() {

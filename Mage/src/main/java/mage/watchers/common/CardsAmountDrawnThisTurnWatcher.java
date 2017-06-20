@@ -38,19 +38,17 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
  * @author Quercitron
  * @author LevelX2
  * @author jeffwadsworth
  */
 public class CardsAmountDrawnThisTurnWatcher extends Watcher {
 
-    public final static String BASIC_KEY = "CardsAmountDrawnThisTurnWatcher";
 
     private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 
     public CardsAmountDrawnThisTurnWatcher() {
-        super(BASIC_KEY, WatcherScope.GAME);
+        super(CardsAmountDrawnThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CardsAmountDrawnThisTurnWatcher(final CardsAmountDrawnThisTurnWatcher watcher) {
@@ -61,11 +59,8 @@ public class CardsAmountDrawnThisTurnWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
-            if (amountOfCardsDrawnThisTurn.containsKey(event.getPlayerId())) {
-                amountOfCardsDrawnThisTurn.put(event.getPlayerId(), amountOfCardsDrawnThisTurn.get(event.getPlayerId()) + 1);
-            } else {
-                amountOfCardsDrawnThisTurn.put(event.getPlayerId(), 1);
-            }
+            amountOfCardsDrawnThisTurn.putIfAbsent(event.getPlayerId(), 0);
+            amountOfCardsDrawnThisTurn.compute(event.getPlayerId(), (k, amount) -> amount + 1);
         }
     }
 
@@ -90,11 +85,7 @@ public class CardsAmountDrawnThisTurnWatcher extends Watcher {
     }
 
     public int getAmountCardsDrawn(UUID playerId) {
-        Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
-        if (amount != null) {
-            return amount;
-        }
-        return 0;
+        return amountOfCardsDrawnThisTurn.getOrDefault(playerId, 0);
     }
 
     @Override

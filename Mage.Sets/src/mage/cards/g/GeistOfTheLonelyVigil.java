@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
@@ -41,6 +40,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +64,7 @@ public class GeistOfTheLonelyVigil extends CardImpl {
         // <i>Delirium</i> &mdash; Geist of the Lonely Vigil can attack as though it didn't have defender as long as there are four or more card types among cards in your graveyard.
         Effect effect = new ConditionalAsThoughEffect(
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
-                DeliriumCondition.getInstance());
+                DeliriumCondition.instance);
         effect.setText("<i>Delirium</i> - {this} can attack as though it didn't have defender as long as there are four or more card types among cards in your graveyard");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

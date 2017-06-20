@@ -27,17 +27,19 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanentAmount;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +50,7 @@ public class Flameshot extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Mountain card");
     
     static {
-        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public Flameshot(UUID ownerId, CardSetInfo setInfo) {

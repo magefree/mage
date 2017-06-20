@@ -26,8 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.cards.c;
- 
-import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -41,6 +40,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *

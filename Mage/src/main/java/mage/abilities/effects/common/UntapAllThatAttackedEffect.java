@@ -28,10 +28,9 @@
 package mage.abilities.effects.common;
 
 import java.util.Set;
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -63,12 +62,12 @@ public class UntapAllThatAttackedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("AttackedThisTurn");
+        Watcher watcher = game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
         if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
-            Set<UUID> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
-            for (UUID uuid : attackedThisTurn) {
-                Permanent permanent = game.getPermanent(uuid);
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            Set<MageObjectReference> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
+            for (MageObjectReference mor : attackedThisTurn) {
+                Permanent permanent = mor.getPermanent(game);
+                if (permanent != null && permanent.isCreature()) {
                     permanent.untap(game);
                 }
             }

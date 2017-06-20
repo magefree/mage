@@ -28,10 +28,10 @@
 
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class PortalThreeKingdoms extends ExpansionSet {
 
-    private static final PortalThreeKingdoms fINSTANCE = new PortalThreeKingdoms();
+    private static final PortalThreeKingdoms instance = new PortalThreeKingdoms();
 
     public static PortalThreeKingdoms getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private PortalThreeKingdoms() {
@@ -122,6 +122,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Marshaling the Troops", 141, Rarity.RARE, mage.cards.m.MarshalingTheTroops.class));
         cards.add(new SetCardInfo("Meng Huo, Barbarian King", 142, Rarity.RARE, mage.cards.m.MengHuoBarbarianKing.class));
         cards.add(new SetCardInfo("Meng Huo's Horde", 143, Rarity.COMMON, mage.cards.m.MengHuosHorde.class));
+        cards.add(new SetCardInfo("Misfortune's Gain", 13, Rarity.COMMON, mage.cards.m.MisfortunesGain.class));
         cards.add(new SetCardInfo("Mountain", 175, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 176, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 177, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));

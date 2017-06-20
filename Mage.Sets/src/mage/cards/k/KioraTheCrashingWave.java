@@ -28,13 +28,10 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
@@ -43,17 +40,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.command.Emblem;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
+import mage.game.command.emblems.KioraEmblem;
 
 /**
  *
@@ -154,31 +149,5 @@ class KioraPreventionEffect extends PreventionEffectImpl {
             return true;
         }
         return false;
-    }
-}
-
-/**
- * Emblem: "At the beginning of your end step, create a 9/9 blue Kraken creature
- * token."
- */
-class KioraEmblem extends Emblem {
-
-    public KioraEmblem() {
-        this.setName("Emblem Kiora");
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new CreateTokenEffect(new KioraKrakenToken()), TargetController.YOU, null, false);
-        this.getAbilities().add(ability);
-    }
-}
-
-class KioraKrakenToken extends Token {
-
-    public KioraKrakenToken() {
-        super("Kraken", "9/9 blue Kraken creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Kraken");
-        power = new MageInt(9);
-        toughness = new MageInt(9);
-        this.setOriginalExpansionSetCode("BNG");
     }
 }

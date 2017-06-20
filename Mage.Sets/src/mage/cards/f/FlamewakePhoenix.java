@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -43,6 +42,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +70,7 @@ public class FlamewakePhoenix extends CardImpl {
                         Zone.GRAVEYARD,
                         new DoIfCostPaid(new ReturnToBattlefieldUnderOwnerControlSourceEffect(), new ManaCostsImpl("{R")),
                         TargetController.YOU, false, false),
-                FerociousCondition.getInstance(),
+                FerociousCondition.instance,
                 "<i>Ferocious</i> &mdash; At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return {this} from your graveyard to the battlefield."
         ));
     }

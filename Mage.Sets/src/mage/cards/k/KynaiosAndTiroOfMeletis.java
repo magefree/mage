@@ -27,9 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -37,10 +34,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -50,8 +44,12 @@ import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public class KynaiosAndTiroOfMeletis extends CardImpl {
@@ -59,7 +57,7 @@ public class KynaiosAndTiroOfMeletis extends CardImpl {
     public KynaiosAndTiroOfMeletis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}{U}");
 
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);
@@ -99,7 +97,6 @@ class KynaiosAndTirosEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null) {
             controller.drawCards(1, game);
             PlayerList playerList = game.getState().getPlayerList().copy();
@@ -110,7 +107,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
             Player currentPlayer = game.getPlayer(playerList.get());
             UUID firstInactivePlayer = null;
             Target target = new TargetCardInHand(filter);
-            HashMap<UUID, Boolean> noLandPlayers = new HashMap<UUID, Boolean>();
+            ArrayList<UUID> noLandPlayers = new ArrayList<>();
 
             while (controller.canRespond()) {
                 if (currentPlayer != null && currentPlayer.canRespond() && game.getState().getPlayersInRange(controller.getId(), game).contains(currentPlayer.getId())) {
@@ -129,7 +126,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
                         }
                     }
                     if (!playedLand && !Objects.equals(currentPlayer, controller)) {
-                        noLandPlayers.put(currentPlayer.getId(), playedLand);
+                        noLandPlayers.add(currentPlayer.getId());
                     }
                 }
                 // get next player
@@ -141,7 +138,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
                 }
             }
 
-            for (UUID playerId : noLandPlayers.keySet()) {
+            for (UUID playerId : noLandPlayers) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     if (player.chooseUse(outcome.DrawCard, "Draw a card?", source, game)) {

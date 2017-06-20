@@ -27,10 +27,11 @@
  */
 package mage.abilities.condition;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import mage.abilities.Ability;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Combines conditions to one compound conditon, all single conditons must be
@@ -55,12 +56,7 @@ public class CompoundCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Condition condition : conditions) {
-            if (!condition.apply(game, source)) {
-                return false;
-            }
-        }
-        return true;
+        return conditions.stream().allMatch(condition -> condition.apply(game, source));
     }
 
     @Override

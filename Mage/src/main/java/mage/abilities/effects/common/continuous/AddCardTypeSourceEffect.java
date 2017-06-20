@@ -27,15 +27,11 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -49,7 +45,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     public AddCardTypeSourceEffect(CardType addedCardType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedCardType = addedCardType;
-        if (addedCardType.equals(CardType.ENCHANTMENT)) {
+        if (addedCardType == CardType.ENCHANTMENT) {
             dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
         }
     }
@@ -60,15 +56,18 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()), game));
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (!permanent.getCardType().contains(addedCardType)) {
-                permanent.getCardType().add(addedCardType);
-            }
+        if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game))) {
+            permanent.addCardType(addedCardType);
             return true;
-        }
-        else if (this.getDuration().equals(Duration.Custom)) {
+        } else if (this.getDuration() == Duration.Custom) {
             this.discard();
         }
         return false;
@@ -85,7 +84,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("{this} becomes ").append(addedCardType.toString()).append(" in addition to its other types until end of turn");
+        sb.append("{this} becomes ").append(addedCardType.toString()).append(" in addition to its other types " + this.getDuration().toString());
         return sb.toString();
     }
 }

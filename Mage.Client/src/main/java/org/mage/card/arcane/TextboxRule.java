@@ -74,6 +74,9 @@ public class TextboxRule {
     private final List<AttributeRegion> regions;
 
     protected TextboxRule(String text, List<AttributeRegion> regions, TextboxRuleType type) {
+        if (text.isEmpty()) {
+            throw new IllegalArgumentException("Empty rule");
+        }
         this.text = text;
         this.type = type;
         this.regions = regions;

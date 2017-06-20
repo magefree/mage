@@ -60,7 +60,7 @@ public class HowlOfTheHorde extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         
         // <i>Raid</i> - If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateDelayedTriggeredAbilityEffect(new HowlOfTheHordeDelayedTriggeredAbility()), RaidCondition.getInstance(), "<br><br><i>Raid</i> - If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy."));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateDelayedTriggeredAbilityEffect(new HowlOfTheHordeDelayedTriggeredAbility()), RaidCondition.instance, "<br><br><i>Raid</i> - If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy."));
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
     }
 
@@ -98,7 +98,7 @@ class HowlOfTheHordeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
          if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
+            if (spell != null && (spell.isInstant() || spell.isSorcery())) {
                 for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }

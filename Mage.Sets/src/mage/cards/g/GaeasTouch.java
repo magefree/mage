@@ -27,21 +27,17 @@
  */
 package mage.cards.g;
 
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
 import mage.Mana;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,6 +46,8 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,8 +82,8 @@ class PutBasicForestOnBattlefieldEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("basic Forest card");
 
     static {
-        filter.add(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic")));
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate(SuperType.BASIC)));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     private static final String choiceText = "Put a basic Forest card from your hand onto the battlefield?";

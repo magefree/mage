@@ -43,6 +43,10 @@ public class FilterAbility extends FilterImpl<Ability> {
         super("");
     }
 
+    public FilterAbility(String name) {
+        super(name);
+    }
+
     public FilterAbility(FilterAbility filter) {
         super(filter);
     }
@@ -94,7 +98,7 @@ public class FilterAbility extends FilterImpl<Ability> {
 
         @Override
         public boolean apply(Ability input, Game game) {
-            return input.getAbilityType().equals(type);
+            return input.getAbilityType() == type;
         }
 
         @Override

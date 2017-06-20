@@ -27,8 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.keyword.InvestigateEffect;
@@ -43,14 +41,16 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class ErdwalIlluminator extends CardImpl {
 
     public ErdwalIlluminator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -85,12 +85,12 @@ class ErdwalIlluminatorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.INVESTIGATED);
+        return event.getType() == EventType.INVESTIGATED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        InvestigatedWatcher watcher = (InvestigatedWatcher) game.getState().getWatchers().get(InvestigatedWatcher.class.getName());
+        InvestigatedWatcher watcher = (InvestigatedWatcher) game.getState().getWatchers().get(InvestigatedWatcher.class.getSimpleName());
         return watcher != null && watcher.getTimesInvestigated(getControllerId()) == 1;
     }
 
@@ -110,7 +110,7 @@ class InvestigatedWatcher extends Watcher {
     private final HashMap<UUID, Integer> timesInvestigated = new HashMap<>();
 
     public InvestigatedWatcher() {
-        super(InvestigatedWatcher.class.getName(), WatcherScope.GAME);
+        super(InvestigatedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public InvestigatedWatcher(final InvestigatedWatcher watcher) {
@@ -124,12 +124,9 @@ class InvestigatedWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (EventType.INVESTIGATED.equals(event.getType())) {
-            if (!timesInvestigated.containsKey(event.getPlayerId())) {
-                timesInvestigated.put(event.getPlayerId(), 1);
-            } else {
-                timesInvestigated.put(event.getPlayerId(), timesInvestigated.get(event.getPlayerId()) + 1);
-            }
+        if (event.getType() == EventType.INVESTIGATED) {
+            timesInvestigated.put(event.getPlayerId(), getTimesInvestigated(event.getPlayerId()) + 1);
+
         }
     }
 
@@ -140,9 +137,6 @@ class InvestigatedWatcher extends Watcher {
     }
 
     public int getTimesInvestigated(UUID playerId) {
-        if (timesInvestigated.containsKey(playerId)) {
-            return timesInvestigated.get(playerId);
-        }
-        return 0;
+        return timesInvestigated.getOrDefault(playerId, 0);
     }
 }

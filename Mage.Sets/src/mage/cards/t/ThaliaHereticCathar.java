@@ -35,10 +35,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -52,7 +49,7 @@ public class ThaliaHereticCathar extends CardImpl {
 
     public ThaliaHereticCathar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(3);
@@ -104,8 +101,8 @@ class ThaliaTapEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && (permanent.getCardType().contains(CardType.CREATURE) ||
-                    (permanent.getCardType().contains(CardType.LAND) && !permanent.getSupertype().contains("Basic")))) {
+            if (permanent != null && (permanent.isCreature() ||
+                    (permanent.isLand() && !permanent.isBasic()))) {
                 return true;
             }
         }

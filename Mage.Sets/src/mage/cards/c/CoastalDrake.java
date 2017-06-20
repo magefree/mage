@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,9 +37,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +62,7 @@ public class CoastalDrake extends CardImpl {
 
         // {1}{U}, {T} : Return target Kavu to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("Kavu", "Kavu")));
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.KAVU, "Kavu")));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

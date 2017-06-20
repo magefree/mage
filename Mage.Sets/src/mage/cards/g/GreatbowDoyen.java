@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -36,11 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -49,6 +44,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +57,7 @@ public class GreatbowDoyen extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Archer"));
+        filter.add(new SubtypePredicate(SubType.ARCHER));
     }
 
     public GreatbowDoyen(UUID ownerId, CardSetInfo setInfo) {
@@ -113,7 +110,7 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
         Permanent creature = game.getPermanent(event.getSourceId());
         Permanent damagedCreature = game.getPermanent(event.getTargetId());
         if (creature != null && damagedCreature != null 
-                && creature.getCardType().contains(CardType.CREATURE)
+                && creature.isCreature()
                 && creature.hasSubtype("Archer", game)
                 && creature.getControllerId().equals(controllerId)) {
             this.getEffects().get(0).setValue("damageAmount", event.getAmount());

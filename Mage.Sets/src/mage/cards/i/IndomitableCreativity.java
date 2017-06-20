@@ -127,7 +127,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
                 Player controllerOfDestroyedCreature = game.getPlayer(permanent.getControllerId());
                 if (controllerOfDestroyedCreature != null) {
                     Library library = controllerOfDestroyedCreature.getLibrary();
-                    if (library.size() > 0) {
+                    if (library.hasCards()) {
                         Cards cards = new CardsImpl();
                         Cards revealCards;
                         if (cardsToReveal.containsKey(controllerOfDestroyedCreature)) {
@@ -138,17 +138,17 @@ class IndomitableCreativityEffect extends OneShotEffect {
                         }
                         Card card = library.removeFromTop(game);
                         cards.add(card);
-                        while (!card.getCardType().contains(CardType.CREATURE) && !card.getCardType().contains(CardType.ARTIFACT) && library.size() > 0) {
+                        while (!card.isCreature() && !card.isArtifact() && library.hasCards()) {
                             card = library.removeFromTop(game);
                             cards.add(card);
                         }
 
-                        if (card.getCardType().contains(CardType.CREATURE) || card.getCardType().contains(CardType.ARTIFACT)) {
-                            controllerOfDestroyedCreature.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        }
-
                         if (!cards.isEmpty()) {
                             revealCards.addAll(cards);
+                            if (card.isCreature() || card.isArtifact()) {
+                                controllerOfDestroyedCreature.moveCards(card, Zone.EXILED, source, game);
+                                controllerOfDestroyedCreature.moveCards(card, Zone.BATTLEFIELD, source, game);
+                            }
                             Set<Card> cardsToShuffle = cards.getCards(game);
                             cardsToShuffle.remove(card);
                             library.addAll(cardsToShuffle, game);

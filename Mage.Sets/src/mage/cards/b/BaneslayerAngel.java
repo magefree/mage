@@ -28,8 +28,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -37,10 +35,14 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +53,7 @@ public class BaneslayerAngel extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("Demons and from Dragons");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Demon"), new SubtypePredicate("Dragon")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.DEMON), new SubtypePredicate(SubType.DRAGON)));
     }
 
     public BaneslayerAngel(UUID ownerId, CardSetInfo setInfo) {

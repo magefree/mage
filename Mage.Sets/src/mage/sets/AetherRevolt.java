@@ -27,8 +27,6 @@
  */
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -36,16 +34,19 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author fireshoes
  */
 public class AetherRevolt extends ExpansionSet {
 
-    private static final AetherRevolt fINSTANCE = new AetherRevolt();
+    private static final AetherRevolt instance = new AetherRevolt();
 
     public static AetherRevolt getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();

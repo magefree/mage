@@ -27,7 +27,6 @@
  */
 package mage.abilities.common;
 
-import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -37,13 +36,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
 
-    class ActivationInfo {
+    static class ActivationInfo {
 
         public int turnNum;
         public int activationCounter;
@@ -120,7 +121,7 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
         if (condition != null) {
             sb.append("only ").append(condition.toString()).append(" and ");
         }
-        if (getTiming().equals(TimingRule.SORCERY)) {
+        if (getTiming() == TimingRule.SORCERY) {
             sb.append("only any time you could cast a sorcery and ");
         }
         switch (maxActivationsPerTurn) {

@@ -58,7 +58,7 @@ public class WindbriskHeights extends CardImpl {
         this.addAbility(new WhiteManaAbility());
         // {W}, {tap}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new HideawayPlayEffect(), new ManaCostsImpl("{W}"), WindbriskHeightsAttackersCondition.getInstance());
+                Zone.BATTLEFIELD, new HideawayPlayEffect(), new ManaCostsImpl("{W}"), WindbriskHeightsAttackersCondition.instance);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, new PlayerAttackedWatcher());
 
@@ -74,17 +74,13 @@ public class WindbriskHeights extends CardImpl {
     }
 }
 
-class WindbriskHeightsAttackersCondition implements Condition {
+enum WindbriskHeightsAttackersCondition implements Condition {
 
-    private static final WindbriskHeightsAttackersCondition fInstance = new WindbriskHeightsAttackersCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerAttackedWatcher watcher = (PlayerAttackedWatcher) game.getState().getWatchers().get("PlayerAttackedWatcher");
+        PlayerAttackedWatcher watcher = (PlayerAttackedWatcher) game.getState().getWatchers().get(PlayerAttackedWatcher.class.getSimpleName());
         return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getControllerId()) >= 3;
     }
 

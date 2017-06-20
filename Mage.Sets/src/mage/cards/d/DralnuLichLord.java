@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,13 +39,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,6 +48,8 @@ import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +66,7 @@ public class DralnuLichLord extends CardImpl {
 
     public DralnuLichLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
 
@@ -151,7 +146,7 @@ class DralnuLichLordFlashbackEffect extends ContinuousEffectImpl {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
             FlashbackAbility ability;
-            if (card.getCardType().contains(CardType.INSTANT)) {
+            if (card.isInstant()) {
                 ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
             }
             else {

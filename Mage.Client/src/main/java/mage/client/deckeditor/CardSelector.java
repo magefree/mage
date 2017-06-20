@@ -33,19 +33,6 @@
  */
 package mage.client.deckeditor;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.*;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableCellRenderer;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.cards.Card;
@@ -71,6 +58,13 @@ import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
 import mage.view.CardView;
 import mage.view.CardsView;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -442,7 +436,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbWhite = new javax.swing.JToggleButton();
         tbColorless = new javax.swing.JToggleButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        cbExpansionSet = new javax.swing.JComboBox<String>();
+        cbExpansionSet = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btnBooster = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
@@ -457,7 +451,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jSeparator6 = new javax.swing.JToolBar.Separator();
         chkPiles = new javax.swing.JCheckBox();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        cbSortBy = new javax.swing.JComboBox<SortBy>();
+        cbSortBy = new javax.swing.JComboBox<>();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         jToggleListView = new javax.swing.JToggleButton();
         jToggleCardView = new javax.swing.JToggleButton();

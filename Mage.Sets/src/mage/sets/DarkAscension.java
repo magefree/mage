@@ -27,9 +27,9 @@
 */
 package mage.sets;
 
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class DarkAscension extends ExpansionSet {
 
-    private static final DarkAscension fINSTANCE = new DarkAscension();
+    private static final DarkAscension instance = new DarkAscension();
 
     public static DarkAscension getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private DarkAscension() {

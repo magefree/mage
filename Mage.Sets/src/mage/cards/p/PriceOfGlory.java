@@ -90,7 +90,7 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
         }
-        if (permanent != null && permanent.getCardType().contains(CardType.LAND)  
+        if (permanent != null && permanent.isLand()
                 && !permanent.getControllerId().equals(game.getActivePlayerId())) { // intervening if clause
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
             return true;

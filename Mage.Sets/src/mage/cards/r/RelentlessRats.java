@@ -28,13 +28,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,10 +35,13 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +78,7 @@ public class RelentlessRats extends CardImpl {
         return new RelentlessRats(this);
     }
 
-    class RelentlessRatsEffect extends ContinuousEffectImpl {
+    static class RelentlessRatsEffect extends ContinuousEffectImpl {
 
         public RelentlessRatsEffect() {
             super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

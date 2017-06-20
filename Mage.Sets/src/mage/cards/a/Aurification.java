@@ -39,7 +39,10 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
@@ -64,7 +67,7 @@ public class Aurification extends CardImpl {
         filter.add(new CounterPredicate(CounterType.GOLD));
     }
 
-    final String rule = "Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender.";
+    static final String rule = "Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender.";
 
     public Aurification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
@@ -95,7 +98,7 @@ public class Aurification extends CardImpl {
         return new Aurification(this);
     }
 
-    public class AddGoldCountersAbility extends TriggeredAbilityImpl {
+    public static class AddGoldCountersAbility extends TriggeredAbilityImpl {
 
         public AddGoldCountersAbility() {
             super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.GOLD.createInstance()));
@@ -119,7 +122,7 @@ public class Aurification extends CardImpl {
         public boolean checkTrigger(GameEvent event, Game game) {
             if (event.getPlayerId().equals(this.getControllerId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+                if (permanent != null && permanent.isCreature()) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                     }
@@ -136,7 +139,7 @@ public class Aurification extends CardImpl {
 
     }
 
-    public  class RemoveAllGoldCountersEffect extends OneShotEffect {
+    public static class RemoveAllGoldCountersEffect extends OneShotEffect {
         public RemoveAllGoldCountersEffect() {
             super(Outcome.Neutral);
             this.staticText = "remove all gold counters from all creatures";

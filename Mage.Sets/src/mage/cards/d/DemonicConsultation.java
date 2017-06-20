@@ -27,15 +27,10 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
@@ -44,6 +39,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -106,7 +103,7 @@ class DemonicConsultationEffect extends OneShotEffect {
             // then reveal cards from the top of your library until you reveal the named card.
             Cards cardsToReaveal = new CardsImpl();
             Card cardToHand = null;
-            while (controller.getLibrary().size() > 0) {
+            while (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cardsToReaveal.add(card);

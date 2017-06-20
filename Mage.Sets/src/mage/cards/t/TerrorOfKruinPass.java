@@ -44,10 +44,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -62,7 +59,7 @@ public class TerrorOfKruinPass extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Werewolf"));
+        filter.add(new SubtypePredicate(SubType.WEREWOLF));
     }
 
     public TerrorOfKruinPass(UUID ownerId, CardSetInfo setInfo) {
@@ -84,7 +81,7 @@ public class TerrorOfKruinPass extends CardImpl {
         
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Terror of Kruin Pass.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
     public TerrorOfKruinPass(final TerrorOfKruinPass card) {

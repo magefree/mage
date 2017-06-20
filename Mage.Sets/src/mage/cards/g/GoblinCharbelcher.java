@@ -27,18 +27,13 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -46,6 +41,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -99,11 +96,11 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         boolean landFound = false;
-        while (controller.getLibrary().size() > 0) {
+        while (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
-                if (card.getCardType().contains(CardType.LAND)){
+                if (card.isLand()){
                     landFound = true;
                     if(card.getSubtype(game).contains("Mountain")){
                         isMountain = true;

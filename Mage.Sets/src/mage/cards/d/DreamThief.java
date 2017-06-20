@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,6 +40,8 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.watchers.common.SpellsCastWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,7 +82,7 @@ class CastBlueSpellThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
+        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
         if (watcher != null) {
             for (Spell spell : watcher.getSpellsCastThisTurn(source.getControllerId())) {
                 if (!spell.getSourceId().equals(source.getSourceId()) && spell.getColor(game).isBlue()) {

@@ -28,14 +28,13 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -44,6 +43,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +97,7 @@ class FeastOfWormsEffect extends OneShotEffect {
         if (permanent != null) {
             targetPlayer = game.getPlayer(permanent.getControllerId());
         }
-        if (targetPlayer != null && permanent != null && (permanent.getSupertype().get(0).equals("Legendary"))) {
+        if (targetPlayer != null && permanent != null && (permanent.isLegendary())) {
             FilterControlledPermanent filter = new FilterControlledLandPermanent("land to sacrifice");
             filter.add(new ControllerIdPredicate(targetPlayer.getId()));
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);

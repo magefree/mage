@@ -40,6 +40,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,7 +53,7 @@ public class ScrollOfAvacyn extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Angel"));
+        filter.add(new SubtypePredicate(SubType.ANGEL));
     }
 
     public ScrollOfAvacyn(UUID ownerId, CardSetInfo setInfo) {

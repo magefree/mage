@@ -82,7 +82,7 @@ class HalfForestsDownCount implements DynamicValue {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     @Override
@@ -112,7 +112,7 @@ class HalfForestsUpCount implements DynamicValue {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     @Override

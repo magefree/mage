@@ -27,9 +27,6 @@
  */
 package mage.cards.g;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,6 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -98,7 +98,7 @@ class GraveyardShovelEffect extends OneShotEffect {
                 if (card != null) {
                     targetPlayer.getGraveyard().remove(card);
                     card.moveToExile(null, "", source.getSourceId(), game);
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         controller.gainLife(2, game);
                     }
                 }

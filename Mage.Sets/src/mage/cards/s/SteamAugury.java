@@ -57,12 +57,10 @@ import mage.util.GameLog;
 public class SteamAugury extends CardImpl {
 
     public SteamAugury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");
 
         // Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new SteamAuguryEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
-
     }
 
     public SteamAugury(final SteamAugury card) {
@@ -146,7 +144,7 @@ class SteamAuguryEffect extends OneShotEffect {
                 pile2Zone = Zone.GRAVEYARD;
             }
 
-            StringBuilder sb = new StringBuilder(sourceObject.getLogName() + ": Pile 1, going to ").append(pile1Zone.equals(Zone.HAND) ? "Hand" : "Graveyard").append(": ");
+            StringBuilder sb = new StringBuilder(sourceObject.getLogName() + ": Pile 1, going to ").append(pile1Zone == Zone.HAND ? "Hand" : "Graveyard").append(": ");
             int i = 0;
             for (UUID cardUuid : pile1CardsIds) {
                 i++;
@@ -161,7 +159,7 @@ class SteamAuguryEffect extends OneShotEffect {
             }
             game.informPlayers(sb.toString());
 
-            sb = new StringBuilder(sourceObject.getLogName() + ": Pile 2, going to ").append(pile2Zone.equals(Zone.HAND) ? "Hand" : "Graveyard").append(':');
+            sb = new StringBuilder(sourceObject.getLogName() + ": Pile 2, going to ").append(pile2Zone == Zone.HAND ? "Hand" : "Graveyard").append(':');
             i = 0;
             for (UUID cardUuid : pile2CardsIds) {
                 Card card = game.getCard(cardUuid);

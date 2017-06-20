@@ -67,7 +67,7 @@ public class CanadianHighlander extends Constructed {
             valid = false;
         }
 
-        if (deck.getSideboard().size() > 0) {
+        if (!deck.getSideboard().isEmpty()) {
             invalid.put("Deck", "Sideboard can't contain any cards: has " + (deck.getSideboard().size()) + " cards");
             valid = false;
         }
@@ -93,11 +93,11 @@ public class CanadianHighlander extends Constructed {
             if (cn.equals("Balance")
                     || cn.equals("Dig Through Time")
                     || cn.equals("Fastbond")
-                    || cn.equals("Gifts Ungiven")
                     || cn.equals("Intuition")
                     || cn.equals("Library of Alexandria")
                     || cn.equals("Lim-Dul's Vault")
                     || cn.equals("Mana Vault")
+                    || cn.equals("Merchant Scroll")
                     || cn.equals("Mind Twist")
                     || cn.equals("Oath of Druids")
                     || cn.equals("Personal Tutor")
@@ -106,12 +106,14 @@ public class CanadianHighlander extends Constructed {
                     || cn.equals("Tolarian Academy")
                     || cn.equals("Transmute Artifact")
                     || cn.equals("Treasure Cruise")
-                    || cn.equals("True-Name Nemesis")) {
-                totalPoints += 1;
-                invalid.put(entry.getKey(), " 1 point " + cn);
+                    || cn.equals("True-Name Nemesis")
+                    || cn.equals("Worldly Tutor")) {
+               totalPoints += 1;
+               invalid.put(entry.getKey(), " 1 point " + cn);
             }
             if (cn.equals("Doomsday")
                     || cn.equals("Enlightened Tutor")
+                    || cn.equals("Gifts Ungiven")
                     || cn.equals("Imperial Seal")
                     || cn.equals("Mana Crypt")
                     || cn.equals("Mystical Tutor")
@@ -119,8 +121,8 @@ public class CanadianHighlander extends Constructed {
                     || cn.equals("Summoner's Pact")
                     || cn.equals("Survival of the Fittest")
                     || cn.equals("Umezawa's Jitte")) {
-                totalPoints += 2;
-                invalid.put(entry.getKey(), " 2 points " + cn);
+               totalPoints += 2;
+               invalid.put(entry.getKey(), " 2 points " + cn);
             }
             if (cn.equals("Birthing Pod")
                     || cn.equals("Mox Emerald")
@@ -130,30 +132,27 @@ public class CanadianHighlander extends Constructed {
                     || cn.equals("Mox Sapphire")
                     || cn.equals("Protean Hulk")
                     || cn.equals("Vampiric Tutor")) {
-                totalPoints += 3;
-                invalid.put(entry.getKey(), " 3 points " + cn);
+               totalPoints += 3;
+               invalid.put(entry.getKey(), " 3 points " + cn);
             }
             if (cn.equals("Demonic Tutor")
                     || cn.equals("Hermit Druid")
                     || cn.equals("Sol Ring")) {
-                totalPoints += 4;
-                invalid.put(entry.getKey(), " 4 points " + cn);
+               totalPoints += 4;
+               invalid.put(entry.getKey(), " 4 points " + cn);
             }
             if (cn.equals("Ancestral Recall")
                     || cn.equals("Natural Order")
                     || cn.equals("Time Walk")
                     || cn.equals("Tinker")) {
-                totalPoints += 5;
-                invalid.put(entry.getKey(), " 5 points " + cn);
-            }
-            if (cn.equals("Flash")) {
-                totalPoints += 6;
-                invalid.put(entry.getKey(), " 6 points " + cn);
+               totalPoints += 5;
+               invalid.put(entry.getKey(), " 5 points " + cn);
             }
             if (cn.equals("Black Lotus")
+                    || cn.equals("Flash")
                     || cn.equals("Time Vault")) {
-                totalPoints += 7;
-                invalid.put(entry.getKey(), " 7 points " + cn);
+               totalPoints += 7;
+               invalid.put(entry.getKey(), " 7 points " + cn);
             }
         }
         if (totalPoints > allowedPoints) {

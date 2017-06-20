@@ -30,6 +30,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -55,8 +56,8 @@ public class LordOfTheUndead extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("Zombie card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
-        filterCard.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filterCard.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public LordOfTheUndead(UUID ownerId, CardSetInfo setInfo) {

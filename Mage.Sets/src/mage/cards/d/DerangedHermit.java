@@ -27,10 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,9 +35,15 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SquirrelToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +54,7 @@ public class DerangedHermit extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Squirrel creatures");
 
     static {
-        filter.add(new SubtypePredicate("Squirrel"));
+        filter.add(new SubtypePredicate(SubType.SQUIRREL));
     }
 
     public DerangedHermit(UUID ownerId, CardSetInfo setInfo) {

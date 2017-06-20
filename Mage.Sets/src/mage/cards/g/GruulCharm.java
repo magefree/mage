@@ -27,21 +27,23 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Mode;
+import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.effects.common.continuous.GainControlAllEffect;
-import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.other.OwnerPredicate;
+
+import java.util.UUID;
 
 /**
  *

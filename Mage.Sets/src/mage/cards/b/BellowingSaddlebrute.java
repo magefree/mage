@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
@@ -38,6 +37,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.watchers.common.PlayerAttackedWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +57,7 @@ public class BellowingSaddlebrute extends CardImpl {
         // Raid - When Bellowing Saddlebrute enters the battlefield, you lose 4 life unless you attacked with a creature this turn
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(4)),
-                new InvertCondition(RaidCondition.getInstance()),
+                new InvertCondition(RaidCondition.instance),
                 "<i>Raid</i> - When {this} enters the battlefield, you lose 4 life unless you attacked with a creature this turn"
         ), new PlayerAttackedWatcher());
     }

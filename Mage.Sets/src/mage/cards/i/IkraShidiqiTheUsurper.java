@@ -27,7 +27,6 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -36,12 +35,15 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +54,7 @@ public class IkraShidiqiTheUsurper extends CardImpl {
     public IkraShidiqiTheUsurper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Naga");
         this.subtype.add("Wizard");
         this.power = new MageInt(3);
@@ -103,7 +105,7 @@ class IkraShidiqiTheUsurperTriggeredAbility extends TriggeredAbilityImpl {
         DamagedEvent damageEvent = (DamagedEvent) event;
         if (damageEvent.isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId())) {
+            if (permanent != null && permanent.isCreature() && permanent.getControllerId().equals(this.getControllerId())) {
                 this.getEffects().clear();
                 this.getEffects().add(new GainLifeEffect(permanent.getToughness().getValue()));
                 return true;

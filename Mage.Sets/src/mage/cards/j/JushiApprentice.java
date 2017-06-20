@@ -27,14 +27,11 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
-import mage.abilities.condition.common.CardsInHandCondition.CountType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -44,8 +41,13 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +68,7 @@ public class JushiApprentice extends CardImpl {
         // {2}{U}, {tap}: Draw a card. If you have nine or more cards in hand, flip Jushi Apprentice.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new TomoyaTheRevealer()), new CardsInHandCondition(CountType.MORE_THAN, 8),
+        ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new TomoyaTheRevealer()), new CardsInHandCondition(ComparisonType.MORE_THAN, 8),
                     "If you have nine or more cards in hand, flip {this}"));
         this.addAbility(ability);
     }
@@ -85,7 +87,7 @@ class TomoyaTheRevealer extends Token {
 
     TomoyaTheRevealer() {
         super("Tomoya the Revealer", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add("Human");

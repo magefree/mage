@@ -27,9 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,6 +48,10 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -58,7 +60,7 @@ public class SavraQueenOfTheGolgari extends CardImpl {
 
     public SavraQueenOfTheGolgari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
         this.power = new MageInt(2);
@@ -106,7 +108,7 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getCardType().contains(CardType.CREATURE)
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature()
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isBlack();
     }
 
@@ -183,7 +185,7 @@ class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getCardType().contains(CardType.CREATURE)
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature()
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isGreen();
     }
 

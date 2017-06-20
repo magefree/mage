@@ -27,14 +27,11 @@
  */
 package mage.cards.j;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -42,17 +39,12 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.game.Game;
-import mage.game.command.Emblem;
-import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
+import mage.game.command.emblems.JaceUnravelerOfSecretsEmblem;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.SpellsCastWatcher;
 
 /**
+ * import mage.game.command.emblems.JaceUnravelerOfSecretsEmblem;
  *
  * @author LevelX2
  */
@@ -89,58 +81,5 @@ public class JaceUnravelerOfSecrets extends CardImpl {
     @Override
     public JaceUnravelerOfSecrets copy() {
         return new JaceUnravelerOfSecrets(this);
-    }
-}
-
-/**
- * Emblem: "Whenever an opponent casts his or her first spell each turn, counter
- * that spell."
- */
-class JaceUnravelerOfSecretsEmblem extends Emblem {
-
-    public JaceUnravelerOfSecretsEmblem() {
-        this.setName("Emblem Jace");
-        setExpansionSetCodeForImage("SOI");
-        Effect effect = new CounterTargetEffect();
-        effect.setText("counter that spell");
-        this.getAbilities().add(new JaceUnravelerOfSecretsTriggeredAbility(effect, false));
-    }
-}
-
-class JaceUnravelerOfSecretsTriggeredAbility extends SpellCastOpponentTriggeredAbility {
-
-    public JaceUnravelerOfSecretsTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.COMMAND, effect, new FilterSpell(), optional);
-    }
-
-    public JaceUnravelerOfSecretsTriggeredAbility(SpellCastOpponentTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SpellCastOpponentTriggeredAbility copy() {
-        return new JaceUnravelerOfSecretsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
-            if (watcher != null) {
-                List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
-                if (spells != null && spells.size() == 1) {
-                    for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent casts his or her first spell each turn, counter that spell.";
     }
 }

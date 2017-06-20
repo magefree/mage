@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.SweepNumber;
@@ -36,7 +35,10 @@ import mage.abilities.effects.keyword.SweepEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +52,7 @@ public class BarrelDownSokenzan extends CardImpl {
 
 
         // Sweep - Return any number of Mountains you control to their owner's hand. Barrel Down Sokenzan deals damage to target creature equal to twice the number of Mountains returned this way.
-        this.getSpellAbility().addEffect(new SweepEffect("Mountain"));
+        this.getSpellAbility().addEffect(new SweepEffect(SubType.MOUNTAIN));
         DynamicValue sweepValue = new MultipliedValue(new SweepNumber("Mountain", false), 2);
         this.getSpellAbility().addEffect(new DamageTargetEffect(sweepValue));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

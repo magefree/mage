@@ -27,31 +27,25 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.command.Emblem;
+import mage.game.command.emblems.ElspethKnightErrantEmblem;
 import mage.game.permanent.token.SoldierToken;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,21 +89,4 @@ public class ElspethKnightErrant extends CardImpl {
         return new ElspethKnightErrant(this);
     }
 
-}
-
-class ElspethKnightErrantEmblem extends Emblem {
-
-    public ElspethKnightErrantEmblem() {
-        this.setName("Emblem Elspeth");
-        FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts, creatures, enchantments, and lands you control");
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT),
-                new CardTypePredicate(CardType.LAND)));
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
-        effect.setText("Artifacts, creatures, enchantments, and lands you control are indestructible");
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, effect));
-        this.setExpansionSetCodeForImage("MMA");
-    }
 }

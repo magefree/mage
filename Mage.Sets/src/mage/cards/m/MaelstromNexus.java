@@ -95,7 +95,7 @@ class MaelstromNexusGainCascadeFirstSpellEffect extends ContinuousEffectImpl {
                 // only spells cast, so no copies of spells
                 if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
                     Spell spell = (Spell) stackObject;
-                    FirstSpellCastThisTurnWatcher watcher = (FirstSpellCastThisTurnWatcher) game.getState().getWatchers().get("FirstSpellCastThisTurn");
+                    FirstSpellCastThisTurnWatcher watcher = (FirstSpellCastThisTurnWatcher) game.getState().getWatchers().get(FirstSpellCastThisTurnWatcher.class.getSimpleName());
                     if (watcher != null && spell.getId().equals(watcher.getIdOfFirstCastSpell(source.getControllerId()))) {
                         game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
                     }

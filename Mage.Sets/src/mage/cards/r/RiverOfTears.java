@@ -27,9 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,7 +35,11 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.ConditionalManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.watchers.common.LandfallWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +54,7 @@ public class RiverOfTears extends CardImpl {
         this.addAbility(new ConditionalManaAbility(Zone.BATTLEFIELD, new ConditionalManaEffect(
                 new BasicManaEffect(Mana.BlackMana(1)),
                 new BasicManaEffect(Mana.BlueMana(1)),
-                LandfallCondition.getInstance(),
+                LandfallCondition.instance,
                 "Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead"),
             new TapSourceCost()), 
             new LandfallWatcher());

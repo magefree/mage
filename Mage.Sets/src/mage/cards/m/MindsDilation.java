@@ -90,7 +90,7 @@ class MindsDilationTriggeredAbility extends SpellCastOpponentTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
+            SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName());
             if (watcher != null) {
                 List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
                 if (spells != null && spells.size() == 1) {
@@ -133,10 +133,10 @@ class MindsDilationEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && sourceObject != null && opponent != null) {
-            if (opponent.getLibrary().size() > 0) {
+            if (opponent.getLibrary().hasCards()) {
                 Card card = opponent.getLibrary().getFromTop(game);
                 if (card != null && opponent.moveCards(card, Zone.EXILED, source, game)) {
-                    if (!card.getCardType().contains(CardType.LAND)) {
+                    if (!card.isLand()) {
                         if (controller.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost from exile?", source, game)) {
                             controller.cast(card.getSpellAbility(), game, true);
                         }

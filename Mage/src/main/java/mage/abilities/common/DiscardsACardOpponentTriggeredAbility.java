@@ -20,11 +20,11 @@ public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl 
 
     private SetTargetPointer setTargetPointer;
 
-    public DiscardsACardOpponentTriggeredAbility(Effect effect, Boolean isOptional) {
+    public DiscardsACardOpponentTriggeredAbility(Effect effect, boolean isOptional) {
         this(effect, isOptional, SetTargetPointer.NONE);
     }
 
-    public DiscardsACardOpponentTriggeredAbility(Effect effect, Boolean isOptional, SetTargetPointer setTargetPointer) {
+    public DiscardsACardOpponentTriggeredAbility(Effect effect, boolean isOptional, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, isOptional);
         this.setTargetPointer = setTargetPointer;
     }

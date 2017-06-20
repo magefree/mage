@@ -69,7 +69,7 @@ public class SetToughnessSourceEffect extends ContinuousEffectImpl {
             mageObject.getToughness().setValue(value);
             return true;
         } else {
-            if (Duration.Custom.equals(duration)) {
+            if (duration == Duration.Custom) {
                 discard();
             }
         }

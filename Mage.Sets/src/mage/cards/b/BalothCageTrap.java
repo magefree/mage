@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -42,18 +40,20 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastToken2;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class BalothCageTrap extends CardImpl {
 
     public BalothCageTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
         this.subtype.add("Trap");
 
         // If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{G}"), BalothCageTrapCondition.getInstance()), new PermanentsEnteredBattlefieldWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{G}"), BalothCageTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
 
         // Create a 4/4 green Beast creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
@@ -69,23 +69,19 @@ public class BalothCageTrap extends CardImpl {
     }
 }
 
-class BalothCageTrapCondition implements Condition {
+enum BalothCageTrapCondition implements Condition {
 
-    private static final BalothCageTrapCondition fInstance = new BalothCageTrapCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getName());
+        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
                 if (permanents != null) {
                     for (Permanent permanent : permanents) {
-                        if (permanent.getCardType().contains(CardType.ARTIFACT)) {
+                        if (permanent.isArtifact()) {
                             return true;
                         }
                     }

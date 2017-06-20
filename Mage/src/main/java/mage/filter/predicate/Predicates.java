@@ -52,7 +52,7 @@ public final class Predicates {
      * @return 
      */
     public static <T> Predicate<T> not(Predicate<T> predicate) {
-        return new NotPredicate<>(predicate);
+        return new NotPredicate<T>(predicate);
     }
 
     /**
@@ -65,7 +65,7 @@ public final class Predicates {
      * @return      
      */
     public static <T> Predicate<T> and(Iterable<? extends Predicate<? super T>> components) {
-        return new AndPredicate<>(defensiveCopy(components));
+        return new AndPredicate<T>(defensiveCopy(components));
     }
 
     /**
@@ -78,7 +78,7 @@ public final class Predicates {
      * @return 
      */
     public static <T> Predicate<T> and(Predicate<? super T>... components) {
-        return new AndPredicate<>(defensiveCopy(components));
+        return new AndPredicate<T>(defensiveCopy(components));
     }
 
     /**
@@ -91,7 +91,7 @@ public final class Predicates {
      * @return 
      */
     public static <T> Predicate<T> and(Predicate<? super T> first, Predicate<? super T> second) {
-        return new AndPredicate<>(Predicates.<T>asList(checkNotNull(first), checkNotNull(second)));
+        return new AndPredicate<T>(Predicates.<T>asList(checkNotNull(first), checkNotNull(second)));
     }
 
     /**
@@ -104,7 +104,7 @@ public final class Predicates {
      * @return 
      */
     public static <T> Predicate<T> or(Iterable<? extends Predicate<? super T>> components) {
-        return new OrPredicate<>(defensiveCopy(components));
+        return new OrPredicate<T>(defensiveCopy(components));
     }
 
     /**
@@ -117,7 +117,7 @@ public final class Predicates {
      * @return 
      */
     public static <T> Predicate<T> or(Predicate<? super T>... components) {
-        return new OrPredicate<>(defensiveCopy(components));
+        return new OrPredicate<T>(defensiveCopy(components));
     }
 
     /**
@@ -129,7 +129,7 @@ public final class Predicates {
      * @return 
      */
     public static <T> Predicate<T> or(Predicate<? super T> first, Predicate<? super T> second) {
-        return new OrPredicate<>(Predicates.<T>asList(first, second));
+        return new OrPredicate<T>(Predicates.<T>asList(first, second));
     }
 
     /**
@@ -221,7 +221,7 @@ public final class Predicates {
     }
 
     static <T> List<T> defensiveCopy(Iterable<T> iterable) {
-        ArrayList<T> list = new ArrayList<>();
+        ArrayList<T> list = new ArrayList<T>();
         for (T element : iterable) {
             list.add(checkNotNull(element));
         }

@@ -28,14 +28,15 @@
 
 package mage.player.ai;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ import mage.game.permanent.Permanent;
 public class CombatEvaluator {
 
     //preserve calculations for efficiency
-    private Map<UUID, Integer> values = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> values = new HashMap<>();
 
     public int evaluate(Permanent creature, Game game) {
         if (!values.containsKey(creature.getId())) {

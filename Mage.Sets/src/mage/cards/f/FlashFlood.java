@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -35,10 +34,13 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +53,7 @@ public class FlashFlood extends CardImpl {
 
     static {
         filter1.add(new ColorPredicate(ObjectColor.RED));
-        filter2.add(new SubtypePredicate("Mountain"));
+        filter2.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public FlashFlood(UUID ownerId, CardSetInfo setInfo) {

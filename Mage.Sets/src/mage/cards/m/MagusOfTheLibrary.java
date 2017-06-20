@@ -29,6 +29,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
@@ -60,7 +61,7 @@ public class MagusOfTheLibrary extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new TapSourceCost(),
-                new CardsInHandCondition(CardsInHandCondition.CountType.EQUAL_TO, 7),
+                new CardsInHandCondition(ComparisonType.EQUAL_TO, 7),
                 ""));
     }
 

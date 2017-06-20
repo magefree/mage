@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +43,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -59,10 +60,10 @@ public class GobhobblerRats extends CardImpl {
 
         // Hellbent - As long as you have no cards in hand, Gobhobbler Rats gets +1/+0 and has "{B}: Regenerate Gobhobbler Rats."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostSourceEffect(1,0, Duration.WhileOnBattlefield), HellbentCondition.getInstance(), "<i>Hellbent</i> - As long as you have no cards in hand, {this} gets +1/+0"));
+                new BoostSourceEffect(1,0, Duration.WhileOnBattlefield), HellbentCondition.instance, "<i>Hellbent</i> - As long as you have no cards in hand, {this} gets +1/+0"));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}"));
         ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), HellbentCondition.getInstance(), "and has \"{B}: Regenerate {this}.\""));
+                new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), HellbentCondition.instance, "and has \"{B}: Regenerate {this}.\""));
         this.addAbility(ability);
     }
 

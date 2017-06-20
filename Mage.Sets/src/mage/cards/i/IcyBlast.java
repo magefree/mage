@@ -60,7 +60,7 @@ public class IcyBlast extends CardImpl {
         // <i>Ferocious</i> - If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps.
         Effect effect = new ConditionalContinuousRuleModifyingEffect(
                 new DontUntapInControllersNextUntapStepTargetEffect(),
-                new LockedInCondition(FerociousCondition.getInstance()));
+                new LockedInCondition(FerociousCondition.instance));
         effect.setText("<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps");
         this.getSpellAbility().addEffect(effect);
     }

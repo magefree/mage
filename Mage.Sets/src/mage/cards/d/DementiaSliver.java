@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -38,20 +37,15 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +56,7 @@ public class DementiaSliver extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("All Slivers");
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
 
     public DementiaSliver(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +66,7 @@ public class DementiaSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // All Slivers have "{T}: Name a card. Target opponent reveals a card at random from his or her hand. If it's the named card, that player discards it. Activate this ability only during your turn."
-        Ability gainedAbility = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new NameACardEffect(NameACardEffect.TypeOfName.ALL), new TapSourceCost(), MyTurnCondition.getInstance());
+        Ability gainedAbility = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new NameACardEffect(NameACardEffect.TypeOfName.ALL), new TapSourceCost(), MyTurnCondition.instance);
         gainedAbility.addEffect(new DementiaSliverEffect());
         gainedAbility.addTarget(new TargetOpponent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

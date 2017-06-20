@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,11 +40,14 @@ import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +59,7 @@ public class EraOfInnovation extends CardImpl {
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new SubtypePredicate("Artificer")));
+                new SubtypePredicate(SubType.ARTIFICER)));
     }
 
     public EraOfInnovation(UUID ownerId, CardSetInfo setInfo) {

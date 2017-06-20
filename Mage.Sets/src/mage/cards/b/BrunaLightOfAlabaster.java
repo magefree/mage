@@ -27,6 +27,8 @@
  */
 package mage.cards.b;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -37,11 +39,11 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
@@ -52,14 +54,15 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
+
 /**
  * @author noxx
  */
 public class BrunaLightOfAlabaster extends CardImpl {
 
     public BrunaLightOfAlabaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}{U}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{U}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);
@@ -101,76 +104,98 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID bruna = source.getSourceId();
-        Player player = game.getPlayer(source.getControllerId());
-        
+        Player controller = game.getPlayer(source.getControllerId());
+
         FilterPermanent filterAura = new FilterPermanent("Aura");
         FilterCard filterAuraCard = new FilterCard("Aura card");
 
         filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAura.add(new SubtypePredicate("Aura"));
+        filterAura.add(new SubtypePredicate(SubType.AURA));
         filterAura.add(new AuraPermanentCanAttachToPermanentId(bruna));
         filterAuraCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAuraCard.add(new SubtypePredicate("Aura"));
+        filterAuraCard.add(new SubtypePredicate(SubType.AURA));
         filterAuraCard.add(new AuraCardCanAttachToPermanentId(bruna));
-        
-        if (player == null) {
+
+        if (controller == null) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent == null) {
             return false;
         }
-        
-        int countBattlefield = game.getBattlefield().getAllActivePermanents(filterAura, game).size() - permanent.getAttachments().size();
-        while (player.canRespond() 
+        List<Permanent> fromBattlefield = new ArrayList<>();
+        List<Card> fromHandGraveyard = new ArrayList<>();
+
+        int countBattlefield = game.getBattlefield().getAllActivePermanents(filterAura, game).size() - sourcePermanent.getAttachments().size();
+        while (controller.canRespond()
                 && countBattlefield > 0
-                && player.chooseUse(Outcome.Benefit, "Attach an Aura from the battlefield?", source, game)) {
+                && controller.chooseUse(Outcome.Benefit, "Attach an Aura from the battlefield?", source, game)) {
             Target targetAura = new TargetPermanent(filterAura);
-            if (player.choose(Outcome.Benefit, targetAura, source.getSourceId(), game)) {
+            targetAura.setNotTarget(true);
+            if (controller.choose(Outcome.Benefit, targetAura, source.getSourceId(), game)) {
                 Permanent aura = game.getPermanent(targetAura.getFirstTarget());
                 if (aura != null) {
-                    Permanent attachedTo = game.getPermanent(aura.getAttachedTo());
-                    if (attachedTo != null) {
-                        attachedTo.removeAttachment(aura.getId(), game);
+                    Target target = aura.getSpellAbility().getTargets().get(0);
+                    if (target != null) {
+                        fromBattlefield.add(aura);
+                        filterAura.add(Predicates.not(new CardIdPredicate(aura.getId())));
                     }
-                    permanent.addAttachment(aura.getId(), game);
                 }
             }
-            countBattlefield = game.getBattlefield().getAllActivePermanents(filterAura, game).size() - permanent.getAttachments().size();
+            countBattlefield = game.getBattlefield().getAllActivePermanents(filterAura, game).size() - sourcePermanent.getAttachments().size();
         }
 
-        int countHand = player.getHand().count(filterAuraCard, game);
-        while (player.canRespond() 
-                && countHand > 0 
-                && player.chooseUse(Outcome.Benefit, "Attach an Aura from your hand?", source, game)) {
+        int countHand = controller.getHand().count(filterAuraCard, game);
+        while (controller.canRespond()
+                && countHand > 0
+                && controller.chooseUse(Outcome.Benefit, "Attach an Aura from your hand?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);
-            if (player.choose(Outcome.Benefit, player.getHand(), targetAura, game)) {
+            if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
-                    game.getState().setValue("attachTo:" + aura.getId(), permanent);
-                    aura.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
-                    permanent.addAttachment(aura.getId(), game);
+                    Target target = aura.getSpellAbility().getTargets().get(0);
+                    if (target != null) {
+                        fromHandGraveyard.add(aura);
+                        filterAuraCard.add(Predicates.not(new CardIdPredicate(aura.getId())));
+                    }
                 }
             }
-            countHand = player.getHand().count(filterAuraCard, game);
+            countHand = controller.getHand().count(filterAuraCard, game);
         }
 
-        int countGraveyard = player.getGraveyard().count(filterAuraCard, game);
-        while (player.canRespond() 
-                && countGraveyard > 0 
-                && player.chooseUse(Outcome.Benefit, "Attach an Aura from your graveyard?", source, game)) {
+        int countGraveyard = controller.getGraveyard().count(filterAuraCard, game);
+        while (controller.canRespond()
+                && countGraveyard > 0
+                && controller.chooseUse(Outcome.Benefit, "Attach an Aura from your graveyard?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.GRAVEYARD, filterAuraCard);
-            if (player.choose(Outcome.Benefit, player.getGraveyard(), targetAura, game)) {
+            if (controller.choose(Outcome.Benefit, controller.getGraveyard(), targetAura, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
-                    game.getState().setValue("attachTo:" + aura.getId(), permanent);
-                    aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), player.getId());
-                    permanent.addAttachment(aura.getId(), game);
+                    Target target = aura.getSpellAbility().getTargets().get(0);
+                    if (target != null) {
+                        fromHandGraveyard.add(aura);
+                        filterAuraCard.add(Predicates.not(new CardIdPredicate(aura.getId())));
+                    }
                 }
             }
-            countGraveyard = player.getGraveyard().count(filterAuraCard, game);
+            countGraveyard = controller.getGraveyard().count(filterAuraCard, game);
         }
-
+        // Move permanents
+        for (Permanent aura : fromBattlefield) {
+            Permanent attachedTo = game.getPermanent(aura.getAttachedTo());
+            if (attachedTo != null) {
+                attachedTo.removeAttachment(aura.getId(), game);
+            }
+            sourcePermanent.addAttachment(aura.getId(), game);
+        }
+        // Move cards
+        for (Card aura : fromHandGraveyard) {
+            if (aura != null) {
+                game.getState().setValue("attachTo:" + aura.getId(), sourcePermanent);
+                controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
+                sourcePermanent.addAttachment(aura.getId(), game);
+            }
+        }
         return true;
     }
 }

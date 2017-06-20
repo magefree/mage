@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
@@ -39,10 +38,13 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -97,7 +99,7 @@ class DistantMelodyEffect extends OneShotEffect {
                 }
             }
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-            filter.add(new SubtypePredicate(typeChoice.getChoice()));
+            filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             return new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)).apply(game, source);
         }
         return false;

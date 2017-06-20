@@ -28,10 +28,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -40,6 +36,8 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColorOrArtifact;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -49,6 +47,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -63,9 +63,9 @@ public class ApostlesBlessing extends CardImpl {
     }
 
     public ApostlesBlessing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{WP}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W/P}");
         
-        // ({WP} can be paid with either {W} or 2 life.)
+        // ({W/P} can be paid with either {W} or 2 life.)
         // Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new ApostlesBlessingEffect());
         this.getSpellAbility().addTarget(new TargetControlledPermanent(filter));

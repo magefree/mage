@@ -27,13 +27,9 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -41,23 +37,25 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class NezumiShortfang extends CardImpl {
 
     public NezumiShortfang(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add("Rat");
         this.subtype.add("Rogue");
 
@@ -71,9 +69,9 @@ public class NezumiShortfang extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new ConditionalOneShotEffect(
-                    new FlipSourceEffect(new StabwhiskerTheOdious()),
-                    new CardsInTargetOpponentHandCondition(CardsInTargetOpponentHandCondition.CountType.FEWER_THAN, 1),
-                    "Then if that player has no cards in hand, flip {this}"));
+                new FlipSourceEffect(new StabwhiskerTheOdious()),
+                new CardsInTargetOpponentHandCondition(ComparisonType.FEWER_THAN, 1),
+                "Then if that player has no cards in hand, flip {this}"));
         this.addAbility(ability);
     }
 
@@ -91,7 +89,7 @@ class StabwhiskerTheOdious extends Token {
 
     StabwhiskerTheOdious() {
         super("Stabwhisker the Odious", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Rat");
@@ -126,7 +124,7 @@ class StabwhiskerLoseLifeEffect extends OneShotEffect {
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent != null) {
             int lifeLose = 3 - opponent.getHand().size();
-            if (lifeLose > 0 ) {
+            if (lifeLose > 0) {
                 opponent.loseLife(lifeLose, game, false);
             }
             return true;
@@ -137,22 +135,20 @@ class StabwhiskerLoseLifeEffect extends OneShotEffect {
 
 class CardsInTargetOpponentHandCondition implements Condition {
 
-    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO }
-
     private Condition condition;
-    private CountType type;
+    private ComparisonType type;
     private int count;
 
-        public CardsInTargetOpponentHandCondition() {
-            this(CountType.EQUAL_TO, 0);
-        }
+    public CardsInTargetOpponentHandCondition() {
+        this(ComparisonType.EQUAL_TO, 0);
+    }
 
-    public CardsInTargetOpponentHandCondition (CountType type, int count ) {
+    public CardsInTargetOpponentHandCondition(ComparisonType type, int count) {
         this.type = type;
         this.count = count;
     }
 
-    public CardsInTargetOpponentHandCondition (CountType type, int count, Condition conditionToDecorate ) {
+    public CardsInTargetOpponentHandCondition(ComparisonType type, int count, Condition conditionToDecorate) {
         this(type, count);
         this.condition = conditionToDecorate;
     }
@@ -164,20 +160,10 @@ class CardsInTargetOpponentHandCondition implements Condition {
         if (opponent == null) {
             return false;
         }
-        switch ( this.type ) {
-            case FEWER_THAN:
-                conditionApplies = opponent.getHand().size() < this.count;
-                break;
-            case MORE_THAN:
-                conditionApplies = opponent.getHand().size()  > this.count;
-                break;
-            case EQUAL_TO:
-                conditionApplies = opponent.getHand().size()  == this.count;
-                break;
-        }
+        conditionApplies = ComparisonType.compare(opponent.getHand().size(), type, count);
 
         //If a decorated condition exists, check it as well and apply them together.
-        if ( this.condition != null ) {
+        if (this.condition != null) {
             conditionApplies = conditionApplies && this.condition.apply(game, source);
         }
 

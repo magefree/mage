@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,7 +56,7 @@ public class SilvergillDouser extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk and/or Faeries you control");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Merfolk"), new SubtypePredicate("Faerie")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.MERFOLK), new SubtypePredicate(SubType.FAERIE)));
     }
 
     public SilvergillDouser(UUID ownerId, CardSetInfo setInfo) {

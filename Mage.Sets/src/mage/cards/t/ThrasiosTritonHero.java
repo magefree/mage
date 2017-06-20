@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -56,7 +57,7 @@ public class ThrasiosTritonHero extends CardImpl {
     public ThrasiosTritonHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);
@@ -103,7 +104,7 @@ class ThrasiosTritonHeroEffect extends OneShotEffect {
         if (sourceObject == null || controller == null) {
             return false;
         }
-        if (controller.getLibrary().size() > 0) {
+        if (controller.getLibrary().hasCards()) {
             CardsImpl cards = new CardsImpl();
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
@@ -111,7 +112,7 @@ class ThrasiosTritonHeroEffect extends OneShotEffect {
             }
             cards.add(card);
             controller.revealCards(sourceObject.getName(), cards, game);
-            if (card.getCardType().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             } else {
                 controller.drawCards(1, game);

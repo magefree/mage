@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -36,14 +35,12 @@ import mage.abilities.effects.common.ruleModifying.TargetsHaveToTargetPermanentI
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +64,7 @@ public class CoalitionFlag extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetCardSubtypeAttachedEffect("Flagbearer", Duration.WhileOnBattlefield, AttachmentType.AURA)));
 
         // While choosing targets as part of casting a spell or activating an ability, your opponents must choose at least one Flagbearer on the battlefield if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TargetsHaveToTargetPermanentIfAbleEffect(new FilterPermanent("Flagbearer", "one Flagbearer"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TargetsHaveToTargetPermanentIfAbleEffect(new FilterPermanent(SubType.FLAGBEARER, "one Flagbearer"))));
     }
 
     public CoalitionFlag(final CoalitionFlag card) {

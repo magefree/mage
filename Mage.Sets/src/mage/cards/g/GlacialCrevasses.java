@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -35,13 +34,13 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,8 +51,8 @@ public class GlacialCrevasses extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow Mountain");
 
     static {
-        filter.add(new SubtypePredicate("Mountain"));
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(new SupertypePredicate(SuperType.SNOW));
     }
 
     public GlacialCrevasses(UUID ownerId, CardSetInfo setInfo) {

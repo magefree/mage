@@ -30,8 +30,10 @@
 
 package mage.cards.o;
 
+import mage.constants.ComparisonType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -60,7 +62,7 @@ import java.util.UUID;
 public class OrochiEggwatcher extends CardImpl {
 
     public OrochiEggwatcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
 
@@ -71,10 +73,10 @@ public class OrochiEggwatcher extends CardImpl {
 
         // {2}{G}, {T}: Create a 1/1 green Snake creature token. If you control ten or more creatures, flip Orochi Eggwatcher.
         Ability ability;
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken()),new ManaCostsImpl("{2}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken()), new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new ShidakoBroodmistress()),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(),PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 9),"If you control ten or more creatures, flip {this}"));
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(), ComparisonType.MORE_THAN, 9), "If you control ten or more creatures, flip {this}"));
         this.addAbility(ability);
     }
 
@@ -92,7 +94,7 @@ class ShidakoBroodmistress extends Token {
 
     ShidakoBroodmistress() {
         super("Shidako, Broodmistress", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Snake");
@@ -103,7 +105,7 @@ class ShidakoBroodmistress extends Token {
         Ability ability;
         ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new BoostTargetEffect(3,3, Duration.EndOfTurn),
+                new BoostTargetEffect(3, 3, Duration.EndOfTurn),
                 new ManaCostsImpl("{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         ability.addTarget(new TargetCreaturePermanent());

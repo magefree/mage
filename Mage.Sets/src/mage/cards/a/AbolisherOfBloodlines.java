@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeEffect;
@@ -43,6 +42,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +80,7 @@ public class AbolisherOfBloodlines extends CardImpl {
 
 class AbolisherOfBloodlinesAbility extends TriggeredAbilityImpl {
 
-    public static final String RULE_TEXT = "When this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures";
+    static final String RULE_TEXT = "When this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures";
 
     public AbolisherOfBloodlinesAbility() {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterCreaturePermanent(), 3, "Target opponent"), false);

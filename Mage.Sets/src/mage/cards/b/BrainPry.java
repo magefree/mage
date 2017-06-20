@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -40,6 +39,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,7 +85,7 @@ class BrainPryEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
         if (targetPlayer != null && controller != null && sourceObject != null && cardName != null) {
-            Boolean hasDiscarded = false;
+            boolean hasDiscarded = false;
             for (Card card : targetPlayer.getHand().getCards(game)) {
                 if (card.getName().equals(cardName)) {
                     targetPlayer.discard(card, source, game);

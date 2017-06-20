@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -46,6 +45,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +72,7 @@ public class CraterElemental extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new SetPowerSourceEffect(new StaticValue(8), Duration.EndOfTurn), 
                 new ManaCostsImpl("{2}{R}"),
-                FormidableCondition.getInstance());
+                FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);        
         this.addAbility(ability);
     }

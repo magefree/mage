@@ -37,6 +37,7 @@ import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -57,7 +58,7 @@ public class HorobisWhisper extends CardImpl {
 
     static {
         filterTarget.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filterCondition.add(new SubtypePredicate("Swamp"));
+        filterCondition.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public HorobisWhisper(UUID ownerId, CardSetInfo setInfo) {

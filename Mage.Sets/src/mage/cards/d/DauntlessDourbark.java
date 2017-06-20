@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -41,11 +40,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,9 +60,9 @@ public class DauntlessDourbark extends CardImpl {
     final static private FilterControlledPermanent filter2 = new FilterControlledPermanent();
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Forest"),
-                new SubtypePredicate("Treefolk")));
-        filter2.add(new SubtypePredicate("Treefolk"));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST),
+                new SubtypePredicate(SubType.TREEFOLK)));
+        filter2.add(new SubtypePredicate(SubType.TREEFOLK));
         filter2.add(new AnotherPredicate());
     }
     

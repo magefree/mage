@@ -27,16 +27,6 @@
  */
 package mage.server.game;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
@@ -44,6 +34,7 @@ import mage.game.GameException;
 import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
+import mage.players.PlayerType;
 import mage.server.RoomImpl;
 import mage.server.TableManager;
 import mage.server.User;
@@ -56,6 +47,13 @@ import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UsersView;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -100,7 +98,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             } else {
                 // more since 50 matches finished since this match so remove it
                 if (table.isTournament()) {
-                    TournamentManager.getInstance().removeTournament(table.getTournament().getId());
+                    TournamentManager.instance.removeTournament(table.getTournament().getId());
                 }
                 this.removeTable(table.getId());
             }
@@ -108,7 +106,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         tableView = tableList;
         matchView = matchList;
         List<UsersView> users = new ArrayList<>();
-        for (User user : UserManager.getInstance().getUsers()) {
+        for (User user : UserManager.instance.getUsers()) {
             try {
                 users.add(new UsersView(user.getUserData().getFlagName(), user.getName(),
                         user.getMatchHistory(), user.getMatchQuitRatio(), user.getTourneyHistory(),
@@ -135,9 +133,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         users.sort((one, two) -> one.getUserName().compareToIgnoreCase(two.getUserName()));
         List<RoomUsersView> roomUserInfo = new ArrayList<>();
         roomUserInfo.add(new RoomUsersView(users,
-                GameManager.getInstance().getNumberActiveGames(),
-                ThreadExecutor.getInstance().getActiveThreads(ThreadExecutor.getInstance().getGameExecutor()),
-                ConfigSettings.getInstance().getMaxGameThreads()
+                GameManager.instance.getNumberActiveGames(),
+                ThreadExecutor.instance.getActiveThreads(ThreadExecutor.instance.getGameExecutor()),
+                ConfigSettings.instance.getMaxGameThreads()
         ));
         roomUsersView = roomUserInfo;
     }
@@ -148,9 +146,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException {
+    public boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
         if (tables.containsKey(tableId)) {
-            return TableManager.getInstance().joinTable(userId, tableId, name, playerType, skill, deckList, password);
+            return TableManager.instance.joinTable(userId, tableId, name, playerType, skill, deckList, password);
         } else {
             return false;
         }
@@ -158,15 +156,15 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     @Override
     public TableView createTable(UUID userId, MatchOptions options) {
-        Table table = TableManager.getInstance().createTable(this.getRoomId(), userId, options);
+        Table table = TableManager.instance.createTable(this.getRoomId(), userId, options);
         tables.put(table.getId(), table);
         return new TableView(table);
     }
 
     @Override
-    public boolean joinTournamentTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws GameException {
+    public boolean joinTournamentTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
         if (tables.containsKey(tableId)) {
-            return TableManager.getInstance().joinTournament(userId, tableId, name, playerType, skill, deckList, password);
+            return TableManager.instance.joinTournament(userId, tableId, name, playerType, skill, deckList, password);
         } else {
             return false;
         }
@@ -174,17 +172,17 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     @Override
     public TableView createTournamentTable(UUID userId, TournamentOptions options) {
-        Table table = TableManager.getInstance().createTournamentTable(this.getRoomId(), userId, options);
+        Table table = TableManager.instance.createTournamentTable(this.getRoomId(), userId, options);
         tables.put(table.getId(), table);
         return new TableView(table);
     }
 
     @Override
-    public TableView getTable(UUID tableId) {
+    public Optional<TableView> getTable(UUID tableId) {
         if (tables.containsKey(tableId)) {
-            return new TableView(tables.get(tableId));
+            return Optional.of(new TableView(tables.get(tableId)));
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
@@ -206,12 +204,12 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     @Override
     public void leaveTable(UUID userId, UUID tableId) {
-        TableManager.getInstance().leaveTable(userId, tableId);
+        TableManager.instance.leaveTable(userId, tableId);
     }
 
     @Override
     public boolean watchTable(UUID userId, UUID tableId) throws MageException {
-        return TableManager.getInstance().watchTable(userId, tableId);
+        return TableManager.instance.watchTable(userId, tableId);
     }
 
     @Override

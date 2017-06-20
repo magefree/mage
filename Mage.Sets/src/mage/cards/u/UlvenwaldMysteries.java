@@ -35,6 +35,7 @@ import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -60,7 +61,7 @@ public class UlvenwaldMysteries extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.not(new TokenPredicate()));
-        filterClue.add(new SubtypePredicate("Clue"));
+        filterClue.add(new SubtypePredicate(SubType.CLUE));
     }
 
     public UlvenwaldMysteries(UUID ownerId, CardSetInfo setInfo) {

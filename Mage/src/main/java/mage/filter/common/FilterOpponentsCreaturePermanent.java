@@ -1,5 +1,6 @@
 package mage.filter.common;
 
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -24,7 +25,7 @@ public class FilterOpponentsCreaturePermanent extends FilterCreaturePermanent {
 
     }
 
-    public FilterOpponentsCreaturePermanent(String subtype, String name) {
+    public FilterOpponentsCreaturePermanent(SubType subtype, String name) {
         super(subtype, name);
         this.add(new ControllerPredicate(TargetController.OPPONENT));
     }

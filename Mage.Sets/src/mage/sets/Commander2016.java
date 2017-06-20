@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class Commander2016 extends ExpansionSet {
 
-    private static final Commander2016 fINSTANCE = new Commander2016();
+    private static final Commander2016 instance = new Commander2016();
 
     public static Commander2016 getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Commander2016() {

@@ -46,7 +46,7 @@ public class Hex extends CardImpl {
 
         // Destroy six target creatures.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(6, 6));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(6));
     }
 
     public Hex(final Hex card) {

@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -50,6 +49,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
  *
  * @author anonymous
@@ -65,7 +66,7 @@ public class BottomlessVault extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // At the beginning of your upkeep, if Bottomless Vault is tapped, put a storage counter on it.
         OneShotEffect addStorageCounter = new AddCountersSourceEffect(CounterType.STORAGE.createInstance());
-        Effect effect = new ConditionalOneShotEffect(addStorageCounter, SourceTappedCondition.getInstance(), "if {this} is tapped, put a storage counter on it");
+        Effect effect = new ConditionalOneShotEffect(addStorageCounter, SourceTappedCondition.instance, "if {this} is tapped, put a storage counter on it");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
         // {tap}, Remove any number of storage counters from Bottomless Vault: Add {B} to your mana pool for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(

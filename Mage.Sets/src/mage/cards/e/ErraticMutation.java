@@ -27,12 +27,7 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
-
 import mage.MageObject;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -41,10 +36,15 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,10 +95,10 @@ class ErraticMutationEffect extends OneShotEffect {
             CardsImpl toReveal = new CardsImpl();
             Card nonLandCard = null;
 
-            while (nonLandCard == null && controller.getLibrary().size() > 0) {
+            while (nonLandCard == null && controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 toReveal.add(card);
-                if (!card.getCardType().contains(CardType.LAND)) {
+                if (!card.isLand()) {
                     nonLandCard = card;
                 }
             }

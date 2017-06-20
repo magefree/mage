@@ -37,7 +37,8 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.Wurm1Token;
+import mage.game.permanent.token.Wurm2Token;
 
 /**
  *
@@ -70,34 +71,4 @@ public class WurmcoilEngine extends CardImpl {
         return new WurmcoilEngine(this);
     }
 
-}
-
-class Wurm1Token extends Token {
-
-    public Wurm1Token(String setCode) {
-        super("Wurm", "3/3 colorless Wurm artifact creature token with deathtouch");
-        setOriginalExpansionSetCode(setCode);
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Wurm");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        this.addAbility(DeathtouchAbility.getInstance());
-    }
-}
-
-class Wurm2Token extends Token {
-
-    public Wurm2Token(String setCode) {
-        super("Wurm", "3/3 colorless Wurm artifact creature token with lifelink");
-        setOriginalExpansionSetCode(setCode);
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Wurm");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        this.addAbility(LifelinkAbility.getInstance());
-
-        setTokenType(2); // for image
-    }
 }

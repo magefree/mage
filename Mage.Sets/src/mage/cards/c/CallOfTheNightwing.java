@@ -28,14 +28,12 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.MageInt;
 import mage.abilities.effects.common.CipherEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.game.permanent.token.NightwingHorrorToken;
 
 /**
  *
@@ -44,11 +42,10 @@ import mage.game.permanent.token.Token;
 public class CallOfTheNightwing extends CardImpl {
 
     public CallOfTheNightwing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
 
         // Create a 1/1 blue and black Horror creature token with flying.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new NightwingHorrorToken(),1));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new NightwingHorrorToken(), 1));
 
         // Cipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
         this.getSpellAbility().addEffect(new CipherEffect());
@@ -62,20 +59,5 @@ public class CallOfTheNightwing extends CardImpl {
     @Override
     public CallOfTheNightwing copy() {
         return new CallOfTheNightwing(this);
-    }
-}
-
-class NightwingHorrorToken extends Token {
-    NightwingHorrorToken() {
-        super("Horror", "1/1 blue and black Horror creature token with flying");
-        cardType.add(CardType.CREATURE);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.subtype.add("Horror");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

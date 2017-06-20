@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -50,6 +49,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +80,7 @@ public class EchoMage extends LevelerCard {
         // LEVEL 2-3
         // 2/4
         // {U}{U}, {tap}: Copy target instant or sorcery spell. You may choose new targets for the copy.
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{U}{U}"));
         ability.addTarget(new TargetSpell(filter));
         ability.addCost(new TapSourceCost());
@@ -87,7 +88,7 @@ public class EchoMage extends LevelerCard {
         // LEVEL 4+
         // 2/5
         // {U}{U}, {tap}: Copy target instant or sorcery spell twice. You may choose new targets for the copies.
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EchoMageEffect(), new ManaCostsImpl("{U}{U}"));
         ability.addTarget(new TargetSpell(filter));
         ability.addCost(new TapSourceCost());

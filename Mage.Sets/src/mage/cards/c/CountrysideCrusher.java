@@ -27,18 +27,13 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -48,6 +43,8 @@ import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -105,10 +102,10 @@ class CountrysideCrusherEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             Cards cards = new CardsImpl();
-            while (controller.getLibrary().size() > 0) {
+            while (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().getFromTop(game);
                 cards.add(card);
-                if (card.getCardType().contains(CardType.LAND)) {
+                if (card.isLand()) {
                     controller.moveCards(card, Zone.GRAVEYARD, source, game);
                 } else {
                     break;

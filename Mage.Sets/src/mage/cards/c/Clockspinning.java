@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -48,6 +45,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPermanentOrSuspendedCard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  */
 public class TransformedCondition implements Condition {
 
-    protected Boolean notCondition;
+    protected boolean notCondition;
 
     public TransformedCondition() {
         this(false);
@@ -50,7 +50,7 @@ public class TransformedCondition implements Condition {
      * @param  notCondition if true the condition is true when the permanent is not transformed
      * @return true if the condition is true, false if the condition is false
      */
-    public TransformedCondition(Boolean notCondition) {
+    public TransformedCondition(boolean notCondition) {
         this.notCondition = notCondition;
     }
 

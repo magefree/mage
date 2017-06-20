@@ -30,17 +30,19 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -51,16 +53,15 @@ import mage.target.common.TargetCardInGraveyard;
 public class NecromanticSummons extends CardImpl {
 
     public NecromanticSummons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
+        this.getSpellAbility().addEffect(new NecromanticSummoningReplacementEffect());// has to be added before the moving effect
         // Put target creature card from a graveyard onto the battlefield under your control.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
 
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it.
-        Effect effect = new ConditionalOneShotEffect(new NecromanticSummoningEffect(),
-                SpellMasteryCondition.getInstance(), "<br><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new InfoEffect("\"<br><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it\""));
     }
 
     public NecromanticSummons(final NecromanticSummons card) {
@@ -73,29 +74,46 @@ public class NecromanticSummons extends CardImpl {
     }
 }
 
-class NecromanticSummoningEffect extends OneShotEffect {
+class NecromanticSummoningReplacementEffect extends ReplacementEffectImpl {
 
-    public NecromanticSummoningEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "<br><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it";
+    NecromanticSummoningReplacementEffect() {
+        super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    public NecromanticSummoningEffect(final NecromanticSummoningEffect effect) {
+    NecromanticSummoningReplacementEffect(NecromanticSummoningReplacementEffect effect) {
         super(effect);
     }
 
     @Override
-    public NecromanticSummoningEffect copy() {
-        return new NecromanticSummoningEffect(this);
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
+            return SpellMasteryCondition.instance.apply(game, source);
+        }
+        return false;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
-            return true;
+        return false;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (creature != null) {
+            creature.addCounters(CounterType.P1P1.createInstance(2), source, game, event.getAppliedEffects());
+            discard();
         }
         return false;
+    }
+
+    @Override
+    public NecromanticSummoningReplacementEffect copy() {
+        return new NecromanticSummoningReplacementEffect(this);
     }
 }

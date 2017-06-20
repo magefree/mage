@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,12 +38,12 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,12 +53,12 @@ public class AkutaBornOfAsh extends CardImpl {
 
     private static final FilterControlledPermanent filterSwamp = new FilterControlledPermanent("a Swamp");
     static {
-        filterSwamp.add(new SubtypePredicate("Swamp"));
+        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
     }
 
     public AkutaBornOfAsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);
@@ -72,7 +71,7 @@ public class AkutaBornOfAsh extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
                     new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filterSwamp))),
                     TargetController.YOU, false),
-                new MoreCardsInHandThanOpponentsCondition(),
+                MoreCardsInHandThanOpponentsCondition.instance,
                 "At the beginning of your upkeep, if you have more cards in hand than each opponent, you may sacrifice a Swamp. If you do, return {this} from your graveyard to the battlefield.");
         this.addAbility(ability);
     }

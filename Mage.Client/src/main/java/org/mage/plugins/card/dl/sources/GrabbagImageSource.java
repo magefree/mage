@@ -29,6 +29,7 @@ package org.mage.plugins.card.dl.sources;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 
@@ -36,18 +37,11 @@ import org.mage.plugins.card.images.CardDownloadData;
  *
  * @author spjspj
  */
-public class GrabbagImageSource implements CardImageSource {
+public enum  GrabbagImageSource implements CardImageSource {
 
+    instance;
     private static final Logger logger = Logger.getLogger(GrabbagImageSource.class);
-    private static CardImageSource instance = new GrabbagImageSource();
     private static int maxTimes = 0;
-
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new GrabbagImageSource();
-        }
-        return instance;
-    }
 
     @Override
     public String getSourceName() {
@@ -55,7 +49,7 @@ public class GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public Float getAverageSize() {
+    public float getAverageSize() {
         return 26.7f;
     }
 
@@ -1670,7 +1664,7 @@ public class GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public Integer getTotalImages() {
+    public int getTotalImages() {
         if (copyUrlToImage == null) {
             setupLinks();
         }
@@ -1681,7 +1675,7 @@ public class GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public Boolean isTokenSource() {
+    public boolean isTokenSource() {
         return false;
     }
 
@@ -1697,7 +1691,7 @@ public class GrabbagImageSource implements CardImageSource {
     public void doPause(String httpImageUrl) {
         if (!httpImageUrl.startsWith("/MTG")) {
             try {
-                Thread.sleep(2000);
+                TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException ex) {
             }
         }

@@ -27,23 +27,22 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AngelToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -52,7 +51,7 @@ public class GeistOfSaintTraft extends CardImpl {
 
     public GeistOfSaintTraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
         this.subtype.add("Cleric");
 
@@ -87,18 +86,12 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        AngelToken token = new AngelToken();
+    public boolean apply(Game game, Ability source) {        
+        CreateTokenEffect effect = new CreateTokenEffect(new AngelToken(), 1, true, true);
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true)) {
-            for (UUID tokenId : token.getLastAddedTokenIds()) {
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                    game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
-                }
-            }
+        
+        if (controller != null && effect.apply(game, source)) {
+            effect.exileTokensCreatedAtEndOfCombat(game, source);
             return true;
         }
         return false;

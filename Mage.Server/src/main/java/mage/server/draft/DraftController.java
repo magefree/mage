@@ -28,11 +28,6 @@
 
 package mage.server.draft;
 
-import java.io.File;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftPlayer;
@@ -46,6 +41,13 @@ import mage.server.game.GameController;
 import mage.server.util.ThreadExecutor;
 import mage.view.DraftPickView;
 import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -121,7 +123,7 @@ public class DraftController {
         UUID playerId = userPlayerMap.get(userId);
         DraftSession draftSession = new DraftSession(draft, userId, playerId);
         draftSessions.put(playerId, draftSession);
-        UserManager.getInstance().getUser(userId).ifPresent(user-> {
+        UserManager.instance.getUser(userId).ifPresent(user-> {
                     user.addDraft(playerId, draftSession);
                     logger.debug("User " + user.getName() + " has joined draft " + draft.getId());
                     draft.getPlayer(playerId).setJoined();
@@ -129,11 +131,11 @@ public class DraftController {
         checkStart();
     }
 
-    public DraftSession getDraftSession(UUID playerId) {
+    public Optional<DraftSession> getDraftSession(UUID playerId) {
         if (draftSessions.containsKey(playerId)) {
-            return draftSessions.get(playerId);
+            return Optional.of(draftSessions.get(playerId));
         }
-        return null;
+        return Optional.empty();
     }
 
     public boolean replacePlayer(Player oldPlayer, Player newPlayer) {
@@ -151,7 +153,7 @@ public class DraftController {
     private synchronized void checkStart() {
         if (!draft.isStarted() && allJoined()) {
             draft.setStarted();
-            ThreadExecutor.getInstance().getCallExecutor().execute(this::startDraft);
+            ThreadExecutor.instance.getCallExecutor().execute(this::startDraft);
         }
     }
 
@@ -187,8 +189,8 @@ public class DraftController {
             draftSession.draftOver();
             draftSession.removeDraft();
         }
-        TableManager.getInstance().endDraft(tableId, draft);
-        DraftManager.getInstance().removeDraft(draft.getId());
+        TableManager.instance.endDraft(tableId, draft);
+        DraftManager.instance.removeDraft(draft.getId());
     }
 
     public void kill(UUID userId) {

@@ -29,6 +29,7 @@ package mage.cards.m;
 
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -50,22 +51,21 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author Quercitron
  */
 public class MightMakesRight extends CardImpl {
 
     private static final String ruleText = "At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, "
             + "gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.";
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
-    
+
     public MightMakesRight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 
 
         // At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, gain control
@@ -74,7 +74,7 @@ public class MightMakesRight extends CardImpl {
         gainControlAbility.addEffect(new UntapTargetEffect());
         gainControlAbility.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         gainControlAbility.addTarget(new TargetCreaturePermanent(filter));
-        Ability conditionalAbility = new ConditionalTriggeredAbility(gainControlAbility, ControlsEachCreatureWithGreatestPowerCondition.getInstance(), ruleText);
+        Ability conditionalAbility = new ConditionalTriggeredAbility(gainControlAbility, ControlsEachCreatureWithGreatestPowerCondition.instance, ruleText);
         this.addAbility(conditionalAbility);
     }
 
@@ -88,16 +88,12 @@ public class MightMakesRight extends CardImpl {
     }
 }
 
-class ControlsEachCreatureWithGreatestPowerCondition implements Condition {
+enum ControlsEachCreatureWithGreatestPowerCondition implements Condition {
 
-    private static final ControlsEachCreatureWithGreatestPowerCondition fInstance = new ControlsEachCreatureWithGreatestPowerCondition();
-    
+    instance;
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public static Condition getInstance() {
-        return fInstance;
-    }
-    
     @Override
     public boolean apply(Game game, Ability source) {
         Integer maxPower = null;
@@ -118,5 +114,5 @@ class ControlsEachCreatureWithGreatestPowerCondition implements Condition {
         }
         return result;
     }
-    
+
 }

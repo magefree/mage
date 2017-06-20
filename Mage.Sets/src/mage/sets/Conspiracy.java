@@ -29,8 +29,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.constants.Rarity;
 
 public class Conspiracy extends ExpansionSet {
 
-    private static final Conspiracy fINSTANCE = new Conspiracy();
+    private static final Conspiracy instance = new Conspiracy();
 
     public static Conspiracy getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Conspiracy() {

@@ -28,20 +28,20 @@
 
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author LevelX2
  */
 public class AjaniVsNicolBolas extends ExpansionSet {
-    private static final AjaniVsNicolBolas fINSTANCE = new AjaniVsNicolBolas();
+    private static final AjaniVsNicolBolas instance = new AjaniVsNicolBolas();
 
     public static AjaniVsNicolBolas getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private AjaniVsNicolBolas() {

@@ -80,7 +80,7 @@ class PsychogenicProbeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.LIBRARY_SHUFFLED);
+        return event.getType() == EventType.LIBRARY_SHUFFLED;
     }
 
     @Override

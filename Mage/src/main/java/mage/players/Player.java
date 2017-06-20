@@ -212,6 +212,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean hasLost();
 
+    boolean hasDrew();
+
     boolean hasWon();
 
     boolean hasQuit();
@@ -429,6 +431,8 @@ public interface Player extends MageItem, Copyable<Player> {
     void lost(Game game);
 
     void lostForced(Game game);
+
+    void drew(Game game);
 
     void won(Game game);
 

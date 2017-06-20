@@ -28,17 +28,14 @@
 package mage.cards.v;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -49,10 +46,10 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlaneswalkerEvent;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.AssassinToken;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -70,7 +67,7 @@ import mage.target.targetpointer.FixedTarget;
 public class VraskaTheUnseen extends CardImpl {
 
     public VraskaTheUnseen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{G}");
         this.subtype.add("Vraska");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
@@ -146,19 +143,6 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
     }
 }
 
-class AssassinToken extends Token {
-
-    AssassinToken() {
-        super("Assassin", "1/1 black Assassin creature tokens with \"Whenever this creature deals combat damage to a player, that player loses the game.\"");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Assassin");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(), false, true));
-    }
-}
-
 class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
 
     public VraskaTheUnseenTriggeredAbility() {
@@ -183,7 +167,7 @@ class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlaneswalkerEvent) event).isCombatDamage() && getSourceId().equals(event.getTargetId())) {
             Permanent sourceOfDamage = game.getPermanent(event.getSourceId());
-            if (sourceOfDamage != null && sourceOfDamage.getCardType().contains(CardType.CREATURE)) {
+            if (sourceOfDamage != null && sourceOfDamage.isCreature()) {
                 Effect effect = this.getEffects().get(0);
                 effect.setTargetPointer(new FixedTarget(sourceOfDamage.getId()));
                 return true;

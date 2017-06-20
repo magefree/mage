@@ -81,14 +81,14 @@ class OrbsOfWardingEffect extends PreventionEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getControllerId())) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.isCreature()) {
                 return super.applies(event, source, game);
             }
         }

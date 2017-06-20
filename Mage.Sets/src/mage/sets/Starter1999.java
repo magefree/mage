@@ -28,10 +28,10 @@
 
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Starter1999 extends ExpansionSet {
 
-    private static final Starter1999 fINSTANCE = new Starter1999();
+    private static final Starter1999 instance = new Starter1999();
 
     public static Starter1999 getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Starter1999() {
@@ -155,6 +155,7 @@ public class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Norwood Archers", 137, Rarity.COMMON, mage.cards.n.NorwoodArchers.class));
         cards.add(new SetCardInfo("Norwood Ranger", 138, Rarity.COMMON, mage.cards.n.NorwoodRanger.class));
         cards.add(new SetCardInfo("Ogre Warrior", 113, Rarity.COMMON, mage.cards.o.OgreWarrior.class));
+        cards.add(new SetCardInfo("Path of Peace", 21, Rarity.COMMON, mage.cards.p.PathOfPeace.class));
         cards.add(new SetCardInfo("Phantom Warrior", 44, Rarity.RARE, mage.cards.p.PhantomWarrior.class));
         cards.add(new SetCardInfo("Plains", 154, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 155, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));

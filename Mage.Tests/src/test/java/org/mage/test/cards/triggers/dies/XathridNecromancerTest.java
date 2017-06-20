@@ -67,8 +67,8 @@ public class XathridNecromancerTest extends CardTestPlayerBase {
         attack(2, playerB, "Pillarfield Ox");
         attack(2, playerB, "Siege Mastodon");
 
-        block(2, playerA, "Human", "Silvercoat Lion");
-        block(2, playerA, "Human", "Pillarfield Ox");
+        block(2, playerA, "Human:0", "Silvercoat Lion");
+        block(2, playerA, "Human:1", "Pillarfield Ox");
         block(2, playerA, "Xathrid Necromancer", "Siege Mastodon");
         
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);

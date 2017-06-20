@@ -25,16 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.j;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.JoinTheRanksSoldierToken;
 
 /**
  *
@@ -42,15 +40,15 @@ import mage.game.permanent.token.Token;
  */
 public class JoinTheRanks extends CardImpl {
 
-    public JoinTheRanks (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
-        this.color.setWhite(true);        
-        
+    public JoinTheRanks(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
+        this.color.setWhite(true);
+
         // Create two 1/1 white Soldier Ally creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new JoinTheRanksSoldierToken(), 2));
     }
 
-    public JoinTheRanks (final JoinTheRanks card) {
+    public JoinTheRanks(final JoinTheRanks card) {
         super(card);
     }
 
@@ -59,18 +57,4 @@ public class JoinTheRanks extends CardImpl {
         return new JoinTheRanks(this);
     }
 
-}
-class JoinTheRanksSoldierToken extends Token {
-
-    public JoinTheRanksSoldierToken() {
-        super("Soldier Ally", "1/1 white Soldier Ally creature token");
-        this.setOriginalExpansionSetCode("WWK");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Soldier");
-        subtype.add("Ally");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        
-    }
 }

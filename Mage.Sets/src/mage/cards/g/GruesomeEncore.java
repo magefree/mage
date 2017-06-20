@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -50,6 +49,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -150,8 +151,8 @@ class GruesomeEncoreReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(source.getFirstTarget())
-                && ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)
-                && !((ZoneChangeEvent) event).getToZone().equals(Zone.EXILED);
+                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
     }
 
     @Override

@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class SageOfFables extends CardImpl {
 
     public SageOfFables(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);
@@ -101,8 +101,8 @@ class SageOfFablesReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         return creature != null && creature.getControllerId().equals(source.getControllerId())
-                && creature.getCardType().contains(CardType.CREATURE)
-                && creature.getSubtype(game).contains("Wizard")
+                && creature.isCreature()
+                && creature.hasSubtype("Wizard", game)
                 && !event.getTargetId().equals(source.getSourceId());
     }
 
@@ -115,7 +115,7 @@ class SageOfFablesReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(), source, game);
+            creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
         }
         return false;
     }

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -47,6 +46,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -127,7 +128,7 @@ public class DroolingOgre extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
+            if (spell != null && spell.isArtifact()) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }

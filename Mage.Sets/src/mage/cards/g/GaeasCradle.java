@@ -27,15 +27,17 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +53,7 @@ public class GaeasCradle extends CardImpl {
 
     public GaeasCradle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // {T}: Add {G} to your mana pool for each creature you control.
         DynamicManaAbility ability = new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filter));

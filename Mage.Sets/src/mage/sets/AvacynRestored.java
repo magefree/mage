@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class AvacynRestored extends ExpansionSet {
 
-    private static final AvacynRestored fINSTANCE = new AvacynRestored();
+    private static final AvacynRestored instance = new AvacynRestored();
 
     public static AvacynRestored getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private AvacynRestored() {

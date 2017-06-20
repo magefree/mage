@@ -79,7 +79,7 @@ class ThoughtweftGambitEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Boolean passed = false;
+        boolean passed = false;
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         Player controller = game.getPlayer(source.getControllerId());
         if (opponents != null) {

@@ -39,6 +39,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +56,9 @@ public class UndeadSlayer extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Skeleton"),
-                new SubtypePredicate("Vampire"),
-                new SubtypePredicate("Zombie")));
+                new SubtypePredicate(SubType.SKELETON),
+                new SubtypePredicate(SubType.VAMPIRE),
+                new SubtypePredicate(SubType.ZOMBIE)));
     }
 
     public UndeadSlayer(UUID ownerId, CardSetInfo setInfo) {

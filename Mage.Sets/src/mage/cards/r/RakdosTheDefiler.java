@@ -43,6 +43,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -58,13 +60,13 @@ public class RakdosTheDefiler extends CardImpl {
     private static final FilterPermanent damageToPlayerTriggerFilter = new FilterPermanent("the non-Demon permanents you control");
 
     static {
-        attackTriggerFilter.add(Predicates.not(new SubtypePredicate("Demon")));
-        damageToPlayerTriggerFilter.add(Predicates.not(new SubtypePredicate("Demon")));
+        attackTriggerFilter.add(Predicates.not(new SubtypePredicate(SubType.DEMON)));
+        damageToPlayerTriggerFilter.add(Predicates.not(new SubtypePredicate(SubType.DEMON)));
     }
 
     public RakdosTheDefiler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{R}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Demon");
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

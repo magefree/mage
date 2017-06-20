@@ -28,16 +28,16 @@
 
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -46,10 +46,10 @@ import mage.constants.SetType;
 
 public class DragonsMaze extends ExpansionSet {
 
-    private static final DragonsMaze fINSTANCE = new DragonsMaze();
+    private static final DragonsMaze instance = new DragonsMaze();
 
     public static DragonsMaze getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     List<CardInfo> savedSpecialRares = new ArrayList<>();
@@ -225,7 +225,7 @@ public class DragonsMaze extends ExpansionSet {
 
     @Override
     public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        if (rarity.equals(Rarity.COMMON)) {
+        if (rarity == Rarity.COMMON) {
             List<CardInfo> savedCardsInfos = savedCards.get(rarity);
             if (savedCardsInfos == null) {
                 CardCriteria criteria = new CardCriteria();

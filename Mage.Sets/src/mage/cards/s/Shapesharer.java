@@ -36,10 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -56,7 +53,7 @@ public class Shapesharer extends CardImpl {
     private static final FilterPermanent filterShapeshifter = new FilterPermanent("Shapeshifter");
 
     static {
-        filterShapeshifter.add(new SubtypePredicate("Shapeshifter"));
+        filterShapeshifter.add(new SubtypePredicate(SubType.SHAPESHIFTER));
     }
 
     public Shapesharer(UUID ownerId, CardSetInfo setInfo) {

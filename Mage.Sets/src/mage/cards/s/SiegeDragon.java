@@ -38,10 +38,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -62,7 +59,7 @@ public class SiegeDragon extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls your opponents control");
     
     static {
-        filter.add(new SubtypePredicate("Wall"));
+        filter.add(new SubtypePredicate(SubType.WALL));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
@@ -98,7 +95,7 @@ class SiegeDragonAttacksTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("wall");
 
     static {
-        filter.add(new SubtypePredicate("Wall"));
+        filter.add(new SubtypePredicate(SubType.WALL));
     }
 
     public SiegeDragonAttacksTriggeredAbility() {

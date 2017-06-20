@@ -42,12 +42,9 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledEnchantmentPermanent;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPlaneswalkerPermanent;
+import mage.filter.common.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
 public class CatchRelease extends SplitCard {
 
     public CatchRelease(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{R}","{4}{R}{W}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{R}", "{4}{R}{W}", SpellAbilityType.SPLIT_FUSED);
 
         // Catch
         // Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.

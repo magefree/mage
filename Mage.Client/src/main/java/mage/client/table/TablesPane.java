@@ -45,9 +45,9 @@ public class TablesPane extends MagePane {
      */
     public TablesPane() {
         boolean initialized = false;
-        if (Plugins.getInstance().isThemePluginLoaded()) {
+        if (Plugins.instance.isThemePluginLoaded()) {
             tablesPanel = new mage.client.table.TablesPanel();
-            JComponent container = Plugins.getInstance().updateTablePanel(tablesPanel.getUIComponents());
+            JComponent container = Plugins.instance.updateTablePanel(tablesPanel.getUIComponents());
             if (container != null) {
                 initComponents(container);
                 container.add(tablesPanel);
@@ -99,8 +99,8 @@ public class TablesPane extends MagePane {
 
         tablesPanel = new mage.client.table.TablesPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tablesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
@@ -110,12 +110,11 @@ public class TablesPane extends MagePane {
             .addComponent(tablesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
         );
 
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void initComponents(JComponent container) {
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
@@ -124,7 +123,6 @@ public class TablesPane extends MagePane {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
         );
-        pack();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -139,5 +137,11 @@ public class TablesPane extends MagePane {
     @Override
     public void deactivated() {
         tablesPanel.stopTasks();
+    }
+
+    public void setTableFilter() {
+        if (tablesPanel != null) {
+            tablesPanel.setTableFilter();
+        }
     }
 }

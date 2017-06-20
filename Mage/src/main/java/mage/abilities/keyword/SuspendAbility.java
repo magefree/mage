@@ -27,9 +27,6 @@
  */
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -45,20 +42,17 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.Card;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -180,7 +174,7 @@ public class SuspendAbility extends SpecialAction {
                         .append((suspend == 1 ? "a time counter" : (suspend == Integer.MAX_VALUE ? "X time counters" : suspend + " time counters")))
                         .append(" on it.")
                         .append(" At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.")
-                        .append(card.getCardType().contains(CardType.CREATURE) ? " If you play it this way and it's a creature, it gains haste until you lose control of it." : "")
+                        .append(card.isCreature() ? " If you play it this way and it's a creature, it gains haste until you lose control of it." : "")
                         .append(")</i>");
             }
             if (card.getManaCost().isEmpty()) {
@@ -236,12 +230,12 @@ public class SuspendAbility extends SpecialAction {
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        if (!game.getState().getZone(getSourceId()).equals(Zone.HAND)) {
+        if (game.getState().getZone(getSourceId()) != Zone.HAND) {
             // Supend can only be activated from hand
             return false;
         }
         MageObject object = game.getObject(sourceId);
-        return (object.getCardType().contains(CardType.INSTANT)
+        return (object.isInstant()
                 || object.hasAbility(FlashAbility.getInstance().getId(), game)
                 || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
                 || game.canPlaySorcery(playerId));
@@ -384,7 +378,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
             }
             // cast the card for free
             if (player.cast(card.getSpellAbility(), game, true)) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     ContinuousEffect effect = new GainHasteEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
                     game.addEffect(effect, source);
@@ -441,7 +435,7 @@ class SuspendBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbili
 
     public SuspendBeginningOfUpkeepTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
-                SuspendedCondition.getInstance(),
+                SuspendedCondition.instance,
                 "At the beginning of your upkeep, if this card ({this}) is suspended, remove a time counter from it.");
         this.setRuleVisible(false);
 

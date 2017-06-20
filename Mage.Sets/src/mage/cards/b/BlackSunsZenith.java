@@ -28,18 +28,18 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -80,7 +80,7 @@ class BlackSunsZenithEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int amount = source.getManaCostsToPay().getX();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null && permanent.isCreature()) {
                 permanent.addCounters(CounterType.M1M1.createInstance(amount), source, game);
             }
         }

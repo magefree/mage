@@ -27,11 +27,9 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.*;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
@@ -43,15 +41,16 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +63,7 @@ public class Seasinger extends CardImpl {
     private static final FilterCreaturePermanent creatureWhoseControllerControlsIsland = new FilterCreaturePermanent("creature whose controller controls an island");
 
     static {
-        islandYouControl.add(new SubtypePredicate("Island"));
+        islandYouControl.add(new SubtypePredicate(SubType.ISLAND));
         islandYouControl.add(new ControllerPredicate(TargetController.YOU));
     }
 
@@ -81,7 +80,7 @@ public class Seasinger extends CardImpl {
 
         // When you control no Islands, sacrifice Seasinger.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new FilterLandPermanent(SubType.ISLAND, "no Islands"), ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
 
         // You may choose not to untap Seasinger during your untap step.
@@ -90,7 +89,7 @@ public class Seasinger extends CardImpl {
         // {tap}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
-                new PermanentsOnTheBattlefieldCondition(seasinger, PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 1, SourceTappedCondition.getInstance()), rule);
+                new PermanentsOnTheBattlefieldCondition(seasinger, ComparisonType.EQUAL_TO, 1, SourceTappedCondition.instance), rule);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         creatureWhoseControllerControlsIsland.add(new ControllerControlsIslandPredicate());
         ability.addTarget(new TargetCreaturePermanent(creatureWhoseControllerControlsIsland));

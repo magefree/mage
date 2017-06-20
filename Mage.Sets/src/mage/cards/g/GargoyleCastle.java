@@ -28,19 +28,17 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GargoyleToken;
 
 /**
  *
@@ -87,17 +85,4 @@ class GargoyleCastleAbility extends ActivatedAbilityImpl {
         return new GargoyleCastleAbility(this);
     }
 
-}
-
-class GargoyleToken extends Token {
-
-    public GargoyleToken() {
-        super("Gargoyle", "3/4 colorless Gargoyle artifact creature token with flying");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        subtype.add("Gargoyle");
-        power = new MageInt(3);
-        toughness = new MageInt(4);
-        addAbility(FlyingAbility.getInstance());
-    }
 }

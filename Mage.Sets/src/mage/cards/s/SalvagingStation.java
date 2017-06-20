@@ -27,8 +27,8 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,12 +38,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +57,7 @@ public class SalvagingStation extends CardImpl {
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
     
     public SalvagingStation(UUID ownerId, CardSetInfo setInfo) {

@@ -69,7 +69,7 @@ public class GreenbeltRampager extends CardImpl {
         return new GreenbeltRampager(this);
     }
 
-    private class GreenbeltRampagerEffect extends OneShotEffect {
+    private static class GreenbeltRampagerEffect extends OneShotEffect {
 
         GreenbeltRampagerEffect() {
             super(Outcome.Neutral);

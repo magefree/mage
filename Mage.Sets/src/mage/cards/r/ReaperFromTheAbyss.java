@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -46,6 +47,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
+import mage.watchers.common.MorbidWatcher;
 
 /**
  *
@@ -56,7 +58,7 @@ public class ReaperFromTheAbyss extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Demon creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Demon")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.DEMON)));
     }
 
     public ReaperFromTheAbyss(UUID ownerId, CardSetInfo setInfo) {
@@ -105,7 +107,7 @@ class ReaperFromTheAbyssAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Watcher watcher = game.getState().getWatchers().get("Morbid");
+        Watcher watcher = game.getState().getWatchers().get(MorbidWatcher.class.getSimpleName());
         return watcher.conditionMet();
     }
 

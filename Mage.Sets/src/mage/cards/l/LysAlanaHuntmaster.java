@@ -34,6 +34,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElfToken;
@@ -47,7 +48,7 @@ public class LysAlanaHuntmaster extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("Elf spell");
 
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public LysAlanaHuntmaster(UUID ownerId, CardSetInfo setInfo) {

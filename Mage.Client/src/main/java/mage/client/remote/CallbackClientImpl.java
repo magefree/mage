@@ -27,13 +27,9 @@
  */
 package mage.client.remote;
 
-import java.awt.event.KeyEvent;
-import java.util.List;
-import java.util.UUID;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.PreferencesDialog;
@@ -42,23 +38,20 @@ import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.DeckUtil;
 import mage.client.util.GameManager;
+import mage.client.util.IgnoreList;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
-import mage.view.AbilityPickerView;
-import mage.view.ChatMessage;
+import mage.view.*;
 import mage.view.ChatMessage.MessageType;
-import mage.view.DeckView;
-import mage.view.DraftClientMessage;
-import mage.view.DraftView;
-import mage.view.GameClientMessage;
-import mage.view.GameEndView;
-import mage.view.GameView;
-import mage.view.TableClientMessage;
-import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -77,39 +70,48 @@ public class CallbackClientImpl implements CallbackClient {
 
     @Override
     public synchronized void processCallback(final ClientCallback callback) {
-        SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
+        SaveObjectUtil.saveObject(callback.getData(), callback.getMethod().toString());
         callback.setData(CompressUtil.decompress(callback.getData()));
         SwingUtilities.invokeLater(() -> {
             try {
                 logger.debug(callback.getMessageId() + " -- " + callback.getMethod());
                 switch (callback.getMethod()) {
-                    case "startGame": {
+                    case START_GAME: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
-                        GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
+                        GameManager.instance.setCurrentPlayerUUID(message.getPlayerId());
                         gameStarted(message.getGameId(), message.getPlayerId());
                         break;
                     }
-                    case "startTournament": {
+                    case START_TOURNAMENT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         tournamentStarted(message.getGameId(), message.getPlayerId());
                         break;
                     }
-                    case "startDraft": {
+                    case START_DRAFT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         draftStarted(message.getGameId(), message.getPlayerId());
                         break;
                     }
-                    case "replayGame":
+                    case REPLAY_GAME:
                         replayGame(callback.getObjectId());
                         break;
-                    case "showTournament":
+                    case SHOW_TOURNAMENT:
                         showTournament(callback.getObjectId());
                         break;
-                    case "watchGame":
+                    case WATCHGAME:
                         watchGame(callback.getObjectId());
                         break;
-                    case "chatMessage": {
+                    case CHATMESSAGE: {
                         ChatMessage message = (ChatMessage) callback.getData();
+
+                        // Drop messages from ignored users
+                        if (message.getUsername() != null && IgnoreList.IGNORED_MESSAGE_TYPES.contains(message.getMessageType())) {
+                            final String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+                            if (IgnoreList.userIsIgnored(serverAddress, message.getUsername())) {
+                                break;
+                            }
+                        }
+
                         ChatPanelBasic panel = MageFrame.getChat(callback.getObjectId());
                         if (panel != null) {
                             // play the sound related to the message
@@ -134,7 +136,7 @@ public class CallbackClientImpl implements CallbackClient {
                                 createChatStartMessage(panel);
                             }
                             // send the message to subchat if exists and it's not a game message
-                            if (!message.getMessageType().equals(MessageType.GAME) && panel.getConnectedChat() != null) {
+                            if (message.getMessageType() != MessageType.GAME && panel.getConnectedChat() != null) {
                                 panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), ChatMessage.MessageColor.BLACK);
                             } else {
                                 panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), message.getColor());
@@ -143,60 +145,60 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "serverMessage":
+                    case SERVER_MESSAGE:
                         if (callback.getData() != null) {
                             ChatMessage message = (ChatMessage) callback.getData();
-                            if (message.getColor().equals(ChatMessage.MessageColor.RED)) {
+                            if (message.getColor() == ChatMessage.MessageColor.RED) {
                                 JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.WARNING_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
                         break;
-                    case "joinedTable": {
+                    case JOINED_TABLE: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
                         break;
                     }
-                    case "replayInit": {
+                    case REPLAY_INIT: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             panel.init((GameView) callback.getData());
                         }
                         break;
                     }
-                    case "replayDone": {
+                    case REPLAY_DONE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             panel.endMessage((String) callback.getData(), callback.getMessageId());
                         }
                         break;
                     }
-                    case "replayUpdate": {
+                    case REPLAY_UPDATE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             panel.updateGame((GameView) callback.getData());
                         }
                         break;
                     }
-                    case "gameInit": {
+                    case GAME_INIT: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             panel.init((GameView) callback.getData());
                         }
                         break;
                     }
-                    case "gameOver": {
+                    case GAME_OVER: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             panel.endMessage((String) callback.getData(), callback.getMessageId());
                         }
                         break;
                     }
-                    case "gameError":
+                    case GAME_ERROR:
                         frame.showErrorDialog("Game Error", (String) callback.getData());
                         break;
-                    case "gameAsk": {
+                    case GAME_ASK: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -204,7 +206,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "gameTarget": // e.g. Pick triggered ability
+                    case GAME_TARGET: // e.g. Pick triggered ability
                     {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
@@ -214,7 +216,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "gameSelect": {
+                    case GAME_SELECT: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -222,14 +224,14 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "gameChooseAbility": {
+                    case GAME_CHOOSE_ABILITY: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             panel.pickAbility((AbilityPickerView) callback.getData());
                         }
                         break;
                     }
-                    case "gameChoosePile": {
+                    case GAME_CHOOSE_PILE: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -237,7 +239,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "gameChooseChoice": {
+                    case GAME_CHOOSE_CHOICE: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
 
@@ -246,7 +248,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "gamePlayMana": {
+                    case GAME_PLAY_MANA: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -254,7 +256,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "gamePlayXMana": {
+                    case GAME_PLAY_XMANA: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -262,7 +264,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "gameSelectAmount": {
+                    case GAME_GET_AMOUNT: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -270,23 +272,23 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "gameUpdate": {
+                    case GAME_UPDATE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             panel.updateGame((GameView) callback.getData());
                         }
                         break;
                     }
-                    case "endGameInfo":
+                    case END_GAME_INFO:
                         MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
                         break;
-                    case "showUserMessage":
+                    case SHOW_USERMESSAGE:
                         List<String> messageData = (List<String>) callback.getData();
                         if (messageData.size() == 2) {
                             JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
                         }
                         break;
-                    case "gameInform":
+                    case GAME_INFORM:
                         if (callback.getMessageId() > gameInformMessageId) {
                             {
                                 GameClientMessage message = (GameClientMessage) callback.getData();
@@ -302,7 +304,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         gameInformMessageId = messageId;
                         break;
-                    case "gameInformPersonal": {
+                    case GAME_INFORM_PERSONAL: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -311,7 +313,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "sideboard": {
+                    case SIDEBOARD: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         DeckView deckView = message.getDeck();
                         Deck deck = DeckUtil.construct(deckView);
@@ -322,17 +324,24 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "construct": {
+                    case VIEW_LIMITED_DECK: {
+                       TableClientMessage message = (TableClientMessage) callback.getData();
+                       DeckView deckView = message.getDeck();
+                       Deck deck = DeckUtil.construct(deckView);
+                       viewLimitedDeck(deck, message.getTableId(), message.getTime());
+                       break;
+                    }
+                    case CONSTRUCT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         DeckView deckView = message.getDeck();
                         Deck deck = DeckUtil.construct(deckView);
                         construct(deck, message.getTableId(), message.getTime());
                         break;
                     }
-                    case "draftOver":
+                    case DRAFT_OVER:
                         MageFrame.removeDraft(callback.getObjectId());
                         break;
-                    case "draftPick": {
+                    case DRAFT_PICK: {
                         DraftClientMessage message = (DraftClientMessage) callback.getData();
                         DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
                         if (panel != null) {
@@ -340,14 +349,14 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "draftUpdate": {
+                    case DRAFT_UPDATE: {
                         DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
                         if (panel != null) {
                             panel.updateDraft((DraftView) callback.getData());
                         }
                         break;
                     }
-                    case "draftInform": //                            if (callback.getMessageId() > messageId) {
+                    case DRAFT_INFORM: //                            if (callback.getMessageId() > messageId) {
                     {
                         DraftClientMessage message = (DraftClientMessage) callback.getData();
                     }
@@ -355,7 +364,7 @@ public class CallbackClientImpl implements CallbackClient {
 //                                logger.warn("message out of sequence - ignoring");
 //                            }
                     break;
-                    case "draftInit": {
+                    case DRAFT_INIT: {
                         DraftClientMessage message = (DraftClientMessage) callback.getData();
                         DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
                         if (panel != null) {
@@ -363,9 +372,9 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case "tournamentInit":
+                    case TOURNAMENT_INIT:
                         break;
-                    case "userRequestDialog":
+                    case USER_REQUEST_DIALOG:
                         frame.showUserRequestDialog((UserRequestMessage) callback.getData());
                         break;
                 }
@@ -422,6 +431,7 @@ public class CallbackClientImpl implements CallbackClient {
                 usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" menu to the top right .")
                         .append("<br/>Download icons and symbols by using the \"Symbols\" menu to the top right.")
                         .append("<br/>\\list - Show a list of available chat commands.")
+                        .append("<br/>").append(IgnoreList.usage())
                         .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
@@ -445,8 +455,8 @@ public class CallbackClientImpl implements CallbackClient {
             handleException(ex);
         }
 
-        if (Plugins.getInstance().isCounterPluginLoaded()) {
-            Plugins.getInstance().addGamesPlayed();
+        if (Plugins.instance.isCounterPluginLoaded()) {
+            Plugins.instance.addGamesPlayed();
         }
     }
 
@@ -507,6 +517,10 @@ public class CallbackClientImpl implements CallbackClient {
 
     protected void construct(Deck deck, UUID tableId, int time) {
         frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
+    }
+
+    protected void viewLimitedDeck(Deck deck, UUID tableId, int time) {
+        frame.showDeckEditor(DeckEditorMode.VIEW_LIMITED_DECK, deck, tableId, time);
     }
 
     private void handleException(Exception ex) {

@@ -122,7 +122,7 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zce = (ZoneChangeEvent) event;
         if (zce.isDiesEvent()) {
-            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", this.getSourceId());
+            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get(DamagedByWatcher.class.getSimpleName(), this.getSourceId());
             if (watcher != null) {
                 return watcher.wasDamaged(zce.getTarget(), game);
             }

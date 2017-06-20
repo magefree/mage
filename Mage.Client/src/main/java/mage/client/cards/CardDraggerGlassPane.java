@@ -1,6 +1,7 @@
 package mage.client.cards;
 
 import mage.cards.MageCard;
+import mage.client.MagePane;
 import mage.client.plugins.impl.Plugins;
 import mage.view.CardView;
 
@@ -24,9 +25,12 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
     private DragCardTarget currentDragTarget;
     private boolean isDragging;
 
+    // This should not be strictly needed, but for some reason I can't figure out getDeepestComponentAt and
+    // getComponentAt do not seem to work correctly for our setup if called on the root MageFrame.
+    private MagePane currentEventRootMagePane;
+
     public CardDraggerGlassPane(DragCardSource source) {
         this.source = source;
-
     }
 
     public void beginDrag(Component c, MouseEvent e) {
@@ -46,6 +50,17 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         glassPane.setOpaque(false);
         glassPane.setVisible(true);
 
+        // Get root mage pane to handle drag targeting in
+        Component rootMagePane = c;
+        while (rootMagePane != null && !(rootMagePane instanceof MagePane)) {
+            rootMagePane = rootMagePane.getParent();
+        }
+        if (rootMagePane == null) {
+            throw new RuntimeException("CardDraggerGlassPane::beginDrag not in a MagePane?");
+        } else {
+            currentEventRootMagePane = (MagePane)rootMagePane;
+        }
+
         // Hook up events
         c.addMouseListener(this);
         c.addMouseMotionListener(this);
@@ -57,7 +72,7 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         currentCards = new ArrayList<>(source.dragCardList());
 
         // Make a view for the first one and add it to us
-        dragView = Plugins.getInstance().getMageCard(currentCards.get(0), null, new Dimension(100, 140), null, true, false);
+        dragView = Plugins.instance.getMageCard(currentCards.get(0), null, new Dimension(100, 140), null, true, false);
         for (MouseListener l: dragView.getMouseListeners()) {
             dragView.removeMouseListener(l);
         }
@@ -72,19 +87,19 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
 
         // Update the target
         currentDragTarget = null;
-        updateCurrentTarget(SwingUtilities.convertMouseEvent(glassPane, e, currentRoot), false);
+        updateCurrentTarget(SwingUtilities.convertMouseEvent(glassPane, e, currentEventRootMagePane), false);
     }
 
     // e is relative to currentRoot
     private void updateCurrentTarget(MouseEvent e, boolean isEnding) {
-        Component mouseOver = SwingUtilities.getDeepestComponentAt(currentRoot.getContentPane(), e.getX(), e.getY());
+        Component mouseOver = SwingUtilities.getDeepestComponentAt(currentEventRootMagePane, e.getX(), e.getY());
         while (mouseOver != null) {
             if (mouseOver instanceof DragCardTarget) {
                 DragCardTarget target = (DragCardTarget)mouseOver;
-                MouseEvent targetEvent = SwingUtilities.convertMouseEvent(currentRoot, e, mouseOver);
+                MouseEvent targetEvent = SwingUtilities.convertMouseEvent(currentEventRootMagePane, e, mouseOver);
                 if (target != currentDragTarget) {
                     if (currentDragTarget != null) {
-                        MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(currentRoot, e, (Component) currentDragTarget);
+                        MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(currentEventRootMagePane, e, (Component) currentDragTarget);
                         currentDragTarget.dragCardExit(oldTargetEvent);
                     }
                     currentDragTarget = target;
@@ -101,7 +116,7 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
             mouseOver = mouseOver.getParent();
         }
         if (currentDragTarget != null) {
-            MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(currentRoot, e, (Component)currentDragTarget);
+            MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(currentEventRootMagePane, e, (Component)currentDragTarget);
             currentDragTarget.dragCardExit(oldTargetEvent);
         }
         currentDragTarget = null;
@@ -124,7 +139,7 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         dragComponent.removeMouseMotionListener(this);
 
         // Convert the event into root coords
-        e = SwingUtilities.convertMouseEvent(dragComponent, e, currentRoot);
+        e = SwingUtilities.convertMouseEvent(dragComponent, e, currentEventRootMagePane);
 
         // Remove the drag card
         glassPane.remove(dragView);
@@ -144,7 +159,7 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         dragView.setLocation(glassE.getX(), glassE.getY());
         dragView.repaint();
         // Convert the event into root coords and update target
-        e = SwingUtilities.convertMouseEvent(dragComponent, e, currentRoot);
+        e = SwingUtilities.convertMouseEvent(dragComponent, e, currentEventRootMagePane);
         updateCurrentTarget(e, false);
     }
 

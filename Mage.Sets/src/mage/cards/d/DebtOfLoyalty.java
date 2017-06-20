@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -38,6 +37,8 @@ import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +63,7 @@ public class DebtOfLoyalty extends CardImpl {
         return new DebtOfLoyalty(this);
     }
     
-    class DebtOfLoyaltyEffect extends RegenerateTargetEffect {
+    static class DebtOfLoyaltyEffect extends RegenerateTargetEffect {
         public DebtOfLoyaltyEffect ( ) {
             super();
             this.staticText = "Regenerate target creature. You gain control of that creature if it regenerates this way.";

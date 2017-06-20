@@ -39,7 +39,10 @@ import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -48,10 +51,7 @@ import mage.players.Player;
 
 import java.util.UUID;
 
-import static mage.abilities.condition.common.TopLibraryCardTypeCondition.CheckType.CREATURE;
-
 /**
- *
  * @author jeffwadsworth
  */
 public class CrownOfConvergence extends CardImpl {
@@ -59,13 +59,13 @@ public class CrownOfConvergence extends CardImpl {
     private static final String rule1 = "As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1";
 
     public CrownOfConvergence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
 
         // As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new CrownOfConvergenceColorBoostEffect(), new TopLibraryCardTypeCondition(CREATURE), rule1);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new CrownOfConvergenceColorBoostEffect(), new TopLibraryCardTypeCondition(CardType.CREATURE), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // {G}{W}: Put the top card of your library on the bottom of your library.
@@ -82,19 +82,19 @@ public class CrownOfConvergence extends CardImpl {
     }
 }
 
-class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
+class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
     private static final String effectText = "creatures you control that share a color with that card get +1/+1";
 
     CrownOfConvergenceColorBoostEffect() {
-    super(1,1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
-    staticText = effectText;
+        super(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        staticText = effectText;
     }
 
     CrownOfConvergenceColorBoostEffect(CrownOfConvergenceColorBoostEffect effect) {
-    super(effect);
+        super(effect);
     }
 
     @Override
@@ -103,7 +103,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
         if (you != null) {
             Card topCard = you.getLibrary().getFromTop(game);
             if (topCard != null) {
-                for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     if (permanent.getColor(game).shares(topCard.getColor(game)) && !permanent.getColor(game).isColorless()) {
                         permanent.addPower(power.calculate(game, source, this));
                         permanent.addToughness(toughness.calculate(game, source, this));
@@ -124,8 +124,8 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
 class CrownOfConvergenceEffect extends OneShotEffect {
 
     public CrownOfConvergenceEffect() {
-    super(Outcome.Neutral);
-    staticText = "Put the top card of your library on the bottom of your library";
+        super(Outcome.Neutral);
+        staticText = "Put the top card of your library on the bottom of your library";
     }
 
     public CrownOfConvergenceEffect(final CrownOfConvergenceEffect effect) {

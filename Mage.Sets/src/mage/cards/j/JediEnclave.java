@@ -27,8 +27,6 @@
  */
 package mage.cards.j;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -37,9 +35,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -47,6 +43,9 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -74,7 +73,7 @@ public class JediEnclave extends CardImpl {
         return new JediEnclave(this);
     }
 
-    public class JediEnclaveAbility extends ActivatedAbilityImpl {
+    public static class JediEnclaveAbility extends ActivatedAbilityImpl {
 
         public JediEnclaveAbility(JediEnclaveAbility ability) {
             super(ability);
@@ -87,11 +86,11 @@ public class JediEnclave extends CardImpl {
             FilterCard filter = new FilterCard("basic Forest, Plains or Island");
             filter.add(new CardTypePredicate(CardType.LAND));
             ArrayList<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
-            subtypePredicates.add(new SubtypePredicate("Forest"));
-            subtypePredicates.add(new SubtypePredicate("Plains"));
-            subtypePredicates.add(new SubtypePredicate("Island"));
+            subtypePredicates.add(new SubtypePredicate(SubType.FOREST));
+            subtypePredicates.add(new SubtypePredicate(SubType.PLAINS));
+            subtypePredicates.add(new SubtypePredicate(SubType.ISLAND));
             filter.add(Predicates.or(subtypePredicates));
-            filter.add(new SupertypePredicate("Basic"));
+            filter.add(new SupertypePredicate(SuperType.BASIC));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
         }

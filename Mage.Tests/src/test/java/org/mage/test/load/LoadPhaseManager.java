@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class LoadPhaseManager {
 
-    private static final LoadPhaseManager fInstance = new LoadPhaseManager();
+    private static final LoadPhaseManager instance = new LoadPhaseManager();
 
     public static String DEFAULT_PLAYER_NAME = "player";
 
@@ -52,7 +52,7 @@ public class LoadPhaseManager {
     }};
 
     public static LoadPhaseManager getInstance() {
-        return fInstance;
+        return instance;
     }
 
     public boolean isSkip(GameView gameView, String message, UUID playerId) {

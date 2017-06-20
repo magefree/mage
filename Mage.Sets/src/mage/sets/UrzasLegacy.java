@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class UrzasLegacy extends ExpansionSet {
 
-    private static final UrzasLegacy fINSTANCE = new UrzasLegacy();
+    private static final UrzasLegacy instance = new UrzasLegacy();
 
     public static UrzasLegacy getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private UrzasLegacy() {

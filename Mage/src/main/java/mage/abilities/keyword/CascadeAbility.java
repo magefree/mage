@@ -33,8 +33,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.SplitCard;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.ExileZone;
@@ -120,7 +118,7 @@ class CascadeEffect extends OneShotEffect {
             }
             controller.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
         } while (controller.isInGame()
-                && (card.getCardType().contains(CardType.LAND)
+                && (card.isLand()
                 || !cardThatCostsLess(sourceCost, card, game)));
 
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
@@ -148,11 +146,8 @@ class CascadeEffect extends OneShotEffect {
     }
 
     private boolean cardThatCostsLess(int value, Card card, Game game) {
-        if (card instanceof SplitCard) {
-            return ((SplitCard) card).getLeftHalfCard().getConvertedManaCost() < value
-                    || ((SplitCard) card).getRightHalfCard().getConvertedManaCost() < value;
-        } else {
-            return card.getConvertedManaCost() < value;
-        }
+
+        return card.getConvertedManaCost() < value;
+
     }
 }

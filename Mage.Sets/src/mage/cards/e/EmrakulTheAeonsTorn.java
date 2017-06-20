@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
@@ -40,9 +39,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -57,7 +59,7 @@ public class EmrakulTheAeonsTorn extends CardImpl {
 
     public EmrakulTheAeonsTorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{15}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Eldrazi");
         this.power = new MageInt(15);
         this.toughness = new MageInt(15);

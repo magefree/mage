@@ -27,15 +27,17 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +48,7 @@ public class Dragonstorm extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Dragon permanent card");
 
     static {
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     public Dragonstorm(UUID ownerId, CardSetInfo setInfo) {

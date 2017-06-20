@@ -28,7 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -38,7 +37,7 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PhyrexianRebirthHorrorToken;
 
 /**
  *
@@ -47,7 +46,7 @@ import mage.game.permanent.token.Token;
 public class PhyrexianRebirth extends CardImpl {
 
     public PhyrexianRebirth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
 
         // Destroy all creatures, then create an X/X colorless Horror artifact creature token, where X is the number of creatures destroyed this way.
         this.getSpellAbility().addEffect(new PhyrexianRebirthEffect());
@@ -79,7 +78,7 @@ public class PhyrexianRebirth extends CardImpl {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 count += permanent.destroy(source.getSourceId(), game, false) ? 1 : 0;
             }
-            HorrorToken horrorToken = new HorrorToken();
+            PhyrexianRebirthHorrorToken horrorToken = new PhyrexianRebirthHorrorToken();
             horrorToken.getPower().modifyBaseValue(count);
             horrorToken.getToughness().modifyBaseValue(count);
             horrorToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
@@ -93,15 +92,4 @@ public class PhyrexianRebirth extends CardImpl {
 
     }
 
-    class HorrorToken extends Token {
-
-        public HorrorToken() {
-            super("Horror", "X/X colorless Horror artifact creature token");
-            cardType.add(CardType.ARTIFACT);
-            cardType.add(CardType.CREATURE);
-            subtype.add("Horror");
-            power = new MageInt(0);
-            toughness = new MageInt(0);
-        }
-    }
 }

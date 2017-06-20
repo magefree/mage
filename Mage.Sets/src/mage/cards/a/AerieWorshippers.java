@@ -32,12 +32,11 @@ import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.AerieWorshippersBirdToken;
 
 /**
  *
@@ -46,7 +45,7 @@ import mage.game.permanent.token.Token;
 public class AerieWorshippers extends CardImpl {
 
     public AerieWorshippers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 
@@ -64,21 +63,5 @@ public class AerieWorshippers extends CardImpl {
     @Override
     public AerieWorshippers copy() {
         return new AerieWorshippers(this);
-    }
-}
-
-class AerieWorshippersBirdToken extends Token {
-
-    public AerieWorshippersBirdToken() {
-        super("Bird", "2/2 blue Bird enchantment creature token with flying");
-        cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Bird");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
-        this.setOriginalExpansionSetCode("BNG");
-        this.setTokenType(2);
     }
 }

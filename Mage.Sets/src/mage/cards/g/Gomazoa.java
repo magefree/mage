@@ -27,9 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -48,6 +45,10 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -111,7 +112,7 @@ class GomazoaEffect extends OneShotEffect {
                 players.add(gomazoa.getOwnerId());
             }
 
-            BlockedByWatcher watcher = (BlockedByWatcher) game.getState().getWatchers().get("BlockedByWatcher", source.getSourceId());
+            BlockedByWatcher watcher = (BlockedByWatcher) game.getState().getWatchers().get(BlockedByWatcher.class.getSimpleName(), source.getSourceId());
             creaturesBlocked = watcher.blockedByWatcher;
 
             for (UUID blockedById : creaturesBlocked) {
@@ -142,7 +143,7 @@ class BlockedByWatcher extends Watcher {
     public List<UUID> blockedByWatcher = new ArrayList<>();
 
     public BlockedByWatcher() {
-        super("BlockedByWatcher", WatcherScope.CARD);
+        super(BlockedByWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public BlockedByWatcher(final BlockedByWatcher watcher) {

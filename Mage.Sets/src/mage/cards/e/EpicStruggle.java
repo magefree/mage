@@ -27,7 +27,7 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -37,6 +37,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +54,7 @@ public class EpicStruggle extends CardImpl {
         // At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 19),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 19),
                 "At the beginning of your upkeep, if you control twenty or more creatures, you win the game."));
     }
 

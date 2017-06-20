@@ -103,9 +103,9 @@ class LoxodonGatekeeperTapEffect extends ReplacementEffectImpl {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
             if (permanent != null
-                    && (permanent.getCardType().contains(CardType.CREATURE)
-                    || permanent.getCardType().contains(CardType.LAND)
-                    || permanent.getCardType().contains(CardType.ARTIFACT))) {
+                    && (permanent.isCreature()
+                    || permanent.isLand()
+                    || permanent.isArtifact())) {
                 return true;
             }
         }

@@ -59,7 +59,7 @@ public class WhispererOfTheWilds extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // Ferocious - {T}: Add {G}{G} to your mana pool. Activate this ability only if you control a creature with power 4 or greater.
-        Ability ability = new ActivateIfConditionManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(2)), new TapSourceCost(), FerociousCondition.getInstance());
+        Ability ability = new ActivateIfConditionManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(2)), new TapSourceCost(), FerociousCondition.instance);
         ability.setAbilityWord(AbilityWord.FEROCIOUS);
         this.addAbility(ability);
     }

@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,8 +36,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +48,7 @@ import mage.filter.FilterPermanent;
  */
 public class GemhideSliver extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Sliver", "All Slivers");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
     public GemhideSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

@@ -38,7 +38,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.SuperType;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -47,8 +48,8 @@ import mage.filter.common.FilterCreaturePermanent;
 public class MillenniumFalcon extends CardImpl {
 
     public MillenniumFalcon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{G}{G}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{G}{G}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Starship");
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
@@ -60,7 +61,7 @@ public class MillenniumFalcon extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
 
         //  When Millennium Falcon enters the battlefield, creatures you control gain hexproof until end of turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures"))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES)));
     }
 
     public MillenniumFalcon(final MillenniumFalcon card) {

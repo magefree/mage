@@ -27,13 +27,13 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
 import mage.cards.e.ErtaiTheCorrupted;
 import mage.cards.s.SkyshipWeatherlight;
 import mage.cards.t.TahngarthTalruumHero;
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -41,10 +41,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class Planeshift extends ExpansionSet {
 
-    private static final Planeshift fINSTANCE = new Planeshift();
+    private static final Planeshift instance = new Planeshift();
 
     public static Planeshift getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Planeshift() {

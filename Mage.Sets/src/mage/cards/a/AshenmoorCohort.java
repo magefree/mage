@@ -27,13 +27,12 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -45,8 +44,9 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class AshenmoorCohort extends CardImpl {
@@ -61,7 +61,7 @@ public class AshenmoorCohort extends CardImpl {
     private static final String rule = "Ashenmoor Cohort gets +1/+1 as long as you control another black creature";
 
     public AshenmoorCohort(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.subtype.add("Elemental");
         this.subtype.add("Warrior");
 
@@ -69,7 +69,7 @@ public class AshenmoorCohort extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ashenmoor Cohort gets +1/+1 as long as you control another black creature.
-        Condition condition = new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0);
+        Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

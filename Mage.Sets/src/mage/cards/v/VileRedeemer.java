@@ -29,6 +29,7 @@ package mage.cards.v;
 
 import java.util.HashMap;
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -52,13 +53,12 @@ import mage.players.Player;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author LevelX2
  */
 public class VileRedeemer extends CardImpl {
 
     public VileRedeemer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -103,7 +103,7 @@ class VileRedeemerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            VileRedeemerNonTokenCreaturesDiedWatcher watcher = (VileRedeemerNonTokenCreaturesDiedWatcher) game.getState().getWatchers().get("VileRedeemerNonTokenCreaturesDiedWatcher");
+            VileRedeemerNonTokenCreaturesDiedWatcher watcher = (VileRedeemerNonTokenCreaturesDiedWatcher) game.getState().getWatchers().get(VileRedeemerNonTokenCreaturesDiedWatcher.class.getSimpleName());
             if (watcher != null) {
                 int amount = watcher.getAmountOfNontokenCreatureDiedThisTurn(controller.getId());
                 if (amount > 0) {
@@ -121,7 +121,7 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
     private final HashMap<UUID, Integer> amountOfCreaturesThatDied = new HashMap<>();
 
     public VileRedeemerNonTokenCreaturesDiedWatcher() {
-        super("VileRedeemerNonTokenCreaturesDiedWatcher", WatcherScope.GAME);
+        super(VileRedeemerNonTokenCreaturesDiedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public VileRedeemerNonTokenCreaturesDiedWatcher(final VileRedeemerNonTokenCreaturesDiedWatcher watcher) {
@@ -134,10 +134,9 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.isDiesEvent() && zEvent.getTarget() != null
-                    && zEvent.getTarget().getCardType().contains(CardType.CREATURE)
+                    && zEvent.getTarget().isCreature()
                     && !(zEvent.getTarget() instanceof PermanentToken)) {
-                int count = amountOfCreaturesThatDied.containsKey(zEvent.getTarget().getControllerId())
-                        ? amountOfCreaturesThatDied.get(zEvent.getTarget().getControllerId()) : 0;
+                int count = getAmountOfNontokenCreatureDiedThisTurn(zEvent.getTargetId());
                 amountOfCreaturesThatDied.put(zEvent.getTarget().getControllerId(), ++count);
             }
         }
@@ -150,7 +149,7 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
     }
 
     public int getAmountOfNontokenCreatureDiedThisTurn(UUID playerId) {
-        return amountOfCreaturesThatDied.containsKey(playerId) ? amountOfCreaturesThatDied.get(playerId) : 0;
+        return amountOfCreaturesThatDied.getOrDefault(playerId, 0);
     }
 
     @Override

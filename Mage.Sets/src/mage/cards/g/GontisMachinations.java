@@ -27,9 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,8 +44,11 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class GontisMachinations extends CardImpl {
@@ -95,7 +95,7 @@ class GontisMachinationsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
             GontisMachinationsFirstLostLifeThisTurnWatcher watcher
-                    = (GontisMachinationsFirstLostLifeThisTurnWatcher) game.getState().getWatchers().get(GontisMachinationsFirstLostLifeThisTurnWatcher.class.getName());
+                    = (GontisMachinationsFirstLostLifeThisTurnWatcher) game.getState().getWatchers().get(GontisMachinationsFirstLostLifeThisTurnWatcher.class.getSimpleName());
             if (watcher != null && watcher.timesLostLifeThisTurn(event.getTargetId()) < 2) {
                 return true;
             }
@@ -119,7 +119,7 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
     private final Map<UUID, Integer> playersLostLife = new HashMap<>();
 
     public GontisMachinationsFirstLostLifeThisTurnWatcher() {
-        super(GontisMachinationsFirstLostLifeThisTurnWatcher.class.getName(), WatcherScope.GAME);
+        super(GontisMachinationsFirstLostLifeThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public GontisMachinationsFirstLostLifeThisTurnWatcher(final GontisMachinationsFirstLostLifeThisTurnWatcher watcher) {
@@ -131,10 +131,8 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
             case LOST_LIFE:
-                int timesLifeLost = 0;
-                if (playersLostLife.containsKey(event.getTargetId())) {
-                    timesLifeLost = playersLostLife.get(event.getTargetId());
-                }
+                int timesLifeLost = playersLostLife.getOrDefault(event.getTargetId(), 0);
+                timesLifeLost++;
                 playersLostLife.put(event.getTargetId(), timesLifeLost);
         }
     }
@@ -151,10 +149,7 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
     }
 
     public int timesLostLifeThisTurn(UUID playerId) {
-        if (playersLostLife.containsKey(playerId)) {
-            return playersLostLife.get(playerId);
-        }
-        return 0;
+        return playersLostLife.getOrDefault(playerId, 0);
     }
 }
 

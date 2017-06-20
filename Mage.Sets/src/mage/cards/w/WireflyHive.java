@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WireflyToken;
 
 /**
  *
@@ -68,18 +68,5 @@ public class WireflyHive extends CardImpl {
     @Override
     public WireflyHive copy() {
         return new WireflyHive(this);
-    }
-}
-
-class WireflyToken extends Token {
-
-    WireflyToken() {
-        super("Wirefly", "2/2 colorless Insect artifact creature token named Wirefly");
-        this.setOriginalExpansionSetCode("DST");
-        this.getPower().modifyBaseValue(2);
-        this.getToughness().modifyBaseValue(2);
-        this.getSubtype(null).add("Insect");
-        this.getCardType().add(CardType.ARTIFACT);
-        this.getCardType().add(CardType.CREATURE);
     }
 }

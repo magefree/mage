@@ -28,10 +28,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -43,10 +39,14 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -92,7 +92,7 @@ class CarnifexDemonEffect extends OneShotEffect {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
             for (Permanent t : game.getBattlefield().getAllActivePermanents()) {
-                if (t.getCardType().contains(CardType.CREATURE) && !t.getId().equals(source.getSourceId()))
+                if (t.isCreature() && !t.getId().equals(source.getSourceId()))
                     t.addCounters(CounterType.M1M1.createInstance(), source, game);
             }
         }

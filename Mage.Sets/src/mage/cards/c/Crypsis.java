@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -42,13 +41,15 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
  */
 public class Crypsis extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("creatures your opponents control");
+    static final FilterCard filter = new FilterCard("creatures your opponents control");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

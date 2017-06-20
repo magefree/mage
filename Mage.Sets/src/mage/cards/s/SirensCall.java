@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -54,11 +55,11 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 public class SirensCall extends CardImpl {
 
     public SirensCall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Cast Siren's Call only during an opponent's turn, before attackers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,
-                new CompoundCondition(OnOpponentsTurnCondition.getInstance(), BeforeAttackersAreDeclaredCondition.getInstance()),
+                new CompoundCondition(OnOpponentsTurnCondition.instance, BeforeAttackersAreDeclaredCondition.instance),
                 "Cast {this} only during an opponent's turn, before attackers are declared"));
 
         // Creatures the active player controls attack this turn if able.
@@ -133,18 +134,19 @@ class SirensCallDestroyEffect extends OneShotEffect {
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(player.getId())) {
-                                
-                   // Non Creature Cards are safe.
-                if(!permanent.getCardType().contains(CardType.CREATURE))
-                    continue;  
-                
+
+                // Non Creature Cards are safe.
+                if (!permanent.isCreature()) {
+                    continue;
+                }
+
                 // Walls are safe.
-                if (permanent.getSubtype(game).contains("Wall")) {
+                if (permanent.hasSubtype("Wall", game)) {
                     continue;
                 }
                 // Creatures that attacked are safe.
-                AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
-                if (watcher != null && watcher.getAttackedThisTurnCreatures().contains(permanent.getId())) {
+                AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+                if (watcher != null && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     continue;
                 }
                 // Creatures that weren't controlled since the beginning of turn are safe.

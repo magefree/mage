@@ -39,10 +39,10 @@ import mage.constants.SetType;
  */
 public class StarWars extends ExpansionSet {
 
-    private static final StarWars fINSTANCE = new StarWars();
+    private static final StarWars instance = new StarWars();
 
     public static StarWars getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private StarWars() {

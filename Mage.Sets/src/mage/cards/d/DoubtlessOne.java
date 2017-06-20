@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,9 +36,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +52,7 @@ public class DoubtlessOne extends CardImpl {
     final static FilterPermanent filter = new FilterPermanent("Clerics on the battlefield");
 
         static {
-            filter.add(new SubtypePredicate("Cleric"));
+            filter.add(new SubtypePredicate(SubType.CLERIC));
         }
 
     public DoubtlessOne(UUID ownerId, CardSetInfo setInfo) {

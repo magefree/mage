@@ -83,10 +83,10 @@ import mage.target.common.TargetOpponent;
  */
 public class ClashEffect extends OneShotEffect implements MageSingleton {
 
-    private static final ClashEffect fINSTANCE = new ClashEffect();
+    private static final ClashEffect instance = new ClashEffect();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     private ClashEffect() {
@@ -95,7 +95,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
     }
 
     public static ClashEffect getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     public ClashEffect(final ClashEffect effect) {
@@ -128,7 +128,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     // Reveal top cards of involved players
                     StringBuilder message = new StringBuilder("Clash: ");
                     message.append(controller.getLogName());
-                    if (controller.getLibrary().size() > 0) {
+                    if (controller.getLibrary().hasCards()) {
                         Cards cards = new CardsImpl();
                         cardController = controller.getLibrary().getFromTop(game);
                         cards.add(cardController);
@@ -139,7 +139,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                         message.append(" no card");
                     }
                     message.append(" vs. ").append(opponent.getLogName());
-                    if (opponent.getLibrary().size() > 0) {
+                    if (opponent.getLibrary().hasCards()) {
                         Cards cards = new CardsImpl();
                         cardOpponent = opponent.getLibrary().getFromTop(game);
                         cards.add(cardOpponent);

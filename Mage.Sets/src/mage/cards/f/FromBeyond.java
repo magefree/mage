@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,12 +38,15 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.EldraziScionToken;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class FromBeyond extends CardImpl {
     private static final FilterCard filter = new FilterCard("Eldrazi card");
 
     static {
-        filter.add(new SubtypePredicate("Eldrazi"));
+        filter.add(new SubtypePredicate(SubType.ELDRAZI));
     }
 
     public FromBeyond(UUID ownerId, CardSetInfo setInfo) {

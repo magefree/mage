@@ -20,7 +20,7 @@ import java.util.Map;
  *
  * @author user
  */
-public class TransformedImageCache {
+public final class TransformedImageCache {
 
     private final static class Key {
 
@@ -68,7 +68,7 @@ public class TransformedImageCache {
         }
     }
 
-    static final Map<Key, Map<BufferedImage, BufferedImage>> IMAGE_CACHE;
+    private static final Map<Key, Map<BufferedImage, BufferedImage>> IMAGE_CACHE;
 
     static {
         // TODO: can we use a single map?
@@ -85,17 +85,17 @@ public class TransformedImageCache {
 
     private static BufferedImage rotateImage(BufferedImage image, double angle) {
         double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
-        int w = image.getWidth(), h = image.getHeight();
-        int neww = (int) Math.floor(w * cos + h * sin), newh = (int) Math.floor(h * cos + w * sin);
+        int width = image.getWidth(), height = image.getHeight();
+        int newWidth = (int) Math.floor(width * cos + height * sin), newHeight = (int) Math.floor(height * cos + width * sin);
 
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gs = ge.getDefaultScreenDevice();
         GraphicsConfiguration gc = gs.getDefaultConfiguration();
 
-        BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
+        BufferedImage result = gc.createCompatibleImage(newWidth, newHeight, Transparency.TRANSLUCENT);
         Graphics2D g = result.createGraphics();
-        g.translate((neww - w) / 2, (newh - h) / 2);
-        g.rotate(angle, w / 2, h / 2);
+        g.translate((newWidth - width) / 2, (newHeight - height) / 2);
+        g.rotate(angle, width / 2, height / 2);
         g.drawRenderedImage(image, null);
         g.dispose();
         return result;

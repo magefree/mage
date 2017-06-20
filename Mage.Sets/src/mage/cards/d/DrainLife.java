@@ -27,8 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.VariableManaCost;
@@ -43,6 +41,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author KholdFuzion
@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class DrainLife extends CardImpl {
 
-    public static final FilterMana filterBlack = new FilterMana();
+    static final FilterMana filterBlack = new FilterMana();
 
     static {
         filterBlack.setBlack(true);

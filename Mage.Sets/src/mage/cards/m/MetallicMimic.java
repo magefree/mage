@@ -106,7 +106,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
         Permanent enteringCreature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (enteringCreature != null && sourcePermanent != null
                 && enteringCreature.getControllerId().equals(source.getControllerId())
-                && enteringCreature.getCardType().contains(CardType.CREATURE)
+                && enteringCreature.isCreature()
                 && !event.getTargetId().equals(source.getSourceId())) {
             String subtype = (String) game.getState().getValue(sourcePermanent.getId() + "_type");
             return subtype != null && enteringCreature.getSubtype(game).contains(subtype);
@@ -123,7 +123,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(), source, game);
+            creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
         }
         return false;
     }

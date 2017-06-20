@@ -36,10 +36,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -49,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class RagebloodShaman extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaur", "Minotaur creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.MINOTAUR, "Minotaur creatures");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }

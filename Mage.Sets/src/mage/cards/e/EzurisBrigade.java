@@ -28,10 +28,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,13 +39,18 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
 public class EzurisBrigade extends CardImpl {
-    private final String text = "Metalcraft - As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample";
+    private static final String text = "Metalcraft - As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample";
 
     public EzurisBrigade (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
@@ -59,9 +60,9 @@ public class EzurisBrigade extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         ContinuousEffect boostSource = new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield);
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.getInstance(), text);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance, text);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), MetalcraftCondition.getInstance(), ""));
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), MetalcraftCondition.instance, ""));
         this.addAbility(ability);
     }
 

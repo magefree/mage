@@ -53,7 +53,7 @@ import java.util.UUID;
 public class BriselaVoiceOfNightmares extends MeldCard {
     public BriselaVoiceOfNightmares(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Eldrazi");
         this.subtype.add("Angel");
         this.power = new MageInt(9);

@@ -37,10 +37,10 @@ import mage.cards.CardGraphicInfo;
  * @author North
  */
 public class Invasion extends ExpansionSet {
-    private static final Invasion fINSTANCE = new Invasion();
+    private static final Invasion instance = new Invasion();
 
     public static Invasion getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Invasion() {
@@ -286,6 +286,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Slimy Kavu", 170, Rarity.COMMON, mage.cards.s.SlimyKavu.class));
         cards.add(new SetCardInfo("Slinking Serpent", 274, Rarity.UNCOMMON, mage.cards.s.SlinkingSerpent.class));
         cards.add(new SetCardInfo("Smoldering Tar", 275, Rarity.UNCOMMON, mage.cards.s.SmolderingTar.class));
+        cards.add(new SetCardInfo("Soul Burn", 351, Rarity.COMMON, mage.cards.s.SoulBurn.class));
         cards.add(new SetCardInfo("Sparring Golem", 312, Rarity.UNCOMMON, mage.cards.s.SparringGolem.class));
         cards.add(new SetCardInfo("Spinal Embrace", 276, Rarity.RARE, mage.cards.s.SpinalEmbrace.class));
         cards.add(new SetCardInfo("Spirit of Resistance", 38, Rarity.RARE, mage.cards.s.SpiritOfResistance.class));

@@ -57,7 +57,7 @@ public class UmezawasJitte extends CardImpl {
 
     public UmezawasJitte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Equipment");
 
         // Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.
@@ -135,7 +135,7 @@ class UmezawasJitteAbility extends TriggeredAbilityImpl {
                 return true;
             }
         }
-        if (event.getType().equals(EventType.COMBAT_DAMAGE_STEP_PRE)) {
+        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_PRE) {
             usedInPhase = false;
         }
         return false;

@@ -27,9 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,10 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,15 +44,18 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.ZombieToken;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public class OathOfLiliana extends CardImpl {
 
     public OathOfLiliana(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
+        addSuperType(SuperType.LEGENDARY);
 
         // When Oath of Liliana enters the battlefield, each opponent sacrifices a creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent("a creature")), false));
@@ -66,7 +63,7 @@ public class OathOfLiliana extends CardImpl {
         // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(new ZombieToken()),
-                TargetController.ANY, false), OathOfLilianaCondition.getInstance(),
+                TargetController.ANY, false), OathOfLilianaCondition.instance,
                 "At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, "
                         + "create a 2/2 black Zombie creature token."), new OathOfLilianaWatcher());
     }
@@ -81,17 +78,13 @@ public class OathOfLiliana extends CardImpl {
     }
 }
 
-class OathOfLilianaCondition implements Condition {
+enum OathOfLilianaCondition implements Condition {
 
-    private static final OathOfLilianaCondition fInstance = new OathOfLilianaCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        OathOfLilianaWatcher watcher = (OathOfLilianaWatcher) game.getState().getWatchers().get("OathOfLilianaWatcher");
+        OathOfLilianaWatcher watcher = (OathOfLilianaWatcher) game.getState().getWatchers().get(OathOfLilianaWatcher.class.getSimpleName());
         return watcher != null && watcher.enteredPlaneswalkerForPlayer(source.getControllerId());
     }
 
@@ -107,7 +100,7 @@ class OathOfLilianaWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public OathOfLilianaWatcher() {
-        super("OathOfLilianaWatcher", WatcherScope.GAME);
+        super(OathOfLilianaWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public OathOfLilianaWatcher(final OathOfLilianaWatcher watcher) {
@@ -119,8 +112,8 @@ class OathOfLilianaWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone().equals(Zone.BATTLEFIELD)
-                    && zEvent.getTarget().getCardType().contains(CardType.PLANESWALKER)) {
+            if (zEvent.getToZone() == Zone.BATTLEFIELD
+                    && zEvent.getTarget().isPlaneswalker()) {
                 players.add(zEvent.getTarget().getControllerId());
             }
         }

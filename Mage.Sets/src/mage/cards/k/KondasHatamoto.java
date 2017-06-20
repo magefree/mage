@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -38,12 +37,12 @@ import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,8 +55,8 @@ public class KondasHatamoto extends CardImpl {
     private static final String rule2 = "As long as you control a legendary Samurai, {this} has vigilance";
 
     static {
-        filter.add(new SupertypePredicate("Legendary"));
-        filter.add(new SubtypePredicate("Samurai"));
+        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(new SubtypePredicate(SubType.SAMURAI));
     }
 
     public KondasHatamoto (UUID ownerId, CardSetInfo setInfo) {

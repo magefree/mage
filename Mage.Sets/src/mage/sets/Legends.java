@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Legends extends ExpansionSet {
 
-    private static final Legends fINSTANCE = new Legends();
+    private static final Legends instance = new Legends();
 
     public static Legends getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Legends() {
@@ -60,12 +60,14 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Aisling Leprechaun", 87, Rarity.COMMON, mage.cards.a.AislingLeprechaun.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 170, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
         cards.add(new SetCardInfo("Alchor's Tomb", 214, Rarity.RARE, mage.cards.a.AlchorsTomb.class));
+        cards.add(new SetCardInfo("All Hallow's Eve", 2, Rarity.RARE, mage.cards.a.AllHallowsEve.class));
         cards.add(new SetCardInfo("Amrou Kithkin", 172, Rarity.COMMON, mage.cards.a.AmrouKithkin.class));
         cards.add(new SetCardInfo("Angus Mackenzie", 257, Rarity.RARE, mage.cards.a.AngusMackenzie.class));
         cards.add(new SetCardInfo("Arcades Sabboth", 258, Rarity.RARE, mage.cards.a.ArcadesSabboth.class));
         cards.add(new SetCardInfo("Arena of the Ancients", 215, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));
         cards.add(new SetCardInfo("Avoid Fate", 89, Rarity.COMMON, mage.cards.a.AvoidFate.class));
         cards.add(new SetCardInfo("Azure Drake", 46, Rarity.UNCOMMON, mage.cards.a.AzureDrake.class));
+        cards.add(new SetCardInfo("Backfire", 47, Rarity.UNCOMMON, mage.cards.b.Backfire.class));
         cards.add(new SetCardInfo("Barbary Apes", 90, Rarity.COMMON, mage.cards.b.BarbaryApes.class));
         cards.add(new SetCardInfo("Barktooth Warbeard", 261, Rarity.UNCOMMON, mage.cards.b.BarktoothWarbeard.class));
         cards.add(new SetCardInfo("Bartel Runeaxe", 262, Rarity.RARE, mage.cards.b.BartelRuneaxe.class));
@@ -151,6 +153,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Lady Caleria", 279, Rarity.RARE, mage.cards.l.LadyCaleria.class));
         cards.add(new SetCardInfo("Lady Evangela", 280, Rarity.RARE, mage.cards.l.LadyEvangela.class));
         cards.add(new SetCardInfo("Lady Orca", 281, Rarity.UNCOMMON, mage.cards.l.LadyOrca.class));
+        cards.add(new SetCardInfo("Land Equilibrium", 64, Rarity.RARE, mage.cards.l.LandEquilibrium.class));
         cards.add(new SetCardInfo("Land Tax", 195, Rarity.UNCOMMON, mage.cards.l.LandTax.class));
         cards.add(new SetCardInfo("Lifeblood", 196, Rarity.RARE, mage.cards.l.Lifeblood.class));
         cards.add(new SetCardInfo("Living Plane", 107, Rarity.RARE, mage.cards.l.LivingPlane.class));
@@ -235,6 +238,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Earth", 166, Rarity.COMMON, mage.cards.w.WallOfEarth.class));
         cards.add(new SetCardInfo("Wall of Heat", 167, Rarity.COMMON, mage.cards.w.WallOfHeat.class));
         cards.add(new SetCardInfo("Wall of Light", 212, Rarity.UNCOMMON, mage.cards.w.WallOfLight.class));
+        cards.add(new SetCardInfo("Wall of Opposition", 168, Rarity.RARE, mage.cards.w.WallOfOpposition.class));
         cards.add(new SetCardInfo("Wall of Putrid Flesh", 41, Rarity.UNCOMMON, mage.cards.w.WallOfPutridFlesh.class));
         cards.add(new SetCardInfo("Wall of Wonder", 85, Rarity.UNCOMMON, mage.cards.w.WallOfWonder.class));
         cards.add(new SetCardInfo("Whirling Dervish", 125, Rarity.UNCOMMON, mage.cards.w.WhirlingDervish.class));

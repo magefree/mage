@@ -27,13 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,8 +34,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,7 +85,7 @@ class CrucibleOfWorldsEffect extends ContinuousEffectImpl {
         if (player != null) {
             for (UUID cardId: player.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if(card != null && card.getCardType().contains(CardType.LAND)){
+                if(card != null && card.isLand()){
                     PlayLandFromGraveyardAbility ability = new PlayLandFromGraveyardAbility(card.getName());
                     ability.setSourceId(cardId);
                     ability.setControllerId(card.getOwnerId());

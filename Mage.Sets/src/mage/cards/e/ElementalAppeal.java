@@ -28,28 +28,21 @@
 package mage.cards.e;
 
 import java.util.UUID;
-
-import mage.MageInt;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-import mage.target.targetpointer.FixedTarget;
+import mage.game.permanent.token.ElementalAppealElementalToken;
 
 /**
  *
@@ -58,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ElementalAppeal extends CardImpl {
 
     public ElementalAppeal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");
 
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));
@@ -68,7 +61,7 @@ public class ElementalAppeal extends CardImpl {
         // If Elemental Appeal was kicked, that creature gets +7/+0 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(7, 0, Duration.EndOfTurn),
-                new LockedInCondition(KickedCondition.getInstance()),
+                new LockedInCondition(KickedCondition.instance),
                 "If {this} was kicked, that creature gets +7/+0 until end of turn"));
     }
 
@@ -100,31 +93,13 @@ class ElementalAppealEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ElementalToken token = new ElementalToken();
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 
-        for (UUID tokenId : token.getLastAddedTokenIds()) {
-            Permanent tokenPermanent = game.getPermanent(tokenId);
-            if (tokenPermanent != null) {
-                ExileTargetEffect exileEffect = new ExileTargetEffect();
-                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-            }
+        CreateTokenEffect effect = new CreateTokenEffect(new ElementalAppealElementalToken());
+        if (effect.apply(game, source)) {
+            effect.exileTokensCreatedAtNextEndStep(game, source);
+            return true;
         }
-        return true;
+        return false;
     }
 
-    class ElementalToken extends Token {
-
-        public ElementalToken() {
-            super("Elemental", "7/1 red Elemental creature token with trample and haste");
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            subtype.add("Elemental");
-            power = new MageInt(7);
-            toughness = new MageInt(1);
-            addAbility(TrampleAbility.getInstance());
-            addAbility(HasteAbility.getInstance());
-        }
-    }
 }

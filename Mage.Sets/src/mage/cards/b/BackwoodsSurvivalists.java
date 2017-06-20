@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +40,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,9 +57,9 @@ public class BackwoodsSurvivalists extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Delirium</i> &mdash; Backwoods Survivalists gets +1/+1 and has trample as long as there are four or more card types among cards in your graveyard.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), DeliriumCondition.getInstance(), "<i>Delirium</i> &mdash; {this} gets +1/+1");
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} gets +1/+1");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), DeliriumCondition.getInstance(), "and has trample as long as there are four or more card types among cards in your graveyard."));
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), DeliriumCondition.instance, "and has trample as long as there are four or more card types among cards in your graveyard."));
         this.addAbility(ability);
     }
 

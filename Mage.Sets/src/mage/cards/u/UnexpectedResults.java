@@ -109,14 +109,14 @@ class UnexpectedResultEffect extends OneShotEffect {
         if (controller == null || sourceCard == null) {
             return false;
         }
-        if (controller.getLibrary().size() > 0) {
+        if (controller.getLibrary().hasCards()) {
             controller.shuffleLibrary(source, game);
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
                 return false;
             }
             controller.revealCards(sourceCard.getName(), new CardsImpl(card), game);
-            if (card.getCardType().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 String message = "Put " + card.getName() + " onto the battlefield?";
                 if (controller.chooseUse(Outcome.PutLandInPlay, message, source, game)) {
                     card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());

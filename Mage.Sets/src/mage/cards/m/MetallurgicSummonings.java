@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -48,11 +48,10 @@ import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.MetallurgicSummoningsConstructToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.RandomUtil;
 
 /**
  *
@@ -69,7 +68,7 @@ public class MetallurgicSummonings extends CardImpl {
     }
 
     public MetallurgicSummonings(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // Whenever you cast an instant or sorcery spell, create an X/X colorless Construct artifact creature token, where X is that spell's converted mana cost.
         this.addAbility(new SpellCastControllerTriggeredAbility(new MetallurgicSummoningsTokenEffect(), filter, false, true));
@@ -77,9 +76,9 @@ public class MetallurgicSummonings extends CardImpl {
         // {3}{U}{U}, Exile Metallurgic Summons: Return all instant and sorcery cards from your graveyard to your hand. Activate this ability only if you control six or more artifacts.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new MetallurgicSummoningsReturnEffect(), new ManaCostsImpl("{3}{U}{U}"),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 5),
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.MORE_THAN, 5),
                 "{3}{U}{U}, Exile {this}: Return all instant and sorcery cards from your graveyard to your hand."
-                        + " Activate this ability only if you control six or more artifacts.");
+                + " Activate this ability only if you control six or more artifacts.");
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }
@@ -151,19 +150,5 @@ class MetallurgicSummoningsReturnEffect extends OneShotEffect {
                     source.getControllerId(), game), Zone.HAND, source, game);
         }
         return false;
-    }
-}
-
-class MetallurgicSummoningsConstructToken extends Token {
-
-    public MetallurgicSummoningsConstructToken(int xValue) {
-        super("Construct", "X/X colorless Construct artifact creature token");
-        setOriginalExpansionSetCode("KLD");
-        setTokenType(RandomUtil.nextInt(2) + 1);
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Construct");
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
     }
 }

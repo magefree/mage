@@ -28,19 +28,12 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.CreateTwiceThatManyTokensEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -49,10 +42,10 @@ import mage.game.stack.StackObject;
 public class ParallelLives extends CardImpl {
 
     public ParallelLives(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ParallelLivesEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreateTwiceThatManyTokensEffect()));
     }
 
     public ParallelLives(final ParallelLives card) {
@@ -63,44 +56,4 @@ public class ParallelLives extends CardImpl {
     public ParallelLives copy() {
         return new ParallelLives(this);
     }
-}
-
-class ParallelLivesEffect extends ReplacementEffectImpl {
-
-    public ParallelLivesEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Copy);
-        staticText = "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead";
-    }
-
-    public ParallelLivesEffect(final ParallelLivesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ParallelLivesEffect copy() {
-        return new ParallelLivesEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.CREATE_TOKEN);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        StackObject spell = game.getStack().getStackObject(event.getSourceId());
-        return spell != null && spell.getControllerId().equals(source.getControllerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
-        return false;
-    }
-
 }

@@ -40,9 +40,11 @@ import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -202,9 +204,9 @@ public class TournamentPanel extends javax.swing.JPanel {
     public synchronized void showTournament(UUID tournamentId) {
         this.tournamentId = tournamentId;
         // MageFrame.addTournament(tournamentId, this);
-        UUID chatRoomId = SessionHandler.getTournamentChatId(tournamentId);
-        if (SessionHandler.joinTournament(tournamentId) && chatRoomId != null) {
-            this.chatPanel1.connect(chatRoomId);
+        Optional<UUID> chatRoomId = SessionHandler.getTournamentChatId(tournamentId);
+        if (SessionHandler.joinTournament(tournamentId) && chatRoomId.isPresent()) {
+            this.chatPanel1.connect(chatRoomId.get());
             startTasks();
             this.setVisible(true);
             this.repaint();
@@ -727,7 +729,7 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             this.publish(SessionHandler.getTournament(tournamentId));
-            Thread.sleep(2000);
+            TimeUnit.SECONDS.sleep(2);
         }
         return null;
     }

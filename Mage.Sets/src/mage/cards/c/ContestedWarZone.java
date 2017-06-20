@@ -27,14 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -46,11 +38,14 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -111,7 +106,7 @@ class ContestedWarZoneAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
         if (damageEvent.isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (damageEvent.getPlayerId().equals(getControllerId()) && permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            if (damageEvent.getPlayerId().equals(getControllerId()) && permanent != null && permanent.isCreature()) {
                 game.getState().setValue(getSourceId().toString(), permanent.getControllerId());
                 return true;
             }

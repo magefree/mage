@@ -36,6 +36,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.CastFromHandWithoutPayingManaCostEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -61,7 +62,7 @@ public class Omniscience extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{7}{U}{U}{U}");
 
         // You may cast nonland cards from your hand without paying their mana costs.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmniscienceCastingEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastFromHandWithoutPayingManaCostEffect()));
     }
 
     public Omniscience(final Omniscience card) {
@@ -74,62 +75,3 @@ public class Omniscience extends CardImpl {
     }
 }
 
-class OmniscienceCastingEffect extends ContinuousEffectImpl {
-
-    public OmniscienceCastingEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You may cast nonland cards from your hand without paying their mana costs";
-    }
-
-    public OmniscienceCastingEffect(final OmniscienceCastingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OmniscienceCastingEffect copy() {
-        return new OmniscienceCastingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.getAlternativeSourceCosts().add(new AlternativeCostSourceAbility(
-                    null, new CompoundCondition(SourceIsSpellCondition.getInstance(), new IsBeingCastFromHandCondition()), null, new FilterNonlandCard(), true));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
-    }
-}
-
-class IsBeingCastFromHandCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
-        if (object instanceof SplitCardHalf) {
-            UUID splitCardId = ((Card) object).getMainCard().getId();
-            object = game.getObject(splitCardId);
-        }
-        if (object instanceof Spell) { // needed to check if it can be cast by alternate cost
-            Spell spell = (Spell) object;
-            return spell.getFromZone() == Zone.HAND;
-        }
-        if (object instanceof Card) { // needed for the check what's playable
-            Card card = (Card) object;
-            return game.getPlayer(card.getOwnerId()).getHand().get(card.getId(), game) != null;
-        }
-        return false;
-    }
-
-}

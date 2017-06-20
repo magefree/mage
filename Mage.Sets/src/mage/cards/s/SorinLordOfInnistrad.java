@@ -28,32 +28,27 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.command.Emblem;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-import mage.players.Player;
+import mage.game.permanent.token.SorinLordOfInnistradVampireToken;
+import mage.game.command.emblems.SorinLordOfInnistradEmblem;
 import mage.target.TargetPermanent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -76,7 +71,7 @@ public class SorinLordOfInnistrad extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Create a 1/1 black Vampire creature token with lifelink.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new VampireToken()), 1));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SorinLordOfInnistradVampireToken()), 1));
 
         // -2: You get an emblem with "Creatures you control get +1/+0."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new SorinLordOfInnistradEmblem()), -2));
@@ -94,29 +89,6 @@ public class SorinLordOfInnistrad extends CardImpl {
     @Override
     public SorinLordOfInnistrad copy() {
         return new SorinLordOfInnistrad(this);
-    }
-}
-
-class VampireToken extends Token {
-
-    VampireToken() {
-        super("Vampire", "1/1 black Vampire creature token with lifelink");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Vampire");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(LifelinkAbility.getInstance());
-    }
-}
-
-class SorinLordOfInnistradEmblem extends Emblem {
-
-    public SorinLordOfInnistradEmblem() {
-        this.setName("Emblem Sorin");
-        BoostControlledEffect effect = new BoostControlledEffect(1, 0, Duration.EndOfGame);
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
-        this.getAbilities().add(ability);
     }
 }
 

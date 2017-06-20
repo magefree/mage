@@ -30,12 +30,9 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -45,14 +42,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.command.Emblem;
-import mage.game.permanent.token.ZombieToken;
+import mage.game.command.emblems.LilianaTheLastHopeEmblem;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -129,45 +122,5 @@ class LilianaTheLastHopeEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-}
-
-class LilianaTheLastHopeEmblem extends Emblem {
-
-    public LilianaTheLastHopeEmblem() {
-        this.setName("Emblem Liliana");
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new CreateTokenEffect(new ZombieToken(), new LilianaZombiesCount()),
-                TargetController.YOU, null, false);
-        this.getAbilities().add(ability);
-    }
-}
-
-class LilianaZombiesCount implements DynamicValue {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(new SubtypePredicate("Zombie"));
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = game.getBattlefield().countAll(filter, sourceAbility.getControllerId(), game) + 2;
-        return amount;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new LilianaZombiesCount();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "two plus the number of Zombies you control";
     }
 }

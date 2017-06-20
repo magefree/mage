@@ -27,9 +27,9 @@
  */
 package mage.sets;
 
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class Morningtide extends ExpansionSet {
 
-    private static final Morningtide fINSTANCE = new Morningtide();
+    private static final Morningtide instance = new Morningtide();
 
     public static Morningtide getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Morningtide() {

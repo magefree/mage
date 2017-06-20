@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -39,15 +38,7 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,6 +48,8 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author emerald000
@@ -65,7 +58,7 @@ public class KaradorGhostChieftain extends CardImpl {
 
     public KaradorGhostChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{G}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Centaur");
         this.subtype.add("Spirit");
 
@@ -181,7 +174,7 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
             if (affectedControllerId.equals(source.getControllerId())) {
-                KaradorGhostChieftainWatcher watcher = (KaradorGhostChieftainWatcher) game.getState().getWatchers().get("KaradorGhostChieftainWatcher", source.getSourceId());
+                KaradorGhostChieftainWatcher watcher = (KaradorGhostChieftainWatcher) game.getState().getWatchers().get(KaradorGhostChieftainWatcher.class.getSimpleName(), source.getSourceId());
                 return !watcher.isAbilityUsed();
             }
         }
@@ -194,7 +187,7 @@ class KaradorGhostChieftainWatcher extends Watcher {
     boolean abilityUsed = false;
 
     KaradorGhostChieftainWatcher() {
-        super("KaradorGhostChieftainWatcher", WatcherScope.CARD);
+        super(KaradorGhostChieftainWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     KaradorGhostChieftainWatcher(final KaradorGhostChieftainWatcher watcher) {
@@ -206,7 +199,7 @@ class KaradorGhostChieftainWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
          if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell.getCardType().contains(CardType.CREATURE)) {
+            if (spell.isCreature()) {
                abilityUsed = true;
             }
         }

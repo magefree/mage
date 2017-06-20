@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,9 +36,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +52,7 @@ public class FlowOfMaggots extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Wall")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
     }
 
     public FlowOfMaggots(UUID ownerId, CardSetInfo setInfo) {

@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -46,6 +45,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastToken;
 import mage.game.permanent.token.WurmToken;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *

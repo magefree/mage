@@ -27,15 +27,12 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -48,16 +45,15 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.game.Game;
-import mage.game.command.Emblem;
 import mage.players.Library;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.game.command.emblems.ChandraTorchOfDefianceEmblem;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public class ChandraTorchOfDefiance extends CardImpl {
@@ -114,39 +110,29 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null && controller.getLibrary().size() > 0) {
+        if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
             Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
             if (card != null) {
                 boolean exiledCardWasCast = false;
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                if (controller.chooseUse(Outcome.Benefit, "Cast the card? (You still pay the costs)", source, game) && !card.getCardType().contains(CardType.LAND)) {
+                if (!card.getManaCost().isEmpty()) {
+                    if (controller.chooseUse(Outcome.Benefit, "Cast the card? (You still pay the costs)", source, game) && !card.isLand()) {
 //                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = controller.getUseableActivatedAbilities(card, Zone.EXILED, game);
 //                    for (ActivatedAbility ability : useableAbilities.values()) {
 //
 //                    }
 //                    controller.activateAbility(useableAbilities, game);
-                    exiledCardWasCast = controller.cast(card.getSpellAbility(), game, false);
+                        exiledCardWasCast = controller.cast(card.getSpellAbility(), game, false);
+                    }
                 }
                 if (!exiledCardWasCast) {
                     new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT).apply(game, source);
                 }
+
             }
             return true;
         }
         return false;
-    }
-}
-
-class ChandraTorchOfDefianceEmblem extends Emblem {
-
-    //  You get an emblem with "Whenever you cast a spell, this emblem deals 5 damage to target creature or player."
-    public ChandraTorchOfDefianceEmblem() {
-        this.setName("Emblem Chandra");
-        Effect effect = new DamageTargetEffect(5);
-        effect.setText("this emblem deals 5 damage to target creature or player");
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, new FilterSpell("a spell"), false, false);
-        ability.addTarget(new TargetCreatureOrPlayer());
-        getAbilities().add(ability);
     }
 }

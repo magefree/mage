@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
@@ -39,6 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +57,7 @@ public class GiantTortoise extends CardImpl {
         // Giant Tortoise gets +0/+3 as long as it's untapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(0,3, Duration.WhileOnBattlefield),
-                new InvertCondition(new SourceTappedCondition()),
+                new InvertCondition(SourceTappedCondition.instance),
                 "{this} gets +0/+3 as long as it's untapped")));
     }
 

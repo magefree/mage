@@ -56,7 +56,7 @@ public class TideshaperMystic extends CardImpl {
 
         // {tap}: Target land becomes the basic land type of your choice until end of turn. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
-                new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost(), MyTurnCondition.getInstance());
+                new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost(), MyTurnCondition.instance);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

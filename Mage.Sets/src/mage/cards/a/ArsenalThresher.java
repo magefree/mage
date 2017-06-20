@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -53,7 +54,7 @@ import mage.target.common.TargetCardInHand;
 public class ArsenalThresher extends CardImpl {
 
     public ArsenalThresher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W/B}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W/B}{U}");
         this.subtype.add("Construct");
 
         this.power = new MageInt(2);
@@ -108,7 +109,8 @@ class ArsenalThresherEffect extends OneShotEffect {
                     }
                     if (arsenalThresher != null) {
                         controller.revealCards(arsenalThresher.getIdName(), cards, game);
-                        arsenalThresher.addCounters(CounterType.P1P1.createInstance(cards.size()), source, game);
+                        ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
+                        arsenalThresher.addCounters(CounterType.P1P1.createInstance(cards.size()), source, game, appliedEffects);
                     }
                 }
             }

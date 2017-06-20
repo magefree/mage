@@ -95,8 +95,8 @@ class IslandOfWakWakEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
-            MageInt toughness = targetCreature.getToughness();
-            game.addEffect(new SetPowerToughnessTargetEffect(0, toughness.getValue(), Duration.EndOfTurn), source);
+            int toughness = targetCreature.getToughness().getBaseValue();
+            game.addEffect(new SetPowerToughnessTargetEffect(0, toughness, Duration.EndOfTurn), source);
             return true;
         }
         return false;

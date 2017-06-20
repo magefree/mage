@@ -39,6 +39,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
@@ -76,7 +77,7 @@ class NissasPilgrimageEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterBasicLandCard("basic Forest");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public NissasPilgrimageEffect() {
@@ -100,7 +101,7 @@ class NissasPilgrimageEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             int number = 2;
-            if (SpellMasteryCondition.getInstance().apply(game, source)) {
+            if (SpellMasteryCondition.instance.apply(game, source)) {
                 number++;
             }
             TargetCardInLibrary target = new TargetCardInLibrary(0, number, filter);

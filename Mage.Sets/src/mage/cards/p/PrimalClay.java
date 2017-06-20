@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,6 +48,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -76,11 +77,11 @@ public class PrimalClay extends CardImpl {
         return new PrimalClay(this);
     }
 
-    class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
+    static class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
 
-        private final String choice33 = "a 3/3 artifact creature";
-        private final String choice22 = "a 2/2 artifact creature with flying";
-        private final String choice16 = "a 1/6 artifact creature with defender";
+        private static final String choice33 = "a 3/3 artifact creature";
+        private static final String choice22 = "a 2/2 artifact creature with flying";
+        private static final String choice16 = "a 1/6 artifact creature with defender";
 
         public PrimalPlasmaReplacementEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -93,7 +94,7 @@ public class PrimalClay extends CardImpl {
 
         @Override
         public boolean checksEventType(GameEvent event, Game game) {
-            return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD);
+            return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
         }
 
         @Override

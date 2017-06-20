@@ -40,8 +40,8 @@ import mage.cards.l.LimDulsHighGuard;
 import mage.cards.n.Necrite;
 import mage.cards.n.NightSoil;
 import mage.cards.o.OrcishVeteran;
-import mage.constants.SetType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -49,10 +49,10 @@ import mage.constants.Rarity;
  */
 public class MastersEditionII extends ExpansionSet {
 
-    private static final MastersEditionII fINSTANCE = new MastersEditionII();
+    private static final MastersEditionII instance = new MastersEditionII();
 
     public static MastersEditionII getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MastersEditionII() {
@@ -122,6 +122,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Foul Familiar", 90, Rarity.COMMON, mage.cards.f.FoulFamiliar.class));
         cards.add(new SetCardInfo("Fumarole", 194, Rarity.UNCOMMON, mage.cards.f.Fumarole.class));
         cards.add(new SetCardInfo("Fungal Bloom", 165, Rarity.RARE, mage.cards.f.FungalBloom.class));
+        cards.add(new SetCardInfo("Gangrenous Zombies", 92, Rarity.COMMON, mage.cards.g.GangrenousZombies.class));
         cards.add(new SetCardInfo("Giant Growth", 167, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Glacial Chasm", 229, Rarity.RARE, mage.cards.g.GlacialChasm.class));
         cards.add(new SetCardInfo("Glacial Crevasses", 127, Rarity.RARE, mage.cards.g.GlacialCrevasses.class));
@@ -138,6 +139,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Imperial Recruiter", 130, Rarity.RARE, mage.cards.i.ImperialRecruiter.class));
         cards.add(new SetCardInfo("Imperial Seal", 96, Rarity.RARE, mage.cards.i.ImperialSeal.class));
         cards.add(new SetCardInfo("Incinerate", 131, Rarity.COMMON, mage.cards.i.Incinerate.class));
+        cards.add(new SetCardInfo("Infernal Darkness", 97, Rarity.RARE, mage.cards.i.InfernalDarkness.class));
         cards.add(new SetCardInfo("Inheritance", 18, Rarity.UNCOMMON, mage.cards.i.Inheritance.class));
         cards.add(new SetCardInfo("Ironclaw Orcs", 132, Rarity.COMMON, mage.cards.i.IronclawOrcs.class));
         cards.add(new SetCardInfo("Jester's Mask", 211, Rarity.RARE, mage.cards.j.JestersMask.class));

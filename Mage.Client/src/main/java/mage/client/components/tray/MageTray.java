@@ -1,7 +1,7 @@
 package mage.client.components.tray;
 
 import java.awt.*;
-
+import java.util.concurrent.TimeUnit;
 import mage.client.MageFrame;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -9,9 +9,9 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 /**
  * @author noxx
  */
-public class MageTray {
+public enum MageTray {
 
-    private static final MageTray instance = new MageTray();
+    instance;
 
     private static final Logger log = Logger.getLogger(MageTray.class);
 
@@ -19,11 +19,7 @@ public class MageTray {
     private Image flashedImage;
     private TrayIcon trayIcon;
 
-    private static int state = 0;
-
-    public static MageTray getInstance() {
-        return instance;
-    }
+    private int state = 0;
 
     public void install() {
         if (!SystemTray.isSupported()) {
@@ -32,8 +28,8 @@ public class MageTray {
         }
 
         try {
-            mainImage = ImageManagerImpl.getInstance().getAppSmallImage();
-            flashedImage = ImageManagerImpl.getInstance().getAppFlashedImage();
+            mainImage = ImageManagerImpl.instance.getAppSmallImage();
+            flashedImage = ImageManagerImpl.instance.getAppFlashedImage();
             trayIcon = new TrayIcon(mainImage);
             trayIcon.setImageAutoSize(true);
 
@@ -100,7 +96,7 @@ public class MageTray {
                             int i = 0;
                             while (state != 3) {
                                 trayIcon.setImage(i == 0 ? mainImage : flashedImage);
-                                Thread.sleep(600);
+                                TimeUnit.MILLISECONDS.sleep(600);
                                 i = i == 0 ? 1 : 0;
                             }
                             trayIcon.setImage(mainImage);

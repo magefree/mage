@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -41,6 +40,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -69,7 +70,7 @@ public class DesolationAngel extends CardImpl {
 
         // When Desolation Angel enters the battlefield, destroy all lands you control. If it was kicked, destroy all lands instead.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DestroyAllEffect(filter),
-                new DestroyAllEffect(filter2), KickedCondition.getInstance(), "destroy all lands you control. If it was kicked, destroy all lands instead.")));
+                new DestroyAllEffect(filter2), KickedCondition.instance, "destroy all lands you control. If it was kicked, destroy all lands instead.")));
     }
 
     public DesolationAngel(final DesolationAngel card) {

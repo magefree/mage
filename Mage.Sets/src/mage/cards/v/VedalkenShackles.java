@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -70,7 +71,7 @@ public class VedalkenShackles extends CardImpl {
 
         // {2}, {tap}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as Vedalken Shackles remains tapped.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new GainControlTargetEffect(Duration.Custom), SourceTappedCondition.getInstance(),
+                new GainControlTargetEffect(Duration.Custom), SourceTappedCondition.instance,
                 "Gain control of target creature with power less than or equal to the number of Islands you control for as long as {this} remains tapped");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
@@ -90,9 +91,9 @@ public class VedalkenShackles extends CardImpl {
 
 class PowerIslandPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
 
-    public static final FilterLandPermanent filter = new FilterLandPermanent("Island");
+    static final FilterLandPermanent filter = new FilterLandPermanent("Island");
     static {
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     @Override

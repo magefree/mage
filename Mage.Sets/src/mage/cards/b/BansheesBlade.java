@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -46,6 +45,8 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -112,7 +113,7 @@ class BansheesBladeAbility extends TriggeredAbilityImpl {
                 return true;
             }
         }
-        if (event.getType().equals(GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE)) {
+        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_PRE) {
             usedInPhase = false;
         }
         return false;

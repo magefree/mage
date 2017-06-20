@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -36,13 +34,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.EnchantAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicate;
@@ -55,6 +50,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -127,7 +125,7 @@ class CallToTheKindredEffect extends OneShotEffect {
             StringBuilder sb = new StringBuilder("creature card with at least one subtype from: ");
             ArrayList<Predicate<MageObject>> subtypes = new ArrayList<>();
             for (String subtype : creature.getSubtype(game)) {
-                subtypes.add(new SubtypePredicate(subtype));
+                subtypes.add(new SubtypePredicate(SubType.byDescription(subtype)));
                 sb.append(subtype).append(", ");
             }
             filter.add(Predicates.or(subtypes));

@@ -28,11 +28,12 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -47,7 +48,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
- *
  * @author fireshoes
  */
 public class SylvanAdvocate extends CardImpl {
@@ -61,7 +61,7 @@ public class SylvanAdvocate extends CardImpl {
     }
 
     public SylvanAdvocate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.subtype.add("Ally");
@@ -73,9 +73,9 @@ public class SylvanAdvocate extends CardImpl {
 
         // As long as you control six or more lands, Sylvan Advocate and land creatures you control get +2/+2.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent(), CountType.MORE_THAN, 5), rule1);
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent(), ComparisonType.MORE_THAN, 5), rule1);
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent(), CountType.MORE_THAN, 5), rule2);
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent(), ComparisonType.MORE_THAN, 5), rule2);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         ability.addEffect(effect2);
         this.addAbility(ability);

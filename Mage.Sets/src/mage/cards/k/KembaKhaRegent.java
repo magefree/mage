@@ -27,17 +27,18 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.game.permanent.token.CatToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public class KembaKhaRegent extends CardImpl {
 
     public KembaKhaRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Cat");
         this.subtype.add("Cleric");
 

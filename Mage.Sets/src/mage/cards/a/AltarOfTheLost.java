@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -43,6 +42,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *
@@ -97,7 +98,7 @@ class AltarOfTheLostManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object instanceof Spell && ((Spell) object).getFromZone().equals(Zone.GRAVEYARD)) {
+        if (object instanceof Spell && ((Spell) object).getFromZone() == Zone.GRAVEYARD) {
             for (Ability ability : ((Spell) object).getAbilities(game)) {
                 if (ability instanceof FlashbackAbility) {
                     return true;

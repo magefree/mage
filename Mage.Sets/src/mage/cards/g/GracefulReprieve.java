@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -45,6 +44,8 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -165,7 +166,7 @@ class GracefulReprieveDelayedEffect extends OneShotEffect {
             Player player = game.getPlayer(permanent.getOwnerId());
             if (player != null) {
                 Card card = game.getCard(target);
-                if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                     return card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), player.getId());
                 }
                 return true;

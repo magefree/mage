@@ -28,8 +28,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
@@ -38,12 +36,16 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.PlantToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class AvengerOfZendikar extends CardImpl {
     private static final FilterControlledPermanent filterLand = new FilterControlledLandPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Plant"));
+        filter.add(new SubtypePredicate(SubType.PLANT));
     }
 
     public AvengerOfZendikar (UUID ownerId, CardSetInfo setInfo) {

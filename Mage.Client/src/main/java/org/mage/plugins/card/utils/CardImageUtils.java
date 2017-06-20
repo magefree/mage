@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.properties.SettingsManager;
 
-public class CardImageUtils {
+public final class CardImageUtils {
 
     private static final HashMap<CardDownloadData, String> pathCache = new HashMap<>();
     private static final Logger log = Logger.getLogger(CardImageUtils.class);
@@ -27,10 +27,12 @@ public class CardImageUtils {
      */
     public static String generateTokenImagePath(CardDownloadData card) {
         if (card.isToken()) {
-            if (pathCache.containsKey(card)) {
-                return pathCache.get(card);
-            }
             String filePath = getTokenImagePath(card);
+            if (pathCache.containsKey(card)) {
+                if (filePath.equals(pathCache.get(card))) {
+                    return pathCache.get(card);
+                }
+            }
             TFile file = new TFile(filePath);
 
             if (!file.exists() && card.getTokenSetCode() != null) {
@@ -190,8 +192,8 @@ public class CardImageUtils {
     }
 
     public static String generateTokenDescriptorImagePath(CardDownloadData card) {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String imagesPath = Objects.equals(useDefault, "true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        // String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        // String imagesPath = Objects.equals(useDefault, "true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
 
         String straightImageFile = getTokenDescriptorImagePath(card);
         TFile file = new TFile(straightImageFile);
@@ -216,7 +218,7 @@ public class CardImageUtils {
     public static Proxy getProxyFromPreferences() {
         Preferences prefs = MageFrame.getPreferences();
         Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
-        if (!proxyType.equals(ProxyType.NONE)) {
+        if (proxyType != ProxyType.NONE) {
             String proxyServer = prefs.get("proxyAddress", "");
             int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
             return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));

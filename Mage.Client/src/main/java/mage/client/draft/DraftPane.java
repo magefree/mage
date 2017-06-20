@@ -52,9 +52,9 @@ public class DraftPane extends MagePane {
      */
     public DraftPane() {
         boolean initialized = false;
-        if (Plugins.getInstance().isThemePluginLoaded()) {
+        if (Plugins.instance.isThemePluginLoaded()) {
             Map<String, JComponent> uiComponents = new HashMap<>();
-            JComponent container = Plugins.getInstance().updateTablePanel(uiComponents);
+            JComponent container = Plugins.instance.updateTablePanel(uiComponents);
             if (container != null) {
                 draftPanel1 = new mage.client.draft.DraftPanel();
                 initComponents(container);
@@ -99,8 +99,8 @@ public class DraftPane extends MagePane {
 
         jScrollPane1.setViewportView(draftPanel1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE)
@@ -109,14 +109,12 @@ public class DraftPane extends MagePane {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void initComponents(Component container) {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
@@ -125,8 +123,6 @@ public class DraftPane extends MagePane {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
         );
-
-        pack();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

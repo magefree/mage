@@ -113,12 +113,12 @@ public class ManaPool implements Serializable {
      * @return
      */
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay) {
-        if (!autoPayment && !manaType.equals(unlockedManaType)) {
+        if (!autoPayment && manaType != unlockedManaType) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
         }
-        if (autoPayment && autoPaymentRestricted && !wasManaAddedBeyondStock() && !manaType.equals(unlockedManaType)) {
-            // if automatic restricted payment and there is laready mana in the pool
+        if (autoPayment && autoPaymentRestricted && !wasManaAddedBeyondStock() && manaType != unlockedManaType) {
+            // if automatic restricted payment and there is already mana in the pool
             // and the needed mana type was not unlocked, nothing will be paid
             return false;
         }
@@ -137,7 +137,7 @@ public class ManaPool implements Serializable {
                     }
                 }
             }
-            if (!manaType.equals(unlockedManaType) && autoPayment && autoPaymentRestricted && mana.count() == mana.getStock()) {
+            if (manaType != unlockedManaType && autoPayment && autoPaymentRestricted && mana.count() == mana.getStock()) {
                 // no mana added beyond the stock so don't auto pay this
                 continue;
             }
@@ -146,7 +146,7 @@ public class ManaPool implements Serializable {
                 continue;
             }
             if (mana.get(usableManaType) > 0) {
-                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());
+                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAID, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());
                 event.setData(mana.getOriginalId().toString());
                 game.fireEvent(event);
                 mana.remove(usableManaType);
@@ -205,6 +205,10 @@ public class ManaPool implements Serializable {
         doNotEmptyManaTypes.add(manaType);
     }
 
+    public void init() {
+        manaItems.clear();
+    }
+
     public int emptyPool(Game game) {
         int total = 0;
         Iterator<ManaPoolItem> it = manaItems.iterator();
@@ -214,7 +218,7 @@ public class ManaPool implements Serializable {
             for (ManaType manaType : ManaType.values()) {
                 if (!doNotEmptyManaTypes.contains(manaType)) {
                     if (item.get(manaType) > 0) {
-                        if (!item.getDuration().equals(Duration.EndOfTurn) || game.getPhase().getType().equals(TurnPhase.END)) {
+                        if (item.getDuration() != Duration.EndOfTurn || game.getPhase().getType() == TurnPhase.END) {
                             if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {
                                 int amount = item.get(manaType);
                                 item.clear(manaType);
@@ -227,7 +231,7 @@ public class ManaPool implements Serializable {
                     }
                     if (conditionalItem != null) {
                         if (conditionalItem.get(manaType) > 0) {
-                            if (!item.getDuration().equals(Duration.EndOfTurn) || game.getPhase().getType().equals(TurnPhase.END)) {
+                            if (item.getDuration() != Duration.EndOfTurn || game.getPhase().getType() == TurnPhase.END) {
                                 if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {
                                     int amount = conditionalItem.get(manaType);
                                     conditionalItem.clear(manaType);
@@ -424,7 +428,7 @@ public class ManaPool implements Serializable {
         for (ConditionalMana mana : getConditionalMana()) {
             if (mana.get(manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {
                 mana.set(manaType, mana.get(manaType) - 1);
-                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getManaProducerId(), ability.getControllerId(), 0, mana.getFlag());
+                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAID, ability.getId(), mana.getManaProducerId(), ability.getControllerId(), 0, mana.getFlag());
                 event.setData(mana.getManaProducerOriginalId().toString());
                 game.fireEvent(event);
                 break;

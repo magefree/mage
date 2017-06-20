@@ -30,9 +30,9 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -69,7 +69,7 @@ public class SkittishKavu extends CardImpl {
         // Skittish Kavu gets +1/+1 as long as no opponent controls a white or blue creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
             new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
-            new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0, false)),
+            new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, false)),
             "{this} gets +1/+1 as long as no opponent controls a white or blue creature")));
     }
 

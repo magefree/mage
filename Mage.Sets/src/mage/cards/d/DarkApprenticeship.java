@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
@@ -39,6 +38,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class DarkApprenticeship extends CardImpl {
         // <i>Hate</i> &mdash; At the beggining of your end step, if an opponent lost life from source other than combat damage this turn, Dark Apprenticeship deals 2 damage to target player.
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new DamageTargetEffect(2), TargetController.YOU, false),
-                HateCondition.getInstance(),
+                HateCondition.instance,
                 "<i>Hate</i> &mdash; At the beggining of your end step, if an opponent lost life from source other than combat damage this turn, Dark Apprenticeship deals 2 damage to target player.");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());

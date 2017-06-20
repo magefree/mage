@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -42,13 +41,15 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki (Mortivore), cbt33
  */
 public class Cantivore extends CardImpl {
 
-    public static final FilterCard filter = new FilterCard("enchantment cards");
+    static final FilterCard filter = new FilterCard("enchantment cards");
     
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

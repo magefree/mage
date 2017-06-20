@@ -28,9 +28,9 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -38,10 +38,10 @@ import mage.constants.Rarity;
  */
 public class WorldMagicCupQualifier extends ExpansionSet {
 
-    private static final WorldMagicCupQualifier fINSTANCE = new WorldMagicCupQualifier();
+    private static final WorldMagicCupQualifier instance = new WorldMagicCupQualifier();
 
     public static WorldMagicCupQualifier getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private WorldMagicCupQualifier() {

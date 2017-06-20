@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
 public class OrimsChant extends CardImpl {
 
     public OrimsChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Kicker {W} (You may pay an additional {W} as you cast this spell.)
         this.addAbility(new KickerAbility("{W}"));
@@ -94,7 +94,7 @@ class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return GameEvent.EventType.CAST_SPELL.equals(event.getType());
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override
@@ -122,8 +122,8 @@ class OrimsChantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && KickedCondition.getInstance().apply(game, source)) {
-            game.addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, new FilterCreaturePermanent("creatures")), source);
+        if (controller != null && KickedCondition.instance.apply(game, source)) {
+            game.addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), source);
             return true;
         }
         return false;

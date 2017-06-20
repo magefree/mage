@@ -58,8 +58,13 @@ public class ExileTargetEffect extends OneShotEffect {
     protected boolean multitargetHandling;
 
     public ExileTargetEffect(String effectText) {
+        this(effectText, false);
+    }
+
+    public ExileTargetEffect(String effectText, boolean multitargetHandling) {
         this();
         this.staticText = effectText;
+        this.multitargetHandling = multitargetHandling;
     }
 
     public ExileTargetEffect() {
@@ -100,21 +105,28 @@ public class ExileTargetEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> toExile = new LinkedHashSet<>();
-            if (multitargetHandling && source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) { // Decimate
+            if (multitargetHandling
+                    && targetPointer instanceof FirstTargetPointer
+                    && (source.getTargets().size() > 1 || (source.getTargets().size() > 0 && source.getTargets().get(0).getTargets().size() > 1))) {
                 for (Target target : source.getTargets()) {
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(targetId);
                         if (permanent != null) {
                             Zone currentZone = game.getState().getZone(permanent.getId());
-                            if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(Zone.BATTLEFIELD))) {
+                            if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == Zone.BATTLEFIELD)) {
                                 toExile.add(permanent);
                             }
                         } else {
                             Card card = game.getCard(targetId);
                             if (card != null) {
                                 Zone currentZone = game.getState().getZone(card.getId());
-                                if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(currentZone))) {
+                                if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == currentZone)) {
                                     toExile.add(card);
+                                }
+                            } else {
+                                StackObject stackObject = game.getStack().getStackObject(targetId);
+                                if (stackObject instanceof Spell) {
+                                    toExile.add((Spell) stackObject);
                                 }
                             }
                         }
@@ -125,14 +137,14 @@ public class ExileTargetEffect extends OneShotEffect {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
                         Zone currentZone = game.getState().getZone(permanent.getId());
-                        if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(Zone.BATTLEFIELD))) {
+                        if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == Zone.BATTLEFIELD)) {
                             toExile.add(permanent);
                         }
                     } else {
                         Card card = game.getCard(targetId);
                         if (card != null) {
                             Zone currentZone = game.getState().getZone(card.getId());
-                            if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(currentZone))) {
+                            if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == currentZone)) {
                                 toExile.add(card);
                             }
                         } else {
@@ -172,6 +184,8 @@ public class ExileTargetEffect extends OneShotEffect {
                     sb.append("target ");
                 }
                 sb.append(targetName);
+            } else if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
+                sb.append("exile up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
             } else {
                 sb.append("exile ").append(CardUtil.numberToText(target.getNumberOfTargets())).append(" target ").append(target.getTargetName());
             }

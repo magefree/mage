@@ -44,6 +44,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+
 import mage.client.cards.BigCard;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
@@ -58,7 +59,6 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CardInfoWindowDialog extends MageDialog {
@@ -83,11 +83,11 @@ public class CardInfoWindowDialog extends MageDialog {
         this.setModal(false);
         switch (this.showType) {
             case LOOKED_AT:
-                this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getLookedAtImage()));
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getLookedAtImage()));
                 this.setClosable(true);
                 break;
             case REVEAL:
-                this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getRevealedImage()));
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getRevealedImage()));
                 this.setClosable(true);
                 break;
             case REVEAL_TOP_LIBRARY:
@@ -106,10 +106,10 @@ public class CardInfoWindowDialog extends MageDialog {
                 });
                 break;
             case EXILE:
-                this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getExileImage()));
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getExileImage()));
                 break;
             default:
-            // no icon yet
+                // no icon yet
         }
         this.setTitelBarToolTip(name);
         setGUISize();
@@ -162,7 +162,7 @@ public class CardInfoWindowDialog extends MageDialog {
 
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId, boolean revertOrder) {
         cards.loadCards(showCards, bigCard, gameId, revertOrder);
-        if (showType.equals(ShowType.GRAVEYARD)) {
+        if (showType == ShowType.GRAVEYARD) {
             int qty = qtyCardTypes(showCards);
             String titel = name + "'s Graveyard (" + showCards.size() + ")  -  " + qty + ((qty == 1) ? " Card Type" : " Card Types");
             setTitle(titel);
@@ -173,7 +173,7 @@ public class CardInfoWindowDialog extends MageDialog {
 
     @Override
     public void show() {
-        if (showType.equals(ShowType.EXILE)) {
+        if (showType == ShowType.EXILE) {
             if (cards == null || cards.getNumberOfCards() == 0) {
                 return;
             }
@@ -189,7 +189,7 @@ public class CardInfoWindowDialog extends MageDialog {
             int width = CardInfoWindowDialog.this.getWidth();
             int height = CardInfoWindowDialog.this.getHeight();
             if (width > 0 && height > 0) {
-                Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+                Point centered = SettingsManager.instance.getComponentPosition(width, height);
                 if (!positioned) {
                     int xPos = centered.x / 2;
                     int yPos = centered.y / 2;
@@ -202,17 +202,19 @@ public class CardInfoWindowDialog extends MageDialog {
         });
     }
 
-        private int qtyCardTypes(mage.view.CardsView cardsView){
-        Set<String> cardTypesPresent = new LinkedHashSet<String>() {};
-        for (CardView card : cardsView.values()){
-            List<CardType> cardTypes = card.getCardTypes();
-            for (CardType cardType : cardTypes){
+    private int qtyCardTypes(mage.view.CardsView cardsView) {
+        Set<String> cardTypesPresent = new LinkedHashSet<String>() {
+        };
+        for (CardView card : cardsView.values()) {
+            Set<CardType> cardTypes = card.getCardTypes();
+            for (CardType cardType : cardTypes) {
                 cardTypesPresent.add(cardType.toString());
             }
         }
         if (cardTypesPresent.isEmpty()) return 0;
         else return cardTypesPresent.size();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -227,24 +229,24 @@ public class CardInfoWindowDialog extends MageDialog {
         setIconifiable(true);
         setResizable(true);
         setPreferredSize(new Dimension((int) Math.round(GUISizeHelper.otherZonesCardDimension.width * 1.3),
-            (int) Math.round(GUISizeHelper.otherZonesCardDimension.height * 1.2)));
+                (int) Math.round(GUISizeHelper.otherZonesCardDimension.height * 1.2)));
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGap(0, 0, 0))
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGap(0, 0, 0))
-    );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
+        );
 
-    pack();
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

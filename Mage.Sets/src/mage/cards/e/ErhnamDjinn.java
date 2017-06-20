@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -35,15 +34,14 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.PhaseStep;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +52,7 @@ public class ErhnamDjinn extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature an opponent controls");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Wall")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

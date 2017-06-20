@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.effects.common.DestroyAttachedToEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -63,7 +63,7 @@ public class QuietDisrepair extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, choose one - Destroy enchanted permanent; or you gain 2 life.
-        ability = new BeginningOfUpkeepTriggeredAbility(new DestroyAttachedEffect("enchanted permanent"), TargetController.YOU, false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new DestroyAttachedToEffect("enchanted permanent"), TargetController.YOU, false);
         Mode mode = new Mode();
         mode.getEffects().add(new GainLifeEffect(2));
         ability.addMode(mode);

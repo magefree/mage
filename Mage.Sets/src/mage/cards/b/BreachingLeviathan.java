@@ -27,9 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -51,6 +48,10 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.watchers.common.CastFromHandWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -67,7 +68,7 @@ public class BreachingLeviathan extends CardImpl {
         // When Breaching Leviathan enters the battlefield, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BreachingLeviathanEffect(), false),
-                new CastFromHandSourceCondition(),
+                CastFromHandSourceCondition.instance,
                 "When {this} enters the battlefield, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps."),
                 new CastFromHandWatcher());
     }

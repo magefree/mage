@@ -41,7 +41,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -172,13 +171,13 @@ public class Combat implements Serializable, Copyable<Combat> {
     public void checkForRemoveFromCombat(Game game) {
         for (UUID creatureId : getAttackers()) {
             Permanent creature = game.getPermanent(creatureId);
-            if (creature != null && !creature.getCardType().contains(CardType.CREATURE)) {
+            if (creature != null && !creature.isCreature()) {
                 removeFromCombat(creatureId, game, true);
             }
         }
         for (UUID creatureId : getBlockers()) {
             Permanent creature = game.getPermanent(creatureId);
-            if (creature != null && !creature.getCardType().contains(CardType.CREATURE)) {
+            if (creature != null && !creature.isCreature()) {
                 removeFromCombat(creatureId, game, true);
             }
         }
@@ -288,10 +287,13 @@ public class Combat implements Serializable, Copyable<Combat> {
                         attackingPermanent.tap(game); // to tap with event finally here is needed to prevent abusing of Vampire Envoy like cards
                     }
                 }
+                // This can only be used to modify the event, the ttack can't be replaced here
+                game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackingPlayerId));
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackingPlayerId));
             }
         }
         attackersTappedByAttack.clear();
+
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackingPlayerId, attackingPlayerId));
         if (!game.isSimulation()) {
             Player player = game.getPlayer(attackingPlayerId);

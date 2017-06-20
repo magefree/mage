@@ -33,14 +33,11 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.OphiomancerSnakeToken;
 
 /**
  *
@@ -59,7 +56,7 @@ public class Ophiomancer extends CardImpl {
         // At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new OphiomancerSnakeToken()), TargetController.ANY, false, false),
-                new PermanentsOnTheBattlefieldCondition(new FilterCreaturePermanent("Snake", "no Snakes"), PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 0),
+                new PermanentsOnTheBattlefieldCondition(new FilterCreaturePermanent(SubType.SNAKE, "no Snakes"), ComparisonType.EQUAL_TO, 0),
                 "At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch."));
     }
 
@@ -71,18 +68,4 @@ public class Ophiomancer extends CardImpl {
     public Ophiomancer copy() {
         return new Ophiomancer(this);
     }
-}
-
-class OphiomancerSnakeToken extends Token {
-
-    public OphiomancerSnakeToken() {
-        super("Snake", "1/1 black Snake creature token with deathtouch");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Snake");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(DeathtouchAbility.getInstance());
-    }
-
 }

@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 public class SlashPanther extends CardImpl {
 
     public SlashPanther(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{R/P}");
         this.subtype.add("Cat");
 
         this.power = new MageInt(4);

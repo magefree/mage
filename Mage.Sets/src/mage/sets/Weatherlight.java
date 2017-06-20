@@ -28,10 +28,9 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
-
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +38,10 @@ import mage.constants.Rarity;
  */
 public class Weatherlight extends ExpansionSet {
 
-    private static final Weatherlight fINSTANCE = new Weatherlight();
+    private static final Weatherlight instance = new Weatherlight();
 
     public static Weatherlight getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Weatherlight() {
@@ -121,6 +120,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Guided Strike", 132, Rarity.COMMON, mage.cards.g.GuidedStrike.class));
         cards.add(new SetCardInfo("Harvest Wurm", 72, Rarity.COMMON, mage.cards.h.HarvestWurm.class));
         cards.add(new SetCardInfo("Haunting Misery", 13, Rarity.COMMON, mage.cards.h.HauntingMisery.class));
+        cards.add(new SetCardInfo("Heat Stroke", 107, Rarity.RARE, mage.cards.h.HeatStroke.class));
         cards.add(new SetCardInfo("Heavy Ballista", 133, Rarity.COMMON, mage.cards.h.HeavyBallista.class));
         cards.add(new SetCardInfo("Hidden Horror", 14, Rarity.UNCOMMON, mage.cards.h.HiddenHorror.class));
         cards.add(new SetCardInfo("Hurloon Shaman", 108, Rarity.UNCOMMON, mage.cards.h.HurloonShaman.class));
@@ -189,6 +189,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Veteran Explorer", 86, Rarity.UNCOMMON, mage.cards.v.VeteranExplorer.class));
         cards.add(new SetCardInfo("Vitalize", 87, Rarity.COMMON, mage.cards.v.Vitalize.class));
         cards.add(new SetCardInfo("Vodalian Illusionist", 58, Rarity.UNCOMMON, mage.cards.v.VodalianIllusionist.class));
+        cards.add(new SetCardInfo("Well of Knowledge", 162, Rarity.RARE, mage.cards.w.WellOfKnowledge.class));
         cards.add(new SetCardInfo("Winding Canyons", 167, Rarity.RARE, mage.cards.w.WindingCanyons.class));
         cards.add(new SetCardInfo("Xanthic Statue", 163, Rarity.RARE, mage.cards.x.XanthicStatue.class));
         cards.add(new SetCardInfo("Zombie Scavengers", 29, Rarity.COMMON, mage.cards.z.ZombieScavengers.class));

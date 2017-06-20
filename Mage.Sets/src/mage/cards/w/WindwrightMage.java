@@ -65,7 +65,7 @@ public class WindwrightMage extends CardImpl {
         // Windwright Mage has flying as long as an artifact card is in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
-                WindwrightMageCondition.getInstance(),
+                WindwrightMageCondition.instance,
                 "{this} has flying as long as an artifact card is in your graveyard")));
     }
 
@@ -79,18 +79,14 @@ public class WindwrightMage extends CardImpl {
     }
 }
 
-class WindwrightMageCondition implements Condition {
-
-    private static WindwrightMageCondition fInstance = new WindwrightMageCondition();
+enum WindwrightMageCondition implements Condition {
+    instance;
     private static final FilterCard filter = new FilterCard("artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public static Condition getInstance() {
-        return fInstance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {

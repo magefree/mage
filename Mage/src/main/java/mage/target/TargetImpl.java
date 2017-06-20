@@ -544,7 +544,7 @@ public abstract class TargetImpl implements Target {
     }
 
     /**
-     * Is used to be able to check, that another target is slected within the
+     * Is used to be able to check, that another target is selected within the
      * group of targets of the ability with a target tag > 0.
      *
      * @param targetTag
@@ -557,6 +557,12 @@ public abstract class TargetImpl implements Target {
     @Override
     public Target getOriginalTarget() {
         return this;
+    }
+
+    @Override
+    public void setTargetAmount(UUID targetId, int amount, Game game) {
+        targets.put(targetId, amount);
+        rememberZoneChangeCounter(targetId, game);
     }
 
 }

@@ -103,7 +103,7 @@ class LlanowarEmpathEffect extends OneShotEffect {
         if (card != null) {
             cards.add(card);
             controller.revealCards(sourceObject.getName(), cards, game);
-            if (card.getCardType().contains(CardType.CREATURE)) {
+            if (card.isCreature()) {
                 controller.moveCards(card, Zone.HAND, source, game);
             }
         }

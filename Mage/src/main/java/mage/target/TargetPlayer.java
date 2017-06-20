@@ -27,14 +27,15 @@
  */
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -158,12 +159,7 @@ public class TargetPlayer extends TargetImpl {
         if (getNumberOfTargets() == 0 && targets.isEmpty()) {
             return true; // 0 targets selected is valid
         }
-        for (UUID playerId : targets.keySet()) {
-            if (canTarget(playerId, source, game)) {
-                return true;
-            }
-        }
-        return false;
+        return targets.keySet().stream().anyMatch(playerId -> canTarget(playerId, source, game));
     }
 
     @Override

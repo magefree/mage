@@ -27,27 +27,21 @@
  */
 package org.mage.plugins.card.dl.sources;
 
-import java.io.IOException;
-import java.util.HashMap;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 /**
  *
  * @author spjspj
  */
-public class MtgOnlTokensImageSource implements CardImageSource {
+public enum MtgOnlTokensImageSource implements CardImageSource {
 
+    instance;
     private static final Logger logger = Logger.getLogger(MtgOnlTokensImageSource.class);
-    private static CardImageSource instance = new MtgOnlTokensImageSource();
     private static int maxTimes = 0;
-
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new MtgOnlTokensImageSource();
-        }
-        return instance;
-    }
 
     @Override
     public String getSourceName() {
@@ -55,7 +49,7 @@ public class MtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
-    public Float getAverageSize() {
+    public float getAverageSize() {
         return 26.7f;
     }
 
@@ -104,9 +98,9 @@ public class MtgOnlTokensImageSource implements CardImageSource {
         if (copyUrlToImage != null) {
             return;
         }
-        copyUrlToImage = new HashMap<String, String>();
-        copyImageToUrl = new HashMap<String, String>();
-        copyUrlToImageDone = new HashMap<String, Integer>();
+        copyUrlToImage = new HashMap<>();
+        copyImageToUrl = new HashMap<>();
+        copyUrlToImageDone = new HashMap<>();
         copyUrlToImage.put("Angel_B_3_3.jpg", "ANGEL.B.ANGEL.CREATURE.3.3.full.jpg");
         copyUrlToImage.put("Angel_W_3_3.jpg", "ANGEL.W.ANGEL.CREATURE.3.3.full.jpg");
         copyUrlToImage.put("Angel_W_4_4.jpg", "ANGEL.W.ANGEL.CREATURE.4.4.full.jpg");
@@ -365,7 +359,7 @@ public class MtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
-    public Integer getTotalImages() {
+    public int getTotalImages() {
         if (copyUrlToImage == null) {
             setupLinks();
         }
@@ -376,7 +370,7 @@ public class MtgOnlTokensImageSource implements CardImageSource {
     }
     
     @Override
-    public Boolean isTokenSource() {
+    public boolean isTokenSource() {
         return true;
     }
     

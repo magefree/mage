@@ -27,21 +27,15 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,6 +44,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -112,7 +108,7 @@ class FavorOfTheMightyEffect extends ContinuousEffectImpl {
             }
         }
         FilterPermanent filterMaxCMC = new FilterCreaturePermanent();
-        filterMaxCMC.add(new ConvertedManaCostPredicate(ComparisonType.Equal, maxCMC));
+        filterMaxCMC.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, maxCMC));
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filterMaxCMC, source.getControllerId(), game)) {
             if (permanent != null) {
                 permanent.addAbility(new ProtectionAbility(filter), source.getSourceId(), game);

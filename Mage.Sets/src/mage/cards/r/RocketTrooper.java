@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -63,7 +64,7 @@ public class RocketTrooper extends CardImpl {
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield,
-                        new FilterCreaturePermanent("Trooper", "Trooper creatures"), false)));
+                        new FilterCreaturePermanent(SubType.TROOPER, "Trooper creatures"), false)));
 
     }
 

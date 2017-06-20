@@ -27,8 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
@@ -38,11 +36,15 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.token.ZombieToken;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +54,7 @@ public class SidisiBroodTyrant extends CardImpl {
 
     public SidisiBroodTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Naga");
         this.subtype.add("Shaman");
 
@@ -99,12 +101,12 @@ class SidisiBroodTyrantTriggeredAbility extends TriggeredAbilityImpl {
                 if (card != null) {
 
                     UUID cardOwnerId = card.getOwnerId();
-                    List<CardType> cardType = card.getCardType();
+                    Set<CardType> cardType = card.getCardType();
 
                     if (cardOwnerId != null
                             && card.getOwnerId().equals(getControllerId())
                             && cardType != null
-                            && card.getCardType().contains(CardType.CREATURE)) {
+                            && card.isCreature()) {
                         return true;
                     }
                 }

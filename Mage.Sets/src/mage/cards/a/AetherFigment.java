@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -39,6 +38,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  * @author nantuko, BetaSteward_at_googlemail.com
@@ -61,7 +62,7 @@ public class AetherFigment extends CardImpl {
         // If Aether Figment was kicked, it enters the battlefield with two +1/+1 counters on it
         Ability ability = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it",
                 "");
         this.addAbility(ability);

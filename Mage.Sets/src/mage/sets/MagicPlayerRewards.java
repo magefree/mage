@@ -35,10 +35,10 @@ import mage.constants.SetType;
 
 public class MagicPlayerRewards extends ExpansionSet {
 
-    private static final MagicPlayerRewards fINSTANCE = new MagicPlayerRewards();
+    private static final MagicPlayerRewards instance = new MagicPlayerRewards();
 
     public static MagicPlayerRewards getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MagicPlayerRewards() {

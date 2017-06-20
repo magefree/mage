@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -38,7 +37,10 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +51,7 @@ public class AtraxaPraetorsVoice extends CardImpl {
     public AtraxaPraetorsVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}{B}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Angel");
         this.subtype.add("Horror");
         this.power = new MageInt(4);
@@ -64,7 +66,7 @@ public class AtraxaPraetorsVoice extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // At the beginning of your end step, proliferate.
+        // At the beginning of your end step, proliferate.  (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ProliferateEffect(), TargetController.YOU, false));
     }
 

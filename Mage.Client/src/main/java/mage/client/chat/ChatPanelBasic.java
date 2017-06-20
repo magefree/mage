@@ -265,14 +265,14 @@ public class ChatPanelBasic extends javax.swing.JPanel {
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
         }
-        if (color.equals(MessageColor.ORANGE)) {
+        if (color == MessageColor.ORANGE) {
             textColor = "Orange";
         }
-        if (color.equals(MessageColor.YELLOW)) {
+        if (color == MessageColor.YELLOW) {
             textColor = "Yellow";
         }
-        if (messageType == MessageType.WHISPER) {
-            if (username.equalsIgnoreCase("Whisper from " + SessionHandler.getUserName())) {
+        if (messageType == MessageType.WHISPER_FROM) {
+            if (username.equalsIgnoreCase(SessionHandler.getUserName())) {
                 if (message.toLowerCase().startsWith("profanity 0")) {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "0");
                 } else if (message.toLowerCase().startsWith("profanity 1")) {
@@ -281,6 +281,10 @@ public class ChatPanelBasic extends javax.swing.JPanel {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "2");
                 }
             }
+            username = "Whisper from " + username;
+        }
+        if (messageType == MessageType.WHISPER_TO) {
+            username = "Whisper to " + username;
         }
 
         Matcher matchPattern = cardNamePattern.matcher(message);
@@ -357,7 +361,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         this.txtConversation.setExtBackgroundColor(new Color(0, 0, 0, alpha)); // Alpha = 255 not transparent
         this.txtConversation.setSelectionColor(Color.LIGHT_GRAY);
         this.jScrollPaneTxt.setOpaque(alpha == 255);
-        this.jScrollPaneTxt.getViewport().setOpaque(!chatType.equals(ChatType.TABLES));
+        this.jScrollPaneTxt.getViewport().setOpaque(chatType != ChatType.TABLES);
     }
 
     public void clear() {

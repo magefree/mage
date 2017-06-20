@@ -39,6 +39,7 @@ Mage.Server.Console/target/
 Mage.Server.Console/mageadmin.log
 Mage.Server.Plugins/Mage.Deck.Constructed/target
 Mage.Server.Plugins/Mage.Deck.Limited/target
+Mage.Server.Plugins/Mage.Game.CanadianHighlanderDuel/target
 Mage.Server.Plugins/Mage.Game.CommanderDuel/target
 Mage.Server.Plugins/Mage.Game.CommanderFreeForAll/target/
 Mage.Server.Plugins/Mage.Game.FreeForAll/target

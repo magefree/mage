@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ExploitCreatureTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -36,8 +35,11 @@ import mage.abilities.keyword.ExploitAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +49,7 @@ public class SidisiUndeadVizier extends CardImpl {
 
     public SidisiUndeadVizier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Naga");
         this.power = new MageInt(4);

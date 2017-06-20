@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DevastatingSummonsElementalToken;
 
 /**
  *
@@ -47,12 +47,11 @@ import mage.game.permanent.token.Token;
 public class DevastatingSummons extends CardImpl {
 
     public DevastatingSummons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // As an additional cost to cast Devastating Summons, sacrifice X lands.
         this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledLandPermanent("lands"), true));
-        
+
         // Create two X/X red Elemental creature tokens.
         this.getSpellAbility().addEffect(new DevastatingSummonsEffect());
     }
@@ -80,13 +79,13 @@ class DevastatingSummonsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ElementalToken token = new ElementalToken();
-        
+        DevastatingSummonsElementalToken token = new DevastatingSummonsElementalToken();
+
         token.getPower().modifyBaseValue(new GetXValue().calculate(game, source, this));
         token.getToughness().modifyBaseValue(new GetXValue().calculate(game, source, this));
-        
+
         token.putOntoBattlefield(2, game, source.getSourceId(), source.getControllerId());
-        
+
         return true;
     }
 
@@ -95,13 +94,4 @@ class DevastatingSummonsEffect extends OneShotEffect {
         return new DevastatingSummonsEffect(this);
     }
 
-    class ElementalToken extends Token {
-
-        public ElementalToken() {
-            super("Elemental", "X/X red Elemental creature");
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            subtype.add("Elemental");
-        }
-    }
 }

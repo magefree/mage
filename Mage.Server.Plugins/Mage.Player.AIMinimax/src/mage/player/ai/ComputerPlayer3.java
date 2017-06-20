@@ -30,7 +30,6 @@ package mage.player.ai;
 
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
-import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -141,7 +140,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
             if (!root.children.isEmpty()) {
                 root = root.children.get(0);
-                actions = new LinkedList<Ability>(root.abilities);
+                actions = new LinkedList<>(root.abilities);
                 combat = root.combat;
                 if (logger.isDebugEnabled())
                     logger.debug("adding pre-combat actions:" + actions);
@@ -165,7 +164,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
             if (!root.children.isEmpty()) {
                 root = root.children.get(0);
-                actions = new LinkedList<Ability>(root.abilities);
+                actions = new LinkedList<>(root.abilities);
                 combat = root.combat;
                 if (logger.isDebugEnabled())
                     logger.debug("adding post-combat actions:" + actions);

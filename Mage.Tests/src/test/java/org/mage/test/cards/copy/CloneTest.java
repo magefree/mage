@@ -1,6 +1,5 @@
 package org.mage.test.cards.copy;
 
-import java.util.Iterator;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectsList;
 import mage.cards.Card;
@@ -140,9 +139,8 @@ public class CloneTest extends CardTestPlayerBase {
 
         Logger.getLogger(CloneTest.class).debug("EXISTING CONTINUOUS EFFECTS:");
         for (ContinuousEffectsList effectsList : currentGame.getContinuousEffects().allEffectsLists) {
-            Iterator it = effectsList.iterator();
-            while (it.hasNext()) {
-                ContinuousEffect effect = (ContinuousEffect) it.next();
+            for (Object anEffectsList : effectsList) {
+                ContinuousEffect effect = (ContinuousEffect) anEffectsList;
                 Logger.getLogger(CloneTest.class).debug("- " + effect.toString());
             }
         }

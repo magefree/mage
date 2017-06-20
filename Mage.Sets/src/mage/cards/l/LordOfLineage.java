@@ -28,10 +28,6 @@
 package mage.cards.l;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,30 +37,35 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.VampireToken;
 
 /**
  *
  * @author Loki
  */
 public class LordOfLineage extends CardImpl {
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Vampire creatures");
 
     static {
-        filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 
     public LordOfLineage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add("Vampire");
 
         this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // this card is the second face of double-faced card
+        // this card is the second face of double-faced card Bloodline Keeper
         this.nightCard = true;
         this.transformable = true;
 
@@ -82,17 +83,5 @@ public class LordOfLineage extends CardImpl {
     @Override
     public LordOfLineage copy() {
         return new LordOfLineage(this);
-    }
-}
-
-class VampireToken extends Token {
-    VampireToken() {
-        super("Vampire", "2/2 black Vampire creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Vampire");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
     }
 }

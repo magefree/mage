@@ -29,7 +29,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -46,12 +45,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -61,7 +63,7 @@ public class FaithfulSquire extends CardImpl {
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public FaithfulSquire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -95,7 +97,7 @@ class KaisoMemoryOfLoyalty extends Token {
 
     KaisoMemoryOfLoyalty() {
         super("Kaiso, Memory of Loyalty", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Spirit");

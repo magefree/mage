@@ -27,18 +27,13 @@
  */
 package mage.cards.a;
 
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -56,7 +51,7 @@ public class ArmamentMaster extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Kor creatures you control");
 
     static {
-        filter.add(new SubtypePredicate("Kor"));
+        filter.add(new SubtypePredicate(SubType.KOR));
     }
 
     public ArmamentMaster(UUID ownerId, CardSetInfo setInfo) {
@@ -85,7 +80,7 @@ class ArmamentMasterEffect extends ContinuousEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Kor creatures you control");
 
     static {
-        filter.add(new SubtypePredicate("Kor"));
+        filter.add(new SubtypePredicate(SubType.KOR));
     }
 
     public ArmamentMasterEffect() {

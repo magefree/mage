@@ -27,10 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -41,9 +37,14 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -103,11 +104,11 @@ class BalustradeSpyEffect extends OneShotEffect {
         }
         CardsImpl cards = new CardsImpl();
         boolean landFound = false;
-        while (controller.getLibrary().size() > 0 && !landFound) {
+        while (controller.getLibrary().hasCards() && !landFound) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
-                if (card.getCardType().contains(CardType.LAND)) {
+                if (card.isLand()) {
                     landFound = true;
                 }
             }

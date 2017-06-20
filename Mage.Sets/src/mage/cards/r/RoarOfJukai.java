@@ -28,9 +28,10 @@
 package mage.cards.r;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
+import mage.constants.*;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.costs.common.GainLifeOpponentCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -38,9 +39,6 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,13 +49,12 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class RoarOfJukai extends CardImpl {
 
     public RoarOfJukai(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.subtype.add("Arcane");
 
 
@@ -84,7 +81,7 @@ class RoarOfJukaiEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filterBlocked = new FilterCreaturePermanent("blocked creature");
 
     static {
-        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.FOREST));
         filterBlocked.add(new BlockedPredicate());
     }
 
@@ -111,15 +108,15 @@ class RoarOfJukaiEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0).apply(game, source)) {
-                for(Permanent permanent : game.getBattlefield().getActivePermanents(filterBlocked, source.getControllerId(), source.getSourceId(), game)) {
-                    ContinuousEffect effect = new BoostTargetEffect(2,2, Duration.EndOfTurn);
+            if (new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0).apply(game, source)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filterBlocked, source.getControllerId(), source.getSourceId(), game)) {
+                    ContinuousEffect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
                     effect.setTargetPointer(new FixedTarget(permanent.getId()));
                     game.addEffect(effect, source);
                 }
             }
             return true;
-        }        
+        }
         return false;
     }
 }

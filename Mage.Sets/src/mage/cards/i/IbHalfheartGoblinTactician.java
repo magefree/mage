@@ -27,9 +27,6 @@
  */
 package mage.cards.i;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
@@ -39,10 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,6 +48,10 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -64,15 +62,15 @@ public class IbHalfheartGoblinTactician extends CardImpl {
     private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent("another Goblin you control");
 
     static {
-        filter.add(new SubtypePredicate("Mountain"));
-        filterGoblin.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filterGoblin.add(new SubtypePredicate(SubType.GOBLIN));
         filterGoblin.add(new AnotherPredicate());
         filterGoblin.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public IbHalfheartGoblinTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Goblin");
         this.subtype.add("Advisor");
 

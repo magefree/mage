@@ -27,10 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.List;
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,7 +37,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -52,6 +50,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -61,7 +62,7 @@ public class DarkSupplicant extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clerics you control");
 
     static {
-        filter.add(new SubtypePredicate("Cleric"));
+        filter.add(new SubtypePredicate(SubType.CLERIC));
     }
 
     public DarkSupplicant(UUID ownerId, CardSetInfo setInfo) {

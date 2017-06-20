@@ -27,20 +27,20 @@
  */
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author North
  */
 public class Mirage extends ExpansionSet {
-    private static final Mirage fINSTANCE = new Mirage();
+    private static final Mirage instance = new Mirage();
 
     public static Mirage getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Mirage() {
@@ -195,6 +195,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Mtenda Griffin", 232, Rarity.UNCOMMON, mage.cards.m.MtendaGriffin.class));
         cards.add(new SetCardInfo("Mtenda Herder", 233, Rarity.COMMON, mage.cards.m.MtendaHerder.class));
         cards.add(new SetCardInfo("Mystical Tutor", 80, Rarity.UNCOMMON, mage.cards.m.MysticalTutor.class));
+        cards.add(new SetCardInfo("Natural Balance", 129, Rarity.RARE, mage.cards.n.NaturalBalance.class));
         cards.add(new SetCardInfo("Nettletooth Djinn", 130, Rarity.UNCOMMON, mage.cards.n.NettletoothDjinn.class));
         cards.add(new SetCardInfo("Nocturnal Raid", 30, Rarity.UNCOMMON, mage.cards.n.NocturnalRaid.class));
         cards.add(new SetCardInfo("Pacifism", 236, Rarity.COMMON, mage.cards.p.Pacifism.class));
@@ -203,6 +204,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Paupers' Cage", 279, Rarity.RARE, mage.cards.p.PaupersCage.class));
         cards.add(new SetCardInfo("Pearl Dragon", 237, Rarity.RARE, mage.cards.p.PearlDragon.class));
         cards.add(new SetCardInfo("Phyrexian Dreadnought", 280, Rarity.RARE, mage.cards.p.PhyrexianDreadnought.class));
+        cards.add(new SetCardInfo("Phyrexian Purge", 333, Rarity.RARE, mage.cards.p.PhyrexianPurge.class));
         cards.add(new SetCardInfo("Phyrexian Tribute", 32, Rarity.RARE, mage.cards.p.PhyrexianTribute.class));
         cards.add(new SetCardInfo("Phyrexian Vault", 281, Rarity.UNCOMMON, mage.cards.p.PhyrexianVault.class));
         cards.add(new SetCardInfo("Plains", 306, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));

@@ -28,7 +28,6 @@
 package mage.cards.e;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -39,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.EyesOfTheWisentElementalToken;
 
 /**
  *
@@ -54,13 +53,13 @@ public class EyesOfTheWisent extends CardImpl {
     }
 
     public EyesOfTheWisent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{G}");
         this.subtype.add("Elemental");
 
         // Whenever an opponent casts a blue spell during your turn, you may create a 4/4 green Elemental creature token.
         this.addAbility(new ConditionalTriggeredAbility(
                 new SpellCastOpponentTriggeredAbility(new CreateTokenEffect(new EyesOfTheWisentElementalToken()), filter, true),
-                new MyTurnCondition(),
+                MyTurnCondition.instance,
                 "Whenever an opponent casts a blue spell during your turn, you may create a 4/4 green Elemental creature token."
         ));
     }
@@ -73,19 +72,4 @@ public class EyesOfTheWisent extends CardImpl {
     public EyesOfTheWisent copy() {
         return new EyesOfTheWisent(this);
     }
-}
-
-class EyesOfTheWisentElementalToken extends Token {
-
-    public EyesOfTheWisentElementalToken() {
-        super("Elemental", "4/4 green Elemental creature token");
-        this.setOriginalExpansionSetCode("MMA");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Elemental");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        setTokenType(1);
-    }
-
 }

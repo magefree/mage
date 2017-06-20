@@ -27,15 +27,16 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.TargetPlayer;
 import mage.watchers.common.LandfallWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public class RestForTheWeary extends CardImpl {
         // Target player gains 4 life.
         // Landfall - If you had a land enter the battlefield under your control this turn, that player gains 8 life instead.
         this.getSpellAbility().addWatcher(new LandfallWatcher());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new GainLifeTargetEffect(8), new GainLifeTargetEffect(4), LandfallCondition.getInstance(), "Target player gains 4 life. <br/>Landfall - If you had a land enter the battlefield under your control this turn, that player gains 8 life instead"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new GainLifeTargetEffect(8), new GainLifeTargetEffect(4), LandfallCondition.instance, "Target player gains 4 life. <br/>Landfall - If you had a land enter the battlefield under your control this turn, that player gains 8 life instead"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

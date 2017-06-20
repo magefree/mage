@@ -123,6 +123,7 @@ class MarkOfSakikoTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever this creature deals combat damage to a player, add that much {G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.";
+        return "Whenever this creature deals combat damage to a player, add that much {G} to your mana pool. "
+                + "Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.";
     }
 }

@@ -28,12 +28,11 @@
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KnightAllyToken;
 
 /**
  *
@@ -42,7 +41,7 @@ import mage.game.permanent.token.Token;
 public class AlliedReinforcements extends CardImpl {
 
     public AlliedReinforcements(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");
 
         // Create two 2/2 white Knight Ally creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightAllyToken(), 2));
@@ -55,19 +54,5 @@ public class AlliedReinforcements extends CardImpl {
     @Override
     public AlliedReinforcements copy() {
         return new AlliedReinforcements(this);
-    }
-}
-
-class KnightAllyToken extends Token {
-
-    public KnightAllyToken() {
-        super("Knight Ally", "2/2 white Knight Ally creature token");
-        this.setExpansionSetCodeForImage("BFZ");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Knight");
-        subtype.add("Ally");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

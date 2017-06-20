@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -37,12 +36,16 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 
 /**
@@ -52,14 +55,14 @@ public class PatronOfTheNezumi extends CardImpl {
 
     public PatronOfTheNezumi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
         // Rat offering (You may cast this card any time you could cast an instant by sacrificing a Rat and paying the difference in mana costs between this and the sacrificed Rat. Mana cost includes color.)
-        this.addAbility(new OfferingAbility("Rat"));
+        this.addAbility(new OfferingAbility(SubType.RAT));
 
         // Whenever a permanent is put into an opponent's graveyard, that player loses 1 life.
         this.addAbility(new PatronOfTheNezumiTriggeredAbility(new LoseLifeTargetEffect(1)));

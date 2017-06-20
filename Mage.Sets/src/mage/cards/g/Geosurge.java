@@ -28,7 +28,6 @@
 package mage.cards.g;
 
 import mage.ConditionalMana;
-import mage.constants.CardType;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -79,7 +79,7 @@ class GeosurgeManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && (card.getCardType().contains(CardType.ARTIFACT) || card.getCardType().contains(CardType.CREATURE))) {
+            if (card != null && (card.isArtifact() || card.isCreature())) {
                 return true;
             }
         }

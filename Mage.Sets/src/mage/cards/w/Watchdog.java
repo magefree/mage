@@ -61,7 +61,7 @@ public class Watchdog extends CardImpl {
         this.getAbilities().add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
         // As long as Watchdog is untapped, all creatures attacking you get -1/-0.
          this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, new WatchdogFilter(), false), new InvertCondition(new SourceTappedCondition()),"As long as {this} is untapped, all creatures attacking you get -1/-0")));
+            new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, new WatchdogFilter(), false), new InvertCondition(SourceTappedCondition.instance),"As long as {this} is untapped, all creatures attacking you get -1/-0")));
     }
 
     public Watchdog(final Watchdog card) {

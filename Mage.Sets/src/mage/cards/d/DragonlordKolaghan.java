@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -48,6 +48,8 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +59,7 @@ public class DragonlordKolaghan extends CardImpl {
 
     public DragonlordKolaghan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elder");
         this.subtype.add("Dragon");        
         this.power = new MageInt(6);
@@ -115,7 +117,7 @@ class DragonlordKolaghanTriggeredAbility extends TriggeredAbilityImpl {
         Player controller = game.getPlayer(getControllerId());
         if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
             Spell spell = game.getStack().getSpell(event.getSourceId());
-            if (spell != null && !spell.isFaceDown(game) && (spell.getCardType().contains(CardType.CREATURE) || spell.getCardType().contains(CardType.PLANESWALKER))) {
+            if (spell != null && !spell.isFaceDown(game) && (spell.isCreature() || spell.isPlaneswalker())) {
                 Player opponent = game.getPlayer(event.getPlayerId());
                 boolean sameName = false;
                 for (Card graveCard :opponent.getGraveyard().getCards(game)) {

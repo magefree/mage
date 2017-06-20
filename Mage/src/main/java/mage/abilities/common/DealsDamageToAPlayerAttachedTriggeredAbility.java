@@ -60,9 +60,14 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (targetController.equals(TargetController.OPPONENT)) {
+        if (targetController == TargetController.OPPONENT) {
             Player controller = game.getPlayer(this.getControllerId());
             if (controller == null || !game.isOpponent(controller, event.getPlayerId())) {
+                return false;
+            }
+        }
+        if (targetController == TargetController.YOU) {
+            if (!this.getControllerId().equals(event.getPlayerId())) {
                 return false;
             }
         }
@@ -72,6 +77,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
                 && p != null && p.getAttachments().contains(this.getSourceId())) {
             if (setFixedTargetPointer) {
                 for (Effect effect : this.getEffects()) {
+                    effect.setValue("damage", event.getAmount());
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
             }
@@ -91,6 +97,9 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
         switch(targetController) {
             case OPPONENT:
                 sb.append("an opponent, ");
+                break;
+            case YOU:
+                sb.append("you, ");
                 break;
             case ANY:
                 sb.append("a player, ");

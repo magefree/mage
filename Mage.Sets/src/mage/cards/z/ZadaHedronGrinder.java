@@ -27,7 +27,6 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -37,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -47,6 +47,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -55,7 +57,7 @@ public class ZadaHedronGrinder extends CardImpl {
 
     public ZadaHedronGrinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Goblin");
         this.subtype.add("Ally");
         this.power = new MageInt(3);
@@ -130,7 +132,7 @@ class ZadaHedronGrinderTriggeredAbility extends TriggeredAbilityImpl {
     private boolean isControlledInstantOrSorcery(Spell spell) {
         return spell != null
                 && (spell.getControllerId().equals(this.getControllerId()))
-                && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
+                && (spell.isInstant() || spell.isSorcery());
     }
 
     @Override

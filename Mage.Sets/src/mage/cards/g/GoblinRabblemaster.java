@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -40,10 +39,7 @@ import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -51,14 +47,16 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.GoblinTokenWithHaste;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author Quercitron
  */
 public class GoblinRabblemaster extends CardImpl {
 
-    private static final FilterCreaturePermanent otherGoblinFilter = new FilterCreaturePermanent("Goblin", "Other Goblin creatures you control");
-    private static final FilterCreaturePermanent attackingFilter = new FilterCreaturePermanent("Goblin", "other attacking Goblin");
+    private static final FilterCreaturePermanent otherGoblinFilter = new FilterCreaturePermanent(SubType.GOBLIN, "Other Goblin creatures you control");
+    private static final FilterCreaturePermanent attackingFilter = new FilterCreaturePermanent(SubType.GOBLIN, "other attacking Goblin");
 
     static {
         otherGoblinFilter.add(new AnotherPredicate());

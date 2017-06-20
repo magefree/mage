@@ -30,18 +30,12 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AuraAttachedTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BroodKeeperDragonToken;
 
 /**
  *
@@ -50,7 +44,7 @@ import mage.game.permanent.token.Token;
 public class BroodKeeper extends CardImpl {
 
     public BroodKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
@@ -71,21 +65,5 @@ public class BroodKeeper extends CardImpl {
     @Override
     public BroodKeeper copy() {
         return new BroodKeeper(this);
-    }
-}
-
-class BroodKeeperDragonToken extends Token {
-
-    public BroodKeeperDragonToken() {
-        super("Dragon", "2/2 red Dragon creature token with flying. It has \"{R}: This creature gets +1/+0 until end of turn.\"");
-        this.setOriginalExpansionSetCode("M15");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 }

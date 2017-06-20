@@ -27,8 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,20 +37,15 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author duncant
@@ -90,10 +83,7 @@ class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            List<CardType> cardType = perm.getCardType();
-            if (!cardType.contains(CardType.ARTIFACT)) {
-                cardType.add(CardType.ARTIFACT);
-            }
+            perm.addCardType(CardType.ARTIFACT);
         }
         return true;
     }

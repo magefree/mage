@@ -178,8 +178,8 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rite of the Raging Storm");
 
-        attack(2, playerB, "Lightning Rager"); // Can't attack
-        attack(2, playerA, "Lightning Rager"); // Can't attack
+        attack(2, playerB, "Lightning Rager:0"); // Can't attack
+        attack(2, playerB, "Lightning Rager:1"); // Can't attack
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -191,5 +191,29 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertLife(playerA, 20);
 
+    }
+
+    /**
+     * Gatherer Ruling:
+     * 10/1/2005: Planeswalkers will enter the battlefield with double the normal amount of loyalty counters. However,
+     * if you activate an ability whose cost has you put loyalty counters on a planeswalker, the number you put on isn’t doubled.
+     * This is because those counters are put on as a cost, not as an effect.
+     */
+    @Test
+    public void testPlaneswalkerLoyalty() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tibalt, the Fiend-Blooded");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Doubling Season");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,"+1: Draw a card, then discard a card at random.");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        //Should not be doubled
+        assertCounterCount("Tibalt, the Fiend-Blooded", CounterType.LOYALTY, 3);
     }
 }

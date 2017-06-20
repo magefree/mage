@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -42,6 +41,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -100,7 +101,7 @@ class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null
                     && permanent.getControllerId().equals(this.getControllerId())
-                    && permanent.getCardType().contains(CardType.CREATURE)
+                    && permanent.isCreature()
                     && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 return true;
             }

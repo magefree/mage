@@ -55,9 +55,9 @@ import mage.target.common.TargetCreaturePermanent;
 public class ProteusStaff extends CardImpl {
 
     public ProteusStaff(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {2}{U}, {tap}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of his or her library in any order. Activate this ability only any time you could cast a sorcery.
+        // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of his or her library in any order. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ProteusStaffEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -102,10 +102,10 @@ class ProteusStaffEffect extends OneShotEffect {
 
                 // That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card.
                 Cards cards = new CardsImpl();
-                while (controller.getLibrary().size() > 0) {
+                while (controller.getLibrary().hasCards()) {
                     Card card = controller.getLibrary().removeFromTop(game);
                     if (card != null) {
-                        if (card.getCardType().contains(CardType.CREATURE)) {
+                        if (card.isCreature()) {
                             // The player puts that card onto the battlefield
                             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                             break;

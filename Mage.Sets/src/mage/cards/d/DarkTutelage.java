@@ -28,21 +28,18 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -80,7 +77,7 @@ class DarkTutelageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
+        if (player != null && player.getLibrary().hasCards()) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 card.moveToZone(Zone.HAND, source.getSourceId(), game, false);

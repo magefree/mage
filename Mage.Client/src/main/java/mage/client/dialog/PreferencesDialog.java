@@ -2958,7 +2958,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
 
         connection.setProxyType(configProxyType);
-        if (!configProxyType.equals(ProxyType.NONE)) {
+        if (configProxyType != ProxyType.NONE) {
             String host = getCachedValue(KEY_PROXY_ADDRESS, "");
             String port = getCachedValue(KEY_PROXY_PORT, "");
             if (!host.isEmpty() && !port.isEmpty()) {
@@ -2984,10 +2984,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (args.length > 0) {
             String param1 = args[0];
             if (param1.equals(OPEN_CONNECTION_TAB)) {
-                param = 4;
+                param = 6;
             }
             if (param1.equals(OPEN_PHASES_TAB)) {
-                param = 1;
+                param = 2;
             }
         }
         final int openedTab = param;

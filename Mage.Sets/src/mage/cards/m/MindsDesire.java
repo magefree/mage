@@ -95,7 +95,7 @@ class MindsDesireEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             controller.shuffleLibrary(source, game);
-            if (controller.getLibrary().size() > 0) {
+            if (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {
                     controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
@@ -139,7 +139,7 @@ class MindsDesireCastFromExileEffect extends AsThoughEffectImpl {
                 Card card = game.getCard(sourceId);
                 if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
                     Player player = game.getPlayer(affectedControllerId);
-                    player.setCastSourceIdWithAlternateMana(sourceId, null, null);
+                    player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
                     return true;
                 }
             }

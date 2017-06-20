@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
@@ -43,6 +42,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+
+import java.util.UUID;
 
 /**
  *
@@ -108,9 +109,9 @@ class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 if (sourceObjectDamage != null) {
                     if (sourceObjectDamage.getColor(game).isRed()
-                            && (sourceObjectDamage.getCardType().contains(CardType.PLANESWALKER)
-                            || sourceObjectDamage.getCardType().contains(CardType.INSTANT)
-                            || sourceObjectDamage.getCardType().contains(CardType.SORCERY))) {
+                            && (sourceObjectDamage.isPlaneswalker()
+                            || sourceObjectDamage.isInstant()
+                            || sourceObjectDamage.isSorcery())) {
                         return true;
                     }
                 }

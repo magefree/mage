@@ -27,10 +27,9 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInAnyLibraryCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,6 +40,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ public class ShelldockIsle extends CardImpl {
         this.addAbility(new BlueManaAbility());
         // {U}, {tap}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new HideawayPlayEffect(), new ManaCostsImpl("{U}"), new CardsInAnyLibraryCondition(Condition.ComparisonType.LessThan, 21));
+                Zone.BATTLEFIELD, new HideawayPlayEffect(), new ManaCostsImpl("{U}"), new CardsInAnyLibraryCondition(ComparisonType.FEWER_THAN, 21));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

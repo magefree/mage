@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -44,6 +43,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -106,7 +107,7 @@ class DracoCostReductionEffect extends CostModificationEffectImpl {
 
 class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
 
-    public static final int MAX_DOMAIN_VALUE = 10;
+    static final int MAX_DOMAIN_VALUE = 10;
 
     public DracoSacrificeUnlessPaysEffect () {
         super(Outcome.Sacrifice);

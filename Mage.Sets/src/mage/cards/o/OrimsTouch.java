@@ -55,7 +55,7 @@ public class OrimsTouch extends CardImpl {
         // Prevent the next 2 damage that would be dealt to target creature or player this turn. If Orim's Touch was kicked, prevent the next 4 damage that would be dealt to that creature or player this turn instead.
         Effect effect = new ConditionalReplacementEffect(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 4),
-                new LockedInCondition(KickedCondition.getInstance()),
+                new LockedInCondition(KickedCondition.instance),
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2));
         effect.setText("Prevent the next 2 damage that would be dealt to target creature or player this turn. If Orim's Touch was kicked, prevent the next 4 damage that would be dealt to that creature or player this turn instead");
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

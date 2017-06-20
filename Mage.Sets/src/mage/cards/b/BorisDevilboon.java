@@ -37,8 +37,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.MinorDemonToken;
 
 /**
  *
@@ -48,7 +49,7 @@ public class BorisDevilboon extends CardImpl {
 
     public BorisDevilboon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);
@@ -67,18 +68,5 @@ public class BorisDevilboon extends CardImpl {
     @Override
     public BorisDevilboon copy() {
         return new BorisDevilboon(this);
-    }
-}
-
-class MinorDemonToken extends Token {
-
-    public MinorDemonToken() {
-        super("Minor Demon", "1/1 black and red Demon creature token named Minor Demon");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        color.setRed(true);
-        subtype.add("Demon");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

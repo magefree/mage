@@ -28,6 +28,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddConditionalColorlessManaEffect;
@@ -43,7 +45,6 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 
 /**
- *
  * @author LevelX2
  */
 public class ShrineOfTheForsakenGods extends CardImpl {
@@ -55,7 +56,7 @@ public class ShrineOfTheForsakenGods extends CardImpl {
     }
 
     public ShrineOfTheForsakenGods(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
@@ -65,7 +66,7 @@ public class ShrineOfTheForsakenGods extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddConditionalColorlessManaEffect(2, new ConditionalSpellManaBuilder(filter)),
                 new TapSourceCost(),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent("you control seven or more lands"), PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 6)));
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent("you control seven or more lands"), ComparisonType.MORE_THAN, 6)));
     }
 
     public ShrineOfTheForsakenGods(final ShrineOfTheForsakenGods card) {

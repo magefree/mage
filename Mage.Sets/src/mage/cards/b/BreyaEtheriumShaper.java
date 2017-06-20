@@ -39,14 +39,14 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ThopterToken;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -60,7 +60,7 @@ public class BreyaEtheriumShaper extends CardImpl {
     public BreyaEtheriumShaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}{B}{R}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -96,19 +96,5 @@ public class BreyaEtheriumShaper extends CardImpl {
     @Override
     public BreyaEtheriumShaper copy() {
         return new BreyaEtheriumShaper(this);
-    }
-}
-
-class ThopterToken extends Token {
-
-    ThopterToken() {
-        super("Thopter", "1/1 blue Thopter artifact creature tokens with flying");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        color.setBlue(true);
-        subtype.add("Thopter");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

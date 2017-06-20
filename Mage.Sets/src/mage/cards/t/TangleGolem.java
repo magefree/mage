@@ -33,6 +33,7 @@ import mage.abilities.keyword.AffinityForLandTypeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -47,7 +48,7 @@ public class TangleGolem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Affinity for Forests
-        this.addAbility(new AffinityForLandTypeAbility("Forest", "Forests"));
+        this.addAbility(new AffinityForLandTypeAbility(SubType.FOREST, "Forests"));
     }
 
     public TangleGolem(final TangleGolem card) {

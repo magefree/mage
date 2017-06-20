@@ -54,7 +54,7 @@ public class ImpactResonance extends CardImpl {
 
 
         // Impact Resonance deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn.
-        DynamicValue xValue = new GreatestAmountOfDamageDealtValue();
+        DynamicValue xValue = GreatestAmountOfDamageDealtValue.instance;
         Effect effect = new DamageMultiEffect(xValue);
         effect.setText("{this} deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn");
         this.getSpellAbility().addEffect(effect);
@@ -73,17 +73,14 @@ public class ImpactResonance extends CardImpl {
 }
 
 
-class GreatestAmountOfDamageDealtValue implements DynamicValue, MageSingleton {
+enum GreatestAmountOfDamageDealtValue implements DynamicValue, MageSingleton {
 
-    private static final GreatestAmountOfDamageDealtValue fINSTANCE =  new GreatestAmountOfDamageDealtValue();
+    instance;
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
-    public static GreatestAmountOfDamageDealtValue getInstance() {
-        return fINSTANCE;
-    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -91,7 +88,7 @@ class GreatestAmountOfDamageDealtValue implements DynamicValue, MageSingleton {
     }
 
     public int calculate(Game game, UUID controllerId) {
-        GreatestAmountOfDamageWatcher watcher = (GreatestAmountOfDamageWatcher) game.getState().getWatchers().get("GreatestAmountOfDamage");
+        GreatestAmountOfDamageWatcher watcher = (GreatestAmountOfDamageWatcher) game.getState().getWatchers().get(GreatestAmountOfDamageWatcher.class.getSimpleName());
         if (watcher != null) {
             return watcher.getGreatestAmountOfDamage();
         }
@@ -100,7 +97,7 @@ class GreatestAmountOfDamageDealtValue implements DynamicValue, MageSingleton {
 
     @Override
     public DynamicValue copy() {
-        return new GreatestAmountOfDamageDealtValue();
+        return this;
     }
 
     @Override
@@ -119,7 +116,7 @@ class GreatestAmountOfDamageWatcher extends Watcher {
     private int damageAmount;
 
     public GreatestAmountOfDamageWatcher() {
-        super("GreatestAmountOfDamage", WatcherScope.GAME);
+        super(GreatestAmountOfDamageWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public GreatestAmountOfDamageWatcher(final GreatestAmountOfDamageWatcher watcher) {

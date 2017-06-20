@@ -114,13 +114,13 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
     public boolean applies(GameEvent event, Ability source, Game game) {
         // the check if a permanent untap pahse is already handled is needed if multiple effects are added to prevent untap in next untap step of controller
         // if we don't check it for every untap step of a turn only one effect would be consumed instead of all be valid for the next untap step
-        if (GameEvent.EventType.UNTAP_STEP.equals(event.getType())) {
+        if (event.getType() == EventType.UNTAP_STEP) {
             boolean allHandled = true;
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
                     if (game.getActivePlayerId().equals(permanent.getControllerId())
-                            || (game.getActivePlayerId().equals(onlyIfControlledByPlayer))) { // if effect works only for specific player, all permanents have to be set to handled in that players untap step
+                            && ((onlyIfControlledByPlayer == null) || (game.getActivePlayerId().equals(onlyIfControlledByPlayer)))) { // if effect works only for specific player, all permanents have to be set to handled in that players untap step
                         if (!handledTargetsDuringTurn.containsKey(targetId)) {
                             // it's the untep step of the current controller and the effect was not handled for this target yet, so do it now
                             handledTargetsDuringTurn.put(targetId, false);
@@ -145,8 +145,10 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
                     && getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
-                    handledTargetsDuringTurn.put(event.getTargetId(), true);
-                    return true;
+                    if ((onlyIfControlledByPlayer == null) || game.getActivePlayerId().equals(onlyIfControlledByPlayer)) { // If onlyIfControlledByPlayer is set, then don't apply unless we're currently controlled by the specified player.
+                        handledTargetsDuringTurn.put(event.getTargetId(), true);
+                        return true;
+                    }
                 }
             }
         }

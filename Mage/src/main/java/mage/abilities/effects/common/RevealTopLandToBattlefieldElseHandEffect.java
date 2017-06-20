@@ -34,7 +34,7 @@ public class RevealTopLandToBattlefieldElseHandEffect extends OneShotEffect {
         if (sourceObject == null || controller == null) {
             return false;
         }
-        if (controller.getLibrary().size() > 0) {
+        if (controller.getLibrary().hasCards()) {
             CardsImpl cards = new CardsImpl();
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
@@ -42,7 +42,7 @@ public class RevealTopLandToBattlefieldElseHandEffect extends OneShotEffect {
             }
             cards.add(card);
             controller.revealCards(sourceObject.getName(), cards, game);
-            if (card.getCardType().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             } else {
                 controller.moveCards(card, Zone.HAND, source, game);

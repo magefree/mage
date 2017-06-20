@@ -27,8 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -46,6 +44,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author North
@@ -61,7 +62,7 @@ public class GruesomeDiscovery extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GruesomeDiscoveryEffect(),
                 new DiscardTargetEffect(2),
-                MorbidCondition.getInstance(),
+                MorbidCondition.instance,
                 "Target player discards two cards. Morbid - If a creature died this turn, instead that player reveals his or her hand, you choose two cards from it, then that player discards those cards"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

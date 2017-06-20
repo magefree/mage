@@ -30,8 +30,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,7 +43,6 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -62,7 +60,7 @@ public class MarrowGnawer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter3 = new FilterControlledCreaturePermanent("the number of Rats you control");
 
     static {
-        SubtypePredicate ratPredicate = new SubtypePredicate("Rat");
+        SubtypePredicate ratPredicate = new SubtypePredicate(SubType.RAT);
         filterFear.add(ratPredicate);
         filterSacrifice.add(ratPredicate);
         filter3.add(ratPredicate);
@@ -70,7 +68,7 @@ public class MarrowGnawer extends CardImpl {
 
     public MarrowGnawer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Rat");
         this.subtype.add("Rogue");
 

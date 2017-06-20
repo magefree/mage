@@ -28,19 +28,19 @@
 
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -80,7 +80,7 @@ class TurnToSlagEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (target != null) {
-            List<Permanent> attachments = new ArrayList<Permanent>();
+            List<Permanent> attachments = new ArrayList<>();
             for (UUID uuid : target.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
                 if (attached.getSubtype(game).contains("Equipment")) {

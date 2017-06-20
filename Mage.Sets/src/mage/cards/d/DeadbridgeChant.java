@@ -27,11 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,9 +35,14 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffec
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -97,7 +97,7 @@ class DeadbridgeChantEffect extends OneShotEffect {
             if (card != null) {
                 Zone targetZone = Zone.HAND;
                 String text = " put into hand of ";
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     targetZone = Zone.BATTLEFIELD;
                     text = " put onto battlefield for ";
                 }

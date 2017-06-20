@@ -134,7 +134,7 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
-        if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)
+        if (permanent != null && permanent.isCreature()
                 && event.getData() != null && event.getData().equals("+1/+1")) {
             return true;
         }

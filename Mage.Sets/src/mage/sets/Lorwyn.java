@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class Lorwyn extends ExpansionSet {
 
-    private static final Lorwyn fINSTANCE = new Lorwyn();
+    private static final Lorwyn instance = new Lorwyn();
 
     public static Lorwyn getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Lorwyn() {

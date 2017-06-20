@@ -27,7 +27,6 @@
  */
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -42,10 +41,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -56,6 +52,8 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -64,7 +62,7 @@ public class UnscytheKillerOfKings extends CardImpl {
 
     public UnscytheKillerOfKings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{U}{B}{B}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Equipment");
 
         // Equipped creature gets +3/+3 and has first strike.
@@ -112,7 +110,7 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) { // target token can't create Zombie
+            if (zEvent.getTarget().isCreature()) { // target token can't create Zombie
                 Permanent equipment = game.getPermanent(getSourceId());
                 // the currently equiped creature must have done damage to the dying creature
                 if (equipment != null && equipment.getAttachedTo() != null) {
@@ -161,7 +159,7 @@ class UnscytheEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD) && controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true)) {
+            if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD && controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true)) {
                 ZombieToken zombie = new ZombieToken();
                 return zombie.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             }

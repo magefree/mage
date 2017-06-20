@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +57,7 @@ public class StinkdrinkerBandit extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Rogue");
 
     static {
-        filter.add(new SubtypePredicate("Rogue"));
+        filter.add(new SubtypePredicate(SubType.ROGUE));
     }
 
     public StinkdrinkerBandit(UUID ownerId, CardSetInfo setInfo) {
@@ -103,7 +104,7 @@ class StinkdrinkerBanditTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.DECLARED_BLOCKERS);
+        return event.getType() == EventType.DECLARED_BLOCKERS;
     }
 
     @Override

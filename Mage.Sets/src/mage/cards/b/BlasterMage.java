@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,10 +37,13 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +54,7 @@ public class BlasterMage extends CardImpl {
    private static final FilterPermanent filter = new FilterPermanent("Wall");
 
     static {
-        filter.add(new SubtypePredicate("Wall"));
+        filter.add(new SubtypePredicate(SubType.WALL));
     }
 
     public BlasterMage(UUID ownerId, CardSetInfo setInfo) {

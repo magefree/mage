@@ -27,7 +27,6 @@
  */
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -36,16 +35,13 @@ import mage.abilities.keyword.CascadeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +52,7 @@ public class YidrisMaelstromWielder extends CardImpl {
     public YidrisMaelstromWielder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}{R}{G}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Ogre");
         this.subtype.add("Wizard");
         this.power = new MageInt(5);
@@ -104,7 +100,7 @@ class YidrisMaelstromWielderGainCascadeEffect extends ContinuousEffectImpl {
                 // only spells cast, so no copies of spells
                 if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
                     Spell spell = (Spell) stackObject;
-                    if (spell.getFromZone().equals(Zone.HAND)) {
+                    if (spell.getFromZone() == Zone.HAND) {
                         game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
                     }
                 }

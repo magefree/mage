@@ -34,6 +34,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -52,7 +53,7 @@ public class NovaChaser extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // Champion an Elemental
-        this.addAbility(new ChampionAbility(this, "Elemental", false));
+        this.addAbility(new ChampionAbility(this, SubType.ELEMENTAL, false));
     }
 
     public NovaChaser(final NovaChaser card) {

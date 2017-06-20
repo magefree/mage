@@ -29,18 +29,18 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author LevelX2
  */
 public class ClashPack extends ExpansionSet {
-    private static final ClashPack fINSTANCE = new ClashPack();
+    private static final ClashPack instance = new ClashPack();
 
     public static ClashPack getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ClashPack() {

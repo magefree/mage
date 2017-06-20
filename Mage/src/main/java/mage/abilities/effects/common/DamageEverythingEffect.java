@@ -55,6 +55,10 @@ public class DamageEverythingEffect extends OneShotEffect {
         this(new StaticValue(amount), new FilterCreaturePermanent());
     }
 
+    public DamageEverythingEffect(DynamicValue amount) {
+        this(amount, new FilterCreaturePermanent());
+    }
+
     public DamageEverythingEffect(int amount, FilterPermanent filter) {
         this(new StaticValue(amount), filter);
     }

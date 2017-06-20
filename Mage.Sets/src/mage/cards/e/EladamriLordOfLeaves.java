@@ -27,9 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -37,11 +34,12 @@ import mage.abilities.keyword.ForestwalkAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,13 +51,13 @@ public class EladamriLordOfLeaves extends CardImpl {
     private static final FilterPermanent filterPermanents = new FilterPermanent("Elves");
 
     static {
-        filterCreatures.add(new SubtypePredicate("Elf"));
-        filterPermanents.add(new SubtypePredicate("Elf"));
+        filterCreatures.add(new SubtypePredicate(SubType.ELF));
+        filterPermanents.add(new SubtypePredicate(SubType.ELF));
     }
 
     public EladamriLordOfLeaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MirranMettle extends CardImpl {
 
-    private final String effectText = "Metalcraft - That creature gets +4/+4 until end of turn instead if you control three or more artifacts.";
+    private static final String effectText = "Metalcraft - That creature gets +4/+4 until end of turn instead if you control three or more artifacts.";
 
     public MirranMettle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
@@ -54,7 +54,7 @@ public class MirranMettle extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
 
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), 
-                new LockedInCondition(MetalcraftCondition.getInstance()), effectText));
+                new LockedInCondition(MetalcraftCondition.instance), effectText));
     }
 
     public MirranMettle(final MirranMettle card) {

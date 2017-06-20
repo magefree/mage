@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,12 +37,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -52,6 +46,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInASingleGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,13 +58,13 @@ public class ThelonOfHavenwood extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("a Fungus card from a graveyard");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Fungus on the battlefield");
     static {
-        filterCard.add(new SubtypePredicate("Fungus"));
-        filterPermanent.add(new SubtypePredicate("Fungus"));
+        filterCard.add(new SubtypePredicate(SubType.FUNGUS));
+        filterPermanent.add(new SubtypePredicate(SubType.FUNGUS));
     }
 
     public ThelonOfHavenwood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.power = new MageInt(2);
@@ -97,7 +93,7 @@ class ThelonOfHavenwoodBoostEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Fungus creature");
     static {
-        filter.add(new SubtypePredicate("Fungus"));
+        filter.add(new SubtypePredicate(SubType.FUNGUS));
     }
 
     ThelonOfHavenwoodBoostEffect() {

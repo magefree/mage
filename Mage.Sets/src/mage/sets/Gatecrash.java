@@ -27,9 +27,9 @@
  */
 package mage.sets;
 
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class Gatecrash extends ExpansionSet {
 
-    private static final Gatecrash fINSTANCE = new Gatecrash();
+    private static final Gatecrash instance = new Gatecrash();
 
     public static Gatecrash getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Gatecrash() {

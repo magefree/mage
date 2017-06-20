@@ -19,7 +19,7 @@ import org.mage.card.arcane.CardRenderer;
  *
  * @author LevelX2
  */
-public class GUISizeHelper {
+public final class GUISizeHelper {
 
     // relate the native image card size to a value of the size scale
     final static int CARD_IMAGE_WIDTH = 312;

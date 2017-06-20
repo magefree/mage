@@ -35,6 +35,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterLandPermanent;
@@ -52,7 +53,7 @@ public class StaffOfTheSunMagus extends CardImpl {
     
     static {
         filterSpell.add(new ColorPredicate(ObjectColor.WHITE));
-        filterLand.add(new SubtypePredicate("Plains"));
+        filterLand.add(new SubtypePredicate(SubType.PLAINS));
     }
 
     public StaffOfTheSunMagus(UUID ownerId, CardSetInfo setInfo) {

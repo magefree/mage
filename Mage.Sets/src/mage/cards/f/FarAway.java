@@ -25,29 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
-/**
- *
- * @author LevelX2
- */
-
-
 public class FarAway extends SplitCard {
 
     public FarAway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}","{2}{B}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}", "{2}{B}", SpellAbilityType.SPLIT_FUSED);
 
         // Far
         // Return target creature to its owner's hand.

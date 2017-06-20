@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Created by IGOUDT on 5-9-2016.
  */
-public class RandomUtil {
+public final class RandomUtil {
 
 
     public static Random getRandom() {return ThreadLocalRandom.current();}

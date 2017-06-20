@@ -69,7 +69,7 @@ public class VedalkenCertarch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Metalcraft - {T}: Tap target artifact, creature, or land. Activate this ability only if you control three or more artifacts.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost(), MetalcraftCondition.getInstance());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost(), MetalcraftCondition.instance);
         ability.setAbilityWord(AbilityWord.METALCRAFT);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

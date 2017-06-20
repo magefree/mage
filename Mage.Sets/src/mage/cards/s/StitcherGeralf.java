@@ -35,17 +35,14 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.StitcherGeralfZombieToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 
@@ -56,8 +53,8 @@ import mage.target.TargetCard;
 public class StitcherGeralf extends CardImpl {
 
     public StitcherGeralf(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
@@ -101,17 +98,17 @@ class StitcherGeralfEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards cards = new CardsImpl();
-            for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     cards.addAll(player.getLibrary().getTopCards(game, 3));
                 }
             }
             controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-            TargetCard target = new TargetCard(0,2,Zone.GRAVEYARD, new FilterCreatureCard("creature cards to exile"));
+            TargetCard target = new TargetCard(0, 2, Zone.GRAVEYARD, new FilterCreatureCard("creature cards to exile"));
             controller.chooseTarget(outcome, cards, target, source, game);
             int power = 0;
-            for (UUID cardId: target.getTargets()) {
+            for (UUID cardId : target.getTargets()) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     power += card.getPower().getValue();
@@ -121,19 +118,5 @@ class StitcherGeralfEffect extends OneShotEffect {
             return new CreateTokenEffect(new StitcherGeralfZombieToken(power)).apply(game, source);
         }
         return false;
-    }
-}
-
-class StitcherGeralfZombieToken extends Token {
-
-    StitcherGeralfZombieToken(int xValue) {
-        super("Zombie", "X/X blue Zombie creature token");
-        setOriginalExpansionSetCode("C14");
-        setTokenType(1);
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Zombie");
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
     }
 }

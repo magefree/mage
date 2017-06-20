@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -40,6 +39,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -94,7 +95,7 @@ class ChronostutterEffect extends OneShotEffect {
             }
 
             Card card = null;
-            if (owner.getLibrary().size() > 0) {
+            if (owner.getLibrary().hasCards()) {
                 card = owner.getLibrary().removeFromTop(game);
             }
 

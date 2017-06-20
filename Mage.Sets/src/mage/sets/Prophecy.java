@@ -37,10 +37,10 @@ import mage.constants.SetType;
  */
 public class Prophecy extends ExpansionSet {
 
-    private static final Prophecy fINSTANCE = new Prophecy();
+    private static final Prophecy instance = new Prophecy();
 
     public static Prophecy getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Prophecy() {
@@ -69,14 +69,18 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Bog Elemental", 57, Rarity.RARE, mage.cards.b.BogElemental.class));
         cards.add(new SetCardInfo("Bog Glider", 58, Rarity.COMMON, mage.cards.b.BogGlider.class));
         cards.add(new SetCardInfo("Calming Verse", 110, Rarity.COMMON, mage.cards.c.CalmingVerse.class));
+        cards.add(new SetCardInfo("Celestial Convergence", 5, Rarity.RARE, mage.cards.c.CelestialConvergence.class));
         cards.add(new SetCardInfo("Chilling Apparition", 59, Rarity.UNCOMMON, mage.cards.c.ChillingApparition.class));
         cards.add(new SetCardInfo("Chimeric Idol", 136, Rarity.UNCOMMON, mage.cards.c.ChimericIdol.class));
+        cards.add(new SetCardInfo("Citadel of Pain", 86, Rarity.UNCOMMON, mage.cards.c.CitadelOfPain.class));
         cards.add(new SetCardInfo("Coastal Hornclaw", 31, Rarity.COMMON, mage.cards.c.CoastalHornclaw.class));
+        cards.add(new SetCardInfo("Copper-Leaf Angel", 137, Rarity.RARE, mage.cards.c.CopperLeafAngel.class));
         cards.add(new SetCardInfo("Darba", 111, Rarity.UNCOMMON, mage.cards.d.Darba.class));
         cards.add(new SetCardInfo("Denying Wind", 32, Rarity.RARE, mage.cards.d.DenyingWind.class));
         cards.add(new SetCardInfo("Despoil", 62, Rarity.COMMON, mage.cards.d.Despoil.class));
         cards.add(new SetCardInfo("Devastate", 87, Rarity.COMMON, mage.cards.d.Devastate.class));
         cards.add(new SetCardInfo("Diving Griffin", 6, Rarity.COMMON, mage.cards.d.DivingGriffin.class));
+        cards.add(new SetCardInfo("Entangler", 7, Rarity.UNCOMMON, mage.cards.e.Entangler.class));
         cards.add(new SetCardInfo("Excavation", 33, Rarity.UNCOMMON, mage.cards.e.Excavation.class));
         cards.add(new SetCardInfo("Fault Riders", 88, Rarity.COMMON, mage.cards.f.FaultRiders.class));
         cards.add(new SetCardInfo("Fen Stalker", 64, Rarity.COMMON, mage.cards.f.FenStalker.class));
@@ -94,6 +98,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Jolrael, Empress of Beasts", 115, Rarity.RARE, mage.cards.j.JolraelEmpressOfBeasts.class));
         cards.add(new SetCardInfo("Jolrael's Favor", 116, Rarity.COMMON, mage.cards.j.JolraelsFavor.class));
         cards.add(new SetCardInfo("Keldon Arsonist", 92, Rarity.UNCOMMON, mage.cards.k.KeldonArsonist.class));
+        cards.add(new SetCardInfo("Keldon Firebombers", 94, Rarity.RARE, mage.cards.k.KeldonFirebombers.class));
         cards.add(new SetCardInfo("Latulla, Keldon Overseer", 95, Rarity.RARE, mage.cards.l.LatullaKeldonOverseer.class));
         cards.add(new SetCardInfo("Lesser Gargadon", 97, Rarity.UNCOMMON, mage.cards.l.LesserGargadon.class));
         cards.add(new SetCardInfo("Living Terrain", 117, Rarity.UNCOMMON, mage.cards.l.LivingTerrain.class));

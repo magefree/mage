@@ -40,10 +40,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -59,8 +56,8 @@ import mage.players.Player;
 public class ChorusOfTheConclave extends CardImpl {
 
     public ChorusOfTheConclave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{W}{W}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{W}{W}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dryad");
 
         this.power = new MageInt(3);
@@ -111,7 +108,7 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
         if (event.getPlayerId().equals(source.getControllerId())) {
             MageObject spellObject = game.getObject(event.getSourceId());
             if (spellObject != null) {
-                return spellObject.getCardType().contains(CardType.CREATURE);
+                return spellObject.isCreature();
             }
         }
         return false;
@@ -200,7 +197,7 @@ class ChorusOfTheConclaveReplacementEffect2 extends ReplacementEffectImpl {
             String key = event.getSourceId().toString() + (game.getState().getZoneChangeCounter(event.getSourceId()) - 1);
             int xValue = spellX.get(key);
             if (xValue > 0) {
-                creature.addCounters(CounterType.P1P1.createInstance(xValue), source, game);
+                creature.addCounters(CounterType.P1P1.createInstance(xValue), source, game, event.getAppliedEffects());
                 game.informPlayers(sourceObject.getLogName() + ": " + creature.getLogName() + " enters the battlefield with " + xValue + " +1/+1 counter" + (xValue > 1 ? "s" : "") + " on it");
             }
             spellX.remove(key);

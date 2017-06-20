@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,8 +42,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +56,7 @@ public class DragonlordOjutai extends CardImpl {
 
     public DragonlordOjutai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elder");
         this.subtype.add("Dragon");
         this.power = new MageInt(5);
@@ -66,7 +68,7 @@ public class DragonlordOjutai extends CardImpl {
         // Dragonlord Ojutai has hexproof as long as it's untapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
-                new InvertCondition(new SourceTappedCondition()),
+                new InvertCondition(SourceTappedCondition.instance),
                 "{this} has hexproof as long as it's untapped")));
         
         // Whenever Dragonlord Ojutai deals combat damage to a player, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.

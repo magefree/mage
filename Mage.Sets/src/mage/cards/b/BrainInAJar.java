@@ -40,10 +40,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -59,7 +59,7 @@ import mage.target.common.TargetCardInHand;
 public class BrainInAJar extends CardImpl {
 
     public BrainInAJar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {1}, {T}: Put a charge counter on Brain in a Jar, then you may cast an instant or sorcery card with converted mana costs equal to the number of charge counters on Brain in a Jar from your hand without paying its mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(1));
@@ -103,11 +103,11 @@ class BrainInAJarCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourceObject != null) {
             int counters = sourceObject.getCounters(game).getCount(CounterType.CHARGE);
             FilterCard filter = new FilterInstantOrSorceryCard();
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, counters));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, counters));
             int cardsToCast = controller.getHand().count(filter, source.getControllerId(), source.getSourceId(), game);
             if (cardsToCast > 0 && controller.chooseUse(outcome, "Cast an instant or sorcery card with converted mana costs of " + counters + " from your hand without paying its mana cost?", source, game)) {
                 TargetCardInHand target = new TargetCardInHand(filter);

@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -38,10 +38,10 @@ import mage.cards.CardGraphicInfo;
  */
 
 public class IzzetVsGolgari extends ExpansionSet {
-    private static final IzzetVsGolgari fINSTANCE = new IzzetVsGolgari();
+    private static final IzzetVsGolgari instance = new IzzetVsGolgari();
 
     public static IzzetVsGolgari getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private IzzetVsGolgari() {

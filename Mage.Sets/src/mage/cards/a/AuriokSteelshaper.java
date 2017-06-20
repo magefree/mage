@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
@@ -37,10 +36,15 @@ import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,8 +57,8 @@ public class AuriokSteelshaper extends CardImpl {
 
     static {
         soldiersOrKnights.add(Predicates.or(
-                new SubtypePredicate("Soldier"),
-                new SubtypePredicate("Knight")
+                new SubtypePredicate(SubType.SOLDIER),
+                new SubtypePredicate(SubType.KNIGHT)
         ));
     }
 
@@ -71,7 +75,7 @@ public class AuriokSteelshaper extends CardImpl {
         // As long as Auriok Steelshaper is equipped, each creature you control that's a Soldier or a Knight gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, soldiersOrKnights, false),
-                EquippedSourceCondition.getInstance(),
+                EquippedSourceCondition.instance,
                 "As long as {this} is equipped, each creature you control that's a Soldier or a Knight gets +1/+1"
         )));
     }

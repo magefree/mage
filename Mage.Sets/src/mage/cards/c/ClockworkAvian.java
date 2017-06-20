@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
@@ -54,6 +53,8 @@ import mage.counters.Counters;
 import mage.game.Game;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author MarcoMarin
@@ -74,7 +75,7 @@ public class ClockworkAvian extends CardImpl {
         // At end of combat, if Clockwork Avian attacked or blocked this combat, remove a +1/+0 counter from it.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EndOfCombatTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P0.createInstance()), false),
-                new AttackedOrBlockedThisCombatSourceCondition(),
+                AttackedOrBlockedThisCombatSourceCondition.instance,
                 "At end of combat, if {this} attacked or blocked this combat, remove a +1/+0 counter from it."),
                 new AttackedOrBlockedThisCombatWatcher());
 

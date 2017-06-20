@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -38,6 +37,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +65,7 @@ public class DanceOfTheSkywise extends CardImpl {
         return new DanceOfTheSkywise(this);
     }
     
-        private class DragonIllusionToken extends Token {
+        private static class DragonIllusionToken extends Token {
 
         public DragonIllusionToken() {
             super("Dragon", "blue Dragon Illusion with base power and toughness 4/4 and with flying");

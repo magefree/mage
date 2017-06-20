@@ -27,9 +27,8 @@
  */
 package mage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
@@ -55,9 +55,9 @@ public abstract class MageObjectImpl implements MageObject {
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
-    protected List<CardType> cardType = new ArrayList<>();
+    protected EnumSet<CardType> cardType = EnumSet.noneOf(CardType.class);
     protected List<String> subtype = new ArrayList<>();
-    protected List<String> supertype = new ArrayList<>();
+    protected EnumSet<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
     protected String text;
     protected MageInt power;
@@ -92,7 +92,7 @@ public abstract class MageObjectImpl implements MageObject {
         abilities = object.abilities.copy();
         this.cardType.addAll(object.cardType);
         this.subtype.addAll(object.subtype);
-        this.supertype.addAll(object.supertype);
+        supertype.addAll(object.supertype);
         this.copy = object.copy;
     }
 
@@ -127,7 +127,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public List<CardType> getCardType() {
+    public EnumSet<CardType> getCardType() {
         return cardType;
     }
 
@@ -137,7 +137,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public List<String> getSupertype() {
+    public EnumSet<SuperType> getSuperType() {
         return supertype;
     }
 
@@ -164,12 +164,12 @@ public abstract class MageObjectImpl implements MageObject {
     public MageInt getToughness() {
         return toughness;
     }
-    
+
     @Override
     public int getStartingLoyalty() {
-        for (Ability ab: getAbilities()) {
+        for (Ability ab : getAbilities()) {
             if (ab instanceof PlanswalkerEntersWithLoyalityCountersAbility) {
-                return ((PlanswalkerEntersWithLoyalityCountersAbility)ab).getStartingLoyalty();
+                return ((PlanswalkerEntersWithLoyalityCountersAbility) ab).getStartingLoyalty();
             }
         }
         return 0;
@@ -179,19 +179,19 @@ public abstract class MageObjectImpl implements MageObject {
     public ObjectColor getColor(Game game) {
         return color;
     }
-    
+
     @Override
     public ObjectColor getFrameColor(Game game) {
         // For lands, add any colors of mana the land can produce to
         // its frame colors.
-        if (getCardType().contains(CardType.LAND)) {
+        if (this.isLand()) {
             ObjectColor cl = frameColor.copy();
-            for (Ability ab: getAbilities()) {
+            for (Ability ab : getAbilities()) {
                 if (ab instanceof ActivatedManaAbilityImpl) {
-                    ActivatedManaAbilityImpl mana = (ActivatedManaAbilityImpl)ab;
+                    ActivatedManaAbilityImpl mana = (ActivatedManaAbilityImpl) ab;
                     try {
                         List<Mana> manaAdded = mana.getNetMana(game);
-                        for (Mana m: manaAdded) {
+                        for (Mana m : manaAdded) {
                             if (m.getAny() > 0) {
                                 return new ObjectColor("WUBRG");
                             }

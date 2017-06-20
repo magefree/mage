@@ -51,7 +51,7 @@ public class LeovoldEmissaryOfTrest extends CardImpl {
 
     public LeovoldEmissaryOfTrest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elf");
         this.subtype.add("Advisor");
         this.power = new MageInt(3);
@@ -97,7 +97,7 @@ class LeovoldEmissaryOfTrestEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        CardsAmountDrawnThisTurnWatcher watcher = (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.BASIC_KEY);
+        CardsAmountDrawnThisTurnWatcher watcher = (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.class.getSimpleName());
         Player controller = game.getPlayer(source.getControllerId());
         return watcher != null && controller != null && watcher.getAmountCardsDrawn(event.getPlayerId()) >= 1
                 && game.isOpponent(controller, event.getPlayerId());

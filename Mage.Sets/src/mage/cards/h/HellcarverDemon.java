@@ -38,23 +38,28 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.cards.Card;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.players.Player;
 import mage.game.permanent.Permanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandCard;
 import mage.target.common.TargetCardInExile;
 import mage.game.Game;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author jeffwadsworth
  */
-
 public class HellcarverDemon extends CardImpl {
 
     public HellcarverDemon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(6);
@@ -92,44 +97,80 @@ class HellcarverDemonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-    Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent hellcarverDemon = game.getPermanent(source.getSourceId());
 
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanents, source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanents, source.getControllerId(), game)) {
             if (!Objects.equals(permanent, hellcarverDemon)) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
         }
 
-        if (player != null && !player.getHand().isEmpty()) {
-            int cardsInHand = player.getHand().size();
-            player.discard(cardsInHand, source, game);
+        if (controller != null && !controller.getHand().isEmpty()) {
+            int cardsInHand = controller.getHand().size();
+            controller.discard(cardsInHand, false, source, game);
         }
 
         for (int i = 0; i < 6; i++) {
-            if (player != null && player.getLibrary().size() > 0) {
-                Card topCard = player.getLibrary().getFromTop(game);
+            if (controller != null
+                    && controller.getLibrary().hasCards()) {
+                Card topCard = controller.getLibrary().getFromTop(game);
                 topCard.moveToExile(source.getSourceId(), "Cards exiled by Hellcarver Demon", source.getSourceId(), game);
             }
         }
 
-        while (player != null && player.canRespond() && player.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with Hellcarver Demon without paying that card's mana cost?", source, game)) {
+        while (controller != null
+                && controller.canRespond()
+                && controller.chooseUse(Outcome.PlayForFree, controller.getLogName() + " can cast another nonland card exiled with Hellcarver Demon without paying that card's mana cost.", source, game)) {
             TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
-            while (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(source.getSourceId()), target, game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        game.getExile().removeCard(card, game);
-                        player.cast(card.getSpellAbility(), game, true);
-                    }
-                    target.clearChosen();
+            while (controller.chooseUse(Outcome.PlayForFree, "Cast another spell exiled by Hellcarver Demon?", source, game)) {
+                controller.choose(Outcome.PlayForFree, game.getExile().getExileZone(source.getSourceId()), target, game);
+                Card card = game.getCard(target.getFirstTarget());
+                if (card != null) {
+                    ContinuousEffect effect = new HellcarverDemonCastFromExileEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
+                    controller.cast(card.getSpellAbility(), game, true);
+                }
+                target.clearChosen();
             }
             return true;
-        }     
+        }
         return false;
     }
 
     @Override
     public HellcarverDemonEffect copy() {
-    return new HellcarverDemonEffect(this);
+        return new HellcarverDemonEffect(this);
+    }
+}
+
+class HellcarverDemonCastFromExileEffect extends AsThoughEffectImpl {
+
+    public HellcarverDemonCastFromExileEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        staticText = "You may play the card from exile without paying its mana cost";
+    }
+
+    public HellcarverDemonCastFromExileEffect(final HellcarverDemonCastFromExileEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public HellcarverDemonCastFromExileEffect copy() {
+        return new HellcarverDemonCastFromExileEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (targetPointer.getTargets(game, source).contains(sourceId)) {
+            return game.getState().getZone(sourceId) == Zone.EXILED;
+        }
+        return false;
     }
 }

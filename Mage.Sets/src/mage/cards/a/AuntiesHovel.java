@@ -27,8 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
@@ -36,9 +34,13 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +50,7 @@ public class AuntiesHovel extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Goblin card from your hand");
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public AuntiesHovel(UUID ownerId, CardSetInfo setInfo) {

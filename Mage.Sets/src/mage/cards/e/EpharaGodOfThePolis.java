@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -41,13 +40,12 @@ import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +55,7 @@ public class EpharaGodOfThePolis extends CardImpl {
 
     public EpharaGodOfThePolis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}{U}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("God");
 
         this.power = new MageInt(6);
@@ -72,7 +70,7 @@ public class EpharaGodOfThePolis extends CardImpl {
         // At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), TargetController.ANY, false, false),
-                HadAnotherCreatureEnterTheBattlefieldCondition.getInstance(),
+                HadAnotherCreatureEnterTheBattlefieldCondition.instance,
                 "At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card."),
                 new PermanentsEnteredBattlefieldWatcher());
 
@@ -88,18 +86,16 @@ public class EpharaGodOfThePolis extends CardImpl {
     }
 }
 
-class HadAnotherCreatureEnterTheBattlefieldCondition implements Condition {
+enum HadAnotherCreatureEnterTheBattlefieldCondition implements Condition {
 
-    private final static HadAnotherCreatureEnterTheBattlefieldCondition fInstance = new HadAnotherCreatureEnterTheBattlefieldCondition();
+    instance;
 
-    public static HadAnotherCreatureEnterTheBattlefieldCondition getInstance() {
-        return fInstance;
-    }
+
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getName());
+        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getSimpleName());
         return sourcePermanent != null
                 && watcher != null
                 && watcher.AnotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(sourcePermanent, game);

@@ -28,19 +28,18 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:40
  */
 public class Dissension extends ExpansionSet {
 
-    private static final Dissension fINSTANCE = new Dissension();
+    private static final Dissension instance = new Dissension();
 
     public static Dissension getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Dissension() {
@@ -60,6 +59,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Assault Zeppelid", 103, Rarity.COMMON, mage.cards.a.AssaultZeppelid.class));
         cards.add(new SetCardInfo("Aurora Eidolon", 1, Rarity.COMMON, mage.cards.a.AuroraEidolon.class));
         cards.add(new SetCardInfo("Avatar of Discord", 140, Rarity.RARE, mage.cards.a.AvatarOfDiscord.class));
+        cards.add(new SetCardInfo("Azorius AEthermage", 104, Rarity.UNCOMMON, mage.cards.a.AzoriusAEthermage.class));
         cards.add(new SetCardInfo("Azorius Chancery", 170, Rarity.COMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius First-Wing", 105, Rarity.COMMON, mage.cards.a.AzoriusFirstWing.class));
         cards.add(new SetCardInfo("Azorius Guildmage", 141, Rarity.UNCOMMON, mage.cards.a.AzoriusGuildmage.class));
@@ -73,6 +73,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Bound // Determined", 149, Rarity.RARE, mage.cards.b.BoundDetermined.class));
         cards.add(new SetCardInfo("Brain Pry", 39, Rarity.UNCOMMON, mage.cards.b.BrainPry.class));
         cards.add(new SetCardInfo("Breeding Pool", 172, Rarity.RARE, mage.cards.b.BreedingPool.class));
+        cards.add(new SetCardInfo("Bronze Bombshell", 160, Rarity.RARE, mage.cards.b.BronzeBombshell.class));
         cards.add(new SetCardInfo("Cackling Flames", 59, Rarity.COMMON, mage.cards.c.CacklingFlames.class));
         cards.add(new SetCardInfo("Carom", 6, Rarity.COMMON, mage.cards.c.Carom.class));
         cards.add(new SetCardInfo("Celestial Ancient", 7, Rarity.RARE, mage.cards.c.CelestialAncient.class));

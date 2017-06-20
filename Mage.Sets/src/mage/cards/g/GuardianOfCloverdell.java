@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,7 +37,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +57,7 @@ public class GuardianOfCloverdell extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Kithkin");
 
     static {
-        filter.add(new SubtypePredicate("Kithkin"));
+        filter.add(new SubtypePredicate(SubType.KITHKIN));
     }
 
     public GuardianOfCloverdell(UUID ownerId, CardSetInfo setInfo) {

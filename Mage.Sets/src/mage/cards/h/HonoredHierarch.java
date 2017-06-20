@@ -63,12 +63,12 @@ public class HonoredHierarch extends CardImpl {
         // As long as Honored Hierarch is renowned, it has vigilance and "{T}: Add one mana of any color to your mana pool."
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.getInstance(),
+                RenownedSourceCondition.instance,
                 "As long as {this} is renown, it has vigilance");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.getInstance(),
+                RenownedSourceCondition.instance,
                 "and \"{T}: Add one mana of any color to your mana pool.\"");
         ability.addEffect(effect);
         this.addAbility(ability);        

@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,6 +38,8 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -52,6 +53,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -61,12 +64,12 @@ public class GodoBanditWarlord extends CardImpl {
     private static final FilterCard filter = new FilterCard("an Equipment card");
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public GodoBanditWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Barbarian");
 
@@ -77,7 +80,7 @@ public class GodoBanditWarlord extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), true));
         // Whenever Godo attacks for the first time each turn, untap it and all Samurai you control. After this phase, there is an additional combat phase.
         FilterControlledCreaturePermanent untapFilter = new FilterControlledCreaturePermanent();
-        untapFilter.add(Predicates.or(new PermanentIdPredicate(this.getId()), new SubtypePredicate("Samurai")));
+        untapFilter.add(Predicates.or(new PermanentIdPredicate(this.getId()), new SubtypePredicate(SubType.SAMURAI)));
         Ability ability = new GodoBanditWarlordAttacksTriggeredAbility(new UntapAllControllerEffect(untapFilter,"untap it and all Samurai you control"), false);
         ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(ability);

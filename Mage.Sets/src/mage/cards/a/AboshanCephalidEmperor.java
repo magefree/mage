@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -47,6 +48,8 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,13 +61,13 @@ static final FilterControlledCreaturePermanent filter1 = new FilterControlledCre
 static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures without flying");
 
 static {
-    filter1.add(new SubtypePredicate("Cephalid"));
+    filter1.add(new SubtypePredicate(SubType.CEPHALID));
     filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
 }
 
     public AboshanCephalidEmperor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Cephalid");
 
         this.power = new MageInt(3);

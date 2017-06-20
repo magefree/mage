@@ -27,13 +27,14 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.SurgeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

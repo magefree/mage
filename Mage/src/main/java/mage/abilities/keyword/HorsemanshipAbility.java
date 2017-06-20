@@ -43,14 +43,14 @@ import mage.game.permanent.Permanent;
  */
 
 public class HorsemanshipAbility extends EvasionAbility implements MageSingleton {
-    private static final HorsemanshipAbility fINSTANCE =  new HorsemanshipAbility();
+    private static final HorsemanshipAbility instance =  new HorsemanshipAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static HorsemanshipAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private HorsemanshipAbility() {
@@ -64,7 +64,7 @@ public class HorsemanshipAbility extends EvasionAbility implements MageSingleton
 
     @Override
     public HorsemanshipAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

@@ -44,7 +44,7 @@ public class SaprolingToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("10E", "ALA", "DDE", "DDH", "DDJ", "M12", "M13", "M14", "MM2", "MMA", "RTR", "C15"));
+        tokenImageSets.addAll(Arrays.asList("10E", "ALA", "DDE", "DDH", "DDJ", "M12", "M13", "M14", "MM2", "MMA", "RTR", "C15", "MM3", "C16", "CMA"));
     }
 
     public SaprolingToken() {

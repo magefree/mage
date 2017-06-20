@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -37,10 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -51,6 +47,8 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +65,7 @@ public class AnafenzaTheForemost extends CardImpl {
 
     public AnafenzaTheForemost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -118,7 +116,7 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
+            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
                 if (permanent != null) {
                     return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
@@ -135,7 +133,7 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.ZONE_CHANGE);
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -145,10 +143,10 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
             Card card = game.getCard(event.getTargetId());
             if (card != null && game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) { // Anafenza only cares about cards
                 if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
-                    if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
+                    if (zEvent.getTarget().isCreature()) {
                         return true;
                     }
-                } else if (card.getCardType().contains(CardType.CREATURE)) {
+                } else if (card.isCreature()) {
                     return true;
                 }
             }

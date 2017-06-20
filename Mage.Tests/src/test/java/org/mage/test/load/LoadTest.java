@@ -1,7 +1,9 @@
 package org.mage.test.load;
 
 import mage.cards.Card;
+import mage.cards.Sets;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -10,10 +12,10 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchOptions;
 import mage.player.ai.ComputerPlayer;
+import mage.players.PlayerType;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
-import mage.cards.Sets;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
@@ -24,7 +26,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.cards.decks.DeckCardInfo;
 
 /**
  * Intended to test Mage server under different load patterns.
@@ -105,9 +106,9 @@ public class LoadTest {
 
             TableView table = session.createTable(roomId, options);
 
-            if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, "Human", 1, deckList,"")) {
+            if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, PlayerType.HUMAN, 1, deckList,"")) {
                 log.error("Error while joining table");
-                Assert.assertTrue("Error while joining table", false);
+                Assert.fail("Error while joining table");
                 return;
             }
 
@@ -119,9 +120,9 @@ public class LoadTest {
             UUID roomId2 = session2.getMainRoomId();
 
             // connect to the table with the same deck
-            if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, "Human", 1, deckList,"")) {
+            if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, PlayerType.HUMAN, 1, deckList,"")) {
                 log.error("Error while joining table");
-                Assert.assertTrue("Error while joining table", false);
+                Assert.fail("Error while joining table");
                 return;
             }
 
@@ -142,14 +143,11 @@ public class LoadTest {
 
         for (int i = 0; i < EXECUTION_COUNT_PLAY_GAME; i++) {
             final int j = i;
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        testSimpleGame0(deckList, j);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+            Thread t = new Thread(() -> {
+                try {
+                    testSimpleGame0(deckList, j);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             });
             t.start();
@@ -180,9 +178,9 @@ public class LoadTest {
 
         TableView table = session.createTable(roomId, options);
 
-        if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, "Human", 1, deckList,"")) {
+        if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, PlayerType.HUMAN, 1, deckList,"")) {
             log.error("Error while joining table");
-            Assert.assertTrue("Error while joining table", false);
+            Assert.fail("Error while joining table");
             return true;
         }
 
@@ -196,9 +194,9 @@ public class LoadTest {
         UUID roomId2 = session2.getMainRoomId();
 
         // connect to the table with the same deck
-        if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, "Human", 1, deckList,"")) {
+        if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, PlayerType.HUMAN, 1, deckList,"")) {
             log.error("Error while joining table");
-            Assert.assertTrue("Error while joining table", false);
+            Assert.fail("Error while joining table");
             return true;
         }
 
@@ -269,8 +267,8 @@ public class LoadTest {
     private MatchOptions createGameOptions(GameTypeView gameTypeView, Session session) {
         MatchOptions options = new MatchOptions("Test game", gameTypeView.getName(), false, 2);
 
-        options.getPlayerTypes().add("Human");
-        options.getPlayerTypes().add("Human");
+        options.getPlayerTypes().add(PlayerType.HUMAN);
+        options.getPlayerTypes().add(PlayerType.HUMAN);
 
         options.setDeckType(session.getDeckTypes()[0]);
         options.setLimited(false);
@@ -288,7 +286,7 @@ public class LoadTest {
      */
     private Deck generateRandomDeck() {
         String selectedColors = "BR";
-        List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
+        List<ColoredManaSymbol> allowedColors = new ArrayList<>();
         log.info("Building deck with colors: " + selectedColors);
         for (int i = 0; i < selectedColors.length(); i++) {
             char c = selectedColors.charAt(i);

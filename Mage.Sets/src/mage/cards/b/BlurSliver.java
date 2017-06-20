@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -36,8 +35,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class BlurSliver extends CardImpl {
         // Sliver creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield,
-                        new FilterControlledCreaturePermanent("Sliver", "Sliver creatures you control"))));
+                        new FilterControlledCreaturePermanent(SubType.SLIVER, "Sliver creatures you control"))));
         
     }
 

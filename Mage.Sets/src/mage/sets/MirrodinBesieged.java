@@ -28,10 +28,10 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class MirrodinBesieged extends ExpansionSet {
 
-    private static final MirrodinBesieged fINSTANCE = new MirrodinBesieged();
+    private static final MirrodinBesieged instance = new MirrodinBesieged();
 
     public static MirrodinBesieged getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MirrodinBesieged() {

@@ -27,21 +27,20 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-
+import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.filter.common.FilterAttackingCreature;
 import mage.target.common.TargetCreaturePermanent;
 
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.filter.common.FilterAttackingCreature;
+import java.util.UUID;
 
 
 /**

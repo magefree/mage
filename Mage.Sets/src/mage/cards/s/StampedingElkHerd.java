@@ -55,7 +55,7 @@ public class StampedingElkHerd extends CardImpl {
         // <i>Formidable</i> - Whenever Stampeding Elk Herd attacks, if creatures you control have total power 8 or greater, creatures you control gain trample until end of turn.
         this.addAbility(new ConditionalTriggeredAbility(
                 new AttacksTriggeredAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent()), false),
-                FormidableCondition.getInstance(),
+                FormidableCondition.instance,
                 "<i>Formidable</i> &mdash; Whenever {this} attacks, if creatures you control have total power 8 or greater, creatures you control gain trample until end of turn."
         ));
     }

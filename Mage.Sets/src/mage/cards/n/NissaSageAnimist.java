@@ -40,16 +40,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.NissaSageAnimistToken;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 
@@ -111,33 +106,19 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (sourceObject != null && controller != null && controller.getLibrary().size() > 0) {
+        if (sourceObject != null && controller != null && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
                 return false;
             }
             controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             Zone targetZone = Zone.HAND;
-            if (card.getCardType().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 targetZone = Zone.BATTLEFIELD;
             }
             return controller.moveCards(card, targetZone, source, game);
         }
         return true;
-    }
-}
-
-class NissaSageAnimistToken extends Token {
-
-    NissaSageAnimistToken() {
-        super("Ashaya, the Awoken World", "legendary 4/4 green Elemental creature token named Ashaya, the Awoken World");
-        this.setOriginalExpansionSetCode("ORI");
-        this.getSupertype().add("Legendary");
-        this.getPower().modifyBaseValue(4);
-        this.getToughness().modifyBaseValue(4);
-        this.color.setGreen(true);
-        this.getSubtype(null).add("Elemental");
-        this.getCardType().add(CardType.CREATURE);
     }
 }
 
@@ -164,10 +145,8 @@ class NissaSageAnimistMinusSevenEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 switch (layer) {
                     case TypeChangingEffects_4:
-                        if (!permanent.getCardType().contains(CardType.CREATURE)) {
-                            permanent.getCardType().add(CardType.CREATURE);
-                        }
-                        if (!permanent.getSubtype(game).contains("Elemental")) {
+                            permanent.addCardType(CardType.CREATURE);
+                        if (!permanent.hasSubtype("Elemental", game)) {
                             permanent.getSubtype(game).add("Elemental");
                         }
                         break;

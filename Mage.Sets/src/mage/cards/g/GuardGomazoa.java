@@ -27,18 +27,18 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.constants.Zone;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *

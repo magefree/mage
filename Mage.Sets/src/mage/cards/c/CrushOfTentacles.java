@@ -28,7 +28,6 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.condition.common.SurgedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
@@ -39,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CrushOfTentaclesToken;
 
 /**
  *
@@ -52,7 +51,7 @@ public class CrushOfTentacles extends CardImpl {
 
         // Return all nonland permanents to their owners' hands. If Crush of Tentacles surge cost was paid, create an 8/8 blue Octopus creature token.
         getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent("nonland permanents")));
-        Effect effect = new ConditionalOneShotEffect(new CreateTokenEffect(new CrushOfTentaclesToken()), SurgedCondition.getInstance());
+        Effect effect = new ConditionalOneShotEffect(new CreateTokenEffect(new CrushOfTentaclesToken()), SurgedCondition.instance);
         effect.setText("If {this} surge cost was paid, create an 8/8 blue Octopus creature token");
         getSpellAbility().addEffect(effect);
 
@@ -67,18 +66,5 @@ public class CrushOfTentacles extends CardImpl {
     @Override
     public CrushOfTentacles copy() {
         return new CrushOfTentacles(this);
-    }
-}
-
-class CrushOfTentaclesToken extends Token {
-
-    public CrushOfTentaclesToken() {
-        super("Octopus", "8/8 blue Octopus creature");
-        this.setExpansionSetCodeForImage("BFZ");
-        this.cardType.add(CardType.CREATURE);
-        this.color.setBlue(true);
-        this.subtype.add("Octopus");
-        this.power = new MageInt(8);
-        this.toughness = new MageInt(8);
     }
 }

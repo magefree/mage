@@ -28,14 +28,18 @@
 
 package mage.game.match;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.result.ResultProtos;
+import mage.players.PlayerType;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -51,7 +55,7 @@ public class MatchOptions implements Serializable {
     protected String gameType;
     protected String deckType;
     protected boolean limited;
-    protected List<String> playerTypes = new ArrayList<>();
+    protected List<PlayerType> playerTypes = new ArrayList<>();
     protected boolean multiPlayer;
     protected int numSeats;
     protected String password;
@@ -61,6 +65,7 @@ public class MatchOptions implements Serializable {
     protected int edhPowerLevel;
     protected boolean rated;
     protected int numSeatsForMatch;
+    protected Set<String> bannedUsers = new HashSet<>();
 
     /**
      * Time each player has during the game to play using his\her priority.
@@ -151,7 +156,7 @@ public class MatchOptions implements Serializable {
         this.deckType = deckType;
     }
 
-    public List<String> getPlayerTypes() {
+    public List<PlayerType> getPlayerTypes() {
         return playerTypes;
     }
 
@@ -224,6 +229,14 @@ public class MatchOptions implements Serializable {
 
     public void setRated(boolean rated) {
         this.rated = rated;
+    }
+
+    public Set<String> getBannedUsers() {
+        return bannedUsers;
+    }
+
+    public void setBannedUsers(Set<String> bannedUsers) {
+        this.bannedUsers = bannedUsers;
     }
 
     public ResultProtos.MatchOptionsProto toProto() {

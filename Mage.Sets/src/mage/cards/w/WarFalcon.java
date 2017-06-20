@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -81,8 +82,8 @@ class WarFalconEffect extends RestrictionEffect {
     
     static {
         filter.add(Predicates.or(
-        new SubtypePredicate("Knight"),
-        new SubtypePredicate("Soldier")));
+        new SubtypePredicate(SubType.KNIGHT),
+        new SubtypePredicate(SubType.SOLDIER)));
     }
 
     public WarFalconEffect() {

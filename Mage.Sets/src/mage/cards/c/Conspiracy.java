@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -40,18 +37,17 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -103,34 +99,34 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     setCreatureSubtype(card, choice, game);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     setCreatureSubtype(card, choice, game);
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
+                if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
                     setCreatureSubtype(card, choice, game);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
+                if (card.getOwnerId().equals(controller.getId()) && card.isCreature()) {
                     setCreatureSubtype(card, choice, game);
                 }
             }
             // commander in command zone
             for (UUID commanderId : controller.getCommandersIds()) {
-                if (game.getState().getZone(commanderId).equals(Zone.COMMAND)) {
+                if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         setCreatureSubtype(card, choice, game);
                     }
                 }
@@ -140,7 +136,7 @@ class ConspiracyEffect extends ContinuousEffectImpl {
                 StackObject stackObject = iterator.next();
                 if (stackObject instanceof Spell &&
                         stackObject.getControllerId().equals(source.getControllerId()) &&
-                        stackObject.getCardType().contains(CardType.CREATURE)) {
+                        stackObject.isCreature()) {
                     Card card = ((Spell) stackObject).getCard();
                     setCreatureSubtype(card, choice, game);
                 }

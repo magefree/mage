@@ -56,7 +56,7 @@ public class IntoTheRoil extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
-                KickedCondition.getInstance(),
+                KickedCondition.instance,
                 "If {this} was kicked, draw a card"));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }

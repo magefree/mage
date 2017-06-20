@@ -49,7 +49,7 @@ public class CastFromGraveyardWatcher extends Watcher {
     private final Map<UUID, HashSet<Integer>> spellsCastFromGraveyard = new HashMap<>();
 
     public CastFromGraveyardWatcher() {
-        super(CastFromGraveyardWatcher.class.getName(), WatcherScope.GAME);
+        super(CastFromGraveyardWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CastFromGraveyardWatcher(final CastFromGraveyardWatcher watcher) {
@@ -63,7 +63,7 @@ public class CastFromGraveyardWatcher extends Watcher {
          * play from other zones during the same step. But at least the state is
          * reset if the game comes to a new step
          */
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone().equals(Zone.GRAVEYARD)) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell != null) {
                 HashSet<Integer> zcc = spellsCastFromGraveyard.computeIfAbsent(spell.getSourceId(), k -> new HashSet<>());

@@ -26,14 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.cards.b;
- 
-import java.util.UUID;
-import mage.constants.CardType;
+
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+
+import java.util.UUID;
  
 /**
  *

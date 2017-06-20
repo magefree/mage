@@ -77,24 +77,24 @@ public class CounterbalanceTest extends CardTestPlayerBase {
     }
 
     /**
-     * Test that if the top card is a split card, both casting costs of the split cards
+     * Test that if the top card is a split card, the total of both halves of the split card
      * count to counter the spell. If one of the split cards halves has the equal casting
-     * cost, the spell is countered.
+     * cost, the spell is not countered.
      *
      */
 
     @Test
     public void testSplitCard() {
-        addCard(Zone.HAND, playerA, "Typhoid Rats");
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.HAND, playerA, "Nessian Courser");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
         addCard(Zone.BATTLEFIELD, playerB, "Counterbalance");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
-        addCard(Zone.LIBRARY, playerB, "Wear // Tear"); // CMC 2 and 1
+        addCard(Zone.LIBRARY, playerB, "Wear // Tear"); // CMC 3
         skipInitShuffling(); // so the set to top card stays at top
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Typhoid Rats");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nessian Courser");
         setChoice(playerB, "Yes");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -103,8 +103,8 @@ public class CounterbalanceTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertPermanentCount(playerA, "Typhoid Rats", 0);
-        assertGraveyardCount(playerA, "Typhoid Rats", 1);
+        assertPermanentCount(playerA, "Nessian Courser", 0);
+        assertGraveyardCount(playerA, "Nessian Courser", 1);
         assertGraveyardCount(playerA, 1);
         assertGraveyardCount(playerB, 0);
 

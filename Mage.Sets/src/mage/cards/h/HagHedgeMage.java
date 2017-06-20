@@ -30,15 +30,16 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -55,8 +56,8 @@ public class HagHedgeMage extends CardImpl {
     private final static FilterLandPermanent filter2 = new FilterLandPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Swamp"));
-        filter2.add(new SubtypePredicate("Forest"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter2.add(new SubtypePredicate(SubType.FOREST));
     }
 
     private String rule = "When {this} enters the battlefield, if you control two or more Swamps, you may have target player discard a card.";
@@ -71,12 +72,12 @@ public class HagHedgeMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Hag Hedge-Mage enters the battlefield, if you control two or more Swamps, you may have target player discard a card.
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1), true), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1), rule);
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1), true), new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1), rule);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // When Hag Hedge-Mage enters the battlefield, if you control two or more Forests, you may put target card from your graveyard on top of your library.
-        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2);
+        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), true), new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 1), rule2);
         ability2.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability2);
     }

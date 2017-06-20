@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceCost;
-import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -47,7 +46,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SengirNosferatuBatToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInExile;
@@ -55,12 +54,12 @@ import mage.target.common.TargetCardInExile;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class SengirNosferatu extends CardImpl {
 
     public SengirNosferatu(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add("Vampire");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -85,24 +84,6 @@ public class SengirNosferatu extends CardImpl {
     }
 }
 
-class SengirNosferatuBatToken extends Token {
-
-    SengirNosferatuBatToken() {
-        super("Bat", "1/2 black Bat creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Bat");
-        power = new MageInt(1);
-        toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
-        ReturnSengirNosferatuEffect effect = new ReturnSengirNosferatuEffect();
-        effect.setText("Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
-    }
-}
-
 class ReturnSengirNosferatuEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("exiled card named Sengir Nosferatu");
@@ -124,19 +105,19 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
         return new ReturnSengirNosferatuEffect(this);
     }
 
-     @Override
+    @Override
     public boolean apply(Game game, Ability source) {
         UUID controllerId = source.getControllerId();
         Target target = new TargetCardInExile(filter);
         target.setNotTarget(true);
-        if(!target.canChoose(source.getSourceId(), controllerId, game)) {
+        if (!target.canChoose(source.getSourceId(), controllerId, game)) {
             return false;
         }
         Player player = game.getPlayer(controllerId);
-        if(player != null) {
+        if (player != null) {
             player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game);
             Card card = game.getCard(target.getTargets().get(0));
-            if(card != null) {
+            if (card != null) {
                 return card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
             }
         }

@@ -29,6 +29,7 @@
  */
 package mage.cards.i;
 
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -98,7 +99,7 @@ class GokaTheUnjust extends Token {
 
     GokaTheUnjust() {
         super("Goka the Unjust", "");
-        supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add("Ogre");

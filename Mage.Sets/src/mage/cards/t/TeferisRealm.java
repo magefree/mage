@@ -36,9 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,7 +54,7 @@ public class TeferisRealm extends CardImpl {
 
     public TeferisRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
-        this.supertype.add("World");
+        addSuperType(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TeferisRealmEffect(), TargetController.ANY, false));
@@ -129,7 +127,7 @@ class TeferisRealmEffect extends OneShotEffect {
                     break;
                 case NON_AURA_ENCHANTMENT:
                     filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-                    filter.add(Predicates.not(new SubtypePredicate("Aura")));
+                    filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
                     break;
                 default:
                     return false;

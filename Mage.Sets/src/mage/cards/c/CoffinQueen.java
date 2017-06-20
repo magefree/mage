@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -51,6 +50,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -138,11 +139,11 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (GameEvent.EventType.LOST_CONTROL.equals(event.getType())
+        if (EventType.LOST_CONTROL == event.getType()
                 && event.getSourceId().equals(getSourceId())) {
             return true;
         }
-        return GameEvent.EventType.UNTAPPED.equals(event.getType()) 
+        return EventType.UNTAPPED == event.getType()
                 && event.getTargetId() != null && event.getTargetId().equals(getSourceId());
     }
     

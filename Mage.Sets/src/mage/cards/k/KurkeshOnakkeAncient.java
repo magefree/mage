@@ -27,7 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,16 +37,15 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +55,7 @@ public class KurkeshOnakkeAncient extends CardImpl {
 
     public KurkeshOnakkeAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Ogre");
         this.subtype.add("Spirit");
 
@@ -102,7 +100,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (source != null && source.getCardType().contains(CardType.ARTIFACT)) {
+            if (source != null && source.isArtifact()) {
                 StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
                 if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
                     Effect effect = this.getEffects().get(0);

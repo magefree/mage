@@ -56,7 +56,7 @@ public class HollowhengeScavenger extends CardImpl {
 
         // Morbid - When Hollowhenge Scavenger enters the battlefield, if a creature died this turn, you gain 5 life.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5));
-        this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.getInstance(), staticText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.instance, staticText));
     }
 
     public HollowhengeScavenger(final HollowhengeScavenger card) {

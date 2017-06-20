@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
@@ -40,6 +39,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,7 @@ public class BloodhallPriest extends CardImpl {
         triggeredAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
-                HellbentCondition.getInstance(),
+                HellbentCondition.instance,
                 "Whenever {this} enters the battlefield or attacks, if you have no cards in hand, {this} deals 2 damage to target creature or player"
         ));
 

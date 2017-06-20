@@ -28,21 +28,20 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
-
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class Innistrad extends ExpansionSet {
 
-    private static final Innistrad fINSTANCE = new Innistrad();
+    private static final Innistrad instance = new Innistrad();
 
     public static Innistrad getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Innistrad() {

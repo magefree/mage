@@ -27,10 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -38,9 +34,14 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +89,7 @@ class ConcussiveBoltEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        source.getEffects().get(2).setValue("MetalcraftConcussiveBolt", MetalcraftCondition.getInstance().apply(game, source));
+        source.getEffects().get(2).setValue("MetalcraftConcussiveBolt", MetalcraftCondition.instance.apply(game, source));
         return true;
     }
 }
@@ -110,7 +111,7 @@ class ConcussiveBoltRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Boolean metalcraft = (Boolean) this.getValue("MetalcraftConcussiveBolt");
+        boolean metalcraft = (Boolean) this.getValue("MetalcraftConcussiveBolt");
         if (metalcraft && permanent.getControllerId().equals(source.getFirstTarget())) {
             return true;
         }

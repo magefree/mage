@@ -128,7 +128,7 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
                 Cards delvedCards = (Cards) game.getState().getValue(keyString);
                 if (delvedCards != null) {
                     for (Card card : delvedCards.getCards(game)) {
-                        if (!card.getCardType().contains(CardType.CREATURE)) {
+                        if (!card.isCreature()) {
                             continue;
                         }
                         for (Ability cardAbility : card.getAbilities()) {

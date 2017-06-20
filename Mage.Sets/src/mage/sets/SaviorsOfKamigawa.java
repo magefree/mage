@@ -27,9 +27,9 @@
  */
 package mage.sets;
 
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  */
 public class SaviorsOfKamigawa extends ExpansionSet {
 
-    private static final SaviorsOfKamigawa fINSTANCE = new SaviorsOfKamigawa();
+    private static final SaviorsOfKamigawa instance = new SaviorsOfKamigawa();
 
     public static SaviorsOfKamigawa getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private SaviorsOfKamigawa() {

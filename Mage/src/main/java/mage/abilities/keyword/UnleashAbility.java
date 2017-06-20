@@ -105,7 +105,7 @@ class UnleashReplacementEffect extends ReplacementEffectImpl {
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " unleashes " + creature.getName());
                 }
-                creature.addCounters(CounterType.P1P1.createInstance(), source, game);
+                creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
             }
         }
         return false;

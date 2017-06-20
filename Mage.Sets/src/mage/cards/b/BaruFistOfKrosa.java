@@ -39,10 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,6 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
+import mage.game.permanent.token.BaruFistOfKrosaToken;
 import mage.game.permanent.token.Token;
 
 /**
@@ -63,14 +61,14 @@ public class BaruFistOfKrosa extends CardImpl {
     private static final FilterCreaturePermanent greenCreatureFilter = new FilterCreaturePermanent("green creatures you control");
 
     static {
-        forestFilter.add(new SubtypePredicate("Forest"));
+        forestFilter.add(new SubtypePredicate(SubType.FOREST));
         greenCreatureFilter.add(new ControllerPredicate(TargetController.YOU));
         greenCreatureFilter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public BaruFistOfKrosa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Druid");
 
@@ -120,17 +118,5 @@ class BaruFistOfKrosaEffect extends OneShotEffect {
         Token token = new BaruFistOfKrosaToken(xValue);
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;
-    }
-}
-
-class BaruFistOfKrosaToken extends Token {
-
-    BaruFistOfKrosaToken(int xValue) {
-        super("Wurm", "X/X green Wurm creature token, where X is the number of lands you control");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Wurm");
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
     }
 }

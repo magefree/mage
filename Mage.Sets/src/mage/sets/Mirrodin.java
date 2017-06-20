@@ -1,16 +1,15 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
-
 public class Mirrodin extends ExpansionSet {
-    private static final Mirrodin fINSTANCE = new Mirrodin();
+    private static final Mirrodin instance = new Mirrodin();
 
     public static Mirrodin getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Mirrodin() {
@@ -142,6 +141,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Leonin Sun Standard", 194, Rarity.RARE, mage.cards.l.LeoninSunStandard.class));
         cards.add(new SetCardInfo("Leveler", 195, Rarity.RARE, mage.cards.l.Leveler.class));
         cards.add(new SetCardInfo("Lifespark Spellbomb", 197, Rarity.COMMON, mage.cards.l.LifesparkSpellbomb.class));
+        cards.add(new SetCardInfo("Lightning Coils", 198, Rarity.RARE, mage.cards.l.LightningCoils.class));
         cards.add(new SetCardInfo("Lightning Greaves", 199, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Living Hive", 124, Rarity.RARE, mage.cards.l.LivingHive.class));
         cards.add(new SetCardInfo("Lodestone Myr", 200, Rarity.RARE, mage.cards.l.LodestoneMyr.class));
@@ -169,6 +169,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 302, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Myr Adapter", 210, Rarity.COMMON, mage.cards.m.MyrAdapter.class));
         cards.add(new SetCardInfo("Myr Enforcer", 211, Rarity.COMMON, mage.cards.m.MyrEnforcer.class));
+        cards.add(new SetCardInfo("Myr Incubator", 212, Rarity.RARE, mage.cards.m.MyrIncubator.class));
         cards.add(new SetCardInfo("Myr Mindservant", 213, Rarity.UNCOMMON, mage.cards.m.MyrMindservant.class));
         cards.add(new SetCardInfo("Myr Retriever", 215, Rarity.UNCOMMON, mage.cards.m.MyrRetriever.class));
         cards.add(new SetCardInfo("Necrogen Mists", 69, Rarity.RARE, mage.cards.n.NecrogenMists.class));
@@ -185,6 +186,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Nim Shrieker", 73, Rarity.COMMON, mage.cards.n.NimShrieker.class));
         cards.add(new SetCardInfo("Nuisance Engine", 221, Rarity.UNCOMMON, mage.cards.n.NuisanceEngine.class));
         cards.add(new SetCardInfo("Oblivion Stone", 222, Rarity.RARE, mage.cards.o.OblivionStone.class));
+        cards.add(new SetCardInfo("Ogre Leadfoot", 102, Rarity.COMMON, mage.cards.o.OgreLeadfoot.class));
         cards.add(new SetCardInfo("Omega Myr", 223, Rarity.COMMON, mage.cards.o.OmegaMyr.class));
         cards.add(new SetCardInfo("One Dozen Eyes", 126, Rarity.UNCOMMON, mage.cards.o.OneDozenEyes.class));
         cards.add(new SetCardInfo("Ornithopter", 224, Rarity.UNCOMMON, mage.cards.o.Ornithopter.class));
@@ -206,6 +208,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Psychogenic Probe", 231, Rarity.RARE, mage.cards.p.PsychogenicProbe.class));
         cards.add(new SetCardInfo("Pyrite Spellbomb", 232, Rarity.COMMON, mage.cards.p.PyriteSpellbomb.class));
         cards.add(new SetCardInfo("Quicksilver Elemental", 47, Rarity.RARE, mage.cards.q.QuicksilverElemental.class));
+        cards.add(new SetCardInfo("Quicksilver Fountain", 233, Rarity.RARE, mage.cards.q.QuicksilverFountain.class));
         cards.add(new SetCardInfo("Raise the Alarm", 16, Rarity.COMMON, mage.cards.r.RaiseTheAlarm.class));
         cards.add(new SetCardInfo("Razor Barrier", 17, Rarity.COMMON, mage.cards.r.RazorBarrier.class));
         cards.add(new SetCardInfo("Regress", 48, Rarity.COMMON, mage.cards.r.Regress.class));

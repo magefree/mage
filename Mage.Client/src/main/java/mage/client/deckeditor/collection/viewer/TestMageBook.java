@@ -11,7 +11,7 @@ import org.mage.card.arcane.ManaSymbols;
  */
 public class TestMageBook extends JFrame {
     public static void main(String[] args) {
-        Plugins.getInstance().loadPlugins();
+        Plugins.instance.loadPlugins();
         ManaSymbols.loadImages();
         CardScanner.scan();
         JFrame frame = new TestMageBook();

@@ -70,4 +70,44 @@ public class EndStepTriggerTest extends CardTestPlayerBase {
 
         assertCounterCount("Bloodchief Ascension", CounterType.QUEST, 2);
     }
+
+    /**
+     * Hey, I don't know how to submit bugs but in a game I played today I
+     * sacrificed Child of Alara by casting Bound at the end step of my previous
+     * opponent's turn, then chose Child as one of the cards to return to my
+     * hand. My graveyard was empty so that was the only card I chose. Child
+     * returned to my hand but it did NOT trigger for some reason. Nothing was
+     * destroyed
+     */
+    @Test
+    public void testSacrificeChildOfAlara() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1); //Creature
+
+        // Trample
+        // When Child of Alara dies, destroy all nonland permanents. They can't be regenerated.
+        addCard(Zone.BATTLEFIELD, playerB, "Icy Manipulator", 1); //Creature
+        addCard(Zone.BATTLEFIELD, playerB, "Child of Alara", 1); //Creature
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 4);
+        // Bound
+        // Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was. Exile this card.
+        // Determined
+        // Other spells you control can't be countered by spells or abilities this turn.
+        // Draw a card.
+        addCard(Zone.HAND, playerB, "Bound // Determined"); // Instant {3}{B}{G} // {G}{U}
+
+        castSpell(1, PhaseStep.END_TURN, playerB, "Bound");
+        addTarget(playerB, "Child of Alara");
+        setChoice(playerB, "Child of Alara");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertExileCount(playerB, "Bound // Determined", 1);
+
+        assertHandCount(playerB, "Child of Alara", 1);
+
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Icy Manipulator", 1);
+    }
 }

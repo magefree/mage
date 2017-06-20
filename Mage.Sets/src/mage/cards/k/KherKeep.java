@@ -28,7 +28,6 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,8 +37,9 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KherKeepKoboldToken;
 
 /**
  *
@@ -49,7 +49,7 @@ public class KherKeep extends CardImpl {
 
     public KherKeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
@@ -67,17 +67,4 @@ public class KherKeep extends CardImpl {
     public KherKeep copy() {
         return new KherKeep(this);
     }
-}
-
-class KherKeepKoboldToken extends Token {
-
-    public KherKeepKoboldToken() {
-        super("Kobolds of Kher Keep", "0/1 red Kobold creature token named Kobolds of Kher Keep");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Kobold");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
-    }
-
 }

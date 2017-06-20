@@ -93,13 +93,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.cardType.addAll(Arrays.asList(cardTypes));
         this.manaCost.load(costs);
         setDefaultColor();
-        if (cardType.contains(CardType.LAND)) {
+        if (this.isLand()) {
             Ability ability = new PlayLandAbility(name);
             ability.setSourceId(this.getId());
             abilities.add(ability);
         } else {
             SpellAbility ability = new SpellAbility(manaCost, name, Zone.HAND, spellAbilityType);
-            if (!cardType.contains(CardType.INSTANT)) {
+            if (!this.isInstant()) {
                 ability.setTiming(TimingRule.SORCERY);
             }
             ability.setSourceId(this.getId());
@@ -284,7 +284,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return all;
     }
 
-    protected void addAbility(Ability ability) {
+    /**
+     * Public in order to support adding abilities to SplitCardHalf's
+     * @param ability
+     */
+    public void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
         for (Ability subAbility : ability.getSubAbilities()) {
@@ -308,7 +312,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (spellAbility == null) {
             for (Ability ability : abilities.getActivatedAbilities(Zone.HAND)) {
                 if (ability instanceof SpellAbility
-                        && !((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
+                        && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.BASE_ALTERNATE) {
                     return spellAbility = (SpellAbility) ability;
                 }
             }
@@ -487,7 +491,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 break;
         }
         if (removed) {
-            if (!fromZone.equals(Zone.OUTSIDE)) {
+            if (fromZone != Zone.OUTSIDE) {
                 game.rememberLKI(lkiObject != null ? lkiObject.getId() : objectId, fromZone, lkiObject != null ? lkiObject : this);
             }
         } else {

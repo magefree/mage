@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,14 +38,13 @@ import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourc
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +52,7 @@ import mage.players.Player;
  */
 public class FreneticSliver extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Sliver", "All Slivers");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
     public FreneticSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
@@ -64,7 +62,7 @@ public class FreneticSliver extends CardImpl {
 
         // All Slivers have "{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it."
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new FreneticSliverEffect(), new ManaCostsImpl("{0}"), SourceOnBattlefieldCondition.getInstance(), "{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it.");
+                new FreneticSliverEffect(), new ManaCostsImpl("{0}"), SourceOnBattlefieldCondition.instance, "{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it.");
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter, "All Slivers have \"{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it.\"")));

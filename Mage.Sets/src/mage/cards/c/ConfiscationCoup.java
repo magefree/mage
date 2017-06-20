@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -48,6 +47,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -104,9 +105,10 @@ class ConfiscationCoupEffect extends OneShotEffect {
             if (targetPermanent != null) {
                 Cost cost = new PayEnergyCost(targetPermanent.getManaCost().convertedManaCost());
                 if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)) {
-                    String energy = "";
-                    for (int i = 0; i < targetPermanent.getManaCost().convertedManaCost(); i++) {
-                        energy += "{E}";
+                    int convertedManaCost = targetPermanent.getManaCost().convertedManaCost();
+                    StringBuilder energy = new StringBuilder(convertedManaCost);
+                    for (int i = 0; i < convertedManaCost; i++) {
+                        energy.append("{E}");
                     }
                     if (controller.chooseUse(outcome, "Pay " + energy + " to get control of " + targetPermanent.getLogName() + '?', source, game)) {
                         if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {

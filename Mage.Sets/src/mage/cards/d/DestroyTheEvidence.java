@@ -27,24 +27,20 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObject;
-
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -100,14 +96,14 @@ class DestroyTheEvidenceEffect extends OneShotEffect {
             }
             boolean landFound = false;
             Cards cards = new CardsImpl();            
-            while (player.getLibrary().size() > 0 && !landFound) {
+            while (player.getLibrary().hasCards() && !landFound) {
                 if (!player.canRespond()) {
                     return false;
                 }
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
-                    if (card.getCardType().contains(CardType.LAND)) {
+                    if (card.isLand()) {
                         landFound = true;
                     }
                 }

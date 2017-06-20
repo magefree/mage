@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -35,16 +34,14 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -115,8 +112,8 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getActivePlayerId().equals(event.getPlayerId()) && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
-            CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
+        if (game.getActivePlayerId().equals(event.getPlayerId()) && game.getPhase().getStep().getType() == PhaseStep.DRAW) {
+            CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get(CardsDrawnDuringDrawStepWatcher.class.getSimpleName());
             if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
                 return true;
             }

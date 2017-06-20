@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,11 +38,14 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ public class CallToTheGrave extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a non-Zombie creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Zombie")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
     }
 
     public CallToTheGrave(UUID ownerId, CardSetInfo setInfo) {

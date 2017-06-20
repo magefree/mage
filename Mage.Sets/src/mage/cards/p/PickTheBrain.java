@@ -106,7 +106,7 @@ class PickTheBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
                         
                         // Check the Delirium condition
-                        if (!DeliriumCondition.getInstance().apply(game, source)) {
+                        if (!DeliriumCondition.instance.apply(game, source)) {
                             return true;
                         }
                         return this.applySearchAndExile(game, source, card.getName(), opponent.getId());   

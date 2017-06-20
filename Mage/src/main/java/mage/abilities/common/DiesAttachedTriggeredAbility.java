@@ -83,7 +83,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
                     for (Effect effect : getEffects()) {
                         if (zEvent.getTarget() != null) {
                             effect.setValue("attachedTo", zEvent.getTarget());
-                            if (setTargetPointer.equals(SetTargetPointer.ATTACHED_TO_CONTROLLER)) {
+                            if (setTargetPointer == SetTargetPointer.ATTACHED_TO_CONTROLLER) {
                                 Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
                                 if (attachment != null && attachment.getAttachedTo() != null) {
                                     Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(), Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());

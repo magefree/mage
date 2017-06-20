@@ -34,6 +34,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,7 +48,7 @@ public class KavuHowler extends CardImpl {
     private static final FilterCard filter = new FilterCard("Kavu cards");
 
     static {
-        filter.add(new SubtypePredicate("Kavu"));
+        filter.add(new SubtypePredicate(SubType.KAVU));
     }
 
     public KavuHowler(UUID ownerId, CardSetInfo setInfo) {

@@ -27,7 +27,7 @@
  */
 package mage.cards.k;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -36,13 +36,15 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,9 +55,9 @@ public class KozileksReturn extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an Eldrazi creature spell with converted mana cost 7 or greater");
 
     static {
-        filter.add(new SubtypePredicate("Eldrazi"));
+        filter.add(new SubtypePredicate(SubType.ELDRAZI));
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 6));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public KozileksReturn(UUID ownerId, CardSetInfo setInfo) {

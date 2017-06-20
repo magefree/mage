@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,12 +35,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +77,7 @@ class FelhideBrawlerRestrictionEffect extends RestrictionEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Minotaur");
 
     static {
-        filter.add(new SubtypePredicate("Minotaur"));
+        filter.add(new SubtypePredicate(SubType.MINOTAUR));
         filter.add(new AnotherPredicate());
     }
 

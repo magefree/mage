@@ -54,27 +54,21 @@ import org.mage.plugins.card.images.CardDownloadData;
  *
  * @author LevelX2
  */
-public class MythicspoilerComSource implements CardImageSource {
+public enum MythicspoilerComSource implements CardImageSource {
 
-    private static CardImageSource instance;
-    private static Map<String, String> setsAliases;
-    private static Map<String, String> cardNameAliases;
-    private static Map<String, Set<String>> cardNameAliasesStart;
+    instance;
+    private Map<String, String> setsAliases;
+    private Map<String, String> cardNameAliases;
+    private Map<String, Set<String>> cardNameAliasesStart;
     private final Map<String, Map<String, String>> sets;
 
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new MythicspoilerComSource();
-        }
-        return instance;
-    }
 
     @Override
     public String getSourceName() {
         return "mythicspoiler.com";
     }
 
-    public MythicspoilerComSource() {
+    MythicspoilerComSource() {
         sets = new LinkedHashMap<>();
         setsAliases = new HashMap<>();
         setsAliases.put("exp", "bfz");
@@ -86,13 +80,14 @@ public class MythicspoilerComSource implements CardImageSource {
         cardNameAliases.put("THS-soldierofpantheon", "soldierofthepantheon");
         cardNameAliases.put("THS-vulpinegolaith", "vulpinegoliath");
         cardNameAliases.put("ORI-kothopedhoarderofsouls", "kothophedsoulhoarder");
-        cardNameAliases.put("BFZ-unisonstrike", "tandemtactics");
-        cardNameAliases.put("BFZ-eldrazidevastator", "eldrazidevastator");
         cardNameAliases.put("BFZ-kozliekschanneler", "kozilekschanneler");
         cardNameAliases.put("OGW-wastes", "wastes1");
         cardNameAliases.put("OGW-wastes2", "wastes2");
-        cardNameAliases.put("AER-locketofmyths", "lifecraftersbestiary");
         cardNameAliases.put("AER-aegisautomation", "aegisautomaton");
+        cardNameAliases.put("AKH-illusorywrappins", "illusorywrappings");
+        cardNameAliases.put("AKH-reducerumble", "reducerubble");
+        cardNameAliases.put("AKH-forsakethewordly", "forsaketheworldly");
+        cardNameAliases.put("AKH-kefnatsmonument", "kefnetsmonument");
 
         cardNameAliasesStart = new HashMap<>();
         HashSet<String> names = new HashSet<>();
@@ -142,7 +137,7 @@ public class MythicspoilerComSource implements CardImageSource {
 
         String urlDocument;
         Document doc;
-        if (proxyType.equals(ProxyType.NONE)) {
+        if (proxyType == ProxyType.NONE) {
             urlDocument = pageUrl;
             doc = Jsoup.connect(urlDocument).get();
         } else {
@@ -182,14 +177,9 @@ public class MythicspoilerComSource implements CardImageSource {
                 if (cardNameAliases.containsKey(cardSet + '-' + cardName)) {
                     cardName = cardNameAliases.get(cardSet + '-' + cardName);
                 } else if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3") || cardName.endsWith("4") || cardName.endsWith("5")) {
-                    if (!cardName.startsWith("forest")
-                            && !cardName.startsWith("swamp")
-                            && !cardName.startsWith("mountain")
-                            && !cardName.startsWith("island")
-                            && !cardName.startsWith("plains")) {
-
-                        cardName = cardName.substring(0, cardName.length() - 1);
-                    }
+                    cardName = cardName.substring(0, cardName.length() - 1);
+                } else if (cardName.endsWith("promo")) {
+                    cardName = cardName.substring(0, cardName.length() - 5);
                 }
                 pageLinks.put(cardName, baseUrl + cardLink);
             }
@@ -213,7 +203,8 @@ public class MythicspoilerComSource implements CardImageSource {
                 .replaceAll(" ", "")
                 .replaceAll("-", "")
                 .replaceAll("'", "")
-                .replaceAll(",", "");
+                .replaceAll(",", "")
+                .replaceAll("/", "");
         String link = setLinks.get(searchName);
         return link;
     }
@@ -225,7 +216,7 @@ public class MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
-    public Float getAverageSize() {
+    public float getAverageSize() {
         return 50.0f;
     }
 
@@ -240,12 +231,12 @@ public class MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
-    public Integer getTotalImages() {
+    public int getTotalImages() {
         return -1;
     }
 
     @Override
-    public Boolean isTokenSource() {
+    public boolean isTokenSource() {
         return false;
     }
 

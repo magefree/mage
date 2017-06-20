@@ -27,21 +27,23 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.permanent.token.ElfToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +55,7 @@ public class DwynensElite extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public DwynensElite(UUID ownerId, CardSetInfo setInfo) {
@@ -67,7 +69,7 @@ public class DwynensElite extends CardImpl {
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken()));
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
-                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0),
                 "When {this} enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token."));
     }
 

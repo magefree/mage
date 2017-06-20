@@ -99,7 +99,7 @@ class PrimitiveEtchingsAbility extends TriggeredAbilityImpl {
                     lastTriggeredTurn = game.getTurnNum();
                     controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
                     this.getEffects().clear();
-                    if (card.getCardType().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         this.addEffect(new DrawCardSourceControllerEffect(1));
                     }
                     return true;

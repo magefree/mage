@@ -67,7 +67,7 @@ public class ScabClanBerserker extends CardImpl {
         // Whenever an opponent casts a noncreature spell, if Scab-Clan Berserker is renowned, Scab-Clan Berserker deals 2 damage to that player.
         this.addAbility(new ConditionalTriggeredAbility(
                 new ScabClanBerserkerTriggeredAbility(),
-                RenownedSourceCondition.getInstance(),
+                RenownedSourceCondition.instance,
                 "Whenever an opponent casts a noncreature spell, if Scab-Clan Berserker is renowned, Scab-Clan Berserker deals 2 damage to that player"));
     }
 
@@ -107,7 +107,7 @@ class ScabClanBerserkerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && !spell.getCardType().contains(CardType.CREATURE)){
+            if (spell != null && !spell.isCreature()){
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }

@@ -28,21 +28,20 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
-
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author loki
  */
 public class RavnicaCityOfGuilds extends ExpansionSet {
-    private static final RavnicaCityOfGuilds fINSTANCE = new RavnicaCityOfGuilds();
+    private static final RavnicaCityOfGuilds instance = new RavnicaCityOfGuilds();
 
     public static RavnicaCityOfGuilds getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private RavnicaCityOfGuilds() {
@@ -65,6 +64,8 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Blazing Archon", 4, Rarity.RARE, mage.cards.b.BlazingArchon.class));
         cards.add(new SetCardInfo("Blockbuster", 115, Rarity.UNCOMMON, mage.cards.b.Blockbuster.class));
         cards.add(new SetCardInfo("Blood Funnel", 77, Rarity.RARE, mage.cards.b.BloodFunnel.class));
+        cards.add(new SetCardInfo("Bloodbond March", 192, Rarity.RARE, mage.cards.b.BloodbondMarch.class));
+        cards.add(new SetCardInfo("Bloodletter Quill", 254, Rarity.RARE, mage.cards.b.BloodletterQuill.class));
         cards.add(new SetCardInfo("Boros Fury-Shield", 5, Rarity.COMMON, mage.cards.b.BorosFuryShield.class));
         cards.add(new SetCardInfo("Boros Garrison", 275, Rarity.COMMON, mage.cards.b.BorosGarrison.class));
         cards.add(new SetCardInfo("Boros Guildmage", 242, Rarity.UNCOMMON, mage.cards.b.BorosGuildmage.class));
@@ -81,14 +82,17 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Carven Caryatid", 155, Rarity.UNCOMMON, mage.cards.c.CarvenCaryatid.class));
         cards.add(new SetCardInfo("Centaur Safeguard", 244, Rarity.COMMON, mage.cards.c.CentaurSafeguard.class));
         cards.add(new SetCardInfo("Cerulean Sphinx", 39, Rarity.RARE, mage.cards.c.CeruleanSphinx.class));
+        cards.add(new SetCardInfo("Chant of Vitu-Ghazi", 7, Rarity.UNCOMMON, mage.cards.c.ChantOfVituGhazi.class));
         cards.add(new SetCardInfo("Char", 117, Rarity.RARE, mage.cards.c.Char.class));
         cards.add(new SetCardInfo("Chord of Calling", 156, Rarity.RARE, mage.cards.c.ChordOfCalling.class));
         cards.add(new SetCardInfo("Chorus of the Conclave", 195, Rarity.RARE, mage.cards.c.ChorusOfTheConclave.class));
+        cards.add(new SetCardInfo("Circu, Dimir Lobotomist", 196, Rarity.RARE, mage.cards.c.CircuDimirLobotomist.class));
         cards.add(new SetCardInfo("Civic Wayfinder", 157, Rarity.COMMON, mage.cards.c.CivicWayfinder.class));
         cards.add(new SetCardInfo("Cleansing Beam", 118, Rarity.UNCOMMON, mage.cards.c.CleansingBeam.class));
         cards.add(new SetCardInfo("Clinging Darkness", 80, Rarity.COMMON, mage.cards.c.ClingingDarkness.class));
         cards.add(new SetCardInfo("Cloudstone Curio", 257, Rarity.RARE, mage.cards.c.CloudstoneCurio.class));
         cards.add(new SetCardInfo("Clutch of the Undercity", 197, Rarity.UNCOMMON, mage.cards.c.ClutchOfTheUndercity.class));
+        cards.add(new SetCardInfo("Coalhauler Swine", 119, Rarity.COMMON, mage.cards.c.CoalhaulerSwine.class));
         cards.add(new SetCardInfo("Compulsive Research", 40, Rarity.COMMON, mage.cards.c.CompulsiveResearch.class));
         cards.add(new SetCardInfo("Concerted Effort", 8, Rarity.RARE, mage.cards.c.ConcertedEffort.class));
         cards.add(new SetCardInfo("Conclave Equenaut", 9, Rarity.COMMON, mage.cards.c.ConclaveEquenaut.class));
@@ -116,6 +120,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Disembowel", 85, Rarity.COMMON, mage.cards.d.Disembowel.class));
         cards.add(new SetCardInfo("Divebomber Griffin", 14, Rarity.UNCOMMON, mage.cards.d.DivebomberGriffin.class));
         cards.add(new SetCardInfo("Dizzy Spell", 43, Rarity.COMMON, mage.cards.d.DizzySpell.class));
+        cards.add(new SetCardInfo("Dogpile", 120, Rarity.COMMON, mage.cards.d.Dogpile.class));
         cards.add(new SetCardInfo("Doubling Season", 158, Rarity.RARE, mage.cards.d.DoublingSeason.class));
         cards.add(new SetCardInfo("Dowsing Shaman", 159, Rarity.UNCOMMON, mage.cards.d.DowsingShaman.class));
         cards.add(new SetCardInfo("Drake Familiar", 44, Rarity.COMMON, mage.cards.d.DrakeFamiliar.class));
@@ -129,6 +134,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Skysweeper", 162, Rarity.COMMON, mage.cards.e.ElvishSkysweeper.class));
         cards.add(new SetCardInfo("Empty the Catacombs", 86, Rarity.RARE, mage.cards.e.EmptyTheCatacombs.class));
         cards.add(new SetCardInfo("Ethereal Usher", 47, Rarity.UNCOMMON, mage.cards.e.EtherealUsher.class));
+        cards.add(new SetCardInfo("Excruciator", 121, Rarity.RARE, mage.cards.e.Excruciator.class));
         cards.add(new SetCardInfo("Eye of the Storm", 48, Rarity.RARE, mage.cards.e.EyeOfTheStorm.class));
         cards.add(new SetCardInfo("Faith's Fetters", 16, Rarity.COMMON, mage.cards.f.FaithsFetters.class));
         cards.add(new SetCardInfo("Farseek", 163, Rarity.COMMON, mage.cards.f.Farseek.class));
@@ -138,6 +144,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Fists of Ironwood", 164, Rarity.COMMON, mage.cards.f.FistsOfIronwood.class));
         cards.add(new SetCardInfo("Flame Fusillade", 123, Rarity.RARE, mage.cards.f.FlameFusillade.class));
         cards.add(new SetCardInfo("Flame-Kin Zealot", 206, Rarity.UNCOMMON, mage.cards.f.FlameKinZealot.class));
+        cards.add(new SetCardInfo("Flash Conscription", 124, Rarity.UNCOMMON, mage.cards.f.FlashConscription.class));
         cards.add(new SetCardInfo("Flickerform", 18, Rarity.RARE, mage.cards.f.Flickerform.class));
         cards.add(new SetCardInfo("Flight of Fancy", 49, Rarity.COMMON, mage.cards.f.FlightOfFancy.class));
         cards.add(new SetCardInfo("Flow of Ideas", 50, Rarity.UNCOMMON, mage.cards.f.FlowOfIdeas.class));
@@ -150,6 +157,8 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Galvanic Arc", 126, Rarity.COMMON, mage.cards.g.GalvanicArc.class));
         cards.add(new SetCardInfo("Gate Hound", 19, Rarity.COMMON, mage.cards.g.GateHound.class));
         cards.add(new SetCardInfo("Gather Courage", 165, Rarity.COMMON, mage.cards.g.GatherCourage.class));
+        cards.add(new SetCardInfo("Gaze of the Gorgon", 246, Rarity.COMMON, mage.cards.g.GazeOfTheGorgon.class));
+        cards.add(new SetCardInfo("Ghosts of the Innocent", 20, Rarity.RARE, mage.cards.g.GhostsOfTheInnocent.class));
         cards.add(new SetCardInfo("Glare of Subdual", 207, Rarity.RARE, mage.cards.g.GlareOfSubdual.class));
         cards.add(new SetCardInfo("Glass Golem", 261, Rarity.UNCOMMON, mage.cards.g.GlassGolem.class));
         cards.add(new SetCardInfo("Gleancrawler", 247, Rarity.RARE, mage.cards.g.Gleancrawler.class));
@@ -169,6 +178,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Grayscaled Gharial", 52, Rarity.COMMON, mage.cards.g.GrayscaledGharial.class));
         cards.add(new SetCardInfo("Greater Forgeling", 129, Rarity.UNCOMMON, mage.cards.g.GreaterForgeling.class));
         cards.add(new SetCardInfo("Greater Mossdog", 169, Rarity.COMMON, mage.cards.g.GreaterMossdog.class));
+        cards.add(new SetCardInfo("Grifter's Blade", 263, Rarity.UNCOMMON, mage.cards.g.GriftersBlade.class));
         cards.add(new SetCardInfo("Grozoth", 53, Rarity.RARE, mage.cards.g.Grozoth.class));
         cards.add(new SetCardInfo("Guardian of Vitu-Ghazi", 212, Rarity.COMMON, mage.cards.g.GuardianOfVituGhazi.class));
         cards.add(new SetCardInfo("Halcyon Glaze", 54, Rarity.UNCOMMON, mage.cards.h.HalcyonGlaze.class));
@@ -182,8 +192,10 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Hunted Phantasm", 55, Rarity.RARE, mage.cards.h.HuntedPhantasm.class));
         cards.add(new SetCardInfo("Hunted Troll", 170, Rarity.RARE, mage.cards.h.HuntedTroll.class));
         cards.add(new SetCardInfo("Incite Hysteria", 132, Rarity.COMMON, mage.cards.i.InciteHysteria.class));
+        cards.add(new SetCardInfo("Indentured Oaf", 133, Rarity.UNCOMMON, mage.cards.i.IndenturedOaf.class));
         cards.add(new SetCardInfo("Induce Paranoia", 56, Rarity.COMMON, mage.cards.i.InduceParanoia.class));
         cards.add(new SetCardInfo("Infectious Host", 91, Rarity.COMMON, mage.cards.i.InfectiousHost.class));
+        cards.add(new SetCardInfo("Instill Furor", 134, Rarity.UNCOMMON, mage.cards.i.InstillFuror.class));
         cards.add(new SetCardInfo("Island", 291, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 292, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 293, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
@@ -201,11 +213,14 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Gatekeeper", 25, Rarity.RARE, mage.cards.l.LoxodonGatekeeper.class));
         cards.add(new SetCardInfo("Loxodon Hierarch", 214, Rarity.RARE, mage.cards.l.LoxodonHierarch.class));
         cards.add(new SetCardInfo("Lurking Informant", 249, Rarity.COMMON, mage.cards.l.LurkingInformant.class));
+        cards.add(new SetCardInfo("Mark of Eviction", 58, Rarity.UNCOMMON, mage.cards.m.MarkOfEviction.class));
+        cards.add(new SetCardInfo("Mausoleum Turnkey", 94, Rarity.UNCOMMON, mage.cards.m.MausoleumTurnkey.class));
         cards.add(new SetCardInfo("Mindleech Mass", 215, Rarity.RARE, mage.cards.m.MindleechMass.class));
         cards.add(new SetCardInfo("Mindmoil", 135, Rarity.RARE, mage.cards.m.Mindmoil.class));
         cards.add(new SetCardInfo("Mnemonic Nexus", 59, Rarity.UNCOMMON, mage.cards.m.MnemonicNexus.class));
         cards.add(new SetCardInfo("Moldervine Cloak", 173, Rarity.UNCOMMON, mage.cards.m.MoldervineCloak.class));
         cards.add(new SetCardInfo("Molten Sentry", 136, Rarity.RARE, mage.cards.m.MoltenSentry.class));
+        cards.add(new SetCardInfo("Moonlight Bargain", 95, Rarity.RARE, mage.cards.m.MoonlightBargain.class));
         cards.add(new SetCardInfo("Moroii", 216, Rarity.UNCOMMON, mage.cards.m.Moroii.class));
         cards.add(new SetCardInfo("Mortipede", 96, Rarity.COMMON, mage.cards.m.Mortipede.class));
         cards.add(new SetCardInfo("Mountain", 299, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
@@ -219,6 +234,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Nightguard Patrol", 26, Rarity.COMMON, mage.cards.n.NightguardPatrol.class));
         cards.add(new SetCardInfo("Nightmare Void", 100, Rarity.UNCOMMON, mage.cards.n.NightmareVoid.class));
         cards.add(new SetCardInfo("Nullmage Shepherd", 174, Rarity.UNCOMMON, mage.cards.n.NullmageShepherd.class));
+        cards.add(new SetCardInfo("Nullstone Gargoyle", 266, Rarity.RARE, mage.cards.n.NullstoneGargoyle.class));
         cards.add(new SetCardInfo("Oathsworn Giant", 27, Rarity.UNCOMMON, mage.cards.o.OathswornGiant.class));
         cards.add(new SetCardInfo("Ordruun Commando", 137, Rarity.COMMON, mage.cards.o.OrdruunCommando.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 279, Rarity.RARE, mage.cards.o.OvergrownTomb.class));
@@ -239,16 +255,19 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Privileged Position", 251, Rarity.RARE, mage.cards.p.PrivilegedPosition.class));
         cards.add(new SetCardInfo("Psychic Drain", 220, Rarity.UNCOMMON, mage.cards.p.PsychicDrain.class));
         cards.add(new SetCardInfo("Putrefy", 221, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
+        cards.add(new SetCardInfo("Quickchange", 62, Rarity.COMMON, mage.cards.q.Quickchange.class));
         cards.add(new SetCardInfo("Rain of Embers", 138, Rarity.COMMON, mage.cards.r.RainOfEmbers.class));
         cards.add(new SetCardInfo("Rally the Righteous", 222, Rarity.COMMON, mage.cards.r.RallyTheRighteous.class));
         cards.add(new SetCardInfo("Razia's Purification", 224, Rarity.RARE, mage.cards.r.RaziasPurification.class));
         cards.add(new SetCardInfo("Razia, Boros Archangel", 223, Rarity.RARE, mage.cards.r.RaziaBorosArchangel.class));
         cards.add(new SetCardInfo("Recollect", 178, Rarity.UNCOMMON, mage.cards.r.Recollect.class));
         cards.add(new SetCardInfo("Remand", 63, Rarity.UNCOMMON, mage.cards.r.Remand.class));
+        cards.add(new SetCardInfo("Reroute", 139, Rarity.UNCOMMON, mage.cards.r.Reroute.class));
         cards.add(new SetCardInfo("Ribbons of Night", 101, Rarity.UNCOMMON, mage.cards.r.RibbonsOfNight.class));
         cards.add(new SetCardInfo("Rolling Spoil", 179, Rarity.UNCOMMON, mage.cards.r.RollingSpoil.class));
         cards.add(new SetCardInfo("Roofstalker Wight", 102, Rarity.COMMON, mage.cards.r.RoofstalkerWight.class));
         cards.add(new SetCardInfo("Root-Kin Ally", 180, Rarity.UNCOMMON, mage.cards.r.RootKinAlly.class));
+        cards.add(new SetCardInfo("Sabertooth Alley Cat", 140, Rarity.COMMON, mage.cards.s.SabertoothAlleyCat.class));
         cards.add(new SetCardInfo("Sacred Foundry", 280, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Sadistic Augermage", 103, Rarity.COMMON, mage.cards.s.SadisticAugermage.class));
         cards.add(new SetCardInfo("Sandsower", 28, Rarity.UNCOMMON, mage.cards.s.Sandsower.class));
@@ -258,6 +277,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Scion of the Wild", 182, Rarity.RARE, mage.cards.s.ScionOfTheWild.class));
         cards.add(new SetCardInfo("Searing Meditation", 226, Rarity.RARE, mage.cards.s.SearingMeditation.class));
         cards.add(new SetCardInfo("Seed Spark", 30, Rarity.UNCOMMON, mage.cards.s.SeedSpark.class));
+        cards.add(new SetCardInfo("Seeds of Strength", 227, Rarity.COMMON, mage.cards.s.SeedsOfStrength.class));
         cards.add(new SetCardInfo("Seismic Spike", 141, Rarity.COMMON, mage.cards.s.SeismicSpike.class));
         cards.add(new SetCardInfo("Selesnya Evangel", 228, Rarity.COMMON, mage.cards.s.SelesnyaEvangel.class));
         cards.add(new SetCardInfo("Selesnya Guildmage", 252, Rarity.UNCOMMON, mage.cards.s.SelesnyaGuildmage.class));
@@ -309,6 +329,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Transluminant", 186, Rarity.COMMON, mage.cards.t.Transluminant.class));
         cards.add(new SetCardInfo("Tunnel Vision", 72, Rarity.RARE, mage.cards.t.TunnelVision.class));
         cards.add(new SetCardInfo("Twilight Drover", 33, Rarity.RARE, mage.cards.t.TwilightDrover.class));
+        cards.add(new SetCardInfo("Twisted Justice", 237, Rarity.UNCOMMON, mage.cards.t.TwistedJustice.class));
         cards.add(new SetCardInfo("Undercity Shade", 110, Rarity.UNCOMMON, mage.cards.u.UndercityShade.class));
         cards.add(new SetCardInfo("Ursapine", 188, Rarity.RARE, mage.cards.u.Ursapine.class));
         cards.add(new SetCardInfo("Vedalken Dismisser", 73, Rarity.COMMON, mage.cards.v.VedalkenDismisser.class));
@@ -328,9 +349,12 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Watchwolf", 239, Rarity.UNCOMMON, mage.cards.w.Watchwolf.class));
         cards.add(new SetCardInfo("Watery Grave", 286, Rarity.RARE, mage.cards.w.WateryGrave.class));
         cards.add(new SetCardInfo("Wizened Snitches", 75, Rarity.UNCOMMON, mage.cards.w.WizenedSnitches.class));
+        cards.add(new SetCardInfo("Woebringer Demon", 113, Rarity.RARE, mage.cards.w.WoebringerDemon.class));
         cards.add(new SetCardInfo("Wojek Apothecary", 36, Rarity.UNCOMMON, mage.cards.w.WojekApothecary.class));
         cards.add(new SetCardInfo("Wojek Embermage", 152, Rarity.UNCOMMON, mage.cards.w.WojekEmbermage.class));
         cards.add(new SetCardInfo("Wojek Siren", 37, Rarity.COMMON, mage.cards.w.WojekSiren.class));
+        cards.add(new SetCardInfo("Woodwraith Corrupter", 240, Rarity.RARE, mage.cards.w.WoodwraithCorrupter.class));
         cards.add(new SetCardInfo("Woodwraith Strangler", 241, Rarity.COMMON, mage.cards.w.WoodwraithStrangler.class));
+        cards.add(new SetCardInfo("Zephyr Spirit", 76, Rarity.COMMON, mage.cards.z.ZephyrSpirit.class));
     }
 }

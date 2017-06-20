@@ -27,9 +27,6 @@
  */
 package mage.cards.i;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -43,15 +40,15 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +60,7 @@ public class IntetTheDreamer extends CardImpl {
 
     public IntetTheDreamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dragon");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -152,7 +149,7 @@ class IntetTheDreamerCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId).equals(Zone.EXILED)) {
+        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = source.getSourceObject(game);
             if (controller != null && sourceObject != null) {
@@ -160,12 +157,12 @@ class IntetTheDreamerCastEffect extends AsThoughEffectImpl {
                 if (card != null && card.isFaceDown(game)) {
                     ExileZone zone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
                     if (zone != null && zone.contains(card.getId())/* && CardUtil.cardCanBePlayedNow(card, controller.getId(), game)*/) {
-                        if (card.getCardType().contains(CardType.LAND)) {
+                        if (card.isLand()) {
                             if (game.canPlaySorcery(controller.getId()) && game.getPlayer(controller.getId()).canPlayLand()) {
                                 return controller.chooseUse(outcome, "Play " + card.getIdName() + '?', source, game);
                             }
                         } else {
-                            controller.setCastSourceIdWithAlternateMana(objectId, null, null);
+                            controller.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
                             return true;
                         }
                     }
@@ -200,7 +197,7 @@ class IntetTheDreamerLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId).equals(Zone.EXILED)) {
+        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = source.getSourceObject(game);
             if (controller != null && sourceObject != null) {

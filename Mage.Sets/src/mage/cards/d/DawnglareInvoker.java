@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.target.TargetPlayer;
 
 /**
@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
 public class DawnglareInvoker extends CardImpl {
 
     public DawnglareInvoker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Kor");
         this.subtype.add("Wizard");
 
@@ -56,7 +56,7 @@ public class DawnglareInvoker extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new TapAllTargetPlayerControlsEffect(new FilterCreaturePermanent("creatures")),
+                new TapAllTargetPlayerControlsEffect(FILTER_PERMANENT_CREATURES),
                 new ManaCostsImpl("{8}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

@@ -39,6 +39,7 @@ import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.game.result.ResultProtos.TourneyProto;
 import mage.players.Player;
+import mage.players.PlayerType;
 
 /**
  *
@@ -48,7 +49,7 @@ public interface Tournament {
 
     UUID getId();
 
-    void addPlayer(Player player, String playerType);
+    void addPlayer(Player player, PlayerType playerType);
 
     void removePlayer(UUID playerId);
 
@@ -74,7 +75,7 @@ public interface Tournament {
 
     void submitDeck(UUID playerId, Deck deck);
 
-    void updateDeck(UUID playerId, Deck deck);
+    boolean updateDeck(UUID playerId, Deck deck);
 
     void autoSubmit(UUID playerId, Deck deck);
 

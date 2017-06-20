@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -51,6 +48,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -173,7 +174,7 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
         }
 
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-            if (!chosen.contains(permanent) && !permanent.getCardType().contains(CardType.LAND)) {
+            if (!chosen.contains(permanent) && !permanent.isLand()) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
         }

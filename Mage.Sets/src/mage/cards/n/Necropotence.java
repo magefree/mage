@@ -137,7 +137,7 @@ class NecropotenceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.getLibrary().size() > 0) {
+            if (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, false)) {
                     card.setFaceDown(true, game);

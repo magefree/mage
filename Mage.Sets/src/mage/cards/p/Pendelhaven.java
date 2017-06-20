@@ -27,39 +27,39 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public class Pendelhaven extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.Equal, 1));
-        filter.add(new ToughnessPredicate(Filter.ComparisonType.Equal, 1));
+        filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, 1));
+        filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, 1));
     }
 
     public Pendelhaven(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
+        addSuperType(SuperType.LEGENDARY);
 
         // {tap}: Add {G} to your mana pool.
         this.addAbility(new GreenManaAbility());

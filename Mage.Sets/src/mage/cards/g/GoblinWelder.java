@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,6 +45,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -77,7 +78,7 @@ public class GoblinWelder extends CardImpl {
         return new GoblinWelder(this);
     }
 
-    public class GoblinWelderEffect extends OneShotEffect {
+    public static class GoblinWelderEffect extends OneShotEffect {
 
         public GoblinWelderEffect() {
             super(Outcome.PutCardInPlay);
@@ -97,8 +98,8 @@ public class GoblinWelder extends CardImpl {
                 Zone currentZone = game.getState().getZone(card.getId());
                 Player owner = game.getPlayer(card.getOwnerId());
                 if (owner != null
-                        && artifact.getCardType().contains(CardType.ARTIFACT)
-                        && card.getCardType().contains(CardType.ARTIFACT)
+                        && artifact.isArtifact()
+                        && card.isArtifact()
                         && currentZone == Zone.GRAVEYARD
                         && card.getOwnerId().equals(artifact.getControllerId())) {
                     boolean sacrifice = artifact.sacrifice(source.getSourceId(), game);
@@ -118,7 +119,7 @@ public class GoblinWelder extends CardImpl {
 
     }
 
-    class GoblinWelderTarget extends TargetCardInGraveyard {
+    static class GoblinWelderTarget extends TargetCardInGraveyard {
 
         public GoblinWelderTarget() {
             super(1, 1, new FilterArtifactCard());

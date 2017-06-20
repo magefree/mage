@@ -62,7 +62,7 @@ public class CantHaveMoreThanAmountCountersSourceAbility extends SimpleStaticAbi
 
     @Override
     public String getRule() {
-        return "Rasputin can't have more than " + CardUtil.numberToText(this.amount) + " " + this.counterType.getName() + " counters on it.";
+        return "Rasputin can't have more than " + CardUtil.numberToText(this.amount) + ' ' + this.counterType.getName() + " counters on it.";
     }
 
     @Override

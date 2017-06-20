@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.keyword.BolsterEffect;
@@ -35,7 +34,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +48,7 @@ public class DromokaTheEternal extends CardImpl {
 
     public DromokaTheEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dragon");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -54,7 +57,7 @@ public class DromokaTheEternal extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever a Dragon you control attacks, bolster 2.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(
-                new BolsterEffect(2), false, new FilterControlledCreaturePermanent("Dragon", "Dragon you control")));
+                new BolsterEffect(2), false, new FilterControlledCreaturePermanent(SubType.DRAGON, "Dragon you control")));
     }
 
     public DromokaTheEternal(final DromokaTheEternal card) {

@@ -28,21 +28,26 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageObjectReference;
+import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
-import mage.abilities.decorator.ConditionalReplacementEffect;
-import mage.abilities.effects.Effect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
+import mage.abilities.effects.common.ExileTargetIfDiesEffect;
+import mage.abilities.effects.common.replacement.DiesReplacementEffect;
 import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -51,20 +56,18 @@ import mage.watchers.common.DamagedByWatcher;
 public class ScorchingLava extends CardImpl {
 
     public ScorchingLava(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Kicker {R}
         this.addAbility(new KickerAbility("{R}"));
         // Scorching Lava deals 2 damage to target creature or player. If Scorching Lava was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
-            new CantRegenerateTargetEffect(Duration.EndOfTurn, "That creature"), new LockedInCondition(KickedCondition.getInstance())));
-        Effect effect = new ConditionalReplacementEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn),
-            new LockedInCondition(KickedCondition.getInstance()));
-        effect.setText("and if it would die this turn, exile it instead");
-        this.getSpellAbility().addEffect(effect);
+                new CantRegenerateTargetEffect(Duration.EndOfTurn, "that creature"), new LockedInCondition(KickedCondition.instance)));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                (OneShotEffect) new ExileTargetIfDiesEffect().setText("and if it would die this turn, exile it instead"),
+                new LockedInCondition(KickedCondition.instance)));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }
 
     public ScorchingLava(final ScorchingLava card) {
@@ -74,5 +77,31 @@ public class ScorchingLava extends CardImpl {
     @Override
     public ScorchingLava copy() {
         return new ScorchingLava(this);
+    }
+}
+
+class ScorchingLavaEffect extends OneShotEffect {
+
+    public ScorchingLavaEffect() {
+        super(Outcome.Exile);
+        this.staticText = "and if it would die this turn, exile it instead";
+    }
+
+    public ScorchingLavaEffect(final ScorchingLavaEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ScorchingLavaEffect copy() {
+        return new ScorchingLavaEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (targetCreature != null) {
+            game.addEffect(new DiesReplacementEffect(new MageObjectReference(targetCreature, game), Duration.EndOfTurn), source);
+        }
+        return true;
     }
 }

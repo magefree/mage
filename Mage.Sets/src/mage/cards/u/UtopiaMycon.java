@@ -40,6 +40,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -58,7 +59,7 @@ public class UtopiaMycon extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
     
     static {
-        filter.add(new SubtypePredicate("Saproling"));
+        filter.add(new SubtypePredicate(SubType.SAPROLING));
     }
 
     public UtopiaMycon(UUID ownerId, CardSetInfo setInfo) {

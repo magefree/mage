@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
@@ -107,12 +108,12 @@ class TawnossCoffinTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return super.checkEventType(event, game) || event.getType().equals(GameEvent.EventType.UNTAPPED);
+        return super.checkEventType(event, game) || event.getType() == GameEvent.EventType.UNTAPPED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.UNTAPPED)) {
+        if (event.getType() == GameEvent.EventType.UNTAPPED) {
             return event.getTargetId().equals(sourceId);
         } else {
             return super.checkTrigger(event, game);
@@ -130,7 +131,7 @@ class TawnossCoffinEffect extends OneShotEffect {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
     }
 
     public TawnossCoffinEffect() {
@@ -196,7 +197,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
 
     static {
         filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAura.add(new SubtypePredicate("Aura"));
+        filterAura.add(new SubtypePredicate(SubType.AURA));
     }
 
     public TawnossCoffinReturnEffect() {

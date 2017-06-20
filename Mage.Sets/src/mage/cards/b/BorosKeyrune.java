@@ -27,10 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -40,7 +36,12 @@ import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ public class BorosKeyrune extends CardImpl {
         return new BorosKeyrune(this);
     }
 
-    private class BorosKeyruneToken extends Token {
+    private static class BorosKeyruneToken extends Token {
         BorosKeyruneToken() {
             super("Soldier", "1/1 red and white Soldier artifact creature with double strike");
             cardType.add(CardType.ARTIFACT);

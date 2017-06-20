@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,7 +54,7 @@ public class SpawnsireOfUlamog extends CardImpl {
     private static final FilterCard filter = new FilterCard("Eldrazi cards");
 
     static {
-        filter.add(new SubtypePredicate("Eldrazi"));
+        filter.add(new SubtypePredicate(SubType.ELDRAZI));
     }
     
     public SpawnsireOfUlamog(UUID ownerId, CardSetInfo setInfo) {

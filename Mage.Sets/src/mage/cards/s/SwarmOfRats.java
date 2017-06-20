@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,7 +50,7 @@ public class SwarmOfRats extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Rats you control");
 
     static{
-        filter.add(new SubtypePredicate("Rat"));
+        filter.add(new SubtypePredicate(SubType.RAT));
     }
 
     public SwarmOfRats(UUID ownerId, CardSetInfo setInfo) {

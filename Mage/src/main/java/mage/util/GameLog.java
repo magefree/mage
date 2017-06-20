@@ -34,7 +34,7 @@ import mage.ObjectColor;
  *
  * @author LevelX2
  */
-public class GameLog {
+public final class GameLog {
 
     static final String LOG_COLOR_PLAYER = "#20B2AA"; // LightSeaGreen
     static final String LOG_COLOR_PLAYER_REQUEST = "#D2691E"; // Chocolate

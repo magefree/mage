@@ -27,8 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,8 +36,11 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.Target;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ import mage.target.TargetPlayer;
  */
 public class BleakCovenVampires extends CardImpl {
 
-    private final String effectText = "Metalcraft - When Bleak Coven Vampires enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.";
+    private static final String effectText = "Metalcraft - When Bleak Coven Vampires enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.";
 
     public BleakCovenVampires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
@@ -62,7 +63,7 @@ public class BleakCovenVampires extends CardImpl {
         Target target = new TargetPlayer();
         ability.addTarget(target);
 
-        this.addAbility(new ConditionalTriggeredAbility(ability, MetalcraftCondition.getInstance(), effectText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, MetalcraftCondition.instance, effectText));
     }
 
     public BleakCovenVampires(final BleakCovenVampires card) {

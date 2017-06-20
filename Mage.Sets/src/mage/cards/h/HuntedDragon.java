@@ -28,17 +28,16 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.game.permanent.token.HuntedDragonKnightToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
@@ -49,7 +48,7 @@ import mage.target.common.TargetOpponent;
 public class HuntedDragon extends CardImpl {
 
     public HuntedDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(6);
@@ -58,7 +57,7 @@ public class HuntedDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         // When Hunted Dragon enters the battlefield, create three 2/2 white Knight creature tokens with first strike under target opponent's control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new KnightToken(), 3), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new HuntedDragonKnightToken(), 3), false);
         Target target = new TargetOpponent();
         ability.addTarget(target);
         this.addAbility(ability);
@@ -71,18 +70,5 @@ public class HuntedDragon extends CardImpl {
     @Override
     public HuntedDragon copy() {
         return new HuntedDragon(this);
-    }
-}
-
-class KnightToken extends Token {
-    KnightToken() {
-        super("Knight", "2/2 white Knight creature tokens with first strike");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Knight");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(FirstStrikeAbility.getInstance());
     }
 }

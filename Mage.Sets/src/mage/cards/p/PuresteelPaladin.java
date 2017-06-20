@@ -29,10 +29,8 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -55,7 +53,7 @@ public class PuresteelPaladin extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent("Equipment");
 
     static {
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public PuresteelPaladin(UUID ownerId, CardSetInfo setInfo) {
@@ -71,7 +69,7 @@ public class PuresteelPaladin extends CardImpl {
         // Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)), Duration.WhileOnBattlefield, filter),
-                MetalcraftCondition.getInstance(),
+                MetalcraftCondition.instance,
                 "Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts")));
     }
 

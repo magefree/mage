@@ -8,16 +8,18 @@ my $addedCards;
 my $GIT_CMD = "C:\\Program Files (x86)\\Git\\bin\\git.exe";
 
 my $text = `\"$GIT_CMD\" tag`;
+print "Assuming the tag command is on: \"$GIT_CMD\" tag\n";
 my @lines = split /\n/, $text;
 my %order_of_tags;
 
 my $tag;
 foreach $tag (@lines)
 {
+    my $orig_num = $tag;
     my $num = $tag;
     if ($num =~ m/(\d+)\.(\d+).(\d+)v(\d+)/img)
     {
-        $num = $1 * 2000 + $2 * 100 + $3 * 20 + $1;
+        $num = $1 * 2000 + $2 * 100 + $3 * 20 + $4;
         $order_of_tags {$num} = $tag;
     }
 }
@@ -48,7 +50,6 @@ chomp $cmd;
 my %cn_classes;
 sub read_all_card_names
 {
-    print ("find \"cards.add\" ../Mage.Sets/src/mage/sets/*.java\n");
     print ("find \"add\" ..\\Mage.Sets\\src\\mage\\sets\\*.java\n");
     my $all_cards = `find \"add\" ..\\Mage.Sets\\src\\mage\\sets\\*.java`;
     my @cards = split /\n/, $all_cards;
@@ -122,12 +123,23 @@ if (exists ($new_order{$cmd}))
         $past_line = $line;
     }
 
+    open MTG_CARDS_DATA, "mtg-cards-data.txt";
+    my %all_cards;
+    while (<MTG_CARDS_DATA>)
+    {
+        my $val = $_;
+        $val =~ s/\|/xxxx/;
+        $val =~ s/\|.*//;
+        $val =~ m/^(.*)xxxx(.*)/;
+        $all_cards {$1} = $2;
+    }
+
     print ("Found these new card names!\n");
     foreach $line (sort keys (%new_cards))
     {
         if ($new_cards {$line} > 0)
         {
-            print ($line, "\n");
+            print ($line, " in ", $all_cards {$line}, "\n");
         }
     }
 }

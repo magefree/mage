@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -42,6 +41,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +89,7 @@ class FilterCoverOfDarkness extends FilterCreaturePermanent {
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
         if (super.match(permanent, sourceId, playerId, game)) {
             String subtype = (String) game.getState().getValue(sourceId + "_type");
-            if (subtype != null && !subtype.equals("") && permanent.hasSubtype(subtype, game)) {
+            if (subtype != null && !subtype.isEmpty() && permanent.hasSubtype(subtype, game)) {
                 return true;
             }
         }

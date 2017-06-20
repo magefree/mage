@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.target.Target;
@@ -21,7 +20,7 @@ import java.util.*;
  *
  * @author nantuko
  */
-public class RateCard {
+public final class RateCard {
 
     private static Map<String, Integer> ratings;
     private static final Map<String, Integer> rated = new HashMap<>();
@@ -57,15 +56,15 @@ public class RateCard {
             return rate;
         }
         int type;
-        if (card.getCardType().contains(CardType.PLANESWALKER)) {
+        if (card.isPlaneswalker()) {
             type = 15;
-        } else if (card.getCardType().contains(CardType.CREATURE)) {
+        } else if (card.isCreature()) {
             type = 10;
         } else if (card.getSubtype(null).contains("Equipment")) {
             type = 8;
         } else if (card.getSubtype(null).contains("Aura")) {
             type = 5;
-        } else if (card.getCardType().contains(CardType.INSTANT)) {
+        } else if (card.isInstant()) {
             type = 7;
         } else {
             type = 6;
@@ -78,16 +77,15 @@ public class RateCard {
     }
 
     private static int isRemoval(Card card) {
-        if (card.getSubtype(null).contains("Aura") || card.getCardType().contains(CardType.INSTANT)
-                || card.getCardType().contains(CardType.SORCERY)) {
+        if (card.getSubtype(null).contains("Aura") || card.isInstant() || card.isSorcery()) {
 
             for (Ability ability : card.getAbilities()) {
                 for (Effect effect : ability.getEffects()) {
-                    if (effect.getOutcome().equals(Outcome.Removal)) {
+                    if (effect.getOutcome() == Outcome.Removal) {
                         log.debug("Found removal: " + card.getName());
                         return 1;
                     }
-                    if (effect.getOutcome().equals(Outcome.Damage)) {
+                    if (effect.getOutcome() == Outcome.Damage) {
                         if (effect instanceof DamageTargetEffect) {
                             DamageTargetEffect damageEffect = (DamageTargetEffect) effect;
                             if (damageEffect.getAmount() > 1) {
@@ -100,7 +98,7 @@ public class RateCard {
                             }
                         }
                     }
-                    if (effect.getOutcome().equals(Outcome.DestroyPermanent)) {
+                    if (effect.getOutcome() == Outcome.DestroyPermanent) {
                         for (Target target : ability.getTargets()) {
                             if (target instanceof TargetCreaturePermanent) {
                                 log.debug("Found destroyer: " + card.getName());
@@ -191,7 +189,7 @@ public class RateCard {
             }
             return 2 * (converted - colorPenalty + 1);
         }
-        final Map<String, Integer> singleCount = new HashMap<String, Integer>();
+        final Map<String, Integer> singleCount = new HashMap<>();
         int maxSingleCount = 0;
         for (String symbol : card.getManaCost().getSymbols()) {
             int count = 0;
@@ -257,7 +255,7 @@ public class RateCard {
      * @return
      */
     public static int getDifferentColorManaCount(Card card) {
-        Set<String> symbols = new HashSet<String>();
+        Set<String> symbols = new HashSet<>();
         for (String symbol : card.getManaCost().getSymbols()) {
             if (isColoredMana(symbol)) {
                 symbols.add(symbol);

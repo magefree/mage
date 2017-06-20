@@ -38,6 +38,7 @@ import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -59,7 +60,7 @@ public class KoskunFalls extends CardImpl {
 
     public KoskunFalls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
-        this.supertype.add("World");
+        addSuperType(SuperType.WORLD);
 
         // At the beginning of your upkeep, sacrifice Koskun Falls unless you tap an untapped creature you control.
         Effect effect = new SacrificeSourceUnlessPaysEffect(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filterCreature, true)));

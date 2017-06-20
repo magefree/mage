@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -45,6 +44,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class DeathSpark extends CardImpl {
                         new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new GenericManaCost(1)),
                         TargetController.YOU,
                         false),
-                new DeathSparkCondition(),
+                DeathSparkCondition.instance,
                 "At the beginning of your upkeep, if {this} is in your graveyard with a creature card directly above it, you may pay {1}. If you do, return {this} to your hand."));
     }
 
@@ -81,13 +82,9 @@ public class DeathSpark extends CardImpl {
     }
 }
 
-class DeathSparkCondition implements Condition {
+enum DeathSparkCondition implements Condition {
 
-    private static final DeathSparkCondition fInstance = new DeathSparkCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -96,7 +93,7 @@ class DeathSparkCondition implements Condition {
             boolean nextCard = false;
             for (Card card : controller.getGraveyard().getCards(game)) {
                 if (nextCard) {
-                    return card.getCardType().contains(CardType.CREATURE);
+                    return card.isCreature();
                 }
                 if (card.getId().equals(source.getSourceId())) {
                     nextCard = true;

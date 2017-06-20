@@ -30,12 +30,12 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -45,15 +45,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GlimpseTheSunGod extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
-
     public GlimpseTheSunGod(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}");
 
         // Tap X target creatures. Scry 1.
         this.getSpellAbility().addEffect(new TapTargetEffect("X target creatures"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1,filter, false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, FILTER_PERMANENT_CREATURES, false));
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
@@ -66,8 +63,8 @@ public class GlimpseTheSunGod extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             int numberToTap = ability.getManaCostsToPay().getX();
-            numberToTap = Math.min(game.getBattlefield().count(filter, ability.getSourceId(), ability.getControllerId(), game), numberToTap);
-            ability.addTarget(new TargetCreaturePermanent(numberToTap, numberToTap, filter, false));
+            numberToTap = Math.min(game.getBattlefield().count(FILTER_PERMANENT_CREATURES, ability.getSourceId(), ability.getControllerId(), game), numberToTap);
+            ability.addTarget(new TargetCreaturePermanent(numberToTap, numberToTap, FILTER_PERMANENT_CREATURES, false));
         }
     }
 

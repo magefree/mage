@@ -92,12 +92,12 @@ class MindFuneralEffect extends OneShotEffect {
         if (opponent != null) {
             Cards cards = new CardsImpl();
             int landsFound = 0;
-            while (landsFound < 4 && opponent.getLibrary().size() > 0) {
+            while (landsFound < 4 && opponent.getLibrary().hasCards()) {
                 Card card = opponent.getLibrary().removeFromTop(game);
                 if (card == null) {
                     break;
                 }
-                if (card.getCardType().contains(CardType.LAND)) {
+                if (card.isLand()) {
                     landsFound++;
                 }
                 cards.add(card);

@@ -1,0 +1,27 @@
+3 [AER:173] Renegade Map
+2 [KLD:144] Armorcraft Judge
+9 [KLD:263] Forest
+1 [KLD:181] Engineered Might
+1 [AER:149] Daredevil Dragster
+1 [AER:105] Aid from the Cowl
+3 [AER:7] Audacious Infiltrator
+1 [AER:5] Airdrop Aeronauts
+4 [AER:189] Tranquil Expanse
+1 [AER:22] Solemn Recruit
+2 [AER:126] Unbridled Growth
+2 [AER:125] Silkweaver Elite
+1 [AER:120] Prey Upon
+4 [AER:186] Inspiring Roar
+1 [AER:185] Ajani, Valiant Protector
+2 [AER:188] Ajani's Aid
+3 [AER:187] Ajani's Comrade
+1 [AER:121] Ridgescale Tusker
+9 [KLD:250] Plains
+1 [KLD:156] Ghirapur Guide
+2 [AER:180] Verdant Automaton
+1 [AER:15] Deadeye Harpooner
+2 [AER:117] Narnam Renegade
+1 [AER:118] Natural Obsolescence
+2 [AER:113] Lifecraft Cavalry
+LAYOUT MAIN:(1,7)(CMC,false,50)|([KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:250],[KLD:250],[KLD:250],[KLD:250],[KLD:250],[KLD:250],[KLD:250],[KLD:250],[KLD:250],[AER:189],[AER:189],[AER:189],[AER:189])([AER:117],[AER:117],[AER:120],[AER:173],[AER:173],[AER:173],[AER:126],[AER:126])([AER:187],[AER:187],[AER:187],[AER:7],[AER:7],[AER:7],[AER:118],[AER:180],[AER:180])([AER:149],[AER:15],[KLD:156],[AER:125],[AER:125],[AER:22])([AER:188],[AER:188],[KLD:144],[KLD:144],[AER:186],[AER:186],[AER:186],[AER:186])([AER:105],[AER:5],[KLD:181],[AER:113],[AER:113],[AER:121])([AER:185])
+LAYOUT SIDEBOARD:(0,0)(NONE,false,50)|

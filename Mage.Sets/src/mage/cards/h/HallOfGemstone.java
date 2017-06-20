@@ -37,10 +37,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
@@ -57,7 +54,7 @@ public class HallOfGemstone extends CardImpl {
     public HallOfGemstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
 
-        this.supertype.add("World");
+        addSuperType(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, that player chooses a color. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color.
         this.addAbility(new BeginningOfUntapTriggeredAbility(new HallOfGemstoneEffect(), TargetController.ANY, false));
@@ -154,6 +151,6 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        return permanent != null && permanent.getCardType().contains(CardType.LAND);
+        return permanent != null && permanent.isLand();
     }
 }

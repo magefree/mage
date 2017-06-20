@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,7 +51,7 @@ public class KrovikanMist extends CardImpl {
     private static final FilterControlledPermanent controlledIllusionsFilter = new FilterControlledPermanent("Illusions you control");
     
     static {
-        controlledIllusionsFilter.add(new SubtypePredicate("Illusion"));
+        controlledIllusionsFilter.add(new SubtypePredicate(SubType.ILLUSION));
     }
 
     public KrovikanMist(UUID ownerId, CardSetInfo setInfo) {

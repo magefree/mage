@@ -28,8 +28,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -38,10 +38,10 @@ import mage.constants.Rarity;
 
 public class Champs extends ExpansionSet {
 
-    private static final Champs fINSTANCE = new Champs();
+    private static final Champs instance = new Champs();
 
     public static Champs getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Champs() {

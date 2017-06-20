@@ -27,15 +27,17 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.RecruiterEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +48,7 @@ public class DwarvenRecruiter extends CardImpl {
     private static final FilterCard filter = new FilterCard("Dwarf cards");
 
     static {
-        filter.add(new SubtypePredicate("Dwarf"));
+        filter.add(new SubtypePredicate(SubType.DWARF));
     }
 
     public DwarvenRecruiter(UUID ownerId, CardSetInfo setInfo) {

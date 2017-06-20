@@ -27,21 +27,18 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +48,7 @@ public class AlhammarretsArchive extends CardImpl {
 
     public AlhammarretsArchive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // If you would gain life, you gain twice that much life instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AlhammarretsArchiveEffect()));
@@ -94,7 +91,7 @@ class AlhammarretsArchiveEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.GAIN_LIFE);
+        return event.getType() == GameEvent.EventType.GAIN_LIFE;
     }
 
     @Override
@@ -142,8 +139,8 @@ class AlhammarretsArchiveReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getControllerId())) {
             if (game.getActivePlayerId().equals(event.getPlayerId())
-                    && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
-                CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
+                    && game.getPhase().getStep().getType() == PhaseStep.DRAW) {
+                CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get(CardsDrawnDuringDrawStepWatcher.class.getSimpleName());
                 if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
                     return true;
                 }

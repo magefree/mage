@@ -27,28 +27,26 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -116,10 +114,10 @@ class BloodlineShamanEffect extends OneShotEffect {
             }
 
             FilterCard filterSubtype = new FilterCard();
-            filterSubtype.add(new SubtypePredicate(typeChoice.getChoice()));
+            filterSubtype.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
 
             // Reveal the top card of your library.
-            if (controller.getLibrary().size() > 0) {
+            if (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             controller.revealCards(sourceObject.getIdName(), cards, game);

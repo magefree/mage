@@ -39,7 +39,6 @@ import mage.watchers.Watcher;
 /**
  * Watcher saves the mana that was spent to cast a spell
  *
- *
  * @author LevelX2
  */
 public class ManaSpentToCastWatcher extends Watcher {
@@ -47,7 +46,7 @@ public class ManaSpentToCastWatcher extends Watcher {
     Mana payment = null;
 
     public ManaSpentToCastWatcher() {
-        super("ManaSpentToCast", WatcherScope.CARD);
+        super(ManaSpentToCastWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public ManaSpentToCastWatcher(final ManaSpentToCastWatcher watcher) {
@@ -64,7 +63,7 @@ public class ManaSpentToCastWatcher extends Watcher {
             }
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && this.getSourceId().equals(event.getSourceId())) {
-            if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
+            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 payment = null;
             }
         }

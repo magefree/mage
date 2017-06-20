@@ -35,6 +35,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.MeldCard;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.game.permanent.token.EldraziHorrorToken;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ import java.util.UUID;
 public class HanweirTheWrithingTownship extends MeldCard {
     public HanweirTheWrithingTownship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Eldrazi");
         this.subtype.add("Ooze");
         this.power = new MageInt(7);

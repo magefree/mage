@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -47,25 +48,27 @@ import mage.target.common.TargetCreaturePermanent;
  * @author FenrisulfrX
  */
 public class SpiteMalice extends SplitCard {
-    
-    private static final FilterSpell filterNonCreatureSpell = new FilterSpell("noncreature spell");    
+
+    private static final FilterSpell filterNonCreatureSpell = new FilterSpell("noncreature spell");
+
     static {
         filterNonCreatureSpell.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
-    
+
     private static final FilterCreaturePermanent filterNonBlackCreature = new FilterCreaturePermanent("nonblack creature");
+
     static {
         filterNonBlackCreature.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public SpiteMalice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}","{3}{B}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}", "{3}{B}", SpellAbilityType.SPLIT);
 
         // Spite
         // Counter target noncreature spell.
         this.getLeftHalfCard().getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell(filterNonCreatureSpell));        
-        
+        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell(filterNonCreatureSpell));
+
         // Malice
         // Destroy target nonblack creature. It can't be regenerated.
         this.getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect(true));

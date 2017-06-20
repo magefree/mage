@@ -13,8 +13,8 @@ public interface CardImageSource {
     String getNextHttpImageUrl();
     String getFileForHttpImage(String httpImageUrl);
     String getSourceName();
-    Float getAverageSize();
-    Integer getTotalImages();
-    Boolean isTokenSource();
+    float getAverageSize();
+    int getTotalImages();
+    boolean isTokenSource();
     void doPause(String httpImageUrl);
 }

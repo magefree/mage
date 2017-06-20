@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,12 +39,15 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +59,7 @@ public class BloodChinFanatic extends CardImpl {
     
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new SubtypePredicate("Warrior"));
+        filter.add(new SubtypePredicate(SubType.WARRIOR));
     }
 
     public BloodChinFanatic(UUID ownerId, CardSetInfo setInfo) {

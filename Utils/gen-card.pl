@@ -180,12 +180,13 @@ while ($type =~ m/([a-zA-Z]+)( )*/g) {
         if (@types) {
             $vars{'subType'} .= "\n        this.subtype.add(\"$1\");";
         } else {
-            $vars{'subType'} .= "\n        this.supertype.add(\"$1\");";
+            my $st = uc($1);
+            $vars{'subType'} .= "\n        addSuperType(SuperType.$st);";
         }
     }
 }
-$vars{'type'} = join(', ', @types);
 
+$vars{'type'} = join(', ', @types);
 $vars{'abilitiesImports'} = '';
 $vars{'abilities'} = '';
 
@@ -226,6 +227,10 @@ foreach my $ability (@abilities) {
                     } elsif ($keywords{$kw} eq 'card, cost') {
                         $ability =~ m/({.*})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, new ManaCostsImpl("' . fixCost($1) . '")));';
+                        $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
+					} elsif ($keywords{$kw} eq 'cost, card') {
+                        $ability =~ m/({.*})/g;
+                        $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(new ManaCostsImpl("' . fixCost($1) . '"), this));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                     } elsif ($keywords{$kw} eq 'type') {
                         $ability =~ m/\s([a-zA-Z\s]*)/g;

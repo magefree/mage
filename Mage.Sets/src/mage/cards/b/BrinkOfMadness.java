@@ -27,11 +27,8 @@
  */
 package mage.cards.b;
 
-import java.util.Set;
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
@@ -41,9 +38,16 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +63,7 @@ public class BrinkOfMadness extends CardImpl {
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new BrinkOfMadnessEffect());
         ability.addTarget(new TargetOpponent());
-        CardsInHandCondition contition = new CardsInHandCondition(CardsInHandCondition.CountType.EQUAL_TO, 0);
+        CardsInHandCondition contition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
         this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if you have no cards in hand, sacrifice {this} and target opponent discards his or her hand."));
         
     }
@@ -73,7 +77,7 @@ public class BrinkOfMadness extends CardImpl {
         return new BrinkOfMadness(this);
     }
     
-    class BrinkOfMadnessEffect extends OneShotEffect {
+    static class BrinkOfMadnessEffect extends OneShotEffect {
 
     public BrinkOfMadnessEffect() {
         super(Outcome.Benefit);

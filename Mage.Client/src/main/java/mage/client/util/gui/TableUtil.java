@@ -13,7 +13,7 @@ import mage.client.dialog.PreferencesDialog;
  *
  * @author LevelX2
  */
-public class TableUtil {
+public final class TableUtil {
 
     /**
      *

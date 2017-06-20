@@ -58,11 +58,11 @@ import mage.players.Player;
 public class DivineIntervention extends CardImpl {
 
     public DivineIntervention(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{6}{W}{W}");
 
         // Divine Intervention enters the battlefield with 2 intervention counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.INTERVENTION.createInstance(2));
-        this.addAbility(new EntersBattlefieldAbility(effect, "enters with 2 intervention counters"));
+        this.addAbility(new EntersBattlefieldAbility(effect, "with 2 intervention counters"));
 
         // At the beginning of your upkeep, remove an intervention counter from Divine Intervention.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.INTERVENTION.createInstance()), TargetController.YOU, false));
@@ -160,15 +160,8 @@ public class DivineIntervention extends CardImpl {
             if (controller != null && sourcePermanent != null) {
                 if (game.getState().getZone(sourcePermanent.getId()) == Zone.BATTLEFIELD && sourcePermanent.getCounters(game).getCount(CounterType.INTERVENTION) == 0) {
                     game.setDraw(controller.getId());
-
-                    for (UUID player : game.getOpponents(controller.getId())) {
-                        Player opponent = game.getPlayer(player);
-                        if (opponent != null) {
-                            game.setDraw(player);
-                        }
-                    }
-                    return true;
                 }
+                return true;
             }
             return false;
         }

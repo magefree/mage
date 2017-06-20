@@ -39,6 +39,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,7 +58,7 @@ public class Scarecrone extends CardImpl {
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filterScarecrow.add(new SubtypePredicate("Scarecrow"));
+        filterScarecrow.add(new SubtypePredicate(SubType.SCARECROW));
     }
 
     public Scarecrone(UUID ownerId, CardSetInfo setInfo) {

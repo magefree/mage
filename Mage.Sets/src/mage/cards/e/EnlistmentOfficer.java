@@ -27,17 +27,19 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +50,7 @@ public class EnlistmentOfficer extends CardImpl {
     private static final FilterCard filter = new FilterCard("Soldier cards");
 
     static {
-        filter.add(new SubtypePredicate("Soldier"));
+        filter.add(new SubtypePredicate(SubType.SOLDIER));
     }
 
     public EnlistmentOfficer(UUID ownerId, CardSetInfo setInfo) {

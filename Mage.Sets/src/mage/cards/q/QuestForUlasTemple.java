@@ -37,10 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -98,11 +95,11 @@ class QuestForUlasTempleEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanent != null && controller != null && controller.getLibrary().size() > 0) {
+        if (sourcePermanent != null && controller != null && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             controller.lookAtCards(sourcePermanent.getName(), cards, game);
-            if (card.getCardType().contains(CardType.CREATURE)) {
+            if (card.isCreature()) {
                 if (controller.chooseUse(Outcome.DrawCard, "Do you wish to reveal the creature card at the top of the library?", source, game)) {
                     controller.revealCards(sourcePermanent.getName(), cards, game);
                     Permanent questForUlasTemple = game.getPermanent(source.getSourceId());
@@ -156,10 +153,10 @@ class QuestForUlasTempleEffect2 extends OneShotEffect {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Kraken"),
-                new SubtypePredicate("Leviathan"),
-                new SubtypePredicate("Octopus"),
-                new SubtypePredicate("Serpent")));
+                new SubtypePredicate(SubType.KRAKEN),
+                new SubtypePredicate(SubType.LEVIATHAN),
+                new SubtypePredicate(SubType.OCTOPUS),
+                new SubtypePredicate(SubType.SERPENT)));
     }
 
     QuestForUlasTempleEffect2() {

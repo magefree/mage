@@ -1,10 +1,5 @@
 package mage.util;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.ManaSymbol;
@@ -12,23 +7,18 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaSymbols;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.abilities.mana.AnyColorManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.*;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 
+import java.util.*;
+
 /**
  * @author noxx
  */
-public class ManaUtil {
+public final class ManaUtil {
 
     private ManaUtil() {
     }
@@ -471,7 +461,7 @@ public class ManaUtil {
         // Combine the cost back as a mana string
         StringBuilder sb = new StringBuilder();
         for (String s : finalCost) {
-            sb.append('{' + s + '}');
+            sb.append('{').append(s).append('}');
         }
         // Return the condensed string
         return sb.toString();

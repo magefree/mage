@@ -45,6 +45,7 @@ import java.io.InputStreamReader;
 import java.io.Writer;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -391,7 +392,12 @@ public class ConnectDialog extends MageDialog {
             connection.setUsername(this.txtUserName.getText().trim());
             connection.setPassword(this.txtPassword.getText().trim());
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected());
-            connection.setUserIdStr(System.getProperty("user.name") + ":" + MagePreferences.getUserNames());
+            String allMAC = "";
+            try {
+                allMAC = connection.getMAC();
+            } catch (SocketException ex) {
+            }
+            connection.setUserIdStr(System.getProperty("user.name") + ":" + System.getProperty("os.name") + ":" + MagePreferences.getUserNames() + ":" + allMAC);
             MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
             PreferencesDialog.setProxyInformation(connection);
 
@@ -429,7 +435,7 @@ public class ConnectDialog extends MageDialog {
                 if (result) {
                     lblStatus.setText("");
                     connected();
-                    MageFrame.getInstance().showGames(false);
+                    MageFrame.getInstance().prepareAndShowTablesPane();
                 } else {
                     lblStatus.setText("Could not connect");
                 }

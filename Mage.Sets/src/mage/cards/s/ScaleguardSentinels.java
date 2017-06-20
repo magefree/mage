@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +58,7 @@ public class ScaleguardSentinels extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Dragon card from your hand (you don't have to)");
 
     static {
-        filter.add(new SubtypePredicate("Dragon"));
+        filter.add(new SubtypePredicate(SubType.DRAGON));
     }
 
     public ScaleguardSentinels(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +73,7 @@ public class ScaleguardSentinels extends CardImpl {
 
         // Scaleguard Sentinels enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast Scaleguard Sentinels.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true),
-                ScaleguardSentinelsCondition.getInstance(),
+                ScaleguardSentinelsCondition.instance,
                 "{this} enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast {this}", ""),
                 new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
 
@@ -80,7 +81,7 @@ public class ScaleguardSentinels extends CardImpl {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
+        if (ability.getAbilityType() == AbilityType.SPELL) {
             Player controller = game.getPlayer(ability.getControllerId());
             if (controller != null) {
                 if (controller.getHand().count(filter, game) > 0) {
@@ -100,19 +101,15 @@ public class ScaleguardSentinels extends CardImpl {
     }
 }
 
-class ScaleguardSentinelsCondition implements Condition {
+enum ScaleguardSentinelsCondition implements Condition {
 
-    private static final ScaleguardSentinelsCondition fInstance = new ScaleguardSentinelsCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (sourcePermanent != null) {
-            DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
+            DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class.getSimpleName());
             return (watcher != null && watcher.castWithConditionTrue(sourcePermanent.getSpellAbility().getId()));
         }
         return false;

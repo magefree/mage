@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -41,6 +40,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -90,10 +91,10 @@ class ErraticExplosionEffect extends OneShotEffect {
             CardsImpl toReveal = new CardsImpl();
             Card nonLandCard = null;
 
-            while (nonLandCard == null && controller.getLibrary().size() > 0) {
+            while (nonLandCard == null && controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 toReveal.add(card);
-                if (!card.getCardType().contains(CardType.LAND)) {
+                if (!card.isLand()) {
                     nonLandCard = card;
                 }
             }

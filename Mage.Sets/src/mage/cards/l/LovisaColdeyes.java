@@ -27,7 +27,6 @@
  */
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,12 +36,12 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,12 +52,12 @@ public class LovisaColdeyes extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that's a Barbarian, a Warrior, or a Berserker");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Barbarian"), new SubtypePredicate("Warrior"), new SubtypePredicate("Berserker")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.BARBARIAN), new SubtypePredicate(SubType.WARRIOR), new SubtypePredicate(SubType.BERSERKER)));
     }
 
     public LovisaColdeyes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

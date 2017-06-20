@@ -27,8 +27,8 @@
  */
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,7 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -50,6 +49,8 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
+
+import java.util.UUID;
 
 /**
  *
@@ -86,7 +87,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
 
     static {
         filter.add(new CardTypePredicate(CardType.INSTANT));
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public IsochronScepterImprintEffect() {
@@ -154,7 +155,7 @@ class IsochronScepterCopyEffect extends OneShotEffect {
             Permanent scepter = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (scepter != null && scepter.getImprinted() != null && !scepter.getImprinted().isEmpty()) {
                 Card imprintedInstant = game.getCard(scepter.getImprinted().get(0));
-                if (imprintedInstant != null && game.getState().getZone(imprintedInstant.getId()).equals(Zone.EXILED)) {
+                if (imprintedInstant != null && game.getState().getZone(imprintedInstant.getId()) == Zone.EXILED) {
                     if (controller.chooseUse(outcome, new StringBuilder("Create a copy of ").append(imprintedInstant.getName()).append('?').toString(), source, game)) {
                         Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                         if (copiedCard != null) {

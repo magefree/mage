@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
@@ -45,6 +44,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author spjspj
@@ -61,7 +62,7 @@ public class DaredevilDragster extends CardImpl {
         // At end of combat, if Daredevil Dragster attacked or blocked this combat, put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EndOfCombatTriggeredAbility(new DaredevilDragsterEffect(), false),
-                new AttackedOrBlockedThisCombatSourceCondition(),
+                AttackedOrBlockedThisCombatSourceCondition.instance,
                 "At end of combat, if {this} attacked or blocked this combat, put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards."),
                 new AttackedOrBlockedThisCombatWatcher());
 

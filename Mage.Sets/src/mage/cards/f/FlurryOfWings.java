@@ -28,15 +28,13 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.MageInt;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.common.FilterAttackingCreature;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BirdSoldierToken;
 
 /**
  *
@@ -47,11 +45,7 @@ public class FlurryOfWings extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("the number of attacking creatures");
 
     public FlurryOfWings(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}{U}");
-
-
-
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{W}{U}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdSoldierToken(), new PermanentsOnBattlefieldCount(filter)));
     }
@@ -63,20 +57,5 @@ public class FlurryOfWings extends CardImpl {
     @Override
     public FlurryOfWings copy() {
         return new FlurryOfWings(this);
-    }
-}
-
-class BirdSoldierToken extends Token {
-
-    public BirdSoldierToken() {
-        super("Bird Soldier", "1/1 white Bird Soldier creature with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Bird");
-
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        addAbility(FlyingAbility.getInstance());
     }
 }

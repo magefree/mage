@@ -28,7 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -37,16 +36,16 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.UramiToken;
 
 /**
  *
@@ -56,7 +55,7 @@ public class TombOfUrami extends CardImpl {
 
     public TombOfUrami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
 
         // {tap}: Add {B} to your mana pool. Tomb of Urami deals 1 damage to you if you don't control an Ogre.
         Ability ability = new BlackManaAbility();
@@ -112,21 +111,4 @@ class SacrificeAllLandCost extends CostImpl {
         return new SacrificeAllLandCost(this);
     }
 
-}
-
-class UramiToken extends Token {
-
-    public UramiToken() {
-        super("Urami", "legendary 5/5 black Demon Spirit creature token with flying named Urami");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Demon");
-        subtype.add("Spirit");
-        supertype.add("Legendary");
-
-        color.setBlack(true);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-
-        this.addAbility(FlyingAbility.getInstance());
-    }
 }

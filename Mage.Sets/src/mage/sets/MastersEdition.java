@@ -27,6 +27,7 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.b.BasalThrull;
 import mage.cards.d.DwarvenSoldier;
@@ -40,9 +41,8 @@ import mage.cards.o.OrderOfTheEbonHand;
 import mage.cards.o.Oubliette;
 import mage.cards.p.PhyrexianWarBeast;
 import mage.cards.t.ThornThallid;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -50,10 +50,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class MastersEdition extends ExpansionSet {
 
-    private static final MastersEdition fINSTANCE = new MastersEdition();
+    private static final MastersEdition instance = new MastersEdition();
 
     public static MastersEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MastersEdition() {

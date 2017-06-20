@@ -37,12 +37,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -58,7 +53,7 @@ public class MeliraSylvokOutcast extends CardImpl {
 
     public MeliraSylvokOutcast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Scout");
 
@@ -152,7 +147,7 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
             if (perm == null) {
                 perm = game.getPermanentEntering(event.getTargetId());
             }
-            if (perm != null && perm.getCardType().contains(CardType.CREATURE) && perm.getControllerId().equals(source.getControllerId())) {
+            if (perm != null && perm.isCreature() && perm.getControllerId().equals(source.getControllerId())) {
                 return true;
             }
         }

@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -35,6 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -43,6 +43,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +55,7 @@ public class ChokingSands extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("non-Swamp land");
     
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Swamp")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.SWAMP)));
     }
 
     public ChokingSands(UUID ownerId, CardSetInfo setInfo) {
@@ -96,7 +98,7 @@ class ChokingSandsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        if (permanent != null && !permanent.getSupertype().contains("Basic")) {
+        if (permanent != null && !permanent.isBasic()) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 player.damage(2, source.getSourceId(), game, false, true);

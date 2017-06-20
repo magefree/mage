@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,7 +51,7 @@ public class SidewinderSliver extends CardImpl {
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("All Sliver creatures");
     
     static{
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate(SubType.SLIVER));
     }
     
     public SidewinderSliver(UUID ownerId, CardSetInfo setInfo) {

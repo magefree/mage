@@ -35,12 +35,13 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
-import mage.cards.CardsImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -67,7 +68,7 @@ public class BoundDetermined extends SplitCard {
     }
 
     public BoundDetermined(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{G}","{G}{U}",false);
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}{G}", "{G}{U}", SpellAbilityType.SPLIT);
 
         // Bound
         // Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was. Exile this card.

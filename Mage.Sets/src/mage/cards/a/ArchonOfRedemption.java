@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -45,6 +44,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -97,7 +98,7 @@ class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
         if (permanent.getControllerId().equals(this.controllerId)
-                && permanent.getCardType().contains(CardType.CREATURE)
+                && permanent.isCreature()
                 && (targetId.equals(this.getSourceId())
                 || (permanent.getAbilities().contains(FlyingAbility.getInstance()) && !targetId.equals(this.getSourceId())))) {
             for (Effect effect : this.getEffects()) {

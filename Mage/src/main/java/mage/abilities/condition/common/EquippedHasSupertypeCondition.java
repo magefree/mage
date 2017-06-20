@@ -29,9 +29,12 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.EnumSet;
 
 /**
  *
@@ -40,15 +43,15 @@ import mage.game.permanent.Permanent;
 
 public class EquippedHasSupertypeCondition implements Condition {
 
-    private String superType;
-    private String[] superTypes; // scope = Any
+    private SuperType superType;
+    private EnumSet<SuperType> superTypes = EnumSet.noneOf(SuperType.class); // scope = Any
 
-    public EquippedHasSupertypeCondition(String subType) {
-        this.superType = subType;
+    public EquippedHasSupertypeCondition(SuperType supertype) {
+        this.superType = supertype;
     }
 
-    public EquippedHasSupertypeCondition(String... subTypes) {
-        this.superTypes = subTypes;
+    public EquippedHasSupertypeCondition(EnumSet<SuperType> superTypes) {
+        this.superTypes = superTypes;
     }
 
     @Override
@@ -61,12 +64,12 @@ public class EquippedHasSupertypeCondition implements Condition {
             }
             if (attachedTo != null) {
                 if (superType != null) {
-                    if (attachedTo.getSupertype().contains(this.superType)) {
+                    if (attachedTo.getSuperType().contains(this.superType)) {
                         return true;
                     }
                 } else {
-                    for (String s : superTypes) {
-                        if (attachedTo.getSupertype().contains(s)) {
+                    for (SuperType s : superTypes) {
+                        if (attachedTo.getSuperType().contains(s)) {
                             return true;
                         }
                     }

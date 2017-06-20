@@ -33,16 +33,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.VoiceOfTheWoodsElementalToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -55,11 +55,11 @@ public class VoiceOfTheWoods extends CardImpl {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate(SubType.ELF));
     }
 
     public VoiceOfTheWoods(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(2);
@@ -68,7 +68,7 @@ public class VoiceOfTheWoods extends CardImpl {
         // Tap five untapped Elves you control: Create a 7/7 green Elemental creature token with trample.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new VoiceOfTheWoodsElementalToken()),
-                new TapTargetCost(new TargetControlledPermanent(5,5, filter, false)));
+                new TapTargetCost(new TargetControlledPermanent(5, 5, filter, false)));
         this.addAbility(ability);
     }
 
@@ -79,21 +79,5 @@ public class VoiceOfTheWoods extends CardImpl {
     @Override
     public VoiceOfTheWoods copy() {
         return new VoiceOfTheWoods(this);
-    }
-}
-
-class VoiceOfTheWoodsElementalToken extends Token {
-
-    VoiceOfTheWoodsElementalToken() {
-        super("Elemental", "7/7 green Elemental creature token with trample");
-        this.setOriginalExpansionSetCode("EVG");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
-
-        color.setGreen(true);
-        power = new MageInt(7);
-        toughness = new MageInt(7);
-
-        addAbility(TrampleAbility.getInstance());
     }
 }

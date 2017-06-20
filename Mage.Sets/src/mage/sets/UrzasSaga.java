@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class UrzasSaga extends ExpansionSet {
 
-    private static final UrzasSaga fINSTANCE = new UrzasSaga();
+    private static final UrzasSaga instance = new UrzasSaga();
 
     public static UrzasSaga getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private UrzasSaga() {
@@ -221,6 +221,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 345, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("No Rest for the Wicked", 142, Rarity.UNCOMMON, mage.cards.n.NoRestForTheWicked.class));
+        cards.add(new SetCardInfo("Noetic Scales", 304, Rarity.RARE, mage.cards.n.NoeticScales.class));
         cards.add(new SetCardInfo("Okk", 204, Rarity.RARE, mage.cards.o.Okk.class));
         cards.add(new SetCardInfo("Opal Archangel", 23, Rarity.RARE, mage.cards.o.OpalArchangel.class));
         cards.add(new SetCardInfo("Opal Caryatid", 24, Rarity.COMMON, mage.cards.o.OpalCaryatid.class));
@@ -230,6 +231,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Pacifism", 27, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Parasitic Bond", 145, Rarity.UNCOMMON, mage.cards.p.ParasiticBond.class));
         cards.add(new SetCardInfo("Pariah", 28, Rarity.RARE, mage.cards.p.Pariah.class));
+        cards.add(new SetCardInfo("Path of Peace", 29, Rarity.COMMON, mage.cards.p.PathOfPeace.class));
         cards.add(new SetCardInfo("Pegasus Charger", 30, Rarity.COMMON, mage.cards.p.PegasusCharger.class));
         cards.add(new SetCardInfo("Pendrell Drake", 86, Rarity.COMMON, mage.cards.p.PendrellDrake.class));
         cards.add(new SetCardInfo("Pendrell Flux", 87, Rarity.COMMON, mage.cards.p.PendrellFlux.class));
@@ -246,6 +248,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Planar Birth", 31, Rarity.RARE, mage.cards.p.PlanarBirth.class));
+        cards.add(new SetCardInfo("Planar Void", 149, Rarity.RARE, mage.cards.p.PlanarVoid.class));
         cards.add(new SetCardInfo("Polluted Mire", 323, Rarity.COMMON, mage.cards.p.PollutedMire.class));
         cards.add(new SetCardInfo("Pouncing Jaguar", 269, Rarity.COMMON, mage.cards.p.PouncingJaguar.class));
         cards.add(new SetCardInfo("Power Sink", 89, Rarity.COMMON, mage.cards.p.PowerSink.class));

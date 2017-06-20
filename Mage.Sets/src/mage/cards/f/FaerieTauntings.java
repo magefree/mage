@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -35,6 +34,8 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public class FaerieTauntings extends CardImpl {
         this.subtype.add("Faerie");
 
         // Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life
-        this.addAbility(new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), true), OnOpponentsTurnCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), true), OnOpponentsTurnCondition.instance,
                 "Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life."));
 
     }

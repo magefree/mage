@@ -25,12 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,18 +37,22 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.game.permanent.token.RakkaMarElementalToken;
 
 /**
  *
  * @author Loki
  */
 public class RakkaMar extends CardImpl {
-    private static ElementalToken token = new ElementalToken();
+
+    private RakkaMarElementalToken token = new RakkaMarElementalToken();
 
     public RakkaMar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
@@ -72,16 +73,4 @@ public class RakkaMar extends CardImpl {
         return new RakkaMar(this);
     }
 
-    static class ElementalToken extends Token {
-
-        public ElementalToken() {
-            super("Elemental", "3/1 red Elemental creature with Haste");
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            subtype.add("Elemental");
-            power = new MageInt(3);
-            toughness = new MageInt(1);
-            addAbility(HasteAbility.getInstance());
-        }
-    }
 }

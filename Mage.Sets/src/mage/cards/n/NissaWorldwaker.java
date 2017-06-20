@@ -40,10 +40,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -61,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class NissaWorldwaker extends CardImpl {
 
-    private static final FilterPermanent filterForest = new FilterPermanent("Forest", "Forest");
+    private static final FilterPermanent filterForest = new FilterPermanent(SubType.FOREST, "Forest");
 
     public NissaWorldwaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{G}");

@@ -28,7 +28,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,6 +41,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,9 +90,9 @@ class FireServantEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE) ||
-                event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER) ||
-                event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
+        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE ||
+                event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER ||
+                event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override
@@ -100,7 +101,7 @@ class FireServantEffect extends ReplacementEffectImpl {
         return spell != null &&
                 spell.getControllerId().equals(source.getControllerId()) &&
                 spell.getColor(game).isRed() &&
-                (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
+                (spell.isInstant() || spell.isSorcery());
     }
 
     @Override

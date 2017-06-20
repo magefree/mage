@@ -44,7 +44,7 @@ import mage.players.Player;
  */
 public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectImpl implements PayCostToAttackBlockEffect {
 
-    public static enum RestrictType {
+    public enum RestrictType {
 
         ATTACK("attack"),
         ATTACK_AND_BLOCK("attack or block"),
@@ -64,7 +64,6 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
 
     protected final Cost cost;
     protected final ManaCosts manaCosts;
-
     protected final RestrictType restrictType;
 
     public PayCostToAttackBlockEffectImpl(Duration duration, Outcome outcome, RestrictType restrictType) {
@@ -88,7 +87,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
         this.manaCosts = manaCosts;
     }
 
-    public PayCostToAttackBlockEffectImpl(PayCostToAttackBlockEffectImpl effect) {
+    public PayCostToAttackBlockEffectImpl(final PayCostToAttackBlockEffectImpl effect) {
         super(effect);
         if (effect.cost != null) {
             this.cost = effect.cost.copy();
@@ -109,9 +108,9 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             case ATTACK:
                 return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
             case BLOCK:
-                return event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER);
+                return event.getType() == EventType.DECLARE_BLOCKER;
             case ATTACK_AND_BLOCK:
-                return event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER);
+                return event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER;
         }
         return false;
     }
@@ -120,11 +119,11 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ManaCosts attackBlockManaTax = getManaCostToPay(event, source, game);
         if (attackBlockManaTax != null) {
-            return handleManaCosts(attackBlockManaTax, event, source, game);
+            return handleManaCosts(attackBlockManaTax.copy(), event, source, game);
         }
         Cost attackBlockOtherTax = getOtherCostToPay(event, source, game);
         if (attackBlockOtherTax != null) {
-            return handleOtherCosts(attackBlockOtherTax, event, source, game);
+            return handleOtherCosts(attackBlockOtherTax.copy(), event, source, game);
         }
         return false;
     }
@@ -133,7 +132,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             String chooseText;
-            if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
+            if (event.getType() == EventType.DECLARE_ATTACKER) {
                 chooseText = "Pay " + attackBlockManaTax.getText() + " to attack?";
             } else {
                 chooseText = "Pay " + attackBlockManaTax.getText() + " to block?";
@@ -158,7 +157,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             attackBlockOtherTax.clearPaid();
             if (attackBlockOtherTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
                     && player.chooseUse(Outcome.Neutral,
-                            attackBlockOtherTax.getText() + " to " + (event.getType().equals(EventType.DECLARE_ATTACKER) ? "attack?" : "block?"), source, game)) {
+                            attackBlockOtherTax.getText() + " to " + (event.getType() == EventType.DECLARE_ATTACKER ? "attack?" : "block?"), source, game)) {
                 if (attackBlockOtherTax.pay(source, game, source.getSourceId(), event.getPlayerId(), false, null)) {
                     return false;
                 }

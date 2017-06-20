@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.FleshCarverHorrorToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
@@ -67,7 +67,7 @@ public class FleshCarver extends CardImpl {
     }
 
     public FleshCarver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
@@ -96,6 +96,7 @@ public class FleshCarver extends CardImpl {
 }
 
 class FleshCarverAbility extends DiesTriggeredAbility {
+
     public FleshCarverAbility() {
         super(new FleshCarverEffect(), false);
     }
@@ -113,8 +114,8 @@ class FleshCarverAbility extends DiesTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent !=null) {
-                for (Effect effect :this.getEffects()) {
+            if (permanent != null) {
+                for (Effect effect : this.getEffects()) {
                     effect.setValue("power", permanent.getPower().getValue());
                 }
                 return true;
@@ -155,18 +156,4 @@ class FleshCarverEffect extends OneShotEffect {
         return new FleshCarverEffect(this);
     }
 
-}
-
-class FleshCarverHorrorToken extends Token {
-
-    public FleshCarverHorrorToken(int xValue) {
-        super("Horror", "X/X black Horror creature token");
-        setOriginalExpansionSetCode("C14");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Horror");
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
-
-    }
 }

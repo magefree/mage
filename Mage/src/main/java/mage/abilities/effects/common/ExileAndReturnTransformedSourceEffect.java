@@ -6,6 +6,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Gender;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -18,15 +19,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
 
-    public static enum Gender {
-
-        MALE, FEMAL
-    }
 
     protected Effect additionalEffect;
 
@@ -41,8 +37,8 @@ public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
     public ExileAndReturnTransformedSourceEffect(Gender gender, Effect additionalEffect) {
         super(Outcome.Benefit);
         this.additionalEffect = additionalEffect;
-        this.staticText = "exile {this}, then return " + (gender.equals(Gender.MALE) ? "him" : "her")
-                + " to the battlefield transformed under " + (gender.equals(Gender.MALE) ? "his" : "her") + " owner's control";
+        this.staticText = "exile {this}, then return " + gender.getPersonalPronoun()
+                + " to the battlefield transformed under " + gender.getPossesivePronoun() + " owner's control";
     }
 
     public ExileAndReturnTransformedSourceEffect(final ExileAndReturnTransformedSourceEffect effect) {

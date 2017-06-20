@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -49,6 +48,8 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -143,9 +144,9 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
                 && !extraplanarLens.getImprinted().isEmpty()) {
             Card imprinted = game.getCard(extraplanarLens.getImprinted().get(0));
             if (imprinted != null
-                    && game.getState().getZone(imprinted.getId()).equals(Zone.EXILED)) {
+                    && game.getState().getZone(imprinted.getId()) == Zone.EXILED) {
                 if (landTappedForMana.getName().equals(imprinted.getName())
-                        && landTappedForMana.getCardType().contains(CardType.LAND)) {
+                        && landTappedForMana.isLand()) {
                     ManaEvent mEvent = (ManaEvent) event;
                     for (Effect effect : getEffects()) {
                         effect.setValue("mana", mEvent.getMana());

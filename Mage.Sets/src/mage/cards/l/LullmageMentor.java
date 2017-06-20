@@ -38,12 +38,13 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.MerfolkToken;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -56,7 +57,7 @@ public class LullmageMentor extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Merfolk you control");
 
     static {
-        filter.add(new SubtypePredicate("Merfolk"));
+        filter.add(new SubtypePredicate(SubType.MERFOLK));
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
@@ -85,17 +86,5 @@ public class LullmageMentor extends CardImpl {
     @Override
     public LullmageMentor copy() {
         return new LullmageMentor(this);
-    }
-}
-
-class MerfolkToken extends Token {
-
-    public MerfolkToken() {
-        super("Merfolk", "1/1 blue Merfolk creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Merfolk");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

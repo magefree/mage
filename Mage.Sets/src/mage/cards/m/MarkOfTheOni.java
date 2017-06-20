@@ -30,9 +30,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,7 +41,6 @@ import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -74,8 +71,8 @@ public class MarkOfTheOni extends CardImpl {
                 new SacrificeSourceEffect(),
                 TargetController.ANY,
                 new PermanentsOnTheBattlefieldCondition(
-                        new FilterControlledCreaturePermanent("Demon", "if you control no Demons"),
-                        PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 1),
+                        new FilterControlledCreaturePermanent(SubType.DEMON, "if you control no Demons"),
+                        ComparisonType.FEWER_THAN, 1),
                 false));
     }
 

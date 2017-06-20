@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -41,6 +40,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -117,7 +118,7 @@ class AngelsGraceReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS);
+        return event.getType() == EventType.DAMAGE_CAUSES_LIFE_LOSS;
     }
 
 

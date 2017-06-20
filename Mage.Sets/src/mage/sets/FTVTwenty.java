@@ -38,10 +38,10 @@ import mage.constants.SetType;
  */
 public class FTVTwenty extends ExpansionSet {
 
-    private static final FTVTwenty fINSTANCE = new FTVTwenty();
+    private static final FTVTwenty instance = new FTVTwenty();
 
     public static FTVTwenty getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FTVTwenty() {

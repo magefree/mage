@@ -62,7 +62,7 @@ public class WardenOfTheBeyond extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // Warden of the Beyond gets +2/+2 as long as an opponent owns a card in exile.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new BoostSourceEffect(2,2,Duration.WhileOnBattlefield), OpponentOwnsCardInExileCondition.getInstance(),
+                new ConditionalContinuousEffect(new BoostSourceEffect(2,2,Duration.WhileOnBattlefield), OpponentOwnsCardInExileCondition.instance,
                         "{this} gets +2/+2 as long as an opponent owns a card in exile")));
     }
 
@@ -76,13 +76,9 @@ public class WardenOfTheBeyond extends CardImpl {
     }
 }
 
-class OpponentOwnsCardInExileCondition implements Condition {
+enum OpponentOwnsCardInExileCondition implements Condition {
 
-    private static final OpponentOwnsCardInExileCondition fInstance = new OpponentOwnsCardInExileCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+  instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

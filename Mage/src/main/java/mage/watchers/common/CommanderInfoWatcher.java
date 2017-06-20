@@ -54,7 +54,7 @@ public class CommanderInfoWatcher extends Watcher {
     public final boolean checkCommanderDamage;
 
     public CommanderInfoWatcher(UUID commander, boolean checkCommanderDamage) {
-        super("CommanderCombatDamageWatcher", WatcherScope.CARD);
+        super(CommanderInfoWatcher.class.getSimpleName(), WatcherScope.CARD);
         this.sourceId = commander;
         this.checkCommanderDamage = checkCommanderDamage;
     }
@@ -77,10 +77,7 @@ public class CommanderInfoWatcher extends Watcher {
                 DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
                 if (damageEvent.isCombatDamage()) {
                     UUID playerUUID = event.getTargetId();
-                    Integer damage = damageToPlayer.get(playerUUID);
-                    if (damage == null) {
-                        damage = 0;
-                    }
+                    Integer damage = damageToPlayer.getOrDefault(playerUUID, 0);
                     damage += damageEvent.getAmount();
                     damageToPlayer.put(playerUUID, damage);
                     Player player = game.getPlayer(playerUUID);

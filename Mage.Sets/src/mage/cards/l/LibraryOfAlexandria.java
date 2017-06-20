@@ -28,6 +28,8 @@
 package mage.cards.l;
 
 import java.util.UUID;
+
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
@@ -39,13 +41,12 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 
 /**
- *
  * @author LevelX2
  */
 public class LibraryOfAlexandria extends CardImpl {
 
     public LibraryOfAlexandria(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
@@ -54,7 +55,7 @@ public class LibraryOfAlexandria extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new TapSourceCost(),
-                new CardsInHandCondition(CardsInHandCondition.CountType.EQUAL_TO, 7),
+                new CardsInHandCondition(ComparisonType.EQUAL_TO, 7),
                 ""));
     }
 

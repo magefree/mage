@@ -27,7 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,13 +39,12 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,12 +55,12 @@ public class RakshaGoldenCub extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Cat creatures you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Cat"));
+        filter.add(new SubtypePredicate(SubType.CAT));
     }
     
     public RakshaGoldenCub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
         this.power = new MageInt(3);
@@ -73,12 +71,12 @@ public class RakshaGoldenCub extends CardImpl {
         // As long as Raksha Golden Cub is equipped, Cat creatures you control get +2/+2 and have double strike.
         Effect effect1 = new ConditionalContinuousEffect(
                 new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false),
-                EquippedSourceCondition.getInstance(),
+                EquippedSourceCondition.instance,
                 "As long as {this} is equipped, Cat creatures you control get +2/+2");
         
         Effect effect2 = new ConditionalContinuousEffect(
                 new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false),
-                EquippedSourceCondition.getInstance(),
+                EquippedSourceCondition.instance,
                 "As long as {this} is equipped, Cat creatures you control have double strike");
         effect2.setText("and have double strike");
         

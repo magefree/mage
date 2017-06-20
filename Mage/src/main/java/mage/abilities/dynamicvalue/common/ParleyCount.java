@@ -47,14 +47,14 @@ import mage.players.Player;
  */
 public class ParleyCount implements DynamicValue, MageSingleton {
 
-    private static final ParleyCount fINSTANCE = new ParleyCount();
+    private static final ParleyCount instance = new ParleyCount();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static ParleyCount getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class ParleyCount implements DynamicValue, MageSingleton {
                 if (player != null) {
                     Card card = player.getLibrary().getFromTop(game);
                     if (card != null) {
-                        if (!card.getCardType().contains(CardType.LAND)) {
+                        if (!card.isLand()) {
                             parleyValue++;
                         }
                         player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', new CardsImpl(card), game);
@@ -82,7 +82,7 @@ public class ParleyCount implements DynamicValue, MageSingleton {
 
     @Override
     public ParleyCount copy() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override

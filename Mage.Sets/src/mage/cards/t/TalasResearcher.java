@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -38,6 +37,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,8 @@ public class TalasResearcher extends CardImpl {
 
         // {tap}: Draw a card. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
-                new DrawCardSourceControllerEffect(1), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
+                new DrawCardSourceControllerEffect(1), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
+
         this.addAbility(ability);
     }
 

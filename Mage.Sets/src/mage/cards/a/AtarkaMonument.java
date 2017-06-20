@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,6 +40,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +70,7 @@ public class AtarkaMonument extends CardImpl {
         return new AtarkaMonument(this);
     }
 
-    private class AtarkaMonumentToken extends Token {
+    private static class AtarkaMonumentToken extends Token {
         AtarkaMonumentToken() {
             super("", "4/4 red and green Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);

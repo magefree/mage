@@ -29,6 +29,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.Effect;
@@ -62,7 +63,7 @@ public class MaraudingMaulhorn extends CardImpl {
         // Marauding Maulhorn attacks each combat if able unless you control a creature named Advocate of the Beast.
         Effect effect = new ConditionalRequirementEffect(
                 new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 1));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 1));
         effect.setText("{this} attacks each combat if able unless you control a creature named Advocate of the Beast");
     }
 

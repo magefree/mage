@@ -27,11 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
@@ -50,6 +45,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.*;
 
 /**
  *
@@ -110,7 +107,7 @@ class GhastlyConscriptionEffect extends OneShotEffect {
             newSource.setWorksFaceDown(true);
             for (Card card : cardsToManifest) {
                 ManaCosts manaCosts = null;
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     manaCosts = card.getSpellAbility().getManaCosts();
                     if (manaCosts == null) {
                         manaCosts = new ManaCostsImpl("{0}");

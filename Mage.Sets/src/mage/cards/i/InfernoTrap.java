@@ -32,6 +32,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -49,17 +50,16 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class InfernoTrap extends CardImpl {
 
     public InfernoTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.subtype.add("Trap");
 
         // If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), InfernoTrapCondition.getInstance()), new InfernoTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), InfernoTrapCondition.instance), new InfernoTrapWatcher());
 
         // Inferno Trap deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
@@ -76,20 +76,16 @@ public class InfernoTrap extends CardImpl {
     }
 }
 
-class InfernoTrapCondition implements Condition {
+enum InfernoTrapCondition implements Condition {
 
-    private static final InfernoTrapCondition fInstance = new InfernoTrapCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        InfernoTrapWatcher watcher = (InfernoTrapWatcher) game.getState().getWatchers().get(InfernoTrapWatcher.class.getName());
+        InfernoTrapWatcher watcher = (InfernoTrapWatcher) game.getState().getWatchers().get(InfernoTrapWatcher.class.getSimpleName());
         if (watcher != null) {
             Set<MageObjectReference> damagingCreatures = watcher.getDamagingCreatures(source.getControllerId());
-            return damagingCreatures != null && damagingCreatures.size() > 1;
+            return damagingCreatures.size() > 1;
         }
         return false;
     }
@@ -105,7 +101,7 @@ class InfernoTrapWatcher extends Watcher {
     Map<UUID, Set<MageObjectReference>> playerDamagedByCreature = new HashMap<>();
 
     public InfernoTrapWatcher() {
-        super(InfernoTrapWatcher.class.getName(), WatcherScope.GAME);
+        super(InfernoTrapWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public InfernoTrapWatcher(final InfernoTrapWatcher watcher) {
@@ -118,24 +114,19 @@ class InfernoTrapWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
                 && event.getTargetId().equals(controllerId)) {
             Permanent damageBy = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (damageBy != null && damageBy.getCardType().contains(CardType.CREATURE)) {
-                Set<MageObjectReference> damagingCreatures;
-                if (playerDamagedByCreature.containsKey(event.getTargetId())) {
-                    damagingCreatures = playerDamagedByCreature.get(event.getTargetId());
-                } else {
-                    damagingCreatures = new HashSet<>();
-                    playerDamagedByCreature.put(event.getTargetId(), damagingCreatures);
-                }
+            if (damageBy != null && damageBy.isCreature()) {
+                Set<MageObjectReference> damagingCreatures = playerDamagedByCreature.getOrDefault(event.getTargetId(), new HashSet<>());
+
                 MageObjectReference damagingCreature = new MageObjectReference(damageBy, game);
-                if (!damagingCreatures.contains(damagingCreature)) {
-                    damagingCreatures.add(damagingCreature);
-                }
+                damagingCreatures.add(damagingCreature);
+                playerDamagedByCreature.put(event.getTargetId(), damagingCreatures);
+
             }
         }
     }
 
     public Set<MageObjectReference> getDamagingCreatures(UUID playerId) {
-        return playerDamagedByCreature.get(playerId);
+        return playerDamagedByCreature.getOrDefault(playerId, new HashSet<>());
     }
 
     @Override

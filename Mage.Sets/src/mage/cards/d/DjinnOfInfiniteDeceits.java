@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -38,14 +37,13 @@ import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +54,7 @@ public class DjinnOfInfiniteDeceits extends CardImpl {
     private static final String rule = "Exchange control of two target nonlegendary creatures";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Legendary")));
+        filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
     }
 
     public DjinnOfInfiniteDeceits(UUID ownerId, CardSetInfo setInfo) {

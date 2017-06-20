@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -42,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -51,6 +51,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -59,7 +61,7 @@ public class DereviEmpyrialTactician extends CardImpl {
 
     public DereviEmpyrialTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Bird");
         this.subtype.add("Wizard");
 
@@ -139,7 +141,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         Zone currentZone = game.getState().getZone(this.getSourceId());
-        if (currentZone == null || !currentZone.equals(Zone.COMMAND)) {
+        if (currentZone == null || currentZone != Zone.COMMAND) {
             return false;
         }
         return super.canActivate(playerId, game);

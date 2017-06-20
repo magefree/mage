@@ -39,11 +39,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
-
+import mage.game.permanent.token.KalonianTwingroveTreefolkWarriorToken;
 import static mage.cards.k.KalonianTwingrove.filterLands;
 
 /**
@@ -51,15 +51,15 @@ import static mage.cards.k.KalonianTwingrove.filterLands;
  * @author LevelX2
  */
 public class KalonianTwingrove extends CardImpl {
-    
+
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
     static {
-        filterLands.add(new SubtypePredicate("Forest"));
+        filterLands.add(new SubtypePredicate(SubType.FOREST));
     }
 
     public KalonianTwingrove(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
         this.subtype.add("Treefolk");
         this.subtype.add("Warrior");
 
@@ -71,7 +71,7 @@ public class KalonianTwingrove extends CardImpl {
         // When Kalonian Twingrove enters the battlefield, create a green Treefolk Warrior creature token with "This creature's power and toughness are each equal to the number of Forests you control."
         Effect effect = new CreateTokenEffect(new KalonianTwingroveTreefolkWarriorToken());
         effect.setText("create a green Treefolk Warrior creature token with \"This creature's power and toughness are each equal to the number of Forests you control.\"");
-        this.addAbility(new EntersBattlefieldTriggeredAbility(effect,false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
     public KalonianTwingrove(final KalonianTwingrove card) {
@@ -81,21 +81,5 @@ public class KalonianTwingrove extends CardImpl {
     @Override
     public KalonianTwingrove copy() {
         return new KalonianTwingrove(this);
-    }
-}
-
-class KalonianTwingroveTreefolkWarriorToken extends Token {
-
-    public KalonianTwingroveTreefolkWarriorToken() {
-        super("Treefolk Warrior", "green Treefolk Warrior creature token with \"This creature's power and toughness are each equal to the number of Forests you control.\"");
-        this.setOriginalExpansionSetCode("M15");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Treefolk");
-        subtype.add("Warrior");
-        power = new MageInt(0);
-        toughness = new MageInt(0);
-        
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.WhileOnBattlefield)));
     }
 }

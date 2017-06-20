@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RallyTheHordeWarriorToken;
 import mage.players.Player;
 
 /**
@@ -49,8 +48,7 @@ import mage.players.Player;
 public class RallyTheHorde extends CardImpl {
 
     public RallyTheHorde(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}");
 
         // Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Create a 1/1 red Warrior creature token for each nonland card exiled this way.
         this.getSpellAbility().addEffect(new RallyTheHordeEffect());
@@ -87,12 +85,12 @@ class RallyTheHordeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int nonLandCardsExiled = 0;
-            while(controller.getLibrary().size() > 0) {
+            while (controller.getLibrary().hasCards()) {
                 nonLandCardsExiled += checkIfNextLibCardIsNonLandAndExile(controller, source, game);
-                if (controller.getLibrary().size() > 0) {
+                if (controller.getLibrary().hasCards()) {
                     nonLandCardsExiled += checkIfNextLibCardIsNonLandAndExile(controller, source, game);
                 }
-                if (controller.getLibrary().size() > 0) {
+                if (controller.getLibrary().hasCards()) {
                     int nonLands = checkIfNextLibCardIsNonLandAndExile(controller, source, game);
                     if (nonLands == 0) {
                         break;
@@ -110,20 +108,8 @@ class RallyTheHordeEffect extends OneShotEffect {
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
             controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
-            return card.getCardType().contains(CardType.LAND) ? 0:1;
+            return card.isLand() ? 0 : 1;
         }
         return 0;
-    }
-}
-
-class RallyTheHordeWarriorToken extends Token {
-
-    public RallyTheHordeWarriorToken() {
-        super("Warrior", "1/1 red Warrior creature token");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Warrior");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

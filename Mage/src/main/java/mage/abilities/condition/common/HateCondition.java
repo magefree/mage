@@ -38,23 +38,13 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  *
  * @author Styxo
  */
-public class HateCondition implements Condition {
+public enum HateCondition implements Condition {
 
-    private static HateCondition fInstance = null;
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new HateCondition();
-        }
-        return fInstance;
-    }
-
-    private HateCondition() {
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        LifeLossOtherFromCombatWatcher watcher = (LifeLossOtherFromCombatWatcher) game.getState().getWatchers().get(LifeLossOtherFromCombatWatcher.class.getName());
+        LifeLossOtherFromCombatWatcher watcher = (LifeLossOtherFromCombatWatcher) game.getState().getWatchers().get(LifeLossOtherFromCombatWatcher.class.getSimpleName());
         return watcher != null && watcher.opponentLostLifeOtherFromCombat(source.getControllerId(), game);
     }
 

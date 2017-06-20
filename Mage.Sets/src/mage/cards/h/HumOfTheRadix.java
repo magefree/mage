@@ -92,7 +92,7 @@ class HumOfTheRadixCostIncreaseEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             MageObject sourceObject = abilityToModify.getSourceObject(game);
-            if (sourceObject != null && sourceObject.getCardType().contains(CardType.ARTIFACT)) {
+            if (sourceObject != null && sourceObject.isArtifact()) {
                 return true;
             }
         }

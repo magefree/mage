@@ -27,9 +27,6 @@
  */
 package mage.cards.r;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -41,6 +38,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -79,7 +80,7 @@ class ReciprocateTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", source.getControllerId());
+        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), source.getControllerId());
         if (watcher != null && watcher.hasSourceDoneDamage(id, game)) {
             return super.canTarget(id, source, game);
         }
@@ -89,8 +90,8 @@ class ReciprocateTarget extends TargetPermanent {
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
-        Set<UUID> possibleTargets = new HashSet<UUID>();
-        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", sourceControllerId);
+        Set<UUID> possibleTargets = new HashSet<>();
+        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), sourceControllerId);
         for (UUID targetId : availablePossibleTargets) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null && watcher != null && watcher.hasSourceDoneDamage(targetId, game)) {
@@ -108,7 +109,7 @@ class ReciprocateTarget extends TargetPermanent {
         }
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
-        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", sourceControllerId);
+        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), sourceControllerId);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
             if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
                     && watcher != null && watcher.hasSourceDoneDamage(permanent.getId(), game)) {

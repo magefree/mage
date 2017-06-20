@@ -97,7 +97,7 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
                 if (card == null) {
                     return false;
                 }
-                isZombieCard = card.getSubtype(game).contains("Zombie");
+                isZombieCard = card.hasSubtype("Zombie", game);
                 paid |= player.discard(card, null, game);
 
             }

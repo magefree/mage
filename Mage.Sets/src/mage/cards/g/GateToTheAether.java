@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -41,6 +40,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,10 +89,10 @@ class GateToTheAetherEffect extends OneShotEffect {
             Card card = activePlayer.getLibrary().getFromTop(game);
             if (card != null) {
                 activePlayer.revealCards("Gate to the Aether", new CardsImpl(card), game);
-                if (card.getCardType().contains(CardType.ARTIFACT)
-                        || card.getCardType().contains(CardType.CREATURE)
-                        || card.getCardType().contains(CardType.ENCHANTMENT)
-                        || card.getCardType().contains(CardType.LAND)) {
+                if (card.isArtifact()
+                        || card.isCreature()
+                        || card.isEnchantment()
+                        || card.isLand()) {
                     if (activePlayer.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
                         activePlayer.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }

@@ -91,8 +91,8 @@ class StartYourEnginesEffect extends ContinuousEffectImpl {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
             if (permanent != null && permanent.getSubtype(game).contains("Vehicle")) {
                 if (sublayer == SubLayer.NA) {
-                    permanent.getCardType().add(CardType.ARTIFACT);
-                    permanent.getCardType().add(CardType.CREATURE);// TODO: Chcek if giving CREATURE Type is correct
+                    permanent.addCardType(CardType.ARTIFACT);
+                    permanent.addCardType(CardType.CREATURE);// TODO: Chcek if giving CREATURE Type is correct
                 }
             }
         }

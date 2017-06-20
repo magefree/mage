@@ -50,12 +50,12 @@ public class Twinstrike extends CardImpl {
         // Twinstrike deals 2 damage to each of two target creatures.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(2),
-                new InvertCondition(HellbentCondition.getInstance()),
+                new InvertCondition(HellbentCondition.instance),
                 "{this} deals 2 damage to each of two target creatures"));        
         // Hellbent - Cackling Flames deals 5 damage to that creature or player instead if you have no cards in hand.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DestroyTargetEffect(),
-                HellbentCondition.getInstance(),
+                HellbentCondition.instance,
                 "<br/><br/><i>Hellbent</i> - Destroy those creatures instead if you have no cards in hand"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2,2));
      

@@ -27,13 +27,13 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -46,6 +46,8 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Styxo
@@ -57,7 +59,7 @@ public class FulfillContract extends CardImpl {
 
     static {
         filterBountyCreature.add(new CounterPredicate(CounterType.BOUNTY));
-        filterRogueOrHunter.add(Predicates.or(new SubtypePredicate("Rogue"), new SubtypePredicate("Hunter")));
+        filterRogueOrHunter.add(Predicates.or(new SubtypePredicate(SubType.ROGUE), new SubtypePredicate(SubType.HUNTER)));
     }
 
     public FulfillContract(UUID ownerId, CardSetInfo setInfo) {

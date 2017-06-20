@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
@@ -38,6 +37,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.AngelToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class DescendUponTheSinful extends CardImpl {
         this.getSpellAbility().addEffect(new ExileAllEffect(new FilterCreaturePermanent()));
 
         // <i>Delirium</i> &mdash; Create a 4/4 white Angel creature token with flying if there are four or more card types among cards in your graveyard.
-        Effect effect = new ConditionalOneShotEffect(new CreateTokenEffect(new AngelToken()), DeliriumCondition.getInstance());
+        Effect effect = new ConditionalOneShotEffect(new CreateTokenEffect(new AngelToken()), DeliriumCondition.instance);
         effect.setText("<br/><i>Delirium</i> &mdash; Create a 4/4 white Angel creature token with flying if there are four or more card types among cards in your graveyard");
         this.getSpellAbility().addEffect(effect);
     }

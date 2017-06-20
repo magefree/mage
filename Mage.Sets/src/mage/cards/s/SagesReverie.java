@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
@@ -57,7 +58,7 @@ public class SagesReverie extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("aura you control that's attached to a creature");
     static {
-        filter.add(new SubtypePredicate("Aura"));
+        filter.add(new SubtypePredicate(SubType.AURA));
         filter.add(new SagesReveriePredicate());
     }
 
@@ -95,7 +96,7 @@ class SagesReveriePredicate implements Predicate<Permanent> {
     public boolean apply(Permanent input, Game game) {
         UUID attachedTo = input.getAttachedTo();
         Permanent attachedToPermanent = game.getPermanent(attachedTo);
-        return attachedToPermanent != null && attachedToPermanent.getCardType().contains(CardType.CREATURE);
+        return attachedToPermanent != null && attachedToPermanent.isCreature();
     }
 
     @Override

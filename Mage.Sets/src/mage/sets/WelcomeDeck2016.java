@@ -29,18 +29,18 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
- * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
+ * @author escplan9
  */
 public class WelcomeDeck2016 extends ExpansionSet {
-    private static final WelcomeDeck2016 fINSTANCE = new WelcomeDeck2016();
+    private static final WelcomeDeck2016 instance = new WelcomeDeck2016();
 
     public static WelcomeDeck2016 getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private WelcomeDeck2016() {

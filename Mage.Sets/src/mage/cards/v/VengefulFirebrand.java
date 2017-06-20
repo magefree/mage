@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -64,7 +65,7 @@ public class VengefulFirebrand extends CardImpl {
         // Vengeful Firebrand has haste as long as a Warrior card is in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield),
-                VengefulFirebrandCondition.getInstance(),
+                VengefulFirebrandCondition.instance,
                 "{this} has haste as long as a Warrior card is in your graveyard")));
         
         // {R}: Vengeful Firebrand gets +1/+0 until end of turn.
@@ -81,17 +82,13 @@ public class VengefulFirebrand extends CardImpl {
     }
 }
 
-class VengefulFirebrandCondition implements Condition {
+enum VengefulFirebrandCondition implements Condition {
 
-    private static VengefulFirebrandCondition fInstance = new VengefulFirebrandCondition();
+    instance;
     private static final FilterCard filter = new FilterCard("Warrior");
 
     static {
-        filter.add(new SubtypePredicate("Warrior"));
-    }
-
-    public static Condition getInstance() {
-        return fInstance;
+        filter.add(new SubtypePredicate(SubType.WARRIOR));
     }
 
     @Override

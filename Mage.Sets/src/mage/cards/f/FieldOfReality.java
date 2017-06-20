@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,14 +36,12 @@ import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffe
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -63,7 +60,7 @@ public class FieldOfReality extends CardImpl {
 
         // Enchanted creature can't be blocked by Spirits.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesAttachedEffect(
-                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Spirit", "Spirits"), AttachmentType.AURA)));
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.SPIRIT, "Spirits"), AttachmentType.AURA)));
         // {1}{U}: Return Field of Reality to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
     }

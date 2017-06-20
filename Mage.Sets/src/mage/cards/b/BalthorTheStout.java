@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,13 +36,13 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,14 +54,14 @@ public class BalthorTheStout extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target Barbarian");
 
     static {
-        filter1.add(new SubtypePredicate("Barbarian"));
+        filter1.add(new SubtypePredicate(SubType.BARBARIAN));
         filter2.add(new AnotherPredicate());
-        filter2.add(new SubtypePredicate("Barbarian"));
+        filter2.add(new SubtypePredicate(SubType.BARBARIAN));
     }
     
     public BalthorTheStout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dwarf");
         this.subtype.add("Barbarian");
         this.power = new MageInt(2);

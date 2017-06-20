@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
@@ -40,6 +39,8 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +67,7 @@ public class EliminateTheCompetition extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
+        if (ability.getAbilityType() == AbilityType.SPELL) {
             ability.getTargets().clear();
             int sac = new GetXValue().calculate(game, ability, null);
             ability.addTarget(new TargetCreaturePermanent(sac, sac));

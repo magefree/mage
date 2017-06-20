@@ -44,6 +44,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -90,7 +91,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new SubtypePredicate("Myr"));
+        filter.add(new SubtypePredicate(SubType.MYR));
     }
 
     public MyrBattlesphereEffect() {

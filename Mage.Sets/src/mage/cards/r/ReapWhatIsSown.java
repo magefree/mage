@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,14 +44,13 @@ import mage.target.common.TargetCreaturePermanent;
 public class ReapWhatIsSown extends CardImpl {
 
     public ReapWhatIsSown(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}{W}");
 
         // Put a +1/+1 counter on each of up to three target creatures.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on each of up to three target creatures");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3, new FilterCreaturePermanent("creatures"), false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3, FILTER_PERMANENT_CREATURES, false));
     }
 
     public ReapWhatIsSown(final ReapWhatIsSown card) {

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects;
 
 import mage.MageObject;
@@ -40,24 +39,23 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-
 public class AsTurnedFaceUpEffect extends ReplacementEffectImpl {
 
     protected Effects baseEffects = new Effects();
-    protected boolean optional;        
-    
+    protected boolean optional;
+
     public AsTurnedFaceUpEffect(Effect baseEffect, boolean optional) {
         super(Duration.WhileOnBattlefield, baseEffect.getOutcome(), true);
         this.baseEffects.add(baseEffect);
-        this.optional = optional;        
+        this.optional = optional;
     }
-    
+
     public AsTurnedFaceUpEffect(final AsTurnedFaceUpEffect effect) {
         super(effect);
         this.baseEffects = effect.baseEffects.copy();
         this.optional = effect.optional;
     }
-    
+
     public void addEffect(Effect effect) {
         baseEffects.add(effect);
     }
@@ -71,7 +69,7 @@ public class AsTurnedFaceUpEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(source.getSourceId());
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return false;
@@ -85,16 +83,15 @@ public class AsTurnedFaceUpEffect extends ReplacementEffectImpl {
             if (controller == null || object == null) {
                 return false;
             }
-            if (!controller.chooseUse(outcome, new StringBuilder("Use effect of ").append(object.getLogName()).append('?').toString(), source, game)) {
+            if (!controller.chooseUse(outcome, "Use effect of " + object.getIdName() + "?", source, game)) {
                 return false;
             }
         }
-        for (Effect effect: baseEffects) {
+        for (Effect effect : baseEffects) {
             if (source.activate(game, false)) {
                 if (effect instanceof ContinuousEffect) {
                     game.addEffect((ContinuousEffect) effect, source);
-                }
-                else {
+                } else {
                     effect.apply(game, source);
                 }
             }
@@ -109,11 +106,10 @@ public class AsTurnedFaceUpEffect extends ReplacementEffectImpl {
         }
         return "As {this} is turned face up, " + baseEffects.getText(mode);
     }
-    
+
     @Override
     public AsTurnedFaceUpEffect copy() {
         return new AsTurnedFaceUpEffect(this);
     }
-    
-    
+
 }

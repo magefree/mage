@@ -37,6 +37,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -59,7 +60,7 @@ public class ThoughtweftTrio extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         
         // Champion a Kithkin
-        this.addAbility(new ChampionAbility(this, "Kithkin", false));
+        this.addAbility(new ChampionAbility(this, SubType.KITHKIN, false));
         
         // Thoughtweft Trio can block any number of creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));

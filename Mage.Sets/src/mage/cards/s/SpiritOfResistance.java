@@ -47,18 +47,17 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author Quercitron
  */
 public class SpiritOfResistance extends CardImpl {
 
     public SpiritOfResistance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // As long as you control a permanent of each color, prevent all damage that would be dealt to you.
         Effect effect = new ConditionalReplacementEffect(
                 new PreventDamageToControllerEffect(Duration.WhileOnBattlefield),
-                SpiritOfResistanceCondition.getInstance());
+                SpiritOfResistanceCondition.instance);
         effect.setText("As long as you control a permanent of each color, prevent all damage that would be dealt to you.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
@@ -73,15 +72,9 @@ public class SpiritOfResistance extends CardImpl {
     }
 }
 
-class SpiritOfResistanceCondition implements Condition {
+enum SpiritOfResistanceCondition implements Condition {
 
-    private static final SpiritOfResistanceCondition fInstance = new SpiritOfResistanceCondition();
-
-    public static SpiritOfResistanceCondition getInstance() {
-        return fInstance;
-    }
-
-    private SpiritOfResistanceCondition() {}
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

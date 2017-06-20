@@ -37,21 +37,17 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class MyTurnBeforeAttackersDeclaredCondition implements Condition {
-    private static final MyTurnBeforeAttackersDeclaredCondition fInstance = new MyTurnBeforeAttackersDeclaredCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+public enum  MyTurnBeforeAttackersDeclaredCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         if (game.getActivePlayerId().equals(source.getControllerId())) {
             TurnPhase turnPhase = game.getTurn().getPhase().getType();
-            if (turnPhase.equals(TurnPhase.BEGINNING) || turnPhase.equals(TurnPhase.PRECOMBAT_MAIN)) {
+            if (turnPhase == TurnPhase.BEGINNING || turnPhase == TurnPhase.PRECOMBAT_MAIN) {
                 return true;
             }
-            if (turnPhase.equals(TurnPhase.COMBAT)) {
+            if (turnPhase == TurnPhase.COMBAT) {
                 return !game.getTurn().isDeclareAttackersStepStarted();
             }
         }

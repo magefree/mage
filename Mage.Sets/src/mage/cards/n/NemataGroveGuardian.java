@@ -27,9 +27,6 @@
  */
 package mage.cards.n;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -38,13 +35,14 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,13 +53,13 @@ public class NemataGroveGuardian extends CardImpl {
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("Saproling");
 
     static {
-        filter.add(new SubtypePredicate("Saproling"));
-        filter1.add(new SubtypePredicate("Saproling"));
+        filter.add(new SubtypePredicate(SubType.SAPROLING));
+        filter1.add(new SubtypePredicate(SubType.SAPROLING));
     }
 
     public NemataGroveGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Treefolk");
 
         this.power = new MageInt(4);

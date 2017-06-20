@@ -28,10 +28,10 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -40,10 +40,10 @@ import mage.cards.CardGraphicInfo;
 
 public class Commander extends ExpansionSet {
 
-    private static final Commander fINSTANCE = new Commander();
+    private static final Commander instance = new Commander();
 
     public static Commander getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private Commander() {

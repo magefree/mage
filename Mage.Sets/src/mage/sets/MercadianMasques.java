@@ -27,21 +27,20 @@
  */
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public class MercadianMasques extends ExpansionSet {
 
-    private static final MercadianMasques fINSTANCE = new MercadianMasques();
+    private static final MercadianMasques instance = new MercadianMasques();
 
     public static MercadianMasques getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MercadianMasques() {
@@ -85,6 +84,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Cavern Crawler", 181, Rarity.COMMON, mage.cards.c.CavernCrawler.class));
         cards.add(new SetCardInfo("Cave Sense", 179, Rarity.COMMON, mage.cards.c.CaveSense.class));
         cards.add(new SetCardInfo("Chambered Nautilus", 64, Rarity.UNCOMMON, mage.cards.c.ChamberedNautilus.class));
+        cards.add(new SetCardInfo("Charisma", 66, Rarity.RARE, mage.cards.c.Charisma.class));
         cards.add(new SetCardInfo("Cho-Arrim Alchemist", 8, Rarity.RARE, mage.cards.c.ChoArrimAlchemist.class));
         cards.add(new SetCardInfo("Cho-Arrim Bruiser", 9, Rarity.RARE, mage.cards.c.ChoArrimBruiser.class));
         cards.add(new SetCardInfo("Cho-Arrim Legate", 10, Rarity.UNCOMMON, mage.cards.c.ChoArrimLegate.class));
@@ -163,6 +163,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Hunted Wumpus", 253, Rarity.UNCOMMON, mage.cards.h.HuntedWumpus.class));
         cards.add(new SetCardInfo("Ignoble Soldier", 22, Rarity.UNCOMMON, mage.cards.i.IgnobleSoldier.class));
         cards.add(new SetCardInfo("Instigator", 140, Rarity.RARE, mage.cards.i.Instigator.class));
+        cards.add(new SetCardInfo("Intimidation", 142, Rarity.UNCOMMON, mage.cards.i.Intimidation.class));
         cards.add(new SetCardInfo("Invigorate", 254, Rarity.COMMON, mage.cards.i.Invigorate.class));
         cards.add(new SetCardInfo("Iron Lance", 300, Rarity.UNCOMMON, mage.cards.i.IronLance.class));
         cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
@@ -175,6 +176,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Kris Mage", 195, Rarity.COMMON, mage.cards.k.KrisMage.class));
         cards.add(new SetCardInfo("Kyren Glider", 196, Rarity.COMMON, mage.cards.k.KyrenGlider.class));
         cards.add(new SetCardInfo("Kyren Legate", 197, Rarity.UNCOMMON, mage.cards.k.KyrenLegate.class));
+        cards.add(new SetCardInfo("Kyren Negotiations", 198, Rarity.UNCOMMON, mage.cards.k.KyrenNegotiations.class));
         cards.add(new SetCardInfo("Kyren Sniper", 199, Rarity.COMMON, mage.cards.k.KyrenSniper.class));
         cards.add(new SetCardInfo("Kyren Toy", 303, Rarity.RARE, mage.cards.k.KyrenToy.class));
         cards.add(new SetCardInfo("Land Grant", 255, Rarity.COMMON, mage.cards.l.LandGrant.class));
@@ -315,7 +317,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("War Tax", 113, Rarity.UNCOMMON, mage.cards.w.WarTax.class));
         cards.add(new SetCardInfo("Warmonger", 225, Rarity.UNCOMMON, mage.cards.w.Warmonger.class));
         cards.add(new SetCardInfo("Waterfront Bouncer", 114, Rarity.COMMON, mage.cards.w.WaterfrontBouncer.class));
-	cards.add(new SetCardInfo("Wave of Reckoning", 56, Rarity.RARE, mage.cards.w.WaveOfReckoning.class));
+        cards.add(new SetCardInfo("Wave of Reckoning", 56, Rarity.RARE, mage.cards.w.WaveOfReckoning.class));
         cards.add(new SetCardInfo("Wild Jhovall", 227, Rarity.COMMON, mage.cards.w.WildJhovall.class));
         cards.add(new SetCardInfo("Word of Blasting", 228, Rarity.UNCOMMON, mage.cards.w.WordOfBlasting.class));
     }

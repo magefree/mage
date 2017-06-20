@@ -61,7 +61,7 @@ public class BramblewoodParagon extends CardImpl {
     }
 
     public BramblewoodParagon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);
@@ -110,7 +110,7 @@ class BramblewoodParagonReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         return creature != null && creature.getControllerId().equals(source.getControllerId())
-                && creature.getCardType().contains(CardType.CREATURE)
+                && creature.isCreature()
                 && creature.hasSubtype("Warrior", game)
                 && !event.getTargetId().equals(source.getSourceId());
     }
@@ -119,7 +119,7 @@ class BramblewoodParagonReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(), source, game);
+            creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
         }
         return false;
     }

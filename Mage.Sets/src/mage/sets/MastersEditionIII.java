@@ -27,11 +27,11 @@
  */
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.f.FeveredStrength;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -39,10 +39,10 @@ import mage.cards.CardGraphicInfo;
  */
 public class MastersEditionIII extends ExpansionSet {
 
-    private static final MastersEditionIII fINSTANCE = new MastersEditionIII();
+    private static final MastersEditionIII instance = new MastersEditionIII();
 
     public static MastersEditionIII getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private MastersEditionIII() {
@@ -56,6 +56,7 @@ public class MastersEditionIII extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Active Volcano", 85, Rarity.UNCOMMON, mage.cards.a.ActiveVolcano.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 1, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
+        cards.add(new SetCardInfo("All Hallow's Eve", 57, Rarity.RARE, mage.cards.a.AllHallowsEve.class));
         cards.add(new SetCardInfo("Amrou Kithkin", 3, Rarity.COMMON, mage.cards.a.AmrouKithkin.class));
         cards.add(new SetCardInfo("Anaba Ancestor", 86, Rarity.COMMON, mage.cards.a.AnabaAncestor.class));
         cards.add(new SetCardInfo("Anaba Spirit Crafter", 87, Rarity.COMMON, mage.cards.a.AnabaSpiritCrafter.class));
@@ -152,6 +153,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Lady Caleria", 157, Rarity.UNCOMMON, mage.cards.l.LadyCaleria.class));
         cards.add(new SetCardInfo("Lady Evangela", 158, Rarity.UNCOMMON, mage.cards.l.LadyEvangela.class));
         cards.add(new SetCardInfo("Lady Orca", 159, Rarity.COMMON, mage.cards.l.LadyOrca.class));
+        cards.add(new SetCardInfo("Land Equilibrium", 40, Rarity.RARE, mage.cards.l.LandEquilibrium.class));
         cards.add(new SetCardInfo("Land Tax", 17, Rarity.RARE, mage.cards.l.LandTax.class));
         cards.add(new SetCardInfo("Lightning Blow", 18, Rarity.COMMON, mage.cards.l.LightningBlow.class));
         cards.add(new SetCardInfo("Liu Bei, Lord of Shu", 19, Rarity.RARE, mage.cards.l.LiuBeiLordOfShu.class));
@@ -167,6 +169,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Meng Huo, Barbarian King", 128, Rarity.RARE, mage.cards.m.MengHuoBarbarianKing.class));
         cards.add(new SetCardInfo("Meng Huo's Horde", 129, Rarity.COMMON, mage.cards.m.MengHuosHorde.class));
         cards.add(new SetCardInfo("Mind Twist", 72, Rarity.RARE, mage.cards.m.MindTwist.class));
+        cards.add(new SetCardInfo("Misfortune's Gain", 21, Rarity.COMMON, mage.cards.m.MisfortunesGain.class));
         cards.add(new SetCardInfo("Mountain", 225, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 226, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 227, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));

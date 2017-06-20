@@ -62,7 +62,7 @@ public class SinuousVermin extends CardImpl {
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                        MonstrousCondition.getInstance(),
+                        MonstrousCondition.instance,
                         "As long as {this} is monstrous, it has menace"));
         this.addAbility(ability);
     }

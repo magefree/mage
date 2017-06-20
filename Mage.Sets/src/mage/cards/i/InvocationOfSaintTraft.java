@@ -31,10 +31,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -44,12 +43,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AngelToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -96,18 +93,11 @@ class InvocationOfSaintTraftEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        AngelToken token = new AngelToken();
+    public boolean apply(Game game, Ability source) {        
+        CreateTokenEffect effect = new CreateTokenEffect(new AngelToken(), 1, true, true);
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true)) {
-            for (UUID tokenId : token.getLastAddedTokenIds()) {
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                    game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
-                }
-            }
+        if (controller != null && (effect.apply(game, source))) {
+            effect.exileTokensCreatedAtEndOfCombat(game, source);
             return true;
         }
         return false;

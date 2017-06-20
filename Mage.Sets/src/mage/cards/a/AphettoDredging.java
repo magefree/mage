@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
@@ -39,11 +38,14 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +69,7 @@ public class AphettoDredging extends CardImpl {
             if (controller != null) {
                 Choice typeChoice = new ChoiceImpl(true);
                 typeChoice.setMessage("Choose a creature type");
-                typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
+                typeChoice.setChoices(SubType.getCreatureTypes(false));
                 while (!controller.choose(Outcome.PutCreatureInPlay, typeChoice, game)) {
                     if (!controller.canRespond()) {
                         return;
@@ -76,7 +78,7 @@ public class AphettoDredging extends CardImpl {
                 String chosenType = typeChoice.getChoice();
 
                 FilterCreatureCard filter = new FilterCreatureCard(chosenType + " cards");
-                filter.add(new SubtypePredicate(chosenType));
+                filter.add(new SubtypePredicate(SubType.byDescription(chosenType)));
                 ability.addTarget(new TargetCardInYourGraveyard(0, 3, filter));
             }
         }

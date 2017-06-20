@@ -27,29 +27,26 @@
  */
 package mage.cards.n;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.cards.y.YixlidJailer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.cards.y.YixlidJailer;
+
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -77,7 +74,7 @@ public class NecroticOoze extends CardImpl {
         return new NecroticOoze(this);
     }
 
-    class NecroticOozeEffect extends ContinuousEffectImpl {
+    static class NecroticOozeEffect extends ContinuousEffectImpl {
 
         public NecroticOozeEffect() {
             super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
@@ -96,7 +93,7 @@ public class NecroticOoze extends CardImpl {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         for (Card card : player.getGraveyard().getCards(game)) {
-                            if (card.getCardType().contains(CardType.CREATURE)) {
+                            if (card.isCreature()) {
                                 for (Ability ability : card.getAbilities()) {
                                     if (ability instanceof ActivatedAbility) {
                                         perm.addAbility(ability, game);
@@ -119,17 +116,11 @@ public class NecroticOoze extends CardImpl {
         @Override
         public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
             // the dependent classes needs to be an enclosed class for dependent check of continuous effects
-            Set<UUID> dependentTo = null;
-            for (ContinuousEffect effect : allEffectsInLayer) {
-                // http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/285211-yixlid-jailer-vs-necrotic-ooze
-                if (YixlidJailer.class.equals(effect.getClass().getEnclosingClass())) {
-                    if (dependentTo == null) {
-                        dependentTo = new HashSet<>();
-                    }
-                    dependentTo.add(effect.getId());
-                }
-            }
-            return dependentTo;
+            return allEffectsInLayer.stream()
+                    .filter(effect -> YixlidJailer.class.equals(effect.getClass().getEnclosingClass()))
+                    .map(Effect::getId)
+                    .collect(Collectors.toSet());
+
         }
     }
 

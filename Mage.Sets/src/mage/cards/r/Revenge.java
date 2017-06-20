@@ -59,7 +59,7 @@ public class Revenge extends CardImpl {
         // Target creature you control gets +4/+0 until end of turn before it fights if you lost life this turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new RevengeEffect(),
-                LostLifeCondition.getInstance(),
+                LostLifeCondition.instance,
                 "Target creature you control gets +4/+0 until end of turn before it fights if you lost life this turn"));
 
         // Target creature you control fights target creature an opponent controls.
@@ -81,23 +81,14 @@ public class Revenge extends CardImpl {
     }
 }
 
-class LostLifeCondition implements Condition {
+enum LostLifeCondition implements Condition {
 
-    private static LostLifeCondition fInstance = null;
+    instance;
 
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new LostLifeCondition();
-        }
-        return fInstance;
-    }
-
-    private LostLifeCondition() {
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         UUID player = source.getControllerId();
         if (watcher != null && player != null) {
             return watcher.getLiveLost(player) > 0;
@@ -125,7 +116,7 @@ class RevengeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
-        if (target != null && target.getCardType().contains(CardType.CREATURE)) {
+        if (target != null && target.isCreature()) {
             ContinuousEffect effect = new BoostTargetEffect(4, 0, Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(target.getId()));
             game.addEffect(effect, source);

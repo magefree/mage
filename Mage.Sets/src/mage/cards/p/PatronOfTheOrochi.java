@@ -27,20 +27,16 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.ObjectColor;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,6 +46,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 
 /**
  * @author LevelX2
@@ -58,14 +56,14 @@ public class PatronOfTheOrochi extends CardImpl {
 
     public PatronOfTheOrochi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Spirit");
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
         // Snake offering (You may cast this card any time you could cast an instant by sacrificing a Snake and paying the difference in mana costs between this and the sacrificed Snake. Mana cost includes color.)
-        this.addAbility(new OfferingAbility("Snake"));
+        this.addAbility(new OfferingAbility(SubType.SNAKE));
 
         // {T}: Untap all Forests and all green creatures. Activate this ability only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new PatronOfTheOrochiEffect(), new TapSourceCost()));
@@ -86,7 +84,7 @@ class PatronOfTheOrochiEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {
-        filter.add(Predicates.or( new SubtypePredicate("Forest"),
+        filter.add(Predicates.or( new SubtypePredicate(SubType.FOREST),
                                   Predicates.and(new CardTypePredicate(CardType.CREATURE),
                                                  new ColorPredicate(ObjectColor.GREEN))
                 ));

@@ -28,13 +28,7 @@
 package mage.game;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -50,11 +44,7 @@ import mage.cards.Cards;
 import mage.cards.MeldCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.constants.Duration;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.PlayerAction;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counters;
 import mage.game.combat.Combat;
 import mage.game.command.Commander;
@@ -128,7 +118,7 @@ public interface Game extends MageItem, Serializable {
 
     Card getCard(UUID cardId);
 
-    Ability getAbility(UUID abilityId, UUID sourceId);
+    Optional<Ability> getAbility(UUID abilityId, UUID sourceId);
 
     void setZone(UUID objectId, Zone zone);
 
@@ -402,7 +392,7 @@ public interface Game extends MageItem, Serializable {
 
     void playPriority(UUID activePlayerId, boolean resuming);
 
-    boolean endTurn();
+    boolean endTurn(Ability source);
 
     int doAction(MageAction action);
 

@@ -30,6 +30,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
@@ -53,8 +54,8 @@ public class PhantasmalImage extends CardImpl {
 
     ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
         @Override
-        public Boolean apply(Game game, Permanent permanent) {
-            if (!permanent.getSubtype(game).contains("Illusion")) {
+        public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+            if (!permanent.hasSubtype("Illusion", game)) {
                 permanent.getSubtype(game).add("Illusion");
             }
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
@@ -64,8 +65,8 @@ public class PhantasmalImage extends CardImpl {
         }
 
         @Override
-        public Boolean apply(Game game, MageObject mageObject) {
-            if (!mageObject.getSubtype(game).contains("Illusion")) {
+        public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+            if (!mageObject.hasSubtype("Illusion", game)) {
                 mageObject.getSubtype(game).add("Illusion");
             }
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
@@ -76,7 +77,7 @@ public class PhantasmalImage extends CardImpl {
     };
 
     public PhantasmalImage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Illusion");
 
         this.color.setBlue(true);

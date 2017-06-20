@@ -63,7 +63,7 @@ public class RavagingRiftwurm extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
         // If Ravaging Riftwurm was kicked, it enters the battlefield with three additional time counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)),
-            KickedCondition.getInstance(), "If {this} was kicked, it enters the battlefield with three additional time counters on it.", ""));
+            KickedCondition.instance, "If {this} was kicked, it enters the battlefield with three additional time counters on it.", ""));
     }
 
     public RavagingRiftwurm(final RavagingRiftwurm card) {

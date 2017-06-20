@@ -39,39 +39,30 @@ import mage.players.Player;
  */
 public class TopLibraryCardTypeCondition implements Condition {
 
-    public static enum CheckType {
-        CREATURE, LAND, SORCERY, INSTANT
-    }
+    private CardType type;
 
-    private TopLibraryCardTypeCondition.CheckType type;
-
-    public TopLibraryCardTypeCondition(TopLibraryCardTypeCondition.CheckType type) {
+    public TopLibraryCardTypeCondition(CardType type) {
         this.type = type;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean conditionApplies = false;
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLibrary().size() > 0) {
+        if (controller != null && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 switch (this.type) {
                     case CREATURE:
-                        conditionApplies |= card.getCardType().contains(CardType.CREATURE);
-                        break;
+                        return card.isCreature();
                     case LAND:
-                        conditionApplies |= card.getCardType().contains(CardType.LAND);
-                        break;
+                        return card.isLand();
                     case SORCERY:
-                        conditionApplies |= card.getCardType().contains(CardType.SORCERY);
-                        break;
+                       return card.isSorcery();
                     case INSTANT:
-                        conditionApplies |= card.getCardType().contains(CardType.INSTANT);
-                        break;
+                        return card.isInstant();
                 }
             }
         }
-        return conditionApplies;
+        return false;
     }
 }

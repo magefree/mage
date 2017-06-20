@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,6 +40,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ public class ThunderTotem extends CardImpl {
         // {1}{W}{W}: Thunder Totem becomes a 2/2 white Spirit artifact creature with flying and first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, 
-                new BecomesCreatureSourceEffect(new ThunderTotemToken(), "", Duration.EndOfTurn), 
+                new BecomesCreatureSourceEffect(new ThunderTotemToken(), "", Duration.EndOfTurn),
                 new ManaCostsImpl("{1}{W}{W}")));
     }
 
@@ -70,7 +71,7 @@ public class ThunderTotem extends CardImpl {
         return new ThunderTotem(this);
     }
 
-private class ThunderTotemToken extends Token {
+private static class ThunderTotemToken extends Token {
         ThunderTotemToken() {
             super("", "2/2 white Spirit artifact creature with flying and first strike");
             cardType.add(CardType.ARTIFACT);

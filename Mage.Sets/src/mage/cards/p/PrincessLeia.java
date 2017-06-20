@@ -38,14 +38,12 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RebelToken;
 
 /**
  *
@@ -57,15 +55,15 @@ public class PrincessLeia extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Rebel creature you control");
 
     static {
-        SubtypePredicate rebel = new SubtypePredicate("Rebel");
+        SubtypePredicate rebel = new SubtypePredicate(SubType.REBEL);
         filter1.add(new AnotherPredicate());
         filter1.add(rebel);
         filter2.add(rebel);
     }
 
     public PrincessLeia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}{W}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}{W}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Rebel");
         this.power = new MageInt(2);
@@ -90,16 +88,5 @@ public class PrincessLeia extends CardImpl {
     @Override
     public PrincessLeia copy() {
         return new PrincessLeia(this);
-    }
-}
-
-class RebelToken extends Token {
-
-    public RebelToken() {
-        super("Rebel", "1/1 white Rebel creature token", 1, 1);
-        this.setOriginalExpansionSetCode("SWS");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Rebel");
     }
 }

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,6 +45,8 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -86,6 +87,10 @@ class AshlingsPrerogativeIncorrectOddityEffect extends PermanentsEnterBattlefiel
         super(creaturefilter);
         staticText = "Each creature without converted mana cost of the chosen value enters the battlefield tapped.";
     }
+    
+    public AshlingsPrerogativeIncorrectOddityEffect(final AshlingsPrerogativeIncorrectOddityEffect effect) {
+        super(effect);   
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
@@ -101,6 +106,11 @@ class AshlingsPrerogativeIncorrectOddityEffect extends PermanentsEnterBattlefiel
 
         return permanent != null && creaturefilter.match(permanent, game) && permanent.getConvertedManaCost() % 2 == incorrectModResult;
     }
+    
+    @Override
+    public AshlingsPrerogativeIncorrectOddityEffect copy() {
+        return new AshlingsPrerogativeIncorrectOddityEffect(this);
+    }
 }
 
 class AshlingsPrerogativeCorrectOddityEffect extends GainAbilityAllEffect {
@@ -111,6 +121,9 @@ class AshlingsPrerogativeCorrectOddityEffect extends GainAbilityAllEffect {
     public AshlingsPrerogativeCorrectOddityEffect() {
         super(HasteAbility.getInstance(), Duration.WhileOnBattlefield, creaturefilter);
         staticText = "Each creature with converted mana cost of the chosen value has haste.";
+    }
+    public AshlingsPrerogativeCorrectOddityEffect(final AshlingsPrerogativeCorrectOddityEffect effect) {
+        super(effect);   
     }
 
     @Override
@@ -123,5 +136,9 @@ class AshlingsPrerogativeCorrectOddityEffect extends GainAbilityAllEffect {
         }
         return permanent != null && creaturefilter.match(permanent, game) && permanent.getConvertedManaCost() % 2 == correctModResult;
     }
-
+    
+    @Override
+    public AshlingsPrerogativeCorrectOddityEffect copy() {
+        return new AshlingsPrerogativeCorrectOddityEffect(this);
+    }
 }

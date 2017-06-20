@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -42,6 +41,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.EldraziHorrorToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -61,7 +62,7 @@ public class DesperateSentry extends CardImpl {
 
         // <i>Delirium</i> &mdash; Desperate Sentry gets +3/+0 as long as there are four or more card types among cards in your graveyard.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield), DeliriumCondition.getInstance(),
+                new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield), DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; {this} gets +3/+0 as long as there are four or more card types among cards in your graveyard.");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         this.addAbility(ability);

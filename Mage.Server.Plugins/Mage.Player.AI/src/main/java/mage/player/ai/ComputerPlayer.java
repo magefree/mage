@@ -29,47 +29,17 @@ package mage.player.ai;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.costs.mana.ColorlessManaCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.HybridManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.MonoHybridManaCost;
-import mage.abilities.costs.mana.PhyrexianManaCost;
+import mage.abilities.costs.mana.*;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlashAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
@@ -81,21 +51,9 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Outcome;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreatureForCombatBlock;
-import mage.filter.common.FilterCreatureOrPlayer;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandCard;
-import mage.filter.common.FilterNonlandCard;
-import mage.filter.common.FilterPermanentOrPlayer;
-import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.common.*;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -115,29 +73,12 @@ import mage.players.Player;
 import mage.players.PlayerImpl;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
-import mage.target.Target;
-import mage.target.TargetAmount;
-import mage.target.TargetCard;
-import mage.target.TargetPermanent;
-import mage.target.TargetPlayer;
-import mage.target.TargetSource;
-import mage.target.TargetSpell;
-import mage.target.common.TargetCardInASingleGraveyard;
-import mage.target.common.TargetCardInExile;
-import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
-import mage.target.common.TargetCreatureOrPlayerAmount;
-import mage.target.common.TargetDefender;
-import mage.target.common.TargetDiscard;
-import mage.target.common.TargetOpponent;
-import mage.target.common.TargetPermanentOrPlayer;
-import mage.target.common.TargetSpellOrPermanent;
-import mage.util.*;
+import mage.target.*;
+import mage.target.common.*;
+import mage.util.Copier;
+import mage.util.RandomUtil;
+import mage.util.TournamentUtil;
+import mage.util.TreeNode;
 import org.apache.log4j.Logger;
 
 /**
@@ -288,7 +229,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         if (target.getOriginalTarget() instanceof TargetCardInHand
-                || (target.getZone().equals(Zone.HAND) && (target.getOriginalTarget() instanceof TargetCard))) {
+                || (target.getZone() == Zone.HAND && (target.getOriginalTarget() instanceof TargetCard))) {
             List<Card> cards = new ArrayList<>();
             for (UUID cardId : target.possibleTargets(sourceId, this.getId(), game)) {
                 Card card = game.getCard(cardId);
@@ -675,9 +616,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         if (target.getOriginalTarget() instanceof TargetSpell) {
             if (!game.getStack().isEmpty()) {
-                Iterator<StackObject> it = game.getStack().iterator();
-                while (it.hasNext()) {
-                    StackObject o = it.next();
+                for (StackObject o : game.getStack()) {
                     if (o instanceof Spell && !source.getId().equals(o.getStackAbility().getId())) {
                         target.addTarget(o.getId(), source, game);
                         return true;
@@ -709,9 +648,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             if (!game.getStack().isEmpty()) {
-                Iterator<StackObject> it = game.getStack().iterator();
-                while (it.hasNext()) {
-                    StackObject stackObject = it.next();
+                for (StackObject stackObject : game.getStack()) {
                     if (stackObject instanceof Spell && source != null && !source.getId().equals(stackObject.getStackAbility().getId())) {
                         if (((TargetSpellOrPermanent) target).getFilter().match(stackObject, game)) {
                             target.addTarget(stackObject.getId(), source, game);
@@ -790,7 +727,23 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-
+        if (target.getOriginalTarget() instanceof TargetActivatedAbility) {
+            List<StackObject> stackObjects = new ArrayList<>();
+            for (UUID uuid : ((TargetActivatedAbility) target).possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
+                StackObject stackObject = game.getStack().getStackObject(uuid);
+                if (stackObject != null) {
+                    stackObjects.add(stackObject);
+                }
+            }
+            while (!target.isChosen() && !stackObjects.isEmpty()) {
+                StackObject pick = stackObjects.get(0);
+                if (pick != null) {
+                    target.addTarget(pick.getId(), source, game);
+                    stackObjects.remove(0);
+                }
+            }
+            return target.isChosen();
+        }
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
     }
 
@@ -821,7 +774,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         UUID opponentId = game.getOpponents(playerId).iterator().next();
         if (target.getOriginalTarget() instanceof TargetCreatureOrPlayerAmount) {
-            if (outcome.equals(Outcome.Damage) && game.getPlayer(opponentId).getLife() <= target.getAmountRemaining()) {
+            if (outcome == Outcome.Damage && game.getPlayer(opponentId).getLife() <= target.getAmountRemaining()) {
                 target.addTarget(opponentId, target.getAmountRemaining(), source, game);
                 return true;
             }
@@ -1327,7 +1280,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // Be proactive! Always use abilities, the evaluation function will decide if it's good or not
         // Otherwise some abilities won't be used by AI like LoseTargetEffect that has "bad" outcome
         // but still is good when targets opponent
-        return !outcome.equals(Outcome.AIDontUseIt); // Added for Desecration Demon sacrifice ability
+        return outcome != Outcome.AIDontUseIt; // Added for Desecration Demon sacrifice ability
     }
 
     @Override
@@ -1338,7 +1291,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             chooseCreatureType(outcome, choice, game);
         }
         // choose the correct color to pay a spell
-        if (outcome.equals(Outcome.PutManaInPool) && choice instanceof ChoiceColor && currentUnpaidMana != null) {
+        if (outcome == Outcome.PutManaInPool && choice instanceof ChoiceColor && currentUnpaidMana != null) {
             if (currentUnpaidMana.containsColor(ColoredManaSymbol.W) && choice.getChoices().contains("White")) {
                 choice.setChoice("White");
                 return true;
@@ -1381,7 +1334,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     protected boolean chooseCreatureType(Outcome outcome, Choice choice, Game game) {
-        if (outcome.equals(Outcome.Detriment)) {
+        if (outcome == Outcome.Detriment) {
             // choose a creature type of opponent on battlefield or graveyard
             for (Permanent permanent : game.getBattlefield().getActivePermanents(this.getId(), game)) {
                 if (game.getOpponents(this.getId()).contains(permanent.getControllerId())
@@ -1453,7 +1406,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 // We don't have any valid target to choose so stop choosing
                 return target.getTargets().size() < target.getNumberOfTargets();
             }
-            if (outcome.equals(Outcome.Neutral) && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
+            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
                 return true;
             }
         }
@@ -1477,7 +1430,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 // We don't have any valid target to choose so stop choosing
                 break;
             }
-            if (outcome.equals(Outcome.Neutral) && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
+            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
                 return true;
             }
         }
@@ -1542,6 +1495,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         switch (ability.getSpellAbilityType()) {
             case SPLIT:
             case SPLIT_FUSED:
+            case SPLIT_AFTERMATH:
                 MageObject object = game.getObject(ability.getSourceId());
                 if (object != null) {
                     LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
@@ -1605,7 +1559,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         //TODO: improve this
         if (min < max && min == 0) {
-            return RandomUtil.nextInt(max + 1);
+            return RandomUtil.nextInt(max);
         }
         return min;
     }
@@ -1670,7 +1624,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         int cardNum = 0;
         while (deck.getCards().size() < 23 && sortedCards.size() > cardNum) {
             Card card = sortedCards.get(cardNum);
-            if (!card.getSupertype().contains("Basic")) {
+            if (!card.isBasic()) {
                 deck.getCards().add(card);
                 deck.getSideboard().remove(card);
             }
@@ -1941,7 +1895,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         return null;
     }
 
-    private class PickedCard {
+    private static class PickedCard {
 
         public Card card;
         public Integer score;
@@ -2138,7 +2092,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (Card card : this.playableInstant) {
                 if (card.getSpellAbility().canActivate(playerId, game)) {
                     for (Effect effect : card.getSpellAbility().getEffects()) {
-                        if (effect.getOutcome().equals(Outcome.DestroyPermanent) || effect.getOutcome().equals(Outcome.ReturnToHand)) {
+                        if (effect.getOutcome() == Outcome.DestroyPermanent || effect.getOutcome() == Outcome.ReturnToHand) {
                             if (card.getSpellAbility().getTargets().get(0).canTarget(creatureId, card.getSpellAbility(), game)) {
                                 if (this.activateAbility(card.getSpellAbility(), game)) {
                                     return;

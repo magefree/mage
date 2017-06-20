@@ -30,6 +30,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -58,7 +59,7 @@ public class OgreSlumlord extends CardImpl {
     static {
         filter.add(Predicates.not(new TokenPredicate()));
         filter.add(new AnotherPredicate());
-        filter2.add(new SubtypePredicate("Rat"));
+        filter2.add(new SubtypePredicate(SubType.RAT));
     }
     
     

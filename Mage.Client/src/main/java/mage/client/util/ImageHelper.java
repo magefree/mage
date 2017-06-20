@@ -47,7 +47,7 @@ import org.mage.card.arcane.UI;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ImageHelper {
+public final class ImageHelper {
 
     protected static final HashMap<String, BufferedImage> images = new HashMap<>();
     protected static final HashMap<String, BufferedImage> backgrounds = new HashMap<>();
@@ -140,13 +140,8 @@ public class ImageHelper {
      * @return
      */
     public static Image getImageFromResources(String path) {
-        InputStream stream;
-        stream = UI.class.getResourceAsStream(path);
-        if (stream == null) {
-            throw new IllegalArgumentException("Couldn't find image in resources: " + path);
-        }
 
-        try {
+        try(InputStream stream = UI.class.getResourceAsStream(path)) {
             ImageIO.setUseCache(false);
             BufferedImage image = ImageIO.read(stream);
             return image;

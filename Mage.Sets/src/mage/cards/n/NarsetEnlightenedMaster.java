@@ -41,11 +41,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -57,8 +53,8 @@ import mage.target.targetpointer.FixedTarget;
 public class NarsetEnlightenedMaster extends CardImpl {
 
     public NarsetEnlightenedMaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{R}{W}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}{W}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Monk");
 
@@ -104,8 +100,8 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
             player.moveCards(cards, Zone.EXILED, source, game);
             for (Card card : cards) {
                 if (game.getState().getZone(card.getId()) == Zone.EXILED
-                        && !card.getCardType().contains(CardType.CREATURE)
-                        && !card.getCardType().contains(CardType.LAND)) {
+                        && !card.isCreature()
+                        && !card.isLand()) {
                     ContinuousEffect effect = new NarsetEnlightenedMasterCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
@@ -150,7 +146,7 @@ class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
             if (card != null) {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
-                    player.setCastSourceIdWithAlternateMana(objectId, null, null);
+                    player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
                     return true;
                 }
             }

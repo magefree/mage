@@ -28,27 +28,27 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
+ import mage.MageInt;
+ import mage.abilities.Ability;
+ import mage.abilities.common.SimpleActivatedAbility;
+ import mage.abilities.common.SpellCastControllerTriggeredAbility;
+ import mage.abilities.costs.Cost;
+ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
+ import mage.abilities.costs.mana.GenericManaCost;
+ import mage.abilities.effects.OneShotEffect;
+ import mage.abilities.effects.common.continuous.BoostSourceEffect;
+ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+ import mage.cards.CardImpl;
+ import mage.cards.CardSetInfo;
+ import mage.constants.CardType;
+ import mage.constants.Duration;
+ import mage.constants.Outcome;
+ import mage.constants.Zone;
+ import mage.counters.CounterType;
+ import mage.filter.common.FilterSpiritOrArcaneCard;
+ import mage.game.Game;
 
-import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.counters.CounterType;
-import mage.filter.common.FilterSpiritOrArcaneCard;
-import mage.game.Game;
+ import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -82,7 +82,7 @@ public class BlademaneBaku extends CardImpl {
         return new BlademaneBaku(this);
     }
     
-    class BlademaneBakuBoostEffect extends OneShotEffect {
+    static class BlademaneBakuBoostEffect extends OneShotEffect {
 
         public BlademaneBakuBoostEffect() {
             super(Outcome.UnboostCreature);

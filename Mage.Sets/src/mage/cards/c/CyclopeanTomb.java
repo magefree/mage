@@ -27,10 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -47,14 +43,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.RemoveAllCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.SubLayer;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -68,6 +57,11 @@ import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author MTGfan
@@ -77,7 +71,7 @@ public class CyclopeanTomb extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Swamp")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.SWAMP)));
     }
 
     public CyclopeanTomb(UUID ownerId, CardSetInfo setInfo) {
@@ -185,7 +179,7 @@ class CyclopeanTombEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObjectReference mor = new MageObjectReference(source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game);
-        CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getName());
+        CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getSimpleName());
         if (controller != null && watcher != null) {
 
             Set<MageObjectReference> landRef = watcher.landMiredByCyclopeanTombInstance(mor, game);
@@ -227,7 +221,7 @@ class CyclopeanTombCounterWatcher extends Watcher {
     public HashMap<MageObjectReference, Set<MageObjectReference>> counterData = new HashMap<>();
 
     public CyclopeanTombCounterWatcher() {
-        super(CyclopeanTombCounterWatcher.class.getName(), WatcherScope.GAME);
+        super(CyclopeanTombCounterWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CyclopeanTombCounterWatcher(final CyclopeanTombCounterWatcher watcher) {

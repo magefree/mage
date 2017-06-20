@@ -27,6 +27,7 @@
  */
 package mage.cards.u;
 
+import java.util.EnumSet;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
@@ -38,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -67,7 +69,7 @@ public class UnstoppableAsh extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Champion a Treefolk or Warrior
-        this.addAbility(new ChampionAbility(this, new String[]{"Treefolk", "Warrior"}, false));
+        this.addAbility(new ChampionAbility(this, EnumSet.of(SubType.TREEFOLK, SubType.WARRIOR), false));
         
         // Whenever a creature you control becomes blocked, it gets +0/+5 until end of turn.
         Effect effect = new BoostTargetEffect(0, 5, Duration.EndOfTurn);

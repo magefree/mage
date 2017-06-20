@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DuneBroodNephilimToken;
 
 /**
  * @author Loki
@@ -47,9 +47,8 @@ public class DuneBroodNephilim extends CardImpl {
     final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent();
 
     public DuneBroodNephilim(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}{W}");
         this.subtype.add("Nephilim");
-
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -65,15 +64,5 @@ public class DuneBroodNephilim extends CardImpl {
     @Override
     public DuneBroodNephilim copy() {
         return new DuneBroodNephilim(this);
-    }
-}
-
-class DuneBroodNephilimToken extends Token {
-    DuneBroodNephilimToken() {
-        super("Sand", "1/1 colorless Sand creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Sand");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

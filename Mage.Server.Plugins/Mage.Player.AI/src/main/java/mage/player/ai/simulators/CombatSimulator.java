@@ -28,19 +28,15 @@
 
 package mage.player.ai.simulators;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  *
@@ -48,10 +44,10 @@ import mage.players.Player;
  */
 public class CombatSimulator implements Serializable {
 
-    public List<CombatGroupSimulator> groups = new ArrayList<CombatGroupSimulator>();
-    public List<UUID> defenders = new ArrayList<UUID>();
-    public Map<UUID, Integer> playersLife = new HashMap<UUID, Integer>();
-    public Map<UUID, Integer> planeswalkerLoyalty = new HashMap<UUID, Integer>();
+    public List<CombatGroupSimulator> groups = new ArrayList<>();
+    public List<UUID> defenders = new ArrayList<>();
+    public Map<UUID, Integer> playersLife = new HashMap<>();
+    public Map<UUID, Integer> planeswalkerLoyalty = new HashMap<>();
     public UUID attackerId;
     public int rating = 0;
 
@@ -89,7 +85,7 @@ public class CombatSimulator implements Serializable {
     }
 
     public int evaluate() {
-        Map<UUID, Integer> damage = new HashMap<UUID, Integer>();
+        Map<UUID, Integer> damage = new HashMap<>();
         int result = 0;
         for (CombatGroupSimulator group: groups) {
             if (!damage.containsKey(group.defenderId)) {

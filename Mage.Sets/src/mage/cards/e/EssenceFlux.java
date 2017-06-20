@@ -27,18 +27,12 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.MeldCard;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -50,6 +44,8 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +78,7 @@ class EssenceFluxEffect extends OneShotEffect {
 
     EssenceFluxEffect() {
         super(Outcome.Benefit);
-        staticText = "return that card to the battlefield under its owner's control";
+        staticText = "return that card to the battlefield under its owner's control.  If it's a Spirit, put a +1/+1 counter on it";
     }
 
     EssenceFluxEffect(final EssenceFluxEffect effect) {
@@ -128,7 +124,7 @@ class EssenceFluxEffect extends OneShotEffect {
                 controller.moveCards(cardsToBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
                 for (UUID cardId : cardsToBattlefield) {
                     Permanent permanent = game.getPermanent(cardId);
-                    if (permanent != null && permanent.getSubtype(game).contains("Spirit")) {
+                    if (permanent != null && permanent.hasSubtype("Spirit", game)) {
                         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
                         effect.setTargetPointer(new FixedTarget(permanent, game));
                         return effect.apply(game, source);

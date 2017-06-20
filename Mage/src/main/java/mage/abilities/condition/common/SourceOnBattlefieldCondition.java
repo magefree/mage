@@ -38,13 +38,9 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class SourceOnBattlefieldCondition implements Condition {
+public enum SourceOnBattlefieldCondition implements Condition {
 
-    private static final SourceOnBattlefieldCondition fInstance = new SourceOnBattlefieldCondition();
-
-    public static SourceOnBattlefieldCondition getInstance() {
-        return fInstance;
-    }
+    instance;
     
     @Override
     public boolean apply(Game game, Ability source) {

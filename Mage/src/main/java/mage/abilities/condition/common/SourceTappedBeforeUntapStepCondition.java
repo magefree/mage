@@ -28,7 +28,6 @@
  
 package mage.abilities.condition.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.PhaseStep;
@@ -37,6 +36,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 
+import java.util.UUID;
+
 /**
  *
  * @author spjspj
@@ -44,15 +45,11 @@ import mage.game.turn.Step;
 
 public class SourceTappedBeforeUntapStepCondition implements Condition {
 
-    private static final SourceTappedBeforeUntapStepCondition fInstance = new SourceTappedBeforeUntapStepCondition();
     UUID permanentId = null;
     boolean permanentWasTappedBeforeUntapStep = false;
     int lastTurnNum = -1;
     
 
-    public static SourceTappedBeforeUntapStepCondition getInstance() {
-        return fInstance;
-    }
 
     public void setPermanentId(UUID permanentId) {
         this.permanentId = permanentId;
@@ -65,12 +62,12 @@ public class SourceTappedBeforeUntapStepCondition implements Condition {
         Permanent permanent = game.getBattlefield().getPermanent(permanentId);
 
         if (permanent != null) {
-            if (lastTurnNum != game.getTurnNum() && turnPhase.equals(TurnPhase.BEGINNING)) {
+            if (lastTurnNum != game.getTurnNum() && turnPhase == TurnPhase.BEGINNING) {
                 lastTurnNum = game.getTurnNum();
                 permanentWasTappedBeforeUntapStep = permanent.isTapped();
             }
 
-            if (step.getType().equals(PhaseStep.UNTAP)) {
+            if (step.getType() == PhaseStep.UNTAP) {
                 return permanentWasTappedBeforeUntapStep;
             } else {
                 return permanent.isTapped();

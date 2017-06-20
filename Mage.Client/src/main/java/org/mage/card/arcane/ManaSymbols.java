@@ -31,7 +31,7 @@ import mage.client.util.gui.BufferedImageBuilder;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.constants.Constants;
 
-public class ManaSymbols {
+public final class ManaSymbols {
 
     private static final Logger LOGGER = Logger.getLogger(ManaSymbols.class);
     private static final Map<Integer, Map<String, BufferedImage>> manaImages = new HashMap<>();
@@ -271,7 +271,7 @@ public class ManaSymbols {
         for (String s : manaCost) {
             sb.append(s);
         }
-        return sb.toString().replace("{", "").replace("}", " ").trim();
+        return sb.toString().replace("/", "").replace("{", "").replace("}", " ").trim();
     }
 
     public enum Type {

@@ -103,7 +103,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                             if (!token.getCardType().isEmpty()) {
                                 for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
-                                        permanent.getCardType().add(t);
+                                        permanent.addCardType(t);
                                     }
                                 }
                             }
@@ -144,7 +144,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                 result = true;
             }
         }
-        if (!result && this.duration.equals(Duration.Custom)) {
+        if (!result && this.duration == Duration.Custom) {
             this.discard();
         }
         return result;

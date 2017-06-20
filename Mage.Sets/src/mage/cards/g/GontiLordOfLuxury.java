@@ -27,9 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -40,17 +37,8 @@ import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -60,6 +48,10 @@ import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +63,7 @@ public class GontiLordOfLuxury extends CardImpl {
 
     public GontiLordOfLuxury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Aetherborn");
         this.subtype.add("Rogue");
         this.power = new MageInt(2);
@@ -133,7 +125,6 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
                     card.setFaceDown(true, game);
                     if (controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName())) {
                         card.setFaceDown(true, game);
-                        @SuppressWarnings("unchecked")
                         Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(GontiLordOfLuxury.VALUE_PREFIX + source.getSourceId().toString());
                         if (exileZones == null) {
                             exileZones = new HashSet<>();
@@ -195,7 +186,7 @@ class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
                 && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             // TODO: Allow to cast Zoetic Cavern face down
-            return card != null && !card.getCardType().contains(CardType.LAND);
+            return card != null && !card.isLand();
         }
         return false;
     }
@@ -270,7 +261,7 @@ class GontiLordOfLuxuryLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId).equals(Zone.EXILED)) {
+        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = source.getSourceObject(game);
             if (controller != null && sourceObject != null) {

@@ -34,7 +34,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BearsCompanionBearToken;
 
 /**
  *
@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
 public class BearsCompanion extends CardImpl {
 
     public BearsCompanion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{R}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 
@@ -62,17 +62,4 @@ public class BearsCompanion extends CardImpl {
     public BearsCompanion copy() {
         return new BearsCompanion(this);
     }
-}
-class BearsCompanionBearToken extends Token {
-
-    public BearsCompanionBearToken() {
-        super("Bear", "4/4 green Bear creature token");
-        setOriginalExpansionSetCode("KTK");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Bear");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-    }
-
 }

@@ -28,8 +28,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -38,10 +38,10 @@ import mage.constants.Rarity;
 
 public class UginsFate extends ExpansionSet {
 
-    private static final UginsFate fINSTANCE = new UginsFate();
+    private static final UginsFate instance = new UginsFate();
 
     public static UginsFate getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private UginsFate() {

@@ -27,17 +27,19 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +49,7 @@ public class FlamekinBladewhirl extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Elemental card from your hand");
     static {
-        filter.add(new SubtypePredicate("Elemental"));
+        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
     }
 
     public FlamekinBladewhirl(UUID ownerId, CardSetInfo setInfo) {

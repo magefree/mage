@@ -50,7 +50,7 @@ public class CounterTargetAndSearchGraveyardHandLibraryEffect extends SearchTarg
         this(false,"its controller's", "all cards with the same name as that spell" );
     }
 
-    public CounterTargetAndSearchGraveyardHandLibraryEffect(Boolean graveyardExileOptional, String searchWhatText, String searchForText) {
+    public CounterTargetAndSearchGraveyardHandLibraryEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText) {
         super(graveyardExileOptional, searchWhatText, searchForText);
     }
 

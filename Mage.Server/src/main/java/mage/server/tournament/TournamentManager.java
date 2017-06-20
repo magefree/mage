@@ -24,10 +24,10 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server.tournament;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.Deck;
@@ -36,23 +36,16 @@ import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentManager {
-
-    private static final TournamentManager INSTANCE = new TournamentManager();
-
+public enum TournamentManager {
+    instance;
     private final ConcurrentHashMap<UUID, TournamentController> controllers = new ConcurrentHashMap<>();
-
-    public static TournamentManager getInstance() {
-        return INSTANCE;
-    }
 
     public TournamentController getTournamentController(UUID tournamentId) {
         return controllers.get(tournamentId);
     }
-    
+
     public void createTournamentSession(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         TournamentController tournamentController = new TournamentController(tournament, userPlayerMap, tableId);
         controllers.put(tournament.getId(), tournamentController);
@@ -79,28 +72,31 @@ public class TournamentManager {
         controllers.get(tournamentId).submitDeck(playerId, deck);
     }
 
-    public void updateDeck(UUID tournamentId, UUID playerId, Deck deck) {
-        controllers.get(tournamentId).updateDeck(playerId, deck);
+    public boolean updateDeck(UUID tournamentId, UUID playerId, Deck deck) {
+        return controllers.get(tournamentId).updateDeck(playerId, deck);
     }
 
     public TournamentView getTournamentView(UUID tournamentId) {
-        TournamentController tournamentController =  controllers.get(tournamentId);
+        TournamentController tournamentController = controllers.get(tournamentId);
         if (tournamentController != null) {
             return tournamentController.getTournamentView();
         }
         return null;
     }
 
-    public UUID getChatId(UUID tournamentId) {
-        return controllers.get(tournamentId).getChatId();
+    public Optional<UUID> getChatId(UUID tournamentId) {
+        if (controllers.containsKey(tournamentId)) {
+            return Optional.of(controllers.get(tournamentId).getChatId());
+        }
+        return Optional.empty();
     }
-    
+
     public void removeTournament(UUID tournamentId) {
         TournamentController tournamentController = controllers.get(tournamentId);
         if (tournamentController != null) {
             controllers.remove(tournamentId);
             tournamentController.cleanUpOnRemoveTournament();
-            
+
         }
     }
 

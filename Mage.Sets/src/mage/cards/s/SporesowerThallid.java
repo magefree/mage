@@ -37,6 +37,7 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,7 +55,7 @@ public class SporesowerThallid extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Fungus you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Fungus"));
+        filter.add(new SubtypePredicate(SubType.FUNGUS));
     }
 
     public SporesowerThallid(UUID ownerId, CardSetInfo setInfo) {

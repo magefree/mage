@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,7 +39,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,6 +46,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,14 +62,11 @@ public class GruulRagebeast extends CardImpl {
     }
 
     public GruulRagebeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
-
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new CardIdPredicate(this.getId()));
 
         // Whenever Gruul Ragebeast or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
         Ability ability = new GruulRagebeastTriggeredAbility();
@@ -113,7 +110,7 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
         if (permanent.getControllerId().equals(this.controllerId)
-                && permanent.getCardType().contains(CardType.CREATURE)
+                && permanent.isCreature()
                 && (targetId.equals(this.getSourceId())
                 || !targetId.equals(this.getSourceId()))) {
             for (Effect effect : this.getEffects()) {
@@ -146,8 +143,8 @@ class GruulRagebeastEffect extends OneShotEffect {
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (triggeredCreature != null
                 && target != null
-                && triggeredCreature.getCardType().contains(CardType.CREATURE)
-                && target.getCardType().contains(CardType.CREATURE)) {
+                && triggeredCreature.isCreature()
+                && target.isCreature()) {
             return triggeredCreature.fight(target, source, game);
         }
         return false;

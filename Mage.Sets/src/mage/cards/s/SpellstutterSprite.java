@@ -27,12 +27,9 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.constants.*;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -40,8 +37,6 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.TargetController;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -51,16 +46,18 @@ import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
  */
 public class SpellstutterSprite extends CardImpl {
     
-    public static final FilterPermanent filter = new FilterPermanent("number of Faeries you control");
+    static final FilterPermanent filter = new FilterPermanent("number of Faeries you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Faerie"));
+        filter.add(new SubtypePredicate(SubType.FAERIE));
     }
 
     public SpellstutterSprite(UUID ownerId, CardSetInfo setInfo) {
@@ -88,7 +85,7 @@ public class SpellstutterSprite extends CardImpl {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             int numberFaeries = game.getState().getBattlefield().countAll(filter, ability.getControllerId(), game);
             FilterSpell xFilter = new FilterSpell(new StringBuilder("spell with converted mana cost ").append(numberFaeries).append(" or less").toString());
-            xFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, numberFaeries + 1));
+            xFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, numberFaeries + 1));
             ability.getTargets().clear();
             ability.addTarget(new TargetSpell(xFilter));
         }
@@ -126,7 +123,8 @@ class SpellstutterSpriteCounterTargetEffect extends OneShotEffect {
          */
         int numberFaeries = game.getState().getBattlefield().countAll(SpellstutterSprite.filter, source.getControllerId(), game);
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        if (stackObject.getConvertedManaCost() <= numberFaeries) {
+        // If do'nt have any spell targeted
+        if (stackObject != null && stackObject.getConvertedManaCost() <= numberFaeries) {
             if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
                 return true;
             }

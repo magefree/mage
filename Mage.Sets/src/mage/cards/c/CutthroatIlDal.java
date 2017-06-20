@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HellbentCondition;
@@ -39,6 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public class CutthroatIlDal extends CardImpl {
 
         // Hellbent - Cutthroat il-Dal has shadow as long as you have no cards in hand.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.WhileOnBattlefield),                                                                                                            HellbentCondition.getInstance(),
+            new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.WhileOnBattlefield),                                                                                                            HellbentCondition.instance,
             "<i>Hellbent</i> - {this} has shadow as long as you have no cards in hand")));                                                                                                   }
 
     public CutthroatIlDal(final CutthroatIlDal card) {

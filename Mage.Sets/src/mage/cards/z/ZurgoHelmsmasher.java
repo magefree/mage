@@ -27,7 +27,6 @@
  */
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
@@ -42,8 +41,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +55,7 @@ public class ZurgoHelmsmasher extends CardImpl {
 
     public ZurgoHelmsmasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}{B}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Orc");
         this.subtype.add("Warrior");
 
@@ -67,7 +69,7 @@ public class ZurgoHelmsmasher extends CardImpl {
         // Zurgo Helmsmasher has indestructible as long as it's your turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.getInstance(),
+                MyTurnCondition.instance,
                 "{this} has indestructible as long as it's your turn")));
 
         // Whenever a creature dealt damage by Zurgo Helmsmasher this turn dies, put a +1/+1 counter on Zurgo Helmsmasher.

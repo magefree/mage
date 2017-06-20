@@ -39,7 +39,7 @@ import mage.view.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardsViewUtil {
+public final class CardsViewUtil {
 
     public static CardsView convertSimple(SimpleCardsView view) {
         CardsView cards = new CardsView();

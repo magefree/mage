@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -47,18 +44,21 @@ import mage.game.permanent.token.SnakeToken;
 import mage.game.stack.StackObject;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author Rafbill
  */
 public class CobraTrap extends CardImpl {
 
     public CobraTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{G}{G}");
         this.subtype.add("Trap");
 
         // If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), CobraTrapCondition.getInstance()), new CobraTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), CobraTrapCondition.instance), new CobraTrapWatcher());
 
         // Create four 1/1 green Snake creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), 4));
@@ -74,17 +74,13 @@ public class CobraTrap extends CardImpl {
     }
 }
 
-class CobraTrapCondition implements Condition {
+enum CobraTrapCondition implements Condition {
 
-    private static final CobraTrapCondition fInstance = new CobraTrapCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CobraTrapWatcher watcher = (CobraTrapWatcher) game.getState().getWatchers().get(CobraTrapWatcher.class.getName());
+        CobraTrapWatcher watcher = (CobraTrapWatcher) game.getState().getWatchers().get(CobraTrapWatcher.class.getSimpleName());
         return watcher != null && watcher.conditionMet(source.getControllerId());
     }
 
@@ -100,7 +96,7 @@ class CobraTrapWatcher extends Watcher {
     Set<UUID> players = new HashSet<>();
 
     public CobraTrapWatcher() {
-        super(CobraTrapWatcher.class.getName(), WatcherScope.GAME);
+        super(CobraTrapWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CobraTrapWatcher(final CobraTrapWatcher watcher) {
@@ -116,7 +112,7 @@ class CobraTrapWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DESTROYED_PERMANENT) {
             Permanent perm = (Permanent) game.getPermanentOrLKIBattlefield(event.getTargetId()); // can regenerate or be indestructible
-            if (perm != null && !perm.getCardType().contains(CardType.CREATURE)) {
+            if (perm != null && !perm.isCreature()) {
                 if (!game.getStack().isEmpty()) {
                     StackObject spell = game.getStack().getStackObject(event.getSourceId());
                     if (spell != null && game.getOpponents(perm.getControllerId()).contains(spell.getControllerId())) {

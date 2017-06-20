@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -47,6 +46,8 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -136,7 +137,7 @@ class GiftOfImmortalityReturnEnchantmentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card aura = game.getCard(source.getSourceId());
-        if (aura != null && game.getState().getZone(aura.getId()).equals(Zone.GRAVEYARD)) {
+        if (aura != null && game.getState().getZone(aura.getId()) == Zone.GRAVEYARD) {
             Player controller = game.getPlayer(source.getControllerId());
             Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (controller != null && creature != null) {

@@ -1,18 +1,18 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
 import mage.cards.f.FishliverOil;
 import mage.cards.r.RukhEgg;
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 public class NinthEdition extends ExpansionSet {
 
-    private static final NinthEdition fINSTANCE = new NinthEdition();
+    private static final NinthEdition instance = new NinthEdition();
 
     public static NinthEdition getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private NinthEdition() {

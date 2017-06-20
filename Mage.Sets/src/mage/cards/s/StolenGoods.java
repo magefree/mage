@@ -91,7 +91,7 @@ class StolenGoodsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
-        if (opponent != null && opponent.getLibrary().size() > 0 && sourceObject != null) {
+        if (opponent != null && opponent.getLibrary().hasCards() && sourceObject != null) {
             Library library = opponent.getLibrary();
             Card card;
             do {
@@ -99,7 +99,7 @@ class StolenGoodsEffect extends OneShotEffect {
                 if (card != null) {
                     opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
                 }
-            } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
+            } while (library.hasCards() && card != null && card.isLand());
 
             if (card != null) {
                 ContinuousEffect effect = new StolenGoodsCastFromExileEffect();
@@ -140,7 +140,7 @@ class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl {
             Card card = game.getCard(sourceId);
             if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
                 Player player = game.getPlayer(affectedControllerId);
-                player.setCastSourceIdWithAlternateMana(sourceId, null, null);
+                player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
                 return true;
             }
         }

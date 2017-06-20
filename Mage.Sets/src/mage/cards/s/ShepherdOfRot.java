@@ -37,6 +37,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -47,12 +48,12 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class ShepherdOfRot extends CardImpl {
     
-    final String rule = "Each player loses 1 life for each Zombie on the battlefield";
+    static final String rule = "Each player loses 1 life for each Zombie on the battlefield";
     
     static final private FilterPermanent filter = new FilterPermanent("Zombie");
     
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public ShepherdOfRot(UUID ownerId, CardSetInfo setInfo) {

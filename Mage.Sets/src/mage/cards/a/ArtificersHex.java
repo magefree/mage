@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -35,16 +34,15 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +53,7 @@ public class ArtificersHex extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new SubtypePredicate("Equipment"));
+        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
     public ArtificersHex(UUID ownerId, CardSetInfo setInfo) {
@@ -107,7 +105,7 @@ class ArtificersHexEffect extends OneShotEffect {
             Permanent equipment = game.getPermanent(enchantment.getAttachedTo());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 Permanent creature = game.getPermanent(equipment.getAttachedTo());
-                if (creature != null && creature.getCardType().contains(CardType.CREATURE)) {
+                if (creature != null && creature.isCreature()) {
                     return creature.destroy(source.getSourceId(), game, false);
                 }
             }

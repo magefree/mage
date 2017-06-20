@@ -27,20 +27,10 @@
  */
 package mage.abilities.keyword;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.OptionalAdditionalCost;
-import mage.abilities.costs.OptionalAdditionalCostImpl;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -51,8 +41,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.*;
+
 /**
- *
  * 20121001 702.31. Kicker 702.31a Kicker is a static ability that functions
  * while the spell with kicker is on the stack. "Kicker [cost]" means "You may
  * pay an additional [cost] as you cast this spell." Paying a spell's kicker
@@ -80,7 +71,6 @@ import mage.players.Player;
  * 601.2c.
  *
  * @author LevelX2
- *
  */
 public class KickerAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
@@ -159,10 +149,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     public int getKickedCounter(Game game, Ability source) {
         String key = getActivationKey(source, "", game);
-        if (activations.containsKey(key)) {
-            return activations.get(key);
-        }
-        return 0;
+        return activations.getOrDefault(key, 0);
     }
 
     public boolean isKicked(Game game, Ability source, String costText) {
@@ -197,13 +184,13 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     private String getActivationKey(Ability source, String costText, Game game) {
         int zcc = 0;
-        if (source.getAbilityType().equals(AbilityType.TRIGGERED)) {
+        if (source.getAbilityType() == AbilityType.TRIGGERED) {
             zcc = source.getSourceObjectZoneChangeCounter();
         }
         if (zcc == 0) {
             zcc = game.getState().getZoneChangeCounter(source.getSourceId());
         }
-        if (zcc > 0 && (source.getAbilityType().equals(AbilityType.TRIGGERED))) {
+        if (zcc > 0 && (source.getAbilityType() == AbilityType.TRIGGERED)) {
             --zcc;
         }
         return String.valueOf(zcc) + ((kickerCosts.size() > 1) ? costText : "");
@@ -227,10 +214,10 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                                 && player.chooseUse(Outcome.Benefit, "Pay " + times + kickerCost.getText(false) + " ?", ability, game)) {
                             this.activateKicker(kickerCost, ability, game);
                             if (kickerCost instanceof Costs) {
-                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext();) {
+                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext(); ) {
                                     Object kickerCostObject = itKickerCost.next();
                                     if ((kickerCostObject instanceof Costs) || (kickerCostObject instanceof CostsImpl)) {
-                                        for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext();) {
+                                        for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext(); ) {
                                             addKickerCostsToAbility(itDetails.next(), ability, game);
                                         }
                                     } else {

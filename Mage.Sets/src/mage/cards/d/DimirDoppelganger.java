@@ -29,23 +29,24 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyEffect;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.functions.ApplyToPermanent;
 
 /**
  *
@@ -54,7 +55,7 @@ import mage.target.common.TargetCardInGraveyard;
 public class DimirDoppelganger extends CardImpl {
 
     public DimirDoppelganger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);
@@ -77,14 +78,14 @@ public class DimirDoppelganger extends CardImpl {
     }
 }
 
-class DimirDoppelgangerEffect extends ContinuousEffectImpl {
+class DimirDoppelgangerEffect extends OneShotEffect {
 
-    public DimirDoppelgangerEffect() {
-        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+    DimirDoppelgangerEffect() {
+        super(Outcome.Copy);
         staticText = "Exile target creature card from a graveyard. {this} becomes a copy of that card and gains this ability";
     }
 
-    public DimirDoppelgangerEffect(final DimirDoppelgangerEffect effect) {
+    DimirDoppelgangerEffect(final DimirDoppelgangerEffect effect) {
         super(effect);
     }
 
@@ -95,49 +96,48 @@ class DimirDoppelgangerEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (card == null || permanent == null) {
-            return false;
-        }
-        card.moveToExile(null, "Dimir Doppelganger", source.getSourceId(), game);
-        Card cardToCopy = card.copy();
-        cardToCopy.assignNewId();
-        permanent.setName(cardToCopy.getName());
-        permanent.getPower().setValue(cardToCopy.getPower().getValue());
-        permanent.getToughness().setValue(cardToCopy.getToughness().getValue());
-        permanent.getColor(game).setColor(cardToCopy.getColor(game));
-        permanent.getManaCost().clear();
-        permanent.getManaCost().add(cardToCopy.getManaCost());
-        permanent.getCardType().clear();
-        for (CardType type : cardToCopy.getCardType()) {
-            if (!permanent.getCardType().contains(type)) {
-                permanent.getCardType().add(type);
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent dimirDoppelganger = game.getPermanent(source.getSourceId());
+        Permanent newBluePrint = null;
+        if (controller != null
+                && dimirDoppelganger != null) {
+            Card copyFromCard = game.getCard(source.getFirstTarget());
+            if (copyFromCard != null) {
+                Cards cardsToExile = new CardsImpl();
+                cardsToExile.add(copyFromCard);
+                controller.moveCards(cardsToExile, Zone.EXILED, source, game);
+                newBluePrint = new PermanentCard((Card) copyFromCard, source.getControllerId(), game);
+                newBluePrint.assignNewId();
+                ApplyToPermanent applier = new DimirDoppelgangerApplier();
+                applier.apply(game, newBluePrint, source, dimirDoppelganger.getId());
+                CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, dimirDoppelganger.getId());
+                copyEffect.newId();
+                copyEffect.setApplier(applier);
+                Ability newAbility = source.copy();
+                copyEffect.init(newAbility, game);
+                game.addEffect(copyEffect, newAbility);
             }
+            return true;
         }
-        permanent.getSubtype(game).clear();
-        for (String type : cardToCopy.getSubtype(game)) {
-            if (!permanent.getSubtype(game).contains(type)) {
-                permanent.getSubtype(game).add(type);
-            }
-        }
-        permanent.getSupertype().clear();
-        for (String type : cardToCopy.getSupertype()) {
-            if (!permanent.getSupertype().contains(type)) {
-                permanent.getSupertype().add(type);
-            }
-        }
-        permanent.removeAllAbilities(source.getSourceId(), game);
-        // gains ability of Dimir Doppelganger
-        Ability dimirDoppelgangerAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
-        dimirDoppelgangerAbility.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
-        permanent.addAbility(dimirDoppelgangerAbility, source.getSourceId(), game);
+        return false;
+    }
+}
 
-        for (Ability ability : cardToCopy.getAbilities()) {
-            if (!permanent.getAbilities().contains(ability)) {
-                permanent.addAbility(ability, source.getSourceId(), game);
-            }
-        }
+class DimirDoppelgangerApplier extends ApplyToPermanent {
+
+    @Override
+    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
+        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
+        permanent.getAbilities().add(ability);
+        return true;
+    }
+
+    @Override
+    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
+        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
+        mageObject.getAbilities().add(ability);
         return true;
     }
 }

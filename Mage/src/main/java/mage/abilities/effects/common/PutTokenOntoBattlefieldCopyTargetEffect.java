@@ -188,12 +188,12 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
 
         EmptyToken token = new EmptyToken();
         CardUtil.copyTo(token).from(copyFrom); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
-        applier.apply(game, token);
+        applier.apply(game, token, source, targetId);
         if (becomesArtifact) {
-            token.getCardType().add(CardType.ARTIFACT);
+            token.addCardType(CardType.ARTIFACT);
         }
         if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
-            token.getCardType().add(additionalCardType);
+            token.addCardType(additionalCardType);
         }
         if (gainsHaste) {
             token.addAbility(HasteAbility.getInstance());

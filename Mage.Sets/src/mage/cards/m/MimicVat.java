@@ -27,6 +27,8 @@
  */
 package mage.cards.m;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -118,7 +120,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
                 && zEvent.getToZone() == Zone.GRAVEYARD
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
                 && !(permanent instanceof PermanentToken)
-                && permanent.getCardType().contains(CardType.CREATURE)) {
+                && permanent.isCreature()) {
 
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
             return true;
@@ -151,17 +153,20 @@ class MimicVatEffect extends OneShotEffect {
             return false;
         }
         // return older cards to graveyard
-        for (UUID imprinted : permanent.getImprinted()) {
-            Card card = game.getCard(imprinted);
-            controller.moveCards(card, Zone.GRAVEYARD, source, game);
+        Set<Card> toGraveyard = new HashSet<>();
+        for (UUID imprintedId : permanent.getImprinted()) {
+            Card card = game.getCard(imprintedId);
+            if (card != null) {
+                toGraveyard.add(card);
+            }
         }
+        controller.moveCards(toGraveyard, Zone.GRAVEYARD, source, game);
         permanent.clearImprinted(game);
 
         // Imprint a new one
-        UUID target = targetPointer.getFirst(game, source);
-        if (target != null) {
-            Card card = game.getCard(target);
-            card.moveToExile(getId(), "Mimic Vat (Imprint)", source.getSourceId(), game);
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        if (card != null) {
+            controller.moveCardsToExile(card, source, game, true, source.getSourceId(), permanent.getName() + " (Imprint)");
             permanent.imprint(card.getId(), game);
         }
 

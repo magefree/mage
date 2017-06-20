@@ -27,8 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +39,8 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -76,7 +76,7 @@ public class TimberpackWolf extends CardImpl {
     }
 
 
-    class TimberpackWolfEffect extends ContinuousEffectImpl {
+    static class TimberpackWolfEffect extends ContinuousEffectImpl {
 
         public TimberpackWolfEffect() {
             super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

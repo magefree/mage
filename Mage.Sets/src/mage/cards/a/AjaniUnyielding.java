@@ -30,13 +30,15 @@ package mage.cards.a;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
-import mage.abilities.effects.common.SwordsToPlowsharesEffect;
+import mage.abilities.effects.common.ExileAndGainLifeEqualPowerTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.Predicates;
@@ -46,8 +48,6 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author JRHerlehy
@@ -73,7 +73,7 @@ public class AjaniUnyielding extends CardImpl {
         this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(3, nonlandPermanentFilter, Zone.LIBRARY), 2));
 
         // -2: Exile target creature. Its controller gains life equal to its power.
-        LoyaltyAbility ajaniAbility2 = new LoyaltyAbility(new SwordsToPlowsharesEffect(), -2);
+        LoyaltyAbility ajaniAbility2 = new LoyaltyAbility(new ExileAndGainLifeEqualPowerTargetEffect(), -2);
         ajaniAbility2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ajaniAbility2);
 

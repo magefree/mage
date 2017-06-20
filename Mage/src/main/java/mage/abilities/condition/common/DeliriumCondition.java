@@ -27,6 +27,7 @@
  */
 package mage.abilities.condition.common;
 
+import java.util.EnumSet;
 import java.util.HashSet;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -40,24 +41,19 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class DeliriumCondition implements Condition {
+public enum DeliriumCondition implements Condition {
 
-    private final static DeliriumCondition INSTANCE = new DeliriumCondition();
-
-    public static Condition getInstance() {
-        return INSTANCE;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            HashSet<CardType> foundCardTypes = new HashSet<>();
+            EnumSet<CardType> foundCardTypes = EnumSet.noneOf(CardType.class);
             for (Card card : controller.getGraveyard().getCards(game)) {
                 foundCardTypes.addAll(card.getCardType());
             }
-            int number = foundCardTypes.size();
-            return number > 3;
+            return foundCardTypes.size() >= 4;
         }
         return false;
     }

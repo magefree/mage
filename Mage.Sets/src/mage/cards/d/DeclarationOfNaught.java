@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +41,8 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *

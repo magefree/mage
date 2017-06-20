@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -41,6 +40,8 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ public class SithRavager extends CardImpl {
         return new SithRavager(this);
     }
 
-    public class LostNonCombatLifeTriggeredAbility extends TriggeredAbilityImpl {
+    public static class LostNonCombatLifeTriggeredAbility extends TriggeredAbilityImpl {
 
         public LostNonCombatLifeTriggeredAbility() {
             super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), false);

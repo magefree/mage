@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -40,7 +39,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.RitualOfTheReturnedZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -51,8 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class RitualOfTheReturned extends CardImpl {
 
     public RitualOfTheReturned(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
         // Exile target creature card from your graveyard. Create a black Zombie creature token with power equal to the exiled card's power and toughness equal to the exiled card's toughness.
         this.getSpellAbility().addEffect(new RitualOfTheReturnedExileEffect());
@@ -70,27 +68,27 @@ public class RitualOfTheReturned extends CardImpl {
 }
 
 class RitualOfTheReturnedExileEffect extends OneShotEffect {
-    
+
     public RitualOfTheReturnedExileEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Exile target creature card from your graveyard. Create a black Zombie creature token with power equal to the exiled card's power and toughness equal to the exiled card's toughness";
     }
-    
+
     public RitualOfTheReturnedExileEffect(final RitualOfTheReturnedExileEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public RitualOfTheReturnedExileEffect copy() {
         return new RitualOfTheReturnedExileEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+            if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                 controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.GRAVEYARD, true);
                 return new CreateTokenEffect(
                         new RitualOfTheReturnedZombieToken(card.getPower().getValue(), card.getToughness().getValue())).apply(game, source);
@@ -98,18 +96,4 @@ class RitualOfTheReturnedExileEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class RitualOfTheReturnedZombieToken extends Token {
-
-    public RitualOfTheReturnedZombieToken(int power, int toughness) {
-        super("Zombie", "black Zombie creature token with power equal to the exiled card's power and toughness equal to the exiled card's toughness");
-        this.setOriginalExpansionSetCode("JOU");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Zombie");
-        this.power = new MageInt(power);
-        this.toughness = new MageInt(toughness);
-    }
-
 }

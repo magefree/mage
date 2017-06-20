@@ -37,9 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,13 +51,13 @@ public class SachiDaughterOfSeshiro extends CardImpl {
     private static final FilterPermanent shamanFilter = new FilterPermanent("Shamans");
 
     static {
-        snakeFilter.add(new SubtypePredicate("Snake"));
-        shamanFilter.add(new SubtypePredicate("Shaman"));
+        snakeFilter.add(new SubtypePredicate(SubType.SNAKE));
+        shamanFilter.add(new SubtypePredicate(SubType.SHAMAN));
     }
 
     public SachiDaughterOfSeshiro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.supertype.add("Legendary");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
 

@@ -27,8 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,13 +34,10 @@ import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandCard;
@@ -50,6 +45,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +57,7 @@ public class AetherworksMarvel extends CardImpl {
 
     public AetherworksMarvel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // Whenever a permanent you control is put into a graveyard, you get {E}.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new GetEnergyCountersControllerEffect(1), false, new FilterControlledPermanent("a permanent you control"), false));

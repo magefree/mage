@@ -34,6 +34,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -48,7 +49,7 @@ public class OxiddaGolem extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Affinity for Mountains
-        this.addAbility(new AffinityForLandTypeAbility("Mountain", "Mountains"));
+        this.addAbility(new AffinityForLandTypeAbility(SubType.MOUNTAIN, "Mountains"));
         
         // Haste
         this.addAbility(HasteAbility.getInstance());

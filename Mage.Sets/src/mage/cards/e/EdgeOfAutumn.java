@@ -27,7 +27,7 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -42,6 +42,8 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author FenrisulfrX
@@ -55,7 +57,7 @@ public class EdgeOfAutumn extends CardImpl {
 
         // If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true),
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 5),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 5),
                 "If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library."));
 
         // Cycling-Sacrifice a land.

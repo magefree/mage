@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -45,6 +44,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -80,42 +81,44 @@ public class AAT1 extends CardImpl {
     public AAT1 copy() {
         return new AAT1(this);
     }
-}
 
-class AAT1TriggeredAbility extends TriggeredAbilityImpl {
+    private static class AAT1TriggeredAbility extends TriggeredAbilityImpl {
 
-    public AAT1TriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
-
-    public AAT1TriggeredAbility(AAT1TriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Card card = game.getCard(event.getTargetId());
-        if (event.getPlayerId().equals(game.getControllerId(sourceId))
-                && card.getCardType().contains(CardType.CREATURE)
-                && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
-                && event.getData().equals("repair")) {
-            return true;
+        public AAT1TriggeredAbility(Effect effect) {
+            super(Zone.BATTLEFIELD, effect);
         }
-        return false;
-    }
 
-    @Override
-    public String getRule() {
-        return "Whenever a repair counter is removed from a creature card in your graveyard " + super.getRule();
-    }
+        public AAT1TriggeredAbility(AAT1TriggeredAbility ability) {
+            super(ability);
+        }
 
-    @Override
-    public AAT1TriggeredAbility copy() {
-        return new AAT1TriggeredAbility(this);
+        @Override
+        public boolean checkEventType(GameEvent event, Game game) {
+            return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
+        }
+
+        @Override
+        public boolean checkTrigger(GameEvent event, Game game) {
+            Card card = game.getCard(event.getTargetId());
+            if (event.getPlayerId().equals(game.getControllerId(sourceId))
+                    && card.isCreature()
+                    && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
+                    && event.getData().equals("repair")) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public String getRule() {
+            return "Whenever a repair counter is removed from a creature card in your graveyard " + super.getRule();
+        }
+
+        @Override
+        public AAT1TriggeredAbility copy() {
+            return new AAT1TriggeredAbility(this);
+        }
     }
 }
+
+

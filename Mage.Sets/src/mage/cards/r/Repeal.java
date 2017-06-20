@@ -27,20 +27,21 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.Filter;
+import mage.constants.CardType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class Repeal extends CardImpl {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
             FilterNonlandPermanent filter = new FilterNonlandPermanent(new StringBuilder("nonland permanent with converted mana cost ").append(xValue).toString());
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
             ability.addTarget(new TargetNonlandPermanent(filter));
         }
     }

@@ -37,11 +37,13 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.OmnathElementalToken;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -53,13 +55,13 @@ public class OmnathLocusOfRage extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elemental you control");
 
     static {
-        filter.add(new SubtypePredicate("Elemental"));
+        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public OmnathLocusOfRage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{G}{G}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{G}{G}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Elemental");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -80,21 +82,5 @@ public class OmnathLocusOfRage extends CardImpl {
     @Override
     public OmnathLocusOfRage copy() {
         return new OmnathLocusOfRage(this);
-    }
-}
-
-class OmnathElementalToken extends Token {
-
-    OmnathElementalToken() {
-        super("Elemental", "5/5 red and green Elemental creature token");
-        setTokenType(2);
-        setOriginalExpansionSetCode("BFZ");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
-
-        color.setRed(true);
-        color.setGreen(true);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
     }
 }

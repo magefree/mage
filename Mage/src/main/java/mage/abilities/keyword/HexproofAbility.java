@@ -13,18 +13,18 @@ import mage.constants.Zone;
  */
 public class HexproofAbility extends SimpleStaticAbility implements MageSingleton {
 
-    private static final HexproofAbility fINSTANCE;
+    private static final HexproofAbility instance;
 
     static {
-        fINSTANCE = new HexproofAbility();
+        instance = new HexproofAbility();
     }
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static HexproofAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private HexproofAbility() {
@@ -33,7 +33,7 @@ public class HexproofAbility extends SimpleStaticAbility implements MageSingleto
 
     @Override
     public HexproofAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override

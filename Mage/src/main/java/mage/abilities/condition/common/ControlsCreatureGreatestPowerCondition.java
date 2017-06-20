@@ -43,15 +43,11 @@ import mage.game.permanent.Permanent;
  *
  * @author noxx
  */
-public class ControlsCreatureGreatestPowerCondition implements Condition {
+public enum ControlsCreatureGreatestPowerCondition implements Condition {
 
-    private static final ControlsCreatureGreatestPowerCondition fInstance = new ControlsCreatureGreatestPowerCondition();
-
+    instance;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public static Condition getInstance() {
-        return fInstance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {

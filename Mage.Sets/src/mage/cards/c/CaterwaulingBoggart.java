@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -36,10 +35,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,8 +53,8 @@ public class CaterwaulingBoggart extends CardImpl {
     private static final FilterPermanent filterElemental = new FilterControlledCreaturePermanent("Elemental");
 
     static {
-        filterGoblin.add(new SubtypePredicate("Goblin"));
-        filterElemental.add(new SubtypePredicate("Elemental"));
+        filterGoblin.add(new SubtypePredicate(SubType.GOBLIN));
+        filterElemental.add(new SubtypePredicate(SubType.ELEMENTAL));
     }
 
     public CaterwaulingBoggart(UUID ownerId, CardSetInfo setInfo) {

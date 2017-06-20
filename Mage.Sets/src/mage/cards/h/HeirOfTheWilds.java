@@ -59,7 +59,7 @@ public class HeirOfTheWilds extends CardImpl {
         // <em>Ferocious</em> - Whenever Heir of the Wilds attacks, if you control a creature with power 4 or greater, Heir of the Wilds gets +1/+1 until end of turn.
         Ability ability = new ConditionalTriggeredAbility(
                 new AttacksTriggeredAbility(new BoostSourceEffect(1,1,Duration.EndOfTurn), false),
-                FerociousCondition.getInstance(),
+                FerociousCondition.instance,
                 "<i>Ferocious</i> - Whenever {this} attacks, if you control a creature with power 4 or greater, {this} gets +1/+1 until end of turn."
         );
         this.addAbility(ability);

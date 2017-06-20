@@ -27,16 +27,19 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,15 +50,15 @@ public class SramSeniorEdificer extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an Aura, Equipment, or Vehicle spell");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate("Aura"),
-            new SubtypePredicate("Equipment"),
-            new SubtypePredicate("Vehicle")));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.AURA),
+            new SubtypePredicate(SubType.EQUIPMENT),
+            new SubtypePredicate(SubType.VEHICLE)));
     }
 
     public SramSeniorEdificer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Dwarf");
         this.subtype.add("Advisor");
         this.power = new MageInt(2);

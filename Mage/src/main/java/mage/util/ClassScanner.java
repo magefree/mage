@@ -40,7 +40,7 @@ import java.util.jar.JarInputStream;
  *
  * @author North
  */
-public class ClassScanner {
+public final class ClassScanner {
 
     private static void checkClassForInclusion(List<Class> cards, Class type, String name, ClassLoader cl) {
         try {

@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.condition.common.BeforeBlockersAreDeclaredCondition;
@@ -41,6 +40,8 @@ import mage.constants.Duration;
 import mage.constants.TurnPhase;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -51,7 +52,7 @@ public class Panic extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Cast Panic only during combat before blockers are declared.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, BeforeBlockersAreDeclaredCondition.getInstance()));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, BeforeBlockersAreDeclaredCondition.instance));
 
         // Target creature can't block this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

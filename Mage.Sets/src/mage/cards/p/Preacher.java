@@ -120,7 +120,7 @@ class PreacherEffect extends OneShotEffect {
                 
                 ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                         new GainControlTargetEffect(Duration.Custom),
-                        new CompoundCondition(SourceTappedCondition.getInstance(), new CompoundCondition (condition, conditionTarget)),
+                        new CompoundCondition(SourceTappedCondition.instance, new CompoundCondition (condition, conditionTarget)),
                         "Gain control of target creature of an opponent's choice that he or she controls for as long as {this} remains tapped");
                 game.addEffect(effect, source);
             }

@@ -38,13 +38,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -83,7 +77,7 @@ class OpalescenceEffect extends ContinuousEffectImpl {
     private static final EnumSet checkDependencyTypes;
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Aura")));
+        filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
         filter.add(new AnotherPredicate());
         checkDependencyTypes = EnumSet.of(DependencyType.AuraAddingRemoving, DependencyType.EnchantmentAddingRemoving);
     }
@@ -108,8 +102,8 @@ class OpalescenceEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!permanent.getCardType().contains(CardType.CREATURE)) {
-                            permanent.getCardType().add(CardType.CREATURE);
+                        if (!permanent.isCreature()) {
+                            permanent.addCardType(CardType.CREATURE);
                         }
                     }
                     break;
@@ -138,13 +132,10 @@ class OpalescenceEffect extends ContinuousEffectImpl {
 
     @Override
     public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
-        Set<UUID> dependentTo = null;
+        Set<UUID> dependentTo = new HashSet<>();
         for (ContinuousEffect effect : allEffectsInLayer) {
             for (DependencyType dependencyType : effect.getDependencyTypes()) {
                 if (checkDependencyTypes.contains(dependencyType)) {
-                    if (dependentTo == null) {
-                        dependentTo = new HashSet<>();
-                    }
                     dependentTo.add(effect.getId());
                 }
             }

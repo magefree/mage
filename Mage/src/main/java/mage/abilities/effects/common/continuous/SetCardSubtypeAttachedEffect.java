@@ -29,6 +29,7 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.repository.CardRepository;
@@ -88,12 +89,7 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == AttachmentType.AURA) {
-            sb.append("Enchanted");
-        } else if (attachmentType == AttachmentType.EQUIPMENT) {
-            sb.append("Equipped");
-        }
-
+        sb.append(attachmentType.verb());
         sb.append(" creature is a");
         for (String subtype : this.setSubtypes) {
             sb.append(' ').append(subtype);

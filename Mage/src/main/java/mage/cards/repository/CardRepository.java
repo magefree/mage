@@ -37,12 +37,9 @@ import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
-
 import java.io.File;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.concurrent.Callable;
-
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
@@ -59,9 +56,9 @@ public enum CardRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     // raise this if db structure was changed
-    private static final long CARD_DB_VERSION = 50;
+    private static final long CARD_DB_VERSION = 51;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 70;
+    private static final long CARD_CONTENT_VERSION = 81;
     private final TreeSet<String> landTypes = new TreeSet<>();
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
@@ -201,6 +198,29 @@ public enum CardRepository {
             }
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error getting creature names from DB : " + ex);
+
+        }
+        return names;
+    }
+
+    public Set<String> getArtifactNames() {
+        Set<String> names = new TreeSet<>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("name");
+            qb.where().like("types", new SelectArg('%' + CardType.ARTIFACT.name() + '%'));
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                int result = card.getName().indexOf(" // ");
+                if (result > 0) {
+                    names.add(card.getName().substring(0, result));
+                    names.add(card.getName().substring(result + 4));
+                } else {
+                    names.add(card.getName());
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting artifact names from DB : " + ex);
 
         }
         return names;
@@ -384,7 +404,7 @@ public enum CardRepository {
             for (CardInfo cardinfo : cards) {
                 ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                 if (set != null) {
-                    if ((set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.CORE))
+                    if ((set.getType() == SetType.EXPANSION || set.getType() == SetType.CORE)
                             && (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
                         cardToUse = cardinfo;
                         lastExpansionDate = set.getReleaseDate();
@@ -398,6 +418,24 @@ public enum CardRepository {
             return cardToUse;
         }
         return null;
+    }
+
+    public CardInfo findCardWPreferredSet(String name, String expansion, boolean caseInsensitive) {
+        List<CardInfo> cards;
+        if (caseInsensitive) {
+            cards = findCardsCaseInsensitive(name);
+        } else {
+            cards = findCards(name);
+        }
+        if (!cards.isEmpty()) {
+            CardInfo cardToUse = null;
+            for (CardInfo cardinfo : cards) {
+                if (cardinfo.getSetCode() != null && expansion != null && expansion.equalsIgnoreCase(cardinfo.getSetCode())) {
+                    return cardinfo;
+                }
+            }
+        }
+        return findPreferedCoreExpansionCard(name, true);
     }
 
     public List<CardInfo> findCards(String name) {

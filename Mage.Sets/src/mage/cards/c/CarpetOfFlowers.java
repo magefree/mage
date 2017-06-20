@@ -27,8 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.LinkedHashSet;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,6 +37,7 @@ import mage.choices.ChoiceColor;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -48,6 +47,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.LinkedHashSet;
+import java.util.UUID;
 
 /**
  *
@@ -136,7 +138,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Island ");
 
     static {
-        filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate(SubType.ISLAND));
         filter.add(new CardTypePredicate(CardType.LAND));
     }
 

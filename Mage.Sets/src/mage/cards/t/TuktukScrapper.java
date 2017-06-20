@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -126,7 +127,7 @@ class TuktukScrapperEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new SubtypePredicate("Ally"));
+        filter.add(new SubtypePredicate(SubType.ALLY));
     }
 
     public TuktukScrapperEffect() {
@@ -149,7 +150,7 @@ class TuktukScrapperEffect extends OneShotEffect {
         if (controller != null && targetArtifact != null) {
             targetArtifact.destroy(source.getSourceId(), game, false);
             Player targetController = game.getPlayer(targetArtifact.getControllerId());
-            if (targetController != null && game.getState().getZone(targetArtifact.getId()).equals(Zone.GRAVEYARD)) {
+            if (targetController != null && game.getState().getZone(targetArtifact.getId()) == Zone.GRAVEYARD) {
                 int alliesControlled = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
                 if (alliesControlled > 0) {
                     targetController.damage(alliesControlled, source.getSourceId(), game, false, true);

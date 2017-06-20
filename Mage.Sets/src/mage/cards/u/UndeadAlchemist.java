@@ -107,7 +107,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.LIBRARY && zEvent.getToZone() == Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && card.isCreature()) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
                 return true;
             }
@@ -150,8 +150,9 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
         if (damageEvent.isCombatDamage()) {
+            UUID controllerId = source.getControllerId();
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.hasSubtype("Zombie", game)) {
+            if (permanent != null && permanent.hasSubtype("Zombie", game) && permanent.getControllerId() == controllerId) {
                 return true;
             }
         }

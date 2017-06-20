@@ -49,8 +49,8 @@ import mage.players.Player;
 public class ThoughtReflection extends CardImpl {
 
     public ThoughtReflection(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}{U}");
-                                   
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
+
         // If you would draw a card, draw two cards instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThoughtReflectionReplacementEffect()));
 
@@ -90,13 +90,13 @@ class ThoughtReflectionReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
-    }   
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(source.getControllerId());
     }
-    
+
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player you = game.getPlayer(event.getPlayerId());
@@ -104,5 +104,5 @@ class ThoughtReflectionReplacementEffect extends ReplacementEffectImpl {
             you.drawCards(2, game, event.getAppliedEffects());
         }
         return true;
-    }    
+    }
 }

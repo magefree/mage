@@ -27,9 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -46,16 +43,16 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -155,7 +152,7 @@ class CavernOfSoulsWatcher extends Watcher {
     private final String originalId;
 
     public CavernOfSoulsWatcher(UUID originalId) {
-        super("ManaPaidFromCavernOfSoulsWatcher", WatcherScope.CARD);
+        super(CavernOfSoulsWatcher.class.getSimpleName(), WatcherScope.CARD);
         this.originalId = originalId.toString();
     }
 
@@ -172,7 +169,7 @@ class CavernOfSoulsWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.MANA_PAYED) {
+        if (event.getType() == GameEvent.EventType.MANA_PAID) {
             if (event.getData() != null && event.getData().equals(originalId)) {
                 spells.add(event.getTargetId());
             }
@@ -227,7 +224,7 @@ class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        CavernOfSoulsWatcher watcher = (CavernOfSoulsWatcher) game.getState().getWatchers().get("ManaPaidFromCavernOfSoulsWatcher", source.getSourceId());
+        CavernOfSoulsWatcher watcher = (CavernOfSoulsWatcher) game.getState().getWatchers().get(CavernOfSoulsWatcher.class.getSimpleName(), source.getSourceId());
         Spell spell = game.getStack().getSpell(event.getTargetId());
         return spell != null && watcher != null && watcher.spellCantBeCountered(spell.getId());
     }

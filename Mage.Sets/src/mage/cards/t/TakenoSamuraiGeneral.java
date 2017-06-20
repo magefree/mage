@@ -52,7 +52,7 @@ public class TakenoSamuraiGeneral extends CardImpl {
 
     public TakenoSamuraiGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Samurai");
 
@@ -78,7 +78,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate("Samurai"));
+        filter.add(new SubtypePredicate(SubType.SAMURAI));
     }
 
     public TakenoSamuraiGeneralEffect() {

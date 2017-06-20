@@ -94,7 +94,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
 
         Cards cardsToReveal = new CardsImpl();
         Cards cardsToExile = new CardsImpl();
-        while (controller.getLibrary().size() > 0) {
+        while (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cardsToReveal.add(card);

@@ -27,7 +27,8 @@ public interface ManaAbility {
     /**
      * Used to check if the ability itself defines mana types it can produce.
      *
+     * @param game
      * @return
      */
-    boolean definesMana();
+    boolean definesMana(Game game);
 }

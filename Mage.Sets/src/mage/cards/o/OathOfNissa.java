@@ -27,7 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -35,17 +34,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,6 +43,8 @@ import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +54,7 @@ public class OathOfNissa extends CardImpl {
 
     public OathOfNissa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // When Oath of Nissa enters the battlefield, look at the top three cards of your library. You may reveal a creature, land, or planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OathOfNissaEffect()));
@@ -166,7 +158,7 @@ class OathOfNissaSpendAnyManaEffect extends AsThoughEffectImpl implements AsThou
         if (source.getControllerId().equals(affectedControllerId)) {
             MageObject mageObject = game.getObject(objectId);
             if (mageObject != null) {
-                if (mageObject.getCardType().contains(CardType.PLANESWALKER)) {
+                if (mageObject.isPlaneswalker()) {
                     return true;
                 }
             }

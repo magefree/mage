@@ -139,7 +139,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        if (ability != null && AbilityType.SPELL.equals(ability.getAbilityType())) {
+        if (ability != null && AbilityType.SPELL == ability.getAbilityType()) {
             if (filter != null) {
                 Card card = game.getCard(ability.getSourceId());
                 if (!filter.match(card, ability.getSourceId(), ability.getControllerId(), game)) {

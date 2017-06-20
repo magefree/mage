@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -45,6 +44,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -106,7 +107,7 @@ class FlayingTendrilsReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zce = (ZoneChangeEvent) event;
-        return zce.isDiesEvent() && zce.getTarget().getCardType().contains(CardType.CREATURE);
+        return zce.isDiesEvent() && zce.getTarget().isCreature();
     }
 
 }

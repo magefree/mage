@@ -29,6 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -51,7 +52,7 @@ public class Seahunter extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Merfolk permanent card");
 
     static {
-        filter.add(new SubtypePredicate("Merfolk"));
+        filter.add(new SubtypePredicate(SubType.MERFOLK));
     }
 
     public Seahunter(UUID ownerId, CardSetInfo setInfo) {

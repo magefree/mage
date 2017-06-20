@@ -133,7 +133,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, boolean drawImage) {
-        MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, drawImage, true);
+        MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, drawImage, true);
         cards.put(card.getId(), cardImg);
         cardImg.addMouseListener(this);
         add(cardImg);
@@ -192,7 +192,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                             }
                             break;
                         case RARITY:
-                            if (!cardImg.getOriginal().getRarity().equals(lastCard.getOriginal().getRarity())) {
+                            if (cardImg.getOriginal().getRarity() != lastCard.getOriginal().getRarity()) {
                                 curColumn++;
                                 curRow = 0;
                             }

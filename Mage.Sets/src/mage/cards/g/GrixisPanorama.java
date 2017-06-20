@@ -27,10 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -40,12 +36,15 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,11 +56,11 @@ public class GrixisPanorama extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(Predicates.or(
-                new SubtypePredicate("Island"),
-                new SubtypePredicate("Swamp"),
-                new SubtypePredicate("Mountain")));
+                new SubtypePredicate(SubType.ISLAND),
+                new SubtypePredicate(SubType.SWAMP),
+                new SubtypePredicate(SubType.MOUNTAIN)));
     }
 
     public GrixisPanorama(UUID ownerId, CardSetInfo setInfo) {

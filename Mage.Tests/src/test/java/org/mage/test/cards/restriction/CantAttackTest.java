@@ -40,8 +40,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class CantAttackTest extends CardTestPlayerBase {
 
     /**
-     * Tests "If all other elves get the Forestwalk ability and can't be blockt
-     * from creatures whose controler has a forest in game"
+     * Tests "If all other elves get the Forestwalk ability and can't be blocked
+     * from creatures whose controller has a forest in game"
      */
     @Test
     public void testAttack() {
@@ -166,5 +166,242 @@ public class CantAttackTest extends CardTestPlayerBase {
         assertTapped("Silvercoat Lion", false);
         assertPowerToughness(playerB, "Silvercoat Lion", 4, 4);
     }
-
+    
+    /*
+    Reported bug: Medomai was able to attack on an extra turn when cheated into play.
+    */
+    @Test
+    public void testMedomaiShouldNotAttackOnExtraTurns() {
+        
+        /*
+        Medomai the Ageless {4}{W}{U}
+        Legendary Creature — Sphinx 4/4
+        Flying
+        Whenever Medomai the Ageless deals combat damage to a player, take an extra turn after this one.
+        Medomai the Ageless can't attack during extra turns.
+        */
+        String medomai = "Medomai the Ageless";
+        
+        /*
+         Cauldron Dance {4}{B}{R} Instant
+        Cast Cauldron Dance only during combat.
+        Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.
+        You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
+        */
+        String cDance = "Cauldron Dance";
+        String dBlade = "Doom Blade"; // {1}{B} instant destroy target creature        
+        addCard(Zone.BATTLEFIELD, playerA, medomai);
+        addCard(Zone.HAND, playerA, dBlade);
+        addCard(Zone.HAND, playerA, cDance);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        
+        // attack with Medomai, connect, and destroy him after combat
+        attack(1, playerA, medomai);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, dBlade, medomai);
+        
+        // next turn granted, return Medomai to field with Cauldron and try to attack again
+        castSpell(2, PhaseStep.BEGIN_COMBAT, playerA, cDance);
+        addTarget(playerA, medomai);
+        attack(2, playerA, medomai);
+        
+        // medomai should not have been allowed to attack, but returned to hand at beginning of next end step still
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        
+        assertLife(playerB, 16); // one hit from medomai
+        assertGraveyardCount(playerA, dBlade, 1);
+        assertGraveyardCount(playerA, cDance, 1);
+        assertGraveyardCount(playerA, medomai, 0);
+        assertHandCount(playerA, medomai, 1);
+    }
+    
+    @Test
+    public void basicMedomaiTestForExtraTurn() {
+        /*
+        Medomai the Ageless {4}{W}{U}
+        Legendary Creature — Sphinx 4/4
+        Flying
+        Whenever Medomai the Ageless deals combat damage to a player, take an extra turn after this one.
+        Medomai the Ageless can't attack during extra turns.
+        */
+        String medomai = "Medomai the Ageless";
+        
+        /*
+         Exquisite Firecraft {1}{R}{R}
+            Sorcery
+            Exquisite Firecraft deals 4 damage to target creature or player.
+        */
+        String eFirecraft = "Exquisite Firecraft";
+        
+        addCard(Zone.BATTLEFIELD, playerA, medomai);
+        addCard(Zone.HAND, playerA, eFirecraft);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        
+        // attack with medomai, get extra turn, confirm cannot attack again with medomai and can cast sorcery
+        attack(1, playerA, medomai);
+        attack(2, playerA, medomai); // should not be allowed to
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, eFirecraft, playerB);
+        
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        
+        assertLife(playerB, 12); // 1 hit from medomai and firecraft = 8 damage
+        assertGraveyardCount(playerA, eFirecraft, 1);
+        assertPermanentCount(playerA, medomai, 1);
+    }
+    
+    @Test
+    public void sphereOfSafetyPaidCostAllowsAttack() {        
+        /*
+        Sphere of Safety {4}{W}
+         Enchantment
+        Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
+        */
+        String sphere = "Sphere of Safety";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, sphere);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "Yes");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, sphere, 1);
+        assertLife(playerB, 19); // took the hit from memnite
+        assertTapped("Forest", true); // forest had to be tapped
+    }
+    
+    @Test
+    public void sphereOfSafetyCostNotPaid_NoAttackAllowed() {
+        /*
+        Sphere of Safety {4}{W}
+         Enchantment
+        Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
+        */
+        String sphere = "Sphere of Safety";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, sphere);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "No");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, sphere, 1);
+        assertLife(playerB, 20); // no damage went through, did not elect to pay
+        assertTapped("Forest", false); // forest not tapped
+    }
+    
+    @Test
+    public void collectiveResistanceCostPaid_AttackAllowed()
+    {
+        /*
+        Collective Restraint {3}{U}
+        Enchantment
+        Domain — Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types among lands you control.
+        */
+        String cRestraint = "Collective Restraint";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, cRestraint);
+        addCard(Zone.BATTLEFIELD, playerB, "Island"); // 1 basic land type = pay 1 to attack
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "Yes");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, cRestraint, 1);
+        assertLife(playerB, 19); // took the hit from memnite
+        assertTapped("Forest", true); // forest had to be tapped
+    }
+    
+    @Test
+    public void collectiveResistanceCostNotPaid_NoAttackAllowed()
+    {
+        /*
+        Collective Restraint {3}{U}
+        Enchantment
+        Domain — Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types among lands you control.
+        */
+        String cRestraint = "Collective Restraint";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, cRestraint);
+        addCard(Zone.BATTLEFIELD, playerB, "Island"); // 1 basic land type = pay 1 to attack
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "No");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, cRestraint, 1);
+        assertLife(playerB, 20); // no damage went through, did not elect to pay
+        assertTapped("Forest", false); // forest not tapped
+    }
+    
+    @Test
+    public void ghostlyPrison_PaidCost_AllowsAttack() {        
+        /*
+        Ghostly Prison {2}{W}
+        Enchantment
+        Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
+        */
+        String gPrison = "Ghostly Prison";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, gPrison);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "Yes");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, gPrison, 1);
+        assertLife(playerB, 19); // took the hit from memnite
+        assertTappedCount("Forest", true, 2);  // forests had to be tapped
+    }
+    
+    @Test
+    public void ghostlyPrison_CostNotPaid_NoAttackAllowed() {
+        /*
+        Ghostly Prison {2}{W}
+        Enchantment
+        Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
+        */
+        String gPrison = "Ghostly Prison";
+        String memnite = "Memnite";
+               
+        addCard(Zone.BATTLEFIELD, playerA, memnite); // {0} 1/1
+        addCard(Zone.BATTLEFIELD, playerB, gPrison);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        
+        attack(1, playerA, memnite);
+        setChoice(playerA, "No");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertPermanentCount(playerB, gPrison, 1);
+        assertLife(playerB, 20); // no damage went through, did not elect to pay
+        assertTapped("Forest", false); // no forests tapped
+    }
 }

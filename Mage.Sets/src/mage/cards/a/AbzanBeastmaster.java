@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.ControlsCreatureGreatestToughnessCondition;
@@ -37,6 +36,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ public class AbzanBeastmaster extends CardImpl {
         // At the beginning of your upkeep, draw a card if you control the creature with the greatest toughness or tied for the greatest toughness.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false),
-                ControlsCreatureGreatestToughnessCondition.getInstance(),
+                ControlsCreatureGreatestToughnessCondition.instance,
                 "At the beginning of your upkeep, draw a card if you control the creature with the greatest toughness or tied for the greatest toughness."
         ));
     }

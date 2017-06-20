@@ -27,17 +27,18 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
+import mage.constants.ComparisonType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,8 +49,8 @@ public class ProclamationOfRebirth extends CardImpl {
     private static final FilterCreatureCard filter1 = new FilterCreatureCard("creature card with converted mana cost {1} or less from your graveyard");
     private static final FilterCreatureCard filter3 = new FilterCreatureCard("creature cards with converted mana cost {1} or less from your graveyard");
     static {
-        filter1.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
-        filter3.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
+        filter1.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
+        filter3.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
     public ProclamationOfRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

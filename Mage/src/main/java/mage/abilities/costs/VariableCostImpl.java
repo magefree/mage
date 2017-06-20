@@ -29,7 +29,10 @@ package mage.abilities.costs;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
@@ -131,13 +134,15 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return true; /* not used */
+        return true;
+        /* not used */
 
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        return true; /* not used */
+        return true;
+        /* not used */
 
     }
 
@@ -165,7 +170,11 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     public int announceXValue(Ability source, Game game) {
         int xValue = 0;
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        StackObject stackObject = game.getStack().getStackObject(source.getId());
+        if (controller != null
+                && (source instanceof ManaAbility
+                || source instanceof FlashbackAbility
+                || stackObject != null)) {
             xValue = controller.announceXCost(getMinValue(source, game), getMaxValue(source, game),
                     "Announce the number of " + actionText, game, source, this);
         }

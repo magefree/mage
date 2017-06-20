@@ -27,7 +27,6 @@
  */
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
@@ -37,10 +36,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.SliverToken;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +59,7 @@ public class BroodSliver extends CardImpl {
 
         // Whenever a Sliver deals combat damage to a player, its controller may create a 1/1 colorless Sliver creature token.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(new BroodSliverEffect(),
-                new FilterCreaturePermanent("Sliver", "a Sliver"), false, SetTargetPointer.PLAYER, true));
+                new FilterCreaturePermanent(SubType.SLIVER, "a Sliver"), false, SetTargetPointer.PLAYER, true));
     }
 
     public BroodSliver(final BroodSliver card) {

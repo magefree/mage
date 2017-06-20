@@ -28,6 +28,7 @@
 package mage.cards.k;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,10 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -59,7 +57,6 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
- *
  * @author fireshoes
  */
 public class KalitasTraitorOfGhet extends CardImpl {
@@ -68,13 +65,13 @@ public class KalitasTraitorOfGhet extends CardImpl {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(Predicates.or(new SubtypePredicate("Vampire"),
-                (new SubtypePredicate("Zombie"))));
+        filter.add(Predicates.or(new SubtypePredicate(SubType.VAMPIRE),
+                (new SubtypePredicate(SubType.ZOMBIE))));
     }
 
     public KalitasTraitorOfGhet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);
@@ -127,7 +124,7 @@ class KalitasTraitorOfGhetEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
+            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
                 if (permanent != null) {
                     controller.moveCards(permanent, Zone.EXILED, source, game);
@@ -141,7 +138,7 @@ class KalitasTraitorOfGhetEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.ZONE_CHANGE);
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -151,10 +148,10 @@ class KalitasTraitorOfGhetEffect extends ReplacementEffectImpl {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId()) && !(permanent instanceof PermanentToken)) {
                 if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
-                    if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
+                    if (zEvent.getTarget().isCreature()) {
                         return true;
                     }
-                } else if (permanent.getCardType().contains(CardType.CREATURE)) {
+                } else if (permanent.isCreature()) {
                     return true;
                 }
             }

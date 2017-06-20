@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,12 +40,11 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HeliodGodOfTheSunToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,8 +53,8 @@ import mage.game.permanent.token.Token;
 public class HeliodGodOfTheSun extends CardImpl {
 
     public HeliodGodOfTheSun(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{W}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{W}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("God");
 
         this.power = new MageInt(5);
@@ -85,21 +83,5 @@ public class HeliodGodOfTheSun extends CardImpl {
     @Override
     public HeliodGodOfTheSun copy() {
         return new HeliodGodOfTheSun(this);
-    }
-}
-
-
-class HeliodGodOfTheSunToken extends Token {
-
-    public HeliodGodOfTheSunToken() {
-        super("Cleric", "2/1 white Cleric enchantment creature token");
-        this.cardType.add(CardType.CREATURE);
-        this.cardType.add(CardType.ENCHANTMENT);
-
-        this.subtype.add("Cleric");
-        this.color.setWhite(true);
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
     }
 }

@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -47,6 +46,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -110,11 +111,11 @@ class DimensionalInfiltratorEffect extends OneShotEffect {
             return false;
         }
 
-        if (opponent.getLibrary().size() > 0) {
+        if (opponent.getLibrary().hasCards()) {
             Card card = opponent.getLibrary().getFromTop(game);
             if (card != null) {
                 card.moveToExile(null, "Dimensional Infiltrator", source.getSourceId(), game);
-                if (card.getCardType().contains(CardType.LAND)) {
+                if (card.isLand()) {
                     if (controller.chooseUse(Outcome.Neutral, "Return " + sourceObject.getIdName() + " to its owner's hand?", source, game)) {
                         new ReturnToHandSourceEffect(true).apply(game, source);
                     }

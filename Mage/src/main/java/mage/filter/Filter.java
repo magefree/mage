@@ -32,31 +32,11 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
 /**
- *
+ * @param <E>
  * @author BetaSteward_at_googlemail.com
  * @author North
- *
- * @param <E>
  */
 public interface Filter<E> extends Serializable {
-
-    enum ComparisonType {
-
-        GreaterThan(">"),
-        Equal("=="),
-        LessThan("<");
-
-        private final String text;
-
-        ComparisonType(String text) {
-            this.text = text;
-        }
-
-        @Override
-        public String toString() {
-            return text;
-        }
-    }
 
     enum ComparisonScope {
         Any, All
@@ -64,7 +44,7 @@ public interface Filter<E> extends Serializable {
 
     boolean match(E o, Game game);
 
-    void add(Predicate predicate);
+    Filter<E> add(Predicate predicate);
 
     boolean checkObjectClass(Object object);
 

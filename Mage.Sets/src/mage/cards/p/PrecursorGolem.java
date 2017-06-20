@@ -37,6 +37,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterInPlay;
 import mage.filter.common.FilterCreaturePermanent;
@@ -107,7 +108,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean checkSpell(Spell spell, Game game) {
         if (spell != null
-                && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
+                && (spell.isInstant() || spell.isSorcery())) {
             UUID targetGolem = null;
             for (TargetAddress addr : TargetAddress.walk(spell)) {
                 Target targetInstance = addr.getTarget(spell);
@@ -144,7 +145,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
 class PrecursorGolemCopySpellEffect extends CopySpellForEachItCouldTargetEffect<Permanent> {
 
     public PrecursorGolemCopySpellEffect() {
-        this(new FilterCreaturePermanent("Golem", "Golem"));
+        this(new FilterCreaturePermanent(SubType.GOLEM, "Golem"));
     }
 
     public PrecursorGolemCopySpellEffect(PrecursorGolemCopySpellEffect effect) {

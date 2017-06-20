@@ -27,7 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -42,6 +41,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ public class FeastOnTheFallen extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                         TargetController.ANY, false),
-                FeastOnTheFallenCondition.getInstance(),
+                FeastOnTheFallenCondition.instance,
                 "At the beginning of each upkeep, if an opponent lost life last turn, put a +1/+1 counter on target creature you control.");
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
@@ -74,17 +75,13 @@ public class FeastOnTheFallen extends CardImpl {
     }
 }
 
-class FeastOnTheFallenCondition implements Condition {
+enum FeastOnTheFallenCondition implements Condition {
 
-    private static final FeastOnTheFallenCondition fInstance = new FeastOnTheFallenCondition();
-
-    public static FeastOnTheFallenCondition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 if (watcher.getLiveLostLastTurn(opponentId) > 0) {

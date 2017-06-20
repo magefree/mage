@@ -27,9 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -46,6 +43,10 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.ClueArtifactToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +99,10 @@ class DeclarationInStoneEffect extends OneShotEffect {
                         nonTokenCount++;
                     }
                 } else {
-                    cardsToExile.add(targetPermanent);
+                    if (cardsToExile.add(targetPermanent)
+                            && !(targetPermanent instanceof PermanentToken)) {
+                        nonTokenCount++;
+                    }
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), targetPermanent.getControllerId(), game)) {
                         if (!permanent.getId().equals(targetPermanent.getId())
                                 && permanent.getName().equals(targetPermanent.getName())) {

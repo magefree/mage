@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -38,14 +37,14 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
+import mage.game.stack.StackAbility;
 
 /**
  * @author noxx
@@ -53,8 +52,8 @@ import mage.game.stack.Spell;
 public class SigardaHostOfHerons extends CardImpl {
 
     public SigardaHostOfHerons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}{W}");
-        this.supertype.add("Legendary");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{W}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);
@@ -114,6 +113,11 @@ class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
             }
             if (object instanceof Card) {
                 if (game.getOpponents(source.getControllerId()).contains(((Card) object).getOwnerId())) {
+                    return true;
+                }
+            }
+            if (object instanceof StackAbility) {
+                if (game.getOpponents(source.getControllerId()).contains(((StackAbility) object).getControllerId())) {
                     return true;
                 }
             }

@@ -27,8 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,25 +35,25 @@ import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.FilterObject;
+import mage.filter.FilterStackObject;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.constants.Outcome;
-import mage.filter.FilterObject;
-import mage.filter.FilterStackObject;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +66,7 @@ public class GuardianBeast extends CardImpl {
 
     static {
         filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAura.add(new SubtypePredicate("Aura"));
+        filterAura.add(new SubtypePredicate(SubType.AURA));
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
@@ -79,7 +77,7 @@ public class GuardianBeast extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As long as Guardian Beast is untapped, noncreature artifacts you control can't be enchanted, they're indestructible, and other players can't gain control of them. This effect doesn't remove Auras already attached to those artifacts.
-        Effect effect = new ConditionalContinuousEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter), new InvertCondition(new SourceTappedCondition()), "noncreature artifacts you control can't be enchanted, they're indestructible, and other players can't gain control of them");
+        Effect effect = new ConditionalContinuousEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter), new InvertCondition(SourceTappedCondition.instance), "noncreature artifacts you control can't be enchanted, they're indestructible, and other players can't gain control of them");
         GuardianBeastConditionalEffect effect2 = new GuardianBeastConditionalEffect(this.getId());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
@@ -145,9 +143,9 @@ class GuardianBeastConditionalEffect extends ContinuousRuleModifyingEffectImpl {
         }
 
         StackObject spell = game.getStack().getStackObject(event.getSourceId());
-        if (event.getType() == EventType.LOSE_CONTROL || event.getType() == EventType.ATTACH || event.getType() == EventType.TARGET && spell != null && spell.getCardType().contains(CardType.ENCHANTMENT) && spell.getSubtype(game).contains("Aura")) {
+        if (event.getType() == EventType.LOSE_CONTROL || event.getType() == EventType.ATTACH || event.getType() == EventType.TARGET && spell != null && spell.isEnchantment() && spell.getSubtype(game).contains("Aura")) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                if (perm != null && Objects.equals(perm.getId(), targetPermanent.getId()) && !perm.getCardType().contains(CardType.CREATURE)) {
+                if (perm != null && Objects.equals(perm.getId(), targetPermanent.getId()) && !perm.isCreature()) {
                     return true;
                 }
             }

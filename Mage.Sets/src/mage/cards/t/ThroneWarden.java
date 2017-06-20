@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
@@ -38,6 +37,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public class ThroneWarden extends CardImpl {
 
         // At the beginning of your end step, if you're the monarch, put a +1/+1 counter on Throne Warden.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, MonarchIsSourceControllerCondition.getInstance(), false));
+                TargetController.YOU, MonarchIsSourceControllerCondition.instance, false));
     }
 
     public ThroneWarden(final ThroneWarden card) {

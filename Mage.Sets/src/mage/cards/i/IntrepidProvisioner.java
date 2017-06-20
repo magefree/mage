@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -47,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class IntrepidProvisioner extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human", "another target Human you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.HUMAN, "another target Human you control");
 
     static {
         filter.add(new AnotherPredicate());

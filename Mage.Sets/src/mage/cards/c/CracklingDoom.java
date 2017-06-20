@@ -27,9 +27,8 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
@@ -37,7 +36,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -46,6 +44,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -116,7 +117,7 @@ class CracklingDoomEffect extends OneShotEffect {
                             }
                         } else if (greatestPower != Integer.MIN_VALUE) {
                             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature to sacrifice with power equal to " + greatestPower);
-                            filter.add(new PowerPredicate(Filter.ComparisonType.Equal, greatestPower));
+                            filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, greatestPower));
                             Target target = new TargetControlledCreaturePermanent(filter);
                             if (opponent.choose(outcome, target, playerId, game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());

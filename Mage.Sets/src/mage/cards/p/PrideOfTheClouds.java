@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -42,10 +41,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 /**
  *
  * @author fireshoes
@@ -86,7 +87,7 @@ public class PrideOfTheClouds extends CardImpl {
         return new PrideOfTheClouds(this);
     }
 
-    private class BirdToken extends Token {
+    private static class BirdToken extends Token {
 
         public BirdToken() {
             super("Bird", "1/1 white and blue Bird creature token with flying");

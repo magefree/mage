@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -38,6 +37,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,7 @@ public class ArdentSoldier extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // If Ardent Soldier was kicked, it enters the battlefield with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            KickedCondition.getInstance(), "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.", ""));
+            KickedCondition.instance, "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.", ""));
     }
 
     public ArdentSoldier(final ArdentSoldier card) {

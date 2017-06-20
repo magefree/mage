@@ -27,16 +27,10 @@
  */
 package mage.cards.c;
 
-import java.util.List;
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -45,6 +39,9 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -107,7 +104,7 @@ class ConfluxEffect extends OneShotEffect {
         TargetCardInLibrary targetRed = new TargetCardInLibrary(filterRed);
         TargetCardInLibrary targetGreen = new TargetCardInLibrary(filterGreen);
 
-        if (you != null && you.getLibrary().size() > 0) {
+        if (you != null && you.getLibrary().hasCards()) {
             if (you.searchLibrary(targetWhite, game)) {
                 if (!targetWhite.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetWhite.getTargets()) {
@@ -119,7 +116,7 @@ class ConfluxEffect extends OneShotEffect {
                 }
             }
         }
-        if (you != null && you.getLibrary().size() > 0) {
+        if (you != null && you.getLibrary().hasCards()) {
             if (you.searchLibrary(targetBlue, game)) {
                 if (!targetBlue.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetBlue.getTargets()) {
@@ -131,7 +128,7 @@ class ConfluxEffect extends OneShotEffect {
                 }
             }
         }
-        if (you != null && you.getLibrary().size() > 0) {
+        if (you != null && you.getLibrary().hasCards()) {
             if (you.searchLibrary(targetBlack, game)) {
                 if (!targetBlack.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetBlack.getTargets()) {
@@ -143,7 +140,7 @@ class ConfluxEffect extends OneShotEffect {
                 }
             }
         }
-        if (you != null && you.getLibrary().size() > 0) {
+        if (you != null && you.getLibrary().hasCards()) {
             if (you.searchLibrary(targetRed, game)) {
                 if (!targetRed.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetRed.getTargets()) {
@@ -155,7 +152,7 @@ class ConfluxEffect extends OneShotEffect {
                 }
             }
         }
-        if (you != null && you.getLibrary().size() > 0) {
+        if (you != null && you.getLibrary().hasCards()) {
             if (you.searchLibrary(targetGreen, game)) {
                 if (!targetGreen.getTargets().isEmpty()) {
                     for (UUID cardId : (List<UUID>) targetGreen.getTargets()) {

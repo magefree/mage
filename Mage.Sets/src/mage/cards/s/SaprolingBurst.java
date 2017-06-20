@@ -33,24 +33,21 @@ import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.FadingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.SaprolingBurstToken;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
 
@@ -119,54 +116,6 @@ class SaprolingBurstCreateTokenEffect extends OneShotEffect {
             game.getState().setValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game), tokensCreated);
         }
         return true;
-    }
-}
-
-class SaprolingBurstToken extends Token {
-
-    SaprolingBurstToken(MageObjectReference saprolingBurstMOR) {
-        super("Saproling", "green Saproling creature token with \"This creature's power and toughness are each equal to the number of fade counters on Saproling Burst.\"");
-        this.color.setGreen(true);
-        this.subtype.add("Saproling");
-        this.cardType.add(CardType.CREATURE);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new SaprolingBurstTokenDynamicValue(saprolingBurstMOR), Duration.WhileOnBattlefield)));
-    }
-}
-
-class SaprolingBurstTokenDynamicValue implements DynamicValue {
-
-    private final MageObjectReference saprolingBurstMOR;
-
-    SaprolingBurstTokenDynamicValue(MageObjectReference saprolingBurstMOR) {
-        this.saprolingBurstMOR = saprolingBurstMOR;
-    }
-
-    SaprolingBurstTokenDynamicValue(final SaprolingBurstTokenDynamicValue dynamicValue) {
-        this.saprolingBurstMOR = dynamicValue.saprolingBurstMOR;
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent permanent = this.saprolingBurstMOR.getPermanent(game);
-        if (permanent != null) {
-            return permanent.getCounters(game).getCount(CounterType.FADE);
-        }
-        return 0;
-    }
-
-    @Override
-    public SaprolingBurstTokenDynamicValue copy() {
-        return new SaprolingBurstTokenDynamicValue(this);
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "the number of fade counters on Saproling Burst";
     }
 }
 

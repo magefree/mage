@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -45,6 +44,8 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,7 +73,7 @@ public class DwarvenLandslide extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            if (KickedCondition.getInstance().apply(game, ability)) {
+            if (KickedCondition.instance.apply(game, ability)) {
                 ability.getTargets().clear();
                 getSpellAbility().addTarget(new TargetLandPermanent(2));
             }

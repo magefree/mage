@@ -27,10 +27,8 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -49,10 +47,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
-import mage.game.command.Emblem;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
+import mage.game.command.emblems.DarettiScrapSavantEmblem;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
@@ -60,6 +55,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetDiscard;
 import mage.target.targetpointer.FixedTarget;
+import java.util.UUID;
 
 /**
  *
@@ -172,55 +168,6 @@ class DarettiSacrificeEffect extends OneShotEffect {
     }
 }
 
-class DarettiScrapSavantEmblem extends Emblem {
-
-    // You get an emblem with "Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step."
-    public DarettiScrapSavantEmblem() {
-        this.getAbilities().add(new DarettiScrapSavantTriggeredAbility());
-    }
-}
-
-class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
-
-    DarettiScrapSavantTriggeredAbility() {
-        super(Zone.COMMAND, new DarettiScrapSavantEffect(), false);
-    }
-
-    DarettiScrapSavantTriggeredAbility(final DarettiScrapSavantTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DarettiScrapSavantTriggeredAbility copy() {
-        return new DarettiScrapSavantTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getFromZone() == Zone.BATTLEFIELD
-                && zEvent.getTarget().getCardType().contains(CardType.ARTIFACT)
-                && zEvent.getTarget().getOwnerId().equals(this.controllerId)) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an artifact is put into your graveyard from the battlefield, " + super.getRule();
-    }
-}
-
 class DarettiScrapSavantEffect extends OneShotEffect {
 
     DarettiScrapSavantEffect() {
@@ -240,7 +187,7 @@ class DarettiScrapSavantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
             effect.setText("return that card to the battlefield at the beginning of the next end step");

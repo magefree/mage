@@ -30,6 +30,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -55,10 +56,10 @@ public class TimberProtector extends CardImpl {
     private static final FilterControlledPermanent filterBoth = new FilterControlledPermanent("Other Treefolk and Forests you control");
 
     static {
-        filterTreefolk.add(new SubtypePredicate("Treefolk"));
+        filterTreefolk.add(new SubtypePredicate(SubType.TREEFOLK));
         filterBoth.add(Predicates.or(
-                new SubtypePredicate("Treefolk"),
-                new SubtypePredicate("Forest")));
+                new SubtypePredicate(SubType.TREEFOLK),
+                new SubtypePredicate(SubType.FOREST)));
         filterBoth.add(new AnotherPredicate());
     }
 

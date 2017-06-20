@@ -29,10 +29,10 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.constants.ComparisonType;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -70,7 +70,7 @@ public class ReaverDrone extends CardImpl {
         // At the beginning of your upkeep, you lose 1 life unless you control another colorless creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
                 new LoseLifeSourceControllerEffect(1),
-                new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0, true)),
+                new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, true)),
                 "you lose 1 life unless you control another colorless creature"), TargetController.YOU, false));
     }
 

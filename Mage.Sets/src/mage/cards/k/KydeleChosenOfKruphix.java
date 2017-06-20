@@ -27,11 +27,6 @@
  */
 package mage.cards.k;
 
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -43,10 +38,13 @@ import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  *
@@ -57,7 +55,7 @@ public class KydeleChosenOfKruphix extends CardImpl {
     public KydeleChosenOfKruphix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);
@@ -85,8 +83,8 @@ class CardsDrawnThisTurnDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        KydeleCardsDrawnThisTurnWatcher watcher = (KydeleCardsDrawnThisTurnWatcher) game.getState().getWatchers().get(KydeleCardsDrawnThisTurnWatcher.class.getName());
-        return watcher.getNumCardsDrawnThisTurn(sourceAbility.getControllerId());
+        KydeleCardsDrawnThisTurnWatcher watcher = (KydeleCardsDrawnThisTurnWatcher) game.getState().getWatchers().get(KydeleCardsDrawnThisTurnWatcher.class.getSimpleName());
+        return watcher.getCardsDrawnThisTurn(sourceAbility.getControllerId()).size();
     }
 
     @Override
@@ -110,7 +108,7 @@ class KydeleCardsDrawnThisTurnWatcher extends Watcher {
     private final Map<UUID, Set<UUID>> cardsDrawnThisTurn = new HashMap<>();
 
     public KydeleCardsDrawnThisTurnWatcher() {
-        super(KydeleCardsDrawnThisTurnWatcher.class.getName(), WatcherScope.GAME);
+        super(KydeleCardsDrawnThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public KydeleCardsDrawnThisTurnWatcher(final KydeleCardsDrawnThisTurnWatcher watcher) {
@@ -121,20 +119,14 @@ class KydeleCardsDrawnThisTurnWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
-            if (!cardsDrawnThisTurn.containsKey(event.getPlayerId())) {
-                Set<UUID> cardsDrawn = new LinkedHashSet<>();
-                cardsDrawnThisTurn.put(event.getPlayerId(), cardsDrawn);
-            }
-            Set<UUID> cardsDrawn = cardsDrawnThisTurn.get(event.getPlayerId());
+            Set<UUID> cardsDrawn = getCardsDrawnThisTurn(event.getPlayerId());
             cardsDrawn.add(event.getTargetId());
+            cardsDrawnThisTurn.put(event.getPlayerId(), cardsDrawn);
         }
     }
 
-    public int getNumCardsDrawnThisTurn(UUID playerId) {
-        if (cardsDrawnThisTurn.get(playerId) == null) {
-            return 0;
-        }
-        return cardsDrawnThisTurn.get(playerId).size();
+    public Set<UUID> getCardsDrawnThisTurn(UUID playerId) {
+        return cardsDrawnThisTurn.getOrDefault(playerId, new LinkedHashSet<>());
     }
 
     @Override

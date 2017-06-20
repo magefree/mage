@@ -33,7 +33,6 @@ public class HallOfTheBanditLordTest extends CardTestPlayerBase {
         execute();
 
         this.assertAbility(playerA, "Goblin Roughrider", HasteAbility.getInstance(), true);
-
     }
 
     // test that a creature cast not using Hall of the Bandit Lord mana does not gain haste
@@ -49,7 +48,5 @@ public class HallOfTheBanditLordTest extends CardTestPlayerBase {
         execute();
 
         this.assertAbility(playerA, "Ember Hauler", HasteAbility.getInstance(), false);
-
     }
-
 }

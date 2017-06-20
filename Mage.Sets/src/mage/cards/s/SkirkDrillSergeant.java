@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
@@ -57,7 +58,7 @@ public class SkirkDrillSergeant extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Goblin");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public SkirkDrillSergeant(UUID ownerId, CardSetInfo setInfo) {
@@ -87,7 +88,7 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Goblin permanent card");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public SkirkDrillSergeantEffect() {
@@ -112,7 +113,7 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
             return false;
         }
 
-        if (controller.getLibrary().size() > 0) {
+        if (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             if (card != null) {

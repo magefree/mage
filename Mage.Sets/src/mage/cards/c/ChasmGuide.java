@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class ChasmGuide extends CardImpl {
 
     public ChasmGuide(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Scout");
         this.subtype.add("Ally");
@@ -54,7 +54,7 @@ public class ChasmGuide extends CardImpl {
 
         // <i>Rally</i> — Whenever Chasm Guide or another Ally enters the battlefield under your control, creatures you control gain haste until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures")), false));
+                new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), false));
     }
 
     public ChasmGuide(final ChasmGuide card) {

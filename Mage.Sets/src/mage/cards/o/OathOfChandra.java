@@ -27,9 +27,6 @@
  */
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,11 +37,7 @@ import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -52,6 +45,11 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  *
@@ -67,16 +65,18 @@ public class OathOfChandra extends CardImpl {
 
     public OathOfChandra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
 
         // When Oath of Chandra enters the battlefield, it deals 3 damage to target creature an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), false);
+        Effect effect = new DamageTargetEffect(3);
+        effect.setText("it deals 3 damage to target creature an opponent controls");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, Oath of Chandra deals 2 damage to each opponent.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
                 new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT),
-                TargetController.ANY, false), OathOfChandraCondition.getInstance(),
+                TargetController.ANY, false), OathOfChandraCondition.instance,
                 "At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, {this} deals 2 damage to each opponent."), new OathOfChandraWatcher());
     }
 
@@ -90,17 +90,13 @@ public class OathOfChandra extends CardImpl {
     }
 }
 
-class OathOfChandraCondition implements Condition {
+enum OathOfChandraCondition implements Condition {
 
-    private static final OathOfChandraCondition fInstance = new OathOfChandraCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        OathOfChandraWatcher watcher = (OathOfChandraWatcher) game.getState().getWatchers().get("OathOfChandraWatcher");
+        OathOfChandraWatcher watcher = (OathOfChandraWatcher) game.getState().getWatchers().get(OathOfChandraWatcher.class.getSimpleName());
         return watcher != null && watcher.enteredPlaneswalkerForPlayer(source.getControllerId());
     }
 
@@ -116,7 +112,7 @@ class OathOfChandraWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public OathOfChandraWatcher() {
-        super("OathOfChandraWatcher", WatcherScope.GAME);
+        super(OathOfChandraWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public OathOfChandraWatcher(final OathOfChandraWatcher watcher) {
@@ -128,8 +124,8 @@ class OathOfChandraWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone().equals(Zone.BATTLEFIELD)
-                    && zEvent.getTarget().getCardType().contains(CardType.PLANESWALKER)) {
+            if (zEvent.getToZone() == Zone.BATTLEFIELD
+                    && zEvent.getTarget().isPlaneswalker()) {
                 players.add(zEvent.getTarget().getControllerId());
             }
         }

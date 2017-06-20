@@ -55,7 +55,7 @@ import mage.players.Player;
 public class RecoverAbility extends TriggeredAbilityImpl {
 
     public RecoverAbility(Cost cost, Card card) {
-        super(Zone.GRAVEYARD, new RecoverEffect(cost, card.getCardType().contains(CardType.CREATURE)), false);
+        super(Zone.GRAVEYARD, new RecoverEffect(cost, card.isCreature()), false);
     }
 
     public RecoverAbility(final RecoverAbility ability) {
@@ -75,9 +75,9 @@ public class RecoverAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
             if (zEvent.getTarget().getOwnerId().equals(getControllerId())
-                    && zEvent.getTarget().getCardType().contains(CardType.CREATURE)
+                    && zEvent.getTarget().isCreature()
                     && !zEvent.getTarget().getId().equals(getSourceId())) {
                 return true;
             }
@@ -116,7 +116,7 @@ class RecoverEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null && sourceCard != null
-                && game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
+                && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
             if (controller.chooseUse(Outcome.Damage, "Pay " + cost.getText() + " to recover " + sourceCard.getLogName() + "? (Otherwise the card will be exiled)", source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {

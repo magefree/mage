@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -47,6 +47,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanentAmount;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +62,7 @@ public class AjaniMentorOfHeroes extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filterCard.add(Predicates.or(
-                new SubtypePredicate("Aura"),
+                new SubtypePredicate(SubType.AURA),
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.PLANESWALKER)));
     }

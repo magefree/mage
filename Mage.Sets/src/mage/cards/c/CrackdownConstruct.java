@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -41,6 +40,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +94,7 @@ class CrackdownConstructTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (source != null && (source.getCardType().contains(CardType.ARTIFACT) || source.getCardType().contains(CardType.CREATURE))) {
+            if (source != null && (source.isArtifact() || source.isCreature())) {
                 StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
                 if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
                     return true;

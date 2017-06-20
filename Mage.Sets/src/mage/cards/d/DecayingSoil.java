@@ -27,7 +27,6 @@
  */
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -43,23 +42,21 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -179,7 +176,7 @@ class DecayingSoilEffect extends OneShotEffect {
                       if (target != null) {
                         Card card = game.getCard(target);
                         // check if it's still in graveyard
-                        if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                             card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                             return true;
                         }

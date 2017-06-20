@@ -28,10 +28,8 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -53,7 +51,7 @@ public class Lashwrithe extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        filter.add(new SubtypePredicate(SubType.SWAMP));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
@@ -64,7 +62,7 @@ public class Lashwrithe extends CardImpl {
         this.addAbility(new LivingWeaponAbility());
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{BP}{BP}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{B/P}{B/P}")));
     }
 
     public Lashwrithe(final Lashwrithe card) {

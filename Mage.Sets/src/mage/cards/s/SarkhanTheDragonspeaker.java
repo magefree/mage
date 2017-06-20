@@ -32,33 +32,24 @@ import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
-import mage.game.command.Emblem;
+import mage.game.command.emblems.SarkhanTheDragonspeakerEmblem;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
+ * import mage.game.command.emblems.SarkhanTheDragonspeakerEmblem;
  *
  * @author emerald000
  */
@@ -124,11 +115,11 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().clear();
-                        permanent.getCardType().add(CardType.CREATURE);
+                        permanent.addCardType(CardType.CREATURE);
                         permanent.getSubtype(game).clear();
                         permanent.getSubtype(game).add("Dragon");
-                        permanent.getSupertype().clear();
-                        permanent.getSupertype().add("Legendary");
+                        permanent.getSuperType().clear();
+                        permanent.addSuperType(SuperType.LEGENDARY);
                     }
                     break;
                 case ColorChangingEffects_5:
@@ -160,16 +151,5 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
     @Override
     public boolean hasLayer(Layer layer) {
         return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
-    }
-}
-
-class SarkhanTheDragonspeakerEmblem extends Emblem {
-
-    SarkhanTheDragonspeakerEmblem() {
-        setName("Emblem Sarkhan");
-        this.setExpansionSetCodeForImage("KTK");
-
-        this.getAbilities().add(new BeginningOfDrawTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(2), TargetController.YOU, false));
-        this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new DiscardHandControllerEffect(), TargetController.YOU, null, false));
     }
 }

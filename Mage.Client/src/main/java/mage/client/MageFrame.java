@@ -27,103 +27,52 @@
  */
 package mage.client;
 
-import java.awt.AWTEvent;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.SplashScreen;
-import java.awt.Toolkit;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.net.SocketException;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
 import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
-import javax.swing.ImageIcon;
-import javax.swing.InputMap;
-import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComponent;
-import javax.swing.JDesktopPane;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JToggleButton;
-import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import mage.cards.action.ActionCallback;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanelBasic;
-import mage.client.components.MageComponents;
-import mage.client.components.MageDesktopManager;
-import mage.client.components.MageJDesktop;
-import mage.client.components.MageRoundPane;
-import mage.client.components.MageUI;
+import mage.client.components.*;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.tray.MageTray;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deckeditor.DeckEditorPane;
 import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
-import mage.client.dialog.AboutDialog;
-import mage.client.dialog.ConnectDialog;
-import mage.client.dialog.ErrorDialog;
-import mage.client.dialog.FeedbackDialog;
-import mage.client.dialog.GameEndDialog;
-import mage.client.dialog.MageDialog;
-import mage.client.dialog.PreferencesDialog;
-import mage.client.dialog.TableWaitingDialog;
-import mage.client.dialog.UserRequestDialog;
+import mage.client.dialog.*;
 import mage.client.draft.DraftPane;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePane;
 import mage.client.game.GamePanel;
+import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.preference.MagePreferences;
 import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
-import mage.client.util.EDTExceptionHandler;
-import mage.client.util.GUISizeHelper;
-import mage.client.util.ImageCaches;
-import mage.client.util.SettingsManager;
-import mage.client.util.SystemUtil;
+import mage.client.util.*;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
+import mage.components.ImagePanelStyle;
 import mage.constants.PlayerAction;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
@@ -185,7 +134,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private final BalloonTip balloonTip;
 
-    private List<CardInfo> missingCards;
+    private java.util.List<CardInfo> missingCards;
 
     /**
      * @return the session
@@ -278,14 +227,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         ManaSymbols.loadImages();
-        Plugins.getInstance().loadPlugins();
+        Plugins.instance.loadPlugins();
 
         initComponents();
 
         desktopPane.setDesktopManager(new MageDesktopManager());
 
         setSize(1024, 768);
-        SettingsManager.getInstance().setScreenWidthAndHeight(1024, 768);
+        SettingsManager.instance.setScreenWidthAndHeight(1024, 768);
         DialogManager.updateParams(768, 1024, false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -302,19 +251,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
 
-        try {
-            tablesPane = new TablesPane();
-            desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-            tablesPane.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-            LOGGER.fatal(null, ex);
-        }
+        tablesPane = new TablesPane();
+        desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         addTooltipContainer();
         setBackground();
         addMageLabel();
         setAppIcon();
-        MageTray.getInstance().install();
+        MageTray.instance.install();
 
         desktopPane.add(ArrowBuilder.getBuilder().getArrowsManagerPanel(), JLayeredPane.DRAG_LAYER);
 
@@ -323,10 +267,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             public void componentResized(ComponentEvent e) {
                 int width = ((JComponent) e.getSource()).getWidth();
                 int height = ((JComponent) e.getSource()).getHeight();
-                SettingsManager.getInstance().setScreenWidthAndHeight(width, height);
+                SettingsManager.instance.setScreenWidthAndHeight(width, height);
                 if (!liteMode && !grayMode) {
                     backgroundPane.setSize(width, height);
                 }
+
+                updateCurrentFrameSize();
 
                 ArrowBuilder.getBuilder().setSize(width, height);
 
@@ -344,8 +290,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(createSwitchPanelsButton(), 0);
         mageToolbar.add(new javax.swing.JToolBar.Separator(), 1);
 
-        if (Plugins.getInstance().isCounterPluginLoaded()) {
-            int i = Plugins.getInstance().getGamesPlayed();
+        if (Plugins.instance.isCounterPluginLoaded()) {
+            int i = Plugins.instance.getGamesPlayed();
             JLabel label = new JLabel("  Games played: " + String.valueOf(i));
             desktopPane.add(label, JLayeredPane.DEFAULT_LAYER + 1);
             label.setVisible(true);
@@ -387,7 +333,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void addTooltipContainer() {
-        final JEditorPane cardInfoPane = (JEditorPane) Plugins.getInstance().getCardInfoPane();
+        final JEditorPane cardInfoPane = (JEditorPane) Plugins.instance.getCardInfoPane();
         if (cardInfoPane == null) {
             return;
         }
@@ -471,12 +417,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
         String filename = "/background.jpg";
         try {
-            if (Plugins.getInstance().isThemePluginLoaded()) {
-                backgroundPane = (ImagePanel) Plugins.getInstance().updateTablePanel(new HashMap<String, JComponent>());
+            if (Plugins.instance.isThemePluginLoaded()) {
+                backgroundPane = (ImagePanel) Plugins.instance.updateTablePanel(new HashMap<>());
             } else {
                 InputStream is = this.getClass().getResourceAsStream(filename);
                 BufferedImage background = ImageIO.read(is);
-                backgroundPane = new ImagePanel(background, ImagePanel.SCALED);
+                backgroundPane = new ImagePanel(background, ImagePanelStyle.SCALED);
             }
             backgroundPane.setSize(1024, 768);
             desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
@@ -509,7 +455,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void setAppIcon() {
-        Image image = ImageManagerImpl.getInstance().getAppImage();
+        Image image = ImageManagerImpl.instance.getAppImage();
         setIconImage(image);
     }
 
@@ -527,7 +473,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void createAndShowSwitchPanelsMenu(final JComponent component, final AbstractButton windowButton) {
         JPopupMenu menu = new JPopupMenu();
-        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Component[] windows = desktopPane.getComponentsInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
         MagePaneMenuItem menuItem;
 
         for (int i = 0; i < windows.length; i++) {
@@ -541,7 +487,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                         MagePane frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
                         setActive(frame);
                     });
-                    menuItem.setIcon(window.getFrameIcon());
+                    //menuItem.setIcon(window.getFrameIcon());
                     menu.add(menuItem);
                 }
             }
@@ -581,34 +527,43 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-//    public void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
-//        List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
-//        DownloadPictures.startDownload(null, cards);
-//    }
-//    public void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {
-//        UserRequestMessage message = new UserRequestMessage("Download additional resources", "Do you want to download game symbols and additional image files?");
-//        message.setButton1("No", null);
-//        message.setButton2("Yes", PlayerAction.CLIENT_DOWNLOAD_SYMBOLS);
-//        showUserRequestDialog(message);
-//    }
     public static void setActive(MagePane frame) {
+        // Always hide not hidden popup window or enlarged card view if a frame is set to active
+        try {
+            ActionCallback callback = Plugins.instance.getActionCallback();
+            if (callback != null && callback instanceof MageActionCallback) {
+                ((MageActionCallback) callback).hideEnlargedCard();
+            }
+            Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
+            if (container.isVisible()) {
+                container.setVisible(false);
+                container.repaint();
+            }
+        } catch (InterruptedException e) {
+
+        }
+        // Nothing to do
+        if (activeFrame == frame) {
+            return;
+        }
+
+        // Deactivate current frame if there is one
+        if (activeFrame != null) {
+            activeFrame.deactivated();
+        }
+
+        // If null, no new frame to activate, return early
         if (frame == null) {
             activeFrame = null;
             return;
         }
         LOGGER.debug("Setting " + frame.getTitle() + " active");
-        if (activeFrame != null) {
-            activeFrame.deactivated();
-        }
         activeFrame = frame;
-        activeFrame.setVisible(true);
-        activeFrame.toFront();
-        try {
-            activeFrame.setSelected(true);
-        } catch (PropertyVetoException ex) {
-            LOGGER.error("Error setting " + frame.getTitle() + " active");
-        }
+        desktopPane.moveToFront(frame);
+        activeFrame.setBounds(0, 0, desktopPane.getWidth(), desktopPane.getHeight());
+        activeFrame.revalidate();
         activeFrame.activated();
+        activeFrame.setVisible(true);
         ArrowBuilder.getBuilder().hideAllPanels();
         if (frame instanceof GamePane) {
             ArrowBuilder.getBuilder().showPanel(((GamePane) frame).getGameId());
@@ -618,23 +573,36 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
+    private void updateCurrentFrameSize() {
+        if (activeFrame != null) {
+            activeFrame.setBounds(0, 0, desktopPane.getWidth(), desktopPane.getHeight());
+        }
+    }
+
+    @Override
+    public void doLayout() {
+        super.doLayout();
+
+        updateCurrentFrameSize();
+    }
+
     public static void deactivate(MagePane frame) {
         frame.setVisible(false);
         setActive(getTopMost(frame));
         if (activeFrame != frame) {
             frame.deactivated();
         }
-
     }
 
     private static MagePane getTopMost(MagePane exclude) {
         MagePane topmost = null;
         int best = Integer.MAX_VALUE;
-        for (JInternalFrame frame : desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER)) {
+        for (Component frame : desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER)) {
             if (frame.isVisible()) {
                 int z = desktopPane.getComponentZOrder(frame);
                 if (z < best) {
-                    if (frame instanceof MagePane) {
+                    // Exclude the tables pane if not connected, we never want to show it when not connected
+                    if (frame instanceof MagePane && (SessionHandler.isConnected() || !(frame instanceof TablesPane))) {
                         best = z;
                         if (!frame.equals(exclude)) {
                             topmost = (MagePane) frame;
@@ -653,64 +621,47 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * @param playerId
      */
     public void showGame(UUID gameId, UUID playerId) {
-        try {
-            GamePane gamePane = new GamePane();
-            desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
-            gamePane.setMaximum(true);
-            gamePane.setVisible(true);
-            gamePane.showGame(gameId, playerId);
-            setActive(gamePane);
-        } catch (PropertyVetoException ex) {
-        }
+        GamePane gamePane = new GamePane();
+        desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
+        gamePane.setVisible(true);
+        gamePane.showGame(gameId, playerId);
+        setActive(gamePane);
     }
 
     public void watchGame(UUID gameId) {
-        try {
-            for (Component component : desktopPane.getComponents()) {
-                if (component instanceof GamePane
-                        && ((GamePane) component).getGameId().equals(gameId)) {
-                    setActive((GamePane) component);
-                    return;
-                }
+        for (Component component : desktopPane.getComponents()) {
+            if (component instanceof GamePane
+                    && ((GamePane) component).getGameId().equals(gameId)) {
+                setActive((GamePane) component);
+                return;
             }
-            GamePane gamePane = new GamePane();
-            desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
-            gamePane.setMaximum(true);
-            gamePane.setVisible(true);
-            gamePane.watchGame(gameId);
-            setActive(gamePane);
-        } catch (PropertyVetoException ex) {
-            LOGGER.debug("Problem starting watching game " + gameId, ex);
         }
+        GamePane gamePane = new GamePane();
+        desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
+        gamePane.setVisible(true);
+        gamePane.watchGame(gameId);
+        setActive(gamePane);
     }
 
     public void replayGame(UUID gameId) {
-        try {
-            GamePane gamePane = new GamePane();
-            desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
-            gamePane.setMaximum(true);
-            gamePane.setVisible(true);
-            gamePane.replayGame(gameId);
-            setActive(gamePane);
-        } catch (PropertyVetoException ex) {
-        }
+        GamePane gamePane = new GamePane();
+        desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
+        gamePane.setVisible(true);
+        gamePane.replayGame(gameId);
+        setActive(gamePane);
     }
 
     public void showDraft(UUID draftId) {
-        try {
-            DraftPane draftPane = new DraftPane();
-            desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
-            draftPane.setMaximum(true);
-            draftPane.setVisible(true);
-            draftPane.showDraft(draftId);
-            setActive(draftPane);
-        } catch (PropertyVetoException ex) {
-        }
+        DraftPane draftPane = new DraftPane();
+        desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
+        draftPane.setVisible(true);
+        draftPane.showDraft(draftId);
+        setActive(draftPane);
     }
 
     public void endDraft(UUID draftId) {
         // inform all open draft panes about
-        for (JInternalFrame window : desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER)) {
+        for (Component window : desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER)) {
             if (window instanceof DraftPane) {
                 DraftPane draftPane = (DraftPane) window;
                 draftPane.removeDraft();
@@ -719,22 +670,18 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void showTournament(UUID tournamentId) {
-        try {
-            for (Component component : desktopPane.getComponents()) {
-                if (component instanceof TournamentPane
-                        && ((TournamentPane) component).getTournamentId().equals(tournamentId)) {
-                    setActive((TournamentPane) component);
-                    return;
-                }
+        for (Component component : desktopPane.getComponents()) {
+            if (component instanceof TournamentPane
+                    && ((TournamentPane) component).getTournamentId().equals(tournamentId)) {
+                setActive((TournamentPane) component);
+                return;
             }
-            TournamentPane tournamentPane = new TournamentPane();
-            desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
-            tournamentPane.setMaximum(true);
-            tournamentPane.setVisible(true);
-            tournamentPane.showTournament(tournamentId);
-            setActive(tournamentPane);
-        } catch (PropertyVetoException ex) {
         }
+        TournamentPane tournamentPane = new TournamentPane();
+        desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
+        tournamentPane.setVisible(true);
+        tournamentPane.showTournament(tournamentId);
+        setActive(tournamentPane);
     }
 
     public void showGameEndDialog(GameEndView gameEndView) {
@@ -785,6 +732,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             currentConnection.setPassword(password);
             currentConnection.setHost(server);
             currentConnection.setPort(port);
+            String allMAC = "";
+            try {
+                allMAC = currentConnection.getMAC();
+            } catch (SocketException ex) {
+            }
+            currentConnection.setUserIdStr(System.getProperty("user.name") + ":" + System.getProperty("os.name") + ":" + MagePreferences.getUserNames() + ":" + allMAC);
             currentConnection.setProxyType(proxyType);
             currentConnection.setProxyHost(proxyServer);
             currentConnection.setProxyPort(proxyPort);
@@ -797,7 +750,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             LOGGER.debug("connecting (auto): " + currentConnection.getProxyType().toString()
                     + ' ' + currentConnection.getProxyHost() + ' ' + currentConnection.getProxyPort() + ' ' + currentConnection.getProxyUsername());
             if (MageFrame.connect(currentConnection)) {
-                showGames(false);
+                prepareAndShowTablesPane();
                 return true;
             } else {
                 showMessage("Unable to connect to server");
@@ -1025,7 +978,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnImagesActionPerformed
 
     public void downloadImages() {
-        List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
+        java.util.List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
         DownloadPictures.startDownload(null, cards);
     }
 
@@ -1057,23 +1010,26 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         this.tablesPane.hideTables();
     }
 
-    public void showGames(boolean setActive) {
-        MagePane topPanebefore = getTopMost(tablesPane);
-        if (!tablesPane.isVisible()) {
-            this.tablesPane.setVisible(true);
-            this.tablesPane.showTables();
+    public void setTableFilter() {
+        if (this.tablesPane != null) {
+            this.tablesPane.setTableFilter();
         }
-        if (setActive) {
+    }
+
+    public void prepareAndShowTablesPane() {
+        // Update the tables pane with the new session
+        this.tablesPane.showTables();
+
+        // Show the tables pane if there wasn't already an active pane
+        MagePane topPanebefore = getTopMost(tablesPane);
+        if (topPanebefore == null) {
             setActive(tablesPane);
-        } else // if other panel was already shown, mamke sure it's topmost again
-         if (topPanebefore != null) {
-                setActive(topPanebefore);
-            }
+        }
     }
 
     public void hideGames() {
-        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
-        for (JInternalFrame window : windows) {
+        Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+        for (Component window : windows) {
             if (window instanceof GamePane) {
                 GamePane gamePane = (GamePane) window;
                 gamePane.removeGame();
@@ -1089,8 +1045,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             // close & remove sideboarding or construction pane if open
             if (window instanceof DeckEditorPane) {
                 DeckEditorPane deckEditorPane = (DeckEditorPane) window;
-                if (deckEditorPane.getDeckEditorMode().equals(DeckEditorMode.LIMITED_BUILDING)
-                        || deckEditorPane.getDeckEditorMode().equals(DeckEditorMode.SIDEBOARDING)) {
+                if (deckEditorPane.getDeckEditorMode() == DeckEditorMode.LIMITED_BUILDING
+                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.SIDEBOARDING
+                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.VIEW_LIMITED_DECK) {
                     deckEditorPane.removeFrame();
                 }
             }
@@ -1100,7 +1057,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
         String name;
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
+        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
             name = "Deck Editor - " + tableId.toString();
         } else {
             if (deck != null) {
@@ -1109,25 +1066,20 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 name = "Deck Editor";
             }
             // use already open editor
-            JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
-            for (JInternalFrame window : windows) {
-                if (window instanceof DeckEditorPane && window.getTitle().equals(name)) {
+            Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+            for (Component window : windows) {
+                if (window instanceof DeckEditorPane && ((MagePane) window).getTitle().equals(name)) {
                     setActive((MagePane) window);
                     return;
                 }
             }
         }
 
-        try {
-            DeckEditorPane deckEditorPane = new DeckEditorPane();
-            desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
-            deckEditorPane.setMaximum(true);
-            deckEditorPane.setVisible(true);
-            deckEditorPane.show(mode, deck, name, tableId, time);
-            setActive(deckEditorPane);
-        } catch (PropertyVetoException ex) {
-            LOGGER.fatal(null, ex);
-        }
+        DeckEditorPane deckEditorPane = new DeckEditorPane();
+        desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
+        deckEditorPane.setVisible(false);
+        deckEditorPane.show(mode, deck, name, tableId, time);
+        setActive(deckEditorPane);
     }
 
     public void showUserRequestDialog(final UserRequestMessage userRequestMessage) {
@@ -1152,22 +1104,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void showCollectionViewer() {
-        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
-        for (JInternalFrame window : windows) {
+        Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+        for (Component window : windows) {
             if (window instanceof CollectionViewerPane) {
                 setActive((MagePane) window);
                 return;
             }
         }
-        try {
-            CollectionViewerPane collectionViewerPane = new CollectionViewerPane();
-            desktopPane.add(collectionViewerPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-            collectionViewerPane.setMaximum(true);
-            collectionViewerPane.setVisible(true);
-            setActive(collectionViewerPane);
-        } catch (PropertyVetoException ex) {
-            LOGGER.fatal(null, ex);
-        }
+        CollectionViewerPane collectionViewerPane = new CollectionViewerPane();
+        desktopPane.add(collectionViewerPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        collectionViewerPane.setVisible(true);
+        setActive(collectionViewerPane);
     }
 
     static void renderSplashFrame(Graphics2D g) {
@@ -1366,7 +1313,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void sendUserReplay(PlayerAction playerAction, UserRequestMessage userRequestMessage) {
         switch (playerAction) {
             case CLIENT_DOWNLOAD_SYMBOLS:
-                Plugins.getInstance().downloadSymbols();
+                Plugins.instance.downloadSymbols();
                 break;
             case CLIENT_DOWNLOAD_CARD_IMAGES:
                 DownloadPictures.startDownload(null, missingCards);
@@ -1404,7 +1351,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
                 CardRepository.instance.closeDB();
                 tablesPane.cleanUp();
-                Plugins.getInstance().shutdown();
+                Plugins.instance.shutdown();
                 dispose();
                 System.exit(0);
                 break;
@@ -1433,7 +1380,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         setGUISizeTooltipContainer();
 
-        Plugins.getInstance().changeGUISize();
+        Plugins.instance.changeGUISize();
         CountryUtil.changeGUISize();
         for (Component component : desktopPane.getComponents()) {
             if (component instanceof MageDialog) {
@@ -1453,7 +1400,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
 
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
 
         this.revalidate();

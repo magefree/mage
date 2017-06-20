@@ -33,26 +33,6 @@
  */
 package mage.client.cards;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.beans.Beans;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import mage.cards.MageCard;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.constants.Constants.SortBy;
@@ -61,21 +41,25 @@ import mage.client.deckeditor.table.TableModel;
 import mage.client.deckeditor.table.UpdateCountsCallback;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.CardViewCardTypeComparator;
-import mage.client.util.CardViewColorComparator;
-import mage.client.util.CardViewColorIdentityComparator;
-import mage.client.util.CardViewCostComparator;
-import mage.client.util.CardViewNameComparator;
-import mage.client.util.CardViewRarityComparator;
+import mage.client.util.*;
 import mage.client.util.Event;
-import mage.client.util.GUISizeHelper;
-import mage.client.util.Listener;
 import mage.client.util.gui.TableSpinnerEditor;
-import mage.constants.CardType;
 import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.SimpleCardView;
 import org.mage.card.arcane.CardPanel;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.beans.Beans;
+import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -217,7 +201,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     // if you use the deck ediot to build a free deck, numbers can be set directly in deck and sideboard
     public void setDeckEditorMode(DeckEditorMode mode) {
-        if (mode.equals(DeckEditorMode.FREE_BUILDING)) {
+        if (mode == DeckEditorMode.FREE_BUILDING) {
             // activate spinner for card number change
             mainModel.setNumberEditable(true);
             TableColumnModel tcm = mainTable.getColumnModel();
@@ -398,22 +382,22 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         int artifactCount = 0;
 
         for (CardView card : cards.values()) {
-            if (card.getCardTypes().contains(CardType.LAND)) {
+            if (card.isLand()) {
                 landCount++;
             }
-            if (card.getCardTypes().contains(CardType.CREATURE)) {
+            if (card.isCreature()) {
                 creatureCount++;
             }
-            if (card.getCardTypes().contains(CardType.SORCERY)) {
+            if (card.isSorcery()) {
                 sorceryCount++;
             }
-            if (card.getCardTypes().contains(CardType.INSTANT)) {
+            if (card.isInstant()) {
                 instantCount++;
             }
-            if (card.getCardTypes().contains(CardType.ENCHANTMENT)) {
+            if (card.isEnchantment()) {
                 enchantmentCount++;
             }
-            if (card.getCardTypes().contains(CardType.ARTIFACT)) {
+            if (card.isArtifact()) {
                 artifactCount++;
             }
         }
@@ -425,7 +409,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     }
 
     private MageCard addCard(CardView card, BigCard bigCard, UUID gameId) {
-        MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true, true);
+        MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true);
         cardArea.add(cardImg);
         cardImg.update(card);
         cardImg.addMouseListener(this);

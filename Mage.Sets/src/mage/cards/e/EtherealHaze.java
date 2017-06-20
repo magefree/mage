@@ -25,16 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.e;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -42,16 +41,16 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class EtherealHaze extends CardImpl {
 
-    public EtherealHaze (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+    public EtherealHaze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
         this.subtype.add("Arcane");
 
         // Prevent all damage that would be dealt by creatures this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(new FilterCreaturePermanent("creatures"), Duration.EndOfTurn, false));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(FILTER_PERMANENT_CREATURES, Duration.EndOfTurn, false));
 
     }
 
-    public EtherealHaze (final EtherealHaze card) {
+    public EtherealHaze(final EtherealHaze card) {
         super(card);
     }
 

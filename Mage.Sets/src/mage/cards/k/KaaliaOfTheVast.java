@@ -36,9 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +55,7 @@ public class KaaliaOfTheVast extends CardImpl {
 
     public KaaliaOfTheVast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}{R}");
-        this.supertype.add("Legendary");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 
@@ -126,9 +124,9 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate("Angel"),
-                new SubtypePredicate("Demon"),
-                new SubtypePredicate("Dragon")));
+                new SubtypePredicate(SubType.ANGEL),
+                new SubtypePredicate(SubType.DEMON),
+                new SubtypePredicate(SubType.DRAGON)));
     }
 
     public KaaliaOfTheVastEffect() {

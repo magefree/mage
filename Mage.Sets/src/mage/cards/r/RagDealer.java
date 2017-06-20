@@ -25,25 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
-import mage.game.Game;
 import mage.target.common.TargetCardInASingleGraveyard;
 
 /**
@@ -52,23 +48,22 @@ import mage.target.common.TargetCardInASingleGraveyard;
  */
 public class RagDealer extends CardImpl {
 
-    public RagDealer (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+    public RagDealer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
-
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // {2}{B}, {T}: Exile up to three target cards from a single graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RagDealerExileEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("up to three target cards from a single graveyard")));
+        ability.addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("cards from a single graveyard")));
         this.addAbility(ability);
     }
 
-    public RagDealer (final RagDealer card) {
+    public RagDealer(final RagDealer card) {
         super(card);
     }
 
@@ -77,32 +72,4 @@ public class RagDealer extends CardImpl {
         return new RagDealer(this);
     }
 
-}
-
-class RagDealerExileEffect extends OneShotEffect {
-
-    public RagDealerExileEffect() {
-            super(Outcome.Exile);
-            this.staticText = "Exile up to three target cards from a single graveyard";
-    }
-
-    public RagDealerExileEffect(final RagDealerExileEffect effect) {
-            super(effect);
-    }
-
-    @Override
-    public RagDealerExileEffect copy() {
-            return new RagDealerExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID targetID : source.getTargets().get(0).getTargets()) {
-            Card card = game.getCard(targetID);
-            if (card != null) {
-                card.moveToExile(null, "", source.getSourceId(), game);
-            }
-        }
-        return true;
-    }
 }

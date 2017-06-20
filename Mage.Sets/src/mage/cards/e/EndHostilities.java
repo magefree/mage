@@ -27,8 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -38,6 +36,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -85,11 +86,11 @@ class EndHostilitiesEffect extends OneShotEffect {
         if (controller != null) {
             ArrayList<Permanent> toDestroy = new ArrayList<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(controller.getId(), game)) {
-                if (permanent.getCardType().contains(CardType.CREATURE)) {
+                if (permanent.isCreature()) {
                     toDestroy.add(permanent);
                 } else if (permanent.getAttachedTo() != null) {
                     Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
-                    if (attachedTo != null && attachedTo.getCardType().contains(CardType.CREATURE)) {
+                    if (attachedTo != null && attachedTo.isCreature()) {
                         toDestroy.add(permanent);                        
                     }
                 }

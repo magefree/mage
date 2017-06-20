@@ -125,7 +125,7 @@ class MonarchDealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
             MageObject damagingObject = game.getObject(event.getSourceId());
             if (damagingObject != null
                     && damagingObject instanceof Permanent
-                    && damagingObject.getCardType().contains(CardType.CREATURE)
+                    && damagingObject.isCreature()
                     && event.getTargetId().equals(game.getMonarchId())) {
                 setControllerId(event.getPlayerId());
                 getEffects().get(0).setTargetPointer(new FixedTarget(((Permanent) damagingObject).getControllerId()));

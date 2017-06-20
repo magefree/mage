@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -46,7 +45,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +91,7 @@ class AlphaStatusDynamicValue implements DynamicValue {
             if (enchanted != null) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game)) {
                     if (!permanent.getId().equals(enchanted.getId())) {
-                        if (CardUtil.shareSubtypes(enchanted, permanent, game)) {
+                        if (enchanted.shareSubtypes(permanent, game)) {
                             xValue += 2;
                         }
                     }

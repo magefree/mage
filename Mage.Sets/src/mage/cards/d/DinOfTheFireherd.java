@@ -28,7 +28,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -42,6 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
+import mage.game.permanent.token.DinOfTheFireherdToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -116,18 +116,5 @@ class DinOfTheFireherdEffect extends OneShotEffect {
             applied = true;
         }
         return applied;
-    }
-}
-
-class DinOfTheFireherdToken extends Token {
-
-    public DinOfTheFireherdToken() {
-        super("", "5/5 black and red Elemental creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
-        color.setBlack(true);
-        color.setRed(true);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
     }
 }

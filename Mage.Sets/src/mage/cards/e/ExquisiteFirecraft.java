@@ -27,7 +27,6 @@
  */
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SpellMasteryCondition;
@@ -40,6 +39,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +57,7 @@ public class ExquisiteFirecraft extends CardImpl {
         
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, Exquisite Firecraft can't be countered by spells or abilities.
         ContinuousRuleModifyingEffect cantBeCountered = new CantBeCounteredSourceEffect();
-        ConditionalContinuousRuleModifyingEffect conditionalCantBeCountered = new ConditionalContinuousRuleModifyingEffect(cantBeCountered, SpellMasteryCondition.getInstance());
+        ConditionalContinuousRuleModifyingEffect conditionalCantBeCountered = new ConditionalContinuousRuleModifyingEffect(cantBeCountered, SpellMasteryCondition.instance);
         conditionalCantBeCountered.setText("<br/>If there are two or more instant and/or sorcery cards in your graveyard, {this} can't be countered by spells or abilities");
         Ability ability = new SimpleStaticAbility(Zone.STACK, conditionalCantBeCountered);
         this.addAbility(ability);

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class RageExtractor extends CardImpl {
 
     public RageExtractor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}{RP}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}{R/P}");
 
 
         this.addAbility(new RageExtractorTriggeredAbility());

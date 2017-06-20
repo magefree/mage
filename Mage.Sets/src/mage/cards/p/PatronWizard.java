@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,7 +56,7 @@ public class PatronWizard extends CardImpl {
     static final private FilterControlledPermanent filter = new FilterControlledPermanent("untapped Wizard you control");
 
     static {
-        filter.add(new SubtypePredicate("Wizard"));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
         filter.add(Predicates.not(new TappedPredicate()));
     }
 

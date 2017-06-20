@@ -28,6 +28,8 @@
 package mage.cards.m;
 
 import java.util.UUID;
+
+import mage.constants.ComparisonType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -74,7 +76,7 @@ public class MistveilPlains extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new MistveilPlainsGraveyardToLibraryEffect(), 
                 new ManaCostsImpl("{W}"), 
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 1));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));
         ability.addTarget(new TargetCardInYourGraveyard());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

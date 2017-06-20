@@ -27,8 +27,7 @@
  */
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -36,7 +35,9 @@ import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-import mage.cards.CardGraphicInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -44,13 +45,13 @@ import mage.cards.CardGraphicInfo;
  */
 public class FateReforged extends ExpansionSet {
 
-    private static final FateReforged fINSTANCE = new FateReforged();
+    private static final FateReforged instance = new FateReforged();
 
     List<CardInfo> savedSpecialRares = new ArrayList<>();
     List<CardInfo> savedSpecialCommon = new ArrayList<>();
 
     public static FateReforged getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FateReforged() {
@@ -256,7 +257,7 @@ public class FateReforged extends ExpansionSet {
     @Override
     public List<CardInfo> getCardsByRarity(Rarity rarity) {
         // Common cards retrievement of Fate Reforged boosters - prevent the retrievement of the common lands (e.g. Blossoming Sands)
-        if (rarity.equals(Rarity.COMMON)) {
+        if (rarity == Rarity.COMMON) {
             List<CardInfo> savedCardsInfos = savedCards.get(rarity);
             if (savedCardsInfos == null) {
                 CardCriteria criteria = new CardCriteria();

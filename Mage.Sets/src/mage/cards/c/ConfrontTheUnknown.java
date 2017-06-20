@@ -27,7 +27,6 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -36,9 +35,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +51,7 @@ public class ConfrontTheUnknown extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("each Clue you control");
 
     static {
-        filter.add(new SubtypePredicate("Clue"));
+        filter.add(new SubtypePredicate(SubType.CLUE));
     }
 
     public ConfrontTheUnknown(UUID ownerId, CardSetInfo setInfo) {

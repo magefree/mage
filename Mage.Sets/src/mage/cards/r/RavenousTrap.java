@@ -51,7 +51,7 @@ public class RavenousTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), RavenousTrapCondition.getInstance()), new CardsPutIntoGraveyardWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), RavenousTrapCondition.instance), new CardsPutIntoGraveyardWatcher());
 
         // Exile all cards from target player's graveyard.
         this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());
@@ -68,17 +68,13 @@ public class RavenousTrap extends CardImpl {
     }
 }
 
-class RavenousTrapCondition implements Condition {
+enum RavenousTrapCondition implements Condition {
 
-    private static final RavenousTrapCondition fInstance = new RavenousTrapCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
+        CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get(CardsPutIntoGraveyardWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 if (watcher.getAmountCardsPutToGraveyard(opponentId) > 2) {

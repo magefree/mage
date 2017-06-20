@@ -34,10 +34,7 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -51,7 +48,7 @@ public class StromkirkCondemned extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires");
 
     static {
-        filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new SubtypePredicate(SubType.VAMPIRE));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

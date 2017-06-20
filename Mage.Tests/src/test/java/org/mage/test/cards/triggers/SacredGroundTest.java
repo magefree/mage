@@ -157,7 +157,7 @@ public class SacredGroundTest extends CardTestPlayerBase {
         // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard,
         // hand, and library for any number of cards with the same name as that card and exile them.
         // Then that player shuffles his or her library.
-        addCard(Zone.HAND, playerA, "Surgical Extraction"); // Instant {BP}
+        addCard(Zone.HAND, playerA, "Surgical Extraction"); // Instant {B/P}
 
         addCard(Zone.BATTLEFIELD, playerB, "Caves of Koilos", 1);
         /**
@@ -177,7 +177,7 @@ public class SacredGroundTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Surgical Extraction", 1);
         assertExileCount("Caves of Koilos", 1);
 
-        assertLife(playerA, 20);
+        assertLife(playerA, 18);
         assertLife(playerB, 18);
     }
 

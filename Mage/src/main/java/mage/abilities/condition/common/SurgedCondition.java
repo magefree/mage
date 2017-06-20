@@ -38,23 +38,13 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class SurgedCondition implements Condition {
+public enum SurgedCondition implements Condition {
 
-    private static SurgedCondition fInstance = null;
-
-    private SurgedCondition() {
-    }
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new SurgedCondition();
-        }
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getAbilityType().equals(AbilityType.TRIGGERED)) {
+        if (source.getAbilityType() == AbilityType.TRIGGERED) {
             @SuppressWarnings("unchecked")
             ArrayList<Integer> surgeActivations = (ArrayList) game.getState().getValue(SurgeAbility.SURGE_ACTIVATION_VALUE_KEY + source.getSourceId());
             if (surgeActivations != null) {

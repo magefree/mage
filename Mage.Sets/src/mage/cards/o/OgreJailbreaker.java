@@ -78,7 +78,7 @@ class OgreJailbreakerEffect extends AsThoughEffectImpl {
     private static final FilterPermanent filter = new FilterPermanent();
     private PermanentsOnTheBattlefieldCondition gateCondition;
     static {
-        filter.add(new SubtypePredicate("Gate"));
+        filter.add(new SubtypePredicate(SubType.GATE));
     }
 
     public OgreJailbreakerEffect() {
