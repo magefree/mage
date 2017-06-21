@@ -2107,6 +2107,11 @@ public final class GamePanel extends javax.swing.JPanel {
         SessionHandler.sendPlayerAction(PlayerAction.TOGGLE_RECORD_MACRO, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, false, false, false, false, false);
+        if (btnToggleMacro.getBorder() instanceof EmptyBorder) {
+            btnToggleMacro.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
+        } else {
+            btnToggleMacro.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+        }
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {

@@ -107,7 +107,8 @@ public class HumanPlayer extends PlayerImpl {
     protected Queue<PlayerResponse> actionQueueSaved = new LinkedList<>();
     protected int actionIterations = 0;
     protected boolean recordingMacro = false;
-    
+    protected boolean macroTriggeredSelectionFlag;
+    protected boolean activatingMacro = false;
 
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
@@ -123,6 +124,10 @@ public class HumanPlayer extends PlayerImpl {
         this.replacementEffectChoice = player.replacementEffectChoice;
     }
     
+    protected boolean isExecutingMacro() {
+        return !actionQueue.isEmpty() || (actionIterations > 0 && !actionQueueSaved.isEmpty());
+    }
+    
     protected boolean pullResponseFromQueue(Game game) {
         if (actionQueue.isEmpty() && actionIterations > 0 && !actionQueueSaved.isEmpty()) {
             actionQueue = new LinkedList(actionQueueSaved);
@@ -130,16 +135,16 @@ public class HumanPlayer extends PlayerImpl {
         }
         PlayerResponse action = actionQueue.poll();
         if (action != null) {
-            logger.info("Popping an action " + action);
+            if (action.getString() != null
+                && action.getString().equals("resolveStack")) {
+                action = actionQueue.poll();
+                if (action == null) return false;
+                sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, game, null);
+            }
             synchronized (response) {
-                if (action.getString() != null && action.getString().equals("resolveStack")) {
-                    logger.info("Skipping stack");
-                    sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, game, null);
-                    response.clear();
-                } else {
-                    response.copy(action);
-                }
+                response.copy(action);
                 response.notifyAll();
+                macroTriggeredSelectionFlag = false;
                 return true;
             }
         }
@@ -147,7 +152,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void waitForResponse(Game game) {
-        if(pullResponseFromQueue(game)) return;
+        if(!recordingMacro && pullResponseFromQueue(game)) return;
         response.clear();
         logger.debug("Waiting response from player: " + getId());
         game.resumeTimer(getTurnControlledBy());
@@ -161,8 +166,8 @@ public class HumanPlayer extends PlayerImpl {
                 game.pauseTimer(getTurnControlledBy());
             }
         }
-        if (recordingMacro) {
-            logger.info("Adding an action " + response);
+        if (recordingMacro && !macroTriggeredSelectionFlag) {
+            logger.debug("Adding an action " + response);
             actionQueueSaved.add(new PlayerResponse(response));
         }
     }
@@ -178,7 +183,7 @@ public class HumanPlayer extends PlayerImpl {
             Map<String, Serializable> options = new HashMap<>();
             options.put("UI.left.btn.text", "Mulligan");
             options.put("UI.right.btn.text", "Keep");
-            game.fireAskPlayerEvent(playerId, new MessageToClient(message), null, options);
+            if(!isExecutingMacro()) game.fireAskPlayerEvent(playerId, new MessageToClient(message), null, options);
             waitForResponse(game);
         } while (response.getBoolean() == null && !abort);
         if (!abort) {
@@ -218,7 +223,7 @@ public class HumanPlayer extends PlayerImpl {
             if (messageToClient.getSecondMessage() == null) {
                 messageToClient.setSecondMessage(getRelatedObjectName(source, game));
             }
-            game.fireAskPlayerEvent(playerId, messageToClient, source, options);
+            if(!isExecutingMacro()) game.fireAskPlayerEvent(playerId, messageToClient, source, options);
             waitForResponse(game);
         } while (response.getBoolean() == null && !abort);
         if (!abort) {
@@ -277,7 +282,7 @@ public class HumanPlayer extends PlayerImpl {
         replacementEffectChoice.setKeyChoices(rEffects);
 
         while (!abort) {
-            game.fireChooseChoiceEvent(playerId, replacementEffectChoice);
+            if(!isExecutingMacro()) game.fireChooseChoiceEvent(playerId, replacementEffectChoice);
             updateGameStatePriority("chooseEffect", game);
             waitForResponse(game);
             logger.debug("Choose effect: " + response.getString());
@@ -312,7 +317,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         updateGameStatePriority("choose(3)", game);
         while (!abort) {
-            game.fireChooseChoiceEvent(playerId, choice);
+            if(!isExecutingMacro()) game.fireChooseChoiceEvent(playerId, choice);
             waitForResponse(game);
             if (response.getString() != null) {
                 choice.setChoice(response.getString());
@@ -354,7 +359,7 @@ public class HumanPlayer extends PlayerImpl {
             List<UUID> chosen = target.getTargets();
             options.put("chosen", (Serializable) chosen);
 
-            game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(sourceId, game)), targetIds, required, getOptions(target, options));
+            if(!isExecutingMacro()) game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(sourceId, game)), targetIds, required, getOptions(target, options));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (!targetIds.contains(response.getUUID())) {
@@ -419,7 +424,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargets, required, getOptions(target, null));
+            if(!isExecutingMacro()) game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargets, required, getOptions(target, null));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.getTargets().contains(response.getUUID())) {
@@ -487,7 +492,7 @@ public class HumanPlayer extends PlayerImpl {
                 options.put("choosable", (Serializable) choosable);
             }
 
-            game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()), cards, required, options);
+            if(!isExecutingMacro()) game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()), cards, required, options);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), cards, game)) {
@@ -546,7 +551,7 @@ public class HumanPlayer extends PlayerImpl {
             if (!choosable.isEmpty()) {
                 options.put("choosable", (Serializable) choosable);
             }
-            game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), cards, required, options);
+            if(!isExecutingMacro()) game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), cards, required, options);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.getTargets().contains(response.getUUID())) { // if already included remove it
@@ -573,7 +578,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
-            game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), getRelatedObjectName(source, game)),
+            if(!isExecutingMacro()) game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), getRelatedObjectName(source, game)),
                     target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game),
                     target.isRequired(source),
                     getOptions(target, null));
@@ -711,17 +716,21 @@ public class HumanPlayer extends PlayerImpl {
             while (canRespond()) {
                 updateGameStatePriority("priority", game);
                 holdingPriority = false;
-                game.firePriorityEvent(playerId);
+                if(!isExecutingMacro()) game.firePriorityEvent(playerId);
                 waitForResponse(game);
-                logger.info("Human Priority got response: " + response);
                 if (game.executingRollback()) {
                     return true;
                 }
                 if (response.getBoolean() != null
                         || response.getInteger() != null) {
-                    if (passWithManaPoolCheck(game)) {
+                    if (passWithManaPoolCheck(game) && !activatingMacro) {
                         return false;
                     } else {
+                        if(activatingMacro){
+                            synchronized(actionQueue) {
+                                actionQueue.notifyAll();
+                            }
+                        }
                         continue;
                     }
                 }
@@ -824,17 +833,28 @@ public class HumanPlayer extends PlayerImpl {
                     || autoOrderUse) {
                 return abilitiesWithNoOrderSet.iterator().next();
             }
+            macroTriggeredSelectionFlag = true;
             updateGameStatePriority("chooseTriggeredAbility", game);
-            game.fireSelectTargetTriggeredAbilityEvent(playerId, "Pick triggered ability (goes to the stack first)", abilitiesWithNoOrderSet);
+            if(!isExecutingMacro()) game.fireSelectTargetTriggeredAbilityEvent(playerId, "Pick triggered ability (goes to the stack first)", abilitiesWithNoOrderSet);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 for (TriggeredAbility ability : abilitiesWithNoOrderSet) {
-                    if (ability.getId().equals(response.getUUID())) {
+                    if (ability.getId().equals(response.getUUID())
+                            || (!macroTriggeredSelectionFlag
+                                && ability.getSourceId().equals(response.getUUID()))) {
+                        if (recordingMacro) {
+                            PlayerResponse tResponse = new PlayerResponse();
+                            tResponse.setUUID(ability.getSourceId());
+                            actionQueueSaved.add(tResponse);
+                            logger.debug("Adding Triggered Ability Source: " + tResponse);
+                        }
+                        macroTriggeredSelectionFlag = false;
                         return ability;
                     }
                 }
             }
         }
+        macroTriggeredSelectionFlag = false;
         return null;
     }
 
@@ -849,7 +869,7 @@ public class HumanPlayer extends PlayerImpl {
     protected boolean playManaHandling(Ability abilityToCast, ManaCost unpaid, String promptText, Game game) {
         updateGameStatePriority("playMana", game);
         Map<String, Serializable> options = new HashMap<>();
-        game.firePlayManaEvent(playerId, "Pay " + promptText, options);
+        if(!isExecutingMacro()) game.firePlayManaEvent(playerId, "Pay " + promptText, options);
         waitForResponse(game);
         if (!this.canRespond()) {
             return false;
@@ -872,6 +892,27 @@ public class HumanPlayer extends PlayerImpl {
         }
         return true;
     }
+    
+     /**
+     * Gets the number of times the user wants to repeat their macro 
+     *
+     * @param game
+     * @return
+     */
+    public int announceRepetitions(Game game) {
+        int xValue = 0;
+        updateGameStatePriority("announceRepetitions", game);
+        do {
+            game.fireGetAmountEvent(playerId, "How many times do you want to repeat your shortcut?", 0, 999);
+            waitForResponse(game);
+        } while (response.getInteger() == null
+                && !abort);
+        if (response != null
+                && response.getInteger() != null) {
+            xValue = response.getInteger();
+        }
+        return xValue;
+    }
 
     /**
      * Gets the amount of mana the player want to spent for a x spell
@@ -888,7 +929,7 @@ public class HumanPlayer extends PlayerImpl {
         int xValue = 0;
         updateGameStatePriority("announceXMana", game);
         do {
-            game.fireGetAmountEvent(playerId, message, min, max);
+            if(!isExecutingMacro()) game.fireGetAmountEvent(playerId, message, min, max);
             waitForResponse(game);
         } while (response.getInteger() == null
                 && !abort);
@@ -904,7 +945,7 @@ public class HumanPlayer extends PlayerImpl {
         int xValue = 0;
         updateGameStatePriority("announceXCost", game);
         do {
-            game.fireGetAmountEvent(playerId, message, min, max);
+            if(!isExecutingMacro()) game.fireGetAmountEvent(playerId, message, min, max);
             waitForResponse(game);
         } while (response.getInteger() == null
                 && !abort);
@@ -968,7 +1009,7 @@ public class HumanPlayer extends PlayerImpl {
                 options.put(Constants.Option.SPECIAL_BUTTON, (Serializable) "All attack");
             }
 
-            game.fireSelectEvent(playerId, "Select attackers", options);
+            if(!isExecutingMacro()) game.fireSelectEvent(playerId, "Select attackers", options);
             waitForResponse(game);
             if (response.getString() != null
                     && response.getString().equals("special")) { // All attack
@@ -1128,7 +1169,7 @@ public class HumanPlayer extends PlayerImpl {
             return;
         }
         while (!abort) {
-            game.fireSelectEvent(playerId, "Select blockers");
+            if(!isExecutingMacro()) game.fireSelectEvent(playerId, "Select blockers");
             waitForResponse(game);
             if (response.getBoolean() != null) {
                 return;
@@ -1158,7 +1199,7 @@ public class HumanPlayer extends PlayerImpl {
     public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
         updateGameStatePriority("chooseAttackerOrder", game);
         while (!abort) {
-            game.fireSelectTargetEvent(playerId, "Pick attacker", attackers, true);
+            if(!isExecutingMacro()) game.fireSelectTargetEvent(playerId, "Pick attacker", attackers, true);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 for (Permanent perm : attackers) {
@@ -1175,7 +1216,7 @@ public class HumanPlayer extends PlayerImpl {
     public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
         updateGameStatePriority("chooseBlockerOrder", game);
         while (!abort) {
-            game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);
+            if(!isExecutingMacro()) game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 for (Permanent perm : blockers) {
@@ -1191,7 +1232,7 @@ public class HumanPlayer extends PlayerImpl {
     protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
         updateGameStatePriority("selectCombatGroup", game);
         TargetAttackingCreature target = new TargetAttackingCreature();
-        game.fireSelectTargetEvent(playerId, new MessageToClient("Select attacker to block", getRelatedObjectName(blockerId, game)),
+        if(!isExecutingMacro()) game.fireSelectTargetEvent(playerId, new MessageToClient("Select attacker to block", getRelatedObjectName(blockerId, game)),
                 target.possibleTargets(null, playerId, game), false, getOptions(target, null));
         waitForResponse(game);
         if (response.getBoolean() != null) {
@@ -1241,7 +1282,7 @@ public class HumanPlayer extends PlayerImpl {
     public int getAmount(int min, int max, String message, Game game) {
         updateGameStatePriority("getAmount", game);
         do {
-            game.fireGetAmountEvent(playerId, message, min, max);
+            if(!isExecutingMacro()) game.fireGetAmountEvent(playerId, message, min, max);
             waitForResponse(game);
         } while (response.getInteger() == null && !abort);
         if (response != null && response.getInteger() != null) {
@@ -1270,7 +1311,7 @@ public class HumanPlayer extends PlayerImpl {
         LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, false);
         if (!specialActions.isEmpty()) {
             updateGameStatePriority("specialAction", game);
-            game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
+            if(!isExecutingMacro()) game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (specialActions.containsKey(response.getUUID())) {
@@ -1284,7 +1325,7 @@ public class HumanPlayer extends PlayerImpl {
         LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, true);
         if (!specialActions.isEmpty()) {
             updateGameStatePriority("specialAction", game);
-            game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
+            if(!isExecutingMacro()) game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (specialActions.containsKey(response.getUUID())) {
@@ -1327,7 +1368,7 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
-        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(abilities.values()));
+        if(!isExecutingMacro()) game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(abilities.values()));
 
         waitForResponse(game);
         if (response.getUUID() != null && isInGame()) {
@@ -1365,7 +1406,7 @@ public class HumanPlayer extends PlayerImpl {
                         return (SpellAbility) useableAbilities.values().iterator().next();
                     } else if (useableAbilities != null
                             && !useableAbilities.isEmpty()) {
-                        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
+                        if(!isExecutingMacro()) game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
                         waitForResponse(game);
                         if (response.getUUID() != null) {
                             if (useableAbilities.containsKey(response.getUUID())) {
@@ -1415,7 +1456,7 @@ public class HumanPlayer extends PlayerImpl {
             if (!modeMap.isEmpty()) {
                 boolean done = false;
                 while (!done) {
-                    game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
+                    if(!isExecutingMacro()) game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
                     waitForResponse(game);
                     if (response.getUUID() != null) {
                         for (Mode mode : modes.getAvailableModes(source, game)) {
@@ -1442,7 +1483,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
         updateGameStatePriority("choosePile", game);
         do {
-            game.fireChoosePileEvent(playerId, message, pile1, pile2);
+            if(!isExecutingMacro()) game.fireChoosePileEvent(playerId, message, pile1, pile2);
             waitForResponse(game);
         } while (response.getBoolean() == null && !abort);
         if (!abort) {
@@ -1560,13 +1601,20 @@ public class HumanPlayer extends PlayerImpl {
                 break;
             case TOGGLE_RECORD_MACRO:
                 if(recordingMacro) {
-                    logger.info("Finished Recording Macro");
+                    logger.debug("Finished Recording Macro");
+                    activatingMacro = true;
                     recordingMacro = false;
-                    // TODO: Figure out how to make dialog
-                    actionIterations = 3;
-                    pullResponseFromQueue(game);
+                    actionIterations = announceRepetitions(game);
+                    try {
+                        synchronized(actionQueue) {
+                            actionQueue.wait();
+                        }
+                    } catch (InterruptedException ex){
+                    } finally {
+                        activatingMacro = false;
+                    }
                 } else {
-                    logger.info("Starting Recording Macro");
+                    logger.debug("Starting Recording Macro");
                     resetPlayerPassedActions();
                     recordingMacro = true;
                     actionIterations = 0;
@@ -1576,6 +1624,7 @@ public class HumanPlayer extends PlayerImpl {
                 break;
             case PASS_PRIORITY_UNTIL_STACK_RESOLVED:
                 if (recordingMacro) {
+                    logger.debug("Adding a resolveStack");
                     PlayerResponse tResponse = new PlayerResponse();
                     tResponse.setString("resolveStack");
                     actionQueueSaved.add(tResponse);
