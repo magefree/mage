@@ -102,6 +102,12 @@ public class HumanPlayer extends PlayerImpl {
     protected Map<String, Boolean> requestAutoAnswerText = new HashMap<>();
 
     protected boolean holdingPriority;
+    
+    protected Queue<PlayerResponse> actionQueue = new LinkedList<>();
+    protected Queue<PlayerResponse> actionQueueSaved = new LinkedList<>();
+    protected int actionIterations = 0;
+    protected boolean recordingMacro = false;
+    
 
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
@@ -116,8 +122,32 @@ public class HumanPlayer extends PlayerImpl {
         this.currentlyUnpaidMana = player.currentlyUnpaidMana;
         this.replacementEffectChoice = player.replacementEffectChoice;
     }
+    
+    protected boolean pullResponseFromQueue(Game game) {
+        if (actionQueue.isEmpty() && actionIterations > 0 && !actionQueueSaved.isEmpty()) {
+            actionQueue = new LinkedList(actionQueueSaved);
+            actionIterations--;
+        }
+        PlayerResponse action = actionQueue.poll();
+        if (action != null) {
+            logger.info("Popping an action " + action);
+            synchronized (response) {
+                if (action.getString() != null && action.getString().equals("resolveStack")) {
+                    logger.info("Skipping stack");
+                    sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, game, null);
+                    response.clear();
+                } else {
+                    response.copy(action);
+                }
+                response.notifyAll();
+                return true;
+            }
+        }
+        return false;
+    }
 
     protected void waitForResponse(Game game) {
+        if(pullResponseFromQueue(game)) return;
         response.clear();
         logger.debug("Waiting response from player: " + getId());
         game.resumeTimer(getTurnControlledBy());
@@ -130,6 +160,10 @@ public class HumanPlayer extends PlayerImpl {
             } finally {
                 game.pauseTimer(getTurnControlledBy());
             }
+        }
+        if (recordingMacro) {
+            logger.info("Adding an action " + response);
+            actionQueueSaved.add(new PlayerResponse(response));
         }
     }
 
@@ -679,6 +713,7 @@ public class HumanPlayer extends PlayerImpl {
                 holdingPriority = false;
                 game.firePriorityEvent(playerId);
                 waitForResponse(game);
+                logger.info("Human Priority got response: " + response);
                 if (game.executingRollback()) {
                     return true;
                 }
@@ -1523,6 +1558,28 @@ public class HumanPlayer extends PlayerImpl {
             case UNHOLD_PRIORITY:
                 holdingPriority = false;
                 break;
+            case TOGGLE_RECORD_MACRO:
+                if(recordingMacro) {
+                    logger.info("Finished Recording Macro");
+                    recordingMacro = false;
+                    // TODO: Figure out how to make dialog
+                    actionIterations = 3;
+                    pullResponseFromQueue(game);
+                } else {
+                    logger.info("Starting Recording Macro");
+                    resetPlayerPassedActions();
+                    recordingMacro = true;
+                    actionIterations = 0;
+                    actionQueueSaved.clear();
+                    actionQueue.clear();
+                }
+                break;
+            case PASS_PRIORITY_UNTIL_STACK_RESOLVED:
+                if (recordingMacro) {
+                    PlayerResponse tResponse = new PlayerResponse();
+                    tResponse.setString("resolveStack");
+                    actionQueueSaved.add(tResponse);
+                }
             default:
                 super.sendPlayerAction(playerAction, game, data);
         }

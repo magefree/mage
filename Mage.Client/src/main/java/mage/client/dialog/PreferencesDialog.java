@@ -299,6 +299,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CONNECTION_URL_SERVER_LIST = "connectionURLServerList";
 
     // controls
+    public static final String KEY_CONTROL_TOGGLE_MACRO = "controlToggleMacro";
     public static final String KEY_CONTROL_CONFIRM = "controlConfirm";
     public static final String KEY_CONTROL_CANCEL_SKIP = "controlCancelSkip";
     public static final String KEY_CONTROL_NEXT_TURN = "controlNextTurn";

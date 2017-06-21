@@ -44,6 +44,34 @@ public class PlayerResponse implements Serializable {
     private Integer responseInteger;
     private ManaType responseManaType;
     private UUID responseManaTypePlayerId;
+    
+    public PlayerResponse() {
+        clear();
+    }
+    
+    public String toString() {
+        String res = new String();
+        res += responseString + ",";
+        res += responseUUID + ",";
+        res += responseBoolean + ",";
+        res += responseInteger + ",";
+        res += responseManaType + ",";
+        res += responseManaTypePlayerId;
+        return res;
+    }
+    
+    public PlayerResponse(PlayerResponse other) {
+        copy(other);
+    }
+    
+    public void copy(PlayerResponse other) {
+        responseString = other.responseString;
+        responseUUID = other.responseUUID;
+        responseBoolean = other.responseBoolean;
+        responseInteger = other.responseInteger;
+        responseManaType = other.responseManaType;
+        responseManaTypePlayerId = other.responseManaTypePlayerId;
+    }
 
     public void clear() {
         responseString = null;
