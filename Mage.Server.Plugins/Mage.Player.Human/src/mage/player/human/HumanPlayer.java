@@ -125,7 +125,9 @@ public class HumanPlayer extends PlayerImpl {
     }
     
     protected boolean isExecutingMacro() {
-        return !actionQueue.isEmpty() || (actionIterations > 0 && !actionQueueSaved.isEmpty());
+        return !recordingMacro
+                && (!actionQueue.isEmpty() 
+                    || (actionIterations > 0 && !actionQueueSaved.isEmpty()));
     }
     
     protected boolean pullResponseFromQueue(Game game) {
@@ -152,7 +154,10 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void waitForResponse(Game game) {
-        if(!recordingMacro && pullResponseFromQueue(game)) return;
+        if (isExecutingMacro()) {
+           pullResponseFromQueue(game);
+           return;
+        }
         response.clear();
         logger.debug("Waiting response from player: " + getId());
         game.resumeTimer(getTurnControlledBy());
