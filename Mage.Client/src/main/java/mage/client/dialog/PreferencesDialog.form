@@ -150,7 +150,7 @@
                     <Property name="toolTipText" type="java.lang.String" value="Write the card&apos;s name on the card to make the card name more recognizable."/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Standardcursor"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -5904,6 +5904,7 @@
                                   <Component id="labelPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelSkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelToggleRecordMacro" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -5916,9 +5917,10 @@
                                   <Component id="keyPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="keySkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="keyEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyToggleRecordMacro" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="controlsDescriptionLabel" pref="498" max="32767" attributes="0"/>
+                              <Component id="controlsDescriptionLabel" pref="441" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -5975,6 +5977,11 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="labelPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="keyPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelToggleRecordMacro" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyToggleRecordMacro" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -6116,6 +6123,19 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnResetControlsActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelToggleRecordMacro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Toggle Record Macro"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keyToggleRecordMacro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_TOGGLE_MACRO)"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

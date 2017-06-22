@@ -577,6 +577,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         labelConfirm = new javax.swing.JLabel();
         controlsDescriptionLabel = new javax.swing.JLabel();
         bttnResetControls = new javax.swing.JButton();
+        labelToggleRecordMacro = new javax.swing.JLabel();
+        keyToggleRecordMacro = new KeyBindButton(this, KEY_CONTROL_TOGGLE_MACRO);
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -592,7 +594,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         showCardName.setToolTipText("Write the card's name on the card to make the card name more recognizable.");
         showCardName.setActionCommand("");
         showCardName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        showCardName.addActionListener(evt -> showCardNameActionPerformed(evt));
+        showCardName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showCardNameActionPerformed(evt);
+            }
+        });
 
         tooltipDelayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tooltipDelayLabel.setText("Delay in milliseconds for showing the card tooltip text");
@@ -614,7 +620,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(main_cardLayout.createSequentialGroup()
                 .add(6, 6, 6)
                 .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                    .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 308, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, showCardName)
                     .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -634,43 +640,71 @@ public class PreferencesDialog extends javax.swing.JDialog {
         nonLandPermanentsInOnePile.setSelected(true);
         nonLandPermanentsInOnePile.setText("Put non-land permanents in same row as creatures");
         nonLandPermanentsInOnePile.setToolTipText("<html>If activated, all non land permanents are shown in one row.<br>\nFirst creatures than other permanents. If not activated, creatures are<br>\nshown in a separate row.");
-        nonLandPermanentsInOnePile.addActionListener(evt -> nonLandPermanentsInOnePileActionPerformed(evt));
+        nonLandPermanentsInOnePile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nonLandPermanentsInOnePileActionPerformed(evt);
+            }
+        });
 
         showPlayerNamesPermanently.setSelected(true);
         showPlayerNamesPermanently.setText("Show player names on avatar permanently");
         showPlayerNamesPermanently.setToolTipText("Instead showing the names only if you hover over the avatar with the mouse, the name is shown all the time.");
         showPlayerNamesPermanently.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        showPlayerNamesPermanently.addActionListener(evt -> showPlayerNamesPermanentlyActionPerformed(evt));
+        showPlayerNamesPermanently.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPlayerNamesPermanentlyActionPerformed(evt);
+            }
+        });
 
         showAbilityPickerForced.setSelected(true);
         showAbilityPickerForced.setText("Show ability picker for abilities or spells without costs");
         showAbilityPickerForced.setToolTipText("This prevents you from accidently activating abilities without other costs than tapping or casting spells with 0 mana costs.");
         showAbilityPickerForced.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        showAbilityPickerForced.addActionListener(evt -> showAbilityPickerForcedActionPerformed(evt));
+        showAbilityPickerForced.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showAbilityPickerForcedActionPerformed(evt);
+            }
+        });
 
         cbAllowRequestToShowHandCards.setSelected(true);
         cbAllowRequestToShowHandCards.setText("Allow requests from players and spectators to show your hand cards");
         cbAllowRequestToShowHandCards.setToolTipText("<html>This is the default setting used for your matches. If activated other players or spectators<br>\nof your match can send a request so you can allow them to see your hand cards.");
         cbAllowRequestToShowHandCards.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cbAllowRequestToShowHandCards.addActionListener(evt -> cbAllowRequestToShowHandCardsActionPerformed(evt));
+        cbAllowRequestToShowHandCards.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAllowRequestToShowHandCardsActionPerformed(evt);
+            }
+        });
 
         cbShowStormCounter.setSelected(true);
         cbShowStormCounter.setText("Show the number of spell casts during the current turn");
         cbShowStormCounter.setToolTipText("<html>Adds a little box left to the short keys line with the number<br>\nof spells already cast during the current turn (storm counter).");
         cbShowStormCounter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cbShowStormCounter.addActionListener(evt -> cbShowStormCounterActionPerformed(evt));
+        cbShowStormCounter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbShowStormCounterActionPerformed(evt);
+            }
+        });
 
         cbConfirmEmptyManaPool.setSelected(true);
         cbConfirmEmptyManaPool.setText("Confirm if you want to pass a phase/step but there is still mana in your mana pool");
         cbConfirmEmptyManaPool.setToolTipText("<html>If activated you get a confirm message if you pass priority while stack is empty<br>\n and you still have mana in your mana pool.");
         cbConfirmEmptyManaPool.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cbConfirmEmptyManaPool.addActionListener(evt -> cbConfirmEmptyManaPoolActionPerformed(evt));
+        cbConfirmEmptyManaPool.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbConfirmEmptyManaPoolActionPerformed(evt);
+            }
+        });
 
         cbAskMoveToGraveOrder.setSelected(true);
         cbAskMoveToGraveOrder.setText("Ask player for setting order cards go to graveyard");
         cbAskMoveToGraveOrder.setToolTipText("<html>If activated and multiple cards go to the graveyard at the same time<br>\nthe player is asked to set the order of the cards.");
         cbAskMoveToGraveOrder.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cbAskMoveToGraveOrder.addActionListener(evt -> cbAskMoveToGraveOrderActionPerformed(evt));
+        cbAskMoveToGraveOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAskMoveToGraveOrderActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout main_gameLayout = new org.jdesktop.layout.GroupLayout(main_game);
         main_game.setLayout(main_gameLayout);
@@ -714,12 +748,20 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbGameLogAutoSave.setSelected(true);
         cbGameLogAutoSave.setText("Auto save game logs     (to \"../Mage.Client/gamelogs/\" directory)");
         cbGameLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
-        cbGameLogAutoSave.addActionListener(evt -> cbGameLogAutoSaveActionPerformed(evt));
+        cbGameLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGameLogAutoSaveActionPerformed(evt);
+            }
+        });
 
         cbDraftLogAutoSave.setSelected(true);
         cbDraftLogAutoSave.setText("Auto save draft logs     (to \"../Mage.Client/gamelogs/\" directory)");
         cbDraftLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
-        cbDraftLogAutoSave.addActionListener(evt -> cbDraftLogAutoSaveActionPerformed(evt));
+        cbDraftLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDraftLogAutoSaveActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout main_gamelogLayout = new org.jdesktop.layout.GroupLayout(main_gamelog);
         main_gamelog.setLayout(main_gamelogLayout);
@@ -1220,47 +1262,75 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbStopAttack.setText("Stop on declare attackers step if you skip steps (F4/F5/F7) and attackers are available");
         cbStopAttack.setToolTipText("If you use F4, F5 or F7 to skip steps, you stop on declare attackers step if attackers are available. If this option is not activated, you also skip the declare attackers step with this actions. F9 does always skip the declare attackers step.");
         cbStopAttack.setActionCommand("");
-        cbStopAttack.addActionListener(evt -> cbStopAttackActionPerformed(evt));
+        cbStopAttack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopAttackActionPerformed(evt);
+            }
+        });
         phases_stopSettings.add(cbStopAttack);
 
         cbStopBlock.setText("Stop on your declare blockers step also if no blockers available");
         cbStopBlock.setToolTipText("Also if you have no blockers to declare, the game stops at the declare blockers step.");
         cbStopBlock.setActionCommand("");
-        cbStopBlock.addActionListener(evt -> cbStopBlockActionPerformed(evt));
+        cbStopBlock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopBlockActionPerformed(evt);
+            }
+        });
         phases_stopSettings.add(cbStopBlock);
 
         cbStopOnAllMain.setText("Skip with F7 to next main phase (if not activated skip always to your next main phase)");
         cbStopOnAllMain.setToolTipText("If activated F7 skips to next main phases (regardless of the active players).");
         cbStopOnAllMain.setActionCommand("");
-        cbStopOnAllMain.addActionListener(evt -> cbStopOnAllMainActionPerformed(evt));
+        cbStopOnAllMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopOnAllMainActionPerformed(evt);
+            }
+        });
         phases_stopSettings.add(cbStopOnAllMain);
 
         cbStopOnAllEnd.setText("Skip with F5 to next end step (if not activated only to end steps of opponents)");
         cbStopOnAllEnd.setToolTipText("If activated - F5 skips to the next end step (regardless of the current player)");
         cbStopOnAllEnd.setActionCommand("");
         cbStopOnAllEnd.setPreferredSize(new java.awt.Dimension(300, 25));
-        cbStopOnAllEnd.addActionListener(evt -> cbStopOnAllEndActionPerformed(evt));
+        cbStopOnAllEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopOnAllEndActionPerformed(evt);
+            }
+        });
         phases_stopSettings.add(cbStopOnAllEnd);
 
         cbPassPriorityCast.setText("Pass priority automatically after you have put a spell on the stack");
         cbPassPriorityCast.setToolTipText("If activated the system passes priority automatically for you if you have put a spell on the stack.");
         cbPassPriorityCast.setActionCommand("");
         cbPassPriorityCast.setPreferredSize(new java.awt.Dimension(300, 25));
-        cbPassPriorityCast.addActionListener(evt -> cbPassPriorityCastActionPerformed(evt));
+        cbPassPriorityCast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPassPriorityCastActionPerformed(evt);
+            }
+        });
         phases_stopSettings.add(cbPassPriorityCast);
 
         cbPassPriorityActivation.setText("Pass priority automatically after you have put an activated ability on the stack");
         cbPassPriorityActivation.setToolTipText("If activated the system passes priority for you automatically after you have put an activated ability on the stack.");
         cbPassPriorityActivation.setActionCommand("");
         cbPassPriorityActivation.setPreferredSize(new java.awt.Dimension(300, 25));
-        cbPassPriorityActivation.addActionListener(evt -> cbPassPriorityActivationActionPerformed(evt));
+        cbPassPriorityActivation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPassPriorityActivationActionPerformed(evt);
+            }
+        });
         phases_stopSettings.add(cbPassPriorityActivation);
 
         cbAutoOrderTrigger.setText("Set order for your triggers automatically if all have the same text");
         cbAutoOrderTrigger.setToolTipText("<HTML>If activated the order to put on the stack your triggers that trigger at the same time<br/>\nis set automatically if all have the same text.");
         cbAutoOrderTrigger.setActionCommand("");
         cbAutoOrderTrigger.setPreferredSize(new java.awt.Dimension(300, 25));
-        cbAutoOrderTrigger.addActionListener(evt -> cbAutoOrderTriggerActionPerformed(evt));
+        cbAutoOrderTrigger.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAutoOrderTriggerActionPerformed(evt);
+            }
+        });
         phases_stopSettings.add(cbAutoOrderTrigger);
 
         org.jdesktop.layout.GroupLayout tabPhasesLayout = new org.jdesktop.layout.GroupLayout(tabPhases);
@@ -1382,18 +1452,34 @@ public class PreferencesDialog extends javax.swing.JDialog {
         panelCardImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images:"));
 
         cbUseDefaultImageFolder.setText("Use default location to save images");
-        cbUseDefaultImageFolder.addActionListener(evt -> cbUseDefaultImageFolderActionPerformed(evt));
+        cbUseDefaultImageFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseDefaultImageFolderActionPerformed(evt);
+            }
+        });
 
         txtImageFolderPath.setToolTipText("The selected image will be used as background picture. You have to restart MAGE to view a changed background image.");
 
         btnBrowseImageLocation.setText("Browse...");
-        btnBrowseImageLocation.addActionListener(evt -> btnBrowseImageLocationActionPerformed(evt));
+        btnBrowseImageLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrowseImageLocationActionPerformed(evt);
+            }
+        });
 
         cbCheckForNewImages.setText("Check for new images on startup");
-        cbCheckForNewImages.addActionListener(evt -> cbCheckForNewImagesActionPerformed(evt));
+        cbCheckForNewImages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCheckForNewImagesActionPerformed(evt);
+            }
+        });
 
         cbSaveToZipFiles.setText("Store images in zip files");
-        cbSaveToZipFiles.addActionListener(evt -> cbSaveToZipFilesActionPerformed(evt));
+        cbSaveToZipFiles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSaveToZipFilesActionPerformed(evt);
+            }
+        });
 
         cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -1464,23 +1550,51 @@ public class PreferencesDialog extends javax.swing.JDialog {
         panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images setting:"));
 
         cbUseDefaultBackground.setText("Use default image");
-        cbUseDefaultBackground.addActionListener(evt -> cbUseDefaultBackgroundActionPerformed(evt));
+        cbUseDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseDefaultBackgroundActionPerformed(evt);
+            }
+        });
 
-        txtBackgroundImagePath.addActionListener(evt -> txtBackgroundImagePathActionPerformed(evt));
+        txtBackgroundImagePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBackgroundImagePathActionPerformed(evt);
+            }
+        });
 
         btnBrowseBackgroundImage.setText("Browse...");
-        btnBrowseBackgroundImage.addActionListener(evt -> btnBrowseBackgroundImageActionPerformed(evt));
+        btnBrowseBackgroundImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrowseBackgroundImageActionPerformed(evt);
+            }
+        });
 
-        txtBattlefieldImagePath.addActionListener(evt -> txtBattlefieldImagePathActionPerformed(evt));
+        txtBattlefieldImagePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBattlefieldImagePathActionPerformed(evt);
+            }
+        });
 
         btnBrowseBattlefieldImage.setText("Browse...");
-        btnBrowseBattlefieldImage.addActionListener(evt -> btnBrowseBattlefieldImageActionPerformed(evt));
+        btnBrowseBattlefieldImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrowseBattlefieldImageActionPerformed(evt);
+            }
+        });
 
         cbUseDefaultBattleImage.setText("Use default battlefield image");
-        cbUseDefaultBattleImage.addActionListener(evt -> cbUseDefaultBattleImageActionPerformed(evt));
+        cbUseDefaultBattleImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseDefaultBattleImageActionPerformed(evt);
+            }
+        });
 
         cbUseRandomBattleImage.setText("Select random battlefield image");
-        cbUseRandomBattleImage.addActionListener(evt -> cbUseRandomBattleImageActionPerformed(evt));
+        cbUseRandomBattleImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseRandomBattleImageActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Background:");
 
@@ -1540,13 +1654,25 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card rendering:"));
 
         cbCardRenderImageFallback.setText("Fall back to plain image based rendering");
-        cbCardRenderImageFallback.addActionListener(evt -> cbCardRenderImageFallbackActionPerformed(evt));
+        cbCardRenderImageFallback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCardRenderImageFallbackActionPerformed(evt);
+            }
+        });
 
         cbCardRenderShowReminderText.setText("Show reminder text in rendered card textboxes");
-        cbCardRenderShowReminderText.addActionListener(evt -> cbCardRenderShowReminderTextActionPerformed(evt));
+        cbCardRenderShowReminderText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCardRenderShowReminderTextActionPerformed(evt);
+            }
+        });
 
         cbCardRenderHideSetSymbol.setText("Hide set symbols on cards (more space on the type line for card types)");
-        cbCardRenderHideSetSymbol.addActionListener(evt -> cbCardRenderHideSetSymbolActionPerformed(evt));
+        cbCardRenderHideSetSymbol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCardRenderHideSetSymbolActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1601,22 +1727,38 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         cbEnableGameSounds.setText("Enable game sounds");
         cbEnableGameSounds.setToolTipText("Sounds that will be played for certain actions (e.g. play land, attack, etc.) during the game.");
-        cbEnableGameSounds.addActionListener(evt -> cbEnableGameSoundsActionPerformed(evt));
+        cbEnableGameSounds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnableGameSoundsActionPerformed(evt);
+            }
+        });
         sounds_clips.add(cbEnableGameSounds);
 
         cbEnableDraftSounds.setText("Enable draft sounds");
         cbEnableDraftSounds.setToolTipText("Sounds that will be played during drafting for card picking or warining if time runs out.");
-        cbEnableDraftSounds.addActionListener(evt -> cbEnableDraftSoundsActionPerformed(evt));
+        cbEnableDraftSounds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnableDraftSoundsActionPerformed(evt);
+            }
+        });
         sounds_clips.add(cbEnableDraftSounds);
 
         cbEnableSkipButtonsSounds.setText("Enable skip button sounds");
         cbEnableSkipButtonsSounds.setToolTipText("Sounds that will be played if a priority skip action (F4/F5/F7/F9) or cancel skip action (F3) is used.");
-        cbEnableSkipButtonsSounds.addActionListener(evt -> cbEnableSkipButtonsSoundsActionPerformed(evt));
+        cbEnableSkipButtonsSounds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnableSkipButtonsSoundsActionPerformed(evt);
+            }
+        });
         sounds_clips.add(cbEnableSkipButtonsSounds);
 
         cbEnableOtherSounds.setText("Enable other sounds");
         cbEnableOtherSounds.setToolTipText("Sounds that will be played for actions outside of games (e.g. whisper, player joins your game, player submits a deck ...).");
-        cbEnableOtherSounds.addActionListener(evt -> cbEnableOtherSoundsActionPerformed(evt));
+        cbEnableOtherSounds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnableOtherSoundsActionPerformed(evt);
+            }
+        });
         sounds_clips.add(cbEnableOtherSounds);
 
         sounds_backgroundMusic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Music"));
@@ -1624,15 +1766,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbEnableBattlefieldBGM.setText("Play music during match");
         cbEnableBattlefieldBGM.setToolTipText("During your matches music will be played from the seleced folder.");
         cbEnableBattlefieldBGM.setActionCommand("Play automatically during matches");
-        cbEnableBattlefieldBGM.addActionListener(evt -> cbEnableBattlefieldBGMActionPerformed(evt));
+        cbEnableBattlefieldBGM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnableBattlefieldBGMActionPerformed(evt);
+            }
+        });
 
         jLabel16.setText("Playing from folder:");
         jLabel16.setToolTipText("");
 
-        txtBattlefieldIBGMPath.addActionListener(evt -> txtBattlefieldIBGMPathActionPerformed(evt));
+        txtBattlefieldIBGMPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBattlefieldIBGMPathActionPerformed(evt);
+            }
+        });
 
         btnBattlefieldBGMBrowse.setText("Browse...");
-        btnBattlefieldBGMBrowse.addActionListener(evt -> btnBattlefieldBGMBrowseActionPerformed(evt));
+        btnBattlefieldBGMBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBattlefieldBGMBrowseActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout sounds_backgroundMusicLayout = new org.jdesktop.layout.GroupLayout(sounds_backgroundMusic);
         sounds_backgroundMusic.setLayout(sounds_backgroundMusicLayout);
@@ -2187,7 +2341,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         lblProxyType.setText("Proxy:");
 
-        cbProxyType.addActionListener(evt -> cbProxyTypeActionPerformed(evt));
+        cbProxyType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProxyTypeActionPerformed(evt);
+            }
+        });
 
         pnlProxySettings.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -2205,10 +2363,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         lblProxyPassword.setText("Password:");
 
-        txtPasswordField.addActionListener(evt -> txtPasswordFieldActionPerformed(evt));
+        txtPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordFieldActionPerformed(evt);
+            }
+        });
 
         rememberPswd.setText("Remember Password");
-        rememberPswd.addActionListener(evt -> rememberPswdActionPerformed(evt));
+        rememberPswd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rememberPswdActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         jLabel11.setText("Note: password won't be encrypted!");
@@ -2355,7 +2521,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         controlsDescriptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         bttnResetControls.setText("Reset to default");
-        bttnResetControls.addActionListener(evt -> bttnResetControlsActionPerformed(evt));
+        bttnResetControls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnResetControlsActionPerformed(evt);
+            }
+        });
+
+        labelToggleRecordMacro.setText("Toggle Record Macro");
+
+        keyToggleRecordMacro.setText("keyBindButton1");
 
         org.jdesktop.layout.GroupLayout tabControlsLayout = new org.jdesktop.layout.GroupLayout(tabControls);
         tabControls.setLayout(tabControlsLayout);
@@ -2377,7 +2551,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                             .add(lebelSkip)
                             .add(labelPriorEnd)
                             .add(labelSkipStep)
-                            .add(labelConfirm))
+                            .add(labelConfirm)
+                            .add(labelToggleRecordMacro))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -2388,9 +2563,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                             .add(keyMainStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keyToggleRecordMacro, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(controlsDescriptionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)))
+                        .add(controlsDescriptionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         tabControlsLayout.setVerticalGroup(
@@ -2434,7 +2610,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(labelPriorEnd)
-                            .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                            .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(labelToggleRecordMacro)
+                            .add(keyToggleRecordMacro, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(bttnResetControls)
                 .addContainerGap())
@@ -2442,19 +2622,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Controls", tabControls);
 
-        saveButton.setText("Save");
+        saveButton.setLabel("Save");
         saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
         saveButton.setMinimumSize(new java.awt.Dimension(100, 30));
         saveButton.setPreferredSize(new java.awt.Dimension(100, 30));
         saveButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        saveButton.addActionListener(evt -> saveButtonActionPerformed(evt));
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
-        exitButton.setText("Exit");
+        exitButton.setLabel("Exit");
         exitButton.setMaximumSize(new java.awt.Dimension(100, 30));
         exitButton.setMinimumSize(new java.awt.Dimension(100, 30));
         exitButton.setPreferredSize(new java.awt.Dimension(100, 30));
         exitButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        exitButton.addActionListener(evt -> exitButtonActionPerformed(evt));
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2632,6 +2820,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.keyYourTurn);
         save(prefs, dialog.keySkipStack);
         save(prefs, dialog.keyPriorEnd);
+        save(prefs, dialog.keyToggleRecordMacro);
 
         // Avatar
         if (selectedAvatarId < MIN_AVATAR_ID || selectedAvatarId > MAX_AVATAR_ID) {
@@ -3184,6 +3373,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.keyYourTurn);
         load(prefs, dialog.keySkipStack);
         load(prefs, dialog.keyPriorEnd);
+        load(prefs, dialog.keyToggleRecordMacro);
     }
 
     private static void loadSelectedAvatar(Preferences prefs) {
@@ -3410,6 +3600,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 return KeyEvent.VK_F10;
             case KEY_CONTROL_PRIOR_END:
                 return KeyEvent.VK_F11;
+            case KEY_CONTROL_TOGGLE_MACRO:
+                return KeyEvent.VK_F8;
             default:
                 return 0;
         }
@@ -3550,7 +3742,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 keyPriorEnd,
                 keySkipStack,
                 keySkipStep,
-                keyYourTurn
+                keyYourTurn,
+                keyToggleRecordMacro
         );
     }
 
@@ -3661,6 +3854,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private mage.client.components.KeyBindButton keyPriorEnd;
     private mage.client.components.KeyBindButton keySkipStack;
     private mage.client.components.KeyBindButton keySkipStep;
+    private mage.client.components.KeyBindButton keyToggleRecordMacro;
     private mage.client.components.KeyBindButton keyYourTurn;
     private javax.swing.JLabel labelCancel;
     private javax.swing.JLabel labelCardSizeHand;
@@ -3681,6 +3875,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelPriorEnd;
     private javax.swing.JLabel labelSkipStep;
     private javax.swing.JLabel labelStackWidth;
+    private javax.swing.JLabel labelToggleRecordMacro;
     private javax.swing.JLabel labelTooltipSize;
     private javax.swing.JLabel labelYourTurn;
     private javax.swing.JLabel lblProxyPassword;

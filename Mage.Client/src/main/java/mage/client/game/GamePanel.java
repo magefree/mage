@@ -1443,8 +1443,9 @@ public final class GamePanel extends javax.swing.JPanel {
         
         btnToggleMacro.setContentAreaFilled(false);
         btnToggleMacro.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnToggleMacro.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipNextTurnButtonImage()));
-        btnToggleMacro.setToolTipText("Toggle Record Macro (F8).");
+        btnToggleMacro.setIcon(new ImageIcon(ImageManagerImpl.instance.getToggleRecordMacroButtonImage()));
+        btnToggleMacro.setToolTipText("Toggle Record Macro ("
+                + getCachedKeyText(KEY_CONTROL_TOGGLE_MACRO) + ").");
         btnToggleMacro.setFocusable(false);
         btnToggleMacro.addMouseListener(new MouseAdapter() {
             @Override
@@ -1455,7 +1456,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        KeyStroke kst = KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0);
+        KeyStroke kst = getCachedKeystroke(KEY_CONTROL_TOGGLE_MACRO);
         this.getInputMap(c).put(kst, "F8_PRESS");
         this.getActionMap().put("F8_PRESS", new AbstractAction() {
             @Override
