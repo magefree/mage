@@ -27,26 +27,17 @@
  */
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.PlayLandAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.Card;
+import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public class RamunapExcavator extends CardImpl {
@@ -60,7 +51,7 @@ public class RamunapExcavator extends CardImpl {
         this.toughness = new MageInt(3);
 
         // You may play land cards from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RamunapExcavatorEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayLandsFromGraveyardEffect()));
     }
 
     public RamunapExcavator(final RamunapExcavator card) {
@@ -70,47 +61,5 @@ public class RamunapExcavator extends CardImpl {
     @Override
     public RamunapExcavator copy() {
         return new RamunapExcavator(this);
-    }
-}
-
-class RamunapExcavatorEffect extends ContinuousEffectImpl {
-
-    public RamunapExcavatorEffect() {
-        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "You may play land cards from your graveyard";
-    }
-
-    public RamunapExcavatorEffect(final RamunapExcavatorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RamunapExcavatorEffect copy() {
-        return new RamunapExcavatorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (UUID cardId: player.getGraveyard()) {
-                Card card = game.getCard(cardId);
-                if(card != null && card.isLand()){
-                    PlayLandFromGraveyardAbility ability = new PlayLandFromGraveyardAbility(card.getName());
-                    ability.setSourceId(cardId);
-                    ability.setControllerId(card.getOwnerId());
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
-class PlayLandFromGraveyardAbility extends PlayLandAbility{
-    PlayLandFromGraveyardAbility(String name){
-        super(name);
-        zone = Zone.GRAVEYARD;
     }
 }
