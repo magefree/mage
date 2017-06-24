@@ -422,7 +422,7 @@ public class CallbackClientImpl implements CallbackClient {
                         .append("</b> - Undo F4/F5/F7/F9/F11")
                         .append("<br/><b>")
                         .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO, 119)))
-                        .append("</b> - Toggle recording a sequence of actions to repeat")
+                        .append("</b> - Toggle recording a sequence of actions to repeat. Will not pause if interrupted and can fail if a selected card changes such as when scrying top card to bottom.")
                         .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;

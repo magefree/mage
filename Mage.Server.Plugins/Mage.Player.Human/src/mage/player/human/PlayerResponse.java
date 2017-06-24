@@ -50,14 +50,17 @@ public class PlayerResponse implements Serializable {
     }
     
     public String toString() {
-        String res = new String();
-        res += responseString + ",";
-        res += responseUUID + ",";
-        res += responseBoolean + ",";
-        res += responseInteger + ",";
-        res += responseManaType + ",";
-        res += responseManaTypePlayerId;
-        return res;
+        return new StringBuilder(responseString)
+                .append(',')
+                .append(responseUUID)
+                .append(',')
+                .append(responseBoolean)
+                .append(',')
+                .append(responseInteger)
+                .append(',')
+                .append(responseManaType)
+                .append(',')
+                .append(responseManaTypePlayerId).toString();
     }
     
     public PlayerResponse(PlayerResponse other) {
