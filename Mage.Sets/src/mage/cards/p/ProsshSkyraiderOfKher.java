@@ -42,8 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.ProsshKoboldToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -52,12 +51,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author LevelX2
  */
 public class ProsshSkyraiderOfKher extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public ProsshSkyraiderOfKher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
@@ -72,7 +65,8 @@ public class ProsshSkyraiderOfKher extends CardImpl {
         // When you cast Prossh, Skyraider of Kher, create X 0/1 red Kobold creature tokens named Kobolds of Kher Keep, where X is the amount of mana spent to cast Prossh.
         this.addAbility(new CastSourceTriggeredAbility(new CreateTokenEffect(new ProsshKoboldToken(), new ManaSpentToCastCount()), false));
         // Sacrifice another creature: Prossh gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
     }
 
     public ProsshSkyraiderOfKher(final ProsshSkyraiderOfKher card) {

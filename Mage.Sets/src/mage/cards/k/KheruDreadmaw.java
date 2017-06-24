@@ -41,9 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -51,14 +49,9 @@ import mage.target.common.TargetControlledPermanent;
  * @author emerald000
  */
 public class KheruDreadmaw extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public KheruDreadmaw(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Crocodile");
 
@@ -67,12 +60,12 @@ public class KheruDreadmaw extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        
+
         // {1}{G}, Sacrifice another creature: You gain life equal to the sacrificed creature's toughness.
         Effect effect = new GainLifeEffect(new SacrificeCostCreaturesToughness());
         effect.setText("You gain life equal to the sacrificed creature's toughness");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         this.addAbility(ability);
     }
 

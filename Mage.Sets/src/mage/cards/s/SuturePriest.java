@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -40,9 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -55,27 +52,23 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SuturePriest extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public SuturePriest (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+    public SuturePriest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add("Cleric");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever another creature enters the battlefield under your control, you may gain 1 life.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filter, true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1),
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true));
 
         // Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.
         this.addAbility(new SuturePriestSecondTriggeredAbility());
 
     }
 
-    public SuturePriest (final SuturePriest card) {
+    public SuturePriest(final SuturePriest card) {
         super(card);
     }
 
@@ -86,6 +79,7 @@ public class SuturePriest extends CardImpl {
 }
 
 class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl {
+
     SuturePriestSecondTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
     }
@@ -107,11 +101,11 @@ class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent)event;
+            EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent) event;
             Card card = zEvent.getTarget();
             if (card != null && card.isCreature()) {
                 for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return true;
             }

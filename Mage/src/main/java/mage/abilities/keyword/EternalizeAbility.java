@@ -117,7 +117,7 @@ class EternalizeEffect extends OneShotEffect {
             token.getToughness().modifyBaseValue(4);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EMBALMED_CREATURE, token.getId(), source.getSourceId(), controller.getId()));
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false, null);
-            // Probably it makes sense to remove also the Embalm ability (it's not shown on the token cards).
+            // Probably it makes sense to remove also the Eternalize ability (it's not shown on the token cards).
             // Also it can never get active or? But it's not mentioned in the reminder text.
             return true;
         }

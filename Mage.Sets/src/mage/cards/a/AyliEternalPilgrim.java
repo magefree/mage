@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,29 +46,20 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
-
-import java.util.UUID;
 
 /**
  *
  * @author fireshoes
  */
 public class AyliEternalPilgrim extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public AyliEternalPilgrim(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Kor");
         this.subtype.add("Cleric");
@@ -76,14 +68,14 @@ public class AyliEternalPilgrim extends CardImpl {
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
-        
+
         // {1}, Sacrifice another creature: You gain life equal to the sacrificed creature's toughness.
         Effect effect = new GainLifeEffect(new SacrificeCostCreaturesToughness());
         effect.setText("You gain life equal to the sacrificed creature's toughness");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         this.addAbility(ability);
-        
+
         // {1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate this ability only if you have at least 10 life more than your starting life total.
         ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
@@ -91,7 +83,7 @@ public class AyliEternalPilgrim extends CardImpl {
                 new ManaCostsImpl("{1}{W}{B}"),
                 new AyliEternalPilgrimCondition(),
                 "{1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate this ability only if you have at least 10 life more than your starting life total");
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }

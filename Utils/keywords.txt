@@ -24,6 +24,7 @@ Echo|manaString|
 Embalm|cost, card|
 Enchant|type|
 Entwine|manaString|
+Eternalize|cost, card|
 Evoke|card, manaString|
 Evolve|new|
 Exalted|new|

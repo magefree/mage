@@ -27,6 +27,7 @@
  */
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,12 +40,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -52,16 +52,14 @@ import java.util.UUID;
  */
 public class EaterOfHope extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent regenFilter = new FilterControlledCreaturePermanent("another creature");
     private static final FilterControlledCreaturePermanent destroyFilter = new FilterControlledCreaturePermanent("two other creatures");
 
     static {
-        regenFilter.add(new AnotherPredicate());
         destroyFilter.add(new AnotherPredicate());
     }
 
     public EaterOfHope(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(6);
@@ -72,7 +70,7 @@ public class EaterOfHope extends CardImpl {
 
         // {B}, Sacrifice another creature: Regenerate Eater of Hope.
         Ability regenAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}"));
-        regenAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, regenFilter, true)));
+        regenAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true)));
         this.addAbility(regenAbility);
 
         // {2}{B}, Sacrifice two other creatures: Destroy target creature.

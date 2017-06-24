@@ -36,8 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -46,13 +45,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class VampireWarlord extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public VampireWarlord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
 
@@ -60,7 +54,7 @@ public class VampireWarlord extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice another creature: Regenerate Vampire Warlord.
-        TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1,1, filter, false);
+        TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(target)));
 
     }

@@ -27,21 +27,18 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -50,11 +47,10 @@ import java.util.UUID;
 public class FiligreeFracture extends CardImpl {
 
     public FiligreeFracture(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Destroy target artifact or enchantment. If that permanent was blue or black, draw a card.
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new FiligreeFractureEffect());
     }
 
@@ -71,8 +67,8 @@ public class FiligreeFracture extends CardImpl {
 class FiligreeFractureEffect extends OneShotEffect {
 
     public FiligreeFractureEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "If that permanent was blue or black, draw a card";
+        super(Outcome.DestroyPermanent);
+        this.staticText = "Destroy target artifact or enchantment. If that permanent was blue or black, draw a card";
     }
 
     public FiligreeFractureEffect(final FiligreeFractureEffect effect) {
@@ -87,10 +83,13 @@ class FiligreeFractureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        if (player != null && permanent != null
-                && (permanent.getColor(game).isBlack() || permanent.getColor(game).isBlue())) {
-            player.drawCards(1, game);
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (player != null && permanent != null) {
+            permanent.destroy(source.getSourceId(), game, true);
+            game.applyEffects();
+            if (permanent.getColor(game).isBlack() || permanent.getColor(game).isBlue()) {
+                player.drawCards(1, game);
+            }
             return true;
         }
         return false;

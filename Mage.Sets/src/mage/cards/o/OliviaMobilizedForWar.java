@@ -41,13 +41,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -55,14 +53,8 @@ import java.util.UUID;
  */
 public class OliviaMobilizedForWar extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public OliviaMobilizedForWar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Vampire");
         this.subtype.add("Knight");
@@ -83,7 +75,8 @@ public class OliviaMobilizedForWar extends CardImpl {
         effect = new BecomesCreatureTypeTargetEffect(Duration.WhileOnBattlefield, new ArrayList<>(Collections.singletonList("Vampire")), false);
         effect.setText("and it becomes a Vampire in addition to its other types");
         doIfCostPaid.addEffect(effect);
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, doIfCostPaid, filter, false, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, doIfCostPaid,
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT, null));
     }
 
     public OliviaMobilizedForWar(final OliviaMobilizedForWar card) {

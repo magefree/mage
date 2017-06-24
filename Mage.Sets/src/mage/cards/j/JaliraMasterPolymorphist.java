@@ -39,14 +39,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -55,10 +54,8 @@ import java.util.UUID;
 public class JaliraMasterPolymorphist extends CardImpl {
 
     private static final FilterCreatureCard filterCard = new FilterCreatureCard("nonlegendary creature card");
-    private static final FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        filterPermanent.add(new AnotherPredicate());
         filterCard.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
     }
 
@@ -75,7 +72,7 @@ public class JaliraMasterPolymorphist extends CardImpl {
         // Put that card onto the battlefield and the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealCardsFromLibraryUntilEffect(filterCard, Zone.BATTLEFIELD, Zone.LIBRARY), new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filterPermanent, true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true)));
         this.addAbility(ability);
 
     }

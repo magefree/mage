@@ -29,21 +29,17 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantBlockUnlessYouControlSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -51,14 +47,21 @@ import mage.game.permanent.Permanent;
  */
 public class HowlpackWolf extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Wolf or Werewolf");
+
+    static {
+        filter.add(Predicates.or(new SubtypePredicate(SubType.WOLF), new SubtypePredicate(SubType.WEREWOLF)));
+        filter.add(new AnotherPredicate());
+    }
+
     public HowlpackWolf(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add("Wolf");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Howlpack Wolf can't block unless you control another Wolf or Werewolf.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HowlpackWolfRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(filter)));
     }
 
     public HowlpackWolf(final HowlpackWolf card) {
@@ -68,41 +71,5 @@ public class HowlpackWolf extends CardImpl {
     @Override
     public HowlpackWolf copy() {
         return new HowlpackWolf(this);
-    }
-}
-
-class HowlpackWolfRestrictionEffect extends RestrictionEffect {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Wolf or Werewolf");
-
-    static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.WOLF), new SubtypePredicate(SubType.WEREWOLF)));
-        filter.add(new AnotherPredicate());
-    }
-
-    public HowlpackWolfRestrictionEffect() {
-        super(Duration.WhileOnBattlefield);
-
-        staticText = "{this} can't block unless you control another Wolf or Werewolf";
-    }
-
-    public HowlpackWolfRestrictionEffect(final HowlpackWolfRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HowlpackWolfRestrictionEffect copy() {
-        return new HowlpackWolfRestrictionEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId())
-                && game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 0;
     }
 }
