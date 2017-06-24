@@ -66,28 +66,28 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Will
  */
-public class NicolBolasGodPharoh extends CardImpl {
+public class NicolBolasGodPharaoh extends CardImpl {
 
     private UUID exileId = UUID.randomUUID();
     private static final FilterPermanent opponentsNonlandPermanentsFilter = new FilterNonlandPermanent("non-land permanents your opponents control");
     static {
         opponentsNonlandPermanentsFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
-    public NicolBolasGodPharoh(UUID ownerId, CardSetInfo setInfo) {
+    public NicolBolasGodPharaoh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{U}{B}{R}");
         this.subtype.add("Bolas");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
 
         // +2: Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
-        LoyaltyAbility ability = new LoyaltyAbility(new NicolBolasGodPharohPlusTwoEffect(exileId), 2);
+        LoyaltyAbility ability = new LoyaltyAbility(new NicolBolasGodPharaohPlusTwoEffect(exileId), 2);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
         // +1: Each opponent exiles two cards from his or her hand.
-        this.addAbility(new LoyaltyAbility(new NicolBolasGodPharohPlusOneEffect(exileId), 1));
+        this.addAbility(new LoyaltyAbility(new NicolBolasGodPharaohPlusOneEffect(exileId), 1));
 
-        // -4: Nicol Bolas, God-Pharoh deals 7 damage to target creature or player.
+        // -4: Nicol Bolas, God-Pharaoh deals 7 damage to target creature or player.
         ability = new LoyaltyAbility(new DamageTargetEffect(7), -2);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -96,34 +96,34 @@ public class NicolBolasGodPharoh extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ExileAllEffect(opponentsNonlandPermanentsFilter, exileId, this.getIdName()), -12));
     }
 
-    public NicolBolasGodPharoh(final NicolBolasGodPharoh card) {
+    public NicolBolasGodPharaoh(final NicolBolasGodPharaoh card) {
         super(card);
     }
 
     @Override
-    public NicolBolasGodPharoh copy() {
-        return new NicolBolasGodPharoh(this);
+    public NicolBolasGodPharaoh copy() {
+        return new NicolBolasGodPharaoh(this);
     }
 }
 
-class NicolBolasGodPharohPlusOneEffect extends OneShotEffect {
+class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
     
     private UUID exileId;
     
-    NicolBolasGodPharohPlusOneEffect(UUID exileId) {
+    NicolBolasGodPharaohPlusOneEffect(UUID exileId) {
         super(Outcome.Exile);
         this.exileId = exileId;
         this.staticText = "Each opponent exiles two cards from his or her hand.";
     }
     
-    NicolBolasGodPharohPlusOneEffect(final NicolBolasGodPharohPlusOneEffect effect) {
+    NicolBolasGodPharaohPlusOneEffect(final NicolBolasGodPharaohPlusOneEffect effect) {
         super(effect);
         this.exileId = effect.exileId;
     }
 
     @Override
-    public NicolBolasGodPharohPlusOneEffect copy() {
-        return new NicolBolasGodPharohPlusOneEffect(this);
+    public NicolBolasGodPharaohPlusOneEffect copy() {
+        return new NicolBolasGodPharaohPlusOneEffect(this);
     }
 
     @Override
@@ -162,24 +162,24 @@ class NicolBolasGodPharohPlusOneEffect extends OneShotEffect {
     }
 }
 
-class NicolBolasGodPharohPlusTwoEffect extends OneShotEffect {
+class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
 
     private UUID exileId;
     
-    public NicolBolasGodPharohPlusTwoEffect(UUID exileId) {
+    public NicolBolasGodPharaohPlusTwoEffect(UUID exileId) {
         super(Outcome.Detriment);
         this.exileId = exileId;
         this.staticText = "Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost";
     }
 
-    public NicolBolasGodPharohPlusTwoEffect(final NicolBolasGodPharohPlusTwoEffect effect) {
+    public NicolBolasGodPharaohPlusTwoEffect(final NicolBolasGodPharaohPlusTwoEffect effect) {
         super(effect);
         this.exileId = effect.exileId;
     }
 
     @Override
-    public NicolBolasGodPharohPlusTwoEffect copy() {
-        return new NicolBolasGodPharohPlusTwoEffect(this);
+    public NicolBolasGodPharaohPlusTwoEffect copy() {
+        return new NicolBolasGodPharaohPlusTwoEffect(this);
     }
 
     @Override
@@ -197,7 +197,7 @@ class NicolBolasGodPharohPlusTwoEffect extends OneShotEffect {
             } while (library.hasCards() && card != null && card.isLand());
 
             if (card != null) {
-                ContinuousEffect effect = new NicolBolasGodPharohFromExileEffect();
+                ContinuousEffect effect = new NicolBolasGodPharaohFromExileEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                 game.addEffect(effect, source);
             }
@@ -207,14 +207,14 @@ class NicolBolasGodPharohPlusTwoEffect extends OneShotEffect {
     }
 }
 
-class NicolBolasGodPharohFromExileEffect extends AsThoughEffectImpl {
+class NicolBolasGodPharaohFromExileEffect extends AsThoughEffectImpl {
 
-    public NicolBolasGodPharohFromExileEffect() {
+    public NicolBolasGodPharaohFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast card from exile";
     }
 
-    public NicolBolasGodPharohFromExileEffect(final NicolBolasGodPharohFromExileEffect effect) {
+    public NicolBolasGodPharaohFromExileEffect(final NicolBolasGodPharaohFromExileEffect effect) {
         super(effect);
     }
 
@@ -224,8 +224,8 @@ class NicolBolasGodPharohFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public NicolBolasGodPharohFromExileEffect copy() {
-        return new NicolBolasGodPharohFromExileEffect(this);
+    public NicolBolasGodPharaohFromExileEffect copy() {
+        return new NicolBolasGodPharaohFromExileEffect(this);
     }
 
     @Override
