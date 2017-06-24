@@ -31,12 +31,10 @@ import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -44,17 +42,11 @@ import java.util.UUID;
  */
 public class Castigate extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a nonland card");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-    }
-
     public Castigate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{B}");
 
         // Target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
-        this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(filter));
+        this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_A_NON_LAND));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
