@@ -66,6 +66,10 @@ import mage.target.TargetCard;
 public class UneshCriosphinxSovereign extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Sphinx spells");
+    
+    static {
+        filter.add(new SubtypePredicate(SubType.SPHINX));
+    }
 
     public UneshCriosphinxSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
@@ -82,8 +86,7 @@ public class UneshCriosphinxSovereign extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
 
         // Whenever Unesh, Criosphinx Sovereign or another Sphinx enters the battlefield under your control, reveal the top four cards of your library. An opponent seperates those cards into two piles. Put one pile into your hand and the other into your graveyard.
-        Ability ability = new UneshCriosphinxSovereignTriggeredAbility();
-        this.addAbility(ability);
+        this.addAbility(new UneshCriosphinxSovereignTriggeredAbility());
     }
 
     public UneshCriosphinxSovereign(final UneshCriosphinxSovereign card) {
