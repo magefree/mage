@@ -260,7 +260,7 @@ public enum SubType {
     SPAWN("Spawn", SubTypeSet.CreatureType, false),
     SPECTER("Specter", SubTypeSet.CreatureType, false),
     SPELLSHAPER("Spellshaper", SubTypeSet.CreatureType, false),
-    SPHINX("Sphix", SubTypeSet.CreatureType, false),
+    SPHINX("Sphinx", SubTypeSet.CreatureType, false),
     SPIDER("Spider", SubTypeSet.CreatureType, false),
     SPIKE("Spike", SubTypeSet.CreatureType, false),
     SPIRIT("Spirit", SubTypeSet.CreatureType, false),
