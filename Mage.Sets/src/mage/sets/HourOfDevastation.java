@@ -27,15 +27,14 @@
  */
 package mage.sets;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author fireshoes
@@ -79,14 +78,13 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Desert of the True", 174, Rarity.COMMON, mage.cards.d.DesertOfTheTrue.class));
         cards.add(new SetCardInfo("Doomfall", 62, Rarity.UNCOMMON, mage.cards.d.Doomfall.class));
         cards.add(new SetCardInfo("Dreamstealer", 63, Rarity.RARE, mage.cards.d.Dreamstealer.class));
-        cards.add(new SetCardInfo("Hour of Glory", 065, Rarity.RARE, mage.cards.h.HourOfGlory.class));
+        cards.add(new SetCardInfo("Hour of Glory", 65, Rarity.RARE, mage.cards.h.HourOfGlory.class));
         cards.add(new SetCardInfo("Hour of Revelation", 15, Rarity.RARE, mage.cards.h.HourOfRevelation.class));
         cards.add(new SetCardInfo("Inferno Jet", 99, Rarity.UNCOMMON, mage.cards.i.InfernoJet.class));
         cards.add(new SetCardInfo("Khenra Eternal", 66, Rarity.COMMON, mage.cards.k.KhenraEternal.class));
         cards.add(new SetCardInfo("Khenra Scrapper", 100, Rarity.COMMON, mage.cards.k.KhenraScrapper.class));
         cards.add(new SetCardInfo("Liliana's Defeat", 68, Rarity.UNCOMMON, mage.cards.l.LilianasDefeat.class));
         cards.add(new SetCardInfo("Marauding Boneslasher", 70, Rarity.COMMON, mage.cards.m.MaraudingBoneslasher.class));
-        cards.add(new SetCardInfo("Maurauding Boneslasher", 70, Rarity.COMMON, mage.cards.m.MauraudingBoneslasher.class));
         cards.add(new SetCardInfo("Nicol Bolas, God-Pharaoh", 140, Rarity.MYTHIC, mage.cards.n.NicolBolasGodPharaoh.class));
         cards.add(new SetCardInfo("Open Fire", 105, Rarity.COMMON, mage.cards.o.OpenFire.class));
         cards.add(new SetCardInfo("Proven Combatant", 42, Rarity.COMMON, mage.cards.p.ProvenCombatant.class));
@@ -97,9 +95,12 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Solemnity", 22, Rarity.RARE, mage.cards.s.Solemnity.class));
         cards.add(new SetCardInfo("Steadfast Sentinel", 24, Rarity.COMMON, mage.cards.s.SteadfastSentinel.class));
         cards.add(new SetCardInfo("Supreme Will", 49, Rarity.UNCOMMON, mage.cards.s.SupremeWill.class));
+        cards.add(new SetCardInfo("Torment of Hailfire", 77, Rarity.RARE, mage.cards.t.TormentOfHailfire.class));
+        cards.add(new SetCardInfo("Torment of Scarabs", 78, Rarity.UNCOMMON, mage.cards.t.TormentOfScarabs.class));
+        cards.add(new SetCardInfo("Torment of Venom", 79, Rarity.COMMON, mage.cards.t.TormentOfVenom.class));
+        cards.add(new SetCardInfo("Wasp of the Bitter End", 206, Rarity.UNCOMMON, mage.cards.w.WaspOfTheBitterEnd.class));
         cards.add(new SetCardInfo("Wildfire Eternal", 109, Rarity.RARE, mage.cards.w.WildfireEternal.class));
         cards.add(new SetCardInfo("Woodland Stream", 204, Rarity.COMMON, mage.cards.w.WoodlandStream.class));
-
         cards.add(new SetCardInfo("Zealot of the God-Pharaoh", 207, Rarity.COMMON, mage.cards.z.ZealotOfTheGodPharaoh.class));
     }
 
