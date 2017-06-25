@@ -123,7 +123,7 @@ class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-            Permanent permanent = zEvent.getTarget();
+            Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
             if (permanent != null
                     && permanent.isCreature()
                     && permanent.getCounters(game).containsKey(CounterType.M1M1)) {
