@@ -56,6 +56,7 @@ public class LilianasDefeat extends CardImpl {
         FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("black creature or black planeswalker");
         filter.add(new ColorPredicate(ObjectColor.BLACK));
         // Destroy target black creature or black planeswalker. If that permanent was a Liliana planeswalker, her controller loses 3 life.
+        this.getSpellAbility().addEffect(new LilianasDefeatEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
