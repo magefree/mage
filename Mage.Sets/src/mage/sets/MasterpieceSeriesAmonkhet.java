@@ -92,6 +92,7 @@ public class MasterpieceSeriesAmonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Slaughter Pact", 44, Rarity.SPECIAL, mage.cards.s.SlaughterPact.class));
         cards.add(new SetCardInfo("Spell Pierce", 17, Rarity.SPECIAL, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Stifle", 18, Rarity.SPECIAL, mage.cards.s.Stifle.class));
+        cards.add(new SetCardInfo("The Scorpion God", 54, Rarity.SPECIAL, mage.cards.t.TheScorpionGod.class));
         cards.add(new SetCardInfo("Vindicate", 30, Rarity.SPECIAL, mage.cards.v.Vindicate.class));
         cards.add(new SetCardInfo("Worship", 6, Rarity.SPECIAL, mage.cards.w.Worship.class));
         cards.add(new SetCardInfo("Wrath of God", 7, Rarity.SPECIAL, mage.cards.w.WrathOfGod.class));
