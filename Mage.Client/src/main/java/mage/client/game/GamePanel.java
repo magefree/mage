@@ -489,6 +489,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.btnStopWatching.setVisible(false);
         this.btnSwitchHands.setVisible(false);
         this.btnCancelSkip.setVisible(true);
+        this.btnToggleMacro.setVisible(true);
 
         this.btnSkipToNextTurn.setVisible(true);
         this.btnSkipToEndTurn.setVisible(true);
@@ -522,6 +523,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.btnSwitchHands.setVisible(false);
         this.chosenHandKey = "";
         this.btnCancelSkip.setVisible(false);
+        this.btnToggleMacro.setVisible(false);
 
         this.btnSkipToNextTurn.setVisible(false);
         this.btnSkipToEndTurn.setVisible(false);
@@ -1346,6 +1348,7 @@ public final class GamePanel extends javax.swing.JPanel {
         txtHoldPriority.setToolTipText("Holding priority after the next spell cast or ability activation");
         txtHoldPriority.setVisible(false);
 
+        btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO);
         btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP); // F3
         btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN); // F4
         btnSkipToEndTurn = new KeyboundButton(KEY_CONTROL_END_STEP); // F5
@@ -1436,6 +1439,31 @@ public final class GamePanel extends javax.swing.JPanel {
         bigCard.setBorder(new LineBorder(Color.black, 1, true));
 
         int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
+        
+        
+        btnToggleMacro.setContentAreaFilled(false);
+        btnToggleMacro.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+        btnToggleMacro.setIcon(new ImageIcon(ImageManagerImpl.instance.getToggleRecordMacroButtonImage()));
+        btnToggleMacro.setToolTipText("Toggle Record Macro ("
+                + getCachedKeyText(KEY_CONTROL_TOGGLE_MACRO) + ").");
+        btnToggleMacro.setFocusable(false);
+        btnToggleMacro.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getButton() == MouseEvent.BUTTON1) {
+                    btnToggleMacroActionPerformed(null);
+                }
+            }
+        });
+
+        KeyStroke kst = getCachedKeystroke(KEY_CONTROL_TOGGLE_MACRO);
+        this.getInputMap(c).put(kst, "F8_PRESS");
+        this.getActionMap().put("F8_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                btnToggleMacroActionPerformed(actionEvent);
+            }
+        });
 
         KeyStroke ks3 = getCachedKeystroke(KEY_CONTROL_CANCEL_SKIP);
         this.getInputMap(c).put(ks3, "F3_PRESS");
@@ -1809,6 +1837,7 @@ public final class GamePanel extends javax.swing.JPanel {
                         .addComponent(btnSkipToEndStepBeforeYourTurn)
                 )
                 .addGroup(gl_pnlShortCuts.createSequentialGroup()
+                        .addComponent(btnToggleMacro)
                         .addComponent(txtHoldPriority)
                         .addComponent(txtSpellsCast)
                         .addComponent(btnSwitchHands)
@@ -1843,6 +1872,7 @@ public final class GamePanel extends javax.swing.JPanel {
                                 .addComponent(btnSkipToEndStepBeforeYourTurn)
                         )
                         .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnToggleMacro)
                                 .addComponent(txtHoldPriority)
                                 .addComponent(txtSpellsCast)
                                 .addComponent(btnSwitchHands)
@@ -1989,6 +2019,9 @@ public final class GamePanel extends javax.swing.JPanel {
         for (MouseListener ml : this.getMouseListeners()) {
             this.removeMouseListener(ml);
         }
+        for (MouseListener ml : this.btnToggleMacro.getMouseListeners()) {
+            this.btnToggleMacro.removeMouseListener(ml);
+        }
         for (MouseListener ml : this.btnCancelSkip.getMouseListeners()) {
             this.btnCancelSkip.removeMouseListener(ml);
         }
@@ -2069,6 +2102,17 @@ public final class GamePanel extends javax.swing.JPanel {
         message.setButton2("Yes", PlayerAction.CLIENT_CONCEDE_GAME);
         message.setGameId(gameId);
         MageFrame.getInstance().showUserRequestDialog(message);
+    }
+    
+    private void btnToggleMacroActionPerformed(java.awt.event.ActionEvent evt) {
+        SessionHandler.sendPlayerAction(PlayerAction.TOGGLE_RECORD_MACRO, gameId, null);
+        AudioManager.playOnSkipButton();
+        updateSkipButtons(false, false, false, false, false, false);
+        if (btnToggleMacro.getBorder() instanceof EmptyBorder) {
+            btnToggleMacro.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
+        } else {
+            btnToggleMacro.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+        }
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
@@ -2360,6 +2404,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private mage.client.cards.BigCard bigCard;
 
     //    private JPanel cancelSkipPanel;
+    private KeyboundButton btnToggleMacro;
     private KeyboundButton btnCancelSkip;
     private KeyboundButton btnSkipToNextTurn; // F4
     private KeyboundButton btnSkipToEndTurn; // F5

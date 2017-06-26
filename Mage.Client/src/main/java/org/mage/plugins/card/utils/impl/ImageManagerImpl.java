@@ -339,6 +339,14 @@ public enum ImageManagerImpl implements ImageManager {
         }
         return imageSkipYourNextTurnButton;
     }
+    
+    @Override
+    public Image getToggleRecordMacroButtonImage() {
+        if(imageToggleRecordMacroButton == null) {
+            imageToggleRecordMacroButton = getBufferedImageFromResource("/buttons/toggle_macro.png");
+        }
+        return imageToggleRecordMacroButton;
+    }
 
     protected static Image getImageFromResourceTransparent(String path, Color mask, Rectangle rec) {
         BufferedImage image;
@@ -433,6 +441,7 @@ public enum ImageManagerImpl implements ImageManager {
     private static BufferedImage imageSkipStackButton;
     private static BufferedImage imageSkipUntilEndStepBeforeYourTurnButton;
     private static BufferedImage imageSkipYourNextTurnButton;
+    private static BufferedImage imageToggleRecordMacroButton;
 
     private static Map<String, Image> phasesImages;
 }
