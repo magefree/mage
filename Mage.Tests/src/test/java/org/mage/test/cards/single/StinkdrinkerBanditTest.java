@@ -15,6 +15,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class StinkdrinkerBanditTest extends CardTestPlayerBase {
+
+    private String stinkdrinker = "Stinkdrinker Bandit";
     
     /**
      *  Reported bug: Stinkdrinker Bandit is incorrectly giving the +2/+1 bonus even to Rogues that do get blocked.
@@ -49,5 +51,21 @@ public class StinkdrinkerBanditTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Wall of Omens", 0, 4);        
         assertLife(playerA, 20);
         assertLife(playerB, 9); // Agent pumped to 5, Amphin pumped to 4, Sable stays at 2 power (11 damage)
+    }
+
+    @Test
+    public void stinkDrinkerPesterMite(){
+        String pestermite = "Pestermite";
+        addCard(Zone.BATTLEFIELD, playerA, stinkdrinker);
+        addCard(Zone.BATTLEFIELD, playerA, pestermite);
+
+        attack(1, playerA, pestermite);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+
+        execute();
+
+        assertPowerToughness(playerA, pestermite, 4, 2);
+        assertPowerToughness(playerA, stinkdrinker, 2, 1);
     }
 }
