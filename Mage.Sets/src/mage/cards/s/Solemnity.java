@@ -59,7 +59,7 @@ public class Solemnity extends CardImpl {
         // Players can't get counters.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SolemnityEffect()));
 
-        // Counters can't be put on artifacts, creatures, enchantments or lands.
+        // Counters can't be put on artifacts, creatures, enchantments, or lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SolemnityEffect2()));
     }
 
@@ -108,7 +108,7 @@ class SolemnityEffect extends ReplacementEffectImpl {
 
 class SolemnityEffect2 extends ReplacementEffectImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, enchantments or lands");
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
         filter.add(Predicates.or(
@@ -120,7 +120,7 @@ class SolemnityEffect2 extends ReplacementEffectImpl {
 
     public SolemnityEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Counters can't be put on artifacts, creatures, enchantments or lands";
+        staticText = "Counters can't be put on artifacts, creatures, enchantments, or lands";
     }
 
     public SolemnityEffect2(final SolemnityEffect2 effect) {
