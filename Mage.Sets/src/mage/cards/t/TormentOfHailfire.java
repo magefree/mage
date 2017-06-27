@@ -85,7 +85,7 @@ class TormentOfHailfireEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int repeat = source.getManaCosts().getX();
+            int repeat = source.getManaCostsToPay().getX();
             for (int i = 0; i < repeat; i++) {
                 for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                     Player opponent = game.getPlayer(opponentId);
