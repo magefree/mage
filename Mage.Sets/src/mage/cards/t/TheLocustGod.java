@@ -69,7 +69,7 @@ public class TheLocustGod extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you draw a card, create a 1/1 blue and red Insect creature token with flying and haste.
-        this.addAbility(new DrawCardControllerTriggeredAbility(new CreateTokenEffect(new TheLocustGodInsectToken(), 1, true, false), false));
+        this.addAbility(new DrawCardControllerTriggeredAbility(new CreateTokenEffect(new TheLocustGodInsectToken(), 1, false, false), false));
 
         // {2}{U}{R}: Draw a card, then discard a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1, false), new ManaCostsImpl("{2}{U}{R}"));
