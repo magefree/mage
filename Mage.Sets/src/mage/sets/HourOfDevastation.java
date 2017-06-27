@@ -29,7 +29,9 @@ package mage.sets;
 
 import java.util.ArrayList;
 import java.util.List;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.cards.FrameStyle;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -102,6 +104,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Steadfast Sentinel", 24, Rarity.COMMON, mage.cards.s.SteadfastSentinel.class));
         cards.add(new SetCardInfo("Supreme Will", 49, Rarity.UNCOMMON, mage.cards.s.SupremeWill.class));
         cards.add(new SetCardInfo("Swamp", 187, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("The Locust God", 139, Rarity.MYTHIC, mage.cards.t.TheLocustGod.class));
         cards.add(new SetCardInfo("The Scarab God", 145, Rarity.MYTHIC, mage.cards.t.TheScarabGod.class));
         cards.add(new SetCardInfo("The Scorpion God", 146, Rarity.MYTHIC, mage.cards.t.TheScorpionGod.class));
         cards.add(new SetCardInfo("Torment of Hailfire", 77, Rarity.RARE, mage.cards.t.TormentOfHailfire.class));
@@ -129,4 +132,3 @@ public class HourOfDevastation extends ExpansionSet {
         return new ArrayList<>(savedSpecialLand);
     }
 }
-
