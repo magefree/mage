@@ -78,7 +78,7 @@ class ChampionOfWitsEffect extends OneShotEffect {
 
     public ChampionOfWitsEffect() {
         super(Outcome.Benefit);
-        staticText = "When {this} enters the battlefield, you may draw cards equal to its power. If you do, discard two cards.";
+        staticText = "you may draw cards equal to its power. If you do, discard two cards.";
     }
 
     public ChampionOfWitsEffect(final ChampionOfWitsEffect effect) {
