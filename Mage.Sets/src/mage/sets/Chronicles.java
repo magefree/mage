@@ -92,6 +92,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Ghazban Ogre", 37, Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
         cards.add(new SetCardInfo("Goblin Artisans", 48, Rarity.UNCOMMON, mage.cards.g.GoblinArtisans.class));
         cards.add(new SetCardInfo("Goblin Digging Team", 49, Rarity.COMMON, mage.cards.g.GoblinDiggingTeam.class));
+        cards.add(new SetCardInfo("Goblin Shrine", 50, Rarity.COMMON, mage.cards.g.GoblinShrine.class));
         cards.add(new SetCardInfo("Goblins of the Flarg", 51, Rarity.COMMON, mage.cards.g.GoblinsOfTheFlarg.class));
         cards.add(new SetCardInfo("Hasran Ogress", 6, Rarity.COMMON, mage.cards.h.HasranOgress.class));
         cards.add(new SetCardInfo("Hell's Caretaker", 7, Rarity.RARE, mage.cards.h.HellsCaretaker.class));

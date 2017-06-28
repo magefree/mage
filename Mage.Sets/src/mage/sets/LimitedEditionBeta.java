@@ -155,6 +155,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Karma", 212, Rarity.UNCOMMON, mage.cards.k.Karma.class));
         cards.add(new SetCardInfo("Keldon Warlord", 162, Rarity.UNCOMMON, mage.cards.k.KeldonWarlord.class));
         cards.add(new SetCardInfo("Kormus Bell", 258, Rarity.RARE, mage.cards.k.KormusBell.class));
+        cards.add(new SetCardInfo("Kudzu", 113, Rarity.RARE, mage.cards.k.Kudzu.class));
         cards.add(new SetCardInfo("Lance", 213, Rarity.UNCOMMON, mage.cards.l.Lance.class));
         cards.add(new SetCardInfo("Ley Druid", 114, Rarity.UNCOMMON, mage.cards.l.LeyDruid.class));
         cards.add(new SetCardInfo("Library of Leng", 259, Rarity.UNCOMMON, mage.cards.l.LibraryOfLeng.class));
