@@ -150,14 +150,15 @@ class DarkIntimationsEffect extends OneShotEffect {
             }
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filterCard);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) 
+                && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card == null) {
                 return false;
             }
             controller.moveCards(card, Zone.HAND, source, game);
-            controller.drawCards(1, game);
         }
+        controller.drawCards(1, game);
         return true;
     }
 }
@@ -217,7 +218,8 @@ class DarkIntimationsReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        return creature != null && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
+        return creature != null 
+                && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 
     @Override
