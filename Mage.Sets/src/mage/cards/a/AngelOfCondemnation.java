@@ -91,7 +91,7 @@ public class AngelOfCondemnation extends CardImpl {
         effect.setText("Exile another target creature until {this} leaves the battlefield");
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ExertSourceCost(ability));
+        ability.addCost(new ExertSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);

@@ -46,16 +46,12 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ExertSourceCost extends CostImpl {
 
-    private final Ability source;
-
-    public ExertSourceCost(Ability source) {
-        this.source = source;
+    public ExertSourceCost() {
         this.text = "Exert {this}";
     }
 
     public ExertSourceCost(ExertSourceCost cost) {
         super(cost);
-        this.source = cost.source;
     }
 
     @Override
@@ -71,7 +67,7 @@ public class ExertSourceCost extends CostImpl {
             game.fireEvent(GameEvent.getEvent(EventType.BECOMES_EXERTED, permanent.getId(), permanent.getId(), permanent.getControllerId()));
             ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("", permanent.getControllerId());
             effect.setTargetPointer(new FixedTarget(permanent, game));
-            game.addEffect(effect, source);
+            game.addEffect(effect, ability);
             paid = true;
         }
         return paid;
