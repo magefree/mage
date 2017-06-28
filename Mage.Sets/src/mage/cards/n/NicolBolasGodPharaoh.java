@@ -68,32 +68,33 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class NicolBolasGodPharaoh extends CardImpl {
 
-    private UUID exileId = UUID.randomUUID();
     private static final FilterPermanent opponentsNonlandPermanentsFilter = new FilterNonlandPermanent("non-land permanents your opponents control");
+
     static {
         opponentsNonlandPermanentsFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
+
     public NicolBolasGodPharaoh(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{U}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}{R}");
         this.subtype.add("Bolas");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
 
         // +2: Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
-        LoyaltyAbility ability = new LoyaltyAbility(new NicolBolasGodPharaohPlusTwoEffect(exileId), 2);
+        LoyaltyAbility ability = new LoyaltyAbility(new NicolBolasGodPharaohPlusTwoEffect(), 2);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
         // +1: Each opponent exiles two cards from his or her hand.
-        this.addAbility(new LoyaltyAbility(new NicolBolasGodPharaohPlusOneEffect(exileId), 1));
+        this.addAbility(new LoyaltyAbility(new NicolBolasGodPharaohPlusOneEffect(), 1));
 
         // -4: Nicol Bolas, God-Pharaoh deals 7 damage to target creature or player.
-        ability = new LoyaltyAbility(new DamageTargetEffect(7), -2);
+        ability = new LoyaltyAbility(new DamageTargetEffect(7), -4);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
         // -12: Exile each nonland permanent your opponents control.
-        this.addAbility(new LoyaltyAbility(new ExileAllEffect(opponentsNonlandPermanentsFilter, exileId, this.getIdName()), -12));
+        this.addAbility(new LoyaltyAbility(new ExileAllEffect(opponentsNonlandPermanentsFilter), -12));
     }
 
     public NicolBolasGodPharaoh(final NicolBolasGodPharaoh card) {
@@ -107,18 +108,14 @@ public class NicolBolasGodPharaoh extends CardImpl {
 }
 
 class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
-    
-    private UUID exileId;
-    
-    NicolBolasGodPharaohPlusOneEffect(UUID exileId) {
+
+    NicolBolasGodPharaohPlusOneEffect() {
         super(Outcome.Exile);
-        this.exileId = exileId;
         this.staticText = "Each opponent exiles two cards from his or her hand.";
     }
-    
+
     NicolBolasGodPharaohPlusOneEffect(final NicolBolasGodPharaohPlusOneEffect effect) {
         super(effect);
-        this.exileId = effect.exileId;
     }
 
     @Override
@@ -139,7 +136,7 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
 
             int numberOfCardsToExile = Math.min(2, player.getHand().size());
             Cards cards = new CardsImpl();
-            
+
             Target target = new TargetCardInHand(numberOfCardsToExile, new FilterCard());
 
             player.chooseTarget(Outcome.Exile, target, source, game);
@@ -156,7 +153,7 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
             if (cardsPlayerChoseToExile == null) {
                 continue;
             }
-            player.moveCardsToExile(cardsPlayerChoseToExile.getCards(game), source, game, true, exileId, source.getSourceObject(game).getIdName());
+            player.moveCards(cardsPlayerChoseToExile.getCards(game), Zone.EXILED, source, game);
         }
         return true;
     }
@@ -164,17 +161,13 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
 
 class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
 
-    private UUID exileId;
-    
-    public NicolBolasGodPharaohPlusTwoEffect(UUID exileId) {
+    public NicolBolasGodPharaohPlusTwoEffect() {
         super(Outcome.Detriment);
-        this.exileId = exileId;
         this.staticText = "Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost";
     }
 
     public NicolBolasGodPharaohPlusTwoEffect(final NicolBolasGodPharaohPlusTwoEffect effect) {
         super(effect);
-        this.exileId = effect.exileId;
     }
 
     @Override
@@ -192,7 +185,7 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
             do {
                 card = library.removeFromTop(game);
                 if (card != null) {
-                    opponent.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
+                    opponent.moveCards(card, Zone.EXILED, source, game);
                 }
             } while (library.hasCards() && card != null && card.isLand());
 
