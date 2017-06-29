@@ -27,7 +27,6 @@
  */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -47,8 +46,9 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BursegSardaukar
  */
 public class MagewrightsStone extends CardImpl {
@@ -60,7 +60,7 @@ public class MagewrightsStone extends CardImpl {
     }
 
     public MagewrightsStone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {1}, {T}: Untap target creature that has an activated ability with {T} in its cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{1}"));
@@ -91,7 +91,7 @@ class HasAbilityWithTapSymbolPredicate implements Predicate<MageObject> {
         }
 
         for (Ability ability : abilities) {
-            if (ability.getAbilityType() == AbilityType.ACTIVATED && !ability.getCosts().isEmpty()) {
+            if ((ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.MANA) && !ability.getCosts().isEmpty()) {
                 for (Cost cost : ability.getCosts()) {
                     if (cost instanceof TapSourceCost) {
                         return true;
