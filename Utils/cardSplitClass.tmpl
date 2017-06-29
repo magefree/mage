@@ -29,11 +29,7 @@ package mage.cards.[=$cardNameFirstLetter=];
 
 import java.util.UUID;[=
 if ($power || $power eq 0) {
-    if ($planeswalker) {
-        $OUT .= "\nimport mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;"
-    }else {
-        $OUT .= "\nimport mage.MageInt;"
-    }
+    $OUT .= "\nimport mage.MageInt;"
 }
 =][=$abilitiesImports=]
 import mage.cards.CardImpl;
@@ -44,18 +40,17 @@ import mage.constants.CardType;
  *
  * @author [=$author=]
  */
-public class [=$className=] extends CardImpl {
+public class [=$className=] extends SplitCard {
 
     public [=$className=](UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{[=$type=]}, "[=$manaCost=]");
         [=$subType=][=$colors=][=
+
+    // super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{3}{R}", "{2}{U}", SpellAbilityType.SPLIT_AFTERMATH);
+
 if ($power || $power eq 0) {
-    if ($planeswalker) {
-        $OUT .= "\n        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility($power));";
-    } else {
-        $OUT .= "\n        this.power = new MageInt($power);";
-        $OUT .= "\n        this.toughness = new MageInt($toughness);";
-    }
+    $OUT .= "\n        this.power = new MageInt($power);";
+    $OUT .= "\n        this.toughness = new MageInt($toughness);";
 }
 =][=$abilities=]
     }

@@ -90,7 +90,7 @@ $raritiesConversion{'Bonus'} = 'BONUS';
 
 # Get card name
 my $cardName = $ARGV[0];
-if(!$cardName) {
+if (!$cardName) {
     print 'Enter a card name: ';
     $cardName = <STDIN>;
     chomp $cardName;
@@ -106,6 +106,18 @@ if (!exists $cards{$cardName}) {
     }
     die "Card name doesn't exist: $cardName\n";
 }
+
+my $cardTemplate = 'cardClass.tmpl';
+my $splitDelimiter = '//';
+my $splitSpell = 'false';
+
+# Remove the // from name of split cards
+if (index($cardName, $splitDelimiter) != -1) {
+    $cardName  =~ s/$splitDelimiter/""/g;
+    $cardTemplate = 'cardSplitClass.tmpl';
+    $splitSpell = 'true';
+}
+
 
 # Check if card is already implemented
 my $fileName = "../Mage.Sets/src/mage/cards/".lc(substr($cardName, 0, 1))."/".toCamelCase($cardName).".java";
@@ -164,18 +176,24 @@ foreach my $setName (keys %{$cards{$cardName}}) {
 
 # Generate the the card
 my $result;
-my $template = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
+my $template = Text::Template->new(TYPE => 'FILE', SOURCE => $cardTemplate, DELIMITERS => [ '[=', '=]' ]);
 $vars{'author'} = $author;
 $vars{'manaCost'} = fixCost($card[4]);
 $vars{'power'} = $card[6];
 $vars{'toughness'} = $card[7];
 
 my @types;
+$vars{'planeswalker'} = 'false';
 $vars{'subType'} = '';
+my $cardAbilities = $card[8];
 my $type = $card[5];
 while ($type =~ m/([a-zA-Z]+)( )*/g) {
     if (exists($cardTypes{$1})) {
-        push(@types, $cardTypes{$1});
+        push(@types, $cardTypes{$1});        
+        if ($cardTypes{$1} eq $cardTypes{'Planeswalker'}) {
+            $vars{'planeswalker'} = 'true';
+            $cardAbilities = $card[7];
+        }
     } else {
         if (@types) {
             $vars{'subType'} .= "\n        this.subtype.add(\"$1\");";
@@ -190,7 +208,8 @@ $vars{'type'} = join(', ', @types);
 $vars{'abilitiesImports'} = '';
 $vars{'abilities'} = '';
 
-my @abilities = split('\$', $card[8]);
+
+my @abilities = split('\$', $cardAbilities);
 foreach my $ability (@abilities) {
     $ability =~ s/ <i>.+?<\/i>//g;
 
@@ -206,6 +225,7 @@ foreach my $ability (@abilities) {
                         $kw = $kk;
                     }
                 }
+
                 if ($keywords{$kw}) {
                     $vars{'abilities'} .= "\n        // " . ucfirst($kwUnchanged);
                     if ($keywords{$kw} eq 'instance') {
