@@ -57,7 +57,7 @@ public class ChampionOfWits extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // When Champion of Wits enters the battlefield, you may draw cards equal to its power. If you do, discard two cards.
+        // When Champion of Wits enters the battlefield, you may draw cards equal to its power. If you do, discard two cards
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ChampionOfWitsEffect(), true));
 
         // Eternalize {5}{U}{U}
