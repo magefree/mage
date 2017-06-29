@@ -98,6 +98,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Marauding Boneslasher", 70, Rarity.COMMON, mage.cards.m.MaraudingBoneslasher.class));
         cards.add(new SetCardInfo("Mountain", 188, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Nicol Bolas, God-Pharaoh", 140, Rarity.MYTHIC, mage.cards.n.NicolBolasGodPharaoh.class));
+        cards.add(new SetCardInfo("Nicol Bolas, the Deceiver", 205, Rarity.MYTHIC, mage.cards.n.NicolBolasTheDeceiver.class));
         cards.add(new SetCardInfo("Nissa, Genesis Mage", 200, Rarity.MYTHIC, mage.cards.n.NissaGenesisMage.class));
         cards.add(new SetCardInfo("Oasis Ritualist", 124, Rarity.COMMON, mage.cards.o.OasisRitualist.class));
         cards.add(new SetCardInfo("Oketra's Last Mercy", 18, Rarity.RARE, mage.cards.o.OketrasLastMercy.class));
@@ -109,12 +110,15 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Ramunap Excavator", 129, Rarity.RARE, mage.cards.r.RamunapExcavator.class));
         cards.add(new SetCardInfo("Ramunap Hydra", 130, Rarity.RARE, mage.cards.r.RamunapHydra.class));
         cards.add(new SetCardInfo("Razaketh, the Foulblooded", 73, Rarity.MYTHIC, mage.cards.r.RazakethTheFoulblooded.class));
+        cards.add(new SetCardInfo("Reason // Believe", 154, Rarity.RARE, mage.cards.r.ReasonBelieve.class));
+        cards.add(new SetCardInfo("Refuse // Cooperate", 156, Rarity.RARE, mage.cards.r.RefuseCooperate.class));
         cards.add(new SetCardInfo("Samut, the Tested", 144, Rarity.MYTHIC, mage.cards.s.SamutTheTested.class));
         cards.add(new SetCardInfo("Sinuous Striker", 45, Rarity.UNCOMMON, mage.cards.s.SinuousStriker.class));
         cards.add(new SetCardInfo("Solemnity", 22, Rarity.RARE, mage.cards.s.Solemnity.class));
         cards.add(new SetCardInfo("Steadfast Sentinel", 24, Rarity.COMMON, mage.cards.s.SteadfastSentinel.class));
         cards.add(new SetCardInfo("Supreme Will", 49, Rarity.UNCOMMON, mage.cards.s.SupremeWill.class));
         cards.add(new SetCardInfo("Swamp", 187, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Swarm Intelligence", 50, Rarity.RARE, mage.cards.s.SwarmIntelligence.class));
         cards.add(new SetCardInfo("The Locust God", 139, Rarity.MYTHIC, mage.cards.t.TheLocustGod.class));
         cards.add(new SetCardInfo("The Scarab God", 145, Rarity.MYTHIC, mage.cards.t.TheScarabGod.class));
         cards.add(new SetCardInfo("The Scorpion God", 146, Rarity.MYTHIC, mage.cards.t.TheScorpionGod.class));

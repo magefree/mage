@@ -409,8 +409,9 @@ public interface Ability extends Controllable, Serializable {
      * true = show the rule at the top position of the rules
      *
      * @param ruleAtTheTop
+     * @return
      */
-    void setRuleAtTheTop(boolean ruleAtTheTop);
+    Ability setRuleAtTheTop(boolean ruleAtTheTop);
 
     /**
      * Returns true if this ability has to work also with face down object (set
