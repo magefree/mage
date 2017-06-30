@@ -109,11 +109,12 @@ if (!exists $cards{$cardName}) {
 
 my $cardTemplate = 'cardClass.tmpl';
 my $splitDelimiter = '//';
+my $empty = '';
 my $splitSpell = 'false';
 
 # Remove the // from name of split cards
 if (index($cardName, $splitDelimiter) != -1) {
-    $cardName  =~ s/$splitDelimiter/""/g;
+    $cardName  =~ s/$splitDelimiter/$empty/g;
     $cardTemplate = 'cardSplitClass.tmpl';
     $splitSpell = 'true';
 }
