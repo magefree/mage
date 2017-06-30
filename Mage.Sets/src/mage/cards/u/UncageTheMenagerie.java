@@ -126,7 +126,7 @@ class UncageTheMenagerieTarget extends TargetCardInLibrary {
     private int xValue;
 
     public UncageTheMenagerieTarget(int xValue) {
-        super(0, xValue, new FilterCreatureCard(xValue + " creature cards with different names"));
+        super(0, xValue, new FilterCreatureCard(xValue + " creature cards with different names with converted mana cost " + xValue));
         this.xValue = xValue;
     }
 
