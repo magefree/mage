@@ -117,8 +117,8 @@ class FrayingSanityEffect extends OneShotEffect {
     int xAmount = 0;
 
     public FrayingSanityEffect() {
-        super(Outcome.LoseLife);
-        this.staticText = "enchanted player puts the top X cards of his or her library into his or her graveyard, blah blah";
+        super(Outcome.Detriment);
+        this.staticText = "";
     }
 
     public FrayingSanityEffect(final FrayingSanityEffect effect) {
