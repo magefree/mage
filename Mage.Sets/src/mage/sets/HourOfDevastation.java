@@ -140,6 +140,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Traveler's Amulet", 167, Rarity.COMMON, mage.cards.t.TravelersAmulet.class));
         cards.add(new SetCardInfo("Uncage the Menagerie", 137, Rarity.MYTHIC, mage.cards.u.UncageTheMenagerie.class));
         cards.add(new SetCardInfo("Unesh, Criosphinx Sovereign", 52, Rarity.MYTHIC, mage.cards.u.UneshCriosphinxSovereign.class));
+        cards.add(new SetCardInfo("Unquenchable Thirst", 53, Rarity.COMMON, mage.cards.u.UnquenchableThirst.class));
         cards.add(new SetCardInfo("Unraveling Mummy", 147, Rarity.UNCOMMON, mage.cards.u.UnravelingMummy.class));
         cards.add(new SetCardInfo("Unsummon", 54, Rarity.COMMON, mage.cards.u.Unsummon.class));
         cards.add(new SetCardInfo("Visage of Bolas", 208, Rarity.RARE, mage.cards.v.VisageOfBolas.class));
