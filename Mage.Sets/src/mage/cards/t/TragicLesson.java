@@ -33,6 +33,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -98,7 +99,7 @@ class TragicLessonEffect extends OneShotEffect {
             Cost cost = new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter));
             if (cost.canPay(source, source.getSourceId(), controller.getId(), game)) {
                 if (cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
-                    return true;
+                    return true;                    
                 }
             }
         }
