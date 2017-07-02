@@ -76,6 +76,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Carrion Screecher", 61, Rarity.COMMON, mage.cards.c.CarrionScreecher.class));
         cards.add(new SetCardInfo("Champion of Wits", 31, Rarity.RARE, mage.cards.c.ChampionOfWits.class));
         cards.add(new SetCardInfo("Chandra's Defeat", 86, Rarity.UNCOMMON, mage.cards.c.ChandrasDefeat.class));
+        cards.add(new SetCardInfo("Chaos Maw", 87, Rarity.RARE, mage.cards.c.ChaosMaw.class));
         cards.add(new SetCardInfo("Cinder Barrens", 209, Rarity.COMMON, mage.cards.c.CinderBarrens.class));
         cards.add(new SetCardInfo("Claim // Fame", 150, Rarity.UNCOMMON, mage.cards.c.ClaimFame.class));
         cards.add(new SetCardInfo("Crook of Condemnation", 159, Rarity.UNCOMMON, mage.cards.c.CrookOfCondemnation.class));
