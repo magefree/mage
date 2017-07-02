@@ -27,38 +27,42 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.EternalizeAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
-import java.util.UUID;
+/**
+ *
+ * @author Archer262
+ */
+public class AvenOfEnduringHope extends CardImpl {
 
-public class AdornedPouncer extends CardImpl {
+    public AvenOfEnduringHope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
 
-    public AdornedPouncer(UUID ownerId, CardSetInfo cardSetInfo) {
-        super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.subtype.add("Bird");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        subtype.add("Cat");
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        //double strike
-        addAbility(DoubleStrikeAbility.getInstance());
-
-        //eternalize 3WW
-        addAbility(new EternalizeAbility(new ManaCostsImpl("{3}{W}{W}"), this));
+        // When Aven of Enduring Hope enters the battlefield, you gain 3 life.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), false));
     }
 
-    public AdornedPouncer(AdornedPouncer adornedPouncer) {
-        super(adornedPouncer);
+    public AvenOfEnduringHope(final AvenOfEnduringHope card) {
+        super(card);
     }
 
-    public AdornedPouncer copy() {
-        return new AdornedPouncer(this);
+    @Override
+    public AvenOfEnduringHope copy() {
+        return new AvenOfEnduringHope(this);
     }
 }

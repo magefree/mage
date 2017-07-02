@@ -70,6 +70,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Adorned Pouncer", 2, Rarity.RARE, mage.cards.a.AdornedPouncer.class));
         cards.add(new SetCardInfo("Angel of Condemnation", 3, Rarity.RARE, mage.cards.a.AngelOfCondemnation.class));
         cards.add(new SetCardInfo("Angel of the God-Pharaoh", 4, Rarity.UNCOMMON, mage.cards.a.AngelOfTheGodPharaoh.class));
+        cards.add(new SetCardInfo("Aven of Enduring Hope", 5, Rarity.COMMON, mage.cards.a.AvenOfEnduringHope.class));
         cards.add(new SetCardInfo("Avid Reclaimer", 201, Rarity.UNCOMMON, mage.cards.a.AvidReclaimer.class));
         cards.add(new SetCardInfo("Beneath The Sands", 111, Rarity.COMMON, mage.cards.b.BeneathTheSands.class));
         cards.add(new SetCardInfo("Bontu's Last Reckoning", 60, Rarity.RARE, mage.cards.b.BontusLastReckoning.class));
