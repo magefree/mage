@@ -1732,4 +1732,3 @@ public class HumanPlayer extends PlayerImpl {
         return "no available";
     }
 }
-// Test
