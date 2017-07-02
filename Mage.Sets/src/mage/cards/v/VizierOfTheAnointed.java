@@ -120,7 +120,7 @@ class VizierOfTheAnointedAbilityPredicate implements Predicate<MageObject> {
 class VizierOfTheAnointedTriggeredAbility extends TriggeredAbilityImpl {
 
     VizierOfTheAnointedTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
     VizierOfTheAnointedTriggeredAbility(final VizierOfTheAnointedTriggeredAbility ability) {
@@ -140,13 +140,10 @@ class VizierOfTheAnointedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
-            Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (source != null) {
-                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                if (stackAbility.getStackAbility() instanceof EternalizeAbility
-                        || stackAbility.getStackAbility() instanceof EmbalmAbility) {
-                    return true;
-                }
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            if (stackAbility.getStackAbility() instanceof EternalizeAbility
+                    || stackAbility.getStackAbility() instanceof EmbalmAbility) {
+                return true;
             }
         }
         return false;
@@ -154,7 +151,7 @@ class VizierOfTheAnointedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you activate an ability of an artifact or creature that isn't a mana ability, " + super.getRule();
+        return "Whenever you activate an eternalize or embalm ability, draw a card.";
     }
 }
 
@@ -162,7 +159,7 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
 
     public SearchLibraryPutInGraveyard(FilterCard filter) {
         super(new TargetCardInLibrary(filter), Outcome.Neutral);
-        staticText = "a creature card with eternalize or embalm, put that card into your graveyard, then shuffle your library.";
+        staticText = "search for a creature card with eternalize or embalm, put that card into your graveyard, then shuffle your library.";
     }
 
     public SearchLibraryPutInGraveyard(final SearchLibraryPutInGraveyard effect) {
