@@ -140,6 +140,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Torment of Hailfire", 77, Rarity.RARE, mage.cards.t.TormentOfHailfire.class));
         cards.add(new SetCardInfo("Torment of Scarabs", 78, Rarity.UNCOMMON, mage.cards.t.TormentOfScarabs.class));
         cards.add(new SetCardInfo("Torment of Venom", 79, Rarity.COMMON, mage.cards.t.TormentOfVenom.class));
+        cards.add(new SetCardInfo("Tragic Lesson", 51, Rarity.COMMON, mage.cards.t.TragicLesson.class));
         cards.add(new SetCardInfo("Traveler's Amulet", 167, Rarity.COMMON, mage.cards.t.TravelersAmulet.class));
         cards.add(new SetCardInfo("Uncage the Menagerie", 137, Rarity.MYTHIC, mage.cards.u.UncageTheMenagerie.class));
         cards.add(new SetCardInfo("Unconventional Tactics", 27, Rarity.UNCOMMON, mage.cards.u.UnconventionalTactics.class));
