@@ -139,9 +139,11 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Supreme Will", 49, Rarity.UNCOMMON, mage.cards.s.SupremeWill.class));
         cards.add(new SetCardInfo("Swamp", 187, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Swarm Intelligence", 50, Rarity.RARE, mage.cards.s.SwarmIntelligence.class));
+        cards.add(new SetCardInfo("Tenacious Hunter", 136, Rarity.UNCOMMON, mage.cards.t.TenaciousHunter.class));
         cards.add(new SetCardInfo("The Locust God", 139, Rarity.MYTHIC, mage.cards.t.TheLocustGod.class));
         cards.add(new SetCardInfo("The Scarab God", 145, Rarity.MYTHIC, mage.cards.t.TheScarabGod.class));
         cards.add(new SetCardInfo("The Scorpion God", 146, Rarity.MYTHIC, mage.cards.t.TheScorpionGod.class));
+        cards.add(new SetCardInfo("Thorned Moloch", 108, Rarity.COMMON, mage.cards.t.ThornedMoloch.class));
         cards.add(new SetCardInfo("Torment of Hailfire", 77, Rarity.RARE, mage.cards.t.TormentOfHailfire.class));
         cards.add(new SetCardInfo("Torment of Scarabs", 78, Rarity.UNCOMMON, mage.cards.t.TormentOfScarabs.class));
         cards.add(new SetCardInfo("Torment of Venom", 79, Rarity.COMMON, mage.cards.t.TormentOfVenom.class));
