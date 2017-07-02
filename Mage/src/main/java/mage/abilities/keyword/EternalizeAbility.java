@@ -58,6 +58,11 @@ public class EternalizeAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
         setRule(cost, card);
     }
+    
+    public EternalizeAbility(Cost cost, Card card, String rule) {
+        this(cost, card);
+        this.rule = rule;
+    }    
 
     public EternalizeAbility(final EternalizeAbility ability) {
         super(ability);
