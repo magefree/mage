@@ -41,7 +41,7 @@ import mage.constants.CardType;
 
 /**
  *
- * @author anonymous
+ * @author nickymikail
  */
 public class RuinRat extends CardImpl {
 

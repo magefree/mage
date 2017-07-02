@@ -38,7 +38,7 @@ import mage.constants.CardType;
 
 /**
  *
- * @author anonymous
+ * @author nickymikail
  */
 public class LurchingRotbeast extends CardImpl {
 
