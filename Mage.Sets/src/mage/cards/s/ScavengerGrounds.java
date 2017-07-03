@@ -28,47 +28,58 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.TargetPlayer;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author spjspj
  */
-public class SeerOfTheLastTomorrow extends CardImpl {
+public class ScavengerGrounds extends CardImpl {
 
-    public SeerOfTheLastTomorrow(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Desert");
 
-        this.subtype.add("Naga");
-        this.subtype.add("Cleric");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(4);
-
-        // {U}, {T}, Discard a card: Target player puts the top three cards of his or her library into his or her graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(3), new ManaCostsImpl("{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardCardCost());
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate(SubType.DESERT));
     }
 
-    public SeerOfTheLastTomorrow(final SeerOfTheLastTomorrow card) {
+    public ScavengerGrounds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+
+        this.subtype.add("Desert");
+
+        // {T}: Add {C} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
+
+        // {2}, {T}, Sacrifice a Desert: Exile all cards from all graveyards.
+        Ability ability2 = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new ExileGraveyardAllPlayersEffect(),
+                new ManaCostsImpl("{2}"));
+        ability2.addCost(new TapSourceCost());
+        ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        this.addAbility(ability2);
+    }
+
+    public ScavengerGrounds(final ScavengerGrounds card) {
         super(card);
     }
 
     @Override
-    public SeerOfTheLastTomorrow copy() {
-        return new SeerOfTheLastTomorrow(this);
+    public ScavengerGrounds copy() {
+        return new ScavengerGrounds(this);
     }
 }
