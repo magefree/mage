@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 
 /**
  *
@@ -40,16 +41,18 @@ import mage.constants.CardType;
 public class [=$className=] extends SplitCard {
 
     public [=$className=](UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{[=$type=]}, "[=$manaCost=]");
-        [=$subType=][=$colors=]
-
-    // super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{3}{R}", "{2}{U}", SpellAbilityType.SPLIT_AFTERMATH);
+        super(ownerId, setInfo, new CardType[]{[=$type=]}, new CardType[]{[=$type=]}, "[=$manaCost=]", "[=$manaCost=]", SpellAbilityType.SPLIT_AFTERMATH);
+  [=$subType=][=$colors=]
 [=
 if ($power || $power eq 0) {
     $OUT .= "\n        this.power = new MageInt($power);";
     $OUT .= "\n        this.toughness = new MageInt($toughness);";
 }
 =][=$abilities=]
+    getLeftHalfCard().getSpellAbility().addEffect(new Effect...);
+
+    getRightHalfCard().getSpellAbility().addEffect(new Effect...);
+
     }
 
     public [=$className=](final [=$className=] card) {
