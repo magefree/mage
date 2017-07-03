@@ -25,18 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -44,41 +42,33 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author jeffwadsworth
+ * @author emerald000
  */
-public class WaywardServant extends CardImpl {
+public class MummyParamount extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Zombie");
-
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
         filter.add(new AnotherPredicate());
     }
 
-    private static final String rule = "Whenever another Zombie enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.";
-
-    public WaywardServant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
+    public MummyParamount(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
         this.subtype.add("Zombie");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another Zombie enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
-        Effect effect = new LoseLifeOpponentsEffect(1);
-        Effect effect2 = new GainLifeEffect(1);
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(effect, filter, rule);
-        ability.addEffect(effect2);
-        this.addAbility(ability);
-
+        // Whenever another Zombie enters the battlefield under your control, Mummy Paramount gets +1/+1 until end of turn.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter));
     }
 
-    public WaywardServant(final WaywardServant card) {
+    public MummyParamount(final MummyParamount card) {
         super(card);
     }
 
     @Override
-    public WaywardServant copy() {
-        return new WaywardServant(this);
+    public MummyParamount copy() {
+        return new MummyParamount(this);
     }
 }
