@@ -174,12 +174,13 @@ foreach my $setName (keys %{$cards{$cardName}}) {
   unlink $setFileName.".bak";
   print "$setFileName\n";
 }
-
-# Generate the the card
+print "Generate the card: ".$card[0]."\n";
+# Generate the card
 my $result;
 my $template = Text::Template->new(TYPE => 'FILE', SOURCE => $cardTemplate, DELIMITERS => [ '[=', '=]' ]);
 $vars{'author'} = $author;
 $vars{'manaCost'} = fixCost($card[4]);
+print "cost ".$vars{'manaCost'}."\n";
 $vars{'power'} = $card[6];
 $vars{'toughness'} = $card[7];
 
@@ -190,7 +191,8 @@ my $cardAbilities = $card[8];
 my $type = $card[5];
 while ($type =~ m/([a-zA-Z]+)( )*/g) {
     if (exists($cardTypes{$1})) {
-        push(@types, $cardTypes{$1});        
+        push(@types, $cardTypes{$1}); 
+print   $cardTypes{$1}."\n";
         if ($cardTypes{$1} eq $cardTypes{'Planeswalker'}) {
             $vars{'planeswalker'} = 'true';
             $cardAbilities = $card[7];
