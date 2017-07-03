@@ -29,30 +29,45 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author Archer262
  */
-public class DutifulServants extends CardImpl {
+public class DauntlessAven extends CardImpl {
 
-    public DutifulServants(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        
-        this.subtype.add("Zombie");
+    public DauntlessAven(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+
+        this.subtype.add("Bird");
+        this.subtype.add("Warrior");
+
         this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+        this.toughness = new MageInt(1);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Whenever Dauntless Aven attacks, untap target creature you control.
+        Ability ability = new AttacksTriggeredAbility(new UntapTargetEffect(), false);
+        ability.addTarget(new TargetControlledCreaturePermanent(1, 1));
+        this.addAbility(ability);
     }
 
-    public DutifulServants(final DutifulServants card) {
+    public DauntlessAven(final DauntlessAven card) {
         super(card);
     }
 
     @Override
-    public DutifulServants copy() {
-        return new DutifulServants(this);
+    public DauntlessAven copy() {
+        return new DauntlessAven(this);
     }
 }

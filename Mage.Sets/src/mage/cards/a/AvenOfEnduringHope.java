@@ -25,10 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,22 +40,29 @@ import mage.constants.CardType;
  *
  * @author Archer262
  */
-public class DutifulServants extends CardImpl {
+public class AvenOfEnduringHope extends CardImpl {
 
-    public DutifulServants(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        
-        this.subtype.add("Zombie");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+    public AvenOfEnduringHope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
+
+        this.subtype.add("Bird");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // When Aven of Enduring Hope enters the battlefield, you gain 3 life.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), false));
     }
 
-    public DutifulServants(final DutifulServants card) {
+    public AvenOfEnduringHope(final AvenOfEnduringHope card) {
         super(card);
     }
 
     @Override
-    public DutifulServants copy() {
-        return new DutifulServants(this);
+    public AvenOfEnduringHope copy() {
+        return new AvenOfEnduringHope(this);
     }
 }

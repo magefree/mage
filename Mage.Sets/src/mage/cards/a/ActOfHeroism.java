@@ -25,34 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.a;
 
-import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
+import mage.abilities.Ability;
 
 /**
  *
  * @author Archer262
  */
-public class DutifulServants extends CardImpl {
+public class ActOfHeroism extends CardImpl {
+    
+    public ActOfHeroism(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
-    public DutifulServants(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        
-        this.subtype.add("Zombie");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+        // Untap target creature.
+        Effect effect = new UntapTargetEffect();
+        effect.setText("Untap target creature");
+        this.getSpellAbility().addEffect(effect);
+
+        // It gets +2/+2 and can block an additional creature this turn.
+        effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
+        effect.setText("It gets +2/+2");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect((Ability) new CanBlockAdditionalCreatureEffect(), Duration.EndOfTurn);
+        effect.setText("and can block an additional creature this turn.");
+        this.getSpellAbility().addEffect(effect);
+
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DutifulServants(final DutifulServants card) {
+    public ActOfHeroism(final ActOfHeroism card) {
         super(card);
     }
 
     @Override
-    public DutifulServants copy() {
-        return new DutifulServants(this);
+    public ActOfHeroism copy() {
+        return new ActOfHeroism(this);
     }
 }

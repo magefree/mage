@@ -67,11 +67,14 @@ public class HourOfDevastation extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abrade", 83, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Accursed Horde", 56, Rarity.UNCOMMON, mage.cards.a.AccursedHorde.class));
+        cards.add(new SetCardInfo("Act of Heroism", 1, Rarity.COMMON, mage.cards.a.ActOfHeroism.class));
         cards.add(new SetCardInfo("Adorned Pouncer", 2, Rarity.RARE, mage.cards.a.AdornedPouncer.class));
         cards.add(new SetCardInfo("Angel of Condemnation", 3, Rarity.RARE, mage.cards.a.AngelOfCondemnation.class));
         cards.add(new SetCardInfo("Angel of the God-Pharaoh", 4, Rarity.UNCOMMON, mage.cards.a.AngelOfTheGodPharaoh.class));
+        cards.add(new SetCardInfo("Aven of Enduring Hope", 5, Rarity.COMMON, mage.cards.a.AvenOfEnduringHope.class));
         cards.add(new SetCardInfo("Appeal // Authority", 152, Rarity.UNCOMMON, mage.cards.a.AppealAuthority.class));
         cards.add(new SetCardInfo("Avid Reclaimer", 201, Rarity.UNCOMMON, mage.cards.a.AvidReclaimer.class));
+        cards.add(new SetCardInfo("Beneath The Sands", 111, Rarity.COMMON, mage.cards.b.BeneathTheSands.class));
         cards.add(new SetCardInfo("Bontu's Last Reckoning", 60, Rarity.RARE, mage.cards.b.BontusLastReckoning.class));
         cards.add(new SetCardInfo("Brambleweft Behemoth", 202, Rarity.COMMON, mage.cards.b.BrambleweftBehemoth.class));
         cards.add(new SetCardInfo("Burning-Fist Minotaur", 85, Rarity.UNCOMMON, mage.cards.b.BurningFistMinotaur.class));
@@ -82,6 +85,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Cinder Barrens", 209, Rarity.COMMON, mage.cards.c.CinderBarrens.class));
         cards.add(new SetCardInfo("Claim // Fame", 150, Rarity.UNCOMMON, mage.cards.c.ClaimFame.class));
         cards.add(new SetCardInfo("Crook of Condemnation", 159, Rarity.UNCOMMON, mage.cards.c.CrookOfCondemnation.class));
+        cards.add(new SetCardInfo("Dauntless Aven", 7, Rarity.COMMON, mage.cards.d.DauntlessAven.class));
         cards.add(new SetCardInfo("Defiant Khenra", 89, Rarity.COMMON, mage.cards.d.DefiantKhenra.class));
         cards.add(new SetCardInfo("Desert of the Fervent", 170, Rarity.COMMON, mage.cards.d.DesertOfTheFervent.class));
         cards.add(new SetCardInfo("Desert of the Glorified", 171, Rarity.COMMON, mage.cards.d.DesertOfTheGlorified.class));
@@ -89,6 +93,8 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Desert of the Mindful", 173, Rarity.COMMON, mage.cards.d.DesertOfTheMindful.class));
         cards.add(new SetCardInfo("Desert of the True", 174, Rarity.COMMON, mage.cards.d.DesertOfTheTrue.class));
         cards.add(new SetCardInfo("Desert's Hold", 8, Rarity.UNCOMMON, mage.cards.d.DesertsHold.class));
+        cards.add(new SetCardInfo("Disposal Mummy", 9, Rarity.COMMON, mage.cards.d.DisposalMummy.class));
+        cards.add(new SetCardInfo("Djeru's Renunciation", 11, Rarity.COMMON, mage.cards.d.DjerusRenunciation.class));
         cards.add(new SetCardInfo("Djeru, With Eyes Open", 10, Rarity.RARE, mage.cards.d.DjeruWithEyesOpen.class));
         cards.add(new SetCardInfo("Doomfall", 62, Rarity.UNCOMMON, mage.cards.d.Doomfall.class));
         cards.add(new SetCardInfo("Dreamstealer", 63, Rarity.RARE, mage.cards.d.Dreamstealer.class));

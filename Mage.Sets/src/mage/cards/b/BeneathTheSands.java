@@ -25,34 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.b;
 
-import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
  * @author Archer262
  */
-public class DutifulServants extends CardImpl {
+public class BeneathTheSands extends CardImpl {
 
-    public DutifulServants(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        
-        this.subtype.add("Zombie");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+    public BeneathTheSands(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
+
+        // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, true));
+
+        // Cycling {2}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public DutifulServants(final DutifulServants card) {
+    public BeneathTheSands(final BeneathTheSands card) {
         super(card);
     }
 
     @Override
-    public DutifulServants copy() {
-        return new DutifulServants(this);
+    public BeneathTheSands copy() {
+        return new BeneathTheSands(this);
     }
 }

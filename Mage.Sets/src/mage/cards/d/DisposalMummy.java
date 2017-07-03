@@ -29,30 +29,42 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.FilterCard;
+import mage.target.Target;
+import mage.target.common.TargetCardInOpponentsGraveyard;
 
 /**
  *
  * @author Archer262
  */
-public class DutifulServants extends CardImpl {
-
-    public DutifulServants(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
+public class DisposalMummy extends CardImpl {
+    
+    public DisposalMummy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         
         this.subtype.add("Zombie");
+        this.subtype.add("Jackal");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
-    }
+        this.toughness = new MageInt(3);
 
-    public DutifulServants(final DutifulServants card) {
+        // When Disposal Mummy enters the battlefield, exile target card from an opponent's graveyard.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect());
+        Target target = new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard"));
+        ability.addTarget(target);
+        this.addAbility(ability);
+    }
+    
+    public DisposalMummy(final DisposalMummy card) {
         super(card);
     }
-
+    
     @Override
-    public DutifulServants copy() {
-        return new DutifulServants(this);
+    public DisposalMummy copy() {
+        return new DisposalMummy(this);
     }
 }
