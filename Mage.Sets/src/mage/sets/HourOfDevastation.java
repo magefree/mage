@@ -132,10 +132,15 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Sandblast", 20, Rarity.COMMON, mage.cards.s.Sandblast.class));
         cards.add(new SetCardInfo("Scrounger of Souls", 76, Rarity.COMMON, mage.cards.s.ScroungerOfSouls.class));
         cards.add(new SetCardInfo("Sidewinder Naga", 134, Rarity.COMMON, mage.cards.s.SidewinderNaga.class));
+        cards.add(new SetCardInfo("Sifter Wurm", 135, Rarity.UNCOMMON, mage.cards.s.SifterWurm.class));
         cards.add(new SetCardInfo("Sinuous Striker", 45, Rarity.UNCOMMON, mage.cards.s.SinuousStriker.class));
         cards.add(new SetCardInfo("Solemnity", 22, Rarity.RARE, mage.cards.s.Solemnity.class));
+        cards.add(new SetCardInfo("Solitary Camel", 23, Rarity.COMMON, mage.cards.s.SolitaryCamel.class));
+        cards.add(new SetCardInfo("Spellweaver Eternal", 46, Rarity.COMMON, mage.cards.s.SpellweaverEternal.class));
         cards.add(new SetCardInfo("Steadfast Sentinel", 24, Rarity.COMMON, mage.cards.s.SteadfastSentinel.class));
+        cards.add(new SetCardInfo("Steward of Solidarity", 25, Rarity.UNCOMMON, mage.cards.s.StewardOfSolidarity.class));
         cards.add(new SetCardInfo("Strategic Planning", 47, Rarity.COMMON, mage.cards.s.StrategicPlanning.class));
+        cards.add(new SetCardInfo("Striped Riverwinder", 48, Rarity.COMMON, mage.cards.s.StripedRiverwinder.class));
         cards.add(new SetCardInfo("Struggle // Survive", 151, Rarity.UNCOMMON, mage.cards.s.StruggleSurvive.class));
         cards.add(new SetCardInfo("Sunscourge Champion", 26, Rarity.UNCOMMON, mage.cards.s.SunscourgeChampion.class));
         cards.add(new SetCardInfo("Sunset Pyramid", 166, Rarity.UNCOMMON, mage.cards.s.SunsetPyramid.class));
