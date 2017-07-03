@@ -25,48 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.h;
+package mage.cards.t;
 
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Zone;
-import mage.filter.common.FilterNonlandPermanent;
-
-import java.util.UUID;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author spjspj
  */
-public class HourOfRevelation extends CardImpl {
+public class TenaciousHunter extends CardImpl {
 
-    public HourOfRevelation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature has a -1/-1 counter on it");
 
-        // Hour of Revelation costs {3} less to cast if there are ten or more nonland permanents on the battlefield.
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.STACK,
-                new SpellCostReductionSourceEffect(3, new PermanentsOnTheBattlefieldCondition(
-                        new FilterNonlandPermanent("there are ten or more nonland permanents on the battlefield"), ComparisonType.MORE_THAN, 9, false)));
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-
-        // Destroy all nonland permanents.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterNonlandPermanent("nonland permanents")));
-
+    static {
+        filter.add(new CounterPredicate(CounterType.M1M1));
     }
 
-    public HourOfRevelation(final HourOfRevelation card) {
+    public TenaciousHunter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+
+        this.subtype.add("Crocodile");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // As long as a creature has a -1/-1 counter on it, Tenacious Hunter has vigilance and deathtouch.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()),
+                        new PermanentsOnTheBattlefieldCondition(filter),
+                        "{this} has Vigilance as long as a creature has a -1/-1 counter on it"
+                )
+        );
+
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(DeathtouchAbility.getInstance()),
+                new PermanentsOnTheBattlefieldCondition(filter),
+                "{this} has Deathtouch as long as a creature has a -1/-1 counter on it"
+            )
+        );
+
+        this.addAbility(ability);
+    }
+
+    public TenaciousHunter(final TenaciousHunter card) {
         super(card);
     }
 
     @Override
-    public HourOfRevelation copy() {
-        return new HourOfRevelation(this);
+    public TenaciousHunter copy() {
+        return new TenaciousHunter(this);
     }
 }

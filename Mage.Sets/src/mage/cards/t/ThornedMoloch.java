@@ -25,48 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.h;
+package mage.cards.t;
 
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.condition.common.SourceAttackingCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Zone;
-import mage.filter.common.FilterNonlandPermanent;
-
-import java.util.UUID;
 
 /**
  *
- * @author fireshoes
+ * @author spjspj
  */
-public class HourOfRevelation extends CardImpl {
+public class ThornedMoloch extends CardImpl {
 
-    public HourOfRevelation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");
+    public ThornedMoloch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        // Hour of Revelation costs {3} less to cast if there are ten or more nonland permanents on the battlefield.
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.STACK,
-                new SpellCostReductionSourceEffect(3, new PermanentsOnTheBattlefieldCondition(
-                        new FilterNonlandPermanent("there are ten or more nonland permanents on the battlefield"), ComparisonType.MORE_THAN, 9, false)));
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.subtype.add("Lizard");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Destroy all nonland permanents.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterNonlandPermanent("nonland permanents")));
+        // Prowess
+        this.addAbility(new ProwessAbility());
+
+        // Thorned Moloch has first strike as long as it's attacking.
+        this.addAbility(
+                new SimpleStaticAbility(
+                        Zone.BATTLEFIELD,
+                        new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.instance, "{this} has first strike as long as it's attacking")
+                )
+        );
 
     }
 
-    public HourOfRevelation(final HourOfRevelation card) {
+    public ThornedMoloch(final ThornedMoloch card) {
         super(card);
     }
 
     @Override
-    public HourOfRevelation copy() {
-        return new HourOfRevelation(this);
+    public ThornedMoloch copy() {
+        return new ThornedMoloch(this);
     }
 }

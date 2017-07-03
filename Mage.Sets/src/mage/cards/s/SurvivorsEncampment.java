@@ -25,48 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.h;
-
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Zone;
-import mage.filter.common.FilterNonlandPermanent;
+package mage.cards.s;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.mana.ColorlessManaAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import static mage.cards.s.SpellstutterSprite.filter;
+import mage.constants.CardType;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author spjspj
  */
-public class HourOfRevelation extends CardImpl {
+public class SurvivorsEncampment extends CardImpl {
 
-    public HourOfRevelation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped creature you control");
 
-        // Hour of Revelation costs {3} less to cast if there are ten or more nonland permanents on the battlefield.
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.STACK,
-                new SpellCostReductionSourceEffect(3, new PermanentsOnTheBattlefieldCondition(
-                        new FilterNonlandPermanent("there are ten or more nonland permanents on the battlefield"), ComparisonType.MORE_THAN, 9, false)));
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-
-        // Destroy all nonland permanents.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterNonlandPermanent("nonland permanents")));
-
+    static {
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public HourOfRevelation(final HourOfRevelation card) {
+    public SurvivorsEncampment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+
+        this.subtype.add("Desert");
+
+        // {T}: Add {C} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
+
+        // {T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
+        Ability ability = new AnyColorManaAbility();
+        ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
+        this.addAbility(ability);
+    }
+
+    public SurvivorsEncampment(final SurvivorsEncampment card) {
         super(card);
     }
 
     @Override
-    public HourOfRevelation copy() {
-        return new HourOfRevelation(this);
+    public SurvivorsEncampment copy() {
+        return new SurvivorsEncampment(this);
     }
 }
