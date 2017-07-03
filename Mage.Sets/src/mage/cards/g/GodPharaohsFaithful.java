@@ -25,37 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.g;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.SpellAbilityType;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class ConsignOblivion extends SplitCard {
+public class GodPharaohsFaithful extends CardImpl {
 
-    public ConsignOblivion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{}, new CardType[]{}, "", "", SpellAbilityType.SPLIT_AFTERMATH);
-  
-
-    getLeftHalfCard().getSpellAbility().addEffect(new Effect...);
-
-    getRightHalfCard().getSpellAbility().addEffect(new Effect...);
-
+    private static final FilterSpell filter = new FilterSpell("a blue, black or red spell");
+    static {
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.BLACK), new ColorPredicate(ObjectColor.RED)));
     }
 
-    public ConsignOblivion(final ConsignOblivion card) {
+    public GodPharaohsFaithful(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
+
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(4);
+
+        // Whenever you cast a blue, black or red spell, you gain 1 life.
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), filter, false));
+    }
+
+    public GodPharaohsFaithful(final GodPharaohsFaithful card) {
         super(card);
     }
 
     @Override
-    public ConsignOblivion copy() {
-        return new ConsignOblivion(this);
+    public GodPharaohsFaithful copy() {
+        return new GodPharaohsFaithful(this);
     }
 }
