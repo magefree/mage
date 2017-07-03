@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -38,6 +37,8 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public class HourOfRevelation extends CardImpl {
         // Hour of Revelation costs {3} less to cast if there are ten or more nonland permanents on the battlefield.
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.STACK,
                 new SpellCostReductionSourceEffect(3, new PermanentsOnTheBattlefieldCondition(
-                        new FilterNonlandPermanent("there are ten or more nonland permanents on the battlefield"), ComparisonType.MORE_THAN, 9)));
+                        new FilterNonlandPermanent("there are ten or more nonland permanents on the battlefield"), ComparisonType.MORE_THAN, 9, false)));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

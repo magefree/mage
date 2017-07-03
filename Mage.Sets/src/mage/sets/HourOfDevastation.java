@@ -27,8 +27,6 @@
  */
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.FrameStyle;
@@ -37,6 +35,9 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author fireshoes
@@ -71,13 +72,16 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of Condemnation", 3, Rarity.RARE, mage.cards.a.AngelOfCondemnation.class));
         cards.add(new SetCardInfo("Angel of the God-Pharaoh", 4, Rarity.UNCOMMON, mage.cards.a.AngelOfTheGodPharaoh.class));
         cards.add(new SetCardInfo("Aven of Enduring Hope", 5, Rarity.COMMON, mage.cards.a.AvenOfEnduringHope.class));
+        cards.add(new SetCardInfo("Appeal // Authority", 152, Rarity.UNCOMMON, mage.cards.a.AppealAuthority.class));
         cards.add(new SetCardInfo("Avid Reclaimer", 201, Rarity.UNCOMMON, mage.cards.a.AvidReclaimer.class));
         cards.add(new SetCardInfo("Beneath The Sands", 111, Rarity.COMMON, mage.cards.b.BeneathTheSands.class));
         cards.add(new SetCardInfo("Bontu's Last Reckoning", 60, Rarity.RARE, mage.cards.b.BontusLastReckoning.class));
         cards.add(new SetCardInfo("Brambleweft Behemoth", 202, Rarity.COMMON, mage.cards.b.BrambleweftBehemoth.class));
+        cards.add(new SetCardInfo("Burning-Fist Minotaur", 85, Rarity.UNCOMMON, mage.cards.b.BurningFistMinotaur.class));
         cards.add(new SetCardInfo("Carrion Screecher", 61, Rarity.COMMON, mage.cards.c.CarrionScreecher.class));
         cards.add(new SetCardInfo("Champion of Wits", 31, Rarity.RARE, mage.cards.c.ChampionOfWits.class));
         cards.add(new SetCardInfo("Chandra's Defeat", 86, Rarity.UNCOMMON, mage.cards.c.ChandrasDefeat.class));
+        cards.add(new SetCardInfo("Chaos Maw", 87, Rarity.RARE, mage.cards.c.ChaosMaw.class));
         cards.add(new SetCardInfo("Cinder Barrens", 209, Rarity.COMMON, mage.cards.c.CinderBarrens.class));
         cards.add(new SetCardInfo("Claim // Fame", 150, Rarity.UNCOMMON, mage.cards.c.ClaimFame.class));
         cards.add(new SetCardInfo("Crook of Condemnation", 159, Rarity.UNCOMMON, mage.cards.c.CrookOfCondemnation.class));
@@ -110,6 +114,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Khenra Scrapper", 100, Rarity.COMMON, mage.cards.k.KhenraScrapper.class));
         cards.add(new SetCardInfo("Kindled Fury", 101, Rarity.COMMON, mage.cards.k.KindledFury.class));
         cards.add(new SetCardInfo("Liliana's Defeat", 68, Rarity.UNCOMMON, mage.cards.l.LilianasDefeat.class));
+        cards.add(new SetCardInfo("Lurching Rotbeast", 69, Rarity.COMMON, mage.cards.l.LurchingRotbeast.class));
         cards.add(new SetCardInfo("Manalith", 164, Rarity.COMMON, mage.cards.m.Manalith.class));
         cards.add(new SetCardInfo("Marauding Boneslasher", 70, Rarity.COMMON, mage.cards.m.MaraudingBoneslasher.class));
         cards.add(new SetCardInfo("Mountain", 188, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
@@ -117,42 +122,62 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Nicol Bolas, the Deceiver", 205, Rarity.MYTHIC, mage.cards.n.NicolBolasTheDeceiver.class));
         cards.add(new SetCardInfo("Nissa, Genesis Mage", 200, Rarity.MYTHIC, mage.cards.n.NissaGenesisMage.class));
         cards.add(new SetCardInfo("Oasis Ritualist", 124, Rarity.COMMON, mage.cards.o.OasisRitualist.class));
+        cards.add(new SetCardInfo("Oketra's Avenger", 17, Rarity.COMMON, mage.cards.o.OketrasAvenger.class));
         cards.add(new SetCardInfo("Oketra's Last Mercy", 18, Rarity.RARE, mage.cards.o.OketrasLastMercy.class));
         cards.add(new SetCardInfo("Open Fire", 105, Rarity.COMMON, mage.cards.o.OpenFire.class));
         cards.add(new SetCardInfo("Overwhelming Splendor", 19, Rarity.MYTHIC, mage.cards.o.OverwhelmingSplendor.class));
         cards.add(new SetCardInfo("Plains", 185, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Pride Sovereign", 126, Rarity.RARE, mage.cards.p.PrideSovereign.class));
         cards.add(new SetCardInfo("Proven Combatant", 42, Rarity.COMMON, mage.cards.p.ProvenCombatant.class));
+        cards.add(new SetCardInfo("Rampaging Hippo", 128, Rarity.COMMON, mage.cards.r.RampagingHippo.class));
         cards.add(new SetCardInfo("Ramunap Excavator", 129, Rarity.RARE, mage.cards.r.RamunapExcavator.class));
         cards.add(new SetCardInfo("Ramunap Hydra", 130, Rarity.RARE, mage.cards.r.RamunapHydra.class));
         cards.add(new SetCardInfo("Razaketh, the Foulblooded", 73, Rarity.MYTHIC, mage.cards.r.RazakethTheFoulblooded.class));
         cards.add(new SetCardInfo("Reason // Believe", 154, Rarity.RARE, mage.cards.r.ReasonBelieve.class));
         cards.add(new SetCardInfo("Refuse // Cooperate", 156, Rarity.RARE, mage.cards.r.RefuseCooperate.class));
+        cards.add(new SetCardInfo("Ruin Rat", 75, Rarity.COMMON, mage.cards.r.RuinRat.class));
         cards.add(new SetCardInfo("Samut, the Tested", 144, Rarity.MYTHIC, mage.cards.s.SamutTheTested.class));
         cards.add(new SetCardInfo("Sand Strangler", 107, Rarity.UNCOMMON, mage.cards.s.SandStrangler.class));
         cards.add(new SetCardInfo("Sandblast", 20, Rarity.COMMON, mage.cards.s.Sandblast.class));
+        cards.add(new SetCardInfo("Saving Grace", 21, Rarity.UNCOMMON, mage.cards.s.SavingGrace.class));
+        cards.add(new SetCardInfo("Scavenger Grounds", 182, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
+        cards.add(new SetCardInfo("Seer of the Last Tomorrow", 44, Rarity.COMMON, mage.cards.s.SeerOfTheLastTomorrow.class));
+        cards.add(new SetCardInfo("Shefet Dunes", 183, Rarity.UNCOMMON, mage.cards.s.ShefetDunes.class));
+        cards.add(new SetCardInfo("Scrounger of Souls", 76, Rarity.COMMON, mage.cards.s.ScroungerOfSouls.class));
         cards.add(new SetCardInfo("Sidewinder Naga", 134, Rarity.COMMON, mage.cards.s.SidewinderNaga.class));
+        cards.add(new SetCardInfo("Sifter Wurm", 135, Rarity.UNCOMMON, mage.cards.s.SifterWurm.class));
         cards.add(new SetCardInfo("Sinuous Striker", 45, Rarity.UNCOMMON, mage.cards.s.SinuousStriker.class));
         cards.add(new SetCardInfo("Solemnity", 22, Rarity.RARE, mage.cards.s.Solemnity.class));
+        cards.add(new SetCardInfo("Solitary Camel", 23, Rarity.COMMON, mage.cards.s.SolitaryCamel.class));
+        cards.add(new SetCardInfo("Spellweaver Eternal", 46, Rarity.COMMON, mage.cards.s.SpellweaverEternal.class));
         cards.add(new SetCardInfo("Steadfast Sentinel", 24, Rarity.COMMON, mage.cards.s.SteadfastSentinel.class));
+        cards.add(new SetCardInfo("Steward of Solidarity", 25, Rarity.UNCOMMON, mage.cards.s.StewardOfSolidarity.class));
         cards.add(new SetCardInfo("Strategic Planning", 47, Rarity.COMMON, mage.cards.s.StrategicPlanning.class));
+        cards.add(new SetCardInfo("Striped Riverwinder", 48, Rarity.COMMON, mage.cards.s.StripedRiverwinder.class));
         cards.add(new SetCardInfo("Struggle // Survive", 151, Rarity.UNCOMMON, mage.cards.s.StruggleSurvive.class));
+        cards.add(new SetCardInfo("Sunscourge Champion", 26, Rarity.UNCOMMON, mage.cards.s.SunscourgeChampion.class));
         cards.add(new SetCardInfo("Sunset Pyramid", 166, Rarity.UNCOMMON, mage.cards.s.SunsetPyramid.class));
         cards.add(new SetCardInfo("Supreme Will", 49, Rarity.UNCOMMON, mage.cards.s.SupremeWill.class));
+        cards.add(new SetCardInfo("Survivors' Encampment", 184, Rarity.COMMON, mage.cards.s.SurvivorsEncampment.class));
         cards.add(new SetCardInfo("Swamp", 187, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Swarm Intelligence", 50, Rarity.RARE, mage.cards.s.SwarmIntelligence.class));
+        cards.add(new SetCardInfo("Tenacious Hunter", 136, Rarity.UNCOMMON, mage.cards.t.TenaciousHunter.class));
         cards.add(new SetCardInfo("The Locust God", 139, Rarity.MYTHIC, mage.cards.t.TheLocustGod.class));
         cards.add(new SetCardInfo("The Scarab God", 145, Rarity.MYTHIC, mage.cards.t.TheScarabGod.class));
         cards.add(new SetCardInfo("The Scorpion God", 146, Rarity.MYTHIC, mage.cards.t.TheScorpionGod.class));
+        cards.add(new SetCardInfo("Thorned Moloch", 108, Rarity.COMMON, mage.cards.t.ThornedMoloch.class));
         cards.add(new SetCardInfo("Torment of Hailfire", 77, Rarity.RARE, mage.cards.t.TormentOfHailfire.class));
         cards.add(new SetCardInfo("Torment of Scarabs", 78, Rarity.UNCOMMON, mage.cards.t.TormentOfScarabs.class));
         cards.add(new SetCardInfo("Torment of Venom", 79, Rarity.COMMON, mage.cards.t.TormentOfVenom.class));
+        cards.add(new SetCardInfo("Tragic Lesson", 51, Rarity.COMMON, mage.cards.t.TragicLesson.class));
         cards.add(new SetCardInfo("Traveler's Amulet", 167, Rarity.COMMON, mage.cards.t.TravelersAmulet.class));
         cards.add(new SetCardInfo("Uncage the Menagerie", 137, Rarity.MYTHIC, mage.cards.u.UncageTheMenagerie.class));
+        cards.add(new SetCardInfo("Unconventional Tactics", 27, Rarity.UNCOMMON, mage.cards.u.UnconventionalTactics.class));
         cards.add(new SetCardInfo("Unesh, Criosphinx Sovereign", 52, Rarity.MYTHIC, mage.cards.u.UneshCriosphinxSovereign.class));
         cards.add(new SetCardInfo("Unquenchable Thirst", 53, Rarity.COMMON, mage.cards.u.UnquenchableThirst.class));
         cards.add(new SetCardInfo("Unraveling Mummy", 147, Rarity.UNCOMMON, mage.cards.u.UnravelingMummy.class));
         cards.add(new SetCardInfo("Unsummon", 54, Rarity.COMMON, mage.cards.u.Unsummon.class));
+        cards.add(new SetCardInfo("Vile Manifestation", 80, Rarity.UNCOMMON, mage.cards.v.VileManifestation.class));
         cards.add(new SetCardInfo("Visage of Bolas", 208, Rarity.RARE, mage.cards.v.VisageOfBolas.class));
         cards.add(new SetCardInfo("Vizier of the Anointed", 55, Rarity.UNCOMMON, mage.cards.v.VizierOfTheAnointed.class));
         cards.add(new SetCardInfo("Vizier of the True", 28, Rarity.UNCOMMON, mage.cards.v.VizierOfTheTrue.class));
