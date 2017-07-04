@@ -49,7 +49,7 @@ public class BlurOfBlades extends CardImpl {
         // Put a -1/-1 counter on target creature. Blur of Blades deals 2 damage to that creature's controller.
         getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance(1)));
         Effect effect = new DamageTargetControllerEffect(2);
-        effect.setText("Blur of Blades deals 2 damage to that creature's controller");
+        effect.setText("{this} deals 2 damage to that creature's controller");
         getSpellAbility().addEffect(effect);
         getSpellAbility().addTarget(new TargetCreaturePermanent());
         
