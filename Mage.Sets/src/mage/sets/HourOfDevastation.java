@@ -94,6 +94,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Desert of the Mindful", 173, Rarity.COMMON, mage.cards.d.DesertOfTheMindful.class));
         cards.add(new SetCardInfo("Desert of the True", 174, Rarity.COMMON, mage.cards.d.DesertOfTheTrue.class));
         cards.add(new SetCardInfo("Desert's Hold", 8, Rarity.UNCOMMON, mage.cards.d.DesertsHold.class));
+        cards.add(new SetCardInfo("Devotee of Strength", 113, Rarity.UNCOMMON, mage.cards.d.DevoteeOfStrength.class));
         cards.add(new SetCardInfo("Disposal Mummy", 9, Rarity.COMMON, mage.cards.d.DisposalMummy.class));
         cards.add(new SetCardInfo("Djeru's Renunciation", 11, Rarity.COMMON, mage.cards.d.DjerusRenunciation.class));
         cards.add(new SetCardInfo("Djeru, With Eyes Open", 10, Rarity.RARE, mage.cards.d.DjeruWithEyesOpen.class));
