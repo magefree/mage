@@ -59,7 +59,6 @@ public class AerialGuide extends CardImpl {
 
     public AerialGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        
         this.subtype.add("Drake");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -68,9 +67,9 @@ public class AerialGuide extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Aerial Guide attacks, another target attacking creature gains flying until end of turn.
-        Ability ability = new AttacksTriggeredAbility(new AerialGuideEffect(), false);
-        ability.addTarget(new TargetAttackingCreature(1, 1, filter, false));
-        this.addAbility(ability);
+          Ability ability = new AttacksTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false);
+          ability.addTarget(new TargetAttackingCreature(1, 1, filter, false));
+          this.addAbility(ability);
     }
 
     public AerialGuide(final AerialGuide card) {
@@ -80,32 +79,5 @@ public class AerialGuide extends CardImpl {
     @Override
     public AerialGuide copy() {
         return new AerialGuide(this);
-    }
-}
-
-class AerialGuideEffect extends OneShotEffect {
-    
-    public AerialGuideEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "another target attacking creature gains flying until end of turn";
-    }
-    
-    public AerialGuideEffect(final AerialGuideEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public AerialGuideEffect copy() {
-        return new AerialGuideEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if(permanent != null) {
-            game.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), source);
-            return true;
-        }
-        return false;
     }
 }
