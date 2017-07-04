@@ -27,22 +27,16 @@
  */
 package mage.cards.c;
 
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.costs.mana.GenericManaCost;
+import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *
@@ -53,13 +47,14 @@ public class CircularLogic extends CardImpl {
     public CircularLogic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
-
         // Counter target spell unless its controller pays {1} for each card in your graveyard.
-        this.getSpellAbility().addEffect(new CircularLogicCounterUnlessPaysEffect());
+        Effect effect = new CounterUnlessPaysEffect(new CardsInControllerGraveyardCount());
+        effect.setText("Counter target spell unless its controller pays {1} for each card in your graveyard");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // Madness {U}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{U}")));
     }
 
     public CircularLogic(final CircularLogic card) {
@@ -70,48 +65,4 @@ public class CircularLogic extends CardImpl {
     public CircularLogic copy() {
         return new CircularLogic(this);
     }
-}
-
-class CircularLogicCounterUnlessPaysEffect extends OneShotEffect {
-
-    public CircularLogicCounterUnlessPaysEffect() {
-        super(Outcome.Detriment);
-    }
-
-    public CircularLogicCounterUnlessPaysEffect(final CircularLogicCounterUnlessPaysEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CircularLogicCounterUnlessPaysEffect copy() {
-        return new CircularLogicCounterUnlessPaysEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (spell != null) {
-            Player player = game.getPlayer(spell.getControllerId());
-            Player controller = game.getPlayer(source.getControllerId());
-            if (player != null && controller != null) {
-                int amount = controller.getGraveyard().size();
-                if (amount == 0) {
-                    game.informPlayers("Circular Logic: no cards in controller's graveyard.");
-                } else {
-                    GenericManaCost cost = new GenericManaCost(amount);
-                    if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
-                        game.informPlayers("Circular Logic: cost wasn't payed - countering target spell.");
-                        return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target spell unless its controller pays {1} for each card in your graveyard";
-    }
-
 }

@@ -14,7 +14,7 @@ public class AfflictAbility extends BecomesBlockedTriggeredAbility {
 
     public AfflictAbility(int amount) {
         super(new LoseLifeDefendingPlayerEffect(amount, true)
-                .setText("Afflict " + amount + "<i>(Whenever this creature becomes blocked, defending player loses " + amount + " life.)</i>"), false);
+                .setText("Afflict " + amount + " <i>(Whenever this creature becomes blocked, defending player loses " + amount + " life.)</i>"), false);
         lifeLoss = amount;
     }
 
@@ -25,6 +25,6 @@ public class AfflictAbility extends BecomesBlockedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Afflict " + lifeLoss + "<i>(Whenever this creature becomes blocked, defending player loses " + lifeLoss + " life.)</i>";
+        return "Afflict " + lifeLoss + " <i>(Whenever this creature becomes blocked, defending player loses " + lifeLoss + " life.)</i>";
     }
 }
