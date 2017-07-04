@@ -158,6 +158,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Oasis Ritualist", 124, Rarity.COMMON, mage.cards.o.OasisRitualist.class));
         cards.add(new SetCardInfo("Oketra's Avenger", 17, Rarity.COMMON, mage.cards.o.OketrasAvenger.class));
         cards.add(new SetCardInfo("Oketra's Last Mercy", 18, Rarity.RARE, mage.cards.o.OketrasLastMercy.class));
+        cards.add(new SetCardInfo("Ominous Sphinx", 41, Rarity.UNCOMMON, mage.cards.o.OminousSphinx.class));
         cards.add(new SetCardInfo("Open Fire", 105, Rarity.COMMON, mage.cards.o.OpenFire.class));
         cards.add(new SetCardInfo("Overwhelming Splendor", 19, Rarity.MYTHIC, mage.cards.o.OverwhelmingSplendor.class));
         cards.add(new SetCardInfo("Overcome", 125, Rarity.UNCOMMON, mage.cards.o.Overcome.class));
@@ -166,6 +167,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 191, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Pride Sovereign", 126, Rarity.RARE, mage.cards.p.PrideSovereign.class));
         cards.add(new SetCardInfo("Proven Combatant", 42, Rarity.COMMON, mage.cards.p.ProvenCombatant.class));
+        cards.add(new SetCardInfo("Puncturing Blow", 106, Rarity.COMMON, mage.cards.p.PuncturingBlow.class));
         cards.add(new SetCardInfo("Quarry Beetle", 127, Rarity.UNCOMMON, mage.cards.q.QuarryBeetle.class));
         cards.add(new SetCardInfo("Rampaging Hippo", 128, Rarity.COMMON, mage.cards.r.RampagingHippo.class));
         cards.add(new SetCardInfo("Ramunap Excavator", 129, Rarity.RARE, mage.cards.r.RamunapExcavator.class));
