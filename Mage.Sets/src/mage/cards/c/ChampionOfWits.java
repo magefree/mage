@@ -29,19 +29,18 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.keyword.EternalizeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -58,7 +57,14 @@ public class ChampionOfWits extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Champion of Wits enters the battlefield, you may draw cards equal to its power. If you do, discard two cards
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ChampionOfWitsEffect(), true));
+        DynamicValue xValue = new SourcePermanentPowerCount();
+        Effect effect = new DrawCardSourceControllerEffect(xValue);
+        effect.setText("you may draw cards equal to its power");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
+        effect = new DiscardControllerEffect(2);
+        effect.setText("If you do, discard two cards");
+        ability.addEffect(effect);
+        this.addAbility(ability);
 
         // Eternalize {5}{U}{U}
         this.addAbility(new EternalizeAbility(new ManaCostsImpl("{5}{U}{U}"), this));
@@ -71,35 +77,5 @@ public class ChampionOfWits extends CardImpl {
     @Override
     public ChampionOfWits copy() {
         return new ChampionOfWits(this);
-    }
-}
-
-class ChampionOfWitsEffect extends OneShotEffect {
-
-    public ChampionOfWitsEffect() {
-        super(Outcome.Benefit);
-        staticText = "you may draw cards equal to its power. If you do, discard two cards.";
-    }
-
-    public ChampionOfWitsEffect(final ChampionOfWitsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && permanent != null && sourceObject != null) {
-            controller.drawCards(permanent.getPower().getValue(), game);
-            controller.discard(2, false, source, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ChampionOfWitsEffect copy() {
-        return new ChampionOfWitsEffect(this);
     }
 }

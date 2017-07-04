@@ -59,7 +59,7 @@ public class StruggleSurvive extends SplitCard {
         // Struggle
         // Struggle deals damage to target creature equal to the number of lands you control.
         Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent("the number of lands you control")));
-        effect.setText("{this} deals damage to target creature equal to the number of lands you control");
+        effect.setText("Struggle deals damage to target creature equal to the number of lands you control");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 

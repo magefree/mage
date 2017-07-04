@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UnconventionalTactics extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("zombie creature");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Zombie");
 
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
@@ -90,7 +90,7 @@ public class UnconventionalTactics extends CardImpl {
 
 class UnconventionalTacticsTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("zombie creature");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Zombie");
 
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));

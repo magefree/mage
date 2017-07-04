@@ -27,24 +27,16 @@
  */
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -57,7 +49,9 @@ public class BontusLastReckoning extends CardImpl {
 
         // Destroy all creatures. Lands you control don't untap during your next untap step.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
-        this.getSpellAbility().addEffect(new BontusLastReckoningEffect());
+        this.getSpellAbility().addEffect(new DontUntapInControllersUntapStepAllEffect(
+                Duration.UntilYourNextTurn, TargetController.YOU, new FilterControlledLandPermanent("Lands you control"))
+                .setText("Lands you control don't untap during your next untap phase"));
     }
 
     public BontusLastReckoning(final BontusLastReckoning card) {
@@ -67,41 +61,5 @@ public class BontusLastReckoning extends CardImpl {
     @Override
     public BontusLastReckoning copy() {
         return new BontusLastReckoning(this);
-    }
-}
-
-class BontusLastReckoningEffect extends OneShotEffect {
-
-    BontusLastReckoningEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Lands you control don't untap during your next untap step.";
-    }
-
-    BontusLastReckoningEffect(final BontusLastReckoningEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BontusLastReckoningEffect copy() {
-        return new BontusLastReckoningEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
-            for (Permanent land : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), controller.getId(), game)) {
-                doNotUntapNextUntapStep.add(land);
-            }
-            if (!doNotUntapNextUntapStep.isEmpty()) {
-                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("", controller.getId());
-                effect.setText("Lands you control don't untap during your next untap step");
-                effect.setTargetPointer(new FixedTargets(doNotUntapNextUntapStep, game));
-                game.addEffect(effect, source);
-            }
-            return true;
-        }
-        return false;
     }
 }
