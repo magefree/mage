@@ -69,13 +69,10 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Accursed Horde", 56, Rarity.UNCOMMON, mage.cards.a.AccursedHorde.class));
         cards.add(new SetCardInfo("Act of Heroism", 1, Rarity.COMMON, mage.cards.a.ActOfHeroism.class));
         cards.add(new SetCardInfo("Adorned Pouncer", 2, Rarity.RARE, mage.cards.a.AdornedPouncer.class));
-        cards.add(new SetCardInfo("Aerial Guide", 29, Rarity.COMMON, mage.cards.a.AerialGuide.class));
         cards.add(new SetCardInfo("Angel of Condemnation", 3, Rarity.RARE, mage.cards.a.AngelOfCondemnation.class));
         cards.add(new SetCardInfo("Angel of the God-Pharaoh", 4, Rarity.UNCOMMON, mage.cards.a.AngelOfTheGodPharaoh.class));
-        cards.add(new SetCardInfo("Aven Reedstalker", 30, Rarity.COMMON, mage.cards.a.AvenReedstalker.class));
         cards.add(new SetCardInfo("Aven of Enduring Hope", 5, Rarity.COMMON, mage.cards.a.AvenOfEnduringHope.class));
         cards.add(new SetCardInfo("Appeal // Authority", 152, Rarity.UNCOMMON, mage.cards.a.AppealAuthority.class));
-        cards.add(new SetCardInfo("Aven Reedstalker", 30, Rarity.COMMON, mage.cards.a.AvenReedstalker.class));
         cards.add(new SetCardInfo("Avid Reclaimer", 201, Rarity.UNCOMMON, mage.cards.a.AvidReclaimer.class));
         cards.add(new SetCardInfo("Beneath The Sands", 111, Rarity.COMMON, mage.cards.b.BeneathTheSands.class));
         cards.add(new SetCardInfo("Bitterbow Sharpshooters", 112, Rarity.COMMON, mage.cards.b.BitterbowSharpshooters.class));
@@ -115,6 +112,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Gideon's Defeat", 13, Rarity.UNCOMMON, mage.cards.g.GideonsDefeat.class));
         cards.add(new SetCardInfo("Gilded Cerodon", 94, Rarity.COMMON, mage.cards.g.GildedCerodon.class));
         cards.add(new SetCardInfo("Grind // Dust", 155, Rarity.RARE, mage.cards.g.GrindDust.class));
+        cards.add(new SetCardInfo("Harrier Naga", 118, Rarity.COMMON, mage.cards.h.HarrierNaga.class));
         cards.add(new SetCardInfo("Hour of Glory", 65, Rarity.RARE, mage.cards.h.HourOfGlory.class));
         cards.add(new SetCardInfo("Hour of Revelation", 15, Rarity.RARE, mage.cards.h.HourOfRevelation.class));
         cards.add(new SetCardInfo("Inferno Jet", 99, Rarity.UNCOMMON, mage.cards.i.InfernoJet.class));
@@ -122,6 +120,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Khenra Eternal", 66, Rarity.COMMON, mage.cards.k.KhenraEternal.class));
         cards.add(new SetCardInfo("Khenra Scrapper", 100, Rarity.COMMON, mage.cards.k.KhenraScrapper.class));
         cards.add(new SetCardInfo("Kindled Fury", 101, Rarity.COMMON, mage.cards.k.KindledFury.class));
+        cards.add(new SetCardInfo("Life Goes On", 121, Rarity.COMMON, mage.cards.l.LifeGoesOn.class));
         cards.add(new SetCardInfo("Liliana's Defeat", 68, Rarity.UNCOMMON, mage.cards.l.LilianasDefeat.class));
         cards.add(new SetCardInfo("Lurching Rotbeast", 69, Rarity.COMMON, mage.cards.l.LurchingRotbeast.class));
         cards.add(new SetCardInfo("Manalith", 164, Rarity.COMMON, mage.cards.m.Manalith.class));
@@ -138,6 +137,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 185, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Pride Sovereign", 126, Rarity.RARE, mage.cards.p.PrideSovereign.class));
         cards.add(new SetCardInfo("Proven Combatant", 42, Rarity.COMMON, mage.cards.p.ProvenCombatant.class));
+        cards.add(new SetCardInfo("Quarry Beetle", 127, Rarity.UNCOMMON, mage.cards.q.QuarryBeetle.class));
         cards.add(new SetCardInfo("Rampaging Hippo", 128, Rarity.COMMON, mage.cards.r.RampagingHippo.class));
         cards.add(new SetCardInfo("Ramunap Excavator", 129, Rarity.RARE, mage.cards.r.RamunapExcavator.class));
         cards.add(new SetCardInfo("Ramunap Hydra", 130, Rarity.RARE, mage.cards.r.RamunapHydra.class));
