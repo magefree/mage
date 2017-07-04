@@ -14,24 +14,24 @@ import java.util.UUID;
 
 public class GiftOfStrength extends CardImpl {
 
-    public GiftOfStrength(UUID cardId, CardSetInfo cardSetInfo){
-        super(cardId, cardSetInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
+    public GiftOfStrength(UUID ownerId, CardSetInfo cardSetInfo) {
+        super(ownerId, cardSetInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Target creature gets +3/+3 and gains reach until end of turn.
         Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
         effect.setText("Target creature gets +3/+3");
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains flying until end of turn");
+        effect.setText("and gains reach until end of turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GiftOfStrength(final GiftOfStrength giftOfStrength){
+    public GiftOfStrength(final GiftOfStrength giftOfStrength) {
         super(giftOfStrength);
     }
 
-    public GiftOfStrength copy(){
+    public GiftOfStrength copy() {
         return new GiftOfStrength(this);
     }
 }
