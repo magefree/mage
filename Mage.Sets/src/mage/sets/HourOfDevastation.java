@@ -27,8 +27,6 @@
  */
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.FrameStyle;
@@ -37,6 +35,9 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author fireshoes
@@ -120,8 +121,10 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 199, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Fraying Sanity", 35, Rarity.UNCOMMON, mage.cards.f.FrayingSanity.class));
         cards.add(new SetCardInfo("Gideon's Defeat", 13, Rarity.UNCOMMON, mage.cards.g.GideonsDefeat.class));
+        cards.add(new SetCardInfo("Gift of Strength", 117, Rarity.COMMON, mage.cards.g.GiftOfStrength.class));
         cards.add(new SetCardInfo("Gilded Cerodon", 94, Rarity.COMMON, mage.cards.g.GildedCerodon.class));
         cards.add(new SetCardInfo("God-Pharaoh's Faithful", 14, Rarity.COMMON, mage.cards.g.GodPharaohsFaithful.class));
+        cards.add(new SetCardInfo("Granitic Titan", 95, Rarity.COMMON, mage.cards.g.GraniticTitan.class));
         cards.add(new SetCardInfo("Grind // Dust", 155, Rarity.RARE, mage.cards.g.GrindDust.class));
         cards.add(new SetCardInfo("Harrier Naga", 118, Rarity.COMMON, mage.cards.h.HarrierNaga.class));
         cards.add(new SetCardInfo("Hour of Eternity", 36, Rarity.RARE, mage.cards.h.HourOfEternity.class));
@@ -138,7 +141,9 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Leave // Chance", 153, Rarity.RARE, mage.cards.l.LeaveChance.class));
         cards.add(new SetCardInfo("Liliana's Defeat", 68, Rarity.UNCOMMON, mage.cards.l.LilianasDefeat.class));
         cards.add(new SetCardInfo("Lurching Rotbeast", 69, Rarity.COMMON, mage.cards.l.LurchingRotbeast.class));
+        cards.add(new SetCardInfo("Magmaroth", 102, Rarity.UNCOMMON, mage.cards.m.Magmaroth.class));
         cards.add(new SetCardInfo("Manalith", 164, Rarity.COMMON, mage.cards.m.Manalith.class));
+        cards.add(new SetCardInfo("Manticore Elemental", 103, Rarity.UNCOMMON, mage.cards.m.ManticoreElemental.class));
         cards.add(new SetCardInfo("Marauding Boneslasher", 70, Rarity.COMMON, mage.cards.m.MaraudingBoneslasher.class));
         cards.add(new SetCardInfo("Moaning Wall", 72, Rarity.COMMON, mage.cards.m.MoaningWall.class));
         cards.add(new SetCardInfo("Mountain", 188, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
