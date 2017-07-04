@@ -39,19 +39,15 @@ import mage.constants.SpellAbilityType;
  * @author [=$author=]
  */
 public class [=$className=] extends SplitCard {
-
     public [=$className=](UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{[=$type=]}, new CardType[]{[=$type=]}, "[=$manaCost=]", "[=$manaCost=]", SpellAbilityType.SPLIT_AFTERMATH);
+        super(ownerId, setInfo, new CardType[]{[=$type=]}, new CardType[]{??}, "[=$manaCost=]", "??", SpellAbilityType.SPLIT_AFTERMATH);
   [=$subType=][=$colors=]
-[=
-if ($power || $power eq 0) {
+[= if ($power || $power eq 0) {
     $OUT .= "\n        this.power = new MageInt($power);";
-    $OUT .= "\n        this.toughness = new MageInt($toughness);";
-}
-=][=$abilities=]
-    getLeftHalfCard().getSpellAbility().addEffect(new Effect...);
+    $OUT .= "\n        this.toughness = new MageInt($toughness);";} =][=$abilities=]
+    // getLeftHalfCard().getSpellAbility().addEffect(new Effect());
 
-    getRightHalfCard().getSpellAbility().addEffect(new Effect...);
+    // getRightHalfCard().getSpellAbility().addEffect(new Effect());
 
     }
 

@@ -27,6 +27,8 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
@@ -36,19 +38,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
-import mage.abilities.Ability;
 
 /**
  *
  * @author Archer262
  */
 public class ActOfHeroism extends CardImpl {
-    
+
     public ActOfHeroism(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Untap target creature.
         Effect effect = new UntapTargetEffect();
@@ -59,8 +59,8 @@ public class ActOfHeroism extends CardImpl {
         effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
         effect.setText("It gets +2/+2");
         this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect((Ability) new CanBlockAdditionalCreatureEffect(), Duration.EndOfTurn);
-        effect.setText("and can block an additional creature this turn.");
+        effect = new GainAbilityTargetEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()), Duration.EndOfTurn);
+        effect.setText("and can block an additional creature this turn");
         this.getSpellAbility().addEffect(effect);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
