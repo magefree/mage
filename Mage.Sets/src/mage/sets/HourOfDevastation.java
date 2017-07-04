@@ -142,6 +142,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana's Defeat", 68, Rarity.UNCOMMON, mage.cards.l.LilianasDefeat.class));
         cards.add(new SetCardInfo("Lurching Rotbeast", 69, Rarity.COMMON, mage.cards.l.LurchingRotbeast.class));
         cards.add(new SetCardInfo("Manalith", 164, Rarity.COMMON, mage.cards.m.Manalith.class));
+        cards.add(new SetCardInfo("Manticore Elemental", 103, Rarity.UNCOMMON, mage.cards.m.ManticoreElemental.class));
         cards.add(new SetCardInfo("Marauding Boneslasher", 70, Rarity.COMMON, mage.cards.m.MaraudingBoneslasher.class));
         cards.add(new SetCardInfo("Moaning Wall", 72, Rarity.COMMON, mage.cards.m.MoaningWall.class));
         cards.add(new SetCardInfo("Mountain", 188, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
