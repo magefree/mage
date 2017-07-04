@@ -25,41 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
+import mage.MageInt;
+import mage.abilities.common.BecomesExertSourceTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.CantBeBlockedByAllTargetEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.ExertAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
  * @author spjspj
  */
-public class BontusLastReckoning extends CardImpl {
+public class RhonassStalwart extends CardImpl {
 
-    public BontusLastReckoning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 
-        // Destroy all creatures. Lands you control don't untap during your next untap step.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
-        this.getSpellAbility().addEffect(new DontUntapInControllersUntapStepAllEffect(
-                Duration.UntilYourNextTurn, TargetController.YOU, new FilterControlledLandPermanent("Lands you control"))
-                .setText("Lands you control don't untap during your next untap phase"));
+    static {
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
-    public BontusLastReckoning(final BontusLastReckoning card) {
+    public RhonassStalwart(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
+
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // You may exert Rhonas's Stalwart as it attacks. When you do, it gets +1/+1 until end of turn and can't be blocked by creatures with power 2 or less this turn.
+        Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
+        effect.setText("it gets +1/+1");
+        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(effect);
+        effect = new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfTurn);
+        effect.setText("and can't be blocked by creatures with power 2 or less this turn");
+        ability.addEffect(effect);
+        this.addAbility(new ExertAbility(ability));
+    }
+
+    public RhonassStalwart(final RhonassStalwart card) {
         super(card);
     }
 
     @Override
-    public BontusLastReckoning copy() {
-        return new BontusLastReckoning(this);
+    public RhonassStalwart copy() {
+        return new RhonassStalwart(this);
     }
 }

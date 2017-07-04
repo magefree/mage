@@ -25,10 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,30 +36,32 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.game.permanent.token.RhonassLastStandToken;
 
 /**
  *
  * @author spjspj
  */
-public class BontusLastReckoning extends CardImpl {
+public class RhonassLastStand extends CardImpl {
 
-    public BontusLastReckoning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
+    public RhonassLastStand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{G}");
 
-        // Destroy all creatures. Lands you control don't untap during your next untap step.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
+        // Create a 5/4 green Snake creature token.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new RhonassLastStandToken()));
+
+        // Lands you control don't untap during your next untap step.
         this.getSpellAbility().addEffect(new DontUntapInControllersUntapStepAllEffect(
                 Duration.UntilYourNextTurn, TargetController.YOU, new FilterControlledLandPermanent("Lands you control"))
                 .setText("Lands you control don't untap during your next untap phase"));
     }
 
-    public BontusLastReckoning(final BontusLastReckoning card) {
+    public RhonassLastStand(final RhonassLastStand card) {
         super(card);
     }
 
     @Override
-    public BontusLastReckoning copy() {
-        return new BontusLastReckoning(this);
+    public RhonassLastStand copy() {
+        return new RhonassLastStand(this);
     }
 }

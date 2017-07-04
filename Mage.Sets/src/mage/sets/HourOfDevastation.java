@@ -142,6 +142,8 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Razaketh's Rite", 74, Rarity.UNCOMMON, mage.cards.r.RazakethsRite.class));
         cards.add(new SetCardInfo("Reason // Believe", 154, Rarity.RARE, mage.cards.r.ReasonBelieve.class));
         cards.add(new SetCardInfo("Refuse // Cooperate", 156, Rarity.RARE, mage.cards.r.RefuseCooperate.class));
+        cards.add(new SetCardInfo("Rhonas's Last Stand", 132, Rarity.RARE, mage.cards.r.RhonassLastStand.class));
+        cards.add(new SetCardInfo("Rhonas's Stalwart", 133, Rarity.COMMON, mage.cards.r.RhonassStalwart.class));
         cards.add(new SetCardInfo("Riddleform", 43, Rarity.UNCOMMON, mage.cards.r.Riddleform.class));
         cards.add(new SetCardInfo("River Hoopoe", 143, Rarity.UNCOMMON, mage.cards.r.RiverHoopoe.class));
         cards.add(new SetCardInfo("Ruin Rat", 75, Rarity.COMMON, mage.cards.r.RuinRat.class));
