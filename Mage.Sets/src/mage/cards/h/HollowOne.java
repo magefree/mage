@@ -43,8 +43,6 @@ import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -84,12 +82,6 @@ public class HollowOne extends CardImpl {
 
 class HollowOneReductionEffect extends CostModificationEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(new AttackingPredicate());
-    }
-
     public HollowOneReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "{this} costs {2} less to cast for each card you've cycled or discarded this turn";
@@ -104,7 +96,8 @@ class HollowOneReductionEffect extends CostModificationEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         CardsCycledOrDiscardedThisTurnWatcher watcher = (CardsCycledOrDiscardedThisTurnWatcher) game.getState().getWatchers().get(CardsCycledOrDiscardedThisTurnWatcher.class.getSimpleName());
         int reductionAmount = 0;
-        if (controller != null && watcher != null) {
+        if (controller != null
+                && watcher != null) {
             for (Card card : watcher.getCardsCycledOrDiscardedThisTurn(controller.getId()).getCards(game)) {
                 if (card.getOwnerId().equals(controller.getId())) {
                     reductionAmount++;
@@ -118,10 +111,9 @@ class HollowOneReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
-            return game.getCard(abilityToModify.getSourceId()) != null;
-        }
-        return false;
+        return abilityToModify instanceof SpellAbility
+                && abilityToModify.getSourceId().equals(source.getSourceId())
+                && game.getCard(abilityToModify.getSourceId()) != null;
     }
 
     @Override
