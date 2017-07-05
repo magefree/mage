@@ -129,6 +129,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Granitic Titan", 95, Rarity.COMMON, mage.cards.g.GraniticTitan.class));
         cards.add(new SetCardInfo("Grind // Dust", 155, Rarity.RARE, mage.cards.g.GrindDust.class));
         cards.add(new SetCardInfo("Harrier Naga", 118, Rarity.COMMON, mage.cards.h.HarrierNaga.class));
+        cards.add(new SetCardInfo("Hollow One", 163, Rarity.RARE, mage.cards.h.HollowOne.class));
         cards.add(new SetCardInfo("Hour of Eternity", 36, Rarity.RARE, mage.cards.h.HourOfEternity.class));
         cards.add(new SetCardInfo("Hour of Glory", 65, Rarity.RARE, mage.cards.h.HourOfGlory.class));
         cards.add(new SetCardInfo("Hour of Promise", 120, Rarity.RARE, mage.cards.h.HourOfPromise.class));
