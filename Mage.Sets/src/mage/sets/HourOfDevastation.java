@@ -123,7 +123,6 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Frontline Devastator", 93, Rarity.COMMON, mage.cards.f.FrontlineDevastator.class));
         cards.add(new SetCardInfo("Gideon's Defeat", 13, Rarity.UNCOMMON, mage.cards.g.GideonsDefeat.class));
         cards.add(new SetCardInfo("Gilded Cerodon", 94, Rarity.COMMON, mage.cards.g.GildedCerodon.class));
-        cards.add(new SetCardInfo("Graven Abomination", 162, Rarity.COMMON, mage.cards.g.GravenAbomination.class));
         cards.add(new SetCardInfo("Grind // Dust", 155, Rarity.RARE, mage.cards.g.GrindDust.class));
         cards.add(new SetCardInfo("Grisly Survivor", 64, Rarity.COMMON, mage.cards.g.GrislySurvivor.class));
         cards.add(new SetCardInfo("Harrier Naga", 118, Rarity.COMMON, mage.cards.h.HarrierNaga.class));

@@ -1,4 +1,4 @@
-/*
+    /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -28,6 +28,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -53,10 +54,13 @@ public class DaggerOfTheWorthy extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +2/+0 and has afflict 1. (Whenever it becomes blocked, defending player loses 1 life.)
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2,0));
+        ability.addEffect(new GainAbilityAttachedEffect(new AfflictAbility(1), AttachmentType.EQUIPMENT));
+        addAbility(ability);
+        
         // Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AfflictAbility(1), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        
     }
 
     public DaggerOfTheWorthy(final DaggerOfTheWorthy card) {
