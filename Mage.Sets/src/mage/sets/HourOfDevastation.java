@@ -79,6 +79,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Appeal // Authority", 152, Rarity.UNCOMMON, mage.cards.a.AppealAuthority.class));
         cards.add(new SetCardInfo("Aven Reedstalker", 30, Rarity.COMMON, mage.cards.a.AvenReedstalker.class));
         cards.add(new SetCardInfo("Avid Reclaimer", 201, Rarity.UNCOMMON, mage.cards.a.AvidReclaimer.class));
+        cards.add(new SetCardInfo("Banewhip Punisher", 59, Rarity.UNCOMMON, mage.cards.b.BanewhipPunisher.class));
         cards.add(new SetCardInfo("Beneath The Sands", 111, Rarity.COMMON, mage.cards.b.BeneathTheSands.class));
         cards.add(new SetCardInfo("Bitterbow Sharpshooters", 112, Rarity.COMMON, mage.cards.b.BitterbowSharpshooters.class));
         cards.add(new SetCardInfo("Blur of Blades", 84, Rarity.COMMON, mage.cards.b.BlurOfBlades.class));
