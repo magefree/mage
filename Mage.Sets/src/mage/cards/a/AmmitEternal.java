@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -29,7 +29,7 @@ public class AmmitEternal extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance()), false));
 
         // Whenever Ammit Eternal deals combat damage to a player, remove all -1/-1 counters from it.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.M1M1), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.M1M1), false));
     }
 
     public AmmitEternal(final AmmitEternal ammitEternal) {
