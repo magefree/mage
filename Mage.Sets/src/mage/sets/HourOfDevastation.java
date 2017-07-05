@@ -154,6 +154,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 196, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mountain", 197, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Mummy Paramount", 16, Rarity.COMMON, mage.cards.m.MummyParamount.class));
+        cards.add(new SetCardInfo("Neheb, the Eternal", 104, Rarity.MYTHIC, mage.cards.n.NehebTheEternal.class));
         cards.add(new SetCardInfo("Nicol Bolas, God-Pharaoh", 140, Rarity.MYTHIC, mage.cards.n.NicolBolasGodPharaoh.class));
         cards.add(new SetCardInfo("Nicol Bolas, the Deceiver", 205, Rarity.MYTHIC, mage.cards.n.NicolBolasTheDeceiver.class));
         cards.add(new SetCardInfo("Nissa, Genesis Mage", 200, Rarity.MYTHIC, mage.cards.n.NissaGenesisMage.class));
