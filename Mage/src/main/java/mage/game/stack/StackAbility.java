@@ -28,7 +28,6 @@
 package mage.game.stack;
 
 import java.util.*;
-
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -447,8 +446,9 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void setRuleAtTheTop(boolean ruleAtTheTop) {
+    public Ability setRuleAtTheTop(boolean ruleAtTheTop) {
         this.ability.setRuleAtTheTop(ruleAtTheTop);
+        return this;
     }
 
     @Override

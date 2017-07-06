@@ -29,19 +29,13 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantBlockUnlessYouControlSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -50,13 +44,13 @@ import mage.game.permanent.Permanent;
 public class MindlessNull extends CardImpl {
 
     public MindlessNull(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MindlessNullEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(new FilterControlledPermanent("Vampire"))));
     }
 
     public MindlessNull(final MindlessNull card) {
@@ -66,35 +60,5 @@ public class MindlessNull extends CardImpl {
     @Override
     public MindlessNull copy() {
         return new MindlessNull(this);
-    }
-}
-
-class MindlessNullEffect extends RestrictionEffect {
-
-    private final FilterControlledPermanent filter = new FilterControlledPermanent("Vampire");
-
-    public MindlessNullEffect() {
-        super(Duration.WhileOnBattlefield);
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
-        staticText = "{this} can't block unless you control a Vampire";
-    }
-
-    public MindlessNullEffect(final MindlessNullEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MindlessNullEffect copy() {
-        return new MindlessNullEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return game.getBattlefield().countAll(filter, source.getControllerId(), game) != 0;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId());
     }
 }

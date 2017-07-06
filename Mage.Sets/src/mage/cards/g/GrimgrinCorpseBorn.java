@@ -43,9 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,6 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -61,13 +60,8 @@ import java.util.UUID;
  */
 public class GrimgrinCorpseBorn extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public GrimgrinCorpseBorn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
@@ -80,10 +74,10 @@ public class GrimgrinCorpseBorn extends CardImpl {
                 "{this} enters the battlefield tapped and doesn't untap during your untap step.");
         ability.addEffect(new DontUntapInControllersUntapStepSourceEffect());
         this.addAbility(ability);
-        
+
         // Sacrifice another creature: Untap Grimgrin and put a +1/+1 counter on it.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false)));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         this.addAbility(ability);
         // Whenever Grimgrin attacks, destroy target creature defending player controls, then put a +1/+1 counter on Grimgrin.

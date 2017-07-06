@@ -44,33 +44,29 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author emerald000
  */
 public class KheruBloodsucker extends CardImpl {
-    
-    private static final FilterControlledPermanent anotherFilter = new FilterControlledCreaturePermanent("another creature");
+
     private static final FilterCreaturePermanent toughnessFilter = new FilterCreaturePermanent("a creature you control with toughness 4 or greater");
 
     static {
-        anotherFilter.add(new AnotherPredicate());
         toughnessFilter.add(new ControllerPredicate(TargetController.YOU));
         toughnessFilter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public KheruBloodsucker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(2);
@@ -82,10 +78,10 @@ public class KheruBloodsucker extends CardImpl {
         effect.setText("and you gain 2 life");
         ability.addEffect(effect);
         this.addAbility(ability);
-        
+
         // {2}{B}, Sacrifice another creature: Put a +1/+1 counter on Kheru Bloodsucker.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{2}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(anotherFilter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         this.addAbility(ability);
     }
 

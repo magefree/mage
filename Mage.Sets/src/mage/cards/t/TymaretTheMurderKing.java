@@ -40,11 +40,11 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -52,13 +52,8 @@ import java.util.UUID;
  */
 public class TymaretTheMurderKing extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public TymaretTheMurderKing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
@@ -68,12 +63,12 @@ public class TymaretTheMurderKing extends CardImpl {
 
         // {1}{R}, Sacrifice another creature: Tymaret, the Murder King deals 2 damage to target player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // {1}{B}, Sacrifice a creature: Return Tymaret from your graveyard to your hand.
         ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("a creature"), false)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), false)));
         this.addAbility(ability);
 
     }

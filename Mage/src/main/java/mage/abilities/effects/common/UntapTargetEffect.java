@@ -43,8 +43,15 @@ import mage.util.CardUtil;
  */
 public class UntapTargetEffect extends OneShotEffect {
 
+    protected boolean useOnlyTargetPointer;
+
     public UntapTargetEffect() {
+        this(true);
+    }
+
+    public UntapTargetEffect(boolean useOnlyTargetPointer) {
         super(Outcome.Untap);
+        this.useOnlyTargetPointer = useOnlyTargetPointer;
     }
 
     public UntapTargetEffect(final UntapTargetEffect effect) {
@@ -58,10 +65,21 @@ public class UntapTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID target : targetPointer.getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(target);
-            if (permanent != null) {
-                permanent.untap(game);
+        if (!useOnlyTargetPointer && source.getTargets().size() > 1) {
+            source.getTargets().forEach((target) -> {
+                for (UUID targetId : target.getTargets()) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null) {
+                        permanent.untap(game);
+                    }
+                }
+            });
+        } else {
+            for (UUID target : targetPointer.getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(target);
+                if (permanent != null) {
+                    permanent.untap(game);
+                }
             }
         }
         return true;

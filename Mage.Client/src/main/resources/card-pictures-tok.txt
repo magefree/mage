@@ -595,6 +595,9 @@
 |Generate|TOK:HOP|Pentavite|||PentaviteToken|
 |Generate|TOK:HOP|Pest|||PestToken|
 |Generate|TOK:HOP|Saproling|||SaprolingToken|
+|Generate|TOK:HOU|Insect|||TheLocustGodInsectToken|
+|Generate|TOK:HOU|Snake|||RhonassLastStandToken|
+|Generate|TOK:HOU|Zombie||
 |Generate|TOK:ICE|Caribou|||CaribouToken|
 |Generate|TOK:INV|Bird|||OwlToken|
 |Generate|TOK:INV|Elephant|||ElephantToken|

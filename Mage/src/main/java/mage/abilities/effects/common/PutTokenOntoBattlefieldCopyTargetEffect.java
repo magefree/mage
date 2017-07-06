@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
@@ -60,6 +61,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private final int number;
     private List<Permanent> addedTokenPermanents;
     private String additionalSubType;
+    private String onlySubType;
     private boolean tapped;
     private boolean attacking;
     private UUID attackedPlayer;
@@ -67,6 +69,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private final int tokenToughness;
     private boolean gainsFlying;
     private boolean becomesArtifact;
+    private ObjectColor color;
 
     public PutTokenOntoBattlefieldCopyTargetEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -75,11 +78,13 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.addedTokenPermanents = new ArrayList<>();
         this.number = 1;
         this.additionalSubType = null;
+        this.onlySubType = null;
         this.attackedPlayer = null;
         this.tokenPower = Integer.MIN_VALUE;
         this.tokenToughness = Integer.MIN_VALUE;
         this.gainsFlying = false;
         this.becomesArtifact = false;
+        this.color = null;
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId) {
@@ -135,6 +140,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
         this.number = effect.number;
         this.additionalSubType = effect.additionalSubType;
+        this.onlySubType = effect.onlySubType;
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.attackedPlayer = effect.attackedPlayer;
@@ -142,6 +148,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.tokenToughness = effect.tokenToughness;
         this.gainsFlying = effect.gainsFlying;
         this.becomesArtifact = effect.becomesArtifact;
+        this.color = effect.color;
     }
 
     public void setBecomesArtifact(boolean becomesArtifact) {
@@ -210,6 +217,13 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         if (additionalSubType != null && !token.getSubtype(game).contains(additionalSubType)) {
             token.getSubtype(game).add(additionalSubType);
         }
+        if (onlySubType != null && !token.getSubtype(game).contains(onlySubType)) {
+            token.getSubtype(game).clear();
+            token.getSubtype(game).add(onlySubType);
+        }        
+        if (color != null) {
+            token.getColor(game).setColor(color);
+        }
 
         token.putOntoBattlefield(number, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
@@ -260,5 +274,13 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
 
     public void setAdditionalSubType(String additionalSubType) {
         this.additionalSubType = additionalSubType;
+    }
+
+    public void setOnlySubType(String onlySubType) {
+        this.onlySubType = onlySubType;
+    }
+    
+    public void setOnlyColor(ObjectColor color) {
+        this.color = color;
     }
 }

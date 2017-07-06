@@ -39,8 +39,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,18 +46,13 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import static mage.cards.r.RavenousWampa.RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author Styxo
  */
 public class RavenousWampa extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     static final String RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX = "TOU_SAC_CRE";
 
@@ -71,7 +64,7 @@ public class RavenousWampa extends CardImpl {
 
         // {2}{G}, Sacrifice another creature: Monstrosity 2.
         Ability ability = new MonstrosityAbility("{2}{G}", 2);
-        ability.addCost(new RavenousWampaSacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
+        ability.addCost(new RavenousWampaSacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         this.addAbility(ability);
 
         // When Ravenous Wampa becomes monstrous, you gain life equal to the sacrificied creature's toughness.

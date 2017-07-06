@@ -39,8 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -48,25 +47,18 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author fireshoes
  */
 public class QarsiHighPriest extends CardImpl {
-    
-    
-private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 
-    static {
-        filter.add(new AnotherPredicate());
-    }
-    
     public QarsiHighPriest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 
         // {1}{B}, {t}, Sacrifice another creature: Manifest the top card of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManifestEffect(1),new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManifestEffect(1), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false)));
         this.addAbility(ability);
     }
 

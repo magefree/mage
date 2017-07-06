@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -37,8 +38,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -46,15 +45,15 @@ import java.util.UUID;
 public class Dreamcatcher extends CardImpl {
 
     public Dreamcatcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever you cast a Spirit or Arcane spell, you may sacrifice Dreamcatcher. If you do, draw a card.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), new FilterSpiritOrArcaneCard(), true, 
-                "Whenever you cast a Spirit or Arcane spell, you may sacrifice Dreamcatcher. If you do, draw a card.");
+        Ability ability = new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), new FilterSpiritOrArcaneCard(), true,
+                "Whenever you cast a Spirit or Arcane spell, you may sacrifice {this}. If you do, draw a card.");
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
     }

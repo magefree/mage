@@ -35,20 +35,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author Loki
  */
 public class HealerOfThePride extends CardImpl {
-
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public HealerOfThePride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -59,7 +52,8 @@ public class HealerOfThePride extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield under your control, you gain 2 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), filter, false, null, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2),
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, null, true));
 
     }
 

@@ -151,6 +151,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Caves", 119, Rarity.COMMON, mage.cards.g.GoblinCaves.class));
         cards.add(new SetCardInfo("Goblin Firestarter", 120, Rarity.COMMON, mage.cards.g.GoblinFirestarter.class));
         cards.add(new SetCardInfo("Goblin General", 121, Rarity.UNCOMMON, mage.cards.g.GoblinGeneral.class));
+        cards.add(new SetCardInfo("Goblin Shrine", 122, Rarity.COMMON, mage.cards.g.GoblinShrine.class));
         cards.add(new SetCardInfo("Goblin Warrens", 123, Rarity.UNCOMMON, mage.cards.g.GoblinWarrens.class));
         cards.add(new SetCardInfo("Gorilla War Cry", 124, Rarity.COMMON, mage.cards.g.GorillaWarCry.class));
         cards.add(new SetCardInfo("Grapeshot Catapult", 204, Rarity.UNCOMMON, mage.cards.g.GrapeshotCatapult.class));
@@ -170,6 +171,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Junún Efreet", 88, Rarity.UNCOMMON, mage.cards.j.JununEfreet.class));
         cards.add(new SetCardInfo("Kismet", 17, Rarity.RARE, mage.cards.k.Kismet.class));
         cards.add(new SetCardInfo("Kormus Bell", 210, Rarity.RARE, mage.cards.k.KormusBell.class));
+        cards.add(new SetCardInfo("Kudzu", 159, Rarity.UNCOMMON, mage.cards.k.Kudzu.class));
         cards.add(new SetCardInfo("Last Chance", 125, Rarity.RARE, mage.cards.l.LastChance.class));
         cards.add(new SetCardInfo("Lava Flow", 126, Rarity.COMMON, mage.cards.l.LavaFlow.class));
         cards.add(new SetCardInfo("Leeches", 18, Rarity.RARE, mage.cards.l.Leeches.class));

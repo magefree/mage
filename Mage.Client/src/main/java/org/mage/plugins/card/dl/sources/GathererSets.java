@@ -59,7 +59,8 @@ public class GathererSets implements Iterable<DownloadJob> {
         "BFZ", "OGW",
         "SOI", "EMN",
         "KLD", "AER",
-        "AKH", "HOU"
+        "AKH", "HOU",
+        "E01"
     };
 
     private static final String[] onlyMythics = {
