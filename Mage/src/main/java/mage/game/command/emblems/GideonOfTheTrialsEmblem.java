@@ -62,7 +62,7 @@ class GideonOfTheTrialsCantLoseEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     public GideonOfTheTrialsCantLoseEffect() {
-        super(Duration.EndOfGame, Outcome.Benefit);
+        super(Duration.EndOfGame, Outcome.Benefit, false, false);
         staticText = "As long as you control a Gideon planeswalker, you can't lose the game and your opponents can't win the game";
     }
 
