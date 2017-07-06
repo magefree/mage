@@ -40,26 +40,19 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author emerald000
  */
 public class BloodHost extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public BloodHost(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(3);
@@ -69,7 +62,7 @@ public class BloodHost extends CardImpl {
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on {this}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         // and you gain 2 life.
         effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");

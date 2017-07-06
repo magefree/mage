@@ -34,7 +34,6 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,23 +48,23 @@ public class DontUntapInOpponentsNextUntapStepAllEffect extends ContinuousRuleMo
 
     private int validForTurnNum;
     //private String targetName;
-    TargetController targetController;
     FilterPermanent filter;
 
     /**
      * Attention: This effect won't work with targets controlled by different
      * controllers If this is needed, the validForTurnNum has to be saved per
      * controller.
+     *
+     * @param filter
      */
     public DontUntapInOpponentsNextUntapStepAllEffect(FilterPermanent filter) {
         super(Duration.Custom, Outcome.Detriment, false, true);
-        this.filter = filter; 
+        this.filter = filter;
     }
 
     public DontUntapInOpponentsNextUntapStepAllEffect(final DontUntapInOpponentsNextUntapStepAllEffect effect) {
         super(effect);
         this.validForTurnNum = effect.validForTurnNum;
-        this.targetController = effect.targetController;
         this.filter = effect.filter;
 
     }
@@ -127,7 +126,8 @@ public class DontUntapInOpponentsNextUntapStepAllEffect extends ContinuousRuleMo
                 if (controller != null && !game.isOpponent(controller, permanent.getControllerId())) {
                     return false;
                 }
-                if (game.getActivePlayerId().equals(permanent.getControllerId()) && // controller's untap step
+                if (game.getActivePlayerId().equals(permanent.getControllerId())
+                        && // controller's untap step
                         filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
                     return true;
                 }

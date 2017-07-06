@@ -13,6 +13,8 @@
     <packaging>jar</packaging>
     <name>Mage Tests</name>
 
+
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>

@@ -27,16 +27,12 @@
  */
 package mage.cards.c;
 
-import mage.abilities.Ability;
-import mage.abilities.PlayLandAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.Card;
+import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -50,7 +46,7 @@ public class CrucibleOfWorlds extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // You may play land cards from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CrucibleOfWorldsEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayLandsFromGraveyardEffect()));
     }
 
     public CrucibleOfWorlds(final CrucibleOfWorlds card) {
@@ -60,47 +56,5 @@ public class CrucibleOfWorlds extends CardImpl {
     @Override
     public CrucibleOfWorlds copy() {
         return new CrucibleOfWorlds(this);
-    }
-}
-
-class CrucibleOfWorldsEffect extends ContinuousEffectImpl {
-
-    public CrucibleOfWorldsEffect() {
-        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "You may play land cards from your graveyard";
-    }
-
-    public CrucibleOfWorldsEffect(final CrucibleOfWorldsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CrucibleOfWorldsEffect copy() {
-        return new CrucibleOfWorldsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (UUID cardId: player.getGraveyard()) {
-                Card card = game.getCard(cardId);
-                if(card != null && card.isLand()){
-                    PlayLandFromGraveyardAbility ability = new PlayLandFromGraveyardAbility(card.getName());
-                    ability.setSourceId(cardId);
-                    ability.setControllerId(card.getOwnerId());
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
-class PlayLandFromGraveyardAbility extends PlayLandAbility{
-    PlayLandFromGraveyardAbility(String name){
-        super(name);
-        zone = Zone.GRAVEYARD;
     }
 }

@@ -38,9 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -48,13 +46,8 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class KruinStriker extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public KruinStriker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 
@@ -62,7 +55,7 @@ public class KruinStriker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever another creature enters the battlefield under your control, Kruin Striker gets +1/+0 and gains trample until end of turn.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), filter,
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
                 "Whenever another creature enters the battlefield under your control, Kruin Striker gets +1/+0 and gains trample until end of turn.");
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);

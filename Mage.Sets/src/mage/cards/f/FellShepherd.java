@@ -40,8 +40,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -53,6 +51,7 @@ import mage.watchers.Watcher;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -60,13 +59,8 @@ import java.util.UUID;
  */
 public class FellShepherd extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public FellShepherd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(8);
@@ -76,8 +70,8 @@ public class FellShepherd extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new FellShepherdEffect(), true), new FellShepherdWatcher());
 
         // {B}, Sacrifice another creature: Target creature gets -2/-2 until end of turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2,-2, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
@@ -120,7 +114,7 @@ class FellShepherdWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && ((Card)card).getOwnerId().equals(this.controllerId) && card.isCreature()) {
+            if (card != null && ((Card) card).getOwnerId().equals(this.controllerId) && card.isCreature()) {
                 creatureIds.add(card.getId());
             }
         }
@@ -163,7 +157,7 @@ class FellShepherdEffect extends OneShotEffect {
                     }
                 }
             }
-            if (sb.length()> 0) {
+            if (sb.length() > 0) {
                 sb.insert(0, "Fell Shepherd - returning to hand:");
                 game.informPlayers(sb.toString());
             }

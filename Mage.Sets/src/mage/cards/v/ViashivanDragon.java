@@ -18,7 +18,7 @@ public class ViashivanDragon extends CardImpl {
 
     public ViashivanDragon(UUID cardId, CardSetInfo cardSetInfo) {
         super(cardId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{G}{G}");
-        subtype.add("DRAGON");
+        subtype.add("Dragon");
         color.setGreen(true);
         color.setRed(true);
         power = new MageInt(4);

@@ -42,8 +42,7 @@ import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -53,15 +52,9 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author jeffwadsworth
  */
 public class VarolzTheScarStriped extends CardImpl {
-    
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-    
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public VarolzTheScarStriped(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add("Troll");
         this.subtype.add("Warrior");
@@ -73,7 +66,8 @@ public class VarolzTheScarStriped extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VarolzTheScarStripedEffect()));
 
         // Sacrifice another creature: Regenerate Varolz, the Scar-Striped.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
     }
 
     public VarolzTheScarStriped(final VarolzTheScarStriped card) {

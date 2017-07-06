@@ -27,23 +27,18 @@
  */
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantBlockUnlessYouControlSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -51,15 +46,22 @@ import java.util.UUID;
  */
 public class FelhideBrawler extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Minotaur");
+
+    static {
+        filter.add(new SubtypePredicate(SubType.MINOTAUR));
+        filter.add(new AnotherPredicate());
+    }
+
     public FelhideBrawler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add("Minotaur");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Felhide Brawler can't block unless you control another Minotaur.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FelhideBrawlerRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(filter)));
     }
 
     public FelhideBrawler(final FelhideBrawler card) {
@@ -69,44 +71,5 @@ public class FelhideBrawler extends CardImpl {
     @Override
     public FelhideBrawler copy() {
         return new FelhideBrawler(this);
-    }
-}
-
-class FelhideBrawlerRestrictionEffect extends RestrictionEffect {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Minotaur");
-
-    static {
-        filter.add(new SubtypePredicate(SubType.MINOTAUR));
-        filter.add(new AnotherPredicate());
-    }
-
-    public FelhideBrawlerRestrictionEffect() {
-        super(Duration.WhileOnBattlefield);
-
-        staticText = "{this} can't block unless you control another Minotaur";
-    }
-
-    public FelhideBrawlerRestrictionEffect(final FelhideBrawlerRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FelhideBrawlerRestrictionEffect copy() {
-        return new FelhideBrawlerRestrictionEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())
-                && game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 0) {
-            return true;
-        }
-        return false;
     }
 }

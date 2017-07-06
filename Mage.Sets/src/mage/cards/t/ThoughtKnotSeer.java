@@ -37,9 +37,7 @@ import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -48,20 +46,14 @@ import mage.target.common.TargetOpponent;
  */
 public class ThoughtKnotSeer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a nonland card");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-    }
-
     public ThoughtKnotSeer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{C}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{C}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // When Thought-Knot Seer enters the battlefield, target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileCardYouChooseTargetOpponentEffect(filter), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_A_NON_LAND), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

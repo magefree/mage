@@ -36,12 +36,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  * Gatecrash FAQ (01.2013) You choose the color when the ability resolves.
@@ -50,14 +48,8 @@ import java.util.UUID;
  */
 public class CartelAristocrat extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public CartelAristocrat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 
@@ -66,7 +58,8 @@ public class CartelAristocrat extends CardImpl {
 
         // Sacrifice another creature: Cartel Aristocrat gains protection from the color of your choice until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+                Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn),
+                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))));
     }
 
     public CartelAristocrat(final CartelAristocrat card) {

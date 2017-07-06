@@ -63,7 +63,7 @@ public class InciteWar extends CardImpl {
     }
 
     public InciteWar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Choose one - Creatures target player controls attack this turn if able;
         this.getSpellAbility().addEffect(new InciteWarMustAttackEffect());
@@ -93,7 +93,7 @@ class InciteWarMustAttackEffect extends OneShotEffect {
 
     public InciteWarMustAttackEffect() {
         super(Outcome.Detriment);
-        staticText = "Creatures target player control attack this turn if able";
+        staticText = "Creatures target player controls attack this turn if able";
     }
 
     public InciteWarMustAttackEffect(final InciteWarMustAttackEffect effect) {

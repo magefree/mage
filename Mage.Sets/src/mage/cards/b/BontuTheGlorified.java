@@ -47,8 +47,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,12 +59,6 @@ import mage.watchers.common.CreaturesDiedWatcher;
  * @author jeffwadsworth
  */
 public class BontuTheGlorified extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
 
     public BontuTheGlorified(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -89,7 +82,7 @@ public class BontuTheGlorified extends CardImpl {
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
         ability.addEffect(effect);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         this.addAbility(ability);
 
     }

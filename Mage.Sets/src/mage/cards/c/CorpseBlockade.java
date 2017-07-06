@@ -38,11 +38,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -50,13 +49,8 @@ import java.util.UUID;
  */
 public class CorpseBlockade extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
     public CorpseBlockade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(1);
@@ -69,7 +63,7 @@ public class CorpseBlockade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, true))));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
     }
 
     public CorpseBlockade(final CorpseBlockade card) {

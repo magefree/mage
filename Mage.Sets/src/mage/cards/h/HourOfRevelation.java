@@ -27,7 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -39,6 +38,8 @@ import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -49,8 +50,11 @@ public class HourOfRevelation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");
 
         // Hour of Revelation costs {3} less to cast if there are ten or more nonland permanents on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK,
-                new SpellCostReductionSourceEffect(3, new PermanentsOnTheBattlefieldCondition(new FilterNonlandPermanent(), ComparisonType.MORE_THAN, 9))));
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.STACK,
+                new SpellCostReductionSourceEffect(3, new PermanentsOnTheBattlefieldCondition(
+                        new FilterNonlandPermanent("there are ten or more nonland permanents on the battlefield"), ComparisonType.MORE_THAN, 9, false)));
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
 
         // Destroy all nonland permanents.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterNonlandPermanent("nonland permanents")));
