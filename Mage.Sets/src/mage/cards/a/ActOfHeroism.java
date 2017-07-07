@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ActOfHeroism extends CardImpl {
 
     public ActOfHeroism(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Untap target creature.
         Effect effect = new UntapTargetEffect();
