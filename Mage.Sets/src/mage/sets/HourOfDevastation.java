@@ -66,6 +66,7 @@ public class HourOfDevastation extends ExpansionSet {
         this.ratioBoosterSpecialLand = 144;
         this.maxCardNumberInBooster = 199;
 
+        cards.add(new SetCardInfo("Abandoned Sarcophagus", 158, Rarity.RARE, mage.cards.a.AbandonedSarcophagus.class));
         cards.add(new SetCardInfo("Abrade", 83, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Accursed Horde", 56, Rarity.UNCOMMON, mage.cards.a.AccursedHorde.class));
         cards.add(new SetCardInfo("Act of Heroism", 1, Rarity.COMMON, mage.cards.a.ActOfHeroism.class));
