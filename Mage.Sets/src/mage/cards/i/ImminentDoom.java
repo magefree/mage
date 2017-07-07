@@ -107,7 +107,7 @@ class ImminentDoomTriggeredAbility extends TriggeredAbilityImpl {
             if (spell != null
                     && imminentDoom != null
                     && spell.getConvertedManaCost() == imminentDoom.getCounters(game).getCount(CounterType.DOOM)) {
-                game.getState().setValue("ImminentDoomCount", imminentDoom.getCounters(game).getCount(CounterType.DOOM)); // store its current value
+                game.getState().setValue("ImminentDoomCount" + getSourceId().toString(), imminentDoom.getCounters(game).getCount(CounterType.DOOM)); // store its current value
                 return true;
             }
             }
@@ -139,10 +139,10 @@ class ImminentDoomEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent imminentDoom = game.getPermanent(source.getSourceId());
         if (imminentDoom != null) {
-            Effect effect = new DamageTargetEffect((int) game.getState().getValue("ImminentDoomCount"));
+            Effect effect = new DamageTargetEffect((int) game.getState().getValue("ImminentDoomCount" + source.getSourceId().toString()));
             effect.apply(game, source);
             imminentDoom.addCounters(CounterType.DOOM.createInstance(), source, game);
-            game.getState().setValue("ImminentDoomCount", 0); // reset to 0 to avoid any silliness
+            game.getState().setValue("ImminentDoomCount" + source.getSourceId().toString(), 0); // reset to 0 to avoid any silliness
             return true;
         }
         return false;
