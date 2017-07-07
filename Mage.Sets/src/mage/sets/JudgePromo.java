@@ -79,6 +79,7 @@ public class JudgePromo extends ExpansionSet {
         cards.add(new SetCardInfo("Flusterstorm", 65, Rarity.RARE, mage.cards.f.Flusterstorm.class));
         cards.add(new SetCardInfo("Force of Will", 83, Rarity.UNCOMMON, mage.cards.f.ForceOfWill.class));
         cards.add(new SetCardInfo("Forest", 93, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Gaddock Teeg", 112, Rarity.SPECIAL, mage.cards.g.GaddockTeeg.class));
         cards.add(new SetCardInfo("Gaea's Cradle", 3, Rarity.RARE, mage.cards.g.GaeasCradle.class));
         cards.add(new SetCardInfo("Gemstone Mine", 20, Rarity.UNCOMMON, mage.cards.g.GemstoneMine.class));
         cards.add(new SetCardInfo("Genesis", 79, Rarity.RARE, mage.cards.g.Genesis.class));

@@ -595,8 +595,18 @@
 |Generate|TOK:HOP|Pentavite|||PentaviteToken|
 |Generate|TOK:HOP|Pest|||PestToken|
 |Generate|TOK:HOP|Saproling|||SaprolingToken|
+|Generate|TOK:HOU|Adorned Pouncer||||
+|Generate|TOK:HOU|Champion of Wits||||
+|Generate|TOK:HOU|Dreamstealer||||
+|Generate|TOK:HOU|Earthshaker Khenra||||
+|Generate|TOK:HOU|Horse|||CrestedSunmareToken|
 |Generate|TOK:HOU|Insect|||TheLocustGodInsectToken|
+|Generate|TOK:HOU|Proven Combatant||||
+|Generate|TOK:HOU|Resilient Khenra||||
+|Generate|TOK:HOU|Sinuous Striker||||
 |Generate|TOK:HOU|Snake|||RhonassLastStandToken|
+|Generate|TOK:HOU|Steadfast Sentinel||||
+|Generate|TOK:HOU|Sunscourge Champion||||
 |Generate|TOK:HOU|Zombie||
 |Generate|TOK:ICE|Caribou|||CaribouToken|
 |Generate|TOK:INV|Bird|||OwlToken|
