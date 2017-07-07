@@ -141,6 +141,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Hour of Revelation", 15, Rarity.RARE, mage.cards.h.HourOfRevelation.class));
         cards.add(new SetCardInfo("Ifnir Deadlands", 179, Rarity.UNCOMMON, mage.cards.i.IfnirDeadlands.class));
         cards.add(new SetCardInfo("Imaginary Threats", 37, Rarity.UNCOMMON, mage.cards.i.ImaginaryThreats.class));
+        cards.add(new SetCardInfo("Imminent Doom", 98, Rarity.RARE, mage.cards.i.ImminentDoom.class));
         cards.add(new SetCardInfo("Inferno Jet", 99, Rarity.UNCOMMON, mage.cards.i.InfernoJet.class));
         cards.add(new SetCardInfo("Ipnu Rivulet", 180, Rarity.UNCOMMON, mage.cards.i.IpnuRivulet.class));
         cards.add(new SetCardInfo("Island", 186, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
