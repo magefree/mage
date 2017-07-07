@@ -64,6 +64,7 @@ public class HourOfDevastation extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.ratioBoosterSpecialLand = 144;
+        this.maxCardNumberInBooster = 199;
 
         cards.add(new SetCardInfo("Abrade", 83, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Accursed Horde", 56, Rarity.UNCOMMON, mage.cards.a.AccursedHorde.class));
@@ -71,13 +72,11 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Adorned Pouncer", 2, Rarity.RARE, mage.cards.a.AdornedPouncer.class));
         cards.add(new SetCardInfo("Aerial Guide", 29, Rarity.COMMON, mage.cards.a.AerialGuide.class));
         cards.add(new SetCardInfo("Ambuscade", 110, Rarity.COMMON, mage.cards.a.Ambuscade.class));
-<<<<<<< HEAD
         cards.add(new SetCardInfo("Ammit Eternal", 57, Rarity.RARE, mage.cards.a.AmmitEternal.class));
         cards.add(new SetCardInfo("Angel of Condemnation", 3, Rarity.RARE, mage.cards.a.AngelOfCondemnation.class));
         cards.add(new SetCardInfo("Angel of the God-Pharaoh", 4, Rarity.UNCOMMON, mage.cards.a.AngelOfTheGodPharaoh.class));
-        cards.add(new SetCardInfo("Aven Reedstalker", 30, Rarity.COMMON, mage.cards.a.AvenReedstalker.class));
-        cards.add(new SetCardInfo("Aven of Enduring Hope", 5, Rarity.COMMON, mage.cards.a.AvenOfEnduringHope.class));
         cards.add(new SetCardInfo("Appeal // Authority", 152, Rarity.UNCOMMON, mage.cards.a.AppealAuthority.class));
+        cards.add(new SetCardInfo("Aven of Enduring Hope", 5, Rarity.COMMON, mage.cards.a.AvenOfEnduringHope.class));
         cards.add(new SetCardInfo("Aven Reedstalker", 30, Rarity.COMMON, mage.cards.a.AvenReedstalker.class));
         cards.add(new SetCardInfo("Avid Reclaimer", 201, Rarity.UNCOMMON, mage.cards.a.AvidReclaimer.class));
         cards.add(new SetCardInfo("Banewhip Punisher", 59, Rarity.UNCOMMON, mage.cards.b.BanewhipPunisher.class));
@@ -151,9 +150,9 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Khenra Eternal", 66, Rarity.COMMON, mage.cards.k.KhenraEternal.class));
         cards.add(new SetCardInfo("Khenra Scrapper", 100, Rarity.COMMON, mage.cards.k.KhenraScrapper.class));
         cards.add(new SetCardInfo("Kindled Fury", 101, Rarity.COMMON, mage.cards.k.KindledFury.class));
-        cards.add(new SetCardInfo("Life Goes On", 121, Rarity.COMMON, mage.cards.l.LifeGoesOn.class));
         cards.add(new SetCardInfo("Leave // Chance", 153, Rarity.RARE, mage.cards.l.LeaveChance.class));
         cards.add(new SetCardInfo("Lethal Sting", 67, Rarity.COMMON, mage.cards.l.LethalSting.class));
+        cards.add(new SetCardInfo("Life Goes On", 121, Rarity.COMMON, mage.cards.l.LifeGoesOn.class));
         cards.add(new SetCardInfo("Liliana's Defeat", 68, Rarity.UNCOMMON, mage.cards.l.LilianasDefeat.class));
         cards.add(new SetCardInfo("Lurching Rotbeast", 69, Rarity.COMMON, mage.cards.l.LurchingRotbeast.class));
         cards.add(new SetCardInfo("Magmaroth", 102, Rarity.UNCOMMON, mage.cards.m.Magmaroth.class));
@@ -180,8 +179,8 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Oketra's Last Mercy", 18, Rarity.RARE, mage.cards.o.OketrasLastMercy.class));
         cards.add(new SetCardInfo("Ominous Sphinx", 41, Rarity.UNCOMMON, mage.cards.o.OminousSphinx.class));
         cards.add(new SetCardInfo("Open Fire", 105, Rarity.COMMON, mage.cards.o.OpenFire.class));
-        cards.add(new SetCardInfo("Overwhelming Splendor", 19, Rarity.MYTHIC, mage.cards.o.OverwhelmingSplendor.class));
         cards.add(new SetCardInfo("Overcome", 125, Rarity.UNCOMMON, mage.cards.o.Overcome.class));
+        cards.add(new SetCardInfo("Overwhelming Splendor", 19, Rarity.MYTHIC, mage.cards.o.OverwhelmingSplendor.class));
         cards.add(new SetCardInfo("Plains", 185, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Plains", 190, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Plains", 191, Rarity.LAND, mage.cards.basiclands.Plains.class));
@@ -209,9 +208,9 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Sandblast", 20, Rarity.COMMON, mage.cards.s.Sandblast.class));
         cards.add(new SetCardInfo("Saving Grace", 21, Rarity.UNCOMMON, mage.cards.s.SavingGrace.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 182, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
+        cards.add(new SetCardInfo("Scrounger of Souls", 76, Rarity.COMMON, mage.cards.s.ScroungerOfSouls.class));
         cards.add(new SetCardInfo("Seer of the Last Tomorrow", 44, Rarity.COMMON, mage.cards.s.SeerOfTheLastTomorrow.class));
         cards.add(new SetCardInfo("Shefet Dunes", 183, Rarity.UNCOMMON, mage.cards.s.ShefetDunes.class));
-        cards.add(new SetCardInfo("Scrounger of Souls", 76, Rarity.COMMON, mage.cards.s.ScroungerOfSouls.class));
         cards.add(new SetCardInfo("Sidewinder Naga", 134, Rarity.COMMON, mage.cards.s.SidewinderNaga.class));
         cards.add(new SetCardInfo("Sifter Wurm", 135, Rarity.UNCOMMON, mage.cards.s.SifterWurm.class));
         cards.add(new SetCardInfo("Sinuous Striker", 45, Rarity.UNCOMMON, mage.cards.s.SinuousStriker.class));
