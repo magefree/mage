@@ -10,6 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class ActOfHeroismTest extends CardTestPlayerBase {
 
+    // Test that loss of abilities doesn't remove Act of Heroism's "block an additional creature" effect
     @Test
     public void testCanBlockMultiple() {
         // 0/4 Creature - Camel
@@ -36,8 +37,7 @@ public class ActOfHeroismTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.COMBAT_DAMAGE);
 
+        // Fails if A's creature is unable to block both attackers
         execute();
-
-        assertLife(playerA, 20); // No damage taken
     }
 }
