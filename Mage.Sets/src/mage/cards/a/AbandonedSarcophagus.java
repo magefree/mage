@@ -34,8 +34,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.Card;
@@ -46,9 +44,7 @@ import mage.cards.CardsImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -59,7 +55,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
 /**
@@ -72,7 +67,7 @@ public class AbandonedSarcophagus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // You may cast nonland cards with cycling from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbandonedSarcophagusEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbandonedSarcophagusCastFromGraveyardEffect()));
 
         // If a card with cycling would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbandonedSarcophagusReplacementEffect()), new AbandonedSarcophagusWatcher());
@@ -89,7 +84,7 @@ public class AbandonedSarcophagus extends CardImpl {
     }
 }
 
-class AbandonedSarcophagusEffect extends ContinuousEffectImpl {
+class AbandonedSarcophagusCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     private static final FilterCard filter = new FilterCard("nonland cards with cycling");
 
@@ -97,37 +92,6 @@ class AbandonedSarcophagusEffect extends ContinuousEffectImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         filter.add(new AbilityPredicate(CyclingAbility.class));
     }
-
-    AbandonedSarcophagusEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "You may cast nonland cards with cycling from your graveyard";
-    }
-
-    AbandonedSarcophagusEffect(final AbandonedSarcophagusEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AbandonedSarcophagusEffect copy() {
-        return new AbandonedSarcophagusEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (Card card : controller.getGraveyard().getCards(filter, game)) {
-                ContinuousEffect effect = new AbandonedSarcophagusCastFromGraveyardEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
-                game.addEffect(effect, source);
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
-class AbandonedSarcophagusCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     AbandonedSarcophagusCastFromGraveyardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -150,10 +114,11 @@ class AbandonedSarcophagusCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(getTargetPointer().getFirst(game, source))) {
-            if (affectedControllerId.equals(source.getControllerId())) {
-                return true;
-            }
+        Card card = game.getCard(objectId);
+        if (card != null) {
+            return (affectedControllerId.equals(source.getControllerId())
+                    && filter.match(card, game)
+                    && game.getState().getZone(card.getId()) == Zone.GRAVEYARD);
         }
         return false;
     }
