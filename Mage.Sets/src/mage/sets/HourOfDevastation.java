@@ -98,6 +98,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Crash Through", 88, Rarity.COMMON, mage.cards.c.CrashThrough.class));
         cards.add(new SetCardInfo("Crested Sunmare", 6, Rarity.MYTHIC, mage.cards.c.CrestedSunmare.class));
         cards.add(new SetCardInfo("Crook of Condemnation", 159, Rarity.UNCOMMON, mage.cards.c.CrookOfCondemnation.class));
+        cards.add(new SetCardInfo("Crypt of the Eternals", 169, Rarity.UNCOMMON, mage.cards.c.CryptOfTheEternals.class));
         cards.add(new SetCardInfo("Cunning Survivor", 33, Rarity.COMMON, mage.cards.c.CunningSurvivor.class));
         cards.add(new SetCardInfo("Dauntless Aven", 7, Rarity.COMMON, mage.cards.d.DauntlessAven.class));
         cards.add(new SetCardInfo("Defiant Khenra", 89, Rarity.COMMON, mage.cards.d.DefiantKhenra.class));
@@ -117,6 +118,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Driven // Despair", 157, Rarity.RARE, mage.cards.d.DrivenDespair.class));
         cards.add(new SetCardInfo("Dutiful Servants", 12, Rarity.COMMON, mage.cards.d.DutifulServants.class));
         cards.add(new SetCardInfo("Earthshaker Khenra", 90, Rarity.RARE, mage.cards.e.EarthshakerKhenra.class));
+        cards.add(new SetCardInfo("Endless Sands", 176, Rarity.RARE, mage.cards.e.EndlessSands.class));
         cards.add(new SetCardInfo("Eternal of Harsh Truths", 34, Rarity.UNCOMMON, mage.cards.e.EternalOfHarshTruths.class));
         cards.add(new SetCardInfo("Farm // Market", 148, Rarity.UNCOMMON, mage.cards.f.FarmMarket.class));
         cards.add(new SetCardInfo("Feral Prowler", 115, Rarity.COMMON, mage.cards.f.FeralProwler.class));
