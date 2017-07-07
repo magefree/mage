@@ -28,6 +28,8 @@ sub toCamelCase
     return $string;
 }
 
+my $option = $ARGV[0];
+
 open (DATA, $setsFile) || die "can't open $setsFile";
 while(my $line = <DATA>)
 {
@@ -37,7 +39,7 @@ while(my $line = <DATA>)
 }
 close(DATA);
 
-my $dir_listing = "dir \/a \/b \/s ..\\Mage.Sets\\ | find \".java\" |";
+my $dir_listing = "dir \/a \/b \/s ..\\Mage.Sets\\src\\mage\\sets | find \".java\" |";
 open (DIR_LISTING, "$dir_listing");
 my %setsForJavafile;
 my $totalCards = 0;
@@ -78,7 +80,12 @@ while (<DIR_LISTING>)
             $setsForJavafile {$f} = $trigraph;
         }
 
-        if ($line =~ m/SetCardInfo\("([^"]+)",([^,]+),/img)
+        if ($line !~ m/$option/img)
+        {
+            next;
+        }
+
+        if ($line =~ m/SetCardInfo\("([^"]+)",([^,]+),/im)
         {
             $name = $1;
             $cardNum = $2;
