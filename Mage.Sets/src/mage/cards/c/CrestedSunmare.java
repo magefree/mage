@@ -46,7 +46,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CrestedSunmareToken;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
@@ -56,6 +56,7 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
 public class CrestedSunmare extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Horses you control");
+
     static {
         filter.add(new SubtypePredicate(SubType.HORSE));
     }
@@ -86,17 +87,5 @@ public class CrestedSunmare extends CardImpl {
     @Override
     public CrestedSunmare copy() {
         return new CrestedSunmare(this);
-    }
-}
-
-class CrestedSunmareToken extends Token {
-
-    CrestedSunmareToken() {
-        super("Horse", "5/5 white Horse creature token");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        color.setWhite(true);
-        subtype.add("Horse");
-        cardType.add(CardType.CREATURE);
     }
 }
