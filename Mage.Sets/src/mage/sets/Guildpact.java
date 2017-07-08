@@ -170,6 +170,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Skarrgan Skybreaker", 130, Rarity.UNCOMMON, mage.cards.s.SkarrganSkybreaker.class));
         cards.add(new SetCardInfo("Skarrg, the Rage Pits", 163, Rarity.UNCOMMON, mage.cards.s.SkarrgTheRagePits.class));
         cards.add(new SetCardInfo("Skeletal Vampire", 62, Rarity.RARE, mage.cards.s.SkeletalVampire.class));
+        cards.add(new SetCardInfo("Sky Swallower", 34, Rarity.RARE, mage.cards.s.SkySwallower.class));
         cards.add(new SetCardInfo("Skyrider Trainee", 17, Rarity.COMMON, mage.cards.s.SkyriderTrainee.class));
         cards.add(new SetCardInfo("Smogsteed Rider", 63, Rarity.UNCOMMON, mage.cards.s.SmogsteedRider.class));
         cards.add(new SetCardInfo("Souls of the Faultless", 131, Rarity.UNCOMMON, mage.cards.s.SoulsOfTheFaultless.class));

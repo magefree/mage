@@ -27,8 +27,6 @@
  */
 package mage.cards.h;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -47,14 +45,12 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 import mage.target.TargetCard;
 
@@ -99,7 +95,7 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
 
     public HazoretsUndyingFuryEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Shuffle your library, then exile the top four cards. You may cast any number of nonland cards with converted mana cost 5 or less from among them without paying their mana costs. Land you control don't untap during your next untap step.";
+        this.staticText = "Shuffle your library, then exile the top four cards. You may cast any number of nonland cards with converted mana cost 5 or less from among them without paying their mana costs. ";
     }
 
     public HazoretsUndyingFuryEffect(final HazoretsUndyingFuryEffect effect) {
