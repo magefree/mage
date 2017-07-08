@@ -54,6 +54,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
@@ -152,6 +153,10 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null) {
+                return controller.moveCards(permanent, Zone.EXILED, source, game);
+            }
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
                 return controller.moveCards(card, Zone.EXILED, source, game);
