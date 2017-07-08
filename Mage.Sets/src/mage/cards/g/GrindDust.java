@@ -63,7 +63,7 @@ public class GrindDust extends SplitCard {
         ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Exile any number of target creatures that have -1/-1 counters on them.
         getRightHalfCard().getSpellAbility().addEffect(new ExileTargetEffect());
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that have -1/-1 counters on them");
         filter.add(new CounterPredicate(CounterType.M1M1));
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, false));
 
