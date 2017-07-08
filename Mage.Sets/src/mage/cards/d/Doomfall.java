@@ -41,7 +41,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
@@ -58,9 +57,9 @@ public class Doomfall extends CardImpl {
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(1);
 
-        // • Target player exiles a creature he or she controls.
+        // • Target opponent exiles a creature he or she controls.
         this.getSpellAbility().addEffect(new DoomfallEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetOpponent());
 
         // • Target opponent reveals his or her hand. You choose a nonland card from it. Exile that card.
         Mode mode = new Mode();
@@ -103,7 +102,7 @@ class DoomfallEffect extends OneShotEffect {
             Target target = new TargetControlledCreaturePermanent();
             target.setNotTarget(true);
             if (targetPlayer.choose(outcome, target, source.getSourceId(), game)) {
-                targetPlayer.moveCards(game.getCard(target.getFirstTarget()), Zone.EXILED, source, game);
+                targetPlayer.moveCards(game.getPermanent(target.getFirstTarget()), Zone.EXILED, source, game);
             }
             return true;
         }

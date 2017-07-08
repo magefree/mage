@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -43,10 +44,10 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  * @author Archer262
  */
 public class DisposalMummy extends CardImpl {
-    
+
     public DisposalMummy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        
+
         this.subtype.add("Zombie");
         this.subtype.add("Jackal");
         this.power = new MageInt(2);
@@ -58,11 +59,11 @@ public class DisposalMummy extends CardImpl {
         ability.addTarget(target);
         this.addAbility(ability);
     }
-    
+
     public DisposalMummy(final DisposalMummy card) {
         super(card);
     }
-    
+
     @Override
     public DisposalMummy copy() {
         return new DisposalMummy(this);
