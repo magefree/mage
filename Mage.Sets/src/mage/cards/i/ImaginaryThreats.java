@@ -45,6 +45,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -57,6 +58,7 @@ public class ImaginaryThreats extends CardImpl {
 
         // Creatures target opponent controls attack this turn if able. During that player's next untap step, creatures he or she controls don't untap.
         getSpellAbility().addEffect(new ImaginaryThreatsEffect());
+        getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
         getSpellAbility().addTarget(new TargetOpponent());
         getSpellAbility().addEffect(new DontUntapInPlayersNextUntapStepAllEffect(new FilterCreaturePermanent())
                 .setText("During that player's next untap step, creatures he or she controls don't untap"));
