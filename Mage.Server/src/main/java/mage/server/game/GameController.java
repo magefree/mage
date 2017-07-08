@@ -46,6 +46,7 @@ import mage.game.Table;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
+import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.interfaces.Action;
 import mage.players.Player;
@@ -65,7 +66,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.*;
 import java.util.zip.GZIPOutputStream;
-import mage.game.match.MatchPlayer;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -108,12 +108,7 @@ public class GameController implements GameCallback {
         this.tableId = tableId;
         this.choosingPlayerId = choosingPlayerId;
         this.gameOptions = gameOptions;
-        for (Player player : game.getPlayers().values()) {
-            if (!player.isHuman()) {
-                useTimeout = false; // no timeout for AI players because of beeing idle
-                break;
-            }
-        }
+        useTimeout = game.getPlayers().values().stream().allMatch(Player::isHuman);
         init();
 
     }
@@ -832,13 +827,8 @@ public class GameController implements GameCallback {
         }
         final String message = new StringBuilder(game.getStep().getType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
         for (final Entry<UUID, GameSessionPlayer> entry : gameSessions.entrySet()) {
-            boolean skip = false;
-            for (UUID uuid : players) {
-                if (entry.getKey().equals(uuid)) {
-                    skip = true;
-                    break;
-                }
-            }
+            boolean skip = players.stream().anyMatch(playerId -> entry.getKey().equals(playerId));
+
             if (!skip) {
                 entry.getValue().inform(message);
             }

@@ -43,6 +43,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -55,6 +56,7 @@ public class HourOfGlory extends CardImpl {
 
         // Exile target creature. If that creature was a God, its controller reveals his or her hand and exiles all cards with the same name as that creature.
         this.getSpellAbility().addEffect(new HourOfGloryEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public HourOfGlory(final HourOfGlory card) {

@@ -27,12 +27,14 @@
  */
 package mage.abilities.costs.mana;
 
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
 import mage.game.Game;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -63,14 +65,10 @@ public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
 
 
     static ManaCosts<ManaCost> removeVariableManaCost(ManaCosts<ManaCost> m) {
-        ManaCosts<ManaCost> manaCosts = new ManaCostsImpl<>();
-        for(ManaCost manaCost : m){
-            if(!(manaCost instanceof VariableManaCost)){
-                manaCosts.add(manaCost);
+        return m.stream()
+                .filter(mc -> !(mc instanceof VariableManaCost))
+                .collect(Collectors.toCollection(ManaCostsImpl<ManaCost>::new));
 
-            }
-        }
-        return manaCosts;
     }
 
 }

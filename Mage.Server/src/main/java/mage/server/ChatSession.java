@@ -129,9 +129,7 @@ public class ChatSession {
                     clientsToRemove.add(userId);
                 }
             }
-            for (UUID userIdToRemove : clientsToRemove) {
-                clients.remove(userIdToRemove);
-            }
+            clients.keySet().removeAll(clientsToRemove);
 
         }
     }

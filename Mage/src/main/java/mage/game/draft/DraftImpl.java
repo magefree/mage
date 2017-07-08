@@ -28,19 +28,15 @@
 
 package mage.game.draft;
 
-import java.util.*;
-
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.game.draft.DraftOptions.TimingOption;
-import mage.game.events.Listener;
-import mage.game.events.PlayerQueryEvent;
-import mage.game.events.PlayerQueryEventSource;
-import mage.game.events.TableEvent;
+import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.events.TableEventSource;
 import mage.players.Player;
 import mage.players.PlayerList;
+
+import java.util.*;
 
 /**
  *
@@ -262,22 +258,16 @@ public abstract class DraftImpl implements Draft {
         if(isAbort()) {
             return true;
         }
-        for (DraftPlayer player: players.values()) {
-            if (player.isPicking()) {
-                return false;
-            }
-        }
-        return true;
+        return players.values()
+                .stream()
+                .noneMatch(DraftPlayer::isPicking);
+
     }
 
     @Override
     public boolean allJoined() {
-        for (DraftPlayer player: this.players.values()) {
-            if (!player.isJoined()) {
-                return false;
-            }
-        }
-        return true;
+        return players.values().stream()
+                .allMatch(DraftPlayer::isJoined);
     }
 
     @Override

@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -45,8 +46,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author Plopman
@@ -54,18 +53,20 @@ import java.util.UUID;
 public class Duplicant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
+
     static {
         filter.add(Predicates.not(new TokenPredicate()));
     }
+
     public Duplicant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
         // Imprint - When Duplicant enters the battlefield, you may exile target nontoken creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(), true, "<i>Imprint - </i>");
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DuplicantExileTargetEffect(), true, "<i>Imprint - </i>");
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // As long as the exiled card is a creature card, Duplicant has that card's power, toughness, and creature types. It's still a Shapeshifter.
@@ -81,20 +82,20 @@ public class Duplicant extends CardImpl {
         return new Duplicant(this);
     }
 }
-class ExileTargetEffect extends OneShotEffect {
 
+class DuplicantExileTargetEffect extends OneShotEffect {
 
-    public ExileTargetEffect() {
+    public DuplicantExileTargetEffect() {
         super(Outcome.Exile);
     }
 
-    public ExileTargetEffect(final ExileTargetEffect effect) {
+    public DuplicantExileTargetEffect(final DuplicantExileTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public ExileTargetEffect copy() {
-        return new ExileTargetEffect(this);
+    public DuplicantExileTargetEffect copy() {
+        return new DuplicantExileTargetEffect(this);
     }
 
     @Override
@@ -102,13 +103,13 @@ class ExileTargetEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         Permanent sourcePermananent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if(sourcePermananent != null){
+            if (sourcePermananent != null) {
                 sourcePermananent.imprint(permanent.getId(), game);
                 sourcePermananent.addInfo("imprint", new StringBuilder("[Imprinted card - ").append(permanent.getName()).append(']').toString(), game);
             }
             return permanent.moveToExile(null, null, source.getSourceId(), game);
-        } 
-        
+        }
+
         return false;
     }
 
@@ -118,17 +119,16 @@ class ExileTargetEffect extends OneShotEffect {
     }
 }
 
-
 class DuplicantContinuousEffect extends ContinuousEffectImpl {
 
     public DuplicantContinuousEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "As long as the exiled card is a creature card, Duplicant has that card's power, toughness, and creature types. It's still a Shapeshifter";         
+        staticText = "As long as the exiled card is a creature card, Duplicant has that card's power, toughness, and creature types. It's still a Shapeshifter";
     }
 
     public DuplicantContinuousEffect(final DuplicantContinuousEffect effect) {
         super(effect);
-        }
+    }
 
     @Override
     public DuplicantContinuousEffect copy() {
@@ -139,10 +139,9 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if(!permanent.getImprinted().isEmpty()){
+            if (!permanent.getImprinted().isEmpty()) {
                 Card card = game.getCard(permanent.getImprinted().get(0));
-                if(card != null && card.isCreature())
-                {
+                if (card != null && card.isCreature()) {
                     switch (layer) {
                         case TypeChangingEffects_4:
                             if (sublayer == SubLayer.NA) {
@@ -152,26 +151,25 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
                             break;
                         case PTChangingEffects_7:
                             if (sublayer == SubLayer.SetPT_7b) {
-                                 permanent.getPower().setValue(card.getPower().getValue());
-                                 permanent.getToughness().setValue(card.getToughness().getValue());
+                                permanent.getPower().setValue(card.getPower().getValue());
+                                permanent.getToughness().setValue(card.getToughness().getValue());
 
                             }
                     }
                     return true;
 
-                    
                 }
             }
-            
+
         }
         return false;
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return false;
     }
-       
+
     @Override
     public boolean hasLayer(Layer layer) {
         return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;

@@ -11,7 +11,7 @@
 *       of conditions and the following disclaimer in the documentation and/or other materials
 *       provided with the distribution.
 *
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com AS IS AND ANY EXPRESS OR IMPLIED
 * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
 * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
 * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
@@ -24,34 +24,24 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
+package mage.game.permanent.token;
 
-package mage.abilities.condition.common;
-
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.abilities.keyword.EvokeAbility;
-import mage.cards.Card;
-import mage.game.Game;
+import mage.constants.CardType;
+import mage.MageInt;
 
 /**
- *  Checks if a the spell was cast with the alternate evoke costs
  *
- * @author LevelX2
+ * @author spjspj
  */
+public class CrestedSunmareToken extends Token {
 
-public enum EvokedCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            return card.getAbilities().stream()
-                    .filter(ab -> ab instanceof EvokeAbility)
-                    .anyMatch(evoke -> ((EvokeAbility) evoke).isActivated(source, game));
-        }
-        return false;
+    public CrestedSunmareToken() {
+        super("Horse", "5/5 white Horse creature token");
+        power = new MageInt(5);
+        toughness = new MageInt(5);
+        color.setWhite(true);
+        subtype.add("Horse");
+        cardType.add(CardType.CREATURE);
     }
 }
