@@ -50,7 +50,7 @@ public class PlayerResponse implements Serializable {
     }
     
     public String toString() {
-        return new StringBuilder(responseString)
+        return new StringBuilder((responseString == null) ? "null" : responseString)
                 .append(',')
                 .append(responseUUID)
                 .append(',')
