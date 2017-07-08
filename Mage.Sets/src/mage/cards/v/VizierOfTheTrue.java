@@ -42,8 +42,6 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -87,6 +85,7 @@ class VizierOfTheTrueAbility extends TriggeredAbilityImpl {
 
     public VizierOfTheTrueAbility() {
         super(Zone.BATTLEFIELD, new TapTargetEffect());
+        addTarget(new TargetCreaturePermanent(filter));
     }
 
     public VizierOfTheTrueAbility(final VizierOfTheTrueAbility ability) {
@@ -105,15 +104,7 @@ class VizierOfTheTrueAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            Target target = new TargetCreaturePermanent(filter);
-            target.setAbilityController(getControllerId());
-            this.getTargets().clear();
-            this.getTargets().add(target);
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(getControllerId());
     }
 
     @Override
