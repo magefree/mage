@@ -65,7 +65,7 @@ public class HourOfDevastation extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.ratioBoosterSpecialLand = 144;
         this.maxCardNumberInBooster = 199;
-
+      
         cards.add(new SetCardInfo("Abandoned Sarcophagus", 158, Rarity.RARE, mage.cards.a.AbandonedSarcophagus.class));
         cards.add(new SetCardInfo("Abrade", 83, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Accursed Horde", 56, Rarity.UNCOMMON, mage.cards.a.AccursedHorde.class));
@@ -78,12 +78,13 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of the God-Pharaoh", 4, Rarity.UNCOMMON, mage.cards.a.AngelOfTheGodPharaoh.class));
         cards.add(new SetCardInfo("Apocalypse Demon", 58, Rarity.RARE, mage.cards.a.ApocalypseDemon.class));
         cards.add(new SetCardInfo("Appeal // Authority", 152, Rarity.UNCOMMON, mage.cards.a.AppealAuthority.class));
-        cards.add(new SetCardInfo("Aven of Enduring Hope", 5, Rarity.COMMON, mage.cards.a.AvenOfEnduringHope.class));
         cards.add(new SetCardInfo("Aven Reedstalker", 30, Rarity.COMMON, mage.cards.a.AvenReedstalker.class));
+        cards.add(new SetCardInfo("Aven of Enduring Hope", 5, Rarity.COMMON, mage.cards.a.AvenOfEnduringHope.class));
         cards.add(new SetCardInfo("Avid Reclaimer", 201, Rarity.UNCOMMON, mage.cards.a.AvidReclaimer.class));
         cards.add(new SetCardInfo("Banewhip Punisher", 59, Rarity.UNCOMMON, mage.cards.b.BanewhipPunisher.class));
         cards.add(new SetCardInfo("Beneath The Sands", 111, Rarity.COMMON, mage.cards.b.BeneathTheSands.class));
         cards.add(new SetCardInfo("Bitterbow Sharpshooters", 112, Rarity.COMMON, mage.cards.b.BitterbowSharpshooters.class));
+        cards.add(new SetCardInfo("Bloodwater Entity", 138, Rarity.UNCOMMON, mage.cards.b.BloodwaterEntity.class));
         cards.add(new SetCardInfo("Blur of Blades", 84, Rarity.COMMON, mage.cards.b.BlurOfBlades.class));
         cards.add(new SetCardInfo("Bontu's Last Reckoning", 60, Rarity.RARE, mage.cards.b.BontusLastReckoning.class));
         cards.add(new SetCardInfo("Brambleweft Behemoth", 202, Rarity.COMMON, mage.cards.b.BrambleweftBehemoth.class));
@@ -101,6 +102,7 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Crook of Condemnation", 159, Rarity.UNCOMMON, mage.cards.c.CrookOfCondemnation.class));
         cards.add(new SetCardInfo("Crypt of the Eternals", 169, Rarity.UNCOMMON, mage.cards.c.CryptOfTheEternals.class));
         cards.add(new SetCardInfo("Cunning Survivor", 33, Rarity.COMMON, mage.cards.c.CunningSurvivor.class));
+        cards.add(new SetCardInfo("Dagger of the Worthy", 160, Rarity.UNCOMMON, mage.cards.d.DaggerOfTheWorthy.class));
         cards.add(new SetCardInfo("Dauntless Aven", 7, Rarity.COMMON, mage.cards.d.DauntlessAven.class));
         cards.add(new SetCardInfo("Defiant Khenra", 89, Rarity.COMMON, mage.cards.d.DefiantKhenra.class));
         cards.add(new SetCardInfo("Desert of the Fervent", 170, Rarity.COMMON, mage.cards.d.DesertOfTheFervent.class));
@@ -115,8 +117,9 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Djeru, With Eyes Open", 10, Rarity.RARE, mage.cards.d.DjeruWithEyesOpen.class));
         cards.add(new SetCardInfo("Doomfall", 62, Rarity.UNCOMMON, mage.cards.d.Doomfall.class));
         cards.add(new SetCardInfo("Dreamstealer", 63, Rarity.RARE, mage.cards.d.Dreamstealer.class));
-        cards.add(new SetCardInfo("Dunes of the Dead", 175, Rarity.UNCOMMON, mage.cards.d.DunesOfTheDead.class));
         cards.add(new SetCardInfo("Driven // Despair", 157, Rarity.RARE, mage.cards.d.DrivenDespair.class));
+        cards.add(new SetCardInfo("Dune Diviner", 114, Rarity.UNCOMMON, mage.cards.d.DuneDiviner.class));
+        cards.add(new SetCardInfo("Dunes of the Dead", 175, Rarity.UNCOMMON, mage.cards.d.DunesOfTheDead.class));
         cards.add(new SetCardInfo("Dutiful Servants", 12, Rarity.COMMON, mage.cards.d.DutifulServants.class));
         cards.add(new SetCardInfo("Earthshaker Khenra", 90, Rarity.RARE, mage.cards.e.EarthshakerKhenra.class));
         cards.add(new SetCardInfo("Endless Sands", 176, Rarity.RARE, mage.cards.e.EndlessSands.class));
@@ -124,10 +127,13 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Farm // Market", 148, Rarity.UNCOMMON, mage.cards.f.FarmMarket.class));
         cards.add(new SetCardInfo("Feral Prowler", 115, Rarity.COMMON, mage.cards.f.FeralProwler.class));
         cards.add(new SetCardInfo("Fervent Paincaster", 91, Rarity.UNCOMMON, mage.cards.f.FerventPaincaster.class));
+        cards.add(new SetCardInfo("Firebrand Archer", 92, Rarity.COMMON, mage.cards.f.FirebrandArcher.class));
         cards.add(new SetCardInfo("Forest", 189, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Forest", 198, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Forest", 199, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Fraying Sanity", 35, Rarity.UNCOMMON, mage.cards.f.FrayingSanity.class));
+        cards.add(new SetCardInfo("Frilled Sandwalla", 116, Rarity.COMMON, mage.cards.f.FrilledSandwalla.class));
+        cards.add(new SetCardInfo("Frontline Devastator", 93, Rarity.COMMON, mage.cards.f.FrontlineDevastator.class));
         cards.add(new SetCardInfo("Gideon's Defeat", 13, Rarity.UNCOMMON, mage.cards.g.GideonsDefeat.class));
         cards.add(new SetCardInfo("Gift of Strength", 117, Rarity.COMMON, mage.cards.g.GiftOfStrength.class));
         cards.add(new SetCardInfo("Gilded Cerodon", 94, Rarity.COMMON, mage.cards.g.GildedCerodon.class));
@@ -136,8 +142,14 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Granitic Titan", 95, Rarity.COMMON, mage.cards.g.GraniticTitan.class));
         cards.add(new SetCardInfo("Graven Abomination", 162, Rarity.COMMON, mage.cards.g.GravenAbomination.class));
         cards.add(new SetCardInfo("Grind // Dust", 155, Rarity.RARE, mage.cards.g.GrindDust.class));
+        cards.add(new SetCardInfo("Grisly Survivor", 64, Rarity.COMMON, mage.cards.g.GrislySurvivor.class));
         cards.add(new SetCardInfo("Harrier Naga", 118, Rarity.COMMON, mage.cards.h.HarrierNaga.class));
+        cards.add(new SetCardInfo("Hashep Oasis", 177, Rarity.UNCOMMON, mage.cards.h.HashepOasis.class));
+        cards.add(new SetCardInfo("Hazoret's Undying Fury", 96, Rarity.RARE, mage.cards.h.HazoretsUndyingFury.class));
         cards.add(new SetCardInfo("Hollow One", 163, Rarity.RARE, mage.cards.h.HollowOne.class));
+        cards.add(new SetCardInfo("Hope Tender", 119, Rarity.UNCOMMON, mage.cards.h.HopeTender.class));
+        cards.add(new SetCardInfo("Hostile Desert", 178, Rarity.RARE, mage.cards.h.HostileDesert.class));
+        cards.add(new SetCardInfo("Hour of Devastation", 97, Rarity.RARE, mage.cards.h.HourOfDevastation.class));
         cards.add(new SetCardInfo("Hour of Eternity", 36, Rarity.RARE, mage.cards.h.HourOfEternity.class));
         cards.add(new SetCardInfo("Hour of Glory", 65, Rarity.RARE, mage.cards.h.HourOfGlory.class));
         cards.add(new SetCardInfo("Hour of Promise", 120, Rarity.RARE, mage.cards.h.HourOfPromise.class));
@@ -198,8 +210,8 @@ public class HourOfDevastation extends ExpansionSet {
         cards.add(new SetCardInfo("Ramunap Excavator", 129, Rarity.RARE, mage.cards.r.RamunapExcavator.class));
         cards.add(new SetCardInfo("Ramunap Hydra", 130, Rarity.RARE, mage.cards.r.RamunapHydra.class));
         cards.add(new SetCardInfo("Ramunap Ruins", 181, Rarity.UNCOMMON, mage.cards.r.RamunapRuins.class));
-        cards.add(new SetCardInfo("Razaketh, the Foulblooded", 73, Rarity.MYTHIC, mage.cards.r.RazakethTheFoulblooded.class));
         cards.add(new SetCardInfo("Razaketh's Rite", 74, Rarity.UNCOMMON, mage.cards.r.RazakethsRite.class));
+        cards.add(new SetCardInfo("Razaketh, the Foulblooded", 73, Rarity.MYTHIC, mage.cards.r.RazakethTheFoulblooded.class));
         cards.add(new SetCardInfo("Reason // Believe", 154, Rarity.RARE, mage.cards.r.ReasonBelieve.class));
         cards.add(new SetCardInfo("Refuse // Cooperate", 156, Rarity.RARE, mage.cards.r.RefuseCooperate.class));
         cards.add(new SetCardInfo("Resilient Khenra", 131, Rarity.RARE, mage.cards.r.ResilientKhenra.class));
