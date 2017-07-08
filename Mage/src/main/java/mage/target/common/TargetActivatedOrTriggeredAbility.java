@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.target.common;
 
 import java.util.Set;
@@ -39,8 +38,6 @@ import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetObject;
-
-
 
 public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
@@ -63,7 +60,6 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
         this.filter = target.filter.copy();
     }
 
-
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         // rule 114.4. A spell or ability on the stack is an illegal target for itself.
@@ -77,7 +73,13 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, game);
+        for (StackObject stackObject : game.getStack()) {
+            if (isActivatedOrTriggeredAbility(stackObject)
+                    && filter.match(stackObject, sourceId, sourceControllerId, game)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

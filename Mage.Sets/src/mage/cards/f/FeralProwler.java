@@ -12,7 +12,7 @@ import java.util.UUID;
 public class FeralProwler extends CardImpl {
 
     public FeralProwler(UUID ownerId, CardSetInfo cardSetInfo) {
-        super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         subtype.add("Cat");
 
         power = new MageInt(1);
