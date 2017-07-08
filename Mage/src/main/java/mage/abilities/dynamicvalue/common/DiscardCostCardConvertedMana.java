@@ -18,11 +18,7 @@ public class DiscardCostCardConvertedMana implements DynamicValue {
         for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof DiscardTargetCost) {
                 DiscardTargetCost discardCost = (DiscardTargetCost) cost;
-                int cmc = 0;
-                for (Card card : discardCost.getCards()) {
-                    cmc += card.getConvertedManaCost();
-                }
-                return cmc;
+                return discardCost.getCards().stream().mapToInt(Card::getConvertedManaCost).sum();
             }
         }
         return 0;

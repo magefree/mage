@@ -45,13 +45,10 @@ public enum DashedCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            for (Ability ability : card.getAbilities()) {
-                if (ability instanceof DashAbility) {
-                    if (((DashAbility) ability).isActivated(source, game)) {
-                        return true;
-                    }
-                }
-            }
+            return card.getAbilities().stream()
+                    .filter(a -> a instanceof DashAbility)
+                    .anyMatch(d -> ((DashAbility)d).isActivated(source, game));
+
         }
         return false;
     }
