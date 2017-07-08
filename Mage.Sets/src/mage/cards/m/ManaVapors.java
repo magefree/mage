@@ -70,7 +70,7 @@ public class ManaVapors extends CardImpl {
 class ManaVaporsEffect extends OneShotEffect {
 
     ManaVaporsEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.Benefit);
         this.staticText = "Lands target player controls don't untap during his or her next untap step.";
     }
 
@@ -98,4 +98,3 @@ class ManaVaporsEffect extends OneShotEffect {
         return false;
     }
 }
-
