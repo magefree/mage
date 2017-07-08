@@ -86,7 +86,7 @@ class GainControlAllPermanentsEffect extends ContinuousEffectImpl {
     private static FilterControlledPermanent filter = new FilterControlledPermanent("all other permanents you control");
 
     public GainControlAllPermanentsEffect(Duration duration) {
-        super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.Detriment);
     }
 
     public GainControlAllPermanentsEffect(final GainControlAllPermanentsEffect effect) {
