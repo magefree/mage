@@ -91,6 +91,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Cone of Flame", 95, Rarity.UNCOMMON, mage.cards.c.ConeOfFlame.class));
         cards.add(new SetCardInfo("Debt of Loyalty", 127, Rarity.RARE, mage.cards.d.DebtOfLoyalty.class));
         cards.add(new SetCardInfo("Dense Foliage", 66, Rarity.RARE, mage.cards.d.DenseFoliage.class));
+        cards.add(new SetCardInfo("Dingus Staff", 149, Rarity.UNCOMMON, mage.cards.d.DingusStaff.class));
         cards.add(new SetCardInfo("Disrupt", 37, Rarity.COMMON, mage.cards.d.Disrupt.class));
         cards.add(new SetCardInfo("Doomsday", 8, Rarity.RARE, mage.cards.d.Doomsday.class));
         cards.add(new SetCardInfo("Downdraft", 67, Rarity.UNCOMMON, mage.cards.d.Downdraft.class));
