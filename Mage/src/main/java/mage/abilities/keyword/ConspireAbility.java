@@ -27,10 +27,6 @@
  */
 package mage.abilities.keyword;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -55,6 +51,11 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.UUID;
 
 /*
  * 702.77. Conspire
@@ -165,7 +166,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
                 if (conspireCost.canPay(ability, getSourceId(), getControllerId(), game)
                         && player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
                     activateConspire(ability, game);
-                    for (Iterator it = ((Costs) conspireCost).iterator(); it.hasNext();) {
+                    for (Iterator it = conspireCost.iterator(); it.hasNext(); ) {
                         Cost cost = (Cost) it.next();
                         ability.getCosts().add(cost.copy());
                     }
