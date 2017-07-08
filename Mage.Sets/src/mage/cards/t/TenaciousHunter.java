@@ -39,6 +39,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -66,16 +67,12 @@ public class TenaciousHunter extends CardImpl {
         // As long as a creature has a -1/-1 counter on it, Tenacious Hunter has vigilance and deathtouch.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()),
-                        new PermanentsOnTheBattlefieldCondition(filter),
-                        "{this} has Vigilance as long as a creature has a -1/-1 counter on it"
-                )
-        );
+                        new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, false),
+                        "As long as a creature has a -1/-1 counter on it, {this} has vigilance"));
 
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(DeathtouchAbility.getInstance()),
-                new PermanentsOnTheBattlefieldCondition(filter),
-                "{this} has Deathtouch as long as a creature has a -1/-1 counter on it"
-            )
-        );
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, false),
+                "and deathtouch"));
 
         this.addAbility(ability);
     }
