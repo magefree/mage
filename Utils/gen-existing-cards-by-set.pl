@@ -32,7 +32,7 @@ my $templateBasicLand = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardExten
 sub toCamelCase {
     my $string = $_[0];
     $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
-    $string =~ s/[-,\s\']//g;
+    $string =~ s/[-,\s\'\/]//g;
     $string;
 }
 
@@ -266,7 +266,7 @@ foreach $name_collectorid (sort @setCards)
                     $githubTask {"- [x] Done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 } else { 
                     $unimplemented {$str} = 1;
-                    $githubTask {"- [ ] Not Done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
+                    $githubTask {"- [ ] Not done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 }
             }
         }

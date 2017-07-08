@@ -29,7 +29,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -73,7 +73,7 @@ public class ShefetDunes extends CardImpl {
         this.addAbility(ability);
 
         // {2}{W}{W}, {T}, Sacrifice a Desert: Creatures you control get +1/+1 until end of turn. Activate this ability only any time you could cast a sorcery.
-        Ability ability2 = new SimpleActivatedAbility(
+        Ability ability2 = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn),
                 new ManaCostsImpl("{2}{W}{W}"));
