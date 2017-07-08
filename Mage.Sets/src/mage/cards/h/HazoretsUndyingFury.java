@@ -45,7 +45,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -63,11 +62,11 @@ public class HazoretsUndyingFury extends CardImpl {
     public HazoretsUndyingFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
 
-        //Shuffle your library, then exile the top four cards. 
-        //You may cast any number of nonland cards with converted mana 
-        //cost 5 or less from among them without paying their mana costs. 
+        //Shuffle your library, then exile the top four cards.
+        //You may cast any number of nonland cards with converted mana
+        //cost 5 or less from among them without paying their mana costs.
         getSpellAbility().addEffect(new HazoretsUndyingFuryEffect());
-        
+
         //Land you control don't untap during your next untap step.
         this.getSpellAbility().addEffect(new DontUntapInControllersUntapStepAllEffect(
                 Duration.UntilYourNextTurn, TargetController.YOU, new FilterControlledLandPermanent("Lands you control"))
@@ -86,7 +85,7 @@ public class HazoretsUndyingFury extends CardImpl {
 
 class HazoretsUndyingFuryEffect extends OneShotEffect {
 
-    private static FilterCard filter = new FilterCard("any number of nonland cards with converted mana cost 5 or less");
+    private final static FilterCard filter = new FilterCard("nonland cards with converted mana cost 5 or less");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
@@ -95,7 +94,7 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
 
     public HazoretsUndyingFuryEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Shuffle your library, then exile the top four cards. You may cast any number of nonland cards with converted mana cost 5 or less from among them without paying their mana costs. ";
+        this.staticText = "Shuffle your library, then exile the top four cards. You may cast any number of nonland cards with converted mana cost 5 or less from among them without paying their mana costs";
     }
 
     public HazoretsUndyingFuryEffect(final HazoretsUndyingFuryEffect effect) {
@@ -117,9 +116,6 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
             controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 4), source, game, true, source.getSourceId(), sourceObject.getIdName());
             // cast the possible cards without paying the mana
             ExileZone hazoretsUndyingFuryExileZone = game.getExile().getExileZone(source.getSourceId());
-            FilterCard filter = new FilterNonlandCard();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 6));
-            filter.setMessage("nonland cards with converted mana cost 5 or less");
             Cards cardsToCast = new CardsImpl();
             if (hazoretsUndyingFuryExileZone == null) {
                 return true;

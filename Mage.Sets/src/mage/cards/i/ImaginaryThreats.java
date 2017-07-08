@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
-import mage.abilities.effects.common.DontUntapInOpponentsNextUntapStepAllEffect;
+import mage.abilities.effects.common.DontUntapInPlayersNextUntapStepAllEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
@@ -58,7 +58,7 @@ public class ImaginaryThreats extends CardImpl {
         // Creatures target opponent controls attack this turn if able. During that player's next untap step, creatures he or she controls don't untap.
         getSpellAbility().addEffect(new ImaginaryThreatsEffect());
         getSpellAbility().addTarget(new TargetOpponent());
-        getSpellAbility().addEffect(new DontUntapInOpponentsNextUntapStepAllEffect(new FilterCreaturePermanent())
+        getSpellAbility().addEffect(new DontUntapInPlayersNextUntapStepAllEffect(new FilterCreaturePermanent())
                 .setText("During that player's next untap step, creatures he or she controls don't untap"));
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

@@ -27,10 +27,11 @@
  */
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DontUntapInOpponentsNextUntapStepAllEffect;
+import mage.abilities.effects.common.DontUntapInPlayersNextUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,8 +42,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -67,11 +66,12 @@ public class ManaVapors extends CardImpl {
         return new ManaVapors(this);
     }
 }
+
 class ManaVaporsEffect extends OneShotEffect {
 
     ManaVaporsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Lands target player controls don't untap during his or her next untap step.";
+        this.staticText = "Lands target player controls don't untap during his or her next untap step";
     }
 
     ManaVaporsEffect(final ManaVaporsEffect effect) {
@@ -85,13 +85,12 @@ class ManaVaporsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-
-        if (player != null) {
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (targetPlayer != null) {
             FilterLandPermanent filter = new FilterLandPermanent();
-            filter.add(new ControllerIdPredicate(player.getId()));
-            ContinuousEffect effect = new DontUntapInOpponentsNextUntapStepAllEffect(filter);
-            effect.setTargetPointer(new FixedTarget(player.getId()));
+            filter.add(new ControllerIdPredicate(targetPlayer.getId()));
+            ContinuousEffect effect = new DontUntapInPlayersNextUntapStepAllEffect(filter);
+            effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
             game.addEffect(effect, source);
             return true;
         }

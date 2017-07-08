@@ -44,7 +44,7 @@ import mage.players.Player;
 /**
  * @author okuRaku
  */
-public class DontUntapInOpponentsNextUntapStepAllEffect extends ContinuousRuleModifyingEffectImpl {
+public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModifyingEffectImpl {
 
     private int validForTurnNum;
     //private String targetName;
@@ -57,12 +57,12 @@ public class DontUntapInOpponentsNextUntapStepAllEffect extends ContinuousRuleMo
      *
      * @param filter
      */
-    public DontUntapInOpponentsNextUntapStepAllEffect(FilterPermanent filter) {
+    public DontUntapInPlayersNextUntapStepAllEffect(FilterPermanent filter) {
         super(Duration.Custom, Outcome.Detriment, false, true);
         this.filter = filter;
     }
 
-    public DontUntapInOpponentsNextUntapStepAllEffect(final DontUntapInOpponentsNextUntapStepAllEffect effect) {
+    public DontUntapInPlayersNextUntapStepAllEffect(final DontUntapInPlayersNextUntapStepAllEffect effect) {
         super(effect);
         this.validForTurnNum = effect.validForTurnNum;
         this.filter = effect.filter;
@@ -70,8 +70,8 @@ public class DontUntapInOpponentsNextUntapStepAllEffect extends ContinuousRuleMo
     }
 
     @Override
-    public DontUntapInOpponentsNextUntapStepAllEffect copy() {
-        return new DontUntapInOpponentsNextUntapStepAllEffect(this);
+    public DontUntapInPlayersNextUntapStepAllEffect copy() {
+        return new DontUntapInPlayersNextUntapStepAllEffect(this);
     }
 
     @Override
