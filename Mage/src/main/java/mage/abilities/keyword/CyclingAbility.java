@@ -27,14 +27,20 @@
  */
 package mage.abilities.keyword;
 
+import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.DiscardSourceCost;
+import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -48,14 +54,14 @@ public class CyclingAbility extends ActivatedAbilityImpl {
 
     public CyclingAbility(Cost cost) {
         super(Zone.HAND, new DrawCardSourceControllerEffect(1), cost);
-        this.addCost(new DiscardSourceCost(false));
+        this.addCost(new CyclingDiscardCost());
         this.cost = cost;
         this.text = "Cycling";
     }
 
     public CyclingAbility(Cost cost, FilterCard filter, String text) {
         super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), cost);
-        this.addCost(new DiscardSourceCost(false));
+        this.addCost(new CyclingDiscardCost());
         this.cost = cost;
         this.text = text;
     }
@@ -83,4 +89,45 @@ public class CyclingAbility extends ActivatedAbilityImpl {
         return rule.toString();
     }
 
+}
+
+class CyclingDiscardCost extends CostImpl {
+
+    public CyclingDiscardCost() {
+    }
+
+    public CyclingDiscardCost(CyclingDiscardCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+        return game.getPlayer(controllerId).getHand().contains(sourceId);
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+        Player player = game.getPlayer(controllerId);
+        if (player != null) {
+            Card card = player.getHand().get(sourceId, game);
+            if (card != null) {
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CYCLE_CARD, card.getId(), card.getId(), card.getOwnerId()));
+                paid = player.discard(card, null, game);
+                if (paid) {
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CYCLED_CARD, card.getId(), card.getId(), card.getOwnerId()));
+                }
+            }
+        }
+        return paid;
+    }
+
+    @Override
+    public String getText() {
+        return "Discard this card";
+    }
+
+    @Override
+    public CyclingDiscardCost copy() {
+        return new CyclingDiscardCost(this);
+    }
 }

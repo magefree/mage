@@ -28,35 +28,39 @@
 
 package mage.target.common;
 
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.filter.Filter;
-import mage.filter.FilterAbility;
+import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetObject;
 
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
-/**
- * @author LevelX2
- */
 
 
 public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
+    protected final FilterStackObject filter;
+
     public TargetActivatedOrTriggeredAbility() {
+        this(new FilterStackObject());
+    }
+
+    public TargetActivatedOrTriggeredAbility(FilterStackObject filter) {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
         this.zone = Zone.STACK;
-        this.targetName = "target activated or triggered ability";
+        this.targetName = filter.getMessage();
+        this.filter = filter;
     }
 
     public TargetActivatedOrTriggeredAbility(final TargetActivatedOrTriggeredAbility target) {
         super(target);
+        this.filter = target.filter.copy();
     }
 
 
@@ -68,7 +72,7 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
         }
 
         StackObject stackObject = game.getStack().getStackObject(id);
-        return isActivatedOrTriggeredAbility(stackObject);
+        return isActivatedOrTriggeredAbility(stackObject) && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
@@ -103,7 +107,7 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
     @Override
     public Filter getFilter() {
-        return new FilterAbility();
+        return filter;
     }
 
     static boolean isActivatedOrTriggeredAbility(StackObject stackObject) {

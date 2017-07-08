@@ -1,3 +1,4 @@
+Afflict|number|
 Annihilator|number|
 Basic landcycling|cost|
 Battle cry|new|

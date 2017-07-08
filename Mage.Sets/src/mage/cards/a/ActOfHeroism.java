@@ -27,19 +27,17 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
+import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,19 +46,21 @@ import mage.target.common.TargetCreaturePermanent;
 public class ActOfHeroism extends CardImpl {
 
     public ActOfHeroism(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Untap target creature.
         Effect effect = new UntapTargetEffect();
         effect.setText("Untap target creature");
         this.getSpellAbility().addEffect(effect);
 
-        // It gets +2/+2 and can block an additional creature this turn.
+        // It gets +2/+2 until end of turn
         effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
         effect.setText("It gets +2/+2");
         this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()), Duration.EndOfTurn);
-        effect.setText("and can block an additional creature this turn");
+
+        // and can block an additional creature this turn
+        effect = new CanBlockAdditionalCreatureTargetEffect();
+        effect.setText("and can block an additional creature this turn.");
         this.getSpellAbility().addEffect(effect);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
