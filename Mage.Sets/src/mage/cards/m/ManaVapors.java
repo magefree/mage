@@ -36,6 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -51,7 +52,6 @@ public class ManaVapors extends CardImpl {
 
     public ManaVapors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        
 
         // Lands target player controls don't untap during his or her next untap step.
         getSpellAbility().addTarget(new TargetPlayer());
@@ -88,7 +88,9 @@ class ManaVaporsEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
 
         if (player != null) {
-            ContinuousEffect effect = new DontUntapInOpponentsNextUntapStepAllEffect(new FilterLandPermanent());
+            FilterLandPermanent filter = new FilterLandPermanent();
+            filter.add(new ControllerIdPredicate(player.getId()));
+            ContinuousEffect effect = new DontUntapInOpponentsNextUntapStepAllEffect(filter);
             effect.setTargetPointer(new FixedTarget(player.getId()));
             game.addEffect(effect, source);
             return true;
