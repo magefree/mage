@@ -63,9 +63,9 @@ public class PrideSovereign extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Pride Sovereign gets +1/+1 for each other Cat you control.
-        DynamicValue otherCats = new PermanentsOnBattlefieldCount();
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.CAT, "other Cat you control");
         filter.add(new AnotherPredicate());
+        DynamicValue otherCats = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(otherCats, otherCats, Duration.WhileOnBattlefield)));
         // {W}, {t}, Exert Pride Sovereign: Create two 1/1 white Cat creature tokens with lifelink.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CatToken2(), 2), new ManaCostsImpl("{W}"));
