@@ -27,6 +27,7 @@
  */
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
@@ -38,30 +39,23 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
 
-import java.util.UUID;
-
 /**
  * @author dustinroepsch
  */
 public class HeatStroke extends CardImpl {
+
     private static final FilterPermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(Predicates.or(
-                new BlockedPredicate(), new BlockingPredicate()
-        ));
+        filter.add(Predicates.or(new BlockedPredicate(), new BlockingPredicate()));
     }
 
     public HeatStroke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // At end of combat, destroy each creature that blocked or was blocked this turn.
-        this.addAbility(
-                new EndOfCombatTriggeredAbility(
-                        new DestroyAllEffect(filter).setText("destroy each creature that blocked or was blocked this turn."),
-                        false
-                )
-        );
+        this.addAbility(new EndOfCombatTriggeredAbility(new DestroyAllEffect(filter)
+                .setText("destroy each creature that blocked or was blocked this turn"), false));
     }
 
     public HeatStroke(final HeatStroke card) {
@@ -73,4 +67,3 @@ public class HeatStroke extends CardImpl {
         return new HeatStroke(this);
     }
 }
-
