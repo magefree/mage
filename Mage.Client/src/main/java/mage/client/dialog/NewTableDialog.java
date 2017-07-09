@@ -474,6 +474,7 @@ public class NewTableDialog extends MageDialog {
         switch (options.getDeckType()) {
             case "Variant Magic - Commander":
             case "Variant Magic - Duel Commander":
+            case "Variant Magic - MTGO 1v1 Commander":
                 if (!options.getGameType().startsWith("Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
@@ -495,7 +496,9 @@ public class NewTableDialog extends MageDialog {
         switch (options.getGameType()) {
             case "Commander Two Player Duel":
             case "Commander Free For All":
-                if (!options.getDeckType().equals("Variant Magic - Commander") && !options.getDeckType().equals("Variant Magic - Duel Commander")) {
+                if (!options.getDeckType().equals("Variant Magic - Commander")
+                        && !options.getDeckType().equals("Variant Magic - Duel Commander")
+                        && !options.getDeckType().equals("Variant Magic - MTGO 1v1 Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
@@ -585,7 +588,7 @@ public class NewTableDialog extends MageDialog {
             setGameOptions();
             this.setLocation(150, 100);
         }
-        currentSettingVersion = 0;            
+        currentSettingVersion = 0;
         setGameSettingsFromPrefs(currentSettingVersion);
         this.setVisible(true);
     }
@@ -611,7 +614,7 @@ public class NewTableDialog extends MageDialog {
     /**
      * set the table settings from java prefs
      */
-    int currentSettingVersion = 0;    
+    int currentSettingVersion = 0;
     private void setGameSettingsFromPrefs(int version) {
         currentSettingVersion = version;
         String versionStr = "";
@@ -721,9 +724,9 @@ public class NewTableDialog extends MageDialog {
             TablePlayerPanel tpp = (TablePlayerPanel) player;
             playerTypesString.append(tpp.getPlayerType());
         }
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES + versionStr, playerTypesString.toString());        
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES + versionStr, playerTypesString.toString());
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOK;
