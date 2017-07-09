@@ -27,12 +27,13 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public class TreeMonkey extends CardImpl {
 
     public TreeMonkey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Ape");
+        this.subtype.add("Monkey");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
