@@ -52,7 +52,7 @@ public class DauthiJackal extends CardImpl {
     public DauthiJackal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Dauthi");
-        this.subtype.add("Hound");
+        this.subtype.add("Jackal");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

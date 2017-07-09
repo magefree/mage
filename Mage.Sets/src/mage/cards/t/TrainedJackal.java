@@ -27,11 +27,12 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public class TrainedJackal extends CardImpl {
 
     public TrainedJackal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add("Hound");
+        this.subtype.add("Jackal");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

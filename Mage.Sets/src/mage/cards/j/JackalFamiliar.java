@@ -27,13 +27,14 @@
  */
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -42,7 +43,7 @@ public class JackalFamiliar extends CardImpl {
 
     public JackalFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        this.subtype.add("Hound");
+        this.subtype.add("Jackal");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
