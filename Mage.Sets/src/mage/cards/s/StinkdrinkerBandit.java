@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  * @author BursegSardaukar
  */
 public class StinkdrinkerBandit extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Rogue");
 
     static {
@@ -61,7 +61,7 @@ public class StinkdrinkerBandit extends CardImpl {
     }
 
     public StinkdrinkerBandit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
 
@@ -71,10 +71,10 @@ public class StinkdrinkerBandit extends CardImpl {
         // Prowl {1}, {B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)
         this.addAbility(new ProwlAbility(this, "{1}{B}"));
 
-        // Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn.        
+        // Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
-            new StinkdrinkerBanditTriggeredAbility(), Duration.WhileOnBattlefield,
-            filter, "Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn")));   
+                new StinkdrinkerBanditTriggeredAbility(), Duration.WhileOnBattlefield,
+                filter, "Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn")));
     }
 
     public StinkdrinkerBandit(final StinkdrinkerBandit card) {
@@ -111,8 +111,10 @@ class StinkdrinkerBanditTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent sourcePermanent = game.getPermanent(getSourceId());
         if (sourcePermanent.isAttacking()) {
-            for (CombatGroup combatGroup: game.getCombat().getGroups()) {
-                if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
+            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+                if (combatGroup.getBlockers().isEmpty()
+                        && combatGroup.getDefenderId().equals(event.getTargetId())
+                        && combatGroup.getAttackers().contains(getSourceId())) {
                     return true;
                 }
             }
