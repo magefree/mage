@@ -27,6 +27,8 @@
  */
 package mage.cards.e;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -34,6 +36,7 @@ import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -49,9 +52,6 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.List;
-import java.util.UUID;
-
 /**
  *
  * @author jonubuu
@@ -65,7 +65,7 @@ public class Extirpate extends CardImpl {
     }
 
     public Extirpate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Split second
         this.addAbility(new SplitSecondAbility());
@@ -105,16 +105,17 @@ class ExtirpateEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         Card chosenCard = game.getCard(getTargetPointer().getFirst(game, source));
-        if (chosenCard != null && sourceObject != null && controller != null) {                                   
+        if (chosenCard != null && sourceObject != null && controller != null) {
             Player owner = game.getPlayer(chosenCard.getOwnerId());
             if (owner == null) {
                 return false;
             }
-            
+
             // Exile all cards with the same name
             // Building a card filter with the name
             FilterCard filterNamedCard = new FilterCard();
-            filterNamedCard.add(new NamePredicate(chosenCard.getName()));                            
+            String nameToSearch = chosenCard.isSplitCard() ? ((SplitCard) chosenCard).getLeftHalfCard().getName() : chosenCard.getName();
+            filterNamedCard.add(new NamePredicate(nameToSearch));
 
             // The cards you're searching for must be found and exiled if they're in the graveyard because it's a public zone.
             // Finding those cards in the hand and library is optional, because those zones are hidden (even if the hand is temporarily revealed).
@@ -133,11 +134,11 @@ class ExtirpateEffect extends OneShotEffect {
                 for (UUID targetId : targets) {
                     Card targetCard = owner.getHand().get(targetId, game);
                     if (targetCard != null) {
-                        controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND, true);                                
+                        controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND, true);
                     }
                 }
             }
-            
+
             // search cards in Library
             filterNamedCard.setMessage("card named " + chosenCard.getName() + " in the library of " + owner.getName());
             TargetCardInLibrary targetCardInLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCard);
@@ -146,7 +147,7 @@ class ExtirpateEffect extends OneShotEffect {
                 for (UUID targetId : targets) {
                     Card targetCard = owner.getLibrary().getCard(targetId, game);
                     if (targetCard != null) {
-                        controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.LIBRARY, true);                                
+                        controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
             }
@@ -155,5 +156,5 @@ class ExtirpateEffect extends OneShotEffect {
         }
         return false;
     }
-        
+
 }

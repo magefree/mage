@@ -27,6 +27,8 @@
  */
 package mage.cards.s;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -45,9 +47,6 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.List;
-import java.util.UUID;
-
 /**
  *
  * @author North
@@ -61,7 +60,7 @@ public class SurgicalExtraction extends CardImpl {
     }
 
     public SurgicalExtraction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B/P}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B/P}");
 
         // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard,
         // hand, and library for any number of cards with the same name as that card and exile them.
@@ -107,16 +106,14 @@ class SurgicalExtractionEffect extends OneShotEffect {
         if (chosenCard != null && controller != null) {
             Player owner = game.getPlayer(chosenCard.getOwnerId());
             if (owner != null) {
-                FilterCard filterNamedCard = new FilterCard("card named " + chosenCard.getName());
-                filterNamedCard.add(new NamePredicate(chosenCard.getName()));
-
-                Cards cardsInLibrary = new CardsImpl();
-                cardsInLibrary.addAll(owner.getLibrary().getCards(game));
+                String nameToSearch = chosenCard.isSplitCard() ? ((SplitCard) chosenCard).getLeftHalfCard().getName() : chosenCard.getName();
+                FilterCard filterNamedCard = new FilterCard("card named " + nameToSearch);
+                filterNamedCard.add(new NamePredicate(nameToSearch));
 
                 // cards in Graveyard
                 int cardsCount = owner.getGraveyard().count(filterNamedCard, game);
                 if (cardsCount > 0) {
-                    filterNamedCard.setMessage("card named " + chosenCard.getName() + " in the graveyard of " + owner.getName());
+                    filterNamedCard.setMessage("card named " + nameToSearch + " in the graveyard of " + owner.getName());
                     TargetCardInGraveyard target = new TargetCardInGraveyard(0, cardsCount, filterNamedCard);
                     if (controller.chooseTarget(Outcome.Exile, owner.getGraveyard(), target, source, game)) {
                         List<UUID> targets = target.getTargets();
@@ -130,27 +127,27 @@ class SurgicalExtractionEffect extends OneShotEffect {
                 }
 
                 // cards in Hand
-                filterNamedCard.setMessage("card named " + chosenCard.getName() + " in the hand of " + owner.getName());
+                filterNamedCard.setMessage("card named " + nameToSearch + " in the hand of " + owner.getName());
                 TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCard);
                 if (controller.chooseTarget(Outcome.Exile, owner.getHand(), targetCardInHand, source, game)) {
                     List<UUID> targets = targetCardInHand.getTargets();
                     for (UUID targetId : targets) {
                         Card targetCard = owner.getHand().get(targetId, game);
                         if (targetCard != null) {
-                            controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND, true);                                
+                            controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND, true);
                         }
                     }
                 }
 
                 // cards in Library
-                filterNamedCard.setMessage("card named " + chosenCard.getName() + " in the library of " + owner.getName());
+                filterNamedCard.setMessage("card named " + nameToSearch + " in the library of " + owner.getName());
                 TargetCardInLibrary targetCardInLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCard);
                 if (controller.searchLibrary(targetCardInLibrary, game, owner.getId())) {
                     List<UUID> targets = targetCardInLibrary.getTargets();
                     for (UUID targetId : targets) {
                         Card targetCard = owner.getLibrary().getCard(targetId, game);
                         if (targetCard != null) {
-                            controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.LIBRARY, true);                                
+                            controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                         }
                     }
                 }

@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -98,7 +99,8 @@ class SecretSalvageEffect extends OneShotEffect {
             if (targetCard != null) {
                 controller.moveCards(targetCard, Zone.EXILED, source, game);
                 FilterCard nameFilter = new FilterCard();
-                nameFilter.add(new NamePredicate(targetCard.getName()));
+                String nameToSearch = targetCard.isSplitCard() ? ((SplitCard) targetCard).getLeftHalfCard().getName() : targetCard.getName();
+                nameFilter.add(new NamePredicate(nameToSearch));
                 TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, nameFilter);
                 if (controller.searchLibrary(target, game)) {
                     if (!target.getTargets().isEmpty()) {

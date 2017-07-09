@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -51,23 +51,21 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.UUID;
-
 /**
  *
  * @author Loki
  */
 public class StrataScythe extends CardImpl {
 
-    public StrataScythe (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+    public StrataScythe(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add("Equipment");
         this.addAbility(new EntersBattlefieldTriggeredAbility(new StrataScytheImprintEffect()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(SameNameAsExiledCountValue.getInstance(), SameNameAsExiledCountValue.getInstance())));
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
 
-    public StrataScythe (final StrataScythe card) {
+    public StrataScythe(final StrataScythe card) {
         super(card);
     }
 
@@ -79,6 +77,7 @@ public class StrataScythe extends CardImpl {
 }
 
 class StrataScytheImprintEffect extends OneShotEffect {
+
     StrataScytheImprintEffect() {
         super(Outcome.Exile);
         staticText = "search your library for a land card, exile it, then shuffle your library";
@@ -91,8 +90,9 @@ class StrataScytheImprintEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null)
+        if (player == null) {
             return false;
+        }
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
         if (player.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {
@@ -119,7 +119,8 @@ class StrataScytheImprintEffect extends OneShotEffect {
 }
 
 class SameNameAsExiledCountValue implements DynamicValue {
-    private static SameNameAsExiledCountValue instance = new SameNameAsExiledCountValue();
+
+    private static final SameNameAsExiledCountValue instance = new SameNameAsExiledCountValue();
 
     public static SameNameAsExiledCountValue getInstance() {
         return instance;

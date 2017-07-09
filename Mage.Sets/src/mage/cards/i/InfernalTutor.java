@@ -39,6 +39,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -56,8 +57,7 @@ import mage.target.common.TargetCardInLibrary;
 public class InfernalTutor extends CardImpl {
 
     public InfernalTutor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle your library.
         this.getSpellAbility().addEffect(new InfernalTutorEffect());
@@ -67,7 +67,7 @@ public class InfernalTutor extends CardImpl {
                 HellbentCondition.instance,
                 "<br/><br/><i>Hellbent</i> - If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle your library");
         this.getSpellAbility().addEffect(effect);
-        
+
     }
 
     public InfernalTutor(final InfernalTutor card) {
@@ -114,14 +114,15 @@ class InfernalTutorEffect extends OneShotEffect {
                 }
                 FilterCard filterCard;
                 if (cardToReveal != null) {
-                    controller.revealCards("from hand :" + sourceObject.getName(), new CardsImpl(cardToReveal), game);                    
-                    filterCard = new FilterCard("card named " + cardToReveal.getName());
-                    filterCard.add(new NamePredicate(cardToReveal.getName()));
+                    controller.revealCards("from hand :" + sourceObject.getName(), new CardsImpl(cardToReveal), game);
+                    String nameToSearch = cardToReveal.isSplitCard() ? ((SplitCard) cardToReveal).getLeftHalfCard().getName() : cardToReveal.getName();
+                    filterCard = new FilterCard("card named " + nameToSearch);
+                    filterCard.add(new NamePredicate(nameToSearch));
                 } else {
                     filterCard = new FilterCard();
-                }                                
+                }
                 return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true).apply(game, source);
-                
+
             }
             return true;
         }
