@@ -1037,7 +1037,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (tapped) {
             return false;
         }
-        if (hasSummoningSickness()) {
+        if (hasSummoningSickness() && !game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK_AS_HASTE, this.getControllerId(), game)) {
             return false;
         }
         //20101001 - 508.1c
