@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesExertSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantBeBlockedByAllTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByAllSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ExertAbility;
 import mage.cards.CardImpl;
@@ -66,7 +66,7 @@ public class RhonassStalwart extends CardImpl {
         Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
         effect.setText("it gets +1/+1");
         BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(effect);
-        effect = new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfTurn);
+        effect = new CantBeBlockedByAllSourceEffect(filter, Duration.EndOfTurn);
         effect.setText("and can't be blocked by creatures with power 2 or less this turn");
         ability.addEffect(effect);
         this.addAbility(new ExertAbility(ability));
