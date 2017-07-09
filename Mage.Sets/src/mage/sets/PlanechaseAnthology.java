@@ -92,6 +92,7 @@ public class PlanechaseAnthology extends ExpansionSet {
         cards.add(new SetCardInfo("Fires of Yavimaya", 92, Rarity.UNCOMMON, mage.cards.f.FiresOfYavimaya.class));
         cards.add(new SetCardInfo("Flayer Husk", 110, Rarity.COMMON, mage.cards.f.FlayerHusk.class));
         cards.add(new SetCardInfo("Fling", 44, Rarity.COMMON, mage.cards.f.Fling.class));
+        cards.add(new SetCardInfo("Forest", 151, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forest", 152, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forest", 153, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forest", 154, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
@@ -138,7 +139,6 @@ public class PlanechaseAnthology extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 148, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 149, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 150, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Mountain", 151, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mudbutton Torchrunner", 49, Rarity.COMMON, mage.cards.m.MudbuttonTorchrunner.class));
         cards.add(new SetCardInfo("Mycoloth", 68, Rarity.RARE, mage.cards.m.Mycoloth.class));
         cards.add(new SetCardInfo("Nest Invader", 69, Rarity.COMMON, mage.cards.n.NestInvader.class));
