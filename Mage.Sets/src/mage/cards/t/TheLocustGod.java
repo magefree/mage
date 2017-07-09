@@ -91,7 +91,7 @@ public class TheLocustGod extends CardImpl {
 
 class TheLocustGodEffect extends OneShotEffect {
 
-    private static final String effectText = "return it to its owner's hand at the beginning of the next end step.";
+    private static final String effectText = "return it to its owner's hand at the beginning of the next end step";
 
     TheLocustGodEffect() {
         super(Outcome.Benefit);
@@ -106,7 +106,7 @@ class TheLocustGodEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         // Create delayed triggered ability
         Effect effect = new ReturnToHandSourceEffect(false, true);
-        effect.setText(staticText);
+        effect.setText("return {this} to its owner's hand");
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
