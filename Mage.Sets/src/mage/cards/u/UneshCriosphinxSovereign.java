@@ -66,7 +66,7 @@ import mage.target.TargetCard;
 public class UneshCriosphinxSovereign extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Sphinx spells");
-    
+
     static {
         filter.add(new SubtypePredicate(SubType.SPHINX));
     }
@@ -126,7 +126,7 @@ class UneshCriosphinxSovereignTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent != null
                 && permanent.getOwnerId().equals(controllerId)
                 && permanent.isCreature()
-                && filter.match(permanent, game)) {
+                && (event.getTargetId().equals(getSourceId()) || filter.match(permanent, game))) {
             return true;
         }
         return false;
