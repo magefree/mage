@@ -620,7 +620,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(main_cardLayout.createSequentialGroup()
                 .add(6, 6, 6)
                 .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 308, Short.MAX_VALUE)
+                    .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, showCardName)
                     .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -904,8 +904,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeBasic.add(sliderDialogFont, gridBagConstraints);
 
         labelDialogFont.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelDialogFont.setText("Messages and menues");
-        labelDialogFont.setToolTipText("<HTML>The size of the font of messages and menues");
+        labelDialogFont.setText("Messages and menus");
+        labelDialogFont.setToolTipText("<HTML>The size of the font of messages and menus");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
