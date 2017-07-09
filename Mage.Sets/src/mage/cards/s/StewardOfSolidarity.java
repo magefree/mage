@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExertSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -59,8 +58,7 @@ public class StewardOfSolidarity extends CardImpl {
         // {T}, Exert Steward of Solidarity: Create a 1/1 white Warrior creature token with vigilance. 
         Effect effect = new CreateTokenEffect(new WarriorVigilantToken());
         effect.setText("Create a 1/1 white Warrior creature token with vigilance");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{W}"));
-        ability.addCost(new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         this.addAbility(ability);
     }
